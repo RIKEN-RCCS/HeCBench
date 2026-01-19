@@ -19,7 +19,7 @@ else
 	  cd ${1}-acc
 	  pwd
 	  ../scripts/edit_makefile.py -t NVIDIA -i Makefile.nvc
-	  cat Makefile.NVD | sed -e 's/cc70/cc90/g'  > TMPFILE
+	  cat Makefile.NVD | sed -e 's/cc70/cc90/g' | sed -e 's/nvc++/nvc++ -acc/g' > TMPFILE
 	  mv TMPFILE Makefile.NVD
 	  cd ..
       fi
