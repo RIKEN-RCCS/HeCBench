@@ -1,0 +1,2 @@
+COMMAND = time -p ( ./$(program) --niterations 100 1>log.std 2>log.err;./$(program) --niterations 1 --ncell_x 96 --ncell_y 32 --ncell_z 64 --ne 64 --na 32 --nblock_z 64 1>>log.std 2>>log.err ) 2> log.time
+#COMMAND = time -p ( ./$(program) --niterations 1 --ncell_x 32 --ncell_y 32 --ncell_z 64 --ne 64 --na 32 --nblock_z 64 1>>log.std 2>>log.err ) 2> log.time

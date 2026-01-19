@@ -1,0 +1,1 @@
+COMMAND = ../mnist-cuda/prepare_data.sh; time -p ( ./$(program) 2 1>log.std 2>log.err ) 2> log.time

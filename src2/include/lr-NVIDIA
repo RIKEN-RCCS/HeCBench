@@ -1,0 +1,2 @@
+#COMMAND = time -p ( ./$(program) 100000 0 1>log.std 2>log.err ) 2> log.time
+COMMAND = ../lr-cuda/prepare_data.sh; time -p ( ./$(program) 500000 0  1>log.std 2>log.err ) 2> log.time

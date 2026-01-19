@@ -1,0 +1,1 @@
+COMMAND = ../minimap2-cuda/prepare_data.sh; time -p ( $(BIN_PATH)/$(BIN_NAME) ../minimap2-sycl/in-1k.txt kernel-out.txt 1>log.std 2>log.err ) 2> log.time

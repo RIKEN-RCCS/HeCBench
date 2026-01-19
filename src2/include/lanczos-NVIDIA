@@ -1,0 +1,1 @@
+COMMAND = ../lanczos-cuda/prepare_data.sh; time -p ( ./$(program) -g ../lanczos-cuda/data/social-large-800k.txt -n 800000 -k 3 -d float 1>log.std 2>log.err ) 2> log.time
