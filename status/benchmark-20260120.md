@@ -57,7 +57,7 @@
 | bm3d | | -- |
 | bmf | | -- |
 | bn | | -- |
-| bonds | | -- |
+| bonds | | 11.79 |
 | boxfilter | | -- |
 | bscan | | -- |
 | bsearch | | -- |
