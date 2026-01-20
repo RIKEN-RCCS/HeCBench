@@ -1,0 +1,24 @@
+Device offload time: 360 ms
+PASS
+Device offload time: 75 ms
+PASS
+Device offload time: 53 ms
+Device offload time: 56 ms
+Device offload time: 56 ms
+Device offload time: 1217 ms
+Device offload time: 56 ms
+Device offload time: 57 ms
+Device offload time: 56 ms
+Device offload time: 53 ms
+Device offload time: 53 ms
+Device offload time: 53 ms
+Device offload time: 53 ms
+Device offload time: 53 ms
+Device offload time: 56 ms
+Device offload time: 53 ms
+Device offload time: 53 ms
+Device offload time: 55 ms
+Device offload time: 53 ms
+Device offload time: 55 ms
+Average kernel time: 49.6401 ms
+Processing complete.

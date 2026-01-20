@@ -82,7 +82,7 @@
 | che | | -- |
 | chi2 | | -- |
 | clenergy | | 3.20 |
-| clink | | -- |
+| clink | | 3.91 |
 | cmp | | -- |
 | cm | | -- |
 | cobahh | | -- |
