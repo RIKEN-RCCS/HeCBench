@@ -1,7 +1,7 @@
 | name | sycl | acc |
 | -- | -- | -- |
 | accuracy | | -- |
-| ace | | -- |
+| ace | | 3.15 |
 | adam | | 6.76 |
 | adamw | | -- |
 | addBiasResidualLayerNorm | | -- |
