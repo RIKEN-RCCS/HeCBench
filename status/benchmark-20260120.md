@@ -20,7 +20,7 @@
 | asmooth | | -- |
 | assert | | -- |
 | asta | | -- |
-| atan2 | | -- |
+| atan2 | | 2.60 |
 | atomicAggregate | | -- |
 | atomicCAS | | -- |
 | atomicCost | | -- |
