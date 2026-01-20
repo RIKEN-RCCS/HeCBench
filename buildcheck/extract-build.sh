@@ -4,7 +4,7 @@ echo ""
 echo "|" name "|" sycl "|" acc  "|"
 echo "|" "--" "|" "--" "|" "--" "|"
 #
-SRCDIR=../tmp2
+SRCDIR=../tmp3
 #SRCDIR=./
 #
 for n in `cat List_full`
@@ -22,11 +22,13 @@ do
 	if [ -d $dir ]; then
 	    c1=""
 	    c2=""
+	    c3=""
 	    if [ -e $dir/log.build ]; then
 		c1=`grep Error $dir/log.build | grep make`
 		c2=`grep -i stop $dir/log.build`
+		c3=`grep -i "No files to process" $dir/log.build`
 
-		if [ "$c1" = "" -a "$c2" = "" ]; then
+		if [ "$c1" = "" -a "$c2" = "" -a "$c3" = "" ]; then
 		    success="yes"
 		fi
 	    fi
