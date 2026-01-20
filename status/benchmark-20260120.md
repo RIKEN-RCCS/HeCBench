@@ -65,7 +65,7 @@
 | bsw | | -- |
 | b+tree | | -- |
 | btree | | -- |
-| burger | | -- |
+| burger | | 72.25 |
 | bwt | | -- |
 | car | | -- |
 | cbsfil | | -- |
