@@ -61,7 +61,7 @@
 | boxfilter | | -- |
 | bscan | | -- |
 | bsearch | | -- |
-| bspline-vgh | | -- |
+| bspline-vgh | | 7.27 |
 | bsw | | -- |
 | b+tree | | -- |
 | btree | | -- |
