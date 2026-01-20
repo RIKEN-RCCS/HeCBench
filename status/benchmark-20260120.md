@@ -8,7 +8,7 @@
 | adjacent | | -- |
 | adv | | -- |
 | aes | | -- |
-| affine | | -- |
+| affine | | 10.61 |
 | aidw | | -- |
 | aligned-types | | -- |
 | all-pairs-distance | | -- |
