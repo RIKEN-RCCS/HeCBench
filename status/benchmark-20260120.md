@@ -10,7 +10,7 @@
 | aes | | -- |
 | affine | | 10.61 |
 | aidw | | -- |
-| aligned-types | | -- |
+| aligned-types | | 2.32 |
 | all-pairs-distance | | -- |
 | allreduce | | -- |
 | amgmk | | -- |
