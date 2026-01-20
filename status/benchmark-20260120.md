@@ -89,7 +89,7 @@
 | collision | | -- |
 | colorwheel | | 27.59 |
 | columnarSolver | | -- |
-| complex | | -- |
+| complex | | 12.73 |
 | compute-score | | -- |
 | concat | | -- |
 | concurrentKernels | | -- |
