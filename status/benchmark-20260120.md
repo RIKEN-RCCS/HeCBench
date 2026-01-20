@@ -87,7 +87,7 @@
 | cm | | -- |
 | cobahh | | 373.29 |
 | collision | | -- |
-| colorwheel | | -- |
+| colorwheel | | 27.59 |
 | columnarSolver | | -- |
 | complex | | -- |
 | compute-score | | -- |
