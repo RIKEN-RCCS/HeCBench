@@ -81,7 +81,7 @@
 | chemv | | -- |
 | che | | -- |
 | chi2 | | -- |
-| clenergy | | -- |
+| clenergy | | 3.20 |
 | clink | | -- |
 | cmp | | -- |
 | cm | | -- |
