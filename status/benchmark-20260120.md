@@ -38,7 +38,7 @@
 | bezier-surface | | 14.00 |
 | bfs | | -- |
 | bh | | -- |
-| bilateral | | -- |
+| bilateral | | 205.61 |
 | bincount | | -- |
 | binomial | | -- |
 | bitcracker | | -- |
