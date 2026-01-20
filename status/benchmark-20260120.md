@@ -29,7 +29,7 @@
 | atomicReduction | | -- |
 | atomicSystemWide | | -- |
 | attentionMultiHead | | -- |
-| attention | | -- |
+| attention | | 81.99 |
 | axhelm | | -- |
 | axpby | | -- |
 | babelstream | | -- |
