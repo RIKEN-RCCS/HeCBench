@@ -45,7 +45,7 @@
 | bitonic-sort | | -- |
 | bitpacking | | -- |
 | bitpermute | | -- |
-| black-scholes | | -- |
+| black-scholes | | 37.35 |
 | blas-dot | | -- |
 | blas-gemmBatched | | -- |
 | blas-gemmEx2 | | -- |
