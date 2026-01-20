@@ -68,7 +68,7 @@
 | burger | | 72.25 |
 | bwt | | 188.99 |
 | car | | 6.54 |
-| cbsfil | | -- |
+| cbsfil | | 34.93 |
 | ccl | | -- |
 | ccsd-trpdrv | | -- |
 | ccs | | -- |
