@@ -35,7 +35,7 @@
 | babelstream | | -- |
 | background-subtract | | -- |
 | backprop | | -- |
-| bezier-surface | | -- |
+| bezier-surface | | 14.00 |
 | bfs | | -- |
 | bh | | -- |
 | bilateral | | -- |
