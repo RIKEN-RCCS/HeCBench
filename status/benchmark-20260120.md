@@ -91,7 +91,7 @@
 | columnarSolver | | -- |
 | complex | | 12.73 |
 | compute-score | | -- |
-| concat | | -- |
+| concat | | 16.76 |
 | concurrentKernels | | -- |
 | contract | | -- |
 | conversion | | -- |
