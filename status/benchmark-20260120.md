@@ -66,7 +66,7 @@
 | b+tree | | -- |
 | btree | | -- |
 | burger | | 72.25 |
-| bwt | | -- |
+| bwt | | 188.99 |
 | car | | -- |
 | cbsfil | | -- |
 | ccl | | -- |
