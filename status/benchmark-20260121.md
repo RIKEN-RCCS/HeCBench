@@ -190,11 +190,11 @@
 | mcmd | | -- |
 | mcpr | | -- |
 | md5hash | | -- |
-| mdh | | -- |
+| mdh | | 35.18 |
 | md | | -- |
 | meanshift | | -- |
 | medianfilter | | -- |
-| memcpy | | -- |
+| memcpy | | 6.57 |
 | memtest | | -- |
 | merge | | -- |
 | metropolis | | -- |
@@ -211,7 +211,7 @@
 | mrc | | -- |
 | mriQ | | -- |
 | mr | | -- |
-| mt | | -- |
+| mt | | 4.43 |
 | multimaterial | | -- |
 | murmurhash3 | | -- |
 | myocyte | | -- |
