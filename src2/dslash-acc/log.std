@@ -1,0 +1,12 @@
+Number of sites = 32^4
+Executing 100 iterations with 1 warmups
+Threads per group = 256
+Running dslash loop
+Setting number of work items to 524288
+Setting workgroup size to 256
+Total execution time = 0.061549 secs
+Validating the result
+Total GFLOP/s = 1006.85
+Total GByte/s (GPU memory) = 2766.72
+Total allocation for matrices = 2528
+Approximate memory usage = 3525.19

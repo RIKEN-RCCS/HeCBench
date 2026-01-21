@@ -86,8 +86,8 @@
 | distort | | -- |
 | divergence | | -- |
 | doh | | 1.72 |
-| dp | | -- |
-| dslash | | -- |
+| dp | | 24.99 |
+| dslash | | 2.58 |
 | dxtc2 | | -- |
 | easyWave | | -- |
 | ecdh | | -- |
