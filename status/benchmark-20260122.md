@@ -287,7 +287,7 @@
 | sosfil | | -- |
 | sph | | 20.38 |
 | split | | -- |
-| spm | | -- |
+| spm | | 98.02 |
 | sptrsv | | -- |
 | srad | | -- |
 | ss | | -- |
