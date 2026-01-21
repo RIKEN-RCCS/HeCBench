@@ -258,7 +258,7 @@
 | reverse | | -- |
 | rfs | | -- |
 | rng-wallace | | -- |
-| rodrigues | | -- |
+| rodrigues | | 105.84 |
 | romberg | | -- |
 | rsbench | | -- |
 | rsc | | -- |
