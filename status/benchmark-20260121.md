@@ -225,7 +225,7 @@
 | ntt | | -- |
 | nw | | -- |
 | openmp | | -- |
-| overlay | | -- |
+| overlay | | 9.07 |
 | p4 | | -- |
 | page-rank | | -- |
 | particle-diffusion | | -- |
@@ -238,7 +238,7 @@
 | phmm | | -- |
 | pnpoly | | -- |
 | pns | | -- |
-| pointwise | | -- |
+| pointwise | | 68.46 |
 | pool | | -- |
 | popcount | | -- |
 | present | | -- |
