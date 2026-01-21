@@ -1,0 +1,45 @@
+nvc++ -acc  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+mixRemainder(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int):
+    108, Generating acc routine seq
+         Generating NVIDIA GPU code
+hashlittle(void const*, unsigned long, unsigned int):
+    140, Loop not fused: complex flow graph
+         Loop not vectorized: recurrence
+main:
+         140, Loop not fused: complex flow graph
+              Loop not vectorized: recurrence
+    214, Loop not vectorized/parallelized: contains call
+    223, Generating copyin(initvals[:N],keys[:?]) [if not already present]
+         Generating copyout(out[:N]) [if not already present]
+         Generating copyin(lens[:N]) [if not already present]
+    224, Generating implicit firstprivate(N)
+         Generating NVIDIA GPU code
+        226, #pragma acc loop gang, vector(block_size) /* blockIdx.x threadIdx.x */
+        237, #pragma acc loop seq
+    224, Loop not vectorized/parallelized: contains call
+    226, Generating implicit private(k)
+         Loop not fused: no successor loop
+    237, Loop carried scalar dependence for a at line 238
+         Scalar last value needed after loop for a at line 259
+         Loop carried scalar dependence for k at line 239
+         Loop carried scalar dependence for c at line 240
+         Scalar last value needed after loop for c at line 259
+         Loop carried scalar dependence for b at line 239
+         Scalar last value needed after loop for b at line 259
+         Loop carried scalar dependence for k at line 238,240
+         Loop carried scalar dependence for c at line 240
+         Loop carried scalar dependence for k at line 243
+         Scalar last value needed after loop for k at line 245,246,247
+         Generating implicit private(k)
+         Loop carried scalar dependence for k at line 239
+         Loop not fused: complex flow graph
+         Loop not vectorized: recurrence
+    242, Accelerator restriction: induction variable live-out from loop: length
+    244, Accelerator restriction: induction variable live-out from loop: length
+    270, Loop not vectorized/parallelized: potential early exits
+         140, Loop not fused: complex flow graph
+              Loop not vectorized: recurrence
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++ -acc  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

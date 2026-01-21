@@ -1,0 +1,9 @@
+WG size of kernel_swap = 256, WG size of kernel_kmeans = 256 
+
+I/O completed
+
+Number of objects: 494020
+Number of features: 34
+Kmeans core timing: 24956 ms
+Number of Iteration: 10
+Best number of clusters is 15
