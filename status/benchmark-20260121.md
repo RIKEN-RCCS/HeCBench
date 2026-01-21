@@ -85,7 +85,7 @@
 | diamond | | -- |
 | distort | | -- |
 | divergence | | -- |
-| doh | | -- |
+| doh | | 1.72 |
 | dp | | -- |
 | dslash | | -- |
 | dxtc2 | | -- |
