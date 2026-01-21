@@ -33,6 +33,7 @@ else
 	  echo "timeout was set to " ${4} >> log_run_bench.err
       fi
       cd ..
+  fi
   if [ -e ${1}-omp_nvc ];then
       echo "running benchmark under ${1}-omp_nvc"
       cd ${1}-omp_nvc

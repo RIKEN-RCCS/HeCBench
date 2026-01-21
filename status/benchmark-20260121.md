@@ -71,7 +71,7 @@
 | convolutionSeparable | | -- |
 | cooling | | 2272.56 |
 | crc64 | | -- |
-| cross | | -- |
+| cross | | 7.67 |
 | crs | | -- |
 | d2q9-bgk | | -- |
 | damage | | -- |
