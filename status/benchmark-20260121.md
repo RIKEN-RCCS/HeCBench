@@ -125,11 +125,11 @@
 | gpp | | -- |
 | grep | | -- |
 | grrt | | -- |
-| haccmk | | -- |
+| haccmk | | 2.51 |
 | hausdorff | | -- |
 | haversine | | -- |
 | heartwall | | -- |
-| heat2d | | -- |
+| heat2d | | 25.47 |
 | heat | | -- |
 | hellinger | | -- |
 | henry | | -- |
