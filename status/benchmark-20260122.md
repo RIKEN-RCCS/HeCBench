@@ -273,7 +273,7 @@
 | scatterAdd | | -- |
 | scel | | -- |
 | secp256k1 | | 2.73 |
-| sheath | | -- |
+| sheath | | 5.79 |
 | shmembench | | -- |
 | simplemoc | | -- |
 | simpleSpmv | | -- |

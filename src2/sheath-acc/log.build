@@ -1,0 +1,80 @@
+nvc++ -acc  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+main:
+         264, Loop not vectorized/parallelized: contains call
+         264, Loop not vectorized/parallelized: contains call
+    170, Generating copyin(electrons_part[:500000]) [if not already present]
+         Generating create(ef[:domain.ni]) [if not already present]
+         Generating copyin(ions_part[:500000]) [if not already present]
+         Generating create(ndi[:domain.ni],nde[:domain.ni]) [if not already present]
+         334, Loop not vectorized/parallelized: not countable
+         402, Loop not vectorized/parallelized: not countable
+         413, Generated vector simd code for the loop containing reductions
+         542, Loop not vectorized/parallelized: contains call
+         334, Loop not vectorized/parallelized: not countable
+         402, Loop not vectorized/parallelized: not countable
+         413, Generated vector simd code for the loop containing reductions
+    213, Loop not fused: function call before adjacent loop
+         Loop not vectorized: unknown
+         542, Loop not vectorized/parallelized: contains call
+SampleVel(double):
+    264, Loop not vectorized/parallelized: contains call
+ScatterSpecies(Species*, Particle*, float*, double&):
+    275, Generating implicit firstprivate(nodes)
+         Generating NVIDIA GPU code
+        278, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+    275, Generating implicit copyout(den[:nodes]) [if not already present]
+    278, Recognized memory zero idiom
+    284, Generating implicit firstprivate(size)
+         Generating NVIDIA GPU code
+        288, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+    284, Generating implicit copyin(particles[:size],den) [if not already present]
+    288, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+    296, Generating update self(den[:nodes])
+    302, Loop not vectorized/parallelized: not countable
+ComputeRho(Species*, Species*):
+    334, Loop not vectorized/parallelized: not countable
+SolvePotentialDirect(double*, double*):
+    350, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 4 times
+    366, Loop not vectorized/parallelized: not countable
+    375, Loop not fused: dependence chain to sibling loop
+         Loop not vectorized: data dependency
+    383, Loop not vectorized: data dependency
+         Loop unrolled 8 times
+SolvePotential(double*, double*):
+    402, Loop not vectorized/parallelized: not countable
+    413, Generated vector simd code for the loop containing reductions
+ComputeEF(double*, double*):
+    432, Loop not vectorized/parallelized: not countable
+    441, Generating update device(ef[:domain.ni])
+PushSpecies(Species*, Particle*, double*):
+    449, Generating implicit firstprivate(size)
+         Generating NVIDIA GPU code
+        453, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+    449, Generating implicit copyin(particles[:size],ef) [if not already present]
+    453, Generating implicit firstprivate(qm)
+         Loop not fused: no successor loop
+RewindSpecies(Species*, Particle*, double*):
+    483, Generating implicit firstprivate(size)
+         Generating NVIDIA GPU code
+        487, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+    483, Generating implicit copyin(particles[:size],ef) [if not already present]
+    487, Generating implicit firstprivate(qm)
+         Loop not fused: no successor loop
+         Loop not vectorized: may not be beneficial for target
+XtoL(double):
+    508, Generating acc routine seq
+         Generating NVIDIA GPU code
+scatter(double, float, float*):
+    516, Generating NVIDIA GPU code
+gather(double, double const*):
+    528, Generating acc routine seq
+         Generating NVIDIA GPU code
+WriteResults(int):
+    542, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     11, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++ -acc  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 
