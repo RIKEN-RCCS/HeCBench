@@ -285,7 +285,7 @@
 | softmax | | -- |
 | sort | | -- |
 | sosfil | | -- |
-| sph | | -- |
+| sph | | 20.38 |
 | split | | -- |
 | spm | | -- |
 | sptrsv | | -- |
