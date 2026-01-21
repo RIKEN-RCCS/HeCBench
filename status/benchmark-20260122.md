@@ -297,7 +297,7 @@
 | streamcluster | | -- |
 | su3 | | -- |
 | surfel | | -- |
-| svd3x3 | | -- |
+| svd3x3 | | 1.98 |
 | sw4ck | | -- |
 | swish | | -- |
 | tensorT | | -- |
