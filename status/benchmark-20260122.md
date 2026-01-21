@@ -262,8 +262,8 @@
 | romberg | | -- |
 | rsbench | | -- |
 | rsc | | -- |
-| rtm8 | | -- |
-| rushlarsen | | -- |
+| rtm8 | | 13.95 |
+| rushlarsen | | 688.40 |
 | s3d | | -- |
 | s8n | | -- |
 | sad | | -- |
