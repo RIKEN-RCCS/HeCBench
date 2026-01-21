@@ -69,7 +69,7 @@
 | convolution1D | | -- |
 | convolution3D | | -- |
 | convolutionSeparable | | -- |
-| cooling | | -- |
+| cooling | | 2272.56 |
 | crc64 | | -- |
 | cross | | -- |
 | crs | | -- |
