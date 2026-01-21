@@ -184,8 +184,8 @@
 | mask | | -- |
 | match | | -- |
 | matern | | -- |
-| matrix-rotate | | -- |
-| maxFlops | | -- |
+| matrix-rotate | | 35.59 |
+| maxFlops | | 26.50 |
 | maxpool3d | | -- |
 | mcmd | | -- |
 | mcpr | | -- |
