@@ -216,7 +216,7 @@
 | murmurhash3 | | 2.64 |
 | myocyte | | -- |
 | nbody | | -- |
-| ne | | -- |
+| ne | | 5.47 |
 | nlll | | -- |
 | nms | | -- |
 | nn | | -- |
