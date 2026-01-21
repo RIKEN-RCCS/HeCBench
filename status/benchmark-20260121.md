@@ -135,14 +135,14 @@
 | henry | | 0.89 |
 | hexciton | | -- |
 | histogram | | -- |
-| hmm | | -- |
+| hmm | | 14.86 |
 | hogbom | | -- |
 | hotspot3D | | -- |
 | hwt1d | | -- |
 | hybridsort | | -- |
 | hypterm | | -- |
 | idivide | | -- |
-| interleave | | -- |
+| interleave | | 4.03 |
 | interval | | -- |
 | inversek2j | | -- |
 | ising | | -- |
