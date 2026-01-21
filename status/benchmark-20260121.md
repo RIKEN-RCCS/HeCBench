@@ -172,7 +172,7 @@
 | lif | | 117.82 |
 | linearprobing | | -- |
 | log2 | | 0.68 |
-| lombscargle | | -- |
+| lombscargle | | 3.05 |
 | loopback | | -- |
 | lrn | | -- |
 | lr | | -- |
