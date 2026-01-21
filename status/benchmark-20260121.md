@@ -169,9 +169,9 @@
 | leukocyte | | -- |
 | libor | | -- |
 | lid-driven-cavity | | -- |
-| lif | | -- |
+| lif | | 117.82 |
 | linearprobing | | -- |
-| log2 | | -- |
+| log2 | | 0.68 |
 | lombscargle | | -- |
 | loopback | | -- |
 | lrn | | -- |
