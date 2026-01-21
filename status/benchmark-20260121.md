@@ -132,7 +132,7 @@
 | heat2d | | 25.47 |
 | heat | | -- |
 | hellinger | | -- |
-| henry | | -- |
+| henry | | 0.89 |
 | hexciton | | -- |
 | histogram | | -- |
 | hmm | | -- |
