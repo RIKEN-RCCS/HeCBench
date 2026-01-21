@@ -1,0 +1,12 @@
+#elements = 0.50 M: average omp nrm2 execution time = 28.370651 (us), performance = 36.959919 (Gop/s)
+#elements = 1.00 M: average omp nrm2 execution time = 31.679111 (us), performance = 66.199867 (Gop/s)
+#elements = 2.00 M: average omp nrm2 execution time = 38.544010 (us), performance = 108.818596 (Gop/s)
+#elements = 4.00 M: average omp nrm2 execution time = 53.624844 (us), performance = 156.431412 (Gop/s)
+#elements = 8.00 M: average omp nrm2 execution time = 82.267822 (us), performance = 203.934128 (Gop/s)
+#elements = 16.00 M: average omp nrm2 execution time = 170.812714 (us), performance = 196.439911 (Gop/s)
+#elements = 32.00 M: average omp nrm2 execution time = 206.347443 (us), performance = 325.222656 (Gop/s)
+#elements = 64.00 M: average omp nrm2 execution time = 267.008423 (us), performance = 502.672302 (Gop/s)
+#elements = 128.00 M: average omp nrm2 execution time = 380.605286 (us), performance = 705.285767 (Gop/s)
+#elements = 256.00 M: average omp nrm2 execution time = 602.541748 (us), performance = 891.010437 (Gop/s)
+#elements = 512.00 M: average omp nrm2 execution time = 1052.532593 (us), performance = 1020.150696 (Gop/s)
+PASS
