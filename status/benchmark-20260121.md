@@ -90,7 +90,7 @@
 | dslash | | 2.58 |
 | dxtc2 | | -- |
 | easyWave | | -- |
-| ecdh | | -- |
+| ecdh | | 18.10 |
 | eigenvalue | | -- |
 | entropy | | -- |
 | epistasis | | -- |
@@ -99,12 +99,12 @@
 | extrema | | -- |
 | face | | -- |
 | fdtd3d | | -- |
-| feynman-kac | | -- |
+| feynman-kac | | 48.19 |
 | fft | | -- |
-| fhd | | -- |
+| fhd | | 1051.50 |
 | filter | | -- |
 | flip | | -- |
-| floydwarshall | | -- |
+| floydwarshall | | 72.83 |
 | fluidSim | | -- |
 | fpc | | -- |
 | fpdc | | -- |

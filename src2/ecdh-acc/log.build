@@ -1,0 +1,139 @@
+nvc++ -acc  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+ext_euclidian_alg(int, int, int&, int&):
+      7, include "ecdh.h"
+           7, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          11, Loop not vectorized/parallelized: not countable
+make_positive(int, unsigned int):
+      7, include "ecdh.h"
+          28, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          29, Loop not vectorized/parallelized: not countable
+find_inverse(int, unsigned int):
+      7, include "ecdh.h"
+          41, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          11, Loop not vectorized/parallelized: not countable
+          29, Loop not vectorized/parallelized: not countable
+point_addition(unsigned int, int, int, int, int, int*, int*):
+      7, include "ecdh.h"
+          57, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          29, Loop not vectorized/parallelized: not countable
+          43, Loop not vectorized/parallelized: not countable
+          44, Loop not vectorized/parallelized: not countable
+          29, Loop not vectorized/parallelized: not countable
+          29, Loop not vectorized/parallelized: not countable
+          29, Loop not vectorized/parallelized: not countable
+point_doubling(unsigned int, int, int, int, int*, int*):
+      7, include "ecdh.h"
+          70, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          43, Loop not vectorized/parallelized: not countable
+          44, Loop not vectorized/parallelized: not countable
+          29, Loop not vectorized/parallelized: not countable
+          29, Loop not vectorized/parallelized: not countable
+first_set_bit(int):
+      7, include "ecdh.h"
+          81, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          83, Loop not vectorized/parallelized: potential early exits
+make_pk_fast(int, int, int, int*, int*, unsigned int, int):
+      7, include "ecdh.h"
+          99, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          83, Loop not vectorized/parallelized: potential early exits
+          71, Loop not vectorized/parallelized: not countable
+          72, Loop not vectorized/parallelized: not countable
+          73, Loop not vectorized/parallelized: not countable
+          58, Loop not vectorized/parallelized: not countable
+          59, Loop not vectorized/parallelized: not countable
+          60, Loop not vectorized/parallelized: not countable
+          61, Loop not vectorized/parallelized: not countable
+make_pk_slow(int, int, int, int*, int*, unsigned int, int):
+      7, include "ecdh.h"
+         121, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          71, Loop not vectorized/parallelized: not countable
+          72, Loop not vectorized/parallelized: not countable
+          73, Loop not vectorized/parallelized: not countable
+          58, Loop not vectorized/parallelized: not countable
+          59, Loop not vectorized/parallelized: not countable
+          60, Loop not vectorized/parallelized: not countable
+          61, Loop not vectorized/parallelized: not countable
+get_shared_key(int, int, int, int*, int*, unsigned int, int):
+      7, include "ecdh.h"
+         142, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+         104, Loop not vectorized/parallelized: potential early exits
+         106, Loop not vectorized/parallelized: not countable
+         109, Loop not vectorized/parallelized: not countable
+k_slow(int, int, int, int*, int*, unsigned int, int, int):
+      7, include "ecdh.h"
+         157, Generating implicit firstprivate(num_pk)
+              Generating NVIDIA GPU code
+             122, #pragma acc loop seq
+             126, #pragma acc loop seq
+             128, #pragma acc loop seq
+             159, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+         157, Generating implicit copyin(T_x,T_y) [if not already present]
+         159, Generating implicit firstprivate(sk,m,P_x,a,P_y)
+         122, Accelerator restriction: induction variable live-out from loop: .inl_.inl_.inl_.inl_a_11_64_200_1079,.inl_.inl_.inl_a_67_207_1086,.inl_.inl_.inl_a_69_213_1091
+              Loop carried scalar dependence for .inl_.inl_.inl_t_48_184_1063 at line 122
+              Scalar last value needed after loop for .inl_.inl_.inl_t_48_184_1063 at line 122
+              Loop carried scalar dependence for .inl_.inl_.inl_.inl_x1_2_54_190_1069 at line 122
+              Loop carried scalar dependence for .inl_.inl_.inl_s_49_185_1064 at line 122
+              Loop carried scalar dependence for .inl_.inl_.inl_.inl_y1_3_55_191_1070 at line 122
+              Loop carried scalar dependence for .inl_.inl_.inl_.inl_a1_4_56_192_1071 at line 122
+              Scalar last value needed after loop for .inl_.inl_.inl_.inl_a1_4_56_192_1071 at line 122
+              Loop carried scalar dependence for .inl_.inl_.inl_.inl_b1_6_57_193_1072 at line 122
+              Loop not vectorized/parallelized: not countable
+         126, Complex loop carried dependence of T_x+((i)*4)->,T_y+((i)*4)-> prevents parallelization
+         128, Accelerator restriction: induction variable live-out from loop: .inl_.inl_.inl_a_13_223_1112,.inl_.inl_.inl_.inl_a_11_35_251_1138,.inl_.inl_.inl_a_38_257_1144,.inl_.inl_.inl_a_40_263_1150,.inl_.inl_.inl_a_42_269_1155
+              Loop carried scalar dependence for .inl_.inl_.inl_t_19_235_1122 at line 128
+              Scalar last value needed after loop for .inl_.inl_.inl_t_19_235_1122 at line 128
+              Loop carried scalar dependence for .inl_.inl_.inl_.inl_x1_2_25_241_1128 at line 128
+              Loop carried scalar dependence for .inl_.inl_.inl_s_20_236_1123 at line 128
+              Loop carried scalar dependence for .inl_.inl_.inl_.inl_y1_3_26_242_1129 at line 128
+              Loop carried scalar dependence for .inl_.inl_.inl_.inl_a1_4_27_243_1130 at line 128
+              Scalar last value needed after loop for .inl_.inl_.inl_.inl_a1_4_27_243_1130 at line 128
+              Loop carried scalar dependence for .inl_.inl_.inl_.inl_b1_6_28_244_1131 at line 128
+              Loop not vectorized/parallelized: not countable
+k_fast(int, int, int, int*, int*, unsigned int, int, int):
+      7, include "ecdh.h"
+         172, Generating implicit firstprivate(num_pk)
+              Generating NVIDIA GPU code
+             104, #pragma acc loop seq
+             106, #pragma acc loop seq
+             109, #pragma acc loop seq
+             174, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+         172, Generating implicit copyin(T_x,T_y) [if not already present]
+         174, Generating implicit firstprivate(sk,m,P_x,a,P_y)
+         104, Accelerator restriction: induction variable live-out from loop: .inl_.inl_i_71_1165
+              Complex loop carried dependence of T_x+((i)*4)->,T_y+((i)*4)-> prevents parallelization
+              Loop not vectorized/parallelized: potential early exits
+         106, Accelerator restriction: induction variable live-out from loop: .inl_.inl_.inl_.inl_a_11_64_100_1204,.inl_.inl_.inl_a_67_107_1211,.inl_.inl_.inl_a_69_113_1216
+              Loop carried scalar dependence for .inl_.inl_.inl_t_48_84_1188 at line 106
+              Scalar last value needed after loop for .inl_.inl_.inl_t_48_84_1188 at line 106
+              Loop carried scalar dependence for .inl_.inl_.inl_.inl_x1_2_54_90_1194 at line 106
+              Loop carried scalar dependence for .inl_.inl_.inl_s_49_85_1189 at line 106
+              Loop carried scalar dependence for .inl_.inl_.inl_.inl_y1_3_55_91_1195 at line 106
+              Loop carried scalar dependence for .inl_.inl_.inl_.inl_a1_4_56_92_1196 at line 106
+              Scalar last value needed after loop for .inl_.inl_.inl_.inl_a1_4_56_92_1196 at line 106
+              Loop carried scalar dependence for .inl_.inl_.inl_.inl_b1_6_57_93_1197 at line 106
+              Loop not vectorized/parallelized: not countable
+         109, Accelerator restriction: induction variable live-out from loop: .inl_.inl_.inl_a_13_123_1236,.inl_.inl_.inl_.inl_a_11_35_151_1262,.inl_.inl_.inl_a_38_157_1268,.inl_.inl_.inl_a_40_163_1274,.inl_.inl_.inl_a_42_169_1279
+              Loop carried scalar dependence for .inl_.inl_.inl_t_19_135_1246 at line 109
+              Scalar last value needed after loop for .inl_.inl_.inl_t_19_135_1246 at line 109
+              Loop carried scalar dependence for .inl_.inl_.inl_.inl_x1_2_25_141_1252 at line 109
+              Loop carried scalar dependence for .inl_.inl_.inl_s_20_136_1247 at line 109
+              Loop carried scalar dependence for .inl_.inl_.inl_.inl_y1_3_26_142_1253 at line 109
+              Loop carried scalar dependence for .inl_.inl_.inl_.inl_a1_4_27_143_1254 at line 109
+              Scalar last value needed after loop for .inl_.inl_.inl_.inl_a1_4_27_143_1254 at line 109
+              Loop carried scalar dependence for .inl_.inl_.inl_.inl_b1_6_28_144_1255 at line 109
+              Loop not vectorized/parallelized: not countable
+main:
+     36, Generating copyout(pk_fast_y[:num_pk],pk_slow_x[:num_pk],pk_slow_y[:num_pk],pk_fast_x[:num_pk]) [if not already present]
+     39, Loop not vectorized/parallelized: contains call
+     50, Loop not vectorized/parallelized: contains call
+nvc++ -acc  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 
