@@ -275,11 +275,11 @@
 | secp256k1 | | 2.73 |
 | sheath | | 5.79 |
 | shmembench | | -- |
-| simplemoc | | -- |
+| simplemoc | | 318.92 |
 | simpleSpmv | | -- |
 | slu | | -- |
 | snake | | -- |
-| sobel | | -- |
+| sobel | | 1.34 |
 | sobol | | -- |
 | softmax-online | | -- |
 | softmax | | -- |
