@@ -272,7 +272,7 @@
 | scan | | -- |
 | scatterAdd | | -- |
 | scel | | -- |
-| secp256k1 | | -- |
+| secp256k1 | | 2.73 |
 | sheath | | -- |
 | shmembench | | -- |
 | simplemoc | | -- |
