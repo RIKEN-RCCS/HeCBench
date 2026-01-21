@@ -114,11 +114,11 @@
 | gabor | | -- |
 | gamma-correction | | -- |
 | ga | | -- |
-| gaussian | | -- |
+| gaussian | | 4.06 |
 | gc | | -- |
 | gd | | -- |
 | geglu | | -- |
-| geodesic | | -- |
+| geodesic | | 2.61 |
 | glu | | -- |
 | gmm | | -- |
 | goulash | | -- |
