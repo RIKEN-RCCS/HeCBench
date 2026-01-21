@@ -186,7 +186,7 @@
 | matern | | -- |
 | matrix-rotate | | 35.59 |
 | maxFlops | | 26.50 |
-| maxpool3d | | -- |
+| maxpool3d | | 32.12 |
 | mcmd | | -- |
 | mcpr | | -- |
 | md5hash | | -- |
