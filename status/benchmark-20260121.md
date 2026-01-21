@@ -156,12 +156,12 @@
 | kmeans | | 25.59 |
 | knn | | -- |
 | lanczos | | -- |
-| langevin | | -- |
+| langevin | | 6.20 |
 | langford | | -- |
 | laplace3d | | -- |
 | laplace | | -- |
 | lavaMD | | -- |
-| layout | | -- |
+| layout | | 2.62 |
 | lci | | -- |
 | lda | | -- |
 | ldpc | | -- |
