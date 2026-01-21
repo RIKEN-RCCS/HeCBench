@@ -33,5 +33,13 @@ else
 	  echo "timeout was set to " ${4} >> log_run_bench.err
       fi
       cd ..
+  if [ -e ${1}-omp_nvc ];then
+      echo "running benchmark under ${1}-omp_nvc"
+      cd ${1}-omp_nvc
+      ${timeout_cmd} ${4} make -f Makefile.NVD ${run} 1> log_run_bench.std 2> log_run_bench.err
+      if [ "${timeout_cmd}" != "" ]; then
+	  echo "timeout was set to " ${4} >> log_run_bench.err
+      fi
+      cd ..
   fi
 fi

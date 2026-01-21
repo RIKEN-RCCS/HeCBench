@@ -22,6 +22,14 @@ else
 	  cat Makefile.NVD | sed -e 's/cc70/cc90/g' | sed -e 's/nvc++/nvc++ -acc/g' > TMPFILE
 	  mv TMPFILE Makefile.NVD
 	  cd ..
+
+	  cp -R ${1}-omp ${1}-omp_nvc
+	  cd ${1}-omp_nvc
+	  pwd
+	  ../scripts/edit_makefile.py -t NVIDIA -i Makefile.nvc
+	  cat Makefile.NVD | sed -e 's/cc70/cc90/g' > TMPFILE
+	  mv TMPFILE Makefile.NVD
+	  cd ..
       fi
   fi
 fi
