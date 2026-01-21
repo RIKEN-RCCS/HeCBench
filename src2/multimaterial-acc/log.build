@@ -1,0 +1,639 @@
+nvc++ -acc  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 compact.cpp full_matrix.cpp multimat.cpp -o multimat 
+compact.cpp:
+"compact.cpp", line 353: warning: variable "mmc_cells" was declared but never referenced [declared_but_not_referenced]
+    int mmc_cells = ccc.mmc_cells;
+        ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"compact.cpp", line 354: warning: variable "mm_len" was declared but never referenced [declared_but_not_referenced]
+    int mm_len = ccc.mm_len;
+        ^
+
+compact_cell_centric(full_data, compact_data, int, char**):
+    102, Generating copy(Vf_compact_list[:mm_len]) [if not already present]
+         Generating copyin(imaterial[:sizey*sizex]) [if not already present]
+         Generating copy(n[:Nmats]) [if not already present]
+         Generating copyin(mmc_i[:mmc_cells+1],matids[:mm_len],mmc_index[:mmc_cells+1]) [if not already present]
+         Generating copy(t_compact_list[:mm_len],y[:sizey*sizex],x[:sizey*sizex],rho_ave_compact[:sizey*sizex],rho_compact[:sizey*sizex],rho_compact_list[:mm_len],rho_mat_ave_compact[:sizey*sizex]) [if not already present]
+         Generating copyin(nextfrac[:mm_len]) [if not already present]
+         Generating copy(p_compact[:sizey*sizex],rho_mat_ave_compact_list[:mm_len],t_compact[:sizey*sizex],V[:sizey*sizex]) [if not already present]
+         Generating copyin(mmc_j[:mmc_cells+1]) [if not already present]
+         Generating copy(p_compact_list[:mm_len]) [if not already present]
+    109, Generating implicit firstprivate(sizey,sizex)
+         Generating NVIDIA GPU code
+        113, #pragma acc loop gang, vector(128) collapse(2) /* blockIdx.x threadIdx.x */
+        114,   /* blockIdx.x threadIdx.x collapsed */
+    113, Outer loop unrolled 1 times (completely unrolled)
+    114, Loop nest collapsed
+         Loop not fused: no successor loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 4 times
+    143, Generating implicit firstprivate(mmc_cells)
+         Generating NVIDIA GPU code
+        149, #pragma acc loop gang, vector(128) /* blockIdx.x threadIdx.x */
+        151, #pragma acc loop seq
+             Generating implicit reduction(+:ave)
+    149, Generating implicit firstprivate(sizex)
+         Loop not fused: no successor loop
+    151, Loop is parallelizable
+         Generated vector simd code for the loop containing reductions
+         Loop unrolled 2 times
+    162, Generating implicit firstprivate(sizey,sizex)
+         Generating NVIDIA GPU code
+        166, #pragma acc loop gang, vector(128) collapse(2) /* blockIdx.x threadIdx.x */
+        167,   /* blockIdx.x threadIdx.x collapsed */
+    166, Loop not fused: no successor loop
+    167, Loop not vectorized: data dependency
+    196, Generating implicit firstprivate(mm_len)
+         Generating NVIDIA GPU code
+        200, #pragma acc loop gang, vector(128) /* blockIdx.x threadIdx.x */
+    200, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    210, Generating implicit firstprivate(sizey,sizex)
+         Generating NVIDIA GPU code
+        214, #pragma acc loop gang, vector(128) collapse(2) /* blockIdx.x threadIdx.x */
+        215,   /* blockIdx.x threadIdx.x collapsed */
+        224, #pragma acc loop seq
+        225, #pragma acc loop seq
+        241, #pragma acc loop seq
+        248, #pragma acc loop seq
+        249, #pragma acc loop seq
+        297, #pragma acc loop seq
+        301, #pragma acc loop seq
+    210, Local memory used for dsqr
+    214, Loop not vectorized/parallelized: too deeply nested
+    215, Loop not vectorized/parallelized: too deeply nested
+    224, Loop carried dependence of dsqr prevents parallelization
+         Loop carried dependence of dsqr prevents vectorization
+         Complex loop carried dependence of dsqr,x->,y-> prevents parallelization
+         Loop carried backward dependence of dsqr prevents vectorization
+         Loop unrolled 3 times (completely unrolled)
+    225, Complex loop carried dependence of dsqr,x->,y-> prevents parallelization
+         Loop unrolled 3 times (completely unrolled)
+    241, Complex loop carried dependence of rho_mat_ave_compact_list-> prevents parallelization
+         Loop carried dependence of rho_mat_ave_compact_list-> prevents parallelization
+         Loop carried backward dependence of rho_mat_ave_compact_list-> prevents vectorization
+         Complex loop carried dependence of rho_compact_list->,dsqr,rho_compact-> prevents parallelization
+         Loop not vectorized/parallelized: too deeply nested
+    248, Loop carried scalar dependence for rho_sum at line 260,276
+         Scalar last value needed after loop for rho_sum at line 283
+         Loop carried scalar dependence for Nn at line 261,277
+         Scalar last value needed after loop for Nn at line 283
+    249, Loop carried scalar dependence for rho_sum at line 260,276
+         Scalar last value needed after loop for rho_sum at line 283
+         Loop carried scalar dependence for Nn at line 261,277
+         Scalar last value needed after loop for Nn at line 283
+    257, Loop not vectorized/parallelized: potential early exits
+    259, Accelerator restriction: induction variable live-out from loop: jx
+    267, Accelerator restriction: induction variable live-out from loop: jx
+    297, Loop carried scalar dependence for rho_sum at line 317,333
+         Scalar last value needed after loop for rho_sum at line 339
+         Loop carried scalar dependence for Nn at line 318,334
+         Scalar last value needed after loop for Nn at line 339
+    301, Loop carried scalar dependence for rho_sum at line 317,333
+         Scalar last value needed after loop for rho_sum at line 339
+         Loop carried scalar dependence for Nn at line 318,334
+         Scalar last value needed after loop for Nn at line 339
+    314, Loop not vectorized/parallelized: potential early exits
+    316, Accelerator restriction: induction variable live-out from loop: jx
+    324, Accelerator restriction: induction variable live-out from loop: jx
+compact_check_results(full_data, compact_data):
+    370, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<double, std::ratio<1l, 1l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+full_matrix.cpp:
+full_matrix_cell_centric(full_data):
+     52, Loop not fused: different loop trip count
+         2 loops fused
+     56, 2 loops fused
+     59, 2 loops fused
+         Generated vector simd code for the loop containing reductions
+    111, Loop not vectorized/parallelized: too deeply nested
+    123, Loop unrolled 3 times (completely unrolled)
+    124, Loop unrolled 3 times (completely unrolled)
+    142, Loop not fused: no successor loop
+         Loop not vectorized/parallelized: loop count too small
+    146, Loop unrolled 3 times (completely unrolled)
+full_matrix_material_centric(full_data, full_data):
+    206, Recognized memory zero idiom
+    211, Loop not fused: complex flow graph
+    223, Generated vector simd code for the loop
+    237, Outer loop unrolled 1 times (completely unrolled)
+    242, Loop nest collapsed
+         Loop not fused: different loop trip count
+         Generated vector simd code for the loop
+    258, Loop not fused: different loop trip count
+    267, Loop not vectorized: unknown
+    290, Loop not vectorized/parallelized: too deeply nested
+    308, Loop not fused: no successor loop
+         Loop not vectorized/parallelized: loop count too small
+    312, Loop unrolled 3 times (completely unrolled)
+full_matrix_check_results(full_data, full_data):
+    365, Loop not vectorized/parallelized: potential early exits
+multimat.cpp:
+"multimat.cpp", line 106: warning: variable "sizex" was declared but never referenced [declared_but_not_referenced]
+    int sizex = cc.sizex;
+        ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"multimat.cpp", line 108: warning: variable "Nmats" was declared but never referenced [declared_but_not_referenced]
+    int Nmats = cc.Nmats;
+        ^
+
+"multimat.cpp", line 281: warning: variable "width" was declared but never referenced [declared_but_not_referenced]
+    int width = sizex/Nmats;
+        ^
+
+initialise_field_rand(full_data, double, double, double):
+    128, Loop not vectorized/parallelized: contains call
+    136, Loop not vectorized/parallelized: potential early exits
+    144, Loop not vectorized/parallelized: potential early exits
+initialise_field_static(full_data):
+    164, Loop not fused: dependence chain to sibling loop
+    166, Loop not fused: different loop trip count
+    167, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    172, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    181, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    190, Loop not fused: different loop trip count
+    192, Loop not fused: different loop trip count
+    193, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    198, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    206, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    216, Outer loop unrolled 2 times (completely unrolled)
+    217, Loop not fused: dependence chain to sibling loop
+         Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+    228, Loop not vectorized: data dependency
+    229, Loop unrolled 3 times (completely unrolled)
+    241, Loop not vectorized: data dependency
+    242, Loop unrolled 3 times (completely unrolled)
+    251, Loop not vectorized/parallelized: potential early exits
+    271, Loop not vectorized: data dependency
+initialise_field_file(full_data):
+    317, Recognized memory zero idiom
+    321, Loop not vectorized/parallelized: contains call
+    329, Loop not vectorized/parallelized: too deeply nested
+    330, Loop not vectorized/parallelized: too deeply nested
+    331, Loop not vectorized/parallelized: contains call
+    340, Loop not vectorized: data dependency
+main:
+    463, Loop not fused: function call before adjacent loop
+    464, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    471, Recognized memory set idiom
+         128, Loop not vectorized/parallelized: contains call
+         136, Loop not vectorized/parallelized: potential early exits
+         144, Loop not vectorized/parallelized: potential early exits
+         317, Recognized memory zero idiom
+         321, Loop not vectorized/parallelized: contains call
+         329, Loop not vectorized/parallelized: too deeply nested
+         330, Loop not vectorized/parallelized: too deeply nested
+         331, Loop not vectorized/parallelized: contains call
+         340, Loop not vectorized: data dependency
+    495, Loop not vectorized/parallelized: contains call
+    497, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+    517, Generated vector simd code for the loop
+    540, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    553, Loop not vectorized/parallelized: contains call
+    558, Loop not fused: function call before adjacent loop
+    595, Loop not vectorized: data dependency
+nvc++ -acc  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -DFUSED -DLINKED compact.cpp full_matrix.cpp multimat.cpp -o multimat_FL 
+compact.cpp:
+"compact.cpp", line 353: warning: variable "mmc_cells" was declared but never referenced [declared_but_not_referenced]
+    int mmc_cells = ccc.mmc_cells;
+        ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"compact.cpp", line 354: warning: variable "mm_len" was declared but never referenced [declared_but_not_referenced]
+    int mm_len = ccc.mm_len;
+        ^
+
+compact_cell_centric(full_data, compact_data, int, char**):
+    102, Generating copy(Vf_compact_list[:mm_len]) [if not already present]
+         Generating copyin(imaterial[:sizey*sizex]) [if not already present]
+         Generating copy(n[:Nmats]) [if not already present]
+         Generating copyin(mmc_i[:mmc_cells+1],matids[:mm_len],mmc_index[:mmc_cells+1]) [if not already present]
+         Generating copy(t_compact_list[:mm_len],y[:sizey*sizex],x[:sizey*sizex],rho_ave_compact[:sizey*sizex],rho_compact[:sizey*sizex],rho_compact_list[:mm_len],rho_mat_ave_compact[:sizey*sizex]) [if not already present]
+         Generating copyin(nextfrac[:mm_len]) [if not already present]
+         Generating copy(p_compact[:sizey*sizex],rho_mat_ave_compact_list[:mm_len],t_compact[:sizey*sizex],V[:sizey*sizex]) [if not already present]
+         Generating copyin(mmc_j[:mmc_cells+1]) [if not already present]
+         Generating copy(p_compact_list[:mm_len]) [if not already present]
+    109, Generating implicit firstprivate(sizey,sizex)
+         Generating NVIDIA GPU code
+        113, #pragma acc loop gang, vector(128) collapse(2) /* blockIdx.x threadIdx.x */
+        114,   /* blockIdx.x threadIdx.x collapsed */
+        123, #pragma acc loop seq
+             Generating implicit reduction(+:ave)
+    123, Loop carried scalar dependence for ix at line 124,125
+         Loop not vectorized/parallelized: not countable
+    162, Generating implicit firstprivate(sizey,sizex)
+         Generating NVIDIA GPU code
+        166, #pragma acc loop gang, vector(128) collapse(2) /* blockIdx.x threadIdx.x */
+        167,   /* blockIdx.x threadIdx.x collapsed */
+        177, #pragma acc loop seq
+    177, Complex loop carried dependence of n->,t_compact_list->,rho_compact_list->,Vf_compact_list-> prevents parallelization
+         Loop carried dependence of p_compact_list-> prevents parallelization
+         Loop carried backward dependence of p_compact_list-> prevents vectorization
+         Complex loop carried dependence of p_compact_list-> prevents parallelization
+         Loop carried scalar dependence for ix at line 178,179,180
+         Loop not vectorized/parallelized: not countable
+    210, Generating implicit firstprivate(sizey,sizex)
+         Generating NVIDIA GPU code
+        214, #pragma acc loop gang, vector(128) collapse(2) /* blockIdx.x threadIdx.x */
+        215,   /* blockIdx.x threadIdx.x collapsed */
+        224, #pragma acc loop seq
+        225, #pragma acc loop seq
+        239, #pragma acc loop seq
+        248, #pragma acc loop seq
+        249, #pragma acc loop seq
+        297, #pragma acc loop seq
+        301, #pragma acc loop seq
+    210, Local memory used for dsqr
+    214, Loop not vectorized/parallelized: too deeply nested
+    215, Loop not vectorized/parallelized: too deeply nested
+    224, Loop carried dependence of dsqr prevents parallelization
+         Loop carried dependence of dsqr prevents vectorization
+         Complex loop carried dependence of dsqr,x->,y-> prevents parallelization
+         Loop carried backward dependence of dsqr prevents vectorization
+         Loop unrolled 3 times (completely unrolled)
+    225, Complex loop carried dependence of dsqr,x->,y-> prevents parallelization
+         Loop unrolled 3 times (completely unrolled)
+    239, Complex loop carried dependence of rho_mat_ave_compact_list-> prevents parallelization
+         Loop carried dependence of rho_mat_ave_compact_list-> prevents parallelization
+         Loop carried backward dependence of rho_mat_ave_compact_list-> prevents vectorization
+         Loop carried scalar dependence for ix at line 243,283,284
+         Complex loop carried dependence of rho_compact_list->,dsqr,rho_compact-> prevents parallelization
+         Loop not vectorized/parallelized: too deeply nested
+    248, Loop carried scalar dependence for rho_sum at line 260,276
+         Scalar last value needed after loop for rho_sum at line 283
+         Loop carried scalar dependence for Nn at line 261,277
+         Scalar last value needed after loop for Nn at line 283
+    249, Loop carried scalar dependence for rho_sum at line 260,276
+         Scalar last value needed after loop for rho_sum at line 283
+         Loop carried scalar dependence for Nn at line 261,277
+         Scalar last value needed after loop for Nn at line 283
+    255, Loop carried scalar dependence for jx at line 259,267
+         Scalar last value needed after loop for jx at line 260
+         Loop not vectorized/parallelized: potential early exits
+    297, Loop carried scalar dependence for rho_sum at line 317,333
+         Scalar last value needed after loop for rho_sum at line 339
+         Loop carried scalar dependence for Nn at line 318,334
+         Scalar last value needed after loop for Nn at line 339
+    301, Loop carried scalar dependence for rho_sum at line 317,333
+         Scalar last value needed after loop for rho_sum at line 339
+         Loop carried scalar dependence for Nn at line 318,334
+         Scalar last value needed after loop for Nn at line 339
+    312, Loop carried scalar dependence for jx at line 316,324
+         Scalar last value needed after loop for jx at line 317
+         Loop not vectorized/parallelized: potential early exits
+compact_check_results(full_data, compact_data):
+    368, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<double, std::ratio<1l, 1l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+full_matrix.cpp:
+full_matrix_cell_centric(full_data):
+     52, Loop not fused: different loop trip count
+         2 loops fused
+     56, 2 loops fused
+     59, 2 loops fused
+         Generated vector simd code for the loop containing reductions
+    111, Loop not vectorized/parallelized: too deeply nested
+    123, Loop unrolled 3 times (completely unrolled)
+    124, Loop unrolled 3 times (completely unrolled)
+    142, Loop not fused: no successor loop
+         Loop not vectorized/parallelized: loop count too small
+    146, Loop unrolled 3 times (completely unrolled)
+full_matrix_material_centric(full_data, full_data):
+    206, Recognized memory zero idiom
+    211, Loop not fused: complex flow graph
+    223, Generated vector simd code for the loop
+    237, Outer loop unrolled 1 times (completely unrolled)
+    242, Loop nest collapsed
+         Loop not fused: different loop trip count
+         Generated vector simd code for the loop
+    258, Loop not fused: different loop trip count
+    267, Loop not vectorized: unknown
+    290, Loop not vectorized/parallelized: too deeply nested
+    308, Loop not fused: no successor loop
+         Loop not vectorized/parallelized: loop count too small
+    312, Loop unrolled 3 times (completely unrolled)
+full_matrix_check_results(full_data, full_data):
+    365, Loop not vectorized/parallelized: potential early exits
+multimat.cpp:
+"multimat.cpp", line 106: warning: variable "sizex" was declared but never referenced [declared_but_not_referenced]
+    int sizex = cc.sizex;
+        ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"multimat.cpp", line 108: warning: variable "Nmats" was declared but never referenced [declared_but_not_referenced]
+    int Nmats = cc.Nmats;
+        ^
+
+"multimat.cpp", line 281: warning: variable "width" was declared but never referenced [declared_but_not_referenced]
+    int width = sizex/Nmats;
+        ^
+
+initialise_field_rand(full_data, double, double, double):
+    128, Loop not vectorized/parallelized: contains call
+    136, Loop not vectorized/parallelized: potential early exits
+    144, Loop not vectorized/parallelized: potential early exits
+initialise_field_static(full_data):
+    164, Loop not fused: dependence chain to sibling loop
+    166, Loop not fused: different loop trip count
+    167, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    172, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    181, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    190, Loop not fused: different loop trip count
+    192, Loop not fused: different loop trip count
+    193, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    198, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    206, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    216, Outer loop unrolled 2 times (completely unrolled)
+    217, Loop not fused: dependence chain to sibling loop
+         Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+    228, Loop not vectorized: data dependency
+    229, Loop unrolled 3 times (completely unrolled)
+    241, Loop not vectorized: data dependency
+    242, Loop unrolled 3 times (completely unrolled)
+    251, Loop not vectorized/parallelized: potential early exits
+    271, Loop not vectorized: data dependency
+initialise_field_file(full_data):
+    317, Recognized memory zero idiom
+    321, Loop not vectorized/parallelized: contains call
+    329, Loop not vectorized/parallelized: too deeply nested
+    330, Loop not vectorized/parallelized: too deeply nested
+    331, Loop not vectorized/parallelized: contains call
+    340, Loop not vectorized: data dependency
+main:
+    463, Loop not fused: function call before adjacent loop
+    464, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    471, Recognized memory set idiom
+         128, Loop not vectorized/parallelized: contains call
+         136, Loop not vectorized/parallelized: potential early exits
+         144, Loop not vectorized/parallelized: potential early exits
+         317, Recognized memory zero idiom
+         321, Loop not vectorized/parallelized: contains call
+         329, Loop not vectorized/parallelized: too deeply nested
+         330, Loop not vectorized/parallelized: too deeply nested
+         331, Loop not vectorized/parallelized: contains call
+         340, Loop not vectorized: data dependency
+    495, Loop not vectorized/parallelized: contains call
+    497, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+    517, Generated vector simd code for the loop
+    540, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    553, Loop not vectorized/parallelized: contains call
+    558, Loop not fused: function call before adjacent loop
+    595, Loop not vectorized: data dependency
+nvc++ -acc  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -DFUSED compact.cpp full_matrix.cpp multimat.cpp -o multimat_F 
+compact.cpp:
+"compact.cpp", line 353: warning: variable "mmc_cells" was declared but never referenced [declared_but_not_referenced]
+    int mmc_cells = ccc.mmc_cells;
+        ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"compact.cpp", line 354: warning: variable "mm_len" was declared but never referenced [declared_but_not_referenced]
+    int mm_len = ccc.mm_len;
+        ^
+
+compact_cell_centric(full_data, compact_data, int, char**):
+    102, Generating copy(Vf_compact_list[:mm_len]) [if not already present]
+         Generating copyin(imaterial[:sizey*sizex]) [if not already present]
+         Generating copy(n[:Nmats]) [if not already present]
+         Generating copyin(mmc_i[:mmc_cells+1],matids[:mm_len],mmc_index[:mmc_cells+1]) [if not already present]
+         Generating copy(t_compact_list[:mm_len],x[:sizey*sizex],y[:sizey*sizex],rho_ave_compact[:sizey*sizex],rho_compact[:sizey*sizex],rho_compact_list[:mm_len],rho_mat_ave_compact[:sizey*sizex]) [if not already present]
+         Generating copyin(nextfrac[:mm_len]) [if not already present]
+         Generating copy(p_compact[:sizey*sizex],rho_mat_ave_compact_list[:mm_len],t_compact[:sizey*sizex],V[:sizey*sizex]) [if not already present]
+         Generating copyin(mmc_j[:mmc_cells+1]) [if not already present]
+         Generating copy(p_compact_list[:mm_len]) [if not already present]
+    109, Generating implicit firstprivate(sizey,sizex)
+         Generating NVIDIA GPU code
+        113, #pragma acc loop gang, vector(128) collapse(2) /* blockIdx.x threadIdx.x */
+        114,   /* blockIdx.x threadIdx.x collapsed */
+        127, #pragma acc loop seq
+             Generating implicit reduction(+:ave)
+    113, Loop not fused: no successor loop
+    127, Loop is parallelizable
+         Loop not fused: no successor loop
+         Generated vector simd code for the loop containing reductions
+         Loop unrolled 2 times
+    162, Generating implicit firstprivate(sizey,sizex)
+         Generating NVIDIA GPU code
+        166, #pragma acc loop gang, vector(128) collapse(2) /* blockIdx.x threadIdx.x */
+        167,   /* blockIdx.x threadIdx.x collapsed */
+        182, #pragma acc loop seq
+    166, Loop not fused: no successor loop
+    182, Complex loop carried dependence of n->,t_compact_list->,rho_compact_list->,Vf_compact_list-> prevents parallelization
+         Loop carried dependence of p_compact_list-> prevents parallelization
+         Loop carried backward dependence of p_compact_list-> prevents vectorization
+         Complex loop carried dependence of p_compact_list-> prevents parallelization
+         Loop not fused: no successor loop
+         Loop unrolled 2 times
+    210, Generating implicit firstprivate(sizey,sizex)
+         Generating NVIDIA GPU code
+        214, #pragma acc loop gang, vector(128) collapse(2) /* blockIdx.x threadIdx.x */
+        215,   /* blockIdx.x threadIdx.x collapsed */
+        224, #pragma acc loop seq
+        225, #pragma acc loop seq
+        241, #pragma acc loop seq
+        248, #pragma acc loop seq
+        249, #pragma acc loop seq
+        297, #pragma acc loop seq
+        301, #pragma acc loop seq
+    210, Local memory used for dsqr
+    214, Loop not vectorized/parallelized: too deeply nested
+    215, Loop not vectorized/parallelized: too deeply nested
+    224, Loop carried dependence of dsqr prevents parallelization
+         Loop carried dependence of dsqr prevents vectorization
+         Complex loop carried dependence of dsqr,x->,y-> prevents parallelization
+         Loop carried backward dependence of dsqr prevents vectorization
+         Loop unrolled 3 times (completely unrolled)
+    225, Complex loop carried dependence of dsqr,x->,y-> prevents parallelization
+         Loop unrolled 3 times (completely unrolled)
+    241, Complex loop carried dependence of rho_mat_ave_compact_list-> prevents parallelization
+         Loop carried dependence of rho_mat_ave_compact_list-> prevents parallelization
+         Loop carried backward dependence of rho_mat_ave_compact_list-> prevents vectorization
+         Complex loop carried dependence of rho_compact_list->,dsqr,rho_compact-> prevents parallelization
+         Loop not vectorized/parallelized: too deeply nested
+    248, Loop carried scalar dependence for rho_sum at line 260,276
+         Scalar last value needed after loop for rho_sum at line 283
+         Loop carried scalar dependence for Nn at line 261,277
+         Scalar last value needed after loop for Nn at line 283
+    249, Loop carried scalar dependence for rho_sum at line 260,276
+         Scalar last value needed after loop for rho_sum at line 283
+         Loop carried scalar dependence for Nn at line 261,277
+         Scalar last value needed after loop for Nn at line 283
+    257, Loop not vectorized/parallelized: potential early exits
+    259, Accelerator restriction: induction variable live-out from loop: jx
+    267, Accelerator restriction: induction variable live-out from loop: jx
+    297, Loop carried scalar dependence for rho_sum at line 317,333
+         Scalar last value needed after loop for rho_sum at line 339
+         Loop carried scalar dependence for Nn at line 318,334
+         Scalar last value needed after loop for Nn at line 339
+    301, Loop carried scalar dependence for rho_sum at line 317,333
+         Scalar last value needed after loop for rho_sum at line 339
+         Loop carried scalar dependence for Nn at line 318,334
+         Scalar last value needed after loop for Nn at line 339
+    314, Loop not vectorized/parallelized: potential early exits
+    316, Accelerator restriction: induction variable live-out from loop: jx
+    324, Accelerator restriction: induction variable live-out from loop: jx
+compact_check_results(full_data, compact_data):
+    370, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<double, std::ratio<1l, 1l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+full_matrix.cpp:
+full_matrix_cell_centric(full_data):
+     52, Loop not fused: different loop trip count
+         2 loops fused
+     56, 2 loops fused
+     59, 2 loops fused
+         Generated vector simd code for the loop containing reductions
+    111, Loop not vectorized/parallelized: too deeply nested
+    123, Loop unrolled 3 times (completely unrolled)
+    124, Loop unrolled 3 times (completely unrolled)
+    142, Loop not fused: no successor loop
+         Loop not vectorized/parallelized: loop count too small
+    146, Loop unrolled 3 times (completely unrolled)
+full_matrix_material_centric(full_data, full_data):
+    206, Recognized memory zero idiom
+    211, Loop not fused: complex flow graph
+    223, Generated vector simd code for the loop
+    237, Outer loop unrolled 1 times (completely unrolled)
+    242, Loop nest collapsed
+         Loop not fused: different loop trip count
+         Generated vector simd code for the loop
+    258, Loop not fused: different loop trip count
+    267, Loop not vectorized: unknown
+    290, Loop not vectorized/parallelized: too deeply nested
+    308, Loop not fused: no successor loop
+         Loop not vectorized/parallelized: loop count too small
+    312, Loop unrolled 3 times (completely unrolled)
+full_matrix_check_results(full_data, full_data):
+    365, Loop not vectorized/parallelized: potential early exits
+multimat.cpp:
+"multimat.cpp", line 106: warning: variable "sizex" was declared but never referenced [declared_but_not_referenced]
+    int sizex = cc.sizex;
+        ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"multimat.cpp", line 108: warning: variable "Nmats" was declared but never referenced [declared_but_not_referenced]
+    int Nmats = cc.Nmats;
+        ^
+
+"multimat.cpp", line 281: warning: variable "width" was declared but never referenced [declared_but_not_referenced]
+    int width = sizex/Nmats;
+        ^
+
+initialise_field_rand(full_data, double, double, double):
+    128, Loop not vectorized/parallelized: contains call
+    136, Loop not vectorized/parallelized: potential early exits
+    144, Loop not vectorized/parallelized: potential early exits
+initialise_field_static(full_data):
+    164, Loop not fused: dependence chain to sibling loop
+    166, Loop not fused: different loop trip count
+    167, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    172, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    181, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    190, Loop not fused: different loop trip count
+    192, Loop not fused: different loop trip count
+    193, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    198, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    206, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    216, Outer loop unrolled 2 times (completely unrolled)
+    217, Loop not fused: dependence chain to sibling loop
+         Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+    228, Loop not vectorized: data dependency
+    229, Loop unrolled 3 times (completely unrolled)
+    241, Loop not vectorized: data dependency
+    242, Loop unrolled 3 times (completely unrolled)
+    251, Loop not vectorized/parallelized: potential early exits
+    271, Loop not vectorized: data dependency
+initialise_field_file(full_data):
+    317, Recognized memory zero idiom
+    321, Loop not vectorized/parallelized: contains call
+    329, Loop not vectorized/parallelized: too deeply nested
+    330, Loop not vectorized/parallelized: too deeply nested
+    331, Loop not vectorized/parallelized: contains call
+    340, Loop not vectorized: data dependency
+main:
+    463, Loop not fused: function call before adjacent loop
+    464, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    471, Recognized memory set idiom
+         128, Loop not vectorized/parallelized: contains call
+         136, Loop not vectorized/parallelized: potential early exits
+         144, Loop not vectorized/parallelized: potential early exits
+         317, Recognized memory zero idiom
+         321, Loop not vectorized/parallelized: contains call
+         329, Loop not vectorized/parallelized: too deeply nested
+         330, Loop not vectorized/parallelized: too deeply nested
+         331, Loop not vectorized/parallelized: contains call
+         340, Loop not vectorized: data dependency
+    495, Loop not vectorized/parallelized: contains call
+    497, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+    517, Generated vector simd code for the loop
+    540, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    553, Loop not vectorized/parallelized: contains call
+    558, Loop not fused: function call before adjacent loop
+    595, Loop not vectorized: data dependency

@@ -212,8 +212,8 @@
 | mriQ | | -- |
 | mr | | -- |
 | mt | | 4.43 |
-| multimaterial | | -- |
-| murmurhash3 | | -- |
+| multimaterial | | 11.98 |
+| murmurhash3 | | 2.64 |
 | myocyte | | -- |
 | nbody | | -- |
 | ne | | -- |
