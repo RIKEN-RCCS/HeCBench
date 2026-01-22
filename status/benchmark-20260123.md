@@ -119,7 +119,7 @@
 | gd | | 12.72 |
 | geglu | | 22.16 |
 | geodesic | | 2.61 |
-| glu | | -- |
+| glu | | 137.60 |
 | gmm | | -- |
 | goulash | | -- |
 | gpp | | -- |
