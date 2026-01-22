@@ -4,6 +4,7 @@
 
 #include "bondsKernelsGpu.h"
 
+
 #pragma acc routine seq
 int monthLengthKernelGpu(int month, bool leapYear) 
 {
@@ -538,6 +539,7 @@ dataType fixedRateCouponAccruedAmountGpu(cashFlowsStruct cashFlows, int numLeg,
   }
 }
 
+
 #pragma acc routine seq
 dataType cashFlowsNpvGpu(cashFlowsStruct cashFlows,
     bondsYieldTermStruct discountCurve,
@@ -902,6 +904,7 @@ dataType fDerivativeGpu(irrFinderStruct f, dataType y, cashFlowsStruct cashFlows
 }
 
 
+#pragma acc routine seq
 bool closeGpu(dataType x, dataType y)
 {
   return closeGpuThreeArgs(x,y,42);
@@ -1032,6 +1035,7 @@ dataType modifiedDurationGpu(cashFlowsStruct cashFlows,
   return (-1*dPdy)/P; // reverse derivative sign
 }
 
+
 long getBondsResultsGpu(inArgsStruct inArgsHost, resultsStruct resultsFromGpu, int numBonds)
 {
   bondsYieldTermStruct* discountCurve = inArgsHost.discountCurve;
@@ -1055,10 +1059,10 @@ long getBondsResultsGpu(inArgsStruct inArgsHost, resultsStruct resultsFromGpu, i
 			bondCleanPrice[0:numBonds],	      \
 			bond[0:numBonds],		      \
 			dummyStrike[0:numBonds])	      \
-  copyout( dirtyPrice[0:numBonds],			       \
-	   accruedAmountCurrDate[0:numBonds],		       \
-	   cleanPrice[0:numBonds],				\
-	   bondForwardVal[0:numBonds]) 
+  copyout(dirtyPrice[0:numBonds],				       \
+	  accruedAmountCurrDate[0:numBonds],			       \
+	  cleanPrice[0:numBonds],				       \
+	  bondForwardVal[0:numBonds]) 
   {
     struct timeval start;
     struct timeval end;

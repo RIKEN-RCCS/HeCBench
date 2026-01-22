@@ -193,9 +193,9 @@ reference_i(int, float const*, float const*, int*):
     358, Generated vector simd code for the loop
 main:
     397, Loop not vectorized/parallelized: contains call
-    404, Generating enter data create(hi[:n],hf[:n])
-         Generating enter data copyin(y[:n],x[:n])
-         Generating enter data create(hs[:n])
+    404, Generating create(hs[:n]) [if not already present]
+         Generating copyin(x[:n],y[:n]) [if not already present]
+         Generating create(hf[:n],hi[:n]) [if not already present]
     408, Loop not vectorized/parallelized: contains call
          325, Loop not fused: dependence chain to sibling loop
               Generated vector simd code for the loop

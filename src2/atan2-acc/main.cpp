@@ -399,7 +399,7 @@ int main(int argc, char* argv[])
     y[i] = rand() / (float)RAND_MAX + 1.57f;
   }
   
-#pragma acc enter data copyin(x[0:n], y[0:n])			\
+#pragma acc data copyin(x[0:n], y[0:n])				\
   create(hf[0:n], hi[0:n], hs[0:n])
   {
     printf("\n======== output type is f32 ========\n");
@@ -412,7 +412,7 @@ int main(int argc, char* argv[])
     auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
     printf("Average execution time: %f (us)\n", (time * 1e-3f) / repeat);
 
-    #pragma acc update host(hf[0:n])
+    #pragma acc update host (hf[0:n])
 
     reference_f (n, y, x, rf);
     float error = 0;
@@ -434,7 +434,7 @@ int main(int argc, char* argv[])
     time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
     printf("Average execution time: %f (us)\n", (time * 1e-3f) / repeat);
 
-    #pragma acc update host(hi[0:n])
+    #pragma acc update host (hi[0:n])
 
     reference_i (n, y, x, ri);
     error = 0;
@@ -456,7 +456,7 @@ int main(int argc, char* argv[])
     time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
     printf("Average execution time: %f (us)\n", (time * 1e-3f) / repeat);
 
-    #pragma acc update host(hs[0:n])
+    #pragma acc update host (hs[0:n])
 
     error = 0;
     reference_s (n, y, x, rs);
