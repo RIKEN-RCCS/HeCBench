@@ -45,7 +45,7 @@
 | bwt | | 188.99 |
 | car | | 6.54 |
 | cbsfil | | 34.93 |
-| ccsd-trpdrv | | -- |
+| ccsd-trpdrv | | 2.20 |
 | ccs | | -- |
 | cfd | | -- |
 | chacha20 | | -- |
