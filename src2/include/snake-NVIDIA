@@ -1,0 +1,1 @@
+COMMAND = ../snake-cuda/prepare_data.sh; time -p ( ./$(program) 100 ../snake-cuda/Datasets/ERR240727_1_E2_30000Pairs.txt 30000 1000 1>log.std 2>log.err ) 2> log.time

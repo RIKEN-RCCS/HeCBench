@@ -1,0 +1,1 @@
+COMMAND = time -p ( ./$(program) ../permutate-cuda/test_data/truerand_1bit.bin 1>log.std 2>log.err ) 2> log.time

@@ -1,0 +1,1 @@
+COMMAND = time -p ( python ../scripts/genhostfile.py ; mpirun --hostfile hosts -n 2 ./$(program) --num_vector 4000 --num_field 90000 --num_iterations 10 1>log.std 2>log.err ) 2> log.time

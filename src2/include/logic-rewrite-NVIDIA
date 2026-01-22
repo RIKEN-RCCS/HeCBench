@@ -1,0 +1,1 @@
+COMMAND = ../logic-rewrite-cuda/prepare_data.sh; time -p ( ./$(program) -c \"read ../logic-rewrite-cuda/benchmarks/arithmetic/hyp.aig; resyn2; write hyp_resyn2.aig\" 1>log.std 2>log.err ) 2> log.time

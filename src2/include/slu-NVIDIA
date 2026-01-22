@@ -1,0 +1,1 @@
+COMMAND = time -p ( $(BIN_PATH)/main -i ./src/nicslu/demo/ASIC_100k.mtx 1>log.std 2>log.err ) 2> log.time

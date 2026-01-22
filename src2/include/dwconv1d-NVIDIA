@@ -1,0 +1,2 @@
+COMMAND=time -p ( export PATH=$(HOME)/miniconda3_gh/bin:$(PATH) ; conda activate torch; export CC=gcc ; export CXX=g++ ; python run.py 1>log.std 2>log.err  ) 2>log.time
+

@@ -1,0 +1,1 @@
+COMMAND = time -p ( ./$(program) graph.csv 10000 output 1>log.std 2>log.err ) 2> log.time

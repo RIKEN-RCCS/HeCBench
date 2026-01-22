@@ -1,0 +1,1 @@
+COMMAND = ../logan-cuda/prepare_data.sh; time -p ( ./$(program) ../logan-cuda/inputs/100k.txt 17 100 1 1>log.std 2>log.err ) 2> log.time

@@ -1,0 +1,1 @@
+COMMAND = ../rsmt-cuda/prepare_data.sh; time -p ( ./$(program) ../rsmt-cuda/data/newblue7.kraftwerk70.3d.80.20.82.m8.gr 1>log.std 2>log.err ) 2> log.time

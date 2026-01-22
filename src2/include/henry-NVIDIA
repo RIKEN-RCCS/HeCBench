@@ -1,0 +1,1 @@
+COMMAND = ../henry-cuda/prepare_data.sh; time -p ( ./$(program) ../henry-cuda/IRMOF-1.cssr 1000 1>log.std 2>log.err ) 2> log.time

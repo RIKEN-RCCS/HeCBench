@@ -1,0 +1,1 @@
+COMMAND = ../sssp-cuda/prepare_data.sh; time -p ( ./$(program) -g 120 -t 1 -w 10 -r 100 1>log.std 2>log.err ) 2> log.time

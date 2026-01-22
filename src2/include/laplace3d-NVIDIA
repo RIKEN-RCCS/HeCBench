@@ -1,0 +1,2 @@
+#COMMAND = time -p ( ./$(program) 128 128 128 100 1 1>log.std 2>log.err;./$(program) 512 512 512 100 0 1>>log.std 2>>log.err ) 2> log.time
+COMMAND = time -p ( ./$(program) 1024 1024 1024 10 1 1>log.std 2>log.err;./$(program) 1024 1024 1024 10 0 1>>log.std 2>>log.err ) 2> log.time

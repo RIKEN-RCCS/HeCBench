@@ -1,0 +1,2 @@
+#COMMAND = time -p ( ./$(program) ../inversek2j-sycl/coord_in.txt 100000 1>log.std 2>log.err ) 2> log.time
+COMMAND = time -p ( ./$(program) ../inversek2j-sycl/coord_in.txt  1000000 1>log.std 2>log.err ) 2> log.time

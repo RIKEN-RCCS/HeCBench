@@ -1,0 +1,1 @@
+COMMAND = time -p ( ./$(program) 512 2 200 ../data/hotspot/temp_512 ../data/hotspot/power_512 output_512.out 1>log.std 2>log.err ) 2> log.time

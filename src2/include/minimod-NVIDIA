@@ -1,0 +1,1 @@
+COMMAND = time -p ( ./$(program) --warm-up --niters 1 --grid 340 --nsteps 1000 1>log.std 2>log.err ) 2> log.time

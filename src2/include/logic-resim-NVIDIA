@@ -1,0 +1,1 @@
+COMMAND = time -p ( ./$(program) toy/intermediate.file 	toy/NV_NVDLA_partition_o_dc_24x33x55_5x5x55x25_int8_input.vcd 	0 2972036001 	toy-result.saif 1>log.std 2>log.err ) 2> log.time

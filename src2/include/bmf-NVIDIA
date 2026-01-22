@@ -1,0 +1,1 @@
+COMMAND = ../bmf-cuda/prepare_data.sh; time -p ( ./$(program) ../bmf-cuda/data/MNIST.in -r 8 -l 112 -i 10000 --seed 123 --stuck 10000 1>log.std 2>log.err ) 2> log.time
