@@ -322,6 +322,6 @@
 | wsm5 | | -- |
 | wyllie | | -- |
 | xlqc | | -- |
-| xsbench | | -- |
+| xsbench | | 37.67 |
 | zeropoint | | 24.32 |
 | zmddft | | -- |
