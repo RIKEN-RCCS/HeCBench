@@ -96,8 +96,8 @@
 | epistasis | | -- |
 | expdist | | -- |
 | extend2 | | -- |
-| extrema | | -- |
-| face | | -- |
+| extrema | | 7.02 |
+| face | | 2.61 |
 | fdtd3d | | -- |
 | feynman-kac | | 48.19 |
 | fft | | -- |
