@@ -304,8 +304,8 @@
 | testSNAP | | -- |
 | thomas | | -- |
 | threadfence | | -- |
-| tissue | | -- |
-| tonemapping | | -- |
+| tissue | | 11.77 |
+| tonemapping | | 1.26 |
 | tqs | | -- |
 | triad | | -- |
 | tridiagonal | | -- |
