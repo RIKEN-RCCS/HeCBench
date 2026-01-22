@@ -105,7 +105,7 @@
 | filter | | -- |
 | flip | | 21.08 |
 | floydwarshall | | 72.83 |
-| fluidSim | | -- |
+| fluidSim | | 17.29 |
 | fpc | | -- |
 | fpdc | | -- |
 | fresnel | | -- |
