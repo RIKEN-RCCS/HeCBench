@@ -4,7 +4,7 @@
 | ace | | 3.15 |
 | adam | | 6.76 |
 | adamw | | -- |
-| adjacent | | -- |
+| adjacent | | 7.08 |
 | adv | | -- |
 | aes | | -- |
 | affine | | 10.61 |
@@ -18,7 +18,7 @@
 | asmooth | | -- |
 | assert | | -- |
 | asta | | -- |
-| atan2 | | 2.60 |
+| atan2 | | 2.54 |
 | atomicCost | | -- |
 | atomicIntrinsics | | -- |
 | atomicPerf | | -- |
@@ -36,7 +36,7 @@
 | black-scholes | | 37.35 |
 | blas-gemm | | -- |
 | bn | | -- |
-| bonds | | 11.79 |
+| bonds | | 11.71 |
 | boxfilter | | -- |
 | bsearch | | -- |
 | bspline-vgh | | 7.27 |
