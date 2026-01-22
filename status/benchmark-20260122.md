@@ -11,7 +11,7 @@
 | aidw | | -- |
 | aligned-types | | 2.32 |
 | all-pairs-distance | | -- |
-| amgmk | | -- |
+| amgmk | | 2.44 |
 | ans | | -- |
 | aobench | | -- |
 | aop | | -- |

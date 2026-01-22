@@ -1,0 +1,37 @@
+
+//------------ 
+// 
+//  CORAL  AMGmk Benchmark Version 1.0 
+// 
+//------------ 
+
+ testIter   = 500 
+
+
+//------------ 
+// 
+//   MATVEC
+// 
+//------------ 
+
+Wall time = 0.215292 seconds. 
+ 
+ Relax: error: 7.266621e-01
+
+//------------ 
+// 
+//   Relax
+// 
+//------------ 
+
+Wall time = 0.005580 seconds. 
+
+//------------ 
+// 
+//   Axpy
+// 
+//------------ 
+
+Wall time = 0.013279 seconds. 
+
+Total Wall time = 2.383638 seconds. 

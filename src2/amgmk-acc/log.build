@@ -1,0 +1,72 @@
+nvc++ -acc  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+main:
+         187, Loop not vectorized/parallelized: contains call
+         208, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+         374, Loop not vectorized/parallelized: contains call
+         388, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+test_Matvec():
+    187, Loop not vectorized/parallelized: contains call
+    208, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+test_Relax():
+    271, Generating copyin(A_diag_data[:nonzero],A_diag_i[:grid_size+1],A_diag_j[:nonzero]) [if not already present]
+         Generating copyout(u_data[:grid_size]) [if not already present]
+         Generating copyin(f_data[:grid_size]) [if not already present]
+    282, Generating implicit firstprivate(n)
+         Generating NVIDIA GPU code
+        284, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+        293, #pragma acc loop seq
+             Generating implicit reduction(+:res)
+    282, Loop not vectorized/parallelized: contains call
+    284, Loop not fused: no successor loop
+    293, Loop is parallelizable
+         Generated vector simd code for the loop containing reductions
+    320, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+test_Axpy():
+    374, Loop not vectorized/parallelized: contains call
+    388, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     23, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1l>>::_S_gcd(long, long):
+     23, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<double, std::ratio<1l, 1l>>::_S_gcd(long, long):
+     23, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++ -acc  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c vector.cpp -o vector.o
+"vector.cpp", line 177: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     hypre_assert( hypre_VectorNumVectors(vector) == 1 );
+     ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+hypre_SeqVectorRead:
+    169, Loop not vectorized/parallelized: contains call
+hypre_SeqVectorPrint:
+    226, Loop not vectorized/parallelized: contains call
+    234, Loop not vectorized/parallelized: contains call
+hypre_SeqVectorSetConstantValues:
+    263, Recognized memory set idiom
+hypre_SeqVectorCopy:
+    289, Recognized memory copy idiom
+hypre_SeqVectorCloneDeep:
+         289, Recognized memory copy idiom
+hypre_SeqVectorScale:
+    358, Generated vector simd code for the loop
+hypre_SeqVectorAxpy:
+    384, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Vectorized loop was interleaved
+         Loop unrolled 4 times
+hypre_SeqVectorInnerProd:
+    408, Generated vector simd code for the loop containing reductions
+         Loop unrolled 2 times
+hypre_VectorSumElts:
+    426, Generated vector simd code for the loop containing reductions
+         Loop unrolled 4 times
+nvc++ -acc  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 csr_matrix.o csr_matvec.o hypre_error.o hypre_memory.o laplace.o main.o vector.o -o AMGMk 
