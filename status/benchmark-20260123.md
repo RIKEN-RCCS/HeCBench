@@ -141,7 +141,7 @@
 | hwt1d | | -- |
 | hybridsort | | -- |
 | hypterm | | 13.24 |
-| idivide | | -- |
+| idivide | | 7.98 |
 | interleave | | 4.03 |
 | interval | | -- |
 | inversek2j | | 9.35 |
