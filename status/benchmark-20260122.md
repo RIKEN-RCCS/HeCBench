@@ -26,10 +26,10 @@
 | attention | | 81.99 |
 | axhelm | | -- |
 | babelstream | | 2.69 |
-| background-subtract | | -- |
+| background-subtract | | 8.63 |
 | backprop | | -- |
 | bezier-surface | | 14.00 |
-| bfs | | -- |
+| bfs | | 1.07 |
 | bilateral | | 205.61 |
 | binomial | | -- |
 | bitonic-sort | | -- |

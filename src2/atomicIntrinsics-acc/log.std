@@ -1,0 +1,8 @@
+atomicInc failed: 14 != 0
+atomicDec failed: 106 != 0
+FAIL
+Average kernel execution time: 28.816002 (us)
+atomicInc failed: 14 != 0
+atomicDec failed: 106 != 0
+FAIL
+Average kernel execution time: 22.640001 (us)
