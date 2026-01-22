@@ -121,7 +121,7 @@
 | geodesic | | 2.61 |
 | glu | | 137.60 |
 | gmm | | -- |
-| goulash | | -- |
+| goulash | | 36.13 |
 | gpp | | -- |
 | grep | | -- |
 | grrt | | -- |
