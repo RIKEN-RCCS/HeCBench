@@ -53,7 +53,7 @@
 | channelSum | | -- |
 | chemv | | -- |
 | che | | -- |
-| chi2 | | -- |
+| chi2 | | 264.23 |
 | clenergy | | 3.20 |
 | clink | | 3.91 |
 | cmp | | -- |
