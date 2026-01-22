@@ -323,5 +323,5 @@
 | wyllie | | -- |
 | xlqc | | -- |
 | xsbench | | -- |
-| zeropoint | | -- |
+| zeropoint | | 24.32 |
 | zmddft | | -- |
