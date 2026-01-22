@@ -140,7 +140,7 @@
 | hotspot3D | | -- |
 | hwt1d | | -- |
 | hybridsort | | -- |
-| hypterm | | -- |
+| hypterm | | 13.24 |
 | idivide | | -- |
 | interleave | | 4.03 |
 | interval | | -- |

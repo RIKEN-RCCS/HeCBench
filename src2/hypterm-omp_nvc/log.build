@@ -1,0 +1,65 @@
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c ../hypterm-cuda/main.cpp -o main.o
+main:
+          24, Loop not vectorized/parallelized: contains call
+          24, Loop not vectorized/parallelized: contains call
+          24, Loop not vectorized/parallelized: contains call
+          24, Loop not vectorized/parallelized: contains call
+          24, Loop not vectorized/parallelized: contains call
+          24, Loop not vectorized/parallelized: contains call
+          24, Loop not vectorized/parallelized: contains call
+          24, Loop not vectorized/parallelized: contains call
+          47, Loop not vectorized/parallelized: contains call
+          47, Loop not vectorized/parallelized: contains call
+          47, Loop not vectorized/parallelized: contains call
+          47, Loop not vectorized/parallelized: contains call
+          47, Loop not vectorized/parallelized: contains call
+double* _INTERNAL_24____hypterm_cuda_main_cpp_main::getRandom3DArray<double>(int, int, int):
+      3, include "utils.h"
+          24, Loop not vectorized/parallelized: contains call
+double _INTERNAL_24____hypterm_cuda_main_cpp_main::checkError3D<double>(int, int, double const*, double const*, int, int, int, int, int, int):
+      3, include "utils.h"
+          47, Loop not vectorized/parallelized: contains call
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c ../hypterm-cuda/reference.cpp -o reference.o
+reference:
+     19, Loop not fused: different loop trip count
+     21, Unable to version for aliasing; too many tests
+         Loop not vectorized: data dependency
+     28, Loop not fused: different loop trip count
+     30, Unable to version for aliasing; too many tests
+         Loop not vectorized: data dependency
+     37, Loop not fused: different loop trip count
+     39, Unable to version for aliasing; too many tests
+         Loop not vectorized: data dependency
+     47, Loop not fused: different loop trip count
+     49, Unable to version for aliasing; too many tests
+         Loop not vectorized: data dependency
+     58, Unable to version for aliasing; too many tests
+         Loop not vectorized: data dependency
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c kernels.cpp -o kernels.o
+hypterm_1(double*, double*, double*, double*, double*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double, double, double, int, int, int):
+     28, #omp target teams distribute parallel for thread_limit(256)
+         28, Generating "nvkernel__Z9hypterm_1PdS_S_S_S_PKdS1_S1_S1_S1_S1_S1_S1_dddiii_F1L28_2" GPU kernel
+         30, Loop parallelized across teams and threads(128), schedule(static)
+     32, Loop not vectorized/parallelized: not countable
+hypterm_2(double*, double*, double*, double*, double*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double, double, double, int, int, int):
+     58, #omp target teams distribute parallel for thread_limit(256)
+         58, Generating "nvkernel__Z9hypterm_2PdS_S_S_S_PKdS1_S1_S1_S1_S1_S1_S1_dddiii_F1L58_6" GPU kernel
+         60, Loop parallelized across teams and threads(128), schedule(static)
+     62, Loop not vectorized/parallelized: not countable
+hypterm_3(double*, double*, double*, double*, double*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double, double, double, int, int, int):
+     88, #omp target teams distribute parallel for thread_limit(256)
+         88, Generating "nvkernel__Z9hypterm_3PdS_S_S_S_PKdS1_S1_S1_S1_S1_S1_S1_dddiii_F1L88_10" GPU kernel
+         90, Loop parallelized across teams and threads(128), schedule(static)
+     92, Loop not vectorized/parallelized: not countable
+offload:
+    138, Generating map(to:cons_4[:vol]) 
+         Generating map(from:flux_0[:vol],flux_1[:vol],flux_2[:vol],flux_3[:vol]) 
+         Generating map(to:cons_1[:vol],cons_2[:vol],cons_3[:vol]) 
+         Generating map(from:flux_4[:vol]) 
+         Generating map(to:q_1[:vol],q_2[:vol],q_4[:vol],q_3[:vol]) 
+    139, Loop not vectorized/parallelized: contains call
+    150, Generating update to(flux_0[:vol],flux_1[:vol],flux_3[:vol],flux_2[:vol])
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o reference.o kernels.o -o main 
