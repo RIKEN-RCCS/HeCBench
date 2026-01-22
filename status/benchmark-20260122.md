@@ -65,9 +65,9 @@
 | compute-score | | -- |
 | concat | | 16.76 |
 | contract | | -- |
-| conversion | | -- |
+| conversion | | 1.38 |
 | convolution1D | | -- |
-| convolution3D | | -- |
+| convolution3D | | 3.10 |
 | convolutionSeparable | | -- |
 | cooling | | 2272.56 |
 | crc64 | | -- |
