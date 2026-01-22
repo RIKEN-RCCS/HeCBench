@@ -278,7 +278,7 @@
 | simplemoc | | 318.92 |
 | simpleSpmv | | -- |
 | slu | | -- |
-| snake | | -- |
+| snake | | 10.64 |
 | sobel | | 1.34 |
 | sobol | | -- |
 | softmax-online | | -- |
