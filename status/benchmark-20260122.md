@@ -49,7 +49,7 @@
 | ccs | | -- |
 | cfd | | 1.11 |
 | chacha20 | | -- |
-| channelShuffle | | -- |
+| channelShuffle | | 18.78 |
 | channelSum | | -- |
 | chemv | | -- |
 | che | | -- |
