@@ -316,7 +316,7 @@
 | vmc | | -- |
 | vol2col | | -- |
 | wedford | | -- |
-| winograd | | -- |
+| winograd | | 3.24 |
 | wlcpow | | -- |
 | wordcount | | -- |
 | wsm5 | | -- |
