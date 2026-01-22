@@ -108,7 +108,7 @@
 | fluidSim | | 17.29 |
 | fpc | | -- |
 | fpdc | | -- |
-| fresnel | | -- |
+| fresnel | | 6.61 |
 | frna | | |
 | fwt | | -- |
 | gabor | | -- |
