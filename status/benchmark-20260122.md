@@ -20,12 +20,12 @@
 | asta | | -- |
 | atan2 | | 2.54 |
 | atomicCost | | 5.13 |
-| atomicIntrinsics | | -- |
+| atomicIntrinsics | | 2.49 |
 | atomicPerf | | -- |
 | atomicReduction | | -- |
 | attention | | 81.99 |
 | axhelm | | -- |
-| babelstream | | -- |
+| babelstream | | 2.69 |
 | background-subtract | | -- |
 | backprop | | -- |
 | bezier-surface | | 14.00 |
