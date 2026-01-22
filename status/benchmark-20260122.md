@@ -15,11 +15,11 @@
 | ans | | -- |
 | aobench | | -- |
 | aop | | -- |
-| asmooth | | -- |
+| asmooth | | 6.38 |
 | assert | | -- |
 | asta | | -- |
 | atan2 | | 2.54 |
-| atomicCost | | -- |
+| atomicCost | | 5.13 |
 | atomicIntrinsics | | -- |
 | atomicPerf | | -- |
 | atomicReduction | | -- |
