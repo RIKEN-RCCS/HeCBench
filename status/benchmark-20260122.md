@@ -112,7 +112,7 @@
 | frna | | |
 | fwt | | -- |
 | gabor | | 21.33 |
-| gamma-correction | | -- |
+| gamma-correction | | 105.93 |
 | ga | | -- |
 | gaussian | | 4.06 |
 | gc | | -- |
