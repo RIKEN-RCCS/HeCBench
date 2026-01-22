@@ -47,7 +47,7 @@
 | cbsfil | | 34.93 |
 | ccsd-trpdrv | | 2.20 |
 | ccs | | -- |
-| cfd | | -- |
+| cfd | | 1.11 |
 | chacha20 | | -- |
 | channelShuffle | | -- |
 | channelSum | | -- |
