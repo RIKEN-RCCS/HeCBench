@@ -113,7 +113,7 @@
 | fwt | | -- |
 | gabor | | 21.33 |
 | gamma-correction | | 105.93 |
-| ga | | -- |
+| ga | | 33.01 |
 | gaussian | | 4.06 |
 | gc | | -- |
 | gd | | -- |
