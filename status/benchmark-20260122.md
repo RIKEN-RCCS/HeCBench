@@ -318,7 +318,7 @@
 | wedford | | -- |
 | winograd | | 3.24 |
 | wlcpow | | -- |
-| wordcount | | -- |
+| wordcount | | 7.96 |
 | wsm5 | | -- |
 | wyllie | | -- |
 | xlqc | | -- |
