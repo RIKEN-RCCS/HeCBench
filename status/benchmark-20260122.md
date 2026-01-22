@@ -78,13 +78,13 @@
 | dct8x8 | | -- |
 | ddbp | | -- |
 | debayer | | -- |
-| degrid | | -- |
+| degrid | | 23.95 |
 | dense-embedding | | -- |
 | depixel | | -- |
 | deredundancy | | -- |
 | diamond | | -- |
-| distort | | -- |
-| divergence | | -- |
+| distort | | 2.42 |
+| divergence | | 3.14 |
 | doh | | 1.72 |
 | dp | | 24.99 |
 | dslash | | 2.58 |
