@@ -1,0 +1,10 @@
+Sizeof(CustomComplex<dataType> = 16 bytes
+number_bands = 512	 nvband = 2	 ncouls = 32768	 nodes_per_group  = 20	 ngpown = 1638	 nend = 3	 nstart = 0
+Memory Foot Print = 2.09985 GBs
+Average kernel execution time 0.166775 (s)
+
+Benchmark result: SUCCESS
+
+ Final achtemp
+( -24852.551554, 2957453.634948) 
+********** Total Time Taken **********= 4.0322 secs
