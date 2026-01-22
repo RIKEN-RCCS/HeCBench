@@ -111,7 +111,7 @@
 | fresnel | | 6.61 |
 | frna | | |
 | fwt | | -- |
-| gabor | | -- |
+| gabor | | 21.33 |
 | gamma-correction | | -- |
 | ga | | -- |
 | gaussian | | 4.06 |
