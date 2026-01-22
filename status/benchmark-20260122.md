@@ -307,7 +307,7 @@
 | tissue | | 11.77 |
 | tonemapping | | 1.26 |
 | tqs | | -- |
-| triad | | -- |
+| triad | | 2.84 |
 | tridiagonal | | -- |
 | tsa | | -- |
 | tsp | | -- |
