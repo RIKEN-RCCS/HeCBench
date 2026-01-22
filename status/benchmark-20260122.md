@@ -103,7 +103,7 @@
 | fft | | -- |
 | fhd | | 1051.50 |
 | filter | | -- |
-| flip | | -- |
+| flip | | 21.08 |
 | floydwarshall | | 72.83 |
 | fluidSim | | -- |
 | fpc | | -- |
