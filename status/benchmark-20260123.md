@@ -174,7 +174,7 @@
 | log2 | | 0.68 |
 | lombscargle | | 3.05 |
 | loopback | | -- |
-| lrn | | -- |
+| lrn | | 77.87 |
 | lr | | -- |
 | lsqt | | -- |
 | lud | | -- |

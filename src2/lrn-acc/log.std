@@ -1,0 +1,20 @@
+Sweep the work-group sizes from 64 to 512
+Average execution time of lrn_fwd_kernel: 0.036970 sec 
+Kernel bandwidth: 498.573120 GB/s 
+Average execution time of lrn_fwd_kernel: 0.037020 sec 
+Kernel bandwidth: 497.886292 GB/s 
+Average execution time of lrn_fwd_kernel: 0.037407 sec 
+Kernel bandwidth: 492.736694 GB/s 
+Average execution time of lrn_fwd_kernel: 0.038030 sec 
+Kernel bandwidth: 484.673798 GB/s 
+Checksum: 0.005000
+Sweep the work-group sizes from 64 to 512
+Average execution time of lrn_bwd_kernel: 0.130298 sec 
+Kernel bandwidth: 176.825302 GB/s 
+Average execution time of lrn_bwd_kernel: 0.130440 sec 
+Kernel bandwidth: 176.632797 GB/s 
+Average execution time of lrn_bwd_kernel: 0.132240 sec 
+Kernel bandwidth: 174.228958 GB/s 
+Average execution time of lrn_bwd_kernel: 0.134380 sec 
+Kernel bandwidth: 171.453583 GB/s 
+Checksum: 0.500008
