@@ -187,7 +187,7 @@
 | matrix-rotate | | 35.59 |
 | maxFlops | | 26.50 |
 | maxpool3d | | 32.12 |
-| mcmd | | -- |
+| mcmd | | 10.78 |
 | mcpr | | -- |
 | md5hash | | -- |
 | mdh | | 35.18 |
