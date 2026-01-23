@@ -243,7 +243,7 @@
 | popcount | | 290.55 |
 | present | | 3.07 |
 | prna | | -- |
-| projectile | | -- |
+| projectile | | 2.54 |
 | pso | | -- |
 | qrg | | 8.55 |
 | qtclustering | | -- |
