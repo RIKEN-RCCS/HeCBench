@@ -256,7 +256,7 @@
 | recursiveGaussian | | -- |
 | resize | | 5.94 |
 | reverse | | -- |
-| rfs | | -- |
+| rfs | | 48.48 |
 | rng-wallace | | -- |
 | rodrigues | | 105.84 |
 | romberg | | -- |
