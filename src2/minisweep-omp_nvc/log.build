@@ -1,0 +1,137 @@
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+Dir_x(int):
+           6, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+Dir_y(int):
+           7, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+Dir_z(int):
+           8, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+Arguments_exists(Arguments const*, char const*):
+      8, include "utils.cpp"
+          17, Loop not vectorized/parallelized: contains call
+Arguments_consume_int_(Arguments*, char const*):
+      8, include "utils.cpp"
+          40, Loop not vectorized/parallelized: contains call
+Arguments_consume_int_or_default(Arguments*, char const*, int):
+          40, Loop not vectorized/parallelized: contains call
+          17, Loop not vectorized/parallelized: contains call
+initialize_input_state(double*, Dimensions, int):
+      8, include "utils.cpp"
+         147, Loop not vectorized/parallelized: too deeply nested
+         148, Loop not vectorized/parallelized: too deeply nested
+         149, Loop not vectorized/parallelized: too deeply nested
+         152, Loop not vectorized/parallelized: contains call
+Quantities_scalefactor_space_acceldir(int, int, int):
+           4, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+Quantities_init_face_acceldir(int, int, int, int, int):
+          26, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+Quantities_solve_acceldir(double*, Dimensions, double*, double*, double*, int, int, int, int, int, int, int, int, int, int, int):
+      9, include "kernels.cpp"
+          55, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          86, Loop not vectorized: data dependency
+Sweeper_sweep_cell_acceldir(Dimensions const&, int, int, int, int, int, int, int, int, int, int, double*, double*, double*, double const*, double const*, double const*, double*, double*, int, int, int):
+      9, include "kernels.cpp"
+         194, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+         254, Outer loop unrolled 4 times (completely unrolled)
+         255, Loop not fused: dependence chain to sibling loop
+              Loop not fused: enclosed in different number of nests
+         259, Generated vector simd code for the loop containing reductions
+         293, Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+         311, Outer loop unrolled 4 times (completely unrolled)
+         312, Loop not fused: sibling loop may prevent vectorization
+              2 loops fused
+         315, 2 loops fused
+              Generated vector simd code for the loop containing reductions
+          86, Loop unrolled 4 times (completely unrolled)
+main:
+     23, Loop not vectorized/parallelized: potential early exits
+          69, Loop not vectorized/parallelized: contains call
+          69, Loop not vectorized/parallelized: contains call
+          69, Loop not vectorized/parallelized: contains call
+          69, Loop not vectorized/parallelized: contains call
+          69, Loop not vectorized/parallelized: contains call
+          69, Loop not vectorized/parallelized: contains call
+     74, Recognized memory zero idiom
+     77, Loop not fused: dependence chain to sibling loop
+     78, Loop not vectorized: data dependency
+     97, Loop not fused: dependence chain to sibling loop
+     98, Outer loop unrolled 2 times (completely unrolled)
+     99, Loop not fused: dependence chain to sibling loop
+         Loop not vectorized: data dependency
+    111, Loop not fused: enclosed in different number of nests
+    112, Outer loop unrolled 4 times (completely unrolled)
+    113, Loop not fused: dependence chain to sibling loop
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 4 times
+    116, Loop not fused: enclosed in different number of nests
+         Loop not vectorized: data dependency
+    117, Loop unrolled 4 times (completely unrolled)
+    136, Loop not fused: dependence chain to sibling loop
+    137, Outer loop unrolled 4 times (completely unrolled)
+    138, Loop not fused: dependence chain to sibling loop
+         Loop not vectorized: data dependency
+    146, Loop not fused: function call before adjacent loop
+    147, Outer loop unrolled 4 times (completely unrolled)
+    148, Loop not fused: dependence chain to sibling loop
+         Generated vector simd code for the loop
+         147, Loop not vectorized/parallelized: too deeply nested
+         148, Loop not vectorized/parallelized: too deeply nested
+         149, Loop not vectorized/parallelized: too deeply nested
+         152, Loop not vectorized/parallelized: contains call
+    254, Outer loop unrolled 4 times (completely unrolled)
+    258, Loop not vectorized/parallelized: contains call
+    259, Generated vector simd code for the loop containing reductions
+    278, #omp target teams distribute parallel for
+        278, Generating "nvkernel_main_F1L278_2" GPU kernel
+        282, Loop parallelized across teams and threads(128), schedule(static)
+    278, Generating update to(vo[:v_size])
+         Generating implicit map(tofrom:stepinfoall) 
+    284, Loop not vectorized/parallelized: not countable
+    286, Outer loop unrolled 4 times (completely unrolled)
+    287, Generated vector simd code for the loop
+    293, Loop not vectorized: data dependency
+    295, Loop unrolled 4 times (completely unrolled)
+    311, Outer loop unrolled 4 times (completely unrolled)
+    312, #omp target teams distribute parallel for
+        312, Generating "nvkernel_main_F1L312_4" GPU kernel
+        315, Loop parallelized across teams and threads(128), schedule(static)
+    312, Generating implicit map(tofrom:stepinfoall) 
+    315, Generated vector simd code for the loop containing reductions
+         Loop unrolled 2 times
+    317, Loop not vectorized/parallelized: not countable
+    319, Outer loop unrolled 4 times (completely unrolled)
+    320, Loop not vectorized: unknown
+    340, #omp target teams distribute parallel for
+        340, Generating "nvkernel_main_F1L340_6" GPU kernel
+        348, Loop parallelized across teams and threads(128), schedule(static)
+    340, Generating implicit map(tofrom:stepinfoall) 
+    350, Loop not vectorized/parallelized: not countable
+    352, Outer loop unrolled 4 times (completely unrolled)
+    353, Loop not vectorized: unknown
+    374, #omp target teams distribute parallel for
+        224, Generating map(alloc:faceyz[:faceyz_size]) 
+             Generating map(to:m_from_a[:a_from_m_size],a_from_m[:a_from_m_size]) 
+             Generating map(alloc:facexy[:facexy_size],facexz[:facexz_size],vo[:v_size],vslocal[:vslocal_size]) 
+             Generating map(to:vi[:v_size]) 
+        374, Generating "nvkernel_main_F1L374_8" GPU kernel
+        383, Loop parallelized across teams and threads(128), schedule(static)
+    374, Generating implicit map(tofrom:stepinfoall,dims_b) 
+    384, Invariant if transformation
+         Loop not vectorized/parallelized: not countable
+         Loop not vectorized/parallelized: too deeply nested
+    385, Invariant if transformation
+         Loop not vectorized/parallelized: too deeply nested
+    387, Invariant if transformation
+         Loop not vectorized/parallelized: too deeply nested
+    388, Invariant if transformation
+         293, Invariant if transformation
+    435, Generating update from(vo[:v_size])
+    450, Loop not vectorized/parallelized: not countable
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

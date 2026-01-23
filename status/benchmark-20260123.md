@@ -202,7 +202,7 @@
 | minibude | | -- |
 | miniFE | | -- |
 | minimap2 | | -- |
-| minisweep | | -- |
+| minisweep | | 36.23 |
 | miniWeather | | -- |
 | minkowski | | -- |
 | mis | | -- |
