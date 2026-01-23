@@ -50,7 +50,7 @@
 | cfd | | 1.11 |
 | chacha20 | | -- |
 | channelShuffle | | 18.78 |
-| channelSum | | -- |
+| channelSum | | 65.24 |
 | chemv | | -- |
 | che | | -- |
 | chi2 | | 264.23 |
