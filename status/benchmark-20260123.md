@@ -282,7 +282,7 @@
 | sobel | | 1.34 |
 | sobol | | -- |
 | softmax-online | | -- |
-| softmax | | -- |
+| softmax | | 40.03 |
 | sort | | -- |
 | sosfil | | -- |
 | sph | | 20.38 |

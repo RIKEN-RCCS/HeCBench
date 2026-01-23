@@ -1,0 +1,37 @@
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90,fastmath -c main.cpp -o main.o
+softMax_cpu(int, int, float const*, float*):
+     12, Loop not fused: different loop trip count
+         Generated vector simd code for the loop containing reductions
+         Loop unrolled 8 times
+     16, Loop not fused: scalar dependence chain to sibling loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop containing reductions
+         Loop unrolled 2 times
+     21, Generated vector simd code for the loop
+main:
+     44, Loop nest collapsed
+         Loop not vectorized/parallelized: contains call
+     51, #omp target teams distribute parallel for simd thread_limit(256)
+         48, Generating map(to:input[:numElem]) 
+             Generating map(from:output_gpu[:numElem]) 
+         51, Generating "nvkernel_main_F1L51_2" GPU kernel
+         53, Loop parallelized across teams and threads(128), schedule(static)
+     51, Loop not vectorized/parallelized: contains call
+     53, Loop not vectorized/parallelized: not countable
+     55, Generated vector simd code for the loop containing reductions
+         Loop unrolled 8 times
+     59, Generated vector simd code for the loop containing reductions
+     62, Generated vector simd code for the loop
+          12, Loop not fused: different loop trip count
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 8 times
+          16, Loop not fused: scalar dependence chain to sibling loop
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 2 times
+          21, Generated vector simd code for the loop
+     76, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90,fastmath main.o -o main 
