@@ -292,7 +292,7 @@
 | srad | | -- |
 | ss | | -- |
 | stddev | | -- |
-| stencil1d | | -- |
+| stencil1d | | 11.49 |
 | stencil3d | | -- |
 | streamcluster | | -- |
 | su3 | | 12.48 |
