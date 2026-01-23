@@ -296,7 +296,7 @@
 | stencil3d | | -- |
 | streamcluster | | -- |
 | su3 | | 12.48 |
-| surfel | | -- |
+| surfel | | 117.18 |
 | svd3x3 | | 1.98 |
 | sw4ck | | -- |
 | swish | | -- |

@@ -1,0 +1,13 @@
+-------------------------------------
+ surfelRenderTest with type float32  
+-------------------------------------
+
+f = 0
+Average kernel execution time: 1471.496826 (ms)
+
+f = 1
+Average kernel execution time: 1469.531616 (ms)
+
+f = 2
+Average kernel execution time: 1469.309692 (ms)
+PASS
