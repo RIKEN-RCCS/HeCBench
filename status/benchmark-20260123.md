@@ -228,12 +228,12 @@
 | overlay | | 9.07 |
 | p4 | | -- |
 | page-rank | | 47.47 |
-| particle-diffusion | | -- |
+| particle-diffusion | | 11.46 |
 | particlefilter | | -- |
 | particles | | -- |
 | pathfinder | | -- |
 | permutate | | -- |
-| permute | | -- |
+| permute | | 85.78 |
 | perplexity | | -- |
 | phmm | | -- |
 | pnpoly | | -- |
