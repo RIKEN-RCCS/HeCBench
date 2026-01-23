@@ -254,7 +254,7 @@
 | randomAccess | | -- |
 | reaction | | -- |
 | recursiveGaussian | | -- |
-| resize | | -- |
+| resize | | 5.94 |
 | reverse | | -- |
 | rfs | | -- |
 | rng-wallace | | -- |
