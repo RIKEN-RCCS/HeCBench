@@ -3,7 +3,7 @@
 | accuracy | | 2.56 |
 | ace | | 3.15 |
 | adam | | 6.76 |
-| adamw | | -- |
+| adamw | | 20.20 |
 | adjacent | | 7.08 |
 | adv | | -- |
 | aes | | -- |
