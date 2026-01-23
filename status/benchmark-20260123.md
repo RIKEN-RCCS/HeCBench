@@ -145,7 +145,7 @@
 | interleave | | 4.03 |
 | interval | | -- |
 | inversek2j | | 9.35 |
-| ising | | -- |
+| ising | | 53.01 |
 | iso2dfd | | -- |
 | jacobi | | -- |
 | jenkins-hash | | 5.31 |

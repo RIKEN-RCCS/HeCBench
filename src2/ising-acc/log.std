@@ -1,0 +1,13 @@
+Starting warmup...
+Starting trial iterations...
+REPORT:
+	nGPUs: 1
+	temperature: 0.100000 * 2.269185
+	seed: 1234
+	warmup iterations: 10
+	trial iterations: 100
+	lattice dimensions: 51200 x 51200
+	elapsed time: 1.545316 sec
+	updates per ns: 169.637796
+Starting verification iterations ...
+PASS
