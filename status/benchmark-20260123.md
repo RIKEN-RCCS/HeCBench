@@ -146,7 +146,7 @@
 | interval | | -- |
 | inversek2j | | 9.35 |
 | ising | | 53.01 |
-| iso2dfd | | -- |
+| iso2dfd | | 15.80 |
 | jacobi | | -- |
 | jenkins-hash | | 5.31 |
 | kalman | | -- |
