@@ -299,10 +299,10 @@
 | surfel | | 117.18 |
 | svd3x3 | | 1.98 |
 | sw4ck | | 28.72 |
-| swish | | -- |
+| swish | | 5.40 |
 | tensorT | | -- |
-| testSNAP | | -- |
-| thomas | | -- |
+| testSNAP | | 66.54 |
+| thomas | | 48.28 |
 | threadfence | | -- |
 | tissue | | 11.77 |
 | tonemapping | | 1.26 |

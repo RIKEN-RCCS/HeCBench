@@ -1,0 +1,52 @@
+nvc++  -std=c++11 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+loadThomasMatrixSyn(int):
+      3, include "ThomasMatrix.hpp"
+          58, Loop not vectorized/parallelized: potential early exits
+solve_seq(double const*, double const*, double*, double*, int, int):
+     18, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+     25, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+main:
+     69, Loop not fused: function call before adjacent loop
+     71, Unable to version for aliasing; too many tests
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+     92, Loop not fused: function call before adjacent loop
+          18, Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+          25, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+    100, Recognized memory copy idiom
+    105, Loop not fused: different loop trip count
+    107, Unable to version for aliasing; too many tests
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    125, Loop not fused: function call before adjacent loop
+    127, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    150, #omp target teams distribute parallel for thread_limit(BlockSize)
+        147, Generating map(to:D[:matrix_size]) 
+             Generating map(tofrom:RHS[:matrix_size]) 
+             Generating map(to:U[:matrix_size],L[:matrix_size]) 
+        150, Generating "nvkernel_main_F1L150_2" GPU kernel
+        153, Loop parallelized across teams and threads, schedule(static)
+    150, Loop not vectorized/parallelized: contains call
+    160, Loop not vectorized/parallelized: not countable
+    169, Loop not vectorized/parallelized: not countable
+          97, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+void calcError<double>(double*, double*, int):
+      4, include "utils.hpp"
+          97, Generated vector simd code for the loop containing reductions
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string(char const*, std::allocator<char> const&):
+      4, include "utils.hpp"
+std::basic_ostream<char, std::char_traits<char>>& std::endl<char, std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&):
+      4, include "utils.hpp"
+double* std::__uninitialized_move_if_noexcept_a<double*, double*, std::allocator<double>>(double*, double*, double*, std::allocator<double>&):
+      3, include "ThomasMatrix.hpp"
+double* std::__copy_move_a<true, double*, double*>(double*, double*, double*):
+      4, include "utils.hpp"
+double* std::__copy_move_a<false, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, double*>(__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, double*):
+      4, include "utils.hpp"
+nvc++  -std=c++11 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

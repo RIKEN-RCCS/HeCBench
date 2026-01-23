@@ -1,0 +1,3 @@
+Average execution time of Swish kernel: 1761.838135 (us)
+Average execution time of SwishGradient kernel: 2814.627197 (us)
+PASS
