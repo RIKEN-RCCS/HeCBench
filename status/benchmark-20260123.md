@@ -250,7 +250,7 @@
 | quantBnB | | 124.46 |
 | quicksort | | -- |
 | radixsort | | -- |
-| rainflow | | -- |
+| rainflow | | 30.31 |
 | randomAccess | | -- |
 | reaction | | -- |
 | recursiveGaussian | | -- |
