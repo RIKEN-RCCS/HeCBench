@@ -276,7 +276,7 @@
 | sheath | | 5.79 |
 | shmembench | | -- |
 | simplemoc | | 318.92 |
-| simpleSpmv | | -- |
+| simpleSpmv | | 318.58 |
 | slu | | -- |
 | snake | | 10.64 |
 | sobel | | 1.34 |
