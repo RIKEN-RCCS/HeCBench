@@ -13,7 +13,7 @@
 | all-pairs-distance | | -- |
 | amgmk | | 2.44 |
 | ans | | -- |
-| aobench | | -- |
+| aobench | | 2.58 |
 | aop | | -- |
 | asmooth | | 6.38 |
 | assert | | -- |
