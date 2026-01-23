@@ -215,7 +215,7 @@
 | multimaterial | | 11.98 |
 | murmurhash3 | | 2.64 |
 | myocyte | | -- |
-| nbody | | -- |
+| nbody | | 125.01 |
 | ne | | 5.47 |
 | nlll | | -- |
 | nms | | -- |
@@ -227,7 +227,7 @@
 | openmp | | -- |
 | overlay | | 9.07 |
 | p4 | | -- |
-| page-rank | | -- |
+| page-rank | | 47.47 |
 | particle-diffusion | | -- |
 | particlefilter | | -- |
 | particles | | -- |
