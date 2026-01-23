@@ -1,0 +1,4 @@
+Average execution time of select kernel: 11.563721 (us)
+Average execution time of select2 kernel: 10.406610 (us)
+Average execution time of select4 kernel: 10.819091 (us)
+PASS
