@@ -167,7 +167,7 @@
 | ldpc | | -- |
 | lebesgue | | 39.57 |
 | leukocyte | | -- |
-| libor | | -- |
+| libor | | 13.26 |
 | lid-driven-cavity | | -- |
 | lif | | 117.82 |
 | linearprobing | | -- |
