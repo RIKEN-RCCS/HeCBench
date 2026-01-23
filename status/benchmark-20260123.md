@@ -189,7 +189,7 @@
 | maxpool3d | | 32.12 |
 | mcmd | | 10.78 |
 | mcpr | | -- |
-| md5hash | | -- |
+| md5hash | | 15.39 |
 | mdh | | 35.18 |
 | md | | -- |
 | meanshift | | -- |
