@@ -314,7 +314,7 @@
 | urng | | -- |
 | vanGenuchten | | 31.11 |
 | vmc | | -- |
-| vol2col | | -- |
+| vol2col | | 7.94 |
 | wedford | | -- |
 | winograd | | 3.24 |
 | wlcpow | | -- |
