@@ -151,14 +151,14 @@
 | jenkins-hash | | 5.31 |
 | kalman | | -- |
 | keccaktreehash | | -- |
-| keogh | | -- |
+| keogh | | 5.71 |
 | kernelLaunch | | -- |
 | kmeans | | 25.59 |
 | knn | | -- |
 | lanczos | | -- |
 | langevin | | 6.20 |
 | langford | | -- |
-| laplace3d | | -- |
+| laplace3d | | 14.64 |
 | laplace | | -- |
 | lavaMD | | -- |
 | layout | | 2.62 |
