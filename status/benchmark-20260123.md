@@ -70,7 +70,7 @@
 | convolution3D | | 3.10 |
 | convolutionSeparable | | -- |
 | cooling | | 2272.56 |
-| crc64 | | -- |
+| crc64 | | 2.58 |
 | cross | | 7.67 |
 | crs | | -- |
 | d2q9-bgk | | -- |
