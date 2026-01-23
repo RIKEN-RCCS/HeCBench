@@ -64,7 +64,7 @@
 | complex | | 12.73 |
 | compute-score | | -- |
 | concat | | 16.76 |
-| contract | | -- |
+| contract | | 28.96 |
 | conversion | | 1.38 |
 | convolution1D | | -- |
 | convolution3D | | 3.10 |
