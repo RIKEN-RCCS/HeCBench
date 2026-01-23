@@ -147,7 +147,7 @@
 | inversek2j | | 9.35 |
 | ising | | 53.01 |
 | iso2dfd | | 15.80 |
-| jacobi | | -- |
+| jacobi | | 3.52 |
 | jenkins-hash | | 5.31 |
 | kalman | | -- |
 | keccaktreehash | | -- |
