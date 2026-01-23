@@ -1,0 +1,122 @@
+nvc++  -Wall -I../mask-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+void eval_mask<int>(int, int, int, int):
+    225, Loop not vectorized/parallelized: contains call
+    228, Loop not vectorized/parallelized: contains call
+    231, Loop not vectorized/parallelized: contains call
+    239, Generating map(alloc:h_out[:data_size]) 
+         Generating map(to:h_window[:window_size],h_seq_len[:seq_len],h_in[:data_size]) 
+    244, Loop not vectorized/parallelized: contains call
+         190, Generating update from(h_out[:data_size])
+         192, Loop not fused: function call before adjacent loop
+    259, Loop not vectorized/parallelized: contains call
+         190, Generating update from(h_out[:data_size])
+         192, Loop not fused: function call before adjacent loop
+    274, Loop not vectorized/parallelized: contains call
+         190, Generating update from(h_out[:data_size])
+         192, Loop not fused: function call before adjacent loop
+    289, Loop not vectorized/parallelized: contains call
+         190, Generating update from(h_out[:data_size])
+         192, Loop not fused: function call before adjacent loop
+    304, Loop not vectorized/parallelized: contains call
+         190, Generating update from(h_out[:data_size])
+         192, Loop not fused: function call before adjacent loop
+    319, Loop not vectorized/parallelized: contains call
+         190, Generating update from(h_out[:data_size])
+         192, Loop not fused: function call before adjacent loop
+void sequenceMaskKernel_cpu<int>(int, int, int, int const*, int const*, int, int*):
+      6, include "reference.h"
+          16, #omp parallel
+              Loop not vectorized: unsupported gather
+          25, #omp parallel
+              Generated vector simd code for the loop
+void sequenceMaskKernel<int>(int, int, int, int const*, int const*, int, int*):
+     23, #omp target teams distribute parallel for num_teams(N*M)
+         23, Generating "nvkernel__Z18sequenceMaskKernelIiEviiiPKT_PKiS0_PS0__F1L23_4" GPU kernel
+         26, Loop parallelized across teams and threads(128), schedule(static)
+     26, Loop not vectorized/parallelized: not countable
+     33, #omp target teams distribute parallel for num_teams((N*M)/256)
+         33, Generating "nvkernel__Z18sequenceMaskKernelIiEviiiPKT_PKiS0_PS0__F1L33_6" GPU kernel
+         36, Loop parallelized across teams and threads(128), schedule(static)
+     36, Loop not vectorized/parallelized: not countable
+void print_mask_ratio<int>(int*, int*, int, int):
+    190, Generating update from(h_out[:data_size])
+void windowMaskKernel_cpu<int>(int, int, int, int const*, int const*, int, int, int*):
+      6, include "reference.h"
+          45, #omp parallel
+              Loop not vectorized: unknown
+          58, #omp parallel
+              Loop not vectorized: unknown
+void windowMaskKernel<int>(int, int, int, int const*, int const*, int, int, int*):
+     54, #omp target teams distribute parallel for num_teams(N*M)
+         54, Generating "nvkernel__Z16windowMaskKernelIiEviiiPKT_PKiiS0_PS0__F1L54_14" GPU kernel
+         57, Loop parallelized across teams and threads(128), schedule(static)
+     57, Loop not vectorized/parallelized: not countable
+     68, #omp target teams distribute parallel for num_teams((N*M)/256)
+         68, Generating "nvkernel__Z16windowMaskKernelIiEviiiPKT_PKiiS0_PS0__F1L68_16" GPU kernel
+         71, Loop parallelized across teams and threads(128), schedule(static)
+     71, Loop not vectorized/parallelized: not countable
+void upperMaskKernel_cpu<int>(int, int, int, int const*, int, int*):
+      6, include "reference.h"
+          75, #omp parallel
+              Loop not vectorized: unsupported gather
+          85, #omp parallel
+              Generated vector simd code for the loop
+void upperMaskKernel<int>(int, int, int, int const*, int, int*):
+     86, #omp target teams distribute parallel for num_teams(N*M)
+         86, Generating "nvkernel__Z15upperMaskKernelIiEviiiPKT_S0_PS0__F1L86_24" GPU kernel
+         89, Loop parallelized across teams and threads(128), schedule(static)
+     89, Loop not vectorized/parallelized: not countable
+     97, #omp target teams distribute parallel for num_teams((N*M)/256)
+         97, Generating "nvkernel__Z15upperMaskKernelIiEviiiPKT_S0_PS0__F1L97_26" GPU kernel
+        100, Loop parallelized across teams and threads(128), schedule(static)
+    100, Loop not vectorized/parallelized: not countable
+void lowerMaskKernel_cpu<int>(int, int, int, int const*, int, int*):
+      6, include "reference.h"
+          99, #omp parallel
+              Loop not vectorized: unsupported gather
+         109, #omp parallel
+              Generated vector simd code for the loop
+void lowerMaskKernel<int>(int, int, int, int const*, int, int*):
+    112, #omp target teams distribute parallel for num_teams(N*M)
+        112, Generating "nvkernel__Z15lowerMaskKernelIiEviiiPKT_S0_PS0__F1L112_34" GPU kernel
+        115, Loop parallelized across teams and threads(128), schedule(static)
+    115, Loop not vectorized/parallelized: not countable
+    123, #omp target teams distribute parallel for num_teams((N*M)/256)
+        123, Generating "nvkernel__Z15lowerMaskKernelIiEviiiPKT_S0_PS0__F1L123_36" GPU kernel
+        126, Loop parallelized across teams and threads(128), schedule(static)
+    126, Loop not vectorized/parallelized: not countable
+void upperDiagMaskKernel_cpu<int>(int, int, int, int const*, int, int*):
+      6, include "reference.h"
+         123, #omp parallel
+              Loop not vectorized: unsupported gather
+         133, #omp parallel
+              Generated vector simd code for the loop
+void upperDiagMaskKernel<int>(int, int, int, int const*, int, int*):
+    138, #omp target teams distribute parallel for num_teams(N*M)
+        138, Generating "nvkernel__Z19upperDiagMaskKernelIiEviiiPKT_S0_PS0__F1L138_44" GPU kernel
+        141, Loop parallelized across teams and threads(128), schedule(static)
+    141, Loop not vectorized/parallelized: not countable
+    149, #omp target teams distribute parallel for num_teams((N*M)/256)
+        149, Generating "nvkernel__Z19upperDiagMaskKernelIiEviiiPKT_S0_PS0__F1L149_46" GPU kernel
+        152, Loop parallelized across teams and threads(128), schedule(static)
+    152, Loop not vectorized/parallelized: not countable
+void lowerDiagMaskKernel_cpu<int>(int, int, int, int const*, int, int*):
+      6, include "reference.h"
+         147, #omp parallel
+              Loop not vectorized: unsupported gather
+         157, #omp parallel
+              Generated vector simd code for the loop
+void lowerDiagMaskKernel<int>(int, int, int, int const*, int, int*):
+    164, #omp target teams distribute parallel for num_teams(N*M)
+        164, Generating "nvkernel__Z19lowerDiagMaskKernelIiEviiiPKT_S0_PS0__F1L164_54" GPU kernel
+        167, Loop parallelized across teams and threads(128), schedule(static)
+    167, Loop not vectorized/parallelized: not countable
+    175, #omp target teams distribute parallel for num_teams((N*M)/256)
+        175, Generating "nvkernel__Z19lowerDiagMaskKernelIiEviiiPKT_S0_PS0__F1L175_56" GPU kernel
+        178, Loop parallelized across teams and threads(128), schedule(static)
+    178, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      6, include "reference.h"
+nvc++  -Wall -I../mask-cuda -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

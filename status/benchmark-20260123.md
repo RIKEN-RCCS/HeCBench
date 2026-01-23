@@ -181,7 +181,7 @@
 | lulesh | | -- |
 | mallocFree | | -- |
 | mandelbrot | | 3.84 |
-| mask | | -- |
+| mask | | 21.30 |
 | match | | -- |
 | matern | | -- |
 | matrix-rotate | | 35.59 |
