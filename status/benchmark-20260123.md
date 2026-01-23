@@ -209,7 +209,7 @@
 | mixbench | | -- |
 | morphology | | -- |
 | mrc | | 17.75 |
-| mriQ | | -- |
+| mriQ | | 3.61 |
 | mr | | -- |
 | mt | | 4.43 |
 | multimaterial | | 11.98 |

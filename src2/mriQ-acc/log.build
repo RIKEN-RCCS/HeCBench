@@ -1,0 +1,48 @@
+nvc++ -acc  -std=c++14 -Wall -I../mriQ-cuda -O3 -Minfo -mp=gpu -gpu=cc90,fastmath -c main.cpp -o main.o
+computeQ_GPU(int, int, float*, float*, float*, kValues*, kValues*, float*, float*):
+     34, include "computeQ.cpp"
+          56, Generating update device(ck[:numElems])
+              Generating implicit firstprivate(numX)
+              Generating NVIDIA GPU code
+              60, #pragma acc loop gang(QBlocks), vector(256) /* blockIdx.x threadIdx.x */
+          56, Generating implicit copy(Qi[:numX]) [if not already present]
+              Generating implicit copyin(z[:numX],y[:numX],x[:numX],ck[:]) [if not already present]
+              Generating implicit copy(Qr[:numX]) [if not already present]
+          60, Generating implicit firstprivate(numK)
+              Invariant if transformation
+          79, Accelerator restriction: induction variable live-out from loop: kGlobalIndex
+              Loop carried scalar dependence for sQr at line 84
+              Scalar last value needed after loop for sQr at line 95
+              Loop carried scalar dependence for sQi at line 85
+              Scalar last value needed after loop for sQi at line 96
+              Loop not vectorized/parallelized: potential early exits
+          93, Accelerator restriction: induction variable live-out from loop: kGlobalIndex
+main:
+     73, Generating copyout(phiMag[:numK]) [if not already present]
+         Generating copyin(phiR[:numK],phiI[:numK]) [if not already present]
+     74, Generating implicit firstprivate(numK)
+         Generating NVIDIA GPU code
+         78, #pragma acc loop gang(phiMagBlocks), vector(256) /* blockIdx.x threadIdx.x */
+     78, Loop not fused: no successor loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Vectorized loop was interleaved
+         Loop unrolled 4 times
+     90, Loop not fused: function call before adjacent loop
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 8 times
+    103, Generating create(ck[:]) [if not already present]
+         Generating copyin(x[:numX],z[:numX],y[:numX]) [if not already present]
+         Generating copyout(Qi[:numX],Qr[:numX]) [if not already present]
+         Generating implicit firstprivate(numX)
+         Generating NVIDIA GPU code
+        105, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+    105, Loop not fused: no successor loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 8 times
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     31, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++ -acc  -std=c++14 -Wall -I../mriQ-cuda -O3 -Minfo -mp=gpu -gpu=cc90,fastmath -c ../mriQ-cuda/file.cc -o file.o
+nvc++ -acc  -std=c++14 -Wall -I../mriQ-cuda -O3 -Minfo -mp=gpu -gpu=cc90,fastmath main.o file.o -o main 
