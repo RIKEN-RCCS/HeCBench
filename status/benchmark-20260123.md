@@ -234,12 +234,12 @@
 | pathfinder | | -- |
 | permutate | | -- |
 | permute | | 85.78 |
-| perplexity | | -- |
+| perplexity | | 123.77 |
 | phmm | | -- |
 | pnpoly | | -- |
 | pns | | -- |
 | pointwise | | 68.46 |
-| pool | | -- |
+| pool | | 36.39 |
 | popcount | | 290.55 |
 | present | | 3.07 |
 | prna | | -- |
