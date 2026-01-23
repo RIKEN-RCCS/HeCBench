@@ -271,7 +271,7 @@
 | scan2 | | -- |
 | scan | | -- |
 | scatterAdd | | 8.07 |
-| scel | | -- |
+| scel | | 11.83 |
 | secp256k1 | | 2.73 |
 | sheath | | 5.79 |
 | shmembench | | -- |
