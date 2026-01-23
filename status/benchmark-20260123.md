@@ -191,7 +191,7 @@
 | mcpr | | -- |
 | md5hash | | 15.39 |
 | mdh | | 35.18 |
-| md | | -- |
+| md | | 14.29 |
 | meanshift | | -- |
 | medianfilter | | -- |
 | memcpy | | 6.57 |
