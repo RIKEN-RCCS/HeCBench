@@ -204,11 +204,11 @@
 | minimap2 | | -- |
 | minisweep | | 36.23 |
 | miniWeather | | -- |
-| minkowski | | -- |
+| minkowski | | 22.51 |
 | mis | | -- |
 | mixbench | | -- |
 | morphology | | -- |
-| mrc | | -- |
+| mrc | | 17.75 |
 | mriQ | | -- |
 | mr | | -- |
 | mt | | 4.43 |
