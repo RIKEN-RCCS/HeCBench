@@ -159,13 +159,13 @@
 | langevin | | 6.20 |
 | langford | | -- |
 | laplace3d | | 14.64 |
-| laplace | | -- |
+| laplace | | 11.66 |
 | lavaMD | | -- |
 | layout | | 2.62 |
-| lci | | -- |
+| lci | | 4.36 |
 | lda | | -- |
 | ldpc | | -- |
-| lebesgue | | -- |
+| lebesgue | | 39.57 |
 | leukocyte | | -- |
 | libor | | -- |
 | lid-driven-cavity | | -- |
