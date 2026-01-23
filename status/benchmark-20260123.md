@@ -180,7 +180,7 @@
 | lud | | -- |
 | lulesh | | -- |
 | mallocFree | | -- |
-| mandelbrot | | -- |
+| mandelbrot | | 3.84 |
 | mask | | -- |
 | match | | -- |
 | matern | | -- |
