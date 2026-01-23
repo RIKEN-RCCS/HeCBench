@@ -1,6 +1,6 @@
 | name | sycl | acc |
 | -- | -- | -- |
-| accuracy | | -- |
+| accuracy | | 2.56 |
 | ace | | 3.15 |
 | adam | | 6.76 |
 | adamw | | -- |
