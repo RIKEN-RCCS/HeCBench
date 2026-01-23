@@ -298,7 +298,7 @@
 | su3 | | 12.48 |
 | surfel | | 117.18 |
 | svd3x3 | | 1.98 |
-| sw4ck | | -- |
+| sw4ck | | 28.72 |
 | swish | | -- |
 | tensorT | | -- |
 | testSNAP | | -- |
