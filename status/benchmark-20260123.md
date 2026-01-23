@@ -195,7 +195,7 @@
 | meanshift | | -- |
 | medianfilter | | -- |
 | memcpy | | 6.57 |
-| memtest | | -- |
+| memtest | | 19.73 |
 | merge | | -- |
 | metropolis | | -- |
 | michalewicz | | -- |
