@@ -270,7 +270,7 @@
 | sampling | | -- |
 | scan2 | | -- |
 | scan | | -- |
-| scatterAdd | | -- |
+| scatterAdd | | 8.07 |
 | scel | | -- |
 | secp256k1 | | 2.73 |
 | sheath | | 5.79 |
