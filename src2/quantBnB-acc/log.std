@@ -1,0 +1,2 @@
+Average execution time of kQuantize kernel with block size 256: 2739.491211 (us)
+PASS
