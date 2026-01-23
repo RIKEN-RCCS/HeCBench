@@ -1,0 +1,42 @@
+nvc++  -std=c++14 -Wall -I../sad-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+compute_sad_array(int*, unsigned char const*, unsigned char const*, int, int&, int&, int, int, int, int, int, double&):
+     25, #omp target teams distribute parallel for thread_limit(256)
+         25, Generating "nvkernel__Z17compute_sad_arrayPiPKhS1_iRiS2_iiiiiRd_F1L25_2" GPU kernel
+         28, Loop parallelized across teams and threads(128), schedule(static)
+     29, Loop not vectorized/parallelized: not countable
+     36, Generated vector simd code for the loop containing reductions
+     62, #omp target teams distribute parallel for thread_limit(256)
+         62, Generating "nvkernel__Z17compute_sad_arrayPiPKhS1_iRiS2_iiiiiRd_F1L62_4" GPU kernel
+             Loop parallelized across teams and threads(128), schedule(static)
+             Generating reduction(min:m)
+     62, Generating map(tofrom:m) 
+         Loop not vectorized/parallelized: not countable
+     68, #omp target teams distribute parallel for thread_limit(256)
+         68, Generating "nvkernel__Z17compute_sad_arrayPiPKhS1_iRiS2_iiiiiRd_F1L68_6" GPU kernel
+             Loop parallelized across teams and threads(128), schedule(static)
+             Generating reduction(+:n)
+     68, Generating map(tofrom:n) 
+         Loop not vectorized/parallelized: not countable
+main:
+    104, Loop not fused: complex flow graph
+    105, Loop not vectorized: data dependency
+    116, Loop not fused: complex flow graph
+    117, Loop not vectorized: data dependency
+    134, Generating map(to:h_template_image[:template_size*3]) 
+         Generating map(alloc:h_sad_array[:sad_array_size]) 
+         Generating map(to:h_main_image[:main_size*3]) 
+    140, Loop not vectorized/parallelized: contains call
+bitmap_image::load_bitmap():
+      4, include "bitmap_image.hpp"
+        1596, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      2, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      4, include "bitmap_image.hpp"
+std::chrono::duration<long, std::ratio<1l, 1000l>>::_S_gcd(long, long):
+      2, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      4, include "bitmap_image.hpp"
+unsigned char* std::__uninitialized_move_if_noexcept_a<unsigned char*, unsigned char*, std::allocator<unsigned char>>(unsigned char*, unsigned char*, unsigned char*, std::allocator<unsigned char>&):
+      4, include "bitmap_image.hpp"
+nvc++  -std=c++14 -Wall -I../sad-cuda -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

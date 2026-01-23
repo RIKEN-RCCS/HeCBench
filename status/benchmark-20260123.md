@@ -266,7 +266,7 @@
 | rushlarsen | | 688.40 |
 | s3d | | -- |
 | s8n | | 2.58 |
-| sad | | -- |
+| sad | | 7.39 |
 | sampling | | -- |
 | scan2 | | -- |
 | scan | | -- |
