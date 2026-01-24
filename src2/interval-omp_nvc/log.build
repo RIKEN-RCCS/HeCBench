@@ -1,0 +1,266 @@
+nvc++  -Wall -I../interval-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+min4(double, double, double, double):
+              133, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+max4(double, double, double, double):
+              137, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+checkAgainstHost(int*, int*, boost::numeric::interval<double, boost::numeric::interval_lib::policies<boost::numeric::interval_lib::rounded_math<double>, boost::numeric::interval_lib::checking_base<double>>>*, boost::numeric::interval<double, boost::numeric::interval_lib::policies<boost::numeric::interval_lib::rounded_math<double>, boost::numeric::interval_lib::checking_base<double>>>*):
+     44, include "cpu_interval.h"
+         273, Loop not vectorized/parallelized: potential early exits
+         286, Loop not vectorized/parallelized: potential early exits
+         616, Loop not vectorized/parallelized: not countable
+main:
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+     82, #omp target teams distribute parallel for num_teams(1024)
+         79, Generating map(from:buffer[:8388608],h_nresults[:65536]) 
+         82, Generating "nvkernel_main_F1L82_2" GPU kernel
+         85, Loop parallelized across teams and threads(128), schedule(static)
+     82, Generating implicit map(tofrom:i) 
+         Loop not vectorized/parallelized: contains call
+     85, Loop not vectorized/parallelized: contains call
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         242, Loop not vectorized/parallelized: potential early exits
+         267, Loop not vectorized/parallelized: not countable
+         273, Loop not vectorized/parallelized: potential early exits
+         286, Loop not vectorized/parallelized: potential early exits
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+void newton_interval_naive<double, 65536, 128>(global_stack<interval_gpu<double>, 128, 65536>&, interval_gpu<double> const&, int):
+     43, include "gpu_interval.h"
+         246, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+         257, Loop not vectorized/parallelized: contains call
+void newton_interval<double, 65536, 128>(global_stack<interval_gpu<double>, 128, 65536>&, interval_gpu<double> const&, int):
+     43, include "gpu_interval.h"
+         123, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+         135, Loop not vectorized/parallelized: contains call
+void test_interval_newton_cpu<boost::numeric::interval<double, boost::numeric::interval_lib::policies<boost::numeric::interval_lib::rounded_math<double>, boost::numeric::interval_lib::checking_base<double>>>>(boost::numeric::interval<double, boost::numeric::interval_lib::policies<boost::numeric::interval_lib::rounded_math<double>, boost::numeric::interval_lib::checking_base<double>>>*, int*, boost::numeric::interval<double, boost::numeric::interval_lib::policies<boost::numeric::interval_lib::rounded_math<double>, boost::numeric::interval_lib::checking_base<double>>>):
+     44, include "cpu_interval.h"
+         242, Loop not vectorized/parallelized: potential early exits
+bool is_minimal<double>(interval_gpu<double> const&, int):
+     43, include "gpu_interval.h"
+          99, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+bool empty<double>(interval_gpu<double>):
+     43, include "gpu_interval.h"
+               82, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+double width<double>(interval_gpu<double>):
+     43, include "gpu_interval.h"
+               88, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+double median<double>(interval_gpu<double> const&):
+     43, include "gpu_interval.h"
+              158, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+interval_gpu<double> f<double>(interval_gpu<double> const&, int):
+     43, include "gpu_interval.h"
+          83, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+interval_gpu<double> operator-<double>(interval_gpu<double> const&, interval_gpu<double> const&):
+     43, include "gpu_interval.h"
+              119, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+interval_gpu<double> square<double>(interval_gpu<double> const&):
+     43, include "gpu_interval.h"
+              324, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+interval_gpu<double> operator*<double>(interval_gpu<double> const&, interval_gpu<double> const&):
+     43, include "gpu_interval.h"
+              143, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+interval_gpu<double> operator+<double>(interval_gpu<double> const&, interval_gpu<double> const&):
+     43, include "gpu_interval.h"
+              111, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+interval_gpu<double> fd<double>(interval_gpu<double> const&, int):
+     43, include "gpu_interval.h"
+          91, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+interval_gpu<double> division_part1<double>(interval_gpu<double> const&, interval_gpu<double> const&, bool&):
+     43, include "gpu_interval.h"
+              297, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+interval_gpu<double> div_zero_part1<double>(interval_gpu<double> const&, interval_gpu<double> const&, bool&):
+     43, include "gpu_interval.h"
+              253, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+interval_gpu<double> div_negative<double>(interval_gpu<double> const&, double const&):
+     43, include "gpu_interval.h"
+              233, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+interval_gpu<double> div_positive<double>(interval_gpu<double> const&, double const&):
+     43, include "gpu_interval.h"
+              214, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+interval_gpu<double> div_non_zero<double>(interval_gpu<double> const&, interval_gpu<double> const&):
+     43, include "gpu_interval.h"
+              181, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+interval_gpu<double> intersect<double>(interval_gpu<double> const&, interval_gpu<double> const&):
+     43, include "gpu_interval.h"
+              166, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+interval_gpu<double> division_part2<double>(interval_gpu<double> const&, interval_gpu<double> const&, bool):
+     43, include "gpu_interval.h"
+              317, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+interval_gpu<double> div_zero_part2<double>(interval_gpu<double> const&, interval_gpu<double> const&):
+     43, include "gpu_interval.h"
+              280, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+bool should_bisect<double>(interval_gpu<double> const&, interval_gpu<double> const&, interval_gpu<double> const&, double):
+     43, include "gpu_interval.h"
+         111, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+void newton_interval_rec_cpu<boost::numeric::interval<double, boost::numeric::interval_lib::policies<boost::numeric::interval_lib::rounded_math<double>, boost::numeric::interval_lib::checking_base<double>>>, 65536, 128>(global_stack_cpu<boost::numeric::interval<double, boost::numeric::interval_lib::policies<boost::numeric::interval_lib::rounded_math<double>, boost::numeric::interval_lib::checking_base<double>>>, 128, 65536>&, boost::numeric::interval<double, boost::numeric::interval_lib::policies<boost::numeric::interval_lib::rounded_math<double>, boost::numeric::interval_lib::checking_base<double>>> const&, int):
+     44, include "cpu_interval.h"
+bool is_minimal_cpu<boost::numeric::interval<double, boost::numeric::interval_lib::policies<boost::numeric::interval_lib::rounded_math<double>, boost::numeric::interval_lib::checking_base<double>>>>(boost::numeric::interval<double, boost::numeric::interval_lib::policies<boost::numeric::interval_lib::rounded_math<double>, boost::numeric::interval_lib::checking_base<double>>> const&, int):
+     44, include "cpu_interval.h"
+rounded_arith<double>::add_down(double const&, double const&):
+     43, include "gpu_interval.h"
+                   126, Generating implicit omp declare target routine
+                        Generating NVIDIA GPU code
+rounded_arith<double>::add_up(double const&, double const&):
+     43, include "gpu_interval.h"
+                   130, Generating implicit omp declare target routine
+                        Generating NVIDIA GPU code
+rounded_arith<double>::sub_down(double const&, double const&):
+     43, include "gpu_interval.h"
+                   134, Generating implicit omp declare target routine
+                        Generating NVIDIA GPU code
+rounded_arith<double>::sub_up(double const&, double const&):
+     43, include "gpu_interval.h"
+                   138, Generating implicit omp declare target routine
+                        Generating NVIDIA GPU code
+rounded_arith<double>::mul_down(double const&, double const&):
+     43, include "gpu_interval.h"
+                   142, Generating implicit omp declare target routine
+                        Generating NVIDIA GPU code
+rounded_arith<double>::mul_up(double const&, double const&):
+     43, include "gpu_interval.h"
+                   146, Generating implicit omp declare target routine
+                        Generating NVIDIA GPU code
+rounded_arith<double>::div_down(double const&, double const&):
+     43, include "gpu_interval.h"
+                   150, Generating implicit omp declare target routine
+                        Generating NVIDIA GPU code
+rounded_arith<double>::div_up(double const&, double const&):
+     43, include "gpu_interval.h"
+                   154, Generating implicit omp declare target routine
+                        Generating NVIDIA GPU code
+rounded_arith<double>::median(double const&, double const&):
+     43, include "gpu_interval.h"
+                   157, Generating implicit omp declare target routine
+                        Generating NVIDIA GPU code
+rounded_arith<double>::neg_inf():
+     43, include "gpu_interval.h"
+                   169, Generating implicit omp declare target routine
+                        Generating NVIDIA GPU code
+rounded_arith<double>::pos_inf():
+     43, include "gpu_interval.h"
+                   173, Generating implicit omp declare target routine
+                        Generating NVIDIA GPU code
+rounded_arith<double>::nan():
+     43, include "gpu_interval.h"
+                   176, Generating implicit omp declare target routine
+                        Generating NVIDIA GPU code
+rounded_arith<double>::min(double const&, double const&):
+     43, include "gpu_interval.h"
+                   178, Generating implicit omp declare target routine
+                        Generating NVIDIA GPU code
+rounded_arith<double>::max(double const&, double const&):
+     43, include "gpu_interval.h"
+                   182, Generating implicit omp declare target routine
+                        Generating NVIDIA GPU code
+interval_gpu<double>::interval_gpu():
+     43, include "gpu_interval.h"
+               55, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+interval_gpu<double>::interval_gpu(double const&):
+     43, include "gpu_interval.h"
+               63, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+interval_gpu<double>::interval_gpu(double const&, double const&):
+     43, include "gpu_interval.h"
+               59, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+interval_gpu<double>::lower() const:
+     43, include "gpu_interval.h"
+               66, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+interval_gpu<double>::upper() const:
+     43, include "gpu_interval.h"
+               71, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+interval_gpu<double>::empty():
+     43, include "gpu_interval.h"
+               76, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+global_stack<interval_gpu<double>, 128, 65536>::global_stack(interval_gpu<double>*, int):
+     43, include "gpu_interval.h"
+          65, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+global_stack<interval_gpu<double>, 128, 65536>::global_stack(interval_gpu<double>*, int):
+     65, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+global_stack<interval_gpu<double>, 128, 65536>::push(interval_gpu<double> const&):
+     43, include "gpu_interval.h"
+          67, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+global_stack<interval_gpu<double>, 128, 65536>::size():
+     43, include "gpu_interval.h"
+          77, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+local_stack<interval_gpu<double>, 128>::local_stack():
+     43, include "gpu_interval.h"
+          42, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+local_stack<interval_gpu<double>, 128>::push(interval_gpu<double> const&):
+     43, include "gpu_interval.h"
+          45, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+local_stack<interval_gpu<double>, 128>::pop():
+     43, include "gpu_interval.h"
+          46, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+local_stack<interval_gpu<double>, 128>::empty():
+     43, include "gpu_interval.h"
+          48, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+std::char_traits<char>::length(char const*):
+         171, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     38, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+     44, include "cpu_interval.h"
+__gnu_cxx::char_traits<char>::length(char const*):
+     37, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                        171, Loop not vectorized/parallelized: not countable
+     43, include "gpu_interval.h"
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&, char const*):
+         397, Loop not vectorized/parallelized: not countable
+boost::numeric::interval<double, boost::numeric::interval_lib::policies<boost::numeric::interval_lib::rounded_math<double>, boost::numeric::interval_lib::checking_base<double>>> boost::numeric::interval_lib::division_part1<double, boost::numeric::interval_lib::policies<boost::numeric::interval_lib::rounded_math<double>, boost::numeric::interval_lib::checking_base<double>>>(boost::numeric::interval<double, boost::numeric::interval_lib::policies<boost::numeric::interval_lib::rounded_math<double>, boost::numeric::interval_lib::checking_base<double>>> const&, boost::numeric::interval<double, boost::numeric::interval_lib::policies<boost::numeric::interval_lib::rounded_math<double>, boost::numeric::interval_lib::checking_base<double>>> const&, bool&):
+     44, include "cpu_interval.h"
+boost::numeric::interval<double, boost::numeric::interval_lib::policies<boost::numeric::interval_lib::rounded_math<double>, boost::numeric::interval_lib::checking_base<double>>> boost::numeric::operator-<double, boost::numeric::interval_lib::policies<boost::numeric::interval_lib::rounded_math<double>, boost::numeric::interval_lib::checking_base<double>>>(boost::numeric::interval<double, boost::numeric::interval_lib::policies<boost::numeric::interval_lib::rounded_math<double>, boost::numeric::interval_lib::checking_base<double>>> const&, boost::numeric::interval<double, boost::numeric::interval_lib::policies<boost::numeric::interval_lib::rounded_math<double>, boost::numeric::interval_lib::checking_base<double>>> const&):
+     44, include "cpu_interval.h"
+boost::numeric::interval<double, boost::numeric::interval_lib::policies<boost::numeric::interval_lib::rounded_math<double>, boost::numeric::interval_lib::checking_base<double>>> boost::numeric::operator+<double, boost::numeric::interval_lib::policies<boost::numeric::interval_lib::rounded_math<double>, boost::numeric::interval_lib::checking_base<double>>>(boost::numeric::interval<double, boost::numeric::interval_lib::policies<boost::numeric::interval_lib::rounded_math<double>, boost::numeric::interval_lib::checking_base<double>>> const&, boost::numeric::interval<double, boost::numeric::interval_lib::policies<boost::numeric::interval_lib::rounded_math<double>, boost::numeric::interval_lib::checking_base<double>>> const&):
+     44, include "cpu_interval.h"
+nvc++  -Wall -I../interval-cuda -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 
