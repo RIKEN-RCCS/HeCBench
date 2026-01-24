@@ -1,0 +1,37 @@
+nvc++  -Wall -gpu=mem:unified -DUM -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+valSet(int*, int, unsigned long):
+     31, CUDA Unified Memory is now enabled due to the 'omp requires unified_shared_memory' directive.
+     36, Recognized memory set idiom
+setup(unsigned long*, int&, int**, unsigned long):
+     31, CUDA Unified Memory is now enabled due to the 'omp requires unified_shared_memory' directive.
+     43, Loop not vectorized/parallelized: potential early exits
+          36, Recognized memory set idiom
+testInit(unsigned long, int):
+     31, CUDA Unified Memory is now enabled due to the 'omp requires unified_shared_memory' directive.
+main:
+     31, CUDA Unified Memory is now enabled due to the 'omp requires unified_shared_memory' directive.
+          43, Loop not vectorized/parallelized: potential early exits
+          51, Recognized memory set idiom
+     95, Loop not vectorized/parallelized: contains call
+    103, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     22, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+     31, CUDA Unified Memory is now enabled due to the 'omp requires unified_shared_memory' directive.
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::count() const:
+     31, CUDA Unified Memory is now enabled due to the 'omp requires unified_shared_memory' directive.
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::duration<long, void>(long const&):
+     31, CUDA Unified Memory is now enabled due to the 'omp requires unified_shared_memory' directive.
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::duration<long, void>(long const&):
+     31, CUDA Unified Memory is now enabled due to the 'omp requires unified_shared_memory' directive.
+std::chrono::time_point<std::chrono::_V2::steady_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l>>>::time_since_epoch() const:
+     31, CUDA Unified Memory is now enabled due to the 'omp requires unified_shared_memory' directive.
+std::chrono::duration<long, std::ratio<1l, 1000000000l>> std::chrono::__duration_cast_impl<std::chrono::duration<long, std::ratio<1l, 1000000000l>>, std::ratio<1l, 1l>, long, true, true>::__cast<long, std::ratio<1l, 1000000000l>>(std::chrono::duration<long, std::ratio<1l, 1000000000l>> const&):
+     31, CUDA Unified Memory is now enabled due to the 'omp requires unified_shared_memory' directive.
+std::common_type<std::chrono::duration<long, std::ratio<1l, 1000000000l>>, std::chrono::duration<long, std::ratio<1l, 1000000000l>>>::type std::chrono::operator-<std::chrono::_V2::steady_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l>>, std::chrono::duration<long, std::ratio<1l, 1000000000l>>>(std::chrono::time_point<std::chrono::_V2::steady_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l>>> const&, std::chrono::time_point<std::chrono::_V2::steady_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l>>> const&):
+     31, CUDA Unified Memory is now enabled due to the 'omp requires unified_shared_memory' directive.
+std::common_type<std::chrono::duration<long, std::ratio<1l, 1000000000l>>, std::chrono::duration<long, std::ratio<1l, 1000000000l>>>::type std::chrono::operator-<long, std::ratio<1l, 1000000000l>, long, std::ratio<1l, 1000000000l>>(std::chrono::duration<long, std::ratio<1l, 1000000000l>> const&, std::chrono::duration<long, std::ratio<1l, 1000000000l>> const&):
+     31, CUDA Unified Memory is now enabled due to the 'omp requires unified_shared_memory' directive.
+std::enable_if<std::chrono::__is_duration<std::chrono::duration<long, std::ratio<1l, 1000000000l>>>::value, std::chrono::duration<long, std::ratio<1l, 1000000000l>>>::type std::chrono::duration_cast<std::chrono::duration<long, std::ratio<1l, 1000000000l>>, long, std::ratio<1l, 1000000000l>>(std::chrono::duration<long, std::ratio<1l, 1000000000l>> const&):
+     31, CUDA Unified Memory is now enabled due to the 'omp requires unified_shared_memory' directive.
+nvc++  -Wall -gpu=mem:unified -DUM -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

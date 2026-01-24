@@ -1,0 +1,309 @@
+nvc++ -acc  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 -c lulesh.cc -o lulesh.o
+SQRT(double):
+    164, include "lulesh.h"
+          32, Generating acc routine seq
+              Generating NVIDIA GPU code
+CBRT(double):
+    164, include "lulesh.h"
+          41, Generating acc routine seq
+              Generating NVIDIA GPU code
+FABS(double):
+    164, include "lulesh.h"
+          50, Generating acc routine seq
+              Generating NVIDIA GPU code
+CalcElemVolume(double const*, double const*, double const*):
+    631, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+main:
+    974, Loop not fused: function call before adjacent loop
+    989, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+   1209, Generating create(x8n[:numElem8],y8n[:numElem8],z8n[:numElem8]) [if not already present]
+         Generating copyin(elemRep[:numElem]) [if not already present]
+         Generating create(fx_elem[:numElem8],fy_elem[:numElem8]) [if not already present]
+         Generating copyin(x[:numNode],y[:numNode],z[:numNode],xd[:numNode],yd[:numNode],zdd[:numNode],zd[:numNode],nodeElemStart[:len1],nodeElemCornerList[:len2],nodalMass[:numNode]) [if not already present]
+         Generating create(fz_elem[:numElem8]) [if not already present]
+         Generating copyin(elemElem[:numElem],lzetap[:numElem],ss[:numElem],symmX[:numNodeBC],symmY[:numNodeBC],v[:numElem],arealg[:numElem]) [if not already present]
+         Generating create(dvdz[:numElem8]) [if not already present]
+         Generating copyin(dxx[:numElem],dyy[:numElem],lxip[:numElem],lzetam[:numElem],letam[:numElem],gamma[:],lxim[:numElem],letap[:numElem],e[:numElem],nodelist[:numElem8],p[:numElem],dzz[:numElem],symmZ[:numNodeBC]) [if not already present]
+         Generating create(sigzz[:numElem],vol_error[:]) [if not already present]
+         Generating copyin(elemMass[:numElem],elemBC[:numElem]) [if not already present]
+         Generating create(delx_zeta[:numElem]) [if not already present]
+         Generating copyin(fx[:numNode],fy[:numNode],fz[:numNode]) [if not already present]
+         Generating create(determ[:numElem],dvdx[:numElem8],dvdy[:numElem8]) [if not already present]
+         Generating copyin(volo[:numElem],xdd[:numNode],ydd[:numNode]) [if not already present]
+         Generating create(qq[:numElem],sigxx[:numElem],sigyy[:numElem],delv_eta[:numElem],delx_eta[:numElem]) [if not already present]
+         Generating copyin(delv[:numElem]) [if not already present]
+         Generating create(delv_zeta[:numElem],delv_xi[:numElem],delx_xi[:numElem],vnew[:numElem]) [if not already present]
+         Generating copyin(vdov[:numElem],q[:numElem]) [if not already present]
+         Generating create(ql[:numElem]) [if not already present]
+   1239, Generating implicit firstprivate(numElem)
+         Generating NVIDIA GPU code
+       1242, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+   1242, Loop not fused: no successor loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 2 times
+   1244, Generating implicit firstprivate(numElem)
+         Generating NVIDIA GPU code
+        400, #pragma acc loop seq
+        456, #pragma acc loop seq
+       1251, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+   1244, Local memory used for z_local,y_local,x_local,B
+   1251, Generating implicit private(elemToNode)
+         Loop not fused: no successor loop
+         400, Loop is parallelizable
+              Loop not fused: possible intervening definition
+              Loop not vectorized: data dependency
+              Loop unrolled 8 times (completely unrolled)
+         456, Complex loop carried dependence of B,fx_elem+((k*8)*8)->,fy_elem+((k*8)*8)->,fz_elem+((k*8)*8)-> prevents parallelization
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 2 times
+   1308, Generating implicit firstprivate(numNode)
+         Generating NVIDIA GPU code
+       1311, #pragma acc loop gang /* blockIdx.x */
+       1319, #pragma acc loop vector(256) /* threadIdx.x */
+             Generating implicit reduction(+:fz_tmp,fy_tmp,fx_tmp)
+   1311, Generating implicit private(cornerList)
+         Loop not fused: no successor loop
+   1319, Loop is parallelizable
+         Generated vector simd code for the loop containing reductions
+   1328, Generating update self(determ[:numElem])
+         Generating NVIDIA GPU code
+       1337, #pragma acc loop gang, vector(128) /* blockIdx.x threadIdx.x */
+   1337, Loop not vectorized/parallelized: contains call
+   1348, Generating update device(vol_error[:])
+         Generating NVIDIA GPU code
+       1353, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+       1400, #pragma acc loop seq
+   1348, Local memory used for pfy,pfx,z1,y1,x1,pfz
+   1353, Generating implicit private(elemToNode)
+         Loop not fused: no successor loop
+   1400, Complex loop carried dependence of pfx,dvdx-> prevents parallelization
+         Loop carried dependence of dvdx-> prevents parallelization
+         Loop carried backward dependence of dvdx-> prevents vectorization
+         Complex loop carried dependence of pfy,dvdy-> prevents parallelization
+         Loop carried dependence of dvdy-> prevents parallelization
+         Loop carried backward dependence of dvdy-> prevents vectorization
+         Complex loop carried dependence of pfz,dvdz-> prevents parallelization
+         Loop carried dependence of dvdz-> prevents parallelization
+         Loop carried backward dependence of dvdz-> prevents vectorization
+         Complex loop carried dependence of x1,x8n-> prevents parallelization
+         Loop carried dependence of x8n-> prevents parallelization
+         Loop carried backward dependence of x8n-> prevents vectorization
+         Complex loop carried dependence of y1,y8n-> prevents parallelization
+         Loop carried dependence of y8n-> prevents parallelization
+         Loop carried backward dependence of y8n-> prevents vectorization
+         Complex loop carried dependence of z1 prevents parallelization
+         Loop carried dependence of z8n-> prevents parallelization
+         Loop carried backward dependence of z8n-> prevents vectorization
+         Complex loop carried dependence of z8n-> prevents parallelization
+         Loop unrolled 2 times
+   1437, Generating update self(vol_error[:])
+   1445, Generating NVIDIA GPU code
+       1461, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+       1477, #pragma acc loop seq
+       1578, #pragma acc loop seq
+       1584, #pragma acc loop seq
+       1589, #pragma acc loop seq
+       1595, #pragma acc loop seq
+       1600, #pragma acc loop seq
+       1606, #pragma acc loop seq
+   1445, Local memory used for hgfy,hyy,hgfx,hxx,hourgam,zd1,yd1,xd1,hzz,hgfz
+         Generating implicit copyin(ss[:numElem],elemMass[:numElem]) [if not already present]
+   1461, Generating implicit private(fz_local,fy_local,fx_local,elemToNode)
+         Loop not vectorized/parallelized: contains call
+   1477, Complex loop carried dependence of x8n->,y8n->,z8n->,dvdz->,dvdy->,dvdx->,hourgam prevents parallelization
+         Loop unrolled 4 times (completely unrolled)
+   1578, Loop is parallelizable
+         Loop unrolled 4 times (completely unrolled)
+   1584, Loop is parallelizable
+         Loop not fused: possible intervening definition
+         Generated vector simd code for the loop
+   1589, Loop is parallelizable
+         Loop unrolled 4 times (completely unrolled)
+   1595, Loop is parallelizable
+         Loop not fused: possible intervening definition
+         Generated vector simd code for the loop
+   1600, Loop is parallelizable
+         Loop unrolled 4 times (completely unrolled)
+   1606, Loop is parallelizable
+         Loop not fused: different loop trip count
+         Generated vector simd code for the loop
+   1617, Rerolled basic block into loop
+         Loop not fused: dependence chain to sibling loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for rerolled loop
+         Loop unrolled 7 times (completely unrolled)
+   1627, Rerolled basic block into loop
+         Loop not fused: dependence chain to sibling loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for rerolled loop
+         Loop unrolled 7 times (completely unrolled)
+   1637, Rerolled basic block into loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for rerolled loop
+         Loop unrolled 7 times (completely unrolled)
+   1644, Generating implicit firstprivate(numNode)
+         Generating NVIDIA GPU code
+       1647, #pragma acc loop gang /* blockIdx.x */
+       1655, #pragma acc loop vector(256) /* threadIdx.x */
+             Generating implicit reduction(+:fz_tmp,fy_tmp,fx_tmp)
+   1647, Generating implicit private(cornerList)
+         Loop not fused: no successor loop
+   1655, Loop is parallelizable
+         Generated vector simd code for the loop containing reductions
+   1674, Generating implicit firstprivate(numNode)
+         Generating NVIDIA GPU code
+       1681, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+   1681, Loop not fused: no successor loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 2 times
+   1696, Generating implicit firstprivate(numNodeBC)
+         Generating NVIDIA GPU code
+       1699, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+   1699, Invariant if transformation
+         Loop not fused: no successor loop
+         Loop not vectorized: unprofitable for target
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+   1703, Generating implicit firstprivate(numNode)
+         Generating NVIDIA GPU code
+       1710, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+   1710, Loop not fused: no successor loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+   1726, Generating implicit firstprivate(numNode)
+         Generating NVIDIA GPU code
+       1733, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+   1733, Loop not fused: no successor loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+   1738, Generating NVIDIA GPU code
+       1763, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+       1828, #pragma acc loop seq
+       1837, #pragma acc loop seq
+   1738, Local memory used for B,zd_local,z_local,y_local,x_local,yd_local,xd_local,D
+   1763, Generating implicit private(elemToNode)
+         Loop not fused: no successor loop
+   1828, Complex loop carried dependence of xd->,xd_local,yd->,yd_local,zd->,zd_local prevents parallelization
+         Loop not fused: dependence chain to sibling loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+   1837, Loop is parallelizable
+         Generated vector simd code for the loop
+   1856, Generating update device(vol_error[:])
+         Generating NVIDIA GPU code
+       1861, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+   1861, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+   1889, Generating update self(vol_error[:],vdov[:numElem])
+   1892, Generating NVIDIA GPU code
+       1910, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+   1910, Generating implicit private(elemToNode)
+         Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+   2055, Generating NVIDIA GPU code
+       2058, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+   2058, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+   2213, Loop not vectorized/parallelized: potential early exits
+   2238, Generating NVIDIA GPU code
+       2241, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+       2283, #pragma acc loop seq
+   2241, Loop not fused: no successor loop
+   2283, Scalar last value needed after loop for q_new at line 2426
+         Scalar last value needed after loop for e_new at line 2425,2428
+         Scalar last value needed after loop for bvc at line 2428
+         Scalar last value needed after loop for pbvc at line 2428
+         Scalar last value needed after loop for p_new at line 2424,2428
+         Invariant if transformation
+         Loop not fused: no successor loop
+   2455, Generating update self(ss[:numElem],arealg[:numElem])
+Domain::~Domain():
+    164, include "lulesh.h"
+double* std::__uninitialized_default_n_1<true>::__uninit_default_n<double*, unsigned long>(double*, unsigned long):
+        1149, Recognized memory set idiom
+std::vector<int, std::allocator<int>>::empty() const:
+    164, include "lulesh.h"
+double* std::__uninitialized_default_n_a<double*, unsigned long, double>(double*, unsigned long, std::allocator<double>&):
+         638, Recognized memory set idiom
+double* std::__uninitialized_default_n<double*, unsigned long>(double*, unsigned long):
+         603, Recognized memory set idiom
+double* std::fill_n<double*, unsigned long, double>(double*, unsigned long, double const&):
+        1120, Recognized memory set idiom
+double* std::__fill_n_a<double*, unsigned long, double>(double*, unsigned long, double const&, std::random_access_iterator_tag):
+         969, Recognized memory set idiom
+void std::__fill_a<double*, double>(double*, double*, double const&):
+         923, Recognized memory set idiom
+__gnu_cxx::__enable_if<std::__is_scalar<double>::__value, void>::__type std::__fill_a1<double*, double>(double*, double*, double const&):
+    156, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+                             923, Recognized memory set idiom
+    164, include "lulesh.h"
+double* std::__uninitialized_move_if_noexcept_a<double*, double*, std::allocator<double>>(double*, double*, double*, std::allocator<double>&):
+    164, include "lulesh.h"
+double* std::__copy_move_a<true, double*, double*>(double*, double*, double*):
+    156, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+    164, include "lulesh.h"
+_INTERNAL_9_lulesh_cc_c9d4bd87::CalcElemShapeFunctionDerivatives(double const*, double const*, double const*, double (*) [8], double*):
+    272, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_9_lulesh_cc_c9d4bd87::SumElemFaceNormal(double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double, double, double, double, double, double, double, double, double, double, double, double):
+    364, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_9_lulesh_cc_c9d4bd87::CalcElemNodeNormals(double*, double*, double*, double const*, double const*, double const*):
+    399, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+    400, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 8 times (completely unrolled)
+_INTERNAL_9_lulesh_cc_c9d4bd87::SumElemStressesToNodeForces(double const (*) [8], double, double, double, double*, double*, double*):
+    455, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+    456, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 2 times
+_INTERNAL_9_lulesh_cc_c9d4bd87::VoluDer(double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double*, double*, double*):
+    474, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_9_lulesh_cc_c9d4bd87::CalcElemVolumeDerivative(double*, double*, double*, double const*, double const*, double const*):
+    505, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_9_lulesh_cc_c9d4bd87::CalcElemVolume(double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double):
+    556, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_9_lulesh_cc_c9d4bd87::AreaFace(double, double, double, double, double, double, double, double, double, double, double, double):
+    644, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_9_lulesh_cc_c9d4bd87::CalcElemCharacteristicLength(double const*, double const*, double const*, double):
+    667, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_9_lulesh_cc_c9d4bd87::CalcElemVelocityGradient(double const*, double const*, double const*, double const (*) [8], double, double*):
+    713, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_9_lulesh_cc_c9d4bd87::CalcCourantConstraintForElems(Domain&, int, int*, double, double&):
+    793, Loop not fused: complex flow graph
+         Loop not vectorized/parallelized: loop count too small
+    822, Loop unrolled 1 times (completely unrolled)
+_INTERNAL_9_lulesh_cc_c9d4bd87::CalcHydroConstraintForElems(Domain&, int, int*, double, double&):
+    858, Loop not fused: complex flow graph
+         Loop not vectorized/parallelized: loop count too small
+    879, Loop unrolled 1 times (completely unrolled)
+_INTERNAL_9_lulesh_cc_c9d4bd87::CalcTimeConstraintsForElems(Domain&):
+         793, Loop not fused: complex flow graph
+              Loop not vectorized/parallelized: loop count too small
+         822, Loop unrolled 1 times (completely unrolled)
+         858, Loop not fused: complex flow graph
+              Loop not vectorized/parallelized: loop count too small
+         879, Loop unrolled 1 times (completely unrolled)
+nvc++ -acc  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 lulesh.o lulesh-viz.o lulesh-util.o lulesh-init.o -o lulesh 

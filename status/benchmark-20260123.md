@@ -178,8 +178,8 @@
 | lr | | -- |
 | lsqt | | -- |
 | lud | | -- |
-| lulesh | | -- |
-| mallocFree | | -- |
+| lulesh | | 11.73 |
+| mallocFree | | 2.69 |
 | mandelbrot | | 3.84 |
 | mask | | 21.30 |
 | match | | -- |
@@ -198,10 +198,10 @@
 | memtest | | 19.73 |
 | merge | | -- |
 | metropolis | | -- |
-| michalewicz | | -- |
+| michalewicz | | 51.76 |
 | minibude | | -- |
 | miniFE | | -- |
-| minimap2 | | -- |
+| minimap2 | | 2.37 |
 | minisweep | | 36.23 |
 | miniWeather | | -- |
 | minkowski | | 22.51 |
