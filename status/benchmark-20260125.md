@@ -8,7 +8,7 @@
 | adv | | -- |
 | aes | | -- |
 | affine | | 10.61 |
-| aidw | | -- |
+| aidw | | 3.53 |
 | aligned-types | | 2.32 |
 | all-pairs-distance | | -- |
 | amgmk | | 2.44 |
@@ -46,13 +46,13 @@
 | car | | 6.54 |
 | cbsfil | | 34.93 |
 | ccsd-trpdrv | | 2.20 |
-| ccs | | -- |
+| ccs | | 2.49 |
 | cfd | | 1.11 |
 | chacha20 | | -- |
 | channelShuffle | | 18.78 |
 | channelSum | | 65.24 |
 | chemv | | -- |
-| che | | -- |
+| che | | 3.27 |
 | chi2 | | 264.23 |
 | clenergy | | 3.20 |
 | clink | | 3.91 |
@@ -201,7 +201,7 @@
 | michalewicz | | 51.76 |
 | minibude | | -- |
 | miniFE | | -- |
-| minimap2 | | 2.37 |
+| minimap2 | | 0.92 |
 | minisweep | | 36.23 |
 | miniWeather | | -- |
 | minkowski | | 22.51 |

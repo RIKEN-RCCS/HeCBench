@@ -23,18 +23,8 @@ device_chain_kernel_wrapper(std::vector<control_dt, std::allocator<control_dt>>&
          Generating copyout(h_ret[:?]) [if not already present]
          Generating copyin(h_control[:]) [if not already present]
      97, Loop not vectorized/parallelized: contains call
-     99, Generating implicit firstprivate(batch)
-         Generating NVIDIA GPU code
-        126, #pragma acc loop seq
-     99, CUDA shared memory used for curr,j_tracker_sm,.inl_act_1000,active_sm,tmp,max_tracker_sm,control
-    126, Complex loop carried dependence of active_sm,max_tracker_sm,j_tracker_sm,h_arg+((batch*1951488)*8)-> prevents parallelization
-         Loop carried dependence due to exposed use of max_tracker_sm[:],j_tracker_sm[:],h_ret+((batch*1835008)*8)[:*] prevents parallelization
-         Complex loop carried dependence of h_ret+((batch*1835008)*8)-> prevents parallelization
-         Loop carried dependence due to exposed use of active_sm[:] prevents parallelization
-         Generating implicit firstprivate(max_dist_x,max_dist_y,bw)
-         Complex loop carried dependence of max_tracker_sm prevents parallelization
-         Loop not fused: no successor loop
-         Loop not vectorized: data dependency
+    126, Loop not vectorized: data dependency
+    129, Accelerator restriction: unsupported statement type: opcode=ACCWAITDIR
 return_dt* std::__uninitialized_default_n_1<true>::__uninit_default_n<return_dt*, unsigned long>(return_dt*, unsigned long):
         1149, Loop not vectorized: data dependency
               Loop unrolled 2 times

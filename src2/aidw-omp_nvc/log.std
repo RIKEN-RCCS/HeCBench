@@ -1,0 +1,14 @@
+Size = : 10 K 
+dnum = : 10240
+inum = : 10240
+Verification enabled
+PASS
+PASS
+Average execution time of AIDW_Kernel       0.000374 (s)
+Average execution time of AIDW_Kernel_Tiled 0.000307 (s)
+Size = : 100 K 
+dnum = : 102400
+inum = : 102400
+Verification disabled
+Average execution time of AIDW_Kernel       0.008124 (s)
+Average execution time of AIDW_Kernel_Tiled 0.008788 (s)

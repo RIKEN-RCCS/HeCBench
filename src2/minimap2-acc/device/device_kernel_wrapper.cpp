@@ -125,7 +125,7 @@ void device_chain_kernel_wrapper(
 
           for (int i = BACK_SEARCH_COUNT_GPU, curr_idx = 0; curr_idx < TILE_SIZE; i++, curr_idx++) {
 
-	    //            #pragma omp barrier
+#pragma acc wait
             anchor_dt curr;
             update_anchor(active_sm, &curr, i % BACK_SEARCH_COUNT_GPU, 0);
             score_dt f_curr = max_tracker_sm[i % BACK_SEARCH_COUNT_GPU];
@@ -136,7 +136,7 @@ void device_chain_kernel_wrapper(
             }
 
             // read in new query anchor, put into active array
-	    //            #pragma omp barrier
+#pragma acc wait
             if (id == i % BACK_SEARCH_COUNT_GPU) {
               update_anchor(h_arg + batch * PE_NUM * TILE_SIZE_ACTUAL,
                   active_sm, ofs*TILE_SIZE_ACTUAL+i, id);
@@ -144,17 +144,17 @@ void device_chain_kernel_wrapper(
               j_tracker_sm[id] = -1;
             }
 
-	    //            #pragma omp barrier
+#pragma acc wait
             score_dt sc = chain_dp_score(active_sm, curr,
                 control.avg_qspan, max_dist_x, max_dist_y, bw, id);
 
-	    //            #pragma omp barrier
+#pragma acc wait
             if (sc + f_curr >= max_tracker_sm[id]) {
               max_tracker_sm[id] = sc + f_curr;
               j_tracker_sm[id] = (parent_dt)curr_idx + (parent_dt)control.tile_num * TILE_SIZE;
             }
 
-	    //            #pragma omp barrier
+#pragma acc wait
             if (id == curr_idx % BACK_SEARCH_COUNT_GPU) {
               return_dt tmp;
               tmp.score = f_curr;
@@ -163,7 +163,7 @@ void device_chain_kernel_wrapper(
             }
           }
 
-	  //          #pragma omp barrier
+#pragma acc wait
           max_tracker_g[ofs][id] = max_tracker_sm[id];
           j_tracker_g[ofs][id] = j_tracker_sm[id];
         }
