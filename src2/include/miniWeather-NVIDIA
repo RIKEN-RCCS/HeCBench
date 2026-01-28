@@ -1,1 +1,2 @@
-COMMAND = time -p ( python ../scripts/genhostfile.py ; mpiexec --hostfile hosts -n 2 ./$(program) 1>log.std 2>log.err ) 2> log.time
+#COMMAND = time -p ( python ../scripts/genhostfile.py ; mpiexec --hostfile hosts -n 2 ./$(program) 1>log.std 2>log.err ) 2> log.time
+COMMAND = time -p ( mpiexec -n 2 ./$(program) 1>log.std 2>log.err ) 2> log.time
