@@ -1,0 +1,49 @@
+nvc++ -acc  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+CPU(int*, int*):
+     27, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+main:
+     69, Loop not vectorized/parallelized: contains call
+          25, Loop not fused: function call before adjacent loop
+          27, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+     86, Generating copyin(data_char[:917504]) [if not already present]
+         Generating create(gpu_distance[:50176]) [if not already present]
+     87, Loop not vectorized/parallelized: too deeply nested
+     92, Generating update device(gpu_distance[:50176])
+     96, Generating NVIDIA GPU code
+         98, #pragma acc loop gang(50176) /* blockIdx.x */
+        103, #pragma acc loop vector(128) /* threadIdx.x */
+        104, #pragma acc loop seq
+     96, Local memory used for j,k
+     98, Loop not fused: no successor loop
+    103, Loop is parallelizable
+    104, Complex loop carried dependence of data_char+((gx*4096)+(i))->x,data_char+((gx*4096)+(i))->y,data_char+((gx*4096)+(i))->z,data_char+((gx*4096)+(i))->w,data_char+((i)+(gy*4096))->x,data_char+((i)+(gy*4096))->y,data_char+((i)+(gy*4096))->z,data_char+((i)+(gy*4096))->w prevents parallelization
+         Loop carried dependence of gpu_distance-> prevents parallelization
+         Loop carried backward dependence of gpu_distance-> prevents vectorization
+         Complex loop carried dependence of gpu_distance-> prevents parallelization
+    136, Generating update self(gpu_distance[:50176])
+    142, Loop not vectorized/parallelized: too deeply nested
+    147, Generating update device(gpu_distance[:50176])
+    151, Generating NVIDIA GPU code
+        153, #pragma acc loop gang(50176) /* blockIdx.x */
+        159, #pragma acc loop vector(128) /* threadIdx.x */
+        164, #pragma acc loop vector(128) /* threadIdx.x */
+        165, #pragma acc loop seq
+        193, #pragma acc loop seq
+        195, #pragma acc loop vector(128) /* threadIdx.x */
+    151, Local memory used for k,j
+         CUDA shared memory used for dist
+    159, Loop is parallelizable
+         Recognized memory zero idiom
+    164, Loop is parallelizable
+    165, Complex loop carried dependence of data_char+((gx*4096)+(i))->x,data_char+((gx*4096)+(i))->y,data_char+((gx*4096)+(i))->z,data_char+((gx*4096)+(i))->w,data_char+((i)+(gy*4096))->x,data_char+((i)+(gy*4096))->y,data_char+((i)+(gy*4096))->z,data_char+((i)+(gy*4096))->w,dist prevents parallelization
+         Loop carried dependence of dist prevents parallelization
+         Loop carried backward dependence of dist prevents vectorization
+    193, Loop carried scalar dependence for stride at line 196,197,200
+         Loop carried reuse of dist prevents parallelization
+         Loop not vectorized/parallelized: not countable
+    195, Loop is parallelizable
+         Loop not vectorized: data dependency
+    218, Generating update self(gpu_distance[:50176])
+nvc++ -acc  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

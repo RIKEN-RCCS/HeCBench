@@ -3,10 +3,9 @@
 #===============================================================================
 
 # Compiler can be set below, or via environment variable
-CC        = nvc++
+CC        = icpx
 OPTIMIZE  = yes
 DEBUG     = no
-SM        = cc70
 LAUNCHER  =
 
 #===============================================================================
@@ -18,6 +17,8 @@ program = vj-cpu vj-gpu
 #===============================================================================
 # Sets Flags
 #===============================================================================
+
+OMP_TARGET_FLAGS += -fiopenmp -fopenmp-targets=spir64 -D__STRICT_ANSI__
 
 # Standard Flags
 CFLAGS := $(EXTRA_CFLAGS) -Wall -I../face-sycl
@@ -52,7 +53,7 @@ main.o: ../face-sycl/main.cpp $(HEADERS)
 	$(CC) $(CFLAGS) -o $@ -c $<
 
 haar-gpu.o: haar.cpp $(HEADERS)
-	$(CC) $(CFLAGS) -DOMP_TARGET -Minfo -mp=gpu -gpu=$(SM) -o $@ -c $<
+	$(CC) $(CFLAGS) -DOMP_TARGET $(OMP_TARGET_FLAGS) -o $@ -c $<
 
 haar-cpu.o: haar.cpp $(HEADERS)
 	$(CC) $(CFLAGS) -o $@ -c $<
@@ -64,7 +65,7 @@ vj-cpu: main.o haar-cpu.o image.o stdio-wrapper.o rectangles.o
 	$(CC) $(CFLAGS) -o $@ $+ 
 
 vj-gpu: main.o haar-gpu.o image.o stdio-wrapper.o rectangles.o
-	$(CC) $(CFLAGS) -mp=gpu -gpu=$(SM) -o $@ $+
+	$(CC) $(CFLAGS) $(OMP_TARGET_FLAGS) -o $@ $+ 
 
 clean:
 	rm -f $(program) *.o Output-cpu.pgm Output-gpu.pgm

@@ -6,8 +6,8 @@
 CC        = nvc++
 OPTIMIZE  = yes
 DEBUG     = no
-SM        = cc70
-LAUNCHER  =
+SM        = cc90
+LAUNCHER = bash -c
 
 #===============================================================================
 # Program name & source code list
@@ -69,6 +69,14 @@ vj-gpu: main.o haar-gpu.o image.o stdio-wrapper.o rectangles.o
 clean:
 	rm -f $(program) *.o Output-cpu.pgm Output-gpu.pgm
 
+include ../include/face-NVIDIA
+
 run: build
-	$(LAUNCHER) ./vj-cpu ../face-cuda/Face.pgm ../face-cuda/info.txt ../face-cuda/class.txt Output-cpu.pgm
-	$(LAUNCHER) ./vj-gpu ../face-cuda/Face.pgm ../face-cuda/info.txt ../face-cuda/class.txt Output-gpu.pgm
+	$(LAUNCHER) "$(COMMAND)"
+
+run_mem: build
+	nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+	$(LAUNCHER) "$(COMMAND)"
+	pkill nvidia-smi
+	../scripts/m.sh
+

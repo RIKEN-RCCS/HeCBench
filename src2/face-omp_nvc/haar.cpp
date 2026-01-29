@@ -19,7 +19,7 @@
 #include <stdio.h>
 #include <assert.h>
 #ifdef OMP_TARGET
-#include <openacc.h>
+#include <omp.h>
 #endif
 #include "haar.h"
 #include "image.h"
@@ -130,8 +130,8 @@ std::vector<MyRect> detectObjects(
   int *d_rectangles_array = rectangles_array;
   int **d_scaled_rectangles_array = scaled_rectangles_array;
 
-#pragma acc data copyin(d_rectangles_array[0:total_nodes*12])		\
-  create(d_scaled_rectangles_array[0:total_nodes*12])
+#pragma omp target data map(to: d_rectangles_array[0:total_nodes*12]) \
+                        map(alloc: d_scaled_rectangles_array[0:total_nodes*12])
 {
 #endif
 
@@ -303,7 +303,7 @@ myCascade* _cascade, MyIntImage* _sum, MyIntImage* _sqsum, int total_nodes)
   int* data = sum->data;
   const int width = sum->width;
 
-#pragma acc parallel loop vector_length(256)
+#pragma omp target teams distribute parallel for thread_limit(256)
   for (int gid = 0; gid < total_nodes; gid++) {
     int idx = gid * 12;
     for (int k = 0; k < 3; k++)
@@ -334,7 +334,7 @@ myCascade* _cascade, MyIntImage* _sum, MyIntImage* _sqsum, int total_nodes)
     }   /* end of k loop */
   }
 
-  #pragma acc update host (d_scaled_rectangles_array[0:total_nodes*12])
+  #pragma omp target update from (d_scaled_rectangles_array[0:total_nodes*12])
 
 #else
   /****************************************
