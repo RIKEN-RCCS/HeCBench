@@ -320,7 +320,7 @@
 | wlcpow | | -- |
 | wordcount | | 7.96 |
 | wsm5 | | -- |
-| wyllie | | -- |
+| wyllie | | 111.26 |
 | xlqc | | -- |
 | xsbench | | 37.67 |
 | zeropoint | | 24.32 |
