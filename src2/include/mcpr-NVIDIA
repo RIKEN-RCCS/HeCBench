@@ -1,0 +1,2 @@
+#COMMAND = time -p ( ./$(program) ../mcpr-cuda/alphas.csv 10 1>log.std 2>log.err ) 2> log.time
+COMMAND = ../mcpr-cuda/prepare_data.sh; time -p ( ./$(program) ../mcpr-cuda/alphas.csv 100  1>log.std 2>log.err ) 2> log.time

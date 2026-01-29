@@ -1,0 +1,1 @@
+COMMAND = time -p ( ./main netflix_test.bin 1> ../log.std 2> ../log.err ; ./main netflix_train.bin 1>> ../log.std 2>> ../log.err ) 2> ../log.time

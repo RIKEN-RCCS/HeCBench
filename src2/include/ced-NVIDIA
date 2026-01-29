@@ -1,0 +1,1 @@
+COMMAND = ../ced-cuda/prepare_data.sh; time -p ( ./$(program) -a 0 -w 10 -r 100 1>log.std 2>log.err ) 2> log.time

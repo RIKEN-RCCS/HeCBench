@@ -1,0 +1,1 @@
+COMMAND = export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./src/hpl-2.3/src/cuda:./lapack_lib/lib64; time -p ( mpirun -n 1 ./src/hpl-2.3/bin/intel64/xhpl 1>log.std 2>log.err ) 2> log.time
