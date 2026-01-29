@@ -1,0 +1,1 @@
+COMMAND = time -p ( ./$(program) noised-bufferfly-20.png denoised.png 20 color 1>log.std 2>log.err ) 2> log.time

@@ -1,0 +1,1 @@
+COMMAND = time -p ( ./main -x 128 -y 128 -z 10 -np 1200000000 1>log.std 2>log.err ) 2> log.time

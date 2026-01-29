@@ -1,0 +1,1 @@
+COMMAND = ../deredundancy-cuda/prepare_data.sh; time -p ( ./$(program) i ../deredundancy-sycl/testData.fasta 1>log.std 2>log.err ) 2> log.time

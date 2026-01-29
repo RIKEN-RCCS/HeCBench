@@ -1,0 +1,2 @@
+#COMMAND = time -p ( ./$(program) sp 1>log.std 2>log.err;./$(program) dp 1>>log.std 2>>log.err ) 2> log.time
+COMMAND = ../xlqc-cuda/prepare_data.sh; export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib/gsl/gsl-nvidia/lib; time -p ( ./$(program) dp 1>log.std 2>log.err ) 2> log.time

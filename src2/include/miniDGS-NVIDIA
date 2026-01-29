@@ -1,0 +1,2 @@
+COMMAND = time -p ( python ../scripts/genhostfile.py ; mpirun --hostfile hosts -n 2 ./MaxwellsGPU3d  Meshes/FS_K01022.neu 1>log.std 2>log.err ) 2>log.time
+

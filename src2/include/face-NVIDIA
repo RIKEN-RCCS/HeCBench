@@ -1,0 +1,1 @@
+COMMAND = ../face-cuda/prepare_data.sh; time -p ( ./vj-cpu Face.pgm info.txt class.txt Output-cpu.pgm 1>log.std 2>log.err;./vj-gpu Face.pgm info.txt class.txt Output-gpu.pgm 1>>log.std 2>>log.err ) 2> log.time

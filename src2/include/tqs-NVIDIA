@@ -1,0 +1,1 @@
+COMMAND = time -p ( ./$(program) -f ../tqs-cuda/input/patternsNP100NB512FB25.txt -q 3200 1>log.std 2>log.err ) 2> log.time

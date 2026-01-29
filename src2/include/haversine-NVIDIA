@@ -1,0 +1,1 @@
+COMMAND = ../haversine-cuda/prepare_data.sh; time -p ( ./$(program) ../haversine-cuda/locations.txt 100 1>log.std 2>log.err ) 2> log.time
