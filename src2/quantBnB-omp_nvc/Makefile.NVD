@@ -3,11 +3,12 @@
 #===============================================================================
 
 # Compiler can be set below, or via environment variable
-CC        = icpx
+CC        = nvc++
 OPTIMIZE  = yes
 DEBUG     = no
 DEVICE    = gpu
-LAUNCHER  =
+SM        = cc90
+LAUNCHER = bash -c
 
 #===============================================================================
 # Program name & source code list
@@ -24,7 +25,7 @@ obj = $(source:.cpp=.o)
 #===============================================================================
 
 # Standard Flags
-CFLAGS := $(EXTRA_CFLAGS) -std=c++17 -Wall -I../quantBnB-cuda
+CFLAGS := $(EXTRA_CFLAGS) -Wall -I../quantBnB-cuda
 
 # Linker Flags
 LDFLAGS = 
@@ -32,7 +33,7 @@ LDFLAGS =
 # Debug Flags
 ifeq ($(DEBUG),yes)
   CFLAGS += -g
-  LDFLAGS  += -g
+  LDFLAGS  += -g 
 endif
 
 # Optimization Flags
@@ -41,9 +42,9 @@ ifeq ($(OPTIMIZE),yes)
 endif
 
 ifeq ($(DEVICE),gpu)
-  CFLAGS +=-fopenacc -fopenacc-targets=spir64 -D__STRICT_ANSI__
+  CFLAGS +=-Minfo -mp=gpu -gpu=$(SM)
 else
-  CFLAGS +=-acc
+  CFLAGS +=
 endif
 #===============================================================================
 # Targets to Build
@@ -58,5 +59,14 @@ $(program): $(obj)
 clean:
 	rm -rf $(program) $(obj)
 
+include ../include/quantBnB-NVIDIA
+
 run: $(program)
-	$(LAUNCHER) ./$(program) 16777216 100
+	$(LAUNCHER) "$(COMMAND)"
+
+run_mem: $(program)
+	nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+	$(LAUNCHER) "$(COMMAND)"
+	pkill nvidia-smi
+	../scripts/m.sh
+

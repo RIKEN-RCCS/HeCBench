@@ -3,10 +3,11 @@
 #===============================================================================
 
 # Compiler can be set below, or via environment variable
-CC        = icpx
+CC        = clang++
 OPTIMIZE  = yes
 DEBUG     = no
 DEVICE    = gpu
+ARCH      = gfx906
 LAUNCHER  =
 
 #===============================================================================
@@ -24,7 +25,7 @@ obj = $(source:.cpp=.o)
 #===============================================================================
 
 # Standard Flags
-CFLAGS := $(EXTRA_CFLAGS) -std=c++17 -Wall -I../quantBnB-cuda
+CFLAGS := $(EXTRA_CFLAGS) -std=c++17 -Wall -I../quantBnB-cuda 
 
 # Linker Flags
 LDFLAGS = 
@@ -41,9 +42,12 @@ ifeq ($(OPTIMIZE),yes)
 endif
 
 ifeq ($(DEVICE),gpu)
-  CFLAGS +=-fopenacc -fopenacc-targets=spir64 -D__STRICT_ANSI__
+  CFLAGS += -target x86_64-pc-linux-gnu \
+          -fopenmp -fopenmp-targets=amdgcn-amd-amdhsa \
+          -Xopenmp-target=amdgcn-amd-amdhsa \
+          -march=$(ARCH)
 else
-  CFLAGS +=-acc
+  CFLAGS +=-fopenmp
 endif
 #===============================================================================
 # Targets to Build

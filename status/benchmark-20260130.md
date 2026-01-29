@@ -247,7 +247,7 @@
 | pso | | -- |
 | qrg | | 8.55 |
 | qtclustering | | -- |
-| quantBnB | | 124.46 |
+| quantBnB | | 125.67 |
 | quicksort | | -- |
 | radixsort | | -- |
 | rainflow | | 30.31 |
