@@ -8,7 +8,7 @@
 | adv | | -- |
 | aes | | -- |
 | affine | | 10.61 |
-| aidw | | 3.53 |
+| aidw | | -- |
 | aligned-types | | 2.32 |
 | all-pairs-distance | | 4.86 |
 | amgmk | | 2.44 |
@@ -46,7 +46,7 @@
 | car | | 6.54 |
 | cbsfil | | 34.93 |
 | ccsd-trpdrv | | 2.20 |
-| ccs | | 2.49 |
+| ccs | | -- |
 | cfd | | 1.11 |
 | chacha20 | | -- |
 | channelShuffle | | 18.78 |
@@ -109,7 +109,7 @@
 | fpc | | -- |
 | fpdc | | -- |
 | fresnel | | 6.61 |
-| frna | | |
+| frna | | -- |
 | fwt | | -- |
 | gabor | | 21.33 |
 | gamma-correction | | 105.93 |
