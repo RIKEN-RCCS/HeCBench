@@ -201,7 +201,7 @@
 | michalewicz | | 51.76 |
 | minibude | | -- |
 | miniFE | | -- |
-| minimap2 | | 0.92 |
+| minimap2 | | -- |
 | minisweep | | 36.23 |
 | miniWeather | | 6.48 |
 | minkowski | | 22.51 |
