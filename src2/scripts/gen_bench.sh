@@ -8,7 +8,8 @@ else
     cd ${1}-sycl
     pwd
     ../scripts/edit_makefile.py -t NVIDIA --command
-    cat Makefile.NVD | sed -e 's/sm_60/sm_90/g' | sed -e 's/sm_70/sm_90/g' > TMPFILE
+    cat Makefile.NVD | sed -E 's/(CUDA\s*=\s*)no/\1yes/' |
+	sed -e 's/sm_60/sm_90/g' | sed -e 's/sm_70/sm_90/g' > TMPFILE
     mv TMPFILE Makefile.NVD
     cd ..
   fi
