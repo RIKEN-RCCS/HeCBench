@@ -1,0 +1,99 @@
+"main.cpp", line 200: error: invalid text in pragma
+  #pragma acc data to: pattern[0:subStrLength], \
+                   ^
+
+"main.cpp", line 200: error: extra text after expected end of preprocessing directive
+  #pragma acc data to: pattern[0:subStrLength], \
+                     ^
+
+"main.cpp", line 230: error: invalid text in pragma
+        #pragma acc parallel teams num_teams(workGroupCount) thread_limit(LOCAL_SIZE) 
+                             ^
+
+"main.cpp", line 230: error: extra text after expected end of preprocessing directive
+        #pragma acc parallel teams num_teams(workGroupCount) thread_limit(LOCAL_SIZE) 
+                                   ^
+
+"main.cpp", line 236: error: identifier "omp_get_thread_num" is undefined
+            int localIdx = omp_get_thread_num();
+                           ^
+
+"main.cpp", line 237: error: identifier "omp_get_vector" is undefined
+            int localSize = omp_get_vector();
+                            ^
+
+"main.cpp", line 238: error: identifier "omp_get_team_num" is undefined
+            int groupIdx = omp_get_team_num(); 
+                           ^
+
+"main.cpp", line 281: error: invalid text in pragma
+      #pragma acc update from (resultCount[0:workGroupCount])
+                         ^
+
+"main.cpp", line 281: error: OpenACC data clause expected
+      #pragma acc update from (resultCount[0:workGroupCount])
+                         ^
+
+"main.cpp", line 281: error: extra text after expected end of preprocessing directive
+      #pragma acc update from (resultCount[0:workGroupCount])
+                              ^
+
+"main.cpp", line 282: error: invalid text in pragma
+      #pragma acc update from (result[0:textLength - subStrLength + 1])
+                         ^
+
+"main.cpp", line 282: error: OpenACC data clause expected
+      #pragma acc update from (result[0:textLength - subStrLength + 1])
+                         ^
+
+"main.cpp", line 282: error: extra text after expected end of preprocessing directive
+      #pragma acc update from (result[0:textLength - subStrLength + 1])
+                              ^
+
+"main.cpp", line 306: error: invalid text in pragma
+        #pragma acc parallel teams num_teams(workGroupCount) thread_limit(LOCAL_SIZE) 
+                             ^
+
+"main.cpp", line 306: error: extra text after expected end of preprocessing directive
+        #pragma acc parallel teams num_teams(workGroupCount) thread_limit(LOCAL_SIZE) 
+                                   ^
+
+"main.cpp", line 320: error: identifier "omp_get_thread_num" is undefined
+            int localIdx = omp_get_thread_num();
+                           ^
+
+"main.cpp", line 321: error: identifier "omp_get_vector" is undefined
+            int localSize = omp_get_vector();
+                            ^
+
+"main.cpp", line 322: error: identifier "omp_get_team_num" is undefined
+            int groupIdx = omp_get_team_num(); 
+                           ^
+
+"main.cpp", line 453: error: invalid text in pragma
+      #pragma acc update from (resultCount[0:workGroupCount])
+                         ^
+
+"main.cpp", line 453: error: OpenACC data clause expected
+      #pragma acc update from (resultCount[0:workGroupCount])
+                         ^
+
+"main.cpp", line 453: error: extra text after expected end of preprocessing directive
+      #pragma acc update from (resultCount[0:workGroupCount])
+                              ^
+
+"main.cpp", line 454: error: invalid text in pragma
+      #pragma acc update from (result[0:textLength - subStrLength + 1])
+                         ^
+
+"main.cpp", line 454: error: OpenACC data clause expected
+      #pragma acc update from (result[0:textLength - subStrLength + 1])
+                         ^
+
+"main.cpp", line 454: error: extra text after expected end of preprocessing directive
+      #pragma acc update from (result[0:textLength - subStrLength + 1])
+                              ^
+
+24 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

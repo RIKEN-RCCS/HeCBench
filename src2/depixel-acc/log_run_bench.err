@@ -1,0 +1,51 @@
+"kernels.h", line 59: error: invalid text in pragma
+    #pragma acc parallel loop thread_limit(nthreads)
+                              ^
+
+"kernels.h", line 59: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop thread_limit(nthreads)
+                                          ^
+
+"kernels.h", line 127: error: invalid text in pragma
+    #pragma acc parallel loop thread_limit(nthreads)
+                              ^
+
+"kernels.h", line 127: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop thread_limit(nthreads)
+                                          ^
+
+"main.cpp", line 36: error: invalid text in pragma
+    #pragma acc parallel data map (alloc: img[0:size], tmp[0:size]) \
+                         ^
+
+"main.cpp", line 36: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel data map (alloc: img[0:size], tmp[0:size]) \
+                              ^
+
+"main.cpp", line 47: error: invalid text in pragma
+        #pragma acc update to (img[0:size])
+                           ^
+
+"main.cpp", line 47: error: OpenACC data clause expected
+        #pragma acc update to (img[0:size])
+                           ^
+
+"main.cpp", line 47: error: extra text after expected end of preprocessing directive
+        #pragma acc update to (img[0:size])
+                              ^
+
+"main.cpp", line 56: error: invalid text in pragma
+        #pragma acc update from (out[0:size])
+                           ^
+
+"main.cpp", line 56: error: OpenACC data clause expected
+        #pragma acc update from (out[0:size])
+                           ^
+
+"main.cpp", line 56: error: extra text after expected end of preprocessing directive
+        #pragma acc update from (out[0:size])
+                                ^
+
+12 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

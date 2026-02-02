@@ -1,0 +1,153 @@
+"pcr_kernels.cpp", line 36: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(szTeams) thread_limit(szThreads)
+                         ^
+
+"pcr_kernels.cpp", line 36: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(szTeams) thread_limit(szThreads)
+                               ^
+
+"pcr_kernels.cpp", line 41: error: identifier "omp_get_thread_num" is undefined
+        int thid = omp_get_thread_num();
+                   ^
+
+"pcr_kernels.cpp", line 42: error: identifier "omp_get_team_num" is undefined
+        int blid = omp_get_team_num();
+                   ^
+
+"pcr_kernels.cpp", line 131: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(szTeams) thread_limit(szThreads)
+                         ^
+
+"pcr_kernels.cpp", line 131: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(szTeams) thread_limit(szThreads)
+                               ^
+
+"pcr_kernels.cpp", line 136: error: identifier "omp_get_thread_num" is undefined
+        int thid = omp_get_thread_num();
+                   ^
+
+"pcr_kernels.cpp", line 137: error: identifier "omp_get_team_num" is undefined
+        int blid = omp_get_team_num();
+                   ^
+
+"pcr_small_systems.h", line 35: error: invalid text in pragma
+    #pragma acc data to: a[0:mem_size], \
+                     ^
+
+"pcr_small_systems.h", line 35: error: extra text after expected end of preprocessing directive
+    #pragma acc data to: a[0:mem_size], \
+                       ^
+
+"pcr_small_systems.h", line 33: warning: variable "mem_size" was declared but never referenced [declared_but_not_referenced]
+    const unsigned int mem_size = num_systems * system_size;
+                       ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"cyclic_kernels.cpp", line 32: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(szTeams) thread_limit(szThreads)
+                         ^
+
+"cyclic_kernels.cpp", line 32: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(szTeams) thread_limit(szThreads)
+                               ^
+
+"cyclic_kernels.cpp", line 37: error: identifier "omp_get_thread_num" is undefined
+        int thid = omp_get_thread_num();
+                   ^
+
+"cyclic_kernels.cpp", line 38: error: identifier "omp_get_team_num" is undefined
+        int blid = omp_get_team_num();
+                   ^
+
+"cyclic_kernels.cpp", line 143: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(szTeams) thread_limit(szThreads)
+                         ^
+
+"cyclic_kernels.cpp", line 143: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(szTeams) thread_limit(szThreads)
+                               ^
+
+"cyclic_kernels.cpp", line 149: error: identifier "omp_get_thread_num" is undefined
+        int thid = omp_get_thread_num();
+                   ^
+
+"cyclic_kernels.cpp", line 150: error: identifier "omp_get_team_num" is undefined
+        int blid = omp_get_team_num();
+                   ^
+
+"cyclic_small_systems.h", line 36: error: invalid text in pragma
+    #pragma acc data to: a[0:mem_size], \
+                     ^
+
+"cyclic_small_systems.h", line 36: error: extra text after expected end of preprocessing directive
+    #pragma acc data to: a[0:mem_size], \
+                       ^
+
+"cyclic_small_systems.h", line 33: warning: variable "mem_size" was declared but never referenced [declared_but_not_referenced]
+    const unsigned int mem_size = num_systems * system_size;
+                       ^
+
+"sweep_kernels.cpp", line 32: error: invalid text in pragma
+    #pragma acc parallel loop num_teams(szTeams) thread_limit(szThreads)
+                              ^
+
+"sweep_kernels.cpp", line 32: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop num_teams(szTeams) thread_limit(szThreads)
+                                       ^
+
+"sweep_kernels.cpp", line 119: error: invalid text in pragma
+  #pragma acc parallel loop num_teams(szTeams) thread_limit(szThreads)
+                            ^
+
+"sweep_kernels.cpp", line 119: error: extra text after expected end of preprocessing directive
+  #pragma acc parallel loop num_teams(szTeams) thread_limit(szThreads)
+                                     ^
+
+"sweep_kernels.cpp", line 239: error: invalid text in pragma
+  #pragma acc parallel loop num_teams(szTeams) thread_limit(szThreads)
+                            ^
+
+"sweep_kernels.cpp", line 239: error: extra text after expected end of preprocessing directive
+  #pragma acc parallel loop num_teams(szTeams) thread_limit(szThreads)
+                                     ^
+
+"sweep_kernels.cpp", line 322: error: invalid text in pragma
+  #pragma acc parallel teams num_teams(szTeam) thread_limit(TRANSPOSE_BLOCK_DIM * TRANSPOSE_BLOCK_DIM)
+                       ^
+
+"sweep_kernels.cpp", line 322: error: extra text after expected end of preprocessing directive
+  #pragma acc parallel teams num_teams(szTeam) thread_limit(TRANSPOSE_BLOCK_DIM * TRANSPOSE_BLOCK_DIM)
+                             ^
+
+"sweep_kernels.cpp", line 327: error: identifier "omp_get_team_num" is undefined
+        int blockIdxx = omp_get_team_num() % szTeamX;
+                        ^
+
+"sweep_kernels.cpp", line 330: error: identifier "omp_get_thread_num" is undefined
+        int threadIdxx = omp_get_thread_num() % TRANSPOSE_BLOCK_DIM;
+                         ^
+
+"sweep_small_systems.h", line 126: error: invalid text in pragma
+    #pragma acc data to: a[0:mem_size], \
+                     ^
+
+"sweep_small_systems.h", line 126: error: extra text after expected end of preprocessing directive
+    #pragma acc data to: a[0:mem_size], \
+                       ^
+
+"sweep_small_systems.h", line 159: error: invalid text in pragma
+    #pragma acc update from (x[0:mem_size])
+                       ^
+
+"sweep_small_systems.h", line 159: error: OpenACC data clause expected
+    #pragma acc update from (x[0:mem_size])
+                       ^
+
+"sweep_small_systems.h", line 159: error: extra text after expected end of preprocessing directive
+    #pragma acc update from (x[0:mem_size])
+                            ^
+
+35 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:59: main.o] Error 2
+timeout was set to  600

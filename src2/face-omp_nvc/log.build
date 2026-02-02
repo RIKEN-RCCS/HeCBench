@@ -1,0 +1,75 @@
+nvc++  -Wall -I../face-sycl -O3 -o main.o -c ../face-sycl/main.cpp
+nvc++  -Wall -I../face-sycl -O3 -o haar-cpu.o -c haar.cpp
+nvc++  -Wall -I../face-sycl -O3 -o image.o -c ../face-sycl/image.cpp
+"../face-sycl/image.cpp", line 159: warning: pointless comparison of unsigned integer with a negative constant [unsigned_compare_with_negative]
+    while ((ch = fgetc(in_file)) != EOF && isspace(ch));
+                                 ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"../face-sycl/image.cpp", line 167: warning: pointless comparison of unsigned integer with a negative constant [unsigned_compare_with_negative]
+      while ((ch = fgetc(in_file)) != EOF && isspace(ch));
+                                   ^
+
+"../face-sycl/image.cpp", line 121: warning: variable "version" was declared but never referenced [declared_but_not_referenced]
+    char version[3];
+         ^
+
+nvc++  -Wall -I../face-sycl -O3 -o stdio-wrapper.o -c ../face-sycl/stdio-wrapper.cpp
+nvc++  -Wall -I../face-sycl -O3 -o rectangles.o -c ../face-sycl/rectangles.cpp
+nvc++  -Wall -I../face-sycl -O3 -o vj-cpu main.o haar-cpu.o image.o stdio-wrapper.o rectangles.o 
+nvc++  -Wall -I../face-sycl -O3 -DOMP_TARGET -Minfo -mp=gpu -gpu=cc90 -o haar-gpu.o -c haar.cpp
+detectObjects(MyImage*, MySize, MySize, myCascade*, float, int, int):
+    135, Generating map(alloc:d_scaled_rectangles_array[:total_nodes*12]) 
+         Generating map(to:d_rectangles_array[:total_nodes*12]) 
+         624, Loop not fused: no successor loop
+         629, Loop not fused: no successor loop
+              Loop not vectorized: data dependency
+              Loop not vectorized: recurrence
+              Loop unrolled 2 times
+         675, Loop not fused: complex flow graph
+         681, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+         624, Invariant if transformation
+         629, Invariant if transformation
+         139, Loop not vectorized/parallelized: too deeply nested
+         577, Loop not vectorized/parallelized: too deeply nested
+         587, Loop not fused: no successor loop
+              Loop not vectorized/parallelized: potential early exits
+              Loop not vectorized: may not be beneficial for target
+              Loop not vectorized: unknown
+int_sqrt(unsigned int):
+    249, Loop not vectorized: unknown
+setImageForCascadeClassifier(int*, int**, myCascade*, MyIntImage*, MyIntImage*, int):
+    304, #omp target teams distribute parallel for thread_limit(256)
+        304, Generating "nvkernel__Z28setImageForCascadeClassifierPiPS_P9myCascadeP10MyIntImageS4_i_F1L304_2" GPU kernel
+        307, Loop parallelized across teams and threads(128), schedule(static)
+    309, Loop not vectorized/parallelized: loop count too small
+    386, Generating update from(d_scaled_rectangles_array[:total_nodes*12])
+runCascadeClassifier(myCascade*, MyPoint, int):
+         249, Loop not fused: no successor loop
+              Loop not vectorized: unknown
+    485, Loop not vectorized/parallelized: potential early exits
+    498, Loop not vectorized: may not be beneficial for target
+ScaleImage_Invoker(myCascade*, float, int, int, std::vector<MyRect, std::allocator<MyRect>>&):
+         464, Loop not fused: no successor loop
+              Loop not vectorized: unknown
+         485, Loop not vectorized/parallelized: potential early exits
+         498, Loop not vectorized: may not be beneficial for target
+         577, Loop not vectorized/parallelized: too deeply nested
+integralImages(MyImage*, MyIntImage*, MyIntImage*):
+    624, Invariant if transformation
+         Loop not fused: no successor loop
+    629, Invariant if transformation
+         Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop not vectorized: recurrence
+         Loop unrolled 2 times
+nearestNeighbor(MyImage*, MyImage*):
+    681, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+readTextClassifier(char const*, char const*):
+    735, Loop not vectorized/parallelized: contains call
+    784, Loop not vectorized/parallelized: too deeply nested
+    790, Loop not vectorized/parallelized: potential early exits
+nvc++  -Wall -I../face-sycl -O3 -mp=gpu -gpu=cc90 -o vj-gpu main.o haar-gpu.o image.o stdio-wrapper.o rectangles.o

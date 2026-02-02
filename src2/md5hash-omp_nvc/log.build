@@ -1,0 +1,45 @@
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c MD5Hash.cpp -o MD5Hash.o
+md5_2words(unsigned int*, unsigned int, unsigned int*):
+     54, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+FindKeyspaceSize(int, int):
+    184, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+    186, Loop not vectorized/parallelized: potential early exits
+IndexToKey(unsigned int, int, int, unsigned char*):
+    220, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+AsHex[abi:cxx11](unsigned char*, int):
+    269, Loop not vectorized/parallelized: potential early exits
+FindKeyWithDigest_CPU(unsigned int const*, int, int, int*, unsigned char*, unsigned int*):
+         186, Loop not vectorized/parallelized: potential early exits
+    310, Loop not vectorized/parallelized: contains call
+    321, Loop versioned for possible aliasing
+         Generated vector simd code for rerolled loop
+         Loop unrolled 7 times (completely unrolled)
+FindKeyWithDigest_GPU(unsigned int const*, int, int, int*, unsigned char*, unsigned int*):
+         186, Loop not vectorized/parallelized: potential early exits
+         398, Rerolled basic block into loop
+    379, #omp target teams distribute parallel for simd
+        379, Generating "nvkernel__Z21FindKeyWithDigest_GPUPKjiiPiPhPj_F1L379_2" GPU kernel
+        381, Loop parallelized across teams and threads(128), schedule(static)
+    379, Generating map(from:foundDigest[:4],foundKey[:8],foundIndex[:1]) 
+    387, Loop not vectorized/parallelized: potential early exits
+    398, Loop versioned for possible aliasing
+         Generated vector simd code for rerolled loop
+         Loop unrolled 7 times (completely unrolled)
+main:
+    319, Rerolled basic block into loop
+         186, Loop not vectorized/parallelized: potential early exits
+         305, Loop not vectorized/parallelized: potential early exits
+         310, Loop not vectorized/parallelized: contains call
+         319, Generated vector simd code for rerolled loop
+         445, Loop not vectorized/parallelized: too deeply nested
+         483, Loop not vectorized/parallelized: too deeply nested
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      9, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000l>>::_S_gcd(long, long):
+      9, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 MD5Hash.o -o MD5Hash 

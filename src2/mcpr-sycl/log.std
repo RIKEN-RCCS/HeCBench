@@ -1,0 +1,6 @@
+Average execution time of compute_probs kernel: 0.005561 (s)
+PASS
+Average execution time of compute_probs_unitStrides kernel: 0.003884 (s)
+PASS
+Average execution time of compute_probs_unitStrides_sharedMem kernel: 0.006675 (s)
+PASS

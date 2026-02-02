@@ -1,0 +1,59 @@
+"main.cpp", line 348: warning: variable "t" was set but never used [set_but_not_used]
+            int t;
+                ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+LCG_random(unsigned int*):
+     63, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+NVC++-W-0155-Compiler failed to translate accelerator region (see -Minfo messages): Missing branch target block (main.cpp: 201)
+main:
+    125, Loop not vectorized/parallelized: potential early exits
+    126, Loop not vectorized/parallelized: potential early exits
+    127, Loop not vectorized/parallelized: potential early exits
+    128, Loop not vectorized/parallelized: potential early exits
+    139, Loop not vectorized/parallelized: potential early exits
+    153, Loop not vectorized/parallelized: contains call
+          89, Loop not vectorized/parallelized: not countable
+    188, Loop not vectorized/parallelized: contains call
+    192, Generating update to(climbs[:],best[:])
+    195, #omp target teams num_teams(restarts) thread_limit(threads)
+        181, Generating map(alloc:glob[:glob_size]) 
+             Generating map(to:posx[:cities],posy[:cities]) 
+             Generating map(alloc:climbs[:],best[:]) 
+        195, Generating "nvkernel_main_F1L195_2" GPU kernel
+        201, #omp parallel
+          212, Barrier
+          224, Barrier
+          229, Barrier
+          255, Barrier
+          274, Barrier
+          281, Barrier
+          288, Barrier
+          299, Barrier
+          305, Barrier
+          311, Barrier
+          323, Barrier
+          331, Barrier
+          339, Barrier
+          344, Barrier
+        217, Team private (buf_s,py_s,px_s,bf_s) located in CUDA shared memory
+    195, Generating implicit map(tofrom:climbs[:],best[:]) 
+    210, Loop not vectorized/parallelized: not countable
+    211, Loop not vectorized/parallelized: not countable
+    216, Loop not vectorized: data dependency
+    227, Loop not vectorized/parallelized: too deeply nested
+    228, Loop not vectorized/parallelized: not countable
+    248, Loop not vectorized/parallelized: not countable
+    259, Loop not vectorized: unknown
+    291, Loop not vectorized/parallelized: contains call
+    316, Loop not vectorized/parallelized: not countable
+    327, Loop not vectorized/parallelized: not countable
+    334, Loop not vectorized/parallelized: contains call
+    350, Loop not vectorized/parallelized: contains a parallel region
+    366, Generating update from(climbs[:],best[:])
+NVC++-F-0704-Compilation aborted due to previous errors. (main.cpp)
+NVC++/arm Linux 25.9-0: compilation aborted
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

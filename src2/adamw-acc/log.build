@@ -1,0 +1,114 @@
+nvc++ -acc  -Wall -I../adam-cuda/  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+q_mapping(float const*, float const*, float):
+      7, include "kernels.h"
+          88, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          97, Loop not vectorized/parallelized: not countable
+main:
+         531, Loop not vectorized: data dependency
+     35, Loop not vectorized/parallelized: potential early exits
+     42, Loop not vectorized/parallelized: potential early exits
+     50, Generating copyin(m[:vector_size],v[:vector_size],v_qscale[:size],m_qscale[:size],g[:size],p[:size]) [if not already present]
+          48, Loop not vectorized/parallelized: potential early exits
+          66, Loop not vectorized/parallelized: too deeply nested
+         120, Loop not vectorized/parallelized: not countable
+         121, Loop not vectorized/parallelized: not countable
+         125, Loop not vectorized/parallelized: not countable
+         126, Loop not vectorized/parallelized: not countable
+    120, Generating update self(p[:size])
+    121, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+    129, Loop not vectorized/parallelized: contains call
+void fused_4bit_kernel<float, 64>(int, int, float*, float const*, float*, float*, signed char*, signed char*, float, float, float, float, float, float, long, float, float, float, float, float, float):
+      7, include "kernels.h"
+         134, Generating implicit firstprivate(numTeams)
+              Generating NVIDIA GPU code
+              97, #pragma acc loop seq
+             136, #pragma acc loop gang(numTeams) /* blockIdx.x */
+             144, #pragma acc loop vector(numThreads) /* threadIdx.x */
+                  Generating reduction(max:absmax_sq,absmax_exp)
+             210, #pragma acc loop vector(numThreads) /* threadIdx.x */
+         134, CUDA shared memory used for local_sq_left,local_exp_right,local_exp_left
+              Local memory used for g2,p2
+              CUDA shared memory used for local_sq_right
+              Generating implicit copyin(_sq_qmap[:],_exp_qmap[:],_sq_qmidpt[:]) [if not already present]
+              Generating implicit copy(p[:],exp_qscale[:numTeams],exp[:],sq_qscale[:numTeams],sq[:]) [if not already present]
+              Generating implicit copyin(_exp_qmidpt[:],g) [if not already present]
+         144, Loop is parallelizable
+              Generating implicit firstprivate(step_size,weight_decay_update,total_size,eps,resid_beta1,beta1,correction2_sqrt,beta2,resid_beta2)
+              Loop not vectorized: data dependency
+         210, Loop is parallelizable
+          97, Loop carried scalar dependence for .inl_low_681 at line 97,106
+              Scalar last value needed after loop for .inl_low_681 at line 107,108
+              Loop carried scalar dependence for .inl_high_682 at line 97,106
+              Loop not vectorized/parallelized: not countable
+          97, Loop carried scalar dependence for .inl_low_688 at line 97,106
+              Scalar last value needed after loop for .inl_low_688 at line 107,108
+              Loop carried scalar dependence for .inl_high_689 at line 97,106
+              Loop not vectorized/parallelized: not countable
+          97, Loop carried scalar dependence for .inl_low_695 at line 97,106
+              Scalar last value needed after loop for .inl_low_695 at line 107,108
+              Loop carried scalar dependence for .inl_high_696 at line 97,106
+              Loop not vectorized/parallelized: not countable
+          97, Loop carried scalar dependence for .inl_low_702 at line 97,106
+              Scalar last value needed after loop for .inl_low_702 at line 107,108
+              Loop carried scalar dependence for .inl_high_703 at line 97,106
+              Loop not vectorized/parallelized: not countable
+void reference<float, 64>(int, float*, float const*, float*, float*, signed char*, signed char*, float, float, float, float, float, float, long, float, float, float, float, float, float):
+      8, include "reference.h"
+          48, Loop not vectorized/parallelized: potential early exits
+          97, Loop not vectorized/parallelized: not countable
+          97, Loop not vectorized/parallelized: not countable
+          97, Loop not vectorized/parallelized: not countable
+          97, Loop not vectorized/parallelized: not countable
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::mersenne_twister_engine(unsigned long):
+         330, Loop not vectorized: data dependency
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::mersenne_twister_engine(unsigned long):
+         531, Loop not vectorized: data dependency
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::seed(unsigned long):
+      5, include "random"
+          51, include "random.tcc"
+              330, Loop not vectorized: data dependency
+      7, include "kernels.h"
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::operator()():
+         401, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+         409, Loop not vectorized: data dependency
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::_M_gen_rand():
+      5, include "random"
+          51, include "random.tcc"
+              401, Loop not fused: different loop trip count
+                   Generated vector simd code for the loop
+              409, Loop not vectorized: data dependency
+      7, include "kernels.h"
+float std::uniform_real_distribution<float>::operator()<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&):
+        1870, Loop not fused: function call before adjacent loop
+              Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+float std::uniform_real_distribution<float>::operator()<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&, std::uniform_real_distribution<float>::param_type const&):
+      5, include "random"
+          51, include "random.tcc"
+      7, include "kernels.h"
+         189, Loop not fused: function call before adjacent loop
+              Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+std::__detail::_Adaptor<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>, float>::operator()():
+        3364, Loop not fused: function call before adjacent loop
+        3366, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      8, include "reference.h"
+float std::generate_canonical<float, 24ul, std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&):
+      5, include "random"
+          51, include "random.tcc"
+             3364, Loop not fused: function call before adjacent loop
+      7, include "kernels.h"
+         456, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+nvc++ -acc  -Wall -I../adam-cuda/  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

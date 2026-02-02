@@ -1,0 +1,37 @@
+"main.cpp", line 127: error: invalid text in pragma
+      #pragma acc parallel teams num_teams(numTeams) thread_limit(blockSize)
+                           ^
+
+"main.cpp", line 127: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel teams num_teams(numTeams) thread_limit(blockSize)
+                                 ^
+
+"main.cpp", line 132: error: identifier "omp_get_thread_num" is undefined
+          int lid = omp_get_thread_num();
+                    ^
+
+"main.cpp", line 133: error: identifier "omp_get_team_num" is undefined
+          int gidx = omp_get_team_num() % uiBlockWidth;
+                     ^
+
+"main.cpp", line 120: warning: variable "numTeams" was declared but never referenced [declared_but_not_referenced]
+    const int numTeams = uiHeight * uiBlockWidth;
+              ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"main.cpp", line 121: warning: variable "blockSize" was declared but never referenced [declared_but_not_referenced]
+    const int blockSize = iRadiusAligned + uiNumOutputPix + iRadius;
+              ^
+
+"main.cpp", line 254: error: invalid text in pragma
+    #pragma acc data to: uiInput[0:szBuff]) \
+                     ^
+
+"main.cpp", line 254: error: extra text after expected end of preprocessing directive
+    #pragma acc data to: uiInput[0:szBuff]) \
+                       ^
+
+6 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:60: main.o] Error 2
+timeout was set to  600

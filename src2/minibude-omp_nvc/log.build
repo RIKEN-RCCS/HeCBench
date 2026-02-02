@@ -1,0 +1,265 @@
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+printTimings(Params const&, double):
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+loadParameters(std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>> const&):
+         690, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    196, Loop not vectorized/parallelized: potential early exits
+runKernel(Params):
+    233, Generating map(to:ligand[:params->natlig],forcefield[:params->ntypes]) 
+         Generating map(from:results[:params->nposes]) 
+         Generating map(to:transforms_0[:params->nposes],transforms_1[:params->nposes],transforms_2[:params->nposes],transforms_3[:params->nposes],transforms_5[:params->nposes],transforms_4[:params->nposes],protein[:params->natpro]) 
+    259, Loop not vectorized/parallelized: contains call
+main:
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    326, Loop not vectorized/parallelized: potential early exits
+         616, Loop not vectorized/parallelized: not countable
+                   616, Loop not vectorized/parallelized: not countable
+loadParameters(std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>> const&)::'lambda'(unsigned long&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, std::initializer_list<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>> const&, std::function<void (std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>)> const&)::operator()(unsigned long&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, std::initializer_list<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>> const&, std::function<void (std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>)> const&) const:
+         616, Loop not vectorized/parallelized: not countable
+    132, Loop not vectorized/parallelized: potential early exits
+         616, Loop not vectorized/parallelized: not countable
+float* std::__uninitialized_default_n_1<true>::__uninit_default_n<float*, unsigned long>(float*, unsigned long):
+        1149, Recognized memory set idiom
+Atom* std::__uninitialized_default_n_1<true>::__uninit_default_n<Atom*, unsigned long>(Atom*, unsigned long):
+        1149, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+FFParams* std::__uninitialized_default_n_1<true>::__uninit_default_n<FFParams*, unsigned long>(FFParams*, unsigned long):
+        1149, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+std::char_traits<char>::length(char const*):
+         171, Loop not vectorized/parallelized: not countable
+std::vector<Atom, std::allocator<Atom>>::_M_default_initialize(unsigned long):
+         704, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+std::vector<FFParams, std::allocator<FFParams>>::_M_default_initialize(unsigned long):
+         704, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+std::vector<float, std::allocator<float>>::_M_default_initialize(unsigned long):
+         704, Recognized memory set idiom
+void std::_Destroy_aux<false>::__destroy<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*):
+      2, include "memory"
+          10, include "memory"
+               65, include "stl_construct.h"
+                   162, Loop not vectorized/parallelized: contains call
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::operator=(char const*):
+        1459, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::append(char const*):
+         397, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::assign(char const*):
+         397, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::insert(unsigned long, char const*):
+         397, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string<std::allocator<char>>(char const*, std::allocator<char> const&):
+         397, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string<std::allocator<char>>(char const*, std::allocator<char> const&):
+         536, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+__gnu_cxx::char_traits<char>::length(char const*):
+      5, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                        171, Loop not vectorized/parallelized: not countable
+std::__cxx11::to_string(unsigned long):
+      5, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+          58, Loop not vectorized/parallelized: potential early exits
+                    84, Loop not vectorized/parallelized: not countable
+unsigned int std::__detail::__to_chars_len<unsigned long>(unsigned long, int):
+      5, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    42, include "ios_base.h"
+                         41, include "locale_classes.h"
+                              40, include "string"
+                                   55, include "basic_string.h"
+                                      6609, include "charconv.h"
+                                             56, Loop not vectorized/parallelized: potential early exits
+void std::__detail::__to_chars_10_impl<unsigned long>(char*, unsigned int, unsigned long):
+      5, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    42, include "ios_base.h"
+                         41, include "locale_classes.h"
+                              40, include "string"
+                                   55, include "basic_string.h"
+                                      6609, include "charconv.h"
+                                             84, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> std::operator+<char, std::char_traits<char>, std::allocator<char>>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, char const*):
+        1258, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> std::operator+<char, std::char_traits<char>, std::allocator<char>>(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>&&):
+      5, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    42, include "ios_base.h"
+                         41, include "locale_classes.h"
+                              40, include "string"
+                                   55, include "basic_string.h"
+        1728, Loop not vectorized/parallelized: not countable
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&, char const*):
+         397, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const* std::find<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+      7, include "functional"
+          65, include "stl_algo.h"
+                  2117, Loop not vectorized/parallelized: potential early exits
+Atom* std::__copy_move_a<false, __gnu_cxx::__normal_iterator<Atom const*, std::vector<Atom, std::allocator<Atom>>>, Atom*>(__gnu_cxx::__normal_iterator<Atom const*, std::vector<Atom, std::allocator<Atom>>>, __gnu_cxx::__normal_iterator<Atom const*, std::vector<Atom, std::allocator<Atom>>>, Atom*):
+      5, include "iostream"
+      7, include "functional"
+FFParams* std::__copy_move_a<false, __gnu_cxx::__normal_iterator<FFParams const*, std::vector<FFParams, std::allocator<FFParams>>>, FFParams*>(__gnu_cxx::__normal_iterator<FFParams const*, std::vector<FFParams, std::allocator<FFParams>>>, __gnu_cxx::__normal_iterator<FFParams const*, std::vector<FFParams, std::allocator<FFParams>>>, FFParams*):
+      5, include "iostream"
+      7, include "functional"
+float* std::__uninitialized_default_n_a<float*, unsigned long, float>(float*, unsigned long, std::allocator<float>&):
+         638, Recognized memory set idiom
+float* std::__uninitialized_default_n<float*, unsigned long>(float*, unsigned long):
+         603, Recognized memory set idiom
+float* std::fill_n<float*, unsigned long, float>(float*, unsigned long, float const&):
+        1120, Recognized memory set idiom
+float* std::__fill_n_a<float*, unsigned long, float>(float*, unsigned long, float const&, std::random_access_iterator_tag):
+         969, Recognized memory set idiom
+void std::__fill_a<float*, float>(float*, float*, float const&):
+         923, Recognized memory set idiom
+__gnu_cxx::__enable_if<std::__is_scalar<float>::__value, void>::__type std::__fill_a1<float*, float>(float*, float*, float const&):
+      1, include "cmath"
+          17, include "cmath"
+             1935, include "specfun.h"
+                    45, include "stl_algobase.h"
+                        923, Recognized memory set idiom
+      5, include "iostream"
+      7, include "functional"
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const* std::__find_if<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const*, __gnu_cxx::__ops::_Iter_equals_val<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const>>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const*, __gnu_cxx::__ops::_Iter_equals_val<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const>):
+        2070, Loop not vectorized/parallelized: potential early exits
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const* std::__find_if<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const*, __gnu_cxx::__ops::_Iter_equals_val<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const>>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const*, __gnu_cxx::__ops::_Iter_equals_val<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const>, std::random_access_iterator_tag):
+      1, include "cmath"
+          17, include "cmath"
+             1935, include "specfun.h"
+                    45, include "stl_algobase.h"
+                       2070, Loop not vectorized/parallelized: potential early exits
+      5, include "iostream"
+      7, include "functional"
+void std::_Destroy<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*):
+      2, include "memory"
+          10, include "memory"
+               65, include "stl_construct.h"
+      4, include "chrono"
+std::enable_if<std::is_invocable_r_v, void>::type std::__invoke_r<void, std::_Bind<loadParameters(std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>> const&)::'lambda'(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, unsigned long&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&) (std::_Placeholder<1>, std::reference_wrapper<unsigned long>, char const*)>&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>(std::_Bind<loadParameters(std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>> const&)::'lambda'(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, unsigned long&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&) (std::_Placeholder<1>, std::reference_wrapper<unsigned long>, char const*)>&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>&&):
+      2, include "memory"
+          10, include "memory"
+      4, include "chrono"
+std::tuple_element<0ul, std::tuple<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>&&>>::type&& std::get<0ul, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>&&>(std::tuple<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>&&>&&):
+      2, include "memory"
+          10, include "memory"
+      4, include "chrono"
+void std::__invoke_impl<void, loadParameters(std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>> const&)::'lambda'(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, unsigned long&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&)&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, unsigned long&, char const*&>(std::__invoke_other, loadParameters(std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>> const&)::'lambda'(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, unsigned long&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&)&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>&&, unsigned long&, char const*&):
+         536, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> std::operator+<char, std::char_traits<char>, std::allocator<char>>(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+      5, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    42, include "ios_base.h"
+                         41, include "locale_classes.h"
+                              40, include "string"
+      7, include "functional"
+         397, Loop not vectorized/parallelized: not countable
+Atom* std::__uninitialized_default_n_a<Atom*, unsigned long, Atom>(Atom*, unsigned long, std::allocator<Atom>&):
+         638, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+Atom* std::__uninitialized_default_n<Atom*, unsigned long>(Atom*, unsigned long):
+         603, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+Atom* std::fill_n<Atom*, unsigned long, Atom>(Atom*, unsigned long, Atom const&):
+        1120, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+Atom* std::__fill_n_a<Atom*, unsigned long, Atom>(Atom*, unsigned long, Atom const&, std::random_access_iterator_tag):
+         969, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+void std::__fill_a<Atom*, Atom>(Atom*, Atom*, Atom const&):
+         911, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+__gnu_cxx::__enable_if<!std::__is_scalar<Atom>::__value, void>::__type std::__fill_a1<Atom*, Atom>(Atom*, Atom*, Atom const&):
+      1, include "cmath"
+          17, include "cmath"
+             1935, include "specfun.h"
+                    45, include "stl_algobase.h"
+                        911, Loop not vectorized: data dependency
+                             Loop unrolled 4 times
+      5, include "iostream"
+      7, include "functional"
+FFParams* std::__uninitialized_default_n_a<FFParams*, unsigned long, FFParams>(FFParams*, unsigned long, std::allocator<FFParams>&):
+         638, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+FFParams* std::__uninitialized_default_n<FFParams*, unsigned long>(FFParams*, unsigned long):
+         603, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+FFParams* std::fill_n<FFParams*, unsigned long, FFParams>(FFParams*, unsigned long, FFParams const&):
+        1120, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+FFParams* std::__fill_n_a<FFParams*, unsigned long, FFParams>(FFParams*, unsigned long, FFParams const&, std::random_access_iterator_tag):
+         969, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+void std::__fill_a<FFParams*, FFParams>(FFParams*, FFParams*, FFParams const&):
+         911, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+__gnu_cxx::__enable_if<!std::__is_scalar<FFParams>::__value, void>::__type std::__fill_a1<FFParams*, FFParams>(FFParams*, FFParams*, FFParams const&):
+      1, include "cmath"
+          17, include "cmath"
+             1935, include "specfun.h"
+                    45, include "stl_algobase.h"
+                        911, Loop not vectorized: data dependency
+                             Loop unrolled 4 times
+      5, include "iostream"
+      7, include "functional"
+void std::_Construct<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, char*&>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, char*&):
+         536, Loop not vectorized/parallelized: not countable
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c kernel.cpp -o kernel.o
+fasten_main(unsigned long, int, unsigned long, unsigned long, unsigned long, unsigned long, Atom const*, Atom const*, float const*, float const*, float const*, float const*, float const*, float const*, FFParams const*, float*):
+     41, #omp target teams num_teams(teams) thread_limit(block)
+         41, Generating "nvkernel__Z11fasten_mainmimmmmPK4AtomS1_PKfS3_S3_S3_S3_S3_PK8FFParamsPf_F1L41_2" GPU kernel
+         44, #omp parallel
+           85, Barrier
+         47, Team private (local_forcefield) located in CUDA shared memory
+     56, Loop not vectorized/parallelized: not countable
+     59, Loop unrolled 1 times (completely unrolled)
+     97, Loop unrolled 1 times (completely unrolled)
+    138, Loop not vectorized/parallelized: loop count too small
+    172, Loop unrolled 1 times (completely unrolled)
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o kernel.o -o main 

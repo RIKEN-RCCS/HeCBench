@@ -1,0 +1,91 @@
+Laplacian(double const (*) [256][256], double, double, double, int, int, int):
+     22, Generating acc routine seq
+         Generating NVIDIA GPU code
+GradientX(double const (*) [256][256], double, double, double, int, int, int):
+     53, Generating acc routine seq
+         Generating NVIDIA GPU code
+GradientY(double const (*) [256][256], double, double, double, int, int, int):
+     67, Generating acc routine seq
+         Generating NVIDIA GPU code
+GradientZ(double const (*) [256][256], double, double, double, int, int, int):
+     81, Generating acc routine seq
+         Generating NVIDIA GPU code
+freeEnergy(double, double, double, double):
+     94, Generating acc routine seq
+         Generating NVIDIA GPU code
+chemicalPotential(double const (*) [256][256], double (*) [256][256], double, double, double, double, double, double, double):
+    110, Generating NVIDIA GPU code
+        112, #pragma acc loop gang, vector(128) collapse(3) /* blockIdx.x threadIdx.x */
+        113,   /* blockIdx.x threadIdx.x collapsed */
+        114,   /* blockIdx.x threadIdx.x collapsed */
+    110, Generating implicit copyin(c[:256][:][:]) [if not already present]
+         Generating implicit copyout(mu[:256][:][:]) [if not already present]
+    112, Loop not fused: no successor loop
+    114, Generating implicit firstprivate(dx,dy,e_AB,dz,e_AA,gamma,e_BB)
+         Loop not vectorized: data dependency
+localFreeEnergyFunctional(double const (*) [256][256], double (*) [256][256], double, double, double, double, double, double, double):
+    135, Generating NVIDIA GPU code
+        137, #pragma acc loop gang, vector(128) collapse(3) /* blockIdx.x threadIdx.x */
+        138,   /* blockIdx.x threadIdx.x collapsed */
+        139,   /* blockIdx.x threadIdx.x collapsed */
+    135, Generating implicit copyout(f[:256][:][:]) [if not already present]
+         Generating implicit copyin(c[:256][:][:]) [if not already present]
+    137, Loop not fused: no successor loop
+    139, Generating implicit firstprivate(dz,e_AB,e_AA,dx,dy,gamma,e_BB)
+         Loop not vectorized: data dependency
+cahnHilliard(double (*) [256][256], double const (*) [256][256], double const (*) [256][256], double, double, double, double, double):
+    159, Generating NVIDIA GPU code
+        161, #pragma acc loop gang, vector(128) collapse(3) /* blockIdx.x threadIdx.x */
+        162,   /* blockIdx.x threadIdx.x collapsed */
+        163,   /* blockIdx.x threadIdx.x collapsed */
+    159, Generating implicit copyin(cold[:256][:][:],mu) [if not already present]
+         Generating implicit copyout(cnew[:256][:][:]) [if not already present]
+    161, Loop not fused: no successor loop
+    163, Generating implicit firstprivate(dt,dx,dz,dy,D)
+         Loop not vectorized: data dependency
+Swap(double (*) [256][256], double (*) [256][256]):
+    171, Generating NVIDIA GPU code
+        173, #pragma acc loop gang, vector(128) collapse(3) /* blockIdx.x threadIdx.x */
+        174,   /* blockIdx.x threadIdx.x collapsed */
+        175,   /* blockIdx.x threadIdx.x collapsed */
+    171, Generating implicit copy(cnew[:256][:][:],cold[:256][:][:]) [if not already present]
+    173, Loop not fused: no successor loop
+    175, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 4 times
+initialization(double (*) [256][256]):
+    190, Loop not vectorized/parallelized: contains call
+integral(double const (*) [256][256], int, int, int):
+    204, Generated vector simd code for the loop containing reductions
+         Loop unrolled 4 times
+main:
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+    280, Generating create(cn[:16777216],mu[:16777216],f[:16777216]) [if not already present]
+         Generating copyin(co[:16777216]) [if not already present]
+    297, Generating update self(mu[:16777216],f[:16777216],cn[:16777216])
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+std::char_traits<char>::length(char const*):
+         171, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string<std::allocator<char>>(char const*, std::allocator<char> const&):
+         397, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string<std::allocator<char>>(char const*, std::allocator<char> const&):
+         536, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      3, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+__gnu_cxx::char_traits<char>::length(char const*):
+      4, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                        171, Loop not vectorized/parallelized: not countable
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&, char const*):
+         397, Loop not vectorized/parallelized: not countable
+timeout was set to  600

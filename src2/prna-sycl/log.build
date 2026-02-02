@@ -1,0 +1,58 @@
+clang++  -D__CUDACC__ -DFLOAT           -std=c++17 -Wall -fsycl -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90             --gcc-toolchain="/auto/software/gcc/x86_64/gcc-9.1.0/" -O3 -ffast-math -DUSE_GPU -c main.c -o main.o
+clang++: warning: treating 'c' input as 'c++' when -fsycl is used [-Wexpected-file-type]
+main.c:36:19: warning: unused function 'can_pair' [-Wunused-function]
+   36 | inline static int can_pair(int i, int j, int n, const base_t *s, const char *seq)
+      |                   ^~~~~~~~
+1 warning generated.
+main.c:36:19: warning: unused function 'can_pair' [-Wunused-function]
+   36 | inline static int can_pair(int i, int j, int n, const base_t *s, const char *seq)
+      |                   ^~~~~~~~
+1 warning generated.
+clang++  -D__CUDACC__ -DFLOAT           -std=c++17 -Wall -fsycl -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90             --gcc-toolchain="/auto/software/gcc/x86_64/gcc-9.1.0/" -O3 -ffast-math -DUSE_GPU -c base.c -o base.o
+clang++: warning: treating 'c' input as 'c++' when -fsycl is used [-Wexpected-file-type]
+base.c:55:46: warning: result of comparison of constant -1 with expression of type 'char' is always true [-Wtautological-constant-out-of-range-compare]
+   55 |   do { c = fgetc(f); } while (c != '\n' && c != EOF);
+      |                                            ~ ^  ~~~
+base.c:101:28: warning: result of comparison of constant -1 with expression of type 'char' is always true [-Wtautological-constant-out-of-range-compare]
+  101 |   while ((c = fgetc(f)), c != EOF && c != '1')
+      |                          ~ ^  ~~~
+base.c:108:28: warning: result of comparison of constant -1 with expression of type 'char' is always true [-Wtautological-constant-out-of-range-compare]
+  108 |   while ((c = fgetc(f)), c != EOF && c != '1')
+      |                          ~ ^  ~~~
+3 warnings generated.
+base.c:55:46: warning: result of comparison of constant -1 with expression of type 'char' is always true [-Wtautological-constant-out-of-range-compare]
+   55 |   do { c = fgetc(f); } while (c != '\n' && c != EOF);
+      |                                            ~ ^  ~~~
+base.c:101:28: warning: result of comparison of constant -1 with expression of type 'char' is always true [-Wtautological-constant-out-of-range-compare]
+  101 |   while ((c = fgetc(f)), c != EOF && c != '1')
+      |                          ~ ^  ~~~
+base.c:108:28: warning: result of comparison of constant -1 with expression of type 'char' is always true [-Wtautological-constant-out-of-range-compare]
+  108 |   while ((c = fgetc(f)), c != EOF && c != '1')
+      |                          ~ ^  ~~~
+3 warnings generated.
+clang++  -D__CUDACC__ -DFLOAT           -std=c++17 -Wall -fsycl -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90             --gcc-toolchain="/auto/software/gcc/x86_64/gcc-9.1.0/" -O3 -ffast-math -DUSE_GPU -c param.c -o param.o
+clang++: warning: treating 'c' input as 'c++' when -fsycl is used [-Wexpected-file-type]
+param.c:597:6: warning: use of NaN is undefined behavior due to the currently enabled floating-point options [-Wnan-infinity-disabled]
+  597 |   if(isnan(dg)) return dg; //"infinite energy" is represented as nan
+      |      ^~~~~~~~~
+param.c:881:11: warning: floating-point comparison is always true; constant cannot be represented exactly in type 'float' [-Wliteral-range]
+  881 |   if (chk != CHK)
+      |       ~~~ ^  ~~~
+2 warnings generated.
+param.c:597:6: warning: use of NaN is undefined behavior due to the currently enabled floating-point options [-Wnan-infinity-disabled]
+  597 |   if(isnan(dg)) return dg; //"infinite energy" is represented as nan
+      |      ^~~~~~~~~
+param.c:881:11: warning: floating-point comparison is always true; constant cannot be represented exactly in type 'float' [-Wliteral-range]
+  881 |   if (chk != CHK)
+      |       ~~~ ^  ~~~
+2 warnings generated.
+clang++  -D__CUDACC__ -DFLOAT           -std=c++17 -Wall -fsycl -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90             --gcc-toolchain="/auto/software/gcc/x86_64/gcc-9.1.0/" -O3 -ffast-math -DUSE_GPU -c util.c -o util.o
+clang++: warning: treating 'c' input as 'c++' when -fsycl is used [-Wexpected-file-type]
+clang++  -D__CUDACC__ -DFLOAT           -std=c++17 -Wall -fsycl -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90             --gcc-toolchain="/auto/software/gcc/x86_64/gcc-9.1.0/" -O3 -ffast-math -DUSE_GPU -c prna.cpp -o prna.o
+clang++  -D__CUDACC__ -DFLOAT           -std=c++17 -Wall -fsycl -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90             --gcc-toolchain="/auto/software/gcc/x86_64/gcc-9.1.0/" -O3 -ffast-math -DUSE_GPU main.o base.o param.o util.o prna.o  -o main 
+/usr/bin/ld: cannot find crtbegin.o: No such file or directory
+/usr/bin/ld: cannot find -lstdc++
+/usr/bin/ld: cannot find -lgcc_s
+/usr/bin/ld: cannot find -lgcc
+clang++: error: linker command failed with exit code 1 (use -v to see invocation)
+make: *** [Makefile.NVD:71: main] Error 1

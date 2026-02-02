@@ -1,0 +1,20 @@
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+main:
+     68, Loop not fused: complex flow graph
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+     80, Loop not vectorized/parallelized: contains call
+    125, Loop not vectorized/parallelized: contains call
+    135, #omp target teams num_teams(gws) thread_limit(256)
+        122, Generating map(alloc:gpuResult[:cols]) 
+             Generating map(to:gpuSrc[:cols],gpuWall[:size-cols]) 
+             Generating map(from:outputBuffer[:16384]) 
+        135, Generating "nvkernel_main_F1L135_2" GPU kernel
+        139, #omp parallel
+          180, Barrier
+          211, Barrier
+          225, Barrier
+        143, Team private (result,prev) located in CUDA shared memory
+    183, Loop not vectorized/parallelized: potential early exits
+    246, Generating update from(gpuSrc[:cols])
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

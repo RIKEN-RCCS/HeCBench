@@ -1,0 +1,31 @@
+"main.cpp", line 40: error: identifier "omp_get_num_procs" is undefined
+    printf("number of host CPUs:\t%d\n", omp_get_num_procs());
+                                         ^
+
+"main.cpp", line 59: error: identifier "omp_get_wtime" is undefined
+        double start = omp_get_wtime();
+                       ^
+
+"main.cpp", line 60: error: identifier "omp_set_num_threads" is undefined
+        omp_set_num_threads(f * num_gpus); 
+        ^
+
+"main.cpp", line 63: error: identifier "omp_get_thread_num" is undefined
+          unsigned int cpu_thread_id = omp_get_thread_num();
+                                       ^
+
+"main.cpp", line 64: error: identifier "omp_get_vector" is undefined
+          unsigned int num_cpu_threads = omp_get_vector();
+                                         ^
+
+"main.cpp", line 73: error: invalid text in pragma
+          #pragma acc parallel data map (tofrom: sub_a[0:nwords_per_kernel])
+                               ^
+
+"main.cpp", line 73: error: extra text after expected end of preprocessing directive
+          #pragma acc parallel data map (tofrom: sub_a[0:nwords_per_kernel])
+                                    ^
+
+7 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

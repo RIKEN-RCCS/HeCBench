@@ -1,0 +1,1 @@
+nvc++  -Wall  -O3 -ffast-math -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o

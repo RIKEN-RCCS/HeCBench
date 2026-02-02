@@ -1,0 +1,10 @@
+Average kernel execution time (pnpoly_base): 0.001628 (s)
+Average kernel execution time (pnpoly_opt<1>): 0.006292 (s)
+Average kernel execution time (pnpoly_opt<2>): 0.001985 (s)
+Average kernel execution time (pnpoly_opt<4>): 0.002571 (s)
+Average kernel execution time (pnpoly_opt<8>): 0.063131 (s)
+Average kernel execution time (pnpoly_opt<16>): 0.122147 (s)
+Average kernel execution time (pnpoly_opt<32>): 0.173455 (s)
+Average kernel execution time (pnpoly_opt<64>): 0.345870 (s)
+Checksum: 676604
+PASS

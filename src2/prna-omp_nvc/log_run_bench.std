@@ -1,0 +1,2 @@
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "../prna-cuda/prepare_data.sh; export DATAPATH=../prna-cuda/data_tables; time -p ( ./main ./HIV1-NL43.seq 1>log.std 2>log.err ) 2> log.time"

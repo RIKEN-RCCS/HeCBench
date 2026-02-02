@@ -1,0 +1,123 @@
+nvc++ -acc  -Wall -I../vol2col-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+main:
+    294, Loop not vectorized/parallelized: potential early exits
+void eval<float>(int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int):
+    180, Loop not vectorized/parallelized: contains call
+    188, Generating copyin(data_vol[:vol_size],data_col[:col_size]) [if not already present]
+    191, Loop not vectorized/parallelized: contains call
+          25, Loop not fused: function call before adjacent loop
+              Loop not vectorized/parallelized: too deeply nested
+          26, Loop not vectorized/parallelized: too deeply nested
+          27, Loop not vectorized/parallelized: too deeply nested
+          28, Loop not vectorized/parallelized: too deeply nested
+          38, Loop not vectorized: data dependency
+    210, Generating update self(data_col[:col_size])
+    225, Loop not vectorized/parallelized: contains call
+          77, Loop not vectorized/parallelized: too deeply nested
+          78, Loop not vectorized/parallelized: too deeply nested
+          79, Loop not vectorized/parallelized: too deeply nested
+          80, Loop not vectorized/parallelized: too deeply nested
+         100, Invariant if transformation
+              Loop not fused: no successor loop
+              Loop not vectorized: unknown
+              Loop unrolled 8 times
+         101, Invariant if transformation
+              Loop not fused: no successor loop
+              Loop not vectorized: unknown
+              Loop unrolled 8 times
+         102, Invariant if transformation
+              Loop not fused: no successor loop
+              Loop not vectorized: may not be beneficial for target
+              Loop not vectorized: unknown
+              Loop unrolled 8 times
+    244, Generating update self(data_vol[:vol_size])
+    254, Loop not vectorized/parallelized: potential early exits
+void vol2col_kernel<float>(float const*, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, float*):
+     36, Generating implicit firstprivate(ksize_t,height_col,ksize_h,ksize_w,width_col,depth_col,channels)
+         Generating NVIDIA GPU code
+         39, #pragma acc loop gang, vector(512) collapse(4) /* blockIdx.x threadIdx.x */
+         40,   /* blockIdx.x threadIdx.x collapsed */
+         41,   /* blockIdx.x threadIdx.x collapsed */
+         42,   /* blockIdx.x threadIdx.x collapsed */
+         50, #pragma acc loop seq
+         51, #pragma acc loop seq
+         52, #pragma acc loop seq
+     36, Generating implicit copyin(data_col,data_vol) [if not already present]
+     39, Loop not fused: no successor loop
+         Loop not vectorized/parallelized: too deeply nested
+     40, Loop not vectorized/parallelized: too deeply nested
+     41, Loop not vectorized/parallelized: too deeply nested
+     42, Generating implicit firstprivate(stride_h,pad_h,pad_w,height,stride_t,pad_t,width,v,depth,c,stride_w)
+         Loop not vectorized/parallelized: too deeply nested
+     50, Complex loop carried dependence of v->,c-> prevents parallelization
+         Loop carried scalar dependence for c at line 56,60
+     51, Complex loop carried dependence of v->,c-> prevents parallelization
+         Loop carried scalar dependence for c at line 56,60
+     52, Complex loop carried dependence of v->,c-> prevents parallelization
+         Loop carried scalar dependence for c at line 56,60
+         Generating implicit firstprivate(dilation_h,c,dilation_w,dilation_t)
+         Loop carried scalar dependence for c at line 60
+         Loop not vectorized: data dependency
+void vol2col_reference<float>(float const*, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, float*):
+      8, include "reference.h"
+          25, Loop not vectorized/parallelized: too deeply nested
+          26, Loop not vectorized/parallelized: too deeply nested
+          27, Loop not vectorized/parallelized: too deeply nested
+          28, Loop not vectorized/parallelized: too deeply nested
+          38, Loop not vectorized: data dependency
+void col2vol_kernel<float, float>(float const*, long, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, float*):
+     90, Generating implicit firstprivate(height,width,depth,channels)
+         Generating NVIDIA GPU code
+         93, #pragma acc loop gang, vector(512) collapse(4) /* blockIdx.x threadIdx.x */
+         94,   /* blockIdx.x threadIdx.x collapsed */
+         95,   /* blockIdx.x threadIdx.x collapsed */
+         96,   /* blockIdx.x threadIdx.x collapsed */
+        116, #pragma acc loop seq
+             Generating implicit reduction(+:val)
+        117, #pragma acc loop seq
+             Generating implicit reduction(+:val)
+        118, #pragma acc loop seq
+             Generating implicit reduction(+:val)
+     90, Generating implicit copyin(data_col[:]) [if not already present]
+         Generating implicit copyout(data_vol[:]) [if not already present]
+     93, Loop not fused: no successor loop
+     96, Generating implicit firstprivate(pad_t,kernel_w,pad_h,dilation_t,kernel_t,depth_col,height_col,dilation_h,kernel_h,stride_t,width_col,stride_w,pad_w,dilation_w,stride_h)
+          93, Loop not vectorized/parallelized: too deeply nested
+          94, Loop not vectorized/parallelized: too deeply nested
+          95, Loop not vectorized/parallelized: too deeply nested
+          96, Loop not vectorized/parallelized: too deeply nested
+         116, Loop not fused: no successor loop
+              Loop not vectorized: unknown
+              Loop unrolled 8 times
+         117, Loop not fused: no successor loop
+              Loop not vectorized: unknown
+              Loop unrolled 8 times
+         118, Loop not fused: no successor loop
+              Loop not vectorized: may not be beneficial for target
+              Loop not vectorized: unknown
+              Loop unrolled 8 times
+    116, Loop is parallelizable
+         Invariant if transformation
+    117, Loop is parallelizable
+         Invariant if transformation
+    118, Loop is parallelizable
+         Invariant if transformation
+void col2vol_reference<float, float>(float const*, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, float*):
+      8, include "reference.h"
+          77, Loop not vectorized/parallelized: too deeply nested
+          78, Loop not vectorized/parallelized: too deeply nested
+          79, Loop not vectorized/parallelized: too deeply nested
+          80, Loop not vectorized/parallelized: too deeply nested
+         102, Invariant if transformation
+              Loop not fused: no successor loop
+              Loop not vectorized: may not be beneficial for target
+              Loop not vectorized: unknown
+              Loop unrolled 8 times
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      5, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+int const& std::min<int>(int const&, int const&):
+                   231, Generating implicit omp declare target routine
+                        Generating NVIDIA GPU code
+      8, include "reference.h"
+nvc++ -acc  -Wall -I../vol2col-cuda -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

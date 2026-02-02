@@ -1,0 +1,43 @@
+"main.cpp", line 88: error: invalid text in pragma
+    #pragma acc parallel loop thread_limit(threads) default(none) \
+                              ^
+
+"main.cpp", line 88: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop thread_limit(threads) default(none) \
+                                          ^
+
+"main.cpp", line 133: error: invalid text in pragma
+    #pragma acc parallel loop thread_limit(threads) default(none) shared(edges, posscol2)
+                              ^
+
+"main.cpp", line 133: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop thread_limit(threads) default(none) shared(edges, posscol2)
+                                          ^
+
+"main.cpp", line 155: error: invalid text in pragma
+      #pragma acc parallel parallel num_threads(threads) \
+                                    ^
+
+"main.cpp", line 155: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel parallel num_threads(threads) \
+                                               ^
+
+"main.cpp", line 248: error: invalid text in pragma
+    #pragma acc parallel parallel num_threads(threads) default(none) shared(nodes, nidx, nlist, color, posscol) private(again)
+                                  ^
+
+"main.cpp", line 248: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel parallel num_threads(threads) default(none) shared(nodes, nidx, nlist, color, posscol) private(again)
+                                             ^
+
+"main.cpp", line 328: error: invalid text in pragma
+    #pragma acc parallel data map (from: color[0:g.nodes]) \
+                         ^
+
+"main.cpp", line 328: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel data map (from: color[0:g.nodes]) \
+                              ^
+
+10 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

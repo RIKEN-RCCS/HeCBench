@@ -1,0 +1,1 @@
+main: ../cmp-cuda/su_trace.cpp:38: bool su_trace::fgettr(std::basic_ifstream<char, std::char_traits<char>> &): Assertion `file' failed.

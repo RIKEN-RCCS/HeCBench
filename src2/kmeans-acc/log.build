@@ -1,0 +1,21 @@
+nvc++ -acc  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 rmse.c -c
+euclid_dist_2(float*, float*, int):
+     29, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+     33, Generated vector simd code for the loop containing reductions
+         Loop unrolled 4 times
+find_nearest_point(float*, int, float**, int):
+     45, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+          33, Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+rms_err(float**, int, int, float**, int):
+     79, Generating copyin(feature[:][:],cluster_centres[:][:]) [if not already present]
+         Loop not fused: function call before adjacent loop
+          50, Loop not fused: different loop trip count
+          52, Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+          33, Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+nvc++ -acc   -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 cluster.o getopt.o read_input.o rmse.o kmeans.c -o kmeans -lm
+kmeans.c:

@@ -1,0 +1,62 @@
+nvc++ -acc  -std=c++14 -Wall -I../bspline-vgh-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+bspline_ref(float const*, long, long, long, float*, float*, float*, float const*, float const*, float const*, float const*, float const*, float const*, float const*, float const*, float const*, float, float, float, int, int, int, int, int):
+          28, Generated vector simd code for the loop
+          30, Loop unrolled 4 times (completely unrolled)
+          31, Loop unrolled 4 times (completely unrolled)
+main:
+    143, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 8 times
+    150, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+    176, Generating copyout(walkers_vals[:24036000],walkers_hess[:216432000]) [if not already present]
+         Generating copyin(spline_coefs[:222953472]) [if not already present]
+         Generating copyout(walkers_grads[:72144000]) [if not already present]
+         Generating create(dc[:],a[:],b[:],d2c[:],da[:],db[:],c[:],d2a[:],d2b[:]) [if not already present]
+          98, Loop not fused: function call before adjacent loop
+          99, Loop unrolled 4 times (completely unrolled)
+              Loop not fused: different loop trip count
+              Loop not vectorized/parallelized: loop count too small
+              Generated vector simd code for the loop
+    241, Generating update device(a[:],b[:],d2c[:],da[:],dc[:],db[:],c[:],d2a[:],d2b[:])
+         Generating implicit firstprivate(spline_num_splines)
+         Generating NVIDIA GPU code
+         45, #pragma acc loop seq
+         47, #pragma acc loop seq
+             Generating implicit reduction(+:.inl_v0_343)
+         48, #pragma acc loop seq
+        244, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+    241, Local memory used for .inl_h_345
+         Generating implicit copyin(grads,vals,hess) [if not already present]
+    244, Generating implicit firstprivate(spline_x_grid_delta_inv,spline_z_grid_delta_inv,spline_y_grid_delta_inv)
+         Loop not fused: no successor loop
+          45, Loop is parallelizable
+              Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+          47, Complex loop carried dependence of spline_coefs+(((((xs*(ix))*4)+((ys*(iy))*4))+((zs*(iz))*4))+((n)*4))+((((.inl_i_346)*xs)*4)+(((.inl_j_347)*ys)*4))-> prevents parallelization
+              Loop carried reuse of .inl_h_345 prevents parallelization
+              Complex loop carried dependence of .inl_h_345 prevents parallelization
+              Loop not vectorized/parallelized: loop count too small
+          48, Complex loop carried dependence of spline_coefs+(((((xs*(ix))*4)+((ys*(iy))*4))+((zs*(iz))*4))+((n)*4))+((((.inl_i_346)*xs)*4)+(((.inl_j_347)*ys)*4))->,.inl_h_345 prevents parallelization
+              Loop carried dependence of .inl_h_345 prevents parallelization
+              Loop carried backward dependence of .inl_h_345 prevents vectorization
+              Loop unrolled 4 times (completely unrolled)
+    263, Loop not vectorized/parallelized: potential early exits
+    270, Loop not vectorized/parallelized: potential early exits
+    277, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+_INTERNAL_8_main_cpp_64e17382::eval_ref(float const*, long, long, long, float*, float*, float*, float const*, float const*, float const*, float const*, float const*, float const*, float const*, float const*, float const*, float, float, float):
+      7, include "reference.h"
+          28, Generated vector simd code for the loop
+          30, Loop unrolled 4 times (completely unrolled)
+          31, Loop unrolled 4 times (completely unrolled)
+_INTERNAL_8_main_cpp_64e17382::eval_UBspline_3d_s_vgh(float const*, long, long, long, float*, float*, float*, float const*, float const*, float const*, float const*, float const*, float const*, float const*, float const*, float const*, float, float, float):
+     42, Generating acc routine seq
+         Generating NVIDIA GPU code
+     45, Generated vector simd code for the loop
+     47, Loop unrolled 4 times (completely unrolled)
+     48, Loop unrolled 4 times (completely unrolled)
+nvc++ -acc  -std=c++14 -Wall -I../bspline-vgh-cuda -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

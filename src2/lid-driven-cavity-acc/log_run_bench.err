@@ -1,0 +1,179 @@
+"main.cpp", line 272: error: invalid text in pragma
+  #pragma acc data tofrom: u[0:size], \
+                   ^
+
+"main.cpp", line 272: error: extra text after expected end of preprocessing directive
+  #pragma acc data tofrom: u[0:size], \
+                         ^
+
+"calculate_F.h", line 1: error: invalid text in pragma
+  #pragma acc parallel loop collapse(2) thread_limit(BLOCK_SIZE)
+                                        ^
+
+"calculate_F.h", line 1: error: extra text after expected end of preprocessing directive
+  #pragma acc parallel loop collapse(2) thread_limit(BLOCK_SIZE)
+                                                    ^
+
+"calculate_G.h", line 1: error: invalid text in pragma
+  #pragma acc parallel loop collapse(2) thread_limit(BLOCK_SIZE)
+                                        ^
+
+"calculate_G.h", line 1: error: extra text after expected end of preprocessing directive
+  #pragma acc parallel loop collapse(2) thread_limit(BLOCK_SIZE)
+                                                    ^
+
+"sum_pressure.h", line 1: error: invalid text in pragma
+  #pragma acc parallel teams num_teams((NUM*NUM/2)/BLOCK_SIZE) thread_limit(BLOCK_SIZE)
+                       ^
+
+"sum_pressure.h", line 1: error: extra text after expected end of preprocessing directive
+  #pragma acc parallel teams num_teams((NUM*NUM/2)/BLOCK_SIZE) thread_limit(BLOCK_SIZE)
+                             ^
+
+"sum_pressure.h", line 6: error: identifier "omp_get_thread_num" is undefined
+      int lid = omp_get_thread_num();
+                ^
+
+"sum_pressure.h", line 7: error: identifier "omp_get_team_num" is undefined
+      int tid = omp_get_team_num();
+                ^
+
+"main.cpp", line 312: error: invalid text in pragma
+        #pragma acc update from(pres_sum[0:size_res])
+                           ^
+
+"main.cpp", line 312: error: OpenACC data clause expected
+        #pragma acc update from(pres_sum[0:size_res])
+                           ^
+
+"main.cpp", line 312: error: extra text after expected end of preprocessing directive
+        #pragma acc update from(pres_sum[0:size_res])
+                               ^
+
+"set_horz_pres_BCs.h", line 1: error: invalid text in pragma
+  #pragma acc parallel loop thread_limit(BLOCK_SIZE)
+                            ^
+
+"set_horz_pres_BCs.h", line 1: error: extra text after expected end of preprocessing directive
+  #pragma acc parallel loop thread_limit(BLOCK_SIZE)
+                                        ^
+
+"set_vert_pres_BCs.h", line 1: error: invalid text in pragma
+  #pragma acc parallel loop thread_limit(BLOCK_SIZE)
+                            ^
+
+"set_vert_pres_BCs.h", line 1: error: extra text after expected end of preprocessing directive
+  #pragma acc parallel loop thread_limit(BLOCK_SIZE)
+                                        ^
+
+"red_kernel.h", line 1: error: invalid text in pragma
+  #pragma acc parallel loop collapse(2) thread_limit(BLOCK_SIZE)
+                                        ^
+
+"red_kernel.h", line 1: error: extra text after expected end of preprocessing directive
+  #pragma acc parallel loop collapse(2) thread_limit(BLOCK_SIZE)
+                                                    ^
+
+"black_kernel.h", line 1: error: invalid text in pragma
+  #pragma acc parallel loop collapse(2) thread_limit(BLOCK_SIZE)
+                                        ^
+
+"black_kernel.h", line 1: error: extra text after expected end of preprocessing directive
+  #pragma acc parallel loop collapse(2) thread_limit(BLOCK_SIZE)
+                                                    ^
+
+"calc_residual.h", line 1: error: invalid text in pragma
+  #pragma acc parallel teams num_teams((NUM*NUM/2)/BLOCK_SIZE) thread_limit(BLOCK_SIZE)
+                       ^
+
+"calc_residual.h", line 1: error: extra text after expected end of preprocessing directive
+  #pragma acc parallel teams num_teams((NUM*NUM/2)/BLOCK_SIZE) thread_limit(BLOCK_SIZE)
+                             ^
+
+"calc_residual.h", line 7: error: identifier "omp_get_thread_num" is undefined
+      int lid = omp_get_thread_num();
+                ^
+
+"calc_residual.h", line 8: error: identifier "omp_get_team_num" is undefined
+      int tid = omp_get_team_num();
+                ^
+
+"main.cpp", line 351: error: invalid text in pragma
+          #pragma acc update from (res_arr[0:size_res])
+                             ^
+
+"main.cpp", line 351: error: OpenACC data clause expected
+          #pragma acc update from (res_arr[0:size_res])
+                             ^
+
+"main.cpp", line 351: error: extra text after expected end of preprocessing directive
+          #pragma acc update from (res_arr[0:size_res])
+                                  ^
+
+"calculate_u.h", line 1: error: invalid text in pragma
+  #pragma acc parallel teams num_teams((NUM*NUM/2)/BLOCK_SIZE) thread_limit(BLOCK_SIZE)
+                       ^
+
+"calculate_u.h", line 1: error: extra text after expected end of preprocessing directive
+  #pragma acc parallel teams num_teams((NUM*NUM/2)/BLOCK_SIZE) thread_limit(BLOCK_SIZE)
+                             ^
+
+"calculate_u.h", line 6: error: identifier "omp_get_thread_num" is undefined
+      int lid = omp_get_thread_num();
+                ^
+
+"calculate_u.h", line 7: error: identifier "omp_get_team_num" is undefined
+      int tid = omp_get_team_num();
+                ^
+
+"main.cpp", line 381: error: invalid text in pragma
+        #pragma acc update from(max_u_arr[0:size_max])
+                           ^
+
+"main.cpp", line 381: error: OpenACC data clause expected
+        #pragma acc update from(max_u_arr[0:size_max])
+                           ^
+
+"main.cpp", line 381: error: extra text after expected end of preprocessing directive
+        #pragma acc update from(max_u_arr[0:size_max])
+                               ^
+
+"calculate_v.h", line 1: error: invalid text in pragma
+  #pragma acc parallel teams num_teams((NUM*NUM/2)/BLOCK_SIZE) thread_limit(BLOCK_SIZE)
+                       ^
+
+"calculate_v.h", line 1: error: extra text after expected end of preprocessing directive
+  #pragma acc parallel teams num_teams((NUM*NUM/2)/BLOCK_SIZE) thread_limit(BLOCK_SIZE)
+                             ^
+
+"calculate_v.h", line 6: error: identifier "omp_get_thread_num" is undefined
+      int lid = omp_get_thread_num();
+                ^
+
+"calculate_v.h", line 7: error: identifier "omp_get_team_num" is undefined
+      int tid = omp_get_team_num();
+                ^
+
+"main.cpp", line 387: error: invalid text in pragma
+        #pragma acc update from(max_v_arr[0:size_max])
+                           ^
+
+"main.cpp", line 387: error: OpenACC data clause expected
+        #pragma acc update from(max_v_arr[0:size_max])
+                           ^
+
+"main.cpp", line 387: error: extra text after expected end of preprocessing directive
+        #pragma acc update from(max_v_arr[0:size_max])
+                               ^
+
+"set_BCs.h", line 1: error: invalid text in pragma
+  #pragma acc parallel loop thread_limit(BLOCK_SIZE)
+                            ^
+
+"set_BCs.h", line 1: error: extra text after expected end of preprocessing directive
+  #pragma acc parallel loop thread_limit(BLOCK_SIZE)
+                                        ^
+
+44 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

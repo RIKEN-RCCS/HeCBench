@@ -1,0 +1,2 @@
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "time -p ( ./main blastx -q ../data/gerbil/ERR164407.fastq.gz -d ../diamond-sycl/ARDB.dmnd -o long_cur.m8 --tmpdir /dev/shm -p1 1>log.std 2>log.err ) 2> log.time"

@@ -1,0 +1,23 @@
+clang++   -std=c++17 -Wall -fsycl           -I../lud-cuda/common -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c lud.cpp -o lud.o
+clang++   -std=c++17 -Wall -fsycl           -I../lud-cuda/common -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c ../lud-cuda/common/common.cpp -o common.o
+../lud-cuda/common/common.cpp:164:13: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+  164 |   float coe[2*size-1];
+      |             ^~~~~~~~
+../lud-cuda/common/common.cpp:164:15: note: function parameter 'size' with unknown value cannot be used in a constant expression
+  164 |   float coe[2*size-1];
+      |               ^
+../lud-cuda/common/common.cpp:160:31: note: declared here
+  160 | create_matrix(float **mp, int size){
+      |                               ^
+1 warning generated.
+../lud-cuda/common/common.cpp:164:13: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+  164 |   float coe[2*size-1];
+      |             ^~~~~~~~
+../lud-cuda/common/common.cpp:164:15: note: function parameter 'size' with unknown value cannot be used in a constant expression
+  164 |   float coe[2*size-1];
+      |               ^
+../lud-cuda/common/common.cpp:160:31: note: declared here
+  160 | create_matrix(float **mp, int size){
+      |                               ^
+1 warning generated.
+clang++   -std=c++17 -Wall -fsycl           -I../lud-cuda/common -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU lud.o common.o -o main 

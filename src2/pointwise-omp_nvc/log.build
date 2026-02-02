@@ -1,0 +1,39 @@
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+elementwise(int, int, float const*, float const*, float const*, float*, float*, float*, float const*, float*):
+     51, #omp target teams distribute parallel for thread_limit(256)
+         51, Generating "nvkernel__Z11elementwiseiiPKfS0_S0_PfS1_S1_S0_S1__F1L51_2" GPU kernel
+         54, Loop parallelized across teams and threads(128), schedule(static)
+     54, Loop not vectorized/parallelized: not countable
+     61, Loop unrolled 4 times (completely unrolled)
+LCG_random(unsigned int*):
+     84, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+init(float*, int):
+     93, #omp target teams distribute parallel for thread_limit(256)
+         93, Generating "nvkernel__Z4initPfi_F1L93_6" GPU kernel
+         95, Loop parallelized across teams and threads(128), schedule(static)
+     95, Loop not vectorized/parallelized: not countable
+test(int, int, int, int, checksum&, double&):
+    140, Generating map(alloc:c_data[:hc_size],h_data[:hc_size],bias[:bias_size],linearGates[:act_size],tmp_h[:tmp_h_size],tmp_i[:tmp_i_size],i_data[:i_size]) 
+    178, Loop not vectorized/parallelized: potential early exits
+    196, Loop not vectorized/parallelized: contains call
+    219, Generating update from(i_data[:i_size],h_data[:hc_size],c_data[:hc_size])
+    228, Loop not vectorized/parallelized: contains call
+    241, Loop not fused: function call before adjacent loop
+    242, Loop not fused: different loop trip count
+    243, Generated vector simd code for the loop containing reductions
+    249, Generated vector simd code for the loop containing reductions
+main:
+         178, Loop not vectorized/parallelized: potential early exits
+         196, Loop not vectorized/parallelized: contains call
+         219, Generating update from(.inl_i_data_215[:miniBatch*hiddenSize*(seqLength*(numLayers+1))],.inl_h_data_214[:miniBatch*hiddenSize*(numLayers*(seqLength+1))],.inl_c_data_216[:miniBatch*hiddenSize*(numLayers*(seqLength+1))])
+         228, Loop not vectorized/parallelized: contains call
+         241, Loop not fused: function call before adjacent loop
+         242, Loop not fused: different loop trip count
+         243, Generated vector simd code for the loop containing reductions
+         249, Generated vector simd code for the loop containing reductions
+         307, Loop not vectorized/parallelized: too deeply nested
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     33, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

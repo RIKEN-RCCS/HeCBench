@@ -1,0 +1,10 @@
+Number of particles is 30
+Number of dimensions is 30
+
+Execute PSO on a device
+Average kernel execution time 24.495071 (us)
+Result=289013.312500
+
+Execute PSO on a host. This may take a while for large problem size..
+Result=289013.312500
+PASS

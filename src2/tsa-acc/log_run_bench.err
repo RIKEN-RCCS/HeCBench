@@ -1,0 +1,67 @@
+"main.cpp", line 76: error: invalid text in pragma
+    #pragma acc parallel data map (to: d_real[0][0:numel], d_imag[0][0:numel]) \
+                         ^
+
+"main.cpp", line 76: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel data map (to: d_real[0][0:numel], d_imag[0][0:numel]) \
+                              ^
+
+"main.cpp", line 92: error: invalid text in pragma
+      #pragma acc update from (d_real[sense][0:numel])
+                         ^
+
+"main.cpp", line 92: error: OpenACC data clause expected
+      #pragma acc update from (d_real[sense][0:numel])
+                         ^
+
+"main.cpp", line 92: error: extra text after expected end of preprocessing directive
+      #pragma acc update from (d_real[sense][0:numel])
+                              ^
+
+"main.cpp", line 93: error: invalid text in pragma
+      #pragma acc update from (d_imag[sense][0:numel])
+                         ^
+
+"main.cpp", line 93: error: OpenACC data clause expected
+      #pragma acc update from (d_imag[sense][0:numel])
+                         ^
+
+"main.cpp", line 93: error: extra text after expected end of preprocessing directive
+      #pragma acc update from (d_imag[sense][0:numel])
+                              ^
+
+"kernels.h", line 61: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(teams) thread_limit(threads)
+                         ^
+          detected during instantiation of "void tsa<T>(int, int, int) [with T=float]" at line 130 of "main.cpp"
+
+"kernels.h", line 61: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(teams) thread_limit(threads)
+                               ^
+          detected during instantiation of "void tsa<T>(int, int, int) [with T=float]" at line 130 of "main.cpp"
+
+"kernels.h", line 67: error: identifier "omp_get_team_num" is undefined
+        int blockIdx_x = omp_get_team_num() % teamX;
+                         ^
+          detected during instantiation of "void tsa<T>(int, int, int) [with T=float]" at line 130 of "main.cpp"
+
+"kernels.h", line 69: error: identifier "omp_get_thread_num" is undefined
+        int threadIdx_x = omp_get_thread_num() % BLOCK_X;
+                          ^
+          detected during instantiation of "void tsa<T>(int, int, int) [with T=float]" at line 130 of "main.cpp"
+
+"kernels.h", line 59: warning: variable "teams" was declared but never referenced [declared_but_not_referenced]
+    const int teams = teamX * teamY;
+              ^
+          detected during instantiation of "void tsa<T>(int, int, int) [with T=float]" at line 130 of "main.cpp"
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"kernels.h", line 60: warning: variable "threads" was declared but never referenced [declared_but_not_referenced]
+    const int threads = BLOCK_X * STRIDE_Y;
+              ^
+          detected during instantiation of "void tsa<T>(int, int, int) [with T=float]" at line 130 of "main.cpp"
+
+12 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

@@ -1,0 +1,36 @@
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90,fastmath -c main.cpp -o main.o
+k0(float const*, float*, int):
+      7, #omp target teams distribute parallel for thread_limit(256)
+          7, Generating "nvkernel__Z2k0PKfPfi_F1L7_2" GPU kernel
+          9, Loop parallelized across teams and threads(128), schedule(static)
+      9, Loop not vectorized/parallelized: not countable
+k1(float const*, float*, int):
+     15, #omp target teams distribute parallel for thread_limit(256)
+         15, Generating "nvkernel__Z2k1PKfPfi_F1L15_6" GPU kernel
+         17, Loop parallelized across teams and threads(128), schedule(static)
+     17, Loop not vectorized/parallelized: not countable
+k2(float const*, float*, int):
+     51, #omp target teams distribute parallel for thread_limit(256)
+         51, Generating "nvkernel__Z2k2PKfPfi_F1L51_10" GPU kernel
+         53, Loop parallelized across teams and threads(128), schedule(static)
+     53, Loop not vectorized/parallelized: contains call
+main:
+     84, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+     94, Generating map(to:a[:n]) 
+         Generating map(from:o0[:n],o1[:n],o2[:n]) 
+     96, Loop not vectorized/parallelized: contains call
+    104, Loop not vectorized/parallelized: contains call
+    112, Loop not vectorized/parallelized: contains call
+    121, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 2 times
+    131, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    138, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90,fastmath main.o -o main 

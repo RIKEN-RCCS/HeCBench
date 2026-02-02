@@ -1,0 +1,222 @@
+verify(double, int, double const*, int, double const*):
+      7, include "reference.h"
+          10, Loop not fused: function call before adjacent loop
+          11, Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+          14, Loop not fused: different loop trip count
+          15, Zero trip check eliminated
+              Loop not vectorized: unknown
+          20, Generated vector simd code for the loop containing reductions
+test01(int):
+          10, Loop not fused: function call before adjacent loop
+          11, Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+          14, Loop not fused: different loop trip count
+          15, Zero trip check eliminated
+              Loop not vectorized: unknown
+          20, Generated vector simd code for the loop containing reductions
+          34, Loop not vectorized/parallelized: too deeply nested
+test02(int):
+          10, Loop not fused: function call before adjacent loop
+          11, Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+          14, Loop not fused: different loop trip count
+          15, Zero trip check eliminated
+              Loop not vectorized: unknown
+          20, Generated vector simd code for the loop containing reductions
+          88, Loop not vectorized/parallelized: too deeply nested
+test03(int):
+          10, Loop not fused: function call before adjacent loop
+          11, Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+          14, Loop not fused: different loop trip count
+          15, Zero trip check eliminated
+              Loop not vectorized: unknown
+          20, Generated vector simd code for the loop containing reductions
+         142, Loop not vectorized/parallelized: too deeply nested
+test04(int):
+          10, Loop not fused: function call before adjacent loop
+          11, Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+          14, Loop not fused: different loop trip count
+          15, Zero trip check eliminated
+              Loop not vectorized: unknown
+          20, Generated vector simd code for the loop containing reductions
+         196, Loop not vectorized/parallelized: too deeply nested
+test05(int):
+          10, Loop not fused: function call before adjacent loop
+          11, Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+          14, Loop not fused: different loop trip count
+          15, Zero trip check eliminated
+              Loop not vectorized: unknown
+          20, Generated vector simd code for the loop containing reductions
+         250, Loop not vectorized/parallelized: too deeply nested
+test06(int):
+          10, Loop not fused: function call before adjacent loop
+          11, Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+          14, Loop not fused: different loop trip count
+          15, Zero trip check eliminated
+              Loop not vectorized: unknown
+          20, Generated vector simd code for the loop containing reductions
+         304, Loop not vectorized/parallelized: too deeply nested
+test07(int):
+          10, Loop not fused: function call before adjacent loop
+          11, Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+          14, Loop not fused: different loop trip count
+          15, Zero trip check eliminated
+              Loop not vectorized: unknown
+          20, Generated vector simd code for the loop containing reductions
+         358, Loop not vectorized/parallelized: too deeply nested
+test08(int):
+          10, Loop not fused: function call before adjacent loop
+          11, Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+          14, Loop not fused: different loop trip count
+          15, Zero trip check eliminated
+              Loop not vectorized: unknown
+          20, Generated vector simd code for the loop containing reductions
+         412, Loop not vectorized/parallelized: too deeply nested
+test09(int):
+          10, Loop not fused: function call before adjacent loop
+          11, Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+          14, Loop not fused: different loop trip count
+          15, Zero trip check eliminated
+              Loop not vectorized: unknown
+          20, Generated vector simd code for the loop containing reductions
+         466, Loop not vectorized/parallelized: too deeply nested
+main:
+          34, Loop not vectorized/parallelized: too deeply nested
+          46, Zero trip check eliminated
+              Loop not fused: function call before adjacent loop
+              Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+              Loop not vectorized: unknown
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+          88, Loop not vectorized/parallelized: too deeply nested
+         100, Zero trip check eliminated
+              Loop not fused: function call before adjacent loop
+              Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+              Loop not vectorized: unknown
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+         142, Loop not vectorized/parallelized: too deeply nested
+         154, Zero trip check eliminated
+              Loop not fused: function call before adjacent loop
+              Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+              Loop not vectorized: unknown
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+         196, Loop not vectorized/parallelized: too deeply nested
+         208, Zero trip check eliminated
+              Loop not fused: function call before adjacent loop
+              Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+              Loop not vectorized: unknown
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+         250, Loop not vectorized/parallelized: too deeply nested
+         262, Zero trip check eliminated
+              Loop not fused: function call before adjacent loop
+              Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+              Loop not vectorized: unknown
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+         304, Loop not vectorized/parallelized: too deeply nested
+         316, Zero trip check eliminated
+              Loop not fused: function call before adjacent loop
+              Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+              Loop not vectorized: unknown
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+         358, Loop not vectorized/parallelized: too deeply nested
+         370, Zero trip check eliminated
+              Loop not fused: function call before adjacent loop
+              Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+              Loop not vectorized: unknown
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+         412, Loop not vectorized/parallelized: too deeply nested
+         424, Zero trip check eliminated
+              Loop not fused: function call before adjacent loop
+              Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+              Loop not vectorized: unknown
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+         466, Loop not vectorized/parallelized: too deeply nested
+         478, Zero trip check eliminated
+              Loop not fused: function call before adjacent loop
+              Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+              Loop not vectorized: unknown
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+         512, Loop not vectorized/parallelized: too deeply nested
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      5, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      7, include "reference.h"
+chebyshev1(int):
+     17, Generated vector simd code for the loop
+chebyshev2(int):
+     41, Generated vector simd code for the loop
+chebyshev3(int):
+     61, Generated vector simd code for the loop
+chebyshev4(int):
+     81, Generated vector simd code for the loop
+equidistant1(int):
+     99, Generated vector simd code for the loop
+equidistant2(int):
+    121, Generated vector simd code for the loop
+equidistant3(int):
+    138, Generated vector simd code for the loop
+fejer1(int):
+    156, Generated vector simd code for the loop
+fejer2(int):
+    175, Generated vector simd code for the loop
+r8vec_linspace_new(int, double, double):
+    240, Generated vector simd code for the loop
+r8vec_print(int, double*, char const*):
+    257, Loop not vectorized/parallelized: contains call
+lebesgue_function(int, double*, int, double*):
+     14, Generating create(linterp[:nfun*n]) [if not already present]
+         Generating copy(lmax) [if not already present]
+         Generating copyin(xfun[:nfun],x[:n]) [if not already present]
+         Generating implicit firstprivate(n,nfun)
+         Generating NVIDIA GPU code
+         16, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+             Generating reduction(max:lmax)
+         18, #pragma acc loop seq
+             Generating implicit reduction(+:t)
+         20, #pragma acc loop seq
+     16, Loop not fused: no successor loop
+     18, Complex loop carried dependence of linterp-> prevents parallelization
+         Loop carried dependence of linterp-> prevents parallelization
+         Loop carried backward dependence of linterp-> prevents vectorization
+         Complex loop carried dependence of xfun->,x-> prevents parallelization
+     20, Complex loop carried dependence of xfun->,x->,linterp-> prevents parallelization
+         Loop carried dependence of linterp-> prevents parallelization
+         Loop carried backward dependence of linterp-> prevents vectorization
+         Loop carried dependence due to exposed use of linterp prevents parallelization
+         Zero trip check eliminated
+timeout was set to  600

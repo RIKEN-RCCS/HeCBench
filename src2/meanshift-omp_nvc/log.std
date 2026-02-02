@@ -1,0 +1,15 @@
+
+DATASET:    ../meanshift-cuda/dataset/data.csv
+NUM POINTS: 10000
+DIM:        3
+BLOCKS:     157
+THREADS:    64
+TILE WIDTH: 64
+
+Average execution time of mean-shift (base) 1.17371 ms
+
+PASS
+
+Average execution time of mean-shift (opt) 0.93848 ms
+
+PASS

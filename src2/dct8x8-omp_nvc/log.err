@@ -1,0 +1,11 @@
+Out of memory allocating 18446744073429682432 bytes of device memory
+Failing in Thread:1
+total/free CUDA memory: 102005473280/101420171264
+Present table dump for device[1]: NVIDIA Tesla GPU 0, compute capability 9.0, threadid=1
+Hint: specify 0x800 bit in NV_ACC_DEBUG for verbose info.
+...empty...
+Accelerator Fatal Error: call to cuMemAlloc returned error 2 (CUDA_ERROR_OUT_OF_MEMORY): Out of memory
+ File: /hs/work0/home/users/u0001901/2026/test3/tmp4/dct8x8-omp_nvc/main.cpp
+ Function: main:58
+ Line: 81
+

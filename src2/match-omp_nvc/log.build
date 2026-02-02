@@ -1,0 +1,304 @@
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+MatchC1(float*, float*, float*, int*):
+     44, Generated vector simd code for the loop containing reductions
+CheckMatches(int*, int*, float*, float*):
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+main:
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+     91, Loop not vectorized/parallelized: contains call
+     97, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 4 times
+          41, Loop not fused: function call before adjacent loop
+          44, Generated vector simd code for the loop containing reductions
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    119, #omp target teams distribute parallel for thread_limit(128)
+        119, Generating "nvkernel_main_F1L119_2" GPU kernel
+        121, Loop parallelized across teams and threads(128), schedule(static)
+    119, Loop not vectorized/parallelized: contains call
+    121, Loop not vectorized/parallelized: not countable
+    127, Generated vector simd code for the loop containing reductions
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    145, Generating update from(d_index[:16384],d_score[:16384])
+    148, Loop not vectorized/parallelized: contains call
+    150, #omp target teams num_teams(1024) thread_limit(256)
+        150, Generating "nvkernel_main_F1L150_4" GPU kernel
+        155, #omp parallel
+          164, Barrier
+          171, Barrier
+          177, Barrier
+          187, Barrier
+        159, Team private (buffer1,scores,buffer2) located in CUDA shared memory
+    162, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    168, Loop not vectorized/parallelized: contains call
+    169, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    174, Generated vector simd code for the loop containing reductions
+    180, Loop not vectorized: unknown
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    203, Generating update from(d_index[:16384],d_score[:16384])
+    206, Loop not vectorized/parallelized: contains call
+    208, #omp target teams num_teams(1024) thread_limit(256)
+        208, Generating "nvkernel_main_F1L208_6" GPU kernel
+        213, #omp parallel
+          222, Barrier
+          229, Barrier
+          235, Barrier
+          245, Barrier
+        217, Team private (buffer1,scores,buffer2) located in CUDA shared memory
+    220, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    226, Loop not vectorized/parallelized: contains call
+    227, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    232, Generated vector simd code for the loop containing reductions
+    238, Loop not vectorized: unknown
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    261, Generating update from(d_score[:16384],d_index[:16384])
+    264, Loop not vectorized/parallelized: contains call
+    266, #omp target teams num_teams(1024) thread_limit(256)
+        266, Generating "nvkernel_main_F1L266_8" GPU kernel
+        271, #omp parallel
+          280, Barrier
+          287, Barrier
+          297, Barrier
+          307, Barrier
+        275, Team private (buffer1,scores,buffer2) located in CUDA shared memory
+    278, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    284, Loop not vectorized/parallelized: contains call
+    285, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    290, Multiple reductions compressed
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 2 times
+    300, Loop not vectorized: unknown
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    323, Generating update from(d_score[:16384],d_index[:16384])
+    326, Loop not vectorized/parallelized: contains call
+    328, #omp target teams num_teams(1024) thread_limit(256)
+        328, Generating "nvkernel_main_F1L328_10" GPU kernel
+        333, #omp parallel
+          341, Barrier
+          348, Barrier
+          365, Barrier
+          375, Barrier
+        336, Team private (buffer1,scores,buffer2) located in CUDA shared memory
+    339, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    345, Loop not vectorized/parallelized: contains call
+    346, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    352, Loop unrolled 4 times (completely unrolled)
+    354, Loop not vectorized: data dependency
+    356, Loop unrolled 4 times (completely unrolled)
+    362, Loop unrolled 4 times (completely unrolled)
+    368, Loop not vectorized: unknown
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    391, Generating update from(d_score[:16384],d_index[:16384])
+    394, Loop not vectorized/parallelized: contains call
+    396, #omp target teams num_teams(1024) thread_limit(256)
+        396, Generating "nvkernel_main_F1L396_12" GPU kernel
+        400, #omp parallel
+          414, Barrier
+          435, Barrier
+          444, Barrier
+        403, Team private (buffer2,buffer1) located in CUDA shared memory
+    406, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    411, Loop not vectorized/parallelized: contains call
+    412, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    418, Loop unrolled 4 times (completely unrolled)
+    420, Loop not vectorized: data dependency
+    422, Loop unrolled 4 times (completely unrolled)
+    428, Loop unrolled 4 times (completely unrolled)
+    449, Loop unrolled 4 times (completely unrolled)
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    466, Generating update from(d_score[:16384],d_index[:16384])
+    469, Loop not vectorized/parallelized: contains call
+    471, #omp target teams num_teams(512) thread_limit(256)
+        471, Generating "nvkernel_main_F1L471_14" GPU kernel
+        475, #omp parallel
+          489, Barrier
+          510, Barrier
+          517, Barrier
+        478, Team private (buffer2,buffer1) located in CUDA shared memory
+    480, Loop not vectorized: data dependency
+    485, Loop not vectorized/parallelized: contains call
+    487, Loop not vectorized: data dependency
+    492, Loop unrolled 4 times (completely unrolled)
+    494, Loop not vectorized: data dependency
+    496, Loop unrolled 4 times (completely unrolled)
+    504, Loop unrolled 4 times (completely unrolled)
+    522, Loop unrolled 8 times (completely unrolled)
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    539, Generating update from(d_score[:16384],d_index[:16384])
+    542, Loop not vectorized/parallelized: contains call
+    544, #omp target teams num_teams(512) thread_limit(256)
+        544, Generating "nvkernel_main_F1L544_16" GPU kernel
+        548, #omp parallel
+          569, Barrier
+          599, Barrier
+          610, Barrier
+        551, Team private (buffer2,buffer1) located in CUDA shared memory
+    553, Loop not vectorized: data dependency
+    558, Generated vector simd code for the loop
+    567, Loop not vectorized: data dependency
+    573, Outer loop unrolled 1 times (completely unrolled)
+    574, Loop nest collapsed
+         Generated vector simd code for the loop
+    576, Loop not vectorized: data dependency
+    578, Loop unrolled 2 times (completely unrolled)
+    580, Loop unrolled 4 times (completely unrolled)
+    582, Loop unrolled 2 times (completely unrolled)
+    590, Loop not vectorized/parallelized: loop count too small
+    591, Loop unrolled 2 times (completely unrolled)
+    605, Loop unrolled 2 times (completely unrolled)
+         Loop not vectorized: data dependency
+    615, Loop unrolled 8 times (completely unrolled)
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    632, Generating update from(d_score[:16384],d_index[:16384])
+    635, Loop not vectorized/parallelized: contains call
+    637, #omp target teams num_teams(512) thread_limit(128)
+        637, Generating "nvkernel_main_F1L637_18" GPU kernel
+        641, #omp parallel
+          662, Barrier
+          690, Barrier
+          701, Barrier
+        644, Team private (buffer2,buffer1) located in CUDA shared memory
+    646, Loop not vectorized: data dependency
+    651, Generated vector simd code for the loop
+    660, Loop not vectorized: data dependency
+    665, Outer loop unrolled 1 times (completely unrolled)
+    666, Loop nest collapsed
+         Generated vector simd code for the loop
+    668, Loop not vectorized: data dependency
+    670, Loop unrolled 2 times (completely unrolled)
+    672, Loop unrolled 4 times (completely unrolled)
+    674, Loop unrolled 2 times (completely unrolled)
+    682, Loop not vectorized/parallelized: loop count too small
+    683, Loop unrolled 2 times (completely unrolled)
+    696, Loop unrolled 2 times (completely unrolled)
+         Loop not vectorized: data dependency
+    706, Loop unrolled 8 times (completely unrolled)
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    723, Generating update from(d_score[:16384],d_index[:16384])
+    727, Loop not vectorized/parallelized: contains call
+    729, #omp target teams num_teams(512) thread_limit(256)
+        109, Generating map(alloc:d_index[:16384]) 
+             Generating map(to:d_pts1[:2097152],d_pts2[:2097152]) 
+             Generating map(alloc:d_score[:16384]) 
+        729, Generating "nvkernel_main_F1L729_20" GPU kernel
+        733, #omp parallel
+          759, Barrier
+          785, Barrier
+          789, Barrier
+          800, Barrier
+          811, Barrier
+        736, Team private (buffer2,buffer1) located in CUDA shared memory
+    738, Loop not vectorized: data dependency
+    743, Generated vector simd code for the loop
+    752, Outer loop unrolled 1 times (completely unrolled)
+    753, Loop nest collapsed
+         Generated vector simd code for the loop
+    760, Loop not vectorized/parallelized: contains call
+    766, Loop not vectorized: data dependency
+    769, Loop unrolled 2 times (completely unrolled)
+    773, Loop unrolled 4 times (completely unrolled)
+    776, Loop unrolled 2 times (completely unrolled)
+    792, Loop not vectorized/parallelized: loop count too small
+    793, Loop unrolled 2 times (completely unrolled)
+    806, Loop unrolled 2 times (completely unrolled)
+         Loop not vectorized: data dependency
+    816, Loop unrolled 8 times (completely unrolled)
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    833, Generating update from(d_score[:16384],d_index[:16384])
+std::char_traits<char>::length(char const*):
+         171, Loop not vectorized/parallelized: not countable
+float* std::__uninitialized_default_n_1<true>::__uninit_default_n<float*, unsigned long>(float*, unsigned long):
+        1149, Recognized memory set idiom
+int* std::__uninitialized_default_n_1<true>::__uninit_default_n<int*, unsigned long>(int*, unsigned long):
+        1149, Recognized memory set idiom
+std::vector<float, std::allocator<float>>::_M_default_initialize(unsigned long):
+         704, Recognized memory set idiom
+std::vector<int, std::allocator<int>>::_M_default_initialize(unsigned long):
+         704, Recognized memory set idiom
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     13, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+__gnu_cxx::char_traits<char>::length(char const*):
+     10, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                        171, Loop not vectorized/parallelized: not countable
+std::basic_ostream<char, std::char_traits<char>>& std::endl<char, std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&):
+     10, include "iostream"
+          39, include "ostream"
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&, char const*):
+         397, Loop not vectorized/parallelized: not countable
+float* std::__uninitialized_default_n_a<float*, unsigned long, float>(float*, unsigned long, std::allocator<float>&):
+         638, Recognized memory set idiom
+float* std::__uninitialized_default_n<float*, unsigned long>(float*, unsigned long):
+         603, Recognized memory set idiom
+float* std::fill_n<float*, unsigned long, float>(float*, unsigned long, float const&):
+        1120, Recognized memory set idiom
+float* std::__fill_n_a<float*, unsigned long, float>(float*, unsigned long, float const&, std::random_access_iterator_tag):
+         969, Recognized memory set idiom
+void std::__fill_a<float*, float>(float*, float*, float const&):
+         923, Recognized memory set idiom
+__gnu_cxx::__enable_if<std::__is_scalar<float>::__value, void>::__type std::__fill_a1<float*, float>(float*, float*, float const&):
+      9, include "cmath"
+          17, include "cmath"
+             1935, include "specfun.h"
+                    45, include "stl_algobase.h"
+                        923, Recognized memory set idiom
+     13, include "chrono"
+int* std::__uninitialized_default_n_a<int*, unsigned long, int>(int*, unsigned long, std::allocator<int>&):
+         638, Recognized memory set idiom
+int* std::__uninitialized_default_n<int*, unsigned long>(int*, unsigned long):
+         603, Recognized memory set idiom
+int* std::fill_n<int*, unsigned long, int>(int*, unsigned long, int const&):
+        1120, Recognized memory set idiom
+int* std::__fill_n_a<int*, unsigned long, int>(int*, unsigned long, int const&, std::random_access_iterator_tag):
+         969, Recognized memory set idiom
+void std::__fill_a<int*, int>(int*, int*, int const&):
+         923, Recognized memory set idiom
+__gnu_cxx::__enable_if<std::__is_scalar<int>::__value, void>::__type std::__fill_a1<int*, int>(int*, int*, int const&):
+      9, include "cmath"
+          17, include "cmath"
+             1935, include "specfun.h"
+                    45, include "stl_algobase.h"
+                        923, Recognized memory set idiom
+     13, include "chrono"
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

@@ -1,0 +1,70 @@
+main:
+    109, Loop not vectorized/parallelized: contains call
+    117, Generating copyin(d_distance[:n_nbrs*n]) [if not already present]
+         Generating copyout(d_data[:n_nbrs*n]) [if not already present]
+    120, Loop not vectorized/parallelized: contains call
+          18, Loop not vectorized/parallelized: potential early exits
+          22, Loop not fused: dependence chain to sibling loop
+              Generated vector simd code for the loop containing reductions
+          30, Generated vector simd code for the loop containing reductions
+    130, Loop not vectorized/parallelized: potential early exits
+void perplexity_search<int, float>(float const*, float*, float, int, float, int, int, double&):
+     39, Generating implicit firstprivate(epochs,n,k)
+         Generating NVIDIA GPU code
+         42, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+         52, #pragma acc loop seq
+             Generating implicit reduction(+:sum_Pi)
+         60, #pragma acc loop seq
+             Generating implicit reduction(+:sum_disti_Pi)
+     39, Generating implicit copy(P[:]) [if not already present]
+         Generating implicit copyin(distances[:]) [if not already present]
+     48, Loop carried scalar dependence for beta_min at line 80,83
+         Loop carried scalar dependence for beta at line 53,65,73,75,77,79,81,83
+         Loop carried scalar dependence for beta_max at line 74,77
+         Loop carried scalar dependence for beta at line 65
+         Loop carried dependence of P-> prevents parallelization
+         Loop carried backward dependence of P-> prevents vectorization
+         Generating implicit firstprivate(desired_entropy,tol)
+         Loop not vectorized/parallelized: potential early exits
+     52, Loop not fused: dependence chain to sibling loop
+         Generated vector simd code for the loop containing reductions
+     60, Generated vector simd code for the loop containing reductions
+void reference<int, float>(float const*, float*, float, int, float, int, int):
+     25, include "reference.cpp"
+          18, Loop not vectorized/parallelized: potential early exits
+          22, Loop not fused: dependence chain to sibling loop
+              Generated vector simd code for the loop containing reductions
+          30, Generated vector simd code for the loop containing reductions
+float* std::__uninitialized_default_n_1<true>::__uninit_default_n<float*, unsigned long>(float*, unsigned long):
+        1149, Recognized memory set idiom
+std::vector<float, std::allocator<float>>::vector(unsigned long, std::allocator<float> const&):
+     25, include "reference.cpp"
+std::vector<float, std::allocator<float>>::_M_default_initialize(unsigned long):
+         704, Recognized memory set idiom
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     21, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::isinf(float):
+                        585, Generating implicit omp declare target routine
+                             Generating NVIDIA GPU code
+     21, include "chrono"
+float* std::__uninitialized_default_n_a<float*, unsigned long, float>(float*, unsigned long, std::allocator<float>&):
+         638, Recognized memory set idiom
+float* std::__uninitialized_default_n<float*, unsigned long>(float*, unsigned long):
+         603, Recognized memory set idiom
+float* std::fill_n<float*, unsigned long, float>(float*, unsigned long, float const&):
+        1120, Recognized memory set idiom
+float* std::__fill_n_a<float*, unsigned long, float>(float*, unsigned long, float const&, std::random_access_iterator_tag):
+         969, Recognized memory set idiom
+void std::__fill_a<float*, float>(float*, float*, float const&):
+         923, Recognized memory set idiom
+__gnu_cxx::__enable_if<std::__is_scalar<float>::__value, void>::__type std::__fill_a1<float*, float>(float*, float*, float const&):
+     19, include "math.h"
+          12, include "math.h"
+               36, include "cmath"
+                    17, include "cmath"
+                       1935, include "specfun.h"
+                              45, include "stl_algobase.h"
+                                  923, Recognized memory set idiom
+     21, include "chrono"
+timeout was set to  600

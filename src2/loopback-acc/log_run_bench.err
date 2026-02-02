@@ -1,0 +1,31 @@
+"kernels.cpp", line 59: error: identifier "omp_get_thread_num" is undefined
+    int base = omp_get_thread_num();
+               ^
+
+"kernels.cpp", line 102: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(LOOKBACK_TAUSWORTHE_NUM_BLOCKS) \
+                         ^
+
+"kernels.cpp", line 102: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(LOOKBACK_TAUSWORTHE_NUM_BLOCKS) \
+                               ^
+
+"kernels.cpp", line 108: error: identifier "omp_get_team_num" is undefined
+        unsigned address = omp_get_team_num() * LOOKBACK_TAUSWORTHE_NUM_THREADS + omp_get_thread_num();
+                           ^
+
+"kernels.cpp", line 108: error: identifier "omp_get_thread_num" is undefined
+        unsigned address = omp_get_team_num() * LOOKBACK_TAUSWORTHE_NUM_THREADS + omp_get_thread_num();
+                                                                                  ^
+
+"main.cpp", line 51: error: invalid text in pragma
+  #pragma acc data to:\
+                   ^
+
+"main.cpp", line 51: error: extra text after expected end of preprocessing directive
+  #pragma acc data to:\
+                     ^
+
+7 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

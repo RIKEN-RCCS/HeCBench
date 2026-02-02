@@ -1,0 +1,59 @@
+red_ref(float const*, float const*, float const*, float const*, float const*, float const*, float const*, float*):
+     33, include "reference.h"
+          24, #omp parallel
+              24, Generating reduction(+:norm_L2)
+          25, Loop not vectorized: data dependency
+black_ref(float const*, float const*, float const*, float const*, float const*, float const*, float const*, float*):
+     33, include "reference.h"
+          71, #omp parallel
+              71, Generating reduction(+:norm_L2)
+          72, Loop not vectorized: data dependency
+fill_coeffs(int, int, float, float, float, float, float, float*, float*, float*, float*, float*, float*):
+     56, Invariant if transformation
+         Loop not fused: no successor loop
+     57, Invariant if transformation
+         Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+main:
+          56, Loop not fused: different loop trip count
+          57, Invariant if transformation
+              Loop not fused: no successor loop
+              Loop not vectorized: data dependency
+    161, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 8 times
+    172, Recognized memory zero idiom
+    183, Generating copyin(aN[:size],aS[:size],aP[:size],aE[:size],aW[:size],b[:size]) [if not already present]
+         Generating copy(temp_red[:size_temp],temp_black[:size_temp]) [if not already present]
+         Generating copyin(bl_norm_L2[:size_norm]) [if not already present]
+    186, Loop not vectorized/parallelized: potential early exits
+    188, Generating NVIDIA GPU code
+        191, #pragma acc loop gang, vector(256) collapse(2) /* blockIdx.x threadIdx.x */
+        192,   /* blockIdx.x threadIdx.x collapsed */
+    191, Loop not fused: no successor loop
+    192, Loop not vectorized: data dependency
+    210, Generating implicit firstprivate(size_norm)
+         Generating NVIDIA GPU code
+        213, #pragma acc loop gang, vector(128) /* blockIdx.x threadIdx.x */
+             Generating reduction(+:norm_L2)
+    210, Generating implicit copy(norm_L2) [if not already present]
+    213, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 8 times
+    215, Generating NVIDIA GPU code
+        218, #pragma acc loop gang, vector(256) collapse(2) /* blockIdx.x threadIdx.x */
+        219,   /* blockIdx.x threadIdx.x collapsed */
+    218, Loop not fused: no successor loop
+    219, Loop not vectorized: data dependency
+    237, Generating implicit firstprivate(size_norm)
+         Generating NVIDIA GPU code
+        240, #pragma acc loop gang, vector(128) /* blockIdx.x threadIdx.x */
+             Generating reduction(+:norm_L2)
+    237, Generating implicit copy(norm_L2) [if not already present]
+    240, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 8 times
+    259, Loop not vectorized/parallelized: potential early exits
+    276, Loop not vectorized/parallelized: contains call
+timeout was set to  600

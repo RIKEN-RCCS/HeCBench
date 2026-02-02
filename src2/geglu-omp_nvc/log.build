@@ -1,0 +1,45 @@
+nvc++  -Wall -I../geglu-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+main:
+     49, Loop not vectorized/parallelized: too deeply nested
+     50, Loop not vectorized/parallelized: too deeply nested
+     58, Loop not vectorized/parallelized: contains call
+        1861, Loop not fused: function call before adjacent loop
+              Loop not vectorized: may not be beneficial for target
+          10, Loop not vectorized/parallelized: contains call
+     64, Generating map(to:x_and_gate[:nelems]) 
+         Generating map(from:output[:?]) 
+     69, Loop not vectorized/parallelized: potential early exits
+     84, Loop not vectorized/parallelized: too deeply nested
+     85, Loop not vectorized/parallelized: too deeply nested
+     91, Loop not vectorized/parallelized: contains call
+        1861, Loop not fused: function call before adjacent loop
+              Loop not vectorized: may not be beneficial for target
+     96, Generating map(alloc:output[:?]) 
+         Generating map(to:x_and_gate[:nelems]) 
+     98, Loop not vectorized/parallelized: contains call
+void geglu_reference<float>(float*, float const*, int, int):
+      8, include "reference.h"
+          10, Loop not vectorized/parallelized: contains call
+void geglu_gpu<float>(float*, float const*, long, int):
+     18, #omp target teams distribute parallel for
+         18, Generating "nvkernel__Z9geglu_gpuIfEvPT_PKS0_li_F1L18_2" GPU kernel
+         20, Loop parallelized across teams and threads(128), schedule(static)
+     21, Loop not vectorized/parallelized: contains call
+float gelu_reference<float>(float):
+      8, include "reference.h"
+           2, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+float std::uniform_real_distribution<float>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&):
+        1870, Loop not vectorized: data dependency
+float std::uniform_real_distribution<float>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&, std::uniform_real_distribution<float>::param_type const&):
+         189, Loop not vectorized: data dependency
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::__detail::_Adaptor<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>, float>::operator()():
+        3364, Loop not vectorized: data dependency
+float std::generate_canonical<float, 24ul, std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&):
+      5, include "random"
+          51, include "random.tcc"
+             3364, Loop not vectorized: data dependency
+nvc++  -Wall -I../geglu-cuda -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

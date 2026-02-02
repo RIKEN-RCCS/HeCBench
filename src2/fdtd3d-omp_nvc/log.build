@@ -1,0 +1,329 @@
+nvc++  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+main:
+         236, Generated vector simd code for the loop
+runTest(int, char const**):
+    236, Generated vector simd code for the loop
+nvc++  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 -c FDTD3dReference.cpp -o FDTD3dReference.o
+generateRandomData(float*, int, int, int, float, float):
+     24, Loop nest collapsed
+         Loop not vectorized/parallelized: contains call
+generatePatternData(float*, int, int, int, float, float):
+     39, Generated vector simd code for the loop
+         Loop unrolled 8 times
+fdtdReference(float*, float const*, float const*, int, int, int, int, int):
+     95, Loop not vectorized/parallelized: too deeply nested
+    100, Loop not vectorized/parallelized: too deeply nested
+    109, Multiple reductions compressed
+         Loop not fused: no successor loop
+         Generated vector simd code for postive and negative strides
+compareData(float const*, float const*, int, int, int, int, float):
+    149, Loop not vectorized/parallelized: potential early exits
+nvc++  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 -c FDTD3dGPU.cpp -o FDTD3dGPU.o
+fdtdGPU(float*, float*, float const*, int, int, int, int, int, int, char const**):
+     68, Loop not vectorized/parallelized: contains call
+     71, #omp target teams num_teams(numTeam) thread_limit(userWorkSize)
+         65, Generating map(to:bufferIn[:paddedVolumeSize],coeff[:radius+1],bufferOut[:paddedVolumeSize]) 
+         71, Generating "nvkernel__Z7fdtdGPUPfS_PKfiiiiiiPPKc_F1L71_2" GPU kernel
+         74, #omp parallel
+          140, Barrier
+          163, Barrier
+         81, Team private (tile) located in CUDA shared memory
+    110, Loop not vectorized: data dependency
+         Loop unrolled 3 times (completely unrolled)
+    120, Loop not vectorized: data dependency
+         Loop unrolled 4 times (completely unrolled)
+    127, Loop not vectorized/parallelized: contains call
+    130, Loop unrolled 3 times (completely unrolled)
+    134, Loop unrolled 3 times (completely unrolled)
+    167, Loop unrolled 4 times (completely unrolled)
+    190, Generating update from(bufferIn[:paddedVolumeSize])
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     16, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 -c shrUtils.cpp -o shrUtils.o
+"shrUtils.cpp", line 86: warning: variable "szNumWritten" was set but never used [set_but_not_used]
+    size_t szNumWritten = 0;
+           ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+shrFillArray:
+     46, Loop not vectorized/parallelized: contains call
+shrPrintArray:
+     57, Loop not vectorized/parallelized: contains call
+shrFindFilePath:
+    560, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrReadFile<float>(char const*, float**, unsigned int*, bool):
+    633, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrReadFile<double>(char const*, double**, unsigned int*, bool):
+    633, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrReadFile<int>(char const*, int**, unsigned int*, bool):
+    633, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrReadFile<unsigned int>(char const*, unsigned int**, unsigned int*, bool):
+    633, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrReadFile<char>(char const*, char**, unsigned int*, bool):
+    633, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrReadFile<unsigned char>(char const*, unsigned char**, unsigned int*, bool):
+    633, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrWriteFile<float>(char const*, float const*, unsigned int, float, bool):
+    709, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrWriteFile<double>(char const*, double const*, unsigned int, double, bool):
+    709, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrWriteFile<int>(char const*, int const*, unsigned int, int, bool):
+    709, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrWriteFile<unsigned int>(char const*, unsigned int const*, unsigned int, unsigned int, bool):
+    709, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrWriteFile<char>(char const*, char const*, unsigned int, char, bool):
+    709, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrWriteFile<unsigned char>(char const*, unsigned char const*, unsigned int, unsigned char, bool):
+    709, Loop not vectorized/parallelized: potential early exits
+loadPPM(char const*, unsigned char**, unsigned int*, unsigned int*, unsigned int*):
+    967, Loop not vectorized/parallelized: potential early exits
+savePPM(char const*, unsigned char*, unsigned int, unsigned int, unsigned int):
+   1074, Loop not vectorized/parallelized: potential early exits
+shrLoadPPM4ub:
+   1121, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+shrSavePPM4ub:
+   1156, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+shrComparef:
+        1414, Loop not vectorized: unknown
+shrBOOL compareData<float, float>(float const*, float const*, unsigned int, float, float):
+   1414, Loop not fused: complex flow graph
+         Loop not vectorized: unknown
+shrComparei:
+        1414, Loop not vectorized: unknown
+shrBOOL compareData<int, int>(int const*, int const*, unsigned int, int, float):
+   1414, Loop not fused: complex flow graph
+         Loop not vectorized: unknown
+shrCompareuit:
+        1502, Loop not fused: complex flow graph
+shrBOOL compareDataAsFloatThreshold<unsigned int, float>(unsigned int const*, unsigned int const*, unsigned int, float, float):
+   1502, Loop not fused: complex flow graph
+shrCompareub:
+        1414, Loop not vectorized: unknown
+shrBOOL compareData<unsigned char, int>(unsigned char const*, unsigned char const*, unsigned int, int, float):
+   1414, Loop not fused: complex flow graph
+         Loop not vectorized: unknown
+shrCompareubt:
+        1502, Loop not fused: complex flow graph
+shrBOOL compareDataAsFloatThreshold<unsigned char, float>(unsigned char const*, unsigned char const*, unsigned int, float, float):
+   1502, Loop not fused: complex flow graph
+shrComparefe:
+        1414, Loop not vectorized: unknown
+shrComparefet:
+        1502, Loop not fused: complex flow graph
+shrBOOL compareDataAsFloatThreshold<float, float>(float const*, float const*, unsigned int, float, float):
+   1502, Loop not fused: complex flow graph
+shrCompareL2fe:
+   1660, Generated vector simd code for the loop containing reductions
+shrComparePPM:
+        1121, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 4 times
+        1121, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 4 times
+        1598, Loop not fused: complex flow graph
+shrComparePGM:
+        1121, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 4 times
+        1121, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 4 times
+        1598, Loop not fused: complex flow graph
+CmdArgReader::existArgHelper(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&) const:
+     25, include "cmd_arg_reader.h"
+             1195, Loop not vectorized/parallelized: contains call
+             1195, Loop not vectorized/parallelized: contains call
+int const* CmdArgReader::getArg<int>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     25, include "cmd_arg_reader.h"
+float const* CmdArgReader::getArg<float>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     25, include "cmd_arg_reader.h"
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const* CmdArgReader::getArg<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     25, include "cmd_arg_reader.h"
+int const* CmdArgReader::getArgHelper<int>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     25, include "cmd_arg_reader.h"
+        1170, Loop not vectorized/parallelized: contains call
+        1170, Loop not vectorized/parallelized: contains call
+float const* CmdArgReader::getArgHelper<float>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     25, include "cmd_arg_reader.h"
+        1170, Loop not vectorized/parallelized: contains call
+        1170, Loop not vectorized/parallelized: contains call
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const* CmdArgReader::getArgHelper<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     25, include "cmd_arg_reader.h"
+        1170, Loop not vectorized/parallelized: contains call
+        1170, Loop not vectorized/parallelized: contains call
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>>::_S_key(std::_Rb_tree_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>> const*):
+     25, include "cmd_arg_reader.h"
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>>::_M_get_insert_unique_pos(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     25, include "cmd_arg_reader.h"
+          18, include "map"
+               60, include "stl_tree.h"
+                  2068, Loop not vectorized/parallelized: contains call
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>>::_M_get_insert_hint_unique_pos(std::_Rb_tree_const_iterator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+        2068, Loop not vectorized/parallelized: contains call
+        2068, Loop not vectorized/parallelized: contains call
+        2068, Loop not vectorized/parallelized: contains call
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>>::_M_lower_bound(std::_Rb_tree_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>*, std::_Rb_tree_node_base*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     25, include "cmd_arg_reader.h"
+          18, include "map"
+               60, include "stl_tree.h"
+                  1904, Loop not vectorized/parallelized: contains call
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>>::_M_lower_bound(std::_Rb_tree_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>> const*, std::_Rb_tree_node_base const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&) const:
+     25, include "cmd_arg_reader.h"
+          18, include "map"
+               60, include "stl_tree.h"
+                  1920, Loop not vectorized/parallelized: contains call
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>>::find(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+        1904, Loop not vectorized/parallelized: contains call
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>>::find(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&) const:
+        1920, Loop not vectorized/parallelized: contains call
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>>::lower_bound(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+        1904, Loop not vectorized/parallelized: contains call
+std::_Rb_tree_iterator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>> std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>>::_M_emplace_hint_unique<std::piecewise_construct_t const&, std::tuple<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&>, std::tuple<>>(std::_Rb_tree_const_iterator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>, std::piecewise_construct_t const&, std::tuple<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&>&&, std::tuple<>&&):
+     25, include "cmd_arg_reader.h"
+          18, include "map"
+               60, include "stl_tree.h"
+std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::type_info const*, void*>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>>::operator[](std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     25, include "cmd_arg_reader.h"
+          18, include "map"
+        1259, Loop not vectorized/parallelized: contains call
+std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::type_info const*, void*>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>>::find(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+        2523, Loop not vectorized/parallelized: contains call
+std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::type_info const*, void*>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>>::find(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&) const:
+        2536, Loop not vectorized/parallelized: contains call
+std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::type_info const*, void*>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>>::lower_bound(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+        1270, Loop not vectorized/parallelized: contains call
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::_S_key(std::_Rb_tree_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>> const*):
+     25, include "cmd_arg_reader.h"
+          18, include "map"
+               60, include "stl_tree.h"
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::_M_lower_bound(std::_Rb_tree_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>*, std::_Rb_tree_node_base*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     25, include "cmd_arg_reader.h"
+          18, include "map"
+               60, include "stl_tree.h"
+                  1904, Loop not vectorized/parallelized: contains call
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::_M_lower_bound(std::_Rb_tree_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>> const*, std::_Rb_tree_node_base const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&) const:
+     25, include "cmd_arg_reader.h"
+          18, include "map"
+               60, include "stl_tree.h"
+                  1920, Loop not vectorized/parallelized: contains call
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::find(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     25, include "cmd_arg_reader.h"
+          18, include "map"
+               60, include "stl_tree.h"
+                  1904, Loop not vectorized/parallelized: contains call
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::find(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&) const:
+        1920, Loop not vectorized/parallelized: contains call
+std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::find(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+        2523, Loop not vectorized/parallelized: contains call
+std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::find(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&) const:
+        2536, Loop not vectorized/parallelized: contains call
+std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, 0ul>(std::tuple<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&>&, std::tuple<>&, std::_Index_tuple<0ul>, std::_Index_tuple<>):
+     25, include "cmd_arg_reader.h"
+          18, include "map"
+void std::allocator_traits<std::allocator<std::_Rb_tree_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>>>::destroy<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>(std::allocator<std::_Rb_tree_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>>&, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>*):
+     25, include "cmd_arg_reader.h"
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::_M_check_length(unsigned long, unsigned long, char const*) const:
+     25, include "cmd_arg_reader.h"
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     25, include "cmd_arg_reader.h"
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::replace(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, char*, char*):
+     25, include "cmd_arg_reader.h"
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>& std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::assign<char*, void>(char*, char*):
+     25, include "cmd_arg_reader.h"
+std::basic_ostream<char, std::char_traits<char>>& std::endl<char, std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&):
+     25, include "cmd_arg_reader.h"
+float* std::__copy_move_a<true, float*, float*>(float*, float*, float*):
+     25, include "cmd_arg_reader.h"
+double* std::__copy_move_a<true, double*, double*>(double*, double*, double*):
+     25, include "cmd_arg_reader.h"
+int* std::__copy_move_a<true, int*, int*>(int*, int*, int*):
+     25, include "cmd_arg_reader.h"
+unsigned int* std::__copy_move_a<true, unsigned int*, unsigned int*>(unsigned int*, unsigned int*, unsigned int*):
+     25, include "cmd_arg_reader.h"
+char* std::__copy_move_a<true, char*, char*>(char*, char*, char*):
+     25, include "cmd_arg_reader.h"
+unsigned char* std::__copy_move_a<true, unsigned char*, unsigned char*>(unsigned char*, unsigned char*, unsigned char*):
+     25, include "cmd_arg_reader.h"
+_INTERNAL_12_shrUtils_cpp_shrFree::shrLogV(int, int, char const*, __va_list_tag):
+    255, Loop not vectorized/parallelized: potential early exits
+nvc++  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 -c cmd_arg_reader.cpp -o cmd_arg_reader.o
+CmdArgReader::~CmdArgReader():
+          76, Loop not vectorized/parallelized: potential early exits
+CmdArgReader::createArgsMaps(int, char const**):
+    123, Loop not vectorized/parallelized: potential early exits
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>>::_M_erase(std::_Rb_tree_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>*):
+     13, include "cmd_arg_reader.h"
+          18, include "map"
+               60, include "stl_tree.h"
+                  1887, Loop not vectorized/parallelized: potential early exits
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>>::~_Rb_tree():
+     13, include "cmd_arg_reader.h"
+          18, include "map"
+               60, include "stl_tree.h"
+                       1887, Loop not vectorized/parallelized: potential early exits
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::_S_key(std::_Rb_tree_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>> const*):
+     13, include "cmd_arg_reader.h"
+          18, include "map"
+               60, include "stl_tree.h"
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::_M_get_insert_unique_pos(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     13, include "cmd_arg_reader.h"
+          18, include "map"
+               60, include "stl_tree.h"
+                  2068, Loop not vectorized/parallelized: contains call
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::_M_get_insert_hint_unique_pos(std::_Rb_tree_const_iterator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+        2068, Loop not vectorized/parallelized: contains call
+        2068, Loop not vectorized/parallelized: contains call
+        2068, Loop not vectorized/parallelized: contains call
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::_M_erase(std::_Rb_tree_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>*):
+     13, include "cmd_arg_reader.h"
+          18, include "map"
+               60, include "stl_tree.h"
+                  1887, Loop not vectorized/parallelized: potential early exits
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::_M_lower_bound(std::_Rb_tree_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>*, std::_Rb_tree_node_base*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     13, include "cmd_arg_reader.h"
+          18, include "map"
+               60, include "stl_tree.h"
+                  1904, Loop not vectorized/parallelized: contains call
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::~_Rb_tree():
+        1887, Loop not vectorized/parallelized: potential early exits
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::lower_bound(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+        1904, Loop not vectorized/parallelized: contains call
+std::_Rb_tree_iterator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>> std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::_M_emplace_hint_unique<std::piecewise_construct_t const&, std::tuple<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>&&>, std::tuple<>>(std::_Rb_tree_const_iterator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::piecewise_construct_t const&, std::tuple<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>&&>&&, std::tuple<>&&):
+     13, include "cmd_arg_reader.h"
+          18, include "map"
+               60, include "stl_tree.h"
+std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::operator[](std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>&&):
+     13, include "cmd_arg_reader.h"
+          18, include "map"
+        1259, Loop not vectorized/parallelized: contains call
+std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::lower_bound(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+        1270, Loop not vectorized/parallelized: contains call
+std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>&&>(std::piecewise_construct_t, std::tuple<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>&&>, std::tuple<>):
+     13, include "cmd_arg_reader.h"
+          18, include "map"
+std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>&&, 0ul>(std::tuple<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>&&>&, std::tuple<>&, std::_Index_tuple<0ul>, std::_Index_tuple<>):
+     13, include "cmd_arg_reader.h"
+          18, include "map"
+void std::_Destroy_aux<false>::__destroy<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*):
+     12, include "vector"
+          65, include "stl_construct.h"
+              162, Loop not vectorized/parallelized: contains call
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::replace(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, char*, char*):
+     13, include "cmd_arg_reader.h"
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::compare(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&) const:
+     13, include "cmd_arg_reader.h"
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>& std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::assign<char*, void>(char*, char*):
+     13, include "cmd_arg_reader.h"
+std::__cxx11::basic_stringbuf<char, std::char_traits<char>, std::allocator<char>>::str() const:
+     13, include "cmd_arg_reader.h"
+void __gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::destroy<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>(std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>*):
+     12, include "vector"
+void std::_Destroy<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*):
+     12, include "vector"
+          65, include "stl_construct.h"
+nvc++  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 main.o FDTD3dReference.o FDTD3dGPU.o shrUtils.o cmd_arg_reader.o -o main 

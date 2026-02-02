@@ -1,0 +1,9 @@
+NVC++-S-0155-OMP for loop increment not in canonical form
+  (stencil_1d.cpp: 38)
+NVC++-S-0094-Illegal type conversion required (stencil_1d.cpp: 38)
+NVC++-S-0094-Illegal type conversion required (stencil_1d.cpp: 38)
+NVC++-S-0094-Illegal type conversion required (stencil_1d.cpp: 38)
+NVC++-S-0094-Illegal type conversion required (stencil_1d.cpp: 38)
+NVC++/arm Linux 25.9-0: compilation completed with severe errors
+make: *** [Makefile.NVD:57: stencil_1d.o] Error 2
+timeout was set to  600

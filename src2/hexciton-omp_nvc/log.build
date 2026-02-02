@@ -1,0 +1,588 @@
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+"main.cpp", line 201: warning: incompatible redefinition of macro "sigma_real" (declared at line 126) [bad_macro_redef]
+          #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + (sigma_id))
+                  ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"main.cpp", line 202: warning: incompatible redefinition of macro "sigma_imag" (declared at line 127) [bad_macro_redef]
+          #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + VEC_LENGTH_AUTO + (sigma_id))
+                  ^
+
+"main.cpp", line 204: warning: incompatible redefinition of macro "ham_real" (declared at line 129) [bad_macro_redef]
+          #define ham_real(i, j) ((i) * dim + (j))
+                  ^
+
+"main.cpp", line 205: warning: incompatible redefinition of macro "ham_imag" (declared at line 130) [bad_macro_redef]
+          #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+                  ^
+
+"main.cpp", line 238: warning: incompatible redefinition of macro "package_id" (declared at line 198) [bad_macro_redef]
+          #define package_id ((gid / VEC_LENGTH_AUTO) * VEC_LENGTH_AUTO * 2 * DIM * DIM)
+                  ^
+
+"main.cpp", line 241: warning: incompatible redefinition of macro "sigma_real" (declared at line 201) [bad_macro_redef]
+          #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + (sigma_id))
+                  ^
+
+"main.cpp", line 242: warning: incompatible redefinition of macro "sigma_imag" (declared at line 202) [bad_macro_redef]
+          #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + VEC_LENGTH_AUTO + (sigma_id))
+                  ^
+
+"main.cpp", line 244: warning: incompatible redefinition of macro "ham_real" (declared at line 204) [bad_macro_redef]
+          #define ham_real(i, j) ((i) * DIM + (j))
+                  ^
+
+"main.cpp", line 245: warning: incompatible redefinition of macro "ham_imag" (declared at line 205) [bad_macro_redef]
+          #define ham_imag(i, j) (DIM * DIM + (i) * DIM + (j))
+                  ^
+
+"main.cpp", line 334: warning: incompatible redefinition of macro "package_id" (declared at line 238) [bad_macro_redef]
+          #define package_id ((gid / VEC_LENGTH_AUTO) * VEC_LENGTH_AUTO * 2 * dim * dim)
+                  ^
+
+"main.cpp", line 337: warning: incompatible redefinition of macro "sigma_real" (declared at line 241) [bad_macro_redef]
+          #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + (sigma_id))
+                  ^
+
+"main.cpp", line 338: warning: incompatible redefinition of macro "sigma_imag" (declared at line 242) [bad_macro_redef]
+          #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + VEC_LENGTH_AUTO + (sigma_id))
+                  ^
+
+"main.cpp", line 339: warning: incompatible redefinition of macro "ham_real" (declared at line 244) [bad_macro_redef]
+          #define ham_real(i, j) ((i) * dim + (j))
+                  ^
+
+"main.cpp", line 340: warning: incompatible redefinition of macro "ham_imag" (declared at line 245) [bad_macro_redef]
+          #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+                  ^
+
+"main.cpp", line 370: warning: incompatible redefinition of macro "package_id" (declared at line 334) [bad_macro_redef]
+          #define package_id ((gid / VEC_LENGTH_AUTO) * VEC_LENGTH_AUTO * 2 * DIM * DIM)
+                  ^
+
+"main.cpp", line 373: warning: incompatible redefinition of macro "sigma_real" (declared at line 337) [bad_macro_redef]
+          #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + (sigma_id))
+                  ^
+
+"main.cpp", line 374: warning: incompatible redefinition of macro "sigma_imag" (declared at line 338) [bad_macro_redef]
+          #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + VEC_LENGTH_AUTO + (sigma_id))
+                  ^
+
+"main.cpp", line 375: warning: incompatible redefinition of macro "ham_real" (declared at line 339) [bad_macro_redef]
+          #define ham_real(i, j) ((i) * DIM + (j))
+                  ^
+
+"main.cpp", line 376: warning: incompatible redefinition of macro "ham_imag" (declared at line 340) [bad_macro_redef]
+          #define ham_imag(i, j) (DIM * DIM + (i) * DIM + (j))
+                  ^
+
+"main.cpp", line 446: warning: incompatible redefinition of macro "package_id" (declared at line 370) [bad_macro_redef]
+          #define package_id ((PACKAGES_PER_WG * g + p) * (VEC_LENGTH_AUTO * 2 * dim * dim))
+                  ^
+
+"main.cpp", line 447: warning: incompatible redefinition of macro "sigma_id" (declared at line 199) [bad_macro_redef]
+          #define sigma_id (v)
+                  ^
+
+"main.cpp", line 449: warning: incompatible redefinition of macro "sigma_real" (declared at line 373) [bad_macro_redef]
+          #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + sigma_id)
+                  ^
+
+"main.cpp", line 450: warning: incompatible redefinition of macro "sigma_imag" (declared at line 374) [bad_macro_redef]
+          #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + VEC_LENGTH_AUTO + sigma_id)
+                  ^
+
+"main.cpp", line 451: warning: incompatible redefinition of macro "ham_real" (declared at line 375) [bad_macro_redef]
+          #define ham_real(i, j) ((i) * dim + (j))
+                  ^
+
+"main.cpp", line 452: warning: incompatible redefinition of macro "ham_imag" (declared at line 376) [bad_macro_redef]
+          #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+                  ^
+
+"main.cpp", line 488: warning: incompatible redefinition of macro "package_id" (declared at line 446) [bad_macro_redef]
+          #define package_id ((PACKAGES_PER_WG * g + p) * (VEC_LENGTH_AUTO * 2 * DIM * DIM))
+                  ^
+
+"main.cpp", line 491: warning: incompatible redefinition of macro "sigma_real" (declared at line 449) [bad_macro_redef]
+          #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + sigma_id)
+                  ^
+
+"main.cpp", line 492: warning: incompatible redefinition of macro "sigma_imag" (declared at line 450) [bad_macro_redef]
+          #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + VEC_LENGTH_AUTO + sigma_id)
+                  ^
+
+"main.cpp", line 494: warning: incompatible redefinition of macro "ham_real" (declared at line 451) [bad_macro_redef]
+          #define ham_real(i, j) ((i) * DIM + (j))
+                  ^
+
+"main.cpp", line 495: warning: incompatible redefinition of macro "ham_imag" (declared at line 452) [bad_macro_redef]
+          #define ham_imag(i, j) (DIM * DIM + (i) * DIM + (j))
+                  ^
+
+"main.cpp", line 585: warning: incompatible redefinition of macro "package_id" (declared at line 488) [bad_macro_redef]
+          #define package_id ((PACKAGES_PER_WG * g + p) * (VEC_LENGTH_AUTO * 2 * dim * dim))
+                  ^
+
+"main.cpp", line 588: warning: incompatible redefinition of macro "sigma_real" (declared at line 491) [bad_macro_redef]
+          #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + sigma_id)
+                  ^
+
+"main.cpp", line 589: warning: incompatible redefinition of macro "sigma_imag" (declared at line 492) [bad_macro_redef]
+          #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + VEC_LENGTH_AUTO + sigma_id)
+                  ^
+
+"main.cpp", line 590: warning: incompatible redefinition of macro "ham_real" (declared at line 494) [bad_macro_redef]
+          #define ham_real(i, j) ((i) * dim + (j))
+                  ^
+
+"main.cpp", line 591: warning: incompatible redefinition of macro "ham_imag" (declared at line 495) [bad_macro_redef]
+          #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+                  ^
+
+"main.cpp", line 622: warning: incompatible redefinition of macro "package_id" (declared at line 585) [bad_macro_redef]
+          #define package_id ((PACKAGES_PER_WG * g + p) * (VEC_LENGTH_AUTO * 2 * DIM * DIM))
+                  ^
+
+"main.cpp", line 625: warning: incompatible redefinition of macro "sigma_real" (declared at line 588) [bad_macro_redef]
+          #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + sigma_id)
+                  ^
+
+"main.cpp", line 626: warning: incompatible redefinition of macro "sigma_imag" (declared at line 589) [bad_macro_redef]
+          #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + VEC_LENGTH_AUTO + sigma_id)
+                  ^
+
+"main.cpp", line 627: warning: incompatible redefinition of macro "ham_real" (declared at line 590) [bad_macro_redef]
+          #define ham_real(i, j) ((i) * DIM + (j))
+                  ^
+
+"main.cpp", line 628: warning: incompatible redefinition of macro "ham_imag" (declared at line 591) [bad_macro_redef]
+          #define ham_imag(i, j) (DIM * DIM + (i) * DIM + (j))
+                  ^
+
+"main.cpp", line 700: warning: incompatible redefinition of macro "package_id" (declared at line 622) [bad_macro_redef]
+          #define package_id (gid * dim * dim * 2)
+                  ^
+
+"main.cpp", line 702: warning: incompatible redefinition of macro "sigma_real" (declared at line 625) [bad_macro_redef]
+          #define sigma_real(i, j) (package_id + 2 * (dim * (i) + (j)))
+                  ^
+
+"main.cpp", line 703: warning: incompatible redefinition of macro "sigma_imag" (declared at line 626) [bad_macro_redef]
+          #define sigma_imag(i, j) (package_id + 2 * (dim * (i) + (j)) + 1)
+                  ^
+
+"main.cpp", line 705: warning: incompatible redefinition of macro "ham_real" (declared at line 627) [bad_macro_redef]
+          #define ham_real(i, j) ((i) * dim + (j))
+                  ^
+
+"main.cpp", line 706: warning: incompatible redefinition of macro "ham_imag" (declared at line 628) [bad_macro_redef]
+          #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+                  ^
+
+"main.cpp", line 738: warning: incompatible redefinition of macro "package_id" (declared at line 700) [bad_macro_redef]
+          #define package_id (gid * DIM * DIM * 2)
+                  ^
+
+"main.cpp", line 740: warning: incompatible redefinition of macro "sigma_real" (declared at line 702) [bad_macro_redef]
+          #define sigma_real(i, j) (package_id + 2 * (DIM * (i) + (j)))
+                  ^
+
+"main.cpp", line 741: warning: incompatible redefinition of macro "sigma_imag" (declared at line 703) [bad_macro_redef]
+          #define sigma_imag(i, j) (package_id + 2 * (DIM * (i) + (j)) + 1)
+                  ^
+
+"main.cpp", line 743: warning: incompatible redefinition of macro "ham_real" (declared at line 705) [bad_macro_redef]
+          #define ham_real(i, j) ((i) * DIM + (j))
+                  ^
+
+"main.cpp", line 744: warning: incompatible redefinition of macro "ham_imag" (declared at line 706) [bad_macro_redef]
+          #define ham_imag(i, j) (DIM * DIM + (i) * DIM + (j))
+                  ^
+
+"main.cpp", line 866: warning: incompatible redefinition of macro "package_id" (declared at line 738) [bad_macro_redef]
+          #define package_id (gid * dim * dim * 2)
+                  ^
+
+"main.cpp", line 868: warning: incompatible redefinition of macro "sigma_real" (declared at line 740) [bad_macro_redef]
+          #define sigma_real(i, j) (package_id + 2 * (dim * (i) + (j)))
+                  ^
+
+"main.cpp", line 869: warning: incompatible redefinition of macro "sigma_imag" (declared at line 741) [bad_macro_redef]
+          #define sigma_imag(i, j) (package_id + 2 * (dim * (i) + (j)) + 1)
+                  ^
+
+"main.cpp", line 871: warning: incompatible redefinition of macro "ham_real" (declared at line 743) [bad_macro_redef]
+          #define ham_real(i, j) ((i) * dim + (j))
+                  ^
+
+"main.cpp", line 872: warning: incompatible redefinition of macro "ham_imag" (declared at line 744) [bad_macro_redef]
+          #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+                  ^
+
+"main.cpp", line 900: warning: incompatible redefinition of macro "package_id" (declared at line 866) [bad_macro_redef]
+          #define package_id (gid * DIM * DIM * 2)
+                  ^
+
+"main.cpp", line 902: warning: incompatible redefinition of macro "sigma_real" (declared at line 868) [bad_macro_redef]
+          #define sigma_real(i, j) (package_id + 2 * (DIM * (i) + (j)))
+                  ^
+
+"main.cpp", line 903: warning: incompatible redefinition of macro "sigma_imag" (declared at line 869) [bad_macro_redef]
+          #define sigma_imag(i, j) (package_id + 2 * (DIM * (i) + (j)) + 1)
+                  ^
+
+"main.cpp", line 905: warning: incompatible redefinition of macro "ham_real" (declared at line 871) [bad_macro_redef]
+          #define ham_real(i, j) ((i) * DIM + (j))
+                  ^
+
+"main.cpp", line 906: warning: incompatible redefinition of macro "ham_imag" (declared at line 872) [bad_macro_redef]
+          #define ham_imag(i, j) (DIM * DIM + (i) * DIM + (j))
+                  ^
+
+"main.cpp", line 1010: warning: incompatible redefinition of macro "sigma_id" (declared at line 447) [bad_macro_redef]
+          #define sigma_id(i,j,m) ((m) * DIM * DIM + ((i) * DIM + (j)))
+                  ^
+
+operator*(float, float2):
+          74, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+operator*(float4, float):
+          86, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+operator*(float, float4):
+          90, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+operator*(float4, float4):
+          94, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+operator-=(float2&, float2):
+          98, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+operator+=(float2&, float2):
+         103, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+operator-=(float4&, float4):
+         108, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+operator+=(float4&, float4):
+         115, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+benchmark(std::complex<float>*, std::complex<float>*, std::complex<float>*, unsigned long, unsigned long, std::complex<float>*, std::complex<float>*, int, int, int, unsigned long, void (*)(std::complex<float>*, unsigned long, unsigned long, unsigned long), bool, void (*)(std::complex<float>*, unsigned long)):
+         263, Loop not vectorized/parallelized: not countable
+         263, Loop not vectorized/parallelized: not countable
+         263, Loop not vectorized/parallelized: not countable
+     50, Loop not fused: different loop trip count
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 4 times
+     55, Loop not fused: dependence chain to sibling loop
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 4 times
+     60, Loop not fused: function call before adjacent loop
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 4 times
+     78, Generating update to(sout[:size_sigma])
+     82, #omp target teams distribute parallel for thread_limit(256)
+         82, Generating "nvkernel__Z9benchmarkPSt7complexIfES1_S1_mmS1_S1_iiimPFvS1_mmmEbPFvS1_mE_F1L82_2" GPU kernel
+         85, Loop parallelized across teams and threads(128), schedule(static)
+     85, Loop not vectorized/parallelized: not countable
+     93, #omp target teams distribute parallel for thread_limit(256)
+         93, Generating "nvkernel__Z9benchmarkPSt7complexIfES1_S1_mmS1_S1_iiimPFvS1_mmmEbPFvS1_mE_F1L93_4" GPU kernel
+         97, Loop parallelized across teams and threads(128), schedule(static)
+     97, Loop not vectorized/parallelized: too deeply nested
+    100, Zero trip check eliminated
+    104, Zero trip check eliminated
+         Multiple reductions compressed
+         Loop not vectorized: recurrence
+    134, #omp target teams distribute parallel for thread_limit(256)
+        134, Generating "nvkernel__Z9benchmarkPSt7complexIfES1_S1_mmS1_S1_iiimPFvS1_mmmEbPFvS1_mE_F1L134_6" GPU kernel
+        138, Loop parallelized across teams and threads(128), schedule(static)
+    138, Loop not vectorized/parallelized: too deeply nested
+    141, Zero trip check eliminated
+    144, Zero trip check eliminated
+         Loop not vectorized: recurrence
+    172, #omp target teams distribute parallel for thread_limit(256)
+        172, Generating "nvkernel__Z9benchmarkPSt7complexIfES1_S1_mmS1_S1_iiimPFvS1_mmmEbPFvS1_mE_F1L172_8" GPU kernel
+        176, Loop parallelized across teams and threads(128), schedule(static)
+    176, Loop not vectorized/parallelized: too deeply nested
+    179, Zero trip check eliminated
+    180, Zero trip check eliminated
+         Loop not vectorized: data dependency
+    209, #omp target teams distribute parallel for thread_limit(256)
+        209, Generating "nvkernel__Z9benchmarkPSt7complexIfES1_S1_mmS1_S1_iiimPFvS1_mmmEbPFvS1_mE_F1L209_10" GPU kernel
+        213, Loop parallelized across teams and threads(128), schedule(static)
+    213, Loop not vectorized/parallelized: too deeply nested
+    215, Zero trip check eliminated
+    218, Zero trip check eliminated
+         Multiple reductions compressed
+         Loop not vectorized: recurrence
+    249, #omp target teams distribute parallel for thread_limit(256)
+        249, Generating "nvkernel__Z9benchmarkPSt7complexIfES1_S1_mmS1_S1_iiimPFvS1_mmmEbPFvS1_mE_F1L249_12" GPU kernel
+        253, Loop parallelized across teams and threads(128), schedule(static)
+    253, Loop not vectorized/parallelized: too deeply nested
+    259, Multiple reductions compressed
+         Loop not vectorized: recurrence
+         Loop unrolled 2 times
+    290, #omp target teams distribute parallel for thread_limit(256)
+        290, Generating "nvkernel__Z9benchmarkPSt7complexIfES1_S1_mmS1_S1_iiimPFvS1_mmmEbPFvS1_mE_F1L290_14" GPU kernel
+        294, Loop parallelized across teams and threads(128), schedule(static)
+    294, Loop not vectorized/parallelized: too deeply nested
+    302, Multiple reductions compressed
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    344, #omp target teams distribute parallel for thread_limit(256)
+        344, Generating "nvkernel__Z9benchmarkPSt7complexIfES1_S1_mmS1_S1_iiimPFvS1_mmmEbPFvS1_mE_F1L344_16" GPU kernel
+        348, Loop parallelized across teams and threads(128), schedule(static)
+    348, Loop not vectorized/parallelized: too deeply nested
+    351, Zero trip check eliminated
+    352, Zero trip check eliminated
+         Loop not vectorized: data dependency
+    380, #omp target teams distribute parallel for thread_limit(256)
+        380, Generating "nvkernel__Z9benchmarkPSt7complexIfES1_S1_mmS1_S1_iiimPFvS1_mmmEbPFvS1_mE_F1L380_18" GPU kernel
+        384, Loop parallelized across teams and threads(128), schedule(static)
+    384, Loop not vectorized/parallelized: too deeply nested
+    388, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    416, #omp target teams distribute parallel for thread_limit(256)
+        416, Generating "nvkernel__Z9benchmarkPSt7complexIfES1_S1_mmS1_S1_iiimPFvS1_mmmEbPFvS1_mE_F1L416_20" GPU kernel
+        420, Loop parallelized across teams and threads(128), schedule(static)
+    420, Loop not vectorized/parallelized: too deeply nested
+    428, Loop not vectorized: data dependency
+    456, #omp target teams distribute parallel for thread_limit(256)
+        456, Generating "nvkernel__Z9benchmarkPSt7complexIfES1_S1_mmS1_S1_iiimPFvS1_mmmEbPFvS1_mE_F1L456_22" GPU kernel
+        460, Loop parallelized across teams and threads(128), schedule(static)
+    462, Loop not vectorized/parallelized: too deeply nested
+    465, Zero trip check eliminated
+    468, Zero trip check eliminated
+         Multiple reductions compressed
+         Loop not vectorized: recurrence
+    499, #omp target teams distribute parallel for thread_limit(256)
+        499, Generating "nvkernel__Z9benchmarkPSt7complexIfES1_S1_mmS1_S1_iiimPFvS1_mmmEbPFvS1_mE_F1L499_24" GPU kernel
+        503, Loop parallelized across teams and threads(128), schedule(static)
+    505, Loop not vectorized/parallelized: too deeply nested
+    510, Multiple reductions compressed
+         Loop not vectorized: recurrence
+         Loop unrolled 2 times
+    540, #omp target teams distribute parallel for thread_limit(256)
+        540, Generating "nvkernel__Z9benchmarkPSt7complexIfES1_S1_mmS1_S1_iiimPFvS1_mmmEbPFvS1_mE_F1L540_26" GPU kernel
+        544, Loop parallelized across teams and threads(128), schedule(static)
+    546, Loop not vectorized/parallelized: too deeply nested
+    553, Multiple reductions compressed
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    595, #omp target teams distribute parallel for thread_limit(256)
+        595, Generating "nvkernel__Z9benchmarkPSt7complexIfES1_S1_mmS1_S1_iiimPFvS1_mmmEbPFvS1_mE_F1L595_28" GPU kernel
+        599, Loop parallelized across teams and threads(128), schedule(static)
+    601, Loop not vectorized/parallelized: too deeply nested
+    603, Zero trip check eliminated
+    604, Zero trip check eliminated
+         Loop not vectorized: data dependency
+    632, #omp target teams distribute parallel for thread_limit(256)
+        632, Generating "nvkernel__Z9benchmarkPSt7complexIfES1_S1_mmS1_S1_iiimPFvS1_mmmEbPFvS1_mE_F1L632_30" GPU kernel
+        636, Loop parallelized across teams and threads(128), schedule(static)
+    638, Loop not vectorized/parallelized: too deeply nested
+    641, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    669, #omp target teams distribute parallel for thread_limit(256)
+        669, Generating "nvkernel__Z9benchmarkPSt7complexIfES1_S1_mmS1_S1_iiimPFvS1_mmmEbPFvS1_mE_F1L669_32" GPU kernel
+        673, Loop parallelized across teams and threads(128), schedule(static)
+    675, Loop not vectorized/parallelized: too deeply nested
+    682, Loop not vectorized: data dependency
+    710, #omp target teams distribute parallel for thread_limit(4)
+        710, Generating "nvkernel__Z9benchmarkPSt7complexIfES1_S1_mmS1_S1_iiimPFvS1_mmmEbPFvS1_mE_F1L710_34" GPU kernel
+        713, Loop parallelized across teams and threads(128), schedule(static)
+    713, Loop not vectorized/parallelized: too deeply nested
+    715, Zero trip check eliminated
+    718, Zero trip check eliminated
+         Loop not vectorized: recurrence
+    748, #omp target teams distribute parallel for thread_limit(4)
+        748, Generating "nvkernel__Z9benchmarkPSt7complexIfES1_S1_mmS1_S1_iiimPFvS1_mmmEbPFvS1_mE_F1L748_36" GPU kernel
+        751, Loop parallelized across teams and threads(128), schedule(static)
+    751, Loop not vectorized/parallelized: too deeply nested
+    756, Loop not vectorized: recurrence
+    786, #omp target teams distribute parallel for thread_limit(4)
+        786, Generating "nvkernel__Z9benchmarkPSt7complexIfES1_S1_mmS1_S1_iiimPFvS1_mmmEbPFvS1_mE_F1L786_38" GPU kernel
+        789, Loop parallelized across teams and threads(128), schedule(static)
+    789, Loop not vectorized/parallelized: too deeply nested
+    796, Loop not vectorized: data dependency
+    838, #omp target teams distribute parallel for thread_limit(4)
+        838, Generating "nvkernel__Z9benchmarkPSt7complexIfES1_S1_mmS1_S1_iiimPFvS1_mmmEbPFvS1_mE_F1L838_40" GPU kernel
+        841, Loop parallelized across teams and threads(128), schedule(static)
+    841, Loop not vectorized/parallelized: too deeply nested
+    846, Loop not vectorized: recurrence
+    876, #omp target teams distribute parallel for thread_limit(4)
+        876, Generating "nvkernel__Z9benchmarkPSt7complexIfES1_S1_mmS1_S1_iiimPFvS1_mmmEbPFvS1_mE_F1L876_42" GPU kernel
+        879, Loop parallelized across teams and threads(128), schedule(static)
+    879, Loop not vectorized/parallelized: too deeply nested
+    881, Zero trip check eliminated
+    882, Zero trip check eliminated
+         Loop not vectorized: data dependency
+    910, #omp target teams distribute parallel for thread_limit(4)
+        910, Generating "nvkernel__Z9benchmarkPSt7complexIfES1_S1_mmS1_S1_iiimPFvS1_mmmEbPFvS1_mE_F1L910_44" GPU kernel
+        913, Loop parallelized across teams and threads(128), schedule(static)
+    913, Loop not vectorized/parallelized: too deeply nested
+    916, Loop not vectorized: data dependency
+    944, #omp target teams distribute parallel for thread_limit(4)
+        944, Generating "nvkernel__Z9benchmarkPSt7complexIfES1_S1_mmS1_S1_iiimPFvS1_mmmEbPFvS1_mE_F1L944_46" GPU kernel
+        947, Loop parallelized across teams and threads(128), schedule(static)
+    947, Loop not vectorized/parallelized: too deeply nested
+    952, Loop not vectorized: data dependency
+    981, #omp target teams distribute parallel for thread_limit(4)
+        981, Generating "nvkernel__Z9benchmarkPSt7complexIfES1_S1_mmS1_S1_iiimPFvS1_mmmEbPFvS1_mE_F1L981_48" GPU kernel
+        984, Loop parallelized across teams and threads(128), schedule(static)
+    984, Loop not vectorized/parallelized: too deeply nested
+    991, Loop not vectorized: data dependency
+   1024, #omp target teams num_teams(teams) thread_limit(threads)
+         70, Generating map(to:sin[:size_sigma]) 
+             Generating map(from:sout[:size_sigma]) 
+             Generating map(to:ham[:size_hamiltonian]) 
+       1024, Generating "nvkernel__Z9benchmarkPSt7complexIfES1_S1_mmS1_S1_iiimPFvS1_mmmEbPFvS1_mE_F1L1024_50" GPU kernel
+       1030, #omp parallel
+         1062, Barrier
+         1081, Barrier
+       1105, Team private (ham_local_imag,sigma_local_real,sigma_local_imag,ham_local_real) located in CUDA shared memory
+   1060, Loop not vectorized/parallelized: contains call
+   1086, Loop not vectorized: recurrence
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+   1133, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+float2* allocate_aligned<float2>(unsigned long, unsigned long):
+         616, Loop not vectorized/parallelized: not countable
+main:
+         263, Loop not vectorized/parallelized: not countable
+         263, Loop not vectorized/parallelized: not countable
+         263, Loop not vectorized/parallelized: not countable
+         263, Loop not vectorized/parallelized: not countable
+         263, Loop not vectorized/parallelized: not countable
+std::complex<float>* allocate_aligned<std::complex<float>>(unsigned long, unsigned long):
+         616, Loop not vectorized/parallelized: not countable
+std::char_traits<char>::length(char const*):
+         171, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      6, include "utils.hpp"
+          13, include "chrono"
+              472, Loop not vectorized/parallelized: not countable
+__gnu_cxx::char_traits<char>::length(char const*):
+      6, include "utils.hpp"
+           9, include "complex"
+               45, include "sstream"
+                    38, include "istream"
+                         38, include "ios"
+                              40, include "char_traits.h"
+                                  171, Loop not vectorized/parallelized: not countable
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<char, std::char_traits<char>, std::allocator<char>>(std::basic_ostream<char, std::char_traits<char>>&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+      6, include "utils.hpp"
+           9, include "complex"
+               45, include "sstream"
+                    38, include "istream"
+                         38, include "ios"
+std::basic_ostream<char, std::char_traits<char>>& std::endl<char, std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&):
+      6, include "utils.hpp"
+           9, include "complex"
+               45, include "sstream"
+                    38, include "istream"
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&, char const*):
+         397, Loop not vectorized/parallelized: not countable
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c utils.cpp -o utils.o
+print_compile_config(std::ostream&):
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+initialise_sigma(std::complex<float>*, std::complex<float>*, unsigned long, unsigned long):
+     69, #omp parallel
+     70, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+initialise_hamiltonian(std::complex<float>*, unsigned long):
+     82, Generated vector simd code for the loop
+transform_matrix_scale_aos(std::complex<float>*, unsigned long):
+     90, Generated vector simd code for the loop
+transform_matrix_aos_to_soa(std::complex<float>*, unsigned long):
+    105, #omp parallel
+    106, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+transform_matrices_aos_to_aosoa(std::complex<float>*, unsigned long, unsigned long, unsigned long):
+    137, #omp parallel
+    141, Zero trip check eliminated
+         Loop not vectorized: data dependency
+transform_matrices_aos_to_aosoa_gpu(std::complex<float>*, unsigned long, unsigned long, unsigned long):
+    169, #omp parallel
+    173, Zero trip check eliminated
+         Loop not vectorized: data dependency
+compare_matrices(std::complex<float>*, std::complex<float>*, unsigned long, unsigned long):
+    190, Loop not vectorized: may not be beneficial for target
+         Loop unrolled 2 times
+look_up[abi:cxx11](int):
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+std::char_traits<char>::length(char const*):
+         171, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string<std::allocator<char>>(char const*, std::allocator<char> const&):
+         397, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string<std::allocator<char>>(char const*, std::allocator<char> const&):
+         536, Loop not vectorized/parallelized: not countable
+__gnu_cxx::char_traits<char>::length(char const*):
+      6, include "utils.hpp"
+           9, include "complex"
+               45, include "sstream"
+                    38, include "istream"
+                         38, include "ios"
+                              40, include "char_traits.h"
+                                  171, Loop not vectorized/parallelized: not countable
+std::basic_ostream<char, std::char_traits<char>>& std::endl<char, std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&):
+      6, include "utils.hpp"
+           9, include "complex"
+               45, include "sstream"
+                    38, include "istream"
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&, char const*):
+         397, Loop not vectorized/parallelized: not countable
+nvc++ -O3 -c reference.cpp -o reference.o
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o utils.o reference.o -o main 

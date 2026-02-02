@@ -1,0 +1,10 @@
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c euler3d.cpp -o euler3d.o
+euler3d.cpp:45:2: warning: "the kernels may fail too launch on some systems if the block length is too large" [-W#warnings]
+   45 | #warning "the kernels may fail too launch on some systems if the block length is too large"
+      |  ^
+1 warning generated.
+euler3d.cpp:45:2: warning: "the kernels may fail too launch on some systems if the block length is too large" [-W#warnings]
+   45 | #warning "the kernels may fail too launch on some systems if the block length is too large"
+      |  ^
+1 warning generated.
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU euler3d.o -o main 

@@ -1,0 +1,31 @@
+"main.cpp", line 9: error: identifier "omp_get_thread_num" is undefined
+    for (int i = omp_get_thread_num(); i < n/2; i = i + omp_get_vector()) {
+                 ^
+
+"main.cpp", line 9: error: identifier "omp_get_vector" is undefined
+    for (int i = omp_get_thread_num(); i < n/2; i = i + omp_get_vector()) {
+                                                        ^
+
+"main.cpp", line 30: error: invalid text in pragma
+    #pragma acc parallel teams gang(1) vector_length(256)
+                         ^
+
+"main.cpp", line 30: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams gang(1) vector_length(256)
+                               ^
+
+"main.cpp", line 38: error: identifier "omp_get_thread_num" is undefined
+        if (omp_get_thread_num() == 0) {
+            ^
+
+"main.cpp", line 75: error: invalid text in pragma
+    #pragma acc data to: char_to_uint[0:256], \
+                     ^
+
+"main.cpp", line 75: error: extra text after expected end of preprocessing directive
+    #pragma acc data to: char_to_uint[0:256], \
+                       ^
+
+7 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

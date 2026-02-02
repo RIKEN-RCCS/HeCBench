@@ -1,0 +1,68 @@
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c divergence.cpp -o divergence.o
+main:
+          14, Loop not vectorized/parallelized: potential early exits
+          25, Loop not vectorized/parallelized: potential early exits
+          30, Loop not vectorized/parallelized: too deeply nested
+          33, Loop not vectorized/parallelized: potential early exits
+          45, Loop not vectorized/parallelized: potential early exits
+          55, Loop not vectorized/parallelized: potential early exits
+void readVelocity<double>(double*, int, std::istream*):
+     14, Zero trip check eliminated
+         Loop not vectorized/parallelized: potential early exits
+void readElement<4, double>(element<4, double>&, std::istream*):
+     25, Loop not vectorized/parallelized: potential early exits
+     30, Loop not vectorized/parallelized: too deeply nested
+     33, Loop not vectorized/parallelized: potential early exits
+void readDerivative<4, double>(derivative<4, double>&, std::istream*):
+     45, Loop not vectorized/parallelized: potential early exits
+void readDivergence<double>(double*, int, std::istream*):
+     55, Zero trip check eliminated
+         Loop not vectorized/parallelized: potential early exits
+void compareDivergences<4, double>(double const*, element<4, double> const&, derivative<4, double> const&, double const*, int):
+     73, Loop not vectorized/parallelized: contains call
+     78, Loop not vectorized/parallelized: contains call
+     88, Loop not vectorized/parallelized: contains call
+     93, Loop not vectorized/parallelized: contains call
+    102, Loop not vectorized/parallelized: potential early exits
+void divergence_sphere_cpu<4, double>(double const*, derivative<4, double> const&, element<4, double> const&, double*):
+      6, include "divergence.hpp"
+         115, Loop unrolled 4 times (completely unrolled)
+         116, Loop unrolled 4 times (completely unrolled)
+         117, Loop unrolled 2 times (completely unrolled)
+         126, Loop unrolled 4 times (completely unrolled)
+         127, Loop unrolled 4 times (completely unrolled)
+         130, Loop unrolled 4 times (completely unrolled)
+         140, Outer loop unrolled 1 times (completely unrolled)
+         141, Loop nest collapsed
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 2 times
+void divergence_sphere_gpu<4, double>(double const*, derivative<4, double> const&, element<4, double> const&, double*):
+      6, include "divergence.hpp"
+          56, Loop unrolled 4 times (completely unrolled)
+          57, Loop unrolled 4 times (completely unrolled)
+          58, Loop unrolled 2 times (completely unrolled)
+          75, #omp target teams distribute parallel for thread_limit(256)
+              75, Generating "nvkernel__Z21divergence_sphere_gpuILi4EdEvPKT0_RK10derivativeIXT_ES0_ERK7elementIXT_ES0_EPS0__F279L75_2" GPU kernel
+              78, Loop parallelized across teams and threads(128), schedule(static)
+          75, Generating implicit map(tofrom:vvtemp[:],gv[:]) 
+          79, Loop not vectorized/parallelized: not countable
+          82, Loop unrolled 4 times (completely unrolled)
+          89, #omp target teams distribute parallel for thread_limit(256)
+              75, Generating map(from:div[:16]) 
+                  Generating map(to:gv[:],Dvv[:16]) 
+                  Generating map(alloc:vvtemp[:]) 
+                  Generating map(to:rmetdet[:16]) 
+              89, Generating "nvkernel__Z21divergence_sphere_gpuILi4EdEvPKT0_RK10derivativeIXT_ES0_ERK7elementIXT_ES0_EPS0__F279L89_4" GPU kernel
+              92, Loop parallelized across teams and threads(128), schedule(static)
+          89, Generating implicit map(tofrom:vvtemp[:]) 
+          93, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::basic_ostream<char, std::char_traits<char>>& std::endl<char, std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&):
+      4, include "chrono"
+make: *** No rule to make target 'timer/timer.cpp', needed by 'timer.o'.  Stop.

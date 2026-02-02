@@ -1,0 +1,66 @@
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c CRC64.cpp -o CRC64.o
+crc64_slow:
+   1112, Loop not vectorized/parallelized: not countable
+crc64:
+   1132, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+   1141, Loop not vectorized/parallelized: potential early exits
+   1156, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 5 times (completely unrolled)
+   1160, Loop not vectorized/parallelized: not countable
+   1188, Loop unrolled 2 times (completely unrolled)
+   1221, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+   1226, Loop not vectorized/parallelized: not countable
+   1254, Loop unrolled 2 times (completely unrolled)
+   1290, Loop unrolled 5 times (completely unrolled)
+   1296, Loop unrolled 3 times (completely unrolled)
+   1304, Loop not vectorized: data dependency
+crc64_combine:
+        1379, Loop not vectorized/parallelized: not countable
+        1396, Loop not vectorized/parallelized: not countable
+crc64_omp:
+   1427, #omp target teams distribute parallel for num_teams(nthreads/64) thread_limit(64)
+       1427, Generating "nvkernel_crc64_omp_F1L1427_2" GPU kernel
+             Generating map(from:thread_cs[:nthreads],thread_sz[:nthreads]) 
+             Generating map(to:data[:nbytes]) 
+       1429, Loop parallelized across teams and threads(128), schedule(static)
+        1141, Loop not vectorized/parallelized: potential early exits
+        1156, Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 5 times (completely unrolled)
+        1160, Loop not vectorized/parallelized: not countable
+        1188, Loop unrolled 2 times (completely unrolled)
+        1221, Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+        1226, Loop not vectorized/parallelized: not countable
+        1254, Loop unrolled 2 times (completely unrolled)
+        1290, Loop unrolled 5 times (completely unrolled)
+        1296, Loop unrolled 3 times (completely unrolled)
+        1304, Loop not vectorized: data dependency
+        1405, Loop not vectorized/parallelized: not countable
+        1141, Loop not vectorized/parallelized: potential early exits
+        1156, Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 5 times (completely unrolled)
+        1160, Loop not vectorized/parallelized: not countable
+        1188, Loop unrolled 2 times (completely unrolled)
+        1221, Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+        1226, Loop not vectorized/parallelized: not countable
+        1254, Loop unrolled 2 times (completely unrolled)
+        1290, Loop unrolled 5 times (completely unrolled)
+        1296, Loop unrolled 3 times (completely unrolled)
+        1304, Loop not vectorized: data dependency
+_INTERNAL_9_CRC64_cpp_a333b806::crc64_load_le32_(unsigned int const*):
+   1122, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_9_CRC64_cpp_a333b806::crc64_multiply_(unsigned long, unsigned long):
+   1379, Loop not vectorized/parallelized: not countable
+_INTERNAL_9_CRC64_cpp_a333b806::crc64_x_pow_n_(unsigned long):
+        1379, Loop not vectorized/parallelized: not countable
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c CRC64Test.cpp -o CRC64Test.o
+main:
+     79, Loop not vectorized/parallelized: contains call
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 CRC64.o CRC64Test.o -o main 

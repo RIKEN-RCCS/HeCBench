@@ -1,0 +1,51 @@
+"main.cpp", line 91: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(nTeams) thread_limit(nThreads)
+                         ^
+
+"main.cpp", line 91: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(nTeams) thread_limit(nThreads)
+                               ^
+
+"main.cpp", line 98: error: identifier "omp_get_thread_num" is undefined
+        int lid = omp_get_thread_num();
+                  ^
+
+"main.cpp", line 108: error: identifier "omp_get_team_num" is undefined
+        warp = (lid + omp_get_team_num() * nThreads) / WARPSIZE;
+                      ^
+
+"main.cpp", line 256: error: invalid text in pragma
+    #pragma acc parallel data map (to: cbuf[0:doubles], \
+                         ^
+
+"main.cpp", line 256: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel data map (to: cbuf[0:doubles], \
+                              ^
+
+"main.cpp", line 272: error: invalid text in pragma
+      #pragma acc update from (off[0:num_warps])
+                         ^
+
+"main.cpp", line 272: error: OpenACC data clause expected
+      #pragma acc update from (off[0:num_warps])
+                         ^
+
+"main.cpp", line 272: error: extra text after expected end of preprocessing directive
+      #pragma acc update from (off[0:num_warps])
+                              ^
+
+"main.cpp", line 304: error: invalid text in pragma
+        #pragma acc update from (dbuf[offset:offset+off[i]])
+                           ^
+
+"main.cpp", line 304: error: OpenACC data clause expected
+        #pragma acc update from (dbuf[offset:offset+off[i]])
+                           ^
+
+"main.cpp", line 304: error: extra text after expected end of preprocessing directive
+        #pragma acc update from (dbuf[offset:offset+off[i]])
+                                ^
+
+12 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

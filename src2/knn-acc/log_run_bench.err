@@ -1,0 +1,51 @@
+"main.cpp", line 178: error: invalid text in pragma
+      #pragma acc data to: ref[0:ref_nb * dim], query[0:query_nb * dim]) \
+                       ^
+
+"main.cpp", line 178: error: extra text after expected end of preprocessing directive
+      #pragma acc data to: ref[0:ref_nb * dim], query[0:query_nb * dim]) \
+                         ^
+
+"main.cpp", line 182: error: invalid text in pragma
+        #pragma acc parallel teams num_teams((ref_nb + 15)*(query_nb + 15)/256) vector_length(256) 
+                             ^
+
+"main.cpp", line 182: error: extra text after expected end of preprocessing directive
+        #pragma acc parallel teams num_teams((ref_nb + 15)*(query_nb + 15)/256) vector_length(256) 
+                                   ^
+
+"main.cpp", line 195: error: identifier "omp_get_thread_num" is undefined
+            int tx = omp_get_thread_num() % 16;
+                     ^
+
+"main.cpp", line 203: error: identifier "omp_get_team_num" is undefined
+            begin_A = BLOCK_DIM * (omp_get_team_num() / ((query_nb+15)/16));
+                                   ^
+
+"main.cpp", line 313: error: invalid text in pragma
+        #pragma acc update from (dist[0:query_nb * k]) 
+                           ^
+
+"main.cpp", line 313: error: OpenACC data clause expected
+        #pragma acc update from (dist[0:query_nb * k]) 
+                           ^
+
+"main.cpp", line 313: error: extra text after expected end of preprocessing directive
+        #pragma acc update from (dist[0:query_nb * k]) 
+                                ^
+
+"main.cpp", line 314: error: invalid text in pragma
+        #pragma acc update from (ind[0:query_nb * k])
+                           ^
+
+"main.cpp", line 314: error: OpenACC data clause expected
+        #pragma acc update from (ind[0:query_nb * k])
+                           ^
+
+"main.cpp", line 314: error: extra text after expected end of preprocessing directive
+        #pragma acc update from (ind[0:query_nb * k])
+                                ^
+
+12 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:58: main.o] Error 2
+timeout was set to  600

@@ -1,0 +1,58 @@
+nvc++  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+verifySort(unsigned int const*, unsigned long):
+     23, Loop not vectorized/parallelized: potential early exits
+main:
+     67, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 2 times
+    100, Loop not vectorized/parallelized: contains call
+    116, #omp target teams num_teams(64) thread_limit(256)
+         13, Team private (lmem) located in CUDA shared memory
+        116, Generating "nvkernel_main_F1L116_2" GPU kernel
+        119, #omp parallel
+           39, Barrier
+           48, Barrier
+    120, include "sort_reduce.h"
+          21, Loop not vectorized/parallelized: not countable
+          42, Loop not vectorized/parallelized: contains call
+    131, #omp target teams num_teams(64) thread_limit(256)
+          3, Team private (lmem,s_seed) located in CUDA shared memory
+        131, Generating "nvkernel_main_F1L131_4" GPU kernel
+        135, #omp parallel
+            6, Barrier
+           28, Barrier
+           32, Barrier
+           34, Barrier
+           43, Barrier
+           49, Barrier
+    136, include "sort_top_scan.h"
+          29, Loop not vectorized/parallelized: contains call
+    147, #omp target teams num_teams(64) thread_limit(256)
+          4, Team private (l_block_counts,lmem,l_scanned_seeds) located in CUDA shared memory
+         92, Generating map(from:odata[:size]) 
+             Generating map(alloc:isums[:1024]) 
+             Generating map(to:idata[:size]) 
+        147, Generating "nvkernel_main_F1L147_6" GPU kernel
+        152, #omp parallel
+           34, Barrier
+           72, Barrier
+           76, Barrier
+           78, Barrier
+           83, Barrier
+          108, Barrier
+          117, Barrier
+    153, include "sort_bottom_scan.h"
+          40, Generated vector simd code for the loop
+          73, Loop not vectorized/parallelized: contains call
+         112, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+          23, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      7, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+    120, include "sort_reduce.h"
+    153, include "sort_bottom_scan.h"
+std::basic_ostream<char, std::char_traits<char>>& std::endl<char, std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&):
+    136, include "sort_top_scan.h"
+nvc++  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

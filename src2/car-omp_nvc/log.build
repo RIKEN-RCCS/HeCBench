@@ -1,0 +1,38 @@
+nvc++  -Wall -I../car-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+reference(float const*, float const*, float const*, float const*, float*, params, int, int):
+      7, include "reference.h"
+          25, Loop not vectorized/parallelized: too deeply nested
+          26, Loop not vectorized/parallelized: too deeply nested
+          27, Loop not vectorized/parallelized: too deeply nested
+          33, Loop not vectorized: data dependency
+          33, Zero trip check eliminated
+car(float const*, float const*, float const*, float const*, float*, params, int, int, unsigned long):
+     33, #omp target teams distribute parallel for thread_limit(256)
+         33, Generating "nvkernel__Z3carPKfS0_S0_S0_Pf6paramsiim_F1L33_2" GPU kernel
+         36, Loop parallelized across teams and threads(128), schedule(static)
+     39, Loop not vectorized/parallelized: not countable
+     44, Zero trip check eliminated
+         Multiple reductions compressed
+         Generated vector simd code for the loop containing reductions
+main:
+    106, Loop not fused: different loop trip count
+         Loop not vectorized: unknown
+    107, Loop not fused: scalar dependence chain to sibling loop
+         Loop not vectorized: unknown
+    108, Loop not fused: function call before adjacent loop
+         Loop not vectorized: unknown
+    118, Generating map(to:kernel[:kernel_size],offsets_h[:offset_size],img[:image_size]) 
+         Generating map(from:output[:output_size]) 
+         Generating map(to:offsets_v[:offset_size]) 
+    121, Loop not vectorized/parallelized: contains call
+          25, Loop not fused: different loop trip count
+              Loop not vectorized/parallelized: too deeply nested
+          26, Loop not vectorized/parallelized: too deeply nested
+          27, Loop not vectorized/parallelized: too deeply nested
+          33, Loop not vectorized/parallelized: loop count too small
+    141, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++  -Wall -I../car-cuda -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

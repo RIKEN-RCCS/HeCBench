@@ -1,0 +1,58 @@
+nvc++ -acc  -DPRECISION=double -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+init_gcf(double2*, unsigned long):
+     11, Loop not vectorized/parallelized: too deeply nested
+     14, Zero trip check eliminated
+         Generated vector simd code for the loop
+degridCPU(double2*, double2*, double2*, double2*):
+     39, Invariant if transformation
+         Loop not fused: no successor loop
+         Loop not vectorized: unprofitable for target
+         Loop not vectorized: unknown
+         Loop unrolled 4 times
+main:
+          11, Loop not fused: function call before adjacent loop
+              Loop not vectorized/parallelized: too deeply nested
+          14, Generated vector simd code for the loop
+     90, Loop not vectorized/parallelized: contains call
+     94, Loop not fused: different loop trip count
+     95, Generated vector simd code for the loop
+    100, Loop not fused: dependence chain to sibling loop
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 8 times
+    103, Loop not fused: function call before adjacent loop
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 8 times
+          31, Loop not fused: function call before adjacent loop
+          39, Invariant if transformation
+              Loop not fused: no successor loop
+              Loop not vectorized: unprofitable for target
+              Loop not vectorized: unknown
+              Loop unrolled 4 times
+    121, Loop not vectorized/parallelized: potential early exits
+void degridGPU<double2>(double2*, double2*, double2*, double2*):
+      7, include "kernels.cpp"
+          54, Generating copyin(gcf[:4194304],img[:71303680],in[:40000]) [if not already present]
+              Generating copyout(out[:40000]) [if not already present]
+          57, Loop not vectorized/parallelized: contains call
+void degrid_kernel<double2>(double2*, double2 const*, unsigned long, double2 const*, unsigned long, double2 const*):
+      7, include "kernels.cpp"
+          11, Generating NVIDIA GPU code
+              14, #pragma acc loop gang(1250), vector(256) /* blockIdx.x threadIdx.x */
+              22, #pragma acc loop seq collapse(2)
+              23,   collapsed */
+                  Generating reduction(+:sum_r,sum_i)
+          11, Generating implicit copyin(img[:],gcf[:],in[:40000]) [if not already present]
+              Generating implicit copyout(out[:40000]) [if not already present]
+          14, Loop not fused: no successor loop
+          22, Loop is parallelizable
+          23, Loop is parallelizable
+              Invariant if transformation
+              Loop not fused: no successor loop
+              Loop not vectorized: unprofitable for target
+              Loop not vectorized: unknown
+              Loop unrolled 4 times
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      7, include "kernels.cpp"
+           1, include "chrono"
+              472, Loop not vectorized/parallelized: not countable
+nvc++ -acc  -DPRECISION=double -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

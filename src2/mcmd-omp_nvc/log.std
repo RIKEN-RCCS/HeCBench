@@ -1,0 +1,206 @@
+MCMD started on 02-02-2026 at 06:31:24
+qc-gh200-06.cloud.r-ccs.riken.jp
+477.554 GB memory available on this node (Linux).
+Reading input parameters from mcmd.inp.
+Got job name = gpu_md_water_octane_SMALL
+Got mode = md
+Got GPU option = on
+Got checkpoints option = off
+Got input atoms file name = input.pqr
+Got potential form = ljes
+Got Ewald kmax = 3
+Got center-of-mass option = off
+Got .car basis: a,b,c = 50, 50, 50
+Got .car basis alpha,beta,gamma = 90, 90, 90
+Got histogram option = off
+Got manual pair-interaction spherical cutoff = 12.0 A.
+Got temperature = 298.0 K
+Got Thermostat type = nose-hoover
+Got ensemble = nvt
+Got sorbate model name 1 = octane
+Got sorbate model name 2 = h2o_tip3p
+Got MD PBC option = on
+Got MD timestep = 1 fs
+The MD thermostat heat-bath collision probability = 0.0475615
+Got MD final step = 10 fs
+Got MD corrtime = 10
+Got MD mode = molecular
+Got MD rotations option = on
+Done reading input parameters.
+
+Centering all coordinates...
+Pre-centered values:
+----> xmax: 26.00600 ymax: 28.68000 zmax: 25.56400
+----> xmin: -26.00600 ymin: -28.68000 zmin: -25.56400
+----> xlen: 52.01200 ylen: 57.36000 zlen: 51.12800
+Done centering coordinates.
+
+
+::: PROTOTYPE (SORBATE) MOLECULES :::
+
+:: 0 :: Prototype molecule 0 has PDBID 956 ( name OCT ) and has 26 atoms
+atom (PDBID 3372) C1 on molecule OCT (PBDID 956) frozen= 0 
+ -----> m = 15.034500 amu; eps = 98.000000 K; sig = 3.750000 A; alpha = 0.000000 A^3; q = 0.000000 e
+atom (PDBID 3372) C2 on molecule OCT (PBDID 956) frozen= 0 
+ -----> m = 14.026580 amu; eps = 46.000000 K; sig = 3.950000 A; alpha = 0.000000 A^3; q = 0.000000 e
+atom (PDBID 3372) C3 on molecule OCT (PBDID 956) frozen= 0 
+ -----> m = 14.026580 amu; eps = 46.000000 K; sig = 3.950000 A; alpha = 0.000000 A^3; q = 0.000000 e
+atom (PDBID 3372) C4 on molecule OCT (PBDID 956) frozen= 0 
+ -----> m = 14.026580 amu; eps = 46.000000 K; sig = 3.950000 A; alpha = 0.000000 A^3; q = 0.000000 e
+atom (PDBID 3372) C5 on molecule OCT (PBDID 956) frozen= 0 
+ -----> m = 14.026580 amu; eps = 46.000000 K; sig = 3.950000 A; alpha = 0.000000 A^3; q = 0.000000 e
+atom (PDBID 3372) C6 on molecule OCT (PBDID 956) frozen= 0 
+ -----> m = 14.026580 amu; eps = 46.000000 K; sig = 3.950000 A; alpha = 0.000000 A^3; q = 0.000000 e
+atom (PDBID 3372) C7 on molecule OCT (PBDID 956) frozen= 0 
+ -----> m = 14.026580 amu; eps = 46.000000 K; sig = 3.950000 A; alpha = 0.000000 A^3; q = 0.000000 e
+atom (PDBID 3372) C8 on molecule OCT (PBDID 956) frozen= 0 
+ -----> m = 15.034500 amu; eps = 98.000000 K; sig = 3.750000 A; alpha = 0.000000 A^3; q = 0.000000 e
+atom (PDBID 3372) H on molecule OCT (PBDID 956) frozen= 0 
+ -----> m = 0.000000 amu; eps = 0.000000 K; sig = 0.000000 A; alpha = 0.000000 A^3; q = 0.000000 e
+atom (PDBID 3372) H on molecule OCT (PBDID 956) frozen= 0 
+ -----> m = 0.000000 amu; eps = 0.000000 K; sig = 0.000000 A; alpha = 0.000000 A^3; q = 0.000000 e
+atom (PDBID 3372) H on molecule OCT (PBDID 956) frozen= 0 
+ -----> m = 0.000000 amu; eps = 0.000000 K; sig = 0.000000 A; alpha = 0.000000 A^3; q = 0.000000 e
+atom (PDBID 3372) H on molecule OCT (PBDID 956) frozen= 0 
+ -----> m = 0.000000 amu; eps = 0.000000 K; sig = 0.000000 A; alpha = 0.000000 A^3; q = 0.000000 e
+atom (PDBID 3372) H on molecule OCT (PBDID 956) frozen= 0 
+ -----> m = 0.000000 amu; eps = 0.000000 K; sig = 0.000000 A; alpha = 0.000000 A^3; q = 0.000000 e
+atom (PDBID 3372) H on molecule OCT (PBDID 956) frozen= 0 
+ -----> m = 0.000000 amu; eps = 0.000000 K; sig = 0.000000 A; alpha = 0.000000 A^3; q = 0.000000 e
+atom (PDBID 3372) H on molecule OCT (PBDID 956) frozen= 0 
+ -----> m = 0.000000 amu; eps = 0.000000 K; sig = 0.000000 A; alpha = 0.000000 A^3; q = 0.000000 e
+atom (PDBID 3372) H on molecule OCT (PBDID 956) frozen= 0 
+ -----> m = 0.000000 amu; eps = 0.000000 K; sig = 0.000000 A; alpha = 0.000000 A^3; q = 0.000000 e
+atom (PDBID 3372) H on molecule OCT (PBDID 956) frozen= 0 
+ -----> m = 0.000000 amu; eps = 0.000000 K; sig = 0.000000 A; alpha = 0.000000 A^3; q = 0.000000 e
+atom (PDBID 3372) H on molecule OCT (PBDID 956) frozen= 0 
+ -----> m = 0.000000 amu; eps = 0.000000 K; sig = 0.000000 A; alpha = 0.000000 A^3; q = 0.000000 e
+atom (PDBID 3372) H on molecule OCT (PBDID 956) frozen= 0 
+ -----> m = 0.000000 amu; eps = 0.000000 K; sig = 0.000000 A; alpha = 0.000000 A^3; q = 0.000000 e
+atom (PDBID 3372) H on molecule OCT (PBDID 956) frozen= 0 
+ -----> m = 0.000000 amu; eps = 0.000000 K; sig = 0.000000 A; alpha = 0.000000 A^3; q = 0.000000 e
+atom (PDBID 3372) H on molecule OCT (PBDID 956) frozen= 0 
+ -----> m = 0.000000 amu; eps = 0.000000 K; sig = 0.000000 A; alpha = 0.000000 A^3; q = 0.000000 e
+atom (PDBID 3372) H on molecule OCT (PBDID 956) frozen= 0 
+ -----> m = 0.000000 amu; eps = 0.000000 K; sig = 0.000000 A; alpha = 0.000000 A^3; q = 0.000000 e
+atom (PDBID 3372) H on molecule OCT (PBDID 956) frozen= 0 
+ -----> m = 0.000000 amu; eps = 0.000000 K; sig = 0.000000 A; alpha = 0.000000 A^3; q = 0.000000 e
+atom (PDBID 3372) H on molecule OCT (PBDID 956) frozen= 0 
+ -----> m = 0.000000 amu; eps = 0.000000 K; sig = 0.000000 A; alpha = 0.000000 A^3; q = 0.000000 e
+atom (PDBID 3372) H on molecule OCT (PBDID 956) frozen= 0 
+ -----> m = 0.000000 amu; eps = 0.000000 K; sig = 0.000000 A; alpha = 0.000000 A^3; q = 0.000000 e
+atom (PDBID 3372) H on molecule OCT (PBDID 956) frozen= 0 
+ -----> m = 0.000000 amu; eps = 0.000000 K; sig = 0.000000 A; alpha = 0.000000 A^3; q = 0.000000 e
+
+:: 1 :: Prototype molecule 1 has PDBID 956 ( name H2O ) and has 3 atoms
+atom (PDBID 3372) OXY on molecule H2O (PBDID 956) frozen= 0 
+ -----> m = 16.000000 amu; eps = 76.420000 K; sig = 3.151000 A; alpha = 0.000000 A^3; q = -0.834000 e
+atom (PDBID 3372) HYD on molecule H2O (PBDID 956) frozen= 0 
+ -----> m = 1.008000 amu; eps = 0.000000 K; sig = 0.000000 A; alpha = 0.000000 A^3; q = 0.417000 e
+atom (PDBID 3372) HYD on molecule H2O (PBDID 956) frozen= 0 
+ -----> m = 1.008000 amu; eps = 0.000000 K; sig = 0.000000 A; alpha = 0.000000 A^3; q = 0.417000 e
+
+Fugacity for prototype 0 ( OCT ) = 1.000000 atm
+Fugacity for prototype 1 ( H2O ) = 0.000000 atm
+
+:: --- Box (basis) information --- ::
+:: basis1 50.00000 0.00000 0.00000
+:: basis2 0.00000 50.00000 0.00000
+:: basis3 0.00000 0.00000 50.00000
+:: Basis vectors: { a =  50.00000; b =  50.00000; c =  50.00000 }
+:: Basis angles:  { α =  90.00000; β =  90.00000; γ =  90.00000 }
+:: Box vertices ::
+   -> 0 : -25.00000 -25.00000 -25.00000
+   -> 1 : -25.00000 -25.00000  25.00000
+   -> 2 : -25.00000  25.00000 -25.00000
+   -> 3 : -25.00000  25.00000  25.00000
+   -> 4 :  25.00000 -25.00000 -25.00000
+   -> 5 :  25.00000 -25.00000  25.00000
+   -> 6 :  25.00000  25.00000 -25.00000
+   -> 7 :  25.00000  25.00000  25.00000
+:: PBC Cutoff = 12.00000
+:: Plane 0 equation :: -2500.00000x + 0.00000y + 0.00000z + -62500.00000 = 0
+:: Plane 1 equation :: -2500.00000x + 0.00000y + 0.00000z + 62500.00000 = 0
+:: Plane 2 equation :: 0.00000x + 2500.00000y + 0.00000z + 62500.00000 = 0
+:: Plane 3 equation :: 0.00000x + 2500.00000y + 0.00000z + -62500.00000 = 0
+:: Plane 4 equation :: 0.00000x + 0.00000y + -2500.00000z + -62500.00000 = 0
+:: Plane 5 equation :: 0.00000x + 0.00000y + -2500.00000z + 62500.00000 = 0
+:: x_length = 50.00000; y_length = 50.00000; z_length = 50.00000
+:: x_max = 25.00000; y_max = 25.00000; z_max = 25.00000
+:: x_min = -25.00000; y_min = -25.00000; z_min = -25.00000
+:: Volume = 125000.00000 A^3
+:: --- End box information --- ::
+
+SORBATE COUNT: 2
+VERSION NUMBER: 1152
+...input options validated.
+Calculated Nose-Hoover Q parameter = 683135200.000000 K fs^2 with scale factor = 1.000000.
+
+| ========================================= |
+|  BEGINNING MOLECULAR DYNAMICS SIMULATION  |
+| ========================================= |
+
+Device offload time: 3.002121 (s)
+MCMD (GPU) Molecular Dynamics: gpu_md_water_octane_SMALL (mcmd.inp)
+Input atoms: input.pqr
+Ensemble: NVT; N_movables = 955 N_atoms = 3371
+Time elapsed = 3.20 s = inf sec/step; ETA = inf min = inf hrs
+Step: 0 / 10; Progress = 0.000%; Realtime = 0.00000 fs
+        Input T = 298.0000 K | simulated annealing (off)
+      Average T = 297.9480 +- 0.0000 K
+Instantaneous T = 297.9480 K
+      Average P = 1094.9898 +- 0.0000 atm
+Instantaneous P = 1094.9898 atm
+     KE = 7098.646 kJ/mol (lin: 7098.646 , rot: 0.000 )
+     PE = -7957.477 kJ/mol
+          RD = -55.809 kJ/mol
+          ES = -7901.668 kJ/mol
+         Pol = 0.000 kJ/mol
+      Bonded = 0.000 kJ/mol
+Total E = -858.831 kJ/mol
+Average v = 895.77 m/s; v_init = 895.77 m/s
+    OCT D_s  = 0.00000e+00 cm^2/s
+    OCT MSD  = 0.00000e+00 A^2
+    OCT VACF = 0.00000e+00
+    H2O D_s  = 0.00000e+00 cm^2/s
+    H2O MSD  = 0.00000e+00 A^2
+    H2O VACF = 0.00000e+00
+--------------------
+
+Device offload time: 0.757778 (s)
+Device offload time: 0.757447 (s)
+Device offload time: 0.757653 (s)
+Device offload time: 0.757400 (s)
+Device offload time: 0.757653 (s)
+Device offload time: 0.757630 (s)
+Device offload time: 0.757655 (s)
+Device offload time: 0.757401 (s)
+Device offload time: 0.757678 (s)
+Device offload time: 0.757414 (s)
+MCMD (GPU) Molecular Dynamics: gpu_md_water_octane_SMALL (mcmd.inp)
+Input atoms: input.pqr
+Ensemble: NVT; N_movables = 955 N_atoms = 3371
+Time elapsed = 10.89 s = 1.0889 sec/step; ETA = 0.000 min = 0.000 hrs
+Step: 10 / 10; Progress = 100.000%; Realtime = 10.00000 fs
+        Input T = 298.0000 K | simulated annealing (off)
+      Average T = 299.3604 +- 1.4124 K
+Instantaneous T = 300.7727 K
+      Average P = 1094.9898 +- 0.0000 atm
+Instantaneous P = 1094.9898 atm
+     KE = 7734.900 kJ/mol (lin: 7165.946 , rot: 568.954 )
+     PE = -8841.552 kJ/mol
+          RD = -170.667 kJ/mol
+          ES = -8670.884 kJ/mol
+         Pol = 0.000 kJ/mol
+      Bonded = 0.000 kJ/mol
+Total E = -1106.652 kJ/mol
+Average v = 897.34 m/s; v_init = 895.77 m/s
+    OCT D_s  = 2.19278e-06 cm^2/s
+    OCT MSD  = 1.31567e-03 A^2
+    OCT VACF = 9.98263e-01
+    H2O D_s  = 1.37874e-05 cm^2/s
+    H2O MSD  = 8.27245e-03 A^2
+    H2O VACF = 9.92869e-01
+--------------------
+
+Total wall time = 10.912305 s

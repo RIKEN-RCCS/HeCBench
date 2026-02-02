@@ -1,0 +1,37 @@
+"shmem_kernels.cpp", line 56: error: invalid text in pragma
+    #pragma acc data from: c[0:size])
+                     ^
+
+"shmem_kernels.cpp", line 56: error: extra text after expected end of preprocessing directive
+    #pragma acc data from: c[0:size])
+                         ^
+
+"shmem_kernels.cpp", line 60: error: invalid text in pragma
+        #pragma acc parallel teams num_teams(TOTAL_BLOCKS/4) thread_limit(BLOCK_SIZE)
+                             ^
+
+"shmem_kernels.cpp", line 60: error: extra text after expected end of preprocessing directive
+        #pragma acc parallel teams num_teams(TOTAL_BLOCKS/4) thread_limit(BLOCK_SIZE)
+                                   ^
+
+"shmem_kernels.cpp", line 65: error: identifier "omp_get_thread_num" is undefined
+            int tid = omp_get_thread_num();
+                      ^
+
+"shmem_kernels.cpp", line 66: error: identifier "omp_get_vector" is undefined
+            int blk = omp_get_vector();
+                      ^
+
+"shmem_kernels.cpp", line 67: error: identifier "omp_get_team_num" is undefined
+            int gid = omp_get_team_num();
+                      ^
+
+"shmem_kernels.cpp", line 52: warning: variable "TOTAL_BLOCKS" was declared but never referenced [declared_but_not_referenced]
+    const int TOTAL_BLOCKS = size/(BLOCK_SIZE);
+              ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+7 errors detected in the compilation of "shmem_kernels.cpp".
+make: *** [Makefile.NVD:60: shmem_kernels.o] Error 2
+timeout was set to  600

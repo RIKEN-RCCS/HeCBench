@@ -1,0 +1,12 @@
+Test single precision
+Average kernel execution time 0.003788 (s)
+    device result: 98751592.000000
+      host result: 98751888.000000
+analytical result: 98751885.543881
+
+Test double precision
+Average kernel execution time 0.004781 (s)
+    device result: 98751885.543882
+      host result: 98751885.832254
+analytical result: 98751885.543881
+

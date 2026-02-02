@@ -1,0 +1,38 @@
+nvc++ -acc  -Wall -I../bwt-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c bwt.cpp -o bwt.o
+generate_table(int*, int, int):
+      8, Generating implicit firstprivate(table_size)
+         Generating NVIDIA GPU code
+         10, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+      8, Generating implicit copyout(table[:table_size]) [if not already present]
+     10, Generating implicit firstprivate(n)
+         Loop not fused: no successor loop
+         Generated vector simd code for the loop
+compare_rotations(int const&, int const&, char const*, int):
+     14, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+     17, Loop not vectorized/parallelized: potential early exits
+bitonic_sort_step(int*, int, int, int, char const*, int):
+     26, Generating implicit firstprivate(table_size)
+         Generating NVIDIA GPU code
+         28, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+     26, Generating implicit copy(table[:]) [if not already present]
+         Generating implicit copyin(genome) [if not already present]
+     28, Generating implicit firstprivate(j,n,k)
+          17, Accelerator restriction: induction variable live-out from loop: .inl_i_1367
+              Loop not vectorized/parallelized: potential early exits
+          21, Accelerator restriction: induction variable live-out from loop: .inl_i_1367
+reconstruct_sequence(int const*, char const*, char*, int):
+     43, Generating implicit firstprivate(n)
+         Generating NVIDIA GPU code
+         45, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+     43, Generating implicit copyin(sequence[:]) [if not already present]
+         Generating implicit copyout(transformed_sequence[:n]) [if not already present]
+         Generating implicit copyin(table[:n]) [if not already present]
+     45, Loop not fused: no successor loop
+         Loop not vectorized: unsupported gather
+         Loop unrolled 2 times
+bwt_with_suffix_array(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>):
+     77, Generating copyin(d_sequence[:n]) [if not already present]
+         Generating copyout(d_transformed_sequence[:n],d_table[:table_size]) [if not already present]
+     81, Loop not vectorized/parallelized: contains call
+nvc++ -acc  -Wall -I../bwt-cuda -O3 -Minfo -mp=gpu -gpu=cc90 main.o bwt.o -o main 

@@ -1,0 +1,156 @@
+nvc++  -Wall -I../mcpr-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+compute_probs(double const*, double const*, double*, int, int, int, int, int):
+      8, include "kernels.h"
+           7, #omp target teams distribute parallel for num_teams(blocks) thread_limit(threads)
+               7, Generating "nvkernel__Z13compute_probsPKdS0_Pdiiiii_F303L7_2" GPU kernel
+              10, Loop parallelized across teams and threads, schedule(static)
+          17, Recognized memory zero idiom
+          23, Generated vector simd code for the loop
+          30, Loop not vectorized: unknown
+          40, Generated vector simd code for the loop
+compute_probs_unitStrides(double const*, double const*, double*, int, int, int, int, int):
+      8, include "kernels.h"
+          52, #omp target teams distribute parallel for num_teams(blocks) thread_limit(threads)
+              52, Generating "nvkernel__Z25compute_probs_unitStridesPKdS0_Pdiiiii_F303L52_6" GPU kernel
+              55, Loop parallelized across teams and threads, schedule(static)
+          55, Loop not vectorized/parallelized: not countable
+          62, Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+          68, Loop not vectorized: unprofitable for target
+          76, Loop not vectorized: unknown
+          86, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+compute_probs_unitStrides_sharedMem(double const*, double const*, double*, int, int, int, int, int):
+      8, include "kernels.h"
+         101, #omp target teams num_teams(blocks) thread_limit(threads)
+             101, Generating "nvkernel__Z35compute_probs_unitStrides_sharedMemPKdS0_Pdiiiii_F303L101_10" GPU kernel
+             104, #omp parallel
+             107, Team private (shared) located in CUDA shared memory
+         122, Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+         128, Loop not vectorized: unprofitable for target
+              Loop unrolled 2 times
+         133, Loop not vectorized: unknown
+         142, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+         147, Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+verify(double const*, double const*, int):
+      9, include "reference.h"
+           3, Loop not vectorized/parallelized: potential early exits
+reference(double const*, double const*, double*, int, int, int):
+      9, include "reference.h"
+          25, Recognized memory zero idiom
+          30, Loop not fused: different loop trip count
+          31, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+          38, Loop not vectorized: unknown
+          48, Generated vector simd code for the loop
+reference_unitStrides(double const*, double const*, double*, int, int, int):
+      9, include "reference.h"
+          67, Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+          72, Loop not fused: different loop trip count
+          73, Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+          81, Loop not vectorized: unknown
+          91, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+t(double const*, int, int):
+     16, Loop not vectorized: data dependency
+         Loop unrolled 8 times
+main:
+     55, Loop not vectorized/parallelized: contains call
+         531, Loop not vectorized: data dependency
+     62, Loop not vectorized/parallelized: potential early exits
+          25, Recognized memory zero idiom
+          30, Loop not fused: different loop trip count
+          31, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+          38, Loop not vectorized: unknown
+          48, Generated vector simd code for the loop
+     68, Generating map(to:rands[:rands_size]) 
+         Generating map(alloc:probs[:alphas_size]) 
+         Generating map(to:alphas[:alphas_size]) 
+     75, Loop not vectorized/parallelized: contains call
+           3, Loop not vectorized/parallelized: potential early exits
+     84, Generating update from(probs[:alphas_size])
+          15, Loop not fused: function call before adjacent loop
+          16, Loop not vectorized: data dependency
+              Loop unrolled 8 times
+          15, Loop not fused: enclosed in different number of nests
+          16, Loop not vectorized: data dependency
+              Loop unrolled 8 times
+          60, Loop not fused: function call before adjacent loop
+          67, Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+              Loop unrolled 8 times
+          72, Loop not fused: different loop trip count
+          73, Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+          81, Loop not vectorized: unknown
+          91, Generated vector simd code for the loop
+     98, Generating update to(rands[:rands_size],alphas[:alphas_size])
+    100, Loop not vectorized/parallelized: contains call
+           3, Loop not vectorized/parallelized: potential early exits
+    110, Generating update from(probs[:alphas_size])
+    118, Loop not vectorized/parallelized: contains call
+           3, Loop not vectorized/parallelized: potential early exits
+    128, Generating update from(probs[:alphas_size])
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::mersenne_twister_engine(unsigned long):
+         330, Loop not vectorized: data dependency
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::mersenne_twister_engine(unsigned long):
+         531, Loop not vectorized: data dependency
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::seed(unsigned long):
+      5, include "random"
+          51, include "random.tcc"
+              330, Loop not vectorized: data dependency
+      9, include "reference.h"
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::operator()():
+         401, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+         409, Loop not vectorized: data dependency
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::_M_gen_rand():
+      5, include "random"
+          51, include "random.tcc"
+              401, Loop not fused: different loop trip count
+                   Generated vector simd code for the loop
+              409, Loop not vectorized: data dependency
+      9, include "reference.h"
+double std::normal_distribution<double>::operator()<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&):
+      5, include "random"
+          51, include "random.tcc"
+      9, include "reference.h"
+double std::normal_distribution<double>::operator()<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&, std::normal_distribution<double>::param_type const&):
+      5, include "random"
+          51, include "random.tcc"
+             1821, Loop not vectorized/parallelized: contains call
+      9, include "reference.h"
+         189, Loop not fused: function call before adjacent loop
+              Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+         189, Loop not fused: function call before adjacent loop
+              Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+std::__detail::_Adaptor<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>, double>::operator()():
+        3364, Loop not fused: function call before adjacent loop
+        3366, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      6, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      8, include "kernels.h"
+double std::generate_canonical<double, 53ul, std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&):
+      5, include "random"
+          51, include "random.tcc"
+             3364, Loop not fused: function call before adjacent loop
+      9, include "reference.h"
+         456, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+nvc++  -Wall -I../mcpr-cuda -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

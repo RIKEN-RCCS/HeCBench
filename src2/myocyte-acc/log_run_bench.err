@@ -1,0 +1,8 @@
+"./main.c", line 69: catastrophic error: cannot open source file "./util/file/file.h"
+  #include "./util/file/file.h"
+                               ^
+
+1 catastrophic error detected in the compilation of "./main.c".
+Compilation terminated.
+make: *** [Makefile.NVD:37: main.o] Error 2
+timeout was set to  600

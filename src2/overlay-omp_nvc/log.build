@@ -1,0 +1,27 @@
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+main:
+    106, Loop not vectorized/parallelized: contains call
+    116, Loop not vectorized/parallelized: contains call
+    126, Generating map(to:input[:img_size]) 
+         Generating map(tofrom:output[:img_size]) 
+          71, Loop not vectorized/parallelized: contains call
+          65, Loop not vectorized: unsupported gather
+    133, Loop not vectorized/parallelized: potential early exits
+int DetectionOverlay<float3>(float3*, float3*, unsigned int, unsigned int, Box*, int, float4):
+     71, Loop not vectorized/parallelized: contains call
+int reference<float3>(float3*, float3*, unsigned int, unsigned int, Box*, int, float4):
+          29, Loop not vectorized: unsupported gather
+void DetectionOverlayBox<float3>(float3 const*, float3*, int, int, int, int, int, int, float4):
+     37, #omp target teams distribute parallel for thread_limit(64)
+         37, Generating "nvkernel__Z19DetectionOverlayBoxI6float3EvPKT_PS1_iiiiii6float4_F1L37_2" GPU kernel
+         39, Loop parallelized across teams and threads(128), schedule(static)
+     37, Generating implicit map(tofrom:color) 
+     40, Loop not vectorized/parallelized: not countable
+void cpuDetectionOverlayBox<float3>(float3 const*, float3*, int, int, int, int, int, int, float4):
+     28, include "reference.h"
+          29, Loop not vectorized: unsupported gather
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     26, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+     28, include "reference.h"
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

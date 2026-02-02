@@ -1,0 +1,2 @@
+cp: cannot stat '../lr-cuda/assets.tar.gz': No such file or directory
+timeout was set to  600

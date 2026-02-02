@@ -1,0 +1,56 @@
+reference(int, double, int const*, bool const*, double*, double const (*) [2], double const*, double const*, double const*, double const*, double*, double*, double*):
+      4, include "reference.h"
+          59, Loop not fused: function call before adjacent loop
+              Loop not vectorized/parallelized: too deeply nested
+          61, Loop not fused: different loop trip count
+          63, Loop not vectorized: data dependency
+         158, Loop not vectorized: data dependency
+verify(int const*, double const*, double const*, double const*, double const*, double const*, double const*):
+      4, include "reference.h"
+         235, Loop not vectorized/parallelized: potential early exits
+         251, Loop not vectorized/parallelized: potential early exits
+         265, Loop not vectorized/parallelized: potential early exits
+main:
+     63, Loop not vectorized/parallelized: contains call
+         235, Loop not vectorized/parallelized: potential early exits
+         251, Loop not vectorized/parallelized: potential early exits
+         265, Loop not vectorized/parallelized: potential early exits
+dot(double4&, double4&):
+     10, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+operator+(double4, double4):
+     15, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+operator*(double, double4):
+     20, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+ced(double, double, double2, double2):
+     32, Generating acc routine seq
+         Generating NVIDIA GPU code
+newPos(int, double8 const&):
+     41, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+fma8(unsigned int const&, int8 const&, int8 const&):
+     55, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+lbm(unsigned int, unsigned int, double const*, double*, double4 const*, double4*, double4 const*, double4*, bool const*, double8, double8, double const*, double):
+     82, Generating implicit firstprivate(height,width)
+         Generating NVIDIA GPU code
+         84, #pragma acc loop gang, vector(256) collapse(2) /* blockIdx.x threadIdx.x */
+         85,   /* blockIdx.x threadIdx.x collapsed */
+     82, Local memory used for f5678,.inl_.X5126_284,.inl__T3_5126_283,.inl_np_280,nX,.inl_.X5126_279,.inl__T3_5126_278,.inl_np_275,nPos,.inl_.X5124_270,.inl__T2_5124_267,.inl__T4_5127_289,.inl_.X5123_262,.inl__T1_5123_259,_T62_5128,.inl_.X5124_266,.inl__T2_5124_263,_T60_5128,_T5_5128,.inl_.X5124_258,.inl__T2_5124_255,_T57_5128,.inl_.X5123_188,.inl__T1_5123_185,_T56_5128,.inl_.X5124_254,.inl__T2_5124_251,_T54_5128,_T53_5128,.inl_.X5123_274,.inl__T1_5123_271,_T51_5128,_T50_5128,_T49_5128,_T46_5128,_T45_5128,_T44_5128,_T41_5128,_T40_5128,_T39_5128,_T36_5128,_T35_5128,_T34_5128,_T31_5128,_T30_5128,_T29_5128,_T26_5128,_T25_5128,_T24_5128,_T21_5128,_T20_5128,_T19_5128,_T16_5128,_T15_5128,_T14_5128,_T11_5128,_T10_5128,.inl_r_285,y5678,y1234,x1234,x5678,u,nY,.inl_.X5127_290,_T6_5128,_T63_5128,temp,_T59_5128,e1234,_T7_5128,f1234,e5678
+         Generating implicit copyin(weight[:9],type[:],dirX,dirY,if0[:],if1234[:]) [if not already present]
+         Generating implicit copy(of5678[:]) [if not already present]
+         Generating implicit copyin(if5678[:]) [if not already present]
+         Generating implicit copy(of0[:],of1234[:]) [if not already present]
+     84, Loop not fused: no successor loop
+     85, Generating implicit firstprivate(omega)
+         Loop not vectorized: data dependency
+fluidSim(int, double, int const*, bool const*, double2*, double*, double8, double8, double const*, double*, double*, double*, double*, double*, double*):
+    229, Generating copyin(h_if5678[:?],h_if0[:temp],h_of0[:temp],h_if1234[:?],h_of1234[:?],h_type[:temp],h_weight[:9],h_of5678[:?]) [if not already present]
+    232, Loop not vectorized/parallelized: contains call
+    260, Generating update self(h_if0[:temp],h_if5678[:?],h_if1234[:?])
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      3, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+timeout was set to  600

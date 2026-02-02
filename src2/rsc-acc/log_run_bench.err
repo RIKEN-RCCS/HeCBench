@@ -1,0 +1,107 @@
+"main.cpp", line 197: error: invalid text in pragma
+    #pragma acc data to: h_flow_vector_array[0:n_flow_vectors], \
+                     ^
+
+"main.cpp", line 197: error: extra text after expected end of preprocessing directive
+    #pragma acc data to: h_flow_vector_array[0:n_flow_vectors], \
+                       ^
+
+"main.cpp", line 214: error: invalid text in pragma
+          #pragma acc update to (h_model_candidate[0:p.max_iter])
+                             ^
+
+"main.cpp", line 214: error: OpenACC data clause expected
+          #pragma acc update to (h_model_candidate[0:p.max_iter])
+                             ^
+
+"main.cpp", line 214: error: extra text after expected end of preprocessing directive
+          #pragma acc update to (h_model_candidate[0:p.max_iter])
+                                ^
+
+"main.cpp", line 215: error: invalid text in pragma
+          #pragma acc update to (h_outliers_candidate[0:p.max_iter])
+                             ^
+
+"main.cpp", line 215: error: OpenACC data clause expected
+          #pragma acc update to (h_outliers_candidate[0:p.max_iter])
+                             ^
+
+"main.cpp", line 215: error: extra text after expected end of preprocessing directive
+          #pragma acc update to (h_outliers_candidate[0:p.max_iter])
+                                ^
+
+"main.cpp", line 216: error: invalid text in pragma
+          #pragma acc update to (h_model_param_local[0:4*p.max_iter])
+                             ^
+
+"main.cpp", line 216: error: OpenACC data clause expected
+          #pragma acc update to (h_model_param_local[0:4*p.max_iter])
+                             ^
+
+"main.cpp", line 216: error: extra text after expected end of preprocessing directive
+          #pragma acc update to (h_model_param_local[0:4*p.max_iter])
+                                ^
+
+"main.cpp", line 217: error: invalid text in pragma
+          #pragma acc update to (h_g_out_id[0:1])
+                             ^
+
+"main.cpp", line 217: error: OpenACC data clause expected
+          #pragma acc update to (h_g_out_id[0:1])
+                             ^
+
+"main.cpp", line 217: error: extra text after expected end of preprocessing directive
+          #pragma acc update to (h_g_out_id[0:1])
+                                ^
+
+"main.cpp", line 224: error: invalid text in pragma
+          #pragma acc update to (h_model_param_local[0:4*p.max_iter])
+                             ^
+
+"main.cpp", line 224: error: OpenACC data clause expected
+          #pragma acc update to (h_model_param_local[0:4*p.max_iter])
+                             ^
+
+"main.cpp", line 224: error: extra text after expected end of preprocessing directive
+          #pragma acc update to (h_model_param_local[0:4*p.max_iter])
+                                ^
+
+"main.cpp", line 233: error: invalid text in pragma
+          #pragma acc update from (h_g_out_id[0:1])
+                             ^
+
+"main.cpp", line 233: error: OpenACC data clause expected
+          #pragma acc update from (h_g_out_id[0:1])
+                             ^
+
+"main.cpp", line 233: error: extra text after expected end of preprocessing directive
+          #pragma acc update from (h_g_out_id[0:1])
+                                  ^
+
+"main.cpp", line 236: error: invalid text in pragma
+          #pragma acc update from (h_outliers_candidate[0:candidates])
+                             ^
+
+"main.cpp", line 236: error: OpenACC data clause expected
+          #pragma acc update from (h_outliers_candidate[0:candidates])
+                             ^
+
+"main.cpp", line 236: error: extra text after expected end of preprocessing directive
+          #pragma acc update from (h_outliers_candidate[0:candidates])
+                                  ^
+
+"main.cpp", line 237: error: invalid text in pragma
+          #pragma acc update from (h_model_candidate[0:candidates])
+                             ^
+
+"main.cpp", line 237: error: OpenACC data clause expected
+          #pragma acc update from (h_model_candidate[0:candidates])
+                             ^
+
+"main.cpp", line 237: error: extra text after expected end of preprocessing directive
+          #pragma acc update from (h_model_candidate[0:candidates])
+                                  ^
+
+26 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

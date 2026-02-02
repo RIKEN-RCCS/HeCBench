@@ -1,0 +1,71 @@
+nvc++  -std=c++14 -Wall -I../ccsd-trpdrv-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c ccsd_tengy.cpp -o ccsd_tengy.o
+ccsd_tengy_gpu(double const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double, double*, double*, double*, double*, int, int, int):
+     45, #omp target teams distribute parallel for thread_limit(256)
+         40, Generating map(to:eorb[:nvir+(nocc+ncor)],f1t[:nvir*nvir],f2t[:nvir*nvir],f3t[:nvir*nvir],f1n[:nvir*nvir],f2n[:nvir*nvir],f3n[:nvir*nvir],f4n[:nvir*nvir],dintc1[:nvir],dintc2[:nvir],dintx1[:nvir],f4t[:nvir*nvir],t1v2[:nvir],t1v1[:nvir]) 
+             Generating map(tofrom:emp5k,emp4k) 
+             Generating map(to:dintx2[:nvir]) 
+             Generating map(tofrom:emp5i,emp4i) 
+         45, Generating "nvkernel__Z14ccsd_tengy_gpuPKdS0_S0_S0_S0_S0_S0_S0_S0_S0_S0_S0_S0_S0_S0_dPdS1_S1_S1_iii_F1L45_2" GPU kernel
+             Loop parallelized across teams and threads(128), schedule(static)
+             Generating reduction(+:emp5k,emp5i,emp4i,emp4k)
+     45, Generating map(tofrom:emp4k,emp5i,emp5k,emp4i) 
+     46, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++  -std=c++14 -Wall -I../ccsd-trpdrv-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c ccsd_trpdrv.cpp -o ccsd_trpdrv.o
+nvc++  -std=c++14 -Wall -I../ccsd-trpdrv-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+kernel_ref(double const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double, double&, double&, double&, double&, int, int, int):
+      4, include "reference.h"
+          13, Zero trip check eliminated
+              Loop not vectorized: data dependency
+ccsd_tengy_ref(double const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double, double&, double&, double&, double&, int, int, int):
+          13, Zero trip check eliminated
+              Generated vector simd code for the loop containing reductions
+ccsd_trpdrv_ref(double*, double*, double*, double*, double*, double*, double*, double*, double*, int*, int*, int*, double*, double*, int*, int*, int*, int*, int*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*):
+          79, Zero trip check eliminated
+              Generated vector simd code for the loop containing reductions
+make_array(int):
+     33, Loop not vectorized/parallelized: contains call
+main:
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+    129, Loop not vectorized/parallelized: too deeply nested
+    132, Loop not vectorized/parallelized: too deeply nested
+    133, Loop not vectorized/parallelized: too deeply nested
+    134, Loop not vectorized/parallelized: potential early exits
+         144, Zero trip check eliminated
+              Generated vector simd code for the loop containing reductions
+    170, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+nvc++  -std=c++14 -Wall -I../ccsd-trpdrv-cuda -O3 -Minfo -mp=gpu -gpu=cc90 ccsd_tengy.o ccsd_trpdrv.o main.o -o main 

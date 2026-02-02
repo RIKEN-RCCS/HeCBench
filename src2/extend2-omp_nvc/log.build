@@ -1,0 +1,21 @@
+nvc++  -std=c++14 -Wall -I../extend2-sycl -O3 -Minfo -mp=gpu -gpu=cc90 -o main.o -c main.cpp
+extend2(extend2_dat*):
+     80, #omp target
+         80, Generating "nvkernel__Z7extend2P11extend2_dat_F1L80_2" GPU kernel
+     80, Generating map(to:qp[:qlen*m],query[:qlen],target[:tlen],eh[:qlen+1]) 
+         Generating map(from:d_tle) 
+         Generating map(to:mat[:m*m]) 
+         Generating map(from:d_max_off,d_score,d_gscore,d_qle,d_gtle) 
+     92, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    100, Loop not vectorized/parallelized: potential early exits
+    105, Generated vector simd code for the loop containing reductions
+    134, Loop not vectorized: data dependency
+    176, Loop not vectorized/parallelized: potential early exits
+    178, Loop not vectorized/parallelized: potential early exits
+main:
+    227, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     29, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++  -std=c++14 -Wall -I../extend2-sycl -O3 -Minfo -mp=gpu -gpu=cc90 main.o ../extend2-sycl/read_data.o -o main 

@@ -1,0 +1,738 @@
+nvc++  -Wall -I../crs-sycl -O3 -Minfo -mp=gpu -gpu=cc90 -c ../crs-sycl/jerasure.cpp -o jerasure.o
+jerasure_print_matrix(int*, int, int, int):
+     62, Loop not vectorized/parallelized: contains call
+jerasure_print_bitmatrix(int*, int, int, int):
+     76, Loop not vectorized/parallelized: contains call
+jerasure_make_decoding_matrix(int, int, int, int*, int*, int*, int*):
+     89, Loop not vectorized/parallelized: not countable
+    100, Recognized memory zero idiom
+    103, Zero trip check eliminated
+         Loop not vectorized: data dependency
+         368, Generated vector simd code for the loop
+         382, Loop not vectorized/parallelized: potential early exits
+         385, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+         399, Zero trip check eliminated
+              Loop not vectorized/parallelized: potential early exits
+         412, Loop not fused: no successor loop
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+         419, Loop not vectorized/parallelized: potential early exits
+         437, Loop not vectorized/parallelized: potential early exits
+jerasure_make_decoding_bitmatrix(int, int, int, int*, int*, int*, int*):
+    121, Loop not vectorized/parallelized: not countable
+    133, Recognized memory zero idiom
+    135, Loop not fused: no successor loop
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 4 times
+    142, Recognized memory copy idiom
+        1024, Generated vector simd code for the loop
+        1038, Loop not vectorized/parallelized: potential early exits
+        1040, Zero trip check eliminated
+              Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+        1049, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+        1059, Loop not fused: function call before adjacent loop
+        1062, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+jerasure_matrix_decode(int, int, int, int*, int, int*, char**, char**, int):
+         518, Recognized memory zero idiom
+         520, Loop not vectorized/parallelized: potential early exits
+    170, Loop not fused: complex flow graph
+          89, Loop not vectorized/parallelized: not countable
+         100, Recognized memory zero idiom
+         103, Zero trip check eliminated
+              Loop not vectorized: data dependency
+         109, Zero trip check eliminated
+              Loop not fused: no successor loop
+              Loop not fused: function call before adjacent loop
+              Loop not vectorized/parallelized: potential early exits
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+         579, Loop not vectorized/parallelized: potential early exits
+         601, Loop not vectorized/parallelized: potential early exits
+    234, Loop not fused: complex flow graph
+         Generated vector simd code for the loop
+         579, Loop not vectorized/parallelized: potential early exits
+         601, Loop not vectorized/parallelized: potential early exits
+         579, Loop not vectorized/parallelized: potential early exits
+         601, Loop not vectorized/parallelized: potential early exits
+jerasure_matrix_to_bitmatrix(int, int, int, int*):
+    268, Loop not vectorized/parallelized: too deeply nested
+    272, Loop not vectorized/parallelized: potential early exits
+    273, Zero trip check eliminated
+         Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+jerasure_matrix_encode(int, int, int, int*, char**, char**, int):
+         579, Loop not vectorized/parallelized: potential early exits
+         601, Loop not vectorized/parallelized: potential early exits
+jerasure_bitmatrix_dotprod(int, int, int*, int*, int, char**, char**, int, int):
+    314, Loop not vectorized/parallelized: too deeply nested
+    327, Loop not vectorized/parallelized: potential early exits
+jerasure_do_parity(int, char**, char*, int):
+    353, Loop not vectorized/parallelized: potential early exits
+jerasure_invert_matrix(int*, int*, int, int):
+    368, Generated vector simd code for the loop
+         Loop unrolled 4 times
+    382, Loop not vectorized/parallelized: potential early exits
+    385, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    399, Zero trip check eliminated
+         Loop not vectorized/parallelized: potential early exits
+    412, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    419, Loop not vectorized/parallelized: potential early exits
+    437, Loop not vectorized/parallelized: potential early exits
+jerasure_invertible_matrix(int*, int, int):
+    461, Loop not vectorized/parallelized: potential early exits
+    464, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    475, Zero trip check eliminated
+         Loop not vectorized/parallelized: potential early exits
+    487, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    493, Loop not vectorized/parallelized: potential early exits
+jerasure_erasures_to_erased(int, int, int*):
+    518, Recognized memory zero idiom
+    520, Loop not vectorized/parallelized: potential early exits
+jerasure_free_schedule(int**):
+    537, Loop not vectorized/parallelized: contains call
+jerasure_free_schedule_cache(int, int, int***):
+         537, Loop not vectorized/parallelized: contains call
+         537, Loop not vectorized/parallelized: contains call
+jerasure_matrix_dotprod(int, int, int*, int*, int, char**, char**, int):
+    579, Loop not vectorized/parallelized: potential early exits
+    601, Loop not vectorized/parallelized: potential early exits
+jerasure_bitmatrix_decode(int, int, int, int*, int, int*, char**, char**, int, int):
+         518, Recognized memory zero idiom
+         520, Loop not vectorized/parallelized: potential early exits
+    640, Loop not fused: complex flow graph
+         121, Loop not vectorized/parallelized: not countable
+         133, Recognized memory zero idiom
+         135, Loop not fused: no successor loop
+              Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+         142, Recognized memory copy idiom
+         148, Zero trip check eliminated
+              Loop not fused: different loop trip count
+              Loop not fused: function call before adjacent loop
+              Loop not vectorized/parallelized: potential early exits
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+         314, Loop not vectorized/parallelized: too deeply nested
+         327, Loop not vectorized/parallelized: potential early exits
+         675, Loop not vectorized/parallelized: too deeply nested
+    684, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+         314, Loop not vectorized/parallelized: too deeply nested
+         327, Loop not vectorized/parallelized: potential early exits
+         314, Loop not vectorized/parallelized: too deeply nested
+         327, Loop not vectorized/parallelized: potential early exits
+         691, Loop not vectorized/parallelized: too deeply nested
+jerasure_schedule_decode_lazy(int, int, int, int*, int*, char**, char**, int, int, int):
+         710, Recognized memory zero idiom
+              Loop not vectorized/parallelized: potential early exits
+         735, Loop not vectorized/parallelized: not countable
+         742, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+        1140, Loop not vectorized/parallelized: potential early exits
+    938, Loop not vectorized: may not be beneficial for target
+         Loop unrolled 2 times
+         537, Loop not vectorized/parallelized: contains call
+jerasure_schedule_decode_cache(int, int, int, int***, int*, char**, char**, int, int):
+         710, Recognized memory zero idiom
+              Loop not vectorized/parallelized: potential early exits
+         735, Loop not vectorized/parallelized: not countable
+         742, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+        1140, Loop not vectorized/parallelized: potential early exits
+    971, Loop not vectorized: may not be beneficial for target
+         Loop unrolled 2 times
+jerasure_generate_schedule_cache(int, int, int, int*, int):
+   1002, Loop not vectorized/parallelized: potential early exits
+jerasure_invert_bitmatrix(int*, int*, int):
+   1024, Generated vector simd code for the loop
+         Loop unrolled 4 times
+   1038, Loop not vectorized/parallelized: potential early exits
+   1040, Zero trip check eliminated
+         Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+   1049, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+   1062, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+jerasure_invertible_bitmatrix(int*, int):
+   1087, Loop not vectorized/parallelized: potential early exits
+   1089, Zero trip check eliminated
+         Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+   1097, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+jerasure_matrix_multiply(int*, int*, int, int, int, int, int):
+   1112, Recognized memory zero idiom
+   1116, Loop not vectorized/parallelized: potential early exits
+jerasure_do_scheduled_operations(char**, int**, int):
+   1140, Loop not vectorized/parallelized: potential early exits
+jerasure_do_scheduled_operations2(char**, int**, int, int, int):
+   1168, Loop not vectorized/parallelized: potential early exits
+jerasure_schedule_encode(int, int, int, int**, char**, char**, int, int):
+   1196, Recognized memory copy idiom
+   1197, Recognized memory copy idiom
+        1168, Loop not vectorized/parallelized: potential early exits
+jerasure_dumb_bitmatrix_to_schedule(int, int, int, int*):
+   1215, Loop not vectorized/parallelized: contains call
+jerasure_smart_bitmatrix_to_schedule(int, int, int, int*):
+   1262, Generated vector simd code for the loop containing reductions
+         Loop unrolled 2 times
+   1295, Loop not vectorized/parallelized: contains call
+   1316, Loop not vectorized/parallelized: contains call
+   1330, Loop not vectorized/parallelized: not countable
+   1333, Loop not fused: complex flow graph
+         Generated vector simd code for the loop containing reductions
+         Loop unrolled 2 times
+jerasure_bitmatrix_encode(int, int, int, int*, char**, char**, int, int):
+         314, Loop not vectorized/parallelized: too deeply nested
+         327, Loop not vectorized/parallelized: potential early exits
+        1370, Loop not vectorized/parallelized: too deeply nested
+_INTERNAL_24____crs_sycl_jerasure_cpp_fb49bdbf::set_up_ptrs_for_scheduled_decoding(int, int, int*, char**, char**):
+         518, Recognized memory zero idiom
+         520, Loop not vectorized/parallelized: potential early exits
+    735, Loop not vectorized/parallelized: not countable
+    742, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+_INTERNAL_24____crs_sycl_jerasure_cpp_fb49bdbf::set_up_ids_for_scheduled_decoding(int, int, int*, int*, int*):
+         518, Recognized memory zero idiom
+         520, Loop not vectorized/parallelized: potential early exits
+    769, Loop not vectorized/parallelized: not countable
+    778, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+_INTERNAL_24____crs_sycl_jerasure_cpp_fb49bdbf::jerasure_generate_decoding_schedule(int, int, int, int*, int*, int):
+    805, Loop not vectorized/parallelized: not countable
+         757, Recognized memory zero idiom
+              Loop not vectorized/parallelized: potential early exits
+         769, Loop not vectorized/parallelized: not countable
+         778, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+    829, Loop not vectorized/parallelized: contains call
+    832, Loop not fused: no successor loop
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 4 times
+        1024, Generated vector simd code for the loop
+        1038, Loop not vectorized/parallelized: potential early exits
+        1040, Zero trip check eliminated
+              Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+        1049, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+        1059, Loop not fused: function call before adjacent loop
+        1062, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+    852, Loop not vectorized/parallelized: contains call
+    871, Loop not vectorized/parallelized: too deeply nested
+    878, Loop not vectorized/parallelized: contains call
+    887, Loop not vectorized/parallelized: too deeply nested
+    894, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Vectorized loop was interleaved
+         Loop unrolled 2 times
+        1262, Generated vector simd code for the loop containing reductions
+              Loop unrolled 2 times
+        1295, Loop not vectorized/parallelized: contains call
+        1316, Loop not vectorized/parallelized: contains call
+        1330, Loop not vectorized/parallelized: not countable
+        1333, Loop not fused: complex flow graph
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 2 times
+        1215, Loop not vectorized/parallelized: contains call
+nvc++  -Wall -I../crs-sycl -O3 -Minfo -mp=gpu -gpu=cc90 -c ../crs-sycl/galois.cpp -o galois.o
+"../crs-sycl/galois.cpp", line 396: warning: statement is unreachable [code_is_unreachable]
+    fprintf(stderr, "Galois_single_divide - no implementation for w=%d\n", w);
+    ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+galois_create_log_tables(int):
+    168, Loop not vectorized/parallelized: not countable
+    174, Loop not vectorized/parallelized: contains call
+    185, Loop not vectorized/parallelized: not countable
+galois_create_mult_tables(int):
+         168, Loop not vectorized/parallelized: not countable
+         174, Loop not vectorized/parallelized: contains call
+         185, Loop not vectorized/parallelized: not countable
+    249, Loop not vectorized/parallelized: not countable
+    260, Loop not vectorized/parallelized: not countable
+galois_ilog(int, int):
+         168, Loop not vectorized/parallelized: not countable
+         174, Loop not vectorized/parallelized: contains call
+         185, Loop not vectorized/parallelized: not countable
+galois_log(int, int):
+         168, Loop not vectorized/parallelized: not countable
+         174, Loop not vectorized/parallelized: contains call
+         185, Loop not vectorized/parallelized: not countable
+galois_shift_multiply(int, int, int):
+    300, Loop not fused: different loop trip count
+         Loop not vectorized: unknown
+    313, Zero trip check eliminated
+         Loop not vectorized: unknown
+         Loop unrolled 2 times
+galois_single_multiply(int, int, int):
+         235, Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: contains call
+         249, Loop not vectorized/parallelized: not countable
+         260, Loop not vectorized/parallelized: not countable
+         168, Loop not vectorized/parallelized: not countable
+         174, Loop not vectorized/parallelized: contains call
+         185, Loop not vectorized/parallelized: not countable
+         759, Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: contains call
+         761, Loop not vectorized/parallelized: potential early exits
+         764, Loop not vectorized/parallelized: contains call
+         769, Loop not fused: function call before adjacent loop
+              Loop not vectorized/parallelized: too deeply nested
+         771, Loop not vectorized/parallelized: too deeply nested
+         775, Loop not vectorized/parallelized: too deeply nested
+         779, Loop not fused: enclosed in different number of nests
+              Loop not vectorized: unknown
+              Loop unrolled 4 times
+         795, Loop unrolled 4 times (completely unrolled)
+         798, Loop unrolled 4 times (completely unrolled)
+         300, Loop not fused: different loop trip count
+              Loop not vectorized: unknown
+         309, Loop not fused: no successor loop
+         313, Zero trip check eliminated
+              Loop not vectorized: unknown
+              Loop unrolled 2 times
+galois_single_divide(int, int, int):
+         235, Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: contains call
+         249, Loop not vectorized/parallelized: not countable
+         260, Loop not vectorized/parallelized: not countable
+         168, Loop not vectorized/parallelized: not countable
+         174, Loop not vectorized/parallelized: contains call
+         185, Loop not vectorized/parallelized: not countable
+galois_shift_divide(int, int, int):
+         612, Loop not fused: sibling loop may prevent vectorization
+              Loop not vectorized: unknown
+         623, Loop not fused: enclosed in different number of nests
+              Loop not vectorized/parallelized: potential early exits
+              Generated vector simd code for the loop
+              Loop not vectorized: unknown
+              Loop not vectorized: data dependency
+         300, Loop not fused: different loop trip count
+              Loop not vectorized: unknown
+         313, Zero trip check eliminated
+              Loop not vectorized: unknown
+              Loop unrolled 2 times
+galois_w08_region_multiply(char*, int, int, char*, int):
+         235, Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: contains call
+         249, Loop not vectorized/parallelized: not countable
+         260, Loop not vectorized/parallelized: not countable
+    449, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    460, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+galois_w16_region_multiply(char*, int, int, char*, int):
+    505, Recognized memory zero idiom
+         168, Loop not vectorized/parallelized: not countable
+         174, Loop not vectorized/parallelized: contains call
+         185, Loop not vectorized/parallelized: not countable
+    519, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+    531, Loop not vectorized: data dependency
+    534, Loop unrolled 4 times (completely unrolled)
+galois_invert_binary_matrix(int*, int*, int):
+    558, Generated vector simd code for the loop
+    568, Loop not vectorized/parallelized: potential early exits
+    578, Loop not vectorized: data dependency
+    589, Loop not vectorized: data dependency
+galois_inverse(int, int):
+         612, Loop not fused: sibling loop may prevent vectorization
+              Loop not vectorized: unknown
+         623, Loop not fused: no successor loop
+              Loop not vectorized/parallelized: potential early exits
+              Generated vector simd code for the loop
+              Loop not vectorized: unknown
+              Loop not vectorized: data dependency
+galois_shift_inverse(int, int):
+    612, Loop not fused: sibling loop may prevent vectorization
+         Loop not vectorized: unknown
+         558, Generated vector simd code for the loop
+         568, Loop not vectorized/parallelized: potential early exits
+         578, Loop not vectorized: unknown
+         589, Loop not vectorized: data dependency
+galois_get_mult_table(int):
+         235, Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: contains call
+         249, Loop not vectorized/parallelized: not countable
+         260, Loop not vectorized/parallelized: not countable
+galois_get_div_table(int):
+         235, Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: contains call
+         249, Loop not vectorized/parallelized: not countable
+         260, Loop not vectorized/parallelized: not countable
+galois_get_log_table(int):
+         168, Loop not vectorized/parallelized: not countable
+         174, Loop not vectorized/parallelized: contains call
+         185, Loop not vectorized/parallelized: not countable
+galois_get_ilog_table(int):
+         168, Loop not vectorized/parallelized: not countable
+         174, Loop not vectorized/parallelized: contains call
+         185, Loop not vectorized/parallelized: not countable
+galois_w32_region_multiply(char*, int, int, char*, int):
+         759, Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: contains call
+         761, Loop not vectorized/parallelized: potential early exits
+         764, Loop not vectorized/parallelized: contains call
+         769, Loop not fused: function call before adjacent loop
+              Loop not vectorized/parallelized: too deeply nested
+         771, Loop not vectorized/parallelized: too deeply nested
+         775, Loop not vectorized/parallelized: too deeply nested
+         779, Loop not fused: enclosed in different number of nests
+              Loop not vectorized: unknown
+              Loop unrolled 4 times
+    693, Loop not fused: complex flow graph
+         Generated vector simd code for the loop
+    698, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+    700, Loop unrolled 4 times (completely unrolled)
+    703, Loop unrolled 4 times (completely unrolled)
+    712, Loop not vectorized: data dependency
+    714, Loop unrolled 4 times (completely unrolled)
+    717, Loop unrolled 4 times (completely unrolled)
+galois_region_xor(char*, char*, char*, int):
+    745, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Vectorized loop was interleaved
+         Loop unrolled 2 times
+galois_create_split_w8_tables():
+         235, Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: contains call
+         249, Loop not vectorized/parallelized: not countable
+         260, Loop not vectorized/parallelized: not countable
+    761, Loop not vectorized/parallelized: potential early exits
+    764, Loop not vectorized/parallelized: contains call
+         300, Loop not fused: enclosed in different number of nests
+              Loop not vectorized: unknown
+         313, Loop not vectorized: unknown
+              Loop unrolled 4 times
+         769, Loop not vectorized/parallelized: too deeply nested
+         771, Loop not vectorized/parallelized: too deeply nested
+         775, Loop not vectorized/parallelized: too deeply nested
+galois_split_w8_multiply(int, int):
+    795, Loop unrolled 4 times (completely unrolled)
+    798, Loop unrolled 4 times (completely unrolled)
+nvc++  -Wall -I../crs-sycl -O3 -Minfo -mp=gpu -gpu=cc90 -c ../crs-sycl/GCRSMatrix.cpp -o GCRSMatrix.o
+gcrs_check_k_m_w(int, int, int):
+     27, Loop not vectorized/parallelized: not countable
+gcrs_create_bitmatrix(int, int, int):
+          27, Loop not vectorized/parallelized: not countable
+     49, Loop not vectorized/parallelized: potential early exits
+gcrs_create_column_coding_bitmatrix(int, int, int, int*):
+          27, Loop not vectorized/parallelized: not countable
+          38, Loop not vectorized/parallelized: not countable
+          49, Loop not vectorized/parallelized: potential early exits
+     98, Loop not fused: function call before adjacent loop
+    101, Loop not vectorized: data dependency
+gcrs_invert_bitmatrix(int*, int*, int):
+    148, Generated vector simd code for the loop
+         Loop unrolled 4 times
+    162, Loop not vectorized/parallelized: potential early exits
+    164, Zero trip check eliminated
+         Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    173, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    186, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+gcrs_create_decoding_data_bitmatrix(int, int, int, int*, int*, int*, int*):
+          27, Loop not vectorized/parallelized: not countable
+    212, Loop not vectorized/parallelized: not countable
+    224, Recognized memory zero idiom
+    226, Loop not fused: no successor loop
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 4 times
+    233, Recognized memory copy idiom
+         148, Generated vector simd code for the loop
+         162, Loop not vectorized/parallelized: potential early exits
+         164, Zero trip check eliminated
+              Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+         173, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+         183, Loop not fused: function call before adjacent loop
+         186, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+gcrs_create_decoding_bitmatrix(int, int, int, int*, int*, int*, int*):
+         324, Recognized memory zero idiom
+         326, Loop not vectorized/parallelized: potential early exits
+    266, Loop not fused: complex flow graph
+         Generated vector simd code for the loop containing reductions
+         203, Loop not vectorized/parallelized: not countable
+         212, Loop not vectorized/parallelized: not countable
+         224, Recognized memory zero idiom
+         226, Loop not fused: no successor loop
+              Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+         233, Recognized memory copy idiom
+         239, Zero trip check eliminated
+              Loop not fused: different loop trip count
+              Loop not fused: function call before adjacent loop
+              Loop not vectorized/parallelized: potential early exits
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+    285, Loop not vectorized/parallelized: contains call
+         294, Loop not vectorized/parallelized: too deeply nested
+         358, Generated vector simd code for the loop
+         373, Loop not vectorized/parallelized: contains call
+         389, Loop not vectorized/parallelized: too deeply nested
+         395, Loop not vectorized/parallelized: contains call
+         406, Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 2 times
+gcrs_erasures_to_erased(int, int, int*):
+    324, Recognized memory zero idiom
+    326, Loop not vectorized/parallelized: potential early exits
+gcrs_generate_coding_vector(int, int, int, int, int*, int*, int*, int*):
+    358, Generated vector simd code for the loop
+    373, Loop not vectorized/parallelized: contains call
+    389, Loop not vectorized/parallelized: too deeply nested
+    395, Loop not vectorized/parallelized: contains call
+    406, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 2 times
+printMatrix(int*, int, int):
+    426, Loop not vectorized/parallelized: contains call
+gcrs_print_column_encoded_bitmatrix(unsigned int*, int, int, int):
+    443, Loop not vectorized/parallelized: contains call
+    453, Loop not vectorized/parallelized: contains call
+nvc++  -Wall -I../crs-sycl -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+m_1_w_4_coding(int, int, long const*, long*, unsigned int const*, int, int, int):
+      8, include "kernels.cpp"
+           9, #omp target teams num_teams(blockDimX) thread_limit(threadDimX)
+               9, Generating "nvkernel__Z14m_1_w_4_codingiiPKlPlPKjiii_F171L9_2" GPU kernel
+              12, #omp parallel
+                39, Barrier
+                47, Barrier
+              23, Team private (shared_data) located in CUDA shared memory
+          35, Loop not vectorized/parallelized: contains call
+          42, Loop unrolled 4 times (completely unrolled)
+m_1_w_5_coding(int, int, long const*, long*, unsigned int const*, int, int, int):
+      8, include "kernels.cpp"
+          65, #omp target teams num_teams(blockDimX) thread_limit(threadDimX)
+              65, Generating "nvkernel__Z14m_1_w_5_codingiiPKlPlPKjiii_F171L65_7" GPU kernel
+              68, #omp parallel
+                94, Barrier
+               102, Barrier
+              78, Team private (shared_data) located in CUDA shared memory
+          90, Loop not vectorized/parallelized: contains call
+          97, Loop not vectorized: data dependency
+m_1_w_6_coding(int, int, long const*, long*, unsigned int const*, int, int, int):
+      8, include "kernels.cpp"
+         119, #omp target teams num_teams(blockDimX) thread_limit(threadDimX)
+             119, Generating "nvkernel__Z14m_1_w_6_codingiiPKlPlPKjiii_F171L119_12" GPU kernel
+             122, #omp parallel
+               148, Barrier
+               156, Barrier
+             132, Team private (shared_data) located in CUDA shared memory
+         144, Loop not vectorized/parallelized: contains call
+         151, Loop not vectorized: data dependency
+m_1_w_7_coding(int, int, long const*, long*, unsigned int const*, int, int, int):
+      8, include "kernels.cpp"
+         174, #omp target teams num_teams(blockDimX) thread_limit(threadDimX)
+             174, Generating "nvkernel__Z14m_1_w_7_codingiiPKlPlPKjiii_F171L174_17" GPU kernel
+             177, #omp parallel
+               203, Barrier
+               211, Barrier
+             187, Team private (shared_data) located in CUDA shared memory
+         199, Loop not vectorized/parallelized: contains call
+         206, Loop not vectorized: data dependency
+m_1_w_8_coding(int, int, long const*, long*, unsigned int const*, int, int, int):
+      8, include "kernels.cpp"
+         229, #omp target teams num_teams(blockDimX) thread_limit(threadDimX)
+             229, Generating "nvkernel__Z14m_1_w_8_codingiiPKlPlPKjiii_F171L229_22" GPU kernel
+             232, #omp parallel
+               258, Barrier
+               266, Barrier
+             242, Team private (shared_data) located in CUDA shared memory
+         254, Loop not vectorized/parallelized: contains call
+         261, Loop not vectorized: data dependency
+m_2_w_4_coding(int, int, long const*, long*, unsigned int const*, int, int, int):
+      8, include "kernels.cpp"
+         285, #omp target teams num_teams(blockDimX) thread_limit(threadDimX)
+             285, Generating "nvkernel__Z14m_2_w_4_codingiiPKlPlPKjiii_F171L285_27" GPU kernel
+             288, #omp parallel
+               317, Barrier
+               327, Barrier
+             301, Team private (shared_data) located in CUDA shared memory
+         313, Loop not vectorized/parallelized: contains call
+         320, Loop unrolled 4 times (completely unrolled)
+m_2_w_5_coding(int, int, long const*, long*, unsigned int const*, int, int, int):
+      8, include "kernels.cpp"
+         346, #omp target teams num_teams(blockDimX) thread_limit(threadDimX)
+             346, Generating "nvkernel__Z14m_2_w_5_codingiiPKlPlPKjiii_F171L346_32" GPU kernel
+             349, #omp parallel
+               378, Barrier
+               388, Barrier
+             362, Team private (shared_data) located in CUDA shared memory
+         374, Loop not vectorized/parallelized: contains call
+         381, Loop not vectorized: data dependency
+m_2_w_6_coding(int, int, long const*, long*, unsigned int const*, int, int, int):
+      8, include "kernels.cpp"
+         407, #omp target teams num_teams(blockDimX) thread_limit(threadDimX)
+             407, Generating "nvkernel__Z14m_2_w_6_codingiiPKlPlPKjiii_F171L407_37" GPU kernel
+             410, #omp parallel
+               439, Barrier
+               449, Barrier
+             423, Team private (shared_data) located in CUDA shared memory
+         435, Loop not vectorized/parallelized: contains call
+         442, Loop not vectorized: data dependency
+m_2_w_7_coding(int, int, long const*, long*, unsigned int const*, int, int, int):
+      8, include "kernels.cpp"
+         468, #omp target teams num_teams(blockDimX) thread_limit(threadDimX)
+             468, Generating "nvkernel__Z14m_2_w_7_codingiiPKlPlPKjiii_F171L468_42" GPU kernel
+             471, #omp parallel
+               500, Barrier
+               510, Barrier
+             484, Team private (shared_data) located in CUDA shared memory
+         496, Loop not vectorized/parallelized: contains call
+         503, Loop not vectorized: data dependency
+m_2_w_8_coding(int, int, long const*, long*, unsigned int const*, int, int, int):
+      8, include "kernels.cpp"
+         530, #omp target teams num_teams(blockDimX) thread_limit(threadDimX)
+             530, Generating "nvkernel__Z14m_2_w_8_codingiiPKlPlPKjiii_F171L530_47" GPU kernel
+             533, #omp parallel
+               561, Barrier
+               571, Barrier
+             545, Team private (shared_data) located in CUDA shared memory
+         557, Loop not vectorized/parallelized: contains call
+         564, Loop not vectorized: data dependency
+m_3_w_4_coding(int, int, long const*, long*, unsigned int const*, int, int, int):
+      8, include "kernels.cpp"
+         590, #omp target teams num_teams(blockDimX) thread_limit(threadDimX)
+             590, Generating "nvkernel__Z14m_3_w_4_codingiiPKlPlPKjiii_F171L590_52" GPU kernel
+             593, #omp parallel
+               624, Barrier
+               635, Barrier
+             608, Team private (shared_data) located in CUDA shared memory
+         620, Loop not vectorized/parallelized: contains call
+         627, Loop unrolled 4 times (completely unrolled)
+m_3_w_5_coding(int, int, long const*, long*, unsigned int const*, int, int, int):
+      8, include "kernels.cpp"
+         654, #omp target teams num_teams(blockDimX) thread_limit(threadDimX)
+             654, Generating "nvkernel__Z14m_3_w_5_codingiiPKlPlPKjiii_F171L654_57" GPU kernel
+             657, #omp parallel
+               688, Barrier
+               699, Barrier
+             672, Team private (shared_data) located in CUDA shared memory
+         684, Loop not vectorized/parallelized: contains call
+         691, Loop not vectorized: data dependency
+m_3_w_6_coding(int, int, long const*, long*, unsigned int const*, int, int, int):
+      8, include "kernels.cpp"
+         720, #omp target teams num_teams(blockDimX) thread_limit(threadDimX)
+             720, Generating "nvkernel__Z14m_3_w_6_codingiiPKlPlPKjiii_F171L720_62" GPU kernel
+             723, #omp parallel
+               754, Barrier
+               765, Barrier
+             738, Team private (shared_data) located in CUDA shared memory
+         750, Loop not vectorized/parallelized: contains call
+         757, Loop not vectorized: data dependency
+m_3_w_7_coding(int, int, long const*, long*, unsigned int const*, int, int, int):
+      8, include "kernels.cpp"
+         785, #omp target teams num_teams(blockDimX) thread_limit(threadDimX)
+             785, Generating "nvkernel__Z14m_3_w_7_codingiiPKlPlPKjiii_F171L785_67" GPU kernel
+             788, #omp parallel
+               819, Barrier
+               830, Barrier
+             803, Team private (shared_data) located in CUDA shared memory
+         815, Loop not vectorized/parallelized: contains call
+         822, Loop not vectorized: data dependency
+m_3_w_8_coding(int, int, long const*, long*, unsigned int const*, int, int, int):
+      8, include "kernels.cpp"
+         850, #omp target teams num_teams(blockDimX) thread_limit(threadDimX)
+             850, Generating "nvkernel__Z14m_3_w_8_codingiiPKlPlPKjiii_F171L850_72" GPU kernel
+             853, #omp parallel
+               884, Barrier
+               895, Barrier
+             868, Team private (shared_data) located in CUDA shared memory
+         880, Loop not vectorized/parallelized: contains call
+         887, Loop not vectorized: data dependency
+m_4_w_4_coding(int, int, long const*, long*, unsigned int const*, int, int, int):
+      8, include "kernels.cpp"
+         915, #omp target teams num_teams(blockDimX) thread_limit(threadDimX)
+             915, Generating "nvkernel__Z14m_4_w_4_codingiiPKlPlPKjiii_F171L915_77" GPU kernel
+             918, #omp parallel
+               950, Barrier
+               962, Barrier
+             934, Team private (shared_data) located in CUDA shared memory
+         946, Loop not vectorized/parallelized: contains call
+         953, Loop unrolled 4 times (completely unrolled)
+m_4_w_5_coding(int, int, long const*, long*, unsigned int const*, int, int, int):
+      8, include "kernels.cpp"
+         983, #omp target teams num_teams(blockDimX) thread_limit(threadDimX)
+             983, Generating "nvkernel__Z14m_4_w_5_codingiiPKlPlPKjiii_F171L983_82" GPU kernel
+             986, #omp parallel
+              1018, Barrier
+              1030, Barrier
+            1001, Team private (shared_data) located in CUDA shared memory
+        1014, Loop not vectorized/parallelized: contains call
+        1021, Loop not vectorized: data dependency
+m_4_w_6_coding(int, int, long const*, long*, unsigned int const*, int, int, int):
+      8, include "kernels.cpp"
+        1051, #omp target teams num_teams(blockDimX) thread_limit(threadDimX)
+            1051, Generating "nvkernel__Z14m_4_w_6_codingiiPKlPlPKjiii_F171L1051_87" GPU kernel
+            1054, #omp parallel
+              1086, Barrier
+              1098, Barrier
+            1069, Team private (shared_data) located in CUDA shared memory
+        1082, Loop not vectorized/parallelized: contains call
+        1089, Loop not vectorized: data dependency
+m_4_w_7_coding(int, int, long const*, long*, unsigned int const*, int, int, int):
+      8, include "kernels.cpp"
+        1119, #omp target teams num_teams(blockDimX) thread_limit(threadDimX)
+            1119, Generating "nvkernel__Z14m_4_w_7_codingiiPKlPlPKjiii_F171L1119_92" GPU kernel
+            1122, #omp parallel
+              1152, Barrier
+              1164, Barrier
+            1136, Team private (shared_data) located in CUDA shared memory
+        1148, Loop not vectorized/parallelized: contains call
+        1155, Loop not vectorized: data dependency
+m_4_w_8_coding(int, int, long const*, long*, unsigned int const*, int, int, int):
+      8, include "kernels.cpp"
+        1185, #omp target teams num_teams(blockDimX) thread_limit(threadDimX)
+            1185, Generating "nvkernel__Z14m_4_w_8_codingiiPKlPlPKjiii_F171L1185_97" GPU kernel
+            1188, #omp parallel
+              1219, Barrier
+              1231, Barrier
+            1203, Team private (shared_data) located in CUDA shared memory
+        1215, Loop not vectorized/parallelized: contains call
+        1222, Loop not vectorized: data dependency
+main:
+     33, Loop not vectorized/parallelized: too deeply nested
+     34, Loop not vectorized/parallelized: too deeply nested
+     88, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+    108, Loop not vectorized/parallelized: potential early exits
+    123, Generating map(from:code[:?]) 
+         Generating map(to:data[:?],all_columns_bitmatrix[:taskSize*(k*w)]) 
+    150, Loop not vectorized/parallelized: contains call
+nvc++  -Wall -I../crs-sycl -O3 -Minfo -mp=gpu -gpu=cc90 -c utils.cpp -o utils.o
+generateRandomValue(char*, unsigned long):
+     13, Loop not vectorized/parallelized: contains call
+nvc++  -Wall -I../crs-sycl -O3 -Minfo -mp=gpu -gpu=cc90 jerasure.o galois.o GCRSMatrix.o main.o utils.o -o main 

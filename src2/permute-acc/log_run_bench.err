@@ -1,0 +1,67 @@
+make_random_float(unsigned long):
+      7, include "common.h"
+          10, Loop not vectorized/parallelized: contains call
+permuate_cpu(float*, float*, float*, float*, int, int, int, int):
+     12, Loop not vectorized/parallelized: too deeply nested
+     15, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 8 times
+permute(float*, float const*, int, int, int, int, int):
+     35, Generating implicit firstprivate(B,C,T)
+         Generating NVIDIA GPU code
+         39, #pragma acc loop gang(num_blocks), vector(block_size) blockIdx.x threadIdx.x */
+     35, Generating implicit copyin(inp[:]) [if not already present]
+         Generating implicit copyout(V[:C*(T*B)],K[:C*(T*B)],Q[:C*(T*B)]) [if not already present]
+     39, Generating implicit firstprivate(d)
+         Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+main:
+          10, Loop not vectorized/parallelized: contains call
+          10, Loop not vectorized/parallelized: contains call
+          10, Loop not vectorized/parallelized: contains call
+          10, Loop not vectorized/parallelized: contains call
+          10, Loop not vectorized/parallelized: contains call
+          12, Loop not fused: function call before adjacent loop
+              Loop not vectorized/parallelized: too deeply nested
+          15, Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 4 times
+     87, Generating copyin(inp[:?]) [if not already present]
+         Generating create(out[:?]) [if not already present]
+     88, Loop not vectorized/parallelized: contains call
+          60, Loop not vectorized/parallelized: contains call
+void validate_result<float, float>(float*, float const*, char const*, unsigned long, float):
+      7, include "common.h"
+          22, Generating update self(out_gpu[:num_elements])
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+float benchmark_kernel<void (*)(float*, float const*, int, int, int, int, int), float*&, float*&, int const&, int const&, int const&, int const&, int&>(int, void (*)(float*, float const*, int, int, int, int, int), float*&, float*&, int const&, int const&, int const&, int const&, int&):
+      7, include "common.h"
+          60, Loop not vectorized/parallelized: potential early exits
+std::char_traits<char>::length(char const*):
+         171, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      7, include "common.h"
+           2, include "chrono"
+              472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<float, std::ratio<1l, 1000l>>::_S_gcd(long, long):
+      7, include "common.h"
+           2, include "chrono"
+              472, Loop not vectorized/parallelized: not countable
+__gnu_cxx::char_traits<char>::length(char const*):
+      7, include "common.h"
+           5, include "iostream"
+               39, include "ostream"
+                    38, include "ios"
+                         40, include "char_traits.h"
+                             171, Loop not vectorized/parallelized: not countable
+std::basic_ostream<char, std::char_traits<char>>& std::endl<char, std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&):
+      7, include "common.h"
+           5, include "iostream"
+               39, include "ostream"
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&, char const*):
+         397, Loop not vectorized/parallelized: not countable
+timeout was set to  600

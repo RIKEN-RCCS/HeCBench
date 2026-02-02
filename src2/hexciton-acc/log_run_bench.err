@@ -1,0 +1,477 @@
+"main.cpp", line 67: error: invalid text in pragma
+  #pragma acc data from: sout[0:size_sigma]) \
+                   ^
+
+"main.cpp", line 67: error: extra text after expected end of preprocessing directive
+  #pragma acc data from: sout[0:size_sigma]) \
+                       ^
+
+"main.cpp", line 76: error: invalid text in pragma
+      #pragma acc update to (sout[0:size_sigma])
+                         ^
+
+"main.cpp", line 76: error: OpenACC data clause expected
+      #pragma acc update to (sout[0:size_sigma])
+                         ^
+
+"main.cpp", line 76: error: extra text after expected end of preprocessing directive
+      #pragma acc update to (sout[0:size_sigma])
+                            ^
+
+"main.cpp", line 84: error: invalid text in pragma
+             thread_limit(VEC_LENGTH_AUTO * PACKAGES_PER_WG)
+             ^
+
+"main.cpp", line 84: error: extra text after expected end of preprocessing directive
+             thread_limit(VEC_LENGTH_AUTO * PACKAGES_PER_WG)
+                         ^
+
+"main.cpp", line 96: error: invalid text in pragma
+             thread_limit(VEC_LENGTH_AUTO * PACKAGES_PER_WG)
+             ^
+
+"main.cpp", line 96: error: extra text after expected end of preprocessing directive
+             thread_limit(VEC_LENGTH_AUTO * PACKAGES_PER_WG)
+                         ^
+
+"main.cpp", line 137: error: invalid text in pragma
+             thread_limit(VEC_LENGTH_AUTO * PACKAGES_PER_WG)
+             ^
+
+"main.cpp", line 137: error: extra text after expected end of preprocessing directive
+             thread_limit(VEC_LENGTH_AUTO * PACKAGES_PER_WG)
+                         ^
+
+"main.cpp", line 175: error: invalid text in pragma
+             thread_limit(VEC_LENGTH_AUTO * PACKAGES_PER_WG)
+             ^
+
+"main.cpp", line 175: error: extra text after expected end of preprocessing directive
+             thread_limit(VEC_LENGTH_AUTO * PACKAGES_PER_WG)
+                         ^
+
+"main.cpp", line 201: warning: incompatible redefinition of macro "sigma_real" (declared at line 126) [bad_macro_redef]
+          #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + (sigma_id))
+                  ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"main.cpp", line 202: warning: incompatible redefinition of macro "sigma_imag" (declared at line 127) [bad_macro_redef]
+          #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + VEC_LENGTH_AUTO + (sigma_id))
+                  ^
+
+"main.cpp", line 204: warning: incompatible redefinition of macro "ham_real" (declared at line 129) [bad_macro_redef]
+          #define ham_real(i, j) ((i) * dim + (j))
+                  ^
+
+"main.cpp", line 205: warning: incompatible redefinition of macro "ham_imag" (declared at line 130) [bad_macro_redef]
+          #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+                  ^
+
+"main.cpp", line 212: error: invalid text in pragma
+             thread_limit(VEC_LENGTH_AUTO * PACKAGES_PER_WG)
+             ^
+
+"main.cpp", line 212: error: extra text after expected end of preprocessing directive
+             thread_limit(VEC_LENGTH_AUTO * PACKAGES_PER_WG)
+                         ^
+
+"main.cpp", line 238: warning: incompatible redefinition of macro "package_id" (declared at line 198) [bad_macro_redef]
+          #define package_id ((gid / VEC_LENGTH_AUTO) * VEC_LENGTH_AUTO * 2 * DIM * DIM)
+                  ^
+
+"main.cpp", line 241: warning: incompatible redefinition of macro "sigma_real" (declared at line 201) [bad_macro_redef]
+          #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + (sigma_id))
+                  ^
+
+"main.cpp", line 242: warning: incompatible redefinition of macro "sigma_imag" (declared at line 202) [bad_macro_redef]
+          #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + VEC_LENGTH_AUTO + (sigma_id))
+                  ^
+
+"main.cpp", line 244: warning: incompatible redefinition of macro "ham_real" (declared at line 204) [bad_macro_redef]
+          #define ham_real(i, j) ((i) * DIM + (j))
+                  ^
+
+"main.cpp", line 245: warning: incompatible redefinition of macro "ham_imag" (declared at line 205) [bad_macro_redef]
+          #define ham_imag(i, j) (DIM * DIM + (i) * DIM + (j))
+                  ^
+
+"main.cpp", line 252: error: invalid text in pragma
+             thread_limit(VEC_LENGTH_AUTO * PACKAGES_PER_WG)
+             ^
+
+"main.cpp", line 252: error: extra text after expected end of preprocessing directive
+             thread_limit(VEC_LENGTH_AUTO * PACKAGES_PER_WG)
+                         ^
+
+"main.cpp", line 293: error: invalid text in pragma
+             thread_limit(VEC_LENGTH_AUTO * PACKAGES_PER_WG)
+             ^
+
+"main.cpp", line 293: error: extra text after expected end of preprocessing directive
+             thread_limit(VEC_LENGTH_AUTO * PACKAGES_PER_WG)
+                         ^
+
+"main.cpp", line 334: warning: incompatible redefinition of macro "package_id" (declared at line 238) [bad_macro_redef]
+          #define package_id ((gid / VEC_LENGTH_AUTO) * VEC_LENGTH_AUTO * 2 * dim * dim)
+                  ^
+
+"main.cpp", line 337: warning: incompatible redefinition of macro "sigma_real" (declared at line 241) [bad_macro_redef]
+          #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + (sigma_id))
+                  ^
+
+"main.cpp", line 338: warning: incompatible redefinition of macro "sigma_imag" (declared at line 242) [bad_macro_redef]
+          #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + VEC_LENGTH_AUTO + (sigma_id))
+                  ^
+
+"main.cpp", line 339: warning: incompatible redefinition of macro "ham_real" (declared at line 244) [bad_macro_redef]
+          #define ham_real(i, j) ((i) * dim + (j))
+                  ^
+
+"main.cpp", line 340: warning: incompatible redefinition of macro "ham_imag" (declared at line 245) [bad_macro_redef]
+          #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+                  ^
+
+"main.cpp", line 347: error: invalid text in pragma
+             thread_limit(VEC_LENGTH_AUTO * PACKAGES_PER_WG)
+             ^
+
+"main.cpp", line 347: error: extra text after expected end of preprocessing directive
+             thread_limit(VEC_LENGTH_AUTO * PACKAGES_PER_WG)
+                         ^
+
+"main.cpp", line 370: warning: incompatible redefinition of macro "package_id" (declared at line 334) [bad_macro_redef]
+          #define package_id ((gid / VEC_LENGTH_AUTO) * VEC_LENGTH_AUTO * 2 * DIM * DIM)
+                  ^
+
+"main.cpp", line 373: warning: incompatible redefinition of macro "sigma_real" (declared at line 337) [bad_macro_redef]
+          #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + (sigma_id))
+                  ^
+
+"main.cpp", line 374: warning: incompatible redefinition of macro "sigma_imag" (declared at line 338) [bad_macro_redef]
+          #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + VEC_LENGTH_AUTO + (sigma_id))
+                  ^
+
+"main.cpp", line 375: warning: incompatible redefinition of macro "ham_real" (declared at line 339) [bad_macro_redef]
+          #define ham_real(i, j) ((i) * DIM + (j))
+                  ^
+
+"main.cpp", line 376: warning: incompatible redefinition of macro "ham_imag" (declared at line 340) [bad_macro_redef]
+          #define ham_imag(i, j) (DIM * DIM + (i) * DIM + (j))
+                  ^
+
+"main.cpp", line 383: error: invalid text in pragma
+             thread_limit(VEC_LENGTH_AUTO * PACKAGES_PER_WG)
+             ^
+
+"main.cpp", line 383: error: extra text after expected end of preprocessing directive
+             thread_limit(VEC_LENGTH_AUTO * PACKAGES_PER_WG)
+                         ^
+
+"main.cpp", line 419: error: invalid text in pragma
+             thread_limit(VEC_LENGTH_AUTO * PACKAGES_PER_WG)
+             ^
+
+"main.cpp", line 419: error: extra text after expected end of preprocessing directive
+             thread_limit(VEC_LENGTH_AUTO * PACKAGES_PER_WG)
+                         ^
+
+"main.cpp", line 446: warning: incompatible redefinition of macro "package_id" (declared at line 370) [bad_macro_redef]
+          #define package_id ((PACKAGES_PER_WG * g + p) * (VEC_LENGTH_AUTO * 2 * dim * dim))
+                  ^
+
+"main.cpp", line 447: warning: incompatible redefinition of macro "sigma_id" (declared at line 199) [bad_macro_redef]
+          #define sigma_id (v)
+                  ^
+
+"main.cpp", line 449: warning: incompatible redefinition of macro "sigma_real" (declared at line 373) [bad_macro_redef]
+          #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + sigma_id)
+                  ^
+
+"main.cpp", line 450: warning: incompatible redefinition of macro "sigma_imag" (declared at line 374) [bad_macro_redef]
+          #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + VEC_LENGTH_AUTO + sigma_id)
+                  ^
+
+"main.cpp", line 451: warning: incompatible redefinition of macro "ham_real" (declared at line 375) [bad_macro_redef]
+          #define ham_real(i, j) ((i) * dim + (j))
+                  ^
+
+"main.cpp", line 452: warning: incompatible redefinition of macro "ham_imag" (declared at line 376) [bad_macro_redef]
+          #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+                  ^
+
+"main.cpp", line 459: error: invalid text in pragma
+            thread_limit(VEC_LENGTH_AUTO * PACKAGES_PER_WG)
+            ^
+
+"main.cpp", line 459: error: extra text after expected end of preprocessing directive
+            thread_limit(VEC_LENGTH_AUTO * PACKAGES_PER_WG)
+                        ^
+
+"main.cpp", line 488: warning: incompatible redefinition of macro "package_id" (declared at line 446) [bad_macro_redef]
+          #define package_id ((PACKAGES_PER_WG * g + p) * (VEC_LENGTH_AUTO * 2 * DIM * DIM))
+                  ^
+
+"main.cpp", line 491: warning: incompatible redefinition of macro "sigma_real" (declared at line 449) [bad_macro_redef]
+          #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + sigma_id)
+                  ^
+
+"main.cpp", line 492: warning: incompatible redefinition of macro "sigma_imag" (declared at line 450) [bad_macro_redef]
+          #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + VEC_LENGTH_AUTO + sigma_id)
+                  ^
+
+"main.cpp", line 494: warning: incompatible redefinition of macro "ham_real" (declared at line 451) [bad_macro_redef]
+          #define ham_real(i, j) ((i) * DIM + (j))
+                  ^
+
+"main.cpp", line 495: warning: incompatible redefinition of macro "ham_imag" (declared at line 452) [bad_macro_redef]
+          #define ham_imag(i, j) (DIM * DIM + (i) * DIM + (j))
+                  ^
+
+"main.cpp", line 502: error: invalid text in pragma
+            thread_limit(VEC_LENGTH_AUTO * PACKAGES_PER_WG)
+            ^
+
+"main.cpp", line 502: error: extra text after expected end of preprocessing directive
+            thread_limit(VEC_LENGTH_AUTO * PACKAGES_PER_WG)
+                        ^
+
+"main.cpp", line 543: error: invalid text in pragma
+            thread_limit(VEC_LENGTH_AUTO * PACKAGES_PER_WG)
+            ^
+
+"main.cpp", line 543: error: extra text after expected end of preprocessing directive
+            thread_limit(VEC_LENGTH_AUTO * PACKAGES_PER_WG)
+                        ^
+
+"main.cpp", line 585: warning: incompatible redefinition of macro "package_id" (declared at line 488) [bad_macro_redef]
+          #define package_id ((PACKAGES_PER_WG * g + p) * (VEC_LENGTH_AUTO * 2 * dim * dim))
+                  ^
+
+"main.cpp", line 588: warning: incompatible redefinition of macro "sigma_real" (declared at line 491) [bad_macro_redef]
+          #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + sigma_id)
+                  ^
+
+"main.cpp", line 589: warning: incompatible redefinition of macro "sigma_imag" (declared at line 492) [bad_macro_redef]
+          #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + VEC_LENGTH_AUTO + sigma_id)
+                  ^
+
+"main.cpp", line 590: warning: incompatible redefinition of macro "ham_real" (declared at line 494) [bad_macro_redef]
+          #define ham_real(i, j) ((i) * dim + (j))
+                  ^
+
+"main.cpp", line 591: warning: incompatible redefinition of macro "ham_imag" (declared at line 495) [bad_macro_redef]
+          #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+                  ^
+
+"main.cpp", line 598: error: invalid text in pragma
+            thread_limit(VEC_LENGTH_AUTO * PACKAGES_PER_WG)
+            ^
+
+"main.cpp", line 598: error: extra text after expected end of preprocessing directive
+            thread_limit(VEC_LENGTH_AUTO * PACKAGES_PER_WG)
+                        ^
+
+"main.cpp", line 622: warning: incompatible redefinition of macro "package_id" (declared at line 585) [bad_macro_redef]
+          #define package_id ((PACKAGES_PER_WG * g + p) * (VEC_LENGTH_AUTO * 2 * DIM * DIM))
+                  ^
+
+"main.cpp", line 625: warning: incompatible redefinition of macro "sigma_real" (declared at line 588) [bad_macro_redef]
+          #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + sigma_id)
+                  ^
+
+"main.cpp", line 626: warning: incompatible redefinition of macro "sigma_imag" (declared at line 589) [bad_macro_redef]
+          #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + VEC_LENGTH_AUTO + sigma_id)
+                  ^
+
+"main.cpp", line 627: warning: incompatible redefinition of macro "ham_real" (declared at line 590) [bad_macro_redef]
+          #define ham_real(i, j) ((i) * DIM + (j))
+                  ^
+
+"main.cpp", line 628: warning: incompatible redefinition of macro "ham_imag" (declared at line 591) [bad_macro_redef]
+          #define ham_imag(i, j) (DIM * DIM + (i) * DIM + (j))
+                  ^
+
+"main.cpp", line 635: error: invalid text in pragma
+            thread_limit(VEC_LENGTH_AUTO * PACKAGES_PER_WG)
+            ^
+
+"main.cpp", line 635: error: extra text after expected end of preprocessing directive
+            thread_limit(VEC_LENGTH_AUTO * PACKAGES_PER_WG)
+                        ^
+
+"main.cpp", line 672: error: invalid text in pragma
+            thread_limit(VEC_LENGTH_AUTO * PACKAGES_PER_WG)
+            ^
+
+"main.cpp", line 672: error: extra text after expected end of preprocessing directive
+            thread_limit(VEC_LENGTH_AUTO * PACKAGES_PER_WG)
+                        ^
+
+"main.cpp", line 700: warning: incompatible redefinition of macro "package_id" (declared at line 622) [bad_macro_redef]
+          #define package_id (gid * dim * dim * 2)
+                  ^
+
+"main.cpp", line 702: warning: incompatible redefinition of macro "sigma_real" (declared at line 625) [bad_macro_redef]
+          #define sigma_real(i, j) (package_id + 2 * (dim * (i) + (j)))
+                  ^
+
+"main.cpp", line 703: warning: incompatible redefinition of macro "sigma_imag" (declared at line 626) [bad_macro_redef]
+          #define sigma_imag(i, j) (package_id + 2 * (dim * (i) + (j)) + 1)
+                  ^
+
+"main.cpp", line 705: warning: incompatible redefinition of macro "ham_real" (declared at line 627) [bad_macro_redef]
+          #define ham_real(i, j) ((i) * dim + (j))
+                  ^
+
+"main.cpp", line 706: warning: incompatible redefinition of macro "ham_imag" (declared at line 628) [bad_macro_redef]
+          #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+                  ^
+
+"main.cpp", line 712: error: invalid text in pragma
+          #pragma acc parallel loop thread_limit(VEC_LENGTH)
+                                    ^
+
+"main.cpp", line 712: error: extra text after expected end of preprocessing directive
+          #pragma acc parallel loop thread_limit(VEC_LENGTH)
+                                                ^
+
+"main.cpp", line 738: warning: incompatible redefinition of macro "package_id" (declared at line 700) [bad_macro_redef]
+          #define package_id (gid * DIM * DIM * 2)
+                  ^
+
+"main.cpp", line 740: warning: incompatible redefinition of macro "sigma_real" (declared at line 702) [bad_macro_redef]
+          #define sigma_real(i, j) (package_id + 2 * (DIM * (i) + (j)))
+                  ^
+
+"main.cpp", line 741: warning: incompatible redefinition of macro "sigma_imag" (declared at line 703) [bad_macro_redef]
+          #define sigma_imag(i, j) (package_id + 2 * (DIM * (i) + (j)) + 1)
+                  ^
+
+"main.cpp", line 743: warning: incompatible redefinition of macro "ham_real" (declared at line 705) [bad_macro_redef]
+          #define ham_real(i, j) ((i) * DIM + (j))
+                  ^
+
+"main.cpp", line 744: warning: incompatible redefinition of macro "ham_imag" (declared at line 706) [bad_macro_redef]
+          #define ham_imag(i, j) (DIM * DIM + (i) * DIM + (j))
+                  ^
+
+"main.cpp", line 750: error: invalid text in pragma
+          #pragma acc parallel loop thread_limit(VEC_LENGTH)
+                                    ^
+
+"main.cpp", line 750: error: extra text after expected end of preprocessing directive
+          #pragma acc parallel loop thread_limit(VEC_LENGTH)
+                                                ^
+
+"main.cpp", line 788: error: invalid text in pragma
+          #pragma acc parallel loop thread_limit(VEC_LENGTH)
+                                    ^
+
+"main.cpp", line 788: error: extra text after expected end of preprocessing directive
+          #pragma acc parallel loop thread_limit(VEC_LENGTH)
+                                                ^
+
+"main.cpp", line 840: error: invalid text in pragma
+          #pragma acc parallel loop thread_limit(VEC_LENGTH)
+                                    ^
+
+"main.cpp", line 840: error: extra text after expected end of preprocessing directive
+          #pragma acc parallel loop thread_limit(VEC_LENGTH)
+                                                ^
+
+"main.cpp", line 866: warning: incompatible redefinition of macro "package_id" (declared at line 738) [bad_macro_redef]
+          #define package_id (gid * dim * dim * 2)
+                  ^
+
+"main.cpp", line 868: warning: incompatible redefinition of macro "sigma_real" (declared at line 740) [bad_macro_redef]
+          #define sigma_real(i, j) (package_id + 2 * (dim * (i) + (j)))
+                  ^
+
+"main.cpp", line 869: warning: incompatible redefinition of macro "sigma_imag" (declared at line 741) [bad_macro_redef]
+          #define sigma_imag(i, j) (package_id + 2 * (dim * (i) + (j)) + 1)
+                  ^
+
+"main.cpp", line 871: warning: incompatible redefinition of macro "ham_real" (declared at line 743) [bad_macro_redef]
+          #define ham_real(i, j) ((i) * dim + (j))
+                  ^
+
+"main.cpp", line 872: warning: incompatible redefinition of macro "ham_imag" (declared at line 744) [bad_macro_redef]
+          #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+                  ^
+
+"main.cpp", line 878: error: invalid text in pragma
+          #pragma acc parallel loop thread_limit(VEC_LENGTH)
+                                    ^
+
+"main.cpp", line 878: error: extra text after expected end of preprocessing directive
+          #pragma acc parallel loop thread_limit(VEC_LENGTH)
+                                                ^
+
+"main.cpp", line 900: warning: incompatible redefinition of macro "package_id" (declared at line 866) [bad_macro_redef]
+          #define package_id (gid * DIM * DIM * 2)
+                  ^
+
+"main.cpp", line 902: warning: incompatible redefinition of macro "sigma_real" (declared at line 868) [bad_macro_redef]
+          #define sigma_real(i, j) (package_id + 2 * (DIM * (i) + (j)))
+                  ^
+
+"main.cpp", line 903: warning: incompatible redefinition of macro "sigma_imag" (declared at line 869) [bad_macro_redef]
+          #define sigma_imag(i, j) (package_id + 2 * (DIM * (i) + (j)) + 1)
+                  ^
+
+"main.cpp", line 905: warning: incompatible redefinition of macro "ham_real" (declared at line 871) [bad_macro_redef]
+          #define ham_real(i, j) ((i) * DIM + (j))
+                  ^
+
+"main.cpp", line 906: warning: incompatible redefinition of macro "ham_imag" (declared at line 872) [bad_macro_redef]
+          #define ham_imag(i, j) (DIM * DIM + (i) * DIM + (j))
+                  ^
+
+"main.cpp", line 912: error: invalid text in pragma
+          #pragma acc parallel loop thread_limit(VEC_LENGTH)
+                                    ^
+
+"main.cpp", line 912: error: extra text after expected end of preprocessing directive
+          #pragma acc parallel loop thread_limit(VEC_LENGTH)
+                                                ^
+
+"main.cpp", line 946: error: invalid text in pragma
+          #pragma acc parallel loop thread_limit(VEC_LENGTH)
+                                    ^
+
+"main.cpp", line 946: error: extra text after expected end of preprocessing directive
+          #pragma acc parallel loop thread_limit(VEC_LENGTH)
+                                                ^
+
+"main.cpp", line 983: error: invalid text in pragma
+          #pragma acc parallel loop thread_limit(VEC_LENGTH)
+                                    ^
+
+"main.cpp", line 983: error: extra text after expected end of preprocessing directive
+          #pragma acc parallel loop thread_limit(VEC_LENGTH)
+                                                ^
+
+"main.cpp", line 1010: warning: incompatible redefinition of macro "sigma_id" (declared at line 447) [bad_macro_redef]
+          #define sigma_id(i,j,m) ((m) * DIM * DIM + ((i) * DIM + (j)))
+                  ^
+
+"main.cpp", line 1023: error: invalid text in pragma
+          #pragma acc parallel teams num_teams(teams) thread_limit(threads)
+                               ^
+
+"main.cpp", line 1023: error: extra text after expected end of preprocessing directive
+          #pragma acc parallel teams num_teams(teams) thread_limit(threads)
+                                     ^
+
+"main.cpp", line 1020: warning: variable "teams" was declared but never referenced [declared_but_not_referenced]
+          const int teams = num / (block_dim_y * CHUNK_SIZE);
+                    ^
+
+"main.cpp", line 1021: warning: variable "threads" was declared but never referenced [declared_but_not_referenced]
+          const int threads = block_dim_x * block_dim_y;
+                    ^
+
+55 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:58: main.o] Error 2
+timeout was set to  600

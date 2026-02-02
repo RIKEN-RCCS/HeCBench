@@ -1,0 +1,111 @@
+nvc++ -acc  -std=c++14 -Wall -DMILC_COMPLEX -O3 -Minfo -mp=gpu -gpu=cc90 -c su3_nn_bench.cpp -o su3_nn_bench.o
+init_link(dsu3_matrix*, dcomplex):
+     54, Loop unrolled 3 times (completely unrolled)
+         Loop unrolled 4 times (completely unrolled)
+make_lattice(site*, unsigned long, dcomplex):
+     65, Loop not vectorized/parallelized: too deeply nested
+     67, Loop not vectorized: data dependency
+          54, Loop unrolled 3 times (completely unrolled)
+              Loop unrolled 4 times (completely unrolled)
+su3_mat_nn(std::vector<site, std::allocator<site>>&, std::vector<dsu3_matrix, std::allocator<dsu3_matrix>>&, std::vector<site, std::allocator<site>>&, unsigned long, unsigned long, unsigned long, int):
+     80, include "mat_nn_openmp.hpp"
+          22, Generating copyin(d_a[:total_sites]) [if not already present]
+              Generating copyout(d_c[:total_sites]) [if not already present]
+              Generating copyin(d_b[:4]) [if not already present]
+          37, Loop not vectorized/parallelized: contains call
+          40, Generating implicit firstprivate(num_work_items)
+              Generating NVIDIA GPU code
+              42, #pragma acc loop gang(total_sites), vector(threads_per_team) blockIdx.x threadIdx.x */
+              56, #pragma acc loop seq
+          40, Local memory used for cc
+          42, Generating implicit firstprivate(total_sites)
+              Loop not fused: no successor loop
+              Loop not vectorized: data dependency
+          56, Loop is parallelizable
+              Loop unrolled 3 times (completely unrolled)
+          75, Loop unrolled 3 times (completely unrolled)
+              Loop unrolled 4 times (completely unrolled)
+              Loop not fused: function call before adjacent loop
+              Loop not vectorized: may not be beneficial for target
+          77, Loop unrolled 3 times (completely unrolled)
+main:
+     98, Loop not vectorized/parallelized: contains call
+          65, Loop not fused: function call before adjacent loop
+              Loop not vectorized/parallelized: too deeply nested
+          67, Loop not vectorized: data dependency
+          74, Loop unrolled 3 times (completely unrolled)
+              Loop unrolled 4 times (completely unrolled)
+          54, Loop unrolled 3 times (completely unrolled)
+              Loop unrolled 4 times (completely unrolled)
+    156, Loop not vectorized/parallelized: potential early exits
+         Loop not vectorized/parallelized: too deeply nested
+    158, Loop unrolled 3 times (completely unrolled)
+site* std::__uninitialized_default_n_1<true>::__uninit_default_n<site*, unsigned long>(site*, unsigned long):
+        1149, Loop not vectorized/parallelized: contains structure move
+              Loop unrolled 4 times
+dsu3_matrix* std::__uninitialized_default_n_1<true>::__uninit_default_n<dsu3_matrix*, unsigned long>(dsu3_matrix*, unsigned long):
+        1149, Loop not vectorized/parallelized: contains structure move
+              Loop unrolled 4 times
+std::vector<site, std::allocator<site>>::vector(unsigned long, std::allocator<site> const&):
+     80, include "mat_nn_openmp.hpp"
+std::vector<site, std::allocator<site>>::_M_default_initialize(unsigned long):
+         704, Loop not vectorized/parallelized: contains structure move
+              Loop unrolled 4 times
+std::vector<dsu3_matrix, std::allocator<dsu3_matrix>>::vector(unsigned long, std::allocator<dsu3_matrix> const&):
+     80, include "mat_nn_openmp.hpp"
+std::vector<dsu3_matrix, std::allocator<dsu3_matrix>>::_M_default_initialize(unsigned long):
+         704, Loop not vectorized/parallelized: contains structure move
+              Loop unrolled 4 times
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     12, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+     80, include "mat_nn_openmp.hpp"
+std::chrono::duration<long, std::ratio<1l, 1000000l>>::_S_gcd(long, long):
+     12, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+     80, include "mat_nn_openmp.hpp"
+site* std::__uninitialized_default_n_a<site*, unsigned long, site>(site*, unsigned long, std::allocator<site>&):
+         638, Loop not vectorized/parallelized: contains structure move
+              Loop unrolled 4 times
+site* std::__uninitialized_default_n<site*, unsigned long>(site*, unsigned long):
+         603, Loop not vectorized/parallelized: contains structure move
+              Loop unrolled 4 times
+site* std::fill_n<site*, unsigned long, site>(site*, unsigned long, site const&):
+        1120, Loop not vectorized/parallelized: contains structure move
+              Loop unrolled 4 times
+site* std::__fill_n_a<site*, unsigned long, site>(site*, unsigned long, site const&, std::random_access_iterator_tag):
+         969, Loop not vectorized/parallelized: contains structure move
+              Loop unrolled 4 times
+void std::__fill_a<site*, site>(site*, site*, site const&):
+         911, Loop not vectorized/parallelized: contains structure move
+              Loop unrolled 4 times
+__gnu_cxx::__enable_if<!std::__is_scalar<site>::__value, void>::__type std::__fill_a1<site*, site>(site*, site*, site const&):
+      6, include "vector"
+          60, include "stl_algobase.h"
+              911, Loop not vectorized/parallelized: contains structure move
+                   Loop unrolled 4 times
+     12, include "chrono"
+     80, include "mat_nn_openmp.hpp"
+dsu3_matrix* std::__uninitialized_default_n_a<dsu3_matrix*, unsigned long, dsu3_matrix>(dsu3_matrix*, unsigned long, std::allocator<dsu3_matrix>&):
+         638, Loop not vectorized/parallelized: contains structure move
+              Loop unrolled 4 times
+dsu3_matrix* std::__uninitialized_default_n<dsu3_matrix*, unsigned long>(dsu3_matrix*, unsigned long):
+         603, Loop not vectorized/parallelized: contains structure move
+              Loop unrolled 4 times
+dsu3_matrix* std::fill_n<dsu3_matrix*, unsigned long, dsu3_matrix>(dsu3_matrix*, unsigned long, dsu3_matrix const&):
+        1120, Loop not vectorized/parallelized: contains structure move
+              Loop unrolled 4 times
+dsu3_matrix* std::__fill_n_a<dsu3_matrix*, unsigned long, dsu3_matrix>(dsu3_matrix*, unsigned long, dsu3_matrix const&, std::random_access_iterator_tag):
+         969, Loop not vectorized/parallelized: contains structure move
+              Loop unrolled 4 times
+void std::__fill_a<dsu3_matrix*, dsu3_matrix>(dsu3_matrix*, dsu3_matrix*, dsu3_matrix const&):
+         911, Loop not vectorized/parallelized: contains structure move
+              Loop unrolled 4 times
+__gnu_cxx::__enable_if<!std::__is_scalar<dsu3_matrix>::__value, void>::__type std::__fill_a1<dsu3_matrix*, dsu3_matrix>(dsu3_matrix*, dsu3_matrix*, dsu3_matrix const&):
+      6, include "vector"
+          60, include "stl_algobase.h"
+              911, Loop not vectorized/parallelized: contains structure move
+                   Loop unrolled 4 times
+     12, include "chrono"
+     80, include "mat_nn_openmp.hpp"
+nvc++ -acc  -std=c++14 -Wall -DMILC_COMPLEX -O3 -Minfo -mp=gpu -gpu=cc90 su3_nn_bench.o -o main 

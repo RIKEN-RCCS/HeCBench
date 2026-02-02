@@ -1,0 +1,35 @@
+primordial_cool(double, double, int):
+     13, Generating acc routine seq
+         Generating NVIDIA GPU code
+     54, Loop not vectorized/parallelized: potential early exits
+cool_kernel(int, double, double const*, double*, int):
+    109, Generating implicit firstprivate(num)
+         Generating NVIDIA GPU code
+        111, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+    109, Generating implicit copyin(T[:num]) [if not already present]
+         Generating implicit copyout(r[:num]) [if not already present]
+    111, Generating implicit firstprivate(n,heat_flag)
+          54, Scalar last value needed after loop for .inl_n_h0_244 at line 77,78,94
+              Scalar last value needed after loop for .inl_n_hp_245 at line 81,86
+              Scalar last value needed after loop for .inl_n_hep_246 at line 77,80,82,84,86,94
+              Scalar last value needed after loop for .inl_n_he0_247 at line 79,94
+              Scalar last value needed after loop for .inl_n_hepp_248 at line 83,86
+              Loop carried scalar dependence for .inl_n_e_237 at line 54,55,57,58,59
+              Scalar last value needed after loop for .inl_n_e_237 at line 77,78,79,80,81,82,83,84,86
+              Loop not vectorized/parallelized: potential early exits
+reference(int, double, double const*, double*, int):
+          54, Loop not vectorized/parallelized: potential early exits
+main:
+    140, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+    149, Generating copyin(T[:num]) [if not already present]
+         Generating copyout(d_r[:num]) [if not already present]
+    151, Loop not vectorized/parallelized: contains call
+    157, Loop not vectorized/parallelized: contains call
+         123, Loop not vectorized/parallelized: potential early exits
+    170, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+make: *** [Makefile.NVD:69: run_mem] Terminated
+timeout was set to  600

@@ -1,0 +1,80 @@
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c HiddenMarkovModel.cpp -o HiddenMarkovModel.o
+main:
+         131, Loop not vectorized/parallelized: contains call
+         133, Loop not fused: scalar dependence chain to sibling loop
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 8 times
+         134, Generated vector simd code for the loop
+         139, Loop not vectorized/parallelized: contains call
+         149, Loop not vectorized/parallelized: contains call
+         156, Loop not fused: function call before adjacent loop
+         159, Loop not fused: scalar dependence chain to sibling loop
+              Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+         160, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+     60, Loop not vectorized/parallelized: not countable
+     72, Loop not vectorized/parallelized: potential early exits
+     78, Loop not vectorized/parallelized: potential early exits
+     84, Outer loop unrolled 1 times (completely unrolled)
+     86, Loop not vectorized/parallelized: potential early exits
+    105, Loop not vectorized/parallelized: contains call
+    139, Loop nest collapsed
+    149, Loop nest collapsed
+initHMM(float*, float*, float*, int const&, int const&):
+    131, Loop not vectorized/parallelized: contains call
+    133, Loop not fused: different loop trip count
+         Generated vector simd code for the loop containing reductions
+         Loop unrolled 4 times
+    134, Generated vector simd code for the loop
+    139, Loop nest collapsed
+         Loop not vectorized/parallelized: contains call
+    149, Loop nest collapsed
+         Loop not vectorized/parallelized: contains call
+    159, Loop not fused: different loop trip count
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 2 times
+    160, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c ViterbiCPU.cpp -o ViterbiCPU.o
+ViterbiCPU(float&, int*, int*, int const&, float*, float*, int const&, float*):
+     31, Loop not vectorized/parallelized: contains call
+     36, #omp parallel
+         Recognized memory copy idiom
+     42, Loop not vectorized/parallelized: contains call
+     45, #omp parallel
+     50, Loop not vectorized: unknown
+     64, #omp parallel
+         Recognized memory copy idiom
+     73, Loop not fused: different loop trip count
+         Loop not vectorized: unknown
+     85, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 8 times
+     92, Loop not vectorized/parallelized: contains call
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c ViterbiGPU.cpp -o ViterbiGPU.o
+ViterbiGPU(float&, int*, int*, int, float*, float*, int, int, float*):
+     46, Loop not vectorized/parallelized: contains call
+     47, #omp target teams distribute parallel for thread_limit(256)
+         47, Generating "nvkernel__Z10ViterbiGPURfPiS0_iPfS1_iiS1__F1L47_2" GPU kernel
+         49, Loop parallelized across teams and threads(128), schedule(static)
+     49, Loop not vectorized/parallelized: not countable
+     54, Loop not vectorized: unknown
+     65, #omp target teams distribute parallel for thread_limit(256)
+         42, Generating map(to:mtEmit[:nState*nEmit],maxProbOld[:nState],mtState[:nState*nState]) 
+             Generating map(from:maxProbNew[:nState]) 
+             Generating map(to:initProb[:nState]) 
+             Generating map(from:path[:nState*(nObs-1)]) 
+             Generating map(to:obs[:nObs]) 
+         65, Generating "nvkernel__Z10ViterbiGPURfPiS0_iPfS1_iiS1__F1L65_4" GPU kernel
+         68, Loop parallelized across teams and threads(128), schedule(static)
+     68, Loop not vectorized/parallelized: not countable
+     82, Loop not fused: different loop trip count
+         Loop not vectorized: unknown
+     94, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 8 times
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     12, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 HiddenMarkovModel.o ViterbiCPU.o ViterbiGPU.o -o main 

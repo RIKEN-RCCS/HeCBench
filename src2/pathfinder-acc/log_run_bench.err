@@ -1,0 +1,49 @@
+"main.cpp", line 118: error: invalid text in pragma
+  #pragma acc data to: gpuSrc[0:cols]) \
+                   ^
+
+"main.cpp", line 118: error: extra text after expected end of preprocessing directive
+  #pragma acc data to: gpuSrc[0:cols]) \
+                     ^
+
+"main.cpp", line 134: error: invalid text in pragma
+        #pragma acc parallel teams num_teams(gws) thread_limit(lws)
+                             ^
+
+"main.cpp", line 134: error: extra text after expected end of preprocessing directive
+        #pragma acc parallel teams num_teams(gws) thread_limit(lws)
+                                   ^
+
+"main.cpp", line 141: error: identifier "omp_get_vector" is undefined
+            int BLOCK_SIZE = omp_get_vector();
+                             ^
+
+"main.cpp", line 142: error: identifier "omp_get_team_num" is undefined
+            int bx = omp_get_team_num();
+                     ^
+
+"main.cpp", line 143: error: identifier "omp_get_thread_num" is undefined
+            int tx = omp_get_thread_num();
+                     ^
+
+"main.cpp", line 245: error: invalid text in pragma
+      #pragma acc update from(gpuSrc[0:cols])
+                         ^
+
+"main.cpp", line 245: error: OpenACC data clause expected
+      #pragma acc update from(gpuSrc[0:cols])
+                         ^
+
+"main.cpp", line 245: error: extra text after expected end of preprocessing directive
+      #pragma acc update from(gpuSrc[0:cols])
+                             ^
+
+"main.cpp", line 104: warning: variable "gws" was declared but never referenced [declared_but_not_referenced]
+    const int gws = size/lws;  // the size is a multiple of lws
+              ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+10 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:62: main.o] Error 2
+timeout was set to  600

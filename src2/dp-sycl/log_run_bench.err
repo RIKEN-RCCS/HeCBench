@@ -1,0 +1,3 @@
+clang++: error: unknown argument: '-qmkl=parallel'
+make: *** [Makefile.NVD:85: main.o] Error 1
+timeout was set to  600

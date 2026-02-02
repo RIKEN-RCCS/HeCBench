@@ -1,0 +1,27 @@
+rotate(int, float, float3, float3*):
+     21, Generating implicit firstprivate(n)
+         Generating NVIDIA GPU code
+         23, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+     21, Local memory used for _T1_6542,p,_T2_6542
+         Generating implicit copyin(w) [if not already present]
+         Generating implicit copy(d[:n]) [if not already present]
+     23, Generating implicit firstprivate(angle)
+         Loop not vectorized/parallelized: contains call
+rotate2(int, float, float3, float4*):
+     53, Generating implicit firstprivate(n)
+         Generating NVIDIA GPU code
+         55, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+     53, Local memory used for _T3_6543,p,_T4_6543
+         Generating implicit copyin(w) [if not already present]
+         Generating implicit copy(d[:n]) [if not already present]
+     55, Generating implicit firstprivate(angle)
+         Loop not vectorized/parallelized: contains call
+main:
+    102, Loop not vectorized/parallelized: contains call
+    112, Generating copyin(h[:n],h2[:n]) [if not already present]
+    115, Loop not vectorized/parallelized: contains call
+    125, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      3, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+timeout was set to  600

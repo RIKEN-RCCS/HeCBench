@@ -1,0 +1,117 @@
+"kernel.cpp", line 29: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(BLK_ROW*MCW) thread_limit(THREADS_PER_BLOCK)
+                         ^
+
+"kernel.cpp", line 29: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(BLK_ROW*MCW) thread_limit(THREADS_PER_BLOCK)
+                               ^
+
+"kernel.cpp", line 33: error: identifier "omp_get_thread_num" is undefined
+        int iSubRow = omp_get_thread_num() % BLOCK_SIZE_X;
+                      ^
+
+"kernel.cpp", line 39: error: identifier "omp_get_team_num" is undefined
+        int iMCW    = omp_get_team_num() / BLK_ROW;
+                      ^
+
+"kernel.cpp", line 133: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(BLK_ROW*MCW) thread_limit(THREADS_PER_BLOCK)
+                         ^
+
+"kernel.cpp", line 133: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(BLK_ROW*MCW) thread_limit(THREADS_PER_BLOCK)
+                               ^
+
+"kernel.cpp", line 138: error: identifier "omp_get_thread_num" is undefined
+        int iSubRow = omp_get_thread_num() % BLOCK_SIZE_X;
+                      ^
+
+"kernel.cpp", line 147: error: identifier "omp_get_team_num" is undefined
+        int iMCW    = omp_get_team_num() / BLK_ROW;
+                      ^
+
+"kernel.cpp", line 248: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(BLK_COL*MCW) thread_limit(THREADS_PER_BLOCK)
+                         ^
+
+"kernel.cpp", line 248: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(BLK_COL*MCW) thread_limit(THREADS_PER_BLOCK)
+                               ^
+
+"kernel.cpp", line 253: error: identifier "omp_get_thread_num" is undefined
+        int iSubCol = omp_get_thread_num() % BLOCK_SIZE_X;
+                      ^
+
+"kernel.cpp", line 260: error: identifier "omp_get_team_num" is undefined
+        int iMCW    = omp_get_team_num() / BLK_COL;
+                      ^
+
+"kernel.cpp", line 316: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(BLK_COL*MCW) thread_limit(THREADS_PER_BLOCK)
+                         ^
+
+"kernel.cpp", line 316: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(BLK_COL*MCW) thread_limit(THREADS_PER_BLOCK)
+                               ^
+
+"kernel.cpp", line 321: error: identifier "omp_get_thread_num" is undefined
+        int iSubCol = omp_get_thread_num() % BLOCK_SIZE_X;
+                      ^
+
+"kernel.cpp", line 328: error: identifier "omp_get_team_num" is undefined
+        int iMCW    = omp_get_team_num() / BLK_COL;
+                      ^
+
+"main.cpp", line 51: warning: integer conversion resulted in a change of sign [integer_sign_change]
+        h_element_temp.value = -1;
+                               ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"main.cpp", line 86: warning: integer conversion resulted in a change of sign [integer_sign_change]
+        h_element_temp.value = -1;
+                               ^
+
+"main.cpp", line 166: error: invalid text in pragma
+  #pragma acc data alloc: dev_llr[0:wordSize_llr], \
+                   ^
+
+"main.cpp", line 166: error: extra text after expected end of preprocessing directive
+  #pragma acc data alloc: dev_llr[0:wordSize_llr], \
+                        ^
+
+"main.cpp", line 217: error: invalid text in pragma
+          #pragma acc update to (llr_gpu[0:wordSize_llr])
+                             ^
+
+"main.cpp", line 217: error: OpenACC data clause expected
+          #pragma acc update to (llr_gpu[0:wordSize_llr])
+                             ^
+
+"main.cpp", line 217: error: extra text after expected end of preprocessing directive
+          #pragma acc update to (llr_gpu[0:wordSize_llr])
+                                ^
+
+"main.cpp", line 269: error: invalid text in pragma
+          #pragma acc update from (dev_hard_decision[0:wordSize_hard_decision])
+                             ^
+
+"main.cpp", line 269: error: OpenACC data clause expected
+          #pragma acc update from (dev_hard_decision[0:wordSize_hard_decision])
+                             ^
+
+"main.cpp", line 269: error: extra text after expected end of preprocessing directive
+          #pragma acc update from (dev_hard_decision[0:wordSize_hard_decision])
+                                  ^
+
+"main.cpp", line 112: warning: variable "memorySize_h_compact1" was declared but never referenced [declared_but_not_referenced]
+    int memorySize_h_compact1 = wordSize_h_compact1 * sizeof(h_element);
+        ^
+
+"main.cpp", line 113: warning: variable "memorySize_h_compact2" was declared but never referenced [declared_but_not_referenced]
+    int memorySize_h_compact2 = wordSize_h_compact2 * sizeof(h_element);
+        ^
+
+24 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

@@ -1,0 +1,30 @@
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+rotate_matrix_parallel(float*, int, int):
+     12, #omp target teams distribute parallel for thread_limit(256)
+          9, Generating map(tofrom:matrix[:n*n]) 
+         12, Generating "nvkernel__Z22rotate_matrix_parallelPfii_F1L12_2" GPU kernel
+         14, Loop parallelized across teams and threads(128), schedule(static)
+     12, Loop not vectorized/parallelized: contains call
+     14, Loop not vectorized/parallelized: not countable
+     17, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+rotate_matrix_serial(float*, int):
+     46, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+main:
+     75, Outer loop unrolled 1 times (completely unrolled)
+     76, Zero trip check eliminated
+         Loop nest collapsed
+         Loop not fused: different loop trip count
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 4 times
+     79, Loop not fused: function call before adjacent loop
+          46, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+     87, Zero trip check eliminated
+         Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

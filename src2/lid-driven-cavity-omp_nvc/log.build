@@ -1,0 +1,114 @@
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+set_BCs_host(double*, double*):
+    129, Loop not vectorized: data dependency
+main:
+    210, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 8 times
+    224, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 8 times
+         129, Loop not fused: enclosed in different number of nests
+              Loop not vectorized: data dependency
+    257, Loop not fused: different loop trip count
+    259, Generated vector simd code for the loop containing reductions
+         Loop unrolled 1 times (completely unrolled)
+    265, Loop not fused: function call before adjacent loop
+    267, Generated vector simd code for the loop containing reductions
+    302, include "calculate_F.h"
+           4, Loop not vectorized/parallelized: not countable
+         298, #omp target teams distribute parallel for thread_limit(128)
+               2, Loop parallelized across teams and threads(128), schedule(static)
+             298, Generating "nvkernel_main_F148L298_2" GPU kernel
+    305, include "calculate_G.h"
+           4, Loop not vectorized/parallelized: not countable
+          42, #omp target teams distribute parallel for thread_limit(128)
+               2, Loop parallelized across teams and threads(128), schedule(static)
+              42, Generating "nvkernel_main_F149L42_4" GPU kernel
+    309, include "sum_pressure.h"
+           2, #omp target teams num_teams(1024) thread_limit(128)
+               2, Generating "nvkernel_main_F150L2_6" GPU kernel
+               5, #omp parallel
+                21, Barrier
+                29, Barrier
+               7, Team private (sum_cache) located in CUDA shared memory
+          25, Loop not vectorized/parallelized: contains call
+    314, Generating update from(pres_sum[:size_res])
+    316, Generated vector simd code for the loop containing reductions
+    330, Loop not vectorized/parallelized: potential early exits
+    334, include "set_horz_pres_BCs.h"
+           2, Loop not vectorized/parallelized: not countable
+         330, #omp target teams distribute parallel for thread_limit(128)
+               2, Loop parallelized across teams and threads(128), schedule(static)
+             330, Generating "nvkernel_main_F151L330_8" GPU kernel
+    337, include "set_vert_pres_BCs.h"
+           2, Loop not vectorized/parallelized: not countable
+          15, #omp target teams distribute parallel for thread_limit(128)
+               2, Loop parallelized across teams and threads(128), schedule(static)
+              15, Generating "nvkernel_main_F152L15_10" GPU kernel
+    341, include "red_kernel.h"
+           4, Loop not vectorized/parallelized: not countable
+          14, #omp target teams distribute parallel for thread_limit(128)
+               2, Loop parallelized across teams and threads(128), schedule(static)
+              14, Generating "nvkernel_main_F153L14_12" GPU kernel
+    345, include "black_kernel.h"
+           4, Loop not vectorized/parallelized: not countable
+          26, #omp target teams distribute parallel for thread_limit(128)
+               2, Loop parallelized across teams and threads(128), schedule(static)
+              26, Generating "nvkernel_main_F154L26_14" GPU kernel
+    349, include "calc_residual.h"
+           2, #omp target teams num_teams(1024) thread_limit(128)
+               2, Generating "nvkernel_main_F155L2_16" GPU kernel
+               5, #omp parallel
+                51, Barrier
+                59, Barrier
+               8, Team private (sum_cache) located in CUDA shared memory
+          55, Loop not vectorized/parallelized: contains call
+    355, Generating update from(res_arr[:size_res])
+    358, Generated vector simd code for the loop containing reductions
+    378, include "calculate_u.h"
+           2, #omp target teams num_teams(1024) thread_limit(128)
+               2, Generating "nvkernel_main_F156L2_18" GPU kernel
+               5, #omp parallel
+                58, Barrier
+                66, Barrier
+               7, Team private (max_cache) located in CUDA shared memory
+          62, Loop not vectorized/parallelized: contains call
+    384, include "calculate_v.h"
+           2, #omp target teams num_teams(1024) thread_limit(128)
+               2, Generating "nvkernel_main_F157L2_20" GPU kernel
+               5, #omp parallel
+                79, Barrier
+                87, Barrier
+               7, Team private (max_cache) located in CUDA shared memory
+           2, Generating update from(max_u_arr[:size_max])
+          83, Loop not vectorized/parallelized: contains call
+    390, Generating update from(max_v_arr[:size_max])
+    394, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+    404, include "set_BCs.h"
+           2, Loop not vectorized/parallelized: not countable
+         400, #omp target teams distribute parallel for thread_limit(128)
+               2, Loop parallelized across teams and threads(128), schedule(static)
+             281, Generating map(alloc:res_arr[:size_res]) 
+                  Generating map(tofrom:u[:size],v[:size],pres_black[:size_pres]) 
+                  Generating map(alloc:max_v_arr[:size_max]) 
+                  Generating map(to:F[:size]) 
+                  Generating map(tofrom:pres_red[:size_pres]) 
+                  Generating map(alloc:pres_sum[:size_res]) 
+                  Generating map(to:G[:size]) 
+                  Generating map(alloc:max_u_arr[:size_max]) 
+             400, Generating "nvkernel_main_F158L400_22" GPU kernel
+    426, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     22, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+    302, include "calculate_F.h"
+    309, include "sum_pressure.h"
+    337, include "set_vert_pres_BCs.h"
+    345, include "black_kernel.h"
+    378, include "calculate_u.h"
+    404, include "set_BCs.h"
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

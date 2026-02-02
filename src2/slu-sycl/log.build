@@ -1,0 +1,6 @@
+clang++  -std=c++17 -Wall -I../slu-cuda/src/../include           -I../slu-cuda/src/nicslu/include           -I../slu-cuda/src/nicslu/util -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -DVERIFY -c ../slu-cuda/src/preprocess.cpp -o preprocess.o
+../slu-cuda/src/preprocess.cpp:5:10: fatal error: 'nicslu.h' file not found
+    5 | #include "nicslu.h"
+      |          ^~~~~~~~~~
+1 error generated.
+make: *** [Makefile.NVD:92: preprocess.o] Error 1

@@ -1,0 +1,4 @@
+NVC++-S-0155-OpenMP unified_shared_memory clause is used in the requires construct but the application is not compiled with -gpu=unified.  (main.cpp)
+NVC++/arm Linux 25.9-0: compilation completed with severe errors
+make: *** [Makefile.NVD:62: main.o] Error 2
+timeout was set to  600

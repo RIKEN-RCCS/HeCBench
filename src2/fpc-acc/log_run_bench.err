@@ -1,0 +1,59 @@
+"main.cpp", line 125: error: invalid text in pragma
+    #pragma acc data to: values[0:values_size]) map(tofrom: cmp_size[0:1])
+                     ^
+
+"main.cpp", line 125: error: extra text after expected end of preprocessing directive
+    #pragma acc data to: values[0:values_size]) map(tofrom: cmp_size[0:1])
+                       ^
+
+"main.cpp", line 127: error: invalid text in pragma
+      #pragma acc parallel teams num_teams(values_size/wgs) thread_limit(wgs) 
+                           ^
+
+"main.cpp", line 127: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel teams num_teams(values_size/wgs) thread_limit(wgs) 
+                                 ^
+
+"main.cpp", line 132: error: identifier "omp_get_thread_num" is undefined
+          int lid = omp_get_thread_num();
+                    ^
+
+"main.cpp", line 133: error: identifier "omp_get_vector" is undefined
+          int WGS = omp_get_vector();
+                    ^
+
+"main.cpp", line 134: error: identifier "omp_get_team_num" is undefined
+          int gid = omp_get_team_num()*WGS+lid;
+                    ^
+
+"main.cpp", line 187: error: invalid text in pragma
+    #pragma acc data to: values[0:values_size]) map(tofrom: cmp_size[0:1])
+                     ^
+
+"main.cpp", line 187: error: extra text after expected end of preprocessing directive
+    #pragma acc data to: values[0:values_size]) map(tofrom: cmp_size[0:1])
+                       ^
+
+"main.cpp", line 189: error: invalid text in pragma
+      #pragma acc parallel teams num_teams(values_size/wgs) thread_limit(wgs)
+                           ^
+
+"main.cpp", line 189: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel teams num_teams(values_size/wgs) thread_limit(wgs)
+                                 ^
+
+"main.cpp", line 194: error: identifier "omp_get_thread_num" is undefined
+          int lid = omp_get_thread_num();
+                    ^
+
+"main.cpp", line 195: error: identifier "omp_get_vector" is undefined
+          int WGS = omp_get_vector();
+                    ^
+
+"main.cpp", line 196: error: identifier "omp_get_team_num" is undefined
+          int gid = omp_get_team_num()*WGS+lid;
+                    ^
+
+14 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:58: main.o] Error 2
+timeout was set to  600

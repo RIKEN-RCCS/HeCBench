@@ -1,0 +1,103 @@
+"main.cpp", line 88: error: invalid text in pragma
+      #pragma acc data to: input[0:input_size], \
+                       ^
+
+"main.cpp", line 88: error: extra text after expected end of preprocessing directive
+      #pragma acc data to: input[0:input_size], \
+                         ^
+
+"main.cpp", line 101: error: invalid text in pragma
+            #pragma acc parallel teams num_teams(batch_size)
+                                 ^
+
+"main.cpp", line 101: error: extra text after expected end of preprocessing directive
+            #pragma acc parallel teams num_teams(batch_size)
+                                       ^
+
+"main.cpp", line 105: error: identifier "omp_get_team_num" is undefined
+                const int batch_idx  = omp_get_team_num(); // each batch is handled by a block
+                                       ^
+
+"main.cpp", line 106: error: identifier "omp_get_vector" is undefined
+                const int grain_size = omp_get_vector();
+                                       ^
+
+"main.cpp", line 107: error: identifier "omp_get_thread_num" is undefined
+                const int tid = omp_get_thread_num();
+                                ^
+
+"main.cpp", line 123: error: invalid text in pragma
+          #pragma acc update from (output_k1[0:input_size])
+                             ^
+
+"main.cpp", line 123: error: OpenACC data clause expected
+          #pragma acc update from (output_k1[0:input_size])
+                             ^
+
+"main.cpp", line 123: error: extra text after expected end of preprocessing directive
+          #pragma acc update from (output_k1[0:input_size])
+                                  ^
+
+"main.cpp", line 128: error: invalid text in pragma
+            #pragma acc parallel teams num_teams(batch_size)
+                                 ^
+
+"main.cpp", line 128: error: extra text after expected end of preprocessing directive
+            #pragma acc parallel teams num_teams(batch_size)
+                                       ^
+
+"main.cpp", line 132: error: identifier "omp_get_team_num" is undefined
+                const int batch_idx  = omp_get_team_num(); // each batch is handled by a block
+                                       ^
+
+"main.cpp", line 135: error: identifier "omp_get_thread_num" is undefined
+                for (int idx = omp_get_thread_num(); idx < ncols; idx += omp_get_vector()) {
+                               ^
+
+"main.cpp", line 135: error: identifier "omp_get_vector" is undefined
+                for (int idx = omp_get_thread_num(); idx < ncols; idx += omp_get_vector()) {
+                                                                         ^
+
+"main.cpp", line 149: error: invalid text in pragma
+          #pragma acc update from (output_k2[0:input_size])
+                             ^
+
+"main.cpp", line 149: error: OpenACC data clause expected
+          #pragma acc update from (output_k2[0:input_size])
+                             ^
+
+"main.cpp", line 149: error: extra text after expected end of preprocessing directive
+          #pragma acc update from (output_k2[0:input_size])
+                                  ^
+
+"main.cpp", line 154: error: invalid text in pragma
+            #pragma acc parallel loop num_teams(batch_size)
+                                      ^
+
+"main.cpp", line 154: error: extra text after expected end of preprocessing directive
+            #pragma acc parallel loop num_teams(batch_size)
+                                               ^
+
+"main.cpp", line 158: error: invalid text in pragma
+              #pragma acc loop num_threads(block_size)
+                               ^
+
+"main.cpp", line 158: error: extra text after expected end of preprocessing directive
+              #pragma acc loop num_threads(block_size)
+                                          ^
+
+"main.cpp", line 171: error: invalid text in pragma
+          #pragma acc update from (output_k3[0:input_size])
+                             ^
+
+"main.cpp", line 171: error: OpenACC data clause expected
+          #pragma acc update from (output_k3[0:input_size])
+                             ^
+
+"main.cpp", line 171: error: extra text after expected end of preprocessing directive
+          #pragma acc update from (output_k3[0:input_size])
+                                  ^
+
+25 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

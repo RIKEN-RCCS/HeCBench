@@ -1,0 +1,35 @@
+"main.cpp", line 161: error: invalid text in pragma
+    #pragma acc data to: points[0:MAX_DETECTIONS], \
+                     ^
+
+"main.cpp", line 161: error: extra text after expected end of preprocessing directive
+    #pragma acc data to: points[0:MAX_DETECTIONS], \
+                       ^
+
+"main.cpp", line 168: error: invalid text in pragma
+        #pragma acc parallel loop collapse(2) thread_limit(threads)
+                                              ^
+
+"main.cpp", line 168: error: extra text after expected end of preprocessing directive
+        #pragma acc parallel loop collapse(2) thread_limit(threads)
+                                                          ^
+
+"main.cpp", line 192: error: invalid text in pragma
+        #pragma acc parallel teams num_teams(ndetections) thread_limit(MAX_DETECTIONS / N_PARTITIONS)
+                             ^
+
+"main.cpp", line 192: error: extra text after expected end of preprocessing directive
+        #pragma acc parallel teams num_teams(ndetections) thread_limit(MAX_DETECTIONS / N_PARTITIONS)
+                                   ^
+
+"main.cpp", line 201: error: identifier "omp_get_team_num" is undefined
+            int bid = omp_get_team_num();
+                      ^
+
+"main.cpp", line 202: error: identifier "omp_get_thread_num" is undefined
+            int lid = omp_get_thread_num();
+                      ^
+
+8 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:62: main.o] Error 2
+timeout was set to  600

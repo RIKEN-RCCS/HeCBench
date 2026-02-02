@@ -1,0 +1,59 @@
+"main.cpp", line 64: error: invalid text in pragma
+  #pragma acc data alloc: VariablesIn[0:VarINNUM], \
+                   ^
+
+"main.cpp", line 64: error: extra text after expected end of preprocessing directive
+  #pragma acc data alloc: VariablesIn[0:VarINNUM], \
+                        ^
+
+"main.cpp", line 67: error: invalid text in pragma
+    #pragma acc update to (VariablesIn[0:VarINNUM])
+                       ^
+
+"main.cpp", line 67: error: OpenACC data clause expected
+    #pragma acc update to (VariablesIn[0:VarINNUM])
+                       ^
+
+"main.cpp", line 67: error: extra text after expected end of preprocessing directive
+    #pragma acc update to (VariablesIn[0:VarINNUM])
+                          ^
+
+"main.cpp", line 81: error: invalid text in pragma
+    #pragma acc update from (Results[0:IMAGE_SIZE* IMAGE_SIZE * 3])
+                       ^
+
+"main.cpp", line 81: error: OpenACC data clause expected
+    #pragma acc update from (Results[0:IMAGE_SIZE* IMAGE_SIZE * 3])
+                       ^
+
+"main.cpp", line 81: error: extra text after expected end of preprocessing directive
+    #pragma acc update from (Results[0:IMAGE_SIZE* IMAGE_SIZE * 3])
+                            ^
+
+"main.cpp", line 104: error: invalid text in pragma
+    #pragma acc update to (VariablesIn[0:VarINNUM])
+                       ^
+
+"main.cpp", line 104: error: OpenACC data clause expected
+    #pragma acc update to (VariablesIn[0:VarINNUM])
+                       ^
+
+"main.cpp", line 104: error: extra text after expected end of preprocessing directive
+    #pragma acc update to (VariablesIn[0:VarINNUM])
+                          ^
+
+"main.cpp", line 118: error: invalid text in pragma
+    #pragma acc update from (Results[0:IMAGE_SIZE * IMAGE_SIZE * 3])
+                       ^
+
+"main.cpp", line 118: error: OpenACC data clause expected
+    #pragma acc update from (Results[0:IMAGE_SIZE * IMAGE_SIZE * 3])
+                       ^
+
+"main.cpp", line 118: error: extra text after expected end of preprocessing directive
+    #pragma acc update from (Results[0:IMAGE_SIZE * IMAGE_SIZE * 3])
+                            ^
+
+14 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

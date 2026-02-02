@@ -1,1 +1,2 @@
-COMMAND = time -p ( ./$(program) 60000 60000 100 1>log.std 2>log.err ) 2> log.time
+#COMMAND = time -p ( ./$(program) 60000 60000 100 1>log.std 2>log.err ) 2> log.time
+COMMAND = time -p ( ./$(program) 21000 21000 1 1>log.std 2>log.err ) 2> log.time

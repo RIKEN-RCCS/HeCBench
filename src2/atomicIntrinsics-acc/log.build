@@ -1,0 +1,170 @@
+nvc++ -acc  -std=c++14 -Wall -I../atomicIntrinsics-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+void testcase<int>(int, int):
+     20, Generating create(gpuData[:]) [if not already present]
+     21, Loop not vectorized/parallelized: contains call
+     22, Generating update device(gpuData[:])
+         Generating implicit firstprivate(len)
+         Generating NVIDIA GPU code
+         26, #pragma acc loop gang, vector(numThreads) /* blockIdx.x threadIdx.x */
+     26, Loop not fused: no successor loop
+         Generated vector simd code for the loop containing reductions
+     42, Generating implicit firstprivate(len)
+         Generating NVIDIA GPU code
+         45, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+             Generating reduction(max:gpuData[2])
+     45, Loop not fused: no successor loop
+         Generated vector simd code for the loop containing reductions
+         Loop unrolled 4 times
+     46, Generating implicit firstprivate(len)
+         Generating NVIDIA GPU code
+         49, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+             Generating reduction(min:gpuData[3])
+     49, Loop not fused: no successor loop
+         Generated vector simd code for the loop containing reductions
+         Loop unrolled 4 times
+          43, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+          56, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+          69, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+          82, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 2 times
+          95, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+         109, Loop not fused: function call before adjacent loop
+              Loop not vectorized: unknown
+         121, Loop not fused: function call before adjacent loop
+              Loop not vectorized: unknown
+     54, Generating update self(gpuData[:])
+     58, Generating implicit firstprivate(len)
+         Generating NVIDIA GPU code
+         61, #pragma acc loop gang, vector(numThreads) /* blockIdx.x threadIdx.x */
+     58, Loop not vectorized/parallelized: contains call
+     61, Loop not fused: no successor loop
+         Generated vector simd code for the loop containing reductions
+     77, Generating implicit firstprivate(len)
+         Generating NVIDIA GPU code
+         80, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+             Generating reduction(max:gpuData[2])
+     80, Loop not fused: no successor loop
+         Generated vector simd code for the loop containing reductions
+         Loop unrolled 4 times
+     81, Generating implicit firstprivate(len)
+         Generating NVIDIA GPU code
+         84, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+             Generating reduction(min:gpuData[3])
+     84, Loop not fused: no successor loop
+         Generated vector simd code for the loop containing reductions
+         Loop unrolled 4 times
+void testcase<unsigned int>(int, int):
+     20, Generating create(gpuData[:]) [if not already present]
+     21, Loop not vectorized/parallelized: contains call
+     22, Generating update device(gpuData[:])
+         Generating implicit firstprivate(len)
+         Generating NVIDIA GPU code
+         26, #pragma acc loop gang, vector(numThreads) /* blockIdx.x threadIdx.x */
+     26, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+     42, Generating implicit firstprivate(len)
+         Generating NVIDIA GPU code
+         45, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+             Generating reduction(max:gpuData[2])
+     45, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+     46, Generating implicit firstprivate(len)
+         Generating NVIDIA GPU code
+         49, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+             Generating reduction(min:gpuData[3])
+     49, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+          43, Loop not fused: function call before adjacent loop
+              Loop not vectorized: unknown
+              Loop unrolled 2 times
+          56, Loop not fused: function call before adjacent loop
+              Loop not vectorized: unknown
+              Loop unrolled 2 times
+          69, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+          82, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 2 times
+          95, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+         109, Loop not fused: function call before adjacent loop
+              Loop not vectorized: unknown
+         121, Loop not fused: function call before adjacent loop
+              Loop not vectorized: unknown
+     54, Generating update self(gpuData[:])
+     58, Generating implicit firstprivate(len)
+         Generating NVIDIA GPU code
+         61, #pragma acc loop gang, vector(numThreads) /* blockIdx.x threadIdx.x */
+     58, Loop not vectorized/parallelized: contains call
+     61, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+     77, Generating implicit firstprivate(len)
+         Generating NVIDIA GPU code
+         80, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+             Generating reduction(max:gpuData[2])
+     80, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+     81, Generating implicit firstprivate(len)
+         Generating NVIDIA GPU code
+         84, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+             Generating reduction(min:gpuData[3])
+     84, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+void computeGold<int>(int*, unsigned long):
+      7, include "reference.h"
+          43, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+          56, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+          69, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+          82, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 2 times
+          95, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+         109, Loop not fused: function call before adjacent loop
+              Loop not vectorized: unknown
+         121, Loop not fused: function call before adjacent loop
+              Loop not vectorized: unknown
+void computeGold<unsigned int>(unsigned int*, unsigned long):
+      7, include "reference.h"
+          43, Loop not fused: function call before adjacent loop
+              Loop not vectorized: unknown
+              Loop unrolled 2 times
+          56, Loop not fused: function call before adjacent loop
+              Loop not vectorized: unknown
+              Loop unrolled 2 times
+          69, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+          82, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 2 times
+          95, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+         109, Loop not fused: function call before adjacent loop
+              Loop not vectorized: unknown
+         121, Loop not fused: function call before adjacent loop
+              Loop not vectorized: unknown
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      7, include "reference.h"
+nvc++ -acc  -std=c++14 -Wall -I../atomicIntrinsics-cuda -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

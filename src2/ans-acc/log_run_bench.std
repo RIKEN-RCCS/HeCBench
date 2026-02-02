@@ -1,0 +1,3 @@
+nvc++ -acc -Wall --std=c++14 -O3 -Minfo -mp=gpu -gpu=cc90 -pthread   -o bin/demo
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "time -p ( ./bin/demo 10 1>log.std 2>log.err ) 2> log.time"

@@ -1,0 +1,1 @@
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90,maxregcount:45 -c main.cpp -o main.o

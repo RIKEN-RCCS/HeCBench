@@ -1,0 +1,8 @@
+"find_ellipse.h", line 5: catastrophic error: cannot open source file "matrix.h"
+  #include "matrix.h"
+                     ^
+
+1 catastrophic error detected in the compilation of "detect_main.c".
+Compilation terminated.
+make: *** [Makefile.NVD:42: detect_main.o] Error 2
+timeout was set to  600

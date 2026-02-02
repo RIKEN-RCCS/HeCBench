@@ -1,0 +1,45 @@
+"heat.cpp", line 45: error: identifier "omp_get_wtime" is undefined
+    double start = omp_get_wtime();
+                   ^
+
+"heat.cpp", line 113: error: invalid text in pragma
+  #pragma acc data tofrom: u[0:n*n], u_tmp[0:n*n]) 
+                   ^
+
+"heat.cpp", line 113: error: extra text after expected end of preprocessing directive
+  #pragma acc data tofrom: u[0:n*n], u_tmp[0:n*n]) 
+                         ^
+
+"heat.cpp", line 116: error: invalid text in pragma
+    #pragma acc parallel loop simd collapse(2) thread_limit(block_size)
+                              ^
+
+"heat.cpp", line 116: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop simd collapse(2) thread_limit(block_size)
+                                   ^
+
+"heat.cpp", line 125: error: invalid text in pragma
+    #pragma acc parallel loop simd collapse(2) thread_limit(block_size)
+                              ^
+
+"heat.cpp", line 125: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop simd collapse(2) thread_limit(block_size)
+                                   ^
+
+"heat.cpp", line 148: error: invalid text in pragma
+      #pragma acc parallel loop simd collapse(2) thread_limit(block_size)
+                                ^
+
+"heat.cpp", line 148: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel loop simd collapse(2) thread_limit(block_size)
+                                     ^
+
+"heat.cpp", line 111: warning: variable "block_size" was declared but never referenced [declared_but_not_referenced]
+    const int block_size = 256;
+              ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+9 errors detected in the compilation of "heat.cpp".
+make: *** [Makefile.NVD:59: heat.o] Error 2
+timeout was set to  600

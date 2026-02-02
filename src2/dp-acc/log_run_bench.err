@@ -1,0 +1,142 @@
+void dot<float>(unsigned long, int):
+     45, Loop not fused: different loop trip count
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+     50, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 4 times
+     56, Generating copyin(srcB[:src_size],srcA[:src_size]) [if not already present]
+     59, Loop not vectorized/parallelized: contains call
+     60, Generating copy(dst) [if not already present]
+         Generating implicit firstprivate(src_size)
+         Generating NVIDIA GPU code
+         63, #pragma acc loop gang, vector(szLocalWorkSize) /* blockIdx.x threadIdx.x */
+             Generating reduction(+:dst)
+     63, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+void dot<double>(unsigned long, int):
+     45, Loop not fused: different loop trip count
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+     50, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 4 times
+     56, Generating copyin(srcB[:src_size],srcA[:src_size]) [if not already present]
+     59, Loop not vectorized/parallelized: contains call
+     60, Generating copy(dst) [if not already present]
+         Generating implicit firstprivate(src_size)
+         Generating NVIDIA GPU code
+         63, #pragma acc loop gang, vector(szLocalWorkSize) /* blockIdx.x threadIdx.x */
+             Generating reduction(+:dst)
+     63, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     22, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+"shrUtils.cpp", line 150: warning: missing return statement at end of non-void function "shrDeltaT" [implicit_return_from_non_void_function]
+  } 
+  ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"shrUtils.cpp", line 67: warning: variable "DeltaT" was declared but never referenced [declared_but_not_referenced]
+      double DeltaT;
+             ^
+
+"shrUtils.cpp", line 175: warning: variable "szNumWritten" was set but never used [set_but_not_used]
+      size_t szNumWritten = 0;
+             ^
+
+shrFillArray:
+     45, Loop not vectorized/parallelized: contains call
+shrPrintArray:
+     56, Loop not vectorized/parallelized: contains call
+shrFindFilePath:
+    649, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrReadFile<float>(char const*, float**, unsigned int*, bool):
+    722, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrReadFile<double>(char const*, double**, unsigned int*, bool):
+    722, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrReadFile<int>(char const*, int**, unsigned int*, bool):
+    722, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrReadFile<unsigned int>(char const*, unsigned int**, unsigned int*, bool):
+    722, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrReadFile<char>(char const*, char**, unsigned int*, bool):
+    722, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrReadFile<unsigned char>(char const*, unsigned char**, unsigned int*, bool):
+    722, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrWriteFile<float>(char const*, float const*, unsigned int, float, bool):
+    798, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrWriteFile<double>(char const*, double const*, unsigned int, double, bool):
+    798, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrWriteFile<int>(char const*, int const*, unsigned int, int, bool):
+    798, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrWriteFile<unsigned int>(char const*, unsigned int const*, unsigned int, unsigned int, bool):
+    798, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrWriteFile<char>(char const*, char const*, unsigned int, char, bool):
+    798, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrWriteFile<unsigned char>(char const*, unsigned char const*, unsigned int, unsigned char, bool):
+    798, Loop not vectorized/parallelized: potential early exits
+loadPPM(char const*, unsigned char**, unsigned int*, unsigned int*, unsigned int*):
+   1056, Loop not vectorized/parallelized: potential early exits
+savePPM(char const*, unsigned char*, unsigned int, unsigned int, unsigned int):
+   1163, Loop not vectorized/parallelized: potential early exits
+shrLoadPPM4ub:
+   1210, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+shrSavePPM4ub:
+   1245, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+shrComparef:
+        1303, Loop not vectorized: unknown
+shrBOOL compareData<float, float>(float const*, float const*, unsigned int, float, float):
+   1303, Loop not fused: complex flow graph
+         Loop not vectorized: unknown
+shrComparei:
+        1303, Loop not vectorized: unknown
+shrBOOL compareData<int, int>(int const*, int const*, unsigned int, int, float):
+   1303, Loop not fused: complex flow graph
+         Loop not vectorized: unknown
+shrCompareuit:
+        1391, Loop not fused: complex flow graph
+shrBOOL compareDataAsFloatThreshold<unsigned int, float>(unsigned int const*, unsigned int const*, unsigned int, float, float):
+   1391, Loop not fused: complex flow graph
+shrCompareub:
+        1303, Loop not vectorized: unknown
+shrBOOL compareData<unsigned char, int>(unsigned char const*, unsigned char const*, unsigned int, int, float):
+   1303, Loop not fused: complex flow graph
+         Loop not vectorized: unknown
+shrCompareubt:
+        1391, Loop not fused: complex flow graph
+shrBOOL compareDataAsFloatThreshold<unsigned char, float>(unsigned char const*, unsigned char const*, unsigned int, float, float):
+   1391, Loop not fused: complex flow graph
+shrComparefe:
+        1303, Loop not vectorized: unknown
+shrComparefet:
+        1391, Loop not fused: complex flow graph
+shrBOOL compareDataAsFloatThreshold<float, float>(float const*, float const*, unsigned int, float, float):
+   1391, Loop not fused: complex flow graph
+shrCompareL2fe:
+   1549, Generated vector simd code for the loop containing reductions
+shrComparePPM:
+        1210, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 4 times
+        1210, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 4 times
+        1487, Loop not fused: complex flow graph
+shrComparePGM:
+        1210, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 4 times
+        1210, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 4 times
+        1487, Loop not fused: complex flow graph
+_INTERNAL_12_shrUtils_cpp_shrFree::shrLogV(int, int, char const*, __va_list_tag):
+    344, Loop not vectorized/parallelized: potential early exits
+timeout was set to  600

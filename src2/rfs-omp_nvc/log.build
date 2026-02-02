@@ -1,0 +1,36 @@
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+createRoundingFactor(float, int):
+     27, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+truncateWithRoundingFactor(float, float):
+     45, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+sumArray(float, int, float const*, float*):
+     56, #omp target teams distribute parallel for num_teams(256) thread_limit(256)
+         56, Generating "nvkernel__Z8sumArrayfiPKfPf_F1L56_2" GPU kernel
+         58, Loop parallelized across teams and threads(128), schedule(static)
+     58, Loop not vectorized/parallelized: not countable
+sumArrays(int, int, float const*, float*, float const*):
+     71, #omp target teams distribute parallel for num_teams(256) thread_limit(256)
+         71, Generating "nvkernel__Z9sumArraysiiPKfPfS0__F1L71_6" GPU kernel
+         73, Loop parallelized across teams and threads(128), schedule(static)
+     73, Loop not vectorized/parallelized: contains call
+     77, Generated vector simd code for negative stride loop
+main:
+    111, Loop not vectorized/parallelized: contains call
+    123, Loop not vectorized/parallelized: not countable
+    125, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    134, #omp target teams distribute parallel for thread_limit(256)
+        134, Generating "nvkernel_main_F1L134_10" GPU kernel
+             Generating map(to:arrays[:nArrays*nElems],maxVal[:nArrays]) 
+             Generating map(alloc:result[:nArrays]) 
+        137, Loop parallelized across teams and threads(128), schedule(static)
+    137, Loop not vectorized/parallelized: not countable
+    142, Loop not vectorized/parallelized: contains call
+    153, Generating update from(result[:nArrays])
+    167, Generating update from(result[:nArrays])
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      6, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

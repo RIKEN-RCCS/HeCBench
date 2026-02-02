@@ -1,0 +1,3 @@
+clang++  -std=c++17 -Wall -I../mriQ-cuda -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -ffast-math -DUSE_GPU -c main.cpp -o main.o
+clang++  -std=c++17 -Wall -I../mriQ-cuda -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -ffast-math -DUSE_GPU -c ../mriQ-cuda/file.cc -o file.o
+clang++  -std=c++17 -Wall -I../mriQ-cuda -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -ffast-math -DUSE_GPU main.o file.o -o main 

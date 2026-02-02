@@ -1,0 +1,2 @@
+/opt/nvidia/hpc_sdk/Linux_aarch64/25.9/compilers/bin/nvc++    -c -o GSimulation.o GSimulation.cpp
+nvc++ -acc  -std=c++14 -Wall -I../nbody-cuda -O3 -Minfo -mp=gpu -gpu=cc90 main.o GSimulation.o -o main 

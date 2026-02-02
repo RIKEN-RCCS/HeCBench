@@ -1,0 +1,43 @@
+"main.cpp", line 34: error: invalid text in pragma
+    #pragma acc data to: data_to_filter[0:num_elems]) \
+                     ^
+
+"main.cpp", line 34: error: extra text after expected end of preprocessing directive
+    #pragma acc data to: data_to_filter[0:num_elems]) \
+                       ^
+
+"main.cpp", line 42: error: invalid text in pragma
+        #pragma acc update to (nres[0:1]) // need to reset on device 
+                           ^
+
+"main.cpp", line 42: error: OpenACC data clause expected
+        #pragma acc update to (nres[0:1]) // need to reset on device 
+                           ^
+
+"main.cpp", line 42: error: extra text after expected end of preprocessing directive
+        #pragma acc update to (nres[0:1]) // need to reset on device 
+                              ^
+
+"main.cpp", line 44: error: invalid text in pragma
+        #pragma acc parallel teams num_teams((num_elems+block_size-1)/block_size) \
+                             ^
+
+"main.cpp", line 44: error: extra text after expected end of preprocessing directive
+        #pragma acc parallel teams num_teams((num_elems+block_size-1)/block_size) \
+                                   ^
+
+"main.cpp", line 50: error: identifier "omp_get_team_num" is undefined
+            int i = omp_get_team_num() * omp_get_vector() + omp_get_thread_num() ;
+                    ^
+
+"main.cpp", line 50: error: identifier "omp_get_vector" is undefined
+            int i = omp_get_team_num() * omp_get_vector() + omp_get_thread_num() ;
+                                         ^
+
+"main.cpp", line 50: error: identifier "omp_get_thread_num" is undefined
+            int i = omp_get_team_num() * omp_get_vector() + omp_get_thread_num() ;
+                                                            ^
+
+10 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:58: main.o] Error 2
+timeout was set to  600

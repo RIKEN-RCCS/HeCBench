@@ -1,0 +1,1 @@
+clang++  -std=c++17           --gcc-toolchain=           -I./oneDPL/include -I./oneTBB/include -fsycl -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c wc.cpp -o wc.o

@@ -1,0 +1,75 @@
+"main.cpp", line 12: error: invalid text in pragma
+      #pragma acc parallel loop num_teams(teams) vector_length(64)
+                                ^
+
+"main.cpp", line 12: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel loop num_teams(teams) vector_length(64)
+                                         ^
+
+"main.cpp", line 39: error: invalid text in pragma
+      #pragma acc parallel teams num_teams(teams) thread_limit(threads)
+                           ^
+
+"main.cpp", line 39: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel teams num_teams(teams) thread_limit(threads)
+                                 ^
+
+"main.cpp", line 45: error: identifier "omp_get_thread_num" is undefined
+          int lid = omp_get_thread_num();
+                    ^
+
+"main.cpp", line 46: error: identifier "omp_get_team_num" is undefined
+          int bid = omp_get_team_num();
+                    ^
+
+"main.cpp", line 47: error: identifier "omp_get_vector" is undefined
+          int tid = bid * omp_get_vector() + lid;
+                          ^
+
+"main.cpp", line 126: error: invalid text in pragma
+    #pragma acc data to: d_data[0:N*D]) map(alloc: d_data_next[0:N*D])
+                     ^
+
+"main.cpp", line 126: error: extra text after expected end of preprocessing directive
+    #pragma acc data to: d_data[0:N*D]) map(alloc: d_data_next[0:N*D])
+                       ^
+
+"main.cpp", line 142: error: invalid text in pragma
+      #pragma acc update from (d_data[0:N*D])
+                         ^
+
+"main.cpp", line 142: error: OpenACC data clause expected
+      #pragma acc update from (d_data[0:N*D])
+                         ^
+
+"main.cpp", line 142: error: extra text after expected end of preprocessing directive
+      #pragma acc update from (d_data[0:N*D])
+                              ^
+
+"main.cpp", line 152: error: invalid text in pragma
+      #pragma acc update to (d_data[0:N*D])
+                         ^
+
+"main.cpp", line 152: error: OpenACC data clause expected
+      #pragma acc update to (d_data[0:N*D])
+                         ^
+
+"main.cpp", line 152: error: extra text after expected end of preprocessing directive
+      #pragma acc update to (d_data[0:N*D])
+                            ^
+
+"main.cpp", line 165: error: invalid text in pragma
+      #pragma acc update from (d_data[0:N*D])
+                         ^
+
+"main.cpp", line 165: error: OpenACC data clause expected
+      #pragma acc update from (d_data[0:N*D])
+                         ^
+
+"main.cpp", line 165: error: extra text after expected end of preprocessing directive
+      #pragma acc update from (d_data[0:N*D])
+                              ^
+
+18 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

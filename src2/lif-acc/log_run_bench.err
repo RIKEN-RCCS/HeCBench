@@ -1,0 +1,27 @@
+reference(int, int, float, float*, float*, float*, float, float, float*, float*, float*):
+     17, Loop not vectorized/parallelized: contains call
+test(int, int, float, float*, float*, float*, float, float, float*, float*, float*):
+     64, Generating implicit firstprivate(numNeurons)
+         Generating NVIDIA GPU code
+         66, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+     64, Generating implicit copyin(encode_result[:],bias[:],gain[:]) [if not already present]
+         Generating implicit copy(voltage_array[:numNeurons]) [if not already present]
+         Generating implicit copyout(spikes[:numNeurons]) [if not already present]
+         Generating implicit copy(reftime_array[:numNeurons]) [if not already present]
+     66, Generating implicit firstprivate(dt,neurons_per_item,tau_ref,tau_rc)
+         Loop not vectorized/parallelized: contains call
+main:
+    137, Loop not vectorized/parallelized: contains call
+    140, Loop not vectorized/parallelized: contains call
+    144, Loop not vectorized/parallelized: contains call
+    155, Generating copyin(bias[:neurons_per_item],encode_result[:num_items]) [if not already present]
+         Generating copy(reftime[:num_neurons],voltage[:num_neurons]) [if not already present]
+         Generating copyout(spikes[:num_neurons]) [if not already present]
+         Generating copyin(gain[:neurons_per_item]) [if not already present]
+    158, Loop not vectorized/parallelized: contains call
+          17, Loop not vectorized/parallelized: contains call
+    193, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+timeout was set to  600

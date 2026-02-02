@@ -1,0 +1,58 @@
+"main.cpp", line 85: error: invalid text in pragma
+    #pragma acc data to: h_input[0:input_size], \
+                     ^
+          detected during instantiation of "void driver<scalar_t,index_t>(char **) [with scalar_t=float, index_t=int]" at line 195
+
+"main.cpp", line 85: error: extra text after expected end of preprocessing directive
+    #pragma acc data to: h_input[0:input_size], \
+                       ^
+          detected during instantiation of "void driver<scalar_t,index_t>(char **) [with scalar_t=float, index_t=int]" at line 195
+
+"main.cpp", line 78: warning: variable "input_size" was declared but never referenced [declared_but_not_referenced]
+    int64_t input_size = nframe * n_classes;
+            ^
+          detected during instantiation of "void driver<scalar_t,index_t>(char **) [with scalar_t=float, index_t=int]" at line 195
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"main.cpp", line 79: warning: variable "weights_size" was declared but never referenced [declared_but_not_referenced]
+    int64_t weights_size = nframe;
+            ^
+          detected during instantiation of "void driver<scalar_t,index_t>(char **) [with scalar_t=float, index_t=int]" at line 195
+
+"main.cpp", line 80: warning: variable "target_size" was declared but never referenced [declared_but_not_referenced]
+    int64_t target_size = nframe;
+            ^
+          detected during instantiation of "void driver<scalar_t,index_t>(char **) [with scalar_t=float, index_t=int]" at line 195
+
+"main.cpp", line 22: error: invalid text in pragma
+    #pragma acc parallel teams gang(1) thread_limit(NLL_LOSS_THREADS)
+                         ^
+          detected during:
+            instantiation of "void eval<scalar_t,index_t,GPU_THREADS>(int64_t, int64_t, bool, int64_t, scalar_t, scalar_t, scalar_t *, scalar_t *, index_t *, int) [with scalar_t=float, index_t=int, GPU_THREADS=64]" at line 176
+            instantiation of "void driver<scalar_t,index_t>(char **) [with scalar_t=float, index_t=int]" at line 195
+
+"main.cpp", line 22: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams gang(1) thread_limit(NLL_LOSS_THREADS)
+                               ^
+          detected during:
+            instantiation of "void eval<scalar_t,index_t,GPU_THREADS>(int64_t, int64_t, bool, int64_t, scalar_t, scalar_t, scalar_t *, scalar_t *, index_t *, int) [with scalar_t=float, index_t=int, GPU_THREADS=64]" at line 176
+            instantiation of "void driver<scalar_t,index_t>(char **) [with scalar_t=float, index_t=int]" at line 195
+
+"main.cpp", line 28: error: identifier "omp_get_thread_num" is undefined
+        int tid = omp_get_thread_num();
+                  ^
+          detected during:
+            instantiation of "void eval<scalar_t,index_t,GPU_THREADS>(int64_t, int64_t, bool, int64_t, scalar_t, scalar_t, scalar_t *, scalar_t *, index_t *, int) [with scalar_t=float, index_t=int, GPU_THREADS=64]" at line 176
+            instantiation of "void driver<scalar_t,index_t>(char **) [with scalar_t=float, index_t=int]" at line 195
+
+"main.cpp", line 29: error: identifier "omp_get_vector" is undefined
+        int nthreads = omp_get_vector();
+                       ^
+          detected during:
+            instantiation of "void eval<scalar_t,index_t,GPU_THREADS>(int64_t, int64_t, bool, int64_t, scalar_t, scalar_t, scalar_t *, scalar_t *, index_t *, int) [with scalar_t=float, index_t=int, GPU_THREADS=64]" at line 176
+            instantiation of "void driver<scalar_t,index_t>(char **) [with scalar_t=float, index_t=int]" at line 195
+
+6 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

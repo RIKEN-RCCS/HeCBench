@@ -1,0 +1,22 @@
+main:
+     26, Loop not vectorized/parallelized: potential early exits
+     33, Recognized memory copy idiom
+     43, Recognized memory copy idiom
+     51, Loop not vectorized/parallelized: potential early exits
+"kernel_gpu.cpp", line 79: error: invalid text in pragma
+    #pragma acc data to: positions[0:size],velocities[0:size]) \
+                     ^
+
+"kernel_gpu.cpp", line 79: error: extra text after expected end of preprocessing directive
+    #pragma acc data to: positions[0:size],velocities[0:size]) \
+                       ^
+
+"kernel_gpu.cpp", line 77: warning: variable "size" was declared but never referenced [declared_but_not_referenced]
+    int size = p*DIM;
+        ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+2 errors detected in the compilation of "kernel_gpu.cpp".
+make: *** [Makefile.NVD:57: kernel_gpu.o] Error 2
+timeout was set to  600

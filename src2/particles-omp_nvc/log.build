@@ -1,0 +1,114 @@
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+initGrid(float*, float*, float, float, unsigned int):
+     53, Loop not vectorized/parallelized: contains call
+main:
+          53, Loop not vectorized/parallelized: contains call
+    143, Generating map(alloc:dIndex[:numParticles]) 
+         Generating map(to:dReorderedVel[:numParticles],dVel[:numParticles],dPos[:numParticles],dReorderedPos[:numParticles]) 
+         Generating map(alloc:dCellStart[:numGridCells],dHash[:numParticles],dCellEnd[:numGridCells]) 
+    146, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     20, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c bitonicSort.cpp -o bitonicSort.o
+ComparatorPrivate(unsigned int*, unsigned int*, unsigned int*, unsigned int*, unsigned int):
+          19, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+ComparatorLocal(unsigned int*, unsigned int*, unsigned int*, unsigned int*, unsigned int):
+          33, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+bitonicSortLocal(unsigned int*, unsigned int*, unsigned int const*, unsigned int const*, unsigned int, unsigned int, unsigned int, unsigned int):
+     17, include "bitonicSort_kernels.cpp"
+          56, #omp target teams num_teams(teams) thread_limit(threads)
+              56, Generating "nvkernel__Z16bitonicSortLocalPjS_PKjS1_jjjj_F40L56_2" GPU kernel
+              60, #omp parallel
+                77, Barrier
+                89, Barrier
+                98, Barrier
+              91, Team private (l_val,l_key) located in CUDA shared memory
+          76, Loop not vectorized/parallelized: contains call
+          88, Loop not vectorized/parallelized: contains call
+bitonicSortLocal1(unsigned int*, unsigned int*, unsigned int const*, unsigned int const*, unsigned int, unsigned int):
+     17, include "bitonicSort_kernels.cpp"
+         123, #omp target teams num_teams(teams) thread_limit(threads)
+             123, Generating "nvkernel__Z17bitonicSortLocal1PjS_PKjS1_jj_F40L123_7" GPU kernel
+             127, #omp parallel
+               146, Barrier
+               160, Barrier
+               169, Barrier
+             162, Team private (l_val,l_key) located in CUDA shared memory
+         145, Loop not vectorized/parallelized: contains call
+         159, Loop not vectorized/parallelized: contains call
+bitonicMergeGlobal(unsigned int*, unsigned int*, unsigned int const*, unsigned int const*, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int):
+     17, include "bitonicSort_kernels.cpp"
+         192, #omp target teams num_teams(teams) thread_limit(threads)
+             192, Generating "nvkernel__Z18bitonicMergeGlobalPjS_PKjS1_jjjjjj_F40L192_12" GPU kernel
+             194, #omp parallel
+bitonicMergeLocal(unsigned int*, unsigned int*, unsigned int const*, unsigned int const*, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int):
+     17, include "bitonicSort_kernels.cpp"
+         237, #omp target teams num_teams(teams) thread_limit(threads)
+             237, Generating "nvkernel__Z17bitonicMergeLocalPjS_PKjS1_jjjjjj_F40L237_17" GPU kernel
+             241, #omp parallel
+               257, Barrier
+               265, Barrier
+             259, Team private (l_val,l_key) located in CUDA shared memory
+         256, Loop not vectorized/parallelized: contains call
+bitonicSort(unsigned int*, unsigned int*, unsigned int*, unsigned int*, unsigned int, unsigned int, unsigned int):
+          24, Loop not vectorized/parallelized: not countable
+     89, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_15_bitonicSort_cpp_9bdfad0b::factorRadix2(unsigned int&, unsigned int):
+     24, Loop not vectorized/parallelized: not countable
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c particles.cpp -o particles.o
+operator+=(float4&, float4):
+          15, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+operator+(float4, float4):
+          23, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+operator+(int4, int4):
+          28, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+operator*(float4, float):
+          43, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+operator*=(float4&, float):
+          53, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+getGridPos(float4, simParams_t const&):
+          64, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+getGridHash(int4, simParams_t const&):
+          75, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+collideSpheres(float4, float4, float4, float4, float, float, float, float, float, float):
+          97, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+integrateSystem(float4*, float4*, simParams_t const&, float, unsigned int):
+     35, #omp target teams distribute parallel for num_teams(?) thread_limit(64)
+         35, Generating "nvkernel__Z15integrateSystemP6float4S0_RK11simParams_tfj_F1L35_2" GPU kernel
+         38, Loop parallelized across teams and threads, schedule(static)
+     38, Loop not vectorized/parallelized: not countable
+calcHash(unsigned int*, unsigned int*, float4*, simParams_t const&, int):
+     96, #omp target teams distribute parallel for num_teams(?) thread_limit(64)
+         96, Generating "nvkernel__Z8calcHashPjS_P6float4RK11simParams_ti_F1L96_6" GPU kernel
+         99, Loop parallelized across teams and threads, schedule(static)
+     99, Loop not vectorized/parallelized: not countable
+memSet(unsigned int*, unsigned int, unsigned int):
+    117, #omp target teams distribute parallel for num_teams(?) thread_limit(64)
+        117, Generating "nvkernel__Z6memSetPjjj_F1L117_10" GPU kernel
+        120, Loop parallelized across teams and threads, schedule(static)
+    120, Loop not vectorized/parallelized: not countable
+findCellBoundsAndReorder(unsigned int*, unsigned int*, float4*, float4*, unsigned int*, unsigned int*, float4*, float4*, unsigned int, unsigned int):
+    141, #omp target teams num_teams(?) thread_limit(64)
+        141, Generating "nvkernel__Z24findCellBoundsAndReorderPjS_P6float4S1_S_S_S1_S1_jj_F1L141_14" GPU kernel
+        144, #omp parallel
+          163, Barrier
+        147, Team private (localHash) located in CUDA shared memory
+collide(float4*, float4*, float4*, unsigned int*, unsigned int*, unsigned int*, simParams_t const&, unsigned int, unsigned int):
+    204, #omp target teams distribute parallel for num_teams(?) thread_limit(64)
+        204, Generating "nvkernel__Z7collideP6float4S0_S0_PjS1_S1_RK11simParams_tjj_F1L204_19" GPU kernel
+        207, Loop parallelized across teams and threads, schedule(static)
+    207, Loop not vectorized/parallelized: too deeply nested
+    217, Loop not vectorized/parallelized: too deeply nested
+    219, Loop not vectorized/parallelized: loop count too small
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o bitonicSort.o particles.o -o main 

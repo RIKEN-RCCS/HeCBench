@@ -1,0 +1,6 @@
+main.cpp:13:10: fatal error: 'mpi.h' file not found
+   13 | #include <mpi.h>
+      |          ^~~~~~~
+1 error generated.
+make: *** [Makefile.NVD:76: main.o] Error 1
+timeout was set to  600

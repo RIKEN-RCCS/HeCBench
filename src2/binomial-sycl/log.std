@@ -1,0 +1,18 @@
+[./main] - Starting...
+Generating input data...
+Running GPU binomial tree...
+Average kernel execution time : 373.541199 (us)
+Options count            : 1024     
+Time steps               : 2048     
+Total binomialOptionsGPU() time: 4508.578125 msec
+Options per second       : 227.122589     
+Running CPU binomial tree...
+Comparing the results...
+GPU binomial vs. Black-Scholes
+L1 norm: 2.220288E-04
+CPU binomial vs. Black-Scholes
+L1 norm: 2.220231E-04
+CPU binomial vs. GPU binomial
+Avg. diff: 9.606185E-08
+L1 norm: 3.883385E-08
+Test passed

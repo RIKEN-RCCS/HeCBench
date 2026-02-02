@@ -1,0 +1,40 @@
+operator*(float3 const&, float):
+     21, Generating acc routine seq
+         Generating NVIDIA GPU code
+operator-(float3 const&, float3 const&):
+     27, Generating acc routine seq
+         Generating NVIDIA GPU code
+dot(float3 const&, float3 const&):
+     33, Generating acc routine seq
+         Generating NVIDIA GPU code
+normalize(float3 const&):
+     39, Generating acc routine seq
+         Generating NVIDIA GPU code
+cross(float3 const&, float3 const&):
+     46, Generating acc routine seq
+         Generating NVIDIA GPU code
+length(float3 const&):
+     52, Generating acc routine seq
+         Generating NVIDIA GPU code
+normalEstimate(float3 const*, int, int, int):
+     58, Generating acc routine seq
+         Generating NVIDIA GPU code
+main:
+    120, Loop not vectorized/parallelized: contains call
+    128, Generating copyin(points[:numPts]) [if not already present]
+         Generating copyout(normal_points[:numPts]) [if not already present]
+    131, Generating implicit firstprivate(numPts)
+         Generating NVIDIA GPU code
+        133, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+    131, Local memory used for .inl_vert_373,_T49_6550,.inl__T16_6549_390,.inl_.X6549_330,.inl_.inl_.inl__T1_6543_2_59_420,.inl_horiz_353,.inl_.inl_.X6544_36_389,.inl_.inl__T2_6544_33_388,.inl_.inl_.X6547_40_397,.inl_.inl_.inl_.X6543_5_60_421,.inl_mc_407,.inl_.inl_.X6546_61_422,.inl_.inl__T5_6546_56_417,.inl__T15_6549_370,.inl_.inl_.X6544_32_383,.inl_.inl__T2_6544_29_382,.inl_.inl_.X6544_28_377,.inl_.inl__T2_6544_25_376,.inl_query_pt_324,.inl_.inl_.X6544_24_369,.inl_.inl__T2_6544_21_368,.inl__T14_6549_329,.inl_.inl_.X6544_20_363,.inl_.inl__T2_6544_17_362,.inl_.inl_.X6544_16_357,.inl_.inl__T2_6544_13_356,.inl__T21_6549_432,.inl_.inl_.X6543_67_431,.inl_.inl__T1_6543_64_429,.inl_.inl__T8_6547_37_396,.inl_normal_393
+    133, Generating implicit firstprivate(width,height)
+         Loop not vectorized/parallelized: contains call
+    144, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::isnan(float):
+                        612, Generating implicit omp declare target routine
+                             Generating NVIDIA GPU code
+timeout was set to  600

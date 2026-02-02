@@ -1,0 +1,60 @@
+nvc++ -acc  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+luminance(float, float, float):
+     27, Generating acc routine seq
+         Generating NVIDIA GPU code
+runKernels(float const*, float*, float, float, float, float, unsigned int, unsigned int, unsigned int):
+     44, Generating update device(input[:height*(numChannels*width)])
+         Generating implicit firstprivate(height,width)
+         Generating NVIDIA GPU code
+         47, #pragma acc loop gang, vector(256) collapse(2) /* blockIdx.x threadIdx.x */
+         48,   /* blockIdx.x threadIdx.x collapsed */
+     44, Generating implicit copyin(input[:]) [if not already present]
+         Generating implicit copyout(output[:]) [if not already present]
+     47, Loop not fused: no successor loop
+     48, Generating implicit firstprivate(numChannels,gamma,averageLuminance,c,delta)
+         Loop not vectorized: data dependency
+    150, Generating update self(output[:height*(numChannels*width)])
+main:
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    184, Loop not vectorized/parallelized: potential early exits
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    197, Loop not fused: function call before adjacent loop
+    199, Generated vector simd code for the loop containing reductions
+         616, Loop not vectorized/parallelized: not countable
+    217, Generating create(output[:height*(width*4)],input[:height*(width*4)]) [if not already present]
+    219, Loop not vectorized/parallelized: potential early exits
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    237, Loop not vectorized/parallelized: contains call
+    259, Loop not fused: dependence chain to sibling loop
+    261, Loop not vectorized: data dependency
+    363, Loop not fused: complex flow graph
+    365, Multiple reductions compressed
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 2 times
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+std::char_traits<char>::length(char const*):
+         171, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     20, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+__gnu_cxx::char_traits<char>::length(char const*):
+     17, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                        171, Loop not vectorized/parallelized: not countable
+     20, include "chrono"
+std::basic_ostream<char, std::char_traits<char>>& std::endl<char, std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&):
+     17, include "iostream"
+          39, include "ostream"
+     20, include "chrono"
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&, char const*):
+         397, Loop not vectorized/parallelized: not countable
+nvc++ -acc  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

@@ -1,0 +1,229 @@
+nvc++	  ./main.cpp 		  -I./util/timer/ 		  -I./util/file/ 			-c 			-o ./main.o 
+nvc++  -std=c++11 -Wall -O3 -Minfo -mp=gpu -gpu=cc90  	./kernel/kernel.cpp 			-c 			-o ./kernel/kernel.o 
+kernel_gpu_wrapper(params_common, int*, int*, int*, int*, int*, int*, int*, int*, avi_t*):
+    404, Generating map(to:endoRow[:common.endoPoints],epiRow[:common.epiPoints]) 
+         Generating map(alloc:epiT[:common.in_elem*common.epiPoints],in2[:common.in2_elem*common.allPoints],in2_pad_cumv[:common.allPoints*common.in2_pad_cumv_elem],in2_sub2[:common.allPoints*common.in2_sub2_elem],in2_sub_cumh[:common.allPoints*common.in2_sub_cumh_elem],in2_sqr_sub2[:common.allPoints*common.in2_sqr_sub2_elem],in2_pad_cumv_sel[:common.allPoints*common.in2_pad_cumv_sel_elem],in2_sqr[:common.in2_elem*common.allPoints],in_partial_sum[:common.in_cols*common.allPoints],tMask[:common.allPoints*common.tMask_elem]) 
+         Generating map(from:tEpiRowLoc[:common.epiPoints*common.no_frames]) 
+         Generating map(alloc:in_sqr_partial_sum[:common.allPoints*common.in_sqr_rows],in_final_sum[:common.allPoints],in_mod_temp[:common.in_elem*common.allPoints],in_sqr_final_sum[:common.allPoints],par_max_coo[:common.allPoints*common.mask_conv_rows],mask_conv[:common.allPoints*common.mask_conv_elem],in2_sub_cumh_sel[:common.allPoints*common.in2_sub_cumh_sel_elem],in_sqr[:common.in_elem*common.allPoints],conv[:common.allPoints*common.conv_elem]) 
+         Generating map(to:endoCol[:common.endoPoints]) 
+         Generating map(alloc:denomT[:common.allPoints]) 
+         Generating map(to:epiCol[:common.epiPoints]) 
+         Generating map(alloc:endoT[:common.in_elem*common.endoPoints]) 
+         Generating map(from:tEndoColLoc[:common.endoPoints*common.no_frames]) 
+         Generating map(alloc:par_max_val[:common.allPoints*common.mask_conv_rows]) 
+         Generating map(from:tEpiColLoc[:common.epiPoints*common.no_frames],tEndoRowLoc[:common.endoPoints*common.no_frames]) 
+    409, Loop not vectorized/parallelized: contains call
+    483, #omp target teams num_teams(allPoints) thread_limit(256)
+        483, Generating "nvkernel__Z18kernel_gpu_wrapper13params_commonPiS0_S0_S0_S0_S0_S0_S0_P5avi_t_F1L483_2" GPU kernel
+             Generating map(to:frame[:common.frame_elem]) 
+        485, #omp parallel
+          171, Barrier
+          239, Barrier
+          292, Barrier
+          380, Barrier
+          444, Barrier
+          491, Barrier
+          539, Barrier
+          587, Barrier
+          625, Barrier
+          672, Barrier
+          720, Barrier
+          768, Barrier
+          806, Barrier
+          852, Barrier
+          912, Barrier
+          959, Barrier
+         1007, Barrier
+         1055, Barrier
+         1093, Barrier
+         1140, Barrier
+         1188, Barrier
+         1236, Barrier
+         1274, Barrier
+         1325, Barrier
+         1363, Barrier
+         1406, Barrier
+         1448, Barrier
+         1493, Barrier
+         1531, Barrier
+         1567, Barrier
+         1605, Barrier
+         1644, Barrier
+         1703, Barrier
+         1795, Barrier
+         1848, Barrier
+         1902, Barrier
+         1966, Barrier
+    483, Generating implicit map(tofrom:common) 
+    486, include "kernel.h"
+         144, Loop not vectorized: data dependency
+         215, Loop not vectorized: data dependency
+         268, Loop not vectorized: data dependency
+         362, Generated vector simd code for postive and negative strides
+         412, Loop not vectorized: data dependency
+         477, Loop not vectorized: unknown
+              Loop unrolled 4 times
+         515, Loop not vectorized: data dependency
+         563, Loop not vectorized: data dependency
+         611, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+         658, Loop not vectorized/parallelized: not countable
+         696, Loop not vectorized: data dependency
+         744, Loop not vectorized: data dependency
+         792, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+         838, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+         880, Loop not vectorized: data dependency
+         945, Loop not vectorized: unknown
+              Loop unrolled 4 times
+         983, Loop not vectorized: data dependency
+        1031, Loop not vectorized: data dependency
+        1079, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+        1126, Loop not vectorized/parallelized: not countable
+        1164, Loop not vectorized: data dependency
+        1212, Loop not vectorized: data dependency
+        1260, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+        1306, Loop not vectorized: unknown
+        1349, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+        1390, Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+        1432, Loop not vectorized: unprofitable for target
+              Loop unrolled 2 times
+        1474, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+        1482, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+        1553, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+        1591, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+        1629, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+        1683, Loop not vectorized: unknown
+        1777, Generated vector simd code for the loop containing reductions
+              Loop unrolled 8 times
+        1828, Loop not vectorized: unknown
+        1872, Loop not vectorized: unknown
+        1939, Loop not vectorized: data dependency
+std::fabs(float):
+                        242, Generating implicit omp declare target routine
+                             Generating NVIDIA GPU code
+std::sqrt(float):
+                        464, Generating implicit omp declare target routine
+                             Generating NVIDIA GPU code
+nvc++	 -std=c++11 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 ./util/avi/avilib.c 		  -I./util/avi 			-c 			-o ./util/avi/avilib.o 
+"./util/avi/avilib.c", line 86: warning: pointless comparison of unsigned integer with zero [unsigned_compare_with_zero]
+        if (n < 0)
+              ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"./util/avi/avilib.c", line 341: warning: integer conversion resulted in a change of sign [integer_sign_change]
+     movi_len = AVI_MAX_LEN - HEADERBYTES + 4;
+                ^
+
+"./util/avi/avilib.c", line 1760: warning: statement is unreachable [code_is_unreachable]
+           break;
+           ^
+
+"./util/avi/avilib.c", line 1765: warning: missing return statement at end of non-void function "AVI_read_data" [implicit_return_from_non_void_function]
+  }
+  ^
+
+AVI_open_output_file:
+    253, Recognized memory zero idiom
+          84, Loop not vectorized/parallelized: contains call
+avi_update_header:
+    460, Loop not vectorized/parallelized: contains call
+          84, Loop not vectorized/parallelized: contains call
+AVI_write_frame:
+         921, Loop not vectorized/parallelized: contains call
+AVI_write_audio:
+         919, Loop not vectorized/parallelized: contains call
+AVI_append_audio:
+          84, Loop not vectorized/parallelized: contains call
+          84, Loop not vectorized/parallelized: contains call
+avi_parse_input_file:
+          68, Loop not vectorized/parallelized: potential early exits
+          68, Loop not vectorized/parallelized: potential early exits
+          68, Loop not vectorized/parallelized: potential early exits
+          68, Loop not vectorized/parallelized: potential early exits
+          68, Loop not vectorized/parallelized: potential early exits
+   1209, Loop not vectorized/parallelized: potential early exits
+   1318, Loop not fused: function call before adjacent loop
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 2 times
+   1343, Loop not vectorized/parallelized: potential early exits
+          68, Loop not vectorized/parallelized: potential early exits
+          68, Loop not vectorized/parallelized: potential early exits
+          68, Loop not vectorized/parallelized: potential early exits
+   1408, Recognized memory zero idiom
+   1414, Loop not vectorized/parallelized: contains call
+   1418, Loop not fused: complex flow graph
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+   1426, Loop not vectorized/parallelized: potential early exits
+   1434, Generated vector simd code for the loop
+   1449, Loop not vectorized/parallelized: contains call
+   1462, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+AVI_read_frame:
+          68, Loop not vectorized/parallelized: potential early exits
+AVI_set_audio_position:
+   1646, Loop not vectorized/parallelized: not countable
+AVI_read_audio:
+          68, Loop not vectorized/parallelized: potential early exits
+AVI_read_data:
+          68, Loop not vectorized/parallelized: potential early exits
+          68, Loop not vectorized/parallelized: potential early exits
+          68, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_19___util_avi_avilib_c_ba9c97dd::avi_read(int, char*, unsigned long):
+     68, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_19___util_avi_avilib_c_ba9c97dd::avi_write(int, char*, unsigned long):
+     84, Loop not vectorized/parallelized: contains call
+_INTERNAL_19___util_avi_avilib_c_ba9c97dd::avi_add_chunk(avi_t*, unsigned char*, unsigned char*, int):
+          84, Loop not vectorized/parallelized: contains call
+          84, Loop not vectorized/parallelized: contains call
+_INTERNAL_19___util_avi_avilib_c_ba9c97dd::avi_close_output_file(avi_t*):
+         159, Loop not vectorized/parallelized: contains call
+    731, Loop not vectorized/parallelized: contains call
+          84, Loop not vectorized/parallelized: contains call
+_INTERNAL_19___util_avi_avilib_c_ba9c97dd::avi_write_data(avi_t*, char*, unsigned long, int, int):
+         159, Loop not vectorized/parallelized: contains call
+         159, Loop not vectorized/parallelized: contains call
+nvc++	 -std=c++11 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 ./util/avi/avimod.c 		  -I./util/avi 			-c 			-o ./util/avi/avimod.o 
+chop_flip_image:
+     55, Loop not fused: no successor loop
+     56, Generated vector simd code for the loop
+     67, Loop not fused: function call before adjacent loop
+     68, Generated vector simd code for the loop
+     83, Loop not fused: no successor loop
+     84, Loop not vectorized: data dependency
+         Loop unrolled 8 times
+get_frame:
+          55, Loop not fused: no successor loop
+          56, Generated vector simd code for the loop
+          67, Loop not fused: function call before adjacent loop
+          68, Generated vector simd code for the loop
+          83, Loop not fused: no successor loop
+          84, Loop not vectorized: data dependency
+              Loop unrolled 8 times
+nvc++	 -std=c++11 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 ./util/file/file.c 		  -I./util/file 		  -I./util/timer 			-c 			-o ./util/file/file.o 
+read_data:
+    113, Loop not vectorized/parallelized: contains call
+    124, Loop not vectorized/parallelized: contains call
+    127, Loop not vectorized/parallelized: contains call
+    131, Loop not vectorized/parallelized: contains call
+    134, Loop not vectorized/parallelized: contains call
+write_data:
+    181, Loop not vectorized/parallelized: contains call
+    185, Loop not vectorized/parallelized: contains call
+    190, Loop not vectorized/parallelized: contains call
+    195, Loop not vectorized/parallelized: contains call
+nvc++	 -std=c++11 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 ./util/timer/timer.c 		  -I./util/timer 			-c 			-o ./util/timer/timer.o 
+nvc++	 -std=c++11 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 ./main.o 		  ./kernel/kernel.o 			./util/avi/avilib.o 			./util/avi/avimod.o 			./util/file/file.o 			./util/timer/timer.o 			-lm -o heartwall

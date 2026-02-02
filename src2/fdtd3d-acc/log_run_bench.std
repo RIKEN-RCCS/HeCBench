@@ -1,0 +1,3 @@
+nvc++ -acc  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+nvc++ -acc  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 -c FDTD3dReference.cpp -o FDTD3dReference.o
+nvc++ -acc  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 -c FDTD3dGPU.cpp -o FDTD3dGPU.o

@@ -1,0 +1,60 @@
+nvc++  -Wall -I../channelSum-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+"main.cpp", line 162: warning: label "end" was declared but never referenced [declared_but_not_referenced]
+    end: return 0;
+    ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+ComputeChannelSumNCHW(int, int, int, int const*, int*, int*, long&, int):
+     74, Loop not vectorized/parallelized: potential early exits
+void ChannelSumNCHW<int>(int, int, int, int const*, int*, int*):
+     21, #omp target teams distribute num_teams(C)
+         21, Generating "nvkernel__Z14ChannelSumNCHWIiEviiiPKT_PS0_S3__F1L21_2" GPU kernel
+         23, Loop parallelized across teams, schedule(static)
+         27, Team private (c,v_val,m_val) located in CUDA shared memory
+             #omp parallel
+           27, Generating reduction(+:m_val,v_val)
+           28, Loop parallelized across threads, schedule(static)
+     23, Loop not vectorized/parallelized: contains structure move
+     28, Loop not vectorized/parallelized: not countable
+ComputeChannelSumNHWC(int, int, int, int const*, int*, int*, long&, int):
+     94, Loop not vectorized/parallelized: potential early exits
+void ChannelSumNHWC<int>(int, int, int, int const*, int*, int*):
+     47, #omp target teams distribute num_teams(C)
+         47, Generating "nvkernel__Z14ChannelSumNHWCIiEviiiPKT_PS0_S3__F1L47_7" GPU kernel
+         49, Loop parallelized across teams, schedule(static)
+         52, Team private (c,v_val,m_val) located in CUDA shared memory
+             #omp parallel
+           52, Generating reduction(+:m_val,v_val)
+               Loop parallelized across threads, schedule(static)
+     49, Loop not vectorized/parallelized: contains structure move
+     52, Loop not vectorized/parallelized: not countable
+main:
+    131, Loop not vectorized/parallelized: contains call
+    135, Generating map(to:h_X[:numel]) 
+         Generating map(from:h_sum[:C],h_sumsq[:C]) 
+          94, Loop not vectorized/parallelized: contains call
+          35, Generated vector simd code for the loop containing reductions
+    139, Generating update from(h_sum[:C])
+          49, Loop not vectorized/parallelized: potential early exits
+          74, Loop not vectorized/parallelized: contains call
+          13, Generated vector simd code for the loop containing reductions
+    148, Generating update from(h_sum[:C])
+          49, Loop not vectorized/parallelized: potential early exits
+         115, Loop not vectorized/parallelized: too deeply nested
+         116, Loop not vectorized/parallelized: too deeply nested
+void ref_nhwc<int>(int, int, int, int const*, int*, int*):
+      6, include "reference.h"
+          35, Generated vector simd code for the loop containing reductions
+bool check<int>(int, int*, int*):
+      6, include "reference.h"
+          49, Loop not vectorized/parallelized: potential early exits
+void ref_nchw<int>(int, int, int, int const*, int*, int*):
+      6, include "reference.h"
+          13, Generated vector simd code for the loop containing reductions
+              Loop unrolled 2 times
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      6, include "reference.h"
+nvc++  -Wall -I../channelSum-cuda -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

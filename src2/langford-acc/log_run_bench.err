@@ -1,0 +1,33 @@
+"main.cpp", line 345: error: invalid text in pragma
+    #pragma acc data tofrom: count[0:1]) map(from: results[0:kLimit * kAlignedCnt])
+                     ^
+          detected during instantiation of "void run_gpu<n>(const int64_t *) [with n=7]" at line 481
+
+"main.cpp", line 345: error: extra text after expected end of preprocessing directive
+    #pragma acc data tofrom: count[0:1]) map(from: results[0:kLimit * kAlignedCnt])
+                           ^
+          detected during instantiation of "void run_gpu<n>(const int64_t *) [with n=7]" at line 481
+
+"main.cpp", line 349: error: invalid text in pragma
+      #pragma acc parallel teams num_teams(blocks_x) thread_limit(kThreadsPerBlock) 
+                           ^
+          detected during instantiation of "void run_gpu<n>(const int64_t *) [with n=7]" at line 481
+
+"main.cpp", line 349: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel teams num_teams(blocks_x) thread_limit(kThreadsPerBlock) 
+                                 ^
+          detected during instantiation of "void run_gpu<n>(const int64_t *) [with n=7]" at line 481
+
+"main.cpp", line 358: error: identifier "omp_get_thread_num" is undefined
+          int lid = omp_get_thread_num();
+                    ^
+          detected during instantiation of "void run_gpu<n>(const int64_t *) [with n=7]" at line 481
+
+"main.cpp", line 359: error: identifier "omp_get_team_num" is undefined
+          int tid = omp_get_team_num();
+                    ^
+          detected during instantiation of "void run_gpu<n>(const int64_t *) [with n=7]" at line 481
+
+6 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

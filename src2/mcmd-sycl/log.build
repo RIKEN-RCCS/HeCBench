@@ -1,0 +1,85 @@
+clang++  -std=c++17 -I../mcmd-cuda -fsycl           --gcc-toolchain=           -D_MWAITXINTRIN_H_INCLUDED -D_FORCE_INLINES -D__STRICT_ANSI__           -DSYCL -DGPU -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -c ../mcmd-cuda/main.cpp -o main.o
+In file included from ../mcmd-cuda/main.cpp:42:
+../mcmd-cuda/system_functions.cpp:52:16: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+   52 |   double xtemp[size];
+      |                ^~~~
+../mcmd-cuda/system_functions.cpp:52:16: note: read of non-const variable 'size' is not allowed in a constant expression
+../mcmd-cuda/system_functions.cpp:50:7: note: declared here
+   50 |   int size = system.constants.total_atoms;
+      |       ^
+../mcmd-cuda/system_functions.cpp:53:16: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+   53 |   double ytemp[size];
+      |                ^~~~
+../mcmd-cuda/system_functions.cpp:53:16: note: read of non-const variable 'size' is not allowed in a constant expression
+../mcmd-cuda/system_functions.cpp:50:7: note: declared here
+   50 |   int size = system.constants.total_atoms;
+      |       ^
+../mcmd-cuda/system_functions.cpp:54:16: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+   54 |   double ztemp[size];
+      |                ^~~~
+../mcmd-cuda/system_functions.cpp:54:16: note: read of non-const variable 'size' is not allowed in a constant expression
+../mcmd-cuda/system_functions.cpp:50:7: note: declared here
+   50 |   int size = system.constants.total_atoms;
+      |       ^
+In file included from ../mcmd-cuda/main.cpp:47:
+../mcmd-cuda/kernels.cpp:52:12: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+   52 |   d_atom H[N]; // host atoms
+      |            ^
+../mcmd-cuda/kernels.cpp:52:12: note: initializer of 'N' is not a constant expression
+../mcmd-cuda/kernels.cpp:34:13: note: declared here
+   34 |   const int N = (int)system.constants.total_atoms;
+      |             ^
+In file included from ../mcmd-cuda/main.cpp:57:
+../mcmd-cuda/averages.cpp:601:14: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+  601 |     double D[(int)system.proto.size()];
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~
+../mcmd-cuda/averages.cpp:601:19: note: function parameter 'system' with unknown value cannot be used in a constant expression
+  601 |     double D[(int)system.proto.size()];
+      |                   ^
+../mcmd-cuda/averages.cpp:415:37: note: declared here
+  415 | void calculateObservablesMD(System &system) { 
+      |                                     ^
+5 warnings generated.
+In file included from ../mcmd-cuda/main.cpp:42:
+../mcmd-cuda/system_functions.cpp:52:16: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+   52 |   double xtemp[size];
+      |                ^~~~
+../mcmd-cuda/system_functions.cpp:52:16: note: read of non-const variable 'size' is not allowed in a constant expression
+../mcmd-cuda/system_functions.cpp:50:7: note: declared here
+   50 |   int size = system.constants.total_atoms;
+      |       ^
+../mcmd-cuda/system_functions.cpp:53:16: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+   53 |   double ytemp[size];
+      |                ^~~~
+../mcmd-cuda/system_functions.cpp:53:16: note: read of non-const variable 'size' is not allowed in a constant expression
+../mcmd-cuda/system_functions.cpp:50:7: note: declared here
+   50 |   int size = system.constants.total_atoms;
+      |       ^
+../mcmd-cuda/system_functions.cpp:54:16: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+   54 |   double ztemp[size];
+      |                ^~~~
+../mcmd-cuda/system_functions.cpp:54:16: note: read of non-const variable 'size' is not allowed in a constant expression
+../mcmd-cuda/system_functions.cpp:50:7: note: declared here
+   50 |   int size = system.constants.total_atoms;
+      |       ^
+In file included from ../mcmd-cuda/main.cpp:47:
+../mcmd-cuda/kernels.cpp:52:12: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+   52 |   d_atom H[N]; // host atoms
+      |            ^
+../mcmd-cuda/kernels.cpp:52:12: note: initializer of 'N' is not a constant expression
+../mcmd-cuda/kernels.cpp:34:13: note: declared here
+   34 |   const int N = (int)system.constants.total_atoms;
+      |             ^
+In file included from ../mcmd-cuda/main.cpp:57:
+../mcmd-cuda/averages.cpp:601:14: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+  601 |     double D[(int)system.proto.size()];
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~
+../mcmd-cuda/averages.cpp:601:19: note: function parameter 'system' with unknown value cannot be used in a constant expression
+  601 |     double D[(int)system.proto.size()];
+      |                   ^
+../mcmd-cuda/averages.cpp:415:37: note: declared here
+  415 | void calculateObservablesMD(System &system) { 
+      |                                     ^
+5 warnings generated.
+clang++  -std=c++17 -I../mcmd-cuda -fsycl           --gcc-toolchain=           -D_MWAITXINTRIN_H_INCLUDED -D_FORCE_INLINES -D__STRICT_ANSI__           -DSYCL -DGPU -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -c force_kernel.cpp -o force_kernel.o
+clang++  -std=c++17 -I../mcmd-cuda -fsycl           --gcc-toolchain=           -D_MWAITXINTRIN_H_INCLUDED -D_FORCE_INLINES -D__STRICT_ANSI__           -DSYCL -DGPU -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 main.o force_kernel.o -o main 

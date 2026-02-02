@@ -1,0 +1,11 @@
+"main.cpp", line 74: error: invalid text in pragma
+    #pragma acc parallel map(to: query[0:qlen], \
+                         ^
+
+"main.cpp", line 74: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel map(to: query[0:qlen], \
+                            ^
+
+2 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:58: main.o] Error 2
+timeout was set to  600

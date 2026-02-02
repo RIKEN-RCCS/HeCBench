@@ -1,0 +1,194 @@
+nvc++  -std=c++14 -Wall           -I../boxfilter-sycl -I../recursiveGaussian-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+operator*(float4, float):
+     25, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+operator+(float4, float4):
+     30, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+operator-(float4, float4):
+     35, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+rgbaUintToFloat4(unsigned int):
+     41, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+rgbaFloat4ToUint(float4):
+     53, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+Transpose(unsigned int const*, unsigned int*, unsigned long, unsigned long):
+     78, #omp target teams num_teams(numTeams) thread_limit(256)
+         78, Generating "nvkernel__Z9TransposePKjPjmm_F1L78_2" GPU kernel
+         81, #omp parallel
+           98, Barrier
+         85, Team private (uiLocalBuff) located in CUDA shared memory
+SimpleRecursiveRGBA(unsigned int const*, unsigned int*, unsigned long, unsigned long, float):
+    131, #omp target teams distribute parallel for num_teams(szTeams) thread_limit(szGaussLocalWork)
+        131, Generating "nvkernel__Z19SimpleRecursiveRGBAPKjPjmmf_F1L131_7" GPU kernel
+        134, Loop parallelized across teams and threads, schedule(static)
+    134, Loop not vectorized/parallelized: not countable
+    141, Loop not vectorized: data dependency
+    157, Loop not vectorized: data dependency
+RecursiveRGBA(unsigned int const*, unsigned int*, unsigned long, unsigned long, float, float, float, float, float, float, float, float):
+    192, #omp target teams distribute parallel for num_teams(szTeams) thread_limit(szGaussLocalWork)
+        192, Generating "nvkernel__Z13RecursiveRGBAPKjPjmmffffffff_F1L192_11" GPU kernel
+        195, Loop parallelized across teams and threads, schedule(static)
+    195, Loop not vectorized/parallelized: not countable
+    212, Loop not vectorized: data dependency
+    241, Loop not vectorized: data dependency
+GPUGaussianFilterRGBA(unsigned int const*, unsigned int*, unsigned int*, unsigned int, unsigned int, _GaussParms const*):
+    280, Generating update to(uiInput[:szBuff])
+    310, Generating update from(uiOutput[:szBuff])
+main:
+    359, Generating map(alloc:uiOutput[:szBuff],uiTmp[:szBuff],uiInput[:szBuff]) 
+         280, Generating update to(uiInput[:])
+         310, Generating update from(uiOutput[:])
+    367, Loop not vectorized/parallelized: contains call
+         280, Generating update to(uiInput[:])
+         310, Generating update from(uiOutput[:])
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     10, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++  -std=c++14 -Wall           -I../boxfilter-sycl -I../recursiveGaussian-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c ../recursiveGaussian-cuda/RecursiveGaussianHost.cpp -o RecursiveGaussianHost.o
+rgbaFloat4ToUint(float*):
+     28, Loop unrolled 4 times (completely unrolled)
+TransposeHost(unsigned int const*, unsigned int*, int, int):
+     51, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+SimpleRecursiveGaussianRGBAHost(unsigned int const*, unsigned int*, int, int, float):
+     80, Loop not fused: different controlling conditions
+         Loop not vectorized: data dependency
+          28, Loop unrolled 4 times (completely unrolled)
+     99, Loop not vectorized: data dependency
+          28, Loop unrolled 4 times (completely unrolled)
+RecursiveGaussianRGBAHost(unsigned int const*, unsigned int*, int, int, float, float, float, float, float, float, float, float):
+    146, Loop unrolled 4 times (completely unrolled)
+    155, Loop not fused: different controlling conditions
+         Loop not vectorized: data dependency
+          28, Loop unrolled 4 times (completely unrolled)
+    164, Loop unrolled 4 times (completely unrolled)
+    181, Loop unrolled 4 times (completely unrolled)
+    190, Loop not vectorized: data dependency
+    198, Loop unrolled 4 times (completely unrolled)
+          28, Loop unrolled 4 times (completely unrolled)
+HostRecursiveGaussianRGBA(unsigned int*, unsigned int*, unsigned int*, int, int, _GaussParms*):
+         137, Loop not fused: complex flow graph
+         146, Loop unrolled 4 times (completely unrolled)
+         155, Loop not fused: different controlling conditions
+              Loop not vectorized: data dependency
+         163, Loop unrolled 4 times (completely unrolled)
+         164, Loop unrolled 4 times (completely unrolled)
+         181, Loop unrolled 4 times (completely unrolled)
+         190, Loop not vectorized: data dependency
+         198, Loop unrolled 4 times (completely unrolled)
+         210, Loop unrolled 4 times (completely unrolled)
+          48, Loop not fused: different loop trip count
+          51, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+         137, Loop not fused: complex flow graph
+         146, Loop unrolled 4 times (completely unrolled)
+         155, Loop not fused: different controlling conditions
+              Loop not vectorized: data dependency
+         163, Loop unrolled 4 times (completely unrolled)
+         164, Loop unrolled 4 times (completely unrolled)
+         181, Loop unrolled 4 times (completely unrolled)
+         190, Loop not vectorized: data dependency
+         198, Loop unrolled 4 times (completely unrolled)
+         210, Loop unrolled 4 times (completely unrolled)
+          51, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+nvc++  -std=c++14 -Wall           -I../boxfilter-sycl -I../recursiveGaussian-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c ../boxfilter-sycl/shrUtils.cpp -o shrUtils.o
+"../boxfilter-sycl/shrUtils.cpp", line 176: warning: variable "szNumWritten" was set but never used [set_but_not_used]
+  	size_t szNumWritten = 0;
+  	       ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+shrFillArray:
+     45, Loop not vectorized/parallelized: contains call
+shrPrintArray:
+     56, Loop not vectorized/parallelized: contains call
+shrFindFilePath:
+    650, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrReadFile<float>(char const*, float**, unsigned int*, bool):
+    723, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrReadFile<double>(char const*, double**, unsigned int*, bool):
+    723, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrReadFile<int>(char const*, int**, unsigned int*, bool):
+    723, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrReadFile<unsigned int>(char const*, unsigned int**, unsigned int*, bool):
+    723, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrReadFile<char>(char const*, char**, unsigned int*, bool):
+    723, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrReadFile<unsigned char>(char const*, unsigned char**, unsigned int*, bool):
+    723, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrWriteFile<float>(char const*, float const*, unsigned int, float, bool):
+    799, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrWriteFile<double>(char const*, double const*, unsigned int, double, bool):
+    799, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrWriteFile<int>(char const*, int const*, unsigned int, int, bool):
+    799, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrWriteFile<unsigned int>(char const*, unsigned int const*, unsigned int, unsigned int, bool):
+    799, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrWriteFile<char>(char const*, char const*, unsigned int, char, bool):
+    799, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrWriteFile<unsigned char>(char const*, unsigned char const*, unsigned int, unsigned char, bool):
+    799, Loop not vectorized/parallelized: potential early exits
+loadPPM(char const*, unsigned char**, unsigned int*, unsigned int*, unsigned int*):
+   1057, Loop not vectorized/parallelized: potential early exits
+savePPM(char const*, unsigned char*, unsigned int, unsigned int, unsigned int):
+   1165, Loop not vectorized/parallelized: potential early exits
+shrLoadPPM4ub:
+   1219, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+shrSavePPM4ub:
+   1254, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+shrComparef:
+        1312, Loop not vectorized: unknown
+shrBOOL compareData<float, float>(float const*, float const*, unsigned long, float, float):
+   1312, Loop not fused: complex flow graph
+         Loop not vectorized: unknown
+shrComparei:
+        1312, Loop not vectorized: unknown
+shrBOOL compareData<int, int>(int const*, int const*, unsigned long, int, float):
+   1312, Loop not fused: complex flow graph
+         Loop not vectorized: unknown
+shrCompareuit:
+        1400, Loop not fused: complex flow graph
+shrBOOL compareDataAsFloatThreshold<unsigned int, float>(unsigned int const*, unsigned int const*, unsigned long, float, float):
+   1400, Loop not fused: complex flow graph
+shrCompareub:
+        1312, Loop not vectorized: unknown
+shrBOOL compareData<unsigned char, int>(unsigned char const*, unsigned char const*, unsigned long, int, float):
+   1312, Loop not fused: complex flow graph
+         Loop not vectorized: unknown
+shrCompareubt:
+        1400, Loop not fused: complex flow graph
+shrBOOL compareDataAsFloatThreshold<unsigned char, float>(unsigned char const*, unsigned char const*, unsigned long, float, float):
+   1400, Loop not fused: complex flow graph
+shrComparefe:
+        1312, Loop not vectorized: unknown
+shrComparefet:
+        1400, Loop not fused: complex flow graph
+shrBOOL compareDataAsFloatThreshold<float, float>(float const*, float const*, unsigned long, float, float):
+   1400, Loop not fused: complex flow graph
+shrCompareL2fe:
+   1558, Generated vector simd code for the loop containing reductions
+shrComparePPM:
+        1219, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+        1219, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+        1496, Loop not fused: complex flow graph
+shrComparePGM:
+        1219, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+        1219, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+        1496, Loop not fused: complex flow graph
+_INTERNAL_30____boxfilter_sycl_shrUtils_cpp_shrFree::shrLogV(int, int, char const*, __va_list_tag):
+    345, Loop not vectorized/parallelized: potential early exits
+nvc++  -std=c++14 -Wall           -I../boxfilter-sycl -I../recursiveGaussian-cuda -O3 -Minfo -mp=gpu -gpu=cc90 main.o RecursiveGaussianHost.o shrUtils.o -o main 

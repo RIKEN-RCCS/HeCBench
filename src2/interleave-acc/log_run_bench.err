@@ -1,0 +1,40 @@
+initialize(INTERLEAVED_T (&) [4096], INTERLEAVED_T (&) [4096], NON_INTERLEAVED_T&, NON_INTERLEAVED_T&, int):
+     59, include "util.h"
+           9, Loop not vectorized/parallelized: contains call
+verify(INTERLEAVED_T (&) [4096], NON_INTERLEAVED_T&, int):
+     59, include "util.h"
+          49, Loop not vectorized/parallelized: contains call
+add_test_interleaved(INTERLEAVED_T*, INTERLEAVED_T const*, unsigned int, unsigned int):
+     68, Generating copy(h_dst[:num_elements]) [if not already present]
+         Generating copyin(h_src[:num_elements]) [if not already present]
+     71, Generating implicit firstprivate(num_elements)
+         Generating NVIDIA GPU code
+         73, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+         75, #pragma acc loop seq
+     71, Loop not vectorized/parallelized: contains call
+     73, Loop not fused: no successor loop
+     75, Complex loop carried dependence of h_src->s0,h_dst->s0 prevents parallelization
+         Loop carried dependence of h_dst->s0 prevents parallelization
+         Loop carried backward dependence of h_dst->s0 prevents vectorization
+         Complex loop carried dependence of h_src->s1,h_dst->s1,h_src->s2,h_dst->s2,h_src->s3,h_dst->s3,h_src->s4,h_dst->s4,h_src->s5,h_dst->s5,h_src->s6,h_dst->s6,h_src->s7,h_dst->s7,h_src->s8,h_dst->s8,h_src->s9,h_dst->s9,h_src->sa,h_dst->sa,h_src->sb,h_dst->sb,h_src->sc,h_dst->sc,h_src->sd,h_dst->sd,h_src->se,h_dst->se,h_src->sf,h_dst->sf prevents parallelization
+add_test_non_interleaved(NON_INTERLEAVED_T*, NON_INTERLEAVED_T const*, unsigned int, unsigned int):
+    110, Generating copy(h_dst[:1]) [if not already present]
+         Generating copyin(h_src[:1]) [if not already present]
+    113, Generating implicit firstprivate(num_elements)
+         Generating NVIDIA GPU code
+        115, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+        117, #pragma acc loop seq
+    113, Loop not vectorized/parallelized: contains call
+    115, Loop not fused: no successor loop
+    117, Complex loop carried dependence of h_src->s0,h_dst->s0 prevents parallelization
+         Loop carried dependence of h_dst->s0 prevents parallelization
+         Loop carried backward dependence of h_dst->s0 prevents vectorization
+         Complex loop carried dependence of h_src->s1,h_dst->s1,h_src->s2,h_dst->s2,h_src->s3,h_dst->s3,h_src->s4,h_dst->s4,h_src->s5,h_dst->s5,h_src->s6,h_dst->s6,h_src->s7,h_dst->s7,h_src->s8,h_dst->s8,h_src->s9,h_dst->s9,h_src->sa,h_dst->sa,h_src->sb,h_dst->sb,h_src->sc,h_dst->sc,h_src->sd,h_dst->sd,h_src->se,h_dst->se,h_src->sf,h_dst->sf prevents parallelization
+main:
+           9, Loop not vectorized/parallelized: contains call
+          49, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      6, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+     59, include "util.h"
+timeout was set to  600

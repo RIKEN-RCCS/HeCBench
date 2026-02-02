@@ -1,0 +1,11 @@
+"sobol.cpp", line 97: error: invalid text in pragma
+      #pragma acc data to: h_directions[0:n_dimensions * n_directions]) \
+                       ^
+
+"sobol.cpp", line 97: error: extra text after expected end of preprocessing directive
+      #pragma acc data to: h_directions[0:n_dimensions * n_directions]) \
+                         ^
+
+2 errors detected in the compilation of "sobol.cpp".
+make: *** [Makefile.NVD:54: sobol.o] Error 2
+timeout was set to  600

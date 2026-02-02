@@ -1,0 +1,73 @@
+"main.cpp", line 74: error: invalid text in pragma
+  #pragma acc data alloc: inData[0:signalLength], \
+                   ^
+
+"main.cpp", line 74: error: extra text after expected end of preprocessing directive
+  #pragma acc data alloc: inData[0:signalLength], \
+                        ^
+
+"main.cpp", line 120: error: invalid text in pragma
+        #pragma acc update to(inData[0:signalLength])
+                           ^
+
+"main.cpp", line 120: error: OpenACC data clause expected
+        #pragma acc update to(inData[0:signalLength])
+                           ^
+
+"main.cpp", line 120: error: extra text after expected end of preprocessing directive
+        #pragma acc update to(inData[0:signalLength])
+                             ^
+
+"main.cpp", line 124: error: invalid text in pragma
+        #pragma acc parallel teams num_teams(teams) thread_limit(groupSize)
+                             ^
+
+"main.cpp", line 124: error: extra text after expected end of preprocessing directive
+        #pragma acc parallel teams num_teams(teams) thread_limit(groupSize)
+                                   ^
+
+"main.cpp", line 129: error: identifier "omp_get_thread_num" is undefined
+            size_t localId = omp_get_thread_num();
+                             ^
+
+"main.cpp", line 130: error: identifier "omp_get_team_num" is undefined
+            size_t groupId = omp_get_team_num();
+                             ^
+
+"main.cpp", line 131: error: identifier "omp_get_vector" is undefined
+            size_t localSize = omp_get_vector();
+                               ^
+
+"main.cpp", line 191: error: invalid text in pragma
+        #pragma acc update from(dOutData[0:signalLength])
+                           ^
+
+"main.cpp", line 191: error: OpenACC data clause expected
+        #pragma acc update from(dOutData[0:signalLength])
+                           ^
+
+"main.cpp", line 191: error: extra text after expected end of preprocessing directive
+        #pragma acc update from(dOutData[0:signalLength])
+                               ^
+
+"main.cpp", line 192: error: invalid text in pragma
+        #pragma acc update from(dPartialOutData[0:signalLength])
+                           ^
+
+"main.cpp", line 192: error: OpenACC data clause expected
+        #pragma acc update from(dPartialOutData[0:signalLength])
+                           ^
+
+"main.cpp", line 192: error: extra text after expected end of preprocessing directive
+        #pragma acc update from(dPartialOutData[0:signalLength])
+                               ^
+
+"main.cpp", line 122: warning: variable "teams" was declared but never referenced [declared_but_not_referenced]
+        const int teams = (curSignalLength >> 1) / groupSize;
+                  ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+16 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

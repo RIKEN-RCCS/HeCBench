@@ -1,0 +1,11 @@
+"main.cpp", line 40: error: invalid text in pragma
+  #pragma acc data to:h_Kernel[0:KERNEL_LENGTH], h_Input[0:imageW*imageH]) \
+                   ^
+
+"main.cpp", line 40: error: extra text after expected end of preprocessing directive
+  #pragma acc data to:h_Kernel[0:KERNEL_LENGTH], h_Input[0:imageW*imageH]) \
+                     ^
+
+2 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:59: main.o] Error 2
+timeout was set to  600

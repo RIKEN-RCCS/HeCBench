@@ -1,0 +1,116 @@
+nvc++  -std=c++17 -Wall -I../meanshift-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+main:
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+    127, Generating map(alloc:d_data_next[:30000]) 
+         Generating map(to:d_data[:30000]) 
+    131, Loop not vectorized/parallelized: contains call
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    143, Generating update from(d_data[:30000])
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    154, Generating update to(d_data[:30000])
+    155, Loop not vectorized/parallelized: contains call
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    166, Generating update from(d_data[:30000])
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+std::char_traits<char>::length(char const*):
+         171, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string<std::allocator<char>>(char const*, std::allocator<char> const&):
+         397, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string<std::allocator<char>>(char const*, std::allocator<char> const&):
+         536, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      3, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+__gnu_cxx::char_traits<char>::length(char const*):
+      4, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                        171, Loop not vectorized/parallelized: not countable
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&, char const*):
+         397, Loop not vectorized/parallelized: not countable
+bool std::all_of<bool*, bool mean_shift::gpu::utils::are_close_to_real<3ul, 3ul>(std::vector<std::array<float, 3ul>, std::allocator<std::array<float, 3ul>>> const&, std::array<float, 3ul * 3ul> const&, float)::'lambda'(bool)>(bool*, bool*, bool mean_shift::gpu::utils::are_close_to_real<3ul, 3ul>(std::vector<std::array<float, 3ul>, std::allocator<std::array<float, 3ul>>> const&, std::array<float, 3ul * 3ul> const&, float)::'lambda'(bool)):
+         513, Loop not vectorized/parallelized: potential early exits
+bool* std::find_if_not<bool*, bool mean_shift::gpu::utils::are_close_to_real<3ul, 3ul>(std::vector<std::array<float, 3ul>, std::allocator<std::array<float, 3ul>>> const&, std::array<float, 3ul * 3ul> const&, float)::'lambda'(bool)>(bool*, bool*, bool mean_shift::gpu::utils::are_close_to_real<3ul, 3ul>(std::vector<std::array<float, 3ul>, std::allocator<std::array<float, 3ul>>> const&, std::array<float, 3ul * 3ul> const&, float)::'lambda'(bool)):
+         106, Loop not vectorized/parallelized: potential early exits
+bool* std::__find_if_not<bool*, __gnu_cxx::__ops::_Iter_pred<bool mean_shift::gpu::utils::are_close_to_real<3ul, 3ul>(std::vector<std::array<float, 3ul>, std::allocator<std::array<float, 3ul>>> const&, std::array<float, 3ul * 3ul> const&, float)::'lambda'(bool)>>(bool*, bool*, __gnu_cxx::__ops::_Iter_pred<bool mean_shift::gpu::utils::are_close_to_real<3ul, 3ul>(std::vector<std::array<float, 3ul>, std::allocator<std::array<float, 3ul>>> const&, std::array<float, 3ul * 3ul> const&, float)::'lambda'(bool)>):
+        2070, Loop not vectorized/parallelized: potential early exits
+bool* std::__find_if<bool*, __gnu_cxx::__ops::_Iter_negate<bool mean_shift::gpu::utils::are_close_to_real<3ul, 3ul>(std::vector<std::array<float, 3ul>, std::allocator<std::array<float, 3ul>>> const&, std::array<float, 3ul * 3ul> const&, float)::'lambda'(bool)>>(bool*, bool*, __gnu_cxx::__ops::_Iter_negate<bool mean_shift::gpu::utils::are_close_to_real<3ul, 3ul>(std::vector<std::array<float, 3ul>, std::allocator<std::array<float, 3ul>>> const&, std::array<float, 3ul * 3ul> const&, float)::'lambda'(bool)>, std::random_access_iterator_tag):
+      1, include "math.h"
+          12, include "math.h"
+               36, include "cmath"
+                    17, include "cmath"
+                       1935, include "specfun.h"
+                              45, include "stl_algobase.h"
+                                   71, include "predefined_ops.h"
+                                      2070, Loop not vectorized/parallelized: potential early exits
+      3, include "chrono"
+mean_shift::gpu::utils::print_info(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, unsigned long, unsigned long, unsigned long, unsigned long):
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+mean_shift::gpu::utils::print_info(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long):
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+std::array<float, 3ul * 3ul> mean_shift::gpu::utils::load_csv<3ul, 3ul>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, char):
+      6, include "utils.h"
+          25, Loop not vectorized/parallelized: potential early exits
+std::array<float, 10000ul * 3ul> mean_shift::gpu::utils::load_csv<10000ul, 3ul>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, char):
+      6, include "utils.h"
+          25, Loop not vectorized/parallelized: potential early exits
+std::vector<std::array<float, 3ul>, std::allocator<std::array<float, 3ul>>> mean_shift::gpu::utils::reduce_to_centroids<10000ul, 3ul>(std::array<float, 10000ul * 3ul>&, float):
+      6, include "utils.h"
+         123, Loop unrolled 3 times (completely unrolled)
+              Loop not fused: function call before adjacent loop
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+         131, Loop unrolled 3 times (completely unrolled)
+         140, Loop unrolled 3 times (completely unrolled)
+              129, Loop not vectorized/parallelized: not countable
+bool mean_shift::gpu::utils::are_close_to_real<3ul, 3ul>(std::vector<std::array<float, 3ul>, std::allocator<std::array<float, 3ul>>> const&, std::array<float, 3ul * 3ul> const&, float):
+      6, include "utils.h"
+         154, Loop not vectorized: may not be beneficial for target
+         155, Loop unrolled 3 times (completely unrolled)
+         157, Loop unrolled 3 times (completely unrolled)
+                        453, Loop not vectorized/parallelized: potential early exits
+mean_shift::gpu::mean_shift(float const*, float*, int, int):
+     11, #omp target teams distribute parallel for num_teams(teams) thread_limit(64)
+         11, Generating "nvkernel__ZN10mean_shift3gpu10mean_shiftEPKfPfii_F1L11_2" GPU kernel
+         13, Loop parallelized across teams and threads(128), schedule(static)
+     13, Loop not vectorized/parallelized: not countable
+     17, Loop not vectorized: data dependency
+     20, Loop unrolled 3 times (completely unrolled)
+     25, Loop unrolled 3 times (completely unrolled)
+     31, Loop unrolled 3 times (completely unrolled)
+mean_shift::gpu::mean_shift_tiling(float const*, float*, int, int):
+     40, #omp target teams num_teams(teams) thread_limit(threads)
+         40, Generating "nvkernel__ZN10mean_shift3gpu17mean_shift_tilingEPKfPfii_F1L40_6" GPU kernel
+         44, #omp parallel
+           68, Barrier
+           85, Barrier
+         47, Team private (valid_data,local_data) located in CUDA shared memory
+     53, Loop not vectorized/parallelized: contains call
+     57, Loop unrolled 3 times (completely unrolled)
+     63, Loop unrolled 3 times (completely unrolled)
+     69, Loop not vectorized: data dependency
+     73, Loop unrolled 3 times (completely unrolled)
+     79, Loop unrolled 3 times (completely unrolled)
+     88, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 3 times (completely unrolled)
+nvc++  -std=c++17 -Wall -I../meanshift-cuda -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

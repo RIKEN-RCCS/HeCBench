@@ -1,0 +1,1 @@
+nvc++ -acc -c -o basis.o ../xlqc-cuda/basis.cc  -std=c++14 -Wall -I../xlqc-cuda -I../xlqc-cuda/int_lib -I/path/to/gsl/include -O3 -Minfo -mp=gpu -gpu=cc90

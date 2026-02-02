@@ -1,0 +1,5 @@
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "../xlqc-cuda/prepare_data.sh; export LD_LIBRARY_PATH=D_LIBRARY_PATH:../lib/gsl/gsl-nvidia/lib; time -p ( ./main dp 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 0 837 837

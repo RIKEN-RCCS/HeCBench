@@ -1,0 +1,64 @@
+nvc++  -Wall -I../simpleSpmv-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c ../simpleSpmv-cuda/main.cpp -o main.o
+main:
+     40, Loop not vectorized/parallelized: contains call
+     69, Loop not vectorized/parallelized: contains call
+     73, Loop not vectorized/parallelized: potential early exits
+     82, Loop not vectorized/parallelized: contains call
+nvc++  -Wall -I../simpleSpmv-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c kernels.cpp -o kernels.o
+mv_dense_parallel(int, int, unsigned long, float const*, float*, float*):
+     22, #omp target teams distribute parallel for
+         19, Generating map(to:matrix[:?]) 
+             Generating map(from:y[:num_rows]) 
+             Generating map(to:x[:num_rows]) 
+         22, Generating "nvkernel__Z17mv_dense_paralleliimPKfPfS1__F1L22_2" GPU kernel
+         24, Loop parallelized across teams and threads, schedule(static)
+     22, Loop not vectorized/parallelized: contains call
+     24, Loop not vectorized/parallelized: not countable
+     26, Generated vector simd code for the loop containing reductions
+mv_csr_parallel(int, int, unsigned long, unsigned long const*, unsigned long const*, float const*, float const*, unsigned long, float*, float*):
+     63, #omp target teams distribute parallel for
+         60, Generating map(to:col_indices[:nnz],row_indices[:num_rows+1],values[:nnz]) 
+             Generating map(from:y[:num_rows]) 
+             Generating map(to:x[:num_rows]) 
+         63, Generating "nvkernel__Z15mv_csr_paralleliimPKmS0_PKfS2_mPfS3__F1L63_6" GPU kernel
+         65, Loop parallelized across teams and threads, schedule(static)
+     63, Loop not vectorized/parallelized: contains call
+     65, Loop not vectorized/parallelized: not countable
+     70, Generated vector simd code for the loop containing reductions
+vector_mv_csr_parallel(int, int, unsigned long, unsigned long const*, unsigned long const*, float const*, float const*, unsigned long, float*, float*):
+    128, #omp target teams distribute num_teams(rows_per_block*num_blocks)
+        125, Generating map(to:col_indices[:nnz],row_indices[:num_rows+1],values[:nnz]) 
+             Generating map(from:y[:num_rows]) 
+             Generating map(to:x[:num_rows]) 
+        128, Generating "nvkernel__Z22vector_mv_csr_paralleliimPKmS0_PKfS2_mPfS3__F1L128_10" GPU kernel
+        130, Loop parallelized across teams, schedule(static)
+        136, Team private (temp,row_start,row_end) located in CUDA shared memory
+             #omp parallel
+          136, Generating reduction(+:temp)
+               Loop parallelized across threads, schedule(static)
+    128, Loop not vectorized/parallelized: contains call
+    130, Loop not vectorized/parallelized: contains structure move
+    136, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      2, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++  -Wall -I../simpleSpmv-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c ../simpleSpmv-cuda/utils.cpp -o utils.o
+init_vector(float*, unsigned long):
+      7, Loop not vectorized/parallelized: contains call
+init_matrix(float*, unsigned long, unsigned long):
+     19, Generated vector simd code for the loop
+     20, Loop not vectorized/parallelized: contains call
+     31, Zero trip check eliminated
+         Loop not vectorized/parallelized: contains call
+init_csr(unsigned long*, float*, unsigned long*, float*, unsigned long, unsigned long):
+     48, Loop not fused: function call before adjacent loop
+     50, Zero trip check eliminated
+         Loop not vectorized: data dependency
+     62, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+mv_csr_serial(unsigned long, unsigned long const*, unsigned long const*, float const*, float const*, float*):
+     79, Generated vector simd code for the loop containing reductions
+check(float*, float*, unsigned long):
+     90, Generated vector simd code for the loop containing reductions
+nvc++  -Wall -I../simpleSpmv-cuda -O3 -Minfo -mp=gpu -gpu=cc90 main.o kernels.o utils.o -o main 

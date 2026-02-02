@@ -1,0 +1,13 @@
+nvc++ -acc  -Wall -I../face-sycl -O3 -o main.o -c ../face-sycl/main.cpp
+nvc++ -acc  -Wall -I../face-sycl -O3 -o haar-cpu.o -c haar.cpp
+nvc++ -acc  -Wall -I../face-sycl -O3 -o image.o -c ../face-sycl/image.cpp
+nvc++ -acc  -Wall -I../face-sycl -O3 -o stdio-wrapper.o -c ../face-sycl/stdio-wrapper.cpp
+nvc++ -acc  -Wall -I../face-sycl -O3 -o rectangles.o -c ../face-sycl/rectangles.cpp
+nvc++ -acc  -Wall -I../face-sycl -O3 -o vj-cpu main.o haar-cpu.o image.o stdio-wrapper.o rectangles.o 
+nvc++ -acc  -Wall -I../face-sycl -O3 -DOMP_TARGET -Minfo -mp=gpu -gpu=cc90 -o haar-gpu.o -c haar.cpp
+nvc++ -acc  -Wall -I../face-sycl -O3 -o vj-gpu main.o haar-gpu.o image.o stdio-wrapper.o rectangles.o
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "../face-cuda/prepare_data.sh; time -p ( ./vj-cpu Face.pgm info.txt class.txt Output-cpu.pgm 1>log.std 2>log.err;./vj-gpu Face.pgm info.txt class.txt Output-gpu.pgm 1>>log.std 2>>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 1 559 558

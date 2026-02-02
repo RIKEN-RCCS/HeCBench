@@ -1,0 +1,23 @@
+reference(float*, float const*, float, float, int, int):
+     31, Loop not vectorized: data dependency
+dev_lapl_iter(float*, float const*, float, float, int, int):
+     43, Generating implicit firstprivate(Ly,Lx)
+         Generating NVIDIA GPU code
+         45, #pragma acc loop gang, vector(256) collapse(2) /* blockIdx.x threadIdx.x */
+         46,   /* blockIdx.x threadIdx.x collapsed */
+     43, Generating implicit copyout(out[:]) [if not already present]
+         Generating implicit copyin(in[:]) [if not already present]
+     45, Loop not fused: no successor loop
+     46, Generating implicit firstprivate(delta,norm)
+         Loop not vectorized: data dependency
+main:
+     92, Loop not vectorized/parallelized: contains call
+     94, Loop not vectorized: unprofitable for target
+         Loop unrolled 4 times
+     99, Recognized memory set idiom
+    104, Loop not vectorized/parallelized: contains call
+    117, Generating create(d_out[:Lx*Ly]) [if not already present]
+         Generating copy(d_in[:Lx*Ly]) [if not already present]
+    119, Loop not vectorized/parallelized: contains call
+    133, Loop not vectorized/parallelized: potential early exits
+timeout was set to  600

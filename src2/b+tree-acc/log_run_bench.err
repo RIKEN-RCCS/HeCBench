@@ -1,0 +1,8 @@
+"./main.c", line 62: catastrophic error: cannot open source file "./util/timer/timer.h"
+  #include "./util/timer/timer.h"            // (in directory provided here)
+                                                                            ^
+
+1 catastrophic error detected in the compilation of "./main.c".
+Compilation terminated.
+make: *** [Makefile.NVD:44: main.o] Error 2
+timeout was set to  600

@@ -1,0 +1,80 @@
+property(char const*, std::vector<long, std::allocator<long>>):
+     52, Loop not vectorized/parallelized: contains call
+void flip<float>(long, long, int, int):
+     66, Loop not vectorized/parallelized: potential early exits
+     75, Loop not vectorized: unknown
+         Loop unrolled 2 times
+     79, Loop not vectorized/parallelized: potential early exits
+          52, Loop not vectorized/parallelized: contains call
+          52, Loop not vectorized/parallelized: contains call
+          52, Loop not vectorized/parallelized: contains call
+     96, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+    116, Generating copyin(d_flip_dims[:num_dims]) [if not already present]
+         Generating create(d_output[:n]) [if not already present]
+         Generating copyin(d_shape[:num_dims],d_strides_contiguous[:num_dims],d_strides[:num_dims],d_input[:n]) [if not already present]
+    127, Generating update self(d_output[:n])
+    139, Loop not vectorized/parallelized: contains call
+void flip<double>(long, long, int, int):
+     66, Loop not vectorized/parallelized: potential early exits
+     75, Loop not vectorized: unknown
+         Loop unrolled 2 times
+     79, Loop not vectorized/parallelized: potential early exits
+          52, Loop not vectorized/parallelized: contains call
+          52, Loop not vectorized/parallelized: contains call
+          52, Loop not vectorized/parallelized: contains call
+     96, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+    116, Generating copyin(d_flip_dims[:num_dims]) [if not already present]
+         Generating create(d_output[:n]) [if not already present]
+         Generating copyin(d_shape[:num_dims],d_strides_contiguous[:num_dims],d_strides[:num_dims],d_input[:n]) [if not already present]
+    127, Generating update self(d_output[:n])
+    139, Loop not vectorized/parallelized: contains call
+void flip_kernel<float>(float const*, float*, long, long const*, long, long const*, long const*, long const*, long):
+     23, Generating implicit firstprivate(n,total_dims,flip_dims_size)
+         Generating NVIDIA GPU code
+         25, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+         31, #pragma acc loop seq
+             Generating implicit reduction(+:dst_offset)
+         35, #pragma acc loop seq
+     23, Generating implicit copyin(strides_contiguous[:total_dims],strides[:total_dims]) [if not already present]
+         Generating implicit copyout(out_tensor[:n]) [if not already present]
+         Generating implicit copyin(shape[:total_dims],flip_dims[:flip_dims_size],in_tensor[:]) [if not already present]
+     25, Loop not fused: no successor loop
+     31, Loop carried scalar dependence for cur_indices at line 32,33
+     35, Loop carried scalar dependence for cur_indices at line 38
+         Scalar last value needed after loop for cur_indices at line 41
+         Loop not vectorized: unknown
+void flip_kernel_cpu<float>(float const*, float*, long, long const*, long, long const*, long const*, long const*, long):
+      7, include "reference.h"
+          14, #omp parallel
+          23, Loop not vectorized: unknown
+void flip_kernel<double>(double const*, double*, long, long const*, long, long const*, long const*, long const*, long):
+     23, Generating implicit firstprivate(n,total_dims,flip_dims_size)
+         Generating NVIDIA GPU code
+         25, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+         31, #pragma acc loop seq
+             Generating implicit reduction(+:dst_offset)
+         35, #pragma acc loop seq
+     23, Generating implicit copyin(strides_contiguous[:total_dims],strides[:total_dims]) [if not already present]
+         Generating implicit copyout(out_tensor[:n]) [if not already present]
+         Generating implicit copyin(shape[:total_dims],flip_dims[:flip_dims_size],in_tensor[:]) [if not already present]
+     25, Loop not fused: no successor loop
+     31, Loop carried scalar dependence for cur_indices at line 32,33
+     35, Loop carried scalar dependence for cur_indices at line 38
+         Scalar last value needed after loop for cur_indices at line 41
+         Loop not vectorized: unknown
+void flip_kernel_cpu<double>(double const*, double*, long, long const*, long, long const*, long const*, long const*, long):
+      7, include "reference.h"
+          14, #omp parallel
+          23, Loop not vectorized: unknown
+std::vector<long, std::allocator<long>>::vector(std::vector<long, std::allocator<long>> const&):
+      7, include "reference.h"
+std::vector<long, std::allocator<long>>::back():
+      7, include "reference.h"
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+long* std::__copy_move_a<false, __gnu_cxx::__normal_iterator<long const*, std::vector<long, std::allocator<long>>>, long*>(__gnu_cxx::__normal_iterator<long const*, std::vector<long, std::allocator<long>>>, __gnu_cxx::__normal_iterator<long const*, std::vector<long, std::allocator<long>>>, long*):
+      7, include "reference.h"
+timeout was set to  600

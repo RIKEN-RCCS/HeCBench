@@ -1,0 +1,30 @@
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+invkin_cpu(float*, float*, float*, int):
+     31, Loop unrolled 3 times (completely unrolled)
+     36, Loop unrolled 4 times (completely unrolled)
+     44, Loop not vectorized/parallelized: loop count too small
+     77, Loop unrolled 3 times (completely unrolled)
+main:
+    148, Loop not vectorized/parallelized: potential early exits
+    152, Loop unrolled 3 times (completely unrolled)
+    169, Loop not vectorized/parallelized: contains call
+    170, #omp target teams distribute parallel for simd thread_limit(128)
+        166, Generating map(from:angle_out_h[:data_size*3]) 
+             Generating map(to:yTarget_in_h[:data_size],xTarget_in_h[:data_size]) 
+        170, Generating "nvkernel_main_F1L170_2" GPU kernel
+        172, Loop parallelized across teams and threads(128), schedule(static)
+    178, Loop unrolled 3 times (completely unrolled)
+    188, Loop unrolled 4 times (completely unrolled)
+    196, Loop not vectorized/parallelized: loop count too small
+    229, Loop unrolled 3 times (completely unrolled)
+          22, Loop not fused: different loop trip count
+          31, Loop unrolled 3 times (completely unrolled)
+          36, Loop unrolled 4 times (completely unrolled)
+          44, Loop not vectorized/parallelized: loop count too small
+          77, Loop unrolled 3 times (completely unrolled)
+    254, Loop not fused: function call before adjacent loop
+    256, Loop unrolled 3 times (completely unrolled)
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     10, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

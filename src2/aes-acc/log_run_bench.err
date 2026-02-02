@@ -1,0 +1,73 @@
+"kernels.cpp", line 109: error: invalid text in pragma
+     #pragma acc parallel teams num_teams(teams) thread_limit(threads)
+                          ^
+
+"kernels.cpp", line 109: error: extra text after expected end of preprocessing directive
+     #pragma acc parallel teams num_teams(teams) thread_limit(threads)
+                                ^
+
+"kernels.cpp", line 115: error: identifier "omp_get_team_num" is undefined
+      unsigned int bx = omp_get_team_num() % (width/4);
+                        ^
+
+"kernels.cpp", line 119: error: identifier "omp_get_thread_num" is undefined
+      unsigned int localIdy = omp_get_thread_num();
+                              ^
+
+"kernels.cpp", line 106: warning: variable "teams" was declared but never referenced [declared_but_not_referenced]
+     const unsigned int teams = width*height/16;
+                        ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"kernels.cpp", line 107: warning: variable "threads" was declared but never referenced [declared_but_not_referenced]
+     const unsigned int threads = 4;
+                        ^
+
+"kernels.cpp", line 166: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(teams) thread_limit(threads)
+                         ^
+
+"kernels.cpp", line 166: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(teams) thread_limit(threads)
+                               ^
+
+"kernels.cpp", line 173: error: identifier "omp_get_team_num" is undefined
+      unsigned int bx = omp_get_team_num() % (width/4);
+                        ^
+
+"kernels.cpp", line 177: error: identifier "omp_get_thread_num" is undefined
+      unsigned int localIdy = omp_get_thread_num();
+                              ^
+
+"kernels.cpp", line 164: warning: variable "teams" was declared but never referenced [declared_but_not_referenced]
+    const unsigned int teams = width*height/16;
+                       ^
+
+"kernels.cpp", line 165: warning: variable "threads" was declared but never referenced [declared_but_not_referenced]
+    const unsigned int threads = 4;
+                       ^
+
+"main.cpp", line 80: error: invalid text in pragma
+  #pragma acc parallel data map (to: input[0:sizeBytes], \
+                       ^
+
+"main.cpp", line 80: error: extra text after expected end of preprocessing directive
+  #pragma acc parallel data map (to: input[0:sizeBytes], \
+                            ^
+
+"main.cpp", line 110: error: invalid text in pragma
+    #pragma acc update from (output[0:sizeBytes])
+                       ^
+
+"main.cpp", line 110: error: OpenACC data clause expected
+    #pragma acc update from (output[0:sizeBytes])
+                       ^
+
+"main.cpp", line 110: error: extra text after expected end of preprocessing directive
+    #pragma acc update from (output[0:sizeBytes])
+                            ^
+
+13 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:58: main.o] Error 2
+timeout was set to  600

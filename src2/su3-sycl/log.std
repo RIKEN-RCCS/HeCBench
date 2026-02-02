@@ -1,0 +1,5 @@
+Number of sites = 50^4
+Executing 1000 iterations with 1 warmups
+Threads per group = 128
+Setting number of work items 800000000
+Workgroup size is 128

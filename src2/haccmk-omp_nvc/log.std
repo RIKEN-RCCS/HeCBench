@@ -1,0 +1,4 @@
+Outer loop count is set 784
+Inner loop count is set 15000
+Average kernel execution time 0.001943 (s)
+PASS

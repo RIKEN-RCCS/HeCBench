@@ -1,0 +1,19 @@
+diamond v0.9.10.111 | by Benjamin Buchfink <buchfink@gmail.com>
+Licensed under the GNU AGPL <https://www.gnu.org/licenses/agpl.txt>
+Check http://github.com/bbuchfink/diamond for updates.
+
+#CPU threads: 1
+Scoring parameters: (Matrix=BLOSUM62 Lambda=0.267 K=0.041 Penalties=11/1)
+#Target sequences to report alignments for: 25
+Temporary directory: /dev/shm
+Opening the database...  [0.00087s]
+Loading dummy query sequences...  [0.668121s]
+Loading dummy query sequences...  [2e-06s]
+Opening the input file...  [0.004085s]
+Opening the output file...  [0.000343s]
+Loading query sequences...  [1.28104s]
+Masking queries... Timing the mask sequences on CPU...
+Total time (maskSequences) on the CPU = 10.3978 s
+There are 1696836 sequences and the total sequence length is 194131480
+Timing the mask sequences on device...
+ [14.1662s]

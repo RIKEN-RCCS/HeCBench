@@ -1,0 +1,6 @@
+Number of thread blocks: 154702
+Total kernel execution time: 3.02 s
+Total device execution time: 7.21 s
+petri N=22 S=100000 T=1000000
+mean_vars: 2.198514    var_vars: 0.083107
+mean_maxs: 8.950097    var_maxs: 1.339663

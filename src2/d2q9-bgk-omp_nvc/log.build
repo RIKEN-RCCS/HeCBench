@@ -1,0 +1,57 @@
+nvc++  -std=c++14 -Wall -I../include -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+isGreater(float, float):
+    127, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+main:
+         655, Outer loop unrolled 1 times (completely unrolled)
+         657, Loop not fused: complex flow graph
+              Loop not vectorized: data dependency
+              Loop unrolled 8 times
+         675, Outer loop unrolled 1 times (completely unrolled)
+         677, Loop not vectorized/parallelized: not countable
+         693, Loop not vectorized/parallelized: contains call
+    189, Loop not fused: function call before adjacent loop
+    191, Loop not vectorized: unprofitable for target
+         Loop unrolled 4 times
+    239, Loop not vectorized/parallelized: contains call
+    246, #omp target teams num_teams(teams) thread_limit(threads)
+        233, Generating map(tofrom:obstacles[:Nx*Ny],speeds0[:Nx*Ny],speeds1[:Nx*Ny],speeds2[:Nx*Ny],speeds3[:Nx*Ny],speeds4[:Nx*Ny],speeds5[:Nx*Ny],speeds6[:Nx*Ny],speeds7[:Nx*Ny],speeds8[:Nx*Ny]) 
+             Generating map(alloc:tmp_speeds0[:Nx*Ny],tmp_speeds1[:Nx*Ny],tmp_speeds2[:Nx*Ny],tmp_speeds3[:Nx*Ny],tmp_speeds4[:Nx*Ny],tmp_speeds5[:Nx*Ny],tmp_speeds6[:Nx*Ny],tmp_speeds7[:Nx*Ny]) 
+             Generating map(from:tot_up[:MaxIters*(Ny*(Nx>>7))],tot_cellsp[:MaxIters*(Ny*(Nx>>7))]) 
+             Generating map(alloc:tmp_speeds8[:Nx*Ny]) 
+        246, Generating "nvkernel_main_F1L246_2" GPU kernel
+        250, #omp parallel
+          401, Barrier
+        397, Team private (local_sum2,local_sum) located in CUDA shared memory
+    410, Generated vector simd code for the loop containing reductions
+         Mixed precision reduction; consider promoting accmulator
+    467, Loop not fused: different loop trip count
+    470, Generated vector simd code for the loop containing reductions
+    479, Loop not fused: function call before adjacent loop
+    481, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+         739, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+         657, Loop nest collapsed
+         677, Loop nest collapsed
+         779, Loop not vectorized/parallelized: contains call
+         792, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+         833, Loop not vectorized/parallelized: contains call
+av_velocity(t_param, t_speed*, int*):
+    535, Generated vector simd code for the loop containing reductions
+initialise(char const*, char const*, t_param*, t_speed**, t_speed**, int**, float**):
+    657, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    677, Recognized memory zero idiom
+    693, Loop not vectorized/parallelized: contains call
+calc_reynolds(t_param, t_speed*, int*):
+         535, Generated vector simd code for the loop containing reductions
+total_density(t_param, t_speed*):
+    750, Generated vector simd code for the loop containing reductions
+write_values(t_param, t_speed*, int*, float*):
+    779, Loop not vectorized/parallelized: contains call
+    792, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+    833, Loop not vectorized/parallelized: contains call
+nvc++  -std=c++14 -Wall -I../include -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

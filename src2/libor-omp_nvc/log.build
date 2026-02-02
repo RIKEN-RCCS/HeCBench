@@ -1,0 +1,120 @@
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+"main.cpp", line 306: warning: reference is to variable "i" (declared at line 253) -- under old for-init scoping rules it would have been variable "i" (declared at line 276) [hidden_by_old_for_init]
+    for (i=0; i<NPATH; i++) v += h_v[i];
+         ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"main.cpp", line 306: warning: reference is to variable "i" (declared at line 253) -- under old for-init scoping rules it would have been variable "i" (declared at line 276) [hidden_by_old_for_init]
+    for (i=0; i<NPATH; i++) v += h_v[i];
+              ^
+
+"main.cpp", line 306: warning: reference is to variable "i" (declared at line 253) -- under old for-init scoping rules it would have been variable "i" (declared at line 276) [hidden_by_old_for_init]
+    for (i=0; i<NPATH; i++) v += h_v[i];
+                       ^
+
+"main.cpp", line 306: warning: reference is to variable "i" (declared at line 253) -- under old for-init scoping rules it would have been variable "i" (declared at line 276) [hidden_by_old_for_init]
+    for (i=0; i<NPATH; i++) v += h_v[i];
+                                     ^
+
+"main.cpp", line 258: warning: variable "ok" was set but never used [set_but_not_used]
+    bool    ok = true;
+            ^
+
+path_calc(float*, float const*, float const*, float, int, int):
+     48, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+     56, Loop not vectorized: recurrence
+path_calc_b1(float*, float const*, float*, float const*, float, int, int):
+     77, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+     81, Recognized memory copy idiom
+     87, Loop not vectorized: recurrence
+path_calc_b2(float*, float const*, float const*, float const*, float, int, int):
+    109, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+    115, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+portfolio_b(float*, float*, float const*, int const*, float const*, float, int, int, int):
+    137, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+    144, Loop not fused: different loop trip count
+         Loop not vectorized: recurrence
+         Loop unrolled 4 times
+    154, Loop not fused: different loop trip count
+         Generated vector simd code for the loop
+    159, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+    169, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+    182, Loop not fused: dependence chain to sibling loop
+         Loop not vectorized: unknown
+         Loop unrolled 4 times
+    186, Loop not fused: different loop trip count
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 4 times
+    190, Generated vector simd code for the loop
+portfolio(float*, float const*, int const*, float const*, float, int, int, int):
+    207, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+    214, Loop not fused: different loop trip count
+         Loop not vectorized: recurrence
+         Loop unrolled 4 times
+    223, Loop not fused: different loop trip count
+         Generated vector simd code for the loop containing reductions
+    233, Loop not vectorized: unknown
+         Loop unrolled 4 times
+main:
+    260, Recognized memory set idiom
+    276, #omp target teams distribute parallel for num_teams(1500) thread_limit(64)
+        276, Generating "nvkernel_main_F1L276_2" GPU kernel
+        278, Loop parallelized across teams and threads(128), schedule(static)
+    276, Generating implicit map(tofrom:h_lambda[:],h_swaprates[:],h_maturities[:]) 
+         Loop not vectorized/parallelized: contains call
+    286, Generated vector simd code for the loop
+          56, Loop not vectorized: recurrence
+         214, Loop not vectorized: recurrence
+              Loop unrolled 4 times
+         223, Generated vector simd code for the loop containing reductions
+         233, Loop not vectorized: unknown
+              Loop unrolled 4 times
+         278, Loop not vectorized/parallelized: too deeply nested
+    305, Generating update from(h_v[:96000])
+    306, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+    319, #omp target teams distribute parallel for num_teams(1500) thread_limit(64)
+        272, Generating map(to:h_lambda[:],h_maturities[:]) 
+             Generating map(alloc:h_Lb[:96000],h_v[:96000]) 
+             Generating map(to:h_swaprates[:]) 
+        319, Generating "nvkernel_main_F1L319_4" GPU kernel
+        321, Loop parallelized across teams and threads(128), schedule(static)
+    319, Generating implicit map(tofrom:h_lambda[:],h_swaprates[:],h_maturities[:]) 
+         Loop not vectorized/parallelized: contains call
+    321, Loop not vectorized/parallelized: too deeply nested
+    332, Generated vector simd code for the loop
+          81, Recognized memory copy idiom
+          87, Loop not vectorized: recurrence
+         144, Loop not vectorized: recurrence
+              Loop unrolled 4 times
+         154, Generated vector simd code for the loop
+         159, Loop not vectorized: data dependency
+         169, Loop not vectorized: data dependency
+         182, Loop not vectorized: unknown
+              Loop unrolled 4 times
+         186, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+         190, Generated vector simd code for the loop
+         115, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+    353, Generating update from(h_v[:96000],h_Lb[:96000])
+    356, Loop not fused: function call before adjacent loop
+         2 loops fused
+         Generated vector simd code for the loop containing reductions
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     23, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::sqrt(float):
+                        464, Generating implicit omp declare target routine
+                             Generating NVIDIA GPU code
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

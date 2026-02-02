@@ -1,0 +1,22 @@
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+sum(int, int, float const*, int, unsigned int*, float volatile*):
+     16, #omp target teams num_teams(teams) thread_limit(blocks)
+         16, Generating "nvkernel__Z3sumiiPKfiPjPVf_F1L16_2" GPU kernel
+         20, #omp parallel
+           29, Barrier
+           36, Barrier
+           61, Barrier
+           68, Barrier
+           75, Barrier
+         25, Team private (partialSum,isLastBlockDone) located in CUDA shared memory
+     70, Loop not vectorized/parallelized: not countable
+main:
+    113, Recognized memory set idiom
+    117, Generating map(to:h_array[:N],h_count[:1]) 
+         Generating map(alloc:h_result[:grids]) 
+    118, Loop not vectorized/parallelized: potential early exits
+    131, Generating update from(h_result[:1])
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

@@ -1,0 +1,280 @@
+monthLengthKernelGpu(int, bool):
+     10, include "bondsKernelsGpu.cpp"
+          10, Generating acc routine seq
+              Generating NVIDIA GPU code
+monthOffsetKernelGpu(int, bool):
+     10, include "bondsKernelsGpu.cpp"
+          45, Generating acc routine seq
+              Generating NVIDIA GPU code
+yearOffsetKernelGpu(int):
+     10, include "bondsKernelsGpu.cpp"
+          82, Generating acc routine seq
+              Generating NVIDIA GPU code
+isLeapKernelGpu(int):
+     10, include "bondsKernelsGpu.cpp"
+         222, Generating acc routine seq
+              Generating NVIDIA GPU code
+intializeDateKernelGpu(int, int, int):
+     10, include "bondsKernelsGpu.cpp"
+         353, Generating acc routine seq
+              Generating NVIDIA GPU code
+yearFractionGpu(bondsDateStruct, bondsDateStruct, int):
+     10, include "bondsKernelsGpu.cpp"
+         372, Generating acc routine seq
+              Generating NVIDIA GPU code
+dayCountGpu(bondsDateStruct, bondsDateStruct, int):
+     10, include "bondsKernelsGpu.cpp"
+         379, Generating acc routine seq
+              Generating NVIDIA GPU code
+couponNotionalGpu():
+     10, include "bondsKernelsGpu.cpp"
+         402, Generating acc routine seq
+              Generating NVIDIA GPU code
+bondNotionalGpu():
+     10, include "bondsKernelsGpu.cpp"
+         408, Generating acc routine seq
+              Generating NVIDIA GPU code
+fixedRateCouponNominalGpu():
+     10, include "bondsKernelsGpu.cpp"
+         415, Generating acc routine seq
+              Generating NVIDIA GPU code
+eventHasOccurredGpu(bondsDateStruct, bondsDateStruct):
+     10, include "bondsKernelsGpu.cpp"
+         421, Generating acc routine seq
+              Generating NVIDIA GPU code
+cashFlowHasOccurredGpu(bondsDateStruct, bondsDateStruct):
+     10, include "bondsKernelsGpu.cpp"
+         428, Generating acc routine seq
+              Generating NVIDIA GPU code
+advanceDateGpu(bondsDateStruct, int):
+     10, include "bondsKernelsGpu.cpp"
+         435, Generating acc routine seq
+              Generating NVIDIA GPU code
+getDirtyPriceGpu(bondStruct*, bondsYieldTermStruct*, bondsDateStruct*, int, cashFlowsStruct, int):
+     10, include "bondsKernelsGpu.cpp"
+         467, Generating acc routine seq
+              Generating NVIDIA GPU code
+getAccruedAmountGpu(bondsDateStruct*, bondsDateStruct, int, cashFlowsStruct, int):
+     10, include "bondsKernelsGpu.cpp"
+         483, Generating acc routine seq
+              Generating NVIDIA GPU code
+         507, Loop not vectorized/parallelized: potential early exits
+         511, Invariant if transformation
+              Loop not fused: no successor loop
+bondFunctionsAccruedAmountGpu(bondsDateStruct*, bondsDateStruct, int, cashFlowsStruct, int):
+     10, include "bondsKernelsGpu.cpp"
+         495, Generating acc routine seq
+              Generating NVIDIA GPU code
+         507, Loop not vectorized/parallelized: potential early exits
+         511, Invariant if transformation
+              Loop not fused: no successor loop
+cashFlowsAccruedAmountGpu(cashFlowsStruct, bool, bondsDateStruct, int, bondsDateStruct*, int):
+     10, include "bondsKernelsGpu.cpp"
+         506, Generating acc routine seq
+              Generating NVIDIA GPU code
+         511, Invariant if transformation
+         511, Invariant if transformation
+              Loop not fused: no successor loop
+         658, Loop not vectorized/parallelized: potential early exits
+fixedRateCouponAccruedAmountGpu(cashFlowsStruct, int, bondsDateStruct, bondsDateStruct*, int):
+     10, include "bondsKernelsGpu.cpp"
+         523, Generating acc routine seq
+              Generating NVIDIA GPU code
+cashFlowsNpvGpu(cashFlowsStruct, bondsYieldTermStruct, bool, bondsDateStruct, bondsDateStruct, int):
+     10, include "bondsKernelsGpu.cpp"
+         550, Generating acc routine seq
+              Generating NVIDIA GPU code
+         557, Loop not vectorized/parallelized: contains structure move
+bondsYieldTermStructureDiscountGpu(bondsYieldTermStruct, bondsDateStruct):
+     10, include "bondsKernelsGpu.cpp"
+         569, Generating acc routine seq
+              Generating NVIDIA GPU code
+flatForwardDiscountImplGpu(intRateStruct, float):
+     10, include "bondsKernelsGpu.cpp"
+         579, Generating acc routine seq
+              Generating NVIDIA GPU code
+interestRateDiscountFactorGpu(intRateStruct, float):
+     10, include "bondsKernelsGpu.cpp"
+         586, Generating acc routine seq
+              Generating NVIDIA GPU code
+interestRateCompoundFactorGpuTwoArgs(intRateStruct, float):
+     10, include "bondsKernelsGpu.cpp"
+         593, Generating acc routine seq
+              Generating NVIDIA GPU code
+fixedRateCouponAmountGpu(cashFlowsStruct, int):
+     10, include "bondsKernelsGpu.cpp"
+         606, Generating acc routine seq
+              Generating NVIDIA GPU code
+interestRateCompoundFactorGpu(intRateStruct, bondsDateStruct, bondsDateStruct, int):
+     10, include "bondsKernelsGpu.cpp"
+         621, Generating acc routine seq
+              Generating NVIDIA GPU code
+interestRateImpliedRateGpu(float, int, float, float):
+     10, include "bondsKernelsGpu.cpp"
+         629, Generating acc routine seq
+              Generating NVIDIA GPU code
+cashFlowsNextCashFlowNumGpu(cashFlowsStruct, bondsDateStruct, int):
+     10, include "bondsKernelsGpu.cpp"
+         656, Generating acc routine seq
+              Generating NVIDIA GPU code
+         658, Loop not vectorized/parallelized: potential early exits
+getBondYieldGpu(float, int, int, float, bondsDateStruct, float, int, bondStruct*, bondsDateStruct*, int, cashFlowsStruct, int):
+     10, include "bondsKernelsGpu.cpp"
+         679, Generating acc routine seq
+              Generating NVIDIA GPU code
+getBondFunctionsYieldGpu(float, int, int, float, bondsDateStruct, float, int, bondsDateStruct*, int, cashFlowsStruct, int):
+     10, include "bondsKernelsGpu.cpp"
+         706, Generating acc routine seq
+              Generating NVIDIA GPU code
+         496, Invariant if transformation
+              Loop not fused: function call before adjacent loop
+              Loop not fused: no successor loop
+              Loop not vectorized/parallelized: potential early exits
+getCashFlowsYieldGpu(cashFlowsStruct, float, int, int, float, bool, bondsDateStruct, bondsDateStruct, int, float, int, float):
+     10, include "bondsKernelsGpu.cpp"
+         730, Generating acc routine seq
+              Generating NVIDIA GPU code
+solverSolveGpu(solverStruct, irrFinderStruct, float, float, float, cashFlowsStruct, int):
+     10, include "bondsKernelsGpu.cpp"
+         756, Generating acc routine seq
+              Generating NVIDIA GPU code
+         786, Loop not vectorized/parallelized: potential early exits
+         956, Loop not vectorized/parallelized: potential early exits
+cashFlowsNpvYieldGpu(cashFlowsStruct, intRateStruct, bool, bondsDateStruct, bondsDateStruct, int):
+     10, include "bondsKernelsGpu.cpp"
+         834, Generating acc routine seq
+              Generating NVIDIA GPU code
+         841, Loop not vectorized/parallelized: contains call
+fOpGpu(irrFinderStruct, float, cashFlowsStruct, int):
+     10, include "bondsKernelsGpu.cpp"
+         873, Generating acc routine seq
+              Generating NVIDIA GPU code
+fDerivativeGpu(irrFinderStruct, float, cashFlowsStruct, int):
+     10, include "bondsKernelsGpu.cpp"
+         894, Generating acc routine seq
+              Generating NVIDIA GPU code
+closeGpu(float, float):
+     10, include "bondsKernelsGpu.cpp"
+         909, Generating acc routine seq
+              Generating NVIDIA GPU code
+closeGpuThreeArgs(float, float, int):
+     10, include "bondsKernelsGpu.cpp"
+         916, Generating acc routine seq
+              Generating NVIDIA GPU code
+solveImplGpu(solverStruct, irrFinderStruct, float, cashFlowsStruct, int):
+     10, include "bondsKernelsGpu.cpp"
+         927, Generating acc routine seq
+              Generating NVIDIA GPU code
+         956, Loop not vectorized/parallelized: potential early exits
+modifiedDurationGpu(cashFlowsStruct, intRateStruct, bool, bondsDateStruct, bondsDateStruct, int):
+     10, include "bondsKernelsGpu.cpp"
+         997, Generating acc routine seq
+              Generating NVIDIA GPU code
+getBondsResultsGpu(inArgsStruct, resultsStruct, int):
+     10, include "bondsKernelsGpu.cpp"
+        1066, Generating copyout(dirtyPrice[:numBonds]) [if not already present]
+              Generating copyin(maturityDate[:numBonds],repoCurve[:numBonds]) [if not already present]
+              Generating copyout(cleanPrice[:numBonds]) [if not already present]
+              Generating copyin(dummyStrike[:numBonds]) [if not already present]
+              Generating copyout(accruedAmountCurrDate[:numBonds],bondForwardVal[:numBonds]) [if not already present]
+              Generating copyin(discountCurve[:numBonds],currDate[:numBonds],bond[:numBonds],bondCleanPrice[:numBonds]) [if not already present]
+        1069, Generating implicit firstprivate(numBonds)
+              Generating NVIDIA GPU code
+             488, #pragma acc loop seq
+                  Generating implicit reduction(+:.inl_.inl_result_285_3076)
+            1072, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+            1080, #pragma acc loop seq
+            1104, #pragma acc loop seq
+        1069, Local memory used for .inl_.inl_.inl_endDate_252_293_3082,.inl_currentDate_3048,currStartDate,currEndDate,currCashflowDate,.inl_settlement_3034,cashFlows,cashLegs
+        1080, Loop not vectorized/parallelized: contains call
+        1082, Accelerator restriction: induction variable live-out from loop: numCashFlows
+        1104, Loop carried scalar dependence for currStartDate.month at line 1108
+              Loop carried scalar dependence for currStartDate.day at line 1108
+              Loop carried scalar dependence for currStartDate.year at line 1108
+              Loop carried scalar dependence for currStartDate.dateSerialNum at line 1108
+              Loop not vectorized/parallelized: contains call
+         488, Accelerator restriction: induction variable live-out from loop: .inl_.inl_.inl_i_241_281_3072
+              Loop is parallelizable
+              Invariant if transformation
+              Loop not fused: no successor loop
+              Loop not vectorized/parallelized: potential early exits
+getNumCashFlowsCpu(inArgsStruct, int):
+     11, include "bondsKernelsCpu.cpp"
+         295, Loop not vectorized/parallelized: contains call
+getBondsResultsCpu(inArgsStruct, resultsStruct, int):
+     11, include "bondsKernelsCpu.cpp"
+         324, Loop not vectorized/parallelized: contains call
+         295, Loop not vectorized/parallelized: contains call
+getAccruedAmountCpu(inArgsStruct, bondsDateStruct, int, cashFlowsStruct, int):
+     11, include "bondsKernelsCpu.cpp"
+discountingBondEngineCalculateSettlementValueCpu(inArgsStruct, int, cashFlowsStruct, int):
+     11, include "bondsKernelsCpu.cpp"
+bondAccruedAmountCpu(inArgsStruct, bondsDateStruct, int, cashFlowsStruct, int):
+         407, Invariant if transformation
+              Loop not fused: no successor loop
+              Loop not vectorized/parallelized: potential early exits
+bondFunctionsAccruedAmountCpu(inArgsStruct, bondsDateStruct, int, cashFlowsStruct, int):
+     11, include "bondsKernelsCpu.cpp"
+         420, Loop not vectorized/parallelized: potential early exits
+         426, Invariant if transformation
+              Loop not fused: no successor loop
+cashFlowsAccruedAmountCpu(cashFlowsStruct, bool, bondsDateStruct, int, inArgsStruct, int):
+     11, include "bondsKernelsCpu.cpp"
+         426, Invariant if transformation
+              Loop not fused: no successor loop
+         606, Loop not vectorized/parallelized: potential early exits
+cashFlowsNpvCpu(cashFlowsStruct, bondsYieldTermStruct, bool, bondsDateStruct, bondsDateStruct, int):
+     11, include "bondsKernelsCpu.cpp"
+         468, Loop not vectorized/parallelized: contains structure move
+cashFlowsNextCashFlowCpu(cashFlowsStruct, bondsDateStruct, int):
+     11, include "bondsKernelsCpu.cpp"
+         591, Loop not vectorized/parallelized: potential early exits
+cashFlowsNextCashFlowNumCpu(cashFlowsStruct, bondsDateStruct, int):
+     11, include "bondsKernelsCpu.cpp"
+         606, Loop not vectorized/parallelized: potential early exits
+getBondYieldCpu(float, int, int, float, bondsDateStruct, float, int, inArgsStruct, int, cashFlowsStruct, int):
+     11, include "bondsKernelsCpu.cpp"
+getBondFunctionsYieldCpu(float, int, int, float, bondsDateStruct, float, int, inArgsStruct, int, cashFlowsStruct, int):
+         407, Invariant if transformation
+              Loop not fused: function call before adjacent loop
+              Loop not fused: no successor loop
+              Loop not vectorized/parallelized: potential early exits
+solverSolveCpu(solverStruct, irrFinderStruct, float, float, float, cashFlowsStruct, int):
+     11, include "bondsKernelsCpu.cpp"
+         728, Loop not vectorized/parallelized: potential early exits
+         910, Loop not vectorized/parallelized: potential early exits
+cashFlowsNpvYieldCpu(cashFlowsStruct, intRateStruct, bool, bondsDateStruct, bondsDateStruct, int):
+     11, include "bondsKernelsCpu.cpp"
+         782, Loop not vectorized/parallelized: contains call
+solveImplCpu(solverStruct, irrFinderStruct, float, cashFlowsStruct, int):
+     11, include "bondsKernelsCpu.cpp"
+         910, Loop not vectorized/parallelized: potential early exits
+runBoundsEngine(int):
+    228, Loop not vectorized/parallelized: contains structure move
+    314, Loop not vectorized/parallelized: contains call
+    326, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+    340, Loop not vectorized/parallelized: potential early exits
+    350, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+main:
+         228, Loop not vectorized/parallelized: contains structure move
+         314, Loop not vectorized/parallelized: contains call
+         326, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+         340, Loop not vectorized/parallelized: potential early exits
+         350, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+std::exp(float):
+                             223, Generating implicit omp declare target routine
+                                  Generating NVIDIA GPU code
+     11, include "bondsKernelsCpu.cpp"
+std::fabs(float):
+                             242, Generating implicit omp declare target routine
+                                  Generating NVIDIA GPU code
+     11, include "bondsKernelsCpu.cpp"
+std::pow(float, float):
+                             389, Generating implicit omp declare target routine
+                                  Generating NVIDIA GPU code
+     11, include "bondsKernelsCpu.cpp"
+timeout was set to  600

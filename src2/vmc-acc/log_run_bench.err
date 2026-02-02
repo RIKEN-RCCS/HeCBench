@@ -1,0 +1,85 @@
+"vmc.cpp", line 75: error: invalid text in pragma
+    #pragma acc parallel loop thread_limit(NTHR_PER_BLK)
+                              ^
+
+"vmc.cpp", line 75: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop thread_limit(NTHR_PER_BLK)
+                                          ^
+
+"vmc.cpp", line 124: error: invalid text in pragma
+    #pragma acc parallel loop thread_limit(NTHR_PER_BLK)
+                              ^
+
+"vmc.cpp", line 124: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop thread_limit(NTHR_PER_BLK)
+                                          ^
+
+"vmc.cpp", line 133: error: invalid text in pragma
+    #pragma acc parallel loop thread_limit(NTHR_PER_BLK)
+                              ^
+
+"vmc.cpp", line 133: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop thread_limit(NTHR_PER_BLK)
+                                          ^
+
+"vmc.cpp", line 147: error: invalid text in pragma
+    #pragma acc parallel loop thread_limit(NTHR_PER_BLK)
+                              ^
+
+"vmc.cpp", line 147: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop thread_limit(NTHR_PER_BLK)
+                                          ^
+
+"vmc.cpp", line 159: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(teams) thread_limit(threads)
+                         ^
+
+"vmc.cpp", line 159: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(teams) thread_limit(threads)
+                               ^
+
+"vmc.cpp", line 164: error: identifier "omp_get_vector" is undefined
+         int blockDim = omp_get_vector();
+                        ^
+
+"vmc.cpp", line 165: error: identifier "omp_get_thread_num" is undefined
+         int tid = omp_get_thread_num();
+                   ^
+
+"vmc.cpp", line 166: error: identifier "omp_get_team_num" is undefined
+         int gid = omp_get_team_num();
+                   ^
+
+"vmc.cpp", line 167: error: identifier "omp_get_gang" is undefined
+         int nthread =  blockDim * omp_get_gang(); // blockDim.x*gridDim.x;
+                                   ^
+
+"vmc.cpp", line 158: warning: variable "teams" was declared but never referenced [declared_but_not_referenced]
+    const int teams = n / threads;
+              ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"vmc.cpp", line 211: error: invalid text in pragma
+    #pragma acc data alloc:x1[0:Npoint],\
+                     ^
+
+"vmc.cpp", line 211: error: extra text after expected end of preprocessing directive
+    #pragma acc data alloc:x1[0:Npoint],\
+                          ^
+
+"vmc.cpp", line 256: error: invalid text in pragma
+        #pragma acc update from (statsum[0:4])
+                           ^
+
+"vmc.cpp", line 256: error: OpenACC data clause expected
+        #pragma acc update from (statsum[0:4])
+                           ^
+
+"vmc.cpp", line 256: error: extra text after expected end of preprocessing directive
+        #pragma acc update from (statsum[0:4])
+                                ^
+
+19 errors detected in the compilation of "vmc.cpp".
+make: *** [Makefile.NVD:57: vmc.o] Error 2
+timeout was set to  600

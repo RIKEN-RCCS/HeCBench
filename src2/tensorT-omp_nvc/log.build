@@ -1,0 +1,26 @@
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+verify(double*, double*):
+     26, Loop not vectorized/parallelized: potential early exits
+main:
+     47, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+     68, Loop not vectorized/parallelized: contains call
+     71, #omp target teams num_teams(34200) thread_limit(256)
+         65, Generating map(from:output[:200514600]) 
+             Generating map(to:shape_input[:],shape_input_r[:],shape_output[:],shape_output_r[:],stride_output_local[:],stride_output_global[:],stride_input[:],input[:200514600]) 
+         71, Generating "nvkernel_main_F1L71_2" GPU kernel
+         74, #omp parallel
+           87, Barrier
+          101, Barrier
+        102, Team private (tile) located in CUDA global memory
+     71, Generating implicit map(tofrom:shape_input[:],shape_output_r[:],shape_output[:],shape_input_r[:],stride_input[:],stride_output_local[:],stride_output_global[:]) 
+     77, Loop unrolled 3 times (completely unrolled)
+     83, Loop not vectorized/parallelized: contains call
+     89, Loop not vectorized/parallelized: contains call
+     92, Loop unrolled 3 times (completely unrolled)
+          26, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      3, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

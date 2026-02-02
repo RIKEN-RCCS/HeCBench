@@ -1,0 +1,7 @@
+/usr/bin/ld: cannot find crtbegin.o: No such file or directory
+/usr/bin/ld: cannot find -lstdc++
+/usr/bin/ld: cannot find -lgcc_s
+/usr/bin/ld: cannot find -lgcc
+clang++: error: linker command failed with exit code 1 (use -v to see invocation)
+make: *** [Makefile.NVD:71: main] Error 1
+timeout was set to  600

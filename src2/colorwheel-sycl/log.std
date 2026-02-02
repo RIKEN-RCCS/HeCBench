@@ -1,0 +1,3 @@
+Start execution on a device
+Average kernel execution time : 123.963066 (ms)
+Maximum error between host and device results: 1

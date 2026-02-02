@@ -1,0 +1,8 @@
+nvc++ -acc  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+nvc++ -acc  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 -c shrUtils.cpp -o shrUtils.o
+nvc++ -acc  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 main.o shrUtils.o -o main 
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "time -p ( ./main 3200000000 1000 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 1 73806 73805

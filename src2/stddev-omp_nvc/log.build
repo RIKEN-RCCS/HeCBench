@@ -1,0 +1,40 @@
+nvc++  -Wall -I../stddev-cuda -O3 -Minfo -mp=gpu -gpu=cc90,fastmath -c main.cpp -o main.o
+"main.cpp", line 48: warning: variable "Teams" was declared but never referenced [declared_but_not_referenced]
+    static const int Teams = TeamX * TeamY;
+                     ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+main:
+    116, Loop nest collapsed
+         Loop not vectorized/parallelized: contains call
+    126, Generating map(to:data[:inputSize]) 
+         Generating map(from:std[:outputSize]) 
+    132, Loop not vectorized/parallelized: contains call
+           6, Generated vector simd code for the loop containing reductions
+    144, Loop not vectorized/parallelized: potential early exits
+void stddev<float, int>(float*, float const*, int, int, bool):
+     48, #omp target teams distribute parallel for thread_limit(256)
+         48, Generating "nvkernel__Z6stddevIfiEvPT_PKS0_T0_S4_b_F1L48_2" GPU kernel
+         52, Loop parallelized across teams and threads(128), schedule(static)
+     52, Loop not vectorized/parallelized: not countable
+     56, #omp target teams num_teams(_ZZ6stddevIfiEvPT_PKS0_T0_S4_bE5Teams) thread_limit(256)
+         56, Generating "nvkernel__Z6stddevIfiEvPT_PKS0_T0_S4_b_F1L56_4" GPU kernel
+         59, #omp parallel
+           77, Barrier
+           82, Barrier
+         62, Team private (sstd) located in CUDA shared memory
+     72, Invariant if transformation
+         Loop not vectorized/parallelized: not countable
+     91, #omp target teams distribute parallel for thread_limit(256)
+         91, Generating "nvkernel__Z6stddevIfiEvPT_PKS0_T0_S4_b_F1L91_6" GPU kernel
+         93, Loop parallelized across teams and threads(128), schedule(static)
+     93, Loop not vectorized/parallelized: not countable
+void stddev_ref<float, int>(float*, float const*, int, int, bool):
+     22, include "reference.h"
+           6, Generated vector simd code for the loop containing reductions
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     20, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+     22, include "reference.h"
+nvc++  -Wall -I../stddev-cuda -O3 -Minfo -mp=gpu -gpu=cc90,fastmath main.o -o main 

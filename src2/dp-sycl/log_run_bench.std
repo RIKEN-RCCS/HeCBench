@@ -1,0 +1,1 @@
+clang++  -std=c++17 -Wall -fsycl           -I ./oneDPL/include -I ./oneTBB/include           --gcc-toolchain=  -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -qmkl=parallel -O3 -DUSE_GPU -c main.cpp -o main.o

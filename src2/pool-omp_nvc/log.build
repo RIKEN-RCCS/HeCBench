@@ -1,0 +1,42 @@
+nvc++  -std=c++14 -Wall -I../pool-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+main:
+     25, Loop not fused: no successor loop
+     60, Loop not vectorized: data dependency
+    160, Loop not vectorized/parallelized: contains call
+    165, Loop not vectorized/parallelized: contains call
+    174, Generating map(from:input_grad[:input_numel]) 
+         Generating map(to:output_grad[:output_numel],output[:output_numel],input[:input_numel]) 
+    177, Loop not vectorized/parallelized: contains call
+          25, Invariant if transformation
+    198, Loop not vectorized/parallelized: potential early exits
+void KernelPool2DGrad<AvgPoolGrad<float>, float>(int, float const*, float const*, float const*, int, int, int, int, int, int, int, int, int, int, int, AvgPoolGrad<float>, bool, float*, bool):
+     50, #omp target teams distribute parallel for thread_limit(256)
+         50, Generating "nvkernel__Z16KernelPool2DGradI11AvgPoolGradIfEfEviPKT0_S4_S4_iiiiiiiiiiiT_bPS2_b_F1L50_2" GPU kernel
+         52, Loop parallelized across teams and threads(128), schedule(static)
+     50, Generating implicit map(tofrom:pool_process) 
+     52, Invariant if transformation
+         Loop not vectorized/parallelized: not countable
+     90, Loop not vectorized: data dependency
+void reference<AvgPoolGrad<float>, float>(int, float const*, float const*, float const*, int, int, int, int, int, int, int, int, int, int, int, AvgPoolGrad<float>, bool, float*, bool):
+     27, include "reference.h"
+          25, Invariant if transformation
+              Loop not fused: no successor loop
+          60, Loop not vectorized: data dependency
+AvgPoolGrad<float>::compute(float const&, float const&, float const&, float, float*):
+     14, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string(char const*, std::allocator<char> const&):
+     27, include "reference.h"
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+     27, include "reference.h"
+int const& std::min<int>(int const&, int const&):
+                   231, Generating implicit omp declare target routine
+                        Generating NVIDIA GPU code
+     27, include "reference.h"
+int const& std::max<int>(int const&, int const&):
+                   255, Generating implicit omp declare target routine
+                        Generating NVIDIA GPU code
+     27, include "reference.h"
+nvc++  -std=c++14 -Wall -I../pool-cuda -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

@@ -1,0 +1,128 @@
+"main.cpp", line 58: error: invalid text in pragma
+    #pragma acc data alloc: dC[0:2*size + PADDING], \
+                     ^
+          detected during instantiation of "void mergeAllTypes<blocks,threads>(uint64_t, uint32_t) [with blocks=112U, threads=128U]" at line 146
+
+"main.cpp", line 58: error: extra text after expected end of preprocessing directive
+    #pragma acc data alloc: dC[0:2*size + PADDING], \
+                          ^
+          detected during instantiation of "void mergeAllTypes<blocks,threads>(uint64_t, uint32_t) [with blocks=112U, threads=128U]" at line 146
+
+"main.cpp", line 81: error: invalid text in pragma
+        #pragma acc update to (dA[0:size + PADDING])
+                           ^
+          detected during instantiation of "void mergeAllTypes<blocks,threads>(uint64_t, uint32_t) [with blocks=112U, threads=128U]" at line 146
+
+"main.cpp", line 81: error: OpenACC data clause expected
+        #pragma acc update to (dA[0:size + PADDING])
+                           ^
+          detected during instantiation of "void mergeAllTypes<blocks,threads>(uint64_t, uint32_t) [with blocks=112U, threads=128U]" at line 146
+
+"main.cpp", line 81: error: extra text after expected end of preprocessing directive
+        #pragma acc update to (dA[0:size + PADDING])
+                              ^
+          detected during instantiation of "void mergeAllTypes<blocks,threads>(uint64_t, uint32_t) [with blocks=112U, threads=128U]" at line 146
+
+"main.cpp", line 82: error: invalid text in pragma
+        #pragma acc update to (dB[0:size + PADDING])
+                           ^
+          detected during instantiation of "void mergeAllTypes<blocks,threads>(uint64_t, uint32_t) [with blocks=112U, threads=128U]" at line 146
+
+"main.cpp", line 82: error: OpenACC data clause expected
+        #pragma acc update to (dB[0:size + PADDING])
+                           ^
+          detected during instantiation of "void mergeAllTypes<blocks,threads>(uint64_t, uint32_t) [with blocks=112U, threads=128U]" at line 146
+
+"main.cpp", line 82: error: extra text after expected end of preprocessing directive
+        #pragma acc update to (dB[0:size + PADDING])
+                              ^
+          detected during instantiation of "void mergeAllTypes<blocks,threads>(uint64_t, uint32_t) [with blocks=112U, threads=128U]" at line 146
+
+"main.cpp", line 98: error: invalid text in pragma
+        #pragma acc update from (dC[0:size])
+                           ^
+          detected during instantiation of "void mergeAllTypes<blocks,threads>(uint64_t, uint32_t) [with blocks=112U, threads=128U]" at line 146
+
+"main.cpp", line 98: error: OpenACC data clause expected
+        #pragma acc update from (dC[0:size])
+                           ^
+          detected during instantiation of "void mergeAllTypes<blocks,threads>(uint64_t, uint32_t) [with blocks=112U, threads=128U]" at line 146
+
+"main.cpp", line 98: error: extra text after expected end of preprocessing directive
+        #pragma acc update from (dC[0:size])
+                                ^
+          detected during instantiation of "void mergeAllTypes<blocks,threads>(uint64_t, uint32_t) [with blocks=112U, threads=128U]" at line 146
+
+"kernels.h", line 68: error: invalid text in pragma
+    #pragma acc parallel teams num_teams (blocks) vector_length(32)
+                         ^
+          detected during:
+            instantiation of "void mergeType<vec_t,blocks,threads,timing>(uint64_t, uint32_t) [with vec_t=uint32_t, blocks=112U, threads=128U, timing=false]" at line 119 of "main.cpp"
+            instantiation of "void mergeAllTypes<blocks,threads>(uint64_t, uint32_t) [with blocks=112U, threads=128U]" at line 146 of "main.cpp"
+
+"kernels.h", line 68: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams (blocks) vector_length(32)
+                               ^
+          detected during:
+            instantiation of "void mergeType<vec_t,blocks,threads,timing>(uint64_t, uint32_t) [with vec_t=uint32_t, blocks=112U, threads=128U, timing=false]" at line 119 of "main.cpp"
+            instantiation of "void mergeAllTypes<blocks,threads>(uint64_t, uint32_t) [with blocks=112U, threads=128U]" at line 146 of "main.cpp"
+
+"kernels.h", line 78: error: identifier "omp_get_thread_num" is undefined
+        int threadIdx_x = omp_get_thread_num();
+                          ^
+          detected during:
+            instantiation of "void mergeType<vec_t,blocks,threads,timing>(uint64_t, uint32_t) [with vec_t=uint32_t, blocks=112U, threads=128U, timing=false]" at line 119 of "main.cpp"
+            instantiation of "void mergeAllTypes<blocks,threads>(uint64_t, uint32_t) [with blocks=112U, threads=128U]" at line 146 of "main.cpp"
+
+"kernels.h", line 79: error: identifier "omp_get_team_num" is undefined
+        int blockIdx_x = omp_get_team_num();
+                         ^
+          detected during:
+            instantiation of "void mergeType<vec_t,blocks,threads,timing>(uint64_t, uint32_t) [with vec_t=uint32_t, blocks=112U, threads=128U, timing=false]" at line 119 of "main.cpp"
+            instantiation of "void mergeAllTypes<blocks,threads>(uint64_t, uint32_t) [with blocks=112U, threads=128U]" at line 146 of "main.cpp"
+
+"kernels.h", line 80: error: identifier "omp_get_gang" is undefined
+        int gridDim_x = omp_get_gang();
+                        ^
+          detected during:
+            instantiation of "void mergeType<vec_t,blocks,threads,timing>(uint64_t, uint32_t) [with vec_t=uint32_t, blocks=112U, threads=128U, timing=false]" at line 119 of "main.cpp"
+            instantiation of "void mergeAllTypes<blocks,threads>(uint64_t, uint32_t) [with blocks=112U, threads=128U]" at line 146 of "main.cpp"
+
+"kernels.h", line 158: error: invalid text in pragma
+    #pragma acc parallel teams num_teams (blocks) thread_limit(threads)
+                         ^
+          detected during:
+            instantiation of "void mergeType<vec_t,blocks,threads,timing>(uint64_t, uint32_t) [with vec_t=uint32_t, blocks=112U, threads=128U, timing=false]" at line 119 of "main.cpp"
+            instantiation of "void mergeAllTypes<blocks,threads>(uint64_t, uint32_t) [with blocks=112U, threads=128U]" at line 146 of "main.cpp"
+
+"kernels.h", line 158: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams (blocks) thread_limit(threads)
+                               ^
+          detected during:
+            instantiation of "void mergeType<vec_t,blocks,threads,timing>(uint64_t, uint32_t) [with vec_t=uint32_t, blocks=112U, threads=128U, timing=false]" at line 119 of "main.cpp"
+            instantiation of "void mergeAllTypes<blocks,threads>(uint64_t, uint32_t) [with blocks=112U, threads=128U]" at line 146 of "main.cpp"
+
+"kernels.h", line 167: error: identifier "omp_get_thread_num" is undefined
+        int threadIdx_x = omp_get_thread_num();
+                          ^
+          detected during:
+            instantiation of "void mergeType<vec_t,blocks,threads,timing>(uint64_t, uint32_t) [with vec_t=uint32_t, blocks=112U, threads=128U, timing=false]" at line 119 of "main.cpp"
+            instantiation of "void mergeAllTypes<blocks,threads>(uint64_t, uint32_t) [with blocks=112U, threads=128U]" at line 146 of "main.cpp"
+
+"kernels.h", line 168: error: identifier "omp_get_team_num" is undefined
+        int blockIdx_x = omp_get_team_num();
+                         ^
+          detected during:
+            instantiation of "void mergeType<vec_t,blocks,threads,timing>(uint64_t, uint32_t) [with vec_t=uint32_t, blocks=112U, threads=128U, timing=false]" at line 119 of "main.cpp"
+            instantiation of "void mergeAllTypes<blocks,threads>(uint64_t, uint32_t) [with blocks=112U, threads=128U]" at line 146 of "main.cpp"
+
+"kernels.h", line 169: error: identifier "omp_get_gang" is undefined
+        int gridDim_x = omp_get_gang();
+                        ^
+          detected during:
+            instantiation of "void mergeType<vec_t,blocks,threads,timing>(uint64_t, uint32_t) [with vec_t=uint32_t, blocks=112U, threads=128U, timing=false]" at line 119 of "main.cpp"
+            instantiation of "void mergeAllTypes<blocks,threads>(uint64_t, uint32_t) [with blocks=112U, threads=128U]" at line 146 of "main.cpp"
+
+21 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

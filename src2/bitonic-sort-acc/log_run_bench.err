@@ -1,0 +1,11 @@
+"main.cpp", line 50: error: invalid text in pragma
+    #pragma acc data tofrom: input[0:size]) 
+                     ^
+
+"main.cpp", line 50: error: extra text after expected end of preprocessing directive
+    #pragma acc data tofrom: input[0:size]) 
+                           ^
+
+2 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:59: main.o] Error 2
+timeout was set to  600

@@ -1,0 +1,58 @@
+"main.cpp", line 51: error: invalid text in pragma
+    #pragma acc data to: A[0:size*2], \
+                     ^
+
+"main.cpp", line 51: error: extra text after expected end of preprocessing directive
+    #pragma acc data to: A[0:size*2], \
+                       ^
+
+"kernel.h", line 53: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(nTeams) thread_limit(block_size_x * block_size_y)
+                         ^
+          detected during:
+            instantiation of "void distance(const T *, const T *, int, int, const T *, const T *, T *) [with T=float]" at line 65 of "main.cpp"
+            instantiation of "void test<FP>(int, int) [with FP=float]" at line 98 of "main.cpp"
+
+"kernel.h", line 53: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(nTeams) thread_limit(block_size_x * block_size_y)
+                               ^
+          detected during:
+            instantiation of "void distance(const T *, const T *, int, int, const T *, const T *, T *) [with T=float]" at line 65 of "main.cpp"
+            instantiation of "void test<FP>(int, int) [with FP=float]" at line 98 of "main.cpp"
+
+"kernel.h", line 62: error: identifier "omp_get_thread_num" is undefined
+        int tx = omp_get_thread_num() % block_size_x;
+                 ^
+          detected during:
+            instantiation of "void distance(const T *, const T *, int, int, const T *, const T *, T *) [with T=float]" at line 65 of "main.cpp"
+            instantiation of "void test<FP>(int, int) [with FP=float]" at line 98 of "main.cpp"
+
+"kernel.h", line 64: error: identifier "omp_get_team_num" is undefined
+        int bx = omp_get_team_num() % nTeamsX;
+                 ^
+          detected during:
+            instantiation of "void distance(const T *, const T *, int, int, const T *, const T *, T *) [with T=float]" at line 65 of "main.cpp"
+            instantiation of "void test<FP>(int, int) [with FP=float]" at line 98 of "main.cpp"
+
+"kernel.h", line 52: warning: variable "nTeams" was declared but never referenced [declared_but_not_referenced]
+    const int nTeams =  nTeamsX * (n / (block_size_y * tile_size_y));
+              ^
+          detected during:
+            instantiation of "void distance(const T *, const T *, int, int, const T *, const T *, T *) [with T=float]" at line 65 of "main.cpp"
+            instantiation of "void test<FP>(int, int) [with FP=float]" at line 98 of "main.cpp"
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"kernel.h", line 141: error: invalid text in pragma
+    thread_limit(reduce_block_size) map(tofrom: sum)
+    ^
+          detected during instantiation of "void test<FP>(int, int) [with FP=float]" at line 98 of "main.cpp"
+
+"kernel.h", line 141: error: extra text after expected end of preprocessing directive
+    thread_limit(reduce_block_size) map(tofrom: sum)
+                ^
+          detected during instantiation of "void test<FP>(int, int) [with FP=float]" at line 98 of "main.cpp"
+
+8 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

@@ -1,0 +1,176 @@
+cube_select(int, int, int, int const*, int*):
+      7, include "reference.h"
+          10, Loop not fused: different loop trip count
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 8 times (completely unrolled)
+          14, Zero trip check eliminated
+              Loop not vectorized: data dependency
+cube_select_two(int, int, int, int const*, int*):
+      7, include "reference.h"
+          43, Loop not fused: different loop trip count
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 16 times (completely unrolled)
+          47, Loop not vectorized: data dependency
+          59, Loop unrolled 2 times (completely unrolled)
+          64, Loop unrolled 1 times (completely unrolled)
+cube_select_four(int, int, int, int const*, int*):
+      7, include "reference.h"
+          87, Loop not fused: different loop trip count
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 8 times
+          91, Loop not vectorized: data dependency
+         103, Loop unrolled 4 times (completely unrolled)
+         108, Loop unrolled 3 times (completely unrolled)
+              Loop unrolled 2 times (completely unrolled)
+              Loop unrolled 1 times (completely unrolled)
+k_cube_select(int, int, int, int const*, int*):
+      9, Generating implicit firstprivate(b,n)
+         Generating NVIDIA GPU code
+         11, #pragma acc loop gang(b) /* blockIdx.x */
+         16, #pragma acc loop vector(512) /* threadIdx.x */
+         21, #pragma acc loop seq
+         25, #pragma acc loop seq
+      9, Local memory used for temp_dist
+         Generating implicit copyin(in,out) [if not already present]
+     11, Generating implicit private(idx_out,xyz)
+         Loop not fused: no successor loop
+     16, Loop is parallelizable
+     21, Complex loop carried dependence of temp_dist,idx_out-> prevents parallelization
+         Generating implicit firstprivate(radius)
+         Complex loop carried dependence of temp_dist prevents parallelization
+         Loop not fused: different loop trip count
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 8 times (completely unrolled)
+     25, Complex loop carried dependence of xyz->,temp_dist,idx_out-> prevents parallelization
+         Loop carried dependence of idx_out-> prevents parallelization
+         Loop carried backward dependence of idx_out-> prevents vectorization
+         Loop carried reuse of temp_dist prevents parallelization
+         Zero trip check eliminated
+k_cube_select_two(int, int, int, int const*, int*):
+     45, Generating implicit firstprivate(b,n)
+         Generating NVIDIA GPU code
+         47, #pragma acc loop gang(b) /* blockIdx.x */
+         52, #pragma acc loop vector(512) /* threadIdx.x */
+         57, #pragma acc loop seq
+         61, #pragma acc loop seq
+         78, #pragma acc loop seq
+     45, Local memory used for temp_dist
+         Generating implicit copyin(out,in) [if not already present]
+     47, Generating implicit private(idx_out,xyz)
+         Loop not fused: no successor loop
+     52, Loop is parallelizable
+     57, Complex loop carried dependence of temp_dist,idx_out-> prevents parallelization
+         Generating implicit firstprivate(radius)
+         Complex loop carried dependence of temp_dist prevents parallelization
+         Loop not fused: different loop trip count
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 16 times (completely unrolled)
+     61, Complex loop carried dependence of xyz->,idx_out-> prevents parallelization
+         Loop carried dependence of idx_out-> prevents parallelization
+         Loop carried backward dependence of idx_out-> prevents vectorization
+         Loop carried reuse of temp_dist prevents parallelization
+         Complex loop carried dependence of temp_dist prevents parallelization
+     73, Loop carried scalar dependence for flag at line 77
+         Loop unrolled 2 times (completely unrolled)
+     74, Accelerator restriction: induction variable live-out from loop: k
+     78, Complex loop carried dependence of idx_out-> prevents parallelization
+         Loop carried dependence of idx_out-> prevents parallelization
+         Loop carried backward dependence of idx_out-> prevents vectorization
+         Loop carried dependence of temp_dist prevents parallelization
+         Loop carried backward dependence of temp_dist prevents vectorization
+         Complex loop carried dependence of temp_dist prevents parallelization
+         Loop unrolled 1 times (completely unrolled)
+     86, Accelerator restriction: induction variable live-out from loop: k
+k_cube_select_four(int, int, int, int const*, int*):
+     92, Generating implicit firstprivate(b,n)
+         Generating NVIDIA GPU code
+         94, #pragma acc loop gang(b) /* blockIdx.x */
+         99, #pragma acc loop vector(512) /* threadIdx.x */
+        104, #pragma acc loop seq
+        108, #pragma acc loop seq
+        125, #pragma acc loop seq
+     92, Local memory used for temp_dist
+         Generating implicit copyin(in,out) [if not already present]
+     94, Generating implicit private(idx_out,xyz)
+         Loop not fused: no successor loop
+     99, Loop is parallelizable
+    104, Complex loop carried dependence of temp_dist,idx_out-> prevents parallelization
+         Generating implicit firstprivate(radius)
+         Complex loop carried dependence of temp_dist,idx_out-> prevents parallelization
+         Loop not fused: different loop trip count
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 8 times
+    108, Complex loop carried dependence of xyz->,idx_out-> prevents parallelization
+         Loop carried dependence of idx_out-> prevents parallelization
+         Loop carried backward dependence of idx_out-> prevents vectorization
+         Loop carried reuse of temp_dist prevents parallelization
+         Complex loop carried dependence of temp_dist prevents parallelization
+    120, Loop carried scalar dependence for flag at line 124
+         Loop unrolled 4 times (completely unrolled)
+    121, Accelerator restriction: induction variable live-out from loop: k
+    125, Complex loop carried dependence of idx_out-> prevents parallelization
+         Loop carried dependence of idx_out-> prevents parallelization
+         Loop carried backward dependence of idx_out-> prevents vectorization
+         Loop carried dependence of temp_dist prevents parallelization
+         Loop carried backward dependence of temp_dist prevents vectorization
+         Complex loop carried dependence of temp_dist prevents parallelization
+         Loop unrolled 3 times (completely unrolled)
+         Loop unrolled 2 times (completely unrolled)
+         Loop unrolled 1 times (completely unrolled)
+    133, Accelerator restriction: induction variable live-out from loop: k
+main:
+    171, Loop not vectorized/parallelized: potential early exits
+    179, Generating create(h_out[:output_size]) [if not already present]
+         Generating copyin(h_xyz[:input_size]) [if not already present]
+         Generating create(h_out4[:?],h_out2[:?]) [if not already present]
+    181, Loop not vectorized/parallelized: contains call
+           2, Loop not fused: function call before adjacent loop
+          10, Loop not fused: different loop trip count
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 8 times (completely unrolled)
+          14, Zero trip check eliminated
+              Loop not vectorized: data dependency
+    189, Generating update self(h_out[:output_size])
+    194, Loop not vectorized/parallelized: contains call
+          35, Loop not fused: function call before adjacent loop
+          43, Loop not fused: different loop trip count
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 16 times (completely unrolled)
+          47, Loop not vectorized: data dependency
+          59, Loop unrolled 2 times (completely unrolled)
+          64, Loop unrolled 1 times (completely unrolled)
+    202, Generating update self(h_out2[:?])
+    207, Loop not vectorized/parallelized: contains call
+          79, Loop not fused: function call before adjacent loop
+          87, Loop not fused: different loop trip count
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 8 times
+          91, Loop not vectorized: data dependency
+         103, Loop unrolled 4 times (completely unrolled)
+         108, Loop unrolled 3 times (completely unrolled)
+              Loop unrolled 2 times (completely unrolled)
+              Loop unrolled 1 times (completely unrolled)
+    215, Generating update self(h_out4[:?])
+int std::uniform_int_distribution<int>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&):
+         324, Loop not vectorized/parallelized: not countable
+         349, Loop not vectorized/parallelized: potential early exits
+int std::uniform_int_distribution<int>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&, std::uniform_int_distribution<int>::param_type const&):
+      5, include "random"
+          49, include "random.h"
+               35, include "uniform_int_dist.h"
+                   324, Loop not vectorized/parallelized: not countable
+                   349, Loop not vectorized/parallelized: potential early exits
+      7, include "reference.h"
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+timeout was set to  600

@@ -1,0 +1,53 @@
+"nw.cpp", line 158: error: invalid text in pragma
+    #pragma acc data tofrom: input_itemsets[0:max_cols * max_rows]) \
+                     ^
+
+"nw.cpp", line 158: error: extra text after expected end of preprocessing directive
+    #pragma acc data tofrom: input_itemsets[0:max_cols * max_rows]) \
+                           ^
+
+"nw.cpp", line 169: error: invalid text in pragma
+        #pragma acc parallel teams num_teams(global_work) thread_limit(local_work)
+                             ^
+
+"nw.cpp", line 169: error: extra text after expected end of preprocessing directive
+        #pragma acc parallel teams num_teams(global_work) thread_limit(local_work)
+                                   ^
+
+"nw.cpp", line 175: error: identifier "omp_get_team_num" is undefined
+            int bx = omp_get_team_num(); 
+                     ^
+
+"nw.cpp", line 176: error: identifier "omp_get_thread_num" is undefined
+            int tx = omp_get_thread_num();
+                     ^
+
+"nw.cpp", line 238: error: invalid text in pragma
+        #pragma acc parallel teams num_teams(global_work) thread_limit(local_work)
+                             ^
+
+"nw.cpp", line 238: error: extra text after expected end of preprocessing directive
+        #pragma acc parallel teams num_teams(global_work) thread_limit(local_work)
+                                   ^
+
+"nw.cpp", line 244: error: identifier "omp_get_team_num" is undefined
+            int bx = omp_get_team_num(); 
+                     ^
+
+"nw.cpp", line 245: error: identifier "omp_get_thread_num" is undefined
+            int tx = omp_get_thread_num();
+                     ^
+
+"nw.cpp", line 146: warning: variable "local_work" was declared but never referenced [declared_but_not_referenced]
+    const size_t local_work = (size_t)workgroupsize;
+                 ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"nw.cpp", line 147: warning: variable "global_work" was set but never used [set_but_not_used]
+    size_t global_work;
+           ^
+
+10 errors detected in the compilation of "nw.cpp".
+make: *** [Makefile.NVD:62: nw.o] Error 2
+timeout was set to  600

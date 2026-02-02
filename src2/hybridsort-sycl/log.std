@@ -1,0 +1,6 @@
+Sorting list of 50000000 floats.
+GPU execution time: 57.958 ms  
+  --Bucketsort execution time: 17.733 ms 
+  --Mergesort execution time: 40.225 ms 
+CPU execution time: 994.390 ms  
+Checking result...PASSED.

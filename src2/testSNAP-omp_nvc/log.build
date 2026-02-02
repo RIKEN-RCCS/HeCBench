@@ -1,0 +1,137 @@
+tar xf ../testSNAP-omp/refdata.tar.gz -C ../testSNAP-omp
+nvc++  -Wall -DREFDATA_TWOJ=14 -I../testSNAP-omp -O3 -Minfo -mp=gpu -gpu=cc90 -DOPENMP_TARGET -c main.cpp -o main.o
+compute_sfac(double, double, int):
+         192, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+compute_dsfac(double, double, int):
+         211, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+compute_duarray(int, int, int, int, int, int, int, int, double, double, double, double, double, double, double, double, double const*, COMPLEX const*, COMPLEX*):
+     24, include "utils.cpp"
+         246, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+         275, Loop not fused: sibling loop may prevent vectorization
+              2 loops fused
+              Generated vector simd code for the loop
+         290, Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+              Loop unrolled 3 times (completely unrolled)
+         295, Loop not fused: enclosed in different number of nests
+         297, Loop not vectorized: data dependency
+         299, Loop unrolled 3 times (completely unrolled)
+         313, Loop not fused: complex flow graph
+         319, Loop not vectorized: data dependency
+         325, Loop unrolled 3 times (completely unrolled)
+         337, Loop unrolled 3 times (completely unrolled)
+         352, Loop unrolled 3 times (completely unrolled)
+         364, Loop unrolled 3 times (completely unrolled)
+         404, Loop not vectorized: data dependency
+options(int, char**):
+     24, include "utils.cpp"
+         445, Loop not vectorized/parallelized: contains call
+main:
+         445, Loop not vectorized/parallelized: contains call
+     66, Recognized memory copy idiom
+     79, Loop not vectorized/parallelized: too deeply nested
+     81, Loop not vectorized/parallelized: not countable
+     83, Loop not vectorized: unknown
+     96, Loop not vectorized/parallelized: not countable
+     98, Loop not vectorized: unknown
+         Loop unrolled 4 times
+     99, Zero trip check eliminated
+    111, Loop not vectorized/parallelized: not countable
+    115, Zero trip check eliminated
+         Loop not vectorized: unknown
+         Loop unrolled 4 times
+    132, Loop not vectorized/parallelized: not countable
+    134, Loop not vectorized: unknown
+    143, Loop not fused: function call before adjacent loop
+    155, Loop not vectorized/parallelized: not countable
+    169, Loop not vectorized/parallelized: not countable
+    181, Loop not fused: function call before adjacent loop
+         Loop not vectorized/parallelized: too deeply nested
+    184, Loop not vectorized: unknown
+    199, Loop not vectorized/parallelized: too deeply nested
+    200, Loop not vectorized/parallelized: too deeply nested
+    201, Loop not vectorized/parallelized: not countable
+    236, Loop not vectorized: data dependency
+         180, Loop not fused: function call before adjacent loop
+    286, Zero trip check eliminated
+         Generated vector simd code for the loop
+    295, Loop not vectorized/parallelized: too deeply nested
+    296, Loop not vectorized/parallelized: too deeply nested
+    297, Loop not vectorized/parallelized: too deeply nested
+    316, Loop not vectorized/parallelized: contains call
+    374, Recognized memory zero idiom
+    379, Loop not fused: function call before adjacent loop
+    380, Loop not vectorized: data dependency
+    397, #omp target teams distribute parallel for
+        397, Generating "nvkernel_main_F1L397_2" GPU kernel
+        410, Loop parallelized across teams and threads(128), schedule(static)
+    397, Generating update to(rcutij[:num_nbor*num_atoms],wj[:num_nbor*num_atoms],rij[:(num_nbor*num_atoms)*3])
+    410, Loop not vectorized/parallelized: not countable
+    411, #omp target teams distribute parallel for
+        411, Generating "nvkernel_main_F1L411_4" GPU kernel
+        418, Loop parallelized across teams and threads(128), schedule(static)
+    418, Loop not vectorized/parallelized: not countable
+    421, Loop not vectorized: unprofitable for target
+         Loop unrolled 4 times
+    426, #omp target teams distribute parallel for
+        426, Generating "nvkernel_main_F1L426_6" GPU kernel
+        435, Loop parallelized across teams and threads(128), schedule(static)
+    436, Loop not vectorized/parallelized: too deeply nested
+    480, Loop not vectorized: unprofitable for target
+         Loop unrolled 4 times
+    499, Loop not vectorized: data dependency
+    539, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    564, Zero trip check eliminated
+         Loop not vectorized: may not be beneficial for target
+         Loop unrolled 2 times
+    580, #omp target teams distribute parallel for
+        580, Generating "nvkernel_main_F1L580_8" GPU kernel
+        590, Loop parallelized across teams and threads(128), schedule(static)
+    590, Loop not vectorized/parallelized: not countable
+    591, #omp target teams distribute parallel for
+        591, Generating "nvkernel_main_F1L591_10" GPU kernel
+        606, Loop parallelized across teams and threads(128), schedule(static)
+    607, Loop not vectorized/parallelized: not countable
+    652, Generated vector simd code for the loop containing reductions
+    689, #omp target teams distribute parallel for
+        689, Generating "nvkernel_main_F1L689_12" GPU kernel
+        697, Loop parallelized across teams and threads(128), schedule(static)
+    698, Loop not vectorized/parallelized: contains call
+    725, #omp target teams distribute parallel for
+        363, Generating map(to:idxdu_block[:jdim],ulist[:idxu_max*(num_nbor*num_atoms)]) 
+             Generating map(alloc:rij[:(num_nbor*num_atoms)*3]) 
+             Generating map(to:idxu_block[:jdim],idxz[:idxz_max*9],dulist[:((num_nbor*num_atoms)*3)*idxdu_max],idxcg_block[:jdim*(jdim*jdim)],rootpqarray[:jdimpq*jdimpq],dedr[:(num_nbor*num_atoms)*3],cglist[:idxcg_max],ulist_parity[:idxu_max]) 
+             Generating map(alloc:wj[:num_nbor*num_atoms],ylist[:num_atoms*idxdu_max],rcutij[:num_nbor*num_atoms]) 
+             Generating map(to:idxzbeta[:idxz_max]) 
+             Generating map(alloc:ulisttot[:idxu_max*num_atoms]) 
+        725, Generating "nvkernel_main_F1L725_14" GPU kernel
+        732, Loop parallelized across teams and threads(128), schedule(static)
+    733, Loop not vectorized/parallelized: too deeply nested
+    734, Loop unrolled 3 times (completely unrolled)
+    741, Loop not vectorized: data dependency
+    746, Loop unrolled 3 times (completely unrolled)
+    758, Loop not vectorized: data dependency
+    762, Loop unrolled 3 times (completely unrolled)
+    772, Loop unrolled 3 times (completely unrolled)
+    783, Loop unrolled 3 times (completely unrolled)
+    792, Generating update from(dedr[:(num_nbor*num_atoms)*3])
+    798, Loop not fused: different loop trip count
+    799, Loop not vectorized: data dependency
+    812, Generated vector simd code for the loop containing reductions
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     17, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1l>>::_S_gcd(long, long):
+     17, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<double, std::ratio<1l, 1l>>::_S_gcd(long, long):
+     17, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<float, std::ratio<1l, 1l>>::_S_gcd(long, long):
+     17, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++  -Wall -DREFDATA_TWOJ=14 -I../testSNAP-omp -O3 -Minfo -mp=gpu -gpu=cc90 -DOPENMP_TARGET main.o -o main 

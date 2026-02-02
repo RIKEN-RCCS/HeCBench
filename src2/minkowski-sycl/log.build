@@ -1,0 +1,2 @@
+clang++  -std=c++17 -Wall -I../minkowski-cuda -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -ffast-math -Xclang -fdenormal-fp-math-f32=preserve-sign -DUSE_GPU -DVERIFY -c main.cpp -o main.o
+clang++  -std=c++17 -Wall -I../minkowski-cuda -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -ffast-math -Xclang -fdenormal-fp-math-f32=preserve-sign -DUSE_GPU -DVERIFY main.o -o main 

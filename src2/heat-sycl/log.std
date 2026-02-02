@@ -1,0 +1,28 @@
+
+ MMS heat equation
+
+--------------------
+Problem input
+
+ Grid size: 32768 x 32768
+ Cell width: 0.0305166
+ Grid length: 1000x1000
+
+ Alpha: 0.1
+
+ Steps: 1000
+ Total time: 0.5
+ Time step: 0.0005
+ GPU device: NVIDIA GH200 480GB
+--------------------
+Stability
+
+ r value: 0.0536904
+--------------------
+Results
+
+Error (L2norm): 1.84574e-09
+Solve time (s): 5.32083
+Total time (s): 23.6947
+Bandwidth (GB/s): 3228.8
+--------------------

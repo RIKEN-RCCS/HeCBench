@@ -1,0 +1,63 @@
+nvc++  -Wall -I../flip-cuda  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+property(char const*, std::vector<long, std::allocator<long>>):
+     52, Loop not vectorized/parallelized: contains call
+void flip<float>(long, long, int, int):
+     66, Loop not vectorized/parallelized: potential early exits
+     75, Loop not vectorized: unknown
+         Loop unrolled 2 times
+     79, Loop not vectorized/parallelized: potential early exits
+          52, Loop not vectorized/parallelized: contains call
+          52, Loop not vectorized/parallelized: contains call
+          52, Loop not vectorized/parallelized: contains call
+     96, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+    116, Generating map(to:d_flip_dims[:num_dims]) 
+         Generating map(alloc:d_output[:n]) 
+         Generating map(to:d_shape[:num_dims],d_strides_contiguous[:num_dims],d_strides[:num_dims],d_input[:n]) 
+    127, Generating update from(d_output[:n])
+    139, Loop not vectorized/parallelized: contains call
+void flip<double>(long, long, int, int):
+     66, Loop not vectorized/parallelized: potential early exits
+     75, Loop not vectorized: unknown
+         Loop unrolled 2 times
+     79, Loop not vectorized/parallelized: potential early exits
+          52, Loop not vectorized/parallelized: contains call
+          52, Loop not vectorized/parallelized: contains call
+          52, Loop not vectorized/parallelized: contains call
+     96, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+    116, Generating map(to:d_flip_dims[:num_dims]) 
+         Generating map(alloc:d_output[:n]) 
+         Generating map(to:d_shape[:num_dims],d_strides_contiguous[:num_dims],d_strides[:num_dims],d_input[:n]) 
+    127, Generating update from(d_output[:n])
+    139, Loop not vectorized/parallelized: contains call
+void flip_kernel<float>(float const*, float*, long, long const*, long, long const*, long const*, long const*, long):
+     23, #omp target teams distribute parallel for
+         23, Generating "nvkernel__Z11flip_kernelIfEvPKT_PS0_lPKllS5_S5_S5_l_F1L23_2" GPU kernel
+         25, Loop parallelized across teams and threads(128), schedule(static)
+     25, Loop not vectorized/parallelized: not countable
+     35, Loop not vectorized: unknown
+void flip_kernel_cpu<float>(float const*, float*, long, long const*, long, long const*, long const*, long const*, long):
+      7, include "reference.h"
+          14, #omp parallel
+          23, Loop not vectorized: unknown
+void flip_kernel<double>(double const*, double*, long, long const*, long, long const*, long const*, long const*, long):
+     23, #omp target teams distribute parallel for
+         23, Generating "nvkernel__Z11flip_kernelIdEvPKT_PS0_lPKllS5_S5_S5_l_F1L23_7" GPU kernel
+         25, Loop parallelized across teams and threads(128), schedule(static)
+     25, Loop not vectorized/parallelized: not countable
+     35, Loop not vectorized: unknown
+void flip_kernel_cpu<double>(double const*, double*, long, long const*, long, long const*, long const*, long const*, long):
+      7, include "reference.h"
+          14, #omp parallel
+          23, Loop not vectorized: unknown
+std::vector<long, std::allocator<long>>::vector(std::vector<long, std::allocator<long>> const&):
+      7, include "reference.h"
+std::vector<long, std::allocator<long>>::back():
+      7, include "reference.h"
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+long* std::__copy_move_a<false, __gnu_cxx::__normal_iterator<long const*, std::vector<long, std::allocator<long>>>, long*>(__gnu_cxx::__normal_iterator<long const*, std::vector<long, std::allocator<long>>>, __gnu_cxx::__normal_iterator<long const*, std::vector<long, std::allocator<long>>>, long*):
+      7, include "reference.h"
+nvc++  -Wall -I../flip-cuda  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

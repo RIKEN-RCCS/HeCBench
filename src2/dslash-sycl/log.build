@@ -1,0 +1,4 @@
+clang++  -DMILC_COMPLEX -DLDIM=32 -DPRECISION=1           -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -ffast-math -DUSE_GPU -c main.cpp -o main.o
+clang++  -DMILC_COMPLEX -DLDIM=32 -DPRECISION=1           -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -ffast-math -DUSE_GPU -c dslash.cpp -o dslash.o
+clang++  -DMILC_COMPLEX -DLDIM=32 -DPRECISION=1           -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -ffast-math -DUSE_GPU -c kernels.cpp -o kernels.o
+clang++  -DMILC_COMPLEX -DLDIM=32 -DPRECISION=1           -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -ffast-math -DUSE_GPU main.o dslash.o kernels.o -o main 

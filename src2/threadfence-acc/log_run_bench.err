@@ -1,0 +1,39 @@
+"main.cpp", line 15: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(teams) thread_limit(blocks)
+                         ^
+
+"main.cpp", line 15: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(teams) thread_limit(blocks)
+                               ^
+
+"main.cpp", line 22: error: identifier "omp_get_team_num" is undefined
+        unsigned int bid = omp_get_team_num();
+                           ^
+
+"main.cpp", line 25: error: identifier "omp_get_thread_num" is undefined
+        unsigned int lid = omp_get_thread_num();
+                           ^
+
+"main.cpp", line 115: error: invalid text in pragma
+    #pragma acc parallel data map (to: h_array[0:N], h_count[0:1]) \
+                         ^
+
+"main.cpp", line 115: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel data map (to: h_array[0:N], h_count[0:1]) \
+                              ^
+
+"main.cpp", line 129: error: invalid text in pragma
+        #pragma acc update from (h_result[0:1])
+                           ^
+
+"main.cpp", line 129: error: OpenACC data clause expected
+        #pragma acc update from (h_result[0:1])
+                           ^
+
+"main.cpp", line 129: error: extra text after expected end of preprocessing directive
+        #pragma acc update from (h_result[0:1])
+                                ^
+
+9 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

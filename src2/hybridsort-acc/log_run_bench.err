@@ -1,0 +1,165 @@
+main:
+     58, Loop not vectorized/parallelized: contains call
+     78, Loop not vectorized/parallelized: contains call
+     91, Loop not vectorized/parallelized: contains call
+    100, Loop not vectorized/parallelized: contains call
+    120, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+    151, Loop not vectorized/parallelized: potential early exits
+"bucketsort.c", line 54: error: invalid text in pragma
+  #pragma acc data to: h_offsets[0:DIVISIONS],\
+                   ^
+
+"bucketsort.c", line 54: error: extra text after expected end of preprocessing directive
+  #pragma acc data to: h_offsets[0:DIVISIONS],\
+                     ^
+
+"kernel_histogram.h", line 4: error: invalid text in pragma
+  #pragma acc parallel teams num_teams(global/local) thread_limit(local)
+                       ^
+
+"kernel_histogram.h", line 4: error: extra text after expected end of preprocessing directive
+  #pragma acc parallel teams num_teams(global/local) thread_limit(local)
+                             ^
+
+"kernel_histogram.h", line 10: error: identifier "omp_get_thread_num" is undefined
+      const int lid = omp_get_thread_num();
+                      ^
+
+"kernel_histogram.h", line 11: error: identifier "omp_get_vector" is undefined
+      const int lsize = omp_get_vector();
+                        ^
+
+"kernel_histogram.h", line 12: error: identifier "omp_get_team_num" is undefined
+      const int tid = omp_get_team_num();
+                      ^
+
+"kernel_histogram.h", line 14: error: identifier "omp_get_gang" is undefined
+      const int gsize = omp_get_gang() * lsize;
+                        ^
+
+"bucketsort.c", line 64: error: invalid text in pragma
+  #pragma acc update from(h_offsets[0:DIVISIONS])
+                     ^
+
+"bucketsort.c", line 64: error: OpenACC data clause expected
+  #pragma acc update from(h_offsets[0:DIVISIONS])
+                     ^
+
+"bucketsort.c", line 64: error: extra text after expected end of preprocessing directive
+  #pragma acc update from(h_offsets[0:DIVISIONS])
+                         ^
+
+"bucketsort.c", line 81: error: invalid text in pragma
+  #pragma acc update to (pivotPoints[0:DIVISIONS])
+                     ^
+
+"bucketsort.c", line 81: error: OpenACC data clause expected
+  #pragma acc update to (pivotPoints[0:DIVISIONS])
+                     ^
+
+"bucketsort.c", line 81: error: extra text after expected end of preprocessing directive
+  #pragma acc update to (pivotPoints[0:DIVISIONS])
+                        ^
+
+"kernel_bucketcount.h", line 1: error: invalid text in pragma
+  #pragma acc parallel teams num_teams(blocks) thread_limit(BUCKET_THREAD_N)
+                       ^
+
+"kernel_bucketcount.h", line 1: error: extra text after expected end of preprocessing directive
+  #pragma acc parallel teams num_teams(blocks) thread_limit(BUCKET_THREAD_N)
+                             ^
+
+"kernel_bucketcount.h", line 6: error: identifier "omp_get_thread_num" is undefined
+      const int lid = omp_get_thread_num();
+                      ^
+
+"kernel_bucketcount.h", line 7: error: identifier "omp_get_vector" is undefined
+      const int lsize = omp_get_vector();
+                        ^
+
+"kernel_bucketcount.h", line 8: error: identifier "omp_get_team_num" is undefined
+      const int tid = omp_get_team_num();
+                      ^
+
+"kernel_bucketcount.h", line 10: error: identifier "omp_get_gang" is undefined
+      const int gsize = omp_get_gang() * lsize;
+                        ^
+
+"kernel_bucketprefix.h", line 1: error: invalid text in pragma
+  #pragma acc parallel loop num_teams(globalpre/localpre) thread_limit(localpre)
+                            ^
+
+"kernel_bucketprefix.h", line 1: error: extra text after expected end of preprocessing directive
+  #pragma acc parallel loop num_teams(globalpre/localpre) thread_limit(localpre)
+                                     ^
+
+"bucketsort.c", line 101: error: invalid text in pragma
+  #pragma acc update from (h_offsets[0:DIVISIONS])
+                     ^
+
+"bucketsort.c", line 101: error: OpenACC data clause expected
+  #pragma acc update from (h_offsets[0:DIVISIONS])
+                     ^
+
+"bucketsort.c", line 101: error: extra text after expected end of preprocessing directive
+  #pragma acc update from (h_offsets[0:DIVISIONS])
+                          ^
+
+"bucketsort.c", line 121: error: invalid text in pragma
+  #pragma acc update to (h_offsets[0:DIVISIONS])
+                     ^
+
+"bucketsort.c", line 121: error: OpenACC data clause expected
+  #pragma acc update to (h_offsets[0:DIVISIONS])
+                     ^
+
+"bucketsort.c", line 121: error: extra text after expected end of preprocessing directive
+  #pragma acc update to (h_offsets[0:DIVISIONS])
+                        ^
+
+"kernel_bucketsort.h", line 1: error: invalid text in pragma
+  #pragma acc parallel teams num_teams(blocks) thread_limit(BUCKET_THREAD_N)
+                       ^
+
+"kernel_bucketsort.h", line 1: error: extra text after expected end of preprocessing directive
+  #pragma acc parallel teams num_teams(blocks) thread_limit(BUCKET_THREAD_N)
+                             ^
+
+"kernel_bucketsort.h", line 6: error: identifier "omp_get_thread_num" is undefined
+      const int lid = omp_get_thread_num();
+                      ^
+
+"kernel_bucketsort.h", line 7: error: identifier "omp_get_vector" is undefined
+      const int lsize = omp_get_vector();
+                        ^
+
+"kernel_bucketsort.h", line 8: error: identifier "omp_get_team_num" is undefined
+      const int tid = omp_get_team_num();
+                      ^
+
+"kernel_bucketsort.h", line 10: error: identifier "omp_get_gang" is undefined
+      const int gsize = omp_get_gang() * lsize;
+                        ^
+
+"bucketsort.c", line 92: warning: variable "localpre" was declared but never referenced [declared_but_not_referenced]
+      size_t localpre = 128;
+             ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"bucketsort.c", line 94: warning: variable "globalpre" was declared but never referenced [declared_but_not_referenced]
+      size_t globalpre = DIVISIONS;
+             ^
+
+"bucketsort.c", line 45: warning: variable "global" was declared but never referenced [declared_but_not_referenced]
+    size_t global = 6144;
+           ^
+
+"bucketsort.c", line 46: warning: variable "local" was set but never used [set_but_not_used]
+    size_t local;
+           ^
+
+34 errors detected in the compilation of "bucketsort.c".
+make: *** [Makefile.NVD:51: bucketsort.o] Error 2
+timeout was set to  600

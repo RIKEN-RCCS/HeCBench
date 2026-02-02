@@ -1,0 +1,31 @@
+
+
+FEYNMAN_KAC_2D:
+
+  Program parameters:
+
+  The calculation takes place inside a 2D ellipse.
+  A rectangular grid of points will be defined.
+  The solution will be estimated for those grid points
+  that lie inside the ellipse.
+
+  Each solution will be estimated by computing 1000 trajectories
+  from the point to the boundary.
+
+    (X/A)^2 + (Y/B)^2 = 1
+
+  The ellipse parameters A, B are set to:
+
+    A = 2.000000
+    B = 1.000000
+  Stepsize H = 0.0010
+
+  X coordinate marked by 255 points
+  Y coordinate marked by 128 points
+Average kernel time: 1.975720 (s)
+
+  RMS absolute error in solution = 2.271646e-02
+
+FEYNMAN_KAC_2D:
+  Normal end of execution.
+

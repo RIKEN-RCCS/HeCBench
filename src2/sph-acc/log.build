@@ -1,0 +1,94 @@
+nvc++ -acc  -std=c++14 -Wall -I../include -O3 -Minfo -mp=gpu -gpu=cc90 -c fluid.cpp -o fluid.o
+W(double3, double3, double):
+     12, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+del_W(double3, double3, double):
+     33, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+boundaryGamma(double3, double3, double3, double, double):
+     58, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+computeDensity(double3, double3, double3, double3, param const*):
+     96, Generating acc routine seq
+         Generating NVIDIA GPU code
+computePressure(double, param const*):
+    115, Generating acc routine seq
+         Generating NVIDIA GPU code
+computeBoundaryAcceleration(double3, double3, double3, double, double):
+    127, Generating acc routine seq
+         Generating NVIDIA GPU code
+computeAcceleration(double3, double3, double, double, double3, double3, double, double, param const*):
+    142, Generating acc routine seq
+         Generating NVIDIA GPU code
+eulerStart(fluid_particle*, boundary_particle*, param*):
+    196, Loop not vectorized: data dependency
+initParticles(fluid_particle**, boundary_particle**, AABB*, AABB*, param*):
+    222, Loop not vectorized: unprofitable for target
+         Loop unrolled 4 times
+    237, Loop not vectorized/parallelized: not countable
+main:
+         222, Loop not vectorized: unprofitable for target
+              Loop unrolled 8 times
+         237, Loop not vectorized/parallelized: not countable
+         196, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+    343, Generating copy(boundary_particles[:num_boundary_particles],fluid_particles[:num_fluid_particles]) [if not already present]
+    347, Generating implicit firstprivate(num_fluid_particles)
+         Generating NVIDIA GPU code
+        351, #pragma acc loop vector(256) /* threadIdx.x */
+        355, #pragma acc loop seq
+             Generating implicit reduction(+:density)
+    347, Local memory used for p_pos,q_v,q_pos,p_v
+         Generating implicit copyin(params) [if not already present]
+         Loop not vectorized/parallelized: contains call
+    351, Loop is parallelizable
+         Loop not fused: no successor loop
+    355, Loop is parallelizable
+         355, Zero trip check eliminated
+    362, Generating implicit firstprivate(num_fluid_particles)
+         Generating NVIDIA GPU code
+        366, #pragma acc loop vector(256) /* threadIdx.x */
+        377, #pragma acc loop seq
+             Generating implicit reduction(+:az,ay,ax)
+    362, Local memory used for p_pos,.inl_a_337,tmp_a,q_v,.inl_.X5238_358,.inl__T2_5238_357,q_pos,p_v
+         Generating implicit copyin(params) [if not already present]
+    366, Loop is parallelizable
+         Loop not fused: no successor loop
+    377, Loop is parallelizable
+         Zero trip check eliminated
+    396, Generating implicit firstprivate(num_particles,num_boundary_particles)
+         Generating NVIDIA GPU code
+        400, #pragma acc loop vector(256) /* threadIdx.x */
+        406, #pragma acc loop seq
+             Generating implicit reduction(+:az,ay,ax)
+    396, Local memory used for k_pos,tmp_a,p_pos,.inl_.X5237_378,.inl__T1_5237_377,.inl_p_a_376,k_n
+         Generating implicit copyin(params) [if not already present]
+    400, Loop is parallelizable
+         Loop not fused: no successor loop
+    406, Loop is parallelizable
+    419, Generating implicit firstprivate(num_fluid_particles)
+         Generating NVIDIA GPU code
+        423, #pragma acc loop vector(256) /* threadIdx.x */
+    419, Local memory used for a,pos,v_half,v
+         Generating implicit copyin(params) [if not already present]
+    423, Loop is parallelizable
+         Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++ -acc  -std=c++14 -Wall -I../include -O3 -Minfo -mp=gpu -gpu=cc90 -c geometry.cpp -o geometry.o
+constructBoundaryBox(boundary_particle*, AABB*, param*):
+    103, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    137, Loop not fused: different loop trip count
+    171, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    223, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    241, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+nvc++ -acc  -std=c++14 -Wall -I../include -O3 -Minfo -mp=gpu -gpu=cc90 fileio.o fluid.o geometry.o -o sph 

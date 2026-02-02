@@ -1,0 +1,27 @@
+nvc++  -Wall -I../vanGenuchten-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+reference(double const*, double const*, double*, double*, double*, int):
+      6, include "reference.h"
+          26, Loop not vectorized: data dependency
+vanGenuchten(double const*, double const*, double*, double*, double*, int):
+     15, #omp target teams distribute parallel for thread_limit(256)
+         15, Generating "nvkernel__Z12vanGenuchtenPKdS0_PdS1_S1_i_F1L15_2" GPU kernel
+         17, Loop parallelized across teams and threads(128), schedule(static)
+     17, Loop not vectorized/parallelized: not countable
+main:
+     78, Loop not fused: dependence chain to sibling loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+          26, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+     88, Generating map(from:K[:size]) 
+         Generating map(to:Ksat[:size]) 
+         Generating map(from:theta[:size]) 
+         Generating map(to:psi[:size]) 
+         Generating map(from:C[:size]) 
+     91, Loop not vectorized/parallelized: contains call
+    100, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      6, include "reference.h"
+nvc++  -Wall -I../vanGenuchten-cuda -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

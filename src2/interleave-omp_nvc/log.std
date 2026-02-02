@@ -1,0 +1,2 @@
+Average kernel (non-interleaved) execution time 0.001501 (s)
+Average kernel (interleaved) execution time 0.007959 (s)

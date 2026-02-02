@@ -1,0 +1,63 @@
+nvc++  -Wall -I../aidw-cuda -O3 -Minfo -mp=gpu -gpu=cc90,fastmath -c main.cpp -o main.o
+reference(float const*, float const*, float const*, int, float const*, float const*, float*, int, float, float const*):
+     28, include "reference.h"
+          29, #omp parallel
+          52, Generated vector simd code for the loop containing reductions
+verify(float*, float*, int, float):
+     28, include "reference.h"
+          62, Loop not vectorized/parallelized: potential early exits
+AIDW_Kernel(float const*, float const*, float const*, int, float const*, float const*, float*, int, float, float const*):
+     46, #omp target teams distribute parallel for thread_limit(256)
+         46, Generating "nvkernel__Z11AIDW_KernelPKfS0_S0_iS0_S0_PfifS0__F1L46_3" GPU kernel
+         48, Loop parallelized across teams and threads(128), schedule(static)
+     48, Loop not vectorized/parallelized: not countable
+     71, Generated vector simd code for the loop containing reductions
+AIDW_Kernel_Tiled(float const*, float const*, float const*, int, float const*, float const*, float*, int, float, float const*):
+     94, #omp target teams num_teams((inum+255)/256) thread_limit(256)
+         94, Generating "nvkernel__Z17AIDW_Kernel_TiledPKfS0_S0_iS0_S0_PfifS0__F1L94_7" GPU kernel
+         99, #omp parallel
+          138, Barrier
+          145, Barrier
+        101, Team private (sdx,sdz,sdy) located in CUDA shared memory
+    131, Loop not vectorized/parallelized: contains call
+    139, Generated vector simd code for the loop containing reductions
+main:
+    179, Loop not vectorized/parallelized: contains call
+    186, Loop not vectorized/parallelized: contains call
+    193, Loop not vectorized/parallelized: contains call
+    224, Generating map(to:d_avg_dist[:dnum],d_dx[:dnum],d_dy[:dnum],d_dz[:dnum],d_ix[:inum]) 
+         Generating map(alloc:d_iz[:inum]) 
+         Generating map(to:d_iy[:inum]) 
+    229, Generating update from(d_iz[:inum])
+          62, Loop not vectorized/parallelized: potential early exits
+    236, Generating update from(d_iz[:inum])
+          62, Loop not vectorized/parallelized: potential early exits
+    243, Loop not vectorized/parallelized: contains call
+    252, Loop not vectorized/parallelized: contains call
+float* std::__uninitialized_default_n_1<true>::__uninit_default_n<float*, unsigned long>(float*, unsigned long):
+        1149, Recognized memory set idiom
+std::vector<float, std::allocator<float>>::vector(unsigned long, std::allocator<float> const&):
+     28, include "reference.h"
+std::vector<float, std::allocator<float>>::_M_default_initialize(unsigned long):
+         704, Recognized memory set idiom
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     26, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+     28, include "reference.h"
+float* std::__uninitialized_default_n_a<float*, unsigned long, float>(float*, unsigned long, std::allocator<float>&):
+         638, Recognized memory set idiom
+float* std::__uninitialized_default_n<float*, unsigned long>(float*, unsigned long):
+         603, Recognized memory set idiom
+float* std::fill_n<float*, unsigned long, float>(float*, unsigned long, float const&):
+        1120, Recognized memory set idiom
+float* std::__fill_n_a<float*, unsigned long, float>(float*, unsigned long, float const&, std::random_access_iterator_tag):
+         969, Recognized memory set idiom
+void std::__fill_a<float*, float>(float*, float*, float const&):
+         923, Recognized memory set idiom
+__gnu_cxx::__enable_if<std::__is_scalar<float>::__value, void>::__type std::__fill_a1<float*, float>(float*, float*, float const&):
+     24, include "vector"
+          60, include "stl_algobase.h"
+              923, Recognized memory set idiom
+     26, include "chrono"
+     28, include "reference.h"
+nvc++  -Wall -I../aidw-cuda -O3 -Minfo -mp=gpu -gpu=cc90,fastmath main.o -o main 

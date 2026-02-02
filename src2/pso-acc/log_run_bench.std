@@ -1,0 +1,2 @@
+nvc++ -acc  -Wall -I../pso-cuda  -O3 -Minfo -mp=gpu -gpu=cc90 -c ../pso-cuda/main.cpp -o main.o
+nvc++ -acc  -Wall -I../pso-cuda  -O3 -Minfo -mp=gpu -gpu=cc90 -c kernel_gpu.cpp -o kernel_gpu.o

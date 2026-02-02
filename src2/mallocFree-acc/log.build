@@ -1,0 +1,15 @@
+nvc++ -acc  -Wall  -DUM -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+valSet(int*, int, unsigned long):
+     36, Recognized memory set idiom
+setup(unsigned long*, int&, int**, unsigned long):
+     43, Loop not vectorized/parallelized: potential early exits
+          36, Recognized memory set idiom
+main:
+          43, Loop not vectorized/parallelized: potential early exits
+          51, Recognized memory set idiom
+    105, Loop not vectorized/parallelized: contains call
+    115, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     22, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++ -acc  -Wall  -DUM -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

@@ -1,0 +1,96 @@
+mpic++  -std=c++14 -Wall 	-DNX=400        	-DNZ=200 	-DSIM_TIME=600 	-DDATA_SPEC=DATA_SPEC_THERMAL         -I../miniWeather-cuda/ -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+"main.cpp", line 364: warning: variable "ierr" was set but never used [set_but_not_used]
+    int k, ll, ind_r, ind_u, ind_t, i, s, ierr;
+                                          ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"main.cpp", line 467: warning: variable "ierr" was set but never used [set_but_not_used]
+    int    i, k, ii, kk, ll, ierr, inds, i_end;
+                             ^
+
+"main.cpp", line 738: warning: variable "ierr" was set but never used [set_but_not_used]
+    int ierr;
+        ^
+
+main:
+    148, Generating map(to:state[:((nx+4)*(nz+4))*4]) 
+         Generating map(alloc:sendbuf_r[:nz*8],flux[:((nz+1)*(nx+1))*4]) 
+         Generating map(to:hy_dens_int[:nz+1],hy_dens_cell[:nz+4],hy_dens_theta_cell[:nz+4],hy_dens_theta_int[:nz+1]) 
+         Generating map(alloc:tend[:(nx*nz)*4]) 
+         Generating map(to:state_tmp[:((nx+4)*(nz+4))*4]) 
+         Generating map(alloc:recvbuf_r[:nz*8],sendbuf_l[:nz*8]) 
+         Generating map(to:hy_pressure_int[:nz+1]) 
+         Generating map(alloc:recvbuf_l[:nz*8]) 
+    156, Loop not vectorized/parallelized: contains call
+semi_discrete_step(double*, double*, double*, double, int, double*, double*):
+    231, #omp target teams distribute parallel for
+        231, Generating "nvkernel__Z18semi_discrete_stepPdS_S_diS_S__F1L231_2" GPU kernel
+             Loop parallelized across teams and threads(128), schedule(static)
+    233, Loop not vectorized/parallelized: not countable
+compute_tendencies_x(double*, double*, double*):
+    254, #omp target teams distribute parallel for
+        254, Generating "nvkernel__Z20compute_tendencies_xPdS_S__F1L254_6" GPU kernel
+             Loop parallelized across teams and threads(128), schedule(static)
+    255, Loop not vectorized/parallelized: not countable
+    257, Loop unrolled 4 times (completely unrolled)
+    258, Loop unrolled 4 times (completely unrolled)
+    285, #omp target teams distribute parallel for
+        285, Generating "nvkernel__Z20compute_tendencies_xPdS_S__F1L285_8" GPU kernel
+             Loop parallelized across teams and threads(128), schedule(static)
+    287, Loop not vectorized/parallelized: not countable
+compute_tendencies_z(double*, double*, double*):
+    309, #omp target teams distribute parallel for
+        309, Generating "nvkernel__Z20compute_tendencies_zPdS_S__F1L309_14" GPU kernel
+             Loop parallelized across teams and threads(128), schedule(static)
+    310, Loop not vectorized/parallelized: not countable
+    312, Loop unrolled 4 times (completely unrolled)
+    313, Loop unrolled 4 times (completely unrolled)
+    345, #omp target teams distribute parallel for
+        345, Generating "nvkernel__Z20compute_tendencies_zPdS_S__F1L345_16" GPU kernel
+             Loop parallelized across teams and threads(128), schedule(static)
+    347, Loop not vectorized/parallelized: not countable
+set_halo_values_x(double*):
+    374, #omp target teams distribute parallel for
+        374, Generating "nvkernel__Z17set_halo_values_xPd_F1L374_22" GPU kernel
+             Loop parallelized across teams and threads(128), schedule(static)
+    376, Loop not vectorized/parallelized: not countable
+    386, Generating update from(sendbuf_l[:nz*8],sendbuf_r[:nz*8])
+    396, #omp target teams distribute parallel for
+        396, Generating "nvkernel__Z17set_halo_values_xPd_F1L396_24" GPU kernel
+             Loop parallelized across teams and threads(128), schedule(static)
+    396, Generating update to(recvbuf_r[:nz*8],recvbuf_l[:nz*8])
+    398, Loop not vectorized/parallelized: not countable
+    411, #omp target teams distribute parallel for
+        411, Generating "nvkernel__Z17set_halo_values_xPd_F1L411_26" GPU kernel
+             Loop parallelized across teams and threads(128), schedule(static)
+    412, Loop not vectorized/parallelized: not countable
+set_halo_values_z(double*):
+    436, #omp target teams distribute parallel for
+        436, Generating "nvkernel__Z17set_halo_values_zPd_F1L436_34" GPU kernel
+             Loop parallelized across teams and threads(128), schedule(static)
+    437, Loop not vectorized/parallelized: not countable
+init(int*, char***):
+    532, Loop not fused: enclosed in different number of nests
+         Loop not vectorized/parallelized: too deeply nested
+    535, Loop unrolled 4 times (completely unrolled)
+    541, Loop not vectorized/parallelized: loop count too small
+    565, Loop unrolled 4 times (completely unrolled)
+    572, Loop not fused: different loop trip count
+    575, Loop not vectorized/parallelized: loop count too small
+    589, Loop not vectorized: data dependency
+reductions(double&, double&):
+    761, #omp target teams distribute parallel for
+        761, Generating "nvkernel__Z10reductionsRdS__F1L761_38" GPU kernel
+        763, Loop parallelized across teams and threads(128), schedule(static)
+             Generating reduction(+:te,mass)
+    761, Generating map(tofrom:mass[:1]) 
+         Generating map(to:state[:((nx+4)*(nz+4))*4]) 
+         Generating map(tofrom:te[:1]) 
+    763, Loop not vectorized/parallelized: not countable
+    764, Loop not vectorized/parallelized: not countable
+    780, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     14, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+mpic++  -std=c++14 -Wall 	-DNX=400        	-DNZ=200 	-DSIM_TIME=600 	-DDATA_SPEC=DATA_SPEC_THERMAL         -I../miniWeather-cuda/ -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

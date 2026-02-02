@@ -1,0 +1,9 @@
+
+		Usage: ./main
+		         -h [display this help message]
+		         -t threshold theta in a range 0.0 - 1.0
+		         -o output file
+		         -i input microarray expression file (processed data)
+		         -m optional parameter maximum expected biclusters in a range 1 - number_of_rows_in_input_data_matrix with a default 1000
+		         -g optional parameter minimum percentage of gene overlap between merged biclusters in a range 0-100 with a default 100 percent for full overlap
+		         -p optional output file format : 0 for standard format, 1 for BiBench bicluster format and default is 0

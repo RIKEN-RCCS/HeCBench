@@ -1,0 +1,188 @@
+"csr_matrix.cpp", line 423: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     hypre_assert( num_rows == hypre_CSRMatrixNumRows(B) );
+     ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"csr_matrix.cpp", line 424: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     if ( col_map_offd_B ) hypre_assert( col_map_offd_A );
+                           ^
+
+"csr_matrix.cpp", line 425: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     if ( col_map_offd_A ) hypre_assert( col_map_offd_B );
+                           ^
+
+"csr_matrix.cpp", line 547: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     hypre_assert( mc == num_nonzeros );
+     ^
+
+hypre_CSRMatrixSetRownnz:
+    150, Loop not fused: complex flow graph
+hypre_CSRMatrixRead:
+    207, Loop not vectorized/parallelized: contains call
+    220, Loop not vectorized/parallelized: contains call
+    232, Loop not vectorized/parallelized: contains call
+hypre_CSRMatrixPrint:
+    279, Loop not vectorized/parallelized: contains call
+    284, Loop not vectorized/parallelized: contains call
+    291, Loop not vectorized/parallelized: contains call
+hypre_CSRMatrixCopy:
+    330, Recognized memory copy idiom
+    342, Recognized memory copy idiom
+hypre_CSRMatrixClone:
+    378, Recognized memory copy idiom
+    379, Recognized memory copy idiom
+         150, Loop not fused: complex flow graph
+hypre_CSRMatrixUnion:
+    438, Loop not fused: function call before adjacent loop
+    442, Loop not vectorized: unknown
+    460, Recognized memory copy idiom
+    466, Loop not vectorized: unknown
+    483, Invariant if transformation
+    488, Loop not vectorized/parallelized: potential early exits
+    517, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 4 times
+    522, Invariant if transformation
+    527, Loop not vectorized/parallelized: potential early exits
+"csr_matvec.cpp", line 94: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      hypre_assert( num_vectors == hypre_VectorNumVectors(y) );
+      ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"csr_matvec.cpp", line 262: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      hypre_assert( num_vectors == hypre_VectorNumVectors(y) );
+      ^
+
+hypre_CSRMatrixMatvec:
+    111, Loop not fused: no successor loop
+         Generated vector simd code for the loop
+    127, Recognized memory zero idiom
+    132, Loop not fused: complex flow graph
+         Generated vector simd code for the loop
+    145, Invariant if transformation
+         Loop not fused: no successor loop
+    158, Generated vector simd code for the loop containing reductions
+    166, Generated vector simd code for the loop containing reductions
+    176, Invariant if transformation
+         Loop not fused: complex flow graph
+         Loop not fused: no successor loop
+    181, Generated vector simd code for the loop containing reductions
+    190, Generated vector simd code for the loop containing reductions
+    206, Generated vector simd code for the loop
+hypre_CSRMatrixMatvecT:
+    279, Loop not fused: no successor loop
+         Generated vector simd code for the loop
+    296, Recognized memory zero idiom
+    302, Loop not fused: complex flow graph
+         Generated vector simd code for the loop
+    362, Invariant if transformation
+         Loop not fused: complex flow graph
+         Loop not fused: no successor loop
+    366, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    376, Loop not vectorized: data dependency
+    393, Generated vector simd code for the loop
+hypre_CSRMatrixMatvec_FF:
+    459, Loop not fused: no successor loop
+         Generated vector simd code for the loop
+    476, Loop not fused: no successor loop
+         Generated vector simd code for the loop
+    482, Loop not fused: enclosed in different number of nests
+         Generated vector simd code for the loop
+    493, Loop not fused: complex flow graph
+    498, Loop not vectorized: unsupported gather
+    512, Generated vector simd code for the loop
+"hypre_memory.cpp", line 78: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     hypre_error(HYPRE_ERROR_MEMORY);
+     ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+GenerateSeqLaplacian:
+     73, Loop not fused: different loop trip count
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 8 times
+     82, Loop not fused: function call before adjacent loop
+     86, Invariant if transformation
+         Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+    113, Loop not fused: function call before adjacent loop
+    117, Invariant if transformation
+         Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+    166, Loop not fused: function call before adjacent loop
+    167, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+main:
+         187, Loop not vectorized/parallelized: contains call
+         208, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+         374, Loop not vectorized/parallelized: contains call
+         388, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+test_Matvec():
+    187, Loop not vectorized/parallelized: contains call
+    208, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+test_Relax():
+    271, Generating copyin(A_diag_data[:nonzero],A_diag_i[:grid_size+1],A_diag_j[:nonzero]) [if not already present]
+         Generating copyout(u_data[:grid_size]) [if not already present]
+         Generating copyin(f_data[:grid_size]) [if not already present]
+    282, Generating implicit firstprivate(n)
+         Generating NVIDIA GPU code
+        284, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+        293, #pragma acc loop seq
+             Generating implicit reduction(+:res)
+    282, Loop not vectorized/parallelized: contains call
+    284, Loop not fused: no successor loop
+    293, Loop is parallelizable
+         Generated vector simd code for the loop containing reductions
+    320, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+test_Axpy():
+    374, Loop not vectorized/parallelized: contains call
+    388, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     23, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1l>>::_S_gcd(long, long):
+     23, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<double, std::ratio<1l, 1l>>::_S_gcd(long, long):
+     23, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+"vector.cpp", line 177: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     hypre_assert( hypre_VectorNumVectors(vector) == 1 );
+     ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+hypre_SeqVectorRead:
+    169, Loop not vectorized/parallelized: contains call
+hypre_SeqVectorPrint:
+    226, Loop not vectorized/parallelized: contains call
+    234, Loop not vectorized/parallelized: contains call
+hypre_SeqVectorSetConstantValues:
+    263, Recognized memory set idiom
+hypre_SeqVectorCopy:
+    289, Recognized memory copy idiom
+hypre_SeqVectorCloneDeep:
+         289, Recognized memory copy idiom
+hypre_SeqVectorScale:
+    358, Generated vector simd code for the loop
+hypre_SeqVectorAxpy:
+    384, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Vectorized loop was interleaved
+         Loop unrolled 4 times
+hypre_SeqVectorInnerProd:
+    408, Generated vector simd code for the loop containing reductions
+         Loop unrolled 2 times
+hypre_VectorSumElts:
+    426, Generated vector simd code for the loop containing reductions
+         Loop unrolled 4 times
+timeout was set to  600

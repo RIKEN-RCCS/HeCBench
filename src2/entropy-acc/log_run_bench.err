@@ -1,0 +1,33 @@
+"main.cpp", line 123: error: invalid text in pragma
+    #pragma acc data to: input[0:width*height], logTable[0:26]) \
+                     ^
+
+"main.cpp", line 123: error: extra text after expected end of preprocessing directive
+    #pragma acc data to: input[0:width*height], logTable[0:26]) \
+                       ^
+
+"main.cpp", line 61: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(numTeams) thread_limit(bsize_x*bsize_y)
+                         ^
+
+"main.cpp", line 61: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(numTeams) thread_limit(bsize_x*bsize_y)
+                               ^
+
+"main.cpp", line 66: error: identifier "omp_get_vector" is undefined
+        const int threadIdx_x = omp_get_vector() % bsize_x;
+                                ^
+
+"main.cpp", line 68: error: identifier "omp_get_gang" is undefined
+        const int teamIdx_x = omp_get_gang() % teamX;
+                              ^
+
+"main.cpp", line 59: warning: variable "numTeams" was declared but never referenced [declared_but_not_referenced]
+    const int numTeams = teamX * teamY;
+              ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+6 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

@@ -1,0 +1,5 @@
+nvc++ -acc  -DFLOAT -Wall -O3 -DOMP_TARGET -Minfo -mp=gpu -gpu=cc90,fastmath -c main.c -o main.o
+nvc++ -acc  -DFLOAT -Wall -O3 -DOMP_TARGET -Minfo -mp=gpu -gpu=cc90,fastmath -c base.c -o base.o
+nvc++ -acc  -DFLOAT -Wall -O3 -DOMP_TARGET -Minfo -mp=gpu -gpu=cc90,fastmath -c param.c -o param.o
+nvc++ -acc  -DFLOAT -Wall -O3 -DOMP_TARGET -Minfo -mp=gpu -gpu=cc90,fastmath -c util.c -o util.o
+nvc++ -acc  -DFLOAT -Wall -O3 -DOMP_TARGET -Minfo -mp=gpu -gpu=cc90,fastmath -c prna.cpp -o prna.o

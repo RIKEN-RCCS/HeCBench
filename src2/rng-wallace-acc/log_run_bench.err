@@ -1,0 +1,39 @@
+"main.cpp", line 58: error: invalid text in pragma
+    #pragma acc data to: globalPool[0: WALLACE_TOTAL_POOL_SIZE], \
+                     ^
+
+"main.cpp", line 58: error: extra text after expected end of preprocessing directive
+    #pragma acc data to: globalPool[0: WALLACE_TOTAL_POOL_SIZE], \
+                       ^
+
+"main.cpp", line 65: error: invalid text in pragma
+        #pragma acc parallel teams num_teams(WALLACE_NUM_BLOCKS) thread_limit(WALLACE_NUM_THREADS)
+                             ^
+
+"main.cpp", line 65: error: extra text after expected end of preprocessing directive
+        #pragma acc parallel teams num_teams(WALLACE_NUM_BLOCKS) thread_limit(WALLACE_NUM_THREADS)
+                                   ^
+
+"main.cpp", line 75: error: identifier "omp_get_thread_num" is undefined
+            const unsigned lid = omp_get_thread_num();
+                                 ^
+
+"main.cpp", line 76: error: identifier "omp_get_team_num" is undefined
+            const unsigned gid = omp_get_team_num();
+                                 ^
+
+"main.cpp", line 158: error: invalid text in pragma
+      #pragma acc update from(randomNumbers[0:WALLACE_OUTPUT_SIZE])
+                         ^
+
+"main.cpp", line 158: error: OpenACC data clause expected
+      #pragma acc update from(randomNumbers[0:WALLACE_OUTPUT_SIZE])
+                         ^
+
+"main.cpp", line 158: error: extra text after expected end of preprocessing directive
+      #pragma acc update from(randomNumbers[0:WALLACE_OUTPUT_SIZE])
+                             ^
+
+9 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:58: main.o] Error 2
+timeout was set to  600

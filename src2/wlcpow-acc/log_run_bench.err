@@ -1,0 +1,27 @@
+"main.cpp", line 34: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(teams) thread_limit(blocks)
+                         ^
+
+"main.cpp", line 34: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(teams) thread_limit(blocks)
+                               ^
+
+"main.cpp", line 39: error: identifier "omp_get_thread_num" is undefined
+        int threadIdx_x = omp_get_thread_num();
+                          ^
+
+"main.cpp", line 40: error: identifier "omp_get_team_num" is undefined
+        int blockIdx_x = omp_get_team_num();
+                         ^
+
+"main.cpp", line 209: error: invalid text in pragma
+  #pragma acc parallel data \
+                       ^
+
+"main.cpp", line 210: error: extra text after expected end of preprocessing directive
+    map (to: coord_merged[0:n+1], \
+    ^
+
+6 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

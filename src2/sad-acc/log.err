@@ -1,0 +1,2 @@
+bitmap_image::load_bitmap() ERROR: bitmap_image - file ../sad-cuda/coins.bmp not found!
+bitmap_image::load_bitmap() ERROR: bitmap_image - file ../sad-cuda/coin.bmp not found!

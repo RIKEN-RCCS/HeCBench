@@ -1,0 +1,57 @@
+nvc++  -Wall -I../p4-cuda -O3 -Minfo -mp=gpu -gpu=cc90,fastmath -c main.cpp -o main.o
+reference(float const*, float*, float const*, float const*, float const*, float*, float*, float, float, float, float, int, int, int, int, int, int, float, float):
+     24, include "reference.h"
+          38, Loop not fused: complex flow graph
+              Loop not vectorized: unknown
+verify(int, float const*, float*, float const*, float const*, float const*, float*, float*, float, float, float, float, int, int, int, int, int, int, float, float):
+     24, include "reference.h"
+         161, Loop not vectorized/parallelized: potential early exits
+         166, Loop not vectorized/parallelized: potential early exits
+          25, Loop not fused: complex flow graph
+          38, Loop not fused: complex flow graph
+              Loop not vectorized: unknown
+        5712, Loop not vectorized: may not be beneficial for target
+postprocess(float const*, float*, float const*, float const*, float const*, float*, float*, int*, float, float, float, float, int, int, int, int, int, float, float):
+     48, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+     63, Loop not fused: complex flow graph
+         Loop not vectorized: unknown
+main:
+    180, Loop not vectorized/parallelized: contains call
+    181, Loop not vectorized/parallelized: contains call
+    182, Loop not vectorized/parallelized: contains call
+    195, Loop not vectorized/parallelized: contains call
+    198, Generating update to(box_input[:box_size])
+    201, Generating update to(object_counter[:])
+    204, #omp target teams num_teams(feature_size)
+        191, Generating map(alloc:box_input[:box_size]) 
+             Generating map(to:cls_input[:cls_size],anchor_bottom_heights[:3]) 
+             Generating map(from:bndbox_output[:bndbox_size]) 
+             Generating map(to:dir_cls_input[:dir_cls_size],anchors[:24]) 
+             Generating map(alloc:object_counter[:]) 
+             Generating map(from:score_output[:feature_anchor_size]) 
+        204, Generating "nvkernel_main_F1L204_2" GPU kernel
+        206, #omp parallel
+    204, Generating implicit map(tofrom:object_counter[:]) 
+          63, Loop unrolled 2 times (completely unrolled)
+         108, Loop not vectorized/parallelized: contains a parallel region
+    236, Generating update from(object_counter[:])
+         133, Loop unrolled 2 times (completely unrolled)
+              Loop not fused: complex flow graph
+              Loop not vectorized: data dependency
+         157, Loop not vectorized: may not be beneficial for target
+         161, Loop not vectorized/parallelized: potential early exits
+         166, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     18, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+     24, include "reference.h"
+float* std::max_element<float*>(float*, float*):
+        5687, Loop not vectorized: may not be beneficial for target
+float* std::__max_element<float*, __gnu_cxx::__ops::_Iter_less_iter>(float*, float*, __gnu_cxx::__ops::_Iter_less_iter):
+     24, include "reference.h"
+           1, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                       5687, Loop not vectorized: may not be beneficial for target
+nvc++  -Wall -I../p4-cuda -O3 -Minfo -mp=gpu -gpu=cc90,fastmath main.o -o main 

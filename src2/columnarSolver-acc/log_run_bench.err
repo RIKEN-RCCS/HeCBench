@@ -1,0 +1,35 @@
+"kernels.cpp", line 77: error: identifier "omp_get_thread_num" is undefined
+    int lid = omp_get_thread_num();
+              ^
+
+"kernels.cpp", line 78: error: identifier "omp_get_team_num" is undefined
+    int idx = omp_get_team_num() * T + lid;
+              ^
+
+"main.cpp", line 95: error: invalid text in pragma
+  #pragma acc data to: scores[0:totalBigrams], \
+                   ^
+
+"main.cpp", line 95: error: extra text after expected end of preprocessing directive
+  #pragma acc data to: scores[0:totalBigrams], \
+                     ^
+
+"main.cpp", line 102: error: invalid text in pragma
+      #pragma acc parallel loop thread_limit(T)
+                                ^
+
+"main.cpp", line 102: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel loop thread_limit(T)
+                                            ^
+
+"main.cpp", line 109: error: invalid text in pragma
+      #pragma acc parallel teams num_teams(B) thread_limit(T)
+                           ^
+
+"main.cpp", line 109: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel teams num_teams(B) thread_limit(T)
+                                 ^
+
+8 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

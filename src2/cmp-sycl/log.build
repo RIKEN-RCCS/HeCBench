@@ -1,0 +1,40 @@
+clang++  -std=c++17 -Wall -I../cmp-cuda -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c main.cpp -o main.o
+clang++  -std=c++17 -Wall -I../cmp-cuda -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c ../cmp-cuda/reference.cpp -o reference.o
+clang++  -std=c++17 -Wall -I../cmp-cuda -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c ../cmp-cuda/su_cdp.cpp -o su_cdp.o
+../cmp-cuda/su_cdp.cpp:31:20: warning: field '_cdp' will be initialized after field '_traces' [-Wreorder-ctor]
+   31 | su_cdp::su_cdp() : _cdp(INT_MIN), _traces(0) {
+      |                    ^~~~~~~~~~~~~  ~~~~~~~~~~
+      |                    _traces(0)     _cdp(INT_MIN)
+1 warning generated.
+../cmp-cuda/su_cdp.cpp:31:20: warning: field '_cdp' will be initialized after field '_traces' [-Wreorder-ctor]
+   31 | su_cdp::su_cdp() : _cdp(INT_MIN), _traces(0) {
+      |                    ^~~~~~~~~~~~~  ~~~~~~~~~~
+      |                    _traces(0)     _cdp(INT_MIN)
+1 warning generated.
+clang++  -std=c++17 -Wall -I../cmp-cuda -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c ../cmp-cuda/su_gather.cpp -o su_gather.o
+../cmp-cuda/su_gather.cpp:34:3: warning: initializer order does not match the declaration order [-Wreorder-ctor]
+   34 |   _ttraces(0), _nos(0), _ns(-1), _ntrs(0)
+      |   ^~~~~~~~~~~  ~~~~~~~  ~~~~~~~  ~~~~~~~~
+      |   _ns(-1)      _ntrs(0) _nos(0)  _ttraces(0)
+../cmp-cuda/su_gather.cpp:34:3: note: field '_ttraces' will be initialized after field '_nos'
+   34 |   _ttraces(0), _nos(0), _ns(-1), _ntrs(0)
+      |   ^~~~~~~~~~~
+../cmp-cuda/su_gather.cpp:34:16: note: field '_nos' will be initialized after field '_ns'
+   34 |   _ttraces(0), _nos(0), _ns(-1), _ntrs(0)
+      |                ^~~~~~~
+1 warning generated.
+../cmp-cuda/su_gather.cpp:34:3: warning: initializer order does not match the declaration order [-Wreorder-ctor]
+   34 |   _ttraces(0), _nos(0), _ns(-1), _ntrs(0)
+      |   ^~~~~~~~~~~  ~~~~~~~  ~~~~~~~  ~~~~~~~~
+      |   _ns(-1)      _ntrs(0) _nos(0)  _ttraces(0)
+../cmp-cuda/su_gather.cpp:34:3: note: field '_ttraces' will be initialized after field '_nos'
+   34 |   _ttraces(0), _nos(0), _ns(-1), _ntrs(0)
+      |   ^~~~~~~~~~~
+../cmp-cuda/su_gather.cpp:34:16: note: field '_nos' will be initialized after field '_ns'
+   34 |   _ttraces(0), _nos(0), _ns(-1), _ntrs(0)
+      |                ^~~~~~~
+1 warning generated.
+clang++  -std=c++17 -Wall -I../cmp-cuda -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c ../cmp-cuda/su_trace.cpp -o su_trace.o
+clang++  -std=c++17 -Wall -I../cmp-cuda -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c ../cmp-cuda/log.cpp -o log.o
+clang++  -std=c++17 -Wall -I../cmp-cuda -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c ../cmp-cuda/parser.cpp -o parser.o
+clang++  -std=c++17 -Wall -I../cmp-cuda -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU main.o reference.o su_cdp.o su_gather.o su_trace.o log.o parser.o -o main 

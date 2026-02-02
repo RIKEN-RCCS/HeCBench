@@ -1,0 +1,405 @@
+"gaussian_kernel.cpp", line 123: error: identifier "omp_get_thread_num" is undefined
+    int tid = omp_get_thread_num(); 
+              ^
+
+"gaussian_kernel.cpp", line 124: error: identifier "omp_get_team_num" is undefined
+    int bid = omp_get_team_num(); 
+              ^
+
+"gaussian_kernel.cpp", line 125: error: identifier "omp_get_vector" is undefined
+    int num_threads = omp_get_vector();
+                      ^
+
+"gaussian_kernel.cpp", line 207: error: identifier "omp_get_team_num" is undefined
+    int c = omp_get_team_num() / NUM_BLOCKS;
+            ^
+
+"gaussian_kernel.cpp", line 216: error: identifier "omp_get_thread_num" is undefined
+    const unsigned int tid = omp_get_thread_num();
+                             ^
+
+"gaussian_kernel.cpp", line 291: error: identifier "omp_get_gang" is undefined
+    int groups = omp_get_gang(); 
+                 ^
+
+"gaussian_kernel.cpp", line 292: error: identifier "omp_get_thread_num" is undefined
+    int tid = omp_get_thread_num();
+              ^
+
+"gaussian_kernel.cpp", line 293: error: identifier "omp_get_team_num" is undefined
+    int bid = omp_get_team_num();
+              ^
+
+"cluster.cpp", line 262: error: invalid text in pragma
+  #pragma acc update from (N[0:num_clusters])
+                     ^
+
+"cluster.cpp", line 262: error: OpenACC data clause expected
+  #pragma acc update from (N[0:num_clusters])
+                     ^
+
+"cluster.cpp", line 262: error: extra text after expected end of preprocessing directive
+  #pragma acc update from (N[0:num_clusters])
+                          ^
+
+"cluster.cpp", line 263: error: invalid text in pragma
+  #pragma acc update from (R[0:num_dimensions*num_dimensions*num_clusters])
+                     ^
+
+"cluster.cpp", line 263: error: OpenACC data clause expected
+  #pragma acc update from (R[0:num_dimensions*num_dimensions*num_clusters])
+                     ^
+
+"cluster.cpp", line 263: error: extra text after expected end of preprocessing directive
+  #pragma acc update from (R[0:num_dimensions*num_dimensions*num_clusters])
+                          ^
+
+"cluster.cpp", line 264: error: invalid text in pragma
+  #pragma acc update from (Rinv[0:num_dimensions*num_dimensions*num_clusters])
+                     ^
+
+"cluster.cpp", line 264: error: OpenACC data clause expected
+  #pragma acc update from (Rinv[0:num_dimensions*num_dimensions*num_clusters])
+                     ^
+
+"cluster.cpp", line 264: error: extra text after expected end of preprocessing directive
+  #pragma acc update from (Rinv[0:num_dimensions*num_dimensions*num_clusters])
+                          ^
+
+"cluster.cpp", line 265: error: invalid text in pragma
+  #pragma acc update from (pi[0:num_clusters])
+                     ^
+
+"cluster.cpp", line 265: error: OpenACC data clause expected
+  #pragma acc update from (pi[0:num_clusters])
+                     ^
+
+"cluster.cpp", line 265: error: extra text after expected end of preprocessing directive
+  #pragma acc update from (pi[0:num_clusters])
+                          ^
+
+"cluster.cpp", line 266: error: invalid text in pragma
+  #pragma acc update from (constant[0:num_clusters])
+                     ^
+
+"cluster.cpp", line 266: error: OpenACC data clause expected
+  #pragma acc update from (constant[0:num_clusters])
+                     ^
+
+"cluster.cpp", line 266: error: extra text after expected end of preprocessing directive
+  #pragma acc update from (constant[0:num_clusters])
+                          ^
+
+"cluster.cpp", line 267: error: invalid text in pragma
+  #pragma acc update from (avgvar[0:num_clusters])
+                     ^
+
+"cluster.cpp", line 267: error: OpenACC data clause expected
+  #pragma acc update from (avgvar[0:num_clusters])
+                     ^
+
+"cluster.cpp", line 267: error: extra text after expected end of preprocessing directive
+  #pragma acc update from (avgvar[0:num_clusters])
+                          ^
+
+"cluster.cpp", line 268: error: invalid text in pragma
+  #pragma acc update from (means[0:num_dimensions*num_clusters])
+                     ^
+
+"cluster.cpp", line 268: error: OpenACC data clause expected
+  #pragma acc update from (means[0:num_dimensions*num_clusters])
+                     ^
+
+"cluster.cpp", line 268: error: extra text after expected end of preprocessing directive
+  #pragma acc update from (means[0:num_dimensions*num_clusters])
+                          ^
+
+"cluster.cpp", line 281: error: invalid text in pragma
+  #pragma acc update to (N[0:num_clusters])
+                     ^
+
+"cluster.cpp", line 281: error: OpenACC data clause expected
+  #pragma acc update to (N[0:num_clusters])
+                     ^
+
+"cluster.cpp", line 281: error: extra text after expected end of preprocessing directive
+  #pragma acc update to (N[0:num_clusters])
+                        ^
+
+"cluster.cpp", line 282: error: invalid text in pragma
+  #pragma acc update to (R[0:num_dimensions*num_dimensions*num_clusters])
+                     ^
+
+"cluster.cpp", line 282: error: OpenACC data clause expected
+  #pragma acc update to (R[0:num_dimensions*num_dimensions*num_clusters])
+                     ^
+
+"cluster.cpp", line 282: error: extra text after expected end of preprocessing directive
+  #pragma acc update to (R[0:num_dimensions*num_dimensions*num_clusters])
+                        ^
+
+"cluster.cpp", line 283: error: invalid text in pragma
+  #pragma acc update to (Rinv[0:num_dimensions*num_dimensions*num_clusters])
+                     ^
+
+"cluster.cpp", line 283: error: OpenACC data clause expected
+  #pragma acc update to (Rinv[0:num_dimensions*num_dimensions*num_clusters])
+                     ^
+
+"cluster.cpp", line 283: error: extra text after expected end of preprocessing directive
+  #pragma acc update to (Rinv[0:num_dimensions*num_dimensions*num_clusters])
+                        ^
+
+"cluster.cpp", line 284: error: invalid text in pragma
+  #pragma acc update to (pi[0:num_clusters])
+                     ^
+
+"cluster.cpp", line 284: error: OpenACC data clause expected
+  #pragma acc update to (pi[0:num_clusters])
+                     ^
+
+"cluster.cpp", line 284: error: extra text after expected end of preprocessing directive
+  #pragma acc update to (pi[0:num_clusters])
+                        ^
+
+"cluster.cpp", line 285: error: invalid text in pragma
+  #pragma acc update to (constant[0:num_clusters])
+                     ^
+
+"cluster.cpp", line 285: error: OpenACC data clause expected
+  #pragma acc update to (constant[0:num_clusters])
+                     ^
+
+"cluster.cpp", line 285: error: extra text after expected end of preprocessing directive
+  #pragma acc update to (constant[0:num_clusters])
+                        ^
+
+"cluster.cpp", line 286: error: invalid text in pragma
+  #pragma acc update to (avgvar[0:num_clusters])
+                     ^
+
+"cluster.cpp", line 286: error: OpenACC data clause expected
+  #pragma acc update to (avgvar[0:num_clusters])
+                     ^
+
+"cluster.cpp", line 286: error: extra text after expected end of preprocessing directive
+  #pragma acc update to (avgvar[0:num_clusters])
+                        ^
+
+"cluster.cpp", line 287: error: invalid text in pragma
+  #pragma acc update to (means[0:num_dimensions*num_clusters])
+                     ^
+
+"cluster.cpp", line 287: error: OpenACC data clause expected
+  #pragma acc update to (means[0:num_dimensions*num_clusters])
+                     ^
+
+"cluster.cpp", line 287: error: extra text after expected end of preprocessing directive
+  #pragma acc update to (means[0:num_dimensions*num_clusters])
+                        ^
+
+"cluster.cpp", line 360: error: invalid text in pragma
+  #pragma acc data alloc:  \
+                   ^
+
+"cluster.cpp", line 360: error: extra text after expected end of preprocessing directive
+  #pragma acc data alloc:  \
+                        ^
+
+"cluster.cpp", line 379: error: invalid text in pragma
+  #pragma acc parallel teams gang(1) thread_limit(NUM_THREADS_MSTEP)
+                       ^
+
+"cluster.cpp", line 379: error: extra text after expected end of preprocessing directive
+  #pragma acc parallel teams gang(1) thread_limit(NUM_THREADS_MSTEP)
+                             ^
+
+"cluster.cpp", line 387: error: identifier "omp_get_thread_num" is undefined
+          int tid = omp_get_thread_num(); 
+                    ^
+
+"cluster.cpp", line 388: error: identifier "omp_get_vector" is undefined
+          int num_threads = omp_get_vector();
+                            ^
+
+"cluster.cpp", line 468: error: invalid text in pragma
+  #pragma acc parallel teams num_teams(original_num_clusters) thread_limit(NUM_THREADS_MSTEP)
+                       ^
+
+"cluster.cpp", line 468: error: extra text after expected end of preprocessing directive
+  #pragma acc parallel teams num_teams(original_num_clusters) thread_limit(NUM_THREADS_MSTEP)
+                             ^
+
+"cluster.cpp", line 552: error: invalid text in pragma
+  #pragma acc parallel teams num_teams(NUM_BLOCKS*num_clusters) thread_limit(NUM_THREADS_ESTEP)
+                       ^
+
+"cluster.cpp", line 552: error: extra text after expected end of preprocessing directive
+  #pragma acc parallel teams num_teams(NUM_BLOCKS*num_clusters) thread_limit(NUM_THREADS_ESTEP)
+                             ^
+
+"cluster.cpp", line 573: error: invalid text in pragma
+  #pragma acc parallel teams num_teams(NUM_BLOCKS) thread_limit(NUM_THREADS_ESTEP)
+                       ^
+
+"cluster.cpp", line 573: error: extra text after expected end of preprocessing directive
+  #pragma acc parallel teams num_teams(NUM_BLOCKS) thread_limit(NUM_THREADS_ESTEP)
+                             ^
+
+"cluster.cpp", line 592: error: invalid text in pragma
+  #pragma acc update from (likelihoods[0:NUM_BLOCKS])
+                     ^
+
+"cluster.cpp", line 592: error: OpenACC data clause expected
+  #pragma acc update from (likelihoods[0:NUM_BLOCKS])
+                     ^
+
+"cluster.cpp", line 592: error: extra text after expected end of preprocessing directive
+  #pragma acc update from (likelihoods[0:NUM_BLOCKS])
+                          ^
+
+"cluster.cpp", line 614: error: invalid text in pragma
+  #pragma acc parallel teams num_teams(num_clusters) thread_limit(NUM_THREADS_MSTEP)
+                       ^
+
+"cluster.cpp", line 614: error: extra text after expected end of preprocessing directive
+  #pragma acc parallel teams num_teams(num_clusters) thread_limit(NUM_THREADS_MSTEP)
+                             ^
+
+"cluster.cpp", line 619: error: identifier "omp_get_thread_num" is undefined
+              int tid  = omp_get_thread_num(); 
+                         ^
+
+"cluster.cpp", line 620: error: identifier "omp_get_vector" is undefined
+              int num_threads = omp_get_vector(); 
+                                ^
+
+"cluster.cpp", line 621: error: identifier "omp_get_team_num" is undefined
+              int c = omp_get_team_num();
+                      ^
+
+"cluster.cpp", line 651: error: invalid text in pragma
+  #pragma acc update from (clusters_N[0:num_clusters])
+                     ^
+
+"cluster.cpp", line 651: error: OpenACC data clause expected
+  #pragma acc update from (clusters_N[0:num_clusters])
+                     ^
+
+"cluster.cpp", line 651: error: extra text after expected end of preprocessing directive
+  #pragma acc update from (clusters_N[0:num_clusters])
+                          ^
+
+"cluster.cpp", line 655: error: invalid text in pragma
+  #pragma acc parallel teams num_teams(num_dimensions*num_clusters) thread_limit(NUM_THREADS_MSTEP)
+                       ^
+
+"cluster.cpp", line 655: error: extra text after expected end of preprocessing directive
+  #pragma acc parallel teams num_teams(num_dimensions*num_clusters) thread_limit(NUM_THREADS_MSTEP)
+                             ^
+
+"cluster.cpp", line 660: error: identifier "omp_get_thread_num" is undefined
+              int tid = omp_get_thread_num();
+                        ^
+
+"cluster.cpp", line 661: error: identifier "omp_get_vector" is undefined
+              int num_threads = omp_get_vector();
+                                ^
+
+"cluster.cpp", line 662: error: identifier "omp_get_team_num" is undefined
+              int c = omp_get_team_num() / num_dimensions;
+                      ^
+
+"cluster.cpp", line 688: error: invalid text in pragma
+  #pragma acc update from(clusters_means[0:num_clusters*num_dimensions])
+                     ^
+
+"cluster.cpp", line 688: error: OpenACC data clause expected
+  #pragma acc update from(clusters_means[0:num_clusters*num_dimensions])
+                     ^
+
+"cluster.cpp", line 688: error: extra text after expected end of preprocessing directive
+  #pragma acc update from(clusters_means[0:num_clusters*num_dimensions])
+                         ^
+
+"cluster.cpp", line 705: error: invalid text in pragma
+  #pragma acc update to(clusters_means[0:num_clusters*num_dimensions])
+                     ^
+
+"cluster.cpp", line 705: error: OpenACC data clause expected
+  #pragma acc update to(clusters_means[0:num_clusters*num_dimensions])
+                     ^
+
+"cluster.cpp", line 705: error: extra text after expected end of preprocessing directive
+  #pragma acc update to(clusters_means[0:num_clusters*num_dimensions])
+                       ^
+
+"cluster.cpp", line 716: error: invalid text in pragma
+  #pragma acc parallel teams num_teams(num_dimensions*(num_dimensions+1)/2*\
+                       ^
+
+"cluster.cpp", line 716: error: extra text after expected end of preprocessing directive
+  #pragma acc parallel teams num_teams(num_dimensions*(num_dimensions+1)/2*\
+                             ^
+
+"cluster.cpp", line 725: error: identifier "omp_get_thread_num" is undefined
+              int tid = omp_get_thread_num(); //item.get_local_id(1);
+                        ^
+
+"cluster.cpp", line 730: error: identifier "omp_get_team_num" is undefined
+              omp_get_team_num() / ((num_clusters+NUM_CLUSTERS_PER_BLOCK-1)/NUM_CLUSTERS_PER_BLOCK),
+              ^
+
+"cluster.cpp", line 819: error: invalid text in pragma
+  #pragma acc update from (clusters_R[0:num_clusters*num_dimensions*num_dimensions])
+                     ^
+
+"cluster.cpp", line 819: error: OpenACC data clause expected
+  #pragma acc update from (clusters_R[0:num_clusters*num_dimensions*num_dimensions])
+                     ^
+
+"cluster.cpp", line 819: error: extra text after expected end of preprocessing directive
+  #pragma acc update from (clusters_R[0:num_clusters*num_dimensions*num_dimensions])
+                          ^
+
+"cluster.cpp", line 842: error: invalid text in pragma
+  #pragma acc update to (clusters_R[0:num_clusters*num_dimensions*num_dimensions])
+                     ^
+
+"cluster.cpp", line 842: error: OpenACC data clause expected
+  #pragma acc update to (clusters_R[0:num_clusters*num_dimensions*num_dimensions])
+                     ^
+
+"cluster.cpp", line 842: error: extra text after expected end of preprocessing directive
+  #pragma acc update to (clusters_R[0:num_clusters*num_dimensions*num_dimensions])
+                        ^
+
+"cluster.cpp", line 852: error: invalid text in pragma
+  #pragma acc parallel teams num_teams(num_clusters) thread_limit(NUM_THREADS_MSTEP)
+                       ^
+
+"cluster.cpp", line 852: error: extra text after expected end of preprocessing directive
+  #pragma acc parallel teams num_teams(num_clusters) thread_limit(NUM_THREADS_MSTEP)
+                             ^
+
+"cluster.cpp", line 876: error: invalid text in pragma
+  #pragma acc update from (clusters_constant[0:num_clusters])
+                     ^
+
+"cluster.cpp", line 876: error: OpenACC data clause expected
+  #pragma acc update from (clusters_constant[0:num_clusters])
+                     ^
+
+"cluster.cpp", line 876: error: extra text after expected end of preprocessing directive
+  #pragma acc update from (clusters_constant[0:num_clusters])
+                          ^
+
+"cluster.cpp", line 885: error: invalid text in pragma
+  #pragma acc parallel teams num_teams(NUM_BLOCKS*num_clusters) thread_limit(NUM_THREADS_ESTEP)
+                       ^
+
+Error limit reached. Use -fmax-errors=N to change the limit, N=0 for unlimited.
+100 errors detected in the compilation of "main.cpp".
+Compilation terminated.
+make: *** [Makefile.NVD:58: main.o] Error 2
+timeout was set to  600

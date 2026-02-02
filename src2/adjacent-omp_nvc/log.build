@@ -1,0 +1,183 @@
+nvc++  -Wall -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+Initialize(int*, int):
+     65, Generated vector simd code for the loop
+main:
+          83, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop
+          88, Loop not vectorized/parallelized: contains call
+          90, Generating update from(.inl_h_out_567[:.inl_num_items_561])
+          93, Loop not fused: function call before adjacent loop
+          96, Loop not vectorized: data dependency
+         104, Loop not vectorized/parallelized: contains call
+         106, Generating update from(.inl_h_out_567[:.inl_num_items_561])
+         109, Loop not fused: function call before adjacent loop
+         112, Loop not vectorized: data dependency
+         122, Loop not vectorized/parallelized: contains call
+          83, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop
+          88, Loop not vectorized/parallelized: contains call
+          90, Generating update from(.inl_h_out_628[:.inl_num_items_622])
+          93, Loop not fused: function call before adjacent loop
+          96, Loop not vectorized: data dependency
+         104, Loop not vectorized/parallelized: contains call
+         106, Generating update from(.inl_h_out_628[:.inl_num_items_622])
+         109, Loop not fused: function call before adjacent loop
+         112, Loop not vectorized: data dependency
+         122, Loop not vectorized/parallelized: contains call
+          83, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop
+          88, Loop not vectorized/parallelized: contains call
+          90, Generating update from(.inl_h_out_689[:.inl_num_items_683])
+          93, Loop not fused: function call before adjacent loop
+          96, Loop not vectorized: data dependency
+         104, Loop not vectorized/parallelized: contains call
+         106, Generating update from(.inl_h_out_689[:.inl_num_items_683])
+         109, Loop not fused: function call before adjacent loop
+         112, Loop not vectorized: data dependency
+         122, Loop not vectorized/parallelized: contains call
+          83, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop
+          88, Loop not vectorized/parallelized: contains call
+          90, Generating update from(.inl_h_out_750[:.inl_num_items_744])
+          93, Loop not fused: function call before adjacent loop
+          96, Loop not vectorized: data dependency
+         104, Loop not vectorized/parallelized: contains call
+         106, Generating update from(.inl_h_out_750[:.inl_num_items_744])
+         109, Loop not fused: function call before adjacent loop
+         112, Loop not vectorized: data dependency
+         122, Loop not vectorized/parallelized: contains call
+          83, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop
+          88, Loop not vectorized/parallelized: contains call
+          90, Generating update from(.inl_h_out_811[:.inl_num_items_805])
+          93, Loop not fused: function call before adjacent loop
+          96, Loop not vectorized: data dependency
+         104, Loop not vectorized/parallelized: contains call
+         106, Generating update from(.inl_h_out_811[:.inl_num_items_805])
+         109, Loop not fused: function call before adjacent loop
+         112, Loop not vectorized: data dependency
+         122, Loop not vectorized/parallelized: contains call
+void Test<64>(int, int):
+          65, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop
+     87, Generating map(alloc:h_out[:num_items]) 
+         Generating map(to:h_in[:num_items]) 
+     88, Loop not vectorized/parallelized: contains call
+     90, Generating update from(h_out[:num_items])
+     93, Loop not fused: function call before adjacent loop
+     96, Loop not vectorized: data dependency
+    104, Loop not vectorized/parallelized: contains call
+    106, Generating update from(h_out[:num_items])
+    109, Loop not fused: function call before adjacent loop
+    112, Loop not vectorized: data dependency
+    122, Loop not vectorized/parallelized: contains call
+void Test<128>(int, int):
+          65, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop
+     87, Generating map(alloc:h_out[:num_items]) 
+         Generating map(to:h_in[:num_items]) 
+     88, Loop not vectorized/parallelized: contains call
+     90, Generating update from(h_out[:num_items])
+     93, Loop not fused: function call before adjacent loop
+     96, Loop not vectorized: data dependency
+    104, Loop not vectorized/parallelized: contains call
+    106, Generating update from(h_out[:num_items])
+    109, Loop not fused: function call before adjacent loop
+    112, Loop not vectorized: data dependency
+    122, Loop not vectorized/parallelized: contains call
+void Test<256>(int, int):
+          65, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop
+     87, Generating map(alloc:h_out[:num_items]) 
+         Generating map(to:h_in[:num_items]) 
+     88, Loop not vectorized/parallelized: contains call
+     90, Generating update from(h_out[:num_items])
+     93, Loop not fused: function call before adjacent loop
+     96, Loop not vectorized: data dependency
+    104, Loop not vectorized/parallelized: contains call
+    106, Generating update from(h_out[:num_items])
+    109, Loop not fused: function call before adjacent loop
+    112, Loop not vectorized: data dependency
+    122, Loop not vectorized/parallelized: contains call
+void Test<512>(int, int):
+          65, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop
+     87, Generating map(alloc:h_out[:num_items]) 
+         Generating map(to:h_in[:num_items]) 
+     88, Loop not vectorized/parallelized: contains call
+     90, Generating update from(h_out[:num_items])
+     93, Loop not fused: function call before adjacent loop
+     96, Loop not vectorized: data dependency
+    104, Loop not vectorized/parallelized: contains call
+    106, Generating update from(h_out[:num_items])
+    109, Loop not fused: function call before adjacent loop
+    112, Loop not vectorized: data dependency
+    122, Loop not vectorized/parallelized: contains call
+void Test<1024>(int, int):
+          65, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop
+     87, Generating map(alloc:h_out[:num_items]) 
+         Generating map(to:h_in[:num_items]) 
+     88, Loop not vectorized/parallelized: contains call
+     90, Generating update from(h_out[:num_items])
+     93, Loop not fused: function call before adjacent loop
+     96, Loop not vectorized: data dependency
+    104, Loop not vectorized/parallelized: contains call
+    106, Generating update from(h_out[:num_items])
+    109, Loop not fused: function call before adjacent loop
+    112, Loop not vectorized: data dependency
+    122, Loop not vectorized/parallelized: contains call
+void BlockAdjDiffKernel<64>(int const*, int*, bool, int):
+     40, #omp target teams distribute
+         40, Generating "nvkernel__Z18BlockAdjDiffKernelILi64EEvPKiPibi_F1L40_2" GPU kernel
+         43, Loop parallelized across teams, schedule(static)
+         47, Team private (out,in) located in CUDA shared memory
+             #omp parallel
+           47, Loop parallelized across threads, schedule(static)
+     43, Loop not vectorized/parallelized: contains structure move
+     47, Invariant if transformation
+         Loop not vectorized/parallelized: not countable
+void BlockAdjDiffKernel<128>(int const*, int*, bool, int):
+     40, #omp target teams distribute
+         40, Generating "nvkernel__Z18BlockAdjDiffKernelILi128EEvPKiPibi_F1L40_7" GPU kernel
+         43, Loop parallelized across teams, schedule(static)
+         47, Team private (out,in) located in CUDA shared memory
+             #omp parallel
+           47, Loop parallelized across threads, schedule(static)
+     43, Loop not vectorized/parallelized: contains structure move
+     47, Invariant if transformation
+         Loop not vectorized/parallelized: not countable
+void BlockAdjDiffKernel<256>(int const*, int*, bool, int):
+     40, #omp target teams distribute
+         40, Generating "nvkernel__Z18BlockAdjDiffKernelILi256EEvPKiPibi_F1L40_12" GPU kernel
+         43, Loop parallelized across teams, schedule(static)
+         47, Team private (out,in) located in CUDA shared memory
+             #omp parallel
+           47, Loop parallelized across threads, schedule(static)
+     43, Loop not vectorized/parallelized: contains structure move
+     47, Invariant if transformation
+         Loop not vectorized/parallelized: not countable
+void BlockAdjDiffKernel<512>(int const*, int*, bool, int):
+     40, #omp target teams distribute
+         40, Generating "nvkernel__Z18BlockAdjDiffKernelILi512EEvPKiPibi_F1L40_17" GPU kernel
+         43, Loop parallelized across teams, schedule(static)
+         47, Team private (out,in) located in CUDA shared memory
+             #omp parallel
+           47, Loop parallelized across threads, schedule(static)
+     43, Loop not vectorized/parallelized: contains structure move
+     47, Invariant if transformation
+         Loop not vectorized/parallelized: not countable
+void BlockAdjDiffKernel<1024>(int const*, int*, bool, int):
+     40, #omp target teams distribute
+         40, Generating "nvkernel__Z18BlockAdjDiffKernelILi1024EEvPKiPibi_F1L40_22" GPU kernel
+         43, Loop parallelized across teams, schedule(static)
+         47, Team private (out,in) located in CUDA shared memory
+             #omp parallel
+           47, Loop parallelized across threads, schedule(static)
+     43, Loop not vectorized/parallelized: contains structure move
+     47, Invariant if transformation
+         Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     28, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++  -Wall -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

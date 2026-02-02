@@ -1,0 +1,8 @@
+"./main.c", line 7: catastrophic error: cannot open source file "./util/graphics/graphics.h"
+  #include "./util/graphics/graphics.h"
+                                       ^
+
+1 catastrophic error detected in the compilation of "./main.c".
+Compilation terminated.
+make: *** [Makefile.NVD:34: main.o] Error 2
+timeout was set to  600

@@ -1,0 +1,1 @@
+nvc++ -acc  -Wall -I../p4-cuda -O3 -Minfo -mp=gpu -gpu=cc90,fastmath -c main.cpp -o main.o

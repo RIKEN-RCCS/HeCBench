@@ -1,0 +1,6 @@
+batch_size: 30000000
+output_size (range of index values): 32
+vector_dimension: 64
+PASS
+Average execution time of kernel1: 4844.504395 (us)
+Average execution time of kernel2: 4775.464844 (us)

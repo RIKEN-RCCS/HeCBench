@@ -1,0 +1,2 @@
+nvc++ -acc -c  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.cpp
+nvc++ -acc -c  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 shmem_kernels.cpp

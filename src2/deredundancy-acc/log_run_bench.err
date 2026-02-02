@@ -1,0 +1,75 @@
+"kernels.cpp", line 362: error: invalid text in pragma
+    #pragma acc parallel map (tofrom: r[0:1]) map(tofrom: cluster[0:readsCount])
+                         ^
+
+"kernels.cpp", line 362: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel map (tofrom: r[0:1]) map(tofrom: cluster[0:readsCount])
+                             ^
+
+"kernels.cpp", line 456: error: invalid text in pragma
+    #pragma acc parallel loop num_teams(readsCount) vector_length(128)
+                              ^
+
+"kernels.cpp", line 456: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop num_teams(readsCount) vector_length(128)
+                                       ^
+
+"main.cpp", line 53: error: invalid text in pragma
+  #pragma acc data to: h_lengths[0:readsCount], \
+                   ^
+
+"main.cpp", line 53: error: extra text after expected end of preprocessing directive
+  #pragma acc data to: h_lengths[0:readsCount], \
+                     ^
+
+"main.cpp", line 140: error: invalid text in pragma
+    #pragma acc update from (h_indexs[0:total_length])
+                       ^
+
+"main.cpp", line 140: error: OpenACC data clause expected
+    #pragma acc update from (h_indexs[0:total_length])
+                       ^
+
+"main.cpp", line 140: error: extra text after expected end of preprocessing directive
+    #pragma acc update from (h_indexs[0:total_length])
+                            ^
+
+"main.cpp", line 141: error: invalid text in pragma
+    #pragma acc update from (h_offsets[0:1+readsCount])
+                       ^
+
+"main.cpp", line 141: error: OpenACC data clause expected
+    #pragma acc update from (h_offsets[0:1+readsCount])
+                       ^
+
+"main.cpp", line 141: error: extra text after expected end of preprocessing directive
+    #pragma acc update from (h_offsets[0:1+readsCount])
+                            ^
+
+"main.cpp", line 142: error: invalid text in pragma
+    #pragma acc update from (h_words[0:readsCount])
+                       ^
+
+"main.cpp", line 142: error: OpenACC data clause expected
+    #pragma acc update from (h_words[0:readsCount])
+                       ^
+
+"main.cpp", line 142: error: extra text after expected end of preprocessing directive
+    #pragma acc update from (h_words[0:readsCount])
+                            ^
+
+"main.cpp", line 151: error: invalid text in pragma
+    #pragma acc update to (h_indexs[0:total_length])
+                       ^
+
+"main.cpp", line 151: error: OpenACC data clause expected
+    #pragma acc update to (h_indexs[0:total_length])
+                       ^
+
+"main.cpp", line 151: error: extra text after expected end of preprocessing directive
+    #pragma acc update to (h_indexs[0:total_length])
+                          ^
+
+18 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

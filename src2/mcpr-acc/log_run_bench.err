@@ -1,0 +1,103 @@
+"kernels.h", line 9: error: invalid text in pragma
+    num_teams(blocks) thread_limit(threads)
+    ^
+
+"kernels.h", line 9: error: extra text after expected end of preprocessing directive
+    num_teams(blocks) thread_limit(threads)
+             ^
+
+"kernels.h", line 54: error: invalid text in pragma
+    num_teams(blocks) thread_limit(threads)
+    ^
+
+"kernels.h", line 54: error: extra text after expected end of preprocessing directive
+    num_teams(blocks) thread_limit(threads)
+             ^
+
+"kernels.h", line 100: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(blocks) thread_limit(threads)
+                         ^
+
+"kernels.h", line 100: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(blocks) thread_limit(threads)
+                               ^
+
+"kernels.h", line 105: error: identifier "omp_get_thread_num" is undefined
+        int threadIdx_x = omp_get_thread_num();
+                          ^
+
+"kernels.h", line 107: error: identifier "omp_get_team_num" is undefined
+        int i = omp_get_team_num() * threads + threadIdx_x;
+                ^
+
+"main.cpp", line 66: error: invalid text in pragma
+    #pragma acc parallel data map (to: rands[0:rands_size], alphas[0:alphas_size]) \
+                         ^
+
+"main.cpp", line 66: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel data map (to: rands[0:rands_size], alphas[0:alphas_size]) \
+                              ^
+
+"main.cpp", line 82: error: invalid text in pragma
+      #pragma acc update from (probs[0:alphas_size])
+                         ^
+
+"main.cpp", line 82: error: OpenACC data clause expected
+      #pragma acc update from (probs[0:alphas_size])
+                         ^
+
+"main.cpp", line 82: error: extra text after expected end of preprocessing directive
+      #pragma acc update from (probs[0:alphas_size])
+                              ^
+
+"main.cpp", line 95: error: invalid text in pragma
+      #pragma acc update to (rands[0:rands_size])
+                         ^
+
+"main.cpp", line 95: error: OpenACC data clause expected
+      #pragma acc update to (rands[0:rands_size])
+                         ^
+
+"main.cpp", line 95: error: extra text after expected end of preprocessing directive
+      #pragma acc update to (rands[0:rands_size])
+                            ^
+
+"main.cpp", line 96: error: invalid text in pragma
+      #pragma acc update to (alphas[0:alphas_size])
+                         ^
+
+"main.cpp", line 96: error: OpenACC data clause expected
+      #pragma acc update to (alphas[0:alphas_size])
+                         ^
+
+"main.cpp", line 96: error: extra text after expected end of preprocessing directive
+      #pragma acc update to (alphas[0:alphas_size])
+                            ^
+
+"main.cpp", line 108: error: invalid text in pragma
+      #pragma acc update from (probs[0:alphas_size])
+                         ^
+
+"main.cpp", line 108: error: OpenACC data clause expected
+      #pragma acc update from (probs[0:alphas_size])
+                         ^
+
+"main.cpp", line 108: error: extra text after expected end of preprocessing directive
+      #pragma acc update from (probs[0:alphas_size])
+                              ^
+
+"main.cpp", line 126: error: invalid text in pragma
+      #pragma acc update from (probs[0:alphas_size])
+                         ^
+
+"main.cpp", line 126: error: OpenACC data clause expected
+      #pragma acc update from (probs[0:alphas_size])
+                         ^
+
+"main.cpp", line 126: error: extra text after expected end of preprocessing directive
+      #pragma acc update from (probs[0:alphas_size])
+                              ^
+
+25 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

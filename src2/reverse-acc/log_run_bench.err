@@ -1,0 +1,47 @@
+"main.cpp", line 41: error: invalid text in pragma
+    #pragma acc data alloc: test[0:len]) 
+                     ^
+
+"main.cpp", line 41: error: extra text after expected end of preprocessing directive
+    #pragma acc data alloc: test[0:len]) 
+                          ^
+
+"main.cpp", line 47: error: invalid text in pragma
+        #pragma acc update to (test[0:len])
+                           ^
+
+"main.cpp", line 47: error: OpenACC data clause expected
+        #pragma acc update to (test[0:len])
+                           ^
+
+"main.cpp", line 47: error: extra text after expected end of preprocessing directive
+        #pragma acc update to (test[0:len])
+                              ^
+
+"main.cpp", line 52: error: invalid text in pragma
+          #pragma acc parallel teams gang(1) thread_limit(len)
+                               ^
+
+"main.cpp", line 52: error: extra text after expected end of preprocessing directive
+          #pragma acc parallel teams gang(1) thread_limit(len)
+                                     ^
+
+"main.cpp", line 57: error: identifier "omp_get_thread_num" is undefined
+              int t = omp_get_thread_num();
+                      ^
+
+"main.cpp", line 68: error: invalid text in pragma
+        #pragma acc update from (test[0:len])
+                           ^
+
+"main.cpp", line 68: error: OpenACC data clause expected
+        #pragma acc update from (test[0:len])
+                           ^
+
+"main.cpp", line 68: error: extra text after expected end of preprocessing directive
+        #pragma acc update from (test[0:len])
+                                ^
+
+11 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

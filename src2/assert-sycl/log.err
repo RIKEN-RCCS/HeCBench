@@ -1,0 +1,20 @@
+main.cpp:32: void testKernel(int, sycl::nd_item<1> &): block: [1,0,0], thread: [28,0,0] Assertion `gid < N` failed.
+main.cpp:32: void testKernel(int, sycl::nd_item<1> &): block: [1,0,0], thread: [29,0,0] Assertion `gid < N` failed.
+main.cpp:32: void testKernel(int, sycl::nd_item<1> &): block: [1,0,0], thread: [30,0,0] Assertion `gid < N` failed.
+main.cpp:32: void testKernel(int, sycl::nd_item<1> &): block: [1,0,0], thread: [31,0,0] Assertion `gid < N` failed.
+<CUDA>[ERROR]: 
+UR CUDA ERROR:
+	Value:           710
+	Name:            CUDA_ERROR_ASSERT
+	Description:     device-side assert triggered
+	Function:        operator()
+	Source Location: /hs/work0/home/users/u0001901/tmp2/sycl_workspace/unified-runtime/source/adapters/cuda/queue.cpp:154
+
+<CUDA>[ERROR]: 
+UR CUDA ERROR:
+	Value:           710
+	Name:            CUDA_ERROR_ASSERT
+	Description:     device-side assert triggered
+	Function:        urProgramRelease
+	Source Location: /hs/work0/home/users/u0001901/tmp2/sycl_workspace/unified-runtime/source/adapters/cuda/program.cpp:419
+

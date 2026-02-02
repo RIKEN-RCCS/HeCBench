@@ -1,0 +1,102 @@
+nvc++ -acc  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+secp256k1_fe_from_storage(secp256k1_fe*, secp256k1_fe_storage const*):
+     37, Generating acc routine seq
+         Generating NVIDIA GPU code
+secp256k1_fe_sqr_inner(unsigned int*, unsigned int const*):
+     51, Generating acc routine seq
+         Generating NVIDIA GPU code
+secp256k1_fe_sqr(secp256k1_fe*, secp256k1_fe const*):
+    147, Generating acc routine seq
+         Generating NVIDIA GPU code
+secp256k1_fe_normalize_weak(secp256k1_fe*):
+    152, Generating acc routine seq
+         Generating NVIDIA GPU code
+secp256k1_fe_mul_inner(unsigned int*, unsigned int const*, unsigned int const*):
+    176, Generating acc routine seq
+         Generating NVIDIA GPU code
+secp256k1_fe_mul(secp256k1_fe*, secp256k1_fe const*, secp256k1_fe const*):
+    403, Generating acc routine seq
+         Generating NVIDIA GPU code
+secp256k1_fe_add(secp256k1_fe*, secp256k1_fe const*):
+    408, Generating acc routine seq
+         Generating NVIDIA GPU code
+secp256k1_fe_negate(secp256k1_fe*, secp256k1_fe const*, int):
+    422, Generating acc routine seq
+         Generating NVIDIA GPU code
+secp256k1_fe_mul_int(secp256k1_fe*, int):
+    436, Generating acc routine seq
+         Generating NVIDIA GPU code
+secp256k1_fe_set_int(secp256k1_fe*, int):
+    450, Generating acc routine seq
+         Generating NVIDIA GPU code
+secp256k1_fe_is_odd(secp256k1_fe const*):
+    456, Generating acc routine seq
+         Generating NVIDIA GPU code
+secp256k1_fe_normalize_var(secp256k1_fe*):
+    461, Generating acc routine seq
+         Generating NVIDIA GPU code
+secp256k1_fe_clear(secp256k1_fe*):
+    513, Generating acc routine seq
+         Generating NVIDIA GPU code
+    515, Generated vector simd code for the loop
+secp256k1_fe_inv(secp256k1_fe*, secp256k1_fe const*):
+    521, Generating acc routine seq
+         Generating NVIDIA GPU code
+    532, Loop not fused: dependence chain to sibling loop
+         Loop not vectorized: data dependency
+    538, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+    544, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+    550, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+    556, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+    562, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+    568, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+    574, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+    580, Loop not vectorized: data dependency
+    586, Loop not vectorized/parallelized: contains call
+    590, Loop not vectorized/parallelized: contains call
+    594, Loop not vectorized/parallelized: contains call
+    598, Loop not vectorized/parallelized: contains call
+secp256k1_fe_get_b32(unsigned char*, secp256k1_fe const*):
+    605, Generating acc routine seq
+         Generating NVIDIA GPU code
+secp256k1_ge_from_storage(secp256k1_ge*, secp256k1_ge_storage const*):
+    641, Generating acc routine seq
+         Generating NVIDIA GPU code
+secp256k1_gej_set_ge(secp256k1_gej*, secp256k1_ge const*):
+    647, Generating acc routine seq
+         Generating NVIDIA GPU code
+secp256k1_gej_add_ge_var(secp256k1_gej*, secp256k1_gej const*, secp256k1_ge const*, secp256k1_fe*):
+    409, Rerolled basic block into loop
+         2 loops fused
+         Generated vector simd code for rerolled loop
+    654, Generating acc routine seq
+         Generating NVIDIA GPU code
+secp256k1_ge_set_gej(secp256k1_ge*, secp256k1_gej*):
+    680, Generating acc routine seq
+         Generating NVIDIA GPU code
+main:
+   1218, Generating copyout(output[:]) [if not already present]
+         Generating copyin(prec[:]) [if not already present]
+   1221, Generating NVIDIA GPU code
+       1224, #pragma acc loop gang /* blockIdx.x */
+       1232, #pragma acc loop seq
+   1221, CUDA shared memory used for z_all,sum
+   1232, Complex loop carried dependence of .inl_.inl_a_668_2439->n,.inl_.inl_r_667_2438->n prevents parallelization
+         Loop carried reuse of .inl_.inl_r_667_2438->n prevents parallelization
+         Complex loop carried dependence of .inl_.inl_a_670_2441->n,.inl_.inl_r_669_2440->n prevents parallelization
+         Loop carried reuse of .inl_.inl_r_669_2440->n prevents parallelization
+         Complex loop carried dependence of ge,-> prevents parallelization
+         Loop carried reuse of -> prevents parallelization
+         Loop not vectorized/parallelized: contains call
+   1248, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++ -acc  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

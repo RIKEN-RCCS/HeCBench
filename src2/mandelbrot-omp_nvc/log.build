@@ -1,0 +1,52 @@
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+Execute():
+     24, Loop not vectorized/parallelized: potential early exits
+          92, Loop not vectorized/parallelized: potential early exits
+         154, Loop not vectorized/parallelized: potential early exits
+MandelParameters::ScaleRow(int) const:
+          43, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+MandelParameters::ScaleCol(int) const:
+          46, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+MandelParameters::Point(ComplexF const&) const:
+      9, include "mandel.hpp"
+          49, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          52, Loop not vectorized/parallelized: potential early exits
+Mandel::Print():
+      9, include "mandel.hpp"
+          92, Loop not vectorized/parallelized: potential early exits
+Mandel::Verify(Mandel&):
+      9, include "mandel.hpp"
+         116, Loop not fused: complex flow graph
+MandelSerial::Evaluate():
+          52, Loop not vectorized/parallelized: potential early exits
+MandelParallel::Evaluate():
+      9, include "mandel.hpp"
+         180, #omp target teams distribute parallel for simd thread_limit(256)
+             179, Generating map(from:b[:image_size]) 
+                  Generating map(to:p) 
+             180, Generating "nvkernel__ZN14MandelParallel8EvaluateEv_F63L180_2" GPU kernel
+             184, Loop parallelized across teams and threads(128), schedule(static)
+         180, Generating implicit map(tofrom:p) 
+          52, Loop not vectorized/parallelized: potential early exits
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string(char const*, std::allocator<char> const&):
+      9, include "mandel.hpp"
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      8, include "util.hpp"
+          14, include "chrono"
+              472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1l>>::_S_gcd(long, long):
+      8, include "util.hpp"
+          14, include "chrono"
+              472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<double, std::ratio<1l, 1l>>::_S_gcd(long, long):
+      8, include "util.hpp"
+          14, include "chrono"
+              472, Loop not vectorized/parallelized: not countable
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<char, std::char_traits<char>, std::allocator<char>>(std::basic_ostream<char, std::char_traits<char>>&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+      9, include "mandel.hpp"
+std::basic_ostream<char, std::char_traits<char>>& std::endl<char, std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&):
+      9, include "mandel.hpp"
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

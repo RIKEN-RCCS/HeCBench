@@ -1,0 +1,26 @@
+<CUDA>[ERROR]: 
+UR CUDA ERROR:
+	Value:           700
+	Name:            CUDA_ERROR_ILLEGAL_ADDRESS
+	Description:     an illegal memory access was encountered
+	Function:        urEnqueueUSMMemcpy
+	Source Location: /hs/work0/home/users/u0001901/tmp2/sycl_workspace/unified-runtime/source/adapters/cuda/enqueue.cpp:1583
+
+<CUDA>[ERROR]: 
+UR CUDA ERROR:
+	Value:           700
+	Name:            CUDA_ERROR_ILLEGAL_ADDRESS
+	Description:     an illegal memory access was encountered
+	Function:        operator()
+	Source Location: /hs/work0/home/users/u0001901/tmp2/sycl_workspace/unified-runtime/source/adapters/cuda/queue.cpp:130
+
+cuda backend failed with error: 2147483646 (UR_RESULT_ERROR_UNKNOWN)
+Error: cuda backend failed with error: 2147483646 (UR_RESULT_ERROR_UNKNOWN)
+<CUDA>[ERROR]: 
+UR CUDA ERROR:
+	Value:           700
+	Name:            CUDA_ERROR_ILLEGAL_ADDRESS
+	Description:     an illegal memory access was encountered
+	Function:        urProgramRelease
+	Source Location: /hs/work0/home/users/u0001901/tmp2/sycl_workspace/unified-runtime/source/adapters/cuda/program.cpp:419
+

@@ -1,0 +1,50 @@
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+fwtBatchGPU(float*, int, int):
+     44, include "kernels.cpp"
+          28, Loop not vectorized/parallelized: contains call
+          30, #omp target teams distribute parallel for thread_limit(256)
+              30, Generating "nvkernel__Z11fwtBatchGPUPfii_F187L30_2" GPU kernel
+              32, Loop parallelized across teams and threads(128), schedule(static)
+          33, Loop not vectorized/parallelized: not countable
+         115, #omp target teams num_teams(M) thread_limit(N/4)
+             115, Generating "nvkernel__Z11fwtBatchGPUPfii_F187L115_4" GPU kernel
+             118, #omp parallel
+               146, Barrier
+               170, Barrier
+               184, Barrier
+             121, Team private (s_data) located in CUDA shared memory
+         130, Loop not vectorized/parallelized: not countable
+         138, Loop not vectorized/parallelized: contains call
+         172, Loop not vectorized/parallelized: not countable
+         186, Loop not vectorized/parallelized: not countable
+modulateGPU(float*, float const*, int):
+     44, include "kernels.cpp"
+         197, #omp target teams distribute parallel for num_teams(128) thread_limit(256)
+             197, Generating "nvkernel__Z11modulateGPUPfPKfi_F187L197_11" GPU kernel
+             199, Loop parallelized across teams and threads(128), schedule(static)
+         199, Loop not vectorized/parallelized: not countable
+main:
+     75, Loop not vectorized/parallelized: contains call
+     80, Loop not vectorized/parallelized: contains call
+     91, Generating map(alloc:d_Data[:8388608],d_Kernel[:8388608]) 
+     94, Loop not vectorized/parallelized: contains call
+    100, Generating update to(d_Kernel[:8388608])
+    103, Generating update to(d_Data[:8388608])
+    118, Generating update from(d_Data[:8388608])
+    127, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     29, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+     44, include "kernels.cpp"
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c reference.cpp -o reference.o
+fwtCPU:
+     17, Recognized memory copy idiom
+     24, Loop not vectorized/parallelized: not countable
+     27, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+slowWTcpu:
+     55, Loop not vectorized/parallelized: not countable
+dyadicConvolutionCPU:
+     81, Generated vector simd code for the loop containing reductions
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o reference.o -o main 

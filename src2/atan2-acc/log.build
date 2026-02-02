@@ -1,0 +1,220 @@
+nvc++ -acc  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+float approx_atan2f_P<3>(float):
+     40, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+float approx_atan2f_P<5>(float):
+     46, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+float approx_atan2f_P<7>(float):
+     53, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+float approx_atan2f_P<9>(float):
+     60, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+float approx_atan2f_P<11>(float):
+     69, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+float approx_atan2f_P<13>(float):
+     79, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+float approx_atan2f_P<15>(float):
+     90, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+float approx_atan2i_P<3>(float):
+    137, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+float approx_atan2i_P<5>(float):
+    144, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+float approx_atan2i_P<7>(float):
+    151, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+float approx_atan2i_P<9>(float):
+    158, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+float approx_atan2i_P<11>(float):
+    165, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+float approx_atan2i_P<13>(float):
+    173, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+float approx_atan2i_P<15>(float):
+    181, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+float approx_atan2s_P<3>(float):
+    215, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+float approx_atan2s_P<5>(float):
+    222, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+float approx_atan2s_P<7>(float):
+    229, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+float approx_atan2s_P<9>(float):
+    236, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+compute_f(int, float const*, float const*, float*):
+    268, Generating implicit firstprivate(n)
+         Generating NVIDIA GPU code
+        270, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+    268, Generating implicit copyin(y[:n],x[:n]) [if not already present]
+         Generating implicit copyout(r[:n]) [if not already present]
+    270, Loop not fused: no successor loop
+         Generated vector simd code for the loop
+float safe_atan2f<3>(float, float):
+    121, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+float unsafe_atan2f_impl<3>(float, float):
+    101, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+float safe_atan2f<5>(float, float):
+    121, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+float unsafe_atan2f_impl<5>(float, float):
+    101, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+float safe_atan2f<7>(float, float):
+    121, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+float unsafe_atan2f_impl<7>(float, float):
+    101, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+float safe_atan2f<9>(float, float):
+    121, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+float unsafe_atan2f_impl<9>(float, float):
+    101, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+float safe_atan2f<11>(float, float):
+    121, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+float unsafe_atan2f_impl<11>(float, float):
+    101, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+float safe_atan2f<13>(float, float):
+    121, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+float unsafe_atan2f_impl<13>(float, float):
+    101, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+float safe_atan2f<15>(float, float):
+    121, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+float unsafe_atan2f_impl<15>(float, float):
+    101, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+compute_s(int, float const*, float const*, short*):
+    288, Generating implicit firstprivate(n)
+         Generating NVIDIA GPU code
+        290, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+    288, Generating implicit copyin(y[:n],x[:n]) [if not already present]
+         Generating implicit copyout(r[:n]) [if not already present]
+    290, Loop not fused: no successor loop
+         Generated vector simd code for the loop
+short unsafe_atan2s<3>(float, float):
+    259, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+short unsafe_atan2s_impl<3>(float, float):
+    243, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+short unsafe_atan2s<5>(float, float):
+    259, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+short unsafe_atan2s_impl<5>(float, float):
+    243, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+short unsafe_atan2s<7>(float, float):
+    259, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+short unsafe_atan2s_impl<7>(float, float):
+    243, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+short unsafe_atan2s<9>(float, float):
+    259, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+short unsafe_atan2s_impl<9>(float, float):
+    243, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+compute_i(int, float const*, float const*, int*):
+    305, Generating implicit firstprivate(n)
+         Generating NVIDIA GPU code
+        307, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+    305, Generating implicit copyin(y[:n],x[:n]) [if not already present]
+         Generating implicit copyout(r[:n]) [if not already present]
+    307, Loop not fused: no successor loop
+         Generated vector simd code for the loop
+int unsafe_atan2i<3>(float, float):
+    205, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+int unsafe_atan2i_impl<3>(float, float):
+    189, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+int unsafe_atan2i<5>(float, float):
+    205, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+int unsafe_atan2i_impl<5>(float, float):
+    189, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+int unsafe_atan2i<7>(float, float):
+    205, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+int unsafe_atan2i_impl<7>(float, float):
+    189, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+int unsafe_atan2i<9>(float, float):
+    205, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+int unsafe_atan2i_impl<9>(float, float):
+    189, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+int unsafe_atan2i<11>(float, float):
+    205, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+int unsafe_atan2i_impl<11>(float, float):
+    189, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+int unsafe_atan2i<13>(float, float):
+    205, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+int unsafe_atan2i_impl<13>(float, float):
+    189, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+int unsafe_atan2i<15>(float, float):
+    205, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+int unsafe_atan2i_impl<15>(float, float):
+    189, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+reference_f(int, float const*, float const*, float*):
+    325, Generated vector simd code for the loop
+reference_s(int, float const*, float const*, short*):
+    343, Generated vector simd code for the loop
+reference_i(int, float const*, float const*, int*):
+    358, Generated vector simd code for the loop
+main:
+    397, Loop not vectorized/parallelized: contains call
+    404, Generating create(hs[:n]) [if not already present]
+         Generating copyin(x[:n],y[:n]) [if not already present]
+         Generating create(hf[:n],hi[:n]) [if not already present]
+    408, Loop not vectorized/parallelized: contains call
+         325, Loop not fused: dependence chain to sibling loop
+              Generated vector simd code for the loop
+    417, Generating update self(hf[:n])
+    419, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+    430, Loop not vectorized/parallelized: contains call
+         358, Loop not fused: dependence chain to sibling loop
+              Generated vector simd code for the loop
+    439, Generating update self(hi[:n])
+    441, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+    452, Loop not vectorized/parallelized: contains call
+    461, Generating update self(hs[:n])
+         343, Loop not fused: dependence chain to sibling loop
+              Generated vector simd code for the loop
+    463, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     30, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++ -acc  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

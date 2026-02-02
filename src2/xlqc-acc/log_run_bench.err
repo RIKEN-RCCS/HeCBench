@@ -1,0 +1,8 @@
+"../xlqc-cuda/basis.cc", line 27: catastrophic error: cannot open source file "gsl/gsl_matrix.h"
+  #include <gsl/gsl_matrix.h>
+                             ^
+
+1 catastrophic error detected in the compilation of "../xlqc-cuda/basis.cc".
+Compilation terminated.
+make: *** [Makefile.NVD:65: basis.o] Error 2
+timeout was set to  600

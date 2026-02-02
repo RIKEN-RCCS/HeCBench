@@ -1,0 +1,5 @@
+cp: cannot stat '../lr-cuda/assets.tar.gz': No such file or directory
+tar: assets.tar.gz: Cannot open: No such file or directory
+tar: Error is not recoverable: exiting now
+make: *** [Makefile.NVD:73: run_mem] Error 1
+timeout was set to  600

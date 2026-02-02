@@ -1,0 +1,51 @@
+"main.cpp", line 177: error: invalid text in pragma
+        #pragma acc data to: background[0:nrows_background * ncols], \
+                         ^
+
+"main.cpp", line 177: error: extra text after expected end of preprocessing directive
+        #pragma acc data to: background[0:nrows_background * ncols], \
+                           ^
+
+"main.cpp", line 190: error: invalid text in pragma
+            #pragma acc parallel teams num_teams(nblks) thread_limit(nthreads)
+                                 ^
+
+"main.cpp", line 190: error: extra text after expected end of preprocessing directive
+            #pragma acc parallel teams num_teams(nblks) thread_limit(nthreads)
+                                       ^
+
+"main.cpp", line 194: error: identifier "omp_get_team_num" is undefined
+                int gid = omp_get_team_num(); 
+                          ^
+
+"main.cpp", line 195: error: identifier "omp_get_thread_num" is undefined
+                int col = omp_get_thread_num();
+                          ^
+
+"main.cpp", line 214: error: identifier "omp_get_vector" is undefined
+                  col += omp_get_vector();
+                         ^
+
+"main.cpp", line 222: error: invalid text in pragma
+            #pragma acc parallel teams num_teams(nblks) thread_limit(nthreads)
+                                 ^
+
+"main.cpp", line 222: error: extra text after expected end of preprocessing directive
+            #pragma acc parallel teams num_teams(nblks) thread_limit(nthreads)
+                                       ^
+
+"main.cpp", line 52: error: identifier "omp_get_team_num" is undefined
+    int bid = omp_get_team_num();
+              ^
+
+"main.cpp", line 53: error: identifier "omp_get_thread_num" is undefined
+    int tid = omp_get_thread_num();
+              ^
+
+"main.cpp", line 105: error: identifier "omp_get_vector" is undefined
+      col_idx += omp_get_vector();
+                 ^
+
+12 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

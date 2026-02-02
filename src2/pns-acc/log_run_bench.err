@@ -1,0 +1,117 @@
+"rand_gen.cpp", line 53: error: identifier "omp_get_thread_num" is undefined
+    if(omp_get_thread_num() == 0)
+       ^
+
+"rand_gen.cpp", line 69: error: identifier "omp_get_thread_num" is undefined
+    int threadIdx_x = omp_get_thread_num();
+                      ^
+
+"petri_kernel.cpp", line 24: error: identifier "omp_get_thread_num" is undefined
+    if (omp_get_thread_num() < thd_thrd) 
+        ^
+
+"petri_kernel.cpp", line 71: error: identifier "omp_get_thread_num" is undefined
+    int threadIdx_x = omp_get_thread_num();
+                      ^
+
+"petri_kernel.cpp", line 83: error: identifier "omp_get_team_num" is undefined
+    RandomInit(mt, omp_get_team_num() + seed);
+                   ^
+
+"petri_kernel.cpp", line 94: error: identifier "omp_get_thread_num" is undefined
+    int threadIdx_x = omp_get_thread_num();
+                      ^
+
+"petri_kernel.cpp", line 137: error: identifier "omp_get_thread_num" is undefined
+    int threadIdx_x = omp_get_thread_num();
+                      ^
+
+"petri_kernel.cpp", line 138: error: identifier "omp_get_team_num" is undefined
+    int blockIdx_x = omp_get_team_num();
+                     ^
+
+"petri_kernel.cpp", line 218: error: identifier "omp_get_team_num" is undefined
+    int* g_places = g_s + omp_get_team_num() * ((nsquare2>>2)+nsquare2);   
+                          ^
+
+"main.cpp", line 151: error: invalid text in pragma
+    #pragma acc parallel data map (alloc: g_vars[0:block_num], \
+                         ^
+
+"main.cpp", line 151: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel data map (alloc: g_vars[0:block_num], \
+                              ^
+
+"main.cpp", line 159: error: invalid text in pragma
+        #pragma acc parallel teams num_teams(block_num) vector_length(256)
+                             ^
+
+"main.cpp", line 159: error: extra text after expected end of preprocessing directive
+        #pragma acc parallel teams num_teams(block_num) vector_length(256)
+                                   ^
+
+"main.cpp", line 171: error: invalid text in pragma
+        #pragma acc update to (g_maxs[0:block_num])
+                           ^
+
+"main.cpp", line 171: error: OpenACC data clause expected
+        #pragma acc update to (g_maxs[0:block_num])
+                           ^
+
+"main.cpp", line 171: error: extra text after expected end of preprocessing directive
+        #pragma acc update to (g_maxs[0:block_num])
+                              ^
+
+"main.cpp", line 172: error: invalid text in pragma
+        #pragma acc update to (g_vars[0:block_num])
+                           ^
+
+"main.cpp", line 172: error: OpenACC data clause expected
+        #pragma acc update to (g_vars[0:block_num])
+                           ^
+
+"main.cpp", line 172: error: extra text after expected end of preprocessing directive
+        #pragma acc update to (g_vars[0:block_num])
+                              ^
+
+"main.cpp", line 182: error: invalid text in pragma
+      #pragma acc parallel teams num_teams(T-i) vector_length(256)
+                           ^
+
+"main.cpp", line 182: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel teams num_teams(T-i) vector_length(256)
+                                 ^
+
+"main.cpp", line 194: error: invalid text in pragma
+      #pragma acc update to (g_maxs[0:T-i])
+                         ^
+
+"main.cpp", line 194: error: OpenACC data clause expected
+      #pragma acc update to (g_maxs[0:T-i])
+                         ^
+
+"main.cpp", line 194: error: extra text after expected end of preprocessing directive
+      #pragma acc update to (g_maxs[0:T-i])
+                            ^
+
+"main.cpp", line 195: error: invalid text in pragma
+      #pragma acc update to (g_vars[0:T-i])
+                         ^
+
+"main.cpp", line 195: error: OpenACC data clause expected
+      #pragma acc update to (g_vars[0:T-i])
+                         ^
+
+"main.cpp", line 195: error: extra text after expected end of preprocessing directive
+      #pragma acc update to (g_vars[0:T-i])
+                            ^
+
+"main.cpp", line 143: warning: variable "places_size_word" was declared but never referenced [declared_but_not_referenced]
+    const int places_size_word =  places_size_byte / sizeof(int);
+              ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+27 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

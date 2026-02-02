@@ -1,0 +1,7 @@
+nvc++ -acc  -std=c++14 -Wall -I../chi2-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c chi2.cpp -o chi2.o
+nvc++ -acc  -std=c++14 -Wall -I../chi2-cuda -O3 -Minfo -mp=gpu -gpu=cc90 chi2.o -o main 
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "time -p ( ./main 23000 2300000 2000 2000 256 1000 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 0 51018 51018

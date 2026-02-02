@@ -1,0 +1,13 @@
+Run parameters:
+  kernel loop count: 20
+     workgroup size: 256
+Generating Data.. 
+Done generating inputs.
+
+Average kernel execution time: 0.05034065
+CPU Time: 1.006825 (Number of tests = 20)
+
+Average kernel time on the device: 0.01102275
+GPU Time: 1.594111 (Number of tests = 20)
+
+PASS

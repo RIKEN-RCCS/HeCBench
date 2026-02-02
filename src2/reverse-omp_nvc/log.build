@@ -1,0 +1,34 @@
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+main:
+     30, Loop not fused: complex flow graph
+         Generated vector simd code for the loop
+     49, Generating update to(test[:])
+     51, Loop not vectorized/parallelized: contains call
+     53, #omp target teams num_teams(1) thread_limit(256)
+         42, Generating map(alloc:test[:]) 
+         53, Generating "nvkernel_main_F1L53_2" GPU kernel
+         56, #omp parallel
+           59, Barrier
+         57, Team private (s) located in CUDA shared memory
+     53, Generating implicit map(tofrom:test[:]) 
+     70, Generating update from(test[:])
+int std::uniform_int_distribution<int>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&, std::uniform_int_distribution<int>::param_type const&):
+      4, include "random"
+          49, include "random.h"
+               35, include "uniform_int_dist.h"
+                   325, Loop not vectorized/parallelized: not countable
+                   349, Loop not vectorized/parallelized: potential early exits
+unsigned long std::uniform_int_distribution<int>::_S_nd<unsigned __int128, std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>, unsigned long>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&, unsigned long):
+      4, include "random"
+          49, include "random.h"
+               35, include "uniform_int_dist.h"
+                   263, Loop not vectorized/parallelized: not countable
+unsigned int std::uniform_int_distribution<int>::_S_nd<unsigned long, std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>, unsigned int>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&, unsigned int):
+      4, include "random"
+          49, include "random.h"
+               35, include "uniform_int_dist.h"
+                   263, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      5, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

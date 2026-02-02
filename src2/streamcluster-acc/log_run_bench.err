@@ -1,0 +1,113 @@
+"streamcluster_cl.h", line 81: error: invalid text in pragma
+  #pragma acc parallel enter data map(alloc: coord_h[0:dim*num],\
+                             ^
+
+"streamcluster_cl.h", line 81: error: extra text after expected end of preprocessing directive
+  #pragma acc parallel enter data map(alloc: coord_h[0:dim*num],\
+                                  ^
+
+"streamcluster_cl.h", line 93: error: invalid text in pragma
+  #pragma acc update to(coord_h[0:num*dim])
+                     ^
+
+"streamcluster_cl.h", line 93: error: OpenACC data clause expected
+  #pragma acc update to(coord_h[0:num*dim])
+                     ^
+
+"streamcluster_cl.h", line 93: error: extra text after expected end of preprocessing directive
+  #pragma acc update to(coord_h[0:num*dim])
+                       ^
+
+"streamcluster_cl.h", line 120: error: invalid text in pragma
+  #pragma acc update to(p_h[0:num])
+                     ^
+
+"streamcluster_cl.h", line 120: error: OpenACC data clause expected
+  #pragma acc update to(p_h[0:num])
+                     ^
+
+"streamcluster_cl.h", line 120: error: extra text after expected end of preprocessing directive
+  #pragma acc update to(p_h[0:num])
+                       ^
+
+"streamcluster_cl.h", line 121: error: invalid text in pragma
+  #pragma acc update to(center_table[0:num])
+                     ^
+
+"streamcluster_cl.h", line 121: error: OpenACC data clause expected
+  #pragma acc update to(center_table[0:num])
+                     ^
+
+"streamcluster_cl.h", line 121: error: extra text after expected end of preprocessing directive
+  #pragma acc update to(center_table[0:num])
+                       ^
+
+"streamcluster_cl.h", line 148: error: invalid text in pragma
+  #pragma acc parallel teams num_teams(work_items/work_group_size) thread_limit(work_group_size)
+                       ^
+
+"streamcluster_cl.h", line 148: error: extra text after expected end of preprocessing directive
+  #pragma acc parallel teams num_teams(work_items/work_group_size) thread_limit(work_group_size)
+                             ^
+
+"kernel.h", line 17: error: identifier "omp_get_thread_num" is undefined
+  const int local_id = omp_get_thread_num();
+                       ^
+
+"kernel.h", line 18: error: identifier "omp_get_team_num" is undefined
+  const int thread_id = omp_get_team_num()*omp_get_vector()+local_id;
+                        ^
+
+"kernel.h", line 18: error: identifier "omp_get_vector" is undefined
+  const int thread_id = omp_get_team_num()*omp_get_vector()+local_id;
+                                           ^
+
+"streamcluster_cl.h", line 163: error: invalid text in pragma
+  #pragma acc update from(switch_membership[0:num])
+                     ^
+
+"streamcluster_cl.h", line 163: error: OpenACC data clause expected
+  #pragma acc update from(switch_membership[0:num])
+                     ^
+
+"streamcluster_cl.h", line 163: error: extra text after expected end of preprocessing directive
+  #pragma acc update from(switch_membership[0:num])
+                         ^
+
+"streamcluster_cl.h", line 164: error: invalid text in pragma
+  #pragma acc update from(work_mem_h[0:num*(K+1)])
+                     ^
+
+"streamcluster_cl.h", line 164: error: OpenACC data clause expected
+  #pragma acc update from(work_mem_h[0:num*(K+1)])
+                     ^
+
+"streamcluster_cl.h", line 164: error: extra text after expected end of preprocessing directive
+  #pragma acc update from(work_mem_h[0:num*(K+1)])
+                         ^
+
+"streamcluster.cpp", line 192: warning: variable "open" was set but never used [set_but_not_used]
+    static bool open = false;
+                ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"streamcluster.cpp", line 824: error: invalid text in pragma
+      #pragma acc parallel exit data map(release: center_table[0:points.num])
+                                ^
+
+"streamcluster.cpp", line 824: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel exit data map(release: center_table[0:points.num])
+                                     ^
+
+"streamcluster.cpp", line 948: error: invalid text in pragma
+    #pragma acc parallel exit data map(release: coord_h[0:dim*chunksize],\
+                              ^
+
+"streamcluster.cpp", line 948: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel exit data map(release: coord_h[0:dim*chunksize],\
+                                   ^
+
+26 errors detected in the compilation of "streamcluster.cpp".
+make: *** [Makefile.NVD:40: streamcluster] Error 2
+timeout was set to  600
