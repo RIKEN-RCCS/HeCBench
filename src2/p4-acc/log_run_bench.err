@@ -1,0 +1,69 @@
+"main.cpp", line 49: error: identifier "omp_get_team_num" is undefined
+    int loc_index = omp_get_team_num();
+                    ^
+
+"main.cpp", line 50: error: identifier "omp_get_thread_num" is undefined
+    int itanchor = omp_get_thread_num();
+                   ^
+
+"main.cpp", line 184: error: invalid text in pragma
+    #pragma acc data to: cls_input[0:cls_size], \
+                     ^
+
+"main.cpp", line 184: error: extra text after expected end of preprocessing directive
+    #pragma acc data to: cls_input[0:cls_size], \
+                       ^
+
+"main.cpp", line 196: error: invalid text in pragma
+        #pragma acc update to (box_input[0:box_size])
+                           ^
+
+"main.cpp", line 196: error: OpenACC data clause expected
+        #pragma acc update to (box_input[0:box_size])
+                           ^
+
+"main.cpp", line 196: error: extra text after expected end of preprocessing directive
+        #pragma acc update to (box_input[0:box_size])
+                              ^
+
+"main.cpp", line 199: error: invalid text in pragma
+        #pragma acc update to (object_counter[0:1])
+                           ^
+
+"main.cpp", line 199: error: OpenACC data clause expected
+        #pragma acc update to (object_counter[0:1])
+                           ^
+
+"main.cpp", line 199: error: extra text after expected end of preprocessing directive
+        #pragma acc update to (object_counter[0:1])
+                              ^
+
+"main.cpp", line 203: error: invalid text in pragma
+        #pragma acc parallel teams num_teams(feature_size)
+                             ^
+
+"main.cpp", line 203: error: extra text after expected end of preprocessing directive
+        #pragma acc parallel teams num_teams(feature_size)
+                                   ^
+
+"main.cpp", line 235: error: invalid text in pragma
+      #pragma acc update from (object_counter[0:1])
+                         ^
+
+"main.cpp", line 235: error: OpenACC data clause expected
+      #pragma acc update from (object_counter[0:1])
+                         ^
+
+"main.cpp", line 235: error: extra text after expected end of preprocessing directive
+      #pragma acc update from (object_counter[0:1])
+                              ^
+
+"main.cpp", line 149: warning: variable "len_per_anchor" was declared but never referenced [declared_but_not_referenced]
+    const int len_per_anchor = p.len_per_anchor;
+              ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+15 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

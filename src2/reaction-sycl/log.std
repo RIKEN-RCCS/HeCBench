@@ -1,0 +1,8 @@
+Starting time-integration
+Constructing initial concentrations...
+timesteps: 10000
+Total kernel execution time:            1.656 s
+
+  Components A | B 
+  Min =     0.256567 |     0.000000
+  Max =     1.000000 |     0.436726

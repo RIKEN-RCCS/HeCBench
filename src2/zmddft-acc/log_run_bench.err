@@ -1,0 +1,59 @@
+"main.cpp", line 143: error: invalid text in pragma
+    #pragma acc parallel teams gang(16384) vector_length(64)
+                         ^
+
+"main.cpp", line 143: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams gang(16384) vector_length(64)
+                               ^
+
+"main.cpp", line 167: error: identifier "omp_get_thread_num" is undefined
+        int threadIdx_x = omp_get_thread_num();
+                          ^
+
+"main.cpp", line 168: error: identifier "omp_get_team_num" is undefined
+        int blockIdx_x = omp_get_team_num();
+                         ^
+
+"main.cpp", line 629: error: invalid text in pragma
+    #pragma acc parallel teams gang(16384) vector_length(64)
+                         ^
+
+"main.cpp", line 629: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams gang(16384) vector_length(64)
+                               ^
+
+"main.cpp", line 653: error: identifier "omp_get_thread_num" is undefined
+        int threadIdx_x = omp_get_thread_num();
+                          ^
+
+"main.cpp", line 654: error: identifier "omp_get_team_num" is undefined
+        int blockIdx_x = omp_get_team_num();
+                         ^
+
+"main.cpp", line 1114: error: invalid text in pragma
+    #pragma acc parallel teams gang(16384) vector_length(64)
+                         ^
+
+"main.cpp", line 1114: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams gang(16384) vector_length(64)
+                               ^
+
+"main.cpp", line 1138: error: identifier "omp_get_thread_num" is undefined
+        int threadIdx_x = omp_get_thread_num();
+                          ^
+
+"main.cpp", line 1139: error: identifier "omp_get_team_num" is undefined
+        int blockIdx_x = omp_get_team_num();
+                         ^
+
+"main.cpp", line 1620: error: invalid text in pragma
+    #pragma acc parallel data map (to: x[0:n], d[0:512]) \
+                         ^
+
+"main.cpp", line 1620: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel data map (to: x[0:n], d[0:512]) \
+                              ^
+
+14 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

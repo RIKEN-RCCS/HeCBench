@@ -1,0 +1,222 @@
+main:
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+     40, Loop not vectorized/parallelized: potential early exits
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+          58, Loop not fused: function call before adjacent loop
+              Loop not vectorized/parallelized: too deeply nested
+          61, Generated vector simd code for the loop
+          68, Loop not vectorized/parallelized: too deeply nested
+          69, Loop not vectorized/parallelized: too deeply nested
+     82, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+     97, Generating enter data copyin(cof_ptr[:cof_size])
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+    145, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+    158, Generating copyin(alpha_ptr[:alpha_size],met_ptr[:met_size],jac_ptr[:jac_size],lambda_ptr[:lambda_size],cof_ptr[:cof_size],mua_ptr[:mua_size]) [if not already present]
+         Generating create(uacc_ptr[:uacc_size]) [if not already present]
+         Generating copyin(sg_str[:sg_str_size]) [if not already present]
+    161, Generating update device(uacc_ptr[:uacc_size])
+         Loop not vectorized/parallelized: contains call
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    177, Generating update self(uacc_ptr[:uacc_size])
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    186, Generating exit data delete(cof_ptr[:cof_size])
+    191, Loop not vectorized/parallelized: contains call
+Sarray::fill(std::__cxx11::basic_istringstream<char, std::char_traits<char>, std::allocator<char>>&):
+         536, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+Sarray::init():
+     19, include "utils.cpp"
+          58, Loop not vectorized/parallelized: too deeply nested
+          61, Generated vector simd code for the loop
+Sarray::norm():
+     19, include "utils.cpp"
+          73, Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+Sarray::minmax():
+     19, include "utils.cpp"
+          80, Loop not vectorized: data dependency
+std::char_traits<char>::length(char const*):
+         171, Loop not vectorized/parallelized: not countable
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>>>::_M_get_insert_unique_pos(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     11, include "map"
+          60, include "stl_tree.h"
+             2068, Loop not vectorized/parallelized: contains call
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>>>::_M_get_insert_hint_unique_pos(std::_Rb_tree_const_iterator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>>, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+        2068, Loop not vectorized/parallelized: contains call
+        2068, Loop not vectorized/parallelized: contains call
+        2068, Loop not vectorized/parallelized: contains call
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>>>::_M_erase(std::_Rb_tree_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>>*):
+     11, include "map"
+          60, include "stl_tree.h"
+             1887, Loop not vectorized/parallelized: potential early exits
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>>>::_M_lower_bound(std::_Rb_tree_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>>*, std::_Rb_tree_node_base*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     11, include "map"
+          60, include "stl_tree.h"
+             1904, Loop not vectorized/parallelized: contains call
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>>>::~_Rb_tree():
+        1887, Loop not vectorized/parallelized: potential early exits
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>>>::lower_bound(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+        1904, Loop not vectorized/parallelized: contains call
+std::_Rb_tree_iterator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>> std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>>>::_M_emplace_hint_unique<std::piecewise_construct_t const&, std::tuple<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&>, std::tuple<>>(std::_Rb_tree_const_iterator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>>, std::piecewise_construct_t const&, std::tuple<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&>&&, std::tuple<>&&):
+     11, include "map"
+          60, include "stl_tree.h"
+std::_Rb_tree_iterator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>> std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>>>::_M_emplace_hint_unique<std::piecewise_construct_t const&, std::tuple<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>&&>, std::tuple<>>(std::_Rb_tree_const_iterator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>>, std::piecewise_construct_t const&, std::tuple<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>&&>&&, std::tuple<>&&):
+     11, include "map"
+          60, include "stl_tree.h"
+std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, Sarray*, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>>>::operator[](std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+        1259, Loop not vectorized/parallelized: contains call
+std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, Sarray*, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>>>::operator[](std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>&&):
+        1259, Loop not vectorized/parallelized: contains call
+std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, Sarray*, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>>>::lower_bound(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+        1270, Loop not vectorized/parallelized: contains call
+void std::vector<int*, std::allocator<int*>>::_M_realloc_insert<int* const&>(__gnu_cxx::__normal_iterator<int**, std::vector<int*, std::allocator<int*>>>, int* const&):
+     19, include "utils.cpp"
+std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, 0ul>(std::tuple<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&>&, std::tuple<>&, std::_Index_tuple<0ul>, std::_Index_tuple<>):
+     19, include "utils.cpp"
+std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>&&, 0ul>(std::tuple<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>&&>&, std::tuple<>&, std::_Index_tuple<0ul>, std::_Index_tuple<>):
+     19, include "utils.cpp"
+void std::allocator_traits<std::allocator<std::_Rb_tree_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>>>>::destroy<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>>(std::allocator<std::_Rb_tree_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>>>&, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>*):
+     19, include "utils.cpp"
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     19, include "utils.cpp"
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string<std::allocator<char>>(char const*, std::allocator<char> const&):
+         397, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string<std::allocator<char>>(char const*, std::allocator<char> const&):
+         536, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_stringbuf<char, std::char_traits<char>, std::allocator<char>>::basic_stringbuf(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, std::_Ios_Openmode):
+     19, include "utils.cpp"
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     14, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+__gnu_cxx::char_traits<char>::length(char const*):
+      8, include "fstream"
+          38, include "istream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                        171, Loop not vectorized/parallelized: not countable
+     19, include "utils.cpp"
+void __gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>>>::construct<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>, std::piecewise_construct_t const&, std::tuple<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>&&>, std::tuple<>>(std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, Sarray*>*, std::piecewise_construct_t const&, std::tuple<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>&&>&&, std::tuple<>&&):
+      8, include "fstream"
+          38, include "istream"
+               38, include "ios"
+     19, include "utils.cpp"
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&, char const*):
+         397, Loop not vectorized/parallelized: not countable
+kernel1(int, int, int, int, int, int, int, int, int, int, int, int, double, double, double const*, double const*, double const*, double const*, double const*, double*, double const*, double const*, double const*, double const*, double const*, double const*, double const*):
+      2, include "kernel1.cpp"
+          22, Generating implicit firstprivate(N2,N0,start0,N1,start2,start1)
+              Generating NVIDIA GPU code
+              25, #pragma acc loop gang, vector(256) collapse(3) /* blockIdx.x threadIdx.x */
+              26,   /* blockIdx.x threadIdx.x collapsed */
+              27,   /* blockIdx.x threadIdx.x collapsed */
+             191, #pragma acc loop seq
+                  Generating implicit reduction(+:r3,r2,r1)
+             199, #pragma acc loop seq
+                  Generating implicit reduction(+:mucofv2,mucofuv,mucofu2,mucofw2,mucofvw,mucofuw)
+             382, #pragma acc loop seq
+                  Generating implicit reduction(+:dwdrm2,dvdrm2,dudrm2,dwdrp2,dwdrp1,dvdrp1,dudrp1,dvdrp2,dudrp2,dwdrm1,dvdrm1,dudrm1)
+             486, #pragma acc loop seq
+                  Generating implicit reduction(+:dwdrm2,dvdrm2,dudrm2,dwdrp2,dwdrp1,dvdrp1,dudrp1,dvdrp2,dudrp2,dwdrm1,dvdrm1,dudrm1)
+             575, #pragma acc loop seq
+                  Generating implicit reduction(+:r3,r2,r1)
+          22, Generating implicit copyin(a_lambda[:],a_acof[start2-1:N2-start2+378],a_ghcof[start2-1:N2-start2],a_mu[:],a_strx[:],a_met[:],a_jac[:],a_bope[start2-1:N2-start2+42],a_u[:],a_stry[:]) [if not already present]
+              Generating implicit copy(a_lu[:]) [if not already present]
+          25, Loop not fused: no successor loop
+              Loop not vectorized/parallelized: too deeply nested
+          26, Loop not vectorized/parallelized: too deeply nested
+          27, Generating implicit firstprivate(ilast,a1,jfirst,ifirst,jlast,kfirst,sgn,klast)
+         191, Loop is parallelizable
+              Loop not fused: enclosed in different number of nests
+         199, Loop is parallelizable
+              Generated vector simd code for the loop containing reductions
+         382, Loop is parallelizable
+              Loop not fused: scalar dependence chain to sibling loop
+              2 loops fused
+              Loop not vectorized: unprofitable for target
+         486, Loop is parallelizable
+         575, Loop is parallelizable
+              Loop not vectorized: unprofitable for target
+kernel2(int, int, int, int, int, int, int, int, int, int, int, int, double, double, double const*, double const*, double const*, double const*, double const*, double*, double const*, double const*, double const*, double const*, double const*, double const*, double const*):
+      3, include "kernel2.cpp"
+          25, Multiple reductions compressed
+              Generated vector simd code for the loop
+kernel3(int, int, int, int, int, int, int, int, int, int, int, int, double, double, double const*, double const*, double const*, double const*, double const*, double*, double const*, double const*, double const*, double const*, double const*, double const*, double const*):
+      4, include "kernel3.cpp"
+          22, Generating implicit firstprivate(N2,N0,start0,N1,start1,start2)
+              Generating NVIDIA GPU code
+              24, #pragma acc loop gang, vector(256) collapse(3) /* blockIdx.x threadIdx.x */
+              25,   /* blockIdx.x threadIdx.x collapsed */
+              26,   /* blockIdx.x threadIdx.x collapsed */
+          22, Generating implicit copyin(a_lambda[:],a_jac[:],a_stry[:],a_u[:],a_met[:]) [if not already present]
+              Generating implicit copy(a_lu[:]) [if not already present]
+              Generating implicit copyin(a_mu[:],a_strx[:]) [if not already present]
+          24, Loop not fused: no successor loop
+          26, Generating implicit firstprivate(ilast,a1,jfirst,ifirst,jlast,kfirst,sgn,klast)
+              Multiple reductions compressed
+              Generated vector simd code for the loop
+kernel4(int, int, int, int, int, int, int, int, int, int, int, int, double, double, double const*, double const*, double const*, double const*, double const*, double*, double const*, double const*, double const*, double const*, double const*, double const*, double const*):
+      5, include "kernel4.cpp"
+          22, Generating implicit firstprivate(N2,N0,start0,N1,start1,start2)
+              Generating NVIDIA GPU code
+              24, #pragma acc loop gang, vector(256) collapse(3) /* blockIdx.x threadIdx.x */
+              25,   /* blockIdx.x threadIdx.x collapsed */
+              26,   /* blockIdx.x threadIdx.x collapsed */
+          22, Generating implicit copyin(a_lambda[:],a_strx[:],a_mu[:],a_jac[:],a_met[:]) [if not already present]
+              Generating implicit copy(a_lu[:]) [if not already present]
+              Generating implicit copyin(a_stry[:],a_u[:]) [if not already present]
+          24, Loop not fused: no successor loop
+          26, Generating implicit firstprivate(ilast,a1,jfirst,ifirst,jlast,kfirst,sgn,klast)
+              Generated vector simd code for the loop
+kernel5(int, int, int, int, int, int, int, int, int, int, int, int, int, double, double, double const*, double const*, double const*, double const*, double const*, double*, double const*, double const*, double const*, double const*, double const*, double const*, double const*):
+      6, include "kernel5.cpp"
+          23, Generating implicit firstprivate(N2,N0,start0,N1,start1,start2)
+              Generating NVIDIA GPU code
+              26, #pragma acc loop gang, vector(256) collapse(3) /* blockIdx.x threadIdx.x */
+              27,   /* blockIdx.x threadIdx.x collapsed */
+              28,   /* blockIdx.x threadIdx.x collapsed */
+             190, #pragma acc loop seq
+                  Generating implicit reduction(+:r3,r2,r1)
+             198, #pragma acc loop seq
+                  Generating implicit reduction(+:mucofv2,mucofuv,mucofu2,mucofw2,mucofvw,mucofuw)
+             354, #pragma acc loop seq
+                  Generating implicit reduction(+:dwdrm2,dvdrm2,dudrm2,dwdrp2,dwdrp1,dvdrp1,dudrp1,dvdrp2,dudrp2,dwdrm1,dvdrm1,dudrm1)
+             457, #pragma acc loop seq
+                  Generating implicit reduction(+:dwdrm2,dvdrm2,dudrm2,dwdrp2,dwdrp1,dvdrp1,dudrp1,dvdrp2,dudrp2,dwdrm1,dvdrm1,dudrm1)
+             545, #pragma acc loop seq
+                  Generating implicit reduction(+:r3,r2,r1)
+          23, Generating implicit copyin(a_lambda[:],a_acof_no_gp[(nk-start2)+(start2-N2)+1:N2-start2+378],a_ghcof_no_gp[(nk-start2)+(start2-N2)+1:N2-start2],a_mu[:],a_strx[:],a_met[:],a_jac[:],a_bope[(nk-start2)+(start2-N2)+1:N2-start2+42],a_u[:],a_stry[:]) [if not already present]
+              Generating implicit copy(a_lu[:]) [if not already present]
+          26, Loop not fused: no successor loop
+              Loop not vectorized/parallelized: too deeply nested
+          27, Loop not vectorized/parallelized: too deeply nested
+          28, Generating implicit firstprivate(ilast,a1,jfirst,ifirst,jlast,kfirst,klast,sgn,nk)
+         190, Loop is parallelizable
+              Loop not fused: different loop trip count
+         198, Loop is parallelizable
+              Zero trip check eliminated
+              Loop not vectorized: unknown
+         354, Loop is parallelizable
+              Loop not fused: scalar dependence chain to sibling loop
+              2 loops fused
+              Loop not vectorized: unknown
+         457, Loop is parallelizable
+         545, Loop is parallelizable
+              Loop not vectorized: unknown
+timeout was set to  600

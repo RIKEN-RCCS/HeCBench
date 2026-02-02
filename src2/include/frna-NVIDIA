@@ -1,1 +1,1 @@
-COMMAND = time -p ( ./$(program) ../prna-cuda/HIV1-NL43.seq  hiv1-nl43.out 1>log.std 2>log.err ) 2> log.time
+COMMAND = ../prna-cuda/prepare_data.sh; time -p ( ./$(program) ../prna-cuda/HIV1-NL43.seq  hiv1-nl43.out 1>log.std 2>log.err ) 2> log.time

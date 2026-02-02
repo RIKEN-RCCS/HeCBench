@@ -1,0 +1,60 @@
+nvc++  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 -c blackScholesAnalyticEngine.cpp -o blackScholesAnalyticEngine.o
+interestRateCompoundFactor(float, yieldTermStruct):
+          17, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+interestRateDiscountFactor(float, yieldTermStruct):
+          24, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+getBlackVolBlackVar(blackVolStruct):
+          31, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+getDiscountOnDividendYield(float, yieldTermStruct):
+          39, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+getDiscountOnRiskFreeRate(float, yieldTermStruct):
+          47, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+errorFunct(normalDistStruct, float):
+          54, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+cumNormDistOp(normalDistStruct, float):
+         110, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+gaussianFunctNormDist(normalDistStruct, float):
+         119, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+cumNormDistDeriv(normalDistStruct, float):
+         131, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+initCumNormDist(normalDistStruct&):
+         139, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+initBlackCalcVars(blackCalcStruct&, payoffStruct):
+         150, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+initBlackCalculator(blackCalcStruct&, payoffStruct, float, float, float):
+         193, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+getResultVal(blackCalcStruct):
+         206, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+runBlackScholesAnalyticEngine(int):
+     29, Loop not vectorized/parallelized: contains structure move
+    236, #omp target teams distribute parallel for simd thread_limit(256)
+        232, Generating map(from:outputVals[:numVals]) 
+             Generating map(to:values[:numVals]) 
+        236, Generating "nvkernel__Z29runBlackScholesAnalyticEnginei_F1L236_2" GPU kernel
+        238, Loop parallelized across teams and threads(128), schedule(static)
+    236, Loop not vectorized/parallelized: contains call
+    238, Loop not vectorized/parallelized: contains structure move
+    310, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+         Loop unrolled 8 times
+    319, Loop not vectorized/parallelized: potential early exits
+    330, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+         Loop unrolled 8 times
+std::fabs(float):
+                        242, Generating implicit omp declare target routine
+                             Generating NVIDIA GPU code
+nvc++  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 blackScholesAnalyticEngine.o -o main 

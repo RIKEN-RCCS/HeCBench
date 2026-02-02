@@ -1,0 +1,59 @@
+"main.cpp", line 189: error: invalid text in pragma
+      #pragma acc data alloc: h_consumed[0:1], \
+                       ^
+
+"main.cpp", line 189: error: extra text after expected end of preprocessing directive
+      #pragma acc data alloc: h_consumed[0:1], \
+                            ^
+
+"main.cpp", line 207: error: invalid text in pragma
+              #pragma acc update to (h_task_queues[0:p.queue_size])
+                                 ^
+
+"main.cpp", line 207: error: OpenACC data clause expected
+              #pragma acc update to (h_task_queues[0:p.queue_size])
+                                 ^
+
+"main.cpp", line 207: error: extra text after expected end of preprocessing directive
+              #pragma acc update to (h_task_queues[0:p.queue_size])
+                                    ^
+
+"main.cpp", line 208: error: invalid text in pragma
+              #pragma acc update to (h_consumed[0:1])
+                                 ^
+
+"main.cpp", line 208: error: OpenACC data clause expected
+              #pragma acc update to (h_consumed[0:1])
+                                 ^
+
+"main.cpp", line 208: error: extra text after expected end of preprocessing directive
+              #pragma acc update to (h_consumed[0:1])
+                                    ^
+
+"main.cpp", line 211: error: invalid text in pragma
+              #pragma acc update to (d_data_queues[0:p.queue_size * p.n_gpu_threads])
+                                 ^
+
+"main.cpp", line 211: error: OpenACC data clause expected
+              #pragma acc update to (d_data_queues[0:p.queue_size * p.n_gpu_threads])
+                                 ^
+
+"main.cpp", line 211: error: extra text after expected end of preprocessing directive
+              #pragma acc update to (d_data_queues[0:p.queue_size * p.n_gpu_threads])
+                                    ^
+
+"main.cpp", line 217: error: invalid text in pragma
+              #pragma acc update from (d_data_queues[0:p.queue_size * p.n_gpu_threads])
+                                 ^
+
+"main.cpp", line 217: error: OpenACC data clause expected
+              #pragma acc update from (d_data_queues[0:p.queue_size * p.n_gpu_threads])
+                                 ^
+
+"main.cpp", line 217: error: extra text after expected end of preprocessing directive
+              #pragma acc update from (d_data_queues[0:p.queue_size * p.n_gpu_threads])
+                                      ^
+
+14 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

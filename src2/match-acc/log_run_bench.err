@@ -1,0 +1,405 @@
+"main.cpp", line 107: error: invalid text in pragma
+  #pragma acc parallel data map (to: d_pts1[0:NPTS*NDIM], d_pts2[0:NPTS*NDIM]) \
+                       ^
+
+"main.cpp", line 107: error: extra text after expected end of preprocessing directive
+  #pragma acc parallel data map (to: d_pts1[0:NPTS*NDIM], d_pts2[0:NPTS*NDIM]) \
+                            ^
+
+"main.cpp", line 120: error: invalid text in pragma
+      #pragma acc parallel loop thread_limit (M1W)
+                                ^
+
+"main.cpp", line 120: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel loop thread_limit (M1W)
+                                             ^
+
+"main.cpp", line 143: error: invalid text in pragma
+    #pragma acc update from (d_index[0:NPTS])
+                       ^
+
+"main.cpp", line 143: error: OpenACC data clause expected
+    #pragma acc update from (d_index[0:NPTS])
+                       ^
+
+"main.cpp", line 143: error: extra text after expected end of preprocessing directive
+    #pragma acc update from (d_index[0:NPTS])
+                            ^
+
+"main.cpp", line 144: error: invalid text in pragma
+    #pragma acc update from (d_score[0:NPTS])
+                       ^
+
+"main.cpp", line 144: error: OpenACC data clause expected
+    #pragma acc update from (d_score[0:NPTS])
+                       ^
+
+"main.cpp", line 144: error: extra text after expected end of preprocessing directive
+    #pragma acc update from (d_score[0:NPTS])
+                            ^
+
+"main.cpp", line 149: error: invalid text in pragma
+      #pragma acc parallel teams num_teams(NPTS/M2W) thread_limit(M2W*M2H)
+                           ^
+
+"main.cpp", line 149: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel teams num_teams(NPTS/M2W) thread_limit(M2W*M2H)
+                                 ^
+
+"main.cpp", line 156: error: identifier "omp_get_thread_num" is undefined
+          int tx = omp_get_thread_num() % M2W;
+                   ^
+
+"main.cpp", line 159: error: identifier "omp_get_team_num" is undefined
+          int bp1 = M2W*omp_get_team_num();
+                        ^
+
+"main.cpp", line 201: error: invalid text in pragma
+    #pragma acc update from (d_index[0:NPTS])
+                       ^
+
+"main.cpp", line 201: error: OpenACC data clause expected
+    #pragma acc update from (d_index[0:NPTS])
+                       ^
+
+"main.cpp", line 201: error: extra text after expected end of preprocessing directive
+    #pragma acc update from (d_index[0:NPTS])
+                            ^
+
+"main.cpp", line 202: error: invalid text in pragma
+    #pragma acc update from (d_score[0:NPTS])
+                       ^
+
+"main.cpp", line 202: error: OpenACC data clause expected
+    #pragma acc update from (d_score[0:NPTS])
+                       ^
+
+"main.cpp", line 202: error: extra text after expected end of preprocessing directive
+    #pragma acc update from (d_score[0:NPTS])
+                            ^
+
+"main.cpp", line 207: error: invalid text in pragma
+      #pragma acc parallel teams num_teams(NPTS/M2W) thread_limit(M2W*M2H)
+                           ^
+
+"main.cpp", line 207: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel teams num_teams(NPTS/M2W) thread_limit(M2W*M2H)
+                                 ^
+
+"main.cpp", line 214: error: identifier "omp_get_thread_num" is undefined
+          int tx = omp_get_thread_num() % M2W;
+                   ^
+
+"main.cpp", line 217: error: identifier "omp_get_team_num" is undefined
+          int bp1 = M2W*omp_get_team_num();
+                        ^
+
+"main.cpp", line 259: error: invalid text in pragma
+    #pragma acc update from (d_index[0:NPTS])
+                       ^
+
+"main.cpp", line 259: error: OpenACC data clause expected
+    #pragma acc update from (d_index[0:NPTS])
+                       ^
+
+"main.cpp", line 259: error: extra text after expected end of preprocessing directive
+    #pragma acc update from (d_index[0:NPTS])
+                            ^
+
+"main.cpp", line 260: error: invalid text in pragma
+    #pragma acc update from (d_score[0:NPTS])
+                       ^
+
+"main.cpp", line 260: error: OpenACC data clause expected
+    #pragma acc update from (d_score[0:NPTS])
+                       ^
+
+"main.cpp", line 260: error: extra text after expected end of preprocessing directive
+    #pragma acc update from (d_score[0:NPTS])
+                            ^
+
+"main.cpp", line 265: error: invalid text in pragma
+      #pragma acc parallel teams num_teams(NPTS/M2W) thread_limit(M2W*M2H)
+                           ^
+
+"main.cpp", line 265: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel teams num_teams(NPTS/M2W) thread_limit(M2W*M2H)
+                                 ^
+
+"main.cpp", line 272: error: identifier "omp_get_thread_num" is undefined
+          int tx = omp_get_thread_num() % M2W;
+                   ^
+
+"main.cpp", line 275: error: identifier "omp_get_team_num" is undefined
+          int bp1 = M2W*omp_get_team_num();
+                        ^
+
+"main.cpp", line 321: error: invalid text in pragma
+    #pragma acc update from (d_index[0:NPTS])
+                       ^
+
+"main.cpp", line 321: error: OpenACC data clause expected
+    #pragma acc update from (d_index[0:NPTS])
+                       ^
+
+"main.cpp", line 321: error: extra text after expected end of preprocessing directive
+    #pragma acc update from (d_index[0:NPTS])
+                            ^
+
+"main.cpp", line 322: error: invalid text in pragma
+    #pragma acc update from (d_score[0:NPTS])
+                       ^
+
+"main.cpp", line 322: error: OpenACC data clause expected
+    #pragma acc update from (d_score[0:NPTS])
+                       ^
+
+"main.cpp", line 322: error: extra text after expected end of preprocessing directive
+    #pragma acc update from (d_score[0:NPTS])
+                            ^
+
+"main.cpp", line 327: error: invalid text in pragma
+      #pragma acc parallel teams num_teams(NPTS/M5W) thread_limit(M5W*M5H)
+                           ^
+
+"main.cpp", line 327: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel teams num_teams(NPTS/M5W) thread_limit(M5W*M5H)
+                                 ^
+
+"main.cpp", line 334: error: identifier "omp_get_thread_num" is undefined
+          int tx = omp_get_thread_num() % M5W;
+                   ^
+
+"main.cpp", line 336: error: identifier "omp_get_team_num" is undefined
+          int bp1 = M5W*omp_get_team_num();
+                        ^
+
+"main.cpp", line 389: error: invalid text in pragma
+    #pragma acc update from (d_index[0:NPTS])
+                       ^
+
+"main.cpp", line 389: error: OpenACC data clause expected
+    #pragma acc update from (d_index[0:NPTS])
+                       ^
+
+"main.cpp", line 389: error: extra text after expected end of preprocessing directive
+    #pragma acc update from (d_index[0:NPTS])
+                            ^
+
+"main.cpp", line 390: error: invalid text in pragma
+    #pragma acc update from (d_score[0:NPTS])
+                       ^
+
+"main.cpp", line 390: error: OpenACC data clause expected
+    #pragma acc update from (d_score[0:NPTS])
+                       ^
+
+"main.cpp", line 390: error: extra text after expected end of preprocessing directive
+    #pragma acc update from (d_score[0:NPTS])
+                            ^
+
+"main.cpp", line 395: error: invalid text in pragma
+      #pragma acc parallel teams num_teams(NPTS/M5W) thread_limit(M5W*M5H)
+                           ^
+
+"main.cpp", line 395: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel teams num_teams(NPTS/M5W) thread_limit(M5W*M5H)
+                                 ^
+
+"main.cpp", line 401: error: identifier "omp_get_thread_num" is undefined
+          int tx = omp_get_thread_num() % M5W;
+                   ^
+
+"main.cpp", line 403: error: identifier "omp_get_team_num" is undefined
+          int bp1 = M5W*omp_get_team_num();
+                        ^
+
+"main.cpp", line 464: error: invalid text in pragma
+    #pragma acc update from (d_index[0:NPTS])
+                       ^
+
+"main.cpp", line 464: error: OpenACC data clause expected
+    #pragma acc update from (d_index[0:NPTS])
+                       ^
+
+"main.cpp", line 464: error: extra text after expected end of preprocessing directive
+    #pragma acc update from (d_index[0:NPTS])
+                            ^
+
+"main.cpp", line 465: error: invalid text in pragma
+    #pragma acc update from (d_score[0:NPTS])
+                       ^
+
+"main.cpp", line 465: error: OpenACC data clause expected
+    #pragma acc update from (d_score[0:NPTS])
+                       ^
+
+"main.cpp", line 465: error: extra text after expected end of preprocessing directive
+    #pragma acc update from (d_score[0:NPTS])
+                            ^
+
+"main.cpp", line 470: error: invalid text in pragma
+      #pragma acc parallel teams num_teams(NPTS/M7W) thread_limit(M7W*M7H/M7R)
+                           ^
+
+"main.cpp", line 470: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel teams num_teams(NPTS/M7W) thread_limit(M7W*M7H/M7R)
+                                 ^
+
+"main.cpp", line 476: error: identifier "omp_get_thread_num" is undefined
+          int tx = omp_get_thread_num() % M7W;
+                   ^
+
+"main.cpp", line 478: error: identifier "omp_get_team_num" is undefined
+          int bp1 = M7W*omp_get_team_num();
+                        ^
+
+"main.cpp", line 537: error: invalid text in pragma
+    #pragma acc update from (d_index[0:NPTS])
+                       ^
+
+"main.cpp", line 537: error: OpenACC data clause expected
+    #pragma acc update from (d_index[0:NPTS])
+                       ^
+
+"main.cpp", line 537: error: extra text after expected end of preprocessing directive
+    #pragma acc update from (d_index[0:NPTS])
+                            ^
+
+"main.cpp", line 538: error: invalid text in pragma
+    #pragma acc update from (d_score[0:NPTS])
+                       ^
+
+"main.cpp", line 538: error: OpenACC data clause expected
+    #pragma acc update from (d_score[0:NPTS])
+                       ^
+
+"main.cpp", line 538: error: extra text after expected end of preprocessing directive
+    #pragma acc update from (d_score[0:NPTS])
+                            ^
+
+"main.cpp", line 543: error: invalid text in pragma
+      #pragma acc parallel teams num_teams(NPTS/M7W) thread_limit(M7W*M7H/M7R)
+                           ^
+
+"main.cpp", line 543: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel teams num_teams(NPTS/M7W) thread_limit(M7W*M7H/M7R)
+                                 ^
+
+"main.cpp", line 549: error: identifier "omp_get_thread_num" is undefined
+          int tx = omp_get_thread_num() % M7W;
+                   ^
+
+"main.cpp", line 551: error: identifier "omp_get_team_num" is undefined
+          int bp1 = M7W*omp_get_team_num();
+                        ^
+
+"main.cpp", line 630: error: invalid text in pragma
+    #pragma acc update from (d_index[0:NPTS])
+                       ^
+
+"main.cpp", line 630: error: OpenACC data clause expected
+    #pragma acc update from (d_index[0:NPTS])
+                       ^
+
+"main.cpp", line 630: error: extra text after expected end of preprocessing directive
+    #pragma acc update from (d_index[0:NPTS])
+                            ^
+
+"main.cpp", line 631: error: invalid text in pragma
+    #pragma acc update from (d_score[0:NPTS])
+                       ^
+
+"main.cpp", line 631: error: OpenACC data clause expected
+    #pragma acc update from (d_score[0:NPTS])
+                       ^
+
+"main.cpp", line 631: error: extra text after expected end of preprocessing directive
+    #pragma acc update from (d_score[0:NPTS])
+                            ^
+
+"main.cpp", line 636: error: invalid text in pragma
+      #pragma acc parallel teams num_teams(NPTS/M7W) thread_limit(M7W*M7H/M7R/2)
+                           ^
+
+"main.cpp", line 636: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel teams num_teams(NPTS/M7W) thread_limit(M7W*M7H/M7R/2)
+                                 ^
+
+"main.cpp", line 642: error: identifier "omp_get_thread_num" is undefined
+          int tx = omp_get_thread_num() % M7W;
+                   ^
+
+"main.cpp", line 644: error: identifier "omp_get_team_num" is undefined
+          int bp1 = M7W*omp_get_team_num();
+                        ^
+
+"main.cpp", line 721: error: invalid text in pragma
+    #pragma acc update from (d_index[0:NPTS])
+                       ^
+
+"main.cpp", line 721: error: OpenACC data clause expected
+    #pragma acc update from (d_index[0:NPTS])
+                       ^
+
+"main.cpp", line 721: error: extra text after expected end of preprocessing directive
+    #pragma acc update from (d_index[0:NPTS])
+                            ^
+
+"main.cpp", line 722: error: invalid text in pragma
+    #pragma acc update from (d_score[0:NPTS])
+                       ^
+
+"main.cpp", line 722: error: OpenACC data clause expected
+    #pragma acc update from (d_score[0:NPTS])
+                       ^
+
+"main.cpp", line 722: error: extra text after expected end of preprocessing directive
+    #pragma acc update from (d_score[0:NPTS])
+                            ^
+
+"main.cpp", line 728: error: invalid text in pragma
+      #pragma acc parallel teams num_teams(NPTS/M7W) thread_limit(M7W*M7H/M7R)
+                           ^
+
+"main.cpp", line 728: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel teams num_teams(NPTS/M7W) thread_limit(M7W*M7H/M7R)
+                                 ^
+
+"main.cpp", line 734: error: identifier "omp_get_thread_num" is undefined
+          int tx = omp_get_thread_num() % M7W;
+                   ^
+
+"main.cpp", line 736: error: identifier "omp_get_team_num" is undefined
+          int bp1 = M7W*omp_get_team_num();
+                        ^
+
+"main.cpp", line 831: error: invalid text in pragma
+    #pragma acc update from (d_index[0:NPTS])
+                       ^
+
+"main.cpp", line 831: error: OpenACC data clause expected
+    #pragma acc update from (d_index[0:NPTS])
+                       ^
+
+"main.cpp", line 831: error: extra text after expected end of preprocessing directive
+    #pragma acc update from (d_index[0:NPTS])
+                            ^
+
+"main.cpp", line 832: error: invalid text in pragma
+    #pragma acc update from (d_score[0:NPTS])
+                       ^
+
+"main.cpp", line 832: error: OpenACC data clause expected
+    #pragma acc update from (d_score[0:NPTS])
+                       ^
+
+"main.cpp", line 832: error: extra text after expected end of preprocessing directive
+    #pragma acc update from (d_score[0:NPTS])
+                            ^
+
+Error limit reached. Use -fmax-errors=N to change the limit, N=0 for unlimited.
+100 errors detected in the compilation of "main.cpp".
+Compilation terminated.
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

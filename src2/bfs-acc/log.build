@@ -1,0 +1,49 @@
+nvc++ -acc  -std=c++14 -Wall -I../bfs-sycl -O3 -Minfo -mp=gpu -gpu=cc90 -c bfs.cpp -o bfs.o
+run_bfs_cpu(int, Node*, int, int*, char*, char*, char*, int*):
+     30, Loop not vectorized/parallelized: not countable
+     33, Loop not fused: enclosed in different number of nests
+     37, Loop not vectorized: data dependency
+     47, Loop not vectorized: data dependency
+run_bfs_gpu(int, Node*, int, int*, char*, char*, char*, int*):
+     75, Generating copyin(d_graph_mask[:no_of_nodes]) [if not already present]
+         Generating copy(d_cost[:no_of_nodes]) [if not already present]
+         Generating copyin(d_graph_nodes[:no_of_nodes],d_graph_edges[:edge_list_size],d_updating_graph_mask[:no_of_nodes]) [if not already present]
+         Generating create(d_over[:]) [if not already present]
+         Generating copyin(d_graph_visited[:no_of_nodes]) [if not already present]
+     77, Loop not vectorized/parallelized: contains call
+     81, Generating update device(d_over[:])
+         Generating implicit firstprivate(no_of_nodes)
+         Generating NVIDIA GPU code
+         84, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+         90, #pragma acc loop seq
+     84, Loop not fused: no successor loop
+     90, Complex loop carried dependence of d_graph_edges->,d_graph_visited->,d_cost-> prevents parallelization
+         Loop carried dependence of d_cost-> prevents parallelization
+         Loop carried backward dependence of d_cost-> prevents vectorization
+         Complex loop carried dependence of d_updating_graph_mask-> prevents parallelization
+     98, Generating implicit firstprivate(no_of_nodes)
+         Generating NVIDIA GPU code
+        101, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+    101, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+    115, Generating update self(d_over[:])
+main:
+    165, Loop not vectorized/parallelized: contains call
+    182, Loop not vectorized/parallelized: contains call
+    192, Loop not vectorized/parallelized: not countable
+    205, Loop not vectorized/parallelized: not countable
+          30, Loop not vectorized/parallelized: not countable
+          33, Loop not fused: enclosed in different number of nests
+          37, Loop not vectorized: data dependency
+          47, Loop not vectorized: data dependency
+          33, Loop not fused: complex flow graph
+              Loop not vectorized: unknown
+void compare_results<int>(int const*, int const*, int):
+      9, include "util.h"
+          33, Loop not fused: complex flow graph
+              Loop not vectorized: unknown
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      6, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      9, include "util.h"
+nvc++ -acc  -std=c++14 -Wall -I../bfs-sycl -O3 -Minfo -mp=gpu -gpu=cc90 bfs.o -o main 

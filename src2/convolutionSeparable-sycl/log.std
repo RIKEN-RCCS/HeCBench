@@ -1,0 +1,5 @@
+Average kernel execution time 0.002301 (s)
+Comparing against Host/C++ computation...
+Relative L2 norm: 0.000e+00
+
+PASS

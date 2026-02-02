@@ -1,0 +1,6 @@
+../slu-cuda/src/preprocess.cpp:5:10: fatal error: 'nicslu.h' file not found
+    5 | #include "nicslu.h"
+      |          ^~~~~~~~~~
+1 error generated.
+make: *** [Makefile.NVD:92: preprocess.o] Error 1
+timeout was set to  600

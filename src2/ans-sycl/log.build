@@ -1,0 +1,25 @@
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -I include -c -o bin/ans_encoder.o src/ans_encoder.cc
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -I include -c -o bin/ans_table_generator.o src/ans_table_generator.cc
+src/ans_table_generator.cc:141:25: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+  141 |     SYMBOL_TYPE symbols[num_states];
+      |                         ^~~~~~~~~~
+src/ans_table_generator.cc:141:25: note: function parameter 'num_states' with unknown value cannot be used in a constant expression
+src/ans_table_generator.cc:137:12: note: declared here
+  137 |     size_t num_states,
+      |            ^
+1 warning generated.
+src/ans_table_generator.cc:141:25: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+  141 |     SYMBOL_TYPE symbols[num_states];
+      |                         ^~~~~~~~~~
+src/ans_table_generator.cc:141:25: note: function parameter 'num_states' with unknown value cannot be used in a constant expression
+src/ans_table_generator.cc:137:12: note: declared here
+  137 |     size_t num_states,
+      |            ^
+1 warning generated.
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -I include -c -o bin/main.o src/main.cc
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -I include -c -o bin/multians_codetable.o src/multians_codetable.cc
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -I include -c -o bin/multians_gpu_decoder.o src/multians_gpu_decoder.cc
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -I include -c -o bin/multians_input_buffer.o src/multians_input_buffer.cc
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -I include -c -o bin/multians_output_buffer.o src/multians_output_buffer.cc
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -I include -c -o bin/multians_util.o src/multians_util.cc
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU bin/ans_encoder.o bin/ans_table_generator.o bin/main.o bin/multians_codetable.o bin/multians_gpu_decoder.o bin/multians_input_buffer.o bin/multians_output_buffer.o bin/multians_util.o -o bin/main

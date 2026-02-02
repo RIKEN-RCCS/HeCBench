@@ -1,0 +1,10 @@
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c main.cpp -o main.o
+main.cpp:88:12: error: no member named 'get_opportunistic_group' in namespace 'sycl::ext::oneapi::experimental::this_kernel'; did you mean 'sycl::ext::oneapi::experimental::this_work_item::get_opportunistic_group'?
+   88 |   auto g = sycl::ext::oneapi::experimental::this_kernel::get_opportunistic_group();
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |            sycl::ext::oneapi::experimental::this_work_item::get_opportunistic_group
+/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/ext/oneapi/experimental/fragment.hpp:183:34: note: 'sycl::ext::oneapi::experimental::this_work_item::get_opportunistic_group' declared here
+  183 | inline fragment<sycl::sub_group> get_opportunistic_group() {
+      |                                  ^
+1 error generated.
+make: *** [Makefile.NVD:73: main.o] Error 1

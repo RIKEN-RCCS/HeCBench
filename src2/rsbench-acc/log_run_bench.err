@@ -1,0 +1,59 @@
+initialize_simulation(Input):
+          46, Loop not vectorized/parallelized: not countable
+          50, Loop not vectorized/parallelized: potential early exits
+          68, Loop not vectorized/parallelized: not countable
+          72, Loop not vectorized/parallelized: potential early exits
+          93, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+         105, Loop not vectorized/parallelized: potential early exits
+         139, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+         155, Loop not vectorized/parallelized: potential early exits
+         181, Loop not vectorized/parallelized: potential early exits
+generate_n_poles(Input, unsigned long*):
+     46, Recognized memory set idiom
+     50, Loop not vectorized/parallelized: potential early exits
+generate_n_windows(Input, unsigned long*):
+     68, Recognized memory set idiom
+     72, Loop not vectorized/parallelized: potential early exits
+generate_poles(Input, int*, unsigned long*, int*):
+     93, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+    105, Loop not vectorized/parallelized: potential early exits
+generate_window_params(Input, int*, int*, unsigned long*, int*):
+    139, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+    155, Loop not vectorized/parallelized: potential early exits
+generate_pseudo_K0RS(Input, unsigned long*):
+    181, Loop not vectorized/parallelized: potential early exits
+logo(int):
+          28, Loop not vectorized/parallelized: contains call
+          28, Loop not vectorized/parallelized: contains call
+center_print(char const*, int):
+     28, Loop not vectorized/parallelized: contains call
+read_CLI(int, char**):
+     95, Loop not vectorized/parallelized: contains call
+get_materials(Input, unsigned long*):
+          51, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+          67, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop
+         118, Loop not vectorized/parallelized: potential early exits
+load_mats(Input, int*, int*, unsigned long*):
+     51, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+     67, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+load_concs(int*, unsigned long*, int):
+    118, Loop not vectorized/parallelized: potential early exits
+"simulation.c", line 21: error: invalid text in pragma
+    #pragma acc data to:data.n_poles[:data.length_n_poles])\
+                     ^
+
+"simulation.c", line 21: error: extra text after expected end of preprocessing directive
+    #pragma acc data to:data.n_poles[:data.length_n_poles])\
+                       ^
+
+2 errors detected in the compilation of "simulation.c".
+make: *** [Makefile.NVD:57: simulation.o] Error 2
+timeout was set to  600

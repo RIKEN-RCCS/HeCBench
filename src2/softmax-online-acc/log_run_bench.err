@@ -1,0 +1,71 @@
+"main.cpp", line 17: error: invalid text in pragma
+    #pragma acc parallel loop num_teams(grid_size)
+                              ^
+
+"main.cpp", line 17: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop num_teams(grid_size)
+                                       ^
+
+"main.cpp", line 22: error: invalid text in pragma
+      #pragma acc loop reduction(max:maxval) num_threads(block_size)
+                                             ^
+
+"main.cpp", line 22: error: extra text after expected end of preprocessing directive
+      #pragma acc loop reduction(max:maxval) num_threads(block_size)
+                                                        ^
+
+"main.cpp", line 26: error: invalid text in pragma
+      #pragma acc loop reduction(+:sumval) num_threads(block_size)
+                                           ^
+
+"main.cpp", line 26: error: extra text after expected end of preprocessing directive
+      #pragma acc loop reduction(+:sumval) num_threads(block_size)
+                                                      ^
+
+"main.cpp", line 30: error: invalid text in pragma
+      #pragma acc loop num_threads(block_size)
+                       ^
+
+"main.cpp", line 30: error: extra text after expected end of preprocessing directive
+      #pragma acc loop num_threads(block_size)
+                                  ^
+
+"main.cpp", line 39: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(grid_size) thread_limit(block_size) 
+                         ^
+
+"main.cpp", line 39: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(grid_size) thread_limit(block_size) 
+                               ^
+
+"main.cpp", line 44: error: identifier "omp_get_team_num" is undefined
+        int row = omp_get_team_num();
+                  ^
+
+"main.cpp", line 51: error: identifier "omp_get_thread_num" is undefined
+          int tid = omp_get_thread_num();
+                    ^
+
+"main.cpp", line 160: error: invalid text in pragma
+    #pragma acc data to: inp[0:B * T * V]) map(alloc: d_out[0:B * T * V])
+                     ^
+
+"main.cpp", line 160: error: extra text after expected end of preprocessing directive
+    #pragma acc data to: inp[0:B * T * V]) map(alloc: d_out[0:B * T * V])
+                       ^
+
+"common.h", line 32: error: invalid text in pragma
+      #pragma acc update from (out_gpu[0:num_elements])
+                         ^
+
+"common.h", line 32: error: OpenACC data clause expected
+      #pragma acc update from (out_gpu[0:num_elements])
+                         ^
+
+"common.h", line 32: error: extra text after expected end of preprocessing directive
+      #pragma acc update from (out_gpu[0:num_elements])
+                              ^
+
+17 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:58: main.o] Error 2
+timeout was set to  600

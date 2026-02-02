@@ -1,0 +1,773 @@
+nvc++  -std=c++17 -Wall          -I../include -I../permutate-cuda -Minfo -mp=gpu -gpu=cc90 -O3 -c ../permutate-cuda/main.cpp -o main.o
+nvc++  -std=c++17 -Wall          -I../include -I../permutate-cuda -Minfo -mp=gpu -gpu=cc90 -O3 -c ../permutate-cuda/permutation_testing.cpp -o permutation_testing.o
+permutation_testing(unsigned char*, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, bool):
+     76, Loop not vectorized/parallelized: potential early exits
+nvc++  -std=c++17 -Wall          -I../include -I../permutate-cuda -Minfo -mp=gpu -gpu=cc90 -O3 -c ../permutate-cuda/utils.cpp -o utils.o
+read_data_from_file(unsigned char*, unsigned int, unsigned int, char const*):
+     83, Loop not vectorized/parallelized: contains call
+print_counters(unsigned int*):
+    122, Loop not vectorized/parallelized: contains call
+seed(unsigned long*):
+    151, Loop not vectorized/parallelized: contains call
+xoshiro_jump(unsigned int, unsigned long*):
+    166, Outer loop unrolled 4 times (completely unrolled)
+    167, Loop not fused: scalar dependence chain to sibling loop
+         Loop not vectorized: data dependency
+randomRange64(unsigned long, unsigned long*):
+    208, Loop not fused: complex flow graph
+    209, Loop not vectorized/parallelized: loop count too small
+    210, Loop unrolled 2 times (completely unrolled)
+    250, Loop not vectorized/parallelized: loop count too small
+    251, Loop unrolled 2 times (completely unrolled)
+FYshuffle(unsigned char*, int, unsigned long*):
+         208, Loop not fused: complex flow graph
+         209, Loop not vectorized/parallelized: loop count too small
+         210, Loop unrolled 2 times (completely unrolled)
+         250, Loop not vectorized/parallelized: loop count too small
+         251, Loop unrolled 2 times (completely unrolled)
+         291, Loop not vectorized/parallelized: too deeply nested
+nvc++  -std=c++17 -Wall          -I../include -I../permutate-cuda -Minfo -mp=gpu -gpu=cc90 -O3 -c ../permutate-cuda/statistical_test.cpp -o statistical_test.o
+calculate_statistics(double*, double*, unsigned char*, unsigned int, unsigned int):
+      7, Generated vector simd code for the loop containing reductions
+run_tests(double*, double, double, unsigned char*, unsigned int, unsigned int):
+          74, Loop not fused: complex flow graph
+              Loop not vectorized: recurrence
+         123, Loop not fused: function call before adjacent loop
+              Loop not vectorized: recurrence
+         213, Loop not vectorized/parallelized: contains call
+         250, Loop not fused: complex flow graph
+         251, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+         255, Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+          92, Loop not fused: complex flow graph
+              Loop not vectorized: data dependency
+         188, Loop not fused: different loop trip count
+         188, Loop not fused: different loop trip count
+         188, Loop not fused: different loop trip count
+         188, Loop not fused: different loop trip count
+         188, Loop not fused: different loop trip count
+         262, Loop not fused: complex flow graph
+         264, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+         270, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+         156, Recognized memory zero idiom
+         158, Loop not vectorized/parallelized: potential early exits
+          74, Loop not fused: different loop trip count
+              Loop not vectorized: recurrence
+          92, Loop not fused: complex flow graph
+              Loop not vectorized: data dependency
+         123, Loop not fused: function call before adjacent loop
+              Loop not vectorized: recurrence
+         156, Recognized memory zero idiom
+         158, Loop not vectorized/parallelized: potential early exits
+         188, Loop not fused: different loop trip count
+         188, Loop not fused: different loop trip count
+         188, Loop not fused: different loop trip count
+         188, Loop not fused: different loop trip count
+         188, Loop not fused: function call before adjacent loop
+         213, Loop not vectorized/parallelized: contains call
+excursion_test(double*, double, unsigned char const*, unsigned int):
+     74, Loop not vectorized: recurrence
+directional_runs_and_number_of_inc_dec(double*, double*, double*, unsigned char const*, unsigned int):
+     92, Loop not vectorized: data dependency
+runs_based_on_median(double*, double*, double, unsigned char const*, unsigned int):
+    123, Loop not vectorized: recurrence
+collision_test_statistic(double*, double*, unsigned char const*, unsigned int, unsigned int):
+    156, Recognized memory zero idiom
+    158, Loop not vectorized/parallelized: potential early exits
+compression(double*, unsigned char const*, unsigned int, unsigned int):
+    213, Loop not vectorized/parallelized: contains call
+conversion1(unsigned char*, unsigned char const*, unsigned int):
+    250, Loop not fused: complex flow graph
+    251, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    255, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+conversion2(unsigned char*, unsigned char const*, unsigned int):
+    262, Loop not fused: complex flow graph
+    264, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    270, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+void std::__introsort_loop<__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, long, __gnu_cxx::__ops::_Iter_less_iter>(__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, __gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, long, __gnu_cxx::__ops::_Iter_less_iter):
+      1, include "header.h"
+           9, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                       1929, Loop not vectorized/parallelized: potential early exits
+        1917, Loop not vectorized/parallelized: potential early exits
+        1918, Loop not vectorized/parallelized: potential early exits
+void std::__partial_sort<__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, __gnu_cxx::__ops::_Iter_less_iter>(__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, __gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, __gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, __gnu_cxx::__ops::_Iter_less_iter):
+        1647, Loop not vectorized/parallelized: potential early exits
+         421, Loop not vectorized/parallelized: potential early exits
+void std::__heap_select<__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, __gnu_cxx::__ops::_Iter_less_iter>(__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, __gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, __gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, __gnu_cxx::__ops::_Iter_less_iter):
+      1, include "header.h"
+           8, include "math.h"
+               12, include "math.h"
+                    36, include "cmath"
+                         17, include "cmath"
+                            1935, include "specfun.h"
+                                   45, include "stl_algobase.h"
+                                        71, include "predefined_ops.h"
+                                           1647, Loop not vectorized/parallelized: potential early exits
+void std::__make_heap<__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, __gnu_cxx::__ops::_Iter_less_iter>(__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, __gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, __gnu_cxx::__ops::_Iter_less_iter&):
+      1, include "header.h"
+           9, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                         61, include "stl_heap.h"
+                             352, Loop not vectorized/parallelized: potential early exits
+void std::__adjust_heap<__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, long, unsigned char, __gnu_cxx::__ops::_Iter_less_iter>(__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, long, long, unsigned char, __gnu_cxx::__ops::_Iter_less_iter):
+      1, include "header.h"
+           9, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                         61, include "stl_heap.h"
+                             228, Loop not vectorized/parallelized: not countable
+void std::__push_heap<__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, long, unsigned char, __gnu_cxx::__ops::_Iter_less_val>(__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, long, long, unsigned char, __gnu_cxx::__ops::_Iter_less_val&):
+      1, include "header.h"
+           9, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                         61, include "stl_heap.h"
+                             139, Loop not vectorized/parallelized: potential early exits
+void std::__sort_heap<__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, __gnu_cxx::__ops::_Iter_less_iter>(__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, __gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, __gnu_cxx::__ops::_Iter_less_iter&):
+      1, include "header.h"
+           9, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                         61, include "stl_heap.h"
+                             421, Loop not vectorized/parallelized: potential early exits
+__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>> std::__unguarded_partition_pivot<__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, __gnu_cxx::__ops::_Iter_less_iter>(__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, __gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, __gnu_cxx::__ops::_Iter_less_iter):
+        1884, Loop not vectorized/parallelized: not countable
+        1887, Loop not vectorized/parallelized: not countable
+__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>> std::__unguarded_partition<__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, __gnu_cxx::__ops::_Iter_less_iter>(__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, __gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, __gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, __gnu_cxx::__ops::_Iter_less_iter):
+      1, include "header.h"
+           9, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                       1884, Loop not vectorized/parallelized: not countable
+                       1887, Loop not vectorized/parallelized: not countable
+void std::__final_insertion_sort<__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, __gnu_cxx::__ops::_Iter_less_iter>(__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, __gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, __gnu_cxx::__ops::_Iter_less_iter):
+        1847, Loop not vectorized/parallelized: not countable
+void std::__insertion_sort<__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, __gnu_cxx::__ops::_Iter_less_iter>(__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, __gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, __gnu_cxx::__ops::_Iter_less_iter):
+        1806, Loop not vectorized/parallelized: not countable
+void std::__unguarded_linear_insert<__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, __gnu_cxx::__ops::_Val_less_iter>(__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, __gnu_cxx::__ops::_Val_less_iter):
+             1806, Loop not vectorized/parallelized: not countable
+void std::__unguarded_insertion_sort<__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, __gnu_cxx::__ops::_Iter_less_iter>(__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, __gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, __gnu_cxx::__ops::_Iter_less_iter):
+        1806, Loop not vectorized/parallelized: not countable
+nvc++  -std=c++17 -Wall          -I../include -I../permutate-cuda -Minfo -mp=gpu -gpu=cc90 -O3 -c ../permutate-cuda/bzip/blocksort.cpp -o blocksort.o
+BZ2_blockSort(EState*):
+         770, Loop not fused: different loop trip count
+              Generated vector simd code for negative stride loop
+         774, Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+         788, Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+         795, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 4 times
+         803, Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+         807, Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+         825, Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+         837, Generated vector simd code for the loop
+         845, Loop not vectorized/parallelized: not countable
+         851, Loop not vectorized/parallelized: potential early exits
+         886, Loop not vectorized/parallelized: potential early exits
+         919, Loop not vectorized: data dependency
+         923, Loop not vectorized/parallelized: not countable
+         929, Loop not vectorized/parallelized: not countable
+         946, Loop not fused: complex flow graph
+              Loop not vectorized: data dependency
+         994, Loop not vectorized/parallelized: not countable
+         996, Loop not fused: function call before adjacent loop
+              Loop not vectorized: unsupported scatter
+   1084, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_36____permutate_cuda_bzip_blocksort_cpp_0f369698::fallbackSimpleSort(unsigned int*, unsigned int*, int, int):
+     46, Loop not vectorized/parallelized: potential early exits
+     55, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_36____permutate_cuda_bzip_blocksort_cpp_0f369698::fallbackQSort3(unsigned int*, unsigned int*, int, int):
+          46, Loop not vectorized/parallelized: potential early exits
+          55, Loop not vectorized/parallelized: potential early exits
+    136, Loop not vectorized/parallelized: potential early exits
+    147, Loop not vectorized/parallelized: potential early exits
+    166, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    167, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+_INTERNAL_36____permutate_cuda_bzip_blocksort_cpp_0f369698::fallbackSort(unsigned int*, unsigned int*, unsigned int*, int, int):
+    231, Recognized memory zero idiom
+    232, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    233, Recognized memory copy idiom
+    234, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    236, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+    244, Recognized memory zero idiom
+    245, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+    254, Loop not vectorized: data dependency
+    261, Loop not vectorized/parallelized: too deeply nested
+    267, Loop not vectorized: data dependency
+    279, Loop not vectorized/parallelized: potential early exits
+    281, Loop not vectorized/parallelized: not countable
+    282, Loop not vectorized/parallelized: not countable
+    286, Loop not vectorized/parallelized: potential early exits
+    288, Loop not vectorized/parallelized: not countable
+    289, Loop not vectorized/parallelized: not countable
+         115, Loop not vectorized/parallelized: potential early exits
+         136, Loop not vectorized/parallelized: potential early exits
+         147, Loop not vectorized/parallelized: potential early exits
+         166, Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+              Loop unrolled 4 times
+         167, Loop not fused: no successor loop
+              Loop not vectorized: data dependency
+              Loop unrolled 4 times
+    301, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+    324, Loop not vectorized/parallelized: not countable
+_INTERNAL_36____permutate_cuda_bzip_blocksort_cpp_0f369698::mainGtU(unsigned int, unsigned int, unsigned char*, unsigned short*, unsigned int, int*):
+    412, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_36____permutate_cuda_bzip_blocksort_cpp_0f369698::mainSimpleSort(unsigned int*, unsigned char*, unsigned short*, int, int, int, int, int*):
+    501, Loop not vectorized/parallelized: not countable
+         412, Loop not vectorized/parallelized: potential early exits
+         412, Loop not vectorized/parallelized: potential early exits
+         412, Loop not vectorized/parallelized: potential early exits
+         504, Loop not vectorized/parallelized: too deeply nested
+_INTERNAL_36____permutate_cuda_bzip_blocksort_cpp_0f369698::mainQSort3(unsigned int*, unsigned char*, unsigned short*, int, int, int, int, int*):
+         501, Loop not vectorized/parallelized: not countable
+         504, Loop not vectorized/parallelized: too deeply nested
+         514, Loop not vectorized/parallelized: potential early exits
+         528, Loop not vectorized/parallelized: potential early exits
+         542, Loop not vectorized/parallelized: potential early exits
+    665, Loop not vectorized/parallelized: potential early exits
+    675, Loop not vectorized/parallelized: potential early exits
+    696, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    697, Loop not fused: complex flow graph
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+_INTERNAL_36____permutate_cuda_bzip_blocksort_cpp_0f369698::mainSort(unsigned int*, unsigned char*, unsigned short*, unsigned int*, int, int, int*):
+    770, Loop not fused: different loop trip count
+         Generated vector simd code for negative stride loop
+    774, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+    788, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+    795, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    803, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    807, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+    825, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+    837, Generated vector simd code for the loop
+    845, Loop not vectorized/parallelized: not countable
+    851, Loop not vectorized/parallelized: potential early exits
+    886, Loop not vectorized/parallelized: potential early exits
+    919, Loop not vectorized: data dependency
+    923, Loop not vectorized/parallelized: not countable
+    929, Loop not vectorized/parallelized: not countable
+    946, Loop not fused: complex flow graph
+         Loop not vectorized: data dependency
+    994, Loop not vectorized/parallelized: not countable
+    996, Loop not fused: function call before adjacent loop
+         Loop not vectorized: unsupported scatter
+nvc++  -std=c++17 -Wall          -I../include -I../permutate-cuda -Minfo -mp=gpu -gpu=cc90 -O3 -c ../permutate-cuda/bzip/bzlib.cpp -o bzlib.o
+"../permutate-cuda/bzip/bzlib.cpp", line 855: warning: statement is unreachable [code_is_unreachable]
+     AssertH ( 0, 6001 );
+     ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"../permutate-cuda/bzip/bzlib.cpp", line 1216: warning: statement is unreachable [code_is_unreachable]
+     return 0; /*not reached*/
+     ^
+
+BZ2_bzCompressInit:
+         124, Recognized memory zero idiom
+BZ2_bzCompress:
+    417, Loop not vectorized/parallelized: potential early exits
+         370, Loop not vectorized/parallelized: potential early exits
+         375, Recognized memory zero idiom
+         383, Loop not fused: complex flow graph
+              Loop not vectorized/parallelized: potential early exits
+              Loop not vectorized: data dependency
+         385, Loop not fused: complex flow graph
+              Loop not vectorized: data dependency
+         370, Loop not vectorized/parallelized: potential early exits
+         375, Recognized memory zero idiom
+         383, Loop not fused: complex flow graph
+              Loop not vectorized/parallelized: potential early exits
+              Loop not vectorized: data dependency
+         385, Loop not fused: complex flow graph
+              Loop not vectorized: data dependency
+         370, Loop not vectorized/parallelized: potential early exits
+         375, Recognized memory zero idiom
+         383, Loop not fused: complex flow graph
+              Loop not vectorized/parallelized: potential early exits
+              Loop not vectorized: data dependency
+         385, Loop not fused: complex flow graph
+              Loop not vectorized: data dependency
+BZ2_indexIntoF(int, int*):
+    693, Loop not vectorized/parallelized: not countable
+BZ2_bzDecompress:
+         715, Loop not vectorized/parallelized: potential early exits
+         735, Loop not vectorized/parallelized: not countable
+         741, Loop not vectorized/parallelized: not countable
+         747, Loop not vectorized/parallelized: not countable
+         752, Loop not vectorized/parallelized: not countable
+         755, Loop not vectorized/parallelized: not countable
+         764, Loop not vectorized/parallelized: potential early exits
+         784, Loop not vectorized/parallelized: not countable
+         789, Loop not vectorized/parallelized: not countable
+         794, Loop not vectorized/parallelized: not countable
+         798, Loop not vectorized/parallelized: not countable
+         800, Loop not vectorized/parallelized: not countable
+         545, Loop not vectorized/parallelized: potential early exits
+         613, Loop not vectorized/parallelized: potential early exits
+BZ2_bzWriteOpen:
+         209, Recognized memory zero idiom
+BZ2_bzWrite:
+    987, Loop not vectorized/parallelized: potential early exits
+BZ2_bzWriteClose:
+        1047, Loop not vectorized/parallelized: potential early exits
+BZ2_bzWriteClose64:
+   1046, Loop not vectorized/parallelized: potential early exits
+BZ2_bzReadOpen:
+   1124, Loop not fused: complex flow graph
+         Loop not vectorized: recurrence
+         Loop unrolled 2 times
+BZ2_bzRead:
+   1184, Loop not vectorized/parallelized: potential early exits
+BZ2_bzBuffToBuffCompress:
+         209, Recognized memory zero idiom
+BZ2_bzopen:
+        1402, Loop not vectorized/parallelized: contains call
+        1440, Recognized memory zero idiom
+BZ2_bzdopen:
+        1402, Loop not vectorized/parallelized: contains call
+        1440, Recognized memory zero idiom
+BZ2_bzread:
+        1184, Loop not vectorized/parallelized: potential early exits
+BZ2_bzwrite:
+         988, Loop not vectorized/parallelized: potential early exits
+BZ2_bzclose:
+        1016, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_32____permutate_cuda_bzip_bzlib_cpp_474bf649::prepare_new_block(EState*):
+    124, Recognized memory zero idiom
+_INTERNAL_32____permutate_cuda_bzip_bzlib_cpp_474bf649::add_pair_to_block(EState*):
+    220, Loop not fused: complex flow graph
+         Loop not vectorized: data dependency
+_INTERNAL_32____permutate_cuda_bzip_bzlib_cpp_474bf649::flush_RL(EState*):
+         220, Loop not fused: complex flow graph
+              Loop not vectorized: data dependency
+_INTERNAL_32____permutate_cuda_bzip_bzlib_cpp_474bf649::copy_input_until_stop(EState*):
+    296, Loop not vectorized/parallelized: potential early exits
+         220, Loop not fused: complex flow graph
+              Loop not vectorized: data dependency
+    312, Loop not vectorized/parallelized: potential early exits
+         220, Loop not fused: complex flow graph
+              Loop not vectorized: data dependency
+_INTERNAL_32____permutate_cuda_bzip_bzlib_cpp_474bf649::copy_output_until_stop(EState*):
+    338, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_32____permutate_cuda_bzip_bzlib_cpp_474bf649::handle_compress(bz_stream*):
+         341, Loop not vectorized/parallelized: potential early exits
+         124, Recognized memory zero idiom
+         296, Loop not vectorized/parallelized: potential early exits
+         302, Loop not fused: complex flow graph
+              Loop not vectorized: data dependency
+         312, Loop not vectorized/parallelized: potential early exits
+         320, Loop not fused: complex flow graph
+              Loop not vectorized: data dependency
+         254, Loop not fused: complex flow graph
+              Loop not vectorized: data dependency
+_INTERNAL_32____permutate_cuda_bzip_bzlib_cpp_474bf649::unRLE_obuf_to_output_FAST(DState*):
+    544, Loop not vectorized/parallelized: potential early exits
+    612, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_32____permutate_cuda_bzip_bzlib_cpp_474bf649::unRLE_obuf_to_output_SMALL(DState*):
+    714, Loop not vectorized/parallelized: potential early exits
+         693, Loop not vectorized/parallelized: not countable
+         693, Loop not vectorized/parallelized: not countable
+         693, Loop not vectorized/parallelized: not countable
+         693, Loop not vectorized/parallelized: not countable
+         693, Loop not vectorized/parallelized: not countable
+    763, Loop not vectorized/parallelized: potential early exits
+         693, Loop not vectorized/parallelized: not countable
+         693, Loop not vectorized/parallelized: not countable
+         693, Loop not vectorized/parallelized: not countable
+         693, Loop not vectorized/parallelized: not countable
+         693, Loop not vectorized/parallelized: not countable
+_INTERNAL_32____permutate_cuda_bzip_bzlib_cpp_474bf649::bzopen_or_bzdopen(char const*, int, char const*, int):
+   1402, Loop not vectorized/parallelized: contains call
+         951, Recognized memory zero idiom
+nvc++  -std=c++17 -Wall          -I../include -I../permutate-cuda -Minfo -mp=gpu -gpu=cc90 -O3 -c ../permutate-cuda/bzip/compress.cpp -o compress.o
+BZ2_compressBlock(EState*, unsigned char):
+          96, Loop not vectorized/parallelized: not countable
+          96, Loop not vectorized/parallelized: not countable
+          96, Loop not vectorized/parallelized: not countable
+          96, Loop not vectorized/parallelized: not countable
+          96, Loop not vectorized/parallelized: not countable
+          96, Loop not vectorized/parallelized: not countable
+          96, Loop not vectorized/parallelized: not countable
+          96, Loop not vectorized/parallelized: not countable
+          96, Loop not vectorized/parallelized: not countable
+          96, Loop not vectorized/parallelized: not countable
+          85, Loop not vectorized/parallelized: not countable
+          86, Loop not vectorized/parallelized: not countable
+          87, Loop not vectorized/parallelized: not countable
+          88, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+         154, Loop not fused: function call before adjacent loop
+              Loop not vectorized: recurrence
+         157, Recognized memory zero idiom
+         161, Generated vector simd code for the loop
+         177, Loop not vectorized/parallelized: not countable
+         197, Loop not vectorized/parallelized: not countable
+         215, Loop not vectorized/parallelized: not countable
+          96, Loop not vectorized/parallelized: not countable
+          96, Loop not vectorized/parallelized: not countable
+          96, Loop not vectorized/parallelized: not countable
+          96, Loop not vectorized/parallelized: not countable
+          96, Loop not vectorized/parallelized: not countable
+          96, Loop not vectorized/parallelized: not countable
+          85, Loop not vectorized/parallelized: not countable
+          86, Loop not vectorized/parallelized: not countable
+          87, Loop not vectorized/parallelized: not countable
+          88, Loop not vectorized/parallelized: not countable
+          48, Loop not vectorized/parallelized: not countable
+_INTERNAL_35____permutate_cuda_bzip_compress_cpp_b4dfae25::bsFinishWrite(EState*):
+     48, Loop not vectorized/parallelized: not countable
+_INTERNAL_35____permutate_cuda_bzip_compress_cpp_b4dfae25::bsW(EState*, int, unsigned int):
+     75, Loop not vectorized/parallelized: not countable
+_INTERNAL_35____permutate_cuda_bzip_compress_cpp_b4dfae25::bsPutUInt32(EState*, unsigned int):
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+_INTERNAL_35____permutate_cuda_bzip_compress_cpp_b4dfae25::bsPutUChar(EState*, unsigned char):
+          75, Loop not vectorized/parallelized: not countable
+_INTERNAL_35____permutate_cuda_bzip_compress_cpp_b4dfae25::makeMaps_e(EState*):
+    110, Loop not vectorized: recurrence
+_INTERNAL_35____permutate_cuda_bzip_compress_cpp_b4dfae25::generateMTFValues(EState*):
+         110, Loop not fused: function call before adjacent loop
+              Loop not vectorized: recurrence
+    157, Recognized memory zero idiom
+    161, Generated vector simd code for the loop
+    176, Loop not vectorized/parallelized: not countable
+    197, Loop not vectorized/parallelized: not countable
+    214, Loop not vectorized/parallelized: not countable
+_INTERNAL_35____permutate_cuda_bzip_compress_cpp_b4dfae25::sendMTFValues(EState*):
+    268, Recognized memory set idiom
+    290, Loop not vectorized/parallelized: potential early exits
+    308, Generated vector simd code for the loop
+    322, Loop not vectorized/parallelized: too deeply nested
+    324, Recognized memory zero idiom
+    327, Recognized memory zero idiom
+    335, Generated vector simd code for the loop
+    356, Recognized memory zero idiom
+    389, Loop not fused: different loop trip count
+    391, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    400, Loop not fused: complex flow graph
+         Loop not vectorized: unknown
+    430, Loop not vectorized: data dependency
+    439, Loop not vectorized/parallelized: contains call
+    449, Loop not vectorized/parallelized: potential early exits
+    464, Generated vector simd code for the loop
+    469, Loop not vectorized/parallelized: not countable
+    481, Loop not vectorized/parallelized: potential early exits
+    484, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+    499, Loop not vectorized: data dependency
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+         531, Loop not vectorized/parallelized: too deeply nested
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+nvc++  -std=c++17 -Wall          -I../include -I../permutate-cuda -Minfo -mp=gpu -gpu=cc90 -O3 -c ../permutate-cuda/bzip/crctable.cpp -o crctable.o
+nvc++  -std=c++17 -Wall          -I../include -I../permutate-cuda -Minfo -mp=gpu -gpu=cc90 -O3 -c ../permutate-cuda/bzip/decompress.cpp -o decompress.o
+BZ2_decompress(DState*):
+    197, Loop not vectorized/parallelized: potential early exits
+    200, Loop not vectorized/parallelized: potential early exits
+    203, Loop not vectorized/parallelized: potential early exits
+    206, Loop not vectorized/parallelized: potential early exits
+    222, Loop not vectorized/parallelized: potential early exits
+    226, Loop not vectorized/parallelized: potential early exits
+    228, Loop not vectorized/parallelized: potential early exits
+    230, Loop not vectorized/parallelized: potential early exits
+    232, Loop not vectorized/parallelized: potential early exits
+    234, Loop not vectorized/parallelized: potential early exits
+    242, Loop not vectorized/parallelized: potential early exits
+    244, Loop not vectorized/parallelized: potential early exits
+    246, Loop not vectorized/parallelized: potential early exits
+    248, Loop not vectorized/parallelized: potential early exits
+    251, Loop not vectorized/parallelized: potential early exits
+    254, Loop not vectorized/parallelized: potential early exits
+    256, Loop not vectorized/parallelized: potential early exits
+    258, Loop not vectorized/parallelized: potential early exits
+    268, Loop not vectorized/parallelized: potential early exits
+    274, Recognized memory zero idiom
+    279, Loop not vectorized/parallelized: potential early exits
+          31, Loop not vectorized: recurrence
+    287, Loop not vectorized/parallelized: potential early exits
+    289, Loop not vectorized/parallelized: potential early exits
+    294, Loop not vectorized/parallelized: potential early exits
+    305, Loop not vectorized/parallelized: not countable
+    310, Loop not vectorized/parallelized: not countable
+    318, Loop not vectorized/parallelized: potential early exits
+    322, Loop not vectorized/parallelized: potential early exits
+    324, Loop not vectorized/parallelized: potential early exits
+    332, Loop not vectorized/parallelized: potential early exits
+    335, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+    356, Loop not fused: different loop trip count
+         Generated vector simd code for the loop
+    363, Generated vector simd code for negative stride loop
+    373, Loop not vectorized/parallelized: potential early exits
+    394, Loop not vectorized/parallelized: potential early exits
+    403, Loop not vectorized/parallelized: potential early exits
+    410, Loop not vectorized/parallelized: potential early exits
+    433, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    441, Recognized memory copy idiom
+    451, Loop not vectorized/parallelized: not countable
+    455, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    465, Loop not fused: complex flow graph
+    466, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    483, Loop not vectorized/parallelized: potential early exits
+    496, Loop not vectorized/parallelized: potential early exits
+    502, Recognized memory copy idiom
+    503, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    505, Loop not vectorized/parallelized: potential early exits
+    512, Loop not vectorized/parallelized: potential early exits
+    527, Recognized memory copy idiom
+    530, Loop not vectorized: data dependency
+    539, Loop not vectorized/parallelized: not countable
+    560, Loop not fused: complex flow graph
+         Loop not vectorized: data dependency
+    584, Loop not vectorized/parallelized: potential early exits
+    586, Loop not vectorized/parallelized: potential early exits
+    588, Loop not vectorized/parallelized: potential early exits
+    590, Loop not vectorized/parallelized: potential early exits
+    592, Loop not vectorized/parallelized: potential early exits
+    596, Loop not vectorized/parallelized: potential early exits
+    598, Loop not vectorized/parallelized: potential early exits
+    600, Loop not vectorized/parallelized: potential early exits
+    602, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_37____permutate_cuda_bzip_decompress_cpp_d8cc3e33::makeMaps_d(DState*):
+     31, Loop not vectorized: recurrence
+nvc++  -std=c++17 -Wall          -I../include -I../permutate-cuda -Minfo -mp=gpu -gpu=cc90 -O3 -c ../permutate-cuda/bzip/huffman.cpp -o huffman.o
+BZ2_hbMakeCodeLengths(unsigned char*, int*, int, int):
+     79, Generated vector simd code for the loop
+     95, Loop not vectorized/parallelized: not countable
+    101, Loop not vectorized/parallelized: potential early exits
+    102, Loop not vectorized/parallelized: potential early exits
+    109, Loop not vectorized/parallelized: not countable
+    118, Loop not vectorized/parallelized: not countable
+    142, Loop not fused: no successor loop
+         Generated vector simd code for the loop
+BZ2_hbCreateDecodeTables(int*, int*, int*, unsigned char*, int, int, int):
+    181, Loop not fused: function call before adjacent loop
+    185, Recognized memory zero idiom
+    186, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    188, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    190, Recognized memory zero idiom
+    193, Loop not fused: different loop trip count
+         Loop not vectorized: recurrence
+         Loop unrolled 2 times
+    198, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Vectorized loop was interleaved
+         Loop unrolled 2 times
+nvc++  -std=c++17 -Wall          -I../include -I../permutate-cuda -Minfo -mp=gpu -gpu=cc90 -O3 -c ../permutate-cuda/bzip/randtable.cpp -o randtable.o
+nvc++  -std=c++17 -Wall          -I../include -I../permutate-cuda -Minfo -mp=gpu -gpu=cc90 -O3 -c gpu_permutation_testing.cpp -o gpu_permutation_testing.o
+dev_test1(double*, double, unsigned char const*, unsigned int, unsigned int, unsigned int):
+     22, include "kernel_functions.hpp"
+          23, include "device_functions.hpp"
+               30, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+               34, Loop not vectorized: recurrence
+dev_test2_6(double*, double*, double*, double*, double*, double, unsigned char const*, unsigned int, unsigned int, unsigned int):
+     22, include "kernel_functions.hpp"
+          23, include "device_functions.hpp"
+               51, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+               68, Loop not fused: complex flow graph
+                   Loop not vectorized: data dependency
+dev_test7_8(double*, double*, unsigned char const*, unsigned int, unsigned int, unsigned int, unsigned int):
+     22, include "kernel_functions.hpp"
+          23, include "device_functions.hpp"
+              130, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+              138, Recognized memory zero idiom
+              140, Loop not vectorized/parallelized: potential early exits
+dev_test9_and_14(double*, double*, unsigned char const*, unsigned int, unsigned int, unsigned int, unsigned int):
+     22, include "kernel_functions.hpp"
+          23, include "device_functions.hpp"
+              169, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+dev_hammingweight(unsigned char):
+     22, include "kernel_functions.hpp"
+          23, include "device_functions.hpp"
+              191, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+dev_binary_test2_4(double*, double*, double*, unsigned char const*, unsigned int, unsigned int, unsigned int):
+     22, include "kernel_functions.hpp"
+          23, include "device_functions.hpp"
+              210, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+              217, Loop not vectorized: recurrence
+dev_binary_test9_and_14(double*, double*, unsigned char const*, unsigned int, unsigned int, unsigned int, unsigned int):
+     22, include "kernel_functions.hpp"
+          23, include "device_functions.hpp"
+              245, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+dev_test5_6(double*, double*, double, unsigned char const*, unsigned int, unsigned int, unsigned int):
+     22, include "kernel_functions.hpp"
+          23, include "device_functions.hpp"
+              264, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+              272, Loop not vectorized: recurrence
+LCG_random(unsigned long*):
+     22, include "kernel_functions.hpp"
+          26, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+shuffling_kernel(unsigned char*, unsigned char const*, unsigned int, unsigned int, unsigned int, unsigned int):
+     22, include "kernel_functions.hpp"
+          49, #omp target teams distribute parallel for thread_limit(num_thread)
+              49, Generating "nvkernel__Z16shuffling_kernelPhPKhjjjj_F330L49_2" GPU kernel
+              52, Loop parallelized across teams and threads, schedule(static)
+          52, Loop not vectorized/parallelized: not countable
+          60, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+          67, Loop not vectorized: data dependency
+statistical_tests_kernel(unsigned int*, double const*, double, double, unsigned char const*, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int):
+     22, include "kernel_functions.hpp"
+         101, #omp target teams num_teams(num_block*2) thread_limit(num_thread)
+             101, Generating "nvkernel__Z24statistical_tests_kernelPjPKdddPKhjjjjj_F330L101_6" GPU kernel
+             103, #omp parallel
+         138, Recognized memory zero idiom
+         140, Loop not vectorized/parallelized: potential early exits
+          34, Loop not vectorized: recurrence
+binary_shuffling_kernel(unsigned char*, unsigned char*, unsigned char const*, unsigned int, unsigned int, unsigned int, int, int):
+     22, include "kernel_functions.hpp"
+         375, #omp target teams distribute parallel for thread_limit(num_thread)
+             375, Generating "nvkernel__Z23binary_shuffling_kernelPhS_PKhjjjii_F330L375_11" GPU kernel
+             378, Loop parallelized across teams and threads, schedule(static)
+         378, Loop not vectorized/parallelized: not countable
+         384, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+         390, Loop not vectorized: data dependency
+         398, Loop not vectorized: data dependency
+binary_statistical_tests_kernel(unsigned int*, double const*, double, double, unsigned char const*, unsigned char const*, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int):
+     22, include "kernel_functions.hpp"
+         439, #omp target teams num_teams(num_block*4) thread_limit(num_thread)
+             439, Generating "nvkernel__Z31binary_statistical_tests_kernelPjPKdddPKhS3_jjjjjj_F330L439_15" GPU kernel
+             441, #omp parallel
+          34, Loop not vectorized: recurrence
+         272, Loop not vectorized: recurrence
+         217, Loop not vectorized: recurrence
+         138, Recognized memory zero idiom
+         140, Loop not vectorized/parallelized: potential early exits
+gpu_permutation_testing(double*, unsigned int*, double*, double, double, unsigned char*, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int):
+     69, Generating map(to:counts[:54],results[:18],data[:len]) 
+         Generating map(alloc:bNdata[:Nblen],Ndata[:Nlen]) 
+     76, Loop not vectorized/parallelized: potential early exits
+     86, Generating update from(counts[:54])
+     87, Loop not vectorized: recurrence
+    103, Generating update from(counts[:54])
+    104, Loop not vectorized: recurrence
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     21, include "header.h"
+          11, include "mutex"
+               39, include "chrono"
+                   472, Loop not vectorized/parallelized: not countable
+nvc++  -std=c++17 -Wall          -I../include -I../permutate-cuda -Minfo -mp=gpu -gpu=cc90 -O3 main.o permutation_testing.o utils.o statistical_test.o       blocksort.o bzlib.o compress.o crctable.o decompress.o       huffman.o randtable.o gpu_permutation_testing.o -o main 

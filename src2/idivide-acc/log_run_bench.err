@@ -1,0 +1,140 @@
+operator/(int, int_fastdiv const&):
+         113, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+check(int, int_fastdiv, int*):
+      9, include "kernels.h"
+          55, Generating implicit private(divident,n)
+              Generating NVIDIA GPU code
+              57, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+          55, Generating implicit copyin(divisor) [if not already present]
+              Generating implicit copy(results[:4]) [if not already present]
+          57, Loop not vectorized/parallelized: not countable
+test():
+         616, Loop not vectorized/parallelized: not countable
+     25, Generating enter data create(buf[:])
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+          17, Loop not vectorized/parallelized: potential early exits
+     35, Generating update device(buf[:])
+     38, Generating update self(buf[:])
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+     44, Generating exit data delete(buf[:])
+     50, Generating exit data delete(buf[:])
+main:
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+          17, Loop not vectorized/parallelized: potential early exits
+          17, Loop not vectorized/parallelized: potential early exits
+          17, Loop not vectorized/parallelized: potential early exits
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+     79, Loop not vectorized/parallelized: potential early exits
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+          17, Loop not vectorized/parallelized: potential early exits
+          17, Loop not vectorized/parallelized: potential early exits
+          17, Loop not vectorized/parallelized: potential early exits
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+          17, Loop not vectorized/parallelized: potential early exits
+          17, Loop not vectorized/parallelized: potential early exits
+          17, Loop not vectorized/parallelized: potential early exits
+          17, Loop not vectorized/parallelized: potential early exits
+          17, Loop not vectorized/parallelized: potential early exits
+          17, Loop not vectorized/parallelized: potential early exits
+          17, Loop not vectorized/parallelized: potential early exits
+          17, Loop not vectorized/parallelized: potential early exits
+          17, Loop not vectorized/parallelized: potential early exits
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    108, Loop not vectorized/parallelized: potential early exits
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+          17, Loop not vectorized/parallelized: potential early exits
+          17, Loop not vectorized/parallelized: potential early exits
+          17, Loop not vectorized/parallelized: potential early exits
+          17, Loop not vectorized/parallelized: potential early exits
+          17, Loop not vectorized/parallelized: potential early exits
+          17, Loop not vectorized/parallelized: potential early exits
+          17, Loop not vectorized/parallelized: potential early exits
+          17, Loop not vectorized/parallelized: potential early exits
+          17, Loop not vectorized/parallelized: potential early exits
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+void throughput_test<int>(int, int, int, int, int, int*):
+      9, include "kernels.h"
+           9, Generating copyin(dummy,n) [if not already present]
+              Generating create(buf[:1]) [if not already present]
+              Generating copyin(d1,d2,d3) [if not already present]
+              Generating NVIDIA GPU code
+              12, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+          12, Loop not vectorized/parallelized: not countable
+void throughput_test<int_fastdiv>(int, int_fastdiv, int_fastdiv, int_fastdiv, int, int*):
+      9, include "kernels.h"
+           9, Generating copyin(dummy,n) [if not already present]
+              Generating create(buf[:1]) [if not already present]
+              Generating copyin(d1,d2,d3) [if not already present]
+              Generating NVIDIA GPU code
+              12, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+          12, Loop not vectorized/parallelized: not countable
+void latency_test<int>(int, int, int, int, int, int, int, int, int, int, int, int, int*):
+      9, include "kernels.h"
+          36, Generating copyin(dummy,n) [if not already present]
+              Generating create(buf[:1]) [if not already present]
+              Generating copyin(d10,d2,d3,d4,d5,d6,d7,d8,d1,d9) [if not already present]
+              Generating implicit private(x)
+              Generating NVIDIA GPU code
+              39, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+          39, Loop not vectorized/parallelized: not countable
+void latency_test<int_fastdiv>(int, int_fastdiv, int_fastdiv, int_fastdiv, int_fastdiv, int_fastdiv, int_fastdiv, int_fastdiv, int_fastdiv, int_fastdiv, int_fastdiv, int, int*):
+      9, include "kernels.h"
+          36, Generating copyin(dummy,n) [if not already present]
+              Generating create(buf[:1]) [if not already present]
+              Generating copyin(d10,d2,d3,d4,d5,d6,d7,d8,d1,d9) [if not already present]
+              Generating implicit private(x)
+              Generating NVIDIA GPU code
+              39, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+          39, Loop not vectorized/parallelized: not countable
+int_fastdiv::int_fastdiv(int):
+          77, Loop not vectorized/parallelized: potential early exits
+int_fastdiv::int_fastdiv(int):
+          17, Loop not vectorized/parallelized: potential early exits
+int_fastdiv::operator int() const:
+          30, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+int_fastdiv::update_magic_numbers():
+      8, include "fastdiv.h"
+          77, Loop not vectorized/parallelized: potential early exits
+std::char_traits<char>::length(char const*):
+         171, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      3, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      8, include "fastdiv.h"
+std::chrono::duration<long, std::ratio<1l, 1l>>::_S_gcd(long, long):
+      3, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      8, include "fastdiv.h"
+std::chrono::duration<double, std::ratio<1l, 1l>>::_S_gcd(long, long):
+      3, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      8, include "fastdiv.h"
+__gnu_cxx::char_traits<char>::length(char const*):
+      1, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                        171, Loop not vectorized/parallelized: not countable
+      3, include "chrono"
+      8, include "fastdiv.h"
+std::basic_ostream<char, std::char_traits<char>>& std::endl<char, std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&):
+      1, include "iostream"
+          39, include "ostream"
+      3, include "chrono"
+      8, include "fastdiv.h"
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&, char const*):
+         397, Loop not vectorized/parallelized: not countable
+timeout was set to  600

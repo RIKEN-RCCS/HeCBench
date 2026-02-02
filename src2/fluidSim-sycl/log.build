@@ -1,0 +1,3 @@
+clang++  -std=c++17 -Wall -I../fluidSim-cuda           -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DVERIFY -DUSE_GPU -c main.cpp -o main.o
+clang++  -std=c++17 -Wall -I../fluidSim-cuda           -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DVERIFY -DUSE_GPU -c kernels.cpp -o kernels.o
+clang++  -std=c++17 -Wall -I../fluidSim-cuda           -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DVERIFY -DUSE_GPU main.o kernels.o -o main 

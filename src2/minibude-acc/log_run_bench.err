@@ -1,0 +1,11 @@
+"main.cpp", line 223: error: invalid text in pragma
+  #pragma acc data to: protein[0:params.natpro],\
+                   ^
+
+"main.cpp", line 223: error: extra text after expected end of preprocessing directive
+  #pragma acc data to: protein[0:params.natpro],\
+                     ^
+
+2 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

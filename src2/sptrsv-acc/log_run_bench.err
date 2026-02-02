@@ -1,0 +1,186 @@
+"../sptrsv-sycl/tranpose.h", line 86: warning: integer conversion resulted in a change of sign [integer_sign_change]
+      unsigned int min=-1;
+                       ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"../sptrsv-sycl/read_mtx.h", line 79: warning: variable "returnvalue" was set but never used [set_but_not_used]
+          int returnvalue;
+              ^
+
+mm_read_mtx_crd(char*, int*, int*, int*, int**, int**, double**, char (*) [4]):
+         274, Loop not vectorized/parallelized: contains call
+         275, Loop not vectorized/parallelized: contains call
+         276, Loop not vectorized/parallelized: contains call
+         277, Loop not vectorized/parallelized: contains call
+         345, Loop not vectorized/parallelized: potential early exits
+         361, Loop not vectorized/parallelized: potential early exits
+         494, Loop not vectorized/parallelized: potential early exits
+         500, Loop not vectorized/parallelized: potential early exits
+         510, Loop not vectorized/parallelized: potential early exits
+         494, Loop not vectorized/parallelized: potential early exits
+         500, Loop not vectorized/parallelized: potential early exits
+         510, Loop not vectorized/parallelized: potential early exits
+         494, Loop not vectorized/parallelized: potential early exits
+         500, Loop not vectorized/parallelized: potential early exits
+         510, Loop not vectorized/parallelized: potential early exits
+mm_read_banner(_IO_FILE*, char (*) [4]):
+      2, include "mmio.h"
+         274, Loop not vectorized/parallelized: contains call
+         275, Loop not vectorized/parallelized: contains call
+         276, Loop not vectorized/parallelized: contains call
+         277, Loop not vectorized/parallelized: contains call
+mm_read_mtx_crd_size(_IO_FILE*, int*, int*, int*):
+      2, include "mmio.h"
+         350, Loop not vectorized/parallelized: potential early exits
+         361, Loop not vectorized/parallelized: potential early exits
+mm_read_mtx_array_size(_IO_FILE*, int*, int*):
+      2, include "mmio.h"
+         379, Loop not vectorized/parallelized: potential early exits
+         390, Loop not vectorized/parallelized: potential early exits
+mm_write_mtx_crd(char*, int, int, int, int*, int*, double*, char*):
+      2, include "mmio.h"
+         466, Loop not vectorized/parallelized: contains call
+         470, Loop not vectorized/parallelized: contains call
+         474, Loop not vectorized/parallelized: contains call
+mm_read_mtx_crd_data(_IO_FILE*, int, int, int, int*, int*, double*, char*):
+      2, include "mmio.h"
+         494, Loop not vectorized/parallelized: potential early exits
+         500, Loop not vectorized/parallelized: potential early exits
+         510, Loop not vectorized/parallelized: potential early exits
+mm_read_unsymmetric_sparse(char const*, int*, int*, int*, double**, int**, int**):
+      2, include "mmio.h"
+         605, Loop not vectorized/parallelized: contains call
+         274, Loop not vectorized/parallelized: contains call
+         275, Loop not vectorized/parallelized: contains call
+         276, Loop not vectorized/parallelized: contains call
+         277, Loop not vectorized/parallelized: contains call
+         345, Loop not vectorized/parallelized: potential early exits
+         361, Loop not vectorized/parallelized: potential early exits
+exclusive_scan(int*, int):
+      3, include "tranpose.h"
+          14, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+matrix_transposition(int, int, int, int const*, int const*, double const*, int*, int*, double*):
+      3, include "tranpose.h"
+          34, Loop not fused: complex flow graph
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+          46, Loop not fused: function call before adjacent loop
+          48, Loop not vectorized: data dependency
+          14, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+matrix_layer(int, int, int, int const*, int const*, double const*, int*, double*):
+      3, include "tranpose.h"
+          90, Loop not fused: different loop trip count
+          93, Generated vector simd code for the loop containing reductions
+         106, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+matrix_warp4(int, int, int, int const*, int const*, double const*, int, int*, int*, double*, double*):
+      3, include "tranpose.h"
+         163, Loop not fused: no successor loop
+              Generated vector simd code for the loop
+read_mtx(char*, int*, int*, int*, int**, int**, double**):
+      4, include "read_mtx.h"
+          74, Loop not vectorized/parallelized: contains call
+         109, Loop not vectorized/parallelized: not countable
+         121, Loop not vectorized/parallelized: not countable
+         138, Loop not vectorized/parallelized: not countable
+         163, Loop not vectorized/parallelized: not countable
+         274, Loop not vectorized/parallelized: contains call
+         275, Loop not vectorized/parallelized: contains call
+         276, Loop not vectorized/parallelized: contains call
+         277, Loop not vectorized/parallelized: contains call
+         345, Loop not vectorized/parallelized: potential early exits
+         361, Loop not vectorized/parallelized: potential early exits
+change2tran(int, int, int*, int*, double*, int*, int**, int**, double**):
+      4, include "read_mtx.h"
+         210, Loop not vectorized/parallelized: potential early exits
+         214, Loop not vectorized: data dependency
+get_x_b(int, int, int const*, int const*, double const*, double**, double**):
+      4, include "read_mtx.h"
+         263, Recognized memory set idiom
+         272, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+main:
+          26, Loop not vectorized/parallelized: contains call
+          43, Loop not vectorized/parallelized: potential early exits
+          74, Loop not vectorized/parallelized: contains call
+         109, Loop not vectorized/parallelized: not countable
+         121, Loop not vectorized/parallelized: not countable
+         138, Loop not vectorized/parallelized: not countable
+         163, Loop not vectorized/parallelized: not countable
+         210, Loop not vectorized/parallelized: potential early exits
+         214, Loop not vectorized: data dependency
+          90, Loop not fused: different loop trip count
+          93, Generated vector simd code for the loop containing reductions
+         106, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+         263, Recognized memory set idiom
+         269, Loop not fused: function call before adjacent loop
+         272, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+"sptrsv_syncfree.cpp", line 69: error: invalid text in pragma
+    #pragma acc data to: csrRowPtr[0:m+1],\
+                     ^
+
+"sptrsv_syncfree.cpp", line 69: error: extra text after expected end of preprocessing directive
+    #pragma acc data to: csrRowPtr[0:m+1],\
+                       ^
+
+"sptrsv_syncfree.cpp", line 85: error: invalid text in pragma
+        #pragma acc update to (x[0:n])
+                           ^
+
+"sptrsv_syncfree.cpp", line 85: error: OpenACC data clause expected
+        #pragma acc update to (x[0:n])
+                           ^
+
+"sptrsv_syncfree.cpp", line 85: error: extra text after expected end of preprocessing directive
+        #pragma acc update to (x[0:n])
+                              ^
+
+"sptrsv_syncfree.cpp", line 86: error: invalid text in pragma
+        #pragma acc update to (get_value[0:m])
+                           ^
+
+"sptrsv_syncfree.cpp", line 86: error: OpenACC data clause expected
+        #pragma acc update to (get_value[0:m])
+                           ^
+
+"sptrsv_syncfree.cpp", line 86: error: extra text after expected end of preprocessing directive
+        #pragma acc update to (get_value[0:m])
+                              ^
+
+"sptrsv_syncfree.cpp", line 90: error: invalid text in pragma
+        #pragma acc parallel teams num_teams(num_blocks) thread_limit(num_threads)
+                             ^
+
+"sptrsv_syncfree.cpp", line 90: error: extra text after expected end of preprocessing directive
+        #pragma acc parallel teams num_teams(num_blocks) thread_limit(num_threads)
+                                   ^
+
+"sptrsv_syncfree.cpp", line 95: error: identifier "omp_get_thread_num" is undefined
+            const int local_id = omp_get_thread_num();
+                                 ^
+
+"sptrsv_syncfree.cpp", line 96: error: identifier "omp_get_team_num" is undefined
+            const int global_id = omp_get_team_num() * num_threads + local_id;
+                                  ^
+
+"sptrsv_syncfree.cpp", line 182: error: invalid text in pragma
+      #pragma acc update from (x[0:m])
+                         ^
+
+"sptrsv_syncfree.cpp", line 182: error: OpenACC data clause expected
+      #pragma acc update from (x[0:m])
+                         ^
+
+"sptrsv_syncfree.cpp", line 182: error: extra text after expected end of preprocessing directive
+      #pragma acc update from (x[0:m])
+                              ^
+
+15 errors detected in the compilation of "sptrsv_syncfree.cpp".
+make: *** [Makefile.NVD:60: sptrsv_syncfree.o] Error 2
+timeout was set to  600

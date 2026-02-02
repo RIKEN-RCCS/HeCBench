@@ -1,0 +1,10 @@
+Global Work Size 		= 3200000000
+Local Work Size 		= 256
+Average kernel execution time 7.211837 (ms)
+PASS
+
+Global Work Size 		= 3200000000
+Local Work Size 		= 256
+Average kernel execution time 13.152795 (ms)
+PASS
+

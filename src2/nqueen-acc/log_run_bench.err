@@ -1,0 +1,81 @@
+"main.cpp", line 74: warning: integer conversion resulted in a change of sign [integer_sign_change]
+        vertice[i] = _EMPTY_;
+                     ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"main.cpp", line 90: warning: integer conversion resulted in a change of sign [integer_sign_change]
+          vertice[depth] = _EMPTY_;
+                           ^
+
+"main.cpp", line 120: warning: integer conversion resulted in a change of sign [integer_sign_change]
+      vertice[i] = -1;
+                   ^
+
+"main.cpp", line 132: warning: integer conversion resulted in a change of sign [integer_sign_change]
+        vertice[nivel] = _EMPTY_;
+                         ^
+
+prefixesHandleSol(queen_root*, unsigned int, char const*, int, int):
+     18, Generated vector simd code for the loop
+MCstillLegal(char const*, int):
+     25, Loop not vectorized/parallelized: potential early exits
+     30, Loop not vectorized/parallelized: potential early exits
+queens_stillLegal(char const*, int):
+     39, Generating acc routine seq
+         Generating NVIDIA GPU code
+     42, Loop not fused: scalar dependence chain to sibling loop
+         Loop not vectorized: unknown
+     47, Loop not vectorized: unknown
+BP_queens_root_dfs(int, unsigned int, int, queen_root const*, unsigned long long*, unsigned long long*):
+     60, Generating implicit firstprivate(nPreFixos)
+         Generating NVIDIA GPU code
+         42, #pragma acc loop seq
+         47, #pragma acc loop seq
+         62, #pragma acc loop gang /* blockIdx.x */
+         73, #pragma acc loop vector(128) /* threadIdx.x */
+         80, #pragma acc loop seq /* threadIdx.x */
+         86, #pragma acc loop seq
+             Generating implicit reduction(+:tree_size,qtd_solutions_thread)
+     60, CUDA shared memory used for vertice
+         Generating implicit copyin(root_prefixes[:nPreFixos]) [if not already present]
+         Generating implicit copyout(sols[:nPreFixos],vector_of_tree_size[:nPreFixos]) [if not already present]
+     62, Generating implicit firstprivate(N,depthPreFixos)
+     73, Loop is parallelizable
+         Recognized memory set idiom
+     80, Loop is parallelizable
+         Generated vector simd code for the loop
+     86, Complex loop carried dependence of vertice prevents parallelization
+         Loop carried dependence of vertice prevents parallelization
+         Loop carried backward dependence of vertice prevents vectorization
+         Complex loop carried dependence of -> prevents parallelization
+         Loop carried scalar dependence for flag at line 91,93,100
+         Loop carried scalar dependence for depth at line 86,88,89,90,91,93,94,99,101
+         Loop not vectorized/parallelized: not countable
+          42, Scalar last value needed after loop for .inl_safe_129 at line 50
+              Loop not fused: different controlling conditions
+              Loop not vectorized: unknown
+          47, Scalar last value needed after loop for .inl_safe_129 at line 50
+              Loop not fused: no successor loop
+              Loop not vectorized: unknown
+BP_queens_prefixes(int, int, unsigned long long*, queen_root*):
+    119, Recognized memory set idiom
+          25, Loop not vectorized/parallelized: potential early exits
+          30, Loop not vectorized/parallelized: potential early exits
+          18, Loop not fused: no successor loop
+              Generated vector simd code for the loop
+nqueens(short, int, unsigned int, queen_root*, unsigned long long*, unsigned long long*, int):
+    163, Generating copy(sols_h[:n_explorers],vector_of_tree_size_h[:n_explorers]) [if not already present]
+         Generating copyin(root_prefixes_h[:n_explorers]) [if not already present]
+    166, Loop not vectorized/parallelized: contains call
+main:
+         119, Recognized memory set idiom
+         133, Loop not vectorized/parallelized: potential early exits
+         139, Loop not fused: no successor loop
+              Generated vector simd code for the loop
+    217, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      3, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+timeout was set to  600

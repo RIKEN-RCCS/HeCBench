@@ -1,0 +1,62 @@
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+main:
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+          25, Loop not fused: function call before adjacent loop
+              Loop not vectorized: recurrence
+              Loop unrolled 4 times (completely unrolled)
+         616, Loop not vectorized/parallelized: not countable
+     53, Loop not vectorized/parallelized: contains call
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    101, Loop not vectorized/parallelized: potential early exits
+    122, Generating update to(inData[:signalLength])
+    125, #omp target teams num_teams(teams) thread_limit(groupSize)
+         77, Generating map(alloc:dPartialOutData[:signalLength],inData[:signalLength],dOutData[:signalLength]) 
+        125, Generating "nvkernel_main_F1L125_2" GPU kernel
+        128, #omp parallel
+          149, Barrier
+          167, Barrier
+          178, Barrier
+        131, Team private (lmem) located in CUDA shared memory
+    156, Loop not vectorized/parallelized: contains call
+    194, Generating update from(dPartialOutData[:signalLength],dOutData[:signalLength])
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    224, Loop not vectorized/parallelized: potential early exits
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+unsigned int roundToPowerOf2<unsigned int>(unsigned int):
+     25, Loop not vectorized: recurrence
+         Loop unrolled 4 times (completely unrolled)
+std::char_traits<char>::length(char const*):
+         171, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     17, include "hwt.h"
+          30, include "chrono"
+              472, Loop not vectorized/parallelized: not countable
+__gnu_cxx::char_traits<char>::length(char const*):
+     17, include "hwt.h"
+          29, include "iostream"
+               39, include "ostream"
+                    38, include "ios"
+                         40, include "char_traits.h"
+                             171, Loop not vectorized/parallelized: not countable
+std::basic_ostream<char, std::char_traits<char>>& std::endl<char, std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&):
+     17, include "hwt.h"
+          29, include "iostream"
+               39, include "ostream"
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&, char const*):
+         397, Loop not vectorized/parallelized: not countable
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c reference.cpp -o reference.o
+calApproxFinalOnHost(float*, float*, unsigned int):
+     10, Generated vector simd code for the loop
+     16, Loop not vectorized/parallelized: contains call
+     18, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+getLevels(unsigned int, unsigned int*):
+     37, Loop not vectorized/parallelized: potential early exits
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o reference.o -o main 

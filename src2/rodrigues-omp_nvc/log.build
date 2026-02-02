@@ -1,0 +1,22 @@
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+rotate(int, float, float3, float3*):
+     21, #omp target teams distribute parallel for thread_limit(256)
+         21, Generating "nvkernel__Z6rotateif6float3PS__F1L21_2" GPU kernel
+         23, Loop parallelized across teams and threads(128), schedule(static)
+     21, Generating implicit map(tofrom:w) 
+     23, Loop not vectorized/parallelized: contains call
+rotate2(int, float, float3, float4*):
+     53, #omp target teams distribute parallel for thread_limit(256)
+         53, Generating "nvkernel__Z7rotate2if6float3P6float4_F1L53_6" GPU kernel
+         55, Loop parallelized across teams and threads(128), schedule(static)
+     53, Generating implicit map(tofrom:w) 
+     55, Loop not vectorized/parallelized: contains call
+main:
+    102, Loop not vectorized/parallelized: contains call
+    112, Generating map(to:h[:n],h2[:n]) 
+    115, Loop not vectorized/parallelized: contains call
+    125, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      3, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

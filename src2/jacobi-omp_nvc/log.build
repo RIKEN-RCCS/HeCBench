@@ -1,0 +1,42 @@
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+main:
+          30, Loop not fused: unsafe variable with target attribute
+          30, Loop not fused: function call before adjacent loop
+     79, #omp target teams distribute parallel for num_teams(16384) thread_limit(256)
+         79, Generating "nvkernel_main_F1L79_2" GPU kernel
+             Loop parallelized across teams and threads(128), schedule(static)
+             Generating reduction(+:error)
+     79, Generating map(tofrom:error) 
+     80, Loop not vectorized/parallelized: not countable
+     89, #omp target teams distribute parallel for thread_limit(256)
+         69, Generating map(to:f[:4194304],f_old[:4194304]) 
+         89, Generating "nvkernel_main_F1L89_4" GPU kernel
+         96, Loop parallelized across teams and threads(128), schedule(static)
+     97, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+                   616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+std::char_traits<char>::length(char const*):
+         171, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     20, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+__gnu_cxx::char_traits<char>::length(char const*):
+     15, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                        171, Loop not vectorized/parallelized: not countable
+     20, include "chrono"
+std::basic_ostream<char, std::char_traits<char>>& std::endl<char, std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&):
+     15, include "iostream"
+          39, include "ostream"
+     20, include "chrono"
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&, char const*):
+         397, Loop not vectorized/parallelized: not countable
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

@@ -1,0 +1,6 @@
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -I/path/to/oneMKL/include -O3 -DUSE_GPU -c main.cpp -o main.o
+main.cpp:44:10: fatal error: 'oneapi/mkl/blas.hpp' file not found
+   44 | #include "oneapi/mkl/blas.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+make: *** [Makefile.NVD:84: main.o] Error 1

@@ -1,0 +1,2 @@
+terminate called after throwing an instance of 'sycl::_V1::exception'
+  what():  NULL pointer argument in memory copy operation.

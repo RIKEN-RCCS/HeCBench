@@ -1,0 +1,38 @@
+================================================================================
+                    _____   _____ ____                  _     
+                   |  __ \ / ____|  _ \                | |    
+                   | |__) | (___ | |_) | ___ _ __   ___| |__  
+                   |  _  / \___ \|  _ < / _ \ '_ \ / __| '_ \ 
+                   | | \ \ ____) | |_) |  __/ | | | (__| | | |
+                   |_|  \_\_____/|____/ \___|_| |_|\___|_| |_|
+
+================================================================================
+                    Developed at Argonne National Laboratory
+                                   Version: 12
+================================================================================
+                                  INPUT SUMMARY
+================================================================================
+Programming Model:           OpenMP Taget Offloading
+Simulation Method:           Event Based
+Materials:                   12
+H-M Benchmark Size:          Large
+Temperature Dependence:      ON
+Total Nuclides:              355
+Avg Poles per Nuclide:       1,000
+Avg Windows per Nuclide:     100
+Total XS Lookups:            10,200,000
+Est. Memory Usage (MB):      25.5
+================================================================================
+                                 INITIALIZATION
+================================================================================
+Loading Hoogenboom-Martin material data...
+Generating resonance distributions...
+Generating window distributions...
+Generating resonance parameter grid...
+Generating window parameter grid...
+Generating 0K l_value data...
+Initialization Complete. (0.01 seconds)
+================================================================================
+                                   SIMULATION
+================================================================================
+Beginning event based simulation ...

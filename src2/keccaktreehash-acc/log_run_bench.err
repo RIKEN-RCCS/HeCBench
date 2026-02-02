@@ -1,0 +1,209 @@
+KeccakTreeCPU(unsigned int*, unsigned int*):
+     20, Loop not vectorized/parallelized: too deeply nested
+     27, Loop not vectorized/parallelized: potential early exits
+     30, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 8 times (completely unrolled)
+     44, Loop not vectorized: data dependency
+         Loop unrolled 8 times (completely unrolled)
+KeccakFunr(unsigned int*, unsigned int const*):
+     44, Generating acc routine seq
+         Generating NVIDIA GPU code
+    180, Rerolled basic block into loop
+         Loop not fused: dependence chain to sibling loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for rerolled loop
+         Loop unrolled 5 times (completely unrolled)
+    190, Rerolled basic block into loop
+         Loop not fused: dependence chain to sibling loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for rerolled loop
+         Loop unrolled 5 times (completely unrolled)
+    200, Rerolled basic block into loop
+         Loop not fused: dependence chain to sibling loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for rerolled loop
+         Loop unrolled 5 times (completely unrolled)
+    210, Rerolled basic block into loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for rerolled loop
+         Loop unrolled 5 times (completely unrolled)
+KeccakFunr_h(unsigned int*):
+    367, Rerolled basic block into loop
+         Loop not fused: dependence chain to sibling loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for rerolled loop
+         Loop unrolled 5 times (completely unrolled)
+    377, Rerolled basic block into loop
+         Loop not fused: dependence chain to sibling loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for rerolled loop
+         Loop unrolled 5 times (completely unrolled)
+    387, Rerolled basic block into loop
+         Loop not fused: dependence chain to sibling loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for rerolled loop
+         Loop unrolled 5 times (completely unrolled)
+    397, Rerolled basic block into loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for rerolled loop
+         Loop unrolled 5 times (completely unrolled)
+Keccak_top_GPU(unsigned int*, unsigned int*, int):
+    422, Loop not fused: different loop trip count
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 2 times
+         366, Rerolled basic block into loop
+              Loop not fused: dependence chain to sibling loop
+              Loop versioned for possible aliasing
+              Generated vector simd code for rerolled loop
+              Loop unrolled 5 times (completely unrolled)
+         376, Rerolled basic block into loop
+              Loop not fused: dependence chain to sibling loop
+              Loop versioned for possible aliasing
+              Generated vector simd code for rerolled loop
+              Loop unrolled 5 times (completely unrolled)
+         386, Rerolled basic block into loop
+              Loop not fused: dependence chain to sibling loop
+              Loop versioned for possible aliasing
+              Generated vector simd code for rerolled loop
+              Loop unrolled 5 times (completely unrolled)
+         396, Rerolled basic block into loop
+              Loop versioned for possible aliasing
+              Generated vector simd code for rerolled loop
+              Loop unrolled 5 times (completely unrolled)
+KeccakTreeGPU(unsigned int*, unsigned int*, unsigned int const*):
+     49, Rerolled basic block into loop
+    165, Rerolled basic block into loop
+    179, Rerolled basic block into loop
+    189, Rerolled basic block into loop
+    199, Rerolled basic block into loop
+    209, Rerolled basic block into loop
+    437, Generating update device(h_inBuffer[:33554432])
+         Generating NVIDIA GPU code
+         49, #pragma acc loop seq
+        442, #pragma acc loop gang(64) collapse(2) /* blockIdx.x */
+        443,   /* blockIdx.x collapsed */
+        449, #pragma acc loop vector(64) /* threadIdx.x */
+        451, #pragma acc loop seq
+        454, #pragma acc loop seq
+        468, #pragma acc loop seq
+    437, CUDA shared memory used for Kstate,.inl_BC_14
+         Generating implicit copyin(h_KeccakF_RoundConstants) [if not already present]
+         Generating implicit copyout(h_outBuffer[:]) [if not already present]
+         Generating implicit copyin(h_inBuffer[:]) [if not already present]
+    442, Loop not vectorized/parallelized: too deeply nested
+    443, Loop not vectorized/parallelized: too deeply nested
+    449, Loop is parallelizable
+         Recognized memory zero idiom
+    451, Complex loop carried dependence of h_inBuffer-> prevents parallelization
+         Loop carried reuse of Kstate prevents parallelization
+         Complex loop carried dependence of Kstate,.inl_BC_14,h_KeccakF_RoundConstants-> prevents parallelization
+         Loop not fused: different loop trip count
+    454, Complex loop carried dependence of h_inBuffer->,Kstate prevents parallelization
+         Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+         Loop unrolled 8 times (completely unrolled)
+          49, Complex loop carried dependence of Kstate,.inl_BC_14 prevents parallelization
+              Loop carried reuse of .inl_BC_14 prevents parallelization
+              Loop carried dependence of Kstate prevents parallelization
+              Loop carried backward dependence of Kstate prevents vectorization
+              Complex loop carried dependence of h_KeccakF_RoundConstants-> prevents parallelization
+              Loop not fused: possible intervening definition
+              Generated vector simd code for rerolled loop
+         165, Loop not fused: possible intervening definition
+              Generated vector simd code for rerolled loop
+         179, Loop not fused: possible intervening definition
+              Generated vector simd code for rerolled loop
+         189, Loop not fused: possible intervening definition
+              Generated vector simd code for rerolled loop
+         199, Loop not fused: possible intervening definition
+              Generated vector simd code for rerolled loop
+         209, Generated vector simd code for rerolled loop
+    468, Complex loop carried dependence of Kstate prevents parallelization
+         Loop carried dependence of h_outBuffer-> prevents parallelization
+         Loop carried backward dependence of h_outBuffer-> prevents vectorization
+         Complex loop carried dependence of h_outBuffer-> prevents parallelization
+         Loop unrolled 8 times (completely unrolled)
+    477, Generating update self(h_outBuffer[:32768])
+TestCPU(int):
+     52, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+     61, Loop not vectorized/parallelized: potential early exits
+TestGPU():
+    130, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+    138, Generating enter data create(h_inBuffer[:33554432],h_outBuffer[:32768])
+         Generating enter data copyin(KeccakF_RoundConstants[:])
+    142, Loop not vectorized/parallelized: potential early exits
+    158, Generating exit data delete(h_outBuffer[:32768],h_inBuffer[:33554432],KeccakF_RoundConstants[:])
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     12, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+KeccakF(unsigned int*):
+     71, Loop not fused: dependence chain to sibling loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+     75, Outer loop unrolled 5 times (completely unrolled)
+     78, Loop not fused: dependence chain to sibling loop
+         Loop not fused: different loop trip count
+         Generated vector simd code for the loop
+     86, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+     94, Outer loop unrolled 5 times (completely unrolled)
+    101, Loop not fused: possible intervening definition
+         Loop not vectorized: data dependency
+KeccakF_CPU(unsigned int*):
+    249, Rerolled basic block into loop
+         Loop not fused: dependence chain to sibling loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for rerolled loop
+         Loop unrolled 5 times (completely unrolled)
+    259, Rerolled basic block into loop
+         Loop not fused: dependence chain to sibling loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for rerolled loop
+         Loop unrolled 5 times (completely unrolled)
+    269, Rerolled basic block into loop
+         Loop not fused: dependence chain to sibling loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for rerolled loop
+         Loop unrolled 5 times (completely unrolled)
+    279, Rerolled basic block into loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for rerolled loop
+         Loop unrolled 5 times (completely unrolled)
+Keccak_top(unsigned int*, unsigned int*, int):
+    304, Loop not fused: different loop trip count
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 2 times
+         248, Rerolled basic block into loop
+              Loop not fused: dependence chain to sibling loop
+              Loop versioned for possible aliasing
+              Generated vector simd code for rerolled loop
+              Loop unrolled 5 times (completely unrolled)
+         258, Rerolled basic block into loop
+              Loop not fused: dependence chain to sibling loop
+              Loop versioned for possible aliasing
+              Generated vector simd code for rerolled loop
+              Loop unrolled 5 times (completely unrolled)
+         268, Rerolled basic block into loop
+              Loop not fused: dependence chain to sibling loop
+              Loop versioned for possible aliasing
+              Generated vector simd code for rerolled loop
+              Loop unrolled 5 times (completely unrolled)
+         278, Rerolled basic block into loop
+              Loop versioned for possible aliasing
+              Generated vector simd code for rerolled loop
+              Loop unrolled 5 times (completely unrolled)
+zeroize(unsigned int*):
+    319, Recognized memory zero idiom
+print_KS(unsigned int*):
+    328, Loop not vectorized/parallelized: contains call
+print_KS_256(unsigned int*):
+    343, Loop not vectorized/parallelized: contains call
+isEqual_KS(unsigned int*, unsigned int*):
+    356, Loop not vectorized/parallelized: potential early exits
+    358, Loop unrolled 5 times (completely unrolled)
+timeout was set to  600

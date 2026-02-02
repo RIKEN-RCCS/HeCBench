@@ -1,0 +1,12 @@
+Total number of documents: 262144
+Kernel execution count: 1000
+RAND_MAX: 2147483647
+Allocating and setting up data
+Creating Documents total_terms=108236928 (no_pad=91562463)
+Creating Profile
+======================================================
+Kernel Time = 0.613764 ms (averaged over 1000 times)
+Throughput = 149181.792644
+Done
+total_access = 412852 , falsies = 323606, percentage = 0.003814 hit= 0.000824543
+Verification: PASS

@@ -1,0 +1,17 @@
+
+Grid dimensions: 1024 x 1024 x 1024
+Result verification enabled 
+
+global work size  = 1024 1024 1 
+local work size = 32 8 1 
+Average kernel execution time: 0.005130 (s)
+
+ RMS error = 0.000000 
+ PASS
+
+Grid dimensions: 1024 x 1024 x 1024
+Result verification disabled 
+
+global work size  = 1024 1024 1 
+local work size = 32 8 1 
+Average kernel execution time: 0.005127 (s)

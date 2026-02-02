@@ -1,0 +1,43 @@
+./main Starting...
+
+Using CTA of size 256 for Sweep
+
+  Num_systems = 1000000, system_size = 128
+
+----- CPU  solvers -----
+  CPU Time =    0.66397 s
+  Throughput =  1506.0873 systems/sec
+
+----- optimized GPU solvers -----
+
+ pcr_small_systems_kernel
+  looping 100 times..
+Tridiagonal-pcrsmall-base, Throughput = 436526.9791 Systems/s, Time = 0.00229 s, Size = 1000000 Systems
+  err = 1.0701
+
+ pcr_branch_free_kernel
+  looping 100 times..
+Tridiagonal-pcrsmall-optimized, Throughput = 472551.8429 Systems/s, Time = 0.00212 s, Size = 1000000 Systems
+  err = 1.0701
+
+ cyclic_small_systems_kernel
+  looping 100 times..
+Tridiagonal-cyclicsmall-optimized, Throughput = 397810.5880 Systems/s, Time = 0.00251 s, Size = 1000000 Systems
+  err = 1.1951
+
+ cyclic_branch_free_kernel
+  looping 100 times..
+Tridiagonal-cyclicsmall-optimized, Throughput = 413559.9170 Systems/s, Time = 0.00242 s, Size = 1000000 Systems
+  err = 1.1951
+
+sweep_small_systems_global_kernel
+  looping 100 times..
+Tridiagonal-sweepsmall-noreorder, Throughput = 40050.0274 Systems/s, Time = 0.02497 s, Size = 1000000 Systems
+  err = 1.7624
+
+sweep_data_reorder_kernel
+sweep_small_systems_global_kernel
+  looping 100 times..
+Tridiagonal-sweepsmall-reorder, Throughput = 249596.3248 Systems/s, Time = 0.00401 s, Size = 1000000 Systems
+  err = 1.7624
+

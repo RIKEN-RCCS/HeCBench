@@ -1,0 +1,71 @@
+"main.cpp", line 27: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(len/blockSize) thread_limit(blockSize/2)
+                         ^
+
+"main.cpp", line 27: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(len/blockSize) thread_limit(blockSize/2)
+                               ^
+
+"main.cpp", line 32: error: identifier "omp_get_thread_num" is undefined
+        int tid = omp_get_thread_num();
+                  ^
+
+"main.cpp", line 33: error: identifier "omp_get_team_num" is undefined
+        int bid = omp_get_team_num();
+                  ^
+
+"main.cpp", line 78: error: invalid text in pragma
+    #pragma acc parallel teams gang(1) thread_limit(len/2)
+                         ^
+
+"main.cpp", line 78: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams gang(1) thread_limit(len/2)
+                               ^
+
+"main.cpp", line 84: error: identifier "omp_get_thread_num" is undefined
+        int tid = omp_get_thread_num();
+                  ^
+
+"main.cpp", line 85: error: identifier "omp_get_team_num" is undefined
+        int bid = omp_get_team_num();
+                  ^
+
+"main.cpp", line 128: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(len/blockSize) thread_limit(blockSize)
+                         ^
+
+"main.cpp", line 128: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(len/blockSize) thread_limit(blockSize)
+                               ^
+
+"main.cpp", line 133: error: identifier "omp_get_thread_num" is undefined
+        int tid = omp_get_thread_num();
+                  ^
+
+"main.cpp", line 134: error: identifier "omp_get_team_num" is undefined
+        int bid = omp_get_team_num();
+                  ^
+
+"main.cpp", line 237: error: invalid text in pragma
+  #pragma acc data to: inputBuffer[0:length]) \
+                   ^
+
+"main.cpp", line 237: error: extra text after expected end of preprocessing directive
+  #pragma acc data to: inputBuffer[0:length]) \
+                     ^
+
+"main.cpp", line 281: error: invalid text in pragma
+    #pragma acc update from (outputBuffer[0: \
+                       ^
+
+"main.cpp", line 281: error: OpenACC data clause expected
+    #pragma acc update from (outputBuffer[0: \
+                       ^
+
+"main.cpp", line 281: error: extra text after expected end of preprocessing directive
+    #pragma acc update from (outputBuffer[0: \
+                            ^
+
+17 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

@@ -1,0 +1,53 @@
+"scoped_ptrs.h", line 33: warning: variable "rc" was set but never used [set_but_not_used]
+    int rc;
+        ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"main.cpp", line 134: warning: integer conversion resulted in a change of sign [integer_sign_change]
+      h_profileScore[i] = -1;
+                          ^
+
+"main.cpp", line 306: error: invalid text in pragma
+  #pragma acc data to: d_docWordFrequencies_dimm1[0:total_doc_size/2],\
+                   ^
+
+"main.cpp", line 306: error: extra text after expected end of preprocessing directive
+  #pragma acc data to: d_docWordFrequencies_dimm1[0:total_doc_size/2],\
+                     ^
+
+"main.cpp", line 318: error: invalid text in pragma
+      #pragma acc parallel teams num_teams(global_size) thread_limit(local_size) 
+                           ^
+
+"main.cpp", line 318: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel teams num_teams(global_size) thread_limit(local_size) 
+                                 ^
+
+"main.cpp", line 323: error: identifier "omp_get_team_num" is undefined
+           int gid = omp_get_team_num() * omp_get_vector() + omp_get_thread_num();
+                     ^
+
+"main.cpp", line 323: error: identifier "omp_get_vector" is undefined
+           int gid = omp_get_team_num() * omp_get_vector() + omp_get_thread_num();
+                                          ^
+
+"main.cpp", line 323: error: identifier "omp_get_thread_num" is undefined
+           int gid = omp_get_team_num() * omp_get_vector() + omp_get_thread_num();
+                                                             ^
+
+"main.cpp", line 376: error: invalid text in pragma
+      #pragma acc parallel loop thread_limit(block_size)
+                                ^
+
+"main.cpp", line 376: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel loop thread_limit(block_size)
+                                            ^
+
+"main.cpp", line 290: warning: variable "global_size" was declared but never referenced [declared_but_not_referenced]
+    size_t global_size = total_doc_size / 2 / MANUAL_VECTOR / local_size;
+           ^
+
+9 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:58: main.o] Error 2
+timeout was set to  600

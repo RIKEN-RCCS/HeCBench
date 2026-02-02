@@ -1,0 +1,79 @@
+main:
+    104, Loop not vectorized/parallelized: contains call
+    109, Generating copyin(h_src[:img_size]) [if not already present]
+         Generating create(h_dst[:img_size]) [if not already present]
+    112, Loop not vectorized/parallelized: contains call
+    122, Generating update self(h_dst[:img_size])
+    124, Loop not vectorized/parallelized: potential early exits
+    133, Loop not vectorized/parallelized: contains call
+    142, Generating update self(h_dst[:img_size])
+    143, Loop not vectorized/parallelized: potential early exits
+    152, Loop not vectorized/parallelized: contains call
+    161, Generating update self(h_dst[:img_size])
+    162, Loop not vectorized/parallelized: potential early exits
+void bilateralFilter<3>(float const*, float*, int, int, float, float, float):
+     17, Generating implicit firstprivate(w,h)
+         Generating NVIDIA GPU code
+         19, #pragma acc loop gang, vector(256) collapse(2) /* blockIdx.x threadIdx.x */
+         20,   /* blockIdx.x threadIdx.x collapsed */
+         31, #pragma acc loop seq
+         35, #pragma acc loop seq
+             Generating implicit reduction(+:res,normalization)
+     17, Generating implicit copyin(in[:]) [if not already present]
+         Generating implicit copyout(out[:]) [if not already present]
+     19, Loop not fused: no successor loop
+     31, Loop is parallelizable
+         Loop not vectorized: recurrence
+     35, Loop is parallelizable
+         Generating implicit firstprivate(a_square,variance_spatial,variance_I)
+         Loop unrolled 7 times (completely unrolled)
+void reference<3>(float*, float*, int, int, float, float, float):
+      6, include "reference.h"
+          12, #omp parallel
+          22, Loop not vectorized: recurrence
+          24, Loop unrolled 7 times (completely unrolled)
+void bilateralFilter<6>(float const*, float*, int, int, float, float, float):
+     17, Generating implicit firstprivate(w,h)
+         Generating NVIDIA GPU code
+         19, #pragma acc loop gang, vector(256) collapse(2) /* blockIdx.x threadIdx.x */
+         20,   /* blockIdx.x threadIdx.x collapsed */
+         31, #pragma acc loop seq
+         35, #pragma acc loop seq
+             Generating implicit reduction(+:res,normalization)
+     17, Generating implicit copyin(in[:]) [if not already present]
+         Generating implicit copyout(out[:]) [if not already present]
+     19, Loop not fused: no successor loop
+         Loop not vectorized/parallelized: too deeply nested
+     31, Loop is parallelizable
+     35, Loop is parallelizable
+         Generating implicit firstprivate(a_square,variance_spatial,variance_I)
+         Generated vector simd code for the loop containing reductions
+void reference<6>(float*, float*, int, int, float, float, float):
+      6, include "reference.h"
+          12, #omp parallel
+          24, Generated vector simd code for the loop containing reductions
+void bilateralFilter<9>(float const*, float*, int, int, float, float, float):
+     17, Generating implicit firstprivate(w,h)
+         Generating NVIDIA GPU code
+         19, #pragma acc loop gang collapse(2) /* blockIdx.x */
+         20,   /* blockIdx.x collapsed */
+         31, #pragma acc loop seq
+         35, #pragma acc loop vector(256) /* threadIdx.x */
+             Generating implicit reduction(+:res,normalization)
+     17, Generating implicit copyin(in[:]) [if not already present]
+         Generating implicit copyout(out[:]) [if not already present]
+     19, Loop not fused: no successor loop
+         Loop not vectorized/parallelized: too deeply nested
+     31, Loop is parallelizable
+     35, Loop is parallelizable
+         Generating implicit firstprivate(a_square,variance_spatial,variance_I)
+         Generated vector simd code for the loop containing reductions
+void reference<9>(float*, float*, int, int, float, float, float):
+      6, include "reference.h"
+          12, #omp parallel
+          24, Generated vector simd code for the loop containing reductions
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      6, include "reference.h"
+timeout was set to  600

@@ -1,0 +1,107 @@
+"kernels.cpp", line 32: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(my * mz / pencils) thread_limit(mx * pencils)
+                         ^
+
+"kernels.cpp", line 32: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(my * mz / pencils) thread_limit(mx * pencils)
+                               ^
+
+"kernels.cpp", line 38: error: identifier "omp_get_thread_num" is undefined
+        int threadIdx_x = omp_get_thread_num() % mx;
+                          ^
+
+"kernels.cpp", line 40: error: identifier "omp_get_team_num" is undefined
+        int blockIdx_x = omp_get_team_num() % (my / pencils);
+                         ^
+
+"kernels.cpp", line 79: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(my * mz / pencils) thread_limit(mx * pencils)
+                         ^
+
+"kernels.cpp", line 79: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(my * mz / pencils) thread_limit(mx * pencils)
+                               ^
+
+"kernels.cpp", line 84: error: identifier "omp_get_thread_num" is undefined
+        int threadIdx_x = omp_get_thread_num() % mx;
+                          ^
+
+"kernels.cpp", line 86: error: identifier "omp_get_team_num" is undefined
+        int blockIdx_x = omp_get_team_num() % (my / pencils);
+                         ^
+
+"kernels.cpp", line 122: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(mx * mz / pencils) thread_limit(my * pencils)
+                         ^
+
+"kernels.cpp", line 122: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(mx * mz / pencils) thread_limit(my * pencils)
+                               ^
+
+"kernels.cpp", line 127: error: identifier "omp_get_thread_num" is undefined
+        int threadIdx_x = omp_get_thread_num() % pencils;
+                          ^
+
+"kernels.cpp", line 129: error: identifier "omp_get_team_num" is undefined
+        int blockIdx_x = omp_get_team_num() % (mx / pencils);
+                         ^
+
+"kernels.cpp", line 169: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(mx * mz / pencils) thread_limit(my * pencils)
+                         ^
+
+"kernels.cpp", line 169: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(mx * mz / pencils) thread_limit(my * pencils)
+                               ^
+
+"kernels.cpp", line 174: error: identifier "omp_get_thread_num" is undefined
+        int threadIdx_x = omp_get_thread_num() % pencils;
+                          ^
+
+"kernels.cpp", line 176: error: identifier "omp_get_team_num" is undefined
+        int blockIdx_x = omp_get_team_num() % (mx / pencils);
+                         ^
+
+"kernels.cpp", line 212: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(mx * my / pencils) thread_limit(mz * pencils)
+                         ^
+
+"kernels.cpp", line 212: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(mx * my / pencils) thread_limit(mz * pencils)
+                               ^
+
+"kernels.cpp", line 217: error: identifier "omp_get_thread_num" is undefined
+        int threadIdx_x = omp_get_thread_num() % pencils;
+                          ^
+
+"kernels.cpp", line 219: error: identifier "omp_get_team_num" is undefined
+        int blockIdx_x = omp_get_team_num() % (mx / pencils);
+                         ^
+
+"kernels.cpp", line 259: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(mx * my / pencils) thread_limit(mz * pencils)
+                         ^
+
+"kernels.cpp", line 259: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(mx * my / pencils) thread_limit(mz * pencils)
+                               ^
+
+"kernels.cpp", line 264: error: identifier "omp_get_thread_num" is undefined
+        int threadIdx_x = omp_get_thread_num() % pencils;
+                          ^
+
+"kernels.cpp", line 266: error: identifier "omp_get_team_num" is undefined
+        int blockIdx_x = omp_get_team_num() % (mx / pencils);
+                         ^
+
+"main.cpp", line 48: error: invalid text in pragma
+  #pragma acc parallel data map (tofrom: a[0:ncells], b[0:ncells]) \
+                       ^
+
+"main.cpp", line 48: error: extra text after expected end of preprocessing directive
+  #pragma acc parallel data map (tofrom: a[0:ncells], b[0:ncells]) \
+                            ^
+
+26 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

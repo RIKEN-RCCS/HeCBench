@@ -1,0 +1,83 @@
+"main.cpp", line 1056: error: invalid text in pragma
+  #pragma acc data alloc: h_samples[0:num_timesteps*num_paths], \
+                   ^
+
+"main.cpp", line 1056: error: extra text after expected end of preprocessing directive
+  #pragma acc data alloc: h_samples[0:num_timesteps*num_paths], \
+                        ^
+
+"main.cpp", line 820: error: invalid text in pragma
+    #pragma acc update to (h_samples[0:num_timesteps*num_paths])
+                       ^
+
+"main.cpp", line 820: error: OpenACC data clause expected
+    #pragma acc update to (h_samples[0:num_timesteps*num_paths])
+                       ^
+
+"main.cpp", line 820: error: extra text after expected end of preprocessing directive
+    #pragma acc update to (h_samples[0:num_timesteps*num_paths])
+                          ^
+
+"main.cpp", line 97: error: invalid text in pragma
+    #pragma acc parallel loop thread_limit (NUM_THREADS_PER_BLOCK)
+                              ^
+          detected during instantiation of "void do_run(double *, int, int, const Payoff &, double, double, double, double, double *, double *, double *, int *, double *, double &) [with Payoff=PayoffPut]" at line 1075
+
+"main.cpp", line 97: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop thread_limit (NUM_THREADS_PER_BLOCK)
+                                           ^
+          detected during instantiation of "void do_run(double *, int, int, const Payoff &, double, double, double, double, double *, double *, double *, int *, double *, double &) [with Payoff=PayoffPut]" at line 1075
+
+"main.cpp", line 491: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(numTeams) thread_limit(NUM_THREADS_PER_BLOCK)
+                         ^
+          detected during instantiation of "void do_run(double *, int, int, const Payoff &, double, double, double, double, double *, double *, double *, int *, double *, double &) [with Payoff=PayoffPut]" at line 1075
+
+"main.cpp", line 491: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(numTeams) thread_limit(NUM_THREADS_PER_BLOCK)
+                               ^
+          detected during instantiation of "void do_run(double *, int, int, const Payoff &, double, double, double, double, double *, double *, double *, int *, double *, double &) [with Payoff=PayoffPut]" at line 1075
+
+"main.cpp", line 505: error: identifier "omp_get_thread_num" is undefined
+        int lid = omp_get_thread_num();
+                  ^
+          detected during instantiation of "void do_run(double *, int, int, const Payoff &, double, double, double, double, double *, double *, double *, int *, double *, double &) [with Payoff=PayoffPut]" at line 1075
+
+"main.cpp", line 506: error: identifier "omp_get_team_num" is undefined
+        int bid = omp_get_team_num();
+                  ^
+          detected during instantiation of "void do_run(double *, int, int, const Payoff &, double, double, double, double, double *, double *, double *, int *, double *, double &) [with Payoff=PayoffPut]" at line 1075
+
+"main.cpp", line 648: error: invalid text in pragma
+      #pragma acc parallel loop thread_limit(NUM_THREADS_PER_BLOCK) \
+                                ^
+          detected during instantiation of "void do_run(double *, int, int, const Payoff &, double, double, double, double, double *, double *, double *, int *, double *, double &) [with Payoff=PayoffPut]" at line 1075
+
+"main.cpp", line 648: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel loop thread_limit(NUM_THREADS_PER_BLOCK) \
+                                            ^
+          detected during instantiation of "void do_run(double *, int, int, const Payoff &, double, double, double, double, double *, double *, double *, int *, double *, double &) [with Payoff=PayoffPut]" at line 1075
+
+"main.cpp", line 744: error: invalid text in pragma
+    #pragma acc parallel loop num_teams(numTeams) thread_limit(NUM_THREADS_PER_BLOCK)
+                              ^
+          detected during instantiation of "void do_run(double *, int, int, const Payoff &, double, double, double, double, double *, double *, double *, int *, double *, double &) [with Payoff=PayoffPut]" at line 1075
+
+"main.cpp", line 744: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop num_teams(numTeams) thread_limit(NUM_THREADS_PER_BLOCK)
+                                       ^
+          detected during instantiation of "void do_run(double *, int, int, const Payoff &, double, double, double, double, double *, double *, double *, int *, double *, double &) [with Payoff=PayoffPut]" at line 1075
+
+"main.cpp", line 793: error: invalid text in pragma
+    #pragma acc parallel loop thread_limit(NUM_THREADS_PER_BLOCK) \
+                              ^
+          detected during instantiation of "void do_run(double *, int, int, const Payoff &, double, double, double, double, double *, double *, double *, int *, double *, double &) [with Payoff=PayoffPut]" at line 1075
+
+"main.cpp", line 793: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop thread_limit(NUM_THREADS_PER_BLOCK) \
+                                          ^
+          detected during instantiation of "void do_run(double *, int, int, const Payoff &, double, double, double, double, double *, double *, double *, int *, double *, double &) [with Payoff=PayoffPut]" at line 1075
+
+17 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

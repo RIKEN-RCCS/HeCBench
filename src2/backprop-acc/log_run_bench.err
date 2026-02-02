@@ -1,0 +1,140 @@
+alloc_2d_dbl(int, int):
+     84, Loop not vectorized/parallelized: contains call
+bpnn_randomize_weights(float**, int, int):
+     97, Loop not vectorized/parallelized: contains call
+bpnn_randomize_row(float*, int):
+    107, Recognized memory set idiom
+bpnn_zero_weights(float**, int, int):
+    119, Recognized memory zero idiom
+bpnn_internal_create(int, int, int):
+          84, Loop not vectorized/parallelized: contains call
+          84, Loop not vectorized/parallelized: contains call
+          84, Loop not vectorized/parallelized: contains call
+          84, Loop not vectorized/parallelized: contains call
+bpnn_free(BPNN*):
+    179, Loop not vectorized/parallelized: contains call
+    186, Loop not vectorized/parallelized: contains call
+bpnn_create(int, int, int):
+         154, Loop not vectorized/parallelized: contains call
+         155, Loop not vectorized/parallelized: contains call
+         157, Loop not vectorized/parallelized: contains call
+         158, Loop not vectorized/parallelized: contains call
+          97, Loop not vectorized/parallelized: contains call
+          97, Loop not vectorized/parallelized: contains call
+         119, Recognized memory zero idiom
+         119, Recognized memory zero idiom
+         107, Recognized memory set idiom
+bpnn_layerforward(float*, float*, float**, int, int):
+    242, Generated vector simd code for the loop containing reductions
+bpnn_output_error(float*, float*, float*, int, float*):
+    254, Loop not vectorized: data dependency
+bpnn_hidden_error(float*, int, float*, int, float**, float*, float*):
+    279, Generated vector simd code for the loop containing reductions
+         Loop unrolled 4 times
+bpnn_adjust_weights(float*, int, float*, int, float**, float**):
+    303, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+bpnn_feedforward(BPNN*):
+         238, Loop not fused: different loop trip count
+         242, Generated vector simd code for the loop containing reductions
+         242, Generated vector simd code for the loop containing reductions
+bpnn_train(BPNN*, float*, float*):
+         238, Loop not fused: different loop trip count
+         242, Generated vector simd code for the loop containing reductions
+         238, Loop not fused: enclosed in different number of nests
+         242, Generated vector simd code for the loop containing reductions
+         254, Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+         276, Loop not fused: different loop trip count
+         279, Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+         302, Loop not fused: different loop trip count
+         303, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+         303, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+bpnn_save(BPNN*, char*):
+    397, Loop not vectorized/parallelized: not countable
+    399, Loop unrolled 4 times (completely unrolled)
+    411, Loop not vectorized/parallelized: not countable
+    413, Loop unrolled 4 times (completely unrolled)
+bpnn_read(char*):
+         154, Loop not vectorized/parallelized: contains call
+         155, Loop not vectorized/parallelized: contains call
+         157, Loop not vectorized/parallelized: contains call
+         158, Loop not vectorized/parallelized: contains call
+    450, Loop not vectorized/parallelized: not countable
+    451, Loop unrolled 4 times (completely unrolled)
+    463, Loop not vectorized/parallelized: not countable
+    464, Loop unrolled 4 times (completely unrolled)
+         119, Recognized memory zero idiom
+         119, Recognized memory zero idiom
+load(BPNN*):
+     19, Loop not vectorized/parallelized: contains call
+"main.cpp", line 72: error: invalid text in pragma
+    #pragma acc data to: input[0:in+1], \
+                     ^
+
+"main.cpp", line 72: error: extra text after expected end of preprocessing directive
+    #pragma acc data to: input[0:in+1], \
+                       ^
+
+"main.cpp", line 78: error: invalid text in pragma
+      #pragma acc parallel teams num_teams(num_blocks) thread_limit(BLOCK_SIZE*BLOCK_SIZE)
+                           ^
+
+"main.cpp", line 78: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel teams num_teams(num_blocks) thread_limit(BLOCK_SIZE*BLOCK_SIZE)
+                                 ^
+
+"main.cpp", line 84: error: identifier "omp_get_team_num" is undefined
+          int by = omp_get_team_num();
+                   ^
+
+"main.cpp", line 85: error: identifier "omp_get_thread_num" is undefined
+          int tx = omp_get_thread_num() % BLOCK_SIZE;
+                   ^
+
+"main.cpp", line 122: error: invalid text in pragma
+      #pragma acc update from(partial_sum[0:num_blocks*WIDTH])
+                         ^
+
+"main.cpp", line 122: error: OpenACC data clause expected
+      #pragma acc update from(partial_sum[0:num_blocks*WIDTH])
+                         ^
+
+"main.cpp", line 122: error: extra text after expected end of preprocessing directive
+      #pragma acc update from(partial_sum[0:num_blocks*WIDTH])
+                             ^
+
+"main.cpp", line 141: error: invalid text in pragma
+      #pragma acc update to(input_weights[0:(in+1)*(hid+1)])
+                         ^
+
+"main.cpp", line 141: error: OpenACC data clause expected
+      #pragma acc update to(input_weights[0:(in+1)*(hid+1)])
+                         ^
+
+"main.cpp", line 141: error: extra text after expected end of preprocessing directive
+      #pragma acc update to(input_weights[0:(in+1)*(hid+1)])
+                           ^
+
+"main.cpp", line 143: error: invalid text in pragma
+      #pragma acc parallel teams num_teams(num_blocks) thread_limit(BLOCK_SIZE*BLOCK_SIZE)
+                           ^
+
+"main.cpp", line 143: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel teams num_teams(num_blocks) thread_limit(BLOCK_SIZE*BLOCK_SIZE)
+                                 ^
+
+"main.cpp", line 147: error: identifier "omp_get_team_num" is undefined
+          int by = omp_get_team_num();
+                   ^
+
+"main.cpp", line 148: error: identifier "omp_get_thread_num" is undefined
+          int tx = omp_get_thread_num() % BLOCK_SIZE;
+                   ^
+
+16 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:63: main.o] Error 2
+timeout was set to  600

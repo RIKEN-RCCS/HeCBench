@@ -1,0 +1,10 @@
+clang++  -DMILC_COMPLEX -std=c++17 -Wall -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c su3_nn_bench.cpp -o su3_nn_bench.o
+su3_nn_bench.cpp:133:18: warning: passing 8-byte aligned argument to 16-byte aligned parameter 1 of 'make_lattice' may result in an unaligned pointer access [-Walign-mismatch]
+  133 |   make_lattice(a.data(), ldim, Complx{1.0,0.0});
+      |                  ^
+1 warning generated.
+su3_nn_bench.cpp:133:18: warning: passing 8-byte aligned argument to 16-byte aligned parameter 1 of 'make_lattice' may result in an unaligned pointer access [-Walign-mismatch]
+  133 |   make_lattice(a.data(), ldim, Complx{1.0,0.0});
+      |                  ^
+1 warning generated.
+clang++  -DMILC_COMPLEX -std=c++17 -Wall -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU su3_nn_bench.o -o main 

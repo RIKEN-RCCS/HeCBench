@@ -1,0 +1,51 @@
+"kernel.h", line 17: error: invalid text in pragma
+    #pragma acc parallel teams num_teams((n+BLOCK_SIZE-1)/BLOCK_SIZE) thread_limit(BLOCK_SIZE)
+                         ^
+
+"kernel.h", line 17: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams((n+BLOCK_SIZE-1)/BLOCK_SIZE) thread_limit(BLOCK_SIZE)
+                               ^
+
+"kernel.h", line 22: error: identifier "omp_get_thread_num" is undefined
+        const int local_id = omp_get_thread_num();
+                             ^
+
+"kernel.h", line 24: error: identifier "omp_get_team_num" is undefined
+        const int nid = omp_get_team_num();
+                        ^
+
+"kernel.h", line 61: error: invalid text in pragma
+    #pragma acc parallel loop num_teams(m) 
+                              ^
+
+"kernel.h", line 61: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop num_teams(m) 
+                                       ^
+
+"kernel.h", line 67: error: invalid text in pragma
+      #pragma acc loop reduction(+:sum) num_threads(BLOCK_SIZE)
+                                        ^
+
+"kernel.h", line 67: error: extra text after expected end of preprocessing directive
+      #pragma acc loop reduction(+:sum) num_threads(BLOCK_SIZE)
+                                                   ^
+
+"main.cpp", line 50: error: invalid text in pragma
+    #pragma acc data to: nlist[0:n], family[0:m]) \
+                     ^
+
+"main.cpp", line 50: error: extra text after expected end of preprocessing directive
+    #pragma acc data to: nlist[0:n], family[0:m]) \
+                       ^
+
+"main.cpp", line 65: error: invalid text in pragma
+    #pragma acc data to: nlist[0:n], family[0:m]) \
+                     ^
+
+"main.cpp", line 65: error: extra text after expected end of preprocessing directive
+    #pragma acc data to: nlist[0:n], family[0:m]) \
+                       ^
+
+12 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

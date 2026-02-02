@@ -1,0 +1,27 @@
+"main.cpp", line 95: error: invalid text in pragma
+    #pragma acc parallel enter data map(alloc:Table[0:TableSize])
+                               ^
+
+"main.cpp", line 95: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel enter data map(alloc:Table[0:TableSize])
+                                    ^
+
+"main.cpp", line 101: error: invalid text in pragma
+        #pragma acc parallel loop thread_limit (256)
+                                  ^
+
+"main.cpp", line 101: error: extra text after expected end of preprocessing directive
+        #pragma acc parallel loop thread_limit (256)
+                                               ^
+
+"main.cpp", line 122: error: invalid text in pragma
+    #pragma acc parallel exit data map(from: Table[0:TableSize])
+                              ^
+
+"main.cpp", line 122: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel exit data map(from: Table[0:TableSize])
+                                   ^
+
+6 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

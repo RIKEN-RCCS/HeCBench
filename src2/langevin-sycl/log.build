@@ -1,0 +1,8 @@
+clang++  -std=c++17 -Wall -fsycl -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90             --gcc-toolchain="/auto/software/gcc/x86_64/gcc-9.1.0/" -O3 -ffast-math -DUSE_GPU -c main.cpp -o main.o
+clang++  -std=c++17 -Wall -fsycl -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90             --gcc-toolchain="/auto/software/gcc/x86_64/gcc-9.1.0/" -O3 -ffast-math -DUSE_GPU main.o -o main 
+/usr/bin/ld: cannot find crtbegin.o: No such file or directory
+/usr/bin/ld: cannot find -lstdc++
+/usr/bin/ld: cannot find -lgcc_s
+/usr/bin/ld: cannot find -lgcc
+clang++: error: linker command failed with exit code 1 (use -v to see invocation)
+make: *** [Makefile.NVD:70: main] Error 1

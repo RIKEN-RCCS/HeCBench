@@ -1,0 +1,148 @@
+nvc++  -Wall -I../reaction-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+build_input_central_cube(unsigned int, unsigned int, unsigned int, unsigned int, float*, float*, float, float, float, float, float):
+      5, include "util.h"
+          23, Loop not vectorized/parallelized: potential early exits
+          31, Loop not vectorized/parallelized: potential early exits
+stats(float const*, float const*, unsigned int):
+      5, include "util.h"
+          45, Loop not fused: dependence chain to sibling loop
+              Loop not vectorized: data dependency
+          50, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+reaction_gray_scott(float const*, float const*, float*, float*, unsigned int, float, float):
+      6, include "kernels.cpp"
+          12, #omp target teams distribute parallel for thread_limit(256)
+              12, Generating "nvkernel__Z19reaction_gray_scottPKfS0_PfS1_jff_F295L12_2" GPU kernel
+              14, Loop parallelized across teams and threads(128), schedule(static)
+          14, Loop not vectorized/parallelized: not countable
+derivative_x2_pbc(float const*, float*, unsigned int, unsigned int, unsigned int, unsigned int):
+      6, include "kernels.cpp"
+          33, #omp target teams num_teams(?) thread_limit(pencils*mx)
+              33, Generating "nvkernel__Z17derivative_x2_pbcPKfPfjjjj_F295L33_6" GPU kernel
+              36, #omp parallel
+                53, Barrier
+                61, Barrier
+              41, Team private (s_f) located in CUDA shared memory
+derivative_x2_zeroflux(float const*, float*, unsigned int, unsigned int, unsigned int, unsigned int):
+      6, include "kernels.cpp"
+          80, #omp target teams num_teams(?) thread_limit(pencils*mx)
+              80, Generating "nvkernel__Z22derivative_x2_zerofluxPKfPfjjjj_F295L80_11" GPU kernel
+              83, #omp parallel
+                98, Barrier
+              87, Team private (s_f) located in CUDA shared memory
+derivative_y2_pbc(float const*, float*, unsigned int, unsigned int, unsigned int, unsigned int):
+      6, include "kernels.cpp"
+         123, #omp target teams num_teams(?) thread_limit(pencils*my)
+             123, Generating "nvkernel__Z17derivative_y2_pbcPKfPfjjjj_F295L123_16" GPU kernel
+             126, #omp parallel
+               143, Barrier
+               151, Barrier
+             130, Team private (s_f) located in CUDA shared memory
+derivative_y2_zeroflux(float const*, float*, unsigned int, unsigned int, unsigned int, unsigned int):
+      6, include "kernels.cpp"
+         170, #omp target teams num_teams(?) thread_limit(pencils*my)
+             170, Generating "nvkernel__Z22derivative_y2_zerofluxPKfPfjjjj_F295L170_21" GPU kernel
+             173, #omp parallel
+               188, Barrier
+             177, Team private (s_f) located in CUDA shared memory
+derivative_z2_pbc(float const*, float*, unsigned int, unsigned int, unsigned int, unsigned int):
+      6, include "kernels.cpp"
+         213, #omp target teams num_teams(?) thread_limit(pencils*mz)
+             213, Generating "nvkernel__Z17derivative_z2_pbcPKfPfjjjj_F295L213_26" GPU kernel
+             216, #omp parallel
+               233, Barrier
+               241, Barrier
+             220, Team private (s_f) located in CUDA shared memory
+derivative_z2_zeroflux(float const*, float*, unsigned int, unsigned int, unsigned int, unsigned int):
+      6, include "kernels.cpp"
+         260, #omp target teams num_teams(?) thread_limit(pencils*mz)
+             260, Generating "nvkernel__Z22derivative_z2_zerofluxPKfPfjjjj_F295L260_31" GPU kernel
+             263, #omp parallel
+               278, Barrier
+             267, Team private (s_f) located in CUDA shared memory
+construct_laplacian(float*, float const*, float const*, float const*, unsigned int, float):
+      6, include "kernels.cpp"
+         301, #omp target teams distribute parallel for thread_limit(256)
+             301, Generating "nvkernel__Z19construct_laplacianPfPKfS1_S1_jf_F295L301_36" GPU kernel
+             303, Loop parallelized across teams and threads(128), schedule(static)
+         303, Loop not vectorized/parallelized: not countable
+update(float*, float*, float const*, float const*, float const*, float const*, unsigned int, float):
+      6, include "kernels.cpp"
+         327, #omp target teams distribute parallel for thread_limit(256)
+             327, Generating "nvkernel__Z6updatePfS_PKfS1_S1_S1_jf_F295L327_40" GPU kernel
+             329, Loop parallelized across teams and threads(128), schedule(static)
+         329, Loop not vectorized/parallelized: not countable
+main:
+          23, Loop not vectorized/parallelized: potential early exits
+          31, Loop not vectorized/parallelized: potential early exits
+     51, Generating map(tofrom:a[:ncells]) 
+         Generating map(to:db[:ncells],dx2[:ncells],dy2[:ncells],dz2[:ncells],rb[:ncells],ra[:ncells]) 
+         Generating map(tofrom:b[:ncells]) 
+         Generating map(to:da[:ncells]) 
+     59, Loop not vectorized/parallelized: contains call
+          45, Loop not fused: dependence chain to sibling loop
+              Loop not vectorized: data dependency
+          50, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::mersenne_twister_engine(unsigned long):
+         330, Loop not vectorized: data dependency
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::mersenne_twister_engine(unsigned long):
+         531, Loop not vectorized: data dependency
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::seed(unsigned long):
+      2, include "random"
+          51, include "random.tcc"
+              330, Loop not vectorized: data dependency
+      5, include "util.h"
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::operator()():
+         401, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+         409, Loop not vectorized: data dependency
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::_M_gen_rand():
+      2, include "random"
+          51, include "random.tcc"
+              401, Loop not fused: different loop trip count
+                   Generated vector simd code for the loop
+              409, Loop not vectorized: data dependency
+      5, include "util.h"
+double std::uniform_real_distribution<double>::operator()<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&):
+        1870, Loop not fused: function call before adjacent loop
+              Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+double std::uniform_real_distribution<double>::operator()<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&, std::uniform_real_distribution<double>::param_type const&):
+      2, include "random"
+          51, include "random.tcc"
+      5, include "util.h"
+         189, Loop not fused: function call before adjacent loop
+              Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      6, include "kernels.cpp"
+std::chrono::duration<long, std::ratio<1l, 1l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      6, include "kernels.cpp"
+std::chrono::duration<double, std::ratio<1l, 1l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      6, include "kernels.cpp"
+std::__detail::_Adaptor<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>, double>::operator()():
+        3364, Loop not fused: function call before adjacent loop
+        3366, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+double std::generate_canonical<double, 53ul, std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&):
+      2, include "random"
+          51, include "random.tcc"
+             3364, Loop not fused: function call before adjacent loop
+      5, include "util.h"
+         456, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+_INTERNAL_8_main_cpp_0a090fbc::uniform_dist():
+         531, Loop not vectorized: data dependency
+      5, include "util.h"
+nvc++  -Wall -I../reaction-cuda -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

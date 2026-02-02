@@ -1,0 +1,36 @@
+main:
+          24, Loop not vectorized/parallelized: contains call
+          24, Loop not vectorized/parallelized: contains call
+          24, Loop not vectorized/parallelized: contains call
+          24, Loop not vectorized/parallelized: contains call
+          24, Loop not vectorized/parallelized: contains call
+          24, Loop not vectorized/parallelized: contains call
+          24, Loop not vectorized/parallelized: contains call
+          24, Loop not vectorized/parallelized: contains call
+          47, Loop not vectorized/parallelized: contains call
+          47, Loop not vectorized/parallelized: contains call
+          47, Loop not vectorized/parallelized: contains call
+          47, Loop not vectorized/parallelized: contains call
+          47, Loop not vectorized/parallelized: contains call
+double* _INTERNAL_24____hypterm_cuda_main_cpp_main::getRandom3DArray<double>(int, int, int):
+      3, include "utils.h"
+          24, Loop not vectorized/parallelized: contains call
+double _INTERNAL_24____hypterm_cuda_main_cpp_main::checkError3D<double>(int, int, double const*, double const*, int, int, int, int, int, int):
+      3, include "utils.h"
+          47, Loop not vectorized/parallelized: contains call
+reference:
+     19, Loop not fused: different loop trip count
+     21, Unable to version for aliasing; too many tests
+         Loop not vectorized: data dependency
+     28, Loop not fused: different loop trip count
+     30, Unable to version for aliasing; too many tests
+         Loop not vectorized: data dependency
+     37, Loop not fused: different loop trip count
+     39, Unable to version for aliasing; too many tests
+         Loop not vectorized: data dependency
+     47, Loop not fused: different loop trip count
+     49, Unable to version for aliasing; too many tests
+         Loop not vectorized: data dependency
+     58, Unable to version for aliasing; too many tests
+         Loop not vectorized: data dependency
+timeout was set to  600

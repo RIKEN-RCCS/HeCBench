@@ -1,0 +1,52 @@
+nvc++ -acc  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+main:
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+     48, Loop not vectorized/parallelized: contains call
+     54, Generating copyin(h_prop[:1],h_src[:imageSize]) [if not already present]
+         Generating copyout(h_dst[:imageSize]) [if not already present]
+     57, Loop not vectorized/parallelized: contains call
+     69, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+std::char_traits<char>::length(char const*):
+         171, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+__gnu_cxx::char_traits<char>::length(char const*):
+      4, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                        171, Loop not vectorized/parallelized: not countable
+std::basic_ostream<char, std::char_traits<char>>& std::endl<char, std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&):
+      4, include "iostream"
+          39, include "ostream"
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&, char const*):
+         397, Loop not vectorized/parallelized: not countable
+nvc++ -acc  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c distort.cpp -o distort.o
+getRadialX(float, float, Properties const*):
+     24, Generating acc routine seq
+         Generating NVIDIA GPU code
+getRadialY(float, float, Properties const*):
+     34, Generating acc routine seq
+         Generating NVIDIA GPU code
+sampleImageTest(uchar3 const*, float, float, uchar3&, Properties const*):
+     45, Generating acc routine seq
+         Generating NVIDIA GPU code
+barrel_distort(uchar3 const*, uchar3*, Properties const*):
+     78, Generating NVIDIA GPU code
+         80, #pragma acc loop gang, vector(256) collapse(2) /* blockIdx.x threadIdx.x */
+         81,   /* blockIdx.x threadIdx.x collapsed */
+     78, Local memory used for .inl_s3_65,.inl_s2_64,.inl_s1_62,temp,.inl_s4_66
+         Generating implicit copyout(dst[:]) [if not already present]
+         Generating implicit copyin(src,prop) [if not already present]
+     80, Loop not fused: no successor loop
+     81, Loop not vectorized: data dependency
+reference(uchar3 const*, uchar3*, Properties const*):
+     98, Loop not vectorized: data dependency
+nvc++ -acc  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o distort.o -o main 

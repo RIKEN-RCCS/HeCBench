@@ -1,0 +1,43 @@
+k0(float const*, float*, int):
+      7, Generating implicit firstprivate(n)
+         Generating NVIDIA GPU code
+          9, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+      7, Generating implicit copyin(a[:n]) [if not already present]
+         Generating implicit copyout(o[:n]) [if not already present]
+      9, Loop not fused: no successor loop
+         Generated vector simd code for the loop
+k1(float const*, float*, int):
+     15, Generating implicit firstprivate(n)
+         Generating NVIDIA GPU code
+         17, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+     15, Generating implicit copyin(a[:n]) [if not already present]
+         Generating implicit copyout(o[:n]) [if not already present]
+     17, Loop not fused: no successor loop
+         Generated vector simd code for the loop
+k2(float const*, float*, int):
+     51, Generating implicit firstprivate(n)
+         Generating NVIDIA GPU code
+         53, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+     51, Generating implicit copyin(a[:n]) [if not already present]
+         Generating implicit copyout(o[:n]) [if not already present]
+     53, Loop not vectorized/parallelized: contains call
+main:
+     84, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+     94, Generating copyin(a[:n]) [if not already present]
+         Generating copyout(o0[:n],o1[:n],o2[:n]) [if not already present]
+     96, Loop not vectorized/parallelized: contains call
+    104, Loop not vectorized/parallelized: contains call
+    112, Loop not vectorized/parallelized: contains call
+    121, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 2 times
+    131, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    138, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+timeout was set to  600

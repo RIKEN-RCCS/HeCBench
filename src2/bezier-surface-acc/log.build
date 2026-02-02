@@ -1,0 +1,73 @@
+nvc++ -acc  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+read_input(XYZ*, Params const&):
+    129, Loop not vectorized/parallelized: contains call
+    135, Loop not vectorized: data dependency
+compare_output(XYZ*, XYZ*, int, int, int, int):
+    150, Outer loop unrolled 1 times (completely unrolled)
+    151, Loop nest collapsed
+         Loop not vectorized: recurrence
+BezierBlend(int, float, int):
+    170, Generating acc routine seq
+         Generating NVIDIA GPU code
+    176, Loop not fused: complex flow graph
+BezierCPU(XYZ const*, XYZ*, int, int, int, int):
+    207, Loop not vectorized/parallelized: too deeply nested
+    209, Loop not vectorized/parallelized: too deeply nested
+         176, Loop not fused: complex flow graph
+         176, Loop not fused: complex flow graph
+run(XYZ*, int, int, int, int, Params const&):
+         207, Loop not fused: function call before adjacent loop
+              Loop not vectorized/parallelized: too deeply nested
+         209, Loop not vectorized/parallelized: too deeply nested
+         213, Loop not fused: complex flow graph
+         215, Loop not fused: complex flow graph
+    240, Generating copyout(gpu_out[:out_size_j*out_size_i]) [if not already present]
+         Generating copyin(in[:(in_size_j+1)*(in_size_i+1)]) [if not already present]
+    241, Generating implicit firstprivate(in_size_i,out_size_i,out_size_j,in_size_j)
+         Generating NVIDIA GPU code
+        176, #pragma acc loop seq
+        244, #pragma acc loop vector(256) /* threadIdx.x */
+        246, #pragma acc loop seq
+        250, #pragma acc loop seq
+        253, #pragma acc loop seq
+    241, Local memory used for out
+    244, Loop is parallelizable
+         Loop not fused: no successor loop
+         Loop not vectorized/parallelized: too deeply nested
+    246, Complex loop carried dependence of gpu_out->x,gpu_out->y,gpu_out->z,in->x,in->y,in->z prevents parallelization
+         Loop not vectorized/parallelized: too deeply nested
+    250, Scalar last value needed after loop for out.x at line 260
+         Scalar last value needed after loop for out.y at line 260
+         Scalar last value needed after loop for out.z at line 260
+         176, Loop carried scalar dependence for .inl_blend_398 at line 176
+              Scalar last value needed after loop for .inl_blend_398 at line 188,194,200
+              Loop carried scalar dependence for .inl_kn_401 at line 178,179,180,181
+              Loop carried scalar dependence for .inl_nkn_403 at line 183,184,185
+              Loop not fused: complex flow graph
+    253, Scalar last value needed after loop for out.x at line 260
+         Scalar last value needed after loop for out.y at line 260
+         Scalar last value needed after loop for out.z at line 260
+         176, Loop carried scalar dependence for .inl_blend_405 at line 176
+              Scalar last value needed after loop for .inl_blend_405 at line 188,194,200
+              Loop carried scalar dependence for .inl_kn_408 at line 178,179,180,181
+              Loop carried scalar dependence for .inl_nkn_410 at line 183,184,185
+              Loop not fused: complex flow graph
+         150, Outer loop unrolled 1 times (completely unrolled)
+         151, Loop nest collapsed
+              Loop not fused: function call before adjacent loop
+              Loop not vectorized: recurrence
+main:
+          72, Loop not vectorized/parallelized: contains call
+         124, Loop not vectorized/parallelized: contains call
+         135, Loop not vectorized/parallelized: not countable
+Params::Params(int, char**):
+     74, Loop not vectorized/parallelized: contains call
+Params::Params(int, char**):
+          72, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     40, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000l>>::_S_gcd(long, long):
+     40, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++ -acc  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

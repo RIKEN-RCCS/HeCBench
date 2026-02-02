@@ -1,0 +1,308 @@
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+genScoreKernel(int, float*, int const*, float const*):
+      7, include "kernels.cpp"
+          20, #omp target teams distribute parallel for thread_limit(256)
+              20, Generating "nvkernel__Z14genScoreKerneliPfPKiPKf_F187L20_2" GPU kernel
+              22, Loop parallelized across teams and threads(128), schedule(static)
+          22, Loop not vectorized/parallelized: not countable
+          23, #omp target teams distribute parallel for thread_limit(256)
+              23, Generating "nvkernel__Z14genScoreKerneliPfPKiPKf_F187L23_4" GPU kernel
+              26, Loop parallelized across teams and threads(128), schedule(static)
+          26, Loop not vectorized/parallelized: too deeply nested
+          39, Loop unrolled 4 times (completely unrolled)
+          44, Loop not vectorized/parallelized: too deeply nested
+          53, Recognized memory zero idiom
+          61, Loop unrolled 2 times (completely unrolled)
+          66, Loop not vectorized/parallelized: potential early exits
+          80, Loop unrolled 2 times (completely unrolled)
+          93, Generating update from(D_localscore[:sizepernode*45])
+         252, Loop unrolled 4 times (completely unrolled)
+         259, Loop not vectorized/parallelized: not countable
+         260, Loop not vectorized: unknown
+              Loop unrolled 4 times
+         261, Loop not vectorized: unknown
+              Loop unrolled 4 times
+         268, Loop not vectorized/parallelized: not countable
+         269, Loop not vectorized: unknown
+              Loop unrolled 4 times
+         270, Loop not vectorized: unknown
+              Loop unrolled 4 times
+         276, Recognized memory set idiom
+         233, Loop not vectorized: unknown
+              Loop unrolled 4 times
+         240, Loop not vectorized/parallelized: potential early exits
+computeKernel(int, int, float const*, bool const*, int, int, float*, int*, int):
+      7, include "kernels.cpp"
+         106, #omp target teams num_teams(blocknum) thread_limit(256)
+             106, Generating "nvkernel__Z13computeKerneliiPKfPKbiiPfPii_F187L106_10" GPU kernel
+             109, #omp parallel
+               153, Barrier
+               174, Barrier
+               177, Barrier
+               188, Barrier
+             139, Team private (lsinblock) located in CUDA shared memory
+         128, Loop unrolled 4 times (completely unrolled)
+         134, Recognized memory copy idiom
+         146, Loop unrolled 4 times (completely unrolled)
+         155, Loop not vectorized/parallelized: contains call
+         182, Loop unrolled 7 times (completely unrolled)
+         191, Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 4 times (completely unrolled)
+         252, Loop unrolled 4 times (completely unrolled)
+         259, Loop not vectorized/parallelized: not countable
+         260, Loop not vectorized: unknown
+              Loop unrolled 4 times
+         261, Loop not vectorized: unknown
+              Loop unrolled 4 times
+         268, Loop not vectorized/parallelized: not countable
+         269, Loop not vectorized: unknown
+              Loop unrolled 4 times
+         270, Loop not vectorized: unknown
+              Loop unrolled 4 times
+         276, Recognized memory set idiom
+         124, Loop not vectorized/parallelized: too deeply nested
+         284, Loop not vectorized: unknown
+              Loop unrolled 4 times
+         289, Loop not vectorized: unknown
+              Loop unrolled 4 times
+Dincr(int*, int):
+      7, include "kernels.cpp"
+         201, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+         203, Loop not vectorized/parallelized: potential early exits
+DincrS(int*, int):
+      7, include "kernels.cpp"
+         218, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+         203, Loop not vectorized/parallelized: potential early exits
+D_getState(int, int*, int):
+      7, include "kernels.cpp"
+         230, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+         233, Loop not fused: complex flow graph
+              Loop not vectorized: unknown
+              Loop unrolled 4 times
+         224, Loop not vectorized/parallelized: potential early exits
+D_findComb(int*, int, int):
+      7, include "kernels.cpp"
+         248, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+         252, Loop not fused: no successor loop
+              Generated vector simd code for the loop
+         259, Loop not vectorized/parallelized: not countable
+         268, Loop not vectorized/parallelized: not countable
+         276, Recognized memory set idiom
+         302, Loop not fused: different controlling conditions
+              Loop not vectorized: unknown
+              Loop unrolled 4 times
+         307, Loop not vectorized: unknown
+              Loop unrolled 4 times
+         302, Loop not fused: different controlling conditions
+              Loop not vectorized: unknown
+              Loop unrolled 4 times
+         307, Loop not vectorized: unknown
+              Loop unrolled 4 times
+         302, Loop not fused: scalar dependence chain to sibling loop
+              Loop not vectorized: unknown
+              Loop unrolled 4 times
+         307, Loop not vectorized: unknown
+              Loop unrolled 4 times
+         302, Loop not fused: different controlling conditions
+              Loop not vectorized: unknown
+              Loop unrolled 4 times
+         307, Loop not vectorized: unknown
+              Loop unrolled 4 times
+D_findindex(int*, int):
+      7, include "kernels.cpp"
+         280, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+         283, Loop not fused: different loop trip count
+         302, Loop not fused: scalar dependence chain to sibling loop
+              Loop not vectorized: unknown
+              Loop unrolled 4 times
+         307, Loop not vectorized: unknown
+              Loop unrolled 4 times
+         302, Loop not fused: scalar dependence chain to sibling loop
+              Loop not vectorized: unknown
+              Loop unrolled 4 times
+         307, Loop not vectorized: unknown
+              Loop unrolled 4 times
+D_C(int, int):
+      7, include "kernels.cpp"
+         299, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+         302, Loop not fused: scalar dependence chain to sibling loop
+              Loop not vectorized: unknown
+              Loop unrolled 4 times
+         307, Loop not vectorized: unknown
+              Loop unrolled 4 times
+main:
+         472, Outer loop unrolled 4 times (completely unrolled)
+         473, Loop not fused: scalar dependence chain to sibling loop
+              Loop not fused: different loop trip count
+              Loop not fused: function call before adjacent loop
+              Loop not vectorized/parallelized: loop count too small
+              Loop not vectorized: unknown
+              Loop unrolled 4 times (completely unrolled)
+              Loop unrolled 3 times (completely unrolled)
+              Loop unrolled 2 times (completely unrolled)
+              Loop unrolled 1 times (completely unrolled)
+         480, Recognized memory zero idiom
+         484, Recognized memory zero idiom
+         488, Recognized memory set idiom
+         492, Loop not vectorized/parallelized: contains call
+         495, Loop not fused: dependence chain to sibling loop
+              Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+         501, Generated vector simd code for the loop
+         509, Recognized memory copy idiom
+         567, Loop not vectorized/parallelized: not countable
+     87, Generating map(alloc:D_resP[:((sizepernode/256)+1)*4]) 
+         Generating map(to:LG[:602]) 
+         Generating map(alloc:localscore[:sizepernode*45],D_Score[:sizepernode/256+1],D_parent[:45]) 
+     90, Loop not vectorized/parallelized: contains call
+    104, Loop not vectorized/parallelized: too deeply nested
+    110, Recognized memory copy idiom
+    116, Loop not vectorized/parallelized: contains call
+         523, Loop not fused: dependence chain to sibling loop
+              Generated vector simd code for the loop
+         528, Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+         544, Loop not fused: complex flow graph
+         545, Generated vector simd code for the loop
+    131, Loop not vectorized: unknown
+    139, Recognized memory copy idiom
+         437, Loop not fused: no successor loop
+         440, Loop not fused: different loop trip count
+              Loop not vectorized/parallelized: loop count too small
+         447, Generated vector simd code for the loop
+    152, Loop unrolled 3 times (completely unrolled)
+    161, Recognized memory copy idiom
+    166, Outer loop unrolled 2 times (completely unrolled)
+         458, Loop not fused: different controlling conditions
+         459, Generated vector simd code for the loop
+    194, Loop not vectorized/parallelized: contains call
+findBestGraph(float*, int*, float*, bool*):
+    221, Recognized memory zero idiom
+    224, Loop not vectorized/parallelized: too deeply nested
+    229, Loop not fused: function call before adjacent loop
+         630, Loop unrolled 4 times (completely unrolled)
+         635, Loop unrolled 4 times (completely unrolled)
+         630, Loop unrolled 3 times (completely unrolled)
+         635, Loop unrolled 3 times (completely unrolled)
+         630, Loop unrolled 2 times (completely unrolled)
+         635, Loop unrolled 2 times (completely unrolled)
+    239, #omp target teams distribute parallel for thread_limit(256)
+        239, Generating "nvkernel__Z13findBestGraphPfPiS_Pb_F1L239_15" GPU kernel
+        242, Loop parallelized across teams and threads(128), schedule(static)
+    242, #omp target teams distribute parallel for thread_limit(256)
+        242, Generating "nvkernel__Z13findBestGraphPfPiS_Pb_F1L242_17" GPU kernel
+        245, Loop parallelized across teams and threads(128), schedule(static)
+    242, Loop not vectorized/parallelized: not countable
+    245, Loop not vectorized/parallelized: not countable
+    250, Generating update to(D_parent[:45])
+    254, Generating update from(D_resP[:blocknum*4])
+    263, Generating update from(D_Score[:blocknum])
+         Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+    270, Loop unrolled 4 times (completely unrolled)
+    284, Loop not vectorized/parallelized: too deeply nested
+    285, Loop not vectorized/parallelized: too deeply nested
+    286, Loop not vectorized/parallelized: too deeply nested
+    287, Invariant if transformation
+         Loop not fused: no successor loop
+         Loop not vectorized/parallelized: too deeply nested
+    313, Loop unrolled 4 times (completely unrolled)
+    323, Loop not vectorized/parallelized: too deeply nested
+    324, Loop not vectorized/parallelized: too deeply nested
+    325, Invariant if transformation
+         Loop not fused: no successor loop
+         Loop not vectorized/parallelized: too deeply nested
+    348, Loop unrolled 3 times (completely unrolled)
+    357, Loop not vectorized/parallelized: too deeply nested
+    358, Invariant if transformation
+         Loop not fused: no successor loop
+         Loop not vectorized/parallelized: too deeply nested
+    377, Loop unrolled 2 times (completely unrolled)
+    385, Loop not fused: complex flow graph
+         Loop not vectorized: unknown
+    400, Loop unrolled 1 times (completely unrolled)
+    418, Loop not vectorized: unsupported scatter
+    612, Outer loop unrolled 1 times (completely unrolled)
+         Outer loop unrolled 2 times (completely unrolled)
+         Outer loop unrolled 3 times (completely unrolled)
+    613, Loop not fused: scalar dependence chain to sibling loop
+         Loop not fused: different loop trip count
+         Loop not fused: enclosed in different number of nests
+         Loop not vectorized/parallelized: loop count too small
+         Loop unrolled 1 times (completely unrolled)
+         Loop unrolled 2 times (completely unrolled)
+         Loop unrolled 3 times (completely unrolled)
+    618, Loop not fused: scalar dependence chain to sibling loop
+         Loop not vectorized/parallelized: loop count too small
+sortGraph():
+    440, Loop not fused: different loop trip count
+         Loop not vectorized/parallelized: loop count too small
+         459, Generated vector simd code for the loop
+swap(int, int):
+    459, Generated vector simd code for the loop
+initial():
+    472, Outer loop unrolled 4 times (completely unrolled)
+         630, Loop not fused: scalar dependence chain to sibling loop
+              Loop not vectorized/parallelized: loop count too small
+              Loop not vectorized: unknown
+              Loop unrolled 3 times (completely unrolled)
+              Loop unrolled 4 times (completely unrolled)
+              Loop unrolled 2 times (completely unrolled)
+              Loop unrolled 1 times (completely unrolled)
+         635, Loop not fused: different loop trip count
+              Loop not fused: function call before adjacent loop
+              Loop not vectorized/parallelized: loop count too small
+              Loop not vectorized: unknown
+              Loop unrolled 4 times (completely unrolled)
+              Loop unrolled 3 times (completely unrolled)
+              Loop unrolled 2 times (completely unrolled)
+              Loop unrolled 1 times (completely unrolled)
+    480, Recognized memory zero idiom
+    484, Recognized memory zero idiom
+    488, Recognized memory set idiom
+    492, Loop not vectorized/parallelized: contains call
+    495, Loop not fused: dependence chain to sibling loop
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 4 times
+    501, Generated vector simd code for the loop
+    509, Recognized memory copy idiom
+genOrders():
+    523, Loop not fused: dependence chain to sibling loop
+         Generated vector simd code for the loop
+    528, Loop not vectorized: unprofitable for target
+         Loop unrolled 4 times
+ConCore():
+    544, Loop not fused: no successor loop
+    545, Generated vector simd code for the loop
+Pre_logGamma():
+    567, Loop not vectorized/parallelized: not countable
+findindex(int*, int):
+    612, Loop not fused: different loop trip count
+         630, Loop not fused: scalar dependence chain to sibling loop
+              Loop not vectorized: unknown
+              Loop unrolled 4 times
+         635, Loop not vectorized: unknown
+              Loop unrolled 4 times
+         630, Loop not fused: scalar dependence chain to sibling loop
+              Loop not vectorized: unknown
+              Loop unrolled 4 times
+         635, Loop not vectorized: unknown
+              Loop unrolled 4 times
+C(int, int):
+    630, Loop not fused: scalar dependence chain to sibling loop
+         Loop not vectorized: unknown
+         Loop unrolled 4 times
+    635, Loop not vectorized: unknown
+         Loop unrolled 4 times
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      5, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      7, include "kernels.cpp"
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

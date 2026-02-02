@@ -1,0 +1,65 @@
+"main.cpp", line 384: error: invalid text in pragma
+  #pragma acc parallel data \
+                       ^
+
+"main.cpp", line 385: error: extra text after expected end of preprocessing directive
+    map(alloc: likelihood[0:Nparticles+1], \
+    ^
+
+"main.cpp", line 403: error: invalid text in pragma
+        #pragma acc parallel teams num_teams(num_blocks) thread_limit(BLOCK_SIZE)
+                             ^
+
+"main.cpp", line 403: error: extra text after expected end of preprocessing directive
+        #pragma acc parallel teams num_teams(num_blocks) thread_limit(BLOCK_SIZE)
+                                   ^
+
+"main.cpp", line 408: error: identifier "omp_get_team_num" is undefined
+            int block_id = omp_get_team_num();
+                           ^
+
+"main.cpp", line 409: error: identifier "omp_get_thread_num" is undefined
+            int thread_id = omp_get_thread_num();
+                            ^
+
+"main.cpp", line 410: error: identifier "omp_get_vector" is undefined
+            int block_dim = omp_get_vector();
+                            ^
+
+"main.cpp", line 496: error: invalid text in pragma
+        #pragma acc parallel teams num_teams(num_blocks) thread_limit(BLOCK_SIZE)
+                             ^
+
+"main.cpp", line 496: error: extra text after expected end of preprocessing directive
+        #pragma acc parallel teams num_teams(num_blocks) thread_limit(BLOCK_SIZE)
+                                   ^
+
+"main.cpp", line 502: error: identifier "omp_get_thread_num" is undefined
+            int local_id = omp_get_thread_num();
+                           ^
+
+"main.cpp", line 503: error: identifier "omp_get_team_num" is undefined
+            int i = omp_get_team_num() * omp_get_vector() + local_id;
+                    ^
+
+"main.cpp", line 503: error: identifier "omp_get_vector" is undefined
+            int i = omp_get_team_num() * omp_get_vector() + local_id;
+                                         ^
+
+"main.cpp", line 562: error: invalid text in pragma
+        #pragma acc parallel loop thread_limit(BLOCK_SIZE)
+                                  ^
+
+"main.cpp", line 562: error: extra text after expected end of preprocessing directive
+        #pragma acc parallel loop thread_limit(BLOCK_SIZE)
+                                              ^
+
+"main.cpp", line 379: warning: variable "num_blocks" was declared but never referenced [declared_but_not_referenced]
+    int num_blocks = (Nparticles + BLOCK_SIZE - 1) / BLOCK_SIZE;
+        ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+14 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:60: main.o] Error 2
+timeout was set to  600

@@ -1,0 +1,22 @@
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+tissue(int const*, float const*, float const*, float*, float const*, float const*, int, int, int, int):
+     32, #omp target teams distribute parallel for thread_limit(256)
+         32, Generating "nvkernel__Z6tissuePKiPKfS2_PfS2_S2_iiii_F1L32_2" GPU kernel
+         34, Loop parallelized across teams and threads(128), schedule(static)
+     45, Loop not vectorized/parallelized: not countable
+     55, Loop not vectorized: data dependency
+main:
+     86, Loop not vectorized/parallelized: contains call
+     89, Loop not vectorized/parallelized: contains call
+     93, Loop not vectorized/parallelized: contains call
+    107, Generating map(to:h_tisspoints[:98304],h_qt[:32768],h_gbartt[:65536],h_ctprev[:32768],h_ct[:32768],h_gtt[:65536]) 
+    109, Loop not vectorized/parallelized: contains call
+    115, Loop not vectorized/parallelized: contains call
+    120, Generating update from(h_ct[:32768])
+    122, Loop not vectorized/parallelized: potential early exits
+    135, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     12, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++ -c reference.cpp -o reference.o
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o reference.o -o main 

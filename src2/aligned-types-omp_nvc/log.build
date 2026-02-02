@@ -1,0 +1,198 @@
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+main:
+    239, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    249, Generating map(alloc:d_odata[:MemorySize]) 
+         Generating map(to:d_idata[:MemorySize]) 
+int runTest<unsigned char>(unsigned char*, unsigned char*, int, int):
+    184, #omp target teams distribute parallel for thread_limit(256)
+        184, Generating "nvkernel__Z7runTestIhEiPhS0_ii_F1L184_2" GPU kernel
+        188, Loop parallelized across teams and threads(128), schedule(static)
+    188, Loop not vectorized/parallelized: not countable
+    194, Loop not vectorized/parallelized: contains call
+    195, #omp target teams distribute parallel for thread_limit(256)
+        195, Generating "nvkernel__Z7runTestIhEiPhS0_ii_F1L195_4" GPU kernel
+        197, Loop parallelized across teams and threads(128), schedule(static)
+    197, Loop not vectorized/parallelized: not countable
+         156, Loop not vectorized/parallelized: potential early exits
+    216, Generating update from(d_odata[:memory_size])
+int runTest<uchar4_misaligned>(unsigned char*, unsigned char*, int, int):
+    184, #omp target teams distribute parallel for thread_limit(256)
+        184, Generating "nvkernel__Z7runTestI17uchar4_misalignedEiPhS1_ii_F1L184_10" GPU kernel
+        188, Loop parallelized across teams and threads(128), schedule(static)
+    188, Loop not vectorized/parallelized: not countable
+    194, Loop not vectorized/parallelized: contains call
+    195, #omp target teams distribute parallel for thread_limit(256)
+        195, Generating "nvkernel__Z7runTestI17uchar4_misalignedEiPhS1_ii_F1L195_12" GPU kernel
+        197, Loop parallelized across teams and threads(128), schedule(static)
+    197, Loop not vectorized/parallelized: not countable
+         156, Loop not vectorized/parallelized: potential early exits
+    216, Generating update from(d_odata[:memory_size])
+int runTest<uchar4_aligned>(unsigned char*, unsigned char*, int, int):
+    184, #omp target teams distribute parallel for thread_limit(256)
+        184, Generating "nvkernel__Z7runTestI14uchar4_alignedEiPhS1_ii_F1L184_18" GPU kernel
+        188, Loop parallelized across teams and threads(128), schedule(static)
+    188, Loop not vectorized/parallelized: not countable
+    194, Loop not vectorized/parallelized: contains call
+    195, #omp target teams distribute parallel for thread_limit(256)
+        195, Generating "nvkernel__Z7runTestI14uchar4_alignedEiPhS1_ii_F1L195_20" GPU kernel
+        197, Loop parallelized across teams and threads(128), schedule(static)
+    197, Loop not vectorized/parallelized: not countable
+         156, Loop not vectorized/parallelized: potential early exits
+    216, Generating update from(d_odata[:memory_size])
+int runTest<unsigned short>(unsigned char*, unsigned char*, int, int):
+    184, #omp target teams distribute parallel for thread_limit(256)
+        184, Generating "nvkernel__Z7runTestItEiPhS0_ii_F1L184_26" GPU kernel
+        188, Loop parallelized across teams and threads(128), schedule(static)
+    188, Loop not vectorized/parallelized: not countable
+    194, Loop not vectorized/parallelized: contains call
+    195, #omp target teams distribute parallel for thread_limit(256)
+        195, Generating "nvkernel__Z7runTestItEiPhS0_ii_F1L195_28" GPU kernel
+        197, Loop parallelized across teams and threads(128), schedule(static)
+    197, Loop not vectorized/parallelized: not countable
+         156, Loop not vectorized/parallelized: potential early exits
+    216, Generating update from(d_odata[:memory_size])
+int runTest<unsigned int>(unsigned char*, unsigned char*, int, int):
+    184, #omp target teams distribute parallel for thread_limit(256)
+        184, Generating "nvkernel__Z7runTestIjEiPhS0_ii_F1L184_34" GPU kernel
+        188, Loop parallelized across teams and threads(128), schedule(static)
+    188, Loop not vectorized/parallelized: not countable
+    194, Loop not vectorized/parallelized: contains call
+    195, #omp target teams distribute parallel for thread_limit(256)
+        195, Generating "nvkernel__Z7runTestIjEiPhS0_ii_F1L195_36" GPU kernel
+        197, Loop parallelized across teams and threads(128), schedule(static)
+    197, Loop not vectorized/parallelized: not countable
+         156, Loop not vectorized/parallelized: potential early exits
+    216, Generating update from(d_odata[:memory_size])
+int runTest<uint2_misaligned>(unsigned char*, unsigned char*, int, int):
+    184, #omp target teams distribute parallel for thread_limit(256)
+        184, Generating "nvkernel__Z7runTestI16uint2_misalignedEiPhS1_ii_F1L184_42" GPU kernel
+        188, Loop parallelized across teams and threads(128), schedule(static)
+    188, Loop not vectorized/parallelized: not countable
+    194, Loop not vectorized/parallelized: contains call
+    195, #omp target teams distribute parallel for thread_limit(256)
+        195, Generating "nvkernel__Z7runTestI16uint2_misalignedEiPhS1_ii_F1L195_44" GPU kernel
+        197, Loop parallelized across teams and threads(128), schedule(static)
+    197, Loop not vectorized/parallelized: not countable
+         156, Loop not vectorized/parallelized: potential early exits
+    216, Generating update from(d_odata[:memory_size])
+int runTest<uint2_aligned>(unsigned char*, unsigned char*, int, int):
+    184, #omp target teams distribute parallel for thread_limit(256)
+        184, Generating "nvkernel__Z7runTestI13uint2_alignedEiPhS1_ii_F1L184_50" GPU kernel
+        188, Loop parallelized across teams and threads(128), schedule(static)
+    188, Loop not vectorized/parallelized: not countable
+    194, Loop not vectorized/parallelized: contains call
+    195, #omp target teams distribute parallel for thread_limit(256)
+        195, Generating "nvkernel__Z7runTestI13uint2_alignedEiPhS1_ii_F1L195_52" GPU kernel
+        197, Loop parallelized across teams and threads(128), schedule(static)
+    197, Loop not vectorized/parallelized: not countable
+         156, Loop not vectorized/parallelized: potential early exits
+    216, Generating update from(d_odata[:memory_size])
+int runTest<uint3_misaligned>(unsigned char*, unsigned char*, int, int):
+    184, #omp target teams distribute parallel for thread_limit(256)
+        184, Generating "nvkernel__Z7runTestI16uint3_misalignedEiPhS1_ii_F1L184_58" GPU kernel
+        188, Loop parallelized across teams and threads(128), schedule(static)
+    188, Loop not vectorized/parallelized: not countable
+    194, Loop not vectorized/parallelized: contains call
+    195, #omp target teams distribute parallel for thread_limit(256)
+        195, Generating "nvkernel__Z7runTestI16uint3_misalignedEiPhS1_ii_F1L195_60" GPU kernel
+        197, Loop parallelized across teams and threads(128), schedule(static)
+    197, Loop not vectorized/parallelized: not countable
+         156, Loop not vectorized/parallelized: potential early exits
+    216, Generating update from(d_odata[:memory_size])
+int runTest<uint3_aligned>(unsigned char*, unsigned char*, int, int):
+    184, #omp target teams distribute parallel for thread_limit(256)
+        184, Generating "nvkernel__Z7runTestI13uint3_alignedEiPhS1_ii_F1L184_66" GPU kernel
+        188, Loop parallelized across teams and threads(128), schedule(static)
+    188, Loop not vectorized/parallelized: not countable
+    194, Loop not vectorized/parallelized: contains call
+    195, #omp target teams distribute parallel for thread_limit(256)
+        195, Generating "nvkernel__Z7runTestI13uint3_alignedEiPhS1_ii_F1L195_68" GPU kernel
+        197, Loop parallelized across teams and threads(128), schedule(static)
+    197, Loop not vectorized/parallelized: not countable
+         156, Loop not vectorized/parallelized: potential early exits
+    216, Generating update from(d_odata[:memory_size])
+int runTest<uint4_misaligned>(unsigned char*, unsigned char*, int, int):
+    184, #omp target teams distribute parallel for thread_limit(256)
+        184, Generating "nvkernel__Z7runTestI16uint4_misalignedEiPhS1_ii_F1L184_74" GPU kernel
+        188, Loop parallelized across teams and threads(128), schedule(static)
+    188, Loop not vectorized/parallelized: not countable
+    194, Loop not vectorized/parallelized: contains call
+    195, #omp target teams distribute parallel for thread_limit(256)
+        195, Generating "nvkernel__Z7runTestI16uint4_misalignedEiPhS1_ii_F1L195_76" GPU kernel
+        197, Loop parallelized across teams and threads(128), schedule(static)
+    197, Loop not vectorized/parallelized: not countable
+         156, Loop not vectorized/parallelized: potential early exits
+    216, Generating update from(d_odata[:memory_size])
+int runTest<uint4_aligned>(unsigned char*, unsigned char*, int, int):
+    184, #omp target teams distribute parallel for thread_limit(256)
+        184, Generating "nvkernel__Z7runTestI13uint4_alignedEiPhS1_ii_F1L184_82" GPU kernel
+        188, Loop parallelized across teams and threads(128), schedule(static)
+    188, Loop not vectorized/parallelized: not countable
+    194, Loop not vectorized/parallelized: contains call
+    195, #omp target teams distribute parallel for thread_limit(256)
+        195, Generating "nvkernel__Z7runTestI13uint4_alignedEiPhS1_ii_F1L195_84" GPU kernel
+        197, Loop parallelized across teams and threads(128), schedule(static)
+    197, Loop not vectorized/parallelized: not countable
+         156, Loop not vectorized/parallelized: potential early exits
+    216, Generating update from(d_odata[:memory_size])
+int runTest<uint8_misaligned>(unsigned char*, unsigned char*, int, int):
+    184, #omp target teams distribute parallel for thread_limit(256)
+        184, Generating "nvkernel__Z7runTestI16uint8_misalignedEiPhS1_ii_F1L184_90" GPU kernel
+        188, Loop parallelized across teams and threads(128), schedule(static)
+    188, Loop not vectorized/parallelized: not countable
+    194, Loop not vectorized/parallelized: contains call
+    195, #omp target teams distribute parallel for thread_limit(256)
+        195, Generating "nvkernel__Z7runTestI16uint8_misalignedEiPhS1_ii_F1L195_92" GPU kernel
+        197, Loop parallelized across teams and threads(128), schedule(static)
+    197, Loop not vectorized/parallelized: contains structure move
+         156, Loop not vectorized/parallelized: potential early exits
+    216, Generating update from(d_odata[:memory_size])
+int runTest<uint8_aligned>(unsigned char*, unsigned char*, int, int):
+    184, #omp target teams distribute parallel for thread_limit(256)
+        184, Generating "nvkernel__Z7runTestI13uint8_alignedEiPhS1_ii_F1L184_98" GPU kernel
+        188, Loop parallelized across teams and threads(128), schedule(static)
+    188, Loop not vectorized/parallelized: not countable
+    194, Loop not vectorized/parallelized: contains call
+    195, #omp target teams distribute parallel for thread_limit(256)
+        195, Generating "nvkernel__Z7runTestI13uint8_alignedEiPhS1_ii_F1L195_100" GPU kernel
+        197, Loop parallelized across teams and threads(128), schedule(static)
+    197, Loop not vectorized/parallelized: contains structure move
+         156, Loop not vectorized/parallelized: potential early exits
+    216, Generating update from(d_odata[:memory_size])
+int testCPU<unsigned char>(unsigned char*, unsigned char*, int, int):
+    156, Loop not vectorized/parallelized: potential early exits
+int testCPU<uchar4_misaligned>(uchar4_misaligned*, uchar4_misaligned*, int, int):
+    156, Loop not vectorized/parallelized: potential early exits
+int testCPU<uchar4_aligned>(uchar4_aligned*, uchar4_aligned*, int, int):
+    156, Loop not vectorized/parallelized: potential early exits
+int testCPU<unsigned short>(unsigned short*, unsigned short*, int, int):
+    156, Loop not vectorized/parallelized: potential early exits
+int testCPU<unsigned int>(unsigned int*, unsigned int*, int, int):
+    156, Loop not vectorized/parallelized: potential early exits
+int testCPU<uint2_misaligned>(uint2_misaligned*, uint2_misaligned*, int, int):
+    156, Loop not vectorized/parallelized: potential early exits
+int testCPU<uint2_aligned>(uint2_aligned*, uint2_aligned*, int, int):
+    156, Loop not vectorized/parallelized: potential early exits
+int testCPU<uint3_misaligned>(uint3_misaligned*, uint3_misaligned*, int, int):
+    156, Loop not vectorized/parallelized: potential early exits
+int testCPU<uint3_aligned>(uint3_aligned*, uint3_aligned*, int, int):
+    156, Loop not vectorized/parallelized: potential early exits
+int testCPU<uint4_misaligned>(uint4_misaligned*, uint4_misaligned*, int, int):
+    156, Loop not vectorized/parallelized: potential early exits
+int testCPU<uint4_aligned>(uint4_aligned*, uint4_aligned*, int, int):
+    156, Loop not vectorized/parallelized: potential early exits
+int testCPU<uint8_misaligned>(uint8_misaligned*, uint8_misaligned*, int, int):
+    156, Loop not vectorized/parallelized: potential early exits
+int testCPU<uint8_aligned>(uint8_aligned*, uint8_aligned*, int, int):
+    156, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     25, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1l>>::_S_gcd(long, long):
+     25, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<double, std::ratio<1l, 1l>>::_S_gcd(long, long):
+     25, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

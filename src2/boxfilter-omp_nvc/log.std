@@ -1,0 +1,11 @@
+Image Width = 1024, Height = 1024, bpp = 32, Mask Radius = 10
+Using Local Memory for Row Processing
+
+Warmup..
+Average kernel execution time 352.710663 (us)
+
+Running BoxFilterGPU for 10000 cycles...
+
+Average kernel execution time 352.519012 (us)
+10278 00989dc0 00a0a6cb
+FAIL

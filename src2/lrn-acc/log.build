@@ -1,0 +1,102 @@
+nvc++ -acc  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+lrn_fwd_kernel(float const*, float*, long, long, long, long, long, long, long, long, long, long, long, float, float, float):
+      7, include "kernels.h"
+          24, Generating implicit firstprivate(wk_size_)
+              Generating NVIDIA GPU code
+              26, #pragma acc loop gang(wg_cnt_), vector(wg_size_) /* blockIdx.x threadIdx.x */
+          24, Local memory used for ker,data_off,Operation
+              Generating implicit copyin(src_,dst_) [if not already present]
+          26, Generating implicit firstprivate(size_,stride_mb_,D_,N_,k_,C_,alpha_,W_,H_)
+              Loop not vectorized/parallelized: contains structure move
+lrn_bwd_kernel(float const*, float*, float*, long, long, long, long, long, long, long, long, long, long, long, float, float, float):
+      7, include "kernels.h"
+         116, Generating implicit firstprivate(wk_size_)
+              Generating NVIDIA GPU code
+             118, #pragma acc loop gang(wg_cnt_), vector(wg_size_) /* blockIdx.x threadIdx.x */
+         116, Local memory used for ker,get_omega,data_off,Operation
+              Generating implicit copyin(src_,dst_,diff_src_mem_) [if not already present]
+         118, Generating implicit firstprivate(stride_mb_,size_,D_,N_,k_,C_,beta_,W_,alpha_,H_)
+              Loop not vectorized/parallelized: contains structure move
+Forward(int):
+     30, Loop not vectorized/parallelized: contains call
+     39, Generating copyin(src_mem[:wk_size]) [if not already present]
+         Generating copyout(dst_mem[:wk_size]) [if not already present]
+     47, Loop not vectorized/parallelized: contains call
+     65, Loop not fused: function call before adjacent loop
+         Loop not vectorized/parallelized: loop count too small
+         Loop unrolled 4 times
+Backward(int):
+     92, Loop not vectorized/parallelized: contains call
+    102, Generating copyin(src_mem[:wk_size]) [if not already present]
+         Generating copy(dst_mem[:wk_size]) [if not already present]
+         Generating copyin(diff_src_mem[:wk_size]) [if not already present]
+    110, Loop not vectorized/parallelized: contains call
+    129, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+lrn_fwd_kernel(float const*, float*, long, long, long, long, long, long, long, long, long, long, long, float, float, float)::'lambda1'(long, long, long, long, long)::operator()(long, long, long, long, long) const:
+      7, include "kernels.h"
+          74, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          46, Loop not vectorized: unprofitable for target
+              Loop unrolled 2 times
+lrn_bwd_kernel(float const*, float*, float*, long, long, long, long, long, long, long, long, long, long, long, float, float, float)::'lambda1'(long, long, long, long, long)::operator()(long, long, long, long, long) const:
+      7, include "kernels.h"
+         161, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+         138, Loop not vectorized: unprofitable for target
+              Loop unrolled 2 times
+float* std::__uninitialized_fill_n<true>::__uninit_fill_n<float*, unsigned long, float>(float*, unsigned long, float const&):
+        1149, Recognized memory set idiom
+std::vector<float, std::allocator<float>>::_M_fill_initialize(unsigned long, float const&):
+         410, Recognized memory set idiom
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      7, include "kernels.h"
+std::chrono::duration<long, std::ratio<1l, 1000000l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      7, include "kernels.h"
+float* std::__uninitialized_fill_n_a<float*, unsigned long, float, float>(float*, unsigned long, float const&, std::allocator<float>&):
+         296, Recognized memory set idiom
+float* std::uninitialized_fill_n<float*, unsigned long, float>(float*, unsigned long, float const&):
+         255, Recognized memory set idiom
+float* std::fill_n<float*, unsigned long, float>(float*, unsigned long, float const&):
+        1120, Recognized memory set idiom
+float* std::__fill_n_a<float*, unsigned long, float>(float*, unsigned long, float const&, std::random_access_iterator_tag):
+         969, Recognized memory set idiom
+void std::__fill_a<float*, float>(float*, float*, float const&):
+         923, Recognized memory set idiom
+__gnu_cxx::__enable_if<std::__is_scalar<float>::__value, void>::__type std::__fill_a1<float*, float>(float*, float*, float const&):
+      3, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+                             923, Recognized memory set idiom
+      7, include "kernels.h"
+lrn_fwd_kernel(float const*, float*, long, long, long, long, long, long, long, long, long, long, long, float, float, float)::'lambda'(long, long, long, long, long)::operator()(long, long, long, long, long) const:
+      7, include "kernels.h"
+          28, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+lrn_fwd_kernel(float const*, float*, long, long, long, long, long, long, long, long, long, long, long, float, float, float)::'lambda0'(long, long, long, long, long)::operator()(long, long, long, long, long) const:
+      7, include "kernels.h"
+          38, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          46, Loop not vectorized: unprofitable for target
+              Loop unrolled 2 times
+lrn_bwd_kernel(float const*, float*, float*, long, long, long, long, long, long, long, long, long, long, long, float, float, float)::'lambda'(long, long, long, long, long)::operator()(long, long, long, long, long) const:
+      7, include "kernels.h"
+         120, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+lrn_bwd_kernel(float const*, float*, float*, long, long, long, long, long, long, long, long, long, long, long, float, float, float)::'lambda0'(long, long, long, long, long)::operator()(long, long, long, long, long) const:
+      7, include "kernels.h"
+         130, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+         138, Loop not vectorized: unprofitable for target
+              Loop unrolled 2 times
+lrn_bwd_kernel(float const*, float*, float*, long, long, long, long, long, long, long, long, long, long, long, float, float, float)::'lambda2'(long, long, long, long, long)::operator()(long, long, long, long, long) const:
+      7, include "kernels.h"
+         210, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+nvc++ -acc  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

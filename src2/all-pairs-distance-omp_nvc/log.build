@@ -1,0 +1,30 @@
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+CPU(int*, int*):
+     26, #omp parallel
+     28, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+main:
+     70, #omp parallel
+     71, Loop not vectorized/parallelized: contains call
+     89, Loop not vectorized/parallelized: contains call
+     94, Generating update to(gpu_distance[:50176])
+     98, #omp target teams num_teams(50176) thread_limit(128)
+         98, Generating "nvkernel_main_F1L98_4" GPU kernel
+        100, #omp parallel
+    105, Loop not vectorized: may not be beneficial for target
+    136, Generating update from(gpu_distance[:50176])
+    142, Loop not vectorized/parallelized: contains call
+    147, Generating update to(gpu_distance[:50176])
+    151, #omp target teams num_teams(50176) thread_limit(128)
+         88, Generating map(alloc:gpu_distance[:50176]) 
+             Generating map(to:data_char[:917504]) 
+        151, Generating "nvkernel_main_F1L151_6" GPU kernel
+        154, #omp parallel
+          160, Barrier
+          187, Barrier
+          194, Barrier
+        157, Team private (dist) located in CUDA shared memory
+    162, Loop not vectorized: data dependency
+    190, Loop not vectorized/parallelized: contains call
+    215, Generating update from(gpu_distance[:50176])
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

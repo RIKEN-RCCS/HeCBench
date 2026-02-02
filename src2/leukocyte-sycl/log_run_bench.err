@@ -1,0 +1,26 @@
+clang++: warning: treating 'c' input as 'c++' when -fsycl is used [-Wexpected-file-type]
+In file included from detect_main.c:157:
+./kernel_GICOV.sycl:24:12: error: use of undeclared identifier 'tY_acc'
+   24 |                         y = j + tY_acc[(k * NPOINTS) + n];
+      |                                 ^~~~~~
+./kernel_GICOV.sycl:25:12: error: use of undeclared identifier 'tX_acc'
+   25 |                         x = i + tX_acc[(k * NPOINTS) + n];
+      |                                 ^~~~~~
+./kernel_GICOV.sycl:29:14: error: use of undeclared identifier 'grad_x_acc'
+   29 |                         float p = grad_x_acc[addr] * cos_angle_acc[n] + 
+      |                                   ^~~~~~~~~~
+./kernel_GICOV.sycl:29:33: error: use of undeclared identifier 'cos_angle_acc'
+   29 |                         float p = grad_x_acc[addr] * cos_angle_acc[n] + 
+      |                                                      ^~~~~~~~~~~~~
+./kernel_GICOV.sycl:30:35: error: use of undeclared identifier 'grad_y_acc'
+   30 |                                   grad_y_acc[addr] * sin_angle_acc[n];
+      |                                   ^~~~~~~~~~
+./kernel_GICOV.sycl:30:54: error: use of undeclared identifier 'sin_angle_acc'
+   30 |                                   grad_y_acc[addr] * sin_angle_acc[n];
+      |                                                      ^~~~~~~~~~~~~
+./kernel_GICOV.sycl:52:2: error: use of undeclared identifier 'gicov_acc'
+   52 |         gicov_acc[(i * grad_m) + j] = max_GICOV;
+      |         ^~~~~~~~~
+7 errors generated.
+make: *** [Makefile.NVD:71: detect_main.o] Error 1
+timeout was set to  600

@@ -1,0 +1,66 @@
+sgenrand_mt:
+     54, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+genrand_mt:
+     74, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+     80, Loop not vectorized: data dependency
+loadMTGPU(char const*, unsigned int, mt_struct_stripped*, unsigned long):
+     51, Loop not vectorized/parallelized: contains call
+     55, Loop not vectorized: unprofitable for target
+         Loop unrolled 4 times
+BoxMullerTrans(float*, float*):
+     61, Generating acc routine seq
+         Generating NVIDIA GPU code
+main:
+          51, Loop not vectorized/parallelized: contains call
+          55, Loop not fused: function call before adjacent loop
+              Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+    102, Generating copyin(h_MT[:4096]) [if not already present]
+         Generating create(h_RandGPU[:24002560]) [if not already present]
+    105, Loop not vectorized/parallelized: contains call
+    106, Generating implicit firstprivate(globalWorkSize)
+         Generating NVIDIA GPU code
+        108, #pragma acc loop gang, vector(localWorkSize) /* blockIdx.x threadIdx.x */
+        121, #pragma acc loop seq
+        126, #pragma acc loop seq
+    106, Local memory used for mt
+    108, Loop not fused: no successor loop
+    121, Loop carried dependence of mt prevents parallelization
+         Loop carried backward dependence of mt prevents vectorization
+         Loop not fused: different loop trip count
+         Loop unrolled 2 times
+    126, Complex loop carried dependence of mt prevents parallelization
+         Loop carried scalar dependence for mti1 at line 131
+         Loop carried dependence of mt prevents parallelization
+         Loop carried backward dependence of mt prevents vectorization
+         Loop carried scalar dependence for iState at line 127,128,139
+    151, Generating implicit firstprivate(globalWorkSize)
+         Generating NVIDIA GPU code
+        155, #pragma acc loop gang, vector(localWorkSize) /* blockIdx.x threadIdx.x */
+        156, #pragma acc loop seq
+    155, Loop not fused: no successor loop
+    156, Complex loop carried dependence of h_RandGPU+((globalID+(iOut*4096))*4)->,h_RandGPU+((globalID+((iOut+1)*4096))*4)-> prevents parallelization
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    173, Generating update self(h_RandGPU[:24002560])
+    184, Loop not fused: function call before adjacent loop
+    185, Generated vector simd code for the loop containing reductions
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     32, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1l>>::_S_gcd(long, long):
+     32, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<double, std::ratio<1l, 1l>>::_S_gcd(long, long):
+     32, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+initMTRef:
+     30, Loop not vectorized/parallelized: contains call
+RandomRef:
+     51, Loop not vectorized/parallelized: contains call
+BoxMullerRef:
+     67, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+timeout was set to  600

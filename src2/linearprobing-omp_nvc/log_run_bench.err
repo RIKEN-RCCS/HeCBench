@@ -1,0 +1,15 @@
+"linearprobing.cpp", line 43: error: invalid text in pragma
+        #pragma omp atomic compare capture
+                           ^
+
+"linearprobing.cpp", line 43: error: invalid text in pragma
+        #pragma omp atomic compare capture
+                                   ^
+
+"linearprobing.cpp", line 43: error: invalid text in pragma
+        #pragma omp atomic compare capture
+                                   ^
+
+3 errors detected in the compilation of "linearprobing.cpp".
+make: *** [Makefile.NVD:57: linearprobing.o] Error 2
+timeout was set to  600

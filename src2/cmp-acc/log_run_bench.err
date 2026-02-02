@@ -1,0 +1,27 @@
+"main.cpp", line 54: error: invalid text in pragma
+    #pragma acc parallel loop thread_limit(NTHREADS)
+                              ^
+
+"main.cpp", line 54: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop thread_limit(NTHREADS)
+                                          ^
+
+"main.cpp", line 121: error: invalid text in pragma
+    #pragma acc parallel loop thread_limit(NTHREADS)
+                              ^
+
+"main.cpp", line 121: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop thread_limit(NTHREADS)
+                                          ^
+
+"main.cpp", line 212: error: invalid text in pragma
+    #pragma acc data to: \
+                     ^
+
+"main.cpp", line 212: error: extra text after expected end of preprocessing directive
+    #pragma acc data to: \
+                       ^
+
+6 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

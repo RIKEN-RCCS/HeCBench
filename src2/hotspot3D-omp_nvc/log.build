@@ -1,0 +1,28 @@
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c 3D.cpp -o 3D.o
+main:
+     92, Loop not vectorized/parallelized: contains call
+     93, #omp target teams distribute parallel for thread_limit(256)
+         89, Generating map(to:pIn[:size]) 
+             Generating map(alloc:tOut[:size]) 
+             Generating map(to:tIn[:size]) 
+         93, Generating "nvkernel_main_F1L93_2" GPU kernel
+         95, Loop parallelized across teams and threads(128), schedule(static)
+     97, Loop not vectorized/parallelized: not countable
+    120, Loop not vectorized: data dependency
+    149, Generating update from(tIn[:size])
+    153, Generating update from(tOut[:size])
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      2, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c 3D_helper.cpp -o 3D_helper.o
+readinput(float*, int, int, int, char*):
+     28, Loop not vectorized/parallelized: contains call
+writeoutput(float*, int, int, int, char*):
+     52, Loop not vectorized/parallelized: contains call
+computeTempCPU(float*, float*, float*, int, int, int, float, float, float, float, float, float, int):
+     77, Loop not vectorized/parallelized: too deeply nested
+     80, Loop not vectorized: data dependency
+accuracy(float*, float*, int):
+    107, Generated vector simd code for the loop containing reductions
+         Loop unrolled 4 times
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 3D.o 3D_helper.o -o main 

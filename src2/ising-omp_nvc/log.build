@@ -1,0 +1,49 @@
+nvc++  -std=c++14 -Wall -I../ising-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+init_spins_ref(signed char*, float const*, long long, long long):
+     29, include "reference.h"
+           9, #omp parallel
+              Generated vector simd code for the loop
+void update_lattice_ref<true>(signed char*, signed char const*, float const*, float, long long, long long):
+     29, include "reference.h"
+          25, #omp parallel
+          26, Loop not vectorized: data dependency
+void update_lattice_ref<false>(signed char*, signed char const*, float const*, float, long long, long long):
+     29, include "reference.h"
+          25, #omp parallel
+          26, Loop not vectorized: data dependency
+init_spins(signed char*, float const*, long long, long long):
+     38, #omp target teams distribute parallel for simd thread_limit(128)
+         38, Generating "nvkernel__Z10init_spinsPaPKfxx_F1L38_5" GPU kernel
+         40, Loop parallelized across teams and threads(128), schedule(static)
+     40, Loop not vectorized/parallelized: not countable
+void update_lattice<true>(signed char*, signed char*, float*, float, long long, long long):
+     53, #omp target teams distribute parallel for thread_limit(128)
+         53, Generating "nvkernel__Z14update_latticeILb1EEvPaS0_Pffxx_F1L53_9" GPU kernel
+         56, Loop parallelized across teams and threads(128), schedule(static)
+     57, Loop not vectorized/parallelized: not countable
+void update_lattice<false>(signed char*, signed char*, float*, float, long long, long long):
+     53, #omp target teams distribute parallel for thread_limit(128)
+         53, Generating "nvkernel__Z14update_latticeILb0EEvPaS0_Pffxx_F1L53_13" GPU kernel
+         56, Loop parallelized across teams and threads(128), schedule(static)
+     57, Loop not vectorized/parallelized: not countable
+main:
+    138, Loop not vectorized/parallelized: contains call
+    198, Loop not vectorized/parallelized: contains call
+    205, Generating target enter data map(create: lattice_b[:(nx*ny)/2])
+         Generating target enter data map(to: randvals[:(nx*ny)/2])
+         Generating target enter data map(create: lattice_w[:(nx*ny)/2])
+    212, Loop not vectorized/parallelized: contains call
+    218, Loop not vectorized/parallelized: contains call
+    228, Generating target exit data map(delete: randvals[:(nx*ny)/2]) finalize
+         Generating target exit data map(from: lattice_w[:(nx*ny)/2],lattice_b[:(nx*ny)/2])
+    241, Loop not vectorized/parallelized: potential early exits
+    246, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     23, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+     29, include "reference.h"
+std::chrono::duration<long, std::ratio<1l, 1000000l>>::_S_gcd(long, long):
+     23, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+     29, include "reference.h"
+nvc++  -std=c++14 -Wall -I../ising-cuda -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

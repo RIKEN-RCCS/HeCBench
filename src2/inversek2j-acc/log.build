@@ -1,0 +1,47 @@
+nvc++ -acc  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+invkin_cpu(float*, float*, float*, int):
+     31, Loop unrolled 3 times (completely unrolled)
+     36, Loop unrolled 4 times (completely unrolled)
+     44, Loop not vectorized/parallelized: loop count too small
+     77, Loop unrolled 3 times (completely unrolled)
+main:
+    148, Loop not vectorized/parallelized: potential early exits
+    152, Loop unrolled 3 times (completely unrolled)
+    166, Generating copyout(angle_out_h[:data_size*3]) [if not already present]
+         Generating copyin(yTarget_in_h[:data_size],xTarget_in_h[:data_size]) [if not already present]
+    169, Loop not vectorized/parallelized: too deeply nested
+    170, Generating implicit firstprivate(data_size)
+         Generating NVIDIA GPU code
+        172, #pragma acc loop vector(128) /* threadIdx.x */
+        178, #pragma acc loop seq
+        188, #pragma acc loop seq
+        194, #pragma acc loop seq
+        196, #pragma acc loop seq
+        229, #pragma acc loop seq
+    170, Local memory used for yData,xData,angle_out
+    172, Loop is parallelizable
+         Loop not fused: no successor loop
+    178, Loop is parallelizable
+         Loop unrolled 3 times (completely unrolled)
+    188, Loop is parallelizable
+         Loop unrolled 4 times (completely unrolled)
+    194, Loop carried reuse of angle_out prevents parallelization
+         Complex loop carried dependence of angle_out prevents parallelization
+    196, Loop carried dependence of angle_out prevents parallelization
+         Loop carried backward dependence of angle_out prevents vectorization
+         Complex loop carried dependence of angle_out prevents parallelization
+         Loop not vectorized/parallelized: loop count too small
+    229, Loop carried dependence of angle_out prevents parallelization
+         Loop carried backward dependence of angle_out prevents vectorization
+         Loop unrolled 3 times (completely unrolled)
+          22, Loop not fused: different loop trip count
+          31, Loop unrolled 3 times (completely unrolled)
+          36, Loop unrolled 4 times (completely unrolled)
+          44, Loop not vectorized/parallelized: loop count too small
+          77, Loop unrolled 3 times (completely unrolled)
+    254, Loop not fused: function call before adjacent loop
+    256, Loop unrolled 3 times (completely unrolled)
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     10, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++ -acc  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

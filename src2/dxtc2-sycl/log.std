@@ -1,0 +1,13 @@
+Image Loaded '../dxtc2-sycl/data/lena_std.ppm', 512 x 512 pixels
+
+
+Running DXT Compression on 512 x 512 image...
+
+16384 Workgroups, 64 Work Items per Workgroup, 1048576 Work Items in NDRange...
+
+Average kernel execution time 361.584991 (us)
+
+Comparing against Host/C++ computation...
+RMS(reference, result) = 0.009803
+
+PASS

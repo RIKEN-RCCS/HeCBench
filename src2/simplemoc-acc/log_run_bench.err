@@ -1,0 +1,120 @@
+initialize_sources(Input*):
+     35, Loop not fused: function call before adjacent loop
+         Loop not vectorized: may not be beneficial for target
+         Loop unrolled 4 times
+     42, Loop not fused: function call before adjacent loop
+         Loop not vectorized: may not be beneficial for target
+         Loop unrolled 4 times
+     48, Loop not vectorized: may not be beneficial for target
+         Loop unrolled 4 times
+     54, Loop not vectorized/parallelized: contains call
+     62, Loop not vectorized/parallelized: contains call
+copy_sources(Input*, Source*):
+    139, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    150, Recognized memory copy idiom
+logo(int):
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+          33, Loop not vectorized/parallelized: contains call
+center_print(char const*, int):
+     33, Loop not vectorized/parallelized: contains call
+print_input_summary(Input*):
+          33, Loop not vectorized/parallelized: contains call
+read_CLI(int, char**, Input*):
+    101, Loop not vectorized/parallelized: contains call
+attenuate_segment(Input*, Source*, int, int, float*, SIMD_Vectors*):
+     50, Loop not fused: no successor loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 4 times
+     76, Loop not fused: no successor loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 4 times
+    103, Loop not fused: complex flow graph
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+    129, Loop not fused: dependence chain to sibling loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 8 times
+    146, Loop not fused: dependence chain to sibling loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 4 times
+    159, Loop not fused: dependence chain to sibling loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 2 times
+    172, Loop not fused: dependence chain to sibling loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+    187, Loop not fused: dependence chain to sibling loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 8 times
+    198, Loop not fused: dependence chain to sibling loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Vectorized loop was interleaved
+         Loop unrolled 4 times
+    210, Loop not fused: dependence chain to sibling loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 4 times
+    220, Loop not fused: dependence chain to sibling loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 4 times
+    230, Loop not fused: dependence chain to sibling loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Vectorized loop was interleaved
+         Loop unrolled 8 times
+    240, Loop not fused: dependence chain to sibling loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Vectorized loop was interleaved
+         Loop unrolled 8 times
+    270, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 4 times
+main:
+    322, Loop not vectorized/parallelized: contains call
+    329, Loop not vectorized/parallelized: contains call
+    374, Generating copyin(FAI_id_acc[:segments],fine_source_acc[:egroups*(source_3D_regions*fine_axial_intervals)]) [if not already present]
+         Generating copy(fine_flux_acc[:egroups*(source_3D_regions*fine_axial_intervals)]) [if not already present]
+         Generating copyin(QSR_id_acc[:segments],sigT_acc[:egroups*source_3D_regions]) [if not already present]
+         Generating create(v_acc[:egroups*14]) [if not already present]
+         Generating copy(state_flux_acc[:egroups]) [if not already present]
+    377, Generating implicit firstprivate(egroups,segments)
+         Generating NVIDIA GPU code
+        380, #pragma acc loop gang, vector(128) /* blockIdx.x threadIdx.x */
+        417, #pragma acc loop seq
+        438, #pragma acc loop seq
+        460, #pragma acc loop seq
+        482, #pragma acc loop seq
+    377, Loop not vectorized/parallelized: contains call
+    380, Generating implicit private(f3,f2,f1,expVal,t3,t2,t1,sigT2,t4,fine_axial_intervals,q2,FSR_flux,sigT,tally,tau,reuse,q1,q0,flux_integral)
+         Loop not fused: no successor loop
+    417, Complex loop carried dependence of f2->,f3->,q0->,q1->,q2-> prevents parallelization
+         Loop not fused: no successor loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 4 times
+    438, Complex loop carried dependence of f1->,f2->,q0->,q1->,q2-> prevents parallelization
+         Loop not fused: no successor loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 4 times
+    460, Complex loop carried dependence of f1->,f2->,f3->,q0->,q1->,q2-> prevents parallelization
+         Loop not fused: complex flow graph
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+    482, Complex loop carried dependence of sigT_acc->,sigT->,tau->,sigT2->,expVal->,reuse->,q2->,q1->,state_flux_acc->,q0->,flux_integral->,tally->,FSR_flux->,t1->,t2->,t3->,t4-> prevents parallelization
+         Unable to version for aliasing; too many tests
+         Loop not vectorized: data dependency
+timeout was set to  600

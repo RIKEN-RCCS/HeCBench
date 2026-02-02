@@ -1,0 +1,14 @@
+Using kernel baseline 1
+Largest output is: 0.999878
+Checking block size 64.
+Checking block size 128.
+Checking block size 256.
+Checking block size 512.
+Checking block size 1024.
+All results match. Starting benchmarks.
+
+block_size   64 | time 7.6653 ms | per token 0.94 µs
+block_size  128 | time 5.3970 ms | per token 0.66 µs
+block_size  256 | time 5.3972 ms | per token 0.66 µs
+block_size  512 | time 5.3962 ms | per token 0.66 µs
+block_size 1024 | time 5.3966 ms | per token 0.66 µs

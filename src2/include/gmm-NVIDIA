@@ -1,1 +1,2 @@
-COMMAND = time -p ( ./$(program) 2000000 data result 1>log.std 2>log.err ) 2> log.time
+#COMMAND = ../gmm-cuda/prepare_data.sh; time -p ( ./$(program) 2000000 data result 1>log.std 2>log.err ) 2> log.time
+COMMAND = ../gmm-cuda/prepare_data.sh; time -p ( ./$(program) 250000 data result 1>log.std 2>log.err ) 2> log.time

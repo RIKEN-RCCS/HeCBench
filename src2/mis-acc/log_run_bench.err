@@ -1,0 +1,45 @@
+"main.cpp", line 79: error: invalid text in pragma
+    #pragma acc data to: nidx[0:nodes+1], nlist[0:edges]) \
+                     ^
+
+"main.cpp", line 79: error: extra text after expected end of preprocessing directive
+    #pragma acc data to: nidx[0:nodes+1], nlist[0:edges]) \
+                       ^
+
+"main.cpp", line 91: error: invalid text in pragma
+        num_teams(blocks) thread_limit(ThreadsPerBlock) shared(avg, scaledavg)
+        ^
+
+"main.cpp", line 91: error: extra text after expected end of preprocessing directive
+        num_teams(blocks) thread_limit(ThreadsPerBlock) shared(avg, scaledavg)
+                 ^
+
+"main.cpp", line 103: error: invalid text in pragma
+      #pragma acc parallel teams num_teams(blocks) thread_limit(ThreadsPerBlock)
+                           ^
+
+"main.cpp", line 103: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel teams num_teams(blocks) thread_limit(ThreadsPerBlock)
+                                 ^
+
+"main.cpp", line 107: error: identifier "omp_get_thread_num" is undefined
+          const int from = omp_get_thread_num() + omp_get_team_num() * ThreadsPerBlock;
+                           ^
+
+"main.cpp", line 107: error: identifier "omp_get_team_num" is undefined
+          const int from = omp_get_thread_num() + omp_get_team_num() * ThreadsPerBlock;
+                                                  ^
+
+"main.cpp", line 108: error: identifier "omp_get_gang" is undefined
+          const int incr = omp_get_gang() * ThreadsPerBlock;
+                           ^
+
+"main.cpp", line 82: warning: variable "blocks" was declared but never referenced [declared_but_not_referenced]
+    const int blocks = 24;
+              ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+9 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

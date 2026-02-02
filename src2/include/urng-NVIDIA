@@ -1,1 +1,2 @@
-COMMAND = time -p ( ./$(program) ../urng-sycl/URNG_Input.bmp 16 16 1000 1>log.std 2>log.err ) 2> log.time
+#COMMAND = ../urng-cuda/prepare_data.sh; time -p ( ./$(program) ../urng-sycl/URNG_Input.bmp 16 16 1000 1>log.std 2>log.err ) 2> log.time
+COMMAND = ../urng-cuda/prepare_data.sh; time -p ( ./$(program) ../urng-sycl/URNG_Input.bmp 1000 1>log.std 2>log.err ) 2> log.time

@@ -1,0 +1,59 @@
+ray_sphere_intersect(_Isect*, _Ray const*, _Sphere const*):
+     78, Generating acc routine seq
+         Generating NVIDIA GPU code
+ray_plane_intersect(_Isect*, _Ray const*, _Plane const*):
+    112, Generating acc routine seq
+         Generating NVIDIA GPU code
+orthoBasis(_vec*, _vec):
+    133, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+ambient_occlusion(_vec*, _Isect const*, _Sphere const*, _Plane const*, RNG&):
+    179, Generating acc routine seq
+         Generating NVIDIA GPU code
+    198, Loop not vectorized: data dependency
+my_clamp(float):
+    241, Generating acc routine seq
+         Generating NVIDIA GPU code
+render(unsigned char*, int, int, int, _Sphere const*, _Plane const&):
+    300, Generating copyin(spheres[:3],plane[:1]) [if not already present]
+         Generating copyout(img[:(h*w)*3]) [if not already present]
+    301, Generating implicit firstprivate(h,w,nsubsamples)
+         Generating NVIDIA GPU code
+        303, #pragma acc loop gang, vector(256) collapse(2) /* blockIdx.x threadIdx.x */
+        304,   /* blockIdx.x threadIdx.x collapsed */
+        310, #pragma acc loop seq
+             Generating implicit reduction(+:s2,s1,s0)
+        311, #pragma acc loop seq
+    301, Local memory used for ray,rng,.inl_rs_361,.inl_rs_348,.inl_rs_335,col,isect
+    303, Loop not vectorized/parallelized: too deeply nested
+    310, Complex loop carried dependence of ->z,->y,->x,spheres->center.x,spheres->center.y,spheres->center.z,spheres->radius,spheres+->center.x,spheres+->center.y,spheres+->center.z,spheres+->radius,plane->n.z,plane->p.z,plane->n.y,plane->p.y,plane->n.x,plane->p.x,plane->,spheres-> prevents parallelization
+    311, Complex loop carried dependence of ->z,->y,->x,spheres->center.x,spheres->center.y,spheres->center.z,spheres->radius,spheres+->center.x,spheres+->center.y,spheres+->center.z,spheres+->radius,plane->n.z,plane->p.z,plane->n.y,plane->p.y,plane->n.x,plane->p.x,plane->,spheres-> prevents parallelization
+         Zero trip check eliminated
+         Loop not vectorized/parallelized: contains call
+main:
+    369, Loop not vectorized/parallelized: contains call
+RNG::RNG(unsigned int):
+    158, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+RNG::next():
+    159, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+RNG::operator()():
+    165, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      5, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::fabs(float):
+                        242, Generating implicit omp declare target routine
+                             Generating NVIDIA GPU code
+_INTERNAL_6_ao_cpp_52d17336::vdot(_vec, _vec):
+     52, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_6_ao_cpp_52d17336::vcross(_vec*, _vec, _vec):
+     57, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_6_ao_cpp_52d17336::vnormalize(_vec*):
+     66, Generating acc routine seq
+         Generating NVIDIA GPU code
+timeout was set to  600

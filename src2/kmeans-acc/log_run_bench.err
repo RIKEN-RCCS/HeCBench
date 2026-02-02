@@ -1,0 +1,97 @@
+cluster(int, int, float**, int, int, float, int*, float***, float*, int, int):
+     45, Generating copyin(feature[:npoints*nfeatures]) [if not already present]
+         Generating create(membership_OCL[:npoints],feature_swap[:npoints*nfeatures]) [if not already present]
+     47, Loop not vectorized/parallelized: too deeply nested
+     51, Generating implicit firstprivate(npoints,nfeatures)
+         Generating NVIDIA GPU code
+         55, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+         56, #pragma acc loop seq
+     55, Loop not fused: no successor loop
+     56, Complex loop carried dependence of feature-> prevents parallelization
+         Loop carried dependence of feature_swap-> prevents parallelization
+         Loop carried backward dependence of feature_swap-> prevents vectorization
+         Complex loop carried dependence of feature_swap-> prevents parallelization
+         Loop unrolled 8 times
+     64, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+     68, Generated vector simd code for the loop
+     72, Loop not vectorized/parallelized: too deeply nested
+     82, Loop not vectorized/parallelized: potential early exits
+     84, Recognized memory copy idiom
+     98, Recognized memory set idiom
+    104, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    110, Loop not vectorized/parallelized: too deeply nested
+    113, Generating copyin(cluster[:nfeatures*nclusters]) [if not already present]
+         Generating implicit firstprivate(nclusters,nfeatures,npoints)
+         Generating NVIDIA GPU code
+        116, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+        118, #pragma acc loop seq
+        121, #pragma acc loop seq
+             Generating implicit reduction(+:ans)
+    116, Generating implicit firstprivate(index)
+         Loop not fused: no successor loop
+    118, Loop carried scalar dependence for min_dist at line 126
+    121, Loop is parallelizable
+         Generated vector simd code for the loop containing reductions
+    128, Accelerator restriction: induction variable live-out from loop: index
+    132, Generating update self(membership_OCL[:npoints])
+    140, Loop not fused: complex flow graph
+    149, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Vectorized loop was interleaved
+         Loop unrolled 4 times
+    156, Invariant if transformation
+         Loop not fused: no successor loop
+         Generated vector simd code for the loop
+    158, Invariant if transformation
+         Loop not fused: no successor loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 8 times
+"read_input.c", line 81: warning: variable "len" was set but never used [set_but_not_used]
+  	float	len;
+  	     	^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+setup(int, char**):
+     95, Loop not vectorized/parallelized: contains call
+    138, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    151, Loop not vectorized/parallelized: contains call
+    155, Loop not vectorized/parallelized: potential early exits
+    158, Loop not vectorized/parallelized: contains call
+    167, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    173, Loop not vectorized/parallelized: contains call
+    229, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     41, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000l>>::_S_gcd(long, long):
+     41, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+euclid_dist_2(float*, float*, int):
+     29, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+     33, Generated vector simd code for the loop containing reductions
+         Loop unrolled 4 times
+find_nearest_point(float*, int, float**, int):
+     45, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+          33, Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+rms_err(float**, int, int, float**, int):
+     79, Generating copyin(feature[:][:],cluster_centres[:][:]) [if not already present]
+         Loop not fused: function call before adjacent loop
+          50, Loop not fused: different loop trip count
+          52, Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+          33, Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+kmeans.c:
+timeout was set to  600

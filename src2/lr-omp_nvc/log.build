@@ -1,0 +1,77 @@
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+"main.cpp", line 42: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+    params.filename = TEMP_FILENAME;
+                    ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+main:
+          48, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_8_main_cpp_5c2b4bbd::create_dataset(linear_param_t*, float2*):
+     29, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_8_main_cpp_5c2b4bbd::temperature_regression(results_t*, int):
+          29, Loop not vectorized/parallelized: potential early exits
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c linear_iter.cpp -o linear_iter.o
+iterative_regression(linear_param_t*, float2*, result_t*):
+     31, Loop not fused: different loop trip count
+         Generated vector simd code for the loop containing reductions
+          14, Generated vector simd code for the loop containing reductions
+_INTERNAL_15_linear_iter_cpp_14d11714::r_squared(linear_param_t*, float2*, float4*, result_t*):
+     14, Generated vector simd code for the loop containing reductions
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c linear_par.cpp -o linear_par.o
+operator+=(float2&, float2 const&):
+           2, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+operator+=(float4&, float4 const&):
+           8, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+linear_regression(int, float2 const*, float4*):
+      6, include "kernel.h"
+          21, #omp target teams num_teams(nTeams) thread_limit(64)
+              21, Generating "nvkernel__Z17linear_regressioniPK6float2P6float4_F185L21_2" GPU kernel
+              24, #omp parallel
+                36, Barrier
+                48, Barrier
+              45, Team private (interns) located in CUDA shared memory
+          38, Loop not vectorized/parallelized: contains call
+rsquared(int, float2 const*, float, float2, float2*):
+      6, include "kernel.h"
+          64, #omp target teams num_teams(nTeams) thread_limit(64)
+              64, Generating "nvkernel__Z8rsquarediPK6float2fS_PS__F185L64_7" GPU kernel
+              67, #omp parallel
+                78, Barrier
+                90, Barrier
+              87, Team private (dist) located in CUDA shared memory
+          64, Generating implicit map(tofrom:equation) 
+          80, Loop not vectorized/parallelized: contains call
+linear_regressionOMP(float2*, float4*, int, int):
+     23, Loop not vectorized/parallelized: not countable
+rsquaredOMP(float2*, float, float2, float2*, int, int):
+     60, Loop not vectorized/parallelized: not countable
+parallelized_regression(linear_param_t*, float2*, result_t*):
+    161, Generating map(alloc:results[:wg_count]) 
+         Generating map(to:dataset[:size]) 
+    166, Loop not vectorized/parallelized: contains call
+    174, Generating update from(results[:?])
+          23, Loop not vectorized/parallelized: not countable
+    184, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+         109, Loop not vectorized/parallelized: contains call
+         117, Generating update from(.inl_results_271[:?])
+         121, Loop not vectorized/parallelized: not countable
+         126, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      6, include "kernel.h"
+_INTERNAL_14_linear_par_cpp_c77ce6ef::r_squared(linear_param_t*, float2*, float4*, result_t*):
+    104, Generating map(to:dataset[:size]) 
+         Generating map(alloc:results[:wg_count]) 
+    109, Loop not vectorized/parallelized: contains call
+    117, Generating update from(results[:?])
+          60, Loop not vectorized/parallelized: not countable
+    126, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o linear_iter.o linear_par.o -o main 

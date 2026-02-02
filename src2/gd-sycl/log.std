@@ -1,0 +1,6 @@
+Processing the SVM file
+Finished processing the LIBSVM file. 6000 observations and 5000 features were read. The total number of non-zero elements are: 29729997
+Training time takes 0.514318 (s) for 100 iterations
+
+object value = 0.335831 train_error = 0.074333
+PASS

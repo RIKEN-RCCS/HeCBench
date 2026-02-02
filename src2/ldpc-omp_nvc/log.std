@@ -1,0 +1,158 @@
+GPU LDPC Decoder
+Computing...
+
+Total kernel execution time: 0.226704 (s)
+# codewords = 80, CW=2, MCW=40
+total bit error = 22775000
+total frame error = 40000
+BER = 2.47e+02, FER = 5.00e+02
+
+Total kernel execution time: 0.223440 (s)
+# codewords = 160, CW=2, MCW=40
+total bit error = 45495000
+total frame error = 80000
+BER = 2.47e+02, FER = 5.00e+02
+
+Total kernel execution time: 0.223343 (s)
+# codewords = 240, CW=2, MCW=40
+total bit error = 68304000
+total frame error = 120000
+BER = 2.47e+02, FER = 5.00e+02
+
+Total kernel execution time: 0.227263 (s)
+# codewords = 320, CW=2, MCW=40
+total bit error = 91046500
+total frame error = 160000
+BER = 2.47e+02, FER = 5.00e+02
+
+Total kernel execution time: 0.227423 (s)
+# codewords = 400, CW=2, MCW=40
+total bit error = 113669000
+total frame error = 200000
+BER = 2.47e+02, FER = 5.00e+02
+
+Total kernel execution time: 0.224985 (s)
+# codewords = 480, CW=2, MCW=40
+total bit error = 136451500
+total frame error = 240000
+BER = 2.47e+02, FER = 5.00e+02
+
+Total kernel execution time: 0.226877 (s)
+# codewords = 560, CW=2, MCW=40
+total bit error = 159125000
+total frame error = 280000
+BER = 2.47e+02, FER = 5.00e+02
+
+Total kernel execution time: 0.227133 (s)
+# codewords = 640, CW=2, MCW=40
+total bit error = 181872500
+total frame error = 320000
+BER = 2.47e+02, FER = 5.00e+02
+
+Total kernel execution time: 0.227187 (s)
+# codewords = 720, CW=2, MCW=40
+total bit error = 204666500
+total frame error = 360000
+BER = 2.47e+02, FER = 5.00e+02
+
+Total kernel execution time: 0.227562 (s)
+# codewords = 800, CW=2, MCW=40
+total bit error = 227396500
+total frame error = 400000
+BER = 2.47e+02, FER = 5.00e+02
+
+Total kernel execution time: 0.227156 (s)
+# codewords = 880, CW=2, MCW=40
+total bit error = 250130000
+total frame error = 440000
+BER = 2.47e+02, FER = 5.00e+02
+
+Total kernel execution time: 0.227353 (s)
+# codewords = 960, CW=2, MCW=40
+total bit error = 272940500
+total frame error = 480000
+BER = 2.47e+02, FER = 5.00e+02
+
+Total kernel execution time: 0.227165 (s)
+# codewords = 1040, CW=2, MCW=40
+total bit error = 295779000
+total frame error = 520000
+BER = 2.47e+02, FER = 5.00e+02
+
+Total kernel execution time: 0.227139 (s)
+# codewords = 1120, CW=2, MCW=40
+total bit error = 318601500
+total frame error = 560000
+BER = 2.47e+02, FER = 5.00e+02
+
+Total kernel execution time: 0.227254 (s)
+# codewords = 1200, CW=2, MCW=40
+total bit error = 341383500
+total frame error = 600000
+BER = 2.47e+02, FER = 5.00e+02
+
+Total kernel execution time: 0.227332 (s)
+# codewords = 1280, CW=2, MCW=40
+total bit error = 364086500
+total frame error = 640000
+BER = 2.47e+02, FER = 5.00e+02
+
+Total kernel execution time: 0.227430 (s)
+# codewords = 1360, CW=2, MCW=40
+total bit error = 386854500
+total frame error = 680000
+BER = 2.47e+02, FER = 5.00e+02
+
+Total kernel execution time: 0.227627 (s)
+# codewords = 1440, CW=2, MCW=40
+total bit error = 409600000
+total frame error = 720000
+BER = 2.47e+02, FER = 5.00e+02
+
+Total kernel execution time: 0.227334 (s)
+# codewords = 1520, CW=2, MCW=40
+total bit error = 432376000
+total frame error = 760000
+BER = 2.47e+02, FER = 5.00e+02
+
+Total kernel execution time: 0.227189 (s)
+# codewords = 1600, CW=2, MCW=40
+total bit error = 455108000
+total frame error = 800000
+BER = 2.47e+02, FER = 5.00e+02
+
+Total kernel execution time: 0.227192 (s)
+# codewords = 1680, CW=2, MCW=40
+total bit error = 477818500
+total frame error = 840000
+BER = 2.47e+02, FER = 5.00e+02
+
+Total kernel execution time: 0.228325 (s)
+# codewords = 1760, CW=2, MCW=40
+total bit error = 500627500
+total frame error = 880000
+BER = 2.47e+02, FER = 5.00e+02
+
+Total kernel execution time: 0.227309 (s)
+# codewords = 1840, CW=2, MCW=40
+total bit error = 523193500
+total frame error = 920000
+BER = 2.47e+02, FER = 5.00e+02
+
+Total kernel execution time: 0.227413 (s)
+# codewords = 1920, CW=2, MCW=40
+total bit error = 545875000
+total frame error = 960000
+BER = 2.47e+02, FER = 5.00e+02
+
+Total kernel execution time: 0.227309 (s)
+# codewords = 2000, CW=2, MCW=40
+total bit error = 568611000
+total frame error = 1000000
+BER = 2.47e+02, FER = 5.00e+02
+
+Total kernel execution time: 0.227295 (s)
+# codewords = 2080, CW=2, MCW=40
+total bit error = 591384500
+total frame error = 1040000
+BER = 2.47e+02, FER = 5.00e+02

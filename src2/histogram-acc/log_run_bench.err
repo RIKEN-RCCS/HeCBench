@@ -1,0 +1,33 @@
+"histogram_smem_atomics.hpp", line 61: error: identifier "omp_get_team_num" is undefined
+          int gid = omp_get_team_num() * omp_get_num_threads() + omp_get_thread_num();
+                    ^
+          detected during instantiation of "void TestMethods<NUM_CHANNELS,ACTIVE_CHANNELS,NUM_BINS,PixelType>(PixelType *, int, int, int, double) [with NUM_CHANNELS=1, ACTIVE_CHANNELS=1, NUM_BINS=256, PixelType=uchar1]" at line 526 of "histogram_compare_base.cpp"
+
+"histogram_smem_atomics.hpp", line 61: error: identifier "omp_get_num_threads" is undefined
+          int gid = omp_get_team_num() * omp_get_num_threads() + omp_get_thread_num();
+                                         ^
+          detected during instantiation of "void TestMethods<NUM_CHANNELS,ACTIVE_CHANNELS,NUM_BINS,PixelType>(PixelType *, int, int, int, double) [with NUM_CHANNELS=1, ACTIVE_CHANNELS=1, NUM_BINS=256, PixelType=uchar1]" at line 526 of "histogram_compare_base.cpp"
+
+"histogram_smem_atomics.hpp", line 61: error: identifier "omp_get_thread_num" is undefined
+          int gid = omp_get_team_num() * omp_get_num_threads() + omp_get_thread_num();
+                                                                 ^
+          detected during instantiation of "void TestMethods<NUM_CHANNELS,ACTIVE_CHANNELS,NUM_BINS,PixelType>(PixelType *, int, int, int, double) [with NUM_CHANNELS=1, ACTIVE_CHANNELS=1, NUM_BINS=256, PixelType=uchar1]" at line 526 of "histogram_compare_base.cpp"
+
+"histogram_gmem_atomics.hpp", line 59: error: identifier "omp_get_team_num" is undefined
+          int gid = omp_get_team_num() * omp_get_num_threads() + omp_get_thread_num();
+                    ^
+          detected during instantiation of "void TestMethods<NUM_CHANNELS,ACTIVE_CHANNELS,NUM_BINS,PixelType>(PixelType *, int, int, int, double) [with NUM_CHANNELS=1, ACTIVE_CHANNELS=1, NUM_BINS=256, PixelType=uchar1]" at line 526 of "histogram_compare_base.cpp"
+
+"histogram_gmem_atomics.hpp", line 59: error: identifier "omp_get_num_threads" is undefined
+          int gid = omp_get_team_num() * omp_get_num_threads() + omp_get_thread_num();
+                                         ^
+          detected during instantiation of "void TestMethods<NUM_CHANNELS,ACTIVE_CHANNELS,NUM_BINS,PixelType>(PixelType *, int, int, int, double) [with NUM_CHANNELS=1, ACTIVE_CHANNELS=1, NUM_BINS=256, PixelType=uchar1]" at line 526 of "histogram_compare_base.cpp"
+
+"histogram_gmem_atomics.hpp", line 59: error: identifier "omp_get_thread_num" is undefined
+          int gid = omp_get_team_num() * omp_get_num_threads() + omp_get_thread_num();
+                                                                 ^
+          detected during instantiation of "void TestMethods<NUM_CHANNELS,ACTIVE_CHANNELS,NUM_BINS,PixelType>(PixelType *, int, int, int, double) [with NUM_CHANNELS=1, ACTIVE_CHANNELS=1, NUM_BINS=256, PixelType=uchar1]" at line 526 of "histogram_compare_base.cpp"
+
+6 errors detected in the compilation of "histogram_compare_base.cpp".
+make: *** [Makefile.NVD:59: histogram_compare_base.o] Error 2
+timeout was set to  600

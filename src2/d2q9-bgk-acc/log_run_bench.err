@@ -1,0 +1,41 @@
+"main.cpp", line 212: error: invalid text in pragma
+  #pragma acc data tofrom: speeds0[0:Ny*Nx], \
+                   ^
+
+"main.cpp", line 212: error: extra text after expected end of preprocessing directive
+  #pragma acc data tofrom: speeds0[0:Ny*Nx], \
+                         ^
+
+"main.cpp", line 245: error: invalid text in pragma
+      #pragma acc parallel teams num_teams(teams) thread_limit(threads)
+                           ^
+
+"main.cpp", line 245: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel teams num_teams(teams) thread_limit(threads)
+                                 ^
+
+"main.cpp", line 251: error: identifier "omp_get_thread_num" is undefined
+          const int lid = omp_get_thread_num();  
+                          ^
+
+"main.cpp", line 252: error: identifier "omp_get_team_num" is undefined
+          const int tid = omp_get_team_num();  
+                          ^
+
+"main.cpp", line 253: error: identifier "omp_get_vector" is undefined
+          const int dim = omp_get_vector();  
+                          ^
+
+"main.cpp", line 209: warning: variable "teams" was declared but never referenced [declared_but_not_referenced]
+    int teams = Nx / LOCALSIZEX * Ny / LOCALSIZEY;
+        ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"main.cpp", line 210: warning: variable "threads" was declared but never referenced [declared_but_not_referenced]
+    int threads = LOCALSIZEX * LOCALSIZEY;
+        ^
+
+7 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:65: main.o] Error 2
+timeout was set to  600

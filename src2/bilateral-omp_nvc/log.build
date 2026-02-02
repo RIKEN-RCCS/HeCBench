@@ -1,0 +1,51 @@
+nvc++  -std=c++14 -Wall -I../bilateral-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+main:
+    104, Loop not vectorized/parallelized: contains call
+    109, Generating map(to:h_src[:img_size]) 
+         Generating map(alloc:h_dst[:img_size]) 
+    112, Loop not vectorized/parallelized: contains call
+    122, Generating update from(h_dst[:img_size])
+    124, Loop not vectorized/parallelized: potential early exits
+    133, Loop not vectorized/parallelized: contains call
+    142, Generating update from(h_dst[:img_size])
+    143, Loop not vectorized/parallelized: potential early exits
+    152, Loop not vectorized/parallelized: contains call
+    161, Generating update from(h_dst[:img_size])
+    162, Loop not vectorized/parallelized: potential early exits
+void bilateralFilter<3>(float const*, float*, int, int, float, float, float):
+     17, #omp target teams distribute parallel for thread_limit(256)
+         17, Generating "nvkernel__Z15bilateralFilterILi3EEvPKfPfiifff_F1L17_2" GPU kernel
+         19, Loop parallelized across teams and threads(128), schedule(static)
+     20, Loop not vectorized/parallelized: not countable
+     31, Loop not vectorized: recurrence
+     35, Loop unrolled 7 times (completely unrolled)
+void reference<3>(float*, float*, int, int, float, float, float):
+      6, include "reference.h"
+          12, #omp parallel
+          22, Loop not vectorized: recurrence
+          24, Loop unrolled 7 times (completely unrolled)
+void bilateralFilter<6>(float const*, float*, int, int, float, float, float):
+     17, #omp target teams distribute parallel for thread_limit(256)
+         17, Generating "nvkernel__Z15bilateralFilterILi6EEvPKfPfiifff_F1L17_7" GPU kernel
+         19, Loop parallelized across teams and threads(128), schedule(static)
+     20, Loop not vectorized/parallelized: not countable
+     35, Generated vector simd code for the loop containing reductions
+void reference<6>(float*, float*, int, int, float, float, float):
+      6, include "reference.h"
+          12, #omp parallel
+          24, Generated vector simd code for the loop containing reductions
+void bilateralFilter<9>(float const*, float*, int, int, float, float, float):
+     17, #omp target teams distribute parallel for thread_limit(256)
+         17, Generating "nvkernel__Z15bilateralFilterILi9EEvPKfPfiifff_F1L17_12" GPU kernel
+         19, Loop parallelized across teams and threads(128), schedule(static)
+     20, Loop not vectorized/parallelized: not countable
+     35, Generated vector simd code for the loop containing reductions
+void reference<9>(float*, float*, int, int, float, float, float):
+      6, include "reference.h"
+          12, #omp parallel
+          24, Generated vector simd code for the loop containing reductions
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      6, include "reference.h"
+nvc++  -std=c++14 -Wall -I../bilateral-cuda -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

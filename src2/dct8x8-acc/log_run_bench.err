@@ -1,0 +1,35 @@
+"main.cpp", line 79: error: invalid text in pragma
+  #pragma acc data to: h_Input[0:imageH * stride]) \
+                   ^
+
+"main.cpp", line 79: error: extra text after expected end of preprocessing directive
+  #pragma acc data to: h_Input[0:imageH * stride]) \
+                     ^
+
+"main.cpp", line 101: error: invalid text in pragma
+    #pragma acc update from(h_OutputGPU[0:imageH * stride])
+                       ^
+
+"main.cpp", line 101: error: OpenACC data clause expected
+    #pragma acc update from(h_OutputGPU[0:imageH * stride])
+                       ^
+
+"main.cpp", line 101: error: extra text after expected end of preprocessing directive
+    #pragma acc update from(h_OutputGPU[0:imageH * stride])
+                           ^
+
+"main.cpp", line 124: error: invalid text in pragma
+    #pragma acc update from(h_OutputGPU[0:imageH * stride])
+                       ^
+
+"main.cpp", line 124: error: OpenACC data clause expected
+    #pragma acc update from(h_OutputGPU[0:imageH * stride])
+                       ^
+
+"main.cpp", line 124: error: extra text after expected end of preprocessing directive
+    #pragma acc update from(h_OutputGPU[0:imageH * stride])
+                           ^
+
+8 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:58: main.o] Error 2
+timeout was set to  600

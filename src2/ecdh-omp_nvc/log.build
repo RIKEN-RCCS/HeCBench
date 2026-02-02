@@ -1,0 +1,90 @@
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+ext_euclidian_alg(int, int, int&, int&):
+      7, include "ecdh.h"
+           7, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          11, Loop not vectorized/parallelized: not countable
+make_positive(int, unsigned int):
+      7, include "ecdh.h"
+          28, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          29, Loop not vectorized/parallelized: not countable
+find_inverse(int, unsigned int):
+      7, include "ecdh.h"
+          41, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          11, Loop not vectorized/parallelized: not countable
+          29, Loop not vectorized/parallelized: not countable
+point_addition(unsigned int, int, int, int, int, int*, int*):
+      7, include "ecdh.h"
+          57, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          29, Loop not vectorized/parallelized: not countable
+          43, Loop not vectorized/parallelized: not countable
+          44, Loop not vectorized/parallelized: not countable
+          29, Loop not vectorized/parallelized: not countable
+          29, Loop not vectorized/parallelized: not countable
+          29, Loop not vectorized/parallelized: not countable
+point_doubling(unsigned int, int, int, int, int*, int*):
+      7, include "ecdh.h"
+          70, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          43, Loop not vectorized/parallelized: not countable
+          44, Loop not vectorized/parallelized: not countable
+          29, Loop not vectorized/parallelized: not countable
+          29, Loop not vectorized/parallelized: not countable
+first_set_bit(int):
+      7, include "ecdh.h"
+          81, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          83, Loop not vectorized/parallelized: potential early exits
+make_pk_fast(int, int, int, int*, int*, unsigned int, int):
+      7, include "ecdh.h"
+          99, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          83, Loop not vectorized/parallelized: potential early exits
+          71, Loop not vectorized/parallelized: not countable
+          72, Loop not vectorized/parallelized: not countable
+          73, Loop not vectorized/parallelized: not countable
+          58, Loop not vectorized/parallelized: not countable
+          59, Loop not vectorized/parallelized: not countable
+          60, Loop not vectorized/parallelized: not countable
+          61, Loop not vectorized/parallelized: not countable
+make_pk_slow(int, int, int, int*, int*, unsigned int, int):
+      7, include "ecdh.h"
+         121, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          71, Loop not vectorized/parallelized: not countable
+          72, Loop not vectorized/parallelized: not countable
+          73, Loop not vectorized/parallelized: not countable
+          58, Loop not vectorized/parallelized: not countable
+          59, Loop not vectorized/parallelized: not countable
+          60, Loop not vectorized/parallelized: not countable
+          61, Loop not vectorized/parallelized: not countable
+get_shared_key(int, int, int, int*, int*, unsigned int, int):
+      7, include "ecdh.h"
+         142, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+         104, Loop not vectorized/parallelized: potential early exits
+         106, Loop not vectorized/parallelized: not countable
+         109, Loop not vectorized/parallelized: not countable
+k_slow(int, int, int, int*, int*, unsigned int, int, int):
+      7, include "ecdh.h"
+         157, #omp target teams distribute parallel for thread_limit(256)
+             157, Generating "nvkernel__Z6k_slowiiiPiS_jii_F169L157_2" GPU kernel
+             159, Loop parallelized across teams and threads(128), schedule(static)
+         122, Loop not vectorized/parallelized: not countable
+         128, Loop not vectorized/parallelized: not countable
+k_fast(int, int, int, int*, int*, unsigned int, int, int):
+      7, include "ecdh.h"
+         172, #omp target teams distribute parallel for thread_limit(256)
+             172, Generating "nvkernel__Z6k_fastiiiPiS_jii_F169L172_6" GPU kernel
+             174, Loop parallelized across teams and threads(128), schedule(static)
+         104, Loop not vectorized/parallelized: potential early exits
+         106, Loop not vectorized/parallelized: not countable
+         109, Loop not vectorized/parallelized: not countable
+main:
+     36, Generating map(from:pk_fast_y[:num_pk],pk_slow_x[:num_pk],pk_slow_y[:num_pk],pk_fast_x[:num_pk]) 
+     39, Loop not vectorized/parallelized: contains call
+     50, Loop not vectorized/parallelized: contains call
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

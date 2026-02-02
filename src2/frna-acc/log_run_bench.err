@@ -1,0 +1,547 @@
+main:
+     26, Loop not vectorized/parallelized: contains call
+"fbase.c", line 46: warning: pointless comparison of unsigned integer with a negative constant [unsigned_compare_with_negative]
+    do { c = fgetc(f); } while (c != '\n' && c != EOF);
+                                               ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"fbase.c", line 84: warning: pointless comparison of unsigned integer with a negative constant [unsigned_compare_with_negative]
+    while ((c = fgetc(f)), c != EOF && c != '1')
+                             ^
+
+"fbase.c", line 91: warning: pointless comparison of unsigned integer with a negative constant [unsigned_compare_with_negative]
+    while ((c = fgetc(f)), c != EOF && c != '1')
+                             ^
+
+fsequence:
+          82, Loop not vectorized/parallelized: potential early exits
+          83, Loop not vectorized/parallelized: contains call
+          89, Loop not vectorized/parallelized: potential early exits
+          90, Loop not vectorized/parallelized: contains call
+          65, Loop not vectorized/parallelized: not countable
+fsequence_from_file:
+          57, Loop not vectorized/parallelized: potential early exits
+          60, Loop not vectorized/parallelized: potential early exits
+     84, Loop not vectorized/parallelized: contains call
+          57, Loop not vectorized/parallelized: potential early exits
+          60, Loop not vectorized/parallelized: potential early exits
+     91, Loop not vectorized/parallelized: contains call
+fsequence_from_string:
+    103, Loop not vectorized/parallelized: contains call
+_INTERNAL_7_fbase_c_2ce8f0c0::read_line(_IO_FILE*):
+     46, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_7_fbase_c_2ce8f0c0::skip_header(_IO_FILE*):
+          57, Loop not vectorized/parallelized: potential early exits
+          60, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_7_fbase_c_2ce8f0c0::contains_only_valid_bases(char const*):
+     65, Loop not vectorized/parallelized: not countable
+fparam_read_from_text:
+         119, Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: too deeply nested
+         122, Loop not vectorized/parallelized: potential early exits
+         132, Loop not vectorized/parallelized: contains call
+         119, Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: too deeply nested
+         122, Loop not vectorized/parallelized: potential early exits
+         132, Loop not vectorized/parallelized: contains call
+         119, Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: too deeply nested
+         122, Loop not vectorized/parallelized: potential early exits
+         132, Loop not vectorized/parallelized: contains call
+         119, Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: too deeply nested
+         122, Loop not vectorized/parallelized: potential early exits
+         132, Loop not vectorized/parallelized: contains call
+         119, Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: too deeply nested
+         122, Loop not vectorized/parallelized: potential early exits
+         132, Loop not vectorized/parallelized: contains call
+         119, Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: too deeply nested
+         122, Loop not vectorized/parallelized: potential early exits
+         132, Loop not vectorized/parallelized: contains call
+         119, Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: too deeply nested
+         122, Loop not vectorized/parallelized: potential early exits
+         132, Loop not vectorized/parallelized: contains call
+         119, Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: too deeply nested
+         122, Loop not vectorized/parallelized: potential early exits
+         132, Loop not vectorized/parallelized: contains call
+         119, Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: too deeply nested
+         122, Loop not vectorized/parallelized: potential early exits
+         132, Loop not vectorized/parallelized: contains call
+         119, Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: too deeply nested
+         122, Loop not vectorized/parallelized: potential early exits
+         132, Loop not vectorized/parallelized: contains call
+         155, Loop not vectorized/parallelized: potential early exits
+         158, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop
+         162, Loop not vectorized/parallelized: contains call
+         270, Loop not vectorized/parallelized: potential early exits
+              Loop not vectorized/parallelized: contains call
+         271, Loop not vectorized/parallelized: potential early exits
+              Loop not vectorized/parallelized: contains call
+         272, Loop not vectorized/parallelized: potential early exits
+              Loop not vectorized/parallelized: contains call
+         289, Loop not vectorized/parallelized: not countable
+         290, Loop not vectorized/parallelized: not countable
+         296, Loop not vectorized/parallelized: potential early exits
+         298, Loop not vectorized/parallelized: potential early exits
+         302, Loop not vectorized/parallelized: contains call
+         304, Loop not vectorized/parallelized: contains call
+         307, Loop not vectorized/parallelized: contains call
+         309, Loop unrolled 4 times (completely unrolled)
+         310, Loop unrolled 4 times (completely unrolled)
+         331, Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: too deeply nested
+         333, Loop not vectorized/parallelized: potential early exits
+         338, Loop not vectorized/parallelized: potential early exits
+         340, Loop not vectorized/parallelized: potential early exits
+         344, Loop not vectorized/parallelized: contains call
+         346, Loop not vectorized/parallelized: contains call
+         352, Loop not vectorized/parallelized: contains call
+         354, Loop not vectorized: data dependency
+         355, Loop unrolled 4 times (completely unrolled)
+         364, Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: too deeply nested
+         366, Loop not vectorized/parallelized: potential early exits
+              Loop not vectorized/parallelized: too deeply nested
+         371, Loop not vectorized/parallelized: potential early exits
+         373, Loop not vectorized/parallelized: potential early exits
+         382, Loop not vectorized/parallelized: contains call
+         387, Loop not vectorized/parallelized: contains call
+         389, Loop unrolled 4 times (completely unrolled)
+         390, Loop unrolled 4 times (completely unrolled)
+         410, Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: too deeply nested
+         412, Loop not vectorized/parallelized: potential early exits
+         417, Loop not vectorized/parallelized: potential early exits
+         419, Loop not vectorized/parallelized: potential early exits
+         423, Loop not vectorized/parallelized: contains call
+         425, Loop not vectorized/parallelized: contains call
+         427, Loop not vectorized/parallelized: contains call
+         432, Loop not vectorized/parallelized: contains call
+         434, Loop not vectorized: data dependency
+         435, Loop unrolled 4 times (completely unrolled)
+fparam_show:
+         502, Loop not vectorized/parallelized: too deeply nested
+         505, Loop not vectorized/parallelized: contains call
+         502, Loop not vectorized/parallelized: too deeply nested
+         505, Loop not vectorized/parallelized: contains call
+         502, Loop not vectorized/parallelized: too deeply nested
+         505, Loop not vectorized/parallelized: contains call
+         502, Loop not vectorized/parallelized: too deeply nested
+         505, Loop not vectorized/parallelized: contains call
+         502, Loop not vectorized/parallelized: too deeply nested
+         505, Loop not vectorized/parallelized: contains call
+         502, Loop not vectorized/parallelized: too deeply nested
+         505, Loop not vectorized/parallelized: contains call
+         502, Loop not vectorized/parallelized: too deeply nested
+         505, Loop not vectorized/parallelized: contains call
+         502, Loop not vectorized/parallelized: too deeply nested
+         505, Loop not vectorized/parallelized: contains call
+         502, Loop not vectorized/parallelized: too deeply nested
+         505, Loop not vectorized/parallelized: contains call
+         502, Loop not vectorized/parallelized: too deeply nested
+         505, Loop not vectorized/parallelized: contains call
+         479, Loop not vectorized/parallelized: contains call
+         479, Loop not vectorized/parallelized: contains call
+         479, Loop not vectorized/parallelized: contains call
+         599, Loop not vectorized/parallelized: contains call
+         600, Loop not vectorized/parallelized: contains call
+         601, Loop not vectorized/parallelized: contains call
+         489, Loop not vectorized/parallelized: contains call
+         489, Loop not vectorized/parallelized: contains call
+         519, Loop not vectorized/parallelized: too deeply nested
+         520, Loop not vectorized/parallelized: too deeply nested
+         521, Loop not vectorized/parallelized: too deeply nested
+         524, Loop not vectorized/parallelized: contains call
+         563, Loop not vectorized/parallelized: too deeply nested
+         564, Loop not vectorized/parallelized: too deeply nested
+         565, Loop not vectorized/parallelized: too deeply nested
+         566, Loop not vectorized/parallelized: too deeply nested
+         567, Loop not vectorized/parallelized: too deeply nested
+         570, Loop not vectorized/parallelized: contains call
+         540, Loop not vectorized/parallelized: too deeply nested
+         541, Loop not vectorized/parallelized: too deeply nested
+         542, Loop not vectorized/parallelized: too deeply nested
+         543, Loop not vectorized/parallelized: too deeply nested
+         546, Loop not vectorized/parallelized: contains call
+_INTERNAL_8_fparam_c_978b0f07::fill3(int (*) [4][4][4], int):
+     15, Loop not vectorized/parallelized: not countable
+_INTERNAL_8_fparam_c_978b0f07::fill4(int (*) [4][4][4][4], int):
+     22, Loop not vectorized/parallelized: too deeply nested
+     25, Loop not vectorized/parallelized: not countable
+_INTERNAL_8_fparam_c_978b0f07::fill6(int (*) [4][4][4][4][4][4], int):
+     32, Loop not vectorized/parallelized: too deeply nested
+     33, Loop not vectorized/parallelized: too deeply nested
+     34, Loop not vectorized/parallelized: too deeply nested
+     37, Loop not vectorized/parallelized: not countable
+_INTERNAL_8_fparam_c_978b0f07::fill7(int (*) [4][4][4][4][4][4][4], int):
+     44, Loop not vectorized/parallelized: too deeply nested
+     45, Loop not vectorized/parallelized: too deeply nested
+     46, Loop not vectorized/parallelized: too deeply nested
+     47, Loop not vectorized/parallelized: too deeply nested
+     50, Loop not vectorized/parallelized: not countable
+_INTERNAL_8_fparam_c_978b0f07::fill8(int (*) [4][4][4][4][4][4][4][4], int):
+     57, Loop not vectorized/parallelized: too deeply nested
+     58, Loop not vectorized/parallelized: too deeply nested
+     59, Loop not vectorized/parallelized: too deeply nested
+     60, Loop not vectorized/parallelized: too deeply nested
+     61, Loop not vectorized/parallelized: too deeply nested
+     64, Loop not vectorized/parallelized: not countable
+_INTERNAL_8_fparam_c_978b0f07::look_for_line_containing(_IO_FILE*, char const*):
+     82, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_8_fparam_c_978b0f07::look_for_dashes(_IO_FILE*):
+          97, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_8_fparam_c_978b0f07::look_for_arrow(_IO_FILE*):
+         102, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_8_fparam_c_978b0f07::read_stack(char const*, int, int (*) [4][4][4][4]):
+          22, Loop not vectorized/parallelized: too deeply nested
+          25, Loop not vectorized/parallelized: not countable
+         122, Loop not vectorized/parallelized: potential early exits
+    132, Loop not vectorized/parallelized: contains call
+_INTERNAL_8_fparam_c_978b0f07::read_loop(fparam*):
+          97, Loop not vectorized/parallelized: potential early exits
+    158, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+    163, Loop not vectorized/parallelized: contains call
+_INTERNAL_8_fparam_c_978b0f07::next_value(_IO_FILE*):
+         102, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_8_fparam_c_978b0f07::read_next_values(_IO_FILE*, int*, int):
+    198, Loop not vectorized/parallelized: contains call
+_INTERNAL_8_fparam_c_978b0f07::read_miscloop(fparam*):
+         187, Loop not vectorized/parallelized: potential early exits
+         187, Loop not vectorized/parallelized: potential early exits
+         187, Loop not vectorized/parallelized: potential early exits
+         102, Loop not vectorized/parallelized: potential early exits
+         198, Loop not vectorized/parallelized: contains call
+         102, Loop not vectorized/parallelized: potential early exits
+         102, Loop not vectorized/parallelized: potential early exits
+         102, Loop not vectorized/parallelized: potential early exits
+         187, Loop not vectorized/parallelized: potential early exits
+         187, Loop not vectorized/parallelized: potential early exits
+         187, Loop not vectorized/parallelized: potential early exits
+         187, Loop not vectorized/parallelized: potential early exits
+         187, Loop not vectorized/parallelized: potential early exits
+         102, Loop not vectorized/parallelized: potential early exits
+         187, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_8_fparam_c_978b0f07::read_small_loop(char*, fbase_t*, int*, int):
+    234, Loop not vectorized/parallelized: contains call
+_INTERNAL_8_fparam_c_978b0f07::is_only_whitespace(char const*):
+    243, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_8_fparam_c_978b0f07::read_triloop(fparam*):
+         243, Loop not vectorized/parallelized: potential early exits
+         234, Loop not vectorized/parallelized: contains call
+          97, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_8_fparam_c_978b0f07::read_tloop(fparam*):
+         243, Loop not vectorized/parallelized: potential early exits
+         234, Loop not vectorized/parallelized: contains call
+          97, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_8_fparam_c_978b0f07::read_hexaloop(fparam*):
+         243, Loop not vectorized/parallelized: potential early exits
+         234, Loop not vectorized/parallelized: contains call
+          97, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_8_fparam_c_978b0f07::read_four_bases(char const*, fbase_t*):
+    283, Loop not vectorized/parallelized: contains call
+_INTERNAL_8_fparam_c_978b0f07::read_dangle(int, int (*) [4][4][4], int (*) [4][4][4]):
+          15, Loop not vectorized/parallelized: not countable
+          15, Loop not vectorized/parallelized: not countable
+         243, Loop not vectorized/parallelized: potential early exits
+         298, Loop not vectorized/parallelized: potential early exits
+         283, Loop not vectorized/parallelized: contains call
+         283, Loop not vectorized/parallelized: contains call
+         198, Loop not vectorized/parallelized: contains call
+    309, Loop unrolled 4 times (completely unrolled)
+    310, Loop unrolled 4 times (completely unrolled)
+_INTERNAL_8_fparam_c_978b0f07::read_twelve_bases(char const*, fbase_t*):
+    325, Loop not vectorized/parallelized: contains call
+_INTERNAL_8_fparam_c_978b0f07::read_int11(int, int (*) [4][4][4][4][4][4]):
+          32, Loop not vectorized/parallelized: too deeply nested
+          33, Loop not vectorized/parallelized: too deeply nested
+          34, Loop not vectorized/parallelized: too deeply nested
+          37, Loop not vectorized/parallelized: not countable
+         333, Loop not vectorized/parallelized: potential early exits
+         243, Loop not vectorized/parallelized: potential early exits
+         340, Loop not vectorized/parallelized: potential early exits
+         325, Loop not vectorized/parallelized: contains call
+         325, Loop not vectorized/parallelized: contains call
+         198, Loop not vectorized/parallelized: contains call
+    354, Loop not vectorized: data dependency
+    355, Loop unrolled 4 times (completely unrolled)
+_INTERNAL_8_fparam_c_978b0f07::read_int22(int, int (*) [4][4][4][4][4][4][4][4]):
+          57, Loop not vectorized/parallelized: too deeply nested
+          58, Loop not vectorized/parallelized: too deeply nested
+          59, Loop not vectorized/parallelized: too deeply nested
+          60, Loop not vectorized/parallelized: too deeply nested
+          61, Loop not vectorized/parallelized: too deeply nested
+          64, Loop not vectorized/parallelized: not countable
+         366, Loop not vectorized/parallelized: potential early exits
+         243, Loop not vectorized/parallelized: potential early exits
+         373, Loop not vectorized/parallelized: potential early exits
+    382, Loop not vectorized/parallelized: contains call
+         198, Loop not vectorized/parallelized: contains call
+         368, Loop not vectorized/parallelized: too deeply nested
+    389, Loop unrolled 4 times (completely unrolled)
+    390, Loop unrolled 4 times (completely unrolled)
+_INTERNAL_8_fparam_c_978b0f07::read_six_bases(char const*, fbase_t*):
+    404, Loop not vectorized/parallelized: contains call
+_INTERNAL_8_fparam_c_978b0f07::read_int21(int, int (*) [4][4][4][4][4][4][4]):
+          44, Loop not vectorized/parallelized: too deeply nested
+          45, Loop not vectorized/parallelized: too deeply nested
+          46, Loop not vectorized/parallelized: too deeply nested
+          47, Loop not vectorized/parallelized: too deeply nested
+          50, Loop not vectorized/parallelized: not countable
+         412, Loop not vectorized/parallelized: potential early exits
+         243, Loop not vectorized/parallelized: potential early exits
+         419, Loop not vectorized/parallelized: potential early exits
+         325, Loop not vectorized/parallelized: contains call
+         325, Loop not vectorized/parallelized: contains call
+         404, Loop not vectorized/parallelized: contains call
+         198, Loop not vectorized/parallelized: contains call
+    434, Loop not vectorized: data dependency
+    435, Loop unrolled 4 times (completely unrolled)
+_INTERNAL_8_fparam_c_978b0f07::show1(char const*, int*, int):
+    479, Loop not vectorized/parallelized: contains call
+_INTERNAL_8_fparam_c_978b0f07::show3(char const*, int (*) [4][4][4]):
+    489, Loop not vectorized/parallelized: contains call
+_INTERNAL_8_fparam_c_978b0f07::show4(char const*, int (*) [4][4][4][4]):
+    502, Loop not vectorized/parallelized: too deeply nested
+    505, Loop not vectorized/parallelized: contains call
+_INTERNAL_8_fparam_c_978b0f07::show6(char const*, int (*) [4][4][4][4][4][4]):
+    519, Loop not vectorized/parallelized: too deeply nested
+    520, Loop not vectorized/parallelized: too deeply nested
+    521, Loop not vectorized/parallelized: too deeply nested
+    524, Loop not vectorized/parallelized: contains call
+_INTERNAL_8_fparam_c_978b0f07::show7(char const*, int (*) [4][4][4][4][4][4][4]):
+    540, Loop not vectorized/parallelized: too deeply nested
+    541, Loop not vectorized/parallelized: too deeply nested
+    542, Loop not vectorized/parallelized: too deeply nested
+    543, Loop not vectorized/parallelized: too deeply nested
+    546, Loop not vectorized/parallelized: contains call
+_INTERNAL_8_fparam_c_978b0f07::show8(char const*, int (*) [4][4][4][4][4][4][4][4]):
+    563, Loop not vectorized/parallelized: too deeply nested
+    564, Loop not vectorized/parallelized: too deeply nested
+    565, Loop not vectorized/parallelized: too deeply nested
+    566, Loop not vectorized/parallelized: too deeply nested
+    567, Loop not vectorized/parallelized: too deeply nested
+    570, Loop not vectorized/parallelized: contains call
+_INTERNAL_8_fparam_c_978b0f07::show_triloop(fparam*):
+    599, Loop not vectorized/parallelized: contains call
+_INTERNAL_8_fparam_c_978b0f07::show_tloop(fparam*):
+    600, Loop not vectorized/parallelized: contains call
+_INTERNAL_8_fparam_c_978b0f07::show_hexaloop(fparam*):
+    601, Loop not vectorized/parallelized: contains call
+isdigits:
+     48, Loop not vectorized/parallelized: potential early exits
+"frna.cpp", line 330: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(n) vector_length(1)
+                         ^
+
+"frna.cpp", line 330: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(n) vector_length(1)
+                               ^
+
+"frna.cpp", line 335: error: identifier "omp_get_team_num" is undefined
+    for (int i = ISTART; i < n; i += IINC) {
+                 ^
+
+"frna.cpp", line 335: error: identifier "omp_get_gang" is undefined
+    for (int i = ISTART; i < n; i += IINC) {
+                                     ^
+
+"frna.cpp", line 391: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(n) thread_limit(SQRT_NTHREAD*SQRT_NTHREAD)
+                         ^
+
+"frna.cpp", line 391: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(n) thread_limit(SQRT_NTHREAD*SQRT_NTHREAD)
+                               ^
+
+"frna.cpp", line 397: error: identifier "omp_get_team_num" is undefined
+    for (int i = ISTART; i < n; i += IINC) {
+                 ^
+
+"frna.cpp", line 397: error: identifier "omp_get_gang" is undefined
+    for (int i = ISTART; i < n; i += IINC) {
+                                     ^
+
+"frna.cpp", line 406: error: identifier "omp_get_thread_num" is undefined
+      const int d1start = omp_get_thread_num() % SQRT_NTHREAD; 
+                          ^
+
+"frna.cpp", line 470: error: invalid text in pragma
+    #pragma acc parallel loop num_teams(n) vector_length(1) 
+                              ^
+
+"frna.cpp", line 470: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop num_teams(n) vector_length(1) 
+                                       ^
+
+"frna.cpp", line 472: error: identifier "omp_get_team_num" is undefined
+    for (int i = ISTART; i < n; i += IINC) {
+                 ^
+
+"frna.cpp", line 472: error: identifier "omp_get_gang" is undefined
+    for (int i = ISTART; i < n; i += IINC) {
+                                     ^
+
+"frna.cpp", line 509: error: invalid text in pragma
+    #pragma acc parallel loop num_teams(n) vector_length(1) 
+                              ^
+
+"frna.cpp", line 509: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop num_teams(n) vector_length(1) 
+                                       ^
+
+"frna.cpp", line 511: error: identifier "omp_get_team_num" is undefined
+    for (int i = ISTART; i < n; i += IINC) { 
+                 ^
+
+"frna.cpp", line 511: error: identifier "omp_get_gang" is undefined
+    for (int i = ISTART; i < n; i += IINC) { 
+                                     ^
+
+"frna.cpp", line 543: error: invalid text in pragma
+    #pragma acc parallel loop num_teams(n) vector_length(1) 
+                              ^
+
+"frna.cpp", line 543: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop num_teams(n) vector_length(1) 
+                                       ^
+
+"frna.cpp", line 545: error: identifier "omp_get_team_num" is undefined
+    for (int i = ISTART; i < n; i += IINC) { 
+                 ^
+
+"frna.cpp", line 545: error: identifier "omp_get_gang" is undefined
+    for (int i = ISTART; i < n; i += IINC) { 
+                                     ^
+
+"frna.cpp", line 607: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(n) thread_limit(NTHREAD)
+                         ^
+
+"frna.cpp", line 607: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(n) thread_limit(NTHREAD)
+                               ^
+
+"frna.cpp", line 613: error: identifier "omp_get_team_num" is undefined
+    for (int i = ISTART; i < n; i += IINC) {
+                 ^
+
+"frna.cpp", line 613: error: identifier "omp_get_gang" is undefined
+    for (int i = ISTART; i < n; i += IINC) {
+                                     ^
+
+"frna.cpp", line 625: error: identifier "omp_get_thread_num" is undefined
+      const int tx = omp_get_thread_num();
+                     ^
+
+"frna.cpp", line 627: error: identifier "omp_get_vector" is undefined
+      const int kinc = omp_get_vector();
+                       ^
+
+"frna.cpp", line 672: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(n) thread_limit(NTHREAD)
+                         ^
+
+"frna.cpp", line 672: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(n) thread_limit(NTHREAD)
+                               ^
+
+"frna.cpp", line 678: error: identifier "omp_get_team_num" is undefined
+    for (int i = ISTART; i < n; i += IINC) {
+                 ^
+
+"frna.cpp", line 678: error: identifier "omp_get_gang" is undefined
+    for (int i = ISTART; i < n; i += IINC) {
+                                     ^
+
+"frna.cpp", line 689: error: identifier "omp_get_thread_num" is undefined
+        kstart = omp_get_thread_num();
+                 ^
+
+"frna.cpp", line 690: error: identifier "omp_get_vector" is undefined
+        const int kinc = omp_get_vector();
+                         ^
+
+"frna.cpp", line 724: error: identifier "omp_get_thread_num" is undefined
+        int ktmpstart = i+2 + omp_get_thread_num();
+                              ^
+
+"frna.cpp", line 725: error: identifier "omp_get_vector" is undefined
+        const int ktmpinc = omp_get_vector();
+                            ^
+
+"frna.cpp", line 767: error: identifier "omp_get_thread_num" is undefined
+      free_energy_min_reduce(buf, &vij, omp_get_thread_num(), omp_get_vector());
+                                        ^
+
+"frna.cpp", line 767: error: identifier "omp_get_vector" is undefined
+      free_energy_min_reduce(buf, &vij, omp_get_thread_num(), omp_get_vector());
+                                                              ^
+
+"frna.cpp", line 790: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(n) thread_limit(NTHREAD)
+                         ^
+
+"frna.cpp", line 790: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(n) thread_limit(NTHREAD)
+                               ^
+
+"frna.cpp", line 796: error: identifier "omp_get_team_num" is undefined
+    for (int i = ISTART; i < n; i += IINC) {
+                 ^
+
+"frna.cpp", line 796: error: identifier "omp_get_gang" is undefined
+    for (int i = ISTART; i < n; i += IINC) {
+                                     ^
+
+"frna.cpp", line 803: error: identifier "omp_get_thread_num" is undefined
+      const int tx = omp_get_thread_num();
+                     ^
+
+"frna.cpp", line 805: error: identifier "omp_get_vector" is undefined
+      const int kinc = omp_get_vector();
+                       ^
+
+"frna.cpp", line 854: error: invalid text in pragma
+    #pragma acc parallel teams gang(1) thread_limit(NTHREAD)
+                         ^
+
+"frna.cpp", line 854: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams gang(1) thread_limit(NTHREAD)
+                               ^
+
+"frna.cpp", line 859: error: identifier "omp_get_thread_num" is undefined
+      const int istart = omp_get_thread_num();
+                         ^
+
+"frna.cpp", line 860: error: identifier "omp_get_vector" is undefined
+      const int iinc = omp_get_vector();
+                       ^
+
+"frna.cpp", line 911: error: invalid text in pragma
+    #pragma acc parallel loop thread_limit(NTHREAD)
+                              ^
+
+"frna.cpp", line 911: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop thread_limit(NTHREAD)
+                                          ^
+
+"frna.cpp", line 958: error: invalid text in pragma
+    #pragma acc data to: pm[0:1], s[0:n]) \
+                     ^
+
+"frna.cpp", line 958: error: extra text after expected end of preprocessing directive
+    #pragma acc data to: pm[0:1], s[0:n]) \
+                       ^
+
+51 errors detected in the compilation of "frna.cpp".
+make: *** [Makefile.NVD:60: frna.o] Error 2
+timeout was set to  600

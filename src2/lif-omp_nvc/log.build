@@ -1,0 +1,23 @@
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+reference(int, int, float, float*, float*, float*, float, float, float*, float*, float*):
+     17, Loop not vectorized/parallelized: contains call
+test(int, int, float, float*, float*, float*, float, float, float*, float*, float*):
+     64, #omp target teams distribute parallel for thread_limit(256)
+         64, Generating "nvkernel__Z4testiifPfS_S_ffS_S_S__F1L64_2" GPU kernel
+         66, Loop parallelized across teams and threads(128), schedule(static)
+     66, Loop not vectorized/parallelized: contains call
+main:
+    137, Loop not vectorized/parallelized: contains call
+    140, Loop not vectorized/parallelized: contains call
+    144, Loop not vectorized/parallelized: contains call
+    155, Generating map(to:bias[:neurons_per_item],encode_result[:num_items]) 
+         Generating map(tofrom:reftime[:num_neurons],voltage[:num_neurons]) 
+         Generating map(from:spikes[:num_neurons]) 
+         Generating map(to:gain[:neurons_per_item]) 
+    158, Loop not vectorized/parallelized: contains call
+          17, Loop not vectorized/parallelized: contains call
+    193, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

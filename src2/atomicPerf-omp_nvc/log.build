@@ -1,0 +1,314 @@
+nvc++  -Wall -I../atomicPerf-cuda  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+main:
+         119, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+         126, Generating update to(.inl_data_1207[:1024])
+         127, Loop not vectorized/parallelized: contains call
+         137, Generating update from(.inl_data_1207[:1024])
+         138, Loop not fused: function call before adjacent loop
+         139, Loop not vectorized: data dependency
+         145, Generating update to(.inl_data_1207[:1024])
+         146, Loop not vectorized/parallelized: contains call
+         155, Generating update from(.inl_data_1207[:1024])
+         157, Loop not fused: function call before adjacent loop
+         158, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+         164, Generating update to(.inl_data_1207[:1024])
+         165, Loop not vectorized/parallelized: contains call
+         174, Generating update from(.inl_data_1207[:1024])
+         176, Loop not fused: function call before adjacent loop
+         177, Loop not vectorized: data dependency
+              Loop unrolled 8 times
+         183, Generating update to(.inl_data_1207[:1024])
+         184, Loop not vectorized/parallelized: contains call
+         194, Generating update from(.inl_data_1207[:1024])
+         199, Generating update to(.inl_data_1207[:1024])
+         200, Loop not vectorized/parallelized: contains call
+         210, Generating update from(.inl_data_1207[:1024])
+         215, Generating update to(.inl_data_1207[:1024])
+         216, Loop not vectorized/parallelized: contains call
+         226, Generating update from(.inl_data_1207[:1024])
+         119, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+         126, Generating update to(.inl_data_1346[:1024])
+         127, Loop not vectorized/parallelized: contains call
+         137, Generating update from(.inl_data_1346[:1024])
+         138, Loop not fused: function call before adjacent loop
+         139, Loop not vectorized: data dependency
+         145, Generating update to(.inl_data_1346[:1024])
+         146, Loop not vectorized/parallelized: contains call
+         155, Generating update from(.inl_data_1346[:1024])
+         157, Loop not fused: function call before adjacent loop
+         158, Loop not vectorized: data dependency
+         164, Generating update to(.inl_data_1346[:1024])
+         165, Loop not vectorized/parallelized: contains call
+         174, Generating update from(.inl_data_1346[:1024])
+         176, Loop not fused: function call before adjacent loop
+         177, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+         183, Generating update to(.inl_data_1346[:1024])
+         184, Loop not vectorized/parallelized: contains call
+         194, Generating update from(.inl_data_1346[:1024])
+         199, Generating update to(.inl_data_1346[:1024])
+         200, Loop not vectorized/parallelized: contains call
+         210, Generating update from(.inl_data_1346[:1024])
+         215, Generating update to(.inl_data_1346[:1024])
+         216, Loop not vectorized/parallelized: contains call
+         226, Generating update from(.inl_data_1346[:1024])
+         119, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+         126, Generating update to(.inl_data_1484[:1024])
+         127, Loop not vectorized/parallelized: contains call
+         137, Generating update from(.inl_data_1484[:1024])
+         138, Loop not fused: function call before adjacent loop
+         139, Loop not vectorized: data dependency
+         145, Generating update to(.inl_data_1484[:1024])
+         146, Loop not vectorized/parallelized: contains call
+         155, Generating update from(.inl_data_1484[:1024])
+         157, Loop not fused: function call before adjacent loop
+         158, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+         164, Generating update to(.inl_data_1484[:1024])
+         165, Loop not vectorized/parallelized: contains call
+         174, Generating update from(.inl_data_1484[:1024])
+         176, Loop not fused: function call before adjacent loop
+         177, Loop not vectorized: data dependency
+              Loop unrolled 8 times
+         183, Generating update to(.inl_data_1484[:1024])
+         184, Loop not vectorized/parallelized: contains call
+         194, Generating update from(.inl_data_1484[:1024])
+         199, Generating update to(.inl_data_1484[:1024])
+         200, Loop not vectorized/parallelized: contains call
+         210, Generating update from(.inl_data_1484[:1024])
+         215, Generating update to(.inl_data_1484[:1024])
+         216, Loop not vectorized/parallelized: contains call
+         226, Generating update from(.inl_data_1484[:1024])
+void atomicPerf<double>(int, int, int):
+    119, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    124, Generating map(alloc:data[:t]) 
+    126, Generating update to(data[:t])
+    127, Loop not vectorized/parallelized: contains call
+    137, Generating update from(data[:t])
+    138, Loop not fused: function call before adjacent loop
+           4, Loop not vectorized: data dependency
+    145, Generating update to(data[:t])
+    146, Loop not vectorized/parallelized: contains call
+    155, Generating update from(data[:t])
+    157, Loop not fused: function call before adjacent loop
+          12, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+    164, Generating update to(data[:t])
+    165, Loop not vectorized/parallelized: contains call
+    174, Generating update from(data[:t])
+    176, Loop not fused: function call before adjacent loop
+          20, Loop not vectorized: data dependency
+              Loop unrolled 8 times
+    183, Generating update to(data[:t])
+    184, Loop not vectorized/parallelized: contains call
+    194, Generating update from(data[:t])
+    199, Generating update to(data[:t])
+    200, Loop not vectorized/parallelized: contains call
+    210, Generating update from(data[:t])
+    215, Generating update to(data[:t])
+    216, Loop not vectorized/parallelized: contains call
+    226, Generating update from(data[:t])
+void atomicPerf<int>(int, int, int):
+    119, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+    124, Generating map(alloc:data[:t]) 
+    126, Generating update to(data[:t])
+    127, Loop not vectorized/parallelized: contains call
+    137, Generating update from(data[:t])
+    138, Loop not fused: function call before adjacent loop
+           4, Loop not vectorized: data dependency
+    145, Generating update to(data[:t])
+    146, Loop not vectorized/parallelized: contains call
+    155, Generating update from(data[:t])
+    157, Loop not fused: function call before adjacent loop
+          12, Loop not vectorized: data dependency
+    164, Generating update to(data[:t])
+    165, Loop not vectorized/parallelized: contains call
+    174, Generating update from(data[:t])
+    176, Loop not fused: function call before adjacent loop
+          20, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+    183, Generating update to(data[:t])
+    184, Loop not vectorized/parallelized: contains call
+    194, Generating update from(data[:t])
+    199, Generating update to(data[:t])
+    200, Loop not vectorized/parallelized: contains call
+    210, Generating update from(data[:t])
+    215, Generating update to(data[:t])
+    216, Loop not vectorized/parallelized: contains call
+    226, Generating update from(data[:t])
+void atomicPerf<float>(int, int, int):
+    119, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    124, Generating map(alloc:data[:t]) 
+    126, Generating update to(data[:t])
+    127, Loop not vectorized/parallelized: contains call
+    137, Generating update from(data[:t])
+    138, Loop not fused: function call before adjacent loop
+           4, Loop not vectorized: data dependency
+    145, Generating update to(data[:t])
+    146, Loop not vectorized/parallelized: contains call
+    155, Generating update from(data[:t])
+    157, Loop not fused: function call before adjacent loop
+          12, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+    164, Generating update to(data[:t])
+    165, Loop not vectorized/parallelized: contains call
+    174, Generating update from(data[:t])
+    176, Loop not fused: function call before adjacent loop
+          20, Loop not vectorized: data dependency
+              Loop unrolled 8 times
+    183, Generating update to(data[:t])
+    184, Loop not vectorized/parallelized: contains call
+    194, Generating update from(data[:t])
+    199, Generating update to(data[:t])
+    200, Loop not vectorized/parallelized: contains call
+    210, Generating update from(data[:t])
+    215, Generating update to(data[:t])
+    216, Loop not vectorized/parallelized: contains call
+    226, Generating update from(data[:t])
+void BlockRangeAtomicOnGlobalMem<double>(double*, int):
+     12, #omp target teams distribute parallel for thread_limit(256)
+         12, Generating "nvkernel__Z27BlockRangeAtomicOnGlobalMemIdEvPT_i_F1L12_2" GPU kernel
+         14, Loop parallelized across teams and threads(128), schedule(static)
+     14, Loop not vectorized/parallelized: not countable
+void BlockRangeAtomicOnGlobalMem_ref<double>(double*, int):
+      8, include "reference.h"
+           4, Loop not vectorized: data dependency
+void WarpRangeAtomicOnGlobalMem<double>(double*, int):
+     22, #omp target teams distribute parallel for thread_limit(256)
+         22, Generating "nvkernel__Z26WarpRangeAtomicOnGlobalMemIdEvPT_i_F1L22_6" GPU kernel
+         24, Loop parallelized across teams and threads(128), schedule(static)
+     24, Loop not vectorized/parallelized: not countable
+void WarpRangeAtomicOnGlobalMem_ref<double>(double*, int):
+      8, include "reference.h"
+          12, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+void SingleRangeAtomicOnGlobalMem<double>(double*, int, int):
+     32, #omp target teams distribute parallel for thread_limit(256)
+         32, Generating "nvkernel__Z28SingleRangeAtomicOnGlobalMemIdEvPT_ii_F1L32_10" GPU kernel
+         34, Loop parallelized across teams and threads(128), schedule(static)
+     34, Loop not vectorized/parallelized: not countable
+void SingleRangeAtomicOnGlobalMem_ref<double>(double*, int, int):
+      8, include "reference.h"
+          20, Loop not vectorized: data dependency
+              Loop unrolled 8 times
+void BlockRangeAtomicOnSharedMem<double>(double*, int):
+     44, #omp target teams num_teams(n/256) thread_limit(256)
+         44, Generating "nvkernel__Z27BlockRangeAtomicOnSharedMemIdEvPT_i_F1L44_14" GPU kernel
+         47, #omp parallel
+         51, Team private (smem_data) located in CUDA shared memory
+     53, Loop not vectorized/parallelized: not countable
+void WarpRangeAtomicOnSharedMem<double>(double*, int):
+     67, #omp target teams num_teams(n/256) thread_limit(256)
+         67, Generating "nvkernel__Z26WarpRangeAtomicOnSharedMemIdEvPT_i_F1L67_19" GPU kernel
+         70, #omp parallel
+         74, Team private (smem_data) located in CUDA shared memory
+     76, Loop not vectorized/parallelized: not countable
+void SingleRangeAtomicOnSharedMem<double>(double*, int, int):
+     90, #omp target teams num_teams(n/256) thread_limit(256)
+         90, Generating "nvkernel__Z28SingleRangeAtomicOnSharedMemIdEvPT_ii_F1L90_24" GPU kernel
+         93, #omp parallel
+         97, Team private (smem_data) located in CUDA shared memory
+     99, Loop not vectorized/parallelized: not countable
+void BlockRangeAtomicOnGlobalMem<int>(int*, int):
+     12, #omp target teams distribute parallel for thread_limit(256)
+         12, Generating "nvkernel__Z27BlockRangeAtomicOnGlobalMemIiEvPT_i_F1L12_29" GPU kernel
+         14, Loop parallelized across teams and threads(128), schedule(static)
+     14, Loop not vectorized/parallelized: not countable
+void BlockRangeAtomicOnGlobalMem_ref<int>(int*, int):
+      8, include "reference.h"
+           4, Loop not vectorized: data dependency
+void WarpRangeAtomicOnGlobalMem<int>(int*, int):
+     22, #omp target teams distribute parallel for thread_limit(256)
+         22, Generating "nvkernel__Z26WarpRangeAtomicOnGlobalMemIiEvPT_i_F1L22_33" GPU kernel
+         24, Loop parallelized across teams and threads(128), schedule(static)
+     24, Loop not vectorized/parallelized: not countable
+void WarpRangeAtomicOnGlobalMem_ref<int>(int*, int):
+      8, include "reference.h"
+          12, Loop not vectorized: data dependency
+void SingleRangeAtomicOnGlobalMem<int>(int*, int, int):
+     32, #omp target teams distribute parallel for thread_limit(256)
+         32, Generating "nvkernel__Z28SingleRangeAtomicOnGlobalMemIiEvPT_ii_F1L32_37" GPU kernel
+         34, Loop parallelized across teams and threads(128), schedule(static)
+     34, Loop not vectorized/parallelized: not countable
+void SingleRangeAtomicOnGlobalMem_ref<int>(int*, int, int):
+      8, include "reference.h"
+          20, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+void BlockRangeAtomicOnSharedMem<int>(int*, int):
+     44, #omp target teams num_teams(n/256) thread_limit(256)
+         44, Generating "nvkernel__Z27BlockRangeAtomicOnSharedMemIiEvPT_i_F1L44_41" GPU kernel
+         47, #omp parallel
+         51, Team private (smem_data) located in CUDA shared memory
+     53, Loop not vectorized/parallelized: not countable
+void WarpRangeAtomicOnSharedMem<int>(int*, int):
+     67, #omp target teams num_teams(n/256) thread_limit(256)
+         67, Generating "nvkernel__Z26WarpRangeAtomicOnSharedMemIiEvPT_i_F1L67_46" GPU kernel
+         70, #omp parallel
+         74, Team private (smem_data) located in CUDA shared memory
+     76, Loop not vectorized/parallelized: not countable
+void SingleRangeAtomicOnSharedMem<int>(int*, int, int):
+     90, #omp target teams num_teams(n/256) thread_limit(256)
+         90, Generating "nvkernel__Z28SingleRangeAtomicOnSharedMemIiEvPT_ii_F1L90_51" GPU kernel
+         93, #omp parallel
+         97, Team private (smem_data) located in CUDA shared memory
+     99, Loop not vectorized/parallelized: not countable
+void BlockRangeAtomicOnGlobalMem<float>(float*, int):
+     12, #omp target teams distribute parallel for thread_limit(256)
+         12, Generating "nvkernel__Z27BlockRangeAtomicOnGlobalMemIfEvPT_i_F1L12_56" GPU kernel
+         14, Loop parallelized across teams and threads(128), schedule(static)
+     14, Loop not vectorized/parallelized: not countable
+void BlockRangeAtomicOnGlobalMem_ref<float>(float*, int):
+      8, include "reference.h"
+           4, Loop not vectorized: data dependency
+void WarpRangeAtomicOnGlobalMem<float>(float*, int):
+     22, #omp target teams distribute parallel for thread_limit(256)
+         22, Generating "nvkernel__Z26WarpRangeAtomicOnGlobalMemIfEvPT_i_F1L22_60" GPU kernel
+         24, Loop parallelized across teams and threads(128), schedule(static)
+     24, Loop not vectorized/parallelized: not countable
+void WarpRangeAtomicOnGlobalMem_ref<float>(float*, int):
+      8, include "reference.h"
+          12, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+void SingleRangeAtomicOnGlobalMem<float>(float*, int, int):
+     32, #omp target teams distribute parallel for thread_limit(256)
+         32, Generating "nvkernel__Z28SingleRangeAtomicOnGlobalMemIfEvPT_ii_F1L32_64" GPU kernel
+         34, Loop parallelized across teams and threads(128), schedule(static)
+     34, Loop not vectorized/parallelized: not countable
+void SingleRangeAtomicOnGlobalMem_ref<float>(float*, int, int):
+      8, include "reference.h"
+          20, Loop not vectorized: data dependency
+              Loop unrolled 8 times
+void BlockRangeAtomicOnSharedMem<float>(float*, int):
+     44, #omp target teams num_teams(n/256) thread_limit(256)
+         44, Generating "nvkernel__Z27BlockRangeAtomicOnSharedMemIfEvPT_i_F1L44_68" GPU kernel
+         47, #omp parallel
+         51, Team private (smem_data) located in CUDA shared memory
+     53, Loop not vectorized/parallelized: not countable
+void WarpRangeAtomicOnSharedMem<float>(float*, int):
+     67, #omp target teams num_teams(n/256) thread_limit(256)
+         67, Generating "nvkernel__Z26WarpRangeAtomicOnSharedMemIfEvPT_i_F1L67_73" GPU kernel
+         70, #omp parallel
+         74, Team private (smem_data) located in CUDA shared memory
+     76, Loop not vectorized/parallelized: not countable
+void SingleRangeAtomicOnSharedMem<float>(float*, int, int):
+     90, #omp target teams num_teams(n/256) thread_limit(256)
+         90, Generating "nvkernel__Z28SingleRangeAtomicOnSharedMemIfEvPT_ii_F1L90_78" GPU kernel
+         93, #omp parallel
+         97, Team private (smem_data) located in CUDA shared memory
+     99, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      8, include "reference.h"
+nvc++  -Wall -I../atomicPerf-cuda  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

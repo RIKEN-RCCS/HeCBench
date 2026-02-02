@@ -1,0 +1,39 @@
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+KernelWithSmallArgs(SmallKernelArgs, char*):
+     46, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+KernelWithMediumArgs(MediumKernelArgs, char*):
+     48, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+KernelWithLargeArgs(LargeKernelArgs, char*):
+     50, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+main:
+     66, Loop not vectorized/parallelized: contains call
+     68, #omp target
+         68, Generating "nvkernel_main_F1L68_2" GPU kernel
+     68, Generating map(to:small_kernel_args) 
+     72, Loop not vectorized/parallelized: contains call
+     74, #omp target
+         74, Generating "nvkernel_main_F1L74_4" GPU kernel
+     74, Generating map(to:small_kernel_args) 
+     81, Loop not vectorized/parallelized: contains call
+     83, #omp target
+         83, Generating "nvkernel_main_F1L83_6" GPU kernel
+     83, Generating map(to:medium_kernel_args) 
+     87, Loop not vectorized/parallelized: contains call
+     89, #omp target
+         89, Generating "nvkernel_main_F1L89_8" GPU kernel
+     89, Generating map(to:medium_kernel_args) 
+     96, Loop not vectorized/parallelized: contains call
+     98, #omp target
+         98, Generating "nvkernel_main_F1L98_10" GPU kernel
+     98, Generating map(to:large_kernel_args) 
+    102, Loop not vectorized/parallelized: contains call
+    104, #omp target
+        104, Generating "nvkernel_main_F1L104_12" GPU kernel
+    104, Generating map(to:large_kernel_args) 
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     25, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

@@ -1,0 +1,232 @@
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+generate_random_keyvalues(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&, unsigned int):
+     21, Loop not vectorized/parallelized: potential early exits
+test_unordered_map(std::vector<KeyValue, std::allocator<KeyValue>>, std::vector<KeyValue, std::allocator<KeyValue>>):
+     68, Loop not vectorized/parallelized: potential early exits
+     72, Loop not vectorized/parallelized: potential early exits
+main:
+         531, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+    138, Generating map(to:pHashTable[:67108864]) 
+         Generating map(alloc:iter_kvs[:33554432],del_kvs[:num_deletes_per_batch],ins_kvs[:num_inserts_per_batch]) 
+    142, Loop not vectorized/parallelized: contains call
+    147, Generating update to(ins_kvs[:num_inserts_per_batch])
+    153, Loop not vectorized/parallelized: contains call
+    158, Generating update to(del_kvs[:num_deletes_per_batch])
+std::char_traits<char>::length(char const*):
+         171, Loop not vectorized/parallelized: not countable
+KeyValue* std::__uninitialized_default_n_1<true>::__uninit_default_n<KeyValue*, unsigned long>(KeyValue*, unsigned long):
+        1149, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::mersenne_twister_engine(unsigned long):
+         330, Loop not vectorized: data dependency
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::mersenne_twister_engine(unsigned long):
+         531, Loop not vectorized: data dependency
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::seed(unsigned long):
+      5, include "random"
+          51, include "random.tcc"
+              330, Loop not vectorized: data dependency
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::operator()():
+         401, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+         409, Loop not vectorized: data dependency
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::_M_gen_rand():
+      5, include "random"
+          51, include "random.tcc"
+              401, Loop not fused: different loop trip count
+                   Generated vector simd code for the loop
+              409, Loop not vectorized: data dependency
+std::random_device::random_device():
+         536, Loop not vectorized/parallelized: not countable
+std::vector<KeyValue, std::allocator<KeyValue>>::vector(std::vector<KeyValue, std::allocator<KeyValue>> const&):
+      5, include "random"
+          51, include "random.tcc"
+std::vector<KeyValue, std::allocator<KeyValue>>::back():
+      5, include "random"
+          51, include "random.tcc"
+unsigned int std::uniform_int_distribution<unsigned int>::operator()<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&, std::uniform_int_distribution<unsigned int>::param_type const&):
+      4, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                    66, include "uniform_int_dist.h"
+                        349, Loop not vectorized/parallelized: potential early exits
+         258, Loop not fused: different loop trip count
+              Loop not fused: complex flow graph
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+         263, Loop not vectorized/parallelized: not countable
+         265, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+         456, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+         456, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+unsigned int std::uniform_int_distribution<unsigned int>::_S_nd<unsigned long, std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>, unsigned int>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&, unsigned int):
+      4, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                    66, include "uniform_int_dist.h"
+                        263, Loop not vectorized/parallelized: not countable
+         456, Loop not fused: different loop trip count
+              Loop not fused: complex flow graph
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+         456, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+std::_Hashtable<unsigned int, std::pair<unsigned int const, unsigned int>, std::allocator<std::pair<unsigned int const, unsigned int>>, std::__detail::_Select1st, std::equal_to<unsigned int>, std::hash<unsigned int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>>::~_Hashtable():
+        2320, Loop not vectorized/parallelized: contains call
+std::_Hashtable<unsigned int, std::pair<unsigned int const, unsigned int>, std::allocator<std::pair<unsigned int const, unsigned int>>, std::__detail::_Select1st, std::equal_to<unsigned int>, std::hash<unsigned int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>>::_M_find_before_node(unsigned long, unsigned int const&, unsigned long) const:
+      6, include "unordered_map"
+          46, include "hashtable.h"
+             1837, Loop not vectorized/parallelized: potential early exits
+std::_Hashtable<unsigned int, std::pair<unsigned int const, unsigned int>, std::allocator<std::pair<unsigned int const, unsigned int>>, std::__detail::_Select1st, std::equal_to<unsigned int>, std::hash<unsigned int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>>::_M_find_node(unsigned long, unsigned int const&, unsigned long) const:
+        1839, Loop not vectorized/parallelized: potential early exits
+std::_Hashtable<unsigned int, std::pair<unsigned int const, unsigned int>, std::allocator<std::pair<unsigned int const, unsigned int>>, std::__detail::_Select1st, std::equal_to<unsigned int>, std::hash<unsigned int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>>::_M_get_previous_node(unsigned long, std::__detail::_Hash_node<std::pair<unsigned int const, unsigned int>, false>*):
+      6, include "unordered_map"
+          46, include "hashtable.h"
+             1949, Loop not vectorized/parallelized: not countable
+std::_Hashtable<unsigned int, std::pair<unsigned int const, unsigned int>, std::allocator<std::pair<unsigned int const, unsigned int>>, std::__detail::_Select1st, std::equal_to<unsigned int>, std::hash<unsigned int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>>::erase(std::__detail::_Node_const_iterator<std::pair<unsigned int const, unsigned int>, false, false>):
+      6, include "unordered_map"
+          46, include "hashtable.h"
+        1949, Loop not vectorized/parallelized: not countable
+std::_Hashtable<unsigned int, std::pair<unsigned int const, unsigned int>, std::allocator<std::pair<unsigned int const, unsigned int>>, std::__detail::_Select1st, std::equal_to<unsigned int>, std::hash<unsigned int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>>::erase(std::__detail::_Node_iterator<std::pair<unsigned int const, unsigned int>, false, false>):
+        2157, Loop not vectorized/parallelized: not countable
+std::_Hashtable<unsigned int, std::pair<unsigned int const, unsigned int>, std::allocator<std::pair<unsigned int const, unsigned int>>, std::__detail::_Select1st, std::equal_to<unsigned int>, std::hash<unsigned int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>>::clear():
+        1916, Loop not vectorized/parallelized: contains call
+std::_Hashtable<unsigned int, std::pair<unsigned int const, unsigned int>, std::allocator<std::pair<unsigned int const, unsigned int>>, std::__detail::_Select1st, std::equal_to<unsigned int>, std::hash<unsigned int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>>::_M_rehash_aux(unsigned long, std::integral_constant<bool, true>):
+      6, include "unordered_map"
+          46, include "hashtable.h"
+             2386, Loop not vectorized/parallelized: not countable
+std::_Hashtable<unsigned int, std::pair<unsigned int const, unsigned int>, std::allocator<std::pair<unsigned int const, unsigned int>>, std::__detail::_Select1st, std::equal_to<unsigned int>, std::hash<unsigned int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>>::_M_rehash(unsigned long, unsigned long const&):
+      6, include "unordered_map"
+          46, include "hashtable.h"
+std::unordered_map<unsigned int, unsigned int, std::hash<unsigned int>, std::equal_to<unsigned int>, std::allocator<std::pair<unsigned int const, unsigned int>>>::erase(std::__detail::_Node_iterator<std::pair<unsigned int const, unsigned int>, false, false>):
+      6, include "unordered_map"
+std::unordered_map<unsigned int, unsigned int, std::hash<unsigned int>, std::equal_to<unsigned int>, std::allocator<std::pair<unsigned int const, unsigned int>>>::~unordered_map():
+      6, include "unordered_map"
+unsigned long std::uniform_int_distribution<unsigned long>::operator()<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&, std::uniform_int_distribution<unsigned long>::param_type const&):
+      4, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                    66, include "uniform_int_dist.h"
+                        349, Loop not vectorized/parallelized: potential early exits
+      6, include "unordered_map"
+         258, Loop not fused: different loop trip count
+              Loop not fused: complex flow graph
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+         263, Loop not vectorized/parallelized: not countable
+         265, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+         456, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+         456, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+unsigned int std::uniform_int_distribution<unsigned long>::_S_nd<unsigned long, std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>, unsigned int>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&, unsigned int):
+      4, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                    66, include "uniform_int_dist.h"
+                        263, Loop not vectorized/parallelized: not countable
+      6, include "unordered_map"
+         456, Loop not fused: different loop trip count
+              Loop not fused: complex flow graph
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+         456, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string<std::allocator<char>>(char const*, std::allocator<char> const&):
+      5, include "random"
+         397, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string<std::allocator<char>>(char const*, std::allocator<char> const&):
+         536, Loop not vectorized/parallelized: not countable
+std::__detail::_Hash_code_base<unsigned int, std::pair<unsigned int const, unsigned int>, std::__detail::_Select1st, std::hash<unsigned int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, false>::_M_hash_code(unsigned int const&) const:
+      6, include "unordered_map"
+          46, include "hashtable.h"
+std::__detail::_Hashtable_base<unsigned int, std::pair<unsigned int const, unsigned int>, std::__detail::_Select1st, std::equal_to<unsigned int>, std::hash<unsigned int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Hashtable_traits<false, false, true>>::_M_equals(unsigned int const&, unsigned long, std::__detail::_Hash_node_value<std::pair<unsigned int const, unsigned int>, false> const&) const:
+      6, include "unordered_map"
+          46, include "hashtable.h"
+std::__detail::_Map_base<unsigned int, std::pair<unsigned int const, unsigned int>, std::allocator<std::pair<unsigned int const, unsigned int>>, std::__detail::_Select1st, std::equal_to<unsigned int>, std::hash<unsigned int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>, true>::operator[](unsigned int const&):
+      6, include "unordered_map"
+          46, include "hashtable.h"
+std::__detail::_Hashtable_alloc<std::allocator<std::__detail::_Hash_node<std::pair<unsigned int const, unsigned int>, false>>>::_M_deallocate_nodes(std::__detail::_Hash_node<std::pair<unsigned int const, unsigned int>, false>*):
+      6, include "unordered_map"
+          46, include "hashtable.h"
+               35, include "hashtable_policy.h"
+                  1916, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      9, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1l>>::_S_gcd(long, long):
+      9, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<double, std::ratio<1l, 1l>>::_S_gcd(long, long):
+      9, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000l>>::_S_gcd(long, long):
+      9, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+__gnu_cxx::char_traits<char>::length(char const*):
+      5, include "random"
+          40, include "string"
+               40, include "char_traits.h"
+                   171, Loop not vectorized/parallelized: not countable
+void std::shuffle<__gnu_cxx::__normal_iterator<KeyValue*, std::vector<KeyValue, std::allocator<KeyValue>>>, std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&>(__gnu_cxx::__normal_iterator<KeyValue*, std::vector<KeyValue, std::allocator<KeyValue>>>, __gnu_cxx::__normal_iterator<KeyValue*, std::vector<KeyValue, std::allocator<KeyValue>>>, std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&):
+      4, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                  3774, Loop not vectorized/parallelized: potential early exits
+                  3790, Loop not vectorized/parallelized: potential early exits
+      6, include "unordered_map"
+      9, include "chrono"
+KeyValue* std::__copy_move_a<false, __gnu_cxx::__normal_iterator<KeyValue const*, std::vector<KeyValue, std::allocator<KeyValue>>>, KeyValue*>(__gnu_cxx::__normal_iterator<KeyValue const*, std::vector<KeyValue, std::allocator<KeyValue>>>, __gnu_cxx::__normal_iterator<KeyValue const*, std::vector<KeyValue, std::allocator<KeyValue>>>, KeyValue*):
+      4, include "algorithm"
+          10, include "algorithm"
+      6, include "unordered_map"
+      9, include "chrono"
+KeyValue* std::__uninitialized_default_n_a<KeyValue*, unsigned long, KeyValue>(KeyValue*, unsigned long, std::allocator<KeyValue>&):
+         638, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+KeyValue* std::__uninitialized_default_n<KeyValue*, unsigned long>(KeyValue*, unsigned long):
+         603, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+KeyValue* std::fill_n<KeyValue*, unsigned long, KeyValue>(KeyValue*, unsigned long, KeyValue const&):
+        1120, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+KeyValue* std::__fill_n_a<KeyValue*, unsigned long, KeyValue>(KeyValue*, unsigned long, KeyValue const&, std::random_access_iterator_tag):
+         969, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+void std::__fill_a<KeyValue*, KeyValue>(KeyValue*, KeyValue*, KeyValue const&):
+         911, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+__gnu_cxx::__enable_if<!std::__is_scalar<KeyValue>::__value, void>::__type std::__fill_a1<KeyValue*, KeyValue>(KeyValue*, KeyValue*, KeyValue const&):
+      4, include "algorithm"
+          10, include "algorithm"
+               61, include "stl_algobase.h"
+                   911, Loop not vectorized: data dependency
+                        Loop unrolled 2 times
+      6, include "unordered_map"
+      9, include "chrono"
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c linearprobing.cpp -o linearprobing.o
+"linearprobing.cpp", line 43: error: invalid text in pragma
+        #pragma omp atomic compare capture
+                           ^
+
+"linearprobing.cpp", line 43: error: invalid text in pragma
+        #pragma omp atomic compare capture
+                                   ^
+
+"linearprobing.cpp", line 43: error: invalid text in pragma
+        #pragma omp atomic compare capture
+                                   ^
+
+3 errors detected in the compilation of "linearprobing.cpp".
+make: *** [Makefile.NVD:57: linearprobing.o] Error 2

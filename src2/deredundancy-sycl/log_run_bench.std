@@ -1,0 +1,5 @@
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "../deredundancy-cuda/prepare_data.sh; time -p ( ./main i ../deredundancy-sycl/testData.fasta 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 2 3500 3498

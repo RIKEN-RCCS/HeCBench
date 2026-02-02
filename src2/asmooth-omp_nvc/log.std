@@ -1,0 +1,11 @@
+Average filtering time 0.005804 (s)
+PASS
+Distribution of box sizes:
+size=1: 0.000012
+size=2: 0.998465
+size=3: 0.000547
+size=4: 0.000000
+size=5: 0.000000
+size=6: 0.000000
+size=7: 0.000000
+size=8: 0.000977

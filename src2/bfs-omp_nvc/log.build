@@ -1,0 +1,46 @@
+nvc++  -std=c++14 -Wall -I../bfs-sycl -O3 -Minfo -mp=gpu -gpu=cc90 -c bfs.cpp -o bfs.o
+run_bfs_cpu(int, Node*, int, int*, char*, char*, char*, int*):
+     30, Loop not vectorized/parallelized: not countable
+     33, Loop not fused: enclosed in different number of nests
+     37, Loop not vectorized: data dependency
+     47, Loop not vectorized: data dependency
+run_bfs_gpu(int, Node*, int, int*, char*, char*, char*, int*):
+     77, Loop not vectorized/parallelized: contains call
+     81, #omp target teams distribute parallel for thread_limit(256)
+         81, Generating "nvkernel__Z11run_bfs_gpuiP4NodeiPiPcS2_S2_S1__F1L81_2" GPU kernel
+         84, Loop parallelized across teams and threads(128), schedule(static)
+     81, Generating update to(d_over[:])
+         Generating implicit map(tofrom:d_over[:]) 
+     84, Loop not vectorized/parallelized: not countable
+     90, Loop not vectorized: data dependency
+     98, #omp target teams distribute parallel for thread_limit(256)
+         75, Generating map(to:d_graph_mask[:no_of_nodes]) 
+             Generating map(tofrom:d_cost[:no_of_nodes]) 
+             Generating map(to:d_graph_nodes[:no_of_nodes],d_graph_edges[:edge_list_size]) 
+             Generating map(alloc:d_over[:]) 
+             Generating map(to:d_updating_graph_mask[:no_of_nodes],d_graph_visited[:no_of_nodes]) 
+         98, Generating "nvkernel__Z11run_bfs_gpuiP4NodeiPiPcS2_S2_S1__F1L98_4" GPU kernel
+        101, Loop parallelized across teams and threads(128), schedule(static)
+     98, Generating implicit map(tofrom:d_over[:]) 
+    101, Loop not vectorized/parallelized: not countable
+    115, Generating update from(d_over[:])
+main:
+    165, Loop not vectorized/parallelized: contains call
+    182, Loop not vectorized/parallelized: contains call
+    192, Loop not vectorized/parallelized: not countable
+    205, Loop not vectorized/parallelized: not countable
+          30, Loop not vectorized/parallelized: not countable
+          33, Loop not fused: enclosed in different number of nests
+          37, Loop not vectorized: data dependency
+          47, Loop not vectorized: data dependency
+          33, Loop not fused: complex flow graph
+              Loop not vectorized: unknown
+void compare_results<int>(int const*, int const*, int):
+      9, include "util.h"
+          33, Loop not fused: complex flow graph
+              Loop not vectorized: unknown
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      6, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      9, include "util.h"
+nvc++  -std=c++14 -Wall -I../bfs-sycl -O3 -Minfo -mp=gpu -gpu=cc90 bfs.o -o main 

@@ -1,0 +1,83 @@
+"main.cpp", line 68: error: invalid text in pragma
+    #pragma acc parallel loop thread_limit(BLOCK_SIZE)
+                              ^
+
+"main.cpp", line 68: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop thread_limit(BLOCK_SIZE)
+                                          ^
+
+"main.cpp", line 83: error: invalid text in pragma
+    #pragma acc parallel loop thread_limit(BLOCK_SIZE)
+                              ^
+
+"main.cpp", line 83: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop thread_limit(BLOCK_SIZE)
+                                          ^
+
+"main.cpp", line 107: error: invalid text in pragma
+    #pragma acc parallel loop collapse(2) thread_limit(BLOCK_SIZE)
+                                          ^
+
+"main.cpp", line 107: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop collapse(2) thread_limit(BLOCK_SIZE)
+                                                      ^
+
+"main.cpp", line 139: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(teams) thread_limit(threads)
+                         ^
+
+"main.cpp", line 139: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(teams) thread_limit(threads)
+                               ^
+
+"main.cpp", line 143: error: identifier "omp_get_thread_num" is undefined
+    const int lx = omp_get_thread_num() % threadX;
+                   ^
+
+"main.cpp", line 146: error: identifier "omp_get_team_num" is undefined
+    const int bx = omp_get_team_num() % teamX;
+                   ^
+
+"main.cpp", line 217: error: invalid text in pragma
+    #pragma acc parallel loop collapse(2) thread_limit(BLOCK_SIZE)
+                                          ^
+
+"main.cpp", line 217: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop collapse(2) thread_limit(BLOCK_SIZE)
+                                                      ^
+
+"main.cpp", line 311: error: invalid text in pragma
+    #pragma acc parallel loop collapse(2) thread_limit(BLOCK_SIZE)
+                                          ^
+
+"main.cpp", line 311: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop collapse(2) thread_limit(BLOCK_SIZE)
+                                                      ^
+
+"main.cpp", line 354: error: invalid text in pragma
+    #pragma acc parallel loop collapse(3) thread_limit(BLOCK_SIZE)
+                                          ^
+
+"main.cpp", line 354: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop collapse(3) thread_limit(BLOCK_SIZE)
+                                                      ^
+
+"main.cpp", line 440: error: invalid text in pragma
+    #pragma acc parallel data map (to: d_pProj[0:nDetXMap*nDetYMap*nProj]) \
+                         ^
+
+"main.cpp", line 440: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel data map (to: d_pProj[0:nDetXMap*nDetYMap*nProj]) \
+                              ^
+
+"main.cpp", line 469: error: invalid text in pragma
+    #pragma acc parallel loop thread_limit(BLOCK_SIZE)
+                              ^
+
+"main.cpp", line 469: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop thread_limit(BLOCK_SIZE)
+                                          ^
+
+20 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

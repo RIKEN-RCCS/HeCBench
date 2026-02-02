@@ -1,0 +1,24 @@
+ECL-GC v1.2 (main.cpp)
+Copyright 2020 Texas State University
+
+input: ../mis-cuda/internet.egr
+nodes: 124651
+edges: 387240
+avg degree: 3.11
+Total number of compute units: 132
+Maximum resident threads per compute unit: 1024
+Work-group size: 512
+Total number of work-groups: 264
+average runtime: (100 runs):   0.000058 s
+throughput: 2153.621710 Mnodes/s
+throughput: 6690.427440 Medges/s
+PASS
+Number of distinct colors used: 8
+color  0:      50456 ( 40.5%)
+color  1:      57099 ( 86.3%)
+color  2:      15136 ( 98.4%)
+color  3:       1743 ( 99.8%)
+color  4:        189 (100.0%)
+color  5:         20 (100.0%)
+color  6:          7 (100.0%)
+color  7:          1 (100.0%)

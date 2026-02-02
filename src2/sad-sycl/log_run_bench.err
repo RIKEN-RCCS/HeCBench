@@ -1,0 +1,8 @@
+"main.cpp", line 3: catastrophic error: cannot open source file "sycl/sycl.hpp"
+  #include <sycl/sycl.hpp>
+                          ^
+
+1 catastrophic error detected in the compilation of "main.cpp".
+Compilation terminated.
+make: *** [<builtin>: main.o] Error 2
+timeout was set to  600

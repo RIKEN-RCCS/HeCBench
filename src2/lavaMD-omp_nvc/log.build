@@ -1,0 +1,38 @@
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+main:
+     34, Loop not vectorized/parallelized: potential early exits
+     94, Loop not fused: function call before adjacent loop
+         Loop not vectorized/parallelized: too deeply nested
+     96, Loop not vectorized/parallelized: too deeply nested
+     98, Loop not vectorized/parallelized: too deeply nested
+    115, Loop not vectorized/parallelized: loop count too small
+    155, Loop not vectorized/parallelized: contains call
+    168, Loop not vectorized/parallelized: contains call
+    175, Loop not fused: function call before adjacent loop
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 4 times
+    195, #omp target teams num_teams(dim_cpu_number_boxes) thread_limit(128)
+        192, Generating map(to:rv_cpu[:dim_cpu.space_elem],qv_cpu[:dim_cpu.space_elem]) 
+             Generating map(tofrom:fv_cpu[:dim_cpu.space_elem]) 
+             Generating map(to:box_cpu[:dim_cpu.number_boxes]) 
+        195, Generating "nvkernel_main_F1L195_2" GPU kernel
+        201, #omp parallel
+          255, Barrier
+          289, Barrier
+          325, Barrier
+        301, Team private (qB_shared,rB_shared,rA_shared) located in CUDA shared memory
+    195, Generating implicit map(tofrom:par_cpu) 
+    247, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    260, Loop not vectorized/parallelized: contains call
+    280, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    297, Loop not vectorized: data dependency
+std::exp(float):
+                        223, Generating implicit omp declare target routine
+                             Generating NVIDIA GPU code
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c util/num/num.cpp -o util/num/num.o
+isInteger:
+     34, Loop not vectorized/parallelized: potential early exits
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c util/timer/timer.cpp -o util/timer/timer.o
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o ./util/num/num.o ./util/timer/timer.o -o main 

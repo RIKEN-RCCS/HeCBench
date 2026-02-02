@@ -1,0 +1,85 @@
+"main.cpp", line 178: error: invalid text in pragma
+    #pragma acc data to: posx[0:cities], posy[0:cities]) \
+                     ^
+
+"main.cpp", line 178: error: extra text after expected end of preprocessing directive
+    #pragma acc data to: posx[0:cities], posy[0:cities]) \
+                       ^
+
+"main.cpp", line 189: error: invalid text in pragma
+      #pragma acc update to (climbs[0:1])
+                         ^
+
+"main.cpp", line 189: error: OpenACC data clause expected
+      #pragma acc update to (climbs[0:1])
+                         ^
+
+"main.cpp", line 189: error: extra text after expected end of preprocessing directive
+      #pragma acc update to (climbs[0:1])
+                            ^
+
+"main.cpp", line 190: error: invalid text in pragma
+      #pragma acc update to (best[0:1])
+                         ^
+
+"main.cpp", line 190: error: OpenACC data clause expected
+      #pragma acc update to (best[0:1])
+                         ^
+
+"main.cpp", line 190: error: extra text after expected end of preprocessing directive
+      #pragma acc update to (best[0:1])
+                            ^
+
+"main.cpp", line 194: error: invalid text in pragma
+      #pragma acc parallel teams num_teams(restarts) thread_limit(threads)
+                           ^
+
+"main.cpp", line 194: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel teams num_teams(restarts) thread_limit(threads)
+                                 ^
+
+"main.cpp", line 202: error: identifier "omp_get_thread_num" is undefined
+          const int lid = omp_get_thread_num();
+                          ^
+
+"main.cpp", line 203: error: identifier "omp_get_team_num" is undefined
+          const int bid = omp_get_team_num();
+                          ^
+
+"main.cpp", line 204: error: identifier "omp_get_vector" is undefined
+          const int dim = omp_get_vector();
+                          ^
+
+"main.cpp", line 348: warning: variable "t" was set but never used [set_but_not_used]
+            int t;
+                ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"main.cpp", line 363: error: invalid text in pragma
+    #pragma acc update from (climbs[0:1])
+                       ^
+
+"main.cpp", line 363: error: OpenACC data clause expected
+    #pragma acc update from (climbs[0:1])
+                       ^
+
+"main.cpp", line 363: error: extra text after expected end of preprocessing directive
+    #pragma acc update from (climbs[0:1])
+                            ^
+
+"main.cpp", line 364: error: invalid text in pragma
+    #pragma acc update from (best[0:1])
+                       ^
+
+"main.cpp", line 364: error: OpenACC data clause expected
+    #pragma acc update from (best[0:1])
+                       ^
+
+"main.cpp", line 364: error: extra text after expected end of preprocessing directive
+    #pragma acc update from (best[0:1])
+                            ^
+
+19 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

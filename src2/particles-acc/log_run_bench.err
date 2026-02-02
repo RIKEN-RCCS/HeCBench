@@ -1,0 +1,11 @@
+"main.cpp", line 135: error: invalid text in pragma
+  #pragma acc data to: dPos[0:numParticles], \
+                   ^
+
+"main.cpp", line 135: error: extra text after expected end of preprocessing directive
+  #pragma acc data to: dPos[0:numParticles], \
+                     ^
+
+2 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

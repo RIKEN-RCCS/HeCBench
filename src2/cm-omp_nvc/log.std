@@ -1,0 +1,7 @@
+Changing to current directory 
+The base directory is : /hs/work0/home/users/u0001901/2026/test3/tmp5A/cm-omp_nvc
+Please enter the number of random generations required over 100 and under 1000000 (default 100000): Please enter the number expected number of false positives (ENFP) required, limited to 5 (default 1) :Compound choice 1: Compound
+Compound choice 2: Compound and dose
+Compound choice 3: Compound, dose and cell line
+Compound choice 4: Each profile is individually analysed
+Please enter the number the compound choice (1-4) (default 1) :Could not find a sub-directory with the name query/ within /hs/work0/home/users/u0001901/2026/test3/tmp5A/cm-omp_nvc

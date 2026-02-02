@@ -1,0 +1,183 @@
+"reduction.cpp", line 56: error: invalid text in pragma
+    #pragma acc data to: array[0:arrayLength]) map(alloc: sum)
+                     ^
+
+"reduction.cpp", line 56: error: extra text after expected end of preprocessing directive
+    #pragma acc data to: array[0:arrayLength]) map(alloc: sum)
+                       ^
+
+"reduction.cpp", line 61: error: invalid text in pragma
+        #pragma acc update to(sum)
+                           ^
+
+"reduction.cpp", line 61: error: OpenACC data clause expected
+        #pragma acc update to(sum)
+                           ^
+
+"reduction.cpp", line 61: error: extra text after expected end of preprocessing directive
+        #pragma acc update to(sum)
+                             ^
+
+"reduction.cpp", line 77: error: invalid text in pragma
+          #pragma acc update to(sum)
+                             ^
+
+"reduction.cpp", line 77: error: OpenACC data clause expected
+          #pragma acc update to(sum)
+                             ^
+
+"reduction.cpp", line 77: error: extra text after expected end of preprocessing directive
+          #pragma acc update to(sum)
+                               ^
+
+"reduction.cpp", line 79: error: invalid text in pragma
+          num_teams(blocks) num_threads(threads) reduction(+:sum)
+          ^
+
+"reduction.cpp", line 79: error: extra text after expected end of preprocessing directive
+          num_teams(blocks) num_threads(threads) reduction(+:sum)
+                   ^
+
+"reduction.cpp", line 84: error: invalid text in pragma
+        #pragma acc update from(sum)
+                           ^
+
+"reduction.cpp", line 84: error: OpenACC data clause expected
+        #pragma acc update from(sum)
+                           ^
+
+"reduction.cpp", line 84: error: extra text after expected end of preprocessing directive
+        #pragma acc update from(sum)
+                               ^
+
+"reduction.cpp", line 100: error: invalid text in pragma
+          #pragma acc update to(sum)
+                             ^
+
+"reduction.cpp", line 100: error: OpenACC data clause expected
+          #pragma acc update to(sum)
+                             ^
+
+"reduction.cpp", line 100: error: extra text after expected end of preprocessing directive
+          #pragma acc update to(sum)
+                               ^
+
+"reduction.cpp", line 102: error: invalid text in pragma
+          num_teams(blocks/2) num_threads(threads) reduction(+:sum)
+          ^
+
+"reduction.cpp", line 102: error: extra text after expected end of preprocessing directive
+          num_teams(blocks/2) num_threads(threads) reduction(+:sum)
+                   ^
+
+"reduction.cpp", line 107: error: invalid text in pragma
+        #pragma acc update from(sum)
+                           ^
+
+"reduction.cpp", line 107: error: OpenACC data clause expected
+        #pragma acc update from(sum)
+                           ^
+
+"reduction.cpp", line 107: error: extra text after expected end of preprocessing directive
+        #pragma acc update from(sum)
+                               ^
+
+"reduction.cpp", line 121: error: invalid text in pragma
+          #pragma acc update to(sum)
+                             ^
+
+"reduction.cpp", line 121: error: OpenACC data clause expected
+          #pragma acc update to(sum)
+                             ^
+
+"reduction.cpp", line 121: error: extra text after expected end of preprocessing directive
+          #pragma acc update to(sum)
+                               ^
+
+"reduction.cpp", line 123: error: invalid text in pragma
+          num_teams(blocks/4) num_threads(threads) reduction(+:sum)
+          ^
+
+"reduction.cpp", line 123: error: extra text after expected end of preprocessing directive
+          num_teams(blocks/4) num_threads(threads) reduction(+:sum)
+                   ^
+
+"reduction.cpp", line 128: error: invalid text in pragma
+        #pragma acc update from(sum)
+                           ^
+
+"reduction.cpp", line 128: error: OpenACC data clause expected
+        #pragma acc update from(sum)
+                           ^
+
+"reduction.cpp", line 128: error: extra text after expected end of preprocessing directive
+        #pragma acc update from(sum)
+                               ^
+
+"reduction.cpp", line 142: error: invalid text in pragma
+          #pragma acc update to(sum)
+                             ^
+
+"reduction.cpp", line 142: error: OpenACC data clause expected
+          #pragma acc update to(sum)
+                             ^
+
+"reduction.cpp", line 142: error: extra text after expected end of preprocessing directive
+          #pragma acc update to(sum)
+                               ^
+
+"reduction.cpp", line 144: error: invalid text in pragma
+          num_teams(blocks/8) num_threads(threads) reduction(+:sum)
+          ^
+
+"reduction.cpp", line 144: error: extra text after expected end of preprocessing directive
+          num_teams(blocks/8) num_threads(threads) reduction(+:sum)
+                   ^
+
+"reduction.cpp", line 150: error: invalid text in pragma
+        #pragma acc update from(sum)
+                           ^
+
+"reduction.cpp", line 150: error: OpenACC data clause expected
+        #pragma acc update from(sum)
+                           ^
+
+"reduction.cpp", line 150: error: extra text after expected end of preprocessing directive
+        #pragma acc update from(sum)
+                               ^
+
+"reduction.cpp", line 164: error: invalid text in pragma
+          #pragma acc update to(sum)
+                             ^
+
+"reduction.cpp", line 164: error: OpenACC data clause expected
+          #pragma acc update to(sum)
+                             ^
+
+"reduction.cpp", line 164: error: extra text after expected end of preprocessing directive
+          #pragma acc update to(sum)
+                               ^
+
+"reduction.cpp", line 166: error: invalid text in pragma
+          num_teams(blocks/16) num_threads(threads) reduction(+:sum)
+          ^
+
+"reduction.cpp", line 166: error: extra text after expected end of preprocessing directive
+          num_teams(blocks/16) num_threads(threads) reduction(+:sum)
+                   ^
+
+"reduction.cpp", line 174: error: invalid text in pragma
+        #pragma acc update from(sum)
+                           ^
+
+"reduction.cpp", line 174: error: OpenACC data clause expected
+        #pragma acc update from(sum)
+                           ^
+
+"reduction.cpp", line 174: error: extra text after expected end of preprocessing directive
+        #pragma acc update from(sum)
+                               ^
+
+45 errors detected in the compilation of "reduction.cpp".
+make: *** [Makefile.NVD:58: reduction.o] Error 2
+timeout was set to  600

@@ -1,0 +1,70 @@
+sigmoid_xent_forward(float, float):
+           8, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+sigmoid_partition(float):
+          13, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+sigmoid_xent_forward_with_log_d_trick(float, float):
+          18, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+unjoined_sigmoid_xent_forward(float, float):
+          23, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+reference(int, int, bool, bool, float const*, float const*, float*):
+      7, include "reference.h"
+          39, Invariant if transformation
+              Loop not fused: no successor loop
+              Generated vector simd code for the loop containing reductions
+SigmoidCrossEntropyWithLogitsKernel(int, int, bool, bool, float const*, float const*, float*):
+     19, Generating implicit firstprivate(outer_size)
+         Generating NVIDIA GPU code
+         21, #pragma acc loop gang(outer_size), vector(256) /* blockIdx.x threadIdx.x */
+         24, #pragma acc loop seq
+             Generating reduction(+:value)
+     19, Generating implicit copyin(targets_ptr[:]) [if not already present]
+         Generating implicit copyout(out_ptr[:outer_size]) [if not already present]
+         Generating implicit copyin(logits_ptr[:]) [if not already present]
+     21, Generating implicit firstprivate(inner_size,in_idx)
+         Loop not fused: no successor loop
+     24, Loop is parallelizable
+         Generating implicit firstprivate(unjoined_lr_loss,log_D_trick)
+         Invariant if transformation
+         Loop not fused: no successor loop
+         Generated vector simd code for the loop containing reductions
+main:
+     65, Loop not vectorized/parallelized: potential early exits
+     75, Generating create(h_out[:output_size]) [if not already present]
+         Generating copyin(h_targets[:input_size],h_logits[:input_size]) [if not already present]
+     76, Loop not vectorized/parallelized: too deeply nested
+     84, Loop not vectorized/parallelized: contains call
+          39, Invariant if transformation
+              Loop not fused: no successor loop
+              Generated vector simd code for the loop containing reductions
+    102, Generating update self(h_out[:output_size])
+    103, Loop not vectorized/parallelized: potential early exits
+float std::normal_distribution<float>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&):
+        1821, Loop not fused: function call before adjacent loop
+              Loop not vectorized/parallelized: contains call
+              Loop not vectorized: data dependency
+        1822, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+float std::normal_distribution<float>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&, std::normal_distribution<float>::param_type const&):
+      5, include "random"
+          51, include "random.tcc"
+             1821, Loop not vectorized/parallelized: contains call
+      7, include "reference.h"
+         189, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+         189, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+std::__detail::_Adaptor<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>, float>::operator()():
+        3364, Loop not vectorized: data dependency
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+float std::generate_canonical<float, 24ul, std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&):
+      5, include "random"
+          51, include "random.tcc"
+             3364, Loop not vectorized: data dependency
+      7, include "reference.h"
+timeout was set to  600

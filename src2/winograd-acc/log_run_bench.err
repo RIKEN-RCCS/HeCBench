@@ -1,0 +1,91 @@
+main:
+     15, Loop nest collapsed
+         Loop not vectorized/parallelized: contains call
+     42, Generating copyin(C[:16]) [if not already present]
+         Generating create(B[:1044484]) [if not already present]
+         Generating copyin(A[:1048576]) [if not already present]
+     44, Loop not vectorized/parallelized: too deeply nested
+     73, Generating NVIDIA GPU code
+         75, #pragma acc loop gang, vector(thread_size) collapse(2) blockIdx.x threadIdx.x */
+         76,   /* blockIdx.x threadIdx.x collapsed */
+         80, #pragma acc loop seq
+         81, #pragma acc loop seq
+         93, #pragma acc loop seq
+        100, #pragma acc loop seq
+        110, #pragma acc loop seq
+        111, #pragma acc loop seq
+        121, #pragma acc loop seq
+        126, #pragma acc loop seq
+        131, #pragma acc loop seq
+        132, #pragma acc loop seq
+     73, Local memory used for tmp_tile,input_tile,transformed_tile,tmp_tile_1,multiplied_tile,final_tile
+     75, Loop not fused: no successor loop
+     80, Complex loop carried dependence of input_tile,A-> prevents parallelization
+         Loop not fused: different loop trip count
+         Loop not vectorized/parallelized: loop count too small
+     81, Complex loop carried dependence of input_tile,A-> prevents parallelization
+         Loop unrolled 4 times (completely unrolled)
+     93, Loop is parallelizable
+         Loop unrolled 4 times (completely unrolled)
+    100, Loop is parallelizable
+         Loop unrolled 4 times (completely unrolled)
+    110, Complex loop carried dependence of C->,multiplied_tile prevents parallelization
+         Outer loop unrolled 1 times (completely unrolled)
+    111, Complex loop carried dependence of C->,multiplied_tile prevents parallelization
+         Loop nest collapsed
+         Loop not fused: different loop trip count
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+    121, Loop is parallelizable
+         Loop unrolled 4 times (completely unrolled)
+    126, Loop is parallelizable
+         Loop unrolled 2 times (completely unrolled)
+    131, Complex loop carried dependence of final_tile prevents parallelization
+         Loop carried dependence of B-> prevents parallelization
+         Loop carried backward dependence of B-> prevents vectorization
+         Complex loop carried dependence of B-> prevents parallelization
+         Loop not vectorized/parallelized: loop count too small
+    132, Complex loop carried dependence of final_tile prevents parallelization
+         Loop carried dependence of B-> prevents parallelization
+         Loop carried backward dependence of B-> prevents vectorization
+         Complex loop carried dependence of B-> prevents parallelization
+         Loop unrolled 2 times (completely unrolled)
+    150, Generating update device(B[:offset_i*2044])
+    153, Generating update device(B[:1044484])
+    158, Generating update self(B[:1044484])
+WinogradConv2D_2x2_filter_transformation(float*):
+     30, Loop not fused: different loop trip count
+         Generated vector simd code for the loop
+     37, Loop not vectorized: data dependency
+         Loop unrolled 4 times (completely unrolled)
+WinogradConv2D_2x2_omp(float*, float*, float*, unsigned long*):
+     53, #omp parallel
+        138, Barrier
+     59, Loop not vectorized/parallelized: loop count too small
+     60, Loop unrolled 4 times (completely unrolled)
+     80, Loop unrolled 4 times (completely unrolled)
+     88, Loop unrolled 4 times (completely unrolled)
+     98, Outer loop unrolled 1 times (completely unrolled)
+    100, Loop nest collapsed
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    116, Loop unrolled 4 times (completely unrolled)
+    122, Loop unrolled 2 times (completely unrolled)
+    127, Loop not vectorized/parallelized: loop count too small
+    128, Loop unrolled 2 times (completely unrolled)
+WinogradConv2D_2x2(float*, float*, float*):
+    172, Loop not fused: different loop trip count
+         Loop not vectorized/parallelized: loop count too small
+    173, Loop unrolled 4 times (completely unrolled)
+    192, Loop unrolled 4 times (completely unrolled)
+    199, Loop unrolled 4 times (completely unrolled)
+    209, Outer loop unrolled 1 times (completely unrolled)
+    210, Loop nest collapsed
+         Loop not fused: different loop trip count
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+    225, Loop unrolled 4 times (completely unrolled)
+    230, Loop unrolled 2 times (completely unrolled)
+    235, Loop not vectorized/parallelized: loop count too small
+    236, Loop unrolled 2 times (completely unrolled)
+timeout was set to  600

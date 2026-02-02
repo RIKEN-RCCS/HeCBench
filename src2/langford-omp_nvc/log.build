@@ -1,0 +1,30 @@
+nvc++  -std=c++14 -Wall -I../include -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+ffsll(long):
+    145, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+    146, Loop not vectorized/parallelized: potential early exits
+init_known_results(long (&) [64]):
+    426, Recognized memory zero idiom
+    430, Loop not vectorized: unknown
+main:
+         426, Recognized memory zero idiom
+         430, Loop not vectorized: unknown
+NVC++-W-0155-Compiler failed to translate accelerator region (see -Minfo messages): Missing branch target block (main.cpp: 357)
+void run_gpu_d<7>(std::vector<std::array<signed char, 7>, std::allocator<std::array<signed char, 7>>>&):
+    350, #omp target teams num_teams(blocks_x) thread_limit(4)
+        346, Generating map(tofrom:count[:]) 
+             Generating map(from:results[:100000000]) 
+        350, Generating "nvkernel__Z9run_gpu_dILi7EEvRSt6vectorISt5arrayIaXT_EESaIS2_EE_F1L350_2" GPU kernel
+        357, #omp parallel
+        362, Team private (availability,stack,pgpualigned,open) located in CUDA shared memory
+    350, Generating implicit map(tofrom:count[:]) 
+         267, Loop unrolled 1 times (completely unrolled)
+         289, Loop not vectorized/parallelized: potential early exits
+    384, Loop not vectorized/parallelized: potential early exits
+    387, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 7 times (completely unrolled)
+NVC++-F-0704-Compilation aborted due to previous errors. (main.cpp)
+NVC++/arm Linux 25.9-0: compilation aborted
+make: *** [Makefile.NVD:57: main.o] Error 2

@@ -1,0 +1,6 @@
+2D Burger's equation
+Grid dimension: x = 16000 y = 16000
+Number of time steps: 100
+Total kernel execution time 0.517939 (s)
+Serial computing for verification...
+PASS

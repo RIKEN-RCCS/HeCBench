@@ -1,0 +1,30 @@
+tissue(int const*, float const*, float const*, float*, float const*, float const*, int, int, int, int):
+     32, Generating implicit firstprivate(nnt,step)
+         Generating NVIDIA GPU code
+         34, #pragma acc loop gang /* blockIdx.x */
+         45, #pragma acc loop vector(256) /* threadIdx.x */
+             Generating implicit reduction(+:p)
+         55, #pragma acc loop seq
+     32, Generating implicit copyin(d_gbartt[:]) [if not already present]
+         Generating implicit copy(d_ct[:]) [if not already present]
+         Generating implicit copyin(d_ctprev[:],d_gtt[:],d_tisspoints[:],d_qt[:]) [if not already present]
+     45, Loop is parallelizable
+         Generating implicit firstprivate(nntDev,isp)
+         Loop not vectorized/parallelized: not countable
+     55, Complex loop carried dependence of d_ct-> prevents parallelization
+         Loop carried dependence of d_ct-> prevents parallelization
+         Loop carried backward dependence of d_ct-> prevents vectorization
+main:
+     86, Loop not vectorized/parallelized: contains call
+     89, Loop not vectorized/parallelized: contains call
+     93, Loop not vectorized/parallelized: contains call
+    107, Generating copyin(h_tisspoints[:98304],h_qt[:32768],h_gbartt[:65536],h_ctprev[:32768],h_ct[:32768],h_gtt[:65536]) [if not already present]
+    109, Loop not vectorized/parallelized: contains call
+    115, Loop not vectorized/parallelized: contains call
+    120, Generating update self(h_ct[:32768])
+    122, Loop not vectorized/parallelized: potential early exits
+    135, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     12, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+timeout was set to  600

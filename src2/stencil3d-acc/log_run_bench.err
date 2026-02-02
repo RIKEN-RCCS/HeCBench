@@ -1,0 +1,27 @@
+"main.cpp", line 23: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(bdimz*bdimy*bdimx) thread_limit(BSIZE*BSIZE)
+                         ^
+
+"main.cpp", line 23: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(bdimz*bdimy*bdimx) thread_limit(BSIZE*BSIZE)
+                               ^
+
+"main.cpp", line 39: error: identifier "omp_get_thread_num" is undefined
+        const int tjj = omp_get_thread_num() / BSIZE;
+                        ^
+
+"main.cpp", line 41: error: identifier "omp_get_team_num" is undefined
+        const int blockIdx_x = omp_get_team_num() % bdimx;
+                               ^
+
+"main.cpp", line 183: error: invalid text in pragma
+    #pragma acc data to: h_Vm[0:vol], h_sigma[0:vol*9]) map(tofrom: h_dVm[0:vol])
+                     ^
+
+"main.cpp", line 183: error: extra text after expected end of preprocessing directive
+    #pragma acc data to: h_Vm[0:vol], h_sigma[0:vol*9]) map(tofrom: h_dVm[0:vol])
+                       ^
+
+6 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:62: main.o] Error 2
+timeout was set to  600

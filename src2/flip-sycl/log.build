@@ -1,0 +1,4 @@
+clang++  -std=c++17 -Wall -fsycl -fopenmp -I../flip-cuda           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c main.cpp -o main.o
+clang++: warning: offloading target 'nvptx64-nvidia-cuda' is similar to target 'nvptx64-nvidia-cuda' already specified; will be ignored [-Woffload-target]
+clang++: error: cannot determine nvptx64 architecture: nvptx-arch: posix_spawn failed: No such file or directory; consider passing it via '--offload-arch'; environment variable CLANG_TOOLCHAIN_PROGRAM_TIMEOUT specifies the tool timeout (integer secs, <=0 is infinite)
+make: *** [Makefile.NVD:73: main.o] Error 1

@@ -1,0 +1,39 @@
+"kernel.h", line 12: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(teamX * teamY) thread_limit(tile_cols*tile_rows)
+                         ^
+
+"kernel.h", line 12: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(teamX * teamY) thread_limit(tile_cols*tile_rows)
+                               ^
+
+"kernel.h", line 19: error: identifier "omp_get_team_num" is undefined
+    const uint tile_col_block = omp_get_team_num() % teamX;
+                                ^
+
+"kernel.h", line 21: error: identifier "omp_get_thread_num" is undefined
+    const uint tile_col = omp_get_thread_num() % tile_cols;
+                          ^
+
+"main.cpp", line 42: error: invalid text in pragma
+    #pragma acc data to: input[0:numPix]) map(from: output[0:4*numPix])
+                     ^
+
+"main.cpp", line 42: error: extra text after expected end of preprocessing directive
+    #pragma acc data to: input[0:numPix]) map(from: output[0:4*numPix])
+                       ^
+
+"main.cpp", line 49: error: invalid text in pragma
+        #pragma acc update to(output[0:4*numPix])
+                           ^
+
+"main.cpp", line 49: error: OpenACC data clause expected
+        #pragma acc update to(output[0:4*numPix])
+                           ^
+
+"main.cpp", line 49: error: extra text after expected end of preprocessing directive
+        #pragma acc update to(output[0:4*numPix])
+                             ^
+
+9 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

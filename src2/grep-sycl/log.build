@@ -1,0 +1,13 @@
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c main.cpp -o main.o
+In file included from main.cpp:38:
+./cycleTimer.h:149:46: warning: variable 'GHz' is uninitialized when used here [-Wuninitialized]
+  149 |                 secondsPerTick_val = 1e-6f / GHz;
+      |                                              ^~~
+./cycleTimer.h:131:18: note: initialize the variable 'GHz' to silence this warning
+  131 |         float GHz, MHz;
+      |                  ^
+      |                   = 0.0
+1 warning generated.
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c nfautil.cpp -o nfautil.o
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c regex.cpp -o regex.o
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU main.o nfautil.o regex.o -o nfa 

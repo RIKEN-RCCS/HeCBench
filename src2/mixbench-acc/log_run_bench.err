@@ -1,0 +1,31 @@
+"main.cpp", line 20: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(grid_dim) thread_limit(block_dim)
+                         ^
+
+"main.cpp", line 20: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(grid_dim) thread_limit(block_dim)
+                               ^
+
+"main.cpp", line 26: error: identifier "omp_get_team_num" is undefined
+        int idx = omp_get_team_num()*blockSize*granularity + omp_get_thread_num();
+                  ^
+
+"main.cpp", line 26: error: identifier "omp_get_thread_num" is undefined
+        int idx = omp_get_team_num()*blockSize*granularity + omp_get_thread_num();
+                                                             ^
+
+"main.cpp", line 27: error: identifier "omp_get_gang" is undefined
+        const int big_stride = omp_get_gang()*blockSize*granularity;
+                               ^
+
+"main.cpp", line 64: error: invalid text in pragma
+    #pragma acc data tofrom: cd[0:size]) 
+                     ^
+
+"main.cpp", line 64: error: extra text after expected end of preprocessing directive
+    #pragma acc data tofrom: cd[0:size]) 
+                           ^
+
+7 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:58: main.o] Error 2
+timeout was set to  600

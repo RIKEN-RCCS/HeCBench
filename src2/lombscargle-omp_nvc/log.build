@@ -1,0 +1,25 @@
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+lombscargle_cpu(int, int, float const*, float const*, float const*, float*, float):
+     61, Loop not vectorized/parallelized: contains call
+main:
+    104, Loop not fused: dependence chain to sibling loop
+         Generated vector simd code for the loop
+    107, Loop not fused: different loop trip count
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 4 times
+    110, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+    120, #omp target teams distribute parallel for thread_limit(256)
+        117, Generating map(from:p[:100000]) 
+             Generating map(to:x[:1000],y[:1000],f[:100000]) 
+        120, Generating "nvkernel_main_F1L120_2" GPU kernel
+        122, Loop parallelized across teams and threads(128), schedule(static)
+    120, Loop not vectorized/parallelized: contains call
+    134, Loop not vectorized/parallelized: contains call
+          61, Loop not vectorized/parallelized: contains call
+    167, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     40, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

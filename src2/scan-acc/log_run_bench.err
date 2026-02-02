@@ -1,0 +1,93 @@
+"main.cpp", line 52: error: invalid text in pragma
+    #pragma acc data to: in[0:nelems]) map(alloc: out[0:nelems])
+                     ^
+          detected during instantiation of "void run<N>(int, int) [with N=128]" at line 211
+
+"main.cpp", line 52: error: extra text after expected end of preprocessing directive
+    #pragma acc data to: in[0:nelems]) map(alloc: out[0:nelems])
+                       ^
+          detected during instantiation of "void run<N>(int, int) [with N=128]" at line 211
+
+"main.cpp", line 57: error: invalid text in pragma
+        #pragma acc parallel teams num_teams(num_blocks) thread_limit(N/2)
+                             ^
+          detected during instantiation of "void run<N>(int, int) [with N=128]" at line 211
+
+"main.cpp", line 57: error: extra text after expected end of preprocessing directive
+        #pragma acc parallel teams num_teams(num_blocks) thread_limit(N/2)
+                                   ^
+          detected during instantiation of "void run<N>(int, int) [with N=128]" at line 211
+
+"main.cpp", line 62: error: identifier "omp_get_team_num" is undefined
+            for (int64_t bid = omp_get_team_num(); bid < num_blocks; bid += omp_get_gang())
+                               ^
+          detected during instantiation of "void run<N>(int, int) [with N=128]" at line 211
+
+"main.cpp", line 62: error: identifier "omp_get_gang" is undefined
+            for (int64_t bid = omp_get_team_num(); bid < num_blocks; bid += omp_get_gang())
+                                                                            ^
+          detected during instantiation of "void run<N>(int, int) [with N=128]" at line 211
+
+"main.cpp", line 67: error: identifier "omp_get_thread_num" is undefined
+              int thid = omp_get_thread_num();
+                         ^
+          detected during instantiation of "void run<N>(int, int) [with N=128]" at line 211
+
+"main.cpp", line 112: error: invalid text in pragma
+      #pragma acc update from (out[0:nelems])
+                         ^
+          detected during instantiation of "void run<N>(int, int) [with N=128]" at line 211
+
+"main.cpp", line 112: error: OpenACC data clause expected
+      #pragma acc update from (out[0:nelems])
+                         ^
+          detected during instantiation of "void run<N>(int, int) [with N=128]" at line 211
+
+"main.cpp", line 112: error: extra text after expected end of preprocessing directive
+      #pragma acc update from (out[0:nelems])
+                              ^
+          detected during instantiation of "void run<N>(int, int) [with N=128]" at line 211
+
+"main.cpp", line 118: error: invalid text in pragma
+        #pragma acc parallel teams num_teams(num_blocks) thread_limit(N/2)
+                             ^
+          detected during instantiation of "void run<N>(int, int) [with N=128]" at line 211
+
+"main.cpp", line 118: error: extra text after expected end of preprocessing directive
+        #pragma acc parallel teams num_teams(num_blocks) thread_limit(N/2)
+                                   ^
+          detected during instantiation of "void run<N>(int, int) [with N=128]" at line 211
+
+"main.cpp", line 123: error: identifier "omp_get_team_num" is undefined
+            for (int64_t bid = omp_get_team_num(); bid < num_blocks; bid += omp_get_gang())
+                               ^
+          detected during instantiation of "void run<N>(int, int) [with N=128]" at line 211
+
+"main.cpp", line 123: error: identifier "omp_get_gang" is undefined
+            for (int64_t bid = omp_get_team_num(); bid < num_blocks; bid += omp_get_gang())
+                                                                            ^
+          detected during instantiation of "void run<N>(int, int) [with N=128]" at line 211
+
+"main.cpp", line 128: error: identifier "omp_get_thread_num" is undefined
+              int thid = omp_get_thread_num();
+                         ^
+          detected during instantiation of "void run<N>(int, int) [with N=128]" at line 211
+
+"main.cpp", line 185: error: invalid text in pragma
+      #pragma acc update from (out[0:nelems])
+                         ^
+          detected during instantiation of "void run<N>(int, int) [with N=128]" at line 211
+
+"main.cpp", line 185: error: OpenACC data clause expected
+      #pragma acc update from (out[0:nelems])
+                         ^
+          detected during instantiation of "void run<N>(int, int) [with N=128]" at line 211
+
+"main.cpp", line 185: error: extra text after expected end of preprocessing directive
+      #pragma acc update from (out[0:nelems])
+                              ^
+          detected during instantiation of "void run<N>(int, int) [with N=128]" at line 211
+
+18 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

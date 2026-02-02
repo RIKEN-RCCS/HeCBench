@@ -1,0 +1,89 @@
+MoroInvCNDgpu(unsigned int):
+     35, Generating acc routine seq
+         Generating NVIDIA GPU code
+main:
+    145, Generating copyin(table[:]) [if not already present]
+         Generating create(output[:3145728]) [if not already present]
+    151, Loop not vectorized/parallelized: contains call
+    152, Generating NVIDIA GPU code
+        154, #pragma acc loop gang, vector(szWorkgroup) collapse(2) blockIdx.x threadIdx.x */
+        155,   /* blockIdx.x threadIdx.x collapsed */
+        158, #pragma acc loop seq
+             Generating implicit reduction(^:result)
+    154, Loop not fused: no successor loop
+    155, Outer loop unrolled 3 times (completely unrolled)
+    158, Loop carried scalar dependence for data at line 159
+         Loop not fused: sibling loop may prevent vectorization
+         2 loops fused
+         Loop not vectorized: unknown
+    172, Generating update self(output[:3145728])
+    177, Loop not vectorized/parallelized: contains call
+    199, Loop not vectorized/parallelized: contains call
+    200, Generating NVIDIA GPU code
+        202, #pragma acc loop gang, vector(szWorkgroup) /* blockIdx.x threadIdx.x */
+    202, Loop not fused: no successor loop
+         Generated vector simd code for the loop
+    215, Generating update self(output[:3145728])
+    219, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     21, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+initQuasirandomGenerator(unsigned int*):
+          94, Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: too deeply nested
+          98, Outer loop unrolled 3 times (completely unrolled)
+         100, Loop not vectorized/parallelized: not countable
+         104, Generated vector simd code for the loop
+         123, Loop not vectorized/parallelized: too deeply nested
+         125, Loop not vectorized: unprofitable for target
+              Loop unrolled 8 times
+         130, Loop not vectorized/parallelized: not countable
+         141, Recognized memory copy idiom
+         148, Loop not vectorized/parallelized: potential early exits
+         157, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+         160, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+         163, Loop not fused: different loop trip count
+         165, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+         172, Loop not vectorized: unprofitable for target
+              Loop unrolled 2 times
+    190, Outer loop unrolled 3 times (completely unrolled)
+    191, Loop not fused: dependence chain to sibling loop
+         Generated vector simd code for the loop
+getQuasirandomValue63(long long, int):
+    203, Loop not vectorized: unknown
+_INTERNAL_13_reference_cpp_6612d3cd::GeneratePolynomials(int*, bool):
+     27, Loop not vectorized/parallelized: too deeply nested
+     29, Invariant if transformation
+         Loop not vectorized/parallelized: too deeply nested
+     31, Loop not vectorized/parallelized: not countable
+     36, Loop not vectorized/parallelized: not countable
+     40, Loop not vectorized/parallelized: not countable
+     56, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_13_reference_cpp_6612d3cd::GenerateCJ():
+          27, Loop not vectorized/parallelized: too deeply nested
+          31, Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: too deeply nested
+          36, Loop not vectorized/parallelized: not countable
+          40, Loop not vectorized/parallelized: not countable
+     98, Outer loop unrolled 3 times (completely unrolled)
+    100, Loop not vectorized/parallelized: not countable
+    104, Generated vector simd code for the loop
+    123, Loop not vectorized/parallelized: too deeply nested
+    125, Loop not vectorized: unprofitable for target
+         Loop unrolled 8 times
+    130, Loop not vectorized/parallelized: not countable
+    141, Recognized memory copy idiom
+    148, Loop not vectorized/parallelized: potential early exits
+    157, Loop not fused: different loop trip count
+         Generated vector simd code for the loop
+    160, Loop not fused: different loop trip count
+         Generated vector simd code for the loop
+    163, Loop not fused: different loop trip count
+    165, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    172, Loop not vectorized: unprofitable for target
+         Loop unrolled 2 times
+timeout was set to  600

@@ -1,0 +1,46 @@
+convert_float4(uchar4):
+          17, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+convert_uchar4_sat(float4):
+          26, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+ran1(int, int*):
+     23, include "kernel.cpp"
+          41, Generating acc routine seq
+              Generating NVIDIA GPU code
+          46, Loop not vectorized: unknown
+operator+(float4, float):
+     23, include "kernel.cpp"
+          74, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+main:
+         375, Loop not vectorized/parallelized: not countable
+     91, Generating copyout(outputImageData[:size]) [if not already present]
+         Generating copyin(inputImageData[:size]) [if not already present]
+     94, Loop not vectorized/parallelized: contains call
+     97, Generating implicit firstprivate(size)
+         Generating NVIDIA GPU code
+         46, #pragma acc loop seq
+        100, #pragma acc loop gang(teams), vector(256) /* blockIdx.x threadIdx.x */
+     97, Local memory used for .inl_res_463,.inl_.X8135_453,.inl__T1_8135_452,.inl_res_450,.inl_.X8136_474,.inl__T2_8136_473,temp,iv,.inl_.X8138_462,.inl__T3_8138_459
+         CUDA shared memory used for iv
+    100, Loop not fused: no successor loop
+          46, Loop carried scalar dependence for .inl_idum_457 at line 46,48
+              Scalar last value needed after loop for .inl_idum_457 at line 58,60
+              Loop not vectorized: unknown
+    123, Multiple reductions compressed
+         Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+SDKBitMap::load(char const*):
+     22, include "urng.h"
+          20, include "SDKBitMap.h"
+              373, Loop not fused: function call before adjacent loop
+              375, Loop not fused: complex flow graph
+                   Loop not vectorized: data dependency
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     17, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+     23, include "kernel.cpp"
+std::basic_ostream<char, std::char_traits<char>>& std::endl<char, std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&):
+     22, include "urng.h"
+timeout was set to  600

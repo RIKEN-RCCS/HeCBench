@@ -1,0 +1,63 @@
+main:
+         236, Generated vector simd code for the loop
+runTest(int, char const**):
+    236, Generated vector simd code for the loop
+generateRandomData(float*, int, int, int, float, float):
+     24, Loop nest collapsed
+         Loop not vectorized/parallelized: contains call
+generatePatternData(float*, int, int, int, float, float):
+     39, Generated vector simd code for the loop
+         Loop unrolled 8 times
+fdtdReference(float*, float const*, float const*, int, int, int, int, int):
+     95, Loop not vectorized/parallelized: too deeply nested
+    100, Loop not vectorized/parallelized: too deeply nested
+    109, Multiple reductions compressed
+         Loop not fused: no successor loop
+         Generated vector simd code for postive and negative strides
+compareData(float const*, float const*, int, int, int, int, float):
+    149, Loop not vectorized/parallelized: potential early exits
+"FDTD3dGPU.cpp", line 62: error: invalid text in pragma
+      #pragma acc data to: bufferIn[0:paddedVolumeSize], \
+                       ^
+
+"FDTD3dGPU.cpp", line 62: error: extra text after expected end of preprocessing directive
+      #pragma acc data to: bufferIn[0:paddedVolumeSize], \
+                         ^
+
+"FDTD3dGPU.cpp", line 70: error: invalid text in pragma
+        #pragma acc parallel teams num_teams(numTeam) thread_limit(userWorkSize)
+                             ^
+
+"FDTD3dGPU.cpp", line 70: error: extra text after expected end of preprocessing directive
+        #pragma acc parallel teams num_teams(numTeam) thread_limit(userWorkSize)
+                                   ^
+
+"FDTD3dGPU.cpp", line 76: error: identifier "omp_get_thread_num" is undefined
+            const int ltidx = omp_get_thread_num() % k_localWorkX;
+                              ^
+
+"FDTD3dGPU.cpp", line 80: error: identifier "omp_get_team_num" is undefined
+            const int gtidx = (omp_get_team_num() % teamX) * workx + ltidx;
+                               ^
+
+"FDTD3dGPU.cpp", line 189: error: invalid text in pragma
+      #pragma acc update from (bufferIn[0:paddedVolumeSize])
+                         ^
+
+"FDTD3dGPU.cpp", line 189: error: OpenACC data clause expected
+      #pragma acc update from (bufferIn[0:paddedVolumeSize])
+                         ^
+
+"FDTD3dGPU.cpp", line 189: error: extra text after expected end of preprocessing directive
+      #pragma acc update from (bufferIn[0:paddedVolumeSize])
+                              ^
+
+"FDTD3dGPU.cpp", line 54: warning: variable "numTeam" was declared but never referenced [declared_but_not_referenced]
+      int numTeam = teamX * teamY;
+          ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+9 errors detected in the compilation of "FDTD3dGPU.cpp".
+make: *** [Makefile.NVD:59: FDTD3dGPU.o] Error 2
+timeout was set to  600

@@ -1,0 +1,14 @@
+CPU offset: 0
+Total execution time: 8133.245945 ms
+Average kernel execution time: 7.848889 us
+
+> TEMPERATURE REGRESSION (96453)
+
+	Parallelized
+	--------
+	| Equation: y = -0.013x + 0.889
+
+	Iterative
+	--------
+	| Equation: y = -0.013x + 0.889
+

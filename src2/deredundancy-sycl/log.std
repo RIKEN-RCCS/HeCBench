@@ -1,0 +1,7 @@
+input:	../deredundancy-sycl/testData.fasta
+output:	result.fasta
+threshold:	0.95
+word length:	6
+reads count:	10000
+Device offload time 15.476499 secs 
+cluster count: 1357

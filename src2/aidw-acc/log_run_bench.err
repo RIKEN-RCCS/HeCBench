@@ -1,0 +1,59 @@
+"main.cpp", line 47: error: invalid text in pragma
+    #pragma acc parallel loop thread_limit(BLOCK_SIZE)
+                              ^
+
+"main.cpp", line 47: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop thread_limit(BLOCK_SIZE)
+                                          ^
+
+"main.cpp", line 93: error: invalid text in pragma
+    #pragma acc parallel teams num_teams((inum+BLOCK_SIZE-1)/BLOCK_SIZE) thread_limit(BLOCK_SIZE)
+                         ^
+
+"main.cpp", line 93: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams((inum+BLOCK_SIZE-1)/BLOCK_SIZE) thread_limit(BLOCK_SIZE)
+                               ^
+
+"main.cpp", line 100: error: identifier "omp_get_thread_num" is undefined
+        int lid = omp_get_thread_num();
+                  ^
+
+"main.cpp", line 101: error: identifier "omp_get_team_num" is undefined
+        int tid = omp_get_team_num() * BLOCK_SIZE + lid;
+                  ^
+
+"main.cpp", line 217: error: invalid text in pragma
+  #pragma acc data to: d_dx[0:dnum], \
+                   ^
+
+"main.cpp", line 217: error: extra text after expected end of preprocessing directive
+  #pragma acc data to: d_dx[0:dnum], \
+                     ^
+
+"main.cpp", line 227: error: invalid text in pragma
+      #pragma acc update from (d_iz[0:inum])
+                         ^
+
+"main.cpp", line 227: error: OpenACC data clause expected
+      #pragma acc update from (d_iz[0:inum])
+                         ^
+
+"main.cpp", line 227: error: extra text after expected end of preprocessing directive
+      #pragma acc update from (d_iz[0:inum])
+                              ^
+
+"main.cpp", line 235: error: invalid text in pragma
+      #pragma acc update from (d_iz[0:inum])
+                         ^
+
+"main.cpp", line 235: error: OpenACC data clause expected
+      #pragma acc update from (d_iz[0:inum])
+                         ^
+
+"main.cpp", line 235: error: extra text after expected end of preprocessing directive
+      #pragma acc update from (d_iz[0:inum])
+                              ^
+
+14 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

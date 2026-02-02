@@ -1,0 +1,23 @@
+"main.cpp", line 64: error: invalid text in pragma
+  #pragma acc parallel data map (to: h_Apoints[0:num_Apoints], \
+                       ^
+
+"main.cpp", line 64: error: extra text after expected end of preprocessing directive
+  #pragma acc parallel data map (to: h_Apoints[0:num_Apoints], \
+                            ^
+
+"main.cpp", line 72: error: invalid text in pragma
+        #pragma acc update to (h_distance[0:2])
+                           ^
+
+"main.cpp", line 72: error: OpenACC data clause expected
+        #pragma acc update to (h_distance[0:2])
+                           ^
+
+"main.cpp", line 72: error: extra text after expected end of preprocessing directive
+        #pragma acc update to (h_distance[0:2])
+                              ^
+
+5 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

@@ -1,0 +1,79 @@
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -DOUTPUT -c euler3d.cpp -o euler3d.o
+"euler3d.cpp", line 44: warning: #warning directive: "the kernels may fail too launch on some systems if the block length is too large" [warning_directive]
+  #warning "the kernels may fail too launch on some systems if the block length is too large"
+   ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+compute_velocity(float, Float3, Float3*):
+     61, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+compute_speed_sqd(Float3):
+     69, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+compute_pressure(float, float, float):
+     75, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+compute_speed_of_sound(float, float):
+     81, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+compute_flux_contribution(float, Float3, float, float, Float3, Float3*, Float3*, Float3*, Float3*):
+     88, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+copy(float*, float const*, int):
+    111, Function 'copy(float*, float const*, int)' contains target construct. The device function is not generated
+         #omp target teams distribute parallel for thread_limit(256)
+        111, Generating "nvkernel__Z4copyPfPKfi_F1L111_2" GPU kernel
+        113, Loop parallelized across teams and threads(128), schedule(static)
+    113, Loop not vectorized/parallelized: not countable
+dump(float*, int, int):
+    123, Loop not vectorized/parallelized: potential early exits
+    131, Loop not vectorized/parallelized: potential early exits
+    140, Loop not vectorized/parallelized: potential early exits
+initialize_buffer(float*, float, int):
+    145, Function 'initialize_buffer(float*, float, int)' contains target construct. The device function is not generated
+         #omp target teams distribute parallel for thread_limit(256)
+        145, Generating "nvkernel__Z17initialize_bufferPffi_F1L145_6" GPU kernel
+        147, Loop parallelized across teams and threads(128), schedule(static)
+    147, Loop not vectorized/parallelized: not countable
+initialize_variables(int, float*, float*):
+    155, Function 'initialize_variables(int, float*, float*)' contains target construct. The device function is not generated
+         #omp target teams distribute parallel for thread_limit(192)
+        155, Generating "nvkernel__Z20initialize_variablesiPfS__F1L155_10" GPU kernel
+        158, Loop parallelized across teams and threads(128), schedule(static)
+    158, Loop not vectorized/parallelized: not countable
+    159, Loop not vectorized: data dependency
+         Loop unrolled 5 times (completely unrolled)
+compute_step_factor(int, float*, float*, float*):
+    165, Function 'compute_step_factor(int, float*, float*, float*)' contains target construct. The device function is not generated
+         #omp target teams distribute parallel for thread_limit(192)
+        165, Generating "nvkernel__Z19compute_step_factoriPfS_S__F1L165_14" GPU kernel
+        168, Loop parallelized across teams and threads(128), schedule(static)
+    168, Loop not vectorized/parallelized: not countable
+compute_flux(int, int*, float*, float*, float*, float*, Float3, Float3, Float3, Float3):
+    198, Function 'compute_flux(int, int*, float*, float*, float*, float*, Float3, Float3, Float3, Float3)' contains target construct. The device function is not generated
+         #omp target teams distribute parallel for thread_limit(192)
+        198, Generating "nvkernel__Z12compute_fluxiPiPfS0_S0_S0_6Float3S1_S1_S1__F1L198_18" GPU kernel
+        201, Loop parallelized across teams and threads(128), schedule(static)
+    198, Generating implicit map(tofrom:ff_flux_contribution_density_energy,ff_flux_contribution_momentum_x,ff_flux_contribution_momentum_z,ff_flux_contribution_momentum_y) 
+    243, Loop not vectorized/parallelized: loop count too small
+time_step(int, int, float const*, float*, float const*, float const*):
+    343, Function 'time_step(int, int, float const*, float*, float const*, float const*)' contains target construct. The device function is not generated
+         #omp target teams distribute parallel for thread_limit(192)
+        343, Generating "nvkernel__Z9time_stepiiPKfPfS0_S0__F1L343_22" GPU kernel
+        346, Loop parallelized across teams and threads(128), schedule(static)
+    346, Loop not vectorized/parallelized: not countable
+main:
+    458, Loop not vectorized/parallelized: potential early exits
+    468, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+    471, Loop unrolled 4 times (completely unrolled)
+    475, Loop unrolled 3 times (completely unrolled)
+    491, Generating map(to:h_elements_surrounding_elements[:nelr*4],h_areas[:nelr]) 
+         Generating map(alloc:h_fluxes[:nelr*5]) 
+         Generating map(to:h_ff_variable[:],h_normals[:nelr*12]) 
+         Generating map(alloc:h_old_variables[:nelr*5]) 
+         Generating map(from:h_variables[:nelr*5]) 
+         Generating map(alloc:h_step_factors[:nelr]) 
+    517, Loop not vectorized/parallelized: contains call
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -DOUTPUT euler3d.o -o main 

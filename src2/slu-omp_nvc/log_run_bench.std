@@ -1,0 +1,1 @@
+nvc++  -std=c++14 -Wall -I../slu-cuda/src/../include           -I../slu-cuda/src/nicslu/include           -I../slu-cuda/src/nicslu/util -O3 -DVERIFY -Minfo -mp=gpu -gpu=cc90 -c ../slu-cuda/src/preprocess.cpp -o preprocess.o

@@ -1,0 +1,1 @@
+nvc++ -acc	  ./main.cpp 		  -I./util/timer/ 		  -I./util/file/ 			-c 			-o ./main.o 

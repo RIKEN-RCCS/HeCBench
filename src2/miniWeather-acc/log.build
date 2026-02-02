@@ -1,0 +1,196 @@
+mpic++ -acc  -std=c++14 -Wall 	-DNX=400        	-DNZ=200 	-DSIM_TIME=600 	-DDATA_SPEC=DATA_SPEC_THERMAL         -I../miniWeather-cuda/ -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+"main.cpp", line 364: warning: variable "ierr" was set but never used [set_but_not_used]
+    int k, ll, ind_r, ind_u, ind_t, i, s, ierr;
+                                          ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"main.cpp", line 467: warning: variable "ierr" was set but never used [set_but_not_used]
+    int    i, k, ii, kk, ll, ierr, inds, i_end;
+                             ^
+
+"main.cpp", line 738: warning: variable "ierr" was set but never used [set_but_not_used]
+    int ierr;
+        ^
+
+main:
+    148, Generating copyin(state[:((nx+4)*(nz+4))*4]) [if not already present]
+         Generating create(sendbuf_r[:nz*8],flux[:((nz+1)*(nx+1))*4]) [if not already present]
+         Generating copyin(hy_dens_int[:nz+1],hy_dens_cell[:nz+4],hy_dens_theta_cell[:nz+4],hy_dens_theta_int[:nz+1]) [if not already present]
+         Generating create(tend[:(nx*nz)*4]) [if not already present]
+         Generating copyin(state_tmp[:((nx+4)*(nz+4))*4]) [if not already present]
+         Generating create(recvbuf_r[:nz*8],sendbuf_l[:nz*8]) [if not already present]
+         Generating copyin(hy_pressure_int[:nz+1]) [if not already present]
+         Generating create(recvbuf_l[:nz*8]) [if not already present]
+    156, Loop not vectorized/parallelized: contains call
+semi_discrete_step(double*, double*, double*, double, int, double*, double*):
+    231, Generating implicit firstprivate(nx,nz)
+         Generating NVIDIA GPU code
+        231, #pragma acc loop gang, vector(128) collapse(3) /* blockIdx.x threadIdx.x */
+        232,   /* blockIdx.x threadIdx.x collapsed */
+        233,   /* blockIdx.x threadIdx.x collapsed */
+    231, Generating implicit copyin(tend[:]) [if not already present]
+         Generating implicit copyout(state_out[:]) [if not already present]
+         Generating implicit copyin(state_init[:]) [if not already present]
+         Outer loop unrolled 4 times (completely unrolled)
+    232, Loop not fused: dependence chain to sibling loop
+         Loop not fused: no successor loop
+    233, Generating implicit firstprivate(dt)
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Vectorized loop was interleaved
+         Loop unrolled 4 times
+compute_tendencies_x(double*, double*, double*):
+    254, Generating implicit firstprivate(nz,nx)
+         Generating NVIDIA GPU code
+        254, #pragma acc loop gang, vector(128) collapse(2) /* blockIdx.x threadIdx.x */
+        255,   /* blockIdx.x threadIdx.x collapsed */
+        257, #pragma acc loop seq
+        258, #pragma acc loop seq
+    254, Local memory used for d3_vals,stencil,vals
+         Generating implicit copyin(hy_dens_cell[2:nz]) [if not already present]
+         Generating implicit copyout(flux[:]) [if not already present]
+         Generating implicit copyin(hy_dens_theta_cell[2:nz],state[:]) [if not already present]
+         Loop not fused: no successor loop
+    255, Generating implicit firstprivate(hv_coef)
+         Loop not vectorized: data dependency
+    257, Loop carried reuse of stencil prevents parallelization
+         Complex loop carried dependence of vals,d3_vals,state->,stencil prevents parallelization
+         Loop unrolled 4 times (completely unrolled)
+    258, Complex loop carried dependence of state->,stencil prevents parallelization
+         Loop unrolled 4 times (completely unrolled)
+    285, Generating implicit firstprivate(nx,nz)
+         Generating NVIDIA GPU code
+        285, #pragma acc loop gang, vector(128) collapse(3) /* blockIdx.x threadIdx.x */
+        286,   /* blockIdx.x threadIdx.x collapsed */
+        287,   /* blockIdx.x threadIdx.x collapsed */
+    285, Generating implicit copyout(tend[:]) [if not already present]
+         Generating implicit copyin(flux[:]) [if not already present]
+         Outer loop unrolled 4 times (completely unrolled)
+    286, Loop not fused: dependence chain to sibling loop
+         Loop not fused: no successor loop
+    287, Generating implicit firstprivate(dx)
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 2 times
+compute_tendencies_z(double*, double*, double*):
+    309, Generating implicit firstprivate(nz,nx)
+         Generating NVIDIA GPU code
+        309, #pragma acc loop gang, vector(128) collapse(2) /* blockIdx.x threadIdx.x */
+        310,   /* blockIdx.x threadIdx.x collapsed */
+        312, #pragma acc loop seq
+        313, #pragma acc loop seq
+    309, Local memory used for d3_vals,vals,stencil
+         Generating implicit copyin(hy_dens_theta_int[:nz+1],hy_dens_int[:nz+1]) [if not already present]
+         Generating implicit copyout(flux[:]) [if not already present]
+         Generating implicit copyin(state[:],hy_pressure_int[:nz+1]) [if not already present]
+         Loop not fused: no successor loop
+    310, Generating implicit firstprivate(hv_coef)
+         Loop not vectorized: data dependency
+    312, Loop carried reuse of stencil prevents parallelization
+         Complex loop carried dependence of vals,d3_vals,state->,stencil prevents parallelization
+         Loop unrolled 4 times (completely unrolled)
+    313, Complex loop carried dependence of state->,stencil prevents parallelization
+         Loop unrolled 4 times (completely unrolled)
+    345, Generating implicit firstprivate(nz,nx)
+         Generating NVIDIA GPU code
+        345, #pragma acc loop gang, vector(128) collapse(3) /* blockIdx.x threadIdx.x */
+        346,   /* blockIdx.x threadIdx.x collapsed */
+        347,   /* blockIdx.x threadIdx.x collapsed */
+    345, Generating implicit copyin(flux[:]) [if not already present]
+         Generating implicit copy(tend[:]) [if not already present]
+         Generating implicit copyin(state[:]) [if not already present]
+         Invariant if transformation
+         Loop not fused: no successor loop
+         Loop not vectorized/parallelized: loop count too small
+    346, Invariant if transformation
+    347, Generating implicit private(inds,dz)
+         Invariant if transformation
+         Loop not fused: no successor loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 2 times
+set_halo_values_x(double*):
+    374, Generating implicit firstprivate(nz)
+         Generating NVIDIA GPU code
+        374, #pragma acc loop gang, vector(128) collapse(3) /* blockIdx.x threadIdx.x */
+        375,   /* blockIdx.x threadIdx.x collapsed */
+        376,   /* blockIdx.x threadIdx.x collapsed */
+    374, Generating implicit copy(sendbuf_l[:],sendbuf_r[:]) [if not already present]
+         Generating implicit copyin(state[:]) [if not already present]
+         Outer loop unrolled 4 times (completely unrolled)
+    375, Loop not fused: dependence chain to sibling loop
+         Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    376, Generating implicit firstprivate(nx)
+         Loop unrolled 2 times (completely unrolled)
+    386, Generating update self(sendbuf_r[:nz*8],sendbuf_l[:nz*8])
+    396, Generating update device(recvbuf_r[:nz*8],recvbuf_l[:nz*8])
+         Generating implicit firstprivate(nz)
+         Generating NVIDIA GPU code
+        396, #pragma acc loop gang, vector(128) collapse(3) /* blockIdx.x threadIdx.x */
+        397,   /* blockIdx.x threadIdx.x collapsed */
+        398,   /* blockIdx.x threadIdx.x collapsed */
+    396, Generating implicit copyout(state[:]) [if not already present]
+         Generating implicit copyin(recvbuf_r[:],recvbuf_l[:]) [if not already present]
+         Outer loop unrolled 4 times (completely unrolled)
+    397, Loop not fused: dependence chain to sibling loop
+         Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    398, Generating implicit firstprivate(nx)
+         Loop unrolled 2 times (completely unrolled)
+    411, Generating implicit firstprivate(nz)
+         Generating NVIDIA GPU code
+        411, #pragma acc loop gang, vector(128) collapse(2) /* blockIdx.x threadIdx.x */
+        412,   /* blockIdx.x threadIdx.x collapsed */
+    411, Generating implicit copyin(hy_dens_cell[2:nz]) [if not already present]
+         Generating implicit copy(state[:]) [if not already present]
+         Generating implicit copyin(hy_dens_theta_cell[2:nz]) [if not already present]
+         Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+    412, Generating implicit firstprivate(dz,nx,k_beg)
+         Loop unrolled 2 times (completely unrolled)
+set_halo_values_z(double*):
+    436, Generating implicit firstprivate(nx)
+         Generating NVIDIA GPU code
+        436, #pragma acc loop gang, vector(128) collapse(2) /* blockIdx.x threadIdx.x */
+        437,   /* blockIdx.x threadIdx.x collapsed */
+    436, Generating implicit copy(state[:]) [if not already present]
+         Invariant if transformation
+         Loop not fused: no successor loop
+         Loop not vectorized/parallelized: loop count too small
+    437, Generating implicit firstprivate(nz,i_beg,data_spec_int,dx)
+         Invariant if transformation
+         Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+init(int*, char***):
+    532, Loop not fused: different loop trip count
+         Loop not vectorized/parallelized: too deeply nested
+    535, Loop unrolled 4 times (completely unrolled)
+    541, Loop not vectorized/parallelized: loop count too small
+    565, Loop unrolled 4 times (completely unrolled)
+    572, Loop not fused: different loop trip count
+    575, Loop not vectorized/parallelized: loop count too small
+    589, Loop not vectorized: data dependency
+reductions(double&, double&):
+    761, Generating copy(mass[:1]) [if not already present]
+         Generating implicit copyin(hy_dens_theta_cell[2:nz]) [if not already present]
+         Generating copy(te[:1]) [if not already present]
+         Generating copyin(state[:((nx+4)*(nz+4))*4]) [if not already present]
+         Generating implicit firstprivate(nz,nx)
+         Generating NVIDIA GPU code
+        763, #pragma acc loop gang, vector(128) collapse(2) /* blockIdx.x threadIdx.x */
+             Generating reduction(+:te[:1],mass[:1])
+        764,   /* blockIdx.x threadIdx.x collapsed */
+    761, Local memory used for mass,te
+         Generating implicit copyin(hy_dens_cell[2:nz]) [if not already present]
+    763, Loop not fused: no successor loop
+    764, Generating implicit firstprivate(dz,dx)
+         Loop not vectorized: data dependency
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     14, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+mpic++ -acc  -std=c++14 -Wall 	-DNX=400        	-DNZ=200 	-DSIM_TIME=600 	-DDATA_SPEC=DATA_SPEC_THERMAL         -I../miniWeather-cuda/ -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

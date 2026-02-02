@@ -1,0 +1,33 @@
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c CRC64.cpp -o CRC64.o
+CRC64.cpp:549:24: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+  549 |     uint64_t thread_cs[nthreads];
+      |                        ^~~~~~~~
+CRC64.cpp:549:24: note: read of non-const variable 'nthreads' is not allowed in a constant expression
+CRC64.cpp:544:9: note: declared here
+  544 |     int nthreads = 96*8*32;
+      |         ^
+CRC64.cpp:550:22: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+  550 |     size_t thread_sz[nthreads];
+      |                      ^~~~~~~~
+CRC64.cpp:550:22: note: read of non-const variable 'nthreads' is not allowed in a constant expression
+CRC64.cpp:544:9: note: declared here
+  544 |     int nthreads = 96*8*32;
+      |         ^
+2 warnings generated.
+CRC64.cpp:549:24: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+  549 |     uint64_t thread_cs[nthreads];
+      |                        ^~~~~~~~
+CRC64.cpp:549:24: note: read of non-const variable 'nthreads' is not allowed in a constant expression
+CRC64.cpp:544:9: note: declared here
+  544 |     int nthreads = 96*8*32;
+      |         ^
+CRC64.cpp:550:22: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+  550 |     size_t thread_sz[nthreads];
+      |                      ^~~~~~~~
+CRC64.cpp:550:22: note: read of non-const variable 'nthreads' is not allowed in a constant expression
+CRC64.cpp:544:9: note: declared here
+  544 |     int nthreads = 96*8*32;
+      |         ^
+2 warnings generated.
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c CRC64Test.cpp -o CRC64Test.o
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU CRC64.o CRC64Test.o -o main 

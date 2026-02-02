@@ -1,0 +1,22 @@
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c main.cpp -o main.o
+main.cpp:77:20: warning: variable 'qle' is uninitialized when passed as a const pointer argument here [-Wuninitialized-const-pointer]
+   77 |   q.memcpy(d_qle, &qle, sizeof(int));
+      |                    ^~~
+main.cpp:80:20: warning: variable 'tle' is uninitialized when passed as a const pointer argument here [-Wuninitialized-const-pointer]
+   80 |   q.memcpy(d_tle, &tle, sizeof(int));
+      |                    ^~~
+main.cpp:83:21: warning: variable 'gtle' is uninitialized when passed as a const pointer argument here [-Wuninitialized-const-pointer]
+   83 |   q.memcpy(d_gtle, &gtle, sizeof(int));
+      |                     ^~~~
+main.cpp:86:23: warning: variable 'gscore' is uninitialized when passed as a const pointer argument here [-Wuninitialized-const-pointer]
+   86 |   q.memcpy(d_gscore, &gscore, sizeof(int));
+      |                       ^~~~~~
+main.cpp:89:24: warning: variable 'max_off' is uninitialized when passed as a const pointer argument here [-Wuninitialized-const-pointer]
+   89 |   q.memcpy(d_max_off, &max_off, sizeof(int));
+      |                        ^~~~~~~
+main.cpp:92:22: warning: variable 'score' is uninitialized when passed as a const pointer argument here [-Wuninitialized-const-pointer]
+   92 |   q.memcpy(d_score, &score, sizeof(int));
+      |                      ^~~~~
+6 warnings generated.
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c read_data.cpp -o read_data.o
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU main.o read_data.o -o main 

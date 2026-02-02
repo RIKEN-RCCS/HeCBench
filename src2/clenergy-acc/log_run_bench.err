@@ -1,0 +1,31 @@
+copyatoms(float*, int, float, float4*):
+     46, Generated vector simd code for the loop
+     54, Generating update device(atominfo[:count])
+initatoms(float**, int, int3, float):
+     72, Loop not vectorized/parallelized: contains call
+main:
+          72, Loop not vectorized/parallelized: contains call
+    147, Generating enter data create(atominfo[:4000],energy[:volmem])
+         Generating implicit firstprivate(volmem)
+         Generating NVIDIA GPU code
+        149, #pragma acc loop vector(128) /* threadIdx.x */
+    147, Generating implicit copyout(energy[:volmem]) [if not already present]
+    149, Loop is parallelizable
+         Recognized memory zero idiom
+    153, Loop not vectorized/parallelized: too deeply nested
+    174, Generating copyin(volsize) [if not already present]
+         Generating implicit copy(energy[:]) [if not already present]
+         Generating NVIDIA GPU code
+        177, #pragma acc loop gang collapse(2) /* blockIdx.x */
+        178,   /* blockIdx.x collapsed */
+        198, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:energyvalx8,energyvalx7,energyvalx6,energyvalx5,energyvalx4,energyvalx3,energyvalx2,energyvalx1)
+    174, Generating implicit copyin(atominfo[:runatoms]) [if not already present]
+    177, Loop not fused: no successor loop
+    178, Generating implicit firstprivate(gridspacing)
+    198, Loop is parallelizable
+         Generated vector simd code for the loop containing reductions
+    241, Generating exit data copyout(energy[:volmem])
+         Generating exit data delete(atominfo[:4000])
+    246, Loop not vectorized/parallelized: contains call
+timeout was set to  600

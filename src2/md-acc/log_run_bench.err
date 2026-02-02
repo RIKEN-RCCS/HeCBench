@@ -1,0 +1,142 @@
+md(float4 const*, float4*, int const*, int, int, float, float, float):
+     22, Generating implicit firstprivate(nAtom,maxNeighbors)
+         Generating NVIDIA GPU code
+         24, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+         29, #pragma acc loop seq
+     22, Local memory used for f,jpos,ipos
+         Generating implicit copyout(force[:nAtom]) [if not already present]
+         Generating implicit copyin(position[:],neighborList[:]) [if not already present]
+     24, Loop not fused: no successor loop
+     29, Scalar last value needed after loop for f.x at line 55
+         Scalar last value needed after loop for f.y at line 55
+         Scalar last value needed after loop for f.z at line 55
+         Generating implicit firstprivate(cutsq_t,lj1_t,lj2_t)
+         Scalar last value needed after loop for f.z at line 55
+         Loop not vectorized: unsupported gather
+main:
+     88, Loop not vectorized/parallelized: contains call
+    104, Generating copyin(neighborList[:nAtom*128],position[:nAtom]) [if not already present]
+         Generating create(force[:nAtom]) [if not already present]
+    117, Generating update self(force[:nAtom])
+          25, Loop not vectorized/parallelized: contains call
+          30, Loop not fused: function call before adjacent loop
+              Loop not vectorized: unsupported gather
+    123, Loop not vectorized/parallelized: contains call
+int buildNeighborList<float, float4>(int, float4 const*, int*):
+     11, include "utils.h"
+         140, Loop not vectorized/parallelized: potential early exits
+         500, Loop not vectorized/parallelized: contains call
+         500, Loop not vectorized/parallelized: contains call
+         500, Loop not vectorized/parallelized: contains call
+         500, Loop not vectorized/parallelized: contains call
+bool checkResults<float, float4, float4>(float4*, float4*, int*, int):
+     10, include "reference.h"
+          25, Loop not vectorized/parallelized: potential early exits
+          30, Loop not fused: function call before adjacent loop
+              Loop not vectorized: unsupported gather
+void insertInOrder<float>(std::__cxx11::list<float, std::allocator<float>>&, std::__cxx11::list<int, std::allocator<int>>&, int, float, int):
+     11, include "utils.h"
+          88, Loop not vectorized/parallelized: potential early exits
+int populateNeighborList<float>(std::__cxx11::list<float, std::allocator<float>>&, std::__cxx11::list<int, std::allocator<int>>&, int, int, int*):
+     11, include "utils.h"
+         198, Loop not vectorized/parallelized: not countable
+std::__cxx11::_List_base<int, std::allocator<int>>::~_List_base():
+          71, Loop not vectorized/parallelized: contains call
+std::__cxx11::_List_base<int, std::allocator<int>>::~_List_base():
+         500, Loop not vectorized/parallelized: contains call
+std::__cxx11::_List_base<int, std::allocator<int>>::_M_clear():
+      6, include "list"
+          64, include "list.tcc"
+               71, Loop not vectorized/parallelized: contains call
+     10, include "reference.h"
+std::__cxx11::list<int, std::allocator<int>>::list(unsigned long, int const&, std::allocator<int> const&):
+        1852, Loop not vectorized/parallelized: potential early exits
+         500, Loop not vectorized/parallelized: contains call
+std::__cxx11::list<int, std::allocator<int>>::~list():
+         500, Loop not vectorized/parallelized: contains call
+std::__cxx11::list<int, std::allocator<int>>::~list():
+         500, Loop not vectorized/parallelized: contains call
+std::__cxx11::list<int, std::allocator<int>>::resize(unsigned long):
+         186, Loop not vectorized/parallelized: not countable
+         192, Loop not vectorized/parallelized: not countable
+        1462, Loop not vectorized/parallelized: contains call
+std::__cxx11::list<int, std::allocator<int>>::erase(std::_List_const_iterator<int>, std::_List_const_iterator<int>):
+      6, include "list"
+          63, include "stl_list.h"
+             1462, Loop not vectorized/parallelized: contains call
+     10, include "reference.h"
+std::__cxx11::list<int, std::allocator<int>>::_M_fill_initialize(unsigned long, int const&):
+      6, include "list"
+          63, include "stl_list.h"
+             1852, Loop not vectorized/parallelized: potential early exits
+     10, include "reference.h"
+std::__cxx11::list<int, std::allocator<int>>::_M_resize_pos(unsigned long&) const:
+         206, Loop not vectorized/parallelized: not countable
+         206, Loop not vectorized/parallelized: not countable
+std::__cxx11::_List_base<float, std::allocator<float>>::~_List_base():
+          71, Loop not vectorized/parallelized: contains call
+std::__cxx11::_List_base<float, std::allocator<float>>::~_List_base():
+         500, Loop not vectorized/parallelized: contains call
+std::__cxx11::_List_base<float, std::allocator<float>>::_M_clear():
+      6, include "list"
+          64, include "list.tcc"
+               71, Loop not vectorized/parallelized: contains call
+     10, include "reference.h"
+std::__cxx11::list<float, std::allocator<float>>::list(unsigned long, float const&, std::allocator<float> const&):
+        1852, Loop not vectorized/parallelized: potential early exits
+         500, Loop not vectorized/parallelized: contains call
+std::__cxx11::list<float, std::allocator<float>>::~list():
+         500, Loop not vectorized/parallelized: contains call
+std::__cxx11::list<float, std::allocator<float>>::~list():
+         500, Loop not vectorized/parallelized: contains call
+std::__cxx11::list<float, std::allocator<float>>::resize(unsigned long):
+         186, Loop not vectorized/parallelized: not countable
+         192, Loop not vectorized/parallelized: not countable
+        1462, Loop not vectorized/parallelized: contains call
+std::__cxx11::list<float, std::allocator<float>>::erase(std::_List_const_iterator<float>, std::_List_const_iterator<float>):
+      6, include "list"
+          63, include "stl_list.h"
+             1462, Loop not vectorized/parallelized: contains call
+     10, include "reference.h"
+std::__cxx11::list<float, std::allocator<float>>::_M_fill_initialize(unsigned long, float const&):
+      6, include "list"
+          63, include "stl_list.h"
+             1852, Loop not vectorized/parallelized: potential early exits
+     10, include "reference.h"
+std::__cxx11::list<float, std::allocator<float>>::_M_resize_pos(unsigned long&) const:
+         206, Loop not vectorized/parallelized: not countable
+         206, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      2, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      6, include "list"
+     10, include "reference.h"
+void std::advance<std::_List_const_iterator<int>, unsigned long>(std::_List_const_iterator<int>&, unsigned long):
+         165, Loop not vectorized/parallelized: not countable
+         168, Loop not vectorized/parallelized: not countable
+void std::__advance<std::_List_const_iterator<int>, long>(std::_List_const_iterator<int>&, long, std::bidirectional_iterator_tag):
+      6, include "list"
+          60, include "stl_algobase.h"
+               66, include "stl_iterator_base_funcs.h"
+                   165, Loop not vectorized/parallelized: not countable
+                   168, Loop not vectorized/parallelized: not countable
+          64, include "list.tcc"
+     10, include "reference.h"
+void std::advance<std::_List_const_iterator<int>, long>(std::_List_const_iterator<int>&, long):
+         165, Loop not vectorized/parallelized: not countable
+         168, Loop not vectorized/parallelized: not countable
+void std::advance<std::_List_const_iterator<float>, unsigned long>(std::_List_const_iterator<float>&, unsigned long):
+         165, Loop not vectorized/parallelized: not countable
+         168, Loop not vectorized/parallelized: not countable
+void std::__advance<std::_List_const_iterator<float>, long>(std::_List_const_iterator<float>&, long, std::bidirectional_iterator_tag):
+      6, include "list"
+          60, include "stl_algobase.h"
+               66, include "stl_iterator_base_funcs.h"
+                   165, Loop not vectorized/parallelized: not countable
+                   168, Loop not vectorized/parallelized: not countable
+          64, include "list.tcc"
+     10, include "reference.h"
+void std::advance<std::_List_const_iterator<float>, long>(std::_List_const_iterator<float>&, long):
+         165, Loop not vectorized/parallelized: not countable
+         168, Loop not vectorized/parallelized: not countable
+timeout was set to  600

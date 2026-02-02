@@ -1,0 +1,10 @@
+<CUDA>[ERROR]: 
+UR CUDA ERROR:
+	Value:           1
+	Name:            CUDA_ERROR_INVALID_VALUE
+	Description:     invalid argument
+	Function:        urEnqueueUSMMemcpy
+	Source Location: /hs/work0/home/users/u0001901/tmp2/sycl_workspace/unified-runtime/source/adapters/cuda/enqueue.cpp:1583
+
+terminate called after throwing an instance of 'sycl::_V1::exception'
+  what():  cuda backend failed with error: 4 (UR_RESULT_ERROR_INVALID_VALUE)

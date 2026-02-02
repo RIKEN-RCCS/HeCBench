@@ -1,0 +1,87 @@
+"main.cpp", line 46: error: identifier "omp_get_gang" is undefined
+  void KernelWithSmallArgs(SmallKernelArgs args, char* out) { DO_NOT_OPTIMIZE_AWAY; }
+                                                              ^
+
+"main.cpp", line 46: error: identifier "omp_get_vector" is undefined
+  void KernelWithSmallArgs(SmallKernelArgs args, char* out) { DO_NOT_OPTIMIZE_AWAY; }
+                                                              ^
+
+"main.cpp", line 46: error: identifier "omp_get_thread_num" is undefined
+  void KernelWithSmallArgs(SmallKernelArgs args, char* out) { DO_NOT_OPTIMIZE_AWAY; }
+                                                              ^
+
+"main.cpp", line 48: error: identifier "omp_get_gang" is undefined
+  void KernelWithMediumArgs(MediumKernelArgs args, char* out) { DO_NOT_OPTIMIZE_AWAY; }
+                                                                ^
+
+"main.cpp", line 48: error: identifier "omp_get_vector" is undefined
+  void KernelWithMediumArgs(MediumKernelArgs args, char* out) { DO_NOT_OPTIMIZE_AWAY; }
+                                                                ^
+
+"main.cpp", line 48: error: identifier "omp_get_thread_num" is undefined
+  void KernelWithMediumArgs(MediumKernelArgs args, char* out) { DO_NOT_OPTIMIZE_AWAY; }
+                                                                ^
+
+"main.cpp", line 50: error: identifier "omp_get_gang" is undefined
+  void KernelWithLargeArgs(LargeKernelArgs args, char* out) { DO_NOT_OPTIMIZE_AWAY; }
+                                                              ^
+
+"main.cpp", line 50: error: identifier "omp_get_vector" is undefined
+  void KernelWithLargeArgs(LargeKernelArgs args, char* out) { DO_NOT_OPTIMIZE_AWAY; }
+                                                              ^
+
+"main.cpp", line 50: error: identifier "omp_get_thread_num" is undefined
+  void KernelWithLargeArgs(LargeKernelArgs args, char* out) { DO_NOT_OPTIMIZE_AWAY; }
+                                                              ^
+
+"main.cpp", line 67: error: invalid text in pragma
+      #pragma acc parallel map(to:small_kernel_args)
+                           ^
+
+"main.cpp", line 67: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel map(to:small_kernel_args)
+                              ^
+
+"main.cpp", line 73: error: invalid text in pragma
+      #pragma acc parallel map(to:small_kernel_args)
+                           ^
+
+"main.cpp", line 73: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel map(to:small_kernel_args)
+                              ^
+
+"main.cpp", line 82: error: invalid text in pragma
+      #pragma acc parallel map(to:medium_kernel_args)
+                           ^
+
+"main.cpp", line 82: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel map(to:medium_kernel_args)
+                              ^
+
+"main.cpp", line 88: error: invalid text in pragma
+      #pragma acc parallel map(to:medium_kernel_args)
+                           ^
+
+"main.cpp", line 88: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel map(to:medium_kernel_args)
+                              ^
+
+"main.cpp", line 97: error: invalid text in pragma
+      #pragma acc parallel map(to:large_kernel_args)
+                           ^
+
+"main.cpp", line 97: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel map(to:large_kernel_args)
+                              ^
+
+"main.cpp", line 103: error: invalid text in pragma
+      #pragma acc parallel map(to:large_kernel_args)
+                           ^
+
+"main.cpp", line 103: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel map(to:large_kernel_args)
+                              ^
+
+21 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

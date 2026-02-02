@@ -1,0 +1,37 @@
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c main.cpp -o main.o
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c Option.cpp -o Option.o
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c OptionParser.cpp -o OptionParser.o
+OptionParser.cpp:213:8: warning: unused variable 'retVal' [-Wunused-variable]
+  213 |    int retVal;
+      |        ^~~~~~
+1 warning generated.
+OptionParser.cpp:213:8: warning: unused variable 'retVal' [-Wunused-variable]
+  213 |    int retVal;
+      |        ^~~~~~
+1 warning generated.
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c QTC.cpp -o QTC.o
+QTC.cpp:304:15: warning: variable 'sizeStr' set but not used [-Wunused-but-set-variable]
+  304 |   const char *sizeStr;
+      |               ^
+1 warning generated.
+QTC.cpp:304:15: warning: variable 'sizeStr' set but not used [-Wunused-but-set-variable]
+  304 |   const char *sizeStr;
+      |               ^
+1 warning generated.
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c comm.cpp -o comm.o
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c libdata.cpp -o libdata.o
+libdata.cpp:23:28: warning: implicit conversion from 'int' to 'float' changes value from 2147483647 to 2147483648 [-Wimplicit-const-int-float-conversion]
+   23 |     return (float)random()/RAND_MAX;
+      |                           ~^~~~~~~~
+/usr/include/stdlib.h:86:18: note: expanded from macro 'RAND_MAX'
+   86 | #define RAND_MAX        2147483647
+      |                         ^~~~~~~~~~
+1 warning generated.
+libdata.cpp:23:28: warning: implicit conversion from 'int' to 'float' changes value from 2147483647 to 2147483648 [-Wimplicit-const-int-float-conversion]
+   23 |     return (float)random()/RAND_MAX;
+      |                           ~^~~~~~~~
+/usr/include/stdlib.h:86:18: note: expanded from macro 'RAND_MAX'
+   86 | #define RAND_MAX        2147483647
+      |                         ^~~~~~~~~~
+1 warning generated.
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU main.o Option.o OptionParser.o QTC.o comm.o libdata.o -o main 

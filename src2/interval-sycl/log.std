@@ -1,0 +1,22 @@
+GPU implementation 1
+Searching for roots in [0.01, 4]...
+Found 2 intervals that may contain the root(s)
+ i[0] = [0.999655515093009, 1.00011722206639]
+ i[1] = [1.00011907576551, 1.00044661086269]
+Number of equations solved: 65536
+Average execution time of test_interval_newton: 19.0038108825684 us
+
+Check against Host computation...
+
+PASS
+GPU implementation 2
+Searching for roots in [0.01, 4]...
+Found 2 intervals that may contain the root(s)
+ i[0] = [1.00011907576551, 1.00044661086269]
+ i[1] = [0.999655515093009, 1.00011722206639]
+Number of equations solved: 65536
+Average execution time of test_interval_newton: 19.5959529876709 us
+
+Check against Host computation...
+
+PASS

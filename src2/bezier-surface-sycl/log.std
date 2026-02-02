@@ -1,0 +1,4 @@
+Read data from file input/control.txt
+host execution time: 12542 ms
+kernel execution time: 113 ms
+PASS

@@ -1,0 +1,49 @@
+nvc++ -acc  -Wall -I../include -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+convert_float4(uchar4):
+          28, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+convert_uchar4(float4):
+          32, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+operator+(float4, float4):
+          42, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+operator-(float4, float4):
+          47, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+operator*(float4, float4):
+          52, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+main:
+         354, Loop not vectorized/parallelized: not countable
+    107, Generating copyin(inputImageData[:height*width]) [if not already present]
+         Generating copy(outputImageData[:height*width]) [if not already present]
+    110, Loop not vectorized/parallelized: contains call
+    111, Generating implicit firstprivate(width,height)
+         Generating NVIDIA GPU code
+        113, #pragma acc loop gang, vector(256) collapse(2) /* blockIdx.x threadIdx.x */
+        114,   /* blockIdx.x threadIdx.x collapsed */
+    111, Local memory used for _T61_10897,.inl_.X10891_299,.inl__T1_10891_297,.inl__T5_10895_340,_T60_10897,Gx,.inl_.X10894_347,.inl__T4_10894_344,_T59_10897,_T58_10897,.inl_.X10893_339,.inl__T3_10893_336,_T57_10897,_T56_10897,.inl_.X10894_331,.inl__T4_10894_328,_T55_10897,.inl_.X10895_335,.inl__T5_10895_332,_T54_10897,_T53_10897,_T52_10897,.inl_.X10893_311,.inl__T3_10893_308,_T51_10897,.inl_.X10895_319,.inl__T5_10895_316,_T50_10897,_T49_10897,_T48_10897,.inl_.X10894_327,.inl__T4_10894_324,_T47_10897,_T46_10897,.inl_res_356,.inl_.X10894_323,.inl__T4_10894_320,_T45_10897,_T44_10897,.inl_.X10894_315,.inl__T4_10894_312,_T43_10897,.inl_.X10895_303,.inl__T5_10895_300,_T42_10897,_T41_10897,_T40_10897,.inl_.X10893_351,.inl__T3_10893_348,_T39_10897,_T38_10897,.inl_.X10893_307,.inl__T3_10893_304,_T37_10897,_T36_10897,.inl_.X10892_367,.inl__T2_10892_366,_T35_10897,.inl_.X10894_355,.inl__T4_10894_352,_T34_10897,_T33_10897,Gy,i22,two,i21,.inl_.X10891_296,.inl__T1_10891_294,i20,.inl_.X10891_293,.inl__T1_10891_291,i12,.inl_.X10891_290,.inl__T1_10891_288,i10,.inl_.X10891_287,.inl__T1_10891_285,i02,.inl_.X10891_284,.inl__T1_10891_282,i01,.inl_.X10891_281,.inl__T1_10891_279,i00,.inl_.X10891_278,.inl__T1_10891_276,_T62_10897,.inl_.X10895_343
+    113, Loop not fused: no successor loop
+    114, Loop not vectorized: data dependency
+    160, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+          28, Loop not fused: complex flow graph
+              Generated vector simd code for the loop containing reductions
+SDKBitMap::load(char const*):
+     19, include "sobel.h"
+           6, include "SDKBitMap.h"
+              352, Loop not fused: function call before adjacent loop
+              354, Loop not fused: complex flow graph
+                   Loop not vectorized: data dependency
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     19, include "sobel.h"
+           4, include "chrono"
+              472, Loop not vectorized/parallelized: not countable
+           6, include "SDKBitMap.h"
+_INTERNAL_8_main_cpp_main::compare(float const*, float const*, int, float):
+     28, Generated vector simd code for the loop containing reductions
+nvc++ -acc  -Wall -I../include -O3 -Minfo -mp=gpu -gpu=cc90 -c reference.cpp -o reference.o
+reference(uchar4*, uchar4 const*, unsigned int, unsigned int, int):
+     62, Loop not vectorized: data dependency
+nvc++ -acc  -Wall -I../include -O3 -Minfo -mp=gpu -gpu=cc90 main.o reference.o -o main 

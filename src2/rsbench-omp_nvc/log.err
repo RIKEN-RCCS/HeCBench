@@ -1,0 +1,37 @@
+Present table dump for device[1]: NVIDIA Tesla GPU 0, compute capability 9.0, threadid=1
+Hint: specify 0x800 bit in NV_ACC_DEBUG for verbose info.
+host:0xffff821f0cc0 device:0xfffd3be00000 size:1431360 presentcount:0+1 line:34 name:data.windows[:data.length_windows]
+host:0xffff823beac0 device:0xfffd3a200000 size:28116000 presentcount:0+1 line:34 name:data.poles[:data.length_poles]
+host:0xffff843d0000 device:0xfffd39efa000 size:1420 presentcount:0+1 line:34 name:data.n_poles[:data.length_n_poles]
+host:0xffff843d0600 device:0xfffd39efa600 size:1420 presentcount:0+1 line:34 name:data.n_windows[:data.length_n_windows]
+host:0xffff84400000 device:0xfffd3bf5d800 size:11360 presentcount:0+1 line:34 name:data.pseudo_K0RS[:data.length_pseudo_K0RS]
+host:0xffff844d0000 device:0xfffd3bf60800 size:15408 presentcount:0+1 line:34 name:data.mats[:data.length_mats]
+host:0xffff84500000 device:0xfffd3bf64600 size:30816 presentcount:0+1 line:34 name:data.concs[:data.length_concs]
+host:0xffff84570000 device:0xfffd3bf60600 size:48 presentcount:0+1 line:34 name:data.num_nucs[:data.length_num_nucs]
+host:0xfffff44fc278 device:0xfffd3bf6c800 size:8 presentcount:0+1 line:34 name:verification
+host:0xfffff44fc3a0 device:0xfffd3bf6c000 size:4 presentcount:0+1 line:34 name:data.max_num_nucs
+host:0xfffff44fc3a4 device:0xfffd3bf6c200 size:4 presentcount:0+1 line:34 name:data.max_num_poles
+host:0xfffff44fc3a8 device:0xfffd3bf6c400 size:4 presentcount:0+1 line:34 name:data.max_num_windows
+host:0xfffff44fc3d0 device:0xfffd3bf6c600 size:44 presentcount:0+2 line:34 name:input
+allocated block device:0xfffd39efa000 size:1536 thread:1
+allocated block device:0xfffd39efa600 size:1536 thread:1
+allocated block device:0xfffd3a200000 size:28116480 thread:1
+allocated block device:0xfffd3be00000 size:1431552 thread:1
+allocated block device:0xfffd3bf5d800 size:11776 thread:1
+allocated block device:0xfffd3bf60600 size:512 thread:1
+allocated block device:0xfffd3bf60800 size:15872 thread:1
+allocated block device:0xfffd3bf64600 size:31232 thread:1
+allocated block device:0xfffd3bf6c000 size:512 thread:1
+allocated block device:0xfffd3bf6c200 size:512 thread:1
+allocated block device:0xfffd3bf6c400 size:512 thread:1
+allocated block device:0xfffd3bf6c600 size:512 thread:1
+allocated block device:0xfffd3bf6c800 size:512 thread:1
+
+Present table errors:
+data lives at 0xfffff44fc320 size 176 partially present in
+host:0xfffff44fc3a0 device:0xfffd3bf6c000 size:4 presentcount:0+1 line:34 name:data.max_num_nucs file:/hs/work0/home/users/u0001901/2026/test3/tmp4/rsbench-omp_nvc/simulation.c
+host:0xfffff44fc3a4 device:0xfffd3bf6c200 size:4 presentcount:0+1 line:34 name:data.max_num_poles file:/hs/work0/home/users/u0001901/2026/test3/tmp4/rsbench-omp_nvc/simulation.c
+host:0xfffff44fc3a8 device:0xfffd3bf6c400 size:4 presentcount:0+1 line:34 name:data.max_num_windows file:/hs/work0/home/users/u0001901/2026/test3/tmp4/rsbench-omp_nvc/simulation.c
+FATAL ERROR: variable in data clause is partially present on the device: name=data
+ file:/hs/work0/home/users/u0001901/2026/test3/tmp4/rsbench-omp_nvc/simulation.c _Z26run_event_based_simulation5Input14SimulationDataPmPd line:38
+

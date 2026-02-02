@@ -1,0 +1,70 @@
+nvc++  -std=c++14 -Wall -I../nw-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c nw.cpp -o nw.o
+nw_host(int*, int*, int, int):
+     18, include "reference.h"
+          11, Loop not vectorized/parallelized: too deeply nested
+          22, Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 16 times (completely unrolled)
+          31, Recognized memory copy idiom
+          38, Loop not fused: dependence chain to sibling loop
+          40, Loop not vectorized: data dependency
+          51, Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 16 times (completely unrolled)
+          59, Loop not vectorized/parallelized: too deeply nested
+          71, Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 16 times (completely unrolled)
+          80, Recognized memory copy idiom
+          87, Loop not fused: dependence chain to sibling loop
+          89, Loop not vectorized: data dependency
+         100, Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 16 times (completely unrolled)
+maximum(int, int, int):
+     24, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+main:
+    112, Loop not vectorized/parallelized: not countable
+    113, Loop not vectorized: data dependency
+    119, Loop not vectorized/parallelized: contains call
+    123, Loop not vectorized/parallelized: contains call
+    127, Loop not vectorized/parallelized: not countable
+    128, Loop not vectorized: data dependency
+    133, Loop not vectorized: data dependency
+    135, Loop not vectorized/parallelized: not countable
+    167, Loop not vectorized/parallelized: contains call
+    170, #omp target teams num_teams(global_work) thread_limit(local_work)
+        170, Generating "nvkernel_main_F1L170_2" GPU kernel
+        174, #omp parallel
+          199, Barrier
+          210, Barrier
+          222, Barrier
+        218, Team private (reference_l,input_itemsets_l) located in CUDA shared memory
+    191, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    201, Loop not vectorized/parallelized: contains call
+    213, Loop not vectorized/parallelized: contains call
+    225, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    236, Loop not vectorized/parallelized: contains call
+    239, #omp target teams num_teams(global_work) thread_limit(local_work)
+        160, Generating map(to:reference[:max_cols*max_rows]) 
+             Generating map(tofrom:input_itemsets[:max_cols*max_rows]) 
+        239, Generating "nvkernel_main_F1L239_4" GPU kernel
+        243, #omp parallel
+          269, Barrier
+          281, Barrier
+          293, Barrier
+        289, Team private (reference_l,input_itemsets_l) located in CUDA shared memory
+    262, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    271, Loop not vectorized/parallelized: contains call
+    284, Loop not vectorized/parallelized: contains call
+    296, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     16, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+     18, include "reference.h"
+nvc++  -std=c++14 -Wall -I../nw-cuda -O3 -Minfo -mp=gpu -gpu=cc90 nw.o -o main 

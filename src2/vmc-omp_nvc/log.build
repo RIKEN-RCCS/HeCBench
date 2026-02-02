@@ -1,0 +1,82 @@
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c vmc.cpp -o vmc.o
+LCG_random(unsigned int*):
+     36, Accelerator restriction: unsupported statement type: opcode=OMPTARGETUPDATE
+LCG_random_init(unsigned int*):
+     44, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+compute_distances(float, float, float, float, float, float, float&, float&, float&):
+     54, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+wave_function(float, float, float, float, float, float):
+     64, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+propagate(int, int, float*, float*, float*, float*, float*, float*, float*, float*, unsigned int*):
+     74, #omp target teams distribute parallel for thread_limit(256)
+         74, Generating "nvkernel__Z9propagateiiPfS_S_S_S_S_S_S_Pj_F1L74_2" GPU kernel
+         76, Loop parallelized across teams and threads(128), schedule(static)
+     85, Loop not vectorized/parallelized: contains call
+          86, Accelerator restriction: unsupported statement type: opcode=OMPTARGETUPDATE
+              Accelerator clause: upper bound for dimension 0 of array '.inl_statsum_285' is unknown
+              Generating update from(.inl_statsum_285[:1])
+          87, Accelerator clause: upper bound for dimension 0 of array '.inl_statsum_290' is unknown
+              Generating update from(.inl_statsum_290[:1])
+          88, Accelerator clause: upper bound for dimension 0 of array '.inl_statsum_295' is unknown
+              Generating update from(.inl_statsum_295[:1])
+          89, Accelerator clause: upper bound for dimension 0 of array '.inl_statsum_300' is unknown
+              Generating update from(.inl_statsum_300[:1])
+          90, Accelerator clause: upper bound for dimension 0 of array '.inl_statsum_305' is unknown
+              Generating update from(.inl_statsum_305[:1])
+          91, Accelerator clause: upper bound for dimension 0 of array '.inl_statsum_310' is unknown
+              Generating update from(.inl_statsum_310[:1])
+          94, Accelerator clause: upper bound for dimension 0 of array '.inl_statsum_351' is unknown
+              Generating update from(.inl_statsum_351[:1])
+initran(int, unsigned int, unsigned int*):
+    123, #omp target teams distribute parallel for thread_limit(256)
+        123, Generating "nvkernel__Z7initranijPj_F1L123_6" GPU kernel
+        125, Loop parallelized across teams and threads(128), schedule(static)
+    125, Loop not vectorized/parallelized: not countable
+initialize(int, float*, float*, float*, float*, float*, float*, float*, unsigned int*):
+    132, #omp target teams distribute parallel for thread_limit(256)
+        132, Generating "nvkernel__Z10initializeiPfS_S_S_S_S_S_Pj_F1L132_10" GPU kernel
+        134, Loop parallelized across teams and threads(128), schedule(static)
+    134, Loop not vectorized/parallelized: contains call
+         135, Accelerator restriction: unsupported statement type: opcode=OMPTARGETUPDATE
+              Accelerator clause: upper bound for dimension 0 of array '.inl_statsum_379' is unknown
+              Generating update from(.inl_statsum_379[:1])
+         136, Accelerator clause: upper bound for dimension 0 of array '.inl_statsum_384' is unknown
+              Generating update from(.inl_statsum_384[:1])
+         137, Accelerator clause: upper bound for dimension 0 of array '.inl_statsum_389' is unknown
+              Generating update from(.inl_statsum_389[:1])
+         138, Accelerator clause: upper bound for dimension 0 of array '.inl_statsum_394' is unknown
+              Generating update from(.inl_statsum_394[:1])
+         139, Accelerator clause: upper bound for dimension 0 of array '.inl_statsum_399' is unknown
+              Generating update from(.inl_statsum_399[:1])
+         140, Accelerator clause: upper bound for dimension 0 of array '.inl_statsum_404' is unknown
+              Generating update from(.inl_statsum_404[:1])
+zero_stats(int, float*):
+    146, #omp target teams distribute parallel for thread_limit(256)
+        146, Generating "nvkernel__Z10zero_statsiPf_F1L146_14" GPU kernel
+        148, Loop parallelized across teams and threads(128), schedule(static)
+    148, Loop not vectorized/parallelized: not countable
+SumWithinBlocks(int, int, float*, float*):
+    160, #omp target teams num_teams(teams) thread_limit(threads)
+        160, Generating "nvkernel__Z15SumWithinBlocksiiPfS__F1L160_18" GPU kernel
+        163, #omp parallel
+          177, Barrier
+          185, Barrier
+        167, Team private (sdata) located in CUDA shared memory
+    172, Loop not vectorized/parallelized: not countable
+    181, Loop not vectorized/parallelized: contains call
+main:
+    222, Generating map(alloc:statsum[:4],x2[:57344],y2[:57344],x1[:57344],y1[:57344],z1[:57344],z2[:57344],blocksums[:224],ranstates[:57344],stats[:229376],psi[:57344]) 
+    248, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::exp(float):
+              223, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+std::sqrt(float):
+              464, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 vmc.o -o main 

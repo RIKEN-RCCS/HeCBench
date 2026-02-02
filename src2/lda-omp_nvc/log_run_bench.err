@@ -1,0 +1,88 @@
+ReduceSum(float const*, int):
+      9, include "kernel.h"
+          10, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          13, Generated vector simd code for the loop containing reductions
+              Loop unrolled 8 times
+Digamma(float):
+      9, include "kernel.h"
+          19, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          21, Loop not vectorized/parallelized: not countable
+main:
+     32, Loop not vectorized/parallelized: contains call
+     35, Loop not vectorized/parallelized: contains call
+     44, Loop not vectorized/parallelized: potential early exits
+     54, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+     92, Generating map(to:d_alpha[:1000]) 
+         Generating map(alloc:d_gamma[:500000]) 
+         Generating map(to:d_locks[:10266],d_indptr[:501],d_beta[:10266000],d_grad_alpha[:500000],d_cols[:10266]) 
+         Generating map(tofrom:d_train_losses[:500]) 
+         Generating map(to:d_new_beta[:10266000]) 
+         Generating map(tofrom:d_vali_losses[:500]) 
+         Generating map(to:d_vali[:10266],d_counts[:10266]) 
+     98, Loop not vectorized/parallelized: contains call
+    124, Generating update to(d_vali[:10266])
+    126, Loop not vectorized/parallelized: contains call
+         140, Loop not fused: different loop trip count
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+         140, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+NVC++-W-0155-Compiler failed to translate accelerator region (see -Minfo messages): Missing branch target block (kernel.h: 59)
+void EstepKernel<500, 256, 4000>(int const*, int const*, bool const*, float const*, bool, int, int, int, int, float const*, float const*, float*, float*, float*, float*, float*, int*):
+      9, include "kernel.h"
+          56, #omp target teams num_teams(500) thread_limit(256)
+              56, Generating "nvkernel__Z11EstepKernelILi500ELi256ELi4000EEvPKiS1_PKbPKfbiiiiS5_S5_PfS6_S6_S6_S6_Pi_F222L56_2" GPU kernel
+              59, #omp parallel
+                80, Barrier
+                91, Barrier
+               102, Barrier
+               117, Barrier
+               133, Barrier
+               136, Barrier
+               140, Barrier
+               150, Barrier
+               158, Barrier
+               161, Barrier
+               167, Barrier
+               187, Barrier
+             181, Team private (shared_memory) located in CUDA shared memory
+          76, Loop not vectorized: unprofitable for target
+              Loop unrolled 8 times
+          83, Loop not vectorized: unprofitable for target
+              Loop unrolled 8 times
+          87, Loop not vectorized/parallelized: too deeply nested
+          89, Loop not vectorized: unprofitable for target
+              Loop unrolled 8 times
+         107, Invariant if transformation
+              Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+         129, Loop not vectorized/parallelized: contains a parallel region
+         134, Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+         145, Loop not vectorized: unprofitable for target
+              Loop not vectorized: may not be beneficial for target
+              Loop unrolled 2 times
+         165, Loop not vectorized: unprofitable for target
+              Loop unrolled 8 times
+          21, Loop not vectorized/parallelized: not countable
+          13, Generated vector simd code for the loop containing reductions
+              Loop unrolled 8 times
+          13, Generated vector simd code for the loop containing reductions
+              Loop unrolled 8 times
+          13, Generated vector simd code for the loop containing reductions
+              Loop unrolled 8 times
+          21, Loop not vectorized/parallelized: not countable
+          21, Loop not vectorized/parallelized: not countable
+          13, Generated vector simd code for the loop containing reductions
+              Loop unrolled 8 times
+          13, Generated vector simd code for the loop containing reductions
+              Loop unrolled 8 times
+          72, Loop not vectorized/parallelized: too deeply nested
+NVC++-F-0704-Compilation aborted due to previous errors. (kernel.h)
+NVC++/arm Linux 25.9-0: compilation aborted
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

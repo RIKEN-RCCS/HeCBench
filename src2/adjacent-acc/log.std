@@ -1,0 +1,15 @@
+PASS
+PASS
+Average execution time of the kernels (thread block size =   64): 3021.144531 (us)
+PASS
+PASS
+Average execution time of the kernels (thread block size =  128): 3018.232666 (us)
+PASS
+PASS
+Average execution time of the kernels (thread block size =  256): 3022.494873 (us)
+PASS
+PASS
+Average execution time of the kernels (thread block size =  512): 3997.841797 (us)
+PASS
+PASS
+Average execution time of the kernels (thread block size = 1024): 3043.621094 (us)

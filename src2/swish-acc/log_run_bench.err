@@ -1,0 +1,58 @@
+void eval_swish<float>(int, int):
+     47, Loop not vectorized/parallelized: contains call
+        1861, Loop not fused: function call before adjacent loop
+              Loop not vectorized: may not be beneficial for target
+        1861, Loop not fused: function call before adjacent loop
+              Loop not vectorized: may not be beneficial for target
+     54, Generating copyin(h_dY[:N]) [if not already present]
+         Generating copyout(h_dX[:N]) [if not already present]
+         Generating copyin(h_X[:N]) [if not already present]
+         Generating copyout(h_Y[:N]) [if not already present]
+     57, Loop not vectorized/parallelized: contains call
+     66, Loop not vectorized/parallelized: contains call
+           3, Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+     78, Loop not vectorized/parallelized: potential early exits
+void SwishKernel<float>(int, float const*, float*):
+     12, Generating implicit firstprivate(N)
+         Generating NVIDIA GPU code
+         14, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+     12, Generating implicit copyout(Y[:N]) [if not already present]
+         Generating implicit copyin(X[:N]) [if not already present]
+     14, Loop not fused: no successor loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 2 times
+void SwishGradientKernel<float>(int, float const*, float const*, float const*, float*):
+     26, Generating implicit firstprivate(N)
+         Generating NVIDIA GPU code
+         28, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+     26, Generating implicit copyin(dY[:N]) [if not already present]
+         Generating implicit copyout(dX[:N]) [if not already present]
+         Generating implicit copyin(X[:N],Y[:N]) [if not already present]
+     28, Loop not fused: no successor loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 2 times
+void reference<float>(int, float*, float*, float*, float*):
+      6, include "reference.h"
+           3, Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+float std::uniform_real_distribution<float>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&):
+        1870, Loop not vectorized: data dependency
+float std::uniform_real_distribution<float>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&, std::uniform_real_distribution<float>::param_type const&):
+         189, Loop not vectorized: data dependency
+std::__detail::_Adaptor<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>, float>::operator()():
+        3364, Loop not vectorized: data dependency
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      6, include "reference.h"
+std::exp(float):
+                        223, Generating implicit omp declare target routine
+                             Generating NVIDIA GPU code
+float std::generate_canonical<float, 24ul, std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&):
+      5, include "random"
+          51, include "random.tcc"
+             3364, Loop not vectorized: data dependency
+timeout was set to  600

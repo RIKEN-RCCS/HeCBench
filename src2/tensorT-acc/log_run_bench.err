@@ -1,0 +1,43 @@
+"main.cpp", line 56: error: invalid text in pragma
+  #pragma acc data to: input[0:data_size],  \
+                   ^
+
+"main.cpp", line 56: error: extra text after expected end of preprocessing directive
+  #pragma acc data to: input[0:data_size],  \
+                     ^
+
+"main.cpp", line 70: error: invalid text in pragma
+        #pragma acc parallel teams num_teams(nblocks) thread_limit(NTHREADS)
+                             ^
+
+"main.cpp", line 70: error: extra text after expected end of preprocessing directive
+        #pragma acc parallel teams num_teams(nblocks) thread_limit(NTHREADS)
+                                   ^
+
+"main.cpp", line 75: error: identifier "omp_get_team_num" is undefined
+            for (int block_idx = omp_get_team_num(); block_idx < nblocks; block_idx += omp_get_gang()) {
+                                 ^
+
+"main.cpp", line 75: error: identifier "omp_get_gang" is undefined
+            for (int block_idx = omp_get_team_num(); block_idx < nblocks; block_idx += omp_get_gang()) {
+                                                                                       ^
+
+"main.cpp", line 83: error: identifier "omp_get_thread_num" is undefined
+              for (int i = omp_get_thread_num(); i < tile_size; i += omp_get_vector()) {
+                           ^
+
+"main.cpp", line 83: error: identifier "omp_get_vector" is undefined
+              for (int i = omp_get_thread_num(); i < tile_size; i += omp_get_vector()) {
+                                                                     ^
+
+"main.cpp", line 89: error: identifier "omp_get_thread_num" is undefined
+              for (int i = omp_get_thread_num(); i < tile_size; i += omp_get_vector()) {
+                           ^
+
+"main.cpp", line 89: error: identifier "omp_get_vector" is undefined
+              for (int i = omp_get_thread_num(); i < tile_size; i += omp_get_vector()) {
+                                                                     ^
+
+10 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

@@ -1,0 +1,67 @@
+nvc++ -acc  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c divergence.cpp -o divergence.o
+main:
+          15, Loop not vectorized/parallelized: potential early exits
+          26, Loop not vectorized/parallelized: potential early exits
+          31, Loop not vectorized/parallelized: too deeply nested
+          34, Loop not vectorized/parallelized: potential early exits
+          46, Loop not vectorized/parallelized: potential early exits
+          56, Loop not vectorized/parallelized: potential early exits
+void readVelocity<double>(double*, int, std::istream*):
+     15, Zero trip check eliminated
+         Loop not vectorized/parallelized: potential early exits
+void readElement<4, double>(element<4, double>&, std::istream*):
+     26, Loop not vectorized/parallelized: potential early exits
+     31, Loop not vectorized/parallelized: too deeply nested
+     34, Loop not vectorized/parallelized: potential early exits
+void readDerivative<4, double>(derivative<4, double>&, std::istream*):
+     46, Loop not vectorized/parallelized: potential early exits
+void readDivergence<double>(double*, int, std::istream*):
+     56, Zero trip check eliminated
+         Loop not vectorized/parallelized: potential early exits
+void compareDivergences<4, double>(double const*, element<4, double> const&, derivative<4, double> const&, double const*, int):
+     75, Loop not vectorized/parallelized: contains call
+     80, Loop not vectorized/parallelized: contains call
+     90, Loop not vectorized/parallelized: contains call
+     94, Loop not vectorized/parallelized: contains call
+    101, Loop not vectorized/parallelized: potential early exits
+void divergence_sphere_cpu<4, double>(double const*, derivative<4, double> const&, element<4, double> const&, double*):
+      7, include "divergence.hpp"
+         115, Loop unrolled 4 times (completely unrolled)
+         116, Loop unrolled 4 times (completely unrolled)
+         117, Loop unrolled 2 times (completely unrolled)
+         126, Loop unrolled 4 times (completely unrolled)
+         127, Loop unrolled 4 times (completely unrolled)
+         130, Loop unrolled 4 times (completely unrolled)
+         140, Outer loop unrolled 1 times (completely unrolled)
+         141, Loop nest collapsed
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 2 times
+void divergence_sphere_gpu<4, double>(double const*, derivative<4, double> const&, element<4, double> const&, double*):
+      7, include "divergence.hpp"
+          56, Loop unrolled 4 times (completely unrolled)
+          57, Loop unrolled 4 times (completely unrolled)
+          58, Loop unrolled 2 times (completely unrolled)
+          75, Generating copyout(div[:16]) [if not already present]
+              Generating copyin(gv[:],Dvv[:16],rmetdet[:16]) [if not already present]
+              Generating create(vvtemp[:]) [if not already present]
+              Generating NVIDIA GPU code
+              78, #pragma acc loop gang, vector(256) collapse(2) /* blockIdx.x threadIdx.x */
+              79,   /* blockIdx.x threadIdx.x collapsed */
+              82, #pragma acc loop seq
+                  Generating implicit reduction(+:dvdy00,dudx00)
+          78, Loop unrolled 4 times (completely unrolled)
+          79, Loop unrolled 4 times (completely unrolled)
+          82, Loop is parallelizable
+              Loop unrolled 4 times (completely unrolled)
+          89, Generating NVIDIA GPU code
+              92, #pragma acc loop gang, vector(256) collapse(2) /* blockIdx.x threadIdx.x */
+              93,   /* blockIdx.x threadIdx.x collapsed */
+          92, Outer loop unrolled 1 times (completely unrolled)
+          93, Loop nest collapsed
+              Loop not fused: no successor loop
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string(char const*, std::allocator<char> const&):
+      7, include "divergence.hpp"
+nvc++ -acc  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 divergence.o timer.o -o divergence 

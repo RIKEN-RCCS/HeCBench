@@ -1,0 +1,27 @@
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+stencil3d(float const*, float*, float const*, float const*, float const*, int, int, int, int, int, int):
+     24, #omp target teams num_teams(bdimx*(bdimy*bdimz)) thread_limit(256)
+         24, Generating "nvkernel__Z9stencil3dPKfPfS0_S0_S0_iiiiii_F1L24_2" GPU kernel
+         27, #omp parallel
+           71, Barrier
+           90, Barrier
+          102, Barrier
+          107, Barrier
+          120, Barrier
+          124, Barrier
+          137, Barrier
+         43, Team private (sm_psi) located in CUDA shared memory
+     86, Loop not vectorized/parallelized: contains call
+main:
+    165, Loop not fused: function call before adjacent loop
+    167, Generated vector simd code for the loop
+         Loop unrolled 4 times
+    172, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+    184, Generating map(tofrom:h_dVm[:vol]) 
+         Generating map(to:h_sigma[:vol*9],h_Vm[:vol]) 
+    187, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

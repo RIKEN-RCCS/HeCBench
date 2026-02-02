@@ -1,0 +1,39 @@
+_timestep(float, float):
+      5, include "neuron_update.h"
+           6, Generating acc routine seq
+              Generating NVIDIA GPU code
+neurongroup_stateupdater(float*, float*, float*, float*, float*, float*, float*, float*, float*, char*, int, int):
+      5, include "neuron_update.h"
+          68, Generating copy(_ptr_array_neurongroup_gi[:_N]) [if not already present]
+              Generating copyin(_ptr_array_neurongroup_lastspike[:_N]) [if not already present]
+              Generating copy(_ptr_array_neurongroup_m[:_N]) [if not already present]
+              Generating copyout(_ptr_array_neurongroup_not_refractory[:_N]) [if not already present]
+              Generating copy(_ptr_array_neurongroup_v[:_N],_ptr_array_neurongroup_ge[:_N],_ptr_array_neurongroup_h[:_N],_ptr_array_neurongroup_n[:_N]) [if not already present]
+          71, Generating implicit firstprivate(_N)
+              Generating NVIDIA GPU code
+              73, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+          71, Loop not vectorized/parallelized: contains call
+          73, Generating implicit firstprivate(dt,t,_lio_33,_lio_1,_lio_23)
+              Loop not fused: no successor loop
+              Generated vector simd code for the loop
+reference_cobahh(float*, float*, float*, float*, float*, float*, float const*, char*, int, float, float, int, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float):
+      6, include "neuron_update_host.h"
+          46, Unable to version for aliasing; too many tests
+              Loop not vectorized: data dependency
+neurongroup_stateupdater_host(float*, float*, float*, float*, float*, float*, float*, float*, float*, char*, int, int):
+          46, Unable to version for aliasing; too many tests
+              Loop not vectorized: data dependency
+main:
+     50, Loop not vectorized/parallelized: contains call
+     60, Loop unrolled 1 times (completely unrolled)
+         127, Loop not fused: function call before adjacent loop
+         128, Unable to version for aliasing; too many tests
+              Loop not vectorized: data dependency
+     75, Multiple reductions compressed
+         Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      5, include "neuron_update.h"
+           1, include "chrono"
+              472, Loop not vectorized/parallelized: not countable
+timeout was set to  600

@@ -1,0 +1,2 @@
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "../svd3x3-cuda/prepare_data.sh; time -p ( ./main ../svd3x3-cuda/Dataset_1M.txt 1000 1>log.std 2>log.err ) 2> log.time"

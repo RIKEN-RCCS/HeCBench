@@ -1,0 +1,85 @@
+"main.cpp", line 77: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(numTeams) vector_length(256)
+                         ^
+
+"main.cpp", line 77: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(numTeams) vector_length(256)
+                               ^
+
+"main.cpp", line 82: error: identifier "omp_get_thread_num" is undefined
+        unsigned int lidX = omp_get_thread_num() % 16;  
+                            ^
+
+"main.cpp", line 84: error: identifier "omp_get_team_num" is undefined
+        unsigned int tidX = omp_get_team_num() % numTeamsX; 
+                            ^
+
+"main.cpp", line 76: warning: variable "numTeams" was declared but never referenced [declared_but_not_referenced]
+    size_t numTeams = numTeamsX * numTeamsY;
+           ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"main.cpp", line 133: error: invalid text in pragma
+    #pragma acc parallel loop num_teams(szTeams) thread_limit(szGaussLocalWork)
+                              ^
+
+"main.cpp", line 133: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop num_teams(szTeams) thread_limit(szGaussLocalWork)
+                                       ^
+
+"main.cpp", line 131: warning: variable "szTeams" was declared but never referenced [declared_but_not_referenced]
+    size_t szTeams = szGaussGlobalWork / szGaussLocalWork; 
+           ^
+
+"main.cpp", line 194: error: invalid text in pragma
+    #pragma acc parallel loop num_teams(szTeams) thread_limit(szGaussLocalWork)
+                              ^
+
+"main.cpp", line 194: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop num_teams(szTeams) thread_limit(szGaussLocalWork)
+                                       ^
+
+"main.cpp", line 192: warning: variable "szTeams" was declared but never referenced [declared_but_not_referenced]
+    size_t szTeams = szGaussGlobalWork / szGaussLocalWork; 
+           ^
+
+"main.cpp", line 278: error: invalid text in pragma
+    #pragma acc update to(uiInput[0:szBuff])
+                       ^
+
+"main.cpp", line 278: error: OpenACC data clause expected
+    #pragma acc update to(uiInput[0:szBuff])
+                       ^
+
+"main.cpp", line 278: error: extra text after expected end of preprocessing directive
+    #pragma acc update to(uiInput[0:szBuff])
+                         ^
+
+"main.cpp", line 309: error: invalid text in pragma
+    #pragma acc update from (uiOutput[0:szBuff])
+                       ^
+
+"main.cpp", line 309: error: OpenACC data clause expected
+    #pragma acc update from (uiOutput[0:szBuff])
+                       ^
+
+"main.cpp", line 309: error: extra text after expected end of preprocessing directive
+    #pragma acc update from (uiOutput[0:szBuff])
+                            ^
+
+"main.cpp", line 276: warning: variable "szBuff" was declared but never referenced [declared_but_not_referenced]
+    size_t szBuff = (size_t)uiImageWidth * uiImageHeight;
+           ^
+
+"main.cpp", line 356: error: invalid text in pragma
+  #pragma acc data alloc: uiInput[0:szBuff]) \
+                   ^
+
+"main.cpp", line 356: error: extra text after expected end of preprocessing directive
+  #pragma acc data alloc: uiInput[0:szBuff]) \
+                        ^
+
+16 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

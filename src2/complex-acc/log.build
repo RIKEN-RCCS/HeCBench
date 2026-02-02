@@ -1,0 +1,107 @@
+nvc++ -acc  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+LCG_random_double(unsigned long*):
+           4, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+fast_forward_LCG(unsigned long, unsigned long):
+      6, include "kernels.h"
+          13, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          23, Loop not vectorized/parallelized: not countable
+complex_float(char*, int):
+      6, include "kernels.h"
+          41, Generating implicit firstprivate(n)
+              Generating NVIDIA GPU code
+              23, #pragma acc loop seq
+                  Generating implicit reduction(*:.inl_a_new_1239)
+              43, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+          41, Local memory used for .inl_.X6546_1697,.inl__T16_6546_1696,.inl_quot_1690,.inl_.inl_.X6541_50_1695,.inl_.inl__T1_6541_49_1694,.inl_.inl_res_46_1693,.inl_.X6545_1617,.inl__T13_6545_1616,.inl_prod_1610,.inl_.inl_.X6541_39_1523,.inl_.inl__T1_6541_38_1522,.inl_.inl_res_35_1521,_T69_6559,.inl_.X6542_1661,.inl__T2_6542_1655,.inl_.inl_.X6541_30_1660,.inl_.inl__T1_6541_29_1659,.inl_.inl_res_26_1658,_T68_6559,.inl_.X6542_1649,.inl__T2_6542_1643,.inl_.inl_.X6541_30_1648,.inl_.inl__T1_6541_29_1647,.inl_.inl_res_26_1646,_T67_6559,_T66_6559,.inl_.X6542_1597,.inl__T2_6542_1591,.inl_.inl_.X6541_30_1596,.inl_.inl__T1_6541_29_1595,.inl_.inl_res_26_1594,.inl_.X6543_1403,.inl__T5_6543_1397,.inl_.inl_.X6541_23_1402,.inl_.inl__T1_6541_22_1401,.inl_.inl_res_19_1400,_T65_6559,.inl_.X6545_1585,.inl__T13_6545_1584,.inl_prod_1578,.inl_.inl_.X6541_12_1583,.inl_.inl__T1_6541_11_1582,.inl_.inl_res_8_1581,_T64_6559,.inl_.X6542_1565,.inl__T2_6542_1559,.inl_.inl_.X6541_30_1564,.inl_.inl__T1_6541_29_1563,.inl_.inl_res_26_1562,_T63_6559,_T62_6559,.inl_.X6545_1552,.inl__T13_6545_1551,.inl_prod_1545,.inl_.inl_.X6541_12_1550,.inl_.inl__T1_6541_11_1549,.inl_.inl_res_8_1548,_T61_6559,.inl_.X6542_1471,.inl__T2_6542_1465,.inl_.inl_.X6541_30_1470,.inl_.inl__T1_6541_29_1469,.inl_.inl_res_26_1468,_T60_6559,.inl_.X6545_1431,.inl__T13_6545_1430,.inl_prod_1424,.inl_.inl_.X6541_12_1429,.inl_.inl__T1_6541_11_1428,.inl_.inl_res_8_1427,.inl_.X6544_1501,.inl__T8_6544_1495,.inl_.inl_.X6541_39_1500,.inl_.inl__T1_6541_38_1499,.inl_.inl_res_35_1498,.inl_.X6544_1486,.inl__T8_6544_1480,.inl_.inl_.X6541_39_1485,.inl_.inl__T1_6541_38_1484,.inl_.inl_res_35_1483,_T59_6559,.inl_.X6544_1447,.inl__T8_6544_1441,.inl_.inl_.X6541_39_1446,.inl_.inl__T1_6541_38_1445,.inl_.inl_res_35_1444,_T58_6559,.inl_.X6542_1459,.inl__T2_6542_1453,.inl_.inl_.X6541_30_1458,.inl_.inl__T1_6541_29_1457,.inl_.inl_res_26_1456,_T57_6559,.inl_.X6542_1350,.inl__T2_6542_1344,.inl_.inl_.X6541_30_1349,.inl_.inl__T1_6541_29_1348,.inl_.inl_res_26_1347,_T56_6559,.inl_.X6543_1632,.inl__T5_6543_1626,.inl_.inl_.X6541_30_1672,.inl_.inl__T1_6541_29_1671,.inl_.inl_res_26_1670,_T55_6559,_T54_6559,_T53_6559,_T52_6559,_T51_6559,_T50_6559,.inl_.X6545_1287,.inl__T13_6545_1286,.inl_prod_1280,.inl_.inl_.X6541_12_1285,.inl_.inl__T1_6541_11_1284,.inl_.inl_res_8_1283,.inl_.X6543_1380,.inl__T5_6543_1374,.inl_.inl_.X6541_23_1379,.inl_.inl__T1_6541_22_1378,.inl_.inl_res_19_1377,.inl_.X6543_1365,.inl__T5_6543_1359,.inl_.inl_.X6541_23_1364,.inl_.inl__T1_6541_22_1363,.inl_.inl_res_19_1362,_T49_6559,.inl_.X6543_1326,.inl__T5_6543_1320,.inl_.inl_.X6541_23_1325,.inl_.inl__T1_6541_22_1324,.inl_.inl_res_19_1323,_T48_6559,.inl_.X6542_1338,.inl__T2_6542_1332,.inl_.inl_.X6541_30_1337,.inl_.inl__T1_6541_29_1336,.inl_.inl_res_26_1335,_T47_6559,.inl_.X6541_1267,.inl__T1_6541_1266,.inl_.inl_.X6541_23_1631,.inl_.inl__T1_6541_22_1630,.inl_.inl_res_19_1629,_T46_6559,.inl_.X6542_1673,.inl__T2_6542_1667,.inl_.inl_.X6541_12_1615,.inl_.inl__T1_6541_11_1614,.inl_.inl__T1_6541_49_1726,_T45_6559,_T44_6559,_T43_6559,_T42_6559,_T41_6559,_T40_6559,.inl_.X6544_1524,.inl_.inl_res_8_1613,.inl__T8_6544_1518,.inl_.X6546_1729,.inl_.inl_.X6541_50_1727,.inl_.inl_res_46_1725,_T39_6559,.inl_res_1263,z2,z1,.inl_.X6541_1262,.inl__T1_6541_1261,.inl_res_1258,_T70_6559,.inl__T16_6546_1728,.inl_quot_1722
+              Generating implicit copyout(checkSum[:n]) [if not already present]
+          23, Loop carried scalar dependence for .inl_c_new_1240 at line 27
+              Scalar last value needed after loop for .inl_c_new_1240 at line 34
+              Loop carried scalar dependence for .inl_c_1237 at line 27,30
+              Loop carried scalar dependence for .inl_a_1236 at line 25,27,30
+              Loop carried scalar dependence for .inl_n_1238 at line 23,31
+              Loop not vectorized/parallelized: not countable
+complex_double(char*, int):
+      6, include "kernels.h"
+          73, Generating implicit firstprivate(n)
+              Generating NVIDIA GPU code
+              23, #pragma acc loop seq
+                  Generating implicit reduction(*:.inl_a_new_1742)
+              75, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+          73, Local memory used for .inl_.X6555_2200,.inl__T32_6555_2199,.inl_quot_2193,.inl_.inl_.X6550_604_2198,.inl_.inl__T17_6550_603_2197,.inl_.inl_res_600_2196,.inl_.X6554_2120,.inl__T29_6554_2119,.inl_prod_2113,.inl_.inl_.X6550_593_2026,.inl_.inl__T17_6550_592_2025,.inl_.inl_res_589_2024,_T107_6560,.inl_.X6551_2164,.inl__T18_6551_2158,.inl_.inl_.X6550_584_2163,.inl_.inl__T17_6550_583_2162,.inl_.inl_res_580_2161,_T106_6560,.inl_.X6551_2152,.inl__T18_6551_2146,.inl_.inl_.X6550_584_2151,.inl_.inl__T17_6550_583_2150,.inl_.inl_res_580_2149,_T105_6560,_T104_6560,.inl_.X6551_2100,.inl__T18_6551_2094,.inl_.inl_.X6550_584_2099,.inl_.inl__T17_6550_583_2098,.inl_.inl_res_580_2097,.inl_.X6552_1906,.inl__T21_6552_1900,.inl_.inl_.X6550_577_1905,.inl_.inl__T17_6550_576_1904,.inl_.inl_res_573_1903,_T103_6560,.inl_.X6554_2088,.inl__T29_6554_2087,.inl_prod_2081,.inl_.inl_.X6550_566_2086,.inl_.inl__T17_6550_565_2085,.inl_.inl_res_562_2084,_T102_6560,.inl_.X6551_2068,.inl__T18_6551_2062,.inl_.inl_.X6550_584_2067,.inl_.inl__T17_6550_583_2066,.inl_.inl_res_580_2065,_T101_6560,_T100_6560,.inl_.X6554_2055,.inl__T29_6554_2054,.inl_prod_2048,.inl_.inl_.X6550_566_2053,.inl_.inl__T17_6550_565_2052,.inl_.inl_res_562_2051,.inl_res_1766,.inl_.X6551_1974,.inl__T18_6551_1968,.inl_.inl_.X6550_584_1973,.inl_.inl__T17_6550_583_1972,.inl_.inl_res_580_1971,_T98_6560,.inl_.X6554_1934,.inl__T29_6554_1933,.inl_prod_1927,.inl_.inl_.X6550_566_1932,.inl_.inl__T17_6550_565_1931,.inl_.inl_res_562_1930,.inl_.X6553_2004,.inl__T24_6553_1998,.inl_.inl_.X6550_593_2003,.inl_.inl__T17_6550_592_2002,.inl_.inl_res_589_2001,.inl_.X6553_1989,.inl__T24_6553_1983,.inl_.inl_.X6550_593_1988,.inl_.inl__T17_6550_592_1987,.inl_.inl_res_589_1986,_T97_6560,.inl_.X6553_1950,.inl__T24_6553_1944,.inl_.inl_.X6550_593_1949,.inl_.inl__T17_6550_592_1948,.inl_.inl_res_589_1947,_T96_6560,.inl_.X6551_1962,.inl__T18_6551_1956,.inl_.inl_.X6550_584_1961,.inl_.inl__T17_6550_583_1960,.inl_.inl_res_580_1959,_T95_6560,.inl_.X6551_1853,.inl__T18_6551_1847,.inl_.inl_.X6550_584_1852,.inl_.inl__T17_6550_583_1851,.inl_.inl_res_580_1850,_T94_6560,.inl_.X6552_2135,.inl__T21_6552_2129,.inl_.inl_.X6550_584_2175,.inl_.inl__T17_6550_583_2174,.inl_.inl_res_580_2173,_T93_6560,_T92_6560,_T91_6560,_T90_6560,_T89_6560,_T88_6560,.inl_.X6554_1790,.inl__T29_6554_1789,.inl_prod_1783,.inl_.inl_.X6550_566_1788,.inl_.inl__T17_6550_565_1787,.inl_.inl_res_562_1786,.inl_.X6552_1883,.inl__T21_6552_1877,.inl_.inl_.X6550_577_1882,.inl_.inl__T17_6550_576_1881,.inl_.inl_res_573_1880,.inl_.X6552_1868,.inl__T21_6552_1862,.inl_.inl_.X6550_577_1867,.inl_.inl__T17_6550_576_1866,.inl_.inl_res_573_1865,_T87_6560,.inl_.X6552_1829,.inl__T21_6552_1823,.inl_.inl_.X6550_577_1828,.inl_.inl__T17_6550_576_1827,.inl_.inl_res_573_1826,_T86_6560,.inl_.X6551_1841,.inl__T18_6551_1835,.inl_.inl_.X6550_584_1840,.inl_.inl__T17_6550_583_1839,.inl_.inl_res_580_1838,_T85_6560,.inl_.X6550_1770,.inl__T17_6550_1769,.inl_.inl_.X6550_577_2134,.inl_.inl__T17_6550_576_2133,.inl_.inl_res_573_2132,_T84_6560,.inl_.X6551_2176,.inl__T18_6551_2170,.inl_.inl_.X6550_566_2118,.inl_.inl__T17_6550_565_2117,.inl_.inl_res_562_2116,_T83_6560,_T82_6560,_T81_6560,_T80_6560,_T79_6560,_T78_6560,.inl_.X6553_2027,.inl__T24_6553_2021,.inl__T32_6555_2231,.inl_.X6555_2232,.inl_.inl_.X6550_604_2230,.inl_.inl__T17_6550_603_2229,_T77_6560,_T108_6560,z2,z1,.inl_.X6550_1765,.inl__T17_6550_1764,.inl_res_1761,_T99_6560,.inl_.inl_res_600_2228,.inl_quot_2225
+              Generating implicit copyout(checkSum[:n]) [if not already present]
+          23, Loop carried scalar dependence for .inl_c_new_1743 at line 27
+              Scalar last value needed after loop for .inl_c_new_1743 at line 34
+              Loop carried scalar dependence for .inl_c_1740 at line 27,30
+              Loop carried scalar dependence for .inl_a_1739 at line 25,27,30
+              Loop carried scalar dependence for .inl_n_1741 at line 23,31
+              Loop not vectorized/parallelized: not countable
+check(char const*, int):
+     11, Loop not vectorized/parallelized: potential early exits
+main:
+     31, Generating create(cs[:n]) [if not already present]
+     39, Loop not vectorized/parallelized: contains call
+          11, Loop not vectorized/parallelized: potential early exits
+     49, Generating update self(cs[:n])
+     54, Loop not vectorized/parallelized: contains call
+          11, Loop not vectorized/parallelized: potential early exits
+     63, Generating update self(cs[:n])
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      3, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+_INTERNAL_8_main_cpp_671624bc::Crealf(float2):
+          25, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_671624bc::Cimagf(float2):
+          30, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_671624bc::make_FloatComplex(float, float):
+          35, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_671624bc::Conjf(float2):
+          43, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_671624bc::Caddf(float2, float2):
+          48, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_671624bc::Csubf(float2, float2):
+          54, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_671624bc::Cmulf(float2, float2):
+          65, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_671624bc::Cdivf(float2, float2):
+          80, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_671624bc::Cabsf(float2):
+         104, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_671624bc::Creal(double2):
+         130, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_671624bc::Cimag(double2):
+         135, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_671624bc::make_DoubleComplex(double, double):
+         140, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_671624bc::Conj(double2):
+         148, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_671624bc::Cadd(double2, double2):
+         153, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_671624bc::Csub(double2, double2):
+         159, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_671624bc::Cmul(double2, double2):
+         170, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_671624bc::Cdiv(double2, double2):
+         185, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_671624bc::Cabs(double2):
+         207, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+nvc++ -acc  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

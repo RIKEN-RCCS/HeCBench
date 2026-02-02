@@ -1,0 +1,4 @@
+nvc++  -Wall  -DUM -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+NVC++-S-0155-OpenMP unified_shared_memory clause is used in the requires construct but the application is not compiled with -gpu=unified.  (main.cpp)
+NVC++/arm Linux 25.9-0: compilation completed with severe errors
+make: *** [Makefile.NVD:62: main.o] Error 2

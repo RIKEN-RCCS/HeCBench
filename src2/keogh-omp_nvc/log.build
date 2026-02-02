@@ -1,0 +1,31 @@
+nvc++  -Wall -I../keogh-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+reference(float const*, float const*, float const*, float*, float const*, float const*, int, int):
+      6, include "reference.h"
+          18, Generated vector simd code for the loop containing reductions
+              Loop unrolled 2 times
+main:
+     32, Loop not vectorized/parallelized: contains call
+     33, Loop not vectorized/parallelized: contains call
+     34, Loop not vectorized/parallelized: contains call
+     35, Loop not vectorized/parallelized: contains call
+     36, Loop not vectorized/parallelized: contains call
+     50, #omp target teams distribute num_teams(grids) thread_limit(256)
+         47, Generating map(to:stds[:N-M+1],lower_bound[:N]) 
+             Generating map(from:lb[:N-M+1]) 
+             Generating map(to:upper_bound[:N],subject[:N],avgs[:N-M+1]) 
+         50, Generating "nvkernel_main_F1L50_2" GPU kernel
+         52, Loop parallelized across teams, schedule(static)
+         59, Team private (idx,avg,std,residues) located in CUDA shared memory
+             #omp parallel
+           59, Generating reduction(+:residues)
+               Loop parallelized across threads, schedule(static)
+     50, Loop not vectorized/parallelized: contains call
+     52, Loop not vectorized/parallelized: contains structure move
+     59, Loop not vectorized/parallelized: not countable
+          18, Generated vector simd code for the loop containing reductions
+     81, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      6, include "reference.h"
+nvc++  -Wall -I../keogh-cuda -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

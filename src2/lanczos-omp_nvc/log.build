@@ -1,0 +1,1190 @@
+nvc++  -std=c++14 -Wall -I../include -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+void _INTERNAL_8_main_cpp_main::run<double>():
+          76, Loop not vectorized/parallelized: potential early exits
+          76, Loop not vectorized/parallelized: potential early exits
+     88, Loop not vectorized/parallelized: potential early exits
+     93, Loop not vectorized/parallelized: potential early exits
+void _INTERNAL_8_main_cpp_main::run<float>():
+          76, Loop not vectorized/parallelized: potential early exits
+          76, Loop not vectorized/parallelized: potential early exits
+     88, Loop not vectorized/parallelized: potential early exits
+     93, Loop not vectorized/parallelized: potential early exits
+coo_matrix<double> adjacency_matrix_from_graph<double>(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+      6, include "graph_io.h"
+          29, Loop not vectorized/parallelized: potential early exits
+std::vector<double, std::allocator<double>> lanczos_eigen<double>(csr_matrix<double> const&, int, int):
+     11, include "eigen.h"
+          36, Loop not vectorized/parallelized: potential early exits
+          66, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+          76, Loop not vectorized/parallelized: potential early exits
+          30, Loop not fused: function call before adjacent loop
+          33, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+          18, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 2 times
+          59, Loop not fused: complex flow graph
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Vectorized loop was interleaved
+              Loop unrolled 2 times
+          59, Loop not fused: function call before adjacent loop
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Vectorized loop was interleaved
+              Loop unrolled 4 times
+          66, Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+          76, Loop not vectorized/parallelized: potential early exits
+double l2_norm<double>(std::vector<double, std::allocator<double>> const&):
+          18, Generated vector simd code for the loop containing reductions
+              Loop unrolled 2 times
+double dot_product<double>(std::vector<double, std::allocator<double>> const&, std::vector<double, std::allocator<double>> const&):
+      8, include "linear_algebra.h"
+          18, Generated vector simd code for the loop containing reductions
+              Loop unrolled 2 times
+void multiply_inplace<double>(std::vector<double, std::allocator<double>>&, double const&):
+      8, include "linear_algebra.h"
+          43, Loop not vectorized/parallelized: not countable
+std::vector<double, std::allocator<double>> multiply<double>(csr_matrix<double> const&, std::vector<double, std::allocator<double>> const&):
+      6, include "graph_io.h"
+          10, include "matrix.h"
+               33, Loop not vectorized: may not be beneficial for target
+                   Loop unrolled 2 times
+      8, include "linear_algebra.h"
+void saxpy_inplace<double>(std::vector<double, std::allocator<double>>&, double const&, std::vector<double, std::allocator<double>> const&):
+      8, include "linear_algebra.h"
+          59, Loop not vectorized: may not be beneficial for target
+std::vector<double, std::allocator<double>> lanczos_no_spurious<double>(symm_tridiag_matrix<double>&, int, double):
+     11, include "eigen.h"
+          76, Loop not vectorized/parallelized: potential early exits
+          82, Loop not vectorized/parallelized: potential early exits
+          76, Loop not vectorized/parallelized: potential early exits
+std::vector<double, std::allocator<double>> tqlrat_eigen<double>(symm_tridiag_matrix<double> const&, double):
+      6, include "graph_io.h"
+          10, include "matrix.h"
+              106, Generated vector simd code for the loop
+     11, include "eigen.h"
+         117, Loop not vectorized/parallelized: potential early exits
+         124, Loop not vectorized/parallelized: not countable
+         132, Loop not fused: complex flow graph
+              Loop not vectorized: may not be beneficial for target
+         137, Loop not vectorized: data dependency
+         155, Loop not vectorized/parallelized: potential early exits
+          76, Loop not vectorized/parallelized: potential early exits
+          76, Loop not vectorized/parallelized: potential early exits
+std::vector<double, std::allocator<double>>::const_iterator approximate_find<double>(std::vector<double, std::allocator<double>> const&, double const&, double const&):
+          71, Loop not vectorized/parallelized: potential early exits
+__gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double>>> approximate_find<__gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double>>>, double>(__gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double>>>, double const&, double const&):
+               71, Loop not vectorized/parallelized: potential early exits
+coo_matrix<float> adjacency_matrix_from_graph<float>(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+      6, include "graph_io.h"
+          29, Loop not vectorized/parallelized: potential early exits
+     11, include "eigen.h"
+std::vector<float, std::allocator<float>> lanczos_eigen<float>(csr_matrix<float> const&, int, int):
+     11, include "eigen.h"
+          36, Loop not vectorized/parallelized: potential early exits
+          66, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 8 times
+          76, Loop not vectorized/parallelized: potential early exits
+          30, Loop not fused: function call before adjacent loop
+          33, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+          18, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+          59, Loop not fused: complex flow graph
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Vectorized loop was interleaved
+              Loop unrolled 4 times
+          59, Loop not fused: function call before adjacent loop
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Vectorized loop was interleaved
+              Loop unrolled 8 times
+          66, Generated vector simd code for the loop containing reductions
+              Loop unrolled 8 times
+          76, Loop not vectorized/parallelized: potential early exits
+float l2_norm<float>(std::vector<float, std::allocator<float>> const&):
+          18, Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+float dot_product<float>(std::vector<float, std::allocator<float>> const&, std::vector<float, std::allocator<float>> const&):
+      8, include "linear_algebra.h"
+          18, Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+void multiply_inplace<float>(std::vector<float, std::allocator<float>>&, float const&):
+      8, include "linear_algebra.h"
+          43, Loop not vectorized/parallelized: not countable
+std::vector<float, std::allocator<float>> multiply<float>(csr_matrix<float> const&, std::vector<float, std::allocator<float>> const&):
+      6, include "graph_io.h"
+          10, include "matrix.h"
+               33, Loop not vectorized: may not be beneficial for target
+                   Loop unrolled 2 times
+      8, include "linear_algebra.h"
+void saxpy_inplace<float>(std::vector<float, std::allocator<float>>&, float const&, std::vector<float, std::allocator<float>> const&):
+      8, include "linear_algebra.h"
+          59, Loop not vectorized: may not be beneficial for target
+std::vector<float, std::allocator<float>> lanczos_no_spurious<float>(symm_tridiag_matrix<float>&, int, float):
+     11, include "eigen.h"
+          76, Loop not vectorized/parallelized: potential early exits
+          82, Loop not vectorized/parallelized: potential early exits
+          76, Loop not vectorized/parallelized: potential early exits
+std::vector<float, std::allocator<float>> tqlrat_eigen<float>(symm_tridiag_matrix<float> const&, float):
+      6, include "graph_io.h"
+          10, include "matrix.h"
+              106, Generated vector simd code for the loop
+     11, include "eigen.h"
+         117, Loop not vectorized/parallelized: potential early exits
+         124, Loop not vectorized/parallelized: not countable
+         132, Loop not fused: complex flow graph
+              Loop not vectorized: may not be beneficial for target
+         137, Loop not vectorized: data dependency
+         155, Loop not vectorized/parallelized: potential early exits
+          76, Loop not vectorized/parallelized: potential early exits
+          76, Loop not vectorized/parallelized: potential early exits
+std::vector<float, std::allocator<float>>::const_iterator approximate_find<float>(std::vector<float, std::allocator<float>> const&, float const&, float const&):
+          71, Loop not vectorized/parallelized: potential early exits
+__gnu_cxx::__normal_iterator<float const*, std::vector<float, std::allocator<float>>> approximate_find<__gnu_cxx::__normal_iterator<float const*, std::vector<float, std::allocator<float>>>, float>(__gnu_cxx::__normal_iterator<float const*, std::vector<float, std::allocator<float>>>, __gnu_cxx::__normal_iterator<float const*, std::vector<float, std::allocator<float>>>, float const&, float const&):
+               71, Loop not vectorized/parallelized: potential early exits
+cycle_timer::current_seconds():
+         145, Loop not vectorized/parallelized: potential early exits
+cycle_timer::seconds_per_tick():
+     10, include "cycle_timer.h"
+         146, Loop not vectorized/parallelized: potential early exits
+csr_matrix<double>::csr_matrix(coo_matrix<double> const&):
+      6, include "graph_io.h"
+          10, include "matrix.h"
+               94, Loop not fused: different loop trip count
+                   Loop not vectorized: may not be beneficial for target
+               97, Loop not fused: function call before adjacent loop
+                   Loop not vectorized: data dependency
+              102, Loop not fused: no successor loop
+                   Loop not vectorized: data dependency
+     11, include "eigen.h"
+csr_matrix<float>::csr_matrix(coo_matrix<float> const&):
+      6, include "graph_io.h"
+          10, include "matrix.h"
+               94, Loop not fused: different loop trip count
+                   Loop not vectorized: may not be beneficial for target
+               97, Loop not fused: function call before adjacent loop
+                   Loop not vectorized: data dependency
+              102, Loop not fused: no successor loop
+                   Loop not vectorized: data dependency
+     11, include "eigen.h"
+std::ostream_iterator<double, char, std::char_traits<char>> std::__copy_move<false, false, std::random_access_iterator_tag>::__copy_m<double const*, std::ostream_iterator<double, char, std::char_traits<char>>>(double const*, double const*, std::ostream_iterator<double, char, std::char_traits<char>>):
+      2, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+                             383, Loop not vectorized/parallelized: potential early exits
+      8, include "linear_algebra.h"
+     10, include "cycle_timer.h"
+std::ostream_iterator<float, char, std::char_traits<char>> std::__copy_move<false, false, std::random_access_iterator_tag>::__copy_m<float const*, std::ostream_iterator<float, char, std::char_traits<char>>>(float const*, float const*, std::ostream_iterator<float, char, std::char_traits<char>>):
+      2, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+                             383, Loop not vectorized/parallelized: potential early exits
+      8, include "linear_algebra.h"
+     10, include "cycle_timer.h"
+std::reverse_iterator<double*> std::__copy_move_backward<true, false, std::random_access_iterator_tag>::__copy_move_b<std::reverse_iterator<double*>, std::reverse_iterator<double*>>(std::reverse_iterator<double*>, std::reverse_iterator<double*>, std::reverse_iterator<double*>):
+      2, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+                             718, Loop not vectorized: data dependency
+      8, include "linear_algebra.h"
+     10, include "cycle_timer.h"
+std::reverse_iterator<float*> std::__copy_move_backward<true, false, std::random_access_iterator_tag>::__copy_move_b<std::reverse_iterator<float*>, std::reverse_iterator<float*>>(std::reverse_iterator<float*>, std::reverse_iterator<float*>, std::reverse_iterator<float*>):
+      2, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+                             718, Loop not vectorized: data dependency
+      8, include "linear_algebra.h"
+     10, include "cycle_timer.h"
+int* std::__uninitialized_fill_n<true>::__uninit_fill_n<int*, unsigned long, int>(int*, unsigned long, int const&):
+        1149, Recognized memory set idiom
+double* std::__uninitialized_fill_n<true>::__uninit_fill_n<double*, unsigned long, double>(double*, unsigned long, double const&):
+        1149, Recognized memory set idiom
+float* std::__uninitialized_fill_n<true>::__uninit_fill_n<float*, unsigned long, float>(float*, unsigned long, float const&):
+        1149, Recognized memory set idiom
+int* std::__uninitialized_default_n_1<true>::__uninit_default_n<int*, unsigned long>(int*, unsigned long):
+        1149, Recognized memory set idiom
+double* std::__uninitialized_default_n_1<true>::__uninit_default_n<double*, unsigned long>(double*, unsigned long):
+        1149, Recognized memory set idiom
+float* std::__uninitialized_default_n_1<true>::__uninit_default_n<float*, unsigned long>(float*, unsigned long):
+        1149, Recognized memory set idiom
+std::vector<int, std::allocator<int>>::vector(unsigned long, int const&, std::allocator<int> const&):
+        1595, Recognized memory set idiom
+std::vector<int, std::allocator<int>>::_M_fill_initialize(unsigned long, int const&):
+         410, Recognized memory set idiom
+void std::vector<int, std::allocator<int>>::_M_realloc_insert<int const&>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int>>>, int const&):
+      6, include "graph_io.h"
+          10, include "matrix.h"
+     11, include "eigen.h"
+std::vector<double, std::allocator<double>>::vector(unsigned long, std::allocator<double> const&):
+      6, include "graph_io.h"
+          10, include "matrix.h"
+     11, include "eigen.h"
+std::vector<double, std::allocator<double>>::vector(unsigned long, double const&, std::allocator<double> const&):
+        1595, Recognized memory set idiom
+std::vector<double, std::allocator<double>>::vector(std::vector<double, std::allocator<double>> const&):
+      6, include "graph_io.h"
+          10, include "matrix.h"
+     11, include "eigen.h"
+std::vector<double, std::allocator<double>>::erase(__gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double>>>):
+      6, include "graph_io.h"
+          10, include "matrix.h"
+     11, include "eigen.h"
+std::vector<double, std::allocator<double>>::_M_fill_initialize(unsigned long, double const&):
+         410, Recognized memory set idiom
+std::vector<double, std::allocator<double>>::_M_default_initialize(unsigned long):
+         704, Recognized memory set idiom
+std::vector<double, std::allocator<double>>::_M_move_assign(std::vector<double, std::allocator<double>>&&, std::integral_constant<bool, true>):
+      6, include "graph_io.h"
+          10, include "matrix.h"
+     11, include "eigen.h"
+void std::vector<double, std::allocator<double>>::_M_range_initialize<double const*>(double const*, double const*, std::forward_iterator_tag):
+      6, include "graph_io.h"
+          10, include "matrix.h"
+     11, include "eigen.h"
+std::vector<std::vector<double, std::allocator<double>>, std::allocator<std::vector<double, std::allocator<double>>>>::_S_do_relocate(std::vector<double, std::allocator<double>>*, std::vector<double, std::allocator<double>>*, std::vector<double, std::allocator<double>>*, std::allocator<std::vector<double, std::allocator<double>>>&, std::integral_constant<bool, true>):
+        1046, Loop not vectorized/parallelized: contains call
+std::vector<std::vector<double, std::allocator<double>>, std::allocator<std::vector<double, std::allocator<double>>>>::_S_relocate(std::vector<double, std::allocator<double>>*, std::vector<double, std::allocator<double>>*, std::vector<double, std::allocator<double>>*, std::allocator<std::vector<double, std::allocator<double>>>&):
+         456, Loop not vectorized/parallelized: contains call
+void std::vector<std::vector<double, std::allocator<double>>, std::allocator<std::vector<double, std::allocator<double>>>>::_M_realloc_insert<std::vector<double, std::allocator<double>> const&>(__gnu_cxx::__normal_iterator<std::vector<double, std::allocator<double>>*, std::vector<std::vector<double, std::allocator<double>>, std::allocator<std::vector<double, std::allocator<double>>>>>, std::vector<double, std::allocator<double>> const&):
+      6, include "graph_io.h"
+          10, include "matrix.h"
+     11, include "eigen.h"
+void std::_Destroy_aux<false>::__destroy<std::vector<double, std::allocator<double>>*>(std::vector<double, std::allocator<double>>*, std::vector<double, std::allocator<double>>*):
+      2, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    42, include "ios_base.h"
+                         41, include "locale_classes.h"
+                              40, include "string"
+                                   55, include "basic_string.h"
+                                        40, include "alloc_traits.h"
+                                             34, include "alloc_traits.h"
+                                                  33, include "stl_construct.h"
+                                                      162, Loop not vectorized/parallelized: contains call
+      8, include "linear_algebra.h"
+     10, include "cycle_timer.h"
+void std::_Destroy_aux<false>::__destroy<std::vector<float, std::allocator<float>>*>(std::vector<float, std::allocator<float>>*, std::vector<float, std::allocator<float>>*):
+      2, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    42, include "ios_base.h"
+                         41, include "locale_classes.h"
+                              40, include "string"
+                                   55, include "basic_string.h"
+                                        40, include "alloc_traits.h"
+                                             34, include "alloc_traits.h"
+                                                  33, include "stl_construct.h"
+                                                      162, Loop not vectorized/parallelized: contains call
+      8, include "linear_algebra.h"
+     10, include "cycle_timer.h"
+std::vector<double, std::allocator<double>>* std::__uninitialized_copy<false>::__uninit_copy<std::move_iterator<std::vector<double, std::allocator<double>>*>, std::vector<double, std::allocator<double>>*>(std::move_iterator<std::vector<double, std::allocator<double>>*>, std::move_iterator<std::vector<double, std::allocator<double>>*>, std::vector<double, std::allocator<double>>*):
+      6, include "graph_io.h"
+          10, include "matrix.h"
+     11, include "eigen.h"
+std::vector<float, std::allocator<float>>* std::__uninitialized_copy<false>::__uninit_copy<std::move_iterator<std::vector<float, std::allocator<float>>*>, std::vector<float, std::allocator<float>>*>(std::move_iterator<std::vector<float, std::allocator<float>>*>, std::move_iterator<std::vector<float, std::allocator<float>>*>, std::vector<float, std::allocator<float>>*):
+      6, include "graph_io.h"
+          10, include "matrix.h"
+     11, include "eigen.h"
+std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>::operator+(long) const:
+      2, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+                    42, include "ios_base.h"
+      8, include "linear_algebra.h"
+     10, include "cycle_timer.h"
+std::vector<float, std::allocator<float>>::vector(unsigned long, std::allocator<float> const&):
+      6, include "graph_io.h"
+          10, include "matrix.h"
+     11, include "eigen.h"
+std::vector<float, std::allocator<float>>::vector(unsigned long, float const&, std::allocator<float> const&):
+        1595, Recognized memory set idiom
+std::vector<float, std::allocator<float>>::vector(std::vector<float, std::allocator<float>> const&):
+      6, include "graph_io.h"
+          10, include "matrix.h"
+     11, include "eigen.h"
+std::vector<float, std::allocator<float>>::erase(__gnu_cxx::__normal_iterator<float const*, std::vector<float, std::allocator<float>>>):
+      6, include "graph_io.h"
+          10, include "matrix.h"
+     11, include "eigen.h"
+std::vector<float, std::allocator<float>>::_M_fill_initialize(unsigned long, float const&):
+         410, Recognized memory set idiom
+std::vector<float, std::allocator<float>>::_M_default_initialize(unsigned long):
+         704, Recognized memory set idiom
+std::vector<float, std::allocator<float>>::_M_move_assign(std::vector<float, std::allocator<float>>&&, std::integral_constant<bool, true>):
+      6, include "graph_io.h"
+          10, include "matrix.h"
+     11, include "eigen.h"
+void std::vector<float, std::allocator<float>>::_M_range_initialize<float const*>(float const*, float const*, std::forward_iterator_tag):
+      6, include "graph_io.h"
+          10, include "matrix.h"
+     11, include "eigen.h"
+std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::_S_do_relocate(std::vector<float, std::allocator<float>>*, std::vector<float, std::allocator<float>>*, std::vector<float, std::allocator<float>>*, std::allocator<std::vector<float, std::allocator<float>>>&, std::integral_constant<bool, true>):
+        1046, Loop not vectorized/parallelized: contains call
+std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::_S_relocate(std::vector<float, std::allocator<float>>*, std::vector<float, std::allocator<float>>*, std::vector<float, std::allocator<float>>*, std::allocator<std::vector<float, std::allocator<float>>>&):
+         456, Loop not vectorized/parallelized: contains call
+void std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::_M_realloc_insert<std::vector<float, std::allocator<float>> const&>(__gnu_cxx::__normal_iterator<std::vector<float, std::allocator<float>>*, std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>>, std::vector<float, std::allocator<float>> const&):
+      6, include "graph_io.h"
+          10, include "matrix.h"
+     11, include "eigen.h"
+std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>::operator+(long) const:
+      2, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+                    42, include "ios_base.h"
+      8, include "linear_algebra.h"
+     10, include "cycle_timer.h"
+std::__cxx11::basic_stringbuf<char, std::char_traits<char>, std::allocator<char>>::basic_stringbuf(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, std::_Ios_Openmode):
+      6, include "graph_io.h"
+     11, include "eigen.h"
+int* std::__uninitialized_move_if_noexcept_a<int*, int*, std::allocator<int>>(int*, int*, int*, std::allocator<int>&):
+      6, include "graph_io.h"
+          10, include "matrix.h"
+     11, include "eigen.h"
+int* std::__copy_move_a<true, int*, int*>(int*, int*, int*):
+      2, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+                    42, include "ios_base.h"
+      8, include "linear_algebra.h"
+     10, include "cycle_timer.h"
+double* std::__uninitialized_move_if_noexcept_a<double*, double*, std::allocator<double>>(double*, double*, double*, std::allocator<double>&):
+      6, include "graph_io.h"
+          10, include "matrix.h"
+     11, include "eigen.h"
+int* std::__uninitialized_fill_n_a<int*, unsigned long, int, int>(int*, unsigned long, int const&, std::allocator<int>&):
+         296, Recognized memory set idiom
+int* std::uninitialized_fill_n<int*, unsigned long, int>(int*, unsigned long, int const&):
+         255, Recognized memory set idiom
+int* std::fill_n<int*, unsigned long, int>(int*, unsigned long, int const&):
+        1120, Recognized memory set idiom
+int* std::__fill_n_a<int*, unsigned long, int>(int*, unsigned long, int const&, std::random_access_iterator_tag):
+         969, Recognized memory set idiom
+void std::__fill_a<int*, int>(int*, int*, int const&):
+         923, Recognized memory set idiom
+__gnu_cxx::__enable_if<std::__is_scalar<int>::__value, void>::__type std::__fill_a1<int*, int>(int*, int*, int const&):
+      2, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+                             923, Recognized memory set idiom
+                    42, include "ios_base.h"
+      8, include "linear_algebra.h"
+     10, include "cycle_timer.h"
+int* std::__uninitialized_default_n_a<int*, unsigned long, int>(int*, unsigned long, std::allocator<int>&):
+         638, Recognized memory set idiom
+int* std::__uninitialized_default_n<int*, unsigned long>(int*, unsigned long):
+         603, Recognized memory set idiom
+double* std::__uninitialized_default_n_a<double*, unsigned long, double>(double*, unsigned long, std::allocator<double>&):
+         638, Recognized memory set idiom
+double* std::__uninitialized_default_n<double*, unsigned long>(double*, unsigned long):
+         603, Recognized memory set idiom
+double* std::fill_n<double*, unsigned long, double>(double*, unsigned long, double const&):
+        1120, Recognized memory set idiom
+double* std::__fill_n_a<double*, unsigned long, double>(double*, unsigned long, double const&, std::random_access_iterator_tag):
+         969, Recognized memory set idiom
+void std::__fill_a<double*, double>(double*, double*, double const&):
+         923, Recognized memory set idiom
+__gnu_cxx::__enable_if<std::__is_scalar<double>::__value, void>::__type std::__fill_a1<double*, double>(double*, double*, double const&):
+      2, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+                             923, Recognized memory set idiom
+                    42, include "ios_base.h"
+      8, include "linear_algebra.h"
+     10, include "cycle_timer.h"
+std::ostream_iterator<double, char, std::char_traits<char>> std::copy<__gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double>>>, std::ostream_iterator<double, char, std::char_traits<char>>>(__gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double>>>, std::ostream_iterator<double, char, std::char_traits<char>>):
+      2, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+                    42, include "ios_base.h"
+      8, include "linear_algebra.h"
+     10, include "cycle_timer.h"
+std::ostream_iterator<double, char, std::char_traits<char>> std::__copy_move_a<false, __gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double>>>, std::ostream_iterator<double, char, std::char_traits<char>>>(__gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double>>>, std::ostream_iterator<double, char, std::char_traits<char>>):
+      2, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+                    42, include "ios_base.h"
+      8, include "linear_algebra.h"
+     10, include "cycle_timer.h"
+                   522, Loop not vectorized/parallelized: potential early exits
+std::ostream_iterator<double, char, std::char_traits<char>> std::__copy_move_a1<false, double const*, std::ostream_iterator<double, char, std::char_traits<char>>>(double const*, double const*, std::ostream_iterator<double, char, std::char_traits<char>>):
+         494, Loop not vectorized/parallelized: potential early exits
+std::ostream_iterator<double, char, std::char_traits<char>> std::__copy_move_a2<false, double const*, std::ostream_iterator<double, char, std::char_traits<char>>>(double const*, double const*, std::ostream_iterator<double, char, std::char_traits<char>>):
+         383, Loop not vectorized/parallelized: potential early exits
+void std::_Destroy<std::vector<double, std::allocator<double>>*, std::vector<double, std::allocator<double>>>(std::vector<double, std::allocator<double>>*, std::vector<double, std::allocator<double>>*, std::allocator<std::vector<double, std::allocator<double>>>&):
+      2, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    42, include "ios_base.h"
+                         41, include "locale_classes.h"
+                              40, include "string"
+                                   55, include "basic_string.h"
+                                        40, include "alloc_traits.h"
+                                             34, include "alloc_traits.h"
+      8, include "linear_algebra.h"
+     10, include "cycle_timer.h"
+void std::_Destroy<std::vector<double, std::allocator<double>>*>(std::vector<double, std::allocator<double>>*, std::vector<double, std::allocator<double>>*):
+         162, Loop not vectorized/parallelized: contains call
+double* std::__uninitialized_fill_n_a<double*, unsigned long, double, double>(double*, unsigned long, double const&, std::allocator<double>&):
+         296, Recognized memory set idiom
+double* std::uninitialized_fill_n<double*, unsigned long, double>(double*, unsigned long, double const&):
+         255, Recognized memory set idiom
+std::vector<double, std::allocator<double>>* std::__relocate_a<std::vector<double, std::allocator<double>>*, std::vector<double, std::allocator<double>>*, std::allocator<std::vector<double, std::allocator<double>>>>(std::vector<double, std::allocator<double>>*, std::vector<double, std::allocator<double>>*, std::vector<double, std::allocator<double>>*, std::allocator<std::vector<double, std::allocator<double>>>&):
+        1031, Loop not vectorized/parallelized: contains call
+std::vector<double, std::allocator<double>>* std::__relocate_a_1<std::vector<double, std::allocator<double>>*, std::vector<double, std::allocator<double>>*, std::allocator<std::vector<double, std::allocator<double>>>>(std::vector<double, std::allocator<double>>*, std::vector<double, std::allocator<double>>*, std::vector<double, std::allocator<double>>*, std::allocator<std::vector<double, std::allocator<double>>>&):
+      6, include "graph_io.h"
+          10, include "matrix.h"
+                5, include "vector"
+                    66, include "stl_uninitialized.h"
+                       1031, Loop not vectorized/parallelized: contains call
+     11, include "eigen.h"
+void std::__relocate_object_a<std::vector<double, std::allocator<double>>, std::vector<double, std::allocator<double>>, std::allocator<std::vector<double, std::allocator<double>>>>(std::vector<double, std::allocator<double>>*, std::vector<double, std::allocator<double>>*, std::allocator<std::vector<double, std::allocator<double>>>&):
+      6, include "graph_io.h"
+          10, include "matrix.h"
+                5, include "vector"
+                    66, include "stl_uninitialized.h"
+     11, include "eigen.h"
+void std::__introsort_loop<std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, long, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, long, __gnu_cxx::__ops::_Iter_less_iter):
+     11, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                       1929, Loop not vectorized/parallelized: potential early exits
+void std::__partial_sort<std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter):
+         421, Loop not vectorized/parallelized: contains call
+void std::__heap_select<std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter):
+     11, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                       1647, Loop not vectorized/parallelized: contains call
+         353, Loop not vectorized/parallelized: contains call
+void std::__make_heap<std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter&):
+     11, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                         61, include "stl_heap.h"
+                             352, Loop not vectorized/parallelized: contains call
+void std::__adjust_heap<std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, long, double, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, long, long, double, __gnu_cxx::__ops::_Iter_less_iter):
+     11, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                         61, include "stl_heap.h"
+                             228, Loop not vectorized/parallelized: not countable
+         139, Loop not vectorized/parallelized: potential early exits
+void std::__push_heap<std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, long, double, __gnu_cxx::__ops::_Iter_less_val>(std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, long, long, double, __gnu_cxx::__ops::_Iter_less_val&):
+     11, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                         61, include "stl_heap.h"
+                             139, Loop not vectorized/parallelized: potential early exits
+void std::__pop_heap<std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter&):
+     11, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                         61, include "stl_heap.h"
+void std::__sort_heap<std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter&):
+     11, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                         61, include "stl_heap.h"
+                             421, Loop not vectorized/parallelized: contains call
+std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>> std::__unguarded_partition<std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter):
+     11, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                       1884, Loop not vectorized/parallelized: not countable
+                       1887, Loop not vectorized/parallelized: not countable
+void std::__final_insertion_sort<std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter):
+     11, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+void std::__insertion_sort<std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter):
+        1806, Loop not vectorized/parallelized: contains structure move
+std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>> std::__copy_move_backward_a<true, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>>(std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>):
+      2, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+                    42, include "ios_base.h"
+      8, include "linear_algebra.h"
+     10, include "cycle_timer.h"
+         769, Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 4 times
+std::reverse_iterator<double*> std::__copy_move_backward_a1<true, std::reverse_iterator<double*>, std::reverse_iterator<double*>>(std::reverse_iterator<double*>, std::reverse_iterator<double*>, std::reverse_iterator<double*>):
+         758, Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 4 times
+std::reverse_iterator<double*> std::__copy_move_backward_a2<true, std::reverse_iterator<double*>, std::reverse_iterator<double*>>(std::reverse_iterator<double*>, std::reverse_iterator<double*>, std::reverse_iterator<double*>):
+         718, Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 4 times
+void std::__unguarded_linear_insert<std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Val_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Val_less_iter):
+             1806, Loop not vectorized/parallelized: contains structure move
+void std::__unguarded_insertion_sort<std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter):
+        1806, Loop not vectorized/parallelized: contains structure move
+float* std::__uninitialized_move_if_noexcept_a<float*, float*, std::allocator<float>>(float*, float*, float*, std::allocator<float>&):
+      6, include "graph_io.h"
+          10, include "matrix.h"
+                5, include "vector"
+                    66, include "stl_uninitialized.h"
+     11, include "eigen.h"
+float* std::__uninitialized_default_n_a<float*, unsigned long, float>(float*, unsigned long, std::allocator<float>&):
+         638, Recognized memory set idiom
+float* std::__uninitialized_default_n<float*, unsigned long>(float*, unsigned long):
+         603, Recognized memory set idiom
+float* std::fill_n<float*, unsigned long, float>(float*, unsigned long, float const&):
+        1120, Recognized memory set idiom
+float* std::__fill_n_a<float*, unsigned long, float>(float*, unsigned long, float const&, std::random_access_iterator_tag):
+         969, Recognized memory set idiom
+void std::__fill_a<float*, float>(float*, float*, float const&):
+         923, Recognized memory set idiom
+__gnu_cxx::__enable_if<std::__is_scalar<float>::__value, void>::__type std::__fill_a1<float*, float>(float*, float*, float const&):
+      2, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+                             923, Recognized memory set idiom
+                    42, include "ios_base.h"
+      8, include "linear_algebra.h"
+     10, include "cycle_timer.h"
+std::ostream_iterator<float, char, std::char_traits<char>> std::copy<__gnu_cxx::__normal_iterator<float const*, std::vector<float, std::allocator<float>>>, std::ostream_iterator<float, char, std::char_traits<char>>>(__gnu_cxx::__normal_iterator<float const*, std::vector<float, std::allocator<float>>>, __gnu_cxx::__normal_iterator<float const*, std::vector<float, std::allocator<float>>>, std::ostream_iterator<float, char, std::char_traits<char>>):
+      2, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+                    42, include "ios_base.h"
+      8, include "linear_algebra.h"
+     10, include "cycle_timer.h"
+std::ostream_iterator<float, char, std::char_traits<char>> std::__copy_move_a<false, __gnu_cxx::__normal_iterator<float const*, std::vector<float, std::allocator<float>>>, std::ostream_iterator<float, char, std::char_traits<char>>>(__gnu_cxx::__normal_iterator<float const*, std::vector<float, std::allocator<float>>>, __gnu_cxx::__normal_iterator<float const*, std::vector<float, std::allocator<float>>>, std::ostream_iterator<float, char, std::char_traits<char>>):
+      2, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+                    42, include "ios_base.h"
+      8, include "linear_algebra.h"
+     10, include "cycle_timer.h"
+                   522, Loop not vectorized/parallelized: potential early exits
+std::ostream_iterator<float, char, std::char_traits<char>> std::__copy_move_a1<false, float const*, std::ostream_iterator<float, char, std::char_traits<char>>>(float const*, float const*, std::ostream_iterator<float, char, std::char_traits<char>>):
+         494, Loop not vectorized/parallelized: potential early exits
+std::ostream_iterator<float, char, std::char_traits<char>> std::__copy_move_a2<false, float const*, std::ostream_iterator<float, char, std::char_traits<char>>>(float const*, float const*, std::ostream_iterator<float, char, std::char_traits<char>>):
+         383, Loop not vectorized/parallelized: potential early exits
+void std::_Destroy<std::vector<float, std::allocator<float>>*, std::vector<float, std::allocator<float>>>(std::vector<float, std::allocator<float>>*, std::vector<float, std::allocator<float>>*, std::allocator<std::vector<float, std::allocator<float>>>&):
+      2, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    42, include "ios_base.h"
+                         41, include "locale_classes.h"
+                              40, include "string"
+                                   55, include "basic_string.h"
+                                        40, include "alloc_traits.h"
+                                             34, include "alloc_traits.h"
+      8, include "linear_algebra.h"
+     10, include "cycle_timer.h"
+void std::_Destroy<std::vector<float, std::allocator<float>>*>(std::vector<float, std::allocator<float>>*, std::vector<float, std::allocator<float>>*):
+         162, Loop not vectorized/parallelized: contains call
+float* std::__uninitialized_fill_n_a<float*, unsigned long, float, float>(float*, unsigned long, float const&, std::allocator<float>&):
+         296, Recognized memory set idiom
+float* std::uninitialized_fill_n<float*, unsigned long, float>(float*, unsigned long, float const&):
+         255, Recognized memory set idiom
+std::vector<float, std::allocator<float>>* std::__relocate_a<std::vector<float, std::allocator<float>>*, std::vector<float, std::allocator<float>>*, std::allocator<std::vector<float, std::allocator<float>>>>(std::vector<float, std::allocator<float>>*, std::vector<float, std::allocator<float>>*, std::vector<float, std::allocator<float>>*, std::allocator<std::vector<float, std::allocator<float>>>&):
+        1031, Loop not vectorized/parallelized: contains call
+std::vector<float, std::allocator<float>>* std::__relocate_a_1<std::vector<float, std::allocator<float>>*, std::vector<float, std::allocator<float>>*, std::allocator<std::vector<float, std::allocator<float>>>>(std::vector<float, std::allocator<float>>*, std::vector<float, std::allocator<float>>*, std::vector<float, std::allocator<float>>*, std::allocator<std::vector<float, std::allocator<float>>>&):
+      6, include "graph_io.h"
+          10, include "matrix.h"
+                5, include "vector"
+                    66, include "stl_uninitialized.h"
+                       1031, Loop not vectorized/parallelized: contains call
+     11, include "eigen.h"
+void std::__relocate_object_a<std::vector<float, std::allocator<float>>, std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>(std::vector<float, std::allocator<float>>*, std::vector<float, std::allocator<float>>*, std::allocator<std::vector<float, std::allocator<float>>>&):
+      6, include "graph_io.h"
+          10, include "matrix.h"
+                5, include "vector"
+                    66, include "stl_uninitialized.h"
+     11, include "eigen.h"
+void std::__introsort_loop<std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, long, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, long, __gnu_cxx::__ops::_Iter_less_iter):
+     11, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                       1929, Loop not vectorized/parallelized: potential early exits
+void std::__partial_sort<std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter):
+         421, Loop not vectorized/parallelized: contains call
+void std::__heap_select<std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter):
+     11, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                       1647, Loop not vectorized/parallelized: contains call
+         353, Loop not vectorized/parallelized: contains call
+void std::__make_heap<std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter&):
+     11, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                         61, include "stl_heap.h"
+                             352, Loop not vectorized/parallelized: contains call
+void std::__adjust_heap<std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, long, float, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, long, long, float, __gnu_cxx::__ops::_Iter_less_iter):
+     11, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                         61, include "stl_heap.h"
+                             228, Loop not vectorized/parallelized: not countable
+         139, Loop not vectorized/parallelized: potential early exits
+void std::__push_heap<std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, long, float, __gnu_cxx::__ops::_Iter_less_val>(std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, long, long, float, __gnu_cxx::__ops::_Iter_less_val&):
+     11, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                         61, include "stl_heap.h"
+                             139, Loop not vectorized/parallelized: potential early exits
+void std::__pop_heap<std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter&):
+     11, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                         61, include "stl_heap.h"
+void std::__sort_heap<std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter&):
+     11, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                         61, include "stl_heap.h"
+                             421, Loop not vectorized/parallelized: contains call
+std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>> std::__unguarded_partition<std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter):
+     11, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                       1884, Loop not vectorized/parallelized: not countable
+                       1887, Loop not vectorized/parallelized: not countable
+void std::__final_insertion_sort<std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter):
+     11, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+void std::__insertion_sort<std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter):
+        1806, Loop not vectorized/parallelized: contains structure move
+std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>> std::__copy_move_backward_a<true, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>>(std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>):
+      2, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+                    42, include "ios_base.h"
+      8, include "linear_algebra.h"
+     10, include "cycle_timer.h"
+         769, Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 4 times
+std::reverse_iterator<float*> std::__copy_move_backward_a1<true, std::reverse_iterator<float*>, std::reverse_iterator<float*>>(std::reverse_iterator<float*>, std::reverse_iterator<float*>, std::reverse_iterator<float*>):
+         758, Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 4 times
+std::reverse_iterator<float*> std::__copy_move_backward_a2<true, std::reverse_iterator<float*>, std::reverse_iterator<float*>>(std::reverse_iterator<float*>, std::reverse_iterator<float*>, std::reverse_iterator<float*>):
+         718, Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 4 times
+void std::__unguarded_linear_insert<std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Val_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Val_less_iter):
+             1806, Loop not vectorized/parallelized: contains structure move
+void std::__unguarded_insertion_sort<std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter):
+        1806, Loop not vectorized/parallelized: contains structure move
+_INTERNAL_8_main_cpp_main::parse_option(int, char**):
+     39, Loop not vectorized/parallelized: potential early exits
+nvc++  -std=c++14 -Wall -I../include -O3 -Minfo -mp=gpu -gpu=cc90 -c lanczos.cpp -o lanczos.o
+"lanczos.cpp", line 112: warning: variable "multiply_blocks" was declared but never referenced [declared_but_not_referenced]
+      const int multiply_blocks = (rows + groups_per_block - 1) / groups_per_block;
+                ^
+          detected during instantiation of "std::vector<T, std::allocator<T>> gpu_lanczos_eigen(const csr_matrix<T> &, int, int) [with T=float]" at line 197
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"lanczos.cpp", line 52: warning: variable "blocks" was declared but never referenced [declared_but_not_referenced]
+    const int blocks = (n + THREADS_PER_BLOCK - 1) / THREADS_PER_BLOCK;
+              ^
+          detected during:
+            instantiation of "symm_tridiag_matrix<T> gpu_lanczos(const csr_matrix<T> &, const std::vector<T, std::allocator<T>> &, int) [with T=float]" at line 192
+            instantiation of "std::vector<T, std::allocator<T>> gpu_lanczos_eigen(const csr_matrix<T> &, int, int) [with T=float]" at line 197
+
+symm_tridiag_matrix<float> gpu_lanczos<float>(csr_matrix<float> const&, std::vector<float, std::allocator<float>> const&, int):
+          76, Loop not vectorized/parallelized: potential early exits
+    109, Loop not vectorized/parallelized: contains call
+    114, #omp target teams num_teams(multiply_blocks) thread_limit(256)
+        107, Generating map(to:col_ind[:nonzeros],row_ptr[:rows+1],values[:nonzeros]) 
+             Generating map(alloc:y[:cols],x_prev[:cols]) 
+             Generating map(to:x[:cols]) 
+        114, Generating "nvkernel__Z11gpu_lanczosIfE19symm_tridiag_matrixIT_ERK10csr_matrixIS1_ERKSt6vectorIS1_SaIS1_EEi_F1L114_2" GPU kernel
+        117, #omp parallel
+        119, Team private (result) located in CUDA shared memory
+    127, Loop not vectorized/parallelized: not countable
+    132, Loop not vectorized/parallelized: not countable
+          76, Loop not vectorized/parallelized: potential early exits
+float device_dot_product<float>(int, float const*, float const*):
+     56, #omp target teams distribute parallel for num_teams(blocks) thread_limit(256)
+         56, Generating "nvkernel__Z18device_dot_productIfET_iPKS0_S2__F1L56_7" GPU kernel
+             Loop parallelized across teams and threads(128), schedule(static)
+             Generating reduction(+:result)
+     56, Generating map(tofrom:result) 
+         Loop not vectorized/parallelized: not countable
+void saxpy_inplace_kernel<float>(int, float*, float const*, float):
+     41, #omp target teams distribute parallel for thread_limit(256)
+         41, Generating "nvkernel__Z20saxpy_inplace_kernelIfEviPT_PKS0_S0__F1L41_11" GPU kernel
+         43, Loop parallelized across teams and threads(128), schedule(static)
+     43, Loop not vectorized/parallelized: not countable
+void multiply_inplace_kernel<float>(int, float*, float):
+     24, #omp target teams distribute parallel for thread_limit(256)
+         24, Generating "nvkernel__Z23multiply_inplace_kernelIfEviPT_S0__F1L24_15" GPU kernel
+         26, Loop parallelized across teams and threads(128), schedule(static)
+     26, Loop not vectorized/parallelized: not countable
+std::vector<float, std::allocator<float>> lanczos_no_spurious<float>(symm_tridiag_matrix<float>&, int, float):
+          76, Loop not vectorized/parallelized: potential early exits
+          82, Loop not vectorized/parallelized: potential early exits
+          76, Loop not vectorized/parallelized: potential early exits
+std::vector<float, std::allocator<float>> tqlrat_eigen<float>(symm_tridiag_matrix<float> const&, float):
+      7, include "eigen.h"
+          11, include "linear_algebra.h"
+                8, include "matrix.h"
+                   106, Generated vector simd code for the loop
+         117, Loop not vectorized/parallelized: potential early exits
+         124, Loop not vectorized/parallelized: not countable
+         132, Loop not fused: complex flow graph
+              Loop not vectorized: may not be beneficial for target
+         137, Loop not vectorized: data dependency
+         155, Loop not vectorized/parallelized: potential early exits
+          76, Loop not vectorized/parallelized: potential early exits
+          76, Loop not vectorized/parallelized: potential early exits
+std::vector<float, std::allocator<float>>::const_iterator approximate_find<float>(std::vector<float, std::allocator<float>> const&, float const&, float const&):
+      7, include "eigen.h"
+          11, include "linear_algebra.h"
+                    71, Loop not vectorized/parallelized: potential early exits
+__gnu_cxx::__normal_iterator<float const*, std::vector<float, std::allocator<float>>> approximate_find<__gnu_cxx::__normal_iterator<float const*, std::vector<float, std::allocator<float>>>, float>(__gnu_cxx::__normal_iterator<float const*, std::vector<float, std::allocator<float>>>, __gnu_cxx::__normal_iterator<float const*, std::vector<float, std::allocator<float>>>, float const&, float const&):
+               71, Loop not vectorized/parallelized: potential early exits
+symm_tridiag_matrix<double> gpu_lanczos<double>(csr_matrix<double> const&, std::vector<double, std::allocator<double>> const&, int):
+          76, Loop not vectorized/parallelized: potential early exits
+    109, Loop not vectorized/parallelized: contains call
+    114, #omp target teams num_teams(multiply_blocks) thread_limit(256)
+        107, Generating map(to:col_ind[:nonzeros],row_ptr[:rows+1],values[:nonzeros]) 
+             Generating map(alloc:y[:cols],x_prev[:cols]) 
+             Generating map(to:x[:cols]) 
+        114, Generating "nvkernel__Z11gpu_lanczosIdE19symm_tridiag_matrixIT_ERK10csr_matrixIS1_ERKSt6vectorIS1_SaIS1_EEi_F1L114_19" GPU kernel
+        117, #omp parallel
+        119, Team private (result) located in CUDA shared memory
+    127, Loop not vectorized/parallelized: not countable
+    132, Loop not vectorized/parallelized: not countable
+          76, Loop not vectorized/parallelized: potential early exits
+double device_dot_product<double>(int, double const*, double const*):
+     56, #omp target teams distribute parallel for num_teams(blocks) thread_limit(256)
+         56, Generating "nvkernel__Z18device_dot_productIdET_iPKS0_S2__F1L56_24" GPU kernel
+             Loop parallelized across teams and threads(128), schedule(static)
+             Generating reduction(+:result)
+     56, Generating map(tofrom:result) 
+         Loop not vectorized/parallelized: not countable
+void saxpy_inplace_kernel<double>(int, double*, double const*, double):
+     41, #omp target teams distribute parallel for thread_limit(256)
+         41, Generating "nvkernel__Z20saxpy_inplace_kernelIdEviPT_PKS0_S0__F1L41_28" GPU kernel
+         43, Loop parallelized across teams and threads(128), schedule(static)
+     43, Loop not vectorized/parallelized: not countable
+void multiply_inplace_kernel<double>(int, double*, double):
+     24, #omp target teams distribute parallel for thread_limit(256)
+         24, Generating "nvkernel__Z23multiply_inplace_kernelIdEviPT_S0__F1L24_32" GPU kernel
+         26, Loop parallelized across teams and threads(128), schedule(static)
+     26, Loop not vectorized/parallelized: not countable
+std::vector<double, std::allocator<double>> lanczos_no_spurious<double>(symm_tridiag_matrix<double>&, int, double):
+      7, include "eigen.h"
+          76, Loop not vectorized/parallelized: potential early exits
+          82, Loop not vectorized/parallelized: potential early exits
+          76, Loop not vectorized/parallelized: potential early exits
+std::vector<double, std::allocator<double>> tqlrat_eigen<double>(symm_tridiag_matrix<double> const&, double):
+      7, include "eigen.h"
+          11, include "linear_algebra.h"
+                8, include "matrix.h"
+                   106, Generated vector simd code for the loop
+         117, Loop not vectorized/parallelized: potential early exits
+         124, Loop not vectorized/parallelized: not countable
+         132, Loop not fused: complex flow graph
+              Loop not vectorized: may not be beneficial for target
+         137, Loop not vectorized: data dependency
+         155, Loop not vectorized/parallelized: potential early exits
+          76, Loop not vectorized/parallelized: potential early exits
+          76, Loop not vectorized/parallelized: potential early exits
+std::vector<double, std::allocator<double>>::const_iterator approximate_find<double>(std::vector<double, std::allocator<double>> const&, double const&, double const&):
+      7, include "eigen.h"
+          11, include "linear_algebra.h"
+                    71, Loop not vectorized/parallelized: potential early exits
+__gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double>>> approximate_find<__gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double>>>, double>(__gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double>>>, double const&, double const&):
+               71, Loop not vectorized/parallelized: potential early exits
+cycle_timer::current_seconds():
+         145, Loop not vectorized/parallelized: potential early exits
+cycle_timer::seconds_per_tick():
+      7, include "eigen.h"
+          10, include "cycle_timer.h"
+              146, Loop not vectorized/parallelized: potential early exits
+std::reverse_iterator<float*> std::__copy_move_backward<true, false, std::random_access_iterator_tag>::__copy_move_b<std::reverse_iterator<float*>, std::reverse_iterator<float*>>(std::reverse_iterator<float*>, std::reverse_iterator<float*>, std::reverse_iterator<float*>):
+      2, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+                             718, Loop not vectorized: data dependency
+      7, include "eigen.h"
+std::reverse_iterator<double*> std::__copy_move_backward<true, false, std::random_access_iterator_tag>::__copy_move_b<std::reverse_iterator<double*>, std::reverse_iterator<double*>>(std::reverse_iterator<double*>, std::reverse_iterator<double*>, std::reverse_iterator<double*>):
+      2, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+                             718, Loop not vectorized: data dependency
+      7, include "eigen.h"
+float* std::__uninitialized_fill_n<true>::__uninit_fill_n<float*, unsigned long, float>(float*, unsigned long, float const&):
+        1149, Recognized memory set idiom
+double* std::__uninitialized_fill_n<true>::__uninit_fill_n<double*, unsigned long, double>(double*, unsigned long, double const&):
+        1149, Recognized memory set idiom
+float* std::__uninitialized_default_n_1<true>::__uninit_default_n<float*, unsigned long>(float*, unsigned long):
+        1149, Recognized memory set idiom
+double* std::__uninitialized_default_n_1<true>::__uninit_default_n<double*, unsigned long>(double*, unsigned long):
+        1149, Recognized memory set idiom
+std::vector<float, std::allocator<float>>::vector(unsigned long, std::allocator<float> const&):
+      7, include "eigen.h"
+          11, include "linear_algebra.h"
+std::vector<float, std::allocator<float>>::vector(unsigned long, float const&, std::allocator<float> const&):
+        1595, Recognized memory set idiom
+std::vector<float, std::allocator<float>>::erase(__gnu_cxx::__normal_iterator<float const*, std::vector<float, std::allocator<float>>>):
+      7, include "eigen.h"
+          11, include "linear_algebra.h"
+std::vector<float, std::allocator<float>>::_M_fill_initialize(unsigned long, float const&):
+         410, Recognized memory set idiom
+std::vector<float, std::allocator<float>>::_M_default_initialize(unsigned long):
+         704, Recognized memory set idiom
+void std::vector<float, std::allocator<float>>::_M_range_initialize<float const*>(float const*, float const*, std::forward_iterator_tag):
+      7, include "eigen.h"
+          11, include "linear_algebra.h"
+std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>::operator+(long) const:
+      2, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+      7, include "eigen.h"
+std::vector<double, std::allocator<double>>::vector(unsigned long, std::allocator<double> const&):
+      7, include "eigen.h"
+          11, include "linear_algebra.h"
+std::vector<double, std::allocator<double>>::vector(unsigned long, double const&, std::allocator<double> const&):
+        1595, Recognized memory set idiom
+std::vector<double, std::allocator<double>>::erase(__gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double>>>):
+      7, include "eigen.h"
+          11, include "linear_algebra.h"
+std::vector<double, std::allocator<double>>::_M_fill_initialize(unsigned long, double const&):
+         410, Recognized memory set idiom
+std::vector<double, std::allocator<double>>::_M_default_initialize(unsigned long):
+         704, Recognized memory set idiom
+void std::vector<double, std::allocator<double>>::_M_range_initialize<double const*>(double const*, double const*, std::forward_iterator_tag):
+      7, include "eigen.h"
+          11, include "linear_algebra.h"
+std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>::operator+(long) const:
+      2, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+      7, include "eigen.h"
+std::basic_ostream<char, std::char_traits<char>>& std::endl<char, std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&):
+      2, include "iostream"
+          39, include "ostream"
+      7, include "eigen.h"
+float* std::__uninitialized_fill_n_a<float*, unsigned long, float, float>(float*, unsigned long, float const&, std::allocator<float>&):
+         296, Recognized memory set idiom
+float* std::uninitialized_fill_n<float*, unsigned long, float>(float*, unsigned long, float const&):
+         255, Recognized memory set idiom
+float* std::fill_n<float*, unsigned long, float>(float*, unsigned long, float const&):
+        1120, Recognized memory set idiom
+float* std::__fill_n_a<float*, unsigned long, float>(float*, unsigned long, float const&, std::random_access_iterator_tag):
+         969, Recognized memory set idiom
+void std::__fill_a<float*, float>(float*, float*, float const&):
+         923, Recognized memory set idiom
+__gnu_cxx::__enable_if<std::__is_scalar<float>::__value, void>::__type std::__fill_a1<float*, float>(float*, float*, float const&):
+      2, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+                             923, Recognized memory set idiom
+      7, include "eigen.h"
+float* std::__uninitialized_default_n_a<float*, unsigned long, float>(float*, unsigned long, std::allocator<float>&):
+         638, Recognized memory set idiom
+float* std::__uninitialized_default_n<float*, unsigned long>(float*, unsigned long):
+         603, Recognized memory set idiom
+float* std::__uninitialized_move_if_noexcept_a<float*, float*, std::allocator<float>>(float*, float*, float*, std::allocator<float>&):
+      7, include "eigen.h"
+          11, include "linear_algebra.h"
+float* std::__copy_move_a<false, float const*, float*>(float const*, float const*, float*):
+      2, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+      7, include "eigen.h"
+void std::__introsort_loop<std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, long, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, long, __gnu_cxx::__ops::_Iter_less_iter):
+      7, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                       1929, Loop not vectorized/parallelized: potential early exits
+          11, include "linear_algebra.h"
+void std::__partial_sort<std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter):
+         421, Loop not vectorized/parallelized: contains call
+void std::__heap_select<std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter):
+      7, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                       1647, Loop not vectorized/parallelized: contains call
+          11, include "linear_algebra.h"
+         353, Loop not vectorized/parallelized: contains call
+void std::__make_heap<std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter&):
+      7, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                         61, include "stl_heap.h"
+                             352, Loop not vectorized/parallelized: contains call
+          11, include "linear_algebra.h"
+void std::__adjust_heap<std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, long, float, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, long, long, float, __gnu_cxx::__ops::_Iter_less_iter):
+      7, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                         61, include "stl_heap.h"
+                             228, Loop not vectorized/parallelized: not countable
+          11, include "linear_algebra.h"
+         139, Loop not vectorized/parallelized: potential early exits
+void std::__push_heap<std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, long, float, __gnu_cxx::__ops::_Iter_less_val>(std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, long, long, float, __gnu_cxx::__ops::_Iter_less_val&):
+      7, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                         61, include "stl_heap.h"
+                             139, Loop not vectorized/parallelized: potential early exits
+          11, include "linear_algebra.h"
+void std::__pop_heap<std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter&):
+      7, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                         61, include "stl_heap.h"
+          11, include "linear_algebra.h"
+void std::__sort_heap<std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter&):
+      7, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                         61, include "stl_heap.h"
+                             421, Loop not vectorized/parallelized: contains call
+          11, include "linear_algebra.h"
+std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>> std::__unguarded_partition<std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter):
+      7, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                       1884, Loop not vectorized/parallelized: not countable
+                       1887, Loop not vectorized/parallelized: not countable
+          11, include "linear_algebra.h"
+void std::__final_insertion_sort<std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter):
+      7, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+          11, include "linear_algebra.h"
+void std::__insertion_sort<std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter):
+        1806, Loop not vectorized/parallelized: contains structure move
+std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>> std::__copy_move_backward_a<true, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>>(std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>):
+      2, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+      7, include "eigen.h"
+         769, Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 4 times
+std::reverse_iterator<float*> std::__copy_move_backward_a1<true, std::reverse_iterator<float*>, std::reverse_iterator<float*>>(std::reverse_iterator<float*>, std::reverse_iterator<float*>, std::reverse_iterator<float*>):
+         758, Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 4 times
+std::reverse_iterator<float*> std::__copy_move_backward_a2<true, std::reverse_iterator<float*>, std::reverse_iterator<float*>>(std::reverse_iterator<float*>, std::reverse_iterator<float*>, std::reverse_iterator<float*>):
+         718, Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 4 times
+void std::__unguarded_linear_insert<std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Val_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Val_less_iter):
+             1806, Loop not vectorized/parallelized: contains structure move
+void std::__unguarded_insertion_sort<std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>>, __gnu_cxx::__ops::_Iter_less_iter):
+        1806, Loop not vectorized/parallelized: contains structure move
+double* std::__uninitialized_fill_n_a<double*, unsigned long, double, double>(double*, unsigned long, double const&, std::allocator<double>&):
+         296, Recognized memory set idiom
+double* std::uninitialized_fill_n<double*, unsigned long, double>(double*, unsigned long, double const&):
+         255, Recognized memory set idiom
+double* std::fill_n<double*, unsigned long, double>(double*, unsigned long, double const&):
+        1120, Recognized memory set idiom
+double* std::__fill_n_a<double*, unsigned long, double>(double*, unsigned long, double const&, std::random_access_iterator_tag):
+         969, Recognized memory set idiom
+void std::__fill_a<double*, double>(double*, double*, double const&):
+         923, Recognized memory set idiom
+__gnu_cxx::__enable_if<std::__is_scalar<double>::__value, void>::__type std::__fill_a1<double*, double>(double*, double*, double const&):
+      2, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+                             923, Recognized memory set idiom
+      7, include "eigen.h"
+double* std::__uninitialized_default_n_a<double*, unsigned long, double>(double*, unsigned long, std::allocator<double>&):
+         638, Recognized memory set idiom
+double* std::__uninitialized_default_n<double*, unsigned long>(double*, unsigned long):
+         603, Recognized memory set idiom
+double* std::__uninitialized_move_if_noexcept_a<double*, double*, std::allocator<double>>(double*, double*, double*, std::allocator<double>&):
+      7, include "eigen.h"
+          11, include "linear_algebra.h"
+double* std::__copy_move_a<false, double const*, double*>(double const*, double const*, double*):
+      2, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+      7, include "eigen.h"
+void std::__introsort_loop<std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, long, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, long, __gnu_cxx::__ops::_Iter_less_iter):
+      7, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                       1929, Loop not vectorized/parallelized: potential early exits
+          11, include "linear_algebra.h"
+void std::__partial_sort<std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter):
+         421, Loop not vectorized/parallelized: contains call
+void std::__heap_select<std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter):
+      7, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                       1647, Loop not vectorized/parallelized: contains call
+          11, include "linear_algebra.h"
+         353, Loop not vectorized/parallelized: contains call
+void std::__make_heap<std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter&):
+      7, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                         61, include "stl_heap.h"
+                             352, Loop not vectorized/parallelized: contains call
+          11, include "linear_algebra.h"
+void std::__adjust_heap<std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, long, double, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, long, long, double, __gnu_cxx::__ops::_Iter_less_iter):
+      7, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                         61, include "stl_heap.h"
+                             228, Loop not vectorized/parallelized: not countable
+          11, include "linear_algebra.h"
+         139, Loop not vectorized/parallelized: potential early exits
+void std::__push_heap<std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, long, double, __gnu_cxx::__ops::_Iter_less_val>(std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, long, long, double, __gnu_cxx::__ops::_Iter_less_val&):
+      7, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                         61, include "stl_heap.h"
+                             139, Loop not vectorized/parallelized: potential early exits
+          11, include "linear_algebra.h"
+void std::__pop_heap<std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter&):
+      7, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                         61, include "stl_heap.h"
+          11, include "linear_algebra.h"
+void std::__sort_heap<std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter&):
+      7, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                         61, include "stl_heap.h"
+                             421, Loop not vectorized/parallelized: contains call
+          11, include "linear_algebra.h"
+std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>> std::__unguarded_partition<std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter):
+      7, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+                       1884, Loop not vectorized/parallelized: not countable
+                       1887, Loop not vectorized/parallelized: not countable
+          11, include "linear_algebra.h"
+void std::__final_insertion_sort<std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter):
+      7, include "eigen.h"
+           4, include "algorithm"
+               10, include "algorithm"
+                    62, include "stl_algo.h"
+          11, include "linear_algebra.h"
+void std::__insertion_sort<std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter):
+        1806, Loop not vectorized/parallelized: contains structure move
+std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>> std::__copy_move_backward_a<true, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>>(std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>):
+      2, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+      7, include "eigen.h"
+         769, Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 4 times
+std::reverse_iterator<double*> std::__copy_move_backward_a1<true, std::reverse_iterator<double*>, std::reverse_iterator<double*>>(std::reverse_iterator<double*>, std::reverse_iterator<double*>, std::reverse_iterator<double*>):
+         758, Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 4 times
+std::reverse_iterator<double*> std::__copy_move_backward_a2<true, std::reverse_iterator<double*>, std::reverse_iterator<double*>>(std::reverse_iterator<double*>, std::reverse_iterator<double*>, std::reverse_iterator<double*>):
+         718, Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 4 times
+void std::__unguarded_linear_insert<std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Val_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Val_less_iter):
+             1806, Loop not vectorized/parallelized: contains structure move
+void std::__unguarded_insertion_sort<std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter>(std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, std::reverse_iterator<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>>, __gnu_cxx::__ops::_Iter_less_iter):
+        1806, Loop not vectorized/parallelized: contains structure move
+nvc++  -std=c++14 -Wall -I../include -O3 -Minfo -mp=gpu -gpu=cc90 main.o lanczos.o -o main 

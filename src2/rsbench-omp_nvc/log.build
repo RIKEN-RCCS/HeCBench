@@ -1,0 +1,138 @@
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c init.c -o init.o
+initialize_simulation(Input):
+          46, Loop not vectorized/parallelized: not countable
+          50, Loop not vectorized/parallelized: potential early exits
+          68, Loop not vectorized/parallelized: not countable
+          72, Loop not vectorized/parallelized: potential early exits
+          93, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+         105, Loop not vectorized/parallelized: potential early exits
+         139, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+         155, Loop not vectorized/parallelized: potential early exits
+         181, Loop not vectorized/parallelized: potential early exits
+generate_n_poles(Input, unsigned long*):
+     46, Recognized memory set idiom
+     50, Loop not vectorized/parallelized: potential early exits
+generate_n_windows(Input, unsigned long*):
+     68, Recognized memory set idiom
+     72, Loop not vectorized/parallelized: potential early exits
+generate_poles(Input, int*, unsigned long*, int*):
+     93, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+    105, Loop not vectorized/parallelized: potential early exits
+generate_window_params(Input, int*, int*, unsigned long*, int*):
+    139, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+    155, Loop not vectorized/parallelized: potential early exits
+generate_pseudo_K0RS(Input, unsigned long*):
+    181, Loop not vectorized/parallelized: potential early exits
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c io.c -o io.o
+logo(int):
+          28, Loop not vectorized/parallelized: contains call
+          28, Loop not vectorized/parallelized: contains call
+center_print(char const*, int):
+     28, Loop not vectorized/parallelized: contains call
+read_CLI(int, char**):
+     95, Loop not vectorized/parallelized: contains call
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.c -o main.o
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c material.c -o material.o
+get_materials(Input, unsigned long*):
+          51, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+          67, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop
+         118, Loop not vectorized/parallelized: potential early exits
+load_mats(Input, int*, int*, unsigned long*):
+     51, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+     67, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+load_concs(int*, unsigned long*, int):
+    118, Loop not vectorized/parallelized: potential early exits
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c simulation.c -o simulation.o
+run_event_based_simulation(Input, SimulationData, unsigned long*, double*):
+     38, #omp target teams distribute parallel for
+         34, Generating map(to:data.max_num_windows,data.n_poles[:data.length_n_poles],data.num_nucs[:data.length_num_nucs],data.pseudo_K0RS[:data.length_pseudo_K0RS],data.poles[:data.length_poles],data.n_windows[:data.length_n_windows],data.concs[:data.length_concs],data.mats[:data.length_mats],data.max_num_nucs,data.max_num_poles,data.windows[:data.length_windows]) 
+             Generating map(tofrom:verification) 
+             Generating map(to:input) 
+         38, Generating "nvkernel__Z26run_event_based_simulation5Input14SimulationDataPmPd_F1L38_2" GPU kernel
+             Loop parallelized across teams and threads(128), schedule(static)
+             Generating reduction(+:verification)
+     38, Generating implicit map(tofrom:data,input) 
+         Generating map(tofrom:verification) 
+         406, Loop not vectorized/parallelized: not countable
+         257, Loop not vectorized/parallelized: potential early exits
+         260, Generated vector simd code for negative stride loop
+          91, Loop unrolled 4 times (completely unrolled)
+         103, Loop not vectorized/parallelized: loop count too small
+              Loop not vectorized/parallelized: contains structure move
+         105, Loop unrolled 4 times (completely unrolled)
+     66, Loop unrolled 4 times (completely unrolled)
+calculate_macro_xs(double*, int, double, Input, int*, int*, int, double*, int*, double*, Window*, Pole*, int, int):
+     89, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+     91, Generated vector simd code for the loop
+         142, Loop not vectorized/parallelized: loop count too small
+         151, Loop not vectorized/parallelized: contains structure move
+    105, Loop unrolled 4 times (completely unrolled)
+calculate_micro_xs(double*, int, double, Input, int*, double*, Window*, Pole*, int, int):
+    127, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+    151, Loop not vectorized/parallelized: contains structure move
+calculate_micro_xs_doppler(double*, int, double, Input, int*, double*, Window*, Pole*, int, int):
+    180, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+    206, Loop not vectorized/parallelized: contains structure move
+         346, Loop not fused: no successor loop
+              Loop not vectorized: unknown
+pick_mat(unsigned long*):
+    234, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+    257, Loop not vectorized/parallelized: potential early exits
+    260, Generated vector simd code for negative stride loop
+         Loop unrolled 4 times
+calculate_sig_T(int, double, Input, double*, RSComplex*):
+    270, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+fast_nuclear_W(RSComplex):
+    295, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+    346, Loop not fused: no successor loop
+         Loop not vectorized: unknown
+LCG_random_double(unsigned long*):
+    378, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+fast_forward_LCG(unsigned long, unsigned long):
+    396, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+    406, Loop not vectorized/parallelized: not countable
+c_add(RSComplex, RSComplex):
+    425, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+c_sub(RSComplex, RSComplex):
+    433, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+c_mul(RSComplex, RSComplex):
+    441, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+c_div(RSComplex, RSComplex):
+    453, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+c_abs(RSComplex):
+    466, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+fast_exp(double):
+    478, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+fast_cexp(RSComplex):
+    490, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c utils.c -o utils.o
+"utils.c", line 23: warning: statement is unreachable [code_is_unreachable]
+  	gettimeofday(&timecheck, NULL);
+  	^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 init.o io.o main.o material.o simulation.o utils.o -o rsbench 

@@ -1,0 +1,63 @@
+nvc++  -Wall -I../ntt-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+_uint96_modP(unsigned int*):
+          17, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_uint128_modP(unsigned int*):
+          36, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_uint160_modP(unsigned int*):
+          53, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_uint192_modP(unsigned int*):
+          64, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_uint224_modP(unsigned int*):
+          81, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_ls_modP(unsigned long, int):
+          97, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_add_modP(unsigned long, unsigned long):
+         178, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_sub_modP(unsigned long, unsigned long):
+         187, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_mul_modP(unsigned long, unsigned long, unsigned long):
+      9, include "modP.h"
+         196, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+         251, Loop not vectorized: unknown
+ntt8(unsigned long*):
+      9, include "modP.h"
+         279, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+         311, Rerolled basic block into loop
+              Loop versioned for possible aliasing
+              Generated vector simd code for rerolled loop
+              Loop unrolled 7 times (completely unrolled)
+intt_3_64k_modcrt(unsigned int, unsigned int*, unsigned long const*):
+     17, #omp target teams num_teams(numTeams) thread_limit(64)
+         17, Generating "nvkernel__Z17intt_3_64k_modcrtjPjPKm_F1L17_2" GPU kernel
+         20, #omp parallel
+           35, Barrier
+         49, Team private (buffer) located in CUDA shared memory
+     28, Loop not vectorized: unsupported gather
+         309, Generated vector simd code for rerolled loop
+     33, Loop not vectorized/parallelized: contains call
+     38, Loop not vectorized: data dependency
+     42, Loop not vectorized: unknown
+         309, Rerolled basic block into loop
+         251, Loop not vectorized: unknown
+main:
+     68, Loop not vectorized/parallelized: contains call
+     76, Generating map(from:res[:65536]) 
+         Generating map(to:ntt[:65536]) 
+     79, Loop not vectorized/parallelized: contains call
+     88, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      3, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      9, include "modP.h"
+nvc++  -Wall -I../ntt-cuda -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

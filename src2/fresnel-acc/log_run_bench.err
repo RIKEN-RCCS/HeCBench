@@ -1,0 +1,84 @@
+xFresnel_Auxiliary_Cosine_Integral(double):
+     70, Generating acc routine seq
+         Generating NVIDIA GPU code
+         317, Loop not vectorized/parallelized: potential early exits
+         329, Generated vector simd code for negative stride loop
+              Loop unrolled 4 times
+_INTERNAL_10_cosine_cpp_c408033a::Chebyshev_Expansion_0_1(double):
+    106, Generating acc routine seq
+         Generating NVIDIA GPU code
+_INTERNAL_10_cosine_cpp_c408033a::Chebyshev_Expansion_1_3(double):
+    155, Generating acc routine seq
+         Generating NVIDIA GPU code
+_INTERNAL_10_cosine_cpp_c408033a::Chebyshev_Expansion_3_5(double):
+    206, Generating acc routine seq
+         Generating NVIDIA GPU code
+_INTERNAL_10_cosine_cpp_c408033a::Chebyshev_Expansion_5_7(double):
+    254, Generating acc routine seq
+         Generating NVIDIA GPU code
+_INTERNAL_10_cosine_cpp_c408033a::Asymptotic_Series(double):
+    304, Generating acc routine seq
+         Generating NVIDIA GPU code
+    317, Loop not vectorized/parallelized: potential early exits
+    329, Generated vector simd code for negative stride loop
+         Loop unrolled 4 times
+Fresnel_Sine_Integral(double):
+     63, Generating acc routine seq
+         Generating NVIDIA GPU code
+          98, Multiple reductions compressed
+              Loop not vectorized/parallelized: not countable
+xFresnel_Sine_Integral(double):
+     92, Generating acc routine seq
+         Generating NVIDIA GPU code
+         148, Multiple reductions compressed
+              Loop not vectorized/parallelized: not countable
+_INTERNAL_11_fresnel_cpp_e8df05f5::Power_Series_S(double):
+    134, Generating acc routine seq
+         Generating NVIDIA GPU code
+    148, Multiple reductions compressed
+         Loop not vectorized/parallelized: not countable
+reference(double const*, double*, int):
+     11, Loop not vectorized/parallelized: potential early exits
+main:
+     30, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+     34, Generating copyout(output[:80000000]) [if not already present]
+         Generating copy(x[:80000000]) [if not already present]
+     37, Generating NVIDIA GPU code
+         39, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+     39, Loop not vectorized/parallelized: contains call
+          11, Loop not vectorized/parallelized: potential early exits
+     51, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+xFresnel_Auxiliary_Sine_Integral(double):
+     69, Generating acc routine seq
+         Generating NVIDIA GPU code
+         318, Loop not vectorized/parallelized: potential early exits
+         329, Generated vector simd code for negative stride loop
+              Loop unrolled 4 times
+_INTERNAL_8_sine_cpp_ec9cb0d5::Chebyshev_Expansion_0_1(double):
+    105, Generating acc routine seq
+         Generating NVIDIA GPU code
+_INTERNAL_8_sine_cpp_ec9cb0d5::Chebyshev_Expansion_1_3(double):
+    154, Generating acc routine seq
+         Generating NVIDIA GPU code
+_INTERNAL_8_sine_cpp_ec9cb0d5::Chebyshev_Expansion_3_5(double):
+    205, Generating acc routine seq
+         Generating NVIDIA GPU code
+_INTERNAL_8_sine_cpp_ec9cb0d5::Chebyshev_Expansion_5_7(double):
+    254, Generating acc routine seq
+         Generating NVIDIA GPU code
+_INTERNAL_8_sine_cpp_ec9cb0d5::Asymptotic_Series(double):
+    305, Generating acc routine seq
+         Generating NVIDIA GPU code
+    318, Loop not vectorized/parallelized: potential early exits
+    329, Generated vector simd code for negative stride loop
+         Loop unrolled 4 times
+xChebyshev_Tn_Series:
+     49, Generating acc routine seq
+         Generating NVIDIA GPU code
+     62, Loop not vectorized: unknown
+         Loop unrolled 2 times
+timeout was set to  600

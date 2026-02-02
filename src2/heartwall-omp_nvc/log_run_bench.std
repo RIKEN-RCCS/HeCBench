@@ -1,0 +1,2 @@
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "../heartwall-cuda/prepare_data.sh; time -p ( ./heartwall 104 1>log.std 2>log.err ) 2> log.time"

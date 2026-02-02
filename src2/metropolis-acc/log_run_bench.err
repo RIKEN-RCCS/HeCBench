@@ -1,0 +1,61 @@
+"kernel_prng.h", line 137: error: invalid text in pragma
+    #pragma acc parallel loop thread_limit(BLOCKSIZE1D)
+                              ^
+
+"kernel_prng.h", line 137: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop thread_limit(BLOCKSIZE1D)
+                                          ^
+
+"kernel_metropolis.h", line 57: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(numTeams) thread_limit(numThreads)
+                         ^
+
+"kernel_metropolis.h", line 57: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(numTeams) thread_limit(numThreads)
+                               ^
+
+"kernel_metropolis.h", line 62: error: identifier "omp_get_team_num" is undefined
+        const int team = omp_get_team_num();
+                         ^
+
+"kernel_metropolis.h", line 63: error: identifier "omp_get_thread_num" is undefined
+        const int thread = omp_get_thread_num();
+                           ^
+
+"kernel_metropolis.h", line 54: warning: variable "numTeams" was declared but never referenced [declared_but_not_referenced]
+    const int numTeams = gridDim_x * gridDim_y * gridDim_z ;
+              ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"kernel_metropolis.h", line 55: warning: variable "numThreads" was declared but never referenced [declared_but_not_referenced]
+    const int numThreads = BX * BY / 2 * BZ;
+              ^
+
+"kernel_metropolis.h", line 208: error: invalid text in pragma
+    #pragma acc parallel loop thread_limit(BLOCKSIZE1D)
+                              ^
+
+"kernel_metropolis.h", line 208: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop thread_limit(BLOCKSIZE1D)
+                                          ^
+
+"main.cpp", line 125: error: invalid text in pragma
+  #pragma acc parallel data map (alloc: dH[0:N], \
+                       ^
+
+"main.cpp", line 125: error: extra text after expected end of preprocessing directive
+  #pragma acc parallel data map (alloc: dH[0:N], \
+                            ^
+
+"kernel_metropolis.h", line 236: error: invalid text in pragma
+    #pragma acc parallel loop thread_limit(BLOCKSIZE1D)
+                              ^
+
+"kernel_metropolis.h", line 236: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop thread_limit(BLOCKSIZE1D)
+                                          ^
+
+12 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:61: main.o] Error 2
+timeout was set to  600

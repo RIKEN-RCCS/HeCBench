@@ -1,0 +1,1 @@
+clang++   -std=c++17 -Wall -I./meschach_lib -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU detect_main.c -c

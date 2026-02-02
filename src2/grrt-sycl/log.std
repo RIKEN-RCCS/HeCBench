@@ -1,0 +1,4 @@
+task1: image size = 1024  x  1024  pixels
+Total kernel execution time (task1) 2.024196 (s)
+task2: image size = 1024  x  1024  pixels
+Total kernel execution time (task2) 8.464371 (s)

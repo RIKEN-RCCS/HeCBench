@@ -1,0 +1,46 @@
+nvc++  -Wall -I../include -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+convert_float4(uchar4):
+          28, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+convert_uchar4(float4):
+          32, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+operator+(float4, float4):
+          42, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+operator-(float4, float4):
+          47, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+operator*(float4, float4):
+          52, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+main:
+         375, Loop not vectorized/parallelized: not countable
+    110, Loop not vectorized/parallelized: contains call
+    111, #omp target teams distribute parallel for thread_limit(256)
+        107, Generating map(to:inputImageData[:height*width]) 
+             Generating map(tofrom:outputImageData[:height*width]) 
+        111, Generating "nvkernel_main_F1L111_2" GPU kernel
+        113, Loop parallelized across teams and threads(128), schedule(static)
+    114, Loop not vectorized/parallelized: not countable
+    160, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+          28, Loop not fused: complex flow graph
+              Generated vector simd code for the loop containing reductions
+SDKBitMap::load(char const*):
+     19, include "sobel.h"
+           6, include "SDKBitMap.h"
+              373, Loop not fused: function call before adjacent loop
+              375, Loop not fused: complex flow graph
+                   Loop not vectorized: data dependency
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     19, include "sobel.h"
+           4, include "chrono"
+              472, Loop not vectorized/parallelized: not countable
+           6, include "SDKBitMap.h"
+_INTERNAL_8_main_cpp_main::compare(float const*, float const*, int, float):
+     28, Generated vector simd code for the loop containing reductions
+nvc++  -Wall -I../include -O3 -Minfo -mp=gpu -gpu=cc90 -c reference.cpp -o reference.o
+reference(uchar4*, uchar4 const*, unsigned int, unsigned int, int):
+     62, Loop not vectorized: data dependency
+nvc++  -Wall -I../include -O3 -Minfo -mp=gpu -gpu=cc90 main.o reference.o -o main 

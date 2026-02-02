@@ -1,0 +1,8 @@
+"../slu-cuda/src/preprocess.cpp", line 5: catastrophic error: cannot open source file "nicslu.h"
+  #include "nicslu.h"
+                     ^
+
+1 catastrophic error detected in the compilation of "../slu-cuda/src/preprocess.cpp".
+Compilation terminated.
+make: *** [Makefile.NVD:76: preprocess.o] Error 2
+timeout was set to  600

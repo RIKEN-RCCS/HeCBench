@@ -1,0 +1,8 @@
+clang++   -std=c++17 -Wall -fsycl           -I../lud-cuda/common -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c lud.cpp -o lud.o
+clang++   -std=c++17 -Wall -fsycl           -I../lud-cuda/common -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c ../lud-cuda/common/common.cpp -o common.o
+clang++   -std=c++17 -Wall -fsycl           -I../lud-cuda/common -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU lud.o common.o -o main 
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "time -p ( ./main -s 32768  1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 2 4654 4652

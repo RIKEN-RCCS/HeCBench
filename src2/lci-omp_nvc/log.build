@@ -1,0 +1,12 @@
+/opt/nvidia/hpc_sdk/Linux_aarch64/25.9/compilers/bin/nvc++    -c -o main.o main.cpp
+"main.cpp", line 57: warning: variable "dftab_size" was declared but never referenced [declared_but_not_referenced]
+    int dftab_size = sizeof(double_fact_table) / sizeof(double_fact_table[0]);
+        ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"main.cpp", line 58: warning: variable "ftab_size" was declared but never referenced [declared_but_not_referenced]
+    int ftab_size = sizeof(fact_table) / sizeof(fact_table[0]);
+        ^
+
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

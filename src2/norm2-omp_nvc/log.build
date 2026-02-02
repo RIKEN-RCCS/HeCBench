@@ -1,0 +1,17 @@
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+main:
+     39, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+     49, Loop not vectorized/parallelized: contains call
+     53, #omp target teams distribute parallel for thread_limit(256)
+         46, Generating map(to:a[:n]) 
+         53, Generating "nvkernel_main_F1L53_2" GPU kernel
+             Loop parallelized across teams and threads(128), schedule(static)
+             Generating reduction(+:sum)
+     53, Generating map(tofrom:sum) 
+         Loop not vectorized/parallelized: not countable
+     67, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

@@ -1,0 +1,89 @@
+lud.cpp:
+"lud.cpp", line 113: error: invalid text in pragma
+    #pragma acc data tofrom: m[0:(size_t)matrix_dim*matrix_dim])
+                     ^
+
+"lud.cpp", line 113: error: extra text after expected end of preprocessing directive
+    #pragma acc data tofrom: m[0:(size_t)matrix_dim*matrix_dim])
+                           ^
+
+"lud.cpp", line 122: error: invalid text in pragma
+      #pragma acc parallel teams gang(1) thread_limit(BLOCK_SIZE)
+                           ^
+
+"lud.cpp", line 122: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel teams gang(1) thread_limit(BLOCK_SIZE)
+                                 ^
+
+"lud.cpp", line 128: error: identifier "omp_get_thread_num" is undefined
+          int tx = omp_get_thread_num() ;
+                   ^
+
+"lud.cpp", line 164: error: invalid text in pragma
+      #pragma acc parallel teams num_teams((matrix_dim-i)/BLOCK_SIZE-1) thread_limit(2*BLOCK_SIZE)
+                           ^
+
+"lud.cpp", line 164: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel teams num_teams((matrix_dim-i)/BLOCK_SIZE-1) thread_limit(2*BLOCK_SIZE)
+                                 ^
+
+"lud.cpp", line 175: error: identifier "omp_get_team_num" is undefined
+           int  bx = omp_get_team_num();  
+                     ^
+
+"lud.cpp", line 176: error: identifier "omp_get_thread_num" is undefined
+           int  tx = omp_get_thread_num();
+                     ^
+
+"lud.cpp", line 243: error: invalid text in pragma
+      #pragma acc parallel teams num_teams(((matrix_dim-i)/BLOCK_SIZE-1) * ((matrix_dim-i)/BLOCK_SIZE-1)) \
+                           ^
+
+"lud.cpp", line 243: error: extra text after expected end of preprocessing directive
+      #pragma acc parallel teams num_teams(((matrix_dim-i)/BLOCK_SIZE-1) * ((matrix_dim-i)/BLOCK_SIZE-1)) \
+                                 ^
+
+"lud.cpp", line 250: error: identifier "omp_get_team_num" is undefined
+          int  bx = omp_get_team_num() % ((matrix_dim-i)/BLOCK_SIZE-1); // item.get_group(1);  
+                    ^
+
+"lud.cpp", line 253: error: identifier "omp_get_thread_num" is undefined
+          int  tx = omp_get_thread_num() % BLOCK_SIZE; //item.get_local_id(1);
+                    ^
+
+"lud.cpp", line 276: error: invalid text in pragma
+    #pragma acc parallel teams gang(1) thread_limit(BLOCK_SIZE)
+                         ^
+
+"lud.cpp", line 276: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams gang(1) thread_limit(BLOCK_SIZE)
+                               ^
+
+"lud.cpp", line 282: error: identifier "omp_get_thread_num" is undefined
+        int tx = omp_get_thread_num() ;
+                 ^
+
+16 errors detected in the compilation of "lud.cpp".
+../lud-cuda/common/common.cpp:
+create_matrix_from_file(float**, char const*, int*):
+     61, Loop not vectorized/parallelized: contains call
+matrix_multiply(float*, float*, float*, int):
+     80, Zero trip check eliminated
+     81, Zero trip check eliminated
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 8 times
+lud_verify(float*, float*, int):
+     96, Loop not vectorized: unprofitable for target
+    129, Zero trip check eliminated
+         Loop not vectorized/parallelized: contains call
+print_matrix(float*, int):
+    150, Zero trip check eliminated
+         Loop not vectorized/parallelized: contains call
+create_matrix(float**, int):
+    167, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    183, Recognized memory copy idiom
+make: *** [Makefile.NVD:55: main] Error 2
+timeout was set to  600

@@ -1,0 +1,3 @@
+Using time step: 0.000350, Minimum recomended 0.000484
+Average execution time of sph kernels: 40.110664 (ms)
+wrote file: sim-0.csv

@@ -1,0 +1,34 @@
+nvc++ -acc  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c 3D.cpp -o 3D.o
+main:
+     89, Generating enter data create(tOut[:size])
+         Generating enter data copyin(tIn[:size],pIn[:size])
+     92, Loop not vectorized/parallelized: too deeply nested
+     93, Generating implicit firstprivate(layers,numRows,numCols)
+         Generating NVIDIA GPU code
+         95, #pragma acc loop gang, vector(256) collapse(2) /* blockIdx.x threadIdx.x */
+         97,   /* blockIdx.x threadIdx.x collapsed */
+        120, #pragma acc loop seq
+     93, Generating implicit copyout(tOut[:]) [if not already present]
+         Generating implicit copyin(tIn[:],pIn[:]) [if not already present]
+     95, Loop not fused: no successor loop
+     97, Generating implicit firstprivate(cs,stepDivCap,cw,ce,cn,cc,ct,cb)
+    120, Loop carried scalar dependence for temp2 at line 121
+         Scalar last value needed after loop for temp2 at line 132
+         Complex loop carried dependence of tIn-> prevents parallelization
+         Loop carried scalar dependence for temp3 at line 122
+         Scalar last value needed after loop for temp3 at line 133,134
+         Complex loop carried dependence of pIn-> prevents parallelization
+         Loop carried dependence of tOut-> prevents parallelization
+         Loop carried backward dependence of tOut-> prevents vectorization
+         Complex loop carried dependence of tOut-> prevents parallelization
+    126, Accelerator restriction: induction variable live-out from loop: c
+    127, Accelerator restriction: induction variable live-out from loop: W
+    128, Accelerator restriction: induction variable live-out from loop: E
+    129, Accelerator restriction: induction variable live-out from loop: N
+    130, Accelerator restriction: induction variable live-out from loop: S
+    149, Generating update self(tIn[:size])
+    153, Generating update self(tOut[:size])
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      2, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++ -acc  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 3D.o 3D_helper.o -o main 

@@ -1,0 +1,403 @@
+void contract<float>(int, int, int):
+    352, Recognized memory set idiom
+    361, Recognized memory set idiom
+    372, Generating copyin(adj_value[:adj_size]) [if not already present]
+         Generating copyout(value[:output_size]) [if not already present]
+         Generating copyin(tensor_value[:tensor_size]) [if not already present]
+    375, Loop not vectorized/parallelized: contains call
+    384, Loop not fused: complex flow graph
+         Generated vector simd code for the loop containing reductions
+        5648, Loop not fused: complex flow graph
+              Loop not vectorized: may not be beneficial for target
+        5712, Loop not fused: function call before adjacent loop
+              Loop not vectorized: may not be beneficial for target
+void contract<double>(int, int, int):
+    352, Recognized memory set idiom
+    361, Recognized memory set idiom
+    372, Generating copyin(adj_value[:adj_size]) [if not already present]
+         Generating copyout(value[:output_size]) [if not already present]
+         Generating copyin(tensor_value[:tensor_size]) [if not already present]
+    375, Loop not vectorized/parallelized: contains call
+    384, Loop not fused: complex flow graph
+         Generated vector simd code for the loop containing reductions
+         Loop unrolled 4 times
+        5648, Loop not fused: complex flow graph
+              Loop not vectorized: may not be beneficial for target
+        5712, Loop not fused: function call before adjacent loop
+              Loop not vectorized: may not be beneficial for target
+void contraction<float>(float const*, float const*, float*, int, int, int):
+     17, Generating implicit firstprivate(N,output_size)
+         Generating NVIDIA GPU code
+         20, #pragma acc loop gang /* blockIdx.x */
+         45, #pragma acc loop seq
+         46, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+         49, #pragma acc loop seq
+             Generating implicit reduction(+:sum)
+         62, #pragma acc loop seq
+             Generating implicit reduction(+:sum)
+         65, #pragma acc loop seq
+         66, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+         79, #pragma acc loop seq
+         80, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+         83, #pragma acc loop seq
+             Generating implicit reduction(+:sum)
+         96, #pragma acc loop seq
+             Generating implicit reduction(+:sum)
+         99, #pragma acc loop seq
+        100, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+        115, #pragma acc loop seq
+        116, #pragma acc loop seq
+        117, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+        134, #pragma acc loop seq
+        135, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+        148, #pragma acc loop seq
+             Generating implicit reduction(+:sum)
+        152, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+        164, #pragma acc loop seq
+             Generating implicit reduction(+:sum)
+        167, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+        180, #pragma acc loop seq
+             Generating implicit reduction(+:sum)
+        184, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+        196, #pragma acc loop seq
+        197, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+        212, #pragma acc loop seq
+             Generating implicit reduction(+:sum)
+        215, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+        228, #pragma acc loop seq
+             Generating implicit reduction(+:sum)
+        232, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+        244, #pragma acc loop seq
+             Generating implicit reduction(+:sum)
+        248, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+        262, #pragma acc loop seq
+        264, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+        278, #pragma acc loop seq
+        280, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+        296, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+        311, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+        328, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+     17, Generating implicit copyout(value[:output_size]) [if not already present]
+         Generating implicit copyin(tensor[:],adj[:]) [if not already present]
+     20, Generating implicit firstprivate(nChanels)
+         Loop not fused: no successor loop
+         Loop not vectorized/parallelized: too deeply nested
+     45, Loop is parallelizable
+         Loop not fused: complex flow graph
+     46, Loop is parallelizable
+         Zero trip check eliminated
+     49, Loop is parallelizable
+         Zero trip check eliminated
+         Generated vector simd code for the loop containing reductions
+     62, Loop is parallelizable
+         Loop not fused: complex flow graph
+     65, Loop is parallelizable
+         Zero trip check eliminated
+     66, Loop is parallelizable
+         Zero trip check eliminated
+         Generated vector simd code for the loop containing reductions
+     79, Loop is parallelizable
+         Loop not fused: complex flow graph
+     80, Loop is parallelizable
+         Zero trip check eliminated
+     83, Loop is parallelizable
+         Zero trip check eliminated
+         Generated vector simd code for the loop containing reductions
+     96, Loop is parallelizable
+         Loop not fused: complex flow graph
+     99, Loop is parallelizable
+         Zero trip check eliminated
+    100, Loop is parallelizable
+         Zero trip check eliminated
+         Generated vector simd code for the loop containing reductions
+    115, Loop is parallelizable
+         Loop not fused: complex flow graph
+    116, Loop is parallelizable
+         Zero trip check eliminated
+    117, Loop is parallelizable
+         Zero trip check eliminated
+         Generated vector simd code for the loop containing reductions
+    134, Loop is parallelizable
+         Loop not fused: complex flow graph
+    135, Loop is parallelizable
+         Zero trip check eliminated
+         Generated vector simd code for the loop containing reductions
+         Loop unrolled 8 times
+    148, Loop is parallelizable
+         Loop not fused: complex flow graph
+    152, Loop is parallelizable
+         Zero trip check eliminated
+         Generated vector simd code for the loop containing reductions
+    164, Loop is parallelizable
+         Loop not fused: complex flow graph
+    167, Loop is parallelizable
+         Zero trip check eliminated
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 4 times
+    180, Loop is parallelizable
+         Loop not fused: complex flow graph
+    184, Loop is parallelizable
+         Zero trip check eliminated
+         Generated vector simd code for the loop containing reductions
+    196, Loop is parallelizable
+         Loop not fused: complex flow graph
+    197, Loop is parallelizable
+         Zero trip check eliminated
+         Loop not vectorized: unknown
+    212, Loop is parallelizable
+         Loop not fused: complex flow graph
+    215, Loop is parallelizable
+         Zero trip check eliminated
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 4 times
+    228, Loop is parallelizable
+         Loop not fused: complex flow graph
+    232, Loop is parallelizable
+         Zero trip check eliminated
+         Generated vector simd code for the loop containing reductions
+    244, Loop is parallelizable
+         Loop not fused: complex flow graph
+    248, Loop is parallelizable
+         Zero trip check eliminated
+         Generated vector simd code for the loop containing reductions
+    262, Loop is parallelizable
+         Loop not fused: complex flow graph
+    264, Loop is parallelizable
+         Zero trip check eliminated
+         Generated vector simd code for the loop containing reductions
+    278, Loop is parallelizable
+         Loop not fused: complex flow graph
+    280, Loop is parallelizable
+         Zero trip check eliminated
+         Generated vector simd code for the loop containing reductions
+    296, Loop is parallelizable
+         Loop not fused: complex flow graph
+         Loop not vectorized: unsupported gather
+    311, Loop is parallelizable
+         Loop not fused: complex flow graph
+         Loop not vectorized: unsupported gather
+    328, Loop is parallelizable
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 4 times
+void contraction<double>(double const*, double const*, double*, int, int, int):
+     17, Generating implicit firstprivate(N,output_size)
+         Generating NVIDIA GPU code
+         20, #pragma acc loop gang /* blockIdx.x */
+         45, #pragma acc loop seq
+         46, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+         49, #pragma acc loop seq
+             Generating implicit reduction(+:sum)
+         62, #pragma acc loop seq
+             Generating implicit reduction(+:sum)
+         65, #pragma acc loop seq
+         66, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+         79, #pragma acc loop seq
+         80, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+         83, #pragma acc loop seq
+             Generating implicit reduction(+:sum)
+         96, #pragma acc loop seq
+             Generating implicit reduction(+:sum)
+         99, #pragma acc loop seq
+        100, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+        115, #pragma acc loop seq
+        116, #pragma acc loop seq
+        117, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+        134, #pragma acc loop seq
+        135, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+        148, #pragma acc loop seq
+             Generating implicit reduction(+:sum)
+        152, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+        164, #pragma acc loop seq
+             Generating implicit reduction(+:sum)
+        167, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+        180, #pragma acc loop seq
+             Generating implicit reduction(+:sum)
+        184, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+        196, #pragma acc loop seq
+        197, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+        212, #pragma acc loop seq
+             Generating implicit reduction(+:sum)
+        215, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+        228, #pragma acc loop seq
+             Generating implicit reduction(+:sum)
+        232, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+        244, #pragma acc loop seq
+             Generating implicit reduction(+:sum)
+        248, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+        262, #pragma acc loop seq
+        264, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+        278, #pragma acc loop seq
+        280, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+        296, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+        311, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+        328, #pragma acc loop vector(128) /* threadIdx.x */
+             Generating implicit reduction(+:sum)
+     17, Generating implicit copyout(value[:output_size]) [if not already present]
+         Generating implicit copyin(tensor[:],adj[:]) [if not already present]
+     20, Generating implicit firstprivate(nChanels)
+         Loop not fused: no successor loop
+         Loop not vectorized/parallelized: too deeply nested
+     45, Loop is parallelizable
+         Loop not fused: complex flow graph
+     46, Loop is parallelizable
+         Zero trip check eliminated
+     49, Loop is parallelizable
+         Zero trip check eliminated
+         Generated vector simd code for the loop containing reductions
+     62, Loop is parallelizable
+         Loop not fused: complex flow graph
+     65, Loop is parallelizable
+         Zero trip check eliminated
+     66, Loop is parallelizable
+         Zero trip check eliminated
+         Generated vector simd code for the loop containing reductions
+     79, Loop is parallelizable
+         Loop not fused: complex flow graph
+     80, Loop is parallelizable
+         Zero trip check eliminated
+     83, Loop is parallelizable
+         Zero trip check eliminated
+         Generated vector simd code for the loop containing reductions
+     96, Loop is parallelizable
+         Loop not fused: complex flow graph
+     99, Loop is parallelizable
+         Zero trip check eliminated
+    100, Loop is parallelizable
+         Zero trip check eliminated
+         Generated vector simd code for the loop containing reductions
+    115, Loop is parallelizable
+         Loop not fused: complex flow graph
+    116, Loop is parallelizable
+         Zero trip check eliminated
+    117, Loop is parallelizable
+         Zero trip check eliminated
+         Generated vector simd code for the loop containing reductions
+    134, Loop is parallelizable
+         Loop not fused: complex flow graph
+    135, Loop is parallelizable
+         Zero trip check eliminated
+         Generated vector simd code for the loop containing reductions
+         Loop unrolled 4 times
+    148, Loop is parallelizable
+         Loop not fused: complex flow graph
+    152, Loop is parallelizable
+         Zero trip check eliminated
+         Generated vector simd code for the loop containing reductions
+    164, Loop is parallelizable
+         Loop not fused: complex flow graph
+    167, Loop is parallelizable
+         Zero trip check eliminated
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 2 times
+    180, Loop is parallelizable
+         Loop not fused: complex flow graph
+    184, Loop is parallelizable
+         Zero trip check eliminated
+         Generated vector simd code for the loop containing reductions
+    196, Loop is parallelizable
+         Loop not fused: complex flow graph
+    197, Loop is parallelizable
+         Zero trip check eliminated
+         Loop not vectorized: unknown
+    212, Loop is parallelizable
+         Loop not fused: complex flow graph
+    215, Loop is parallelizable
+         Zero trip check eliminated
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 2 times
+    228, Loop is parallelizable
+         Loop not fused: complex flow graph
+    232, Loop is parallelizable
+         Zero trip check eliminated
+         Generated vector simd code for the loop containing reductions
+    244, Loop is parallelizable
+         Loop not fused: complex flow graph
+    248, Loop is parallelizable
+         Zero trip check eliminated
+         Generated vector simd code for the loop containing reductions
+    262, Loop is parallelizable
+         Loop not fused: complex flow graph
+    264, Loop is parallelizable
+         Zero trip check eliminated
+         Generated vector simd code for the loop containing reductions
+    278, Loop is parallelizable
+         Loop not fused: complex flow graph
+    280, Loop is parallelizable
+         Zero trip check eliminated
+         Generated vector simd code for the loop containing reductions
+    296, Loop is parallelizable
+         Loop not fused: complex flow graph
+         Loop not vectorized: unsupported gather
+    311, Loop is parallelizable
+         Loop not fused: complex flow graph
+         Loop not vectorized: unsupported gather
+    328, Loop is parallelizable
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 2 times
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+float* std::min_element<float*>(float*, float*):
+        5623, Loop not vectorized: may not be beneficial for target
+float* std::__min_element<float*, __gnu_cxx::__ops::_Iter_less_iter>(float*, float*, __gnu_cxx::__ops::_Iter_less_iter):
+      3, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                  5623, Loop not vectorized: may not be beneficial for target
+float* std::max_element<float*>(float*, float*):
+        5687, Loop not vectorized: may not be beneficial for target
+float* std::__max_element<float*, __gnu_cxx::__ops::_Iter_less_iter>(float*, float*, __gnu_cxx::__ops::_Iter_less_iter):
+      3, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                  5687, Loop not vectorized: may not be beneficial for target
+double* std::min_element<double*>(double*, double*):
+        5623, Loop not vectorized: may not be beneficial for target
+double* std::__min_element<double*, __gnu_cxx::__ops::_Iter_less_iter>(double*, double*, __gnu_cxx::__ops::_Iter_less_iter):
+      3, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                  5623, Loop not vectorized: may not be beneficial for target
+double* std::max_element<double*>(double*, double*):
+        5687, Loop not vectorized: may not be beneficial for target
+double* std::__max_element<double*, __gnu_cxx::__ops::_Iter_less_iter>(double*, double*, __gnu_cxx::__ops::_Iter_less_iter):
+      3, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                  5687, Loop not vectorized: may not be beneficial for target
+timeout was set to  600

@@ -1,0 +1,41 @@
+nvc++  -std=c++14 -Wall -I../minkowski-cuda -O3 -Minfo -mp=gpu -gpu=cc90,fastmath -DVERIFY -c main.cpp -o main.o
+VerifyResult(float (*) [1024], float (*) [2048], float (*) [2048], float (*) [2048], float, float):
+     20, include "verify.cpp"
+          18, Recognized memory zero idiom
+          20, Loop not fused: different loop trip count
+          22, Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 2 times
+          27, Outer loop unrolled 1 times (completely unrolled)
+          28, Loop nest collapsed
+              Generated vector simd code for the loop
+          40, Loop not vectorized/parallelized: potential early exits
+main:
+     39, Outer loop unrolled 1 times (completely unrolled)
+     40, Loop nest collapsed
+         Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+     45, Loop nest collapsed
+         Loop not vectorized/parallelized: contains call
+     48, Loop not fused: function call before adjacent loop
+     50, Loop not fused: scalar dependence chain to sibling loop
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 8 times
+     52, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+     72, #omp target teams distribute parallel for thread_limit(256)
+         64, Generating map(to:a_host[:512][:]) 
+             Generating map(alloc:c_back[:512][:]) 
+             Generating map(to:b_host[:1024][:]) 
+         72, Generating "nvkernel_main_F1L72_2" GPU kernel
+         74, Loop parallelized across teams and threads(128), schedule(static)
+     72, Loop not vectorized/parallelized: contains call
+     75, Loop not vectorized/parallelized: not countable
+     77, Generated vector simd code for the loop containing reductions
+     91, Generating update from(c_back[:512][:])
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+     20, include "verify.cpp"
+nvc++  -std=c++14 -Wall -I../minkowski-cuda -O3 -Minfo -mp=gpu -gpu=cc90,fastmath -DVERIFY main.o -o main 

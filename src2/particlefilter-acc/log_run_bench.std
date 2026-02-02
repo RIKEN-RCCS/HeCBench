@@ -1,0 +1,1 @@
+nvc++ -acc  -std=c++14 -Wall -DBLOCK_SIZE=256 -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o

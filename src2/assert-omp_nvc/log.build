@@ -1,0 +1,29 @@
+nvc++  -Wall -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+testKernel(int, int, int):
+     21, #omp target teams distribute parallel for num_teams(numTeams)
+         21, Generating "nvkernel__Z10testKerneliii_F1L21_2" GPU kernel
+         24, Loop parallelized across teams and threads, schedule(static)
+     21, Generating implicit map(tofrom:_T1_0[:]) 
+     24, Loop not vectorized/parallelized: contains call
+perfKernel(int, int):
+     32, #omp target teams num_teams(numTeams)
+         32, Generating "nvkernel__Z10perfKernelii_F1L32_6" GPU kernel
+         34, #omp parallel
+     32, Generating implicit map(tofrom:_T2_0[:]) 
+     38, Loop not vectorized/parallelized: contains call
+perfKernel2(int, int):
+     48, #omp target teams num_teams(numTeams)
+         48, Generating "nvkernel__Z11perfKernel2ii_F1L48_11" GPU kernel
+         50, #omp parallel
+     48, Generating implicit map(tofrom:_T3_0[:]) 
+     53, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     14, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1l>>::_S_gcd(long, long):
+     14, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<float, std::ratio<1l, 1l>>::_S_gcd(long, long):
+     14, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++  -Wall -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

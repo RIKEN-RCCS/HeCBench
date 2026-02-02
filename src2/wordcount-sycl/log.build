@@ -1,0 +1,7 @@
+clang++  -std=c++17           --gcc-toolchain=           -I./oneDPL/include -I./oneTBB/include -fsycl -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c main.cpp -o main.o
+clang++  -std=c++17           --gcc-toolchain=           -I./oneDPL/include -I./oneTBB/include -fsycl -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c wc.cpp -o wc.o
+wc.cpp:1:10: fatal error: 'oneapi/dpl/execution' file not found
+    1 | #include <oneapi/dpl/execution>
+      |          ^~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+make: *** [Makefile.NVD:73: wc.o] Error 1

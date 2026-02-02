@@ -1,0 +1,10 @@
+nvc++ -acc  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 cluster.c -c
+nvc++ -acc  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 getopt.c -c
+nvc++ -acc  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 read_input.c -c
+nvc++ -acc  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 rmse.c -c
+nvc++ -acc   -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 cluster.o getopt.o read_input.o rmse.o kmeans.c -o kmeans -lm
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "../kmeans-cuda/prepare_data.sh; time -p ( ./kmeans -r -n 5 -m 15 -l 10 -o -i ../data/kmeans/kdd_cup 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 1 695 694

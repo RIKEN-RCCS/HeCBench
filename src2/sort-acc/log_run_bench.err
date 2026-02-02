@@ -1,0 +1,75 @@
+"main.cpp", line 89: error: invalid text in pragma
+    #pragma acc data to: idata[0:size]) \
+                     ^
+
+"main.cpp", line 89: error: extra text after expected end of preprocessing directive
+    #pragma acc data to: idata[0:size]) \
+                       ^
+
+"main.cpp", line 115: error: invalid text in pragma
+          #pragma acc parallel teams num_teams(num_work_groups) thread_limit(local_wsize)
+                               ^
+
+"main.cpp", line 115: error: extra text after expected end of preprocessing directive
+          #pragma acc parallel teams num_teams(num_work_groups) thread_limit(local_wsize)
+                                     ^
+
+"sort_reduce.h", line 2: error: identifier "omp_get_gang" is undefined
+  int group_range = omp_get_gang();
+                    ^
+
+"sort_reduce.h", line 3: error: identifier "omp_get_team_num" is undefined
+  int group = omp_get_team_num();
+              ^
+
+"sort_reduce.h", line 4: error: identifier "omp_get_vector" is undefined
+  int local_range = omp_get_vector();
+                    ^
+
+"sort_reduce.h", line 13: error: identifier "omp_get_thread_num" is undefined
+  int tid = omp_get_thread_num();
+            ^
+
+"main.cpp", line 130: error: invalid text in pragma
+          #pragma acc parallel teams num_teams(num_work_groups) thread_limit(local_wsize)
+                               ^
+
+"main.cpp", line 130: error: extra text after expected end of preprocessing directive
+          #pragma acc parallel teams num_teams(num_work_groups) thread_limit(local_wsize)
+                                     ^
+
+"sort_top_scan.h", line 2: error: identifier "omp_get_vector" is undefined
+  int local_range = omp_get_vector();
+                    ^
+
+"sort_top_scan.h", line 3: error: identifier "omp_get_thread_num" is undefined
+  int lid = omp_get_thread_num();
+            ^
+
+"main.cpp", line 146: error: invalid text in pragma
+          #pragma acc parallel teams num_teams(num_work_groups) thread_limit(local_wsize)
+                               ^
+
+"main.cpp", line 146: error: extra text after expected end of preprocessing directive
+          #pragma acc parallel teams num_teams(num_work_groups) thread_limit(local_wsize)
+                                     ^
+
+"sort_bottom_scan.h", line 1: error: identifier "omp_get_gang" is undefined
+  int group_range = omp_get_gang();
+                    ^
+
+"sort_bottom_scan.h", line 2: error: identifier "omp_get_team_num" is undefined
+  int group = omp_get_team_num();
+              ^
+
+"sort_bottom_scan.h", line 3: error: identifier "omp_get_vector" is undefined
+  int local_range = omp_get_vector();
+                    ^
+
+"sort_bottom_scan.h", line 4: error: identifier "omp_get_thread_num" is undefined
+  int lid = omp_get_thread_num();
+            ^
+
+18 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:58: main.o] Error 2
+timeout was set to  600

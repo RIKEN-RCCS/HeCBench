@@ -1,0 +1,27 @@
+Number of non-zero elements: 16777216
+Number of rows in a square matrix: 40980
+Sparsity: 99.000976%
+
+Thread block size: 32
+Average dense, sparse, and vector sparse kernel execution time (ms): 7.239810 0.557531 0.675322
+Error rate: 0.000000 0.000000 0.000000
+
+Thread block size: 64
+Average dense, sparse, and vector sparse kernel execution time (ms): 6.257034 0.543867 0.673019
+Error rate: 0.000000 0.000000 0.000000
+
+Thread block size: 128
+Average dense, sparse, and vector sparse kernel execution time (ms): 6.628839 0.544987 0.671546
+Error rate: 0.000000 0.000000 0.000000
+
+Thread block size: 256
+Average dense, sparse, and vector sparse kernel execution time (ms): 7.036067 0.560539 0.674427
+Error rate: 0.000000 0.000000 0.000000
+
+Thread block size: 512
+Average dense, sparse, and vector sparse kernel execution time (ms): 6.997572 0.543131 0.672603
+Error rate: 0.000000 0.000000 0.000000
+
+Thread block size: 1024
+Average dense, sparse, and vector sparse kernel execution time (ms): 11.145089 0.578651 0.671962
+Error rate: 0.000000 0.000000 0.000000

@@ -1,0 +1,57 @@
+nvc++  -Wall -I../asmooth-cuda/ -O3 -Minfo -mp=gpu -gpu=cc90,fastmath -c main.cpp -o main.o
+reference(int, int, int, int, float*, int*, float*, float*):
+      7, include "reference.h"
+           7, Loop not vectorized/parallelized: too deeply nested
+           8, Loop not vectorized/parallelized: too deeply nested
+          19, Invariant if transformation
+              Loop not vectorized/parallelized: not countable
+          30, Invariant if transformation
+              Loop not vectorized/parallelized: not countable
+          38, Loop not vectorized: data dependency
+          42, Loop not vectorized/parallelized: too deeply nested
+          50, Invariant if transformation
+              Loop not vectorized/parallelized: not countable
+verify(int, int, float const*, float const*, float const*, float const*, int const*, int const*):
+      7, include "reference.h"
+          89, Loop not vectorized/parallelized: potential early exits
+          96, Loop not vectorized/parallelized: contains call
+main:
+     41, Loop not vectorized/parallelized: contains call
+     51, Loop not vectorized/parallelized: contains call
+     57, #omp target teams distribute parallel for thread_limit(256)
+         57, Generating "nvkernel_main_F1L57_2" GPU kernel
+         61, Loop parallelized across teams and threads(128), schedule(static)
+     57, Generating update to(norm[:size],img[:size])
+     62, Loop not vectorized/parallelized: too deeply nested
+     68, Loop not vectorized/parallelized: potential early exits
+     74, Invariant if transformation
+     85, Invariant if transformation
+     92, #omp target teams distribute parallel for thread_limit(256)
+         92, Generating "nvkernel_main_F1L92_4" GPU kernel
+         96, Loop parallelized across teams and threads(128), schedule(static)
+     97, Loop not vectorized/parallelized: not countable
+     98, #omp target teams distribute parallel for thread_limit(256)
+         50, Generating map(alloc:box[:size],img[:size],norm[:size]) 
+             Generating map(to:out[:size]) 
+         98, Generating "nvkernel_main_F1L98_6" GPU kernel
+        102, Loop parallelized across teams and threads(128), schedule(static)
+    103, Loop not vectorized/parallelized: not countable
+    110, Invariant if transformation
+    128, Generating update from(out[:size],norm[:size],box[:size])
+           7, Loop not vectorized/parallelized: too deeply nested
+           8, Loop not vectorized/parallelized: too deeply nested
+          19, Invariant if transformation
+              Loop not vectorized/parallelized: not countable
+          30, Invariant if transformation
+              Loop not vectorized/parallelized: not countable
+          38, Loop not vectorized: data dependency
+          42, Loop not vectorized/parallelized: too deeply nested
+          50, Invariant if transformation
+              Loop not vectorized/parallelized: not countable
+          89, Loop not vectorized/parallelized: potential early exits
+          96, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      7, include "reference.h"
+nvc++  -Wall -I../asmooth-cuda/ -O3 -Minfo -mp=gpu -gpu=cc90,fastmath main.o -o main 

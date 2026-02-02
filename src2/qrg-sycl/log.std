@@ -1,0 +1,24 @@
+Initializing QRNG tables...
+>>>Launch QuasirandomGenerator kernel...
+
+Average kernel execution time (qrng): 14.901921 (us)
+
+Read back results...
+Comparing to the CPU results...
+
+  L1 norm: 7.275964E-12
+  ckQuasirandomGenerator deviations WITHIN Allowable Tolerance
+
+
+>>>Launch InverseCND kernel...
+
+Average kernel execution time (icnd): 21.746000 (us)
+
+Read back results...
+Comparing to the CPU results...
+
+  L1 norm: 8.021285E-08
+  ckInverseCNDGPU deviations WITHIN Allowable Tolerance
+
+
+PASS

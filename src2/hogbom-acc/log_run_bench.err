@@ -1,0 +1,68 @@
+zeroInit(std::vector<float, std::allocator<float>>&):
+     10, include "utils.h"
+          39, Recognized memory zero idiom
+compare(std::vector<float, std::allocator<float>> const&, std::vector<float, std::allocator<float>> const&):
+     10, include "utils.h"
+          52, Loop not vectorized/parallelized: potential early exits
+main:
+          39, Recognized memory zero idiom
+float* std::__uninitialized_default_n_1<true>::__uninit_default_n<float*, unsigned long>(float*, unsigned long):
+        1149, Recognized memory set idiom
+std::vector<float, std::allocator<float>>::vector(unsigned long, std::allocator<float> const&):
+     10, include "utils.h"
+std::vector<float, std::allocator<float>>::_M_default_initialize(unsigned long):
+         704, Recognized memory set idiom
+float* std::__uninitialized_default_n_a<float*, unsigned long, float>(float*, unsigned long, std::allocator<float>&):
+         638, Recognized memory set idiom
+float* std::__uninitialized_default_n<float*, unsigned long>(float*, unsigned long):
+         603, Recognized memory set idiom
+float* std::fill_n<float*, unsigned long, float>(float*, unsigned long, float const&):
+        1120, Recognized memory set idiom
+float* std::__fill_n_a<float*, unsigned long, float>(float*, unsigned long, float const&, std::random_access_iterator_tag):
+         969, Recognized memory set idiom
+void std::__fill_a<float*, float>(float*, float*, float const&):
+         923, Recognized memory set idiom
+__gnu_cxx::__enable_if<std::__is_scalar<float>::__value, void>::__type std::__fill_a1<float*, float>(float*, float*, float const&):
+      1, include "string"
+          40, include "char_traits.h"
+               39, include "stl_algobase.h"
+                   923, Recognized memory set idiom
+"kernels.cpp", line 45: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(findPeakNBlocks) thread_limit(findPeakWidth)
+                         ^
+
+"kernels.cpp", line 45: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(findPeakNBlocks) thread_limit(findPeakWidth)
+                               ^
+
+"kernels.cpp", line 51: error: identifier "omp_get_thread_num" is undefined
+        int tid = omp_get_thread_num();
+                  ^
+
+"kernels.cpp", line 52: error: identifier "omp_get_team_num" is undefined
+        int bid = omp_get_team_num();
+                  ^
+
+"kernels.cpp", line 88: error: invalid text in pragma
+    #pragma acc update from (d_peaks[0:nBlocks])
+                       ^
+
+"kernels.cpp", line 88: error: OpenACC data clause expected
+    #pragma acc update from (d_peaks[0:nBlocks])
+                       ^
+
+"kernels.cpp", line 88: error: extra text after expected end of preprocessing directive
+    #pragma acc update from (d_peaks[0:nBlocks])
+                            ^
+
+"kernels.cpp", line 155: error: invalid text in pragma
+    #pragma acc data to: d_psf[0:psf_size])\
+                     ^
+
+"kernels.cpp", line 155: error: extra text after expected end of preprocessing directive
+    #pragma acc data to: d_psf[0:psf_size])\
+                       ^
+
+9 errors detected in the compilation of "kernels.cpp".
+make: *** [Makefile.NVD:71: kernels.o] Error 2
+timeout was set to  600

@@ -1,0 +1,51 @@
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+main:
+     45, Loop not vectorized/parallelized: too deeply nested
+     72, Loop not vectorized/parallelized: contains call
+     77, Loop not vectorized/parallelized: contains call
+        1861, Loop not fused: function call before adjacent loop
+              Loop not vectorized: may not be beneficial for target
+     81, Loop not vectorized/parallelized: contains call
+        1861, Loop not fused: function call before adjacent loop
+              Loop not vectorized: may not be beneficial for target
+          21, Loop not vectorized/parallelized: not countable
+    100, Loop not vectorized/parallelized: contains call
+    102, #omp target teams num_teams(batch_size)
+        102, Generating "nvkernel_main_F1L102_2" GPU kernel
+        104, #omp parallel
+    111, Loop not vectorized/parallelized: not countable
+    125, Generating update from(output_k1[:input_size])
+    127, Loop not vectorized/parallelized: contains call
+    129, #omp target teams num_teams(batch_size)
+        129, Generating "nvkernel_main_F1L129_4" GPU kernel
+        131, #omp parallel
+    137, Loop not vectorized/parallelized: not countable
+    151, Generating update from(output_k2[:input_size])
+    153, #omp target teams distribute num_teams(batch_size)
+         94, Generating map(to:dense[:dense_size],input[:input_size],offset[:batch_size+1],output_k1[:input_size],output_k3[:input_size],output_k2[:input_size]) 
+        153, Generating "nvkernel_main_F1L153_6" GPU kernel
+        155, Loop parallelized across teams, schedule(static)
+        159, Team private (batch_idx,start,range) located in CUDA shared memory
+             #omp parallel
+          159, Loop parallelized across threads, schedule(static)
+    153, Loop not vectorized/parallelized: contains call
+    155, Loop not vectorized/parallelized: contains structure move
+    159, Loop not vectorized/parallelized: not countable
+    172, Generating update from(output_k3[:input_size])
+    173, Loop not vectorized/parallelized: potential early exits
+void reference<float>(float const*, float const*, float*, int, int, int const*):
+     21, Loop not vectorized/parallelized: not countable
+float std::uniform_real_distribution<float>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&):
+        1870, Loop not vectorized: data dependency
+float std::uniform_real_distribution<float>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&, std::uniform_real_distribution<float>::param_type const&):
+         189, Loop not vectorized: data dependency
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::__detail::_Adaptor<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>, float>::operator()():
+        3364, Loop not vectorized: data dependency
+float std::generate_canonical<float, 24ul, std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&):
+      5, include "random"
+          51, include "random.tcc"
+             3364, Loop not vectorized: data dependency
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

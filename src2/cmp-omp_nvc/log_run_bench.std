@@ -1,0 +1,2 @@
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "time -p ( ./main -c0 1.975e-7 -c1 1.384e-6 -nc 5 -aph 2600 -tau 0.004 -v 2 -i ../cmp-cuda/fold1000.su 1>log.std 2>log.err ) 2> log.time"

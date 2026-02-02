@@ -1,0 +1,53 @@
+"main.cpp", line 33: error: identifier "omp_get_thread_num" is undefined
+    int localId = omp_get_thread_num();
+                  ^
+
+"main.cpp", line 55: error: identifier "omp_get_thread_num" is undefined
+    unsigned int idx = omp_get_thread_num();
+                       ^
+
+"main.cpp", line 91: error: identifier "omp_get_thread_num" is undefined
+    int localId = omp_get_thread_num();
+                  ^
+
+"main.cpp", line 92: error: identifier "omp_get_vector" is undefined
+    int localSize = omp_get_vector();
+                    ^
+
+"main.cpp", line 135: error: invalid text in pragma
+    #pragma acc data tofrom: out[0:N]) 
+                     ^
+
+"main.cpp", line 135: error: extra text after expected end of preprocessing directive
+    #pragma acc data tofrom: out[0:N]) 
+                           ^
+
+"main.cpp", line 140: error: invalid text in pragma
+        #pragma acc parallel teams num_teams(teams) thread_limit(threads)
+                             ^
+
+"main.cpp", line 140: error: extra text after expected end of preprocessing directive
+        #pragma acc parallel teams num_teams(teams) thread_limit(threads)
+                                   ^
+
+"main.cpp", line 146: error: identifier "omp_get_thread_num" is undefined
+            int localId = omp_get_thread_num();
+                          ^
+
+"main.cpp", line 147: error: identifier "omp_get_vector" is undefined
+            int localSize = omp_get_vector();
+                            ^
+
+"main.cpp", line 148: error: identifier "omp_get_team_num" is undefined
+            int globalId = omp_get_team_num() * localSize + localId;
+                           ^
+
+"main.cpp", line 133: warning: variable "teams" was declared but never referenced [declared_but_not_referenced]
+    unsigned teams = N/4/threads;
+             ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+11 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

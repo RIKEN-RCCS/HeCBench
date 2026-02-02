@@ -1,0 +1,36 @@
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+Hadamard4x4a(float&, float&, float&, float&):
+     14, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+Hadamard4x4b(float&, float&, float&, float&):
+     23, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+main:
+     41, Loop not fused: function call before adjacent loop
+     48, Loop not fused: function call before adjacent loop
+     64, Loop not vectorized/parallelized: contains call
+     66, #omp target teams num_teams(16384) thread_limit(256)
+         61, Generating map(to:chi2Corrections[:16384]) 
+             Generating map(alloc:randomNumbers[:33554432]) 
+             Generating map(to:globalPool[:33554432]) 
+         66, Generating "nvkernel_main_F1L66_2" GPU kernel
+         69, #omp parallel
+           83, Barrier
+           98, Barrier
+          110, Barrier
+          128, Barrier
+          142, Barrier
+          145, Barrier
+        136, Team private (pool) located in CUDA shared memory
+     80, Loop not vectorized: data dependency
+         Loop unrolled 8 times (completely unrolled)
+    100, Loop not vectorized: data dependency
+         Loop unrolled 8 times (completely unrolled)
+    107, Loop not vectorized/parallelized: contains call
+    148, Loop not vectorized: data dependency
+         Loop unrolled 8 times (completely unrolled)
+    165, Generating update from(randomNumbers[:33554432])
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      5, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

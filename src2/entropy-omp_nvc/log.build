@@ -1,0 +1,53 @@
+nvc++  -Wall -I../entropy-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+"main.cpp", line 59: warning: variable "numTeams" was declared but never referenced [declared_but_not_referenced]
+    const int numTeams = teamX * teamY;
+              ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+reference(float*, char const*, int, int):
+      6, include "reference.h"
+          10, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+          15, Loop not vectorized: data dependency
+          16, Loop unrolled 5 times (completely unrolled)
+          30, Loop not vectorized/parallelized: contains call
+entropy(float*, char const*, int, int):
+     12, #omp target teams distribute parallel for thread_limit(256)
+         12, Generating "nvkernel__Z7entropyPfPKcii_F1L12_2" GPU kernel
+         14, Loop parallelized across teams and threads(128), schedule(static)
+     18, Generated vector simd code for the loop
+     24, Loop not vectorized: data dependency
+     25, Loop unrolled 5 times (completely unrolled)
+     39, Loop not vectorized/parallelized: contains call
+main:
+    116, Loop not vectorized/parallelized: contains call
+    120, Loop nest collapsed
+         Loop not vectorized/parallelized: contains call
+    125, Generating map(to:input[:height*width]) 
+         Generating map(from:output[:height*width]) 
+         Generating map(to:logTable[:]) 
+    128, Loop not vectorized/parallelized: contains call
+    137, Loop not vectorized/parallelized: contains call
+          10, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+          15, Loop not vectorized: data dependency
+          16, Loop unrolled 5 times (completely unrolled)
+          30, Loop not vectorized/parallelized: contains call
+    150, Loop not vectorized/parallelized: potential early exits
+void entropy_opt<16, 16>(float*, char const*, float const*, int, int):
+     62, #omp target teams num_teams(numTeams) thread_limit(256)
+         62, Generating "nvkernel__Z11entropy_optILi16ELi16EEvPfPKcPKfii_F1L62_6" GPU kernel
+         65, #omp parallel
+         94, Team private (sd_count) located in CUDA shared memory
+     75, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+     78, Loop not vectorized: data dependency
+     79, Loop unrolled 5 times (completely unrolled)
+     91, Loop not vectorized: unprofitable for target
+         Loop unrolled 2 times
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      6, include "reference.h"
+nvc++  -Wall -I../entropy-cuda -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

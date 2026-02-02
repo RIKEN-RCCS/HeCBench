@@ -1,0 +1,56 @@
+
+[verbose] is off by default.
+
+Start the permutation testing. 
+Performing 19 statistical tests on the original data. 
+>---- Origianl test statistics: 
+                        Excursion test = 398.0735 
+            Number of directional runs = 499907 
+            Length of directional runs = 22 
+    Numbers of increases and decreases = 750046 
+        Number of runs based on median = 499907 
+        Length of runs based on median = 19 
+      Average collision test statistic = 1.4995 
+      Maximum collision test statistic = 2 
+           Periodicity test (lag =  1) = 500093 
+           Periodicity test (lag =  2) = 499957 
+           Periodicity test (lag =  8) = 499686 
+           Periodicity test (lag = 16) = 500381 
+           Periodicity test (lag = 32) = 500308 
+            Covariance test (lag =  1) = 250479 
+            Covariance test (lag =  2) = 250411 
+            Covariance test (lag =  8) = 250276 
+            Covariance test (lag = 16) = 250625 
+            Covariance test (lag = 32) = 250589 
+                      Compression test = 155806 
+>------------------------------------------------------< 
+
+Performing 10,000 iterations(shuffling + 18 statistical tests) in parallel on the GPU. 
+Performing 10,000 iterations(shuffling + compression test) in serial on the CPU. 
+End the permutation testing. 
+
+>---- The ranking(count) of the original test statistics: 
+  #Test   Counter 1  Counter 2  Counter 3
+     1     1259         0       981 
+     2     1274         3       963 
+     3     1137       496       607 
+     4      962         4      1274 
+     5     1277         0       963 
+     6     1359       517       364 
+     7     1627         1       612 
+     8        0      2240         0 
+     9      963         0      1277 
+    10     1185         3      1052 
+    11     1636         1       603 
+    12      506         4      1730 
+    13      549         1      1690 
+    14      963         5      1272 
+    15     1187         1      1052 
+    16     1634         4       602 
+    17      497         4      1739 
+    18      544         2      1694 
+    19       73         0         6 
+>------------------------------------------------------< 
+
+Execution time of the permutation testing processed in the GPU : 2.251 sec
+==> Assume that the noise source outputs are IID! 

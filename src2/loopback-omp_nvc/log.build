@@ -1,0 +1,48 @@
+nvc++  -Wall -I../loopback-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+TausStep(unsigned int&, int, int, int, unsigned int):
+           2, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+LCGStep(unsigned int&):
+           8, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+getRandomValueTauswortheUniform(unsigned int&, unsigned int&, unsigned int&, unsigned int&):
+          14, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+boxMuller(float, float, float&, float&):
+          23, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+getRandomValueTausworthe(unsigned int&, unsigned int&, unsigned int&, unsigned int&, float&, unsigned int):
+          33, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+tausworthe_lookback_sim(unsigned int, float, float, float, float, float, float, float, unsigned int&, unsigned int&, unsigned int&, unsigned int&, float*):
+     12, include "kernels.cpp"
+          55, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          61, Loop not fused: scalar dependence chain to sibling loop
+              Loop not vectorized: data dependency
+          81, Loop not vectorized: unknown
+              Loop unrolled 4 times
+tausworthe_lookback(unsigned int, unsigned int const*, float*, float*, float const*, float const*, float const*, float const*, float const*, float const*, float const*):
+     12, include "kernels.cpp"
+         104, #omp target teams num_teams(4096) thread_limit(256)
+             104, Generating "nvkernel__Z19tausworthe_lookbackjPKjPfS1_PKfS3_S3_S3_S3_S3_S3__F185L104_2" GPU kernel
+             107, #omp parallel
+             128, Team private (path) located in CUDA shared memory
+         125, Loop not vectorized/parallelized: contains call
+          61, Loop not vectorized: data dependency
+          81, Loop not vectorized: unknown
+              Loop unrolled 4 times
+main:
+     36, Loop not fused: function call before adjacent loop
+         Loop not vectorized: recurrence
+     48, Loop not vectorized/parallelized: contains call
+     62, Generating map(to:tauswortheSeeds[:4194304],lookback_VOL_0[:1048576],lookback_S_0[:1048576]) 
+         Generating map(from:lookbackSimulationResultsVariance[:1048576]) 
+         Generating map(to:lookback_A_0[:1048576],lookback_A_1[:1048576],lookback_MU[:1048576],lookback_A_2[:1048576],lookback_EPS_0[:1048576]) 
+         Generating map(from:lookbackSimulationResultsMean[:1048576]) 
+     68, Loop not vectorized/parallelized: contains call
+     89, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      9, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+nvc++  -Wall -I../loopback-cuda -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

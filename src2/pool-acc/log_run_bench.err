@@ -1,0 +1,51 @@
+main:
+     25, Loop not fused: no successor loop
+     60, Loop not vectorized: data dependency
+    160, Loop not vectorized/parallelized: contains call
+    165, Loop not vectorized/parallelized: contains call
+    174, Generating copyout(input_grad[:input_numel]) [if not already present]
+         Generating copyin(output_grad[:output_numel],output[:output_numel],input[:input_numel]) [if not already present]
+    177, Loop not vectorized/parallelized: contains call
+          25, Invariant if transformation
+    198, Loop not vectorized/parallelized: potential early exits
+void KernelPool2DGrad<AvgPoolGrad<float>, float>(int, float const*, float const*, float const*, int, int, int, int, int, int, int, int, int, int, int, AvgPoolGrad<float>, bool, float*, bool):
+     50, Generating implicit firstprivate(nthreads)
+         Generating NVIDIA GPU code
+         52, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+         89, #pragma acc loop seq
+             Generating implicit reduction(+:gradient)
+         90, #pragma acc loop seq
+             Generating implicit reduction(+:gradient)
+     50, Generating implicit copyin(output_grad,output_data) [if not already present]
+         Generating implicit copyout(input_grad[:nthreads]) [if not already present]
+         Generating implicit copyin(input_data[:nthreads]) [if not already present]
+     52, Generating implicit firstprivate(padding_height,input_height,output_width,channels,channel_last,input_width,padding_width,ksize_height,stride_width,stride_height,output_grad_t,output_height,ksize_width)
+         Invariant if transformation
+         Loop not fused: no successor loop
+     89, Loop is parallelizable
+     90, Loop is parallelizable
+         Generating implicit firstprivate(exclusive)
+         Loop not vectorized: data dependency
+void reference<AvgPoolGrad<float>, float>(int, float const*, float const*, float const*, int, int, int, int, int, int, int, int, int, int, int, AvgPoolGrad<float>, bool, float*, bool):
+     27, include "reference.h"
+          25, Invariant if transformation
+              Loop not fused: no successor loop
+          60, Loop not vectorized: data dependency
+AvgPoolGrad<float>::compute(float const&, float const&, float const&, float, float*):
+     14, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string(char const*, std::allocator<char> const&):
+     27, include "reference.h"
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+     27, include "reference.h"
+int const& std::min<int>(int const&, int const&):
+                   231, Generating implicit omp declare target routine
+                        Generating NVIDIA GPU code
+     27, include "reference.h"
+int const& std::max<int>(int const&, int const&):
+                   255, Generating implicit omp declare target routine
+                        Generating NVIDIA GPU code
+     27, include "reference.h"
+timeout was set to  600

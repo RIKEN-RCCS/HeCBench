@@ -1,0 +1,71 @@
+nvc++  -std=c++17 -Wall -I../projectile-cuda/ -O3 -Minfo -mp=gpu -gpu=cc90 -c Projectile.cpp -o Projectile.o
+operator<<(std::ostream&, Projectile const&):
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+reference(Projectile const*, Projectile*, int):
+     11, include "reference.h"
+           6, #omp parallel
+              Generated vector simd code for the loop
+GpuParallel(std::vector<Projectile, std::allocator<Projectile>>&, std::vector<Projectile, std::allocator<Projectile>>&, int):
+     29, #omp target teams distribute parallel for thread_limit(256)
+         26, Generating map(to:obj[:10000000]) 
+             Generating map(from:pObj[:10000000]) 
+         29, Generating "nvkernel__Z11GpuParallelRSt6vectorI10ProjectileSaIS0_EES3_i_F1L29_3" GPU kernel
+         31, Loop parallelized across teams and threads(128), schedule(static)
+     29, Loop not vectorized/parallelized: contains call
+     31, Loop not vectorized/parallelized: not countable
+main:
+     63, Loop not vectorized/parallelized: potential early exits
+     76, Loop not vectorized/parallelized: potential early exits
+Projectile::getangle() const:
+          39, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+Projectile::getvelocity() const:
+          40, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+Projectile::setRangeandTime(float, float, float, float, float):
+          43, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+std::char_traits<char>::length(char const*):
+         171, Loop not vectorized/parallelized: not countable
+std::vector<Projectile, std::allocator<Projectile>>::_S_do_relocate(Projectile*, Projectile*, Projectile*, std::allocator<Projectile>&, std::integral_constant<bool, true>):
+        1046, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+std::vector<Projectile, std::allocator<Projectile>>::_S_relocate(Projectile*, Projectile*, Projectile*, std::allocator<Projectile>&):
+         456, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+std::vector<Projectile, std::allocator<Projectile>>::back():
+     11, include "reference.h"
+void std::vector<Projectile, std::allocator<Projectile>>::_M_realloc_insert<Projectile>(__gnu_cxx::__normal_iterator<Projectile*, std::vector<Projectile, std::allocator<Projectile>>>, Projectile&&):
+     11, include "reference.h"
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      7, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+     11, include "reference.h"
+__gnu_cxx::char_traits<char>::length(char const*):
+     10, include "Projectile.hpp"
+           8, include "iostream"
+               39, include "ostream"
+                    38, include "ios"
+                         40, include "char_traits.h"
+                             171, Loop not vectorized/parallelized: not countable
+std::basic_ostream<char, std::char_traits<char>>& std::endl<char, std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&):
+     10, include "Projectile.hpp"
+           8, include "iostream"
+               39, include "ostream"
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&, char const*):
+         397, Loop not vectorized/parallelized: not countable
+Projectile* std::__relocate_a<Projectile*, Projectile*, std::allocator<Projectile>>(Projectile*, Projectile*, Projectile*, std::allocator<Projectile>&):
+        1031, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+Projectile* std::__relocate_a_1<Projectile*, Projectile*, std::allocator<Projectile>>(Projectile*, Projectile*, Projectile*, std::allocator<Projectile>&):
+      9, include "vector"
+          66, include "stl_uninitialized.h"
+             1031, Loop not vectorized: data dependency
+                   Loop unrolled 2 times
+     11, include "reference.h"
+nvc++  -std=c++17 -Wall -I../projectile-cuda/ -O3 -Minfo -mp=gpu -gpu=cc90 Projectile.o -o Projectile 

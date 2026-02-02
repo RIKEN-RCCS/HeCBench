@@ -1,0 +1,9 @@
+Random number generator seed: 7
+Input layer size : 65536
+Starting training kernel
+Performing device offload
+Device offloading time = 4.011514(s)
+Performing host execution 
+PASS
+
+Finish the training for one iteration

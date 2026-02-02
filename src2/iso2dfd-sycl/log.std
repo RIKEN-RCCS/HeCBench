@@ -1,0 +1,7 @@
+Initializing ... 
+Grid Sizes: 65536 65536
+Iterations: 1
+
+Computing wavefield in device ..
+Running on:: NVIDIA GH200 480GB
+The Device Max Work Group Size is : 1024

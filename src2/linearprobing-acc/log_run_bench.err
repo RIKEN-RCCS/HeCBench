@@ -1,0 +1,35 @@
+"main.cpp", line 134: error: invalid text in pragma
+    #pragma acc data to : pHashTable[0:kHashTableCapacity]) \
+                     ^
+
+"main.cpp", line 134: error: extra text after expected end of preprocessing directive
+    #pragma acc data to : pHashTable[0:kHashTableCapacity]) \
+                        ^
+
+"main.cpp", line 145: error: invalid text in pragma
+        #pragma acc update to (ins_kvs[0:num_inserts_per_batch])
+                           ^
+
+"main.cpp", line 145: error: OpenACC data clause expected
+        #pragma acc update to (ins_kvs[0:num_inserts_per_batch])
+                           ^
+
+"main.cpp", line 145: error: extra text after expected end of preprocessing directive
+        #pragma acc update to (ins_kvs[0:num_inserts_per_batch])
+                              ^
+
+"main.cpp", line 156: error: invalid text in pragma
+        #pragma acc update to (del_kvs[0:num_deletes_per_batch])
+                           ^
+
+"main.cpp", line 156: error: OpenACC data clause expected
+        #pragma acc update to (del_kvs[0:num_deletes_per_batch])
+                           ^
+
+"main.cpp", line 156: error: extra text after expected end of preprocessing directive
+        #pragma acc update to (del_kvs[0:num_deletes_per_batch])
+                              ^
+
+8 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

@@ -1,0 +1,69 @@
+"main.cpp", line 22: error: invalid text in pragma
+    #pragma acc parallel loop thread_limit(SX*64)
+                              ^
+
+"main.cpp", line 22: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel loop thread_limit(SX*64)
+                                          ^
+
+"main.cpp", line 38: error: invalid text in pragma
+    #pragma acc update from(result[0:ntargets])
+                       ^
+
+"main.cpp", line 38: error: OpenACC data clause expected
+    #pragma acc update from(result[0:ntargets])
+                       ^
+
+"main.cpp", line 38: error: extra text after expected end of preprocessing directive
+    #pragma acc update from(result[0:ntargets])
+                           ^
+
+"main.cpp", line 53: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(teams) thread_limit(SX*64)
+                         ^
+
+"main.cpp", line 53: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(teams) thread_limit(SX*64)
+                               ^
+
+"main.cpp", line 62: error: identifier "omp_get_thread_num" is undefined
+        int tx = omp_get_thread_num() % SX;
+                 ^
+
+"main.cpp", line 64: error: identifier "omp_get_team_num" is undefined
+        int px = omp_get_team_num() * SX + tx; // range [0:ntargets)
+                 ^
+
+"main.cpp", line 107: error: invalid text in pragma
+    #pragma acc update from(result[0:ntargets])
+                       ^
+
+"main.cpp", line 107: error: OpenACC data clause expected
+    #pragma acc update from(result[0:ntargets])
+                       ^
+
+"main.cpp", line 107: error: extra text after expected end of preprocessing directive
+    #pragma acc update from(result[0:ntargets])
+                           ^
+
+"main.cpp", line 50: warning: variable "teams" was declared but never referenced [declared_but_not_referenced]
+    const int teams = (ntargets + SX - 1) / SX;
+              ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"main.cpp", line 148: error: invalid text in pragma
+    #pragma acc data to: sources[0:source_size],\
+                     ^
+
+"main.cpp", line 148: error: extra text after expected end of preprocessing directive
+    #pragma acc data to: sources[0:source_size],\
+                       ^
+
+"main.cpp", line 129: warning: variable "result_size" was declared but never referenced [declared_but_not_referenced]
+    const int result_size = ntargets;
+              ^
+
+14 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:57: main.o] Error 2
+timeout was set to  600

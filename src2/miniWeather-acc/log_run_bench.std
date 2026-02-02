@@ -1,0 +1,7 @@
+mpic++ -acc  -std=c++14 -Wall 	-DNX=400        	-DNZ=200 	-DSIM_TIME=600 	-DDATA_SPEC=DATA_SPEC_THERMAL         -I../miniWeather-cuda/ -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+mpic++ -acc  -std=c++14 -Wall 	-DNX=400        	-DNZ=200 	-DSIM_TIME=600 	-DDATA_SPEC=DATA_SPEC_THERMAL         -I../miniWeather-cuda/ -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "time -p ( mpiexec -n 2 ./main 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 0 1134 1134

@@ -1,0 +1,51 @@
+reference(float const*, float const*, float const*, float const*, float*, params, int, int):
+      7, include "reference.h"
+          25, Loop not vectorized/parallelized: too deeply nested
+          26, Loop not vectorized/parallelized: too deeply nested
+          27, Loop not vectorized/parallelized: too deeply nested
+          33, Loop not vectorized: data dependency
+          33, Zero trip check eliminated
+car(float const*, float const*, float const*, float const*, float*, params, int, int, unsigned long):
+     33, Generating implicit firstprivate(dim_w,k_size,dim_h,dim_c,dim_b)
+         Generating NVIDIA GPU code
+         36, #pragma acc loop gang, vector(256) collapse(4) /* blockIdx.x threadIdx.x */
+         37,   /* blockIdx.x threadIdx.x collapsed */
+         38,   /* blockIdx.x threadIdx.x collapsed */
+         39,   /* blockIdx.x threadIdx.x collapsed */
+         42, #pragma acc loop seq
+         44, #pragma acc loop seq
+             Generating implicit reduction(+:result)
+     33, Generating implicit copyout(output[:]) [if not already present]
+         Generating implicit copyin(offsets_v[:],kernels[:],offsets_h[:],img[:]) [if not already present]
+     36, Loop not fused: no successor loop
+         Loop not vectorized/parallelized: too deeply nested
+     37, Loop not vectorized/parallelized: too deeply nested
+     38, Loop not vectorized/parallelized: too deeply nested
+     42, Loop is parallelizable
+     44, Loop is parallelizable
+         Generating implicit firstprivate(img_w,padding,w,offset_unit,img_h,h)
+         Zero trip check eliminated
+         Multiple reductions compressed
+         Generated vector simd code for the loop containing reductions
+main:
+    106, Loop not fused: different loop trip count
+         Loop not vectorized: unknown
+    107, Loop not fused: scalar dependence chain to sibling loop
+         Loop not vectorized: unknown
+    108, Loop not fused: function call before adjacent loop
+         Loop not vectorized: unknown
+    118, Generating copyin(kernel[:kernel_size],offsets_h[:offset_size],img[:image_size]) [if not already present]
+         Generating copyout(output[:output_size]) [if not already present]
+         Generating copyin(offsets_v[:offset_size]) [if not already present]
+    121, Loop not vectorized/parallelized: contains call
+          25, Loop not fused: different loop trip count
+              Loop not vectorized/parallelized: too deeply nested
+          26, Loop not vectorized/parallelized: too deeply nested
+          27, Loop not vectorized/parallelized: too deeply nested
+          33, Loop not vectorized/parallelized: loop count too small
+    141, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+timeout was set to  600

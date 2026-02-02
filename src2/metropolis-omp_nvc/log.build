@@ -1,0 +1,128 @@
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+gpu_pcg32_srandom_r(unsigned long*, unsigned long*, unsigned long, unsigned long):
+          68, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+gpu_pcg32_random_r(unsigned long*, unsigned long*):
+          78, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+gpu_rand01(unsigned long*, unsigned long*):
+          87, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+mmhash64(void const*, int, unsigned int):
+     27, include "kernel_prng.h"
+          95, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+         104, Loop not fused: complex flow graph
+              Loop not vectorized: recurrence
+kernel_gpupcg_setup(unsigned long*, unsigned long*, int, unsigned long, unsigned long):
+     27, include "kernel_prng.h"
+         136, #omp target teams distribute parallel for thread_limit(256)
+             136, Generating "nvkernel__Z19kernel_gpupcg_setupPmS_imm_F328L136_2" GPU kernel
+             138, Loop parallelized across teams and threads(128), schedule(static)
+         104, Loop not vectorized: recurrence
+         104, Loop not vectorized: recurrence
+         138, Loop not vectorized/parallelized: not countable
+kernel_metropolis(int, int, int*, int const*, float, float, unsigned long*, unsigned long*, int):
+     28, include "kernel_metropolis.h"
+          58, #omp target teams num_teams(numTeams) thread_limit(256)
+              58, Generating "nvkernel__Z17kernel_metropolisiiPiPKiffPmS2_i_F342L58_6" GPU kernel
+              61, #omp parallel
+               167, Barrier
+               179, Barrier
+               189, Barrier
+             187, Team private (ss) located in CUDA shared memory
+         170, Loop not vectorized/parallelized: contains call
+kernel_reset_random_gpupcg(int*, int, unsigned long*, unsigned long*):
+     28, include "kernel_metropolis.h"
+         205, #omp target teams distribute parallel for thread_limit(256)
+             205, Generating "nvkernel__Z26kernel_reset_random_gpupcgPiiPmS0__F342L205_11" GPU kernel
+             209, Loop parallelized across teams and threads(128), schedule(static)
+         209, Loop not vectorized/parallelized: not countable
+main:
+     44, Loop not vectorized/parallelized: contains call
+    129, Generating map(alloc:dH[:N],mdlat[:rpool*N],pcgb[:rpool*(N/4)],pcga[:rpool*(N/4)]) 
+    132, Loop not vectorized/parallelized: contains call
+    138, Generated vector simd code for the loop
+    144, Loop not vectorized/parallelized: not countable
+    172, Loop not vectorized/parallelized: too deeply nested
+    189, Loop not vectorized/parallelized: contains call
+    200, Loop not vectorized/parallelized: contains call
+    204, Loop not vectorized/parallelized: contains call
+    217, Loop not vectorized/parallelized: contains call
+    228, Loop not vectorized/parallelized: contains call
+    264, Loop not fused: function call before adjacent loop
+         3 loops fused
+         Loop not vectorized: data dependency
+void kernel_reset<int>(int*, int, int):
+     28, include "kernel_metropolis.h"
+         235, #omp target teams distribute parallel for thread_limit(256)
+             235, Generating "nvkernel__Z12kernel_resetIiEvPT_iS0__F342L235_15" GPU kernel
+             237, Loop parallelized across teams and threads(128), schedule(static)
+         237, Loop not vectorized/parallelized: not countable
+void kernel_redenergy<float>(int const*, int, float*, int const*, float):
+     29, include "kernel_reduction.h"
+          33, #omp target teams distribute parallel for
+              33, Generating "nvkernel__Z16kernel_redenergyIfEvPKiiPT_S1_f_F343L33_19" GPU kernel
+                  Loop parallelized across teams and threads(128), schedule(static)
+                  Generating reduction(+:energy)
+          33, Generating map(tofrom:energy) 
+          35, Loop not vectorized/parallelized: not countable
+std::signbit(float):
+                             662, Generating implicit omp declare target routine
+                                  Generating NVIDIA GPU code
+     28, include "kernel_metropolis.h"
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c utils.cpp -o utils.o
+rebuild_temps(float*, int, int):
+     52, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+     61, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+insert_temps(float*, float*, int*, int*, int):
+     72, Loop not vectorized/parallelized: potential early exits
+     78, Loop not vectorized/parallelized: potential early exits
+rebuild_indices(findex*, findex*, int):
+     89, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+printarray(float*, int, char const*):
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+printindexarray(float*, int*, int, char const*):
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+printindexarrayfrag(float*, findex*, int, char const*):
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+printarrayfrag(float*, int, char const*):
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+reset_array(float*, int, float):
+    131, Recognized memory set idiom
+std::char_traits<char>::length(char const*):
+         171, Loop not vectorized/parallelized: not countable
+__gnu_cxx::char_traits<char>::length(char const*):
+      1, include "utils.h"
+          11, include "iostream"
+               39, include "ostream"
+                    38, include "ios"
+                         40, include "char_traits.h"
+                             171, Loop not vectorized/parallelized: not countable
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&, char const*):
+         397, Loop not vectorized/parallelized: not countable
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c heap.cpp -o heap.o
+buildMinHeap(minHeap*, int*, int):
+     63, Loop not vectorized/parallelized: contains structure move
+     75, Loop not vectorized/parallelized: potential early exits
+insertNode(minHeap*, float, findex):
+     97, Loop not vectorized/parallelized: potential early exits
+levelorderTraversal(minHeap*):
+    218, Loop not vectorized/parallelized: contains call
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o utils.o heap.o -o main 

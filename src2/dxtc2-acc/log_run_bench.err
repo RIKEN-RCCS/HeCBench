@@ -1,0 +1,61 @@
+"kernel.cpp", line 79: error: identifier "omp_get_thread_num" is undefined
+      const int idx = omp_get_thread_num();
+                      ^
+
+"kernel.cpp", line 91: error: identifier "omp_get_thread_num" is undefined
+      const int idx = omp_get_thread_num();
+                      ^
+
+"kernel.cpp", line 127: error: identifier "omp_get_thread_num" is undefined
+      const int tid = omp_get_thread_num();
+                      ^
+
+"kernel.cpp", line 152: error: identifier "omp_get_team_num" is undefined
+      const int bid = omp_get_team_num() + groupOffset;
+                      ^
+
+"kernel.cpp", line 153: error: identifier "omp_get_thread_num" is undefined
+      const int idx = omp_get_thread_num();
+                      ^
+
+"kernel.cpp", line 281: error: identifier "omp_get_thread_num" is undefined
+      const int idx = omp_get_thread_num();
+                      ^
+
+"kernel.cpp", line 358: error: identifier "omp_get_thread_num" is undefined
+      const int idx = omp_get_thread_num();
+                      ^
+
+"kernel.cpp", line 386: error: identifier "omp_get_team_num" is undefined
+      const int bid = omp_get_team_num() + groupOffset;
+                      ^
+
+"main.cpp", line 103: error: invalid text in pragma
+    #pragma acc data to: permutations[0:1024], \
+                     ^
+
+"main.cpp", line 103: error: extra text after expected end of preprocessing directive
+    #pragma acc data to: permutations[0:1024], \
+                       ^
+
+"main.cpp", line 127: error: invalid text in pragma
+        #pragma acc parallel teams num_teams(grid) thread_limit(NUM_THREADS)
+                             ^
+
+"main.cpp", line 127: error: extra text after expected end of preprocessing directive
+        #pragma acc parallel teams num_teams(grid) thread_limit(NUM_THREADS)
+                                   ^
+
+"main.cpp", line 137: error: identifier "omp_get_thread_num" is undefined
+            const int idx = omp_get_thread_num();
+                            ^
+
+"main.cpp", line 126: warning: variable "grid" was declared but never referenced [declared_but_not_referenced]
+        int grid = MIN( blocksPerLaunch, blocks-j );
+            ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+13 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:60: main.o] Error 2
+timeout was set to  600

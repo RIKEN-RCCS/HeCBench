@@ -1,0 +1,8 @@
+"main.cpp", line 44: catastrophic error: cannot open source file "support/common.h"
+  #include "support/common.h"
+                             ^
+
+1 catastrophic error detected in the compilation of "main.cpp".
+Compilation terminated.
+make: *** [<builtin>: main.o] Error 2
+timeout was set to  600

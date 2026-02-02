@@ -1,0 +1,6 @@
+
+Array size: 33554432, seed: 2
+Bitonic sort (parallel)..
+Total kernel execution time: 54.489635 (ms)
+Bitonic sort (serial)..
+FAIL

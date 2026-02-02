@@ -1,0 +1,23 @@
+3D convolution (FP32)
+
+========== Warmup start ==========
+input dimensions: C=1 Win=32 Hin=32
+output dimensions: M=6 Wout=28 Hout=28
+3D grid dimensions: N=32 M=6 Z=4
+Average kernel execution time of conv3d_s1 kernel: 5.443945 (us)
+PASS
+Average kernel execution time of conv3d_s2 kernel: 5.594472 (us)
+PASS
+Average kernel execution time of conv3d_s3 kernel: 5.602536 (us)
+PASS
+
+========== Warmup done ==========
+input dimensions: C=1 Win=32 Hin=32
+output dimensions: M=6 Wout=28 Hout=28
+3D grid dimensions: N=32 M=6 Z=4
+Average kernel execution time of conv3d_s1 kernel: 5.578820 (us)
+PASS
+Average kernel execution time of conv3d_s2 kernel: 5.843781 (us)
+PASS
+Average kernel execution time of conv3d_s3 kernel: 5.860750 (us)
+PASS

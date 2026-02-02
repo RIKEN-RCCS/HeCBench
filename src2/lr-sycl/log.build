@@ -1,0 +1,18 @@
+clang++  -std=c++17 -Wall -I../include -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c main.cpp -o main.o
+main.cpp:42:21: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+   42 |   params.filename = TEMP_FILENAME;
+      |                     ^
+./linear.h:7:23: note: expanded from macro 'TEMP_FILENAME'
+    7 | #define TEMP_FILENAME "assets/temperature.txt"
+      |                       ^
+1 warning generated.
+main.cpp:42:21: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+   42 |   params.filename = TEMP_FILENAME;
+      |                     ^
+./linear.h:7:23: note: expanded from macro 'TEMP_FILENAME'
+    7 | #define TEMP_FILENAME "assets/temperature.txt"
+      |                       ^
+1 warning generated.
+clang++  -std=c++17 -Wall -I../include -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c linear_iter.cpp -o linear_iter.o
+clang++  -std=c++17 -Wall -I../include -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c linear_par.cpp -o linear_par.o
+clang++  -std=c++17 -Wall -I../include -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU main.o linear_iter.o linear_par.o -o main 

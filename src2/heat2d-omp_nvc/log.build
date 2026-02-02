@@ -1,0 +1,20 @@
+nvc++  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+reference(float*, float const*, float, float, int, int):
+     30, #omp parallel
+     31, Loop not vectorized: data dependency
+dev_lapl_iter(float*, float const*, float, float, int, int):
+     43, #omp target teams distribute parallel for thread_limit(256)
+         43, Generating "nvkernel__Z13dev_lapl_iterPfPKfffii_F1L43_3" GPU kernel
+         45, Loop parallelized across teams and threads(128), schedule(static)
+     46, Loop not vectorized/parallelized: not countable
+main:
+     92, Loop not vectorized/parallelized: contains call
+     94, Loop not vectorized: unprofitable for target
+         Loop unrolled 4 times
+     99, Recognized memory set idiom
+    104, Loop not vectorized/parallelized: contains call
+    117, Generating map(alloc:d_out[:Lx*Ly]) 
+         Generating map(tofrom:d_in[:Lx*Ly]) 
+    119, Loop not vectorized/parallelized: contains call
+    133, Loop not vectorized/parallelized: potential early exits
+nvc++  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

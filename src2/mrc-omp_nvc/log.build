@@ -1,0 +1,47 @@
+nvc++  -Wall -I../mrc-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+reference(int, int const*, float const*, float const*, float const*, float, float*, float*):
+      7, include "reference.h"
+          10, Loop not vectorized: data dependency
+MRCGradient(int, int const*, float const*, float const*, float const*, float, float*, float*):
+     11, #omp target teams distribute parallel for
+         11, Generating "nvkernel__Z11MRCGradientiPKiPKfS2_S2_fPfS3__F1L11_2" GPU kernel
+         13, Loop parallelized across teams and threads(128), schedule(static)
+     13, Loop not vectorized/parallelized: not countable
+MRCGradient2(int, int const*, float const*, float const*, float const*, float, float*, float*):
+     26, #omp target teams distribute parallel for
+         26, Generating "nvkernel__Z12MRCGradient2iPKiPKfS2_S2_fPfS3__F1L26_6" GPU kernel
+         28, Loop parallelized across teams and threads(128), schedule(static)
+     28, Loop not vectorized/parallelized: not countable
+main:
+     61, Loop not vectorized/parallelized: contains call
+        1861, Loop not fused: function call before adjacent loop
+              Loop not vectorized: may not be beneficial for target
+        1861, Loop not fused: function call before adjacent loop
+              Loop not vectorized: may not be beneficial for target
+        1861, Loop not fused: function call before adjacent loop
+              Loop not vectorized: may not be beneficial for target
+        1861, Loop not fused: function call before adjacent loop
+              Loop not vectorized: may not be beneficial for target
+     74, Generating map(to:h_O[:length],h_X1[:length],h_X2[:length],h_Y[:length]) 
+         Generating map(from:h_dX2[:length],h_dX1[:length]) 
+     76, Loop not vectorized/parallelized: contains call
+     83, Loop not vectorized/parallelized: contains call
+     92, Loop not vectorized/parallelized: contains call
+          10, Loop not vectorized: data dependency
+    103, Loop not vectorized/parallelized: potential early exits
+float std::uniform_real_distribution<float>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&):
+        1870, Loop not vectorized: data dependency
+float std::uniform_real_distribution<float>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&, std::uniform_real_distribution<float>::param_type const&):
+      7, include "reference.h"
+         189, Loop not vectorized: data dependency
+std::__detail::_Adaptor<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>, float>::operator()():
+        3364, Loop not vectorized: data dependency
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+float std::generate_canonical<float, 24ul, std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&):
+      5, include "random"
+          51, include "random.tcc"
+             3364, Loop not vectorized: data dependency
+      7, include "reference.h"
+nvc++  -Wall -I../mrc-cuda -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 

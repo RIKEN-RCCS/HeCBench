@@ -1,0 +1,11 @@
+
+Grid dimensions: 1024 x 1024 x 1024
+Result verification enabled 
+Average kernel execution time: 0.009019 (s)
+
+ RMS error = 0.008776 
+ PASS
+
+Grid dimensions: 1024 x 1024 x 1024
+Result verification disabled 
+Average kernel execution time: 0.009020 (s)
