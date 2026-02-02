@@ -30,8 +30,8 @@ ifeq ($(OPTIMIZE),yes)
 endif
 
 
-./myocyte.out:	./main.o 	./kernel/kernel_wrapper.o 	./util/file/file.o 	./util/num/num.o 	$(CC) $(CFLAGS) ./main.o 		./kernel/kernel_wrapper.o 		./util/file/file.o 		./util/num/num.o
-		$(LDFLAGS) 		-o myocyte.out
+./myocyte.out:	./main.o 	./kernel/kernel_wrapper.o 	./util/file/file.o 	./util/num/num.o
+	$(CC) $(CFLAGS) ./main.o 		./kernel/kernel_wrapper.o 		./util/file/file.o 		./util/num/num.o		$(LDFLAGS) 		-o myocyte.out
 
 ./main.o:	./common.h ./main.c
 	$(CC) $(CFLAGS) ./main.c 		-c 		-o ./main.o 		-O3
