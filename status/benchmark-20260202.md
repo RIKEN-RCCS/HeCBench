@@ -1,3 +1,5 @@
+# 実行時間 (sec.)
+
 | name | sycl | acc |
 | -- | -- | -- |
 | accuracy | | 2.56 |
@@ -311,7 +313,7 @@
 | tridiagonal | | -- |
 | tsa | | -- |
 | tsp | | -- |
-| urng | | -- |
+| urng | | 4.34 |
 | vanGenuchten | | 31.11 |
 | vmc | | -- |
 | vol2col | | 7.94 |
@@ -319,9 +321,11 @@
 | winograd | | 3.24 |
 | wlcpow | | -- |
 | wordcount | | 7.96 |
-| wsm5 | | -- |
+| wsm5 | | 5.54 |
 | wyllie | | 111.26 |
 | xlqc | | -- |
 | xsbench | | 37.67 |
 | zeropoint | | 24.32 |
 | zmddft | | -- |
+| | | |
+| completed | | 180 |

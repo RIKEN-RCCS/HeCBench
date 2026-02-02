@@ -1,4 +1,6 @@
 #!/bin/sh
+echo "# 実行時間 (sec.)"
+echo ""
 echo "|" name "|" sycl "|" acc  "|"
 echo "|" "--" "|" "--" "|" "--" "|"
 #
@@ -28,7 +30,8 @@ do
 
 		c4=`grep Terminated $dir/log_run_bench.err`
 		c5=`grep "timeout was set" $dir/log_run_bench.err`
-
+		c6=`grep Error $dir/log_run_bench.err | grep make`
+		
 		if [ "$c4" != "" ]; then
 		    if [ "$c5" != "" ]; then
 			tmp1=`echo $c5 | awk '{print $NF}'`
@@ -36,10 +39,16 @@ do
 		    else
 			time="TLE error"
 		    fi
+                elif [ "$c6" != "" ]; then
+                    time="exe error"
 		else
                     if [ "$c2"  = "" -a "$c3" = "" ]; then
 			time=`grep real $dir/log.time | awk '{print $NF}'`
-		    else
+                        if [ "$time" != "" ]; then
+                            if [ $num = 0 ]; then let sum0="$sum0 +1"; fi
+                            if [ $num = 1 ]; then let sum1="$sum1 +1"; fi
+                            if [ $num = 2 ]; then let sum2="$sum2 +1"; fi
+                        fi		    else
 			time="exe err"
 		    fi
 		fi
@@ -59,3 +68,6 @@ do
     done
     echo $comment
 done
+######################
+echo "|"           "|"        "|"       "|"
+echo "|" "completed" "|"  $sum0 "|" $sum1 "|"
