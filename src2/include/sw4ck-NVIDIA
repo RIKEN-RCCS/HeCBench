@@ -1,1 +1,1 @@
-COMMAND = time -p ( ./$(program) sw4ck.in 100 1>log.std 2>log.err ) 2> log.time
+COMMAND = time -p ( ./$(program) ../sw4ck-cuda/sw4ck.in 100 1>log.std 2>log.err ) 2> log.time

@@ -1,9 +1,9 @@
-Reading from file sw4ck.in
+Reading from file ../sw4ck-cuda/sw4ck.in
 
-Average execution time of sw4ck kernels: 14.2416 milliseconds
+Average execution time of sw4ck kernels: 14.2807 milliseconds
 
 Error = 0.00326096 %
 
-Average execution time of sw4ck kernels: 227.748 milliseconds
+Average execution time of sw4ck kernels: 233.809 milliseconds
 
 Error = 0.0562726 %
