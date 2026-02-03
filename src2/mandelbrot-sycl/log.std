@@ -1,5 +1,5 @@
 No Print() output due to size too large
-       Serial time: 0.251791 s
-Average parallel time: 0.266871 ms
-Average kernel execution time: 0.0635656 ms
+       Serial time: 0.253735 s
+Average parallel time: 0.258003 ms
+Average kernel execution time: 0.0643381 ms
 Success

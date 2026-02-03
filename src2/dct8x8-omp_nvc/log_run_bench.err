@@ -1,2 +1,68 @@
+Verify(float const*, float*, float const*, unsigned int, unsigned int, unsigned int, int):
+     40, Loop not fused: function call before adjacent loop
+     41, Generated vector simd code for the loop containing reductions
+         Loop unrolled 2 times
+main:
+     76, Loop not vectorized/parallelized: contains call
+     81, Generating map(alloc:h_OutputGPU[:stride*imageH]) 
+         Generating map(to:h_Input[:stride*imageH]) 
+     88, Loop not vectorized/parallelized: contains call
+          40, Loop not fused: function call before adjacent loop
+          41, Generated vector simd code for the loop containing reductions
+    103, Generating update from(h_OutputGPU[:stride*imageH])
+    111, Loop not vectorized/parallelized: contains call
+          40, Loop not fused: function call before adjacent loop
+          41, Generated vector simd code for the loop containing reductions
+    126, Generating update from(h_OutputGPU[:stride*imageH])
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     15, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+DCT8(float*):
+     17, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+IDCT8(float*):
+     44, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+DCT8x8(float*, float const*, unsigned int, unsigned int, unsigned int, int):
+     93, #omp target teams num_teams(teams) thread_limit(threads)
+         93, Generating "nvkernel__Z6DCT8x8PfPKfjjji_F1L93_2" GPU kernel
+         96, #omp parallel
+        123, Team private (l_Transpose) located in CUDA shared memory
+    112, Loop not vectorized: data dependency
+         Loop unrolled 8 times (completely unrolled)
+    115, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 8 times (completely unrolled)
+    118, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 8 times (completely unrolled)
+    121, Loop not vectorized: data dependency
+         Loop unrolled 8 times (completely unrolled)
+    125, Loop not vectorized: data dependency
+         Loop unrolled 8 times (completely unrolled)
+    134, #omp target teams num_teams(teams) thread_limit(threads)
+        134, Generating "nvkernel__Z6DCT8x8PfPKfjjji_F1L134_4" GPU kernel
+        137, #omp parallel
+        164, Team private (l_Transpose) located in CUDA shared memory
+    153, Loop not vectorized: data dependency
+         Loop unrolled 8 times (completely unrolled)
+    156, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 8 times (completely unrolled)
+    159, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 8 times (completely unrolled)
+    162, Loop not vectorized: data dependency
+         Loop unrolled 8 times (completely unrolled)
+    165, Loop not vectorized: data dependency
+         Loop unrolled 8 times (completely unrolled)
+DCT8x8CPU(float*, float const*, unsigned int, unsigned int, unsigned int, int):
+     83, Invariant if transformation
+         Loop not fused: different controlling conditions
+         Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+     90, Invariant if transformation
+         Loop not fused: no successor loop
+         Loop not vectorized: data dependency
 make: *** [Makefile.NVD:70: run_mem] Error 1
 timeout was set to  600

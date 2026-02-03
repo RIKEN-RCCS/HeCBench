@@ -15,10 +15,10 @@ starting run...
 [4608] -25.7 [4609] -31.6 [4610] -15.9 [4611] -18.6 [4612] -23.5 [4613] -10.9 [4614] -22.7 [4615] -28.1 
 [5376] -26.5 [5377] -49.3 [5378] -19.3 [5379] -20.1 [5380] -28.9 [5381] -25.8 [5382] -14.5 [5383] -7.2 
 Final calculation required 250 iterations of 4000 atoms
-Copy time: 0.002923 seconds, 0.000012 per iteration
-Kernel time: 0.223177 seconds, 0.000893 per iteration
-Total time: 0.226956 seconds
-Kernel invocation rate: 1101.535156 iterations per second
-GPU to host copy bandwidth: 6355.93MB/sec, 0.000354 seconds total
-Efficiency metric, 2598.85 billion atom evals per second
-FP performance: 19166.5 GFLOPS
+Copy time: 0.002770 seconds, 0.000011 per iteration
+Kernel time: 0.223210 seconds, 0.000893 per iteration
+Total time: 0.227424 seconds
+Kernel invocation rate: 1099.268311 iterations per second
+GPU to host copy bandwidth: 6267.41MB/sec, 0.000359 seconds total
+Efficiency metric, 2593.5 billion atom evals per second
+FP performance: 19127.1 GFLOPS

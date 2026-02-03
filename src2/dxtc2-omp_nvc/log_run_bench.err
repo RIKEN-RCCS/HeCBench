@@ -229,5 +229,16 @@ shrComparePGM:
         1496, Loop not fused: complex flow graph
 _INTERNAL_30____boxfilter_sycl_shrUtils_cpp_shrFree::shrLogV(int, int, char const*, __va_list_tag):
     345, Loop not vectorized/parallelized: potential early exits
+compareColors(Color32 const*, Color32 const*):
+     63, Generated vector simd code for the loop containing reductions
+compareBlock(BlockDXT1 const*, BlockDXT1 const*):
+          54, Loop not vectorized/parallelized: contains structure move
+              Loop unrolled 2 times
+          54, Loop not vectorized/parallelized: contains structure move
+              Loop unrolled 2 times
+          63, Generated vector simd code for the loop containing reductions
+BlockDXT1::decompress(Color32*) const:
+     54, Loop not vectorized/parallelized: contains structure move
+         Loop unrolled 2 times
 make: *** [Makefile.NVD:75: run_mem] Terminated
 timeout was set to  600

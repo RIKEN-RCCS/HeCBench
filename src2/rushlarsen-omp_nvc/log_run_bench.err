@@ -1,2 +1,24 @@
+k_forward_rush_larsen(double*, double, double, double const*, int):
+      8, include "kernels.cpp"
+           5, #omp target teams distribute parallel for thread_limit(256)
+               5, Generating "nvkernel__Z21k_forward_rush_larsenPdddPKdi_F175L5_2" GPU kernel
+               8, Loop parallelized across teams and threads(128), schedule(static)
+           8, Loop not vectorized/parallelized: not countable
+main:
+     50, Loop not vectorized/parallelized: potential early exits
+     59, Generating map(tofrom:states2[:total_num_states]) 
+         Generating map(to:parameters[:total_num_parameters]) 
+     65, Loop not vectorized/parallelized: contains call
+     77, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+         Loop unrolled 2 times
+forward_rush_larsen(double*, double, double, double const*, int):
+      7, Loop not vectorized: data dependency
+init_state_values(double*, int):
+      6, Loop not vectorized: data dependency
+         Loop unrolled 8 times
+init_parameters_values(double*, int):
+     32, Loop not vectorized: data dependency
+         Loop unrolled 8 times
 make: *** [Makefile.NVD:69: run_mem] Terminated
 timeout was set to  600

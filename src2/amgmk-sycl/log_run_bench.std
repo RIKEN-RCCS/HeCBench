@@ -1,5 +1,13 @@
+clang++  -std=c++17 -Wall -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c csr_matrix.cpp -o csr_matrix.o
+clang++  -std=c++17 -Wall -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c csr_matvec.cpp -o csr_matvec.o
+clang++  -std=c++17 -Wall -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c hypre_error.cpp -o hypre_error.o
+clang++  -std=c++17 -Wall -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c hypre_memory.cpp -o hypre_memory.o
+clang++  -std=c++17 -Wall -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c laplace.cpp -o laplace.o
+clang++  -std=c++17 -Wall -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c main.cpp -o main.o
+clang++  -std=c++17 -Wall -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c vector.cpp -o vector.o
+clang++  -std=c++17 -Wall -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU csr_matrix.o csr_matvec.o hypre_error.o hypre_memory.o laplace.o main.o vector.o -o AMGMk 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "time -p ( ./AMGMk 1>log.std 2>log.err ) 2> log.time"
 pkill nvidia-smi
 ../scripts/m.sh
-min max diff memory in [MB] : 1 573 572
+min max diff memory in [MB] : 1 572 571

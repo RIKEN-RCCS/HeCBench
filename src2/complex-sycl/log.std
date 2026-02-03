@@ -4,6 +4,6 @@ Average kernel execution time 0.004140 (s)
 Average kernel execution time (reference) 0.004782 (s)
 
 Double-precision complex data type
-Average kernel execution time 0.005077 (s)
-Average kernel execution time (reference) 0.005606 (s)
+Average kernel execution time 0.005078 (s)
+Average kernel execution time (reference) 0.005607 (s)
 PASS

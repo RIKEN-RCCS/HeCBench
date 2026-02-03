@@ -1,1 +1,76 @@
+writeFile(fluid_particle*, param*):
+     26, Loop not vectorized/parallelized: contains call
+writeBoundaryFile(boundary_particle*, param*):
+     48, Loop not vectorized/parallelized: contains call
+W(double3, double3, double):
+     12, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+del_W(double3, double3, double):
+     33, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+boundaryGamma(double3, double3, double3, double, double):
+     58, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+computeDensity(double3, double3, double3, double3, param const*):
+     96, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+computePressure(double, param const*):
+    116, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+computeBoundaryAcceleration(double3, double3, double3, double, double):
+    129, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+computeAcceleration(double3, double3, double, double, double3, double3, double, double, param const*):
+    145, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+eulerStart(fluid_particle*, boundary_particle*, param*):
+    200, Loop not vectorized: data dependency
+initParticles(fluid_particle**, boundary_particle**, AABB*, AABB*, param*):
+    226, Loop not vectorized: unprofitable for target
+         Loop unrolled 4 times
+    241, Loop not vectorized/parallelized: not countable
+main:
+         226, Loop not vectorized: unprofitable for target
+              Loop unrolled 8 times
+         241, Loop not vectorized/parallelized: not countable
+         200, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+    351, #omp target teams distribute parallel for simd thread_limit(256)
+        351, Generating "nvkernel_main_F1L351_2" GPU kernel
+        355, Loop parallelized across teams and threads(128), schedule(static)
+    351, Generating implicit map(tofrom:params) 
+         Loop not vectorized/parallelized: contains call
+    355, Loop not vectorized/parallelized: not countable
+    366, #omp target teams distribute parallel for simd thread_limit(256)
+        366, Generating "nvkernel_main_F1L366_4" GPU kernel
+        370, Loop parallelized across teams and threads(128), schedule(static)
+    366, Generating implicit map(tofrom:params) 
+    370, Loop not vectorized/parallelized: not countable
+    400, #omp target teams distribute parallel for simd thread_limit(256)
+        400, Generating "nvkernel_main_F1L400_6" GPU kernel
+        404, Loop parallelized across teams and threads(128), schedule(static)
+    400, Generating implicit map(tofrom:params) 
+    404, Loop not vectorized/parallelized: not countable
+    423, #omp target teams distribute parallel for simd thread_limit(256)
+        347, Generating map(tofrom:boundary_particles[:num_boundary_particles],fluid_particles[:num_fluid_particles]) 
+        423, Generating "nvkernel_main_F1L423_8" GPU kernel
+        427, Loop parallelized across teams and threads(128), schedule(static)
+    423, Generating implicit map(tofrom:params) 
+    427, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+constructBoundaryBox(boundary_particle*, AABB*, param*):
+    103, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    137, Loop not fused: different loop trip count
+    171, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    223, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    241, Loop not vectorized: data dependency
+         Loop unrolled 4 times
 timeout was set to  600

@@ -1,1 +1,20 @@
+setup(unsigned long*):
+     10, Generated vector simd code for the loop
+valSet(int*, int, unsigned long):
+     17, Recognized memory set idiom
+main:
+          10, Generated vector simd code for the loop
+          17, Recognized memory set idiom
+     43, Generating map(alloc:A[:len]) 
+     45, Loop not vectorized/parallelized: contains call
+     47, Generating update to(A[:len])
+     51, Loop not vectorized/parallelized: contains call
+     53, Generating update to(A[:len])
+     61, Loop not vectorized/parallelized: contains call
+     63, Generating update from(A[:len])
+     67, Loop not vectorized/parallelized: contains call
+     69, Generating update from(A[:len])
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      2, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
 timeout was set to  600

@@ -1,3 +1,6 @@
+nvc++  -std=c++14 -Wall -DVALUE_TYPE=double -I../sptrsv-sycl  -O3 -Minfo -mp=gpu -gpu=cc90 -c ../sptrsv-sycl/main.cpp -o main.o
+nvc++  -std=c++14 -Wall -DVALUE_TYPE=double -I../sptrsv-sycl  -O3 -Minfo -mp=gpu -gpu=cc90 -c sptrsv_syncfree.cpp -o sptrsv_syncfree.o
+nvc++  -std=c++14 -Wall -DVALUE_TYPE=double -I../sptrsv-sycl  -O3 -Minfo -mp=gpu -gpu=cc90 main.o sptrsv_syncfree.o -o main 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "../sptrsv-cuda/prepare_data.sh; time -p ( ./main ../sptrsv-sycl/lp1.mtx 2000 1>log.std 2>log.err ) 2> log.time"
 pkill nvidia-smi

@@ -1,5 +1,11 @@
+clang++  -std=c++17 -Wall -Iinclude           -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c device/device_kernel_wrapper.cpp -o device/device_kernel_wrapper.o
+clang++  -std=c++17 -Wall -Iinclude           -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c src/host_data_io.cpp -o src/host_data_io.o
+clang++  -std=c++17 -Wall -Iinclude           -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c src/host_kernel.cpp -o src/host_kernel.o
+clang++  -std=c++17 -Wall -Iinclude           -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c src/main.cpp -o src/main.o
+clang++  -std=c++17 -Wall -Iinclude           -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c src/memory_scheduler.cpp -o src/memory_scheduler.o
+clang++  -std=c++17 -Wall -Iinclude           -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU device/device_kernel_wrapper.o src/host_data_io.o src/host_kernel.o src/main.o src/memory_scheduler.o -o main 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "../minimap2-cuda/prepare_data.sh; time -p ( ./main ../minimap2-sycl/in-1k.txt kernel-out.txt 1>log.std 2>log.err ) 2> log.time"
 pkill nvidia-smi
 ../scripts/m.sh
-min max diff memory in [MB] : 1 993 992
+min max diff memory in [MB] : 1 992 991

@@ -1,1 +1,0 @@
-nvc++  -std=c++11 -Wall -Minfo -mp=gpu -gpu=cc90 -O3	./main.o 		./util/graphics/graphics.o 		./util/graphics/resize.o 		./util/timer/timer.o 		-lm 		-lm -o srad

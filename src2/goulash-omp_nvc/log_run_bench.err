@@ -1,1 +1,35 @@
+reference(double*, long, double const*):
+     14, include "utils.h"
+          83, Loop not fused: different loop trip count
+              Loop not vectorized: unknown
+              Loop unrolled 5 times (completely unrolled)
+          87, Loop not fused: different loop trip count
+              Loop not vectorized: unknown
+              Loop unrolled 4 times
+          95, Loop not vectorized: unknown
+              Loop unrolled 4 times
+gate(double*, long, double const*):
+     17, #omp target teams distribute parallel for thread_limit(256)
+         17, Generating "nvkernel__Z4gatePdlPKd_F1L17_2" GPU kernel
+         19, Loop parallelized across teams and threads(128), schedule(static)
+     19, Loop not vectorized/parallelized: not countable
+     28, Loop not vectorized: unknown
+         Loop unrolled 5 times (completely unrolled)
+     32, Loop not vectorized: unknown
+         Loop unrolled 4 times
+     40, Loop not vectorized: unknown
+         Loop unrolled 4 times
+main:
+     74, Generating map(to:Vm[:nCells],m_gate[:nCells]) 
+     76, Loop not vectorized/parallelized: contains call
+     80, Generating update from(m_gate[:nCells])
+          83, Loop not fused: different loop trip count
+              Loop not vectorized: unknown
+              Loop unrolled 5 times (completely unrolled)
+          87, Loop not fused: different loop trip count
+              Loop not vectorized: unknown
+              Loop unrolled 4 times
+          95, Loop not vectorized: unknown
+              Loop unrolled 4 times
+     94, Loop not vectorized/parallelized: potential early exits
 timeout was set to  600

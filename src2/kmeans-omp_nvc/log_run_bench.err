@@ -1,1 +1,77 @@
+cluster(int, int, float**, int, int, float, int*, float***, float*, int, int):
+     47, Loop not vectorized/parallelized: too deeply nested
+     51, #omp target teams distribute parallel for thread_limit(256)
+         45, Generating map(to:feature[:npoints*nfeatures]) 
+             Generating map(alloc:membership_OCL[:npoints],feature_swap[:npoints*nfeatures]) 
+         51, Generating "nvkernel__Z7clusteriiPPfiifPiPS0_S_ii_F1L51_2" GPU kernel
+         55, Loop parallelized across teams and threads(128), schedule(static)
+     55, Loop not vectorized/parallelized: not countable
+     56, Loop not vectorized: data dependency
+         Loop unrolled 8 times
+     64, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+     68, Loop not vectorized/parallelized: not countable
+     72, Loop not vectorized/parallelized: too deeply nested
+     82, Loop not vectorized/parallelized: potential early exits
+     84, Recognized memory copy idiom
+     98, Loop not vectorized/parallelized: not countable
+    104, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    113, #omp target teams distribute parallel for thread_limit(256)
+        113, Generating "nvkernel__Z7clusteriiPPfiifPiPS0_S_ii_F1L113_4" GPU kernel
+             Generating map(to:cluster[:nfeatures*nclusters]) 
+        116, Loop parallelized across teams and threads(128), schedule(static)
+    116, Loop not vectorized/parallelized: not countable
+    121, Generated vector simd code for the loop containing reductions
+    132, Generating update from(membership_OCL[:npoints])
+    140, Loop not vectorized/parallelized: not countable
+    149, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Vectorized loop was interleaved
+         Loop unrolled 4 times
+    156, Loop not vectorized/parallelized: not countable
+    158, Invariant if transformation
+         Loop not fused: no successor loop
+         Generated vector simd code for the loop
+         Loop versioned for possible aliasing
+         Loop unrolled 8 times
+"read_input.c", line 81: warning: variable "len" was set but never used [set_but_not_used]
+  	float	len;
+  	     	^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+setup(int, char**):
+     95, Loop not vectorized/parallelized: contains call
+    138, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    151, Loop not vectorized/parallelized: contains call
+    155, Loop not vectorized/parallelized: potential early exits
+    158, Loop not vectorized/parallelized: contains call
+    167, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    173, Loop not vectorized/parallelized: contains call
+    229, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     41, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000l>>::_S_gcd(long, long):
+     41, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+euclid_dist_2(float*, float*, int):
+     33, Generated vector simd code for the loop containing reductions
+         Loop unrolled 4 times
+find_nearest_point(float*, int, float**, int):
+          33, Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+rms_err(float**, int, int, float**, int):
+     79, #omp parallel
+          52, Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+          33, Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+kmeans.c:
 timeout was set to  600

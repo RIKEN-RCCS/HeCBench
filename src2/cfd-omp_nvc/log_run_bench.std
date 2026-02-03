@@ -1,3 +1,5 @@
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -DOUTPUT -c euler3d.cpp -o euler3d.o
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -DOUTPUT euler3d.o -o main 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "../cfd-cuda/prepare_data.sh; time -p ( ./main ../data/cfd/fvcorr.domn.097K 1>log.std 2>log.err ) 2> log.time"
 pkill nvidia-smi

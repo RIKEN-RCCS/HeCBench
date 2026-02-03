@@ -1,2 +1,11 @@
+nvc++ -Wall --std=c++14 -O3 -Minfo -mp=gpu -gpu=cc90 -pthread  -I include -c -o bin/ans_encoder.o src/ans_encoder.cc
+nvc++ -Wall --std=c++14 -O3 -Minfo -mp=gpu -gpu=cc90 -pthread  -I include -c -o bin/ans_table_generator.o src/ans_table_generator.cc
+nvc++ -Wall --std=c++14 -O3 -Minfo -mp=gpu -gpu=cc90 -pthread  -I include -c -o bin/main.o src/main.cc
+nvc++ -Wall --std=c++14 -O3 -Minfo -mp=gpu -gpu=cc90 -pthread  -I include -c -o bin/multians_codetable.o src/multians_codetable.cc
+nvc++ -Wall --std=c++14 -O3 -Minfo -mp=gpu -gpu=cc90 -pthread  -I include -c -o bin/multians_gpu_decoder.o src/multians_gpu_decoder.cc
+nvc++ -Wall --std=c++14 -O3 -Minfo -mp=gpu -gpu=cc90 -pthread  -I include -c -o bin/multians_input_buffer.o src/multians_input_buffer.cc
+nvc++ -Wall --std=c++14 -O3 -Minfo -mp=gpu -gpu=cc90 -pthread  -I include -c -o bin/multians_output_buffer.o src/multians_output_buffer.cc
+nvc++ -Wall --std=c++14 -O3 -Minfo -mp=gpu -gpu=cc90 -pthread  -I include -c -o bin/multians_util.o src/multians_util.cc
+nvc++ -Wall --std=c++14 -O3 -Minfo -mp=gpu -gpu=cc90 -pthread  bin/ans_encoder.o bin/ans_table_generator.o bin/main.o bin/multians_codetable.o bin/multians_gpu_decoder.o bin/multians_input_buffer.o bin/multians_output_buffer.o bin/multians_util.o -o bin/demo
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "time -p ( ./bin/demo 10 1>log.std 2>log.err ) 2> log.time"

@@ -1,6 +1,6 @@
 WG size of kernel = 128 
 Configuration used: arch = 0, cores = 1, boxes1d = 230
 Device offloading time:
-15.814567565918 s
+18.214860916138 s
 Kernel execution time:
-15.224885940552 s
+15.217357635498 s

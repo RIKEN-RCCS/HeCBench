@@ -105,7 +105,7 @@ fdtdGPU...
  set local work group size to 32x8
  set total work size to 384x376
  GPU FDTD loop
-Average kernel execution time 0.000393 (s)
+Average kernel execution time 0.000396 (s)
 fdtdGPU complete
 
 CompareData (tolerance 0.000100)...

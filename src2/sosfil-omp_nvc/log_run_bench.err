@@ -1,1 +1,58 @@
+void filtering<float>(int, int, int, int, int):
+     47, Outer loop unrolled 1 times (completely unrolled)
+     48, Loop nest collapsed
+         Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+     54, Recognized memory set idiom
+     59, Loop not fused: function call before adjacent loop
+     60, Generated vector simd code for the loop
+         Loop unrolled 2 times
+     80, Loop not vectorized/parallelized: contains call
+     82, #omp target teams num_teams(blocks) thread_limit(32)
+         77, Generating map(tofrom:x_in[:x_size]) 
+             Generating map(to:zi[:z_size],sos[:sos_size]) 
+         82, Generating "nvkernel__Z9filteringIfEviiiii_F1L82_2" GPU kernel
+         85, #omp parallel
+          108, Barrier
+          135, Barrier
+          160, Barrier
+          183, Barrier
+         92, Team private (smem) located in CUDA shared memory
+     98, Recognized memory copy idiom
+    104, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 6 times (completely unrolled)
+    118, Loop not vectorized/parallelized: contains call
+    139, Loop not vectorized/parallelized: contains call
+    164, Loop not vectorized/parallelized: contains call
+void filtering<double>(int, int, int, int, int):
+     47, Outer loop unrolled 1 times (completely unrolled)
+     48, Loop nest collapsed
+         Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+     54, Recognized memory set idiom
+     59, Loop not fused: function call before adjacent loop
+     60, Generated vector simd code for the loop
+         Loop unrolled 2 times
+     80, Loop not vectorized/parallelized: contains call
+     82, #omp target teams num_teams(blocks) thread_limit(32)
+         77, Generating map(tofrom:x_in[:x_size]) 
+             Generating map(to:zi[:z_size],sos[:sos_size]) 
+         82, Generating "nvkernel__Z9filteringIdEviiiii_F1L82_7" GPU kernel
+         85, #omp parallel
+          108, Barrier
+          135, Barrier
+          160, Barrier
+          183, Barrier
+         92, Team private (smem) located in CUDA shared memory
+     98, Recognized memory copy idiom
+    104, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 6 times (completely unrolled)
+    118, Loop not vectorized/parallelized: contains call
+    139, Loop not vectorized/parallelized: contains call
+    164, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     18, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
 timeout was set to  600

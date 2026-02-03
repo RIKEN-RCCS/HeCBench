@@ -2,8 +2,8 @@ memory (MB) = 984.096000
 pts (billions) = 3.742502
 Tflops = 0.250748
 PASS
-dt = 0.106030
-pt_rate (millions/sec) = 35296.641017
-flop_rate (Gflops) = 2364.874948
-speedup over cpu = 138.452595
-average kernel execution time = 0.001060 (s)
+dt = 0.106072
+pt_rate (millions/sec) = 35282.677797
+flop_rate (Gflops) = 2363.939412
+speedup over cpu = 142.166672
+average kernel execution time = 0.001061 (s)

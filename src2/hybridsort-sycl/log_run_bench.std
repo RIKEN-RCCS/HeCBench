@@ -1,3 +1,7 @@
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -o hybridsort.o -c hybridsort.c
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -o bucketsort.o -c bucketsort.c 
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -o mergesort.o -c mergesort.c 
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -o hybridsort -DVERIFY -DOUTPUT -DTIMER 		hybridsort.o bucketsort.o mergesort.o 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "time -p ( ./hybridsort r 1>log.std 2>log.err ) 2> log.time"
 pkill nvidia-smi

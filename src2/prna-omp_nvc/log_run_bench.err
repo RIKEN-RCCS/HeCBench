@@ -1,2 +1,556 @@
+"main.c", line 71: warning: nested comment is not allowed [nested_comment]
+  //*/
+   ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"main.c", line 36: warning: function "can_pair" was declared but never referenced [declared_but_not_referenced]
+  inline static int can_pair(int i, int j, int n, const base_t *s, const char *seq)
+                    ^
+
+main:
+     83, Loop not vectorized/parallelized: contains call
+"base.c", line 55: warning: pointless comparison of unsigned integer with a negative constant [unsigned_compare_with_negative]
+    do { c = fgetc(f); } while (c != '\n' && c != EOF);
+                                               ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"base.c", line 101: warning: pointless comparison of unsigned integer with a negative constant [unsigned_compare_with_negative]
+    while ((c = fgetc(f)), c != EOF && c != '1')
+                             ^
+
+"base.c", line 108: warning: pointless comparison of unsigned integer with a negative constant [unsigned_compare_with_negative]
+    while ((c = fgetc(f)), c != EOF && c != '1')
+                             ^
+
+sequence:
+          99, Loop not vectorized/parallelized: potential early exits
+         100, Loop not vectorized/parallelized: contains call
+         106, Loop not vectorized/parallelized: potential early exits
+         107, Loop not vectorized/parallelized: contains call
+          79, Loop not vectorized/parallelized: potential early exits
+sequence_from_file:
+          66, Loop not vectorized/parallelized: potential early exits
+          69, Loop not vectorized/parallelized: potential early exits
+    101, Loop not vectorized/parallelized: contains call
+          66, Loop not vectorized/parallelized: potential early exits
+          69, Loop not vectorized/parallelized: potential early exits
+    108, Loop not vectorized/parallelized: contains call
+sequence_from_string:
+    118, Loop not vectorized/parallelized: contains call
+_INTERNAL_6_base_c_4a441bf1::read_line(_IO_FILE*):
+     55, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_6_base_c_4a441bf1::skip_header(_IO_FILE*):
+          66, Loop not vectorized/parallelized: potential early exits
+          69, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_6_base_c_4a441bf1::contains_only_valid_bases(char const*):
+     79, Loop not vectorized/parallelized: potential early exits
+init_val(int*, int, float):
+     17, Loop not vectorized/parallelized: potential early exits
+param_read_from_text:
+         170, Loop unrolled 4 times (completely unrolled)
+              Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: too deeply nested
+         177, Loop not vectorized/parallelized: contains call
+         187, Loop not vectorized/parallelized: contains call
+         192, Loop not vectorized/parallelized: contains call
+         170, Loop unrolled 4 times (completely unrolled)
+              Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: too deeply nested
+         177, Loop not vectorized/parallelized: contains call
+         187, Loop not vectorized/parallelized: contains call
+         192, Loop not vectorized/parallelized: contains call
+         170, Loop unrolled 4 times (completely unrolled)
+              Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: too deeply nested
+         177, Loop not vectorized/parallelized: contains call
+         187, Loop not vectorized/parallelized: contains call
+         192, Loop not vectorized/parallelized: contains call
+         170, Loop unrolled 4 times (completely unrolled)
+              Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: too deeply nested
+         177, Loop not vectorized/parallelized: contains call
+         187, Loop not vectorized/parallelized: contains call
+         192, Loop not vectorized/parallelized: contains call
+         170, Loop unrolled 4 times (completely unrolled)
+              Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: too deeply nested
+         177, Loop not vectorized/parallelized: contains call
+         187, Loop not vectorized/parallelized: contains call
+         192, Loop not vectorized/parallelized: contains call
+         170, Loop unrolled 4 times (completely unrolled)
+              Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: too deeply nested
+         177, Loop not vectorized/parallelized: contains call
+         187, Loop not vectorized/parallelized: contains call
+         192, Loop not vectorized/parallelized: contains call
+         170, Loop unrolled 4 times (completely unrolled)
+              Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: too deeply nested
+         177, Loop not vectorized/parallelized: contains call
+         187, Loop not vectorized/parallelized: contains call
+         192, Loop not vectorized/parallelized: contains call
+         170, Loop unrolled 4 times (completely unrolled)
+              Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: too deeply nested
+         177, Loop not vectorized/parallelized: contains call
+         187, Loop not vectorized/parallelized: contains call
+         192, Loop not vectorized/parallelized: contains call
+         170, Loop unrolled 4 times (completely unrolled)
+              Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: too deeply nested
+         177, Loop not vectorized/parallelized: contains call
+         187, Loop not vectorized/parallelized: contains call
+         192, Loop not vectorized/parallelized: contains call
+         170, Loop unrolled 4 times (completely unrolled)
+              Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: too deeply nested
+         177, Loop not vectorized/parallelized: contains call
+         187, Loop not vectorized/parallelized: contains call
+         192, Loop not vectorized/parallelized: contains call
+         210, Loop not vectorized/parallelized: potential early exits
+         213, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop
+         217, Loop not vectorized/parallelized: contains call
+         309, Loop not vectorized/parallelized: potential early exits
+              Loop not vectorized/parallelized: contains call
+         310, Loop not vectorized/parallelized: potential early exits
+              Loop not vectorized/parallelized: contains call
+         311, Loop not vectorized/parallelized: potential early exits
+              Loop not vectorized/parallelized: contains call
+         317, Loop unrolled 3 times (completely unrolled)
+              Loop not vectorized/parallelized: not countable
+         318, Loop unrolled 3 times (completely unrolled)
+              Loop not vectorized/parallelized: not countable
+         325, Loop not vectorized/parallelized: contains call
+         329, Loop not vectorized/parallelized: contains call
+         342, Loop not vectorized/parallelized: contains call
+         348, Loop not vectorized/parallelized: contains call
+         358, Loop unrolled 6 times (completely unrolled)
+              Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: too deeply nested
+         366, Loop not vectorized/parallelized: contains call
+         370, Loop not vectorized/parallelized: contains call
+         375, Loop not vectorized/parallelized: contains call
+         379, Loop not vectorized/parallelized: contains call
+         383, Loop not vectorized/parallelized: contains call
+         386, Loop not vectorized/parallelized: contains call
+         511, Loop unrolled 7 times (completely unrolled)
+              Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: too deeply nested
+         519, Loop not vectorized/parallelized: contains call
+         524, Loop not vectorized/parallelized: contains call
+         529, Loop not vectorized/parallelized: contains call
+         535, Loop not vectorized/parallelized: contains call
+         539, Loop not vectorized/parallelized: contains call
+         543, Loop not vectorized/parallelized: contains call
+         547, Loop not vectorized/parallelized: contains call
+param_read_alternative_temperature:
+    635, Loop not vectorized/parallelized: too deeply nested
+    636, Loop not vectorized/parallelized: too deeply nested
+    637, Loop not vectorized/parallelized: too deeply nested
+    640, Loop not vectorized/parallelized: too deeply nested
+    651, Loop not vectorized/parallelized: too deeply nested
+    656, Loop not vectorized/parallelized: potential early exits
+    666, Loop not vectorized/parallelized: potential early exits
+    668, Loop not vectorized/parallelized: potential early exits
+    670, Loop not vectorized/parallelized: potential early exits
+    672, Loop not vectorized/parallelized: potential early exits
+param_show:
+         724, Loop not vectorized/parallelized: too deeply nested
+         727, Loop not vectorized/parallelized: contains call
+         724, Loop not vectorized/parallelized: too deeply nested
+         727, Loop not vectorized/parallelized: contains call
+         724, Loop not vectorized/parallelized: too deeply nested
+         727, Loop not vectorized/parallelized: contains call
+         724, Loop not vectorized/parallelized: too deeply nested
+         727, Loop not vectorized/parallelized: contains call
+         724, Loop not vectorized/parallelized: too deeply nested
+         727, Loop not vectorized/parallelized: contains call
+         724, Loop not vectorized/parallelized: too deeply nested
+         727, Loop not vectorized/parallelized: contains call
+         724, Loop not vectorized/parallelized: too deeply nested
+         727, Loop not vectorized/parallelized: contains call
+         724, Loop not vectorized/parallelized: too deeply nested
+         727, Loop not vectorized/parallelized: contains call
+         724, Loop not vectorized/parallelized: too deeply nested
+         727, Loop not vectorized/parallelized: contains call
+         724, Loop not vectorized/parallelized: too deeply nested
+         727, Loop not vectorized/parallelized: contains call
+         703, Loop not vectorized/parallelized: contains call
+         703, Loop not vectorized/parallelized: contains call
+         703, Loop not vectorized/parallelized: contains call
+         816, Loop not vectorized/parallelized: contains call
+         817, Loop not vectorized/parallelized: contains call
+         818, Loop not vectorized/parallelized: contains call
+         712, Loop not vectorized/parallelized: contains call
+         712, Loop not vectorized/parallelized: contains call
+         740, Loop not vectorized/parallelized: too deeply nested
+         741, Loop not vectorized/parallelized: too deeply nested
+         742, Loop not vectorized/parallelized: too deeply nested
+         745, Loop not vectorized/parallelized: contains call
+         782, Loop not vectorized/parallelized: too deeply nested
+         783, Loop not vectorized/parallelized: too deeply nested
+         784, Loop not vectorized/parallelized: too deeply nested
+         785, Loop not vectorized/parallelized: too deeply nested
+         786, Loop not vectorized/parallelized: too deeply nested
+         789, Loop not vectorized/parallelized: contains call
+         760, Loop not vectorized/parallelized: too deeply nested
+         761, Loop not vectorized/parallelized: too deeply nested
+         762, Loop not vectorized/parallelized: too deeply nested
+         763, Loop not vectorized/parallelized: too deeply nested
+         766, Loop not vectorized/parallelized: contains call
+_INTERNAL_7_param_c_T37::init_tab3(float (*) [5][5][5], float):
+     28, Loop not vectorized/parallelized: not countable
+          17, Loop unrolled 3 times (completely unrolled)
+_INTERNAL_7_param_c_T37::init_tab4(float (*) [5][5][5][5], float):
+     35, Loop not vectorized/parallelized: too deeply nested
+     38, Loop not vectorized/parallelized: not countable
+          17, Loop unrolled 4 times (completely unrolled)
+_INTERNAL_7_param_c_T37::init_tab6(float (*) [5][5][5][5][5][5], float):
+     45, Loop not vectorized/parallelized: too deeply nested
+     46, Loop not vectorized/parallelized: too deeply nested
+     47, Loop not vectorized/parallelized: too deeply nested
+     50, Loop not vectorized/parallelized: not countable
+          17, Loop unrolled 6 times (completely unrolled)
+_INTERNAL_7_param_c_T37::init_tab7(float (*) [5][5][5][5][5][5][5], float):
+     57, Loop not vectorized/parallelized: too deeply nested
+     58, Loop not vectorized/parallelized: too deeply nested
+     59, Loop not vectorized/parallelized: too deeply nested
+     60, Loop not vectorized/parallelized: too deeply nested
+     63, Loop not vectorized/parallelized: not countable
+          17, Loop unrolled 7 times (completely unrolled)
+_INTERNAL_7_param_c_T37::init_tab8(float (*) [5][5][5][5][5][5][5][5], float):
+     70, Loop not vectorized/parallelized: too deeply nested
+     71, Loop not vectorized/parallelized: too deeply nested
+     72, Loop not vectorized/parallelized: too deeply nested
+     73, Loop not vectorized/parallelized: too deeply nested
+     74, Loop not vectorized/parallelized: too deeply nested
+     77, Loop not vectorized/parallelized: not countable
+          17, Loop unrolled 8 times (completely unrolled)
+_INTERNAL_7_param_c_T37::look_for_line_containing(_IO_FILE*, char const*):
+     97, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_7_param_c_T37::is_only_whitespace(char const*):
+    108, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_7_param_c_T37::read_next_line(_IO_FILE*, char*):
+         108, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_7_param_c_T37::look_for_dashes(_IO_FILE*):
+         136, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_7_param_c_T37::look_for_arrow(_IO_FILE*):
+         141, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_7_param_c_T37::split(char*, char (*) [17][1025]):
+    156, Loop not vectorized/parallelized: contains call
+_INTERNAL_7_param_c_T37::split_expecting(char*, char (*) [17][1025], int):
+         156, Loop not vectorized/parallelized: contains call
+_INTERNAL_7_param_c_T37::read_stack(char const*, int, float (*) [5][5][5][5], int):
+          35, Loop not vectorized/parallelized: too deeply nested
+          38, Loop not vectorized/parallelized: not countable
+          39, Loop unrolled 4 times (completely unrolled)
+         156, Loop not vectorized/parallelized: contains call
+    187, Loop not vectorized/parallelized: contains call
+    192, Loop not vectorized/parallelized: contains call
+_INTERNAL_7_param_c_T37::read_loop(param*):
+         136, Loop not vectorized/parallelized: potential early exits
+    213, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+    218, Loop not vectorized/parallelized: contains call
+_INTERNAL_7_param_c_T37::next_value(_IO_FILE*):
+         141, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_7_param_c_T37::read_next_values(_IO_FILE*, float*, int):
+    247, Loop not vectorized/parallelized: contains call
+_INTERNAL_7_param_c_T37::read_miscloop(param*):
+         236, Loop not vectorized/parallelized: potential early exits
+         236, Loop not vectorized/parallelized: potential early exits
+         236, Loop not vectorized/parallelized: potential early exits
+         141, Loop not vectorized/parallelized: potential early exits
+         247, Loop not vectorized/parallelized: contains call
+         141, Loop not vectorized/parallelized: potential early exits
+         141, Loop not vectorized/parallelized: potential early exits
+         141, Loop not vectorized/parallelized: potential early exits
+         236, Loop not vectorized/parallelized: potential early exits
+         236, Loop not vectorized/parallelized: potential early exits
+         236, Loop not vectorized/parallelized: potential early exits
+         236, Loop not vectorized/parallelized: potential early exits
+         236, Loop not vectorized/parallelized: potential early exits
+         141, Loop not vectorized/parallelized: potential early exits
+         236, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_7_param_c_T37::read_small_loop(char*, base_t*, float*, int):
+    282, Loop not vectorized/parallelized: contains call
+_INTERNAL_7_param_c_T37::read_triloop(param*):
+         108, Loop not vectorized/parallelized: potential early exits
+         282, Loop not vectorized/parallelized: contains call
+         136, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_7_param_c_T37::read_tloop(param*):
+         108, Loop not vectorized/parallelized: potential early exits
+         282, Loop not vectorized/parallelized: contains call
+         136, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_7_param_c_T37::read_hexaloop(param*):
+         108, Loop not vectorized/parallelized: potential early exits
+         282, Loop not vectorized/parallelized: contains call
+         136, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_7_param_c_T37::read_dangle(int, int, float (*) [5][5][5], float (*) [5][5][5]):
+          28, Loop not vectorized/parallelized: not countable
+          29, Loop unrolled 3 times (completely unrolled)
+          28, Loop not vectorized/parallelized: not countable
+          29, Loop unrolled 3 times (completely unrolled)
+         156, Loop not vectorized/parallelized: contains call
+         163, Loop not vectorized/parallelized: contains call
+    342, Loop not vectorized/parallelized: contains call
+    348, Loop not vectorized/parallelized: contains call
+_INTERNAL_7_param_c_T37::read_int11(int, int, float (*) [5][5][5][5][5][5]):
+          45, Loop not vectorized/parallelized: too deeply nested
+          46, Loop not vectorized/parallelized: too deeply nested
+          47, Loop not vectorized/parallelized: too deeply nested
+          50, Loop not vectorized/parallelized: not countable
+          51, Loop unrolled 6 times (completely unrolled)
+         163, Loop not vectorized/parallelized: contains call
+         163, Loop not vectorized/parallelized: contains call
+         156, Loop not vectorized/parallelized: contains call
+    379, Loop not vectorized/parallelized: contains call
+         163, Loop not vectorized/parallelized: contains call
+    386, Loop not vectorized/parallelized: contains call
+_INTERNAL_7_param_c_T37::read_int22(int, int, float (*) [5][5][5][5][5][5][5][5]):
+          70, Loop not vectorized/parallelized: too deeply nested
+          71, Loop not vectorized/parallelized: too deeply nested
+          72, Loop not vectorized/parallelized: too deeply nested
+          73, Loop not vectorized/parallelized: too deeply nested
+          74, Loop not vectorized/parallelized: too deeply nested
+          77, Loop not vectorized/parallelized: not countable
+          78, Loop unrolled 8 times (completely unrolled)
+         163, Loop not vectorized/parallelized: contains call
+         163, Loop not vectorized/parallelized: contains call
+         163, Loop not vectorized/parallelized: contains call
+    486, Loop not vectorized/parallelized: contains call
+         163, Loop not vectorized/parallelized: contains call
+    490, Loop not vectorized/parallelized: contains call
+         163, Loop not vectorized/parallelized: contains call
+    498, Loop not vectorized/parallelized: contains call
+_INTERNAL_7_param_c_T37::read_int21(int, int, float (*) [5][5][5][5][5][5][5]):
+          57, Loop not vectorized/parallelized: too deeply nested
+          58, Loop not vectorized/parallelized: too deeply nested
+          59, Loop not vectorized/parallelized: too deeply nested
+          60, Loop not vectorized/parallelized: too deeply nested
+          63, Loop not vectorized/parallelized: not countable
+          64, Loop unrolled 7 times (completely unrolled)
+         156, Loop not vectorized/parallelized: contains call
+         156, Loop not vectorized/parallelized: contains call
+         156, Loop not vectorized/parallelized: contains call
+         156, Loop not vectorized/parallelized: contains call
+    539, Loop not vectorized/parallelized: contains call
+         156, Loop not vectorized/parallelized: contains call
+    547, Loop not vectorized/parallelized: contains call
+_INTERNAL_7_param_c_T37::show1(char const*, float*, int):
+    703, Loop not vectorized/parallelized: contains call
+_INTERNAL_7_param_c_T37::show3(char const*, float (*) [5][5][5]):
+    712, Loop not vectorized/parallelized: contains call
+_INTERNAL_7_param_c_T37::show4(char const*, float (*) [5][5][5][5]):
+    724, Loop not vectorized/parallelized: too deeply nested
+    727, Loop not vectorized/parallelized: contains call
+_INTERNAL_7_param_c_T37::show6(char const*, float (*) [5][5][5][5][5][5]):
+    740, Loop not vectorized/parallelized: too deeply nested
+    741, Loop not vectorized/parallelized: too deeply nested
+    742, Loop not vectorized/parallelized: too deeply nested
+    745, Loop not vectorized/parallelized: contains call
+_INTERNAL_7_param_c_T37::show7(char const*, float (*) [5][5][5][5][5][5][5]):
+    760, Loop not vectorized/parallelized: too deeply nested
+    761, Loop not vectorized/parallelized: too deeply nested
+    762, Loop not vectorized/parallelized: too deeply nested
+    763, Loop not vectorized/parallelized: too deeply nested
+    766, Loop not vectorized/parallelized: contains call
+_INTERNAL_7_param_c_T37::show8(char const*, float (*) [5][5][5][5][5][5][5][5]):
+    782, Loop not vectorized/parallelized: too deeply nested
+    783, Loop not vectorized/parallelized: too deeply nested
+    784, Loop not vectorized/parallelized: too deeply nested
+    785, Loop not vectorized/parallelized: too deeply nested
+    786, Loop not vectorized/parallelized: too deeply nested
+    789, Loop not vectorized/parallelized: contains call
+_INTERNAL_7_param_c_T37::show_triloop(param*):
+    816, Loop not vectorized/parallelized: contains call
+_INTERNAL_7_param_c_T37::show_tloop(param*):
+    817, Loop not vectorized/parallelized: contains call
+_INTERNAL_7_param_c_T37::show_hexaloop(param*):
+    818, Loop not vectorized/parallelized: contains call
+isdigits:
+     48, Loop not vectorized/parallelized: potential early exits
+array_val:
+    240, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+prna_new:
+    889, Generating map(to:dev_bcp[:(n*(n-1))/2],dev_par[:1],dev_s[:n]) 
+         Generating map(from:w3[:n+1],v[:n*n]) 
+         Generating map(alloc:z[:n*n],yl[:n*n],xl[:n*2],y[:n*n],wl[:n*2]) 
+         Generating map(from:w5[:n+1]) 
+         Generating map(alloc:w[:n*2],x[:n*5],wq[:(n*(n-1))/2]) 
+    893, Loop not vectorized/parallelized: contains call
+prna_show:
+   1004, Loop not vectorized/parallelized: contains call
+   1007, Zero trip check eliminated
+         Loop not vectorized/parallelized: contains call
+   1008, Loop not vectorized/parallelized: contains call
+   1009, Loop not vectorized/parallelized: contains call
+prna_write_neg_log10_probabilities:
+   1057, Loop not vectorized/parallelized: contains call
+prna_write_probability_matrix:
+   1072, Loop not vectorized/parallelized: contains call
+             1072, Zero trip check eliminated
+prna_write_probknot:
+   1170, Loop not fused: different loop trip count
+   1173, Zero trip check eliminated
+         Loop not vectorized: data dependency
+   1177, Loop not vectorized: data dependency
+        1120, Loop not vectorized/parallelized: not countable
+        1136, Loop not vectorized/parallelized: not countable
+        1150, Loop not vectorized/parallelized: not countable
+        1089, Loop not vectorized/parallelized: contains call
+        1089, Loop not vectorized/parallelized: contains call
+generate_bcp:
+   1204, Loop not vectorized/parallelized: contains call
+_INTERNAL_8_prna_cpp_f409f464::contains_only_base(base_t, int, base_t const*):
+      9, include "base.h"
+          29, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          31, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_8_prna_cpp_f409f464::sequences_match(base_t const*, base_t const*, int):
+      9, include "base.h"
+          38, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          40, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_8_prna_cpp_f409f464::terminal_U_penalty(base_t const*, int, int, param*):
+     19, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_8_prna_cpp_f409f464::dangle_3p_energy(base_t const*, int, int, int, param*):
+     28, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_8_prna_cpp_f409f464::dangle_5p_energy(base_t const*, int, int, int, param*):
+     37, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_8_prna_cpp_f409f464::terminal_stack(base_t const*, int, int, int, int, param*):
+     47, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_8_prna_cpp_f409f464::terminal_stack_multibranch(base_t const*, int, int, int, int, param*):
+     57, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_8_prna_cpp_f409f464::lookup_find(base_t const*, int, param*):
+     63, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+          40, Loop not vectorized/parallelized: potential early exits
+          40, Loop not vectorized/parallelized: potential early exits
+          40, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_8_prna_cpp_f409f464::hairpin_loop_energy(base_t const*, int, int, int, param*):
+     95, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+          68, Loop not vectorized/parallelized: potential early exits
+          73, Loop not vectorized/parallelized: potential early exits
+          78, Loop not vectorized/parallelized: potential early exits
+          31, Loop not vectorized/parallelized: potential early exits
+          31, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_8_prna_cpp_f409f464::real_min(float, float):
+    126, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_8_prna_cpp_f409f464::internal_loop_energy(base_t const*, int, int, int, int, int, int, param*):
+    144, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_8_prna_cpp_f409f464::free_energy_sum(float, float):
+    186, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_8_prna_cpp_f409f464::free_energy_accumulate(float*, float):
+    196, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_8_prna_cpp_f409f464::int_min(int, int):
+    200, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_8_prna_cpp_f409f464::ind(int, int, int):
+    203, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_8_prna_cpp_f409f464::upper_triangle_index(int, int):
+    208, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_8_prna_cpp_f409f464::can_pair(int, int, int, int const*):
+    213, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_8_prna_cpp_f409f464::wrap(int, int):
+    225, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_8_prna_cpp_f409f464::is_exterior(int, int):
+    230, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_8_prna_cpp_f409f464::is_interior(int, int):
+    235, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_8_prna_cpp_f409f464::calc_hairpin_stack_exterior_multibranch(int, int, base_t const*, int const*, float*, float const*, float const*, float const*, param*):
+    269, #omp target teams num_teams(n) thread_limit(1)
+        269, Generating "nvkernel__ZN29_INTERNAL_8_prna_cpp_f409f46439calc_hairpin_stack_exterior_multibranchEiiPK6base_tPKiPfPKfS7_S7_P5param_F1L269_2" GPU kernel
+        271, #omp parallel
+          98, Loop not vectorized/parallelized: potential early exits
+         110, Loop unrolled 3 times (completely unrolled)
+         115, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_8_prna_cpp_f409f464::free_energy_reduce(float*, float*, int, int):
+    328, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+    330, Barrier
+    331, Loop not vectorized/parallelized: contains call
+    334, Barrier
+_INTERNAL_8_prna_cpp_f409f464::calc_internal(int, int, base_t const*, int const*, float*, param*):
+    353, #omp target teams num_teams(n) thread_limit(128)
+        353, Generating "nvkernel__ZN29_INTERNAL_8_prna_cpp_f409f46413calc_internalEiiPK6base_tPKiPfP5param_F1L353_7" GPU kernel
+        356, #omp parallel
+        403, Team private (buf) located in CUDA shared memory
+    389, Loop not vectorized/parallelized: contains call
+_INTERNAL_8_prna_cpp_f409f464::coaxial_flush(base_t const*, int, int, int, int, param*):
+    417, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_8_prna_cpp_f409f464::coaxial_mismatch1(base_t const*, int, int, int, int, param*):
+    428, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_8_prna_cpp_f409f464::coaxial_mismatch2(base_t const*, int, int, int, int, param*):
+    440, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_8_prna_cpp_f409f464::calc_coaxial(int, int, base_t const*, int const*, float*, float const*, float const*, float const*, param*):
+    460, #omp target teams num_teams(n) thread_limit(128)
+        460, Generating "nvkernel__ZN29_INTERNAL_8_prna_cpp_f409f46412calc_coaxialEiiPK6base_tPKiPfPKfS7_S7_P5param_F1L460_12" GPU kernel
+        463, #omp parallel
+        558, Team private (buf) located in CUDA shared memory
+    481, Loop not vectorized/parallelized: contains call
+    496, Loop not vectorized/parallelized: contains call
+    516, Loop not vectorized/parallelized: contains call
+    536, Loop not vectorized/parallelized: contains call
+_INTERNAL_8_prna_cpp_f409f464::calc_wl(int, int, base_t const*, int const*, float*, float*, float*, float*, float*, param*):
+    597, #omp target teams distribute parallel for num_teams(n) thread_limit(1)
+        597, Generating "nvkernel__ZN29_INTERNAL_8_prna_cpp_f409f4647calc_wlEiiPK6base_tPKiPfS5_S5_S5_S5_P5param_F1L597_17" GPU kernel
+        601, Loop parallelized across teams and threads(128), schedule(static)
+    601, Loop not vectorized/parallelized: contains call
+_INTERNAL_8_prna_cpp_f409f464::calc_xl(int, int, float const*, float const*, float*):
+    650, #omp target teams num_teams(n) thread_limit(128)
+        650, Generating "nvkernel__ZN29_INTERNAL_8_prna_cpp_f409f4647calc_xlEiiPKfS1_Pf_F1L650_21" GPU kernel
+        653, #omp parallel
+        691, Team private (buf) located in CUDA shared memory
+    679, Loop not vectorized/parallelized: contains call
+_INTERNAL_8_prna_cpp_f409f464::calc_z(int, int, base_t const*, int const*, float*, float*, float*, float*, param*):
+    711, #omp target teams num_teams(n) thread_limit(128)
+        711, Generating "nvkernel__ZN29_INTERNAL_8_prna_cpp_f409f4646calc_zEiiPK6base_tPKiPfS5_S5_S5_P5param_F1L711_26" GPU kernel
+        714, #omp parallel
+        758, Team private (buf) located in CUDA shared memory
+    733, Loop not vectorized/parallelized: contains call
+_INTERNAL_8_prna_cpp_f409f464::calc_x(int, int, float*, float*, float const*, float const*, float*, float*, param*):
+    775, #omp target teams distribute parallel for num_teams(n) thread_limit(1)
+        775, Generating "nvkernel__ZN29_INTERNAL_8_prna_cpp_f409f4646calc_xEiiPfS0_PKfS2_S0_S0_P5param_F1L775_31" GPU kernel
+        779, Loop parallelized across teams and threads(128), schedule(static)
+    779, Loop not vectorized/parallelized: contains call
+_INTERNAL_8_prna_cpp_f409f464::init_w5_and_w3(int, float*, float*):
+    803, #omp target
+        803, Generating "nvkernel__ZN29_INTERNAL_8_prna_cpp_f409f46414init_w5_and_w3EiPfS0__F1L803_35" GPU kernel
+_INTERNAL_8_prna_cpp_f409f464::calc_w5_and_w3(int, int, float*, float*, float const*):
+    815, #omp target teams num_teams(1) thread_limit(128)
+        815, Generating "nvkernel__ZN29_INTERNAL_8_prna_cpp_f409f46414calc_w5_and_w3EiiPfS0_PKf_F1L815_37" GPU kernel
+        818, #omp parallel
+        840, Team private (buf) located in CUDA shared memory
+    827, Loop not vectorized/parallelized: contains call
+_INTERNAL_8_prna_cpp_f409f464::write_ct_structure(_IO_FILE*, char const*, int, int const*):
+   1089, Loop not vectorized/parallelized: contains call
+_INTERNAL_8_prna_cpp_f409f464::remove_helices_shorter_than(int, int*, int):
+   1120, Loop not vectorized/parallelized: not countable
+   1136, Loop not vectorized/parallelized: not countable
+   1150, Loop not vectorized/parallelized: not countable
 make: *** [Makefile.NVD:82: run_mem] Error 134
 timeout was set to  600

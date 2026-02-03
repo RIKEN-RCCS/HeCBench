@@ -1,2 +1,909 @@
+ANSEncoder::encode(unsigned char*, unsigned long, std::shared_ptr<ANSEncoderTable>):
+          38, Loop not vectorized/parallelized: potential early exits
+ANSEncoder::encode_memory(unsigned int*, unsigned long, unsigned char*, unsigned long, std::shared_ptr<ANSEncoderTable>, std::shared_ptr<Decoder_Info>):
+     38, Loop not vectorized/parallelized: potential early exits
+ANSTableGenerator::generate_distribution(unsigned long, unsigned long, unsigned long, std::function<double (double)>):
+         531, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+          97, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop
+        4295, Loop not vectorized/parallelized: potential early exits
+        4295, Loop not fused: different loop trip count
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+         140, Loop not fused: different loop trip count
+              Generated vector simd code for the loop containing reductions
+              Mixed precision reduction; consider promoting accmulator
+        4295, Loop not fused: different loop trip count
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 4 times
+        4295, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+         140, Generated vector simd code for the loop containing reductions
+     41, Loop not vectorized/parallelized: too deeply nested
+        1861, Loop not fused: function call before adjacent loop
+              Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+        1861, Loop not fused: function call before adjacent loop
+              Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+     45, Loop not vectorized/parallelized: potential early exits
+        1861, Loop not fused: function call before adjacent loop
+              Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+        1861, Loop not fused: function call before adjacent loop
+              Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+        4295, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop
+ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long):
+     68, Recognized memory zero idiom
+     71, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+     77, Loop not vectorized/parallelized: potential early exits
+         140, Loop not fused: different loop trip count
+              Generated vector simd code for the loop containing reductions
+        4295, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+        4295, Loop not fused: different loop trip count
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+         140, Loop not fused: different loop trip count
+              Generated vector simd code for the loop containing reductions
+              Mixed precision reduction; consider promoting accmulator
+        4295, Loop not fused: different loop trip count
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 4 times
+        4295, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+         531, Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+         140, Generated vector simd code for the loop containing reductions
+    112, Loop not vectorized/parallelized: too deeply nested
+        1861, Loop not fused: function call before adjacent loop
+              Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+        1861, Loop not fused: function call before adjacent loop
+              Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+    116, Loop not vectorized/parallelized: potential early exits
+        1861, Loop not fused: function call before adjacent loop
+              Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+        1861, Loop not fused: function call before adjacent loop
+              Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+        4295, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop
+ANSTableGenerator::generate_test_data(std::shared_ptr<std::vector<unsigned long, std::allocator<unsigned long>>>, unsigned long, unsigned long, unsigned long):
+    147, Loop not vectorized/parallelized: potential early exits
+         531, Loop not vectorized: data dependency
+    156, Loop not vectorized/parallelized: potential early exits
+ANSTableGenerator::generate_table(std::shared_ptr<std::vector<double, std::allocator<double>>>, std::shared_ptr<std::vector<unsigned long, std::allocator<unsigned long>>>, std::shared_ptr<std::vector<unsigned char, std::allocator<unsigned char>>>, unsigned long, unsigned long):
+    181, Loop not vectorized/parallelized: potential early exits
+    184, Loop not vectorized/parallelized: potential early exits
+    193, Loop not vectorized/parallelized: potential early exits
+    196, Loop not vectorized/parallelized: potential early exits
+    203, Loop not vectorized/parallelized: potential early exits
+        5675, Loop not fused: function call before adjacent loop
+              Loop not vectorized: may not be beneficial for target
+    219, Loop not vectorized/parallelized: potential early exits
+        5675, Loop not fused: function call before adjacent loop
+              Loop not vectorized: may not be beneficial for target
+    243, Loop not vectorized/parallelized: potential early exits
+ANSTableGenerator::get_decoder_table(std::shared_ptr<ANSEncoderTable>):
+    271, Loop not vectorized/parallelized: potential early exits
+ANSTableGenerator::generate_encoder_table(std::shared_ptr<std::vector<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>, std::allocator<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>>>>):
+    305, Loop not vectorized/parallelized: potential early exits
+double* std::__uninitialized_default_n_1<true>::__uninit_default_n<double*, unsigned long>(double*, unsigned long):
+        1149, Recognized memory set idiom
+unsigned long* std::__uninitialized_default_n_1<true>::__uninit_default_n<unsigned long*, unsigned long>(unsigned long*, unsigned long):
+        1149, Recognized memory set idiom
+Queue_Entry* std::__uninitialized_default_n_1<true>::__uninit_default_n<Queue_Entry*, unsigned long>(Queue_Entry*, unsigned long):
+        1149, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+Encoder_Table_Entry* std::__uninitialized_default_n_1<true>::__uninit_default_n<Encoder_Table_Entry*, unsigned long>(Encoder_Table_Entry*, unsigned long):
+        1149, Loop not vectorized: data dependency
+ANSEncoderTable::ANSEncoderTableItem* std::__uninitialized_default_n_1<true>::__uninit_default_n<ANSEncoderTable::ANSEncoderTableItem*, unsigned long>(ANSEncoderTable::ANSEncoderTableItem*, unsigned long):
+        1149, Loop not vectorized: data dependency
+std::vector<std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>, std::allocator<std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>>>::_S_do_relocate(std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*, std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*, std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*, std::allocator<std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>>&, std::integral_constant<bool, true>):
+        1046, Loop not vectorized/parallelized: contains call
+std::vector<std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>, std::allocator<std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>>>::_S_relocate(std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*, std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*, std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*, std::allocator<std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>>&):
+         456, Loop not vectorized/parallelized: contains call
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::mersenne_twister_engine(unsigned long):
+         330, Loop not vectorized: data dependency
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::mersenne_twister_engine(unsigned long):
+         531, Loop not vectorized: data dependency
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::seed(unsigned long):
+     14, include "random"
+          51, include "random.tcc"
+              330, Loop not vectorized: data dependency
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::operator()():
+         401, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+         409, Loop not vectorized: data dependency
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::_M_gen_rand():
+     14, include "random"
+          51, include "random.tcc"
+              401, Loop not fused: different loop trip count
+                   Generated vector simd code for the loop
+              409, Loop not vectorized: data dependency
+std::vector<double, std::allocator<double>>::vector(unsigned long, std::allocator<double> const&):
+     14, include "random"
+std::vector<double, std::allocator<double>>::vector(std::vector<double, std::allocator<double>> const&):
+     14, include "random"
+std::vector<double, std::allocator<double>>::_M_default_initialize(unsigned long):
+         704, Recognized memory set idiom
+double std::uniform_real_distribution<double>::operator()<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&):
+        1870, Loop not fused: function call before adjacent loop
+              Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+double std::uniform_real_distribution<double>::operator()<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&, std::uniform_real_distribution<double>::param_type const&):
+     14, include "random"
+          51, include "random.tcc"
+         189, Loop not fused: function call before adjacent loop
+              Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+std::vector<unsigned long, std::allocator<unsigned long>>::vector(unsigned long, std::allocator<unsigned long> const&):
+     14, include "random"
+std::vector<unsigned long, std::allocator<unsigned long>>::vector(std::vector<unsigned long, std::allocator<unsigned long>> const&):
+     14, include "random"
+std::vector<unsigned long, std::allocator<unsigned long>>::_M_default_initialize(unsigned long):
+         704, Recognized memory set idiom
+std::vector<unsigned char, std::allocator<unsigned char>>::vector(unsigned long, std::allocator<unsigned char> const&):
+     14, include "random"
+std::vector<unsigned char, std::allocator<unsigned char>>::vector(std::vector<unsigned char, std::allocator<unsigned char>> const&):
+     14, include "random"
+void std::vector<unsigned char, std::allocator<unsigned char>>::emplace_back<unsigned char>(unsigned char&&):
+     14, include "random"
+void std::vector<unsigned char, std::allocator<unsigned char>>::_M_realloc_insert<unsigned char>(__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char>>>, unsigned char&&):
+     14, include "random"
+unsigned long std::uniform_int_distribution<unsigned long>::operator()<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&):
+     14, include "random"
+          51, include "random.tcc"
+unsigned long std::uniform_int_distribution<unsigned long>::operator()<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&, std::uniform_int_distribution<unsigned long>::param_type const&):
+     14, include "random"
+          49, include "random.h"
+               35, include "uniform_int_dist.h"
+                   349, Loop not vectorized/parallelized: potential early exits
+          51, include "random.tcc"
+         258, Loop not fused: different loop trip count
+              Loop not fused: complex flow graph
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+         263, Loop not vectorized/parallelized: not countable
+         265, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+         456, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+         456, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+unsigned long std::uniform_int_distribution<unsigned long>::_S_nd<unsigned __int128, std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>, unsigned long>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&, unsigned long):
+     14, include "random"
+          49, include "random.h"
+               35, include "uniform_int_dist.h"
+                   263, Loop not vectorized/parallelized: not countable
+          51, include "random.tcc"
+         456, Loop not fused: different loop trip count
+              Loop not fused: complex flow graph
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+         456, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+unsigned int std::uniform_int_distribution<unsigned long>::_S_nd<unsigned long, std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>, unsigned int>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&, unsigned int):
+     14, include "random"
+          49, include "random.h"
+               35, include "uniform_int_dist.h"
+                   263, Loop not vectorized/parallelized: not countable
+          51, include "random.tcc"
+         456, Loop not fused: different loop trip count
+              Loop not fused: complex flow graph
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+         456, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+std::pair<unsigned int const, XS_pair>::pair<unsigned int const&, 0ul>(std::tuple<unsigned int const&>&, std::tuple<>&, std::_Index_tuple<0ul>, std::_Index_tuple<>):
+     14, include "random"
+std::_Hashtable<unsigned int, std::pair<unsigned int const, XS_pair>, std::allocator<std::pair<unsigned int const, XS_pair>>, std::__detail::_Select1st, std::equal_to<unsigned int>, std::hash<unsigned int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>>::~_Hashtable():
+        2320, Loop not vectorized/parallelized: contains call
+std::_Hashtable<unsigned int, std::pair<unsigned int const, XS_pair>, std::allocator<std::pair<unsigned int const, XS_pair>>, std::__detail::_Select1st, std::equal_to<unsigned int>, std::hash<unsigned int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>>::_M_find_before_node(unsigned long, unsigned int const&, unsigned long) const:
+     13, include "unordered_map"
+          46, include "hashtable.h"
+             1837, Loop not vectorized/parallelized: potential early exits
+std::_Hashtable<unsigned int, std::pair<unsigned int const, XS_pair>, std::allocator<std::pair<unsigned int const, XS_pair>>, std::__detail::_Select1st, std::equal_to<unsigned int>, std::hash<unsigned int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>>::_M_find_node(unsigned long, unsigned int const&, unsigned long) const:
+        1839, Loop not vectorized/parallelized: potential early exits
+std::_Hashtable<unsigned int, std::pair<unsigned int const, XS_pair>, std::allocator<std::pair<unsigned int const, XS_pair>>, std::__detail::_Select1st, std::equal_to<unsigned int>, std::hash<unsigned int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>>::clear():
+        1916, Loop not vectorized/parallelized: contains call
+std::_Hashtable<unsigned int, std::pair<unsigned int const, XS_pair>, std::allocator<std::pair<unsigned int const, XS_pair>>, std::__detail::_Select1st, std::equal_to<unsigned int>, std::hash<unsigned int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>>::_M_rehash_aux(unsigned long, std::integral_constant<bool, true>):
+     13, include "unordered_map"
+          46, include "hashtable.h"
+             2386, Loop not vectorized/parallelized: not countable
+std::_Hashtable<unsigned int, std::pair<unsigned int const, XS_pair>, std::allocator<std::pair<unsigned int const, XS_pair>>, std::__detail::_Select1st, std::equal_to<unsigned int>, std::hash<unsigned int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>>::_M_rehash(unsigned long, unsigned long const&):
+     13, include "unordered_map"
+          46, include "hashtable.h"
+std::unordered_map<unsigned int, XS_pair, std::hash<unsigned int>, std::equal_to<unsigned int>, std::allocator<std::pair<unsigned int const, XS_pair>>>::~unordered_map():
+     13, include "unordered_map"
+std::_Hashtable<unsigned int, std::pair<unsigned int const, unsigned int>, std::allocator<std::pair<unsigned int const, unsigned int>>, std::__detail::_Select1st, std::equal_to<unsigned int>, std::hash<unsigned int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>>::~_Hashtable():
+        2320, Loop not vectorized/parallelized: contains call
+std::_Hashtable<unsigned int, std::pair<unsigned int const, unsigned int>, std::allocator<std::pair<unsigned int const, unsigned int>>, std::__detail::_Select1st, std::equal_to<unsigned int>, std::hash<unsigned int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>>::_M_find_before_node(unsigned long, unsigned int const&, unsigned long) const:
+     13, include "unordered_map"
+          46, include "hashtable.h"
+             1837, Loop not vectorized/parallelized: potential early exits
+std::_Hashtable<unsigned int, std::pair<unsigned int const, unsigned int>, std::allocator<std::pair<unsigned int const, unsigned int>>, std::__detail::_Select1st, std::equal_to<unsigned int>, std::hash<unsigned int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>>::_M_find_node(unsigned long, unsigned int const&, unsigned long) const:
+        1839, Loop not vectorized/parallelized: potential early exits
+std::_Hashtable<unsigned int, std::pair<unsigned int const, unsigned int>, std::allocator<std::pair<unsigned int const, unsigned int>>, std::__detail::_Select1st, std::equal_to<unsigned int>, std::hash<unsigned int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>>::clear():
+        1916, Loop not vectorized/parallelized: contains call
+std::_Hashtable<unsigned int, std::pair<unsigned int const, unsigned int>, std::allocator<std::pair<unsigned int const, unsigned int>>, std::__detail::_Select1st, std::equal_to<unsigned int>, std::hash<unsigned int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>>::_M_rehash_aux(unsigned long, std::integral_constant<bool, true>):
+     13, include "unordered_map"
+          46, include "hashtable.h"
+             2386, Loop not vectorized/parallelized: not countable
+std::_Hashtable<unsigned int, std::pair<unsigned int const, unsigned int>, std::allocator<std::pair<unsigned int const, unsigned int>>, std::__detail::_Select1st, std::equal_to<unsigned int>, std::hash<unsigned int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>>::_M_rehash(unsigned long, unsigned long const&):
+     13, include "unordered_map"
+          46, include "hashtable.h"
+std::unordered_map<unsigned int, unsigned int, std::hash<unsigned int>, std::equal_to<unsigned int>, std::allocator<std::pair<unsigned int const, unsigned int>>>::~unordered_map():
+     13, include "unordered_map"
+std::vector<Queue_Entry, std::allocator<Queue_Entry>>::vector(unsigned long, std::allocator<Queue_Entry> const&):
+     14, include "random"
+std::vector<Queue_Entry, std::allocator<Queue_Entry>>::_M_default_initialize(unsigned long):
+         704, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+std::vector<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>, std::allocator<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>>>::_S_do_relocate(std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*, std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*, std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*, std::allocator<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>>&, std::integral_constant<bool, true>):
+        1046, Loop not vectorized/parallelized: contains call
+std::vector<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>, std::allocator<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>>>::_S_relocate(std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*, std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*, std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*, std::allocator<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>>&):
+         456, Loop not vectorized/parallelized: contains call
+std::vector<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>, std::allocator<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>>>::vector(std::vector<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>, std::allocator<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>>> const&):
+     14, include "random"
+std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>::vector(std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>> const&):
+     14, include "random"
+std::shared_ptr<CUHDCodetable>::shared_ptr<std::allocator<CUHDCodetable>, CUHDCodetable&>(std::_Sp_alloc_shared_tag<std::allocator<CUHDCodetable>>, CUHDCodetable&):
+     14, include "random"
+std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>::vector(std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>> const&):
+     14, include "random"
+void std::_Destroy_aux<false>::__destroy<std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*>(std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*, std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+                         65, include "stl_construct.h"
+                             162, Loop not vectorized/parallelized: contains call
+     14, include "random"
+void std::_Destroy_aux<false>::__destroy<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*>(std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*, std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+                         65, include "stl_construct.h"
+                             162, Loop not vectorized/parallelized: contains call
+     14, include "random"
+std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>* std::__uninitialized_default_n_1<false>::__uninit_default_n<std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*, unsigned long>(std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*, unsigned long):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+     14, include "random"
+std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>* std::__uninitialized_default_n_1<false>::__uninit_default_n<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*, unsigned long>(std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*, unsigned long):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+     14, include "random"
+std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>* std::__uninitialized_copy<false>::__uninit_copy<std::move_iterator<std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*>, std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*>(std::move_iterator<std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*>, std::move_iterator<std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*>, std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+     14, include "random"
+std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>* std::__uninitialized_copy<false>::__uninit_copy<std::move_iterator<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*>, std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*>(std::move_iterator<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*>, std::move_iterator<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*>, std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+     14, include "random"
+std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>* std::__uninitialized_copy<false>::__uninit_copy<__gnu_cxx::__normal_iterator<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>> const*, std::vector<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>, std::allocator<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>>>>, std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*>(__gnu_cxx::__normal_iterator<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>> const*, std::vector<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>, std::allocator<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>>>>, __gnu_cxx::__normal_iterator<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>> const*, std::vector<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>, std::allocator<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>>>>, std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+     14, include "random"
+std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>* std::__uninitialized_copy<false>::__uninit_copy<__gnu_cxx::__normal_iterator<std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>> const*, std::vector<std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>, std::allocator<std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>>>>, std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*>(__gnu_cxx::__normal_iterator<std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>> const*, std::vector<std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>, std::allocator<std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>>>>, __gnu_cxx::__normal_iterator<std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>> const*, std::vector<std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>, std::allocator<std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>>>>, std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+     14, include "random"
+std::_Sp_counted_ptr_inplace<std::vector<unsigned long, std::allocator<unsigned long>>, std::allocator<std::vector<unsigned long, std::allocator<unsigned long>>>, (__gnu_cxx::_Lock_policy)2>::_M_dispose():
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+     14, include "random"
+std::_Sp_counted_ptr_inplace<std::vector<unsigned char, std::allocator<unsigned char>>, std::allocator<std::vector<unsigned char, std::allocator<unsigned char>>>, (__gnu_cxx::_Lock_policy)2>::_M_dispose():
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+     14, include "random"
+void std::allocator_traits<std::allocator<CUHDCodetable>>::construct<CUHDCodetable, CUHDCodetable&>(std::allocator<CUHDCodetable>&, CUHDCodetable*, CUHDCodetable&):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+     14, include "random"
+std::__detail::_Hash_code_base<unsigned int, std::pair<unsigned int const, XS_pair>, std::__detail::_Select1st, std::hash<unsigned int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, false>::_M_hash_code(unsigned int const&) const:
+     13, include "unordered_map"
+          46, include "hashtable.h"
+std::__detail::_Hashtable_base<unsigned int, std::pair<unsigned int const, XS_pair>, std::__detail::_Select1st, std::equal_to<unsigned int>, std::hash<unsigned int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Hashtable_traits<false, false, true>>::_M_equals(unsigned int const&, unsigned long, std::__detail::_Hash_node_value<std::pair<unsigned int const, XS_pair>, false> const&) const:
+     13, include "unordered_map"
+          46, include "hashtable.h"
+std::__detail::_Map_base<unsigned int, std::pair<unsigned int const, XS_pair>, std::allocator<std::pair<unsigned int const, XS_pair>>, std::__detail::_Select1st, std::equal_to<unsigned int>, std::hash<unsigned int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>, true>::operator[](unsigned int const&):
+     13, include "unordered_map"
+          46, include "hashtable.h"
+std::__detail::_Map_base<unsigned int, std::pair<unsigned int const, XS_pair>, std::allocator<std::pair<unsigned int const, XS_pair>>, std::__detail::_Select1st, std::equal_to<unsigned int>, std::hash<unsigned int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>, true>::operator[](unsigned int&&):
+     13, include "unordered_map"
+          46, include "hashtable.h"
+std::__detail::_Hashtable_alloc<std::allocator<std::__detail::_Hash_node<std::pair<unsigned int const, XS_pair>, false>>>::_M_deallocate_nodes(std::__detail::_Hash_node<std::pair<unsigned int const, XS_pair>, false>*):
+     13, include "unordered_map"
+          46, include "hashtable.h"
+               35, include "hashtable_policy.h"
+                  1916, Loop not vectorized/parallelized: contains call
+std::__detail::_Hash_code_base<unsigned int, std::pair<unsigned int const, unsigned int>, std::__detail::_Select1st, std::hash<unsigned int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, false>::_M_hash_code(unsigned int const&) const:
+     13, include "unordered_map"
+          46, include "hashtable.h"
+               35, include "hashtable_policy.h"
+std::__detail::_Hashtable_base<unsigned int, std::pair<unsigned int const, unsigned int>, std::__detail::_Select1st, std::equal_to<unsigned int>, std::hash<unsigned int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Hashtable_traits<false, false, true>>::_M_equals(unsigned int const&, unsigned long, std::__detail::_Hash_node_value<std::pair<unsigned int const, unsigned int>, false> const&) const:
+     13, include "unordered_map"
+          46, include "hashtable.h"
+               35, include "hashtable_policy.h"
+std::__detail::_Map_base<unsigned int, std::pair<unsigned int const, unsigned int>, std::allocator<std::pair<unsigned int const, unsigned int>>, std::__detail::_Select1st, std::equal_to<unsigned int>, std::hash<unsigned int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>, true>::operator[](unsigned int&&):
+     13, include "unordered_map"
+          46, include "hashtable.h"
+               35, include "hashtable_policy.h"
+std::__detail::_Hashtable_alloc<std::allocator<std::__detail::_Hash_node<std::pair<unsigned int const, unsigned int>, false>>>::_M_deallocate_nodes(std::__detail::_Hash_node<std::pair<unsigned int const, unsigned int>, false>*):
+     13, include "unordered_map"
+          46, include "hashtable.h"
+               35, include "hashtable_policy.h"
+                  1916, Loop not vectorized/parallelized: contains call
+std::__detail::_Adaptor<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>, double>::operator()():
+        3364, Loop not fused: function call before adjacent loop
+        3366, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+void std::iota<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, int>(__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, int):
+     14, include "random"
+          51, include "random.tcc"
+               33, include "numeric"
+                    10, include "numeric"
+                         62, include "stl_numeric.h"
+                              97, Loop not vectorized/parallelized: not countable
+__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>> std::transform<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, std::function<double (double)>>(__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, std::function<double (double)>):
+     15, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                  4295, Loop not vectorized/parallelized: potential early exits
+__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>> std::transform<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, ANSTableGenerator::generate_distribution(unsigned long, unsigned long, unsigned long, std::function<double (double)>)::'lambda'(double)>(__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, ANSTableGenerator::generate_distribution(unsigned long, unsigned long, unsigned long, std::function<double (double)>)::'lambda'(double)):
+     15, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                  4295, Loop not vectorized/parallelized: not countable
+float std::accumulate<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, float>(__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, float):
+     14, include "random"
+          51, include "random.tcc"
+               33, include "numeric"
+                    10, include "numeric"
+                         62, include "stl_numeric.h"
+                             140, Loop not vectorized/parallelized: not countable
+__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>> std::transform<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, ANSTableGenerator::generate_distribution(unsigned long, unsigned long, unsigned long, std::function<double (double)>)::'lambda0'(double)>(__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, ANSTableGenerator::generate_distribution(unsigned long, unsigned long, unsigned long, std::function<double (double)>)::'lambda0'(double)):
+     15, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                  4295, Loop not vectorized/parallelized: not countable
+__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>> std::transform<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, ANSTableGenerator::generate_distribution(unsigned long, unsigned long, unsigned long, std::function<double (double)>)::'lambda1'(double)>(__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, ANSTableGenerator::generate_distribution(unsigned long, unsigned long, unsigned long, std::function<double (double)>)::'lambda1'(double)):
+     15, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                  4295, Loop not vectorized/parallelized: not countable
+int std::accumulate<__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, int>(__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, int):
+     14, include "random"
+          51, include "random.tcc"
+               33, include "numeric"
+                    10, include "numeric"
+                         62, include "stl_numeric.h"
+                             140, Loop not vectorized/parallelized: not countable
+__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>> std::transform<__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, ANSTableGenerator::generate_distribution(unsigned long, unsigned long, unsigned long, std::function<double (double)>)::'lambda'(unsigned long)>(__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, ANSTableGenerator::generate_distribution(unsigned long, unsigned long, unsigned long, std::function<double (double)>)::'lambda'(unsigned long)):
+     15, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                  4295, Loop not vectorized/parallelized: not countable
+float std::accumulate<__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, float>(__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, float):
+     14, include "random"
+          51, include "random.tcc"
+               33, include "numeric"
+                    10, include "numeric"
+                         62, include "stl_numeric.h"
+                             140, Loop not vectorized/parallelized: not countable
+__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>> std::transform<__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda'(double)>(__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda'(double)):
+     15, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                  4295, Loop not vectorized/parallelized: not countable
+__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>> std::transform<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda0'(double)>(__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda0'(double)):
+     15, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                  4295, Loop not vectorized/parallelized: not countable
+__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>> std::transform<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda1'(double)>(__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda1'(double)):
+     15, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                  4295, Loop not vectorized/parallelized: not countable
+__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>> std::transform<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda2'(double)>(__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda2'(double)):
+     15, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                  4295, Loop not vectorized/parallelized: not countable
+__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>> std::transform<__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda'(unsigned long)>(__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda'(unsigned long)):
+     15, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                  4295, Loop not vectorized/parallelized: not countable
+__gnu_cxx::__normal_iterator<Queue_Entry*, std::vector<Queue_Entry, std::allocator<Queue_Entry>>> std::min_element<__gnu_cxx::__normal_iterator<Queue_Entry*, std::vector<Queue_Entry, std::allocator<Queue_Entry>>>, ANSTableGenerator::generate_table(std::shared_ptr<std::vector<double, std::allocator<double>>>, std::shared_ptr<std::vector<unsigned long, std::allocator<unsigned long>>>, std::shared_ptr<std::vector<unsigned char, std::allocator<unsigned char>>>, unsigned long, unsigned long)::'lambda'(Queue_Entry, Queue_Entry)>(__gnu_cxx::__normal_iterator<Queue_Entry*, std::vector<Queue_Entry, std::allocator<Queue_Entry>>>, __gnu_cxx::__normal_iterator<Queue_Entry*, std::vector<Queue_Entry, std::allocator<Queue_Entry>>>, ANSTableGenerator::generate_table(std::shared_ptr<std::vector<double, std::allocator<double>>>, std::shared_ptr<std::vector<unsigned long, std::allocator<unsigned long>>>, std::shared_ptr<std::vector<unsigned char, std::allocator<unsigned char>>>, unsigned long, unsigned long)::'lambda'(Queue_Entry, Queue_Entry)):
+        5623, Loop not vectorized: may not be beneficial for target
+__gnu_cxx::__normal_iterator<Queue_Entry*, std::vector<Queue_Entry, std::allocator<Queue_Entry>>> std::__min_element<__gnu_cxx::__normal_iterator<Queue_Entry*, std::vector<Queue_Entry, std::allocator<Queue_Entry>>>, __gnu_cxx::__ops::_Iter_comp_iter<ANSTableGenerator::generate_table(std::shared_ptr<std::vector<double, std::allocator<double>>>, std::shared_ptr<std::vector<unsigned long, std::allocator<unsigned long>>>, std::shared_ptr<std::vector<unsigned char, std::allocator<unsigned char>>>, unsigned long, unsigned long)::'lambda'(Queue_Entry, Queue_Entry)>>(__gnu_cxx::__normal_iterator<Queue_Entry*, std::vector<Queue_Entry, std::allocator<Queue_Entry>>>, __gnu_cxx::__normal_iterator<Queue_Entry*, std::vector<Queue_Entry, std::allocator<Queue_Entry>>>, __gnu_cxx::__ops::_Iter_comp_iter<ANSTableGenerator::generate_table(std::shared_ptr<std::vector<double, std::allocator<double>>>, std::shared_ptr<std::vector<unsigned long, std::allocator<unsigned long>>>, std::shared_ptr<std::vector<unsigned char, std::allocator<unsigned char>>>, unsigned long, unsigned long)::'lambda'(Queue_Entry, Queue_Entry)>):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+                         63, include "stl_algobase.h"
+                              71, include "predefined_ops.h"
+                                 5623, Loop not vectorized/parallelized: not countable
+                         65, include "stl_construct.h"
+     14, include "random"
+__gnu_cxx::__normal_iterator<Queue_Entry*, std::vector<Queue_Entry, std::allocator<Queue_Entry>>> std::min_element<__gnu_cxx::__normal_iterator<Queue_Entry*, std::vector<Queue_Entry, std::allocator<Queue_Entry>>>, ANSTableGenerator::generate_table(std::shared_ptr<std::vector<double, std::allocator<double>>>, std::shared_ptr<std::vector<unsigned long, std::allocator<unsigned long>>>, std::shared_ptr<std::vector<unsigned char, std::allocator<unsigned char>>>, unsigned long, unsigned long)::'lambda0'(Queue_Entry, Queue_Entry)>(__gnu_cxx::__normal_iterator<Queue_Entry*, std::vector<Queue_Entry, std::allocator<Queue_Entry>>>, __gnu_cxx::__normal_iterator<Queue_Entry*, std::vector<Queue_Entry, std::allocator<Queue_Entry>>>, ANSTableGenerator::generate_table(std::shared_ptr<std::vector<double, std::allocator<double>>>, std::shared_ptr<std::vector<unsigned long, std::allocator<unsigned long>>>, std::shared_ptr<std::vector<unsigned char, std::allocator<unsigned char>>>, unsigned long, unsigned long)::'lambda0'(Queue_Entry, Queue_Entry)):
+        5623, Loop not vectorized: may not be beneficial for target
+__gnu_cxx::__normal_iterator<Queue_Entry*, std::vector<Queue_Entry, std::allocator<Queue_Entry>>> std::__min_element<__gnu_cxx::__normal_iterator<Queue_Entry*, std::vector<Queue_Entry, std::allocator<Queue_Entry>>>, __gnu_cxx::__ops::_Iter_comp_iter<ANSTableGenerator::generate_table(std::shared_ptr<std::vector<double, std::allocator<double>>>, std::shared_ptr<std::vector<unsigned long, std::allocator<unsigned long>>>, std::shared_ptr<std::vector<unsigned char, std::allocator<unsigned char>>>, unsigned long, unsigned long)::'lambda0'(Queue_Entry, Queue_Entry)>>(__gnu_cxx::__normal_iterator<Queue_Entry*, std::vector<Queue_Entry, std::allocator<Queue_Entry>>>, __gnu_cxx::__normal_iterator<Queue_Entry*, std::vector<Queue_Entry, std::allocator<Queue_Entry>>>, __gnu_cxx::__ops::_Iter_comp_iter<ANSTableGenerator::generate_table(std::shared_ptr<std::vector<double, std::allocator<double>>>, std::shared_ptr<std::vector<unsigned long, std::allocator<unsigned long>>>, std::shared_ptr<std::vector<unsigned char, std::allocator<unsigned char>>>, unsigned long, unsigned long)::'lambda0'(Queue_Entry, Queue_Entry)>):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+                         63, include "stl_algobase.h"
+                              71, include "predefined_ops.h"
+                                 5623, Loop not vectorized/parallelized: not countable
+                         65, include "stl_construct.h"
+     14, include "random"
+void std::_Destroy<std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*, std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>>(std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*, std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*, std::allocator<std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>>&):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+     14, include "random"
+void std::_Destroy<std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*>(std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*, std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*):
+         162, Loop not vectorized/parallelized: contains call
+std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>* std::__relocate_a<std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*, std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*, std::allocator<std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>>>(std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*, std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*, std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*, std::allocator<std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>>&):
+        1031, Loop not vectorized/parallelized: contains call
+std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>* std::__relocate_a_1<std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*, std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*, std::allocator<std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>>>(std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*, std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*, std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*, std::allocator<std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>>&):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+                         66, include "stl_uninitialized.h"
+                            1031, Loop not vectorized/parallelized: contains call
+     14, include "random"
+void std::__relocate_object_a<std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>, std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>, std::allocator<std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>>>(std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*, std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>*, std::allocator<std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>>&):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+                         66, include "stl_uninitialized.h"
+     14, include "random"
+double* std::__uninitialized_default_n_a<double*, unsigned long, double>(double*, unsigned long, std::allocator<double>&):
+         638, Recognized memory set idiom
+double* std::__uninitialized_default_n<double*, unsigned long>(double*, unsigned long):
+         603, Recognized memory set idiom
+double* std::fill_n<double*, unsigned long, double>(double*, unsigned long, double const&):
+        1120, Recognized memory set idiom
+double* std::__fill_n_a<double*, unsigned long, double>(double*, unsigned long, double const&, std::random_access_iterator_tag):
+         969, Recognized memory set idiom
+void std::__fill_a<double*, double>(double*, double*, double const&):
+         923, Recognized memory set idiom
+__gnu_cxx::__enable_if<std::__is_scalar<double>::__value, void>::__type std::__fill_a1<double*, double>(double*, double*, double const&):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+                         63, include "stl_algobase.h"
+                             923, Recognized memory set idiom
+                         65, include "stl_construct.h"
+     14, include "random"
+unsigned long* std::__uninitialized_default_n_a<unsigned long*, unsigned long, unsigned long>(unsigned long*, unsigned long, std::allocator<unsigned long>&):
+         638, Recognized memory set idiom
+unsigned long* std::__uninitialized_default_n<unsigned long*, unsigned long>(unsigned long*, unsigned long):
+         603, Recognized memory set idiom
+unsigned long* std::fill_n<unsigned long*, unsigned long, unsigned long>(unsigned long*, unsigned long, unsigned long const&):
+        1120, Recognized memory set idiom
+unsigned long* std::__fill_n_a<unsigned long*, unsigned long, unsigned long>(unsigned long*, unsigned long, unsigned long const&, std::random_access_iterator_tag):
+         969, Recognized memory set idiom
+void std::__fill_a<unsigned long*, unsigned long>(unsigned long*, unsigned long*, unsigned long const&):
+         923, Recognized memory set idiom
+__gnu_cxx::__enable_if<std::__is_scalar<unsigned long>::__value, void>::__type std::__fill_a1<unsigned long*, unsigned long>(unsigned long*, unsigned long*, unsigned long const&):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+                         63, include "stl_algobase.h"
+                             923, Recognized memory set idiom
+                         65, include "stl_construct.h"
+     14, include "random"
+unsigned long* std::__uninitialized_move_if_noexcept_a<unsigned long*, unsigned long*, std::allocator<unsigned long>>(unsigned long*, unsigned long*, unsigned long*, std::allocator<unsigned long>&):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+                         66, include "stl_uninitialized.h"
+     14, include "random"
+unsigned long* std::__copy_move_a<true, unsigned long*, unsigned long*>(unsigned long*, unsigned long*, unsigned long*):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+                         63, include "stl_algobase.h"
+                         65, include "stl_construct.h"
+     14, include "random"
+double std::generate_canonical<double, 53ul, std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&):
+     14, include "random"
+          51, include "random.tcc"
+             3364, Loop not fused: function call before adjacent loop
+         456, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+double* std::__copy_move_a<false, __gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double>>>, double*>(__gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double>>>, double*):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+                         63, include "stl_algobase.h"
+                         65, include "stl_construct.h"
+     14, include "random"
+unsigned long* std::__copy_move_a<false, __gnu_cxx::__normal_iterator<unsigned long const*, std::vector<unsigned long, std::allocator<unsigned long>>>, unsigned long*>(__gnu_cxx::__normal_iterator<unsigned long const*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__normal_iterator<unsigned long const*, std::vector<unsigned long, std::allocator<unsigned long>>>, unsigned long*):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+                         63, include "stl_algobase.h"
+                         65, include "stl_construct.h"
+     14, include "random"
+unsigned char* std::__uninitialized_move_if_noexcept_a<unsigned char*, unsigned char*, std::allocator<unsigned char>>(unsigned char*, unsigned char*, unsigned char*, std::allocator<unsigned char>&):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+                         66, include "stl_uninitialized.h"
+     14, include "random"
+unsigned char* std::__copy_move_a<true, unsigned char*, unsigned char*>(unsigned char*, unsigned char*, unsigned char*):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+                         63, include "stl_algobase.h"
+                         65, include "stl_construct.h"
+     14, include "random"
+void std::__sort<__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__ops::_Iter_comp_iter<ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda'(unsigned long, unsigned long)>>(__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__ops::_Iter_comp_iter<ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda'(unsigned long, unsigned long)>):
+     15, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+        1867, Loop not vectorized/parallelized: not countable
+void std::__introsort_loop<__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, long, __gnu_cxx::__ops::_Iter_comp_iter<ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda'(unsigned long, unsigned long)>>(__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, long, __gnu_cxx::__ops::_Iter_comp_iter<ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda'(unsigned long, unsigned long)>):
+     15, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                  1929, Loop not vectorized/parallelized: potential early exits
+        1917, Loop not vectorized/parallelized: potential early exits
+        1918, Loop not vectorized/parallelized: potential early exits
+void std::__partial_sort<__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__ops::_Iter_comp_iter<ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda'(unsigned long, unsigned long)>>(__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__ops::_Iter_comp_iter<ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda'(unsigned long, unsigned long)>):
+        1647, Loop not vectorized/parallelized: potential early exits
+         421, Loop not vectorized/parallelized: potential early exits
+void std::__heap_select<__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__ops::_Iter_comp_iter<ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda'(unsigned long, unsigned long)>>(__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__ops::_Iter_comp_iter<ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda'(unsigned long, unsigned long)>):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+                         63, include "stl_algobase.h"
+                              71, include "predefined_ops.h"
+                                 1647, Loop not vectorized/parallelized: potential early exits
+                         65, include "stl_construct.h"
+     14, include "random"
+void std::__make_heap<__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__ops::_Iter_comp_iter<ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda'(unsigned long, unsigned long)>>(__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__ops::_Iter_comp_iter<ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda'(unsigned long, unsigned long)>&):
+     15, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                    61, include "stl_heap.h"
+                        352, Loop not vectorized/parallelized: potential early exits
+void std::__adjust_heap<__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, long, unsigned long, __gnu_cxx::__ops::_Iter_comp_iter<ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda'(unsigned long, unsigned long)>>(__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, long, long, unsigned long, __gnu_cxx::__ops::_Iter_comp_iter<ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda'(unsigned long, unsigned long)>):
+     15, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                    61, include "stl_heap.h"
+                        228, Loop not vectorized/parallelized: not countable
+void std::__push_heap<__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, long, unsigned long, __gnu_cxx::__ops::_Iter_comp_val<ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda'(unsigned long, unsigned long)>>(__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, long, long, unsigned long, __gnu_cxx::__ops::_Iter_comp_val<ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda'(unsigned long, unsigned long)>&):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+                         63, include "stl_algobase.h"
+                              71, include "predefined_ops.h"
+                                  139, Loop not vectorized/parallelized: potential early exits
+                         65, include "stl_construct.h"
+     14, include "random"
+void std::__sort_heap<__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__ops::_Iter_comp_iter<ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda'(unsigned long, unsigned long)>>(__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__ops::_Iter_comp_iter<ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda'(unsigned long, unsigned long)>&):
+     15, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                    61, include "stl_heap.h"
+                        421, Loop not vectorized/parallelized: potential early exits
+__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>> std::__unguarded_partition_pivot<__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__ops::_Iter_comp_iter<ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda'(unsigned long, unsigned long)>>(__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__ops::_Iter_comp_iter<ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda'(unsigned long, unsigned long)>):
+        1884, Loop not vectorized/parallelized: not countable
+        1887, Loop not vectorized/parallelized: not countable
+__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>> std::__unguarded_partition<__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__ops::_Iter_comp_iter<ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda'(unsigned long, unsigned long)>>(__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__ops::_Iter_comp_iter<ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda'(unsigned long, unsigned long)>):
+     15, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                  1884, Loop not vectorized/parallelized: not countable
+                  1887, Loop not vectorized/parallelized: not countable
+void std::__final_insertion_sort<__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__ops::_Iter_comp_iter<ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda'(unsigned long, unsigned long)>>(__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__ops::_Iter_comp_iter<ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda'(unsigned long, unsigned long)>):
+        1847, Loop not vectorized/parallelized: not countable
+void std::__insertion_sort<__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__ops::_Iter_comp_iter<ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda'(unsigned long, unsigned long)>>(__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__ops::_Iter_comp_iter<ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda'(unsigned long, unsigned long)>):
+        1806, Loop not vectorized/parallelized: not countable
+void std::__unguarded_linear_insert<__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__ops::_Val_comp_iter<ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda'(unsigned long, unsigned long)>>(__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__ops::_Val_comp_iter<ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda'(unsigned long, unsigned long)>):
+             1806, Loop not vectorized/parallelized: not countable
+void std::__unguarded_insertion_sort<__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__ops::_Iter_comp_iter<ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda'(unsigned long, unsigned long)>>(__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long>>>, __gnu_cxx::__ops::_Iter_comp_iter<ANSTableGenerator::generate_distribution_from_buffer(unsigned long, unsigned long, unsigned char*, unsigned long)::'lambda'(unsigned long, unsigned long)>):
+        1806, Loop not vectorized/parallelized: not countable
+unsigned char* std::__copy_move_a<false, __gnu_cxx::__normal_iterator<unsigned char const*, std::vector<unsigned char, std::allocator<unsigned char>>>, unsigned char*>(__gnu_cxx::__normal_iterator<unsigned char const*, std::vector<unsigned char, std::allocator<unsigned char>>>, __gnu_cxx::__normal_iterator<unsigned char const*, std::vector<unsigned char, std::allocator<unsigned char>>>, unsigned char*):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+                         63, include "stl_algobase.h"
+                         65, include "stl_construct.h"
+     14, include "random"
+Queue_Entry* std::__uninitialized_default_n_a<Queue_Entry*, unsigned long, Queue_Entry>(Queue_Entry*, unsigned long, std::allocator<Queue_Entry>&):
+         638, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+Queue_Entry* std::__uninitialized_default_n<Queue_Entry*, unsigned long>(Queue_Entry*, unsigned long):
+         603, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+Queue_Entry* std::fill_n<Queue_Entry*, unsigned long, Queue_Entry>(Queue_Entry*, unsigned long, Queue_Entry const&):
+        1120, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+Queue_Entry* std::__fill_n_a<Queue_Entry*, unsigned long, Queue_Entry>(Queue_Entry*, unsigned long, Queue_Entry const&, std::random_access_iterator_tag):
+         969, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+void std::__fill_a<Queue_Entry*, Queue_Entry>(Queue_Entry*, Queue_Entry*, Queue_Entry const&):
+         911, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+__gnu_cxx::__enable_if<!std::__is_scalar<Queue_Entry>::__value, void>::__type std::__fill_a1<Queue_Entry*, Queue_Entry>(Queue_Entry*, Queue_Entry*, Queue_Entry const&):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+                         63, include "stl_algobase.h"
+                             911, Loop not vectorized: data dependency
+                                  Loop unrolled 4 times
+                         65, include "stl_construct.h"
+     14, include "random"
+void std::_Destroy<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*, std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>>(std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*, std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*, std::allocator<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>>&):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+                         66, include "stl_uninitialized.h"
+     14, include "random"
+void std::_Destroy<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*>(std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*, std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*):
+         162, Loop not vectorized/parallelized: contains call
+std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>* std::__relocate_a<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*, std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*, std::allocator<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>>>(std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*, std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*, std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*, std::allocator<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>>&):
+        1031, Loop not vectorized/parallelized: contains call
+std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>* std::__relocate_a_1<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*, std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*, std::allocator<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>>>(std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*, std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*, std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*, std::allocator<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>>&):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+                         66, include "stl_uninitialized.h"
+                            1031, Loop not vectorized/parallelized: contains call
+     14, include "random"
+void std::__relocate_object_a<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>, std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>, std::allocator<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>>>(std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*, std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>*, std::allocator<std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>>&):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+                         66, include "stl_uninitialized.h"
+     14, include "random"
+Encoder_Table_Entry* std::__uninitialized_default_n_a<Encoder_Table_Entry*, unsigned long, Encoder_Table_Entry>(Encoder_Table_Entry*, unsigned long, std::allocator<Encoder_Table_Entry>&):
+         638, Loop not vectorized: data dependency
+Encoder_Table_Entry* std::__uninitialized_default_n<Encoder_Table_Entry*, unsigned long>(Encoder_Table_Entry*, unsigned long):
+         603, Loop not vectorized: data dependency
+Encoder_Table_Entry* std::fill_n<Encoder_Table_Entry*, unsigned long, Encoder_Table_Entry>(Encoder_Table_Entry*, unsigned long, Encoder_Table_Entry const&):
+        1120, Loop not vectorized: data dependency
+Encoder_Table_Entry* std::__fill_n_a<Encoder_Table_Entry*, unsigned long, Encoder_Table_Entry>(Encoder_Table_Entry*, unsigned long, Encoder_Table_Entry const&, std::random_access_iterator_tag):
+         969, Loop not vectorized: data dependency
+void std::__fill_a<Encoder_Table_Entry*, Encoder_Table_Entry>(Encoder_Table_Entry*, Encoder_Table_Entry*, Encoder_Table_Entry const&):
+         911, Loop not vectorized: data dependency
+__gnu_cxx::__enable_if<!std::__is_scalar<Encoder_Table_Entry>::__value, void>::__type std::__fill_a1<Encoder_Table_Entry*, Encoder_Table_Entry>(Encoder_Table_Entry*, Encoder_Table_Entry*, Encoder_Table_Entry const&):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+                         63, include "stl_algobase.h"
+                             911, Loop not vectorized: data dependency
+                         65, include "stl_construct.h"
+     14, include "random"
+Encoder_Table_Entry* std::__uninitialized_move_if_noexcept_a<Encoder_Table_Entry*, Encoder_Table_Entry*, std::allocator<Encoder_Table_Entry>>(Encoder_Table_Entry*, Encoder_Table_Entry*, Encoder_Table_Entry*, std::allocator<Encoder_Table_Entry>&):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+                         66, include "stl_uninitialized.h"
+     14, include "random"
+Encoder_Table_Entry* std::__copy_move_a<true, Encoder_Table_Entry*, Encoder_Table_Entry*>(Encoder_Table_Entry*, Encoder_Table_Entry*, Encoder_Table_Entry*):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+                         63, include "stl_algobase.h"
+                         65, include "stl_construct.h"
+     14, include "random"
+Encoder_Table_Entry* std::__copy_move_a<false, __gnu_cxx::__normal_iterator<Encoder_Table_Entry const*, std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>>, Encoder_Table_Entry*>(__gnu_cxx::__normal_iterator<Encoder_Table_Entry const*, std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>>, __gnu_cxx::__normal_iterator<Encoder_Table_Entry const*, std::vector<Encoder_Table_Entry, std::allocator<Encoder_Table_Entry>>>, Encoder_Table_Entry*):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+                         63, include "stl_algobase.h"
+                         65, include "stl_construct.h"
+     14, include "random"
+ANSEncoderTable::ANSEncoderTableItem* std::__uninitialized_default_n_a<ANSEncoderTable::ANSEncoderTableItem*, unsigned long, ANSEncoderTable::ANSEncoderTableItem>(ANSEncoderTable::ANSEncoderTableItem*, unsigned long, std::allocator<ANSEncoderTable::ANSEncoderTableItem>&):
+         638, Loop not vectorized: data dependency
+ANSEncoderTable::ANSEncoderTableItem* std::__uninitialized_default_n<ANSEncoderTable::ANSEncoderTableItem*, unsigned long>(ANSEncoderTable::ANSEncoderTableItem*, unsigned long):
+         603, Loop not vectorized: data dependency
+ANSEncoderTable::ANSEncoderTableItem* std::fill_n<ANSEncoderTable::ANSEncoderTableItem*, unsigned long, ANSEncoderTable::ANSEncoderTableItem>(ANSEncoderTable::ANSEncoderTableItem*, unsigned long, ANSEncoderTable::ANSEncoderTableItem const&):
+        1120, Loop not vectorized: data dependency
+ANSEncoderTable::ANSEncoderTableItem* std::__fill_n_a<ANSEncoderTable::ANSEncoderTableItem*, unsigned long, ANSEncoderTable::ANSEncoderTableItem>(ANSEncoderTable::ANSEncoderTableItem*, unsigned long, ANSEncoderTable::ANSEncoderTableItem const&, std::random_access_iterator_tag):
+         969, Loop not vectorized: data dependency
+void std::__fill_a<ANSEncoderTable::ANSEncoderTableItem*, ANSEncoderTable::ANSEncoderTableItem>(ANSEncoderTable::ANSEncoderTableItem*, ANSEncoderTable::ANSEncoderTableItem*, ANSEncoderTable::ANSEncoderTableItem const&):
+         911, Loop not vectorized: data dependency
+__gnu_cxx::__enable_if<!std::__is_scalar<ANSEncoderTable::ANSEncoderTableItem>::__value, void>::__type std::__fill_a1<ANSEncoderTable::ANSEncoderTableItem*, ANSEncoderTable::ANSEncoderTableItem>(ANSEncoderTable::ANSEncoderTableItem*, ANSEncoderTable::ANSEncoderTableItem*, ANSEncoderTable::ANSEncoderTableItem const&):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+                         63, include "stl_algobase.h"
+                             911, Loop not vectorized: data dependency
+                         65, include "stl_construct.h"
+     14, include "random"
+ANSEncoderTable::ANSEncoderTableItem* std::__uninitialized_move_if_noexcept_a<ANSEncoderTable::ANSEncoderTableItem*, ANSEncoderTable::ANSEncoderTableItem*, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>(ANSEncoderTable::ANSEncoderTableItem*, ANSEncoderTable::ANSEncoderTableItem*, ANSEncoderTable::ANSEncoderTableItem*, std::allocator<ANSEncoderTable::ANSEncoderTableItem>&):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+                         66, include "stl_uninitialized.h"
+     14, include "random"
+ANSEncoderTable::ANSEncoderTableItem* std::__copy_move_a<true, ANSEncoderTable::ANSEncoderTableItem*, ANSEncoderTable::ANSEncoderTableItem*>(ANSEncoderTable::ANSEncoderTableItem*, ANSEncoderTable::ANSEncoderTableItem*, ANSEncoderTable::ANSEncoderTableItem*):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+                         63, include "stl_algobase.h"
+                         65, include "stl_construct.h"
+     14, include "random"
+ANSEncoderTable::ANSEncoderTableItem* std::__copy_move_a<false, __gnu_cxx::__normal_iterator<ANSEncoderTable::ANSEncoderTableItem const*, std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>>, ANSEncoderTable::ANSEncoderTableItem*>(__gnu_cxx::__normal_iterator<ANSEncoderTable::ANSEncoderTableItem const*, std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>>, __gnu_cxx::__normal_iterator<ANSEncoderTable::ANSEncoderTableItem const*, std::vector<ANSEncoderTable::ANSEncoderTableItem, std::allocator<ANSEncoderTable::ANSEncoderTableItem>>>, ANSEncoderTable::ANSEncoderTableItem*):
+     11, include "ans_table_generator.h"
+          16, include "cuhd_codetable.h"
+               17, include "memory"
+                    10, include "memory"
+                         63, include "stl_algobase.h"
+                         65, include "stl_construct.h"
+     14, include "random"
+run(long):
+     43, Loop not vectorized/parallelized: potential early exits
+    107, Generating map(to:d_decoder_table[:decoder_table_size],d_sync_info[:num_subseq],d_sequence_synced[:num_blocks]) 
+         Generating map(alloc:d_output_sizes[:num_subseq]) 
+         Generating map(from:d_output_buffer[:output_buffer_size]) 
+         Generating map(to:d_input_buffer[:input_buffer_size]) 
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     12, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+CUHDCodetable::CUHDCodetable(unsigned long):
+     22, Loop not vectorized/parallelized: contains call
+decode_subsequence(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int&, unsigned int*, unsigned int&, unsigned int&, unsigned int&, unsigned int&, unsigned int&, unsigned int&, unsigned int&, unsigned char*, unsigned int&, unsigned int const*, unsigned int, unsigned int, unsigned int&, unsigned int&, bool, bool):
+     41, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+     80, Loop not vectorized/parallelized: not countable
+    130, Invariant if transformation
+    142, Loop not vectorized/parallelized: not countable
+phase1_decode_subseq(unsigned long, unsigned long, unsigned int, unsigned int, unsigned int, unsigned int*, unsigned int const*, uint4*, unsigned int, unsigned int, unsigned int, unsigned int):
+    212, #omp target teams num_teams(num_sequences) thread_limit(threads_per_block)
+        212, Generating "nvkernel__Z20phase1_decode_subseqmmjjjPjPKjP5uint4jjjj_F1L212_2" GPU kernel
+        214, #omp parallel
+          367, Barrier
+         142, Loop not vectorized/parallelized: not countable
+         142, Loop not vectorized/parallelized: not countable
+         142, Loop not vectorized/parallelized: not countable
+         142, Loop not vectorized/parallelized: not countable
+         278, Loop not vectorized/parallelized: too deeply nested
+phase2_synchronise_blocks(unsigned long, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int*, unsigned int const*, uint4*, unsigned char*, unsigned int, unsigned int, unsigned int):
+    391, #omp target teams num_teams(num_blocks) thread_limit(threads_per_block)
+        391, Generating "nvkernel__Z25phase2_synchronise_blocksmjjjjPjPKjP5uint4Phjjj_F1L391_7" GPU kernel
+        393, #omp parallel
+          479, Barrier
+          80, Loop not vectorized/parallelized: not countable
+         142, Loop not vectorized/parallelized: not countable
+         440, Loop not vectorized/parallelized: too deeply nested
+phase3_copy_num_symbols_from_sync_points_to_aux(unsigned long, unsigned long, unsigned int, uint4 const*, unsigned int*):
+    491, #omp target teams distribute parallel for num_teams(num_sequences) thread_limit(threads_per_block)
+        491, Generating "nvkernel__Z47phase3_copy_num_symbols_from_sync_points_to_auxmmjPK5uint4Pj_F1L491_12" GPU kernel
+        495, Loop parallelized across teams and threads, schedule(static)
+    495, Loop not vectorized/parallelized: not countable
+phase3_copy_num_symbols_from_aux_to_sync_points(unsigned long, unsigned long, unsigned int, uint4*, unsigned int const*):
+    505, #omp target teams distribute parallel for num_teams(num_sequences) thread_limit(threads_per_block)
+        505, Generating "nvkernel__Z47phase3_copy_num_symbols_from_aux_to_sync_pointsmmjP5uint4PKj_F1L505_16" GPU kernel
+        509, Loop parallelized across teams and threads, schedule(static)
+    509, Loop not vectorized/parallelized: not countable
+phase4_decode_write_output(unsigned long, unsigned long, unsigned int, unsigned int, unsigned int, unsigned int*, unsigned char*, unsigned int, unsigned int const*, uint4 const*, unsigned int, unsigned int, unsigned int, unsigned int):
+    528, #omp target teams distribute parallel for num_teams(num_sequences) thread_limit(threads_per_block)
+        528, Generating "nvkernel__Z26phase4_decode_write_outputmmjjjPjPhjPKjPK5uint4jjjj_F1L528_20" GPU kernel
+        532, Loop parallelized across teams and threads, schedule(static)
+          80, Loop not vectorized/parallelized: not countable
+         142, Loop not vectorized/parallelized: not countable
+         532, Loop not vectorized/parallelized: too deeply nested
+cuhd::CUHDGPUDecoder::decode(unsigned int*, unsigned long, unsigned char*, unsigned long, unsigned int*, uint4*, unsigned int*, unsigned char*, unsigned int, unsigned int, unsigned int, unsigned long, unsigned long, unsigned long):
+    658, Generating update from(d_sequence_synced[:num_sequences])
+    660, Loop not vectorized/parallelized: potential early exits
+    687, Generating update from(d_output_sizes[:num_subseq])
+    691, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    698, Generating update to(d_output_sizes[:num_subseq])
+decode_subsequence(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int&, unsigned int*, unsigned int&, unsigned int&, unsigned int&, unsigned int&, unsigned int&, unsigned int&, unsigned int&, unsigned char*, unsigned int&, unsigned int const*, unsigned int, unsigned int, unsigned int&, unsigned int&, bool, bool)::'lambda'()::operator()() const:
+     54, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+phase1_decode_subseq(unsigned long, unsigned long, unsigned int, unsigned int, unsigned int, unsigned int*, unsigned int const*, uint4*, unsigned int, unsigned int, unsigned int, unsigned int)::'lambda'(unsigned int)::operator()(unsigned int) const:
+    260, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+CUHDInputBuffer::CUHDInputBuffer(unsigned int*, unsigned long, unsigned long, unsigned long):
+        1183, Loop not fused: no successor loop
+              Loop not vectorized: data dependency
+              Loop unrolled 4 times
+unsigned int* std::reverse_copy<unsigned int*, unsigned int*>(unsigned int*, unsigned int*, unsigned int*):
+     13, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                  1183, Loop not vectorized: data dependency
+                        Loop unrolled 4 times
+CUHDOutputBuffer::reverse():
+        1151, Loop not vectorized/parallelized: not countable
+void std::reverse<unsigned char*>(unsigned char*, unsigned char*):
+        1122, Loop not vectorized/parallelized: not countable
+void std::__reverse<unsigned char*>(unsigned char*, unsigned char*, std::random_access_iterator_tag):
+     13, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                  1122, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     11, include "cuhd_util.h"
+          18, include "chrono"
+              472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000l>>::_S_gcd(long, long):
+     11, include "cuhd_util.h"
+          18, include "chrono"
+              472, Loop not vectorized/parallelized: not countable
+cuhd::CUHDUtil::equals(unsigned char*, unsigned char*, unsigned long):
+     41, Loop not vectorized/parallelized: potential early exits
+cuhd::CUHDUtil::optimal_subsequence_size(unsigned long, unsigned long, unsigned long, unsigned long):
+     55, Loop not vectorized/parallelized: potential early exits
 make: *** [Makefile.NVD:33: run_mem] Error 134
 timeout was set to  600

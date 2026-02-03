@@ -1,1 +1,9 @@
+main.cpp:31:10: warning: unused variable 'r_size_bytes' [-Wunused-variable]
+   31 |   size_t r_size_bytes = r_size * sizeof(float);
+      |          ^~~~~~~~~~~~
+1 warning generated.
+main.cpp:31:10: warning: unused variable 'r_size_bytes' [-Wunused-variable]
+   31 |   size_t r_size_bytes = r_size * sizeof(float);
+      |          ^~~~~~~~~~~~
+1 warning generated.
 timeout was set to  600

@@ -1,1 +1,87 @@
+kernel0_write(char*, unsigned long):
+      5, include "kernels.h"
+           8, #omp target teams distribute parallel for num_teams(1024) thread_limit(64)
+               8, Generating "nvkernel__Z13kernel0_writePcm_F112L8_2" GPU kernel
+              11, Loop parallelized across teams and threads(128), schedule(static)
+          20, Loop not vectorized/parallelized: potential early exits
+kernel0_read(char const*, unsigned long, unsigned int*, unsigned long*, unsigned long*, unsigned long*, unsigned long*):
+      5, include "kernels.h"
+          47, #omp target teams distribute parallel for num_teams(1024) thread_limit(64)
+              47, Generating "nvkernel__Z12kernel0_readPKcmPjPmS2_S2_S2__F112L47_6" GPU kernel
+              49, Loop parallelized across teams and threads(128), schedule(static)
+          69, Loop not vectorized/parallelized: potential early exits
+kernel1_write(char*, unsigned long):
+      5, include "kernels.h"
+         102, #omp target teams distribute parallel for num_teams(1024) thread_limit(64)
+             102, Generating "nvkernel__Z13kernel1_writePcm_F112L102_10" GPU kernel
+             105, Loop parallelized across teams and threads(128), schedule(static)
+         105, Loop not vectorized/parallelized: not countable
+kernel1_read(char const*, unsigned long, unsigned int*, unsigned long*, unsigned long*, unsigned long*, unsigned long*):
+      5, include "kernels.h"
+         118, #omp target teams distribute parallel for num_teams(1024) thread_limit(64)
+             118, Generating "nvkernel__Z12kernel1_readPKcmPjPmS2_S2_S2__F112L118_14" GPU kernel
+             121, Loop parallelized across teams and threads(128), schedule(static)
+         121, Loop not vectorized/parallelized: not countable
+kernel_write(char*, unsigned long, unsigned long):
+      5, include "kernels.h"
+         139, #omp target teams distribute parallel for num_teams(1024) thread_limit(64)
+             139, Generating "nvkernel__Z12kernel_writePcmm_F112L139_18" GPU kernel
+             142, Loop parallelized across teams and threads(128), schedule(static)
+         142, Loop not vectorized/parallelized: not countable
+kernel_read_write(char*, unsigned long, unsigned long, unsigned long, unsigned int*, unsigned long*, unsigned long*, unsigned long*, unsigned long*):
+      5, include "kernels.h"
+         157, #omp target teams distribute parallel for num_teams(1024) thread_limit(64)
+             157, Generating "nvkernel__Z17kernel_read_writePcmmmPjPmS1_S1_S1__F112L157_22" GPU kernel
+             160, Loop parallelized across teams and threads(128), schedule(static)
+         160, Loop not vectorized/parallelized: not countable
+kernel_read(char const*, unsigned long, unsigned long, unsigned int*, unsigned long*, unsigned long*, unsigned long*, unsigned long*):
+      5, include "kernels.h"
+         190, #omp target teams distribute parallel for num_teams(1024) thread_limit(64)
+             190, Generating "nvkernel__Z11kernel_readPKcmmPjPmS2_S2_S2__F112L190_26" GPU kernel
+             193, Loop parallelized across teams and threads(128), schedule(static)
+         193, Loop not vectorized/parallelized: not countable
+kernel5_init(char*, unsigned long):
+      5, include "kernels.h"
+         212, #omp target teams distribute parallel for num_teams(1024) thread_limit(64)
+             212, Generating "nvkernel__Z12kernel5_initPcm_F112L212_30" GPU kernel
+             215, Loop parallelized across teams and threads(128), schedule(static)
+         215, Loop not vectorized/parallelized: not countable
+kernel5_move(char*, unsigned long):
+      5, include "kernels.h"
+         241, #omp target teams distribute parallel for num_teams(1024) thread_limit(64)
+             241, Generating "nvkernel__Z12kernel5_movePcm_F112L241_34" GPU kernel
+             244, Loop parallelized across teams and threads(128), schedule(static)
+         248, Recognized memory copy idiom
+         251, Recognized memory copy idiom
+         254, Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 8 times (completely unrolled)
+kernel5_check(char const*, unsigned long, unsigned int*, unsigned long*, unsigned long*, unsigned long*, unsigned long*):
+      5, include "kernels.h"
+         269, #omp target teams distribute parallel for num_teams(1024) thread_limit(64)
+             269, Generating "nvkernel__Z13kernel5_checkPKcmPjPmS2_S2_S2__F112L269_38" GPU kernel
+             272, Loop parallelized across teams and threads(128), schedule(static)
+         272, Loop not vectorized/parallelized: not countable
+check(unsigned int*):
+     12, Generating update from(err_cnt[:1])
+     16, #omp target
+         16, Generating "nvkernel__Z5checkPj_F1L16_42" GPU kernel
+moving_inversion(unsigned int*, unsigned long*, unsigned long*, unsigned long*, unsigned long*, char*, unsigned long, unsigned long):
+     34, Loop not vectorized/parallelized: contains call
+main:
+     82, Generating map(alloc:err_addr[:10],dev_mem[:mem_size],err_current[:10]) 
+         Generating map(to:err_cnt[:]) 
+         Generating map(alloc:err_second_read[:10],err_expect[:10]) 
+     85, Loop not vectorized/parallelized: contains call
+    100, Loop not vectorized/parallelized: contains call
+          34, Loop not vectorized/parallelized: contains call
+          34, Loop not vectorized/parallelized: contains call
+          34, Loop not vectorized/parallelized: contains call
+          34, Loop not vectorized/parallelized: contains call
+          34, Loop not vectorized/parallelized: contains call
+    148, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      3, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      5, include "kernels.h"
 timeout was set to  600

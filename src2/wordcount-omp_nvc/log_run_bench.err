@@ -34,4 +34,18 @@ char* std::__copy_move_a<false, char const*, char*>(char const*, char const*, ch
           39, include "ostream"
                38, include "ios"
                     40, include "char_traits.h"
+is_alpha(char):
+     16, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+word_count(std::vector<char, std::allocator<char>> const&):
+     44, #omp target teams distribute parallel for thread_limit(256)
+         42, Generating map(to:in[:size]) 
+             Generating map(tofrom:wc) 
+         44, Generating "nvkernel__Z10word_countRKSt6vectorIcSaIcEE_F1L44_2" GPU kernel
+             Loop parallelized across teams and threads(128), schedule(static)
+             Generating reduction(+:wc)
+     44, Generating map(tofrom:wc) 
+         Loop not vectorized/parallelized: not countable
+int std::inner_product<__gnu_cxx::__normal_iterator<char const*, std::vector<char, std::allocator<char>>>, __gnu_cxx::__normal_iterator<char const*, std::vector<char, std::allocator<char>>>, int, std::plus<int>, is_word_start>(__gnu_cxx::__normal_iterator<char const*, std::vector<char, std::allocator<char>>>, __gnu_cxx::__normal_iterator<char const*, std::vector<char, std::allocator<char>>>, __gnu_cxx::__normal_iterator<char const*, std::vector<char, std::allocator<char>>>, int, std::plus<int>, is_word_start):
+              233, Loop not vectorized/parallelized: not countable
 timeout was set to  600

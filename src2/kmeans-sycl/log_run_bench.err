@@ -1,2 +1,23 @@
+clang++: warning: treating 'c' input as 'c++' when -fsycl is used [-Wexpected-file-type]
+cluster.c:67:9: warning: variable 'c' set but not used [-Wunused-but-set-variable]
+   67 |     int c = 0;  // for each cluster size, count the actual number of loop interations
+      |         ^
+1 warning generated.
+cluster.c:67:9: warning: variable 'c' set but not used [-Wunused-but-set-variable]
+   67 |     int c = 0;  // for each cluster size, count the actual number of loop interations
+      |         ^
+1 warning generated.
+clang++: warning: treating 'c' input as 'c++' when -fsycl is used [-Wexpected-file-type]
+clang++: warning: treating 'c' input as 'c++' when -fsycl is used [-Wexpected-file-type]
+read_input.c:81:8: warning: variable 'len' set but not used [-Wunused-but-set-variable]
+   81 |         float   len;
+      |                 ^
+1 warning generated.
+read_input.c:81:8: warning: variable 'len' set but not used [-Wunused-but-set-variable]
+   81 |         float   len;
+      |                 ^
+1 warning generated.
+clang++: warning: treating 'c' input as 'c++' when -fsycl is used [-Wexpected-file-type]
+clang++: warning: treating 'c' input as 'c++' when -fsycl is used [-Wexpected-file-type]
 make: *** [Makefile.NVD:96: run_mem] Error 127
 timeout was set to  600

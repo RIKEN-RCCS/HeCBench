@@ -1,3 +1,7 @@
+clang++  -std=c++17 -Wall -I../pso-cuda -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c ../pso-cuda/main.cpp -o main.o
+clang++  -std=c++17 -Wall -I../pso-cuda -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c kernel_gpu.cpp -o kernel_gpu.o
+clang++  -std=c++17 -Wall -I../pso-cuda -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c ../pso-cuda/kernel_cpu.cpp -o kernel_cpu.o
+clang++  -std=c++17 -Wall -I../pso-cuda -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU main.o kernel_gpu.o kernel_cpu.o -o main 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "time -p ( ./main 30 10000 1>log.std 2>log.err ) 2> log.time"
 pkill nvidia-smi

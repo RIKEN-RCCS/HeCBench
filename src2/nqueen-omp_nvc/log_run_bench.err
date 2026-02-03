@@ -1,1 +1,60 @@
+"main.cpp", line 75: warning: integer conversion resulted in a change of sign [integer_sign_change]
+        vertice[i] = _EMPTY_;
+                     ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"main.cpp", line 91: warning: integer conversion resulted in a change of sign [integer_sign_change]
+          vertice[depth] = _EMPTY_;
+                           ^
+
+"main.cpp", line 121: warning: integer conversion resulted in a change of sign [integer_sign_change]
+      vertice[i] = -1;
+                   ^
+
+"main.cpp", line 133: warning: integer conversion resulted in a change of sign [integer_sign_change]
+        vertice[nivel] = _EMPTY_;
+                         ^
+
+prefixesHandleSol(queen_root*, unsigned int, char const*, int, int):
+     18, Generated vector simd code for the loop
+MCstillLegal(char const*, int):
+     25, Loop not vectorized/parallelized: potential early exits
+     30, Loop not vectorized/parallelized: potential early exits
+queens_stillLegal(char const*, int):
+     39, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+     42, Loop not fused: scalar dependence chain to sibling loop
+         Loop not vectorized: unknown
+     47, Loop not vectorized: unknown
+BP_queens_root_dfs(int, unsigned int, int, queen_root const*, unsigned long long*, unsigned long long*):
+     61, #omp target teams distribute parallel for thread_limit(128)
+         61, Generating "nvkernel__Z18BP_queens_root_dfsijiPK10queen_rootPyS2__F1L61_2" GPU kernel
+         63, Loop parallelized across teams and threads(128), schedule(static)
+     74, Recognized memory set idiom
+     81, Generated vector simd code for the loop
+     87, Loop not vectorized/parallelized: not countable
+          42, Loop not vectorized: unknown
+          47, Loop not vectorized: unknown
+BP_queens_prefixes(int, int, unsigned long long*, queen_root*):
+    120, Recognized memory set idiom
+          25, Loop not vectorized/parallelized: potential early exits
+          30, Loop not vectorized/parallelized: potential early exits
+          18, Loop not fused: no successor loop
+              Generated vector simd code for the loop
+nqueens(short, int, unsigned int, queen_root*, unsigned long long*, unsigned long long*, int):
+    164, Generating map(from:sols_h[:n_explorers],vector_of_tree_size_h[:n_explorers]) 
+         Generating map(to:root_prefixes_h[:n_explorers]) 
+    167, Loop not vectorized/parallelized: contains call
+main:
+         120, Recognized memory set idiom
+         134, Loop not vectorized/parallelized: potential early exits
+         140, Loop not fused: no successor loop
+              Generated vector simd code for the loop
+         167, Loop not vectorized/parallelized: contains call
+    218, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      3, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
 timeout was set to  600

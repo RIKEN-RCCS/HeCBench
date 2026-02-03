@@ -1,1 +1,49 @@
+HiddenMarkovModel.cpp:141:38: warning: implicit conversion from 'int' to 'float' changes value from 2147483647 to 2147483648 [-Wimplicit-const-int-float-conversion]
+  141 |             mtState[i*nState + j] /= RAND_MAX;
+      |                                   ~~ ^~~~~~~~
+/usr/include/stdlib.h:86:18: note: expanded from macro 'RAND_MAX'
+   86 | #define RAND_MAX        2147483647
+      |                         ^~~~~~~~~~
+1 warning generated.
+HiddenMarkovModel.cpp:141:38: warning: implicit conversion from 'int' to 'float' changes value from 2147483647 to 2147483648 [-Wimplicit-const-int-float-conversion]
+  141 |             mtState[i*nState + j] /= RAND_MAX;
+      |                                   ~~ ^~~~~~~~
+/usr/include/stdlib.h:86:18: note: expanded from macro 'RAND_MAX'
+   86 | #define RAND_MAX        2147483647
+      |                         ^~~~~~~~~~
+1 warning generated.
+ViterbiGPU.cpp:30:20: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+   30 |   float maxProbNew[nState];
+      |                    ^~~~~~
+ViterbiGPU.cpp:30:20: note: function parameter 'nState' with unknown value cannot be used in a constant expression
+ViterbiGPU.cpp:26:15: note: declared here
+   26 |     const int nState,
+      |               ^
+ViterbiGPU.cpp:31:12: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+   31 |   int path[(nObs-1)*nState];
+      |            ^~~~~~~~~~~~~~~
+ViterbiGPU.cpp:31:13: note: function parameter 'nObs' with unknown value cannot be used in a constant expression
+   31 |   int path[(nObs-1)*nState];
+      |             ^
+ViterbiGPU.cpp:22:15: note: declared here
+   22 |     const int nObs, 
+      |               ^
+2 warnings generated.
+ViterbiGPU.cpp:30:20: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+   30 |   float maxProbNew[nState];
+      |                    ^~~~~~
+ViterbiGPU.cpp:30:20: note: function parameter 'nState' with unknown value cannot be used in a constant expression
+ViterbiGPU.cpp:26:15: note: declared here
+   26 |     const int nState,
+      |               ^
+ViterbiGPU.cpp:31:12: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+   31 |   int path[(nObs-1)*nState];
+      |            ^~~~~~~~~~~~~~~
+ViterbiGPU.cpp:31:13: note: function parameter 'nObs' with unknown value cannot be used in a constant expression
+   31 |   int path[(nObs-1)*nState];
+      |             ^
+ViterbiGPU.cpp:22:15: note: declared here
+   22 |     const int nObs, 
+      |               ^
+2 warnings generated.
 timeout was set to  600

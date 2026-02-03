@@ -1,1 +1,15 @@
+main.cpp:12:30: warning: array subscript is of type 'char' [-Wchar-subscripts]
+   12 |     uint8_t hi = char_to_uint[src[i*2 + 0]];
+      |                              ^~~~~~~~~~~~~
+main.cpp:13:30: warning: array subscript is of type 'char' [-Wchar-subscripts]
+   13 |     uint8_t lo = char_to_uint[src[i*2 + 1]];
+      |                              ^~~~~~~~~~~~~
+2 warnings generated.
+main.cpp:12:30: warning: array subscript is of type 'char' [-Wchar-subscripts]
+   12 |     uint8_t hi = char_to_uint[src[i*2 + 0]];
+      |                              ^~~~~~~~~~~~~
+main.cpp:13:30: warning: array subscript is of type 'char' [-Wchar-subscripts]
+   13 |     uint8_t lo = char_to_uint[src[i*2 + 1]];
+      |                              ^~~~~~~~~~~~~
+2 warnings generated.
 timeout was set to  600

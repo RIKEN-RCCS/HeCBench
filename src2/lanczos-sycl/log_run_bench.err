@@ -1,1 +1,77 @@
-../scripts/m.sh: line 5: warning: command substitution: ignored null byte in input
+lanczos.cpp:160:18: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+  160 |   T host_scratch[blocks];
+      |                  ^~~~~~
+lanczos.cpp:160:18: note: initializer of 'blocks' is not a constant expression
+lanczos.cpp:128:13: note: declared here
+  128 |   const int blocks = (n + THREADS_PER_BLOCK - 1) / THREADS_PER_BLOCK;
+      |             ^
+lanczos.cpp:160:18: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+  160 |   T host_scratch[blocks];
+      |                  ^~~~~~
+lanczos.cpp:230:17: note: in instantiation of function template specialization 'device_dot_product<float>' requested here
+  230 |     T product = device_dot_product(q, rows, x, y, scratch);
+      |                 ^
+lanczos.cpp:281:36: note: in instantiation of function template specialization 'gpu_lanczos<float>' requested here
+  281 |   symm_tridiag_matrix<T> tridiag = gpu_lanczos(q, matrix, v, steps);
+      |                                    ^
+lanczos.cpp:160:18: note: initializer of 'blocks' is not a constant expression
+  160 |   T host_scratch[blocks];
+      |                  ^
+lanczos.cpp:128:13: note: declared here
+  128 |   const int blocks = (n + THREADS_PER_BLOCK - 1) / THREADS_PER_BLOCK;
+      |             ^
+lanczos.cpp:160:18: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+  160 |   T host_scratch[blocks];
+      |                  ^~~~~~
+lanczos.cpp:230:17: note: in instantiation of function template specialization 'device_dot_product<double>' requested here
+  230 |     T product = device_dot_product(q, rows, x, y, scratch);
+      |                 ^
+lanczos.cpp:281:36: note: in instantiation of function template specialization 'gpu_lanczos<double>' requested here
+  281 |   symm_tridiag_matrix<T> tridiag = gpu_lanczos(q, matrix, v, steps);
+      |                                    ^
+lanczos.cpp:160:18: note: initializer of 'blocks' is not a constant expression
+  160 |   T host_scratch[blocks];
+      |                  ^
+lanczos.cpp:128:13: note: declared here
+  128 |   const int blocks = (n + THREADS_PER_BLOCK - 1) / THREADS_PER_BLOCK;
+      |             ^
+3 warnings generated.
+lanczos.cpp:160:18: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+  160 |   T host_scratch[blocks];
+      |                  ^~~~~~
+lanczos.cpp:160:18: note: initializer of 'blocks' is not a constant expression
+lanczos.cpp:128:13: note: declared here
+  128 |   const int blocks = (n + THREADS_PER_BLOCK - 1) / THREADS_PER_BLOCK;
+      |             ^
+lanczos.cpp:160:18: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+  160 |   T host_scratch[blocks];
+      |                  ^~~~~~
+lanczos.cpp:230:17: note: in instantiation of function template specialization 'device_dot_product<float>' requested here
+  230 |     T product = device_dot_product(q, rows, x, y, scratch);
+      |                 ^
+lanczos.cpp:281:36: note: in instantiation of function template specialization 'gpu_lanczos<float>' requested here
+  281 |   symm_tridiag_matrix<T> tridiag = gpu_lanczos(q, matrix, v, steps);
+      |                                    ^
+lanczos.cpp:160:18: note: initializer of 'blocks' is not a constant expression
+  160 |   T host_scratch[blocks];
+      |                  ^
+lanczos.cpp:128:13: note: declared here
+  128 |   const int blocks = (n + THREADS_PER_BLOCK - 1) / THREADS_PER_BLOCK;
+      |             ^
+lanczos.cpp:160:18: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+  160 |   T host_scratch[blocks];
+      |                  ^~~~~~
+lanczos.cpp:230:17: note: in instantiation of function template specialization 'device_dot_product<double>' requested here
+  230 |     T product = device_dot_product(q, rows, x, y, scratch);
+      |                 ^
+lanczos.cpp:281:36: note: in instantiation of function template specialization 'gpu_lanczos<double>' requested here
+  281 |   symm_tridiag_matrix<T> tridiag = gpu_lanczos(q, matrix, v, steps);
+      |                                    ^
+lanczos.cpp:160:18: note: initializer of 'blocks' is not a constant expression
+  160 |   T host_scratch[blocks];
+      |                  ^
+lanczos.cpp:128:13: note: declared here
+  128 |   const int blocks = (n + THREADS_PER_BLOCK - 1) / THREADS_PER_BLOCK;
+      |             ^
+3 warnings generated.
+timeout was set to  600

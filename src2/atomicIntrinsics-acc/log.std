@@ -1,1 +1,8 @@
-Usage: ./main <number of atomic operations> <repeat>
+atomicInc failed: 8 != 0
+atomicDec failed: 106 != 0
+FAIL
+Average kernel execution time: 15572.408203 (us)
+atomicInc failed: 8 != 0
+atomicDec failed: 106 != 0
+FAIL
+Average kernel execution time: 15555.479492 (us)

@@ -5,4 +5,4 @@ nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.m
 bash -c "../hotspot3D-cuda/prepare_data.sh; time -p ( ./main 512 8 5000 ../data/hotspot3D/power_512x8 ../data/hotspot3D/temp_512x8 output.out 1>log.std 2>log.err ) 2> log.time"
 pkill nvidia-smi
 ../scripts/m.sh
-min max diff memory in [MB] : 0 583 583
+min max diff memory in [MB] : 1 583 582

@@ -3,46 +3,46 @@ FP64 atomic add
 
 
 Each thread sums up 1 elements
-Average execution time of WithAtomicOnGlobalMem: 5324.312988 (us)
-Average execution time of WithoutAtomicOnGlobalMem: 4339.096680 (us)
+Average execution time of WithAtomicOnGlobalMem: 5317.865234 (us)
+Average execution time of WithoutAtomicOnGlobalMem: 4338.770996 (us)
 PASS
 
 INT32 atomic add
 
 
 Each thread sums up 1 elements
-Average execution time of WithAtomicOnGlobalMem: 3506.043701 (us)
-Average execution time of WithoutAtomicOnGlobalMem: 3182.788086 (us)
+Average execution time of WithAtomicOnGlobalMem: 3503.771973 (us)
+Average execution time of WithoutAtomicOnGlobalMem: 3182.372314 (us)
 PASS
 
 FP32 atomic add
 
 
 Each thread sums up 1 elements
-Average execution time of WithAtomicOnGlobalMem: 3546.872314 (us)
-Average execution time of WithoutAtomicOnGlobalMem: 3158.410645 (us)
+Average execution time of WithAtomicOnGlobalMem: 3544.859375 (us)
+Average execution time of WithoutAtomicOnGlobalMem: 3157.854004 (us)
 PASS
 
 FP64 atomic add
 
 
 Each thread sums up 16 elements
-Average execution time of WithAtomicOnGlobalMem: 3534.907471 (us)
-Average execution time of WithoutAtomicOnGlobalMem: 292.375610 (us)
+Average execution time of WithAtomicOnGlobalMem: 3640.141846 (us)
+Average execution time of WithoutAtomicOnGlobalMem: 291.502014 (us)
 PASS
 
 INT32 atomic add
 
 
 Each thread sums up 16 elements
-Average execution time of WithAtomicOnGlobalMem: 1643.880127 (us)
-Average execution time of WithoutAtomicOnGlobalMem: 225.464111 (us)
+Average execution time of WithAtomicOnGlobalMem: 1643.521851 (us)
+Average execution time of WithoutAtomicOnGlobalMem: 225.572906 (us)
 PASS
 
 FP32 atomic add
 
 
 Each thread sums up 16 elements
-Average execution time of WithAtomicOnGlobalMem: 1718.810913 (us)
-Average execution time of WithoutAtomicOnGlobalMem: 227.310516 (us)
+Average execution time of WithAtomicOnGlobalMem: 1720.692627 (us)
+Average execution time of WithoutAtomicOnGlobalMem: 227.524902 (us)
 PASS

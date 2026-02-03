@@ -1,1 +1,58 @@
+main:
+     26, Loop not vectorized/parallelized: potential early exits
+     33, Recognized memory copy idiom
+     43, Recognized memory copy idiom
+     51, Loop not vectorized/parallelized: potential early exits
+fitness_function(float*):
+      6, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+     13, Generated vector simd code for the loop containing reductions
+kernelUpdateParticle(float*, float*, float const*, float const*, int, float, float):
+     30, #omp target teams distribute parallel for thread_limit(256)
+         30, Generating "nvkernel__Z20kernelUpdateParticlePfS_PKfS1_iff_F1L30_2" GPU kernel
+         32, Loop parallelized across teams and threads(128), schedule(static)
+     32, Loop not vectorized/parallelized: not countable
+kernelUpdatePBest(float const*, float*, float*, int):
+     44, #omp target teams distribute parallel for thread_limit(256)
+         44, Generating "nvkernel__Z17kernelUpdatePBestPKfPfS1_i_F1L44_6" GPU kernel
+         46, Loop parallelized across teams and threads(128), schedule(static)
+     52, Generated vector simd code for the loop
+          13, 1 loop-carried redundant expressions removed with 1 operations and 1 arrays
+              Generated vector simd code for the loop containing reductions
+          13, 1 loop-carried redundant expressions removed with 1 operations and 1 arrays
+              Generated vector simd code for the loop containing reductions
+     60, Recognized memory copy idiom
+          13, 1 loop-carried redundant expressions removed with 1 operations and 1 arrays
+              Generated vector simd code for the loop containing reductions
+     65, Loop not vectorized: may not be beneficial for target
+         Loop unrolled 8 times
+gpu_pso:
+     81, Generating map(tofrom:pBests[:size]) 
+         Generating map(to:positions[:size],velocities[:size]) 
+         Generating map(tofrom:gBest[:30]) 
+     84, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+host_fitness_function(float*):
+     11, Generated vector simd code for the loop containing reductions
+pso(int, int, float*, float*, float*, float*):
+     42, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+     53, Loop not fused: different loop trip count
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 8 times
+          11, 1 loop-carried redundant expressions removed with 1 operations and 1 arrays
+              Loop not fused: function call before adjacent loop
+              2 loops fused
+              Generated vector simd code for the loop containing reductions
+          11, 1 loop-carried redundant expressions removed with 1 operations and 1 arrays
+     60, Recognized memory copy idiom
+          11, 1 loop-carried redundant expressions removed with 1 operations and 1 arrays
+              Loop not fused: different loop trip count
+              Generated vector simd code for the loop containing reductions
+     65, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 4 times
 timeout was set to  600

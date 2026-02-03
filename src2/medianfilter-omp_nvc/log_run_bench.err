@@ -107,4 +107,11 @@ shrComparePGM:
         1496, Loop not fused: complex flow graph
 _INTERNAL_30____boxfilter_sycl_shrUtils_cpp_shrFree::shrLogV(int, int, char const*, __va_list_tag):
     345, Loop not vectorized/parallelized: potential early exits
+MedianFilterHost:
+     28, Loop not vectorized/parallelized: too deeply nested
+     46, Loop not fused: complex flow graph
+         Loop not vectorized/parallelized: loop count too small
+tar: ../medianfilter-cuda/data.tar.bz2: Cannot open: No such file or directory
+tar: Error is not recoverable: exiting now
+make: *** [Makefile.NVD:77: run_mem] Error 1
 timeout was set to  600

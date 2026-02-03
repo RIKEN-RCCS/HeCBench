@@ -9,5 +9,5 @@ Minkowski distance with p = 3
 Average kernel execution time: 0.000662 (s)
 PASS
 Minkowski distance with p = 4
-Average kernel execution time: 0.000662 (s)
+Average kernel execution time: 0.000663 (s)
 PASS

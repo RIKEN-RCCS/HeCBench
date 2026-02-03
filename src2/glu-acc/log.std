@@ -1,15 +1,15 @@
 Shape of input tensor: ( 1260 1260 1260 )
-Average execution time of GLU kernel (split dimension = 2): 6355.336914 (us)
+Average execution time of GLU kernel (split dimension = 2): 6351.112305 (us)
 PASS
-Average execution time of GLU kernel (split dimension = 0): 6201.540039 (us)
+Average execution time of GLU kernel (split dimension = 0): 6201.858398 (us)
 PASS
-Average execution time of GLU kernel (split dimension = 1): 6245.672363 (us)
+Average execution time of GLU kernel (split dimension = 1): 6248.335449 (us)
 PASS
-Average execution time of GLU kernel (split dimension = 2): 6332.077637 (us)
+Average execution time of GLU kernel (split dimension = 2): 6331.739258 (us)
 PASS
-Average execution time of GLU kernel (split dimension = 0): 6206.294434 (us)
+Average execution time of GLU kernel (split dimension = 0): 6196.093750 (us)
 PASS
-Average execution time of GLU kernel (split dimension = 1): 6248.432129 (us)
+Average execution time of GLU kernel (split dimension = 1): 6248.349609 (us)
 PASS
-Average execution time of GLU kernel (split dimension = 2): 6329.378418 (us)
+Average execution time of GLU kernel (split dimension = 2): 6328.961914 (us)
 PASS

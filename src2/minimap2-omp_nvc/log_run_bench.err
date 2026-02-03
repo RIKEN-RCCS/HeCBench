@@ -1,1 +1,275 @@
+"device/device_kernel_wrapper.cpp", line 82: warning: variable "end" was declared but never referenced [declared_but_not_referenced]
+    struct timespec start, end;
+                           ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+device_ilog2(int):
+     13, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+chain_dp_score(anchor_dt const*, anchor_dt, float, int, int, int, int):
+     32, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+update_anchor(anchor_dt const*, anchor_dt*, int, int):
+     56, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+update_return(return_dt const*, return_dt*, int, int):
+     60, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+device_chain_kernel_wrapper(std::vector<control_dt, std::allocator<control_dt>>&, std::vector<anchor_dt, std::allocator<anchor_dt>>&, std::vector<return_dt, std::allocator<return_dt>>&, int, int, int):
+     95, Loop not vectorized/parallelized: contains call
+     97, #omp target teams num_teams(1792) thread_limit(64)
+         92, Generating map(to:h_arg[:]) 
+             Generating map(alloc:max_tracker_g[:][:],j_tracker_g[:][:]) 
+             Generating map(from:h_ret[:?]) 
+             Generating map(to:h_control[:]) 
+         97, Generating "nvkernel__Z27device_chain_kernel_wrapperRSt6vectorI10control_dtSaIS0_EERS_I9anchor_dtSaIS4_EERS_I9return_dtSaIS8_EEiii_F1L97_2" GPU kernel
+        102, #omp parallel
+          121, Barrier
+          132, Barrier
+          140, Barrier
+          144, Barrier
+          150, Barrier
+          159, Barrier
+        155, Team private (max_tracker_sm,j_tracker_sm,active_sm) located in CUDA shared memory
+     97, Generating implicit map(tofrom:max_tracker_g[:][:],j_tracker_g[:][:]) 
+    119, Loop not vectorized/parallelized: contains call
+return_dt* std::__uninitialized_default_n_1<true>::__uninit_default_n<return_dt*, unsigned long>(return_dt*, unsigned long):
+        1149, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+return_dt* std::__uninitialized_default_n_a<return_dt*, unsigned long, return_dt>(return_dt*, unsigned long, std::allocator<return_dt>&):
+         638, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+return_dt* std::__uninitialized_default_n<return_dt*, unsigned long>(return_dt*, unsigned long):
+         603, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+return_dt* std::fill_n<return_dt*, unsigned long, return_dt>(return_dt*, unsigned long, return_dt const&):
+        1120, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+return_dt* std::__fill_n_a<return_dt*, unsigned long, return_dt>(return_dt*, unsigned long, return_dt const&, std::random_access_iterator_tag):
+         969, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+void std::__fill_a<return_dt*, return_dt>(return_dt*, return_dt*, return_dt const&):
+         911, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+__gnu_cxx::__enable_if<!std::__is_scalar<return_dt>::__value, void>::__type std::__fill_a1<return_dt*, return_dt>(return_dt*, return_dt*, return_dt const&):
+      5, include "vector"
+          60, include "stl_algobase.h"
+              911, Loop not vectorized: data dependency
+                   Loop unrolled 2 times
+return_dt* std::__uninitialized_move_if_noexcept_a<return_dt*, return_dt*, std::allocator<return_dt>>(return_dt*, return_dt*, return_dt*, std::allocator<return_dt>&):
+      5, include "vector"
+return_dt* std::__copy_move_a<true, return_dt*, return_dt*>(return_dt*, return_dt*, return_dt*):
+      5, include "vector"
+          60, include "stl_algobase.h"
+skip_to_EOR(_IO_FILE*):
+      6, Loop not vectorized/parallelized: contains call
+read_call(_IO_FILE*):
+     36, Loop not vectorized/parallelized: contains call
+           6, Loop not vectorized/parallelized: contains call
+print_return(_IO_FILE*, return_t const&):
+     54, Loop not vectorized/parallelized: contains call
+anchor_t* std::__uninitialized_default_n_1<true>::__uninit_default_n<anchor_t*, unsigned long>(anchor_t*, unsigned long):
+        1149, Loop not vectorized: data dependency
+anchor_t* std::__uninitialized_default_n_a<anchor_t*, unsigned long, anchor_t>(anchor_t*, unsigned long, std::allocator<anchor_t>&):
+         638, Loop not vectorized: data dependency
+anchor_t* std::__uninitialized_default_n<anchor_t*, unsigned long>(anchor_t*, unsigned long):
+         603, Loop not vectorized: data dependency
+anchor_t* std::fill_n<anchor_t*, unsigned long, anchor_t>(anchor_t*, unsigned long, anchor_t const&):
+        1120, Loop not vectorized: data dependency
+anchor_t* std::__fill_n_a<anchor_t*, unsigned long, anchor_t>(anchor_t*, unsigned long, anchor_t const&, std::random_access_iterator_tag):
+         969, Loop not vectorized: data dependency
+void std::__fill_a<anchor_t*, anchor_t>(anchor_t*, anchor_t*, anchor_t const&):
+         911, Loop not vectorized: data dependency
+__gnu_cxx::__enable_if<!std::__is_scalar<anchor_t>::__value, void>::__type std::__fill_a1<anchor_t*, anchor_t>(anchor_t*, anchor_t*, anchor_t const&):
+      1, include "host_data_io.h"
+           5, include "datatypes.h"
+                4, include "vector"
+                    60, include "stl_algobase.h"
+                        911, Loop not vectorized: data dependency
+anchor_t* std::__uninitialized_move_if_noexcept_a<anchor_t*, anchor_t*, std::allocator<anchor_t>>(anchor_t*, anchor_t*, anchor_t*, std::allocator<anchor_t>&):
+      1, include "host_data_io.h"
+           5, include "datatypes.h"
+                4, include "vector"
+anchor_t* std::__copy_move_a<true, anchor_t*, anchor_t*>(anchor_t*, anchor_t*, anchor_t*):
+      1, include "host_data_io.h"
+           5, include "datatypes.h"
+                4, include "vector"
+                    60, include "stl_algobase.h"
+host_chain_kernel(call_t const&, return_t&):
+     48, Loop not vectorized/parallelized: potential early exits
+int* std::__uninitialized_fill_n<true>::__uninit_fill_n<int*, unsigned long, int>(int*, unsigned long, int const&):
+        1149, Recognized memory set idiom
+int* std::__uninitialized_default_n_1<true>::__uninit_default_n<int*, unsigned long>(int*, unsigned long):
+        1149, Recognized memory set idiom
+std::vector<int, std::allocator<int>>::vector(unsigned long, int const&, std::allocator<int> const&):
+        1595, Recognized memory set idiom
+std::vector<int, std::allocator<int>>::_M_fill_initialize(unsigned long, int const&):
+         410, Recognized memory set idiom
+int* std::__uninitialized_fill_n_a<int*, unsigned long, int, int>(int*, unsigned long, int const&, std::allocator<int>&):
+         296, Recognized memory set idiom
+int* std::uninitialized_fill_n<int*, unsigned long, int>(int*, unsigned long, int const&):
+         255, Recognized memory set idiom
+int* std::fill_n<int*, unsigned long, int>(int*, unsigned long, int const&):
+        1120, Recognized memory set idiom
+int* std::__fill_n_a<int*, unsigned long, int>(int*, unsigned long, int const&, std::random_access_iterator_tag):
+         969, Recognized memory set idiom
+void std::__fill_a<int*, int>(int*, int*, int const&):
+         923, Recognized memory set idiom
+__gnu_cxx::__enable_if<std::__is_scalar<int>::__value, void>::__type std::__fill_a1<int*, int>(int*, int*, int const&):
+      1, include "vector"
+          60, include "stl_algobase.h"
+              923, Recognized memory set idiom
+int* std::__uninitialized_default_n_a<int*, unsigned long, int>(int*, unsigned long, std::allocator<int>&):
+         638, Recognized memory set idiom
+int* std::__uninitialized_default_n<int*, unsigned long>(int*, unsigned long):
+         603, Recognized memory set idiom
+int* std::__uninitialized_move_if_noexcept_a<int*, int*, std::allocator<int>>(int*, int*, int*, std::allocator<int>&):
+      1, include "vector"
+int* std::__copy_move_a<true, int*, int*>(int*, int*, int*):
+      1, include "vector"
+          60, include "stl_algobase.h"
+main:
+     33, Loop not vectorized/parallelized: potential early exits
+               52, Loop not vectorized/parallelized: potential early exits
+std::vector<return_t, std::allocator<return_t>>::~vector():
+         848, Loop not vectorized/parallelized: contains call
+void std::_Destroy_aux<false>::__destroy<return_t*>(return_t*, return_t*):
+      3, include "host_data_io.h"
+           5, include "datatypes.h"
+                4, include "vector"
+                    65, include "stl_construct.h"
+                        162, Loop not vectorized/parallelized: contains call
+void std::_Destroy<return_t*, return_t>(return_t*, return_t*, std::allocator<return_t>&):
+         195, Loop not vectorized/parallelized: contains call
+void std::_Destroy<return_t*>(return_t*, return_t*):
+         162, Loop not vectorized/parallelized: contains call
+void std::_Destroy<return_t>(return_t*):
+      3, include "host_data_io.h"
+           5, include "datatypes.h"
+                4, include "vector"
+                    65, include "stl_construct.h"
+scheduler(_IO_FILE*, std::vector<control_dt, std::allocator<control_dt>>&, std::vector<anchor_dt, std::allocator<anchor_dt>>&, std::vector<long, std::allocator<long>>&, int, int&, int&, int&):
+     40, Loop not vectorized/parallelized: potential early exits
+     56, Loop not vectorized: unknown
+     66, Loop not vectorized/parallelized: potential early exits
+     77, Loop not vectorized/parallelized: potential early exits
+descheduler(std::vector<control_dt, std::allocator<control_dt>>&, std::vector<return_dt, std::allocator<return_dt>>&, std::vector<return_t, std::allocator<return_t>>&, std::vector<long, std::allocator<long>>&):
+    131, Loop not vectorized/parallelized: potential early exits
+              148, Loop not vectorized/parallelized: potential early exits
+unsigned int* std::__uninitialized_default_n_1<true>::__uninit_default_n<unsigned int*, unsigned long>(unsigned int*, unsigned long):
+        1149, Recognized memory set idiom
+unsigned short* std::__uninitialized_default_n_1<true>::__uninit_default_n<unsigned short*, unsigned long>(unsigned short*, unsigned long):
+        1149, Recognized memory set idiom
+anchor_dt* std::__uninitialized_default_n_1<true>::__uninit_default_n<anchor_dt*, unsigned long>(anchor_dt*, unsigned long):
+        1149, Loop not vectorized: data dependency
+std::vector<unsigned int, std::allocator<unsigned int>>::_M_default_initialize(unsigned long):
+         704, Recognized memory set idiom
+std::vector<unsigned short, std::allocator<unsigned short>>::_M_default_initialize(unsigned long):
+         704, Recognized memory set idiom
+std::vector<return_t, std::allocator<return_t>>::_S_do_relocate(return_t*, return_t*, return_t*, std::allocator<return_t>&, std::integral_constant<bool, true>):
+        1046, Loop not vectorized/parallelized: contains call
+std::vector<return_t, std::allocator<return_t>>::_S_relocate(return_t*, return_t*, return_t*, std::allocator<return_t>&):
+         456, Loop not vectorized/parallelized: contains call
+std::vector<return_t, std::allocator<return_t>>::_M_erase_at_end(return_t*):
+         848, Loop not vectorized/parallelized: potential early exits
+void std::_Destroy_aux<false>::__destroy<return_t*>(return_t*, return_t*):
+      2, include "vector"
+          65, include "stl_construct.h"
+              162, Loop not vectorized/parallelized: potential early exits
+void __gnu_cxx::new_allocator<return_t>::construct<return_t, return_t>(return_t*, return_t&&):
+      2, include "vector"
+anchor_t* std::__copy_move_a<false, anchor_t*, anchor_t*>(anchor_t*, anchor_t*, anchor_t*):
+      2, include "vector"
+          65, include "stl_construct.h"
+int* std::__uninitialized_move_if_noexcept_a<int*, int*, std::allocator<int>>(int*, int*, int*, std::allocator<int>&):
+      2, include "vector"
+int* std::__copy_move_a<true, int*, int*>(int*, int*, int*):
+      2, include "vector"
+          65, include "stl_construct.h"
+unsigned int* std::__uninitialized_default_n_a<unsigned int*, unsigned long, unsigned int>(unsigned int*, unsigned long, std::allocator<unsigned int>&):
+         638, Recognized memory set idiom
+unsigned int* std::__uninitialized_default_n<unsigned int*, unsigned long>(unsigned int*, unsigned long):
+         603, Recognized memory set idiom
+unsigned int* std::fill_n<unsigned int*, unsigned long, unsigned int>(unsigned int*, unsigned long, unsigned int const&):
+        1120, Recognized memory set idiom
+unsigned int* std::__fill_n_a<unsigned int*, unsigned long, unsigned int>(unsigned int*, unsigned long, unsigned int const&, std::random_access_iterator_tag):
+         969, Recognized memory set idiom
+void std::__fill_a<unsigned int*, unsigned int>(unsigned int*, unsigned int*, unsigned int const&):
+         923, Recognized memory set idiom
+__gnu_cxx::__enable_if<std::__is_scalar<unsigned int>::__value, void>::__type std::__fill_a1<unsigned int*, unsigned int>(unsigned int*, unsigned int*, unsigned int const&):
+      2, include "vector"
+          60, include "stl_algobase.h"
+              923, Recognized memory set idiom
+          65, include "stl_construct.h"
+unsigned short* std::__uninitialized_default_n_a<unsigned short*, unsigned long, unsigned short>(unsigned short*, unsigned long, std::allocator<unsigned short>&):
+         638, Recognized memory set idiom
+unsigned short* std::__uninitialized_default_n<unsigned short*, unsigned long>(unsigned short*, unsigned long):
+         603, Recognized memory set idiom
+unsigned short* std::fill_n<unsigned short*, unsigned long, unsigned short>(unsigned short*, unsigned long, unsigned short const&):
+        1120, Recognized memory set idiom
+unsigned short* std::__fill_n_a<unsigned short*, unsigned long, unsigned short>(unsigned short*, unsigned long, unsigned short const&, std::random_access_iterator_tag):
+         969, Recognized memory set idiom
+void std::__fill_a<unsigned short*, unsigned short>(unsigned short*, unsigned short*, unsigned short const&):
+         923, Recognized memory set idiom
+__gnu_cxx::__enable_if<std::__is_scalar<unsigned short>::__value, void>::__type std::__fill_a1<unsigned short*, unsigned short>(unsigned short*, unsigned short*, unsigned short const&):
+      2, include "vector"
+          60, include "stl_algobase.h"
+              923, Recognized memory set idiom
+          65, include "stl_construct.h"
+long* std::__uninitialized_move_if_noexcept_a<long*, long*, std::allocator<long>>(long*, long*, long*, std::allocator<long>&):
+      2, include "vector"
+long* std::__copy_move_a<true, long*, long*>(long*, long*, long*):
+      2, include "vector"
+          60, include "stl_algobase.h"
+          65, include "stl_construct.h"
+control_dt* std::__uninitialized_move_if_noexcept_a<control_dt*, control_dt*, std::allocator<control_dt>>(control_dt*, control_dt*, control_dt*, std::allocator<control_dt>&):
+      2, include "vector"
+control_dt* std::__copy_move_a<true, control_dt*, control_dt*>(control_dt*, control_dt*, control_dt*):
+      2, include "vector"
+          60, include "stl_algobase.h"
+          65, include "stl_construct.h"
+anchor_dt* std::__uninitialized_default_n_a<anchor_dt*, unsigned long, anchor_dt>(anchor_dt*, unsigned long, std::allocator<anchor_dt>&):
+         638, Loop not vectorized: data dependency
+anchor_dt* std::__uninitialized_default_n<anchor_dt*, unsigned long>(anchor_dt*, unsigned long):
+         603, Loop not vectorized: data dependency
+anchor_dt* std::fill_n<anchor_dt*, unsigned long, anchor_dt>(anchor_dt*, unsigned long, anchor_dt const&):
+        1120, Loop not vectorized: data dependency
+anchor_dt* std::__fill_n_a<anchor_dt*, unsigned long, anchor_dt>(anchor_dt*, unsigned long, anchor_dt const&, std::random_access_iterator_tag):
+         969, Loop not vectorized: data dependency
+void std::__fill_a<anchor_dt*, anchor_dt>(anchor_dt*, anchor_dt*, anchor_dt const&):
+         911, Loop not vectorized: data dependency
+__gnu_cxx::__enable_if<!std::__is_scalar<anchor_dt>::__value, void>::__type std::__fill_a1<anchor_dt*, anchor_dt>(anchor_dt*, anchor_dt*, anchor_dt const&):
+      2, include "vector"
+          60, include "stl_algobase.h"
+              911, Loop not vectorized: data dependency
+          65, include "stl_construct.h"
+anchor_dt* std::__uninitialized_move_if_noexcept_a<anchor_dt*, anchor_dt*, std::allocator<anchor_dt>>(anchor_dt*, anchor_dt*, anchor_dt*, std::allocator<anchor_dt>&):
+      2, include "vector"
+anchor_dt* std::__copy_move_a<true, anchor_dt*, anchor_dt*>(anchor_dt*, anchor_dt*, anchor_dt*):
+      2, include "vector"
+          60, include "stl_algobase.h"
+          65, include "stl_construct.h"
+return_dt* std::__uninitialized_move_if_noexcept_a<return_dt*, return_dt*, std::allocator<return_dt>>(return_dt*, return_dt*, return_dt*, std::allocator<return_dt>&):
+      2, include "vector"
+return_dt* std::__copy_move_a<true, return_dt*, return_dt*>(return_dt*, return_dt*, return_dt*):
+      2, include "vector"
+          60, include "stl_algobase.h"
+          65, include "stl_construct.h"
+void std::_Destroy<return_t*>(return_t*, return_t*):
+         162, Loop not vectorized/parallelized: potential early exits
+return_t* std::__relocate_a<return_t*, return_t*, std::allocator<return_t>>(return_t*, return_t*, return_t*, std::allocator<return_t>&):
+        1031, Loop not vectorized/parallelized: contains call
+return_t* std::__relocate_a_1<return_t*, return_t*, std::allocator<return_t>>(return_t*, return_t*, return_t*, std::allocator<return_t>&):
+      2, include "vector"
+          66, include "stl_uninitialized.h"
+             1031, Loop not vectorized/parallelized: contains call
+void std::_Construct<return_t, return_t>(return_t*, return_t&&):
+      2, include "vector"
+          65, include "stl_construct.h"
+void std::_Destroy<return_t*, return_t>(return_t*, return_t*, std::allocator<return_t>&):
+         195, Loop not vectorized/parallelized: potential early exits
 timeout was set to  600

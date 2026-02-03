@@ -1,4 +1,4 @@
-bash: line 1: 549220 Aborted                 (core dumped) ./main -c0 1.975e-7 -c1 1.384e-6 -nc 5 -aph 2600 -tau 0.004 -v 2 -i ../cmp-cuda/fold1000.su > log.std 2> log.err
-real 0.44
+bash: line 1: 2542278 Aborted                 (core dumped) ./main -c0 1.975e-7 -c1 1.384e-6 -nc 5 -aph 2600 -tau 0.004 -v 2 -i ../cmp-cuda/fold1000.su > log.std 2> log.err
+real 0.12
 user 0.00
 sys 0.00

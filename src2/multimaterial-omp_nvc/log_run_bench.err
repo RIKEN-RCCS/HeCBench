@@ -1,1 +1,486 @@
+compact.cpp:
+"compact.cpp", line 353: warning: variable "mmc_cells" was declared but never referenced [declared_but_not_referenced]
+    int mmc_cells = ccc.mmc_cells;
+        ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"compact.cpp", line 354: warning: variable "mm_len" was declared but never referenced [declared_but_not_referenced]
+    int mm_len = ccc.mm_len;
+        ^
+
+compact_cell_centric(full_data, compact_data, int, char**):
+    109, #omp target teams distribute parallel for thread_limit(128)
+        109, Generating "nvkernel__Z20compact_cell_centric9full_data12compact_dataiPPc_F1L109_2" GPU kernel
+        113, Loop parallelized across teams and threads(128), schedule(static)
+    114, Loop not vectorized/parallelized: not countable
+    143, #omp target teams distribute parallel for thread_limit(128)
+        143, Generating "nvkernel__Z20compact_cell_centric9full_data12compact_dataiPPc_F1L143_4" GPU kernel
+        149, Loop parallelized across teams and threads(128), schedule(static)
+    149, Loop not vectorized/parallelized: not countable
+    151, Generated vector simd code for the loop containing reductions
+         Loop unrolled 2 times
+    162, #omp target teams distribute parallel for thread_limit(128)
+        162, Generating "nvkernel__Z20compact_cell_centric9full_data12compact_dataiPPc_F1L162_6" GPU kernel
+        166, Loop parallelized across teams and threads(128), schedule(static)
+    167, Loop not vectorized/parallelized: not countable
+    196, #omp target teams distribute parallel for thread_limit(128)
+        196, Generating "nvkernel__Z20compact_cell_centric9full_data12compact_dataiPPc_F1L196_8" GPU kernel
+        200, Loop parallelized across teams and threads(128), schedule(static)
+    200, Loop not vectorized/parallelized: not countable
+    210, #omp target teams distribute parallel for thread_limit(128)
+        102, Generating map(tofrom:Vf_compact_list[:mm_len]) 
+             Generating map(to:imaterial[:sizey*sizex]) 
+             Generating map(tofrom:n[:Nmats]) 
+             Generating map(to:mmc_i[:mmc_cells+1],matids[:mm_len],mmc_index[:mmc_cells+1]) 
+             Generating map(tofrom:t_compact_list[:mm_len],y[:sizey*sizex],x[:sizey*sizex],rho_ave_compact[:sizey*sizex],rho_compact[:sizey*sizex],rho_compact_list[:mm_len],rho_mat_ave_compact[:sizey*sizex]) 
+             Generating map(to:nextfrac[:mm_len]) 
+             Generating map(tofrom:p_compact[:sizey*sizex],rho_mat_ave_compact_list[:mm_len],t_compact[:sizey*sizex],V[:sizey*sizex]) 
+             Generating map(to:mmc_j[:mmc_cells+1]) 
+             Generating map(tofrom:p_compact_list[:mm_len]) 
+        210, Generating "nvkernel__Z20compact_cell_centric9full_data12compact_dataiPPc_F1L210_10" GPU kernel
+        214, Loop parallelized across teams and threads(128), schedule(static)
+    215, Loop not vectorized/parallelized: too deeply nested
+    224, Loop unrolled 3 times (completely unrolled)
+    225, Loop unrolled 3 times (completely unrolled)
+    241, Loop not vectorized/parallelized: too deeply nested
+    257, Loop not vectorized/parallelized: potential early exits
+    314, Loop not vectorized/parallelized: potential early exits
+compact_check_results(full_data, compact_data):
+    370, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<double, std::ratio<1l, 1l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+full_matrix.cpp:
+full_matrix_cell_centric(full_data):
+     52, Loop not fused: different loop trip count
+         2 loops fused
+     56, 2 loops fused
+     59, 2 loops fused
+         Generated vector simd code for the loop containing reductions
+    111, Loop not vectorized/parallelized: too deeply nested
+    123, Loop unrolled 3 times (completely unrolled)
+    124, Loop unrolled 3 times (completely unrolled)
+    142, Loop not fused: no successor loop
+         Loop not vectorized/parallelized: loop count too small
+    146, Loop unrolled 3 times (completely unrolled)
+full_matrix_material_centric(full_data, full_data):
+    206, Recognized memory zero idiom
+    211, Loop not fused: complex flow graph
+    223, Generated vector simd code for the loop
+    237, Outer loop unrolled 1 times (completely unrolled)
+    242, Loop nest collapsed
+         Loop not fused: different loop trip count
+         Generated vector simd code for the loop
+    258, Loop not fused: different loop trip count
+    267, Loop not vectorized: unknown
+    290, Loop not vectorized/parallelized: too deeply nested
+    308, Loop not fused: no successor loop
+         Loop not vectorized/parallelized: loop count too small
+    312, Loop unrolled 3 times (completely unrolled)
+full_matrix_check_results(full_data, full_data):
+    365, Loop not vectorized/parallelized: potential early exits
+multimat.cpp:
+"multimat.cpp", line 106: warning: variable "sizex" was declared but never referenced [declared_but_not_referenced]
+    int sizex = cc.sizex;
+        ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"multimat.cpp", line 108: warning: variable "Nmats" was declared but never referenced [declared_but_not_referenced]
+    int Nmats = cc.Nmats;
+        ^
+
+"multimat.cpp", line 281: warning: variable "width" was declared but never referenced [declared_but_not_referenced]
+    int width = sizex/Nmats;
+        ^
+
+initialise_field_rand(full_data, double, double, double):
+    128, Loop not vectorized/parallelized: contains call
+    136, Loop not vectorized/parallelized: potential early exits
+    144, Loop not vectorized/parallelized: potential early exits
+initialise_field_static(full_data):
+    164, Loop not vectorized/parallelized: contains call
+    166, #omp parallel
+    167, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    172, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    180, #omp parallel
+    181, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    190, Loop not vectorized/parallelized: contains call
+    192, #omp parallel
+    193, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    198, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    205, #omp parallel
+    206, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    215, #omp parallel
+    216, Outer loop unrolled 2 times (completely unrolled)
+    217, Loop not vectorized: data dependency
+    228, Loop not vectorized: data dependency
+    229, Loop unrolled 3 times (completely unrolled)
+    241, Loop not vectorized: data dependency
+    242, Loop unrolled 3 times (completely unrolled)
+    251, Loop not vectorized/parallelized: potential early exits
+    271, #omp parallel
+         Loop not vectorized: data dependency
+initialise_field_file(full_data):
+    317, Recognized memory zero idiom
+    321, Loop not vectorized/parallelized: contains call
+    329, Loop not vectorized/parallelized: too deeply nested
+    330, Loop not vectorized/parallelized: too deeply nested
+    331, Loop not vectorized/parallelized: contains call
+    340, Loop not vectorized: data dependency
+main:
+    463, Loop not fused: function call before adjacent loop
+    464, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    471, Recognized memory set idiom
+         128, Loop not vectorized/parallelized: contains call
+         136, Loop not vectorized/parallelized: potential early exits
+         144, Loop not vectorized/parallelized: potential early exits
+         317, Recognized memory zero idiom
+         321, Loop not vectorized/parallelized: contains call
+         329, Loop not vectorized/parallelized: too deeply nested
+         330, Loop not vectorized/parallelized: too deeply nested
+         331, Loop not vectorized/parallelized: contains call
+         340, Loop not vectorized: data dependency
+    495, Loop not vectorized/parallelized: contains call
+    497, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+    517, Generated vector simd code for the loop
+    538, #omp parallel
+    540, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    553, Loop not vectorized/parallelized: contains call
+    558, Loop not fused: function call before adjacent loop
+    595, Loop not vectorized: data dependency
+compact.cpp:
+"compact.cpp", line 353: warning: variable "mmc_cells" was declared but never referenced [declared_but_not_referenced]
+    int mmc_cells = ccc.mmc_cells;
+        ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"compact.cpp", line 354: warning: variable "mm_len" was declared but never referenced [declared_but_not_referenced]
+    int mm_len = ccc.mm_len;
+        ^
+
+compact_cell_centric(full_data, compact_data, int, char**):
+    109, #omp target teams distribute parallel for thread_limit(128)
+        109, Generating "nvkernel__Z20compact_cell_centric9full_data12compact_dataiPPc_F1L109_2" GPU kernel
+        113, Loop parallelized across teams and threads(128), schedule(static)
+    123, Loop not vectorized/parallelized: not countable
+    162, #omp target teams distribute parallel for thread_limit(128)
+        162, Generating "nvkernel__Z20compact_cell_centric9full_data12compact_dataiPPc_F1L162_4" GPU kernel
+        166, Loop parallelized across teams and threads(128), schedule(static)
+    177, Loop not vectorized/parallelized: not countable
+    210, #omp target teams distribute parallel for thread_limit(128)
+        102, Generating map(tofrom:Vf_compact_list[:mm_len]) 
+             Generating map(to:imaterial[:sizey*sizex]) 
+             Generating map(tofrom:n[:Nmats]) 
+             Generating map(to:mmc_i[:mmc_cells+1],matids[:mm_len],mmc_index[:mmc_cells+1]) 
+             Generating map(tofrom:t_compact_list[:mm_len],y[:sizey*sizex],x[:sizey*sizex],rho_ave_compact[:sizey*sizex],rho_compact[:sizey*sizex],rho_compact_list[:mm_len],rho_mat_ave_compact[:sizey*sizex]) 
+             Generating map(to:nextfrac[:mm_len]) 
+             Generating map(tofrom:p_compact[:sizey*sizex],rho_mat_ave_compact_list[:mm_len],t_compact[:sizey*sizex],V[:sizey*sizex]) 
+             Generating map(to:mmc_j[:mmc_cells+1]) 
+             Generating map(tofrom:p_compact_list[:mm_len]) 
+        210, Generating "nvkernel__Z20compact_cell_centric9full_data12compact_dataiPPc_F1L210_6" GPU kernel
+        214, Loop parallelized across teams and threads(128), schedule(static)
+    215, Loop not vectorized/parallelized: too deeply nested
+    224, Loop unrolled 3 times (completely unrolled)
+    225, Loop unrolled 3 times (completely unrolled)
+    239, Loop not vectorized/parallelized: too deeply nested
+    255, Loop not vectorized/parallelized: potential early exits
+    312, Loop not vectorized/parallelized: potential early exits
+compact_check_results(full_data, compact_data):
+    368, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<double, std::ratio<1l, 1l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+full_matrix.cpp:
+full_matrix_cell_centric(full_data):
+     52, Loop not fused: different loop trip count
+         2 loops fused
+     56, 2 loops fused
+     59, 2 loops fused
+         Generated vector simd code for the loop containing reductions
+    111, Loop not vectorized/parallelized: too deeply nested
+    123, Loop unrolled 3 times (completely unrolled)
+    124, Loop unrolled 3 times (completely unrolled)
+    142, Loop not fused: no successor loop
+         Loop not vectorized/parallelized: loop count too small
+    146, Loop unrolled 3 times (completely unrolled)
+full_matrix_material_centric(full_data, full_data):
+    206, Recognized memory zero idiom
+    211, Loop not fused: complex flow graph
+    223, Generated vector simd code for the loop
+    237, Outer loop unrolled 1 times (completely unrolled)
+    242, Loop nest collapsed
+         Loop not fused: different loop trip count
+         Generated vector simd code for the loop
+    258, Loop not fused: different loop trip count
+    267, Loop not vectorized: unknown
+    290, Loop not vectorized/parallelized: too deeply nested
+    308, Loop not fused: no successor loop
+         Loop not vectorized/parallelized: loop count too small
+    312, Loop unrolled 3 times (completely unrolled)
+full_matrix_check_results(full_data, full_data):
+    365, Loop not vectorized/parallelized: potential early exits
+multimat.cpp:
+"multimat.cpp", line 106: warning: variable "sizex" was declared but never referenced [declared_but_not_referenced]
+    int sizex = cc.sizex;
+        ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"multimat.cpp", line 108: warning: variable "Nmats" was declared but never referenced [declared_but_not_referenced]
+    int Nmats = cc.Nmats;
+        ^
+
+"multimat.cpp", line 281: warning: variable "width" was declared but never referenced [declared_but_not_referenced]
+    int width = sizex/Nmats;
+        ^
+
+initialise_field_rand(full_data, double, double, double):
+    128, Loop not vectorized/parallelized: contains call
+    136, Loop not vectorized/parallelized: potential early exits
+    144, Loop not vectorized/parallelized: potential early exits
+initialise_field_static(full_data):
+    164, Loop not vectorized/parallelized: contains call
+    166, #omp parallel
+    167, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    172, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    180, #omp parallel
+    181, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    190, Loop not vectorized/parallelized: contains call
+    192, #omp parallel
+    193, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    198, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    205, #omp parallel
+    206, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    215, #omp parallel
+    216, Outer loop unrolled 2 times (completely unrolled)
+    217, Loop not vectorized: data dependency
+    228, Loop not vectorized: data dependency
+    229, Loop unrolled 3 times (completely unrolled)
+    241, Loop not vectorized: data dependency
+    242, Loop unrolled 3 times (completely unrolled)
+    251, Loop not vectorized/parallelized: potential early exits
+    271, #omp parallel
+         Loop not vectorized: data dependency
+initialise_field_file(full_data):
+    317, Recognized memory zero idiom
+    321, Loop not vectorized/parallelized: contains call
+    329, Loop not vectorized/parallelized: too deeply nested
+    330, Loop not vectorized/parallelized: too deeply nested
+    331, Loop not vectorized/parallelized: contains call
+    340, Loop not vectorized: data dependency
+main:
+    463, Loop not fused: function call before adjacent loop
+    464, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    471, Recognized memory set idiom
+         128, Loop not vectorized/parallelized: contains call
+         136, Loop not vectorized/parallelized: potential early exits
+         144, Loop not vectorized/parallelized: potential early exits
+         317, Recognized memory zero idiom
+         321, Loop not vectorized/parallelized: contains call
+         329, Loop not vectorized/parallelized: too deeply nested
+         330, Loop not vectorized/parallelized: too deeply nested
+         331, Loop not vectorized/parallelized: contains call
+         340, Loop not vectorized: data dependency
+    495, Loop not vectorized/parallelized: contains call
+    497, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+    517, Generated vector simd code for the loop
+    538, #omp parallel
+    540, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    553, Loop not vectorized/parallelized: contains call
+    558, Loop not fused: function call before adjacent loop
+    595, Loop not vectorized: data dependency
+compact.cpp:
+"compact.cpp", line 353: warning: variable "mmc_cells" was declared but never referenced [declared_but_not_referenced]
+    int mmc_cells = ccc.mmc_cells;
+        ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"compact.cpp", line 354: warning: variable "mm_len" was declared but never referenced [declared_but_not_referenced]
+    int mm_len = ccc.mm_len;
+        ^
+
+compact_cell_centric(full_data, compact_data, int, char**):
+    109, #omp target teams distribute parallel for thread_limit(128)
+        109, Generating "nvkernel__Z20compact_cell_centric9full_data12compact_dataiPPc_F1L109_2" GPU kernel
+        113, Loop parallelized across teams and threads(128), schedule(static)
+    114, Loop not vectorized/parallelized: not countable
+    127, Generated vector simd code for the loop containing reductions
+         Loop unrolled 2 times
+    162, #omp target teams distribute parallel for thread_limit(128)
+        162, Generating "nvkernel__Z20compact_cell_centric9full_data12compact_dataiPPc_F1L162_4" GPU kernel
+        166, Loop parallelized across teams and threads(128), schedule(static)
+    167, Loop not vectorized/parallelized: not countable
+    182, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    210, #omp target teams distribute parallel for thread_limit(128)
+        102, Generating map(tofrom:Vf_compact_list[:mm_len]) 
+             Generating map(to:imaterial[:sizey*sizex]) 
+             Generating map(tofrom:n[:Nmats]) 
+             Generating map(to:mmc_i[:mmc_cells+1],matids[:mm_len],mmc_index[:mmc_cells+1]) 
+             Generating map(tofrom:t_compact_list[:mm_len],y[:sizey*sizex],x[:sizey*sizex],rho_ave_compact[:sizey*sizex],rho_compact[:sizey*sizex],rho_compact_list[:mm_len],rho_mat_ave_compact[:sizey*sizex]) 
+             Generating map(to:nextfrac[:mm_len]) 
+             Generating map(tofrom:p_compact[:sizey*sizex],rho_mat_ave_compact_list[:mm_len],t_compact[:sizey*sizex],V[:sizey*sizex]) 
+             Generating map(to:mmc_j[:mmc_cells+1]) 
+             Generating map(tofrom:p_compact_list[:mm_len]) 
+        210, Generating "nvkernel__Z20compact_cell_centric9full_data12compact_dataiPPc_F1L210_6" GPU kernel
+        214, Loop parallelized across teams and threads(128), schedule(static)
+    215, Loop not vectorized/parallelized: too deeply nested
+    224, Loop unrolled 3 times (completely unrolled)
+    225, Loop unrolled 3 times (completely unrolled)
+    241, Loop not vectorized/parallelized: too deeply nested
+    257, Loop not vectorized/parallelized: potential early exits
+    314, Loop not vectorized/parallelized: potential early exits
+compact_check_results(full_data, compact_data):
+    370, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<double, std::ratio<1l, 1l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+full_matrix.cpp:
+full_matrix_cell_centric(full_data):
+     52, Loop not fused: different loop trip count
+         2 loops fused
+     56, 2 loops fused
+     59, 2 loops fused
+         Generated vector simd code for the loop containing reductions
+    111, Loop not vectorized/parallelized: too deeply nested
+    123, Loop unrolled 3 times (completely unrolled)
+    124, Loop unrolled 3 times (completely unrolled)
+    142, Loop not fused: no successor loop
+         Loop not vectorized/parallelized: loop count too small
+    146, Loop unrolled 3 times (completely unrolled)
+full_matrix_material_centric(full_data, full_data):
+    206, Recognized memory zero idiom
+    211, Loop not fused: complex flow graph
+    223, Generated vector simd code for the loop
+    237, Outer loop unrolled 1 times (completely unrolled)
+    242, Loop nest collapsed
+         Loop not fused: different loop trip count
+         Generated vector simd code for the loop
+    258, Loop not fused: different loop trip count
+    267, Loop not vectorized: unknown
+    290, Loop not vectorized/parallelized: too deeply nested
+    308, Loop not fused: no successor loop
+         Loop not vectorized/parallelized: loop count too small
+    312, Loop unrolled 3 times (completely unrolled)
+full_matrix_check_results(full_data, full_data):
+    365, Loop not vectorized/parallelized: potential early exits
+multimat.cpp:
+"multimat.cpp", line 106: warning: variable "sizex" was declared but never referenced [declared_but_not_referenced]
+    int sizex = cc.sizex;
+        ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"multimat.cpp", line 108: warning: variable "Nmats" was declared but never referenced [declared_but_not_referenced]
+    int Nmats = cc.Nmats;
+        ^
+
+"multimat.cpp", line 281: warning: variable "width" was declared but never referenced [declared_but_not_referenced]
+    int width = sizex/Nmats;
+        ^
+
+initialise_field_rand(full_data, double, double, double):
+    128, Loop not vectorized/parallelized: contains call
+    136, Loop not vectorized/parallelized: potential early exits
+    144, Loop not vectorized/parallelized: potential early exits
+initialise_field_static(full_data):
+    164, Loop not vectorized/parallelized: contains call
+    166, #omp parallel
+    167, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    172, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    180, #omp parallel
+    181, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    190, Loop not vectorized/parallelized: contains call
+    192, #omp parallel
+    193, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    198, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    205, #omp parallel
+    206, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    215, #omp parallel
+    216, Outer loop unrolled 2 times (completely unrolled)
+    217, Loop not vectorized: data dependency
+    228, Loop not vectorized: data dependency
+    229, Loop unrolled 3 times (completely unrolled)
+    241, Loop not vectorized: data dependency
+    242, Loop unrolled 3 times (completely unrolled)
+    251, Loop not vectorized/parallelized: potential early exits
+    271, #omp parallel
+         Loop not vectorized: data dependency
+initialise_field_file(full_data):
+    317, Recognized memory zero idiom
+    321, Loop not vectorized/parallelized: contains call
+    329, Loop not vectorized/parallelized: too deeply nested
+    330, Loop not vectorized/parallelized: too deeply nested
+    331, Loop not vectorized/parallelized: contains call
+    340, Loop not vectorized: data dependency
+main:
+    463, Loop not fused: function call before adjacent loop
+    464, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    471, Recognized memory set idiom
+         128, Loop not vectorized/parallelized: contains call
+         136, Loop not vectorized/parallelized: potential early exits
+         144, Loop not vectorized/parallelized: potential early exits
+         317, Recognized memory zero idiom
+         321, Loop not vectorized/parallelized: contains call
+         329, Loop not vectorized/parallelized: too deeply nested
+         330, Loop not vectorized/parallelized: too deeply nested
+         331, Loop not vectorized/parallelized: contains call
+         340, Loop not vectorized: data dependency
+    495, Loop not vectorized/parallelized: contains call
+    497, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+    517, Generated vector simd code for the loop
+    538, #omp parallel
+    540, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    553, Loop not vectorized/parallelized: contains call
+    558, Loop not fused: function call before adjacent loop
+    595, Loop not vectorized: data dependency
 timeout was set to  600

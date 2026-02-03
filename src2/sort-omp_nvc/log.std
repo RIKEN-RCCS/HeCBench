@@ -1,4 +1,4 @@
 Initializing host memory.
 Running benchmark with input array length 16777216
-Average elapsed time per pass 0.344064 (s)
+Average elapsed time per pass 0.344005 (s)
 PASS

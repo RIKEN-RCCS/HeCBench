@@ -1,1 +1,86 @@
+xFresnel_Auxiliary_Cosine_Integral(double):
+     63, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+         305, Loop not vectorized/parallelized: potential early exits
+         317, Generated vector simd code for negative stride loop
+              Loop unrolled 4 times
+_INTERNAL_10_cosine_cpp_c408033a::Chebyshev_Expansion_0_1(double):
+     98, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_10_cosine_cpp_c408033a::Chebyshev_Expansion_1_3(double):
+    146, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_10_cosine_cpp_c408033a::Chebyshev_Expansion_3_5(double):
+    196, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_10_cosine_cpp_c408033a::Chebyshev_Expansion_5_7(double):
+    243, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_10_cosine_cpp_c408033a::Asymptotic_Series(double):
+    292, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+    305, Loop not vectorized/parallelized: potential early exits
+    317, Generated vector simd code for negative stride loop
+         Loop unrolled 4 times
+Fresnel_Sine_Integral(double):
+     58, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+          92, Multiple reductions compressed
+              Loop not vectorized/parallelized: not countable
+xFresnel_Sine_Integral(double):
+     86, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+         141, Multiple reductions compressed
+              Loop not vectorized/parallelized: not countable
+_INTERNAL_11_fresnel_cpp_e8df05f5::Power_Series_S(double):
+    127, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+    141, Multiple reductions compressed
+         Loop not vectorized/parallelized: not countable
+reference(double const*, double*, int):
+     12, Loop not vectorized/parallelized: potential early exits
+main:
+     31, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+     38, #omp target teams distribute parallel for thread_limit(256)
+         35, Generating map(from:output[:80000000]) 
+             Generating map(tofrom:x[:80000000]) 
+         38, Generating "nvkernel_main_F1L38_2" GPU kernel
+         40, Loop parallelized across teams and threads(128), schedule(static)
+     38, Loop not vectorized/parallelized: contains call
+     40, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+     52, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+xFresnel_Auxiliary_Sine_Integral(double):
+     62, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+         306, Loop not vectorized/parallelized: potential early exits
+         317, Generated vector simd code for negative stride loop
+              Loop unrolled 4 times
+_INTERNAL_8_sine_cpp_ec9cb0d5::Chebyshev_Expansion_0_1(double):
+     97, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_8_sine_cpp_ec9cb0d5::Chebyshev_Expansion_1_3(double):
+    145, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_8_sine_cpp_ec9cb0d5::Chebyshev_Expansion_3_5(double):
+    195, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_8_sine_cpp_ec9cb0d5::Chebyshev_Expansion_5_7(double):
+    243, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_8_sine_cpp_ec9cb0d5::Asymptotic_Series(double):
+    293, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+    306, Loop not vectorized/parallelized: potential early exits
+    317, Generated vector simd code for negative stride loop
+         Loop unrolled 4 times
+xChebyshev_Tn_Series:
+     47, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+     60, Loop not vectorized: unknown
+         Loop unrolled 2 times
 timeout was set to  600

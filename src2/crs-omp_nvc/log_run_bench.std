@@ -1,2 +1,8 @@
+nvc++  -Wall -I../crs-sycl -O3 -Minfo -mp=gpu -gpu=cc90 -c ../crs-sycl/jerasure.cpp -o jerasure.o
+nvc++  -Wall -I../crs-sycl -O3 -Minfo -mp=gpu -gpu=cc90 -c ../crs-sycl/galois.cpp -o galois.o
+nvc++  -Wall -I../crs-sycl -O3 -Minfo -mp=gpu -gpu=cc90 -c ../crs-sycl/GCRSMatrix.cpp -o GCRSMatrix.o
+nvc++  -Wall -I../crs-sycl -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+nvc++  -Wall -I../crs-sycl -O3 -Minfo -mp=gpu -gpu=cc90 -c utils.cpp -o utils.o
+nvc++  -Wall -I../crs-sycl -O3 -Minfo -mp=gpu -gpu=cc90 jerasure.o galois.o GCRSMatrix.o main.o utils.o -o main 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "time -p ( ./main 10 10 1>log.std 2>log.err ) 2> log.time"

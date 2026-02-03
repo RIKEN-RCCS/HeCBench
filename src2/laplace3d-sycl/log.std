@@ -4,7 +4,7 @@ Result verification enabled
 
 global work size  = 1024 1024 1 
 local work size = 32 8 1 
-Average kernel execution time: 0.005130 (s)
+Average kernel execution time: 0.005127 (s)
 
  RMS error = 0.000000 
  PASS
@@ -14,4 +14,4 @@ Result verification disabled
 
 global work size  = 1024 1024 1 
 local work size = 32 8 1 
-Average kernel execution time: 0.005127 (s)
+Average kernel execution time: 0.005131 (s)

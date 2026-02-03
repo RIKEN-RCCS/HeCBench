@@ -4,7 +4,7 @@ Size of observational sequence = 250
 
 
 Compute Viterbi path on GPU
-Device execution time of Viterbi iterations 0.144164 (s)
+Device execution time of Viterbi iterations 0.144101 (s)
 
 Compute Viterbi path on CPU
 Success

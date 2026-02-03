@@ -1,8 +1,0 @@
-nvc++  -std=c++14 -Wall -I../slu-cuda/src/../include           -I../slu-cuda/src/nicslu/include           -I../slu-cuda/src/nicslu/util -O3 -DVERIFY -Minfo -mp=gpu -gpu=cc90 -c ../slu-cuda/src/preprocess.cpp -o preprocess.o
-"../slu-cuda/src/preprocess.cpp", line 5: catastrophic error: cannot open source file "nicslu.h"
-  #include "nicslu.h"
-                     ^
-
-1 catastrophic error detected in the compilation of "../slu-cuda/src/preprocess.cpp".
-Compilation terminated.
-make: *** [Makefile.NVD:76: preprocess.o] Error 2

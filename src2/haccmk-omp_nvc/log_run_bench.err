@@ -1,1 +1,28 @@
+haccmk_gold(int, float, float, float, float, float, float*, float*, float*, float*, float*, float*, float*):
+    116, Generated vector simd code for the loop containing reductions
+main:
+    177, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    184, Loop not fused: different loop trip count
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 8 times
+    193, Loop not fused: function call before adjacent loop
+         116, Generated vector simd code for the loop containing reductions
+    206, Loop not vectorized/parallelized: potential early exits
+void haccmk<float>(int, unsigned long, int, float, float, float, float const*, float const*, float const*, float const*, float*, float*, float*):
+     28, Loop not vectorized/parallelized: contains call
+     33, #omp target teams distribute parallel for
+         25, Generating map(from:vz2[:n]) 
+             Generating map(to:xx[:ilp],yy[:ilp],zz[:ilp],mass[:ilp]) 
+             Generating map(from:vx2[:n],vy2[:n]) 
+         33, Generating "nvkernel__Z6haccmkIfEvimiT_S0_S0_PKS0_S2_S2_S2_PS0_S3_S3__F1L33_2" GPU kernel
+         36, Loop parallelized across teams and threads(128), schedule(static)
+     33, Generating update to(vx2[:n],vz2[:n],vy2[:n])
+     36, Loop not vectorized/parallelized: not countable
+     55, Generated vector simd code for the loop containing reductions
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
 timeout was set to  600

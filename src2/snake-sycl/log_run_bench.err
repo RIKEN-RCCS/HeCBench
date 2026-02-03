@@ -1,1 +1,25 @@
+In file included from main.cpp:60:
+./kernel.h:43:7: warning: variable 'Diagonal' set but not used [-Wunused-but-set-variable]
+   43 |   int Diagonal = 0;
+      |       ^
+In file included from main.cpp:61:
+../snake-cuda/reference.h:49:9: warning: variable 'Diagonal' set but not used [-Wunused-but-set-variable]
+   49 |     int Diagonal = 0;
+      |         ^
+main.cpp:78:11: warning: variable 'read' set but not used [-Wunused-but-set-variable]
+   78 |   ssize_t read;
+      |           ^
+3 warnings generated.
+In file included from main.cpp:60:
+./kernel.h:43:7: warning: variable 'Diagonal' set but not used [-Wunused-but-set-variable]
+   43 |   int Diagonal = 0;
+      |       ^
+In file included from main.cpp:61:
+../snake-cuda/reference.h:49:9: warning: variable 'Diagonal' set but not used [-Wunused-but-set-variable]
+   49 |     int Diagonal = 0;
+      |         ^
+main.cpp:78:11: warning: variable 'read' set but not used [-Wunused-but-set-variable]
+   78 |   ssize_t read;
+      |           ^
+3 warnings generated.
 timeout was set to  600

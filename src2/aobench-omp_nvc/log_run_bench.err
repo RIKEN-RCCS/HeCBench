@@ -1,1 +1,51 @@
+ray_sphere_intersect(_Isect*, _Ray const*, _Sphere const*):
+     79, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+ray_plane_intersect(_Isect*, _Ray const*, _Plane const*):
+    114, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+orthoBasis(_vec*, _vec):
+    136, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+ambient_occlusion(_vec*, _Isect const*, _Sphere const*, _Plane const*, RNG&):
+    184, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+    203, Loop not vectorized: data dependency
+my_clamp(float):
+    247, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+render(unsigned char*, int, int, int, _Sphere const*, _Plane const&):
+    308, #omp target teams distribute parallel for simd thread_limit(256)
+        307, Generating map(to:plane[:1],spheres[:3]) 
+             Generating map(from:img[:(h*w)*3]) 
+        308, Generating "nvkernel__Z6renderPhiiiPK7_SphereRK6_Plane_F1L308_2" GPU kernel
+        310, Loop parallelized across teams and threads(128), schedule(static)
+    318, Zero trip check eliminated
+         Loop not vectorized/parallelized: contains call
+main:
+    376, Loop not vectorized/parallelized: contains call
+RNG::RNG(unsigned int):
+    162, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+RNG::next():
+    163, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+RNG::operator()():
+    169, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      5, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::fabs(float):
+                        242, Generating implicit omp declare target routine
+                             Generating NVIDIA GPU code
+_INTERNAL_6_ao_cpp_52d17336::vdot(_vec, _vec):
+     52, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_6_ao_cpp_52d17336::vcross(_vec*, _vec, _vec):
+     57, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_6_ao_cpp_52d17336::vnormalize(_vec*):
+     66, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
 timeout was set to  600

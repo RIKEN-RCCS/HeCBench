@@ -1,1 +1,3 @@
+clang++  -Ddfloat=float -Ddlong=int           -std=c++17 -Wall -I../axhelm-cuda           -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c main.cpp -o main.o
+clang++  -Ddfloat=float -Ddlong=int           -std=c++17 -Wall -I../axhelm-cuda           -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c meshBasis.cpp -o meshBasis.o
 cd BlasLapack && make -j8 && cd ..

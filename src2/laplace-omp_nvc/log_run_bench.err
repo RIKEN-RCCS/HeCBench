@@ -1,1 +1,53 @@
+red_ref(float const*, float const*, float const*, float const*, float const*, float const*, float const*, float*):
+     33, include "reference.h"
+          24, #omp parallel
+              24, Generating reduction(+:norm_L2)
+          25, Loop not vectorized: data dependency
+black_ref(float const*, float const*, float const*, float const*, float const*, float const*, float const*, float*):
+     33, include "reference.h"
+          71, #omp parallel
+              71, Generating reduction(+:norm_L2)
+          72, Loop not vectorized: data dependency
+fill_coeffs(int, int, float, float, float, float, float, float*, float*, float*, float*, float*, float*):
+     56, Invariant if transformation
+         Loop not fused: no successor loop
+     57, Invariant if transformation
+         Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+main:
+          56, Loop not fused: different loop trip count
+          57, Invariant if transformation
+              Loop not fused: no successor loop
+              Loop not vectorized: data dependency
+    161, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 8 times
+    172, Recognized memory zero idiom
+    186, Loop not vectorized/parallelized: potential early exits
+    188, #omp target teams distribute parallel for
+        188, Generating "nvkernel_main_F1L188_4" GPU kernel
+        191, Loop parallelized across teams and threads(128), schedule(static)
+    192, Loop not vectorized/parallelized: not countable
+    213, #omp target teams distribute parallel for
+        213, Generating "nvkernel_main_F1L213_6" GPU kernel
+             Loop parallelized across teams and threads(128), schedule(static)
+             Generating reduction(+:norm_L2)
+    213, Generating map(tofrom:norm_L2) 
+         Loop not vectorized/parallelized: not countable
+    215, #omp target teams distribute parallel for
+        215, Generating "nvkernel_main_F1L215_8" GPU kernel
+        218, Loop parallelized across teams and threads(128), schedule(static)
+    219, Loop not vectorized/parallelized: not countable
+    240, #omp target teams distribute parallel for
+        183, Generating map(to:aN[:size],aS[:size],aP[:size],aE[:size],aW[:size],b[:size]) 
+             Generating map(tofrom:temp_red[:size_temp],temp_black[:size_temp]) 
+             Generating map(to:bl_norm_L2[:size_norm]) 
+        240, Generating "nvkernel_main_F1L240_10" GPU kernel
+             Loop parallelized across teams and threads(128), schedule(static)
+             Generating reduction(+:norm_L2)
+    240, Generating map(tofrom:norm_L2) 
+         Loop not vectorized/parallelized: not countable
+    259, Loop not vectorized/parallelized: potential early exits
+    276, Loop not vectorized/parallelized: contains call
 timeout was set to  600

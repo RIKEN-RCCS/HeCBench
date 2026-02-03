@@ -1,5 +1,9 @@
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c genmtrand.cpp -o genmtrand.o
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c MT.cpp -o MT.o
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c MT_gold.cpp -o MT_gold.o
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU genmtrand.o MT.o MT_gold.o -o main 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "tar xf data.tar.gz; time -p ( ./main 1000 1>log.std 2>log.err ) 2> log.time"
 pkill nvidia-smi
 ../scripts/m.sh
-min max diff memory in [MB] : 0 653 653
+min max diff memory in [MB] : 1 653 652

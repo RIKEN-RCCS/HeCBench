@@ -1,2 +1,174 @@
+main:
+         156, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop
+         159, Loop not vectorized/parallelized: contains call
+         169, Loop not vectorized/parallelized: contains call
+         177, Generating update from(.inl_b_635[:input_width])
+              Loop not vectorized/parallelized: potential early exits
+              Generated vector simd code for the loop containing reductions
+         181, Loop not vectorized/parallelized: contains call
+         189, Generating update from(.inl_b_635[:input_width])
+              Loop not vectorized/parallelized: potential early exits
+              Generated vector simd code for the loop containing reductions
+         193, Loop not vectorized/parallelized: contains call
+         201, Generating update from(.inl_b_635[:input_width])
+              Loop not vectorized/parallelized: potential early exits
+              Generated vector simd code for the loop containing reductions
+         156, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop
+         159, Loop not vectorized/parallelized: contains call
+         169, Loop not vectorized/parallelized: contains call
+         177, Generating update from(.inl_b_693[:input_width])
+              Loop not vectorized/parallelized: potential early exits
+              Generated vector simd code for the loop containing reductions
+         181, Loop not vectorized/parallelized: contains call
+         189, Generating update from(.inl_b_693[:input_width])
+              Loop not vectorized/parallelized: potential early exits
+              Generated vector simd code for the loop containing reductions
+         193, Loop not vectorized/parallelized: contains call
+         201, Generating update from(.inl_b_693[:input_width])
+              Loop not vectorized/parallelized: potential early exits
+              Generated vector simd code for the loop containing reductions
+         156, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop
+         159, Loop not vectorized/parallelized: contains call
+         169, Loop not vectorized/parallelized: contains call
+         177, Generating update from(.inl_b_757[:input_width])
+              Loop not vectorized/parallelized: potential early exits
+              Generated vector simd code for the loop containing reductions
+         181, Loop not vectorized/parallelized: contains call
+         189, Generating update from(.inl_b_757[:input_width])
+              Loop not vectorized/parallelized: potential early exits
+              Generated vector simd code for the loop containing reductions
+         193, Loop not vectorized/parallelized: contains call
+         201, Generating update from(.inl_b_757[:input_width])
+              Loop not vectorized/parallelized: potential early exits
+              Generated vector simd code for the loop containing reductions
+void conv1D<double>(int, int, int):
+    156, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+    159, Loop not vectorized/parallelized: contains call
+    166, Generating map(to:mask[:mask_width]) 
+         Generating map(alloc:b[:input_width]) 
+         Generating map(to:a[:input_width]) 
+    169, Loop not vectorized/parallelized: contains call
+         129, Loop not vectorized/parallelized: potential early exits
+         132, Generated vector simd code for the loop containing reductions
+    177, Generating update from(b[:input_width])
+    181, Loop not vectorized/parallelized: contains call
+         129, Loop not vectorized/parallelized: potential early exits
+         132, Generated vector simd code for the loop containing reductions
+    189, Generating update from(b[:input_width])
+    193, Loop not vectorized/parallelized: contains call
+         129, Loop not vectorized/parallelized: potential early exits
+         132, Generated vector simd code for the loop containing reductions
+    201, Generating update from(b[:input_width])
+void conv1D<float>(int, int, int):
+    156, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+    159, Loop not vectorized/parallelized: contains call
+    166, Generating map(to:mask[:mask_width]) 
+         Generating map(alloc:b[:input_width]) 
+         Generating map(to:a[:input_width]) 
+    169, Loop not vectorized/parallelized: contains call
+         129, Loop not vectorized/parallelized: potential early exits
+         132, Generated vector simd code for the loop containing reductions
+    177, Generating update from(b[:input_width])
+    181, Loop not vectorized/parallelized: contains call
+         129, Loop not vectorized/parallelized: potential early exits
+         132, Generated vector simd code for the loop containing reductions
+    189, Generating update from(b[:input_width])
+    193, Loop not vectorized/parallelized: contains call
+         129, Loop not vectorized/parallelized: potential early exits
+         132, Generated vector simd code for the loop containing reductions
+    201, Generating update from(b[:input_width])
+void conv1D<short>(int, int, int):
+    156, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+    159, Loop not vectorized/parallelized: contains call
+    166, Generating map(to:mask[:mask_width]) 
+         Generating map(alloc:b[:input_width]) 
+         Generating map(to:a[:input_width]) 
+    169, Loop not vectorized/parallelized: contains call
+         129, Loop not vectorized/parallelized: potential early exits
+         132, Generated vector simd code for the loop containing reductions
+    177, Generating update from(b[:input_width])
+    181, Loop not vectorized/parallelized: contains call
+         129, Loop not vectorized/parallelized: potential early exits
+         132, Generated vector simd code for the loop containing reductions
+    189, Generating update from(b[:input_width])
+    193, Loop not vectorized/parallelized: contains call
+         129, Loop not vectorized/parallelized: potential early exits
+         132, Generated vector simd code for the loop containing reductions
+    201, Generating update from(b[:input_width])
+void conv1d<double>(double const*, double const*, double*, int, int):
+     24, #omp target teams distribute parallel for
+         24, Generating "nvkernel__Z6conv1dIdEvPKT_S2_PS0_ii_F1L24_2" GPU kernel
+         26, Loop parallelized across teams and threads(128), schedule(static)
+     26, Loop not vectorized/parallelized: not countable
+     29, Generated vector simd code for the loop containing reductions
+void reference<double>(double const*, double const*, double const*, int, int):
+    129, Loop not vectorized/parallelized: potential early exits
+    132, Generated vector simd code for the loop containing reductions
+void conv1d_tiled<double>(double const*, double const*, double*, int, int):
+     46, #omp target teams num_teams(input_width/256) thread_limit(256)
+         46, Generating "nvkernel__Z12conv1d_tiledIdEvPKT_S2_PS0_ii_F1L46_6" GPU kernel
+         49, #omp parallel
+           70, Barrier
+         52, Team private (tile) located in CUDA shared memory
+     73, Generated vector simd code for the loop containing reductions
+void conv1d_tiled_caching<double>(double const*, double const*, double*, int, int):
+     89, #omp target teams num_teams(input_width/256) thread_limit(256)
+         89, Generating "nvkernel__Z20conv1d_tiled_cachingIdEvPKT_S2_PS0_ii_F1L89_11" GPU kernel
+         92, #omp parallel
+           98, Barrier
+         95, Team private (tile) located in CUDA shared memory
+void conv1d<float>(float const*, float const*, float*, int, int):
+     24, #omp target teams distribute parallel for
+         24, Generating "nvkernel__Z6conv1dIfEvPKT_S2_PS0_ii_F1L24_16" GPU kernel
+         26, Loop parallelized across teams and threads(128), schedule(static)
+     26, Loop not vectorized/parallelized: not countable
+     29, Generated vector simd code for the loop containing reductions
+void reference<float>(float const*, float const*, float const*, int, int):
+    129, Loop not vectorized/parallelized: potential early exits
+    132, Generated vector simd code for the loop containing reductions
+void conv1d_tiled<float>(float const*, float const*, float*, int, int):
+     46, #omp target teams num_teams(input_width/256) thread_limit(256)
+         46, Generating "nvkernel__Z12conv1d_tiledIfEvPKT_S2_PS0_ii_F1L46_20" GPU kernel
+         49, #omp parallel
+           70, Barrier
+         52, Team private (tile) located in CUDA shared memory
+     73, Generated vector simd code for the loop containing reductions
+void conv1d_tiled_caching<float>(float const*, float const*, float*, int, int):
+     89, #omp target teams num_teams(input_width/256) thread_limit(256)
+         89, Generating "nvkernel__Z20conv1d_tiled_cachingIfEvPKT_S2_PS0_ii_F1L89_25" GPU kernel
+         92, #omp parallel
+           98, Barrier
+         95, Team private (tile) located in CUDA shared memory
+void conv1d<short>(short const*, short const*, short*, int, int):
+     24, #omp target teams distribute parallel for
+         24, Generating "nvkernel__Z6conv1dIsEvPKT_S2_PS0_ii_F1L24_30" GPU kernel
+         26, Loop parallelized across teams and threads(128), schedule(static)
+     26, Loop not vectorized/parallelized: not countable
+     29, Generated vector simd code for the loop containing reductions
+void reference<short>(short const*, short const*, short const*, int, int):
+    129, Loop not vectorized/parallelized: potential early exits
+    132, Generated vector simd code for the loop containing reductions
+void conv1d_tiled<short>(short const*, short const*, short*, int, int):
+     46, #omp target teams num_teams(input_width/256) thread_limit(256)
+         46, Generating "nvkernel__Z12conv1d_tiledIsEvPKT_S2_PS0_ii_F1L46_34" GPU kernel
+         49, #omp parallel
+           70, Barrier
+         52, Team private (tile) located in CUDA shared memory
+     73, Generated vector simd code for the loop containing reductions
+void conv1d_tiled_caching<short>(short const*, short const*, short*, int, int):
+     89, #omp target teams num_teams(input_width/256) thread_limit(256)
+         89, Generating "nvkernel__Z20conv1d_tiled_cachingIsEvPKT_S2_PS0_ii_F1L89_39" GPU kernel
+         92, #omp parallel
+           98, Barrier
+         95, Team private (tile) located in CUDA shared memory
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     11, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
 make: *** [Makefile.NVD:69: run_mem] Terminated
 timeout was set to  600

@@ -1,2 +1,6 @@
-make: *** [Makefile.NVD:106: run_mem] Error 127
+../xlqc-cuda/basis.cc:27:10: fatal error: 'gsl/gsl_matrix.h' file not found
+   27 | #include <gsl/gsl_matrix.h>
+      |          ^~~~~~~~~~~~~~~~~~
+1 error generated.
+make: *** [Makefile.NVD:88: basis.o] Error 1
 timeout was set to  600

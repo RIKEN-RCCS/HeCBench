@@ -1,1 +1,1668 @@
+main:
+     41, Loop not fused: different loop trip count
+         Generated vector simd code for the loop
+     52, Loop not fused: function call before adjacent loop
+     54, Generated vector simd code for the loop
+     93, Loop not fused: function call before adjacent loop
+     94, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    104, Recognized memory zero idiom
+    136, include "kernel_GICOV.h"
+           3, Loop not vectorized/parallelized: not countable
+          19, Loop not vectorized: recurrence
+         134, #omp target teams distribute parallel for thread_limit(work_group_size)
+               3, Loop parallelized across teams and threads, schedule(static)
+             133, Generating map(to:host_grad_y[:grad_n*grad_m]) 
+                  Generating map(tofrom:host_gicov[:grad_n*grad_m]) 
+                  Generating map(to:host_grad_x[:grad_n*grad_m],host_sin_angle[:],host_tX[:],host_tY[:],host_cos_angle[:]) 
+             134, Generating "nvkernel_main_F228L134_2" GPU kernel
+         134, Generating implicit map(tofrom:host_tY[:],host_tX[:],host_sin_angle[:],host_cos_angle[:]) 
+    150, Loop not fused: function call before adjacent loop
+    151, Loop not vectorized: unprofitable for target
+    185, include "kernel_dilated.h"
+           2, Loop not vectorized/parallelized: not countable
+          23, Loop not vectorized: unsupported gather
+         183, #omp target teams distribute parallel for thread_limit(local_work_size)
+               2, Loop parallelized across teams and threads, schedule(static)
+             182, Generating map(to:host_gicov[:grad_n*grad_m],host_strel[:strel_n*strel_m]) 
+                  Generating map(from:host_dilated[:max_gicov_n*max_gicov_m]) 
+             183, Generating "nvkernel_main_F229L183_4" GPU kernel
+    196, Loop not fused: function call before adjacent loop
+    197, Generated vector simd code for the loop
+    210, Loop not vectorized/parallelized: potential early exits
+    223, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+    231, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+    242, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+    249, Loop not fused: function call before adjacent loop
+    250, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+    292, Loop not vectorized: data dependency
+         Loop unrolled 9 times (completely unrolled)
+    296, Loop not vectorized/parallelized: potential early exits
+    306, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    316, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 2 times
+    320, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 2 times
+    324, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 2 times
+"avilib.c", line 82: warning: pointless comparison of unsigned integer with zero [unsigned_compare_with_zero]
+        if (n < 0)
+              ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"avilib.c", line 337: warning: integer conversion resulted in a change of sign [integer_sign_change]
+     movi_len = AVI_MAX_LEN - HEADERBYTES + 4;
+                ^
+
+"avilib.c", line 1763: warning: statement is unreachable [code_is_unreachable]
+           break;
+           ^
+
+"avilib.c", line 1768: warning: missing return statement at end of non-void function "AVI_read_data" [implicit_return_from_non_void_function]
+  }
+  ^
+
+AVI_open_output_file(char*):
+    249, Recognized memory zero idiom
+          80, Loop not vectorized/parallelized: contains call
+avi_update_header(avi_t*):
+    456, Loop not vectorized/parallelized: contains call
+          80, Loop not vectorized/parallelized: contains call
+AVI_write_frame(avi_t*, char*, long, int):
+         917, Loop not vectorized/parallelized: contains call
+AVI_write_audio(avi_t*, char*, long):
+         915, Loop not vectorized/parallelized: contains call
+AVI_append_audio(avi_t*, char*, long):
+          80, Loop not vectorized/parallelized: contains call
+          80, Loop not vectorized/parallelized: contains call
+avi_parse_input_file(avi_t*, int):
+          64, Loop not vectorized/parallelized: potential early exits
+          64, Loop not vectorized/parallelized: potential early exits
+          64, Loop not vectorized/parallelized: potential early exits
+          64, Loop not vectorized/parallelized: potential early exits
+          64, Loop not vectorized/parallelized: potential early exits
+   1205, Loop not vectorized/parallelized: potential early exits
+   1314, Loop not fused: function call before adjacent loop
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 2 times
+   1339, Loop not vectorized/parallelized: potential early exits
+          64, Loop not vectorized/parallelized: potential early exits
+          64, Loop not vectorized/parallelized: potential early exits
+          64, Loop not vectorized/parallelized: potential early exits
+   1404, Recognized memory zero idiom
+   1410, Loop not vectorized/parallelized: contains call
+   1414, Loop not fused: complex flow graph
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+   1422, Loop not vectorized/parallelized: potential early exits
+   1430, Generated vector simd code for the loop
+   1445, Loop not vectorized/parallelized: contains call
+   1458, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+AVI_read_frame(avi_t*, char*, int*):
+          64, Loop not vectorized/parallelized: potential early exits
+AVI_set_audio_position(avi_t*, long):
+   1649, Loop not vectorized/parallelized: not countable
+AVI_read_audio(avi_t*, char*, long):
+          64, Loop not vectorized/parallelized: potential early exits
+AVI_read_data(avi_t*, char*, long, char*, long, long*):
+          64, Loop not vectorized/parallelized: potential early exits
+          64, Loop not vectorized/parallelized: potential early exits
+          64, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_8_avilib_c_95c5d392::avi_read(int, char*, unsigned long):
+     64, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_8_avilib_c_95c5d392::avi_write(int, char*, unsigned long):
+     80, Loop not vectorized/parallelized: contains call
+_INTERNAL_8_avilib_c_95c5d392::avi_add_chunk(avi_t*, unsigned char*, unsigned char*, int):
+          80, Loop not vectorized/parallelized: contains call
+          80, Loop not vectorized/parallelized: contains call
+_INTERNAL_8_avilib_c_95c5d392::avi_close_output_file(avi_t*):
+         155, Loop not vectorized/parallelized: contains call
+    727, Loop not vectorized/parallelized: contains call
+          80, Loop not vectorized/parallelized: contains call
+_INTERNAL_8_avilib_c_95c5d392::avi_write_data(avi_t*, char*, unsigned long, int, int):
+         155, Loop not vectorized/parallelized: contains call
+         155, Loop not vectorized/parallelized: contains call
+ellipsetrack(avi_t*, double*, double*, int, int, int, int):
+     32, Loop not fused: complex flow graph
+         Generated vector simd code for the loop
+         520, Loop not fused: complex flow graph
+              Loop not vectorized: may not be beneficial for target
+              Loop unrolled 8 times
+         520, Loop not fused: complex flow graph
+              Loop not vectorized: may not be beneficial for target
+              Loop unrolled 8 times
+         539, Loop not fused: different loop trip count
+              Loop not vectorized: may not be beneficial for target
+              Loop unrolled 4 times
+         540, Loop not fused: complex flow graph
+              Loop not vectorized: may not be beneficial for target
+              Loop unrolled 8 times
+         539, Loop not fused: different loop trip count
+              Loop not vectorized: may not be beneficial for target
+              Loop unrolled 4 times
+         540, Loop not fused: complex flow graph
+              Loop not vectorized: may not be beneficial for target
+              Loop unrolled 8 times
+         539, Loop not fused: different loop trip count
+              Loop not vectorized: may not be beneficial for target
+              Loop unrolled 4 times
+         540, Loop not fused: enclosed in different number of nests
+              Loop not vectorized: may not be beneficial for target
+              Loop unrolled 8 times
+     44, Loop not fused: dependence chain to sibling loop
+     47, Loop not vectorized: unprofitable for target
+         Loop unrolled 4 times
+     53, Loop not fused: function call before adjacent loop
+     54, Loop not vectorized: data dependency
+         520, Loop not fused: function call before adjacent loop
+              Loop not vectorized: may not be beneficial for target
+              Loop unrolled 8 times
+     82, Loop not vectorized/parallelized: too deeply nested
+     95, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    106, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    113, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    129, Recognized memory copy idiom
+    139, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 2 times
+         278, Loop not vectorized/parallelized: potential early exits
+         285, Loop not fused: different controlling conditions
+         286, Loop not vectorized: unknown
+         295, Loop not fused: function call before adjacent loop
+         296, Generated vector simd code for the loop
+    153, Loop not vectorized/parallelized: too deeply nested
+         352, Recognized memory copy idiom
+         360, Loop not fused: function call before adjacent loop
+         361, Loop not vectorized: data dependency
+         386, Loop not vectorized/parallelized: potential early exits
+         390, Recognized memory copy idiom
+         395, Loop not fused: different loop trip count
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+         403, Loop not vectorized: unknown
+         416, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+         431, Loop not fused: complex flow graph
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+         432, Loop not fused: complex flow graph
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+         433, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+         438, Loop not fused: different loop trip count
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+         452, Loop not fused: function call before adjacent loop
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop containing reductions
+         473, Recognized memory copy idiom
+    171, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+MGVF(MAT**, double, double, int):
+    278, Loop not vectorized/parallelized: potential early exits
+    285, Loop not fused: different controlling conditions
+    286, Loop not vectorized: unknown
+    295, Loop not fused: function call before adjacent loop
+    296, Generated vector simd code for the loop
+ellipseevolve(MAT*, double*, double*, double*, double*, int, double, double):
+    352, Recognized memory copy idiom
+    360, Loop not fused: function call before adjacent loop
+    361, Loop not vectorized: data dependency
+    386, Loop not vectorized/parallelized: potential early exits
+    390, Recognized memory copy idiom
+    395, Loop not fused: different loop trip count
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+    403, Loop not vectorized: unknown
+    416, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+         489, Loop not fused: complex flow graph
+         490, Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+         489, Loop not fused: complex flow graph
+         490, Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+         489, Loop not fused: function call before adjacent loop
+         490, Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+    438, Loop not fused: different loop trip count
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+    452, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop containing reductions
+    473, Recognized memory copy idiom
+sum_m(MAT*):
+    490, Generated vector simd code for the loop containing reductions
+         Loop unrolled 4 times
+sum_v(VEC*):
+    503, Generated vector simd code for the loop containing reductions
+         Loop unrolled 4 times
+alloc_2d_double(int, int):
+    520, Loop not vectorized: may not be beneficial for target
+         Loop unrolled 8 times
+alloc_3d_double(int, int, int):
+    539, Loop not fused: different loop trip count
+         Loop not vectorized: may not be beneficial for target
+         Loop unrolled 4 times
+    540, Loop not vectorized: may not be beneficial for target
+         Loop unrolled 8 times
+heaviside(float):
+     18, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+IMGVF_GPU(MAT**, MAT**, double, double, double, int, double, int):
+     39, Loop not fused: function call before adjacent loop
+         Loop not vectorized: unsupported gather
+     52, Loop not vectorized/parallelized: not countable
+     68, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 8 times
+     91, include "kernel_IMGVF.h"
+           2, #omp target teams num_teams(num_cells) thread_limit(256)
+               2, Generating "nvkernel__Z9IMGVF_GPUPP3MATS1_dddidi_F227L2_2" GPU kernel
+               7, #omp parallel
+                33, Barrier
+                37, Barrier
+               134, Barrier
+               140, Barrier
+               146, Barrier
+               154, Barrier
+               168, Barrier
+              88, Generating map(to:host_I_all[:total_size],host_I_offsets[:num_cells],host_m_array[:num_cells],host_n_array[:num_cells]) 
+                  Generating map(tofrom:host_IMGVF_all[:total_size]) 
+             101, Team private (cell_converged,IMGVF_buffer,IMGVF) located in CUDA shared memory
+          27, Loop not vectorized: data dependency
+          59, Loop not vectorized/parallelized: contains call
+         150, Loop not vectorized/parallelized: contains call
+         175, Loop not vectorized: data dependency
+    100, Loop not fused: function call before adjacent loop
+    107, Generated vector simd code for the loop
+         Loop unrolled 8 times
+get_frame(avi_t*, int, int, int):
+          53, Loop not fused: no successor loop
+          54, Generated vector simd code for the loop
+          58, Loop not fused: no successor loop
+          59, Generated vector simd code for the loop
+          53, Loop not fused: no successor loop
+          54, Generated vector simd code for the loop
+          58, Loop not fused: function call before adjacent loop
+          59, Generated vector simd code for the loop
+chop_flip_image(unsigned char*, int, int, int, int, int, int, int):
+     53, Loop not fused: no successor loop
+     54, Generated vector simd code for the loop
+     59, Generated vector simd code for the loop
+structuring_element(int):
+    153, Generated vector simd code for the loop
+TMatrix(unsigned int, unsigned int):
+    207, Loop not fused: different loop trip count
+         Generated vector simd code for the loop
+    211, Loop not fused: different loop trip count
+         Generated vector simd code for the loop
+    214, Loop not fused: different loop trip count
+         Generated vector simd code for the loop
+    218, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+    231, Loop not vectorized: data dependency
+    249, Recognized memory copy idiom
+uniformseg(VEC*, VEC*, MAT*, MAT*):
+    275, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+    284, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    287, Loop not fused: enclosed in different number of nests
+    291, Loop not vectorized: unknown
+    303, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+m_min(MAT*):
+    317, Generated vector simd code for the loop containing reductions
+m_max(MAT*):
+    334, Generated vector simd code for the loop containing reductions
+getsampling(MAT*, int):
+    356, Loop not fused: different loop trip count
+         Generated vector simd code for the loop
+    360, Loop not fused: different loop trip count
+         Generated vector simd code for the loop
+    363, Loop not fused: different loop trip count
+         Generated vector simd code for the loop
+    367, Loop not fused: different loop trip count
+         Generated vector simd code for the loop
+    372, Loop not fused: function call before adjacent loop
+    374, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+getfdriv(MAT*, int):
+    408, Loop not fused: different loop trip count
+         Generated vector simd code for the loop
+    412, Loop not fused: different loop trip count
+         Generated vector simd code for the loop
+    415, Loop not fused: different loop trip count
+         Generated vector simd code for the loop
+    419, Loop not fused: different loop trip count
+         Generated vector simd code for the loop
+    424, Loop not fused: function call before adjacent loop
+    426, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+linear_interp2(MAT*, VEC*, VEC*):
+    457, Loop not vectorized: data dependency
+splineenergyform01(MAT*, MAT*, MAT*, MAT*, int, double, double, int):
+         356, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+         360, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+         363, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+         367, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+         372, Loop not fused: function call before adjacent loop
+         374, Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+         356, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+         360, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+         363, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+         367, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+         372, Loop not fused: function call before adjacent loop
+         374, Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+         408, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+         412, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+         415, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+         419, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+         424, Loop not fused: function call before adjacent loop
+         426, Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+         408, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+         412, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+         415, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+         419, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+         424, Loop not fused: function call before adjacent loop
+         426, Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+    493, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 2 times
+    497, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 2 times
+    501, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Vectorized loop was interleaved
+         Loop unrolled 4 times
+    505, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Vectorized loop was interleaved
+         Loop unrolled 4 times
+    509, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Vectorized loop was interleaved
+         Loop unrolled 4 times
+    513, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Vectorized loop was interleaved
+         Loop unrolled 4 times
+         457, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+         457, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+         457, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+         457, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+    541, Loop not fused: different loop trip count
+         Generated vector simd code for the loop
+    545, Loop not fused: different loop trip count
+         Generated vector simd code for the loop
+    548, Loop not fused: different loop trip count
+         Generated vector simd code for the loop
+    552, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+    558, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Vectorized loop was interleaved
+         Loop unrolled 4 times
+    562, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 4 times
+    566, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 4 times
+    573, Loop not fused: complex flow graph
+    575, Loop not vectorized: data dependency
+    659, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    662, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    667, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    670, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+gradient_x(MAT*):
+     23, Loop not vectorized: data dependency
+gradient_y(MAT*):
+     45, Loop not vectorized: data dependency
+mean(VEC*):
+     63, Generated vector simd code for the loop containing reductions
+         Loop unrolled 4 times
+std_dev(VEC*):
+          63, Loop not fused: different loop trip count
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+     74, Generated vector simd code for the loop containing reductions
+"copy.c", line 229: warning: variable "dim0" was set but never used [set_but_not_used]
+      int		dim0, i;
+         		^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"copy.c", line 27: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	rcsid[] = "$Id: copy.c,v 1.2 1994/01/13 05:37:14 des Exp $";
+        	    	^
+
+"err.c", line 62: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  {	  "unknown error",			    /* 0 */
+   	  ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"err.c", line 63: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	  "sizes of objects don't match",	    /* 1 */
+  	  ^
+
+"err.c", line 64: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	  "index out of bounds",		    /* 2 */
+  	  ^
+
+"err.c", line 65: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	  "can't allocate memory",		    /* 3 */
+  	  ^
+
+"err.c", line 66: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	  "singular matrix",			    /* 4 */
+  	  ^
+
+"err.c", line 67: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	  "matrix not positive definite",	    /* 5 */
+  	  ^
+
+"err.c", line 68: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	  "incorrect format input",		    /* 6 */
+  	  ^
+
+"err.c", line 69: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	  "bad input file/device",		    /* 7 */
+  	  ^
+
+"err.c", line 70: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	  "NULL objects passed",		    /* 8 */
+  	  ^
+
+"err.c", line 71: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	  "matrix not square",			    /* 9 */
+  	  ^
+
+"err.c", line 72: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	  "object out of range",		    /* 10 */
+  	  ^
+
+"err.c", line 73: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	  "can't do operation in situ for non-square matrix",   /* 11 */
+  	  ^
+
+"err.c", line 74: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	  "can't do operation in situ",		    /* 12 */
+  	  ^
+
+"err.c", line 75: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	  "excessive number of iterations",	    /* 13 */
+  	  ^
+
+"err.c", line 76: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	  "convergence criterion failed",	    /* 14 */
+  	  ^
+
+"err.c", line 77: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	  "bad starting value",			    /* 15 */
+  	  ^
+
+"err.c", line 78: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	  "floating exception",			    /* 16 */
+  	  ^
+
+"err.c", line 79: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	  "internal inconsistency (data structure)",/* 17 */
+  	  ^
+
+"err.c", line 80: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	  "unexpected end-of-file",		    /* 18 */
+  	  ^
+
+"err.c", line 81: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	  "shared vectors (cannot release them)",   /* 19 */  
+  	  ^
+
+"err.c", line 82: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	  "negative argument",			    /* 20 */
+  	  ^
+
+"err.c", line 83: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	  "cannot overwrite object",                /* 21 */
+  	  ^
+
+"err.c", line 84: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	  "breakdown in iterative method"           /* 22 */
+  	  ^
+
+"err.c", line 90: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     "unknown warning",				  /* 0 */
+     ^
+
+"err.c", line 91: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     "wrong type number (use macro TYPE_*)",	  /* 1 */
+     ^
+
+"err.c", line 92: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     "no corresponding mem_stat_mark",		  /* 2 */
+     ^
+
+"err.c", line 93: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     "computed norm of a residual is less than 0",  /* 3 */
+     ^
+
+"err.c", line 94: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     "resizing a shared vector"			  /* 4 */
+     ^
+
+"err.c", line 31: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	rcsid[] = "$Id: err.c,v 1.6 1995/01/30 14:49:14 des Exp $";
+        	    	^
+
+"matrixio.c", line 34: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static char rcsid[] = "$Id: matrixio.c,v 1.4 1994/01/13 05:31:10 des Exp $";
+              ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"memory.c", line 32: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	rcsid[] = "$Id: memory.c,v 1.13 1994/04/05 02:10:37 des Exp $";
+        	    	^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"vecop.c", line 32: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	rcsid[] = "$Id: vecop.c,v 1.5 1996/08/20 18:18:10 stewart Exp $";
+        	    	^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"matop.c", line 33: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	rcsid[] = "$Id: matop.c,v 1.4 1995/03/27 15:43:57 des Exp $";
+        	    	^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"pxop.c", line 33: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	rcsid[] = "$Id: pxop.c,v 1.6 1995/06/08 14:57:11 des Exp $";
+        	    	^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"submat.c", line 32: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	rcsid[] = "$Id: submat.c,v 1.2 1994/01/13 05:28:12 des Exp $";
+        	    	^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"init.c", line 33: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	rcsid[] = "$Id: init.c,v 1.6 1994/01/13 05:36:58 des Exp $";
+        	    	^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"otherio.c", line 31: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	rcsid[] = "$Id: otherio.c,v 1.2 1994/01/13 05:34:52 des Exp $";
+        	    	^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"machine.c", line 34: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  static	char	*rcsid = "$Id: machine.c,v 1.4 1994/01/13 05:28:56 des Exp $";
+        	    	         ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"machine.c", line 34: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	*rcsid = "$Id: machine.c,v 1.4 1994/01/13 05:28:56 des Exp $";
+        	    	 ^
+
+"matlab.c", line 39: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static char rcsid[] = "$Id: matlab.c,v 1.8 1995/02/14 20:12:36 des Exp $";
+              ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"ivecop.c", line 32: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	rcsid[] = "$Id: ivecop.c,v 1.6 1996/08/20 18:19:21 stewart Exp $";
+        	    	^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"ivecop.c", line 34: warning: variable "line" was declared but never referenced [declared_but_not_referenced]
+  static char    line[MAXLINE];
+                 ^
+
+"meminfo.c", line 53: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     "MAT",
+     ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"meminfo.c", line 54: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     "BAND",
+     ^
+
+"meminfo.c", line 55: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     "PERM",
+     ^
+
+"meminfo.c", line 56: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     "VEC",
+     ^
+
+"meminfo.c", line 57: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     "IVEC"
+     ^
+
+"meminfo.c", line 59: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+       ,"ITER",
+        ^
+
+"meminfo.c", line 60: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+       "SPROW",
+       ^
+
+"meminfo.c", line 61: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+       "SPMAT"
+       ^
+
+"meminfo.c", line 64: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+         ,"ZVEC",
+          ^
+
+"meminfo.c", line 65: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+         "ZMAT"
+         ^
+
+"meminfo.c", line 45: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static char rcsid[] = "$Id: meminfo.c,v 1.1 1994/01/13 05:31:39 des Exp $";
+              ^
+
+"memstat.c", line 43: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static char rcsid[] = "$Id: memstat.c,v 1.1 1994/01/13 05:32:44 des Exp $";
+              ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+ar: creating meschach.a
+"lufactor.c", line 65: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	MEM_STAT_REG(scale,TYPE_VEC);
+  	^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"lufactor.c", line 218: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	MEM_STAT_REG(A_cp,TYPE_MAT);
+  	^
+
+"lufactor.c", line 219: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	MEM_STAT_REG(tmp, TYPE_VEC);
+  	^
+
+"lufactor.c", line 220: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	MEM_STAT_REG(tmp2,TYPE_VEC);
+  	^
+
+"lufactor.c", line 221: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	MEM_STAT_REG(pivot,TYPE_PERM);
+  	^
+
+"lufactor.c", line 265: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(y,TYPE_VEC);
+      ^
+
+"lufactor.c", line 266: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(z,TYPE_VEC);
+      ^
+
+"lufactor.c", line 32: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	rcsid[] = "$Id: lufactor.c,v 1.10 1995/05/16 17:26:44 des Exp $";
+        	    	^
+
+"bkpfacto.c", line 53: warning: variable "A_me" was set but never used [set_but_not_used]
+  	Real	**A_me, tmp;
+  	    	  ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"bkpfacto.c", line 110: warning: variable "A_me" was set but never used [set_but_not_used]
+  	Real	**A_me, aii, aip1, aip1i, lambda, sigma, tmp;
+  	    	  ^
+
+"bkpfacto.c", line 253: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	MEM_STAT_REG(tmp,TYPE_VEC);
+  	^
+
+"bkpfacto.c", line 242: warning: variable "A_me" was set but never used [set_but_not_used]
+  	Real	**A_me, a11, a12, a22, b1, b2, det, sum, *tmp_ve, tmp_diag;
+  	    	  ^
+
+"bkpfacto.c", line 242: warning: variable "tmp_ve" was set but never used [set_but_not_used]
+  	Real	**A_me, a11, a12, a22, b1, b2, det, sum, *tmp_ve, tmp_diag;
+  	    	                                          ^
+
+"bkpfacto.c", line 31: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	rcsid[] = "$Id: bkpfacto.c,v 1.7 1994/01/13 05:45:50 des Exp $";
+        	    	^
+
+"chfactor.c", line 132: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	MEM_STAT_REG(r,TYPE_VEC);
+  	^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"chfactor.c", line 32: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	rcsid[] = "$Id: chfactor.c,v 1.2 1994/01/13 05:36:36 des Exp $";
+        	    	^
+
+"qrfactor.c", line 83: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(hh,TYPE_VEC);
+      ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"qrfactor.c", line 84: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(w, TYPE_VEC);
+      ^
+
+"qrfactor.c", line 132: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(tmp1,TYPE_VEC);
+      ^
+
+"qrfactor.c", line 133: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(tmp2,TYPE_VEC);
+      ^
+
+"qrfactor.c", line 134: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(gamma,TYPE_VEC);
+      ^
+
+"qrfactor.c", line 135: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(w,   TYPE_VEC);
+      ^
+
+"qrfactor.c", line 269: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(tmp1,TYPE_VEC);
+      ^
+
+"qrfactor.c", line 270: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(tmp2,TYPE_VEC);
+      ^
+
+"qrfactor.c", line 343: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(tmp,TYPE_VEC);
+      ^
+
+"qrfactor.c", line 378: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(tmp,TYPE_VEC);
+      ^
+
+"qrfactor.c", line 528: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(y,TYPE_VEC);
+      ^
+
+"qrfactor.c", line 41: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	rcsid[] = "$Id: qrfactor.c,v 1.5 1994/01/13 05:35:07 des Exp $";
+        	    	^
+
+"solve.c", line 32: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	rcsid[] = "$Id: solve.c,v 1.3 1994/01/13 05:29:57 des Exp $";
+        	    	^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"hsehldr.c", line 190: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+    MEM_STAT_REG(w,TYPE_VEC);
+    ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"hsehldr.c", line 36: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	rcsid[] = "$Id: hsehldr.c,v 1.2 1994/01/13 05:36:29 des Exp $";
+        	    	^
+
+"givens.c", line 37: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	rcsid[] = "$Id: givens.c,v 1.3 1995/03/27 15:41:15 des Exp $";
+        	    	^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"update.c", line 32: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	rcsid[] = "$Id: update.c,v 1.2 1994/01/13 05:26:06 des Exp $";
+        	    	^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"norm.c", line 30: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	rcsid[] = "$Id: norm.c,v 1.6 1994/01/13 05:34:35 des Exp $";
+        	    	^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"hessen.c", line 65: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	MEM_STAT_REG(hh,TYPE_VEC);
+  	^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"hessen.c", line 66: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	MEM_STAT_REG(w, TYPE_VEC);
+  	^
+
+"hessen.c", line 117: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	MEM_STAT_REG(tmp1,TYPE_VEC);
+  	^
+
+"hessen.c", line 118: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	MEM_STAT_REG(tmp2,TYPE_VEC);
+  	^
+
+"hessen.c", line 33: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	rcsid[] = "$Id: hessen.c,v 1.2 1994/01/13 05:36:24 des Exp $";
+        	    	^
+
+"symmeig.c", line 201: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	MEM_STAT_REG(tmp,TYPE_MAT);
+  	^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"symmeig.c", line 202: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	MEM_STAT_REG(b,TYPE_VEC);
+  	^
+
+"symmeig.c", line 203: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	MEM_STAT_REG(diag,TYPE_VEC);
+  	^
+
+"symmeig.c", line 204: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	MEM_STAT_REG(beta,TYPE_VEC);
+  	^
+
+"symmeig.c", line 37: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static char rcsid[] = "$Id: symmeig.c,v 1.6 1995/03/27 15:45:55 des Exp $";
+              ^
+
+"schur.c", line 73: warning: variable "A_me" was set but never used [set_but_not_used]
+  	Real	**A_me, ip, prod;
+  	    	  ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"schur.c", line 122: warning: variable "A_me" was set but never used [set_but_not_used]
+  	Real	**A_me, ip, prod;
+  	    	  ^
+
+"schur.c", line 176: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(diag,TYPE_VEC);
+      ^
+
+"schur.c", line 177: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(beta,TYPE_VEC);
+      ^
+
+"schur.c", line 162: warning: variable "t" was declared but never referenced [declared_but_not_referenced]
+      Real	beta2, c, discrim, dummy, nu1, s, t, tmp, x, y, z;
+          	                                  ^
+
+"schur.c", line 533: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	MEM_STAT_REG(tmp1_re,TYPE_VEC);
+  	^
+
+"schur.c", line 534: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	MEM_STAT_REG(tmp1_im,TYPE_VEC);
+  	^
+
+"schur.c", line 535: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	MEM_STAT_REG(tmp2_re,TYPE_VEC);
+  	^
+
+"schur.c", line 536: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	MEM_STAT_REG(tmp2_im,TYPE_VEC);
+  	^
+
+"schur.c", line 39: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static char rcsid[] = "$Id: schur.c,v 1.7 1994/03/17 05:36:53 des Exp $";
+              ^
+
+"svd.c", line 328: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	MEM_STAT_REG(tmp1,TYPE_VEC);
+  	^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"svd.c", line 329: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	MEM_STAT_REG(tmp2,TYPE_VEC);
+  	^
+
+"svd.c", line 330: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	MEM_STAT_REG(w,   TYPE_VEC);
+  	^
+
+"svd.c", line 402: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	MEM_STAT_REG(f,TYPE_VEC);
+  	^
+
+"svd.c", line 37: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static char rcsid[] = "$Id: svd.c,v 1.7 1995/09/08 14:45:43 des Exp $";
+              ^
+
+"fft.c", line 33: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static char rcsid[] = "$Id: fft.c,v 1.4 1996/08/20 14:21:05 stewart Exp $";
+              ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"mfunc.c", line 118: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(wkspace,TYPE_MAT);
+     ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"mfunc.c", line 122: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+         MEM_STAT_REG(tmp,TYPE_MAT);
+         ^
+
+"mfunc.c", line 178: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(N,TYPE_MAT);
+     ^
+
+"mfunc.c", line 179: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(D,TYPE_MAT);
+     ^
+
+"mfunc.c", line 180: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(Apow,TYPE_MAT);
+     ^
+
+"mfunc.c", line 209: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(c1,TYPE_VEC);
+     ^
+
+"mfunc.c", line 215: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(tmp,TYPE_VEC);
+     ^
+
+"mfunc.c", line 223: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(Y,TYPE_MAT);
+     ^
+
+"mfunc.c", line 272: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(pivot,TYPE_PERM);
+     ^
+
+"mfunc.c", line 360: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(Apow,TYPE_MAT);
+     ^
+
+"mfunc.c", line 362: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(tmp,TYPE_VEC);
+     ^
+
+"mfunc.c", line 384: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(Y,TYPE_MAT);
+     ^
+
+"mfunc.c", line 38: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static char	rcsid[] = "$Id: mfunc.c,v 1.2 1994/11/01 05:57:56 des Exp $";
+             	^
+
+"bdfactor.c", line 33: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	rcsid[] = "$Id: ";
+        	    	^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"sparse.c", line 138: warning: variable "n" was set but never used [set_but_not_used]
+     int	i, j_idx, m, n, max_idx;
+        	             ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"sparse.c", line 178: warning: variable "n" was set but never used [set_but_not_used]
+     int	i, j_idx, m, n, max_idx;
+        	             ^
+
+"sparse.c", line 534: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+        MEM_STAT_REG(tmp,TYPE_SPROW);
+        ^
+
+"sparse.c", line 589: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+        MEM_STAT_REG(tmp,TYPE_SPROW);
+        ^
+
+"sparse.c", line 645: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+        MEM_STAT_REG(tmp,TYPE_SPROW);
+        ^
+
+"sparse.c", line 745: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+        MEM_STAT_REG(scratch,TYPE_SPROW);
+        ^
+
+"sparse.c", line 939: warning: variable "k" was declared but never referenced [declared_but_not_referenced]
+    int     i, j, k, idx, cp;
+                  ^
+
+"sparse.c", line 37: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static char	rcsid[] = "$Id: sparse.c,v 1.10 1994/03/08 05:46:07 des Exp $";
+             	^
+
+"sprow.c", line 37: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static char	rcsid[] = "$Id: sprow.c,v 1.1 1994/01/13 05:35:36 des Exp $";
+             	^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"sparseio.c", line 35: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static char rcsid[] = "$Id: sparseio.c,v 1.4 1994/01/13 05:34:25 des Exp $";
+              ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"spchfctr.c", line 409: warning: variable "n" was set but never used [set_but_not_used]
+  	int	k, m, n, nxt_row, nxt_idx, diag_idx;
+  	   	      ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"spchfctr.c", line 33: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static char	rcsid[] = "$Id: spchfctr.c,v 1.5 1996/08/20 19:45:33 stewart Exp $";
+             	^
+
+"splufctr.c", line 71: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	MEM_STAT_REG(col_vals,TYPE_VEC);
+  	^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"splufctr.c", line 81: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	   MEM_STAT_REG(merge,TYPE_SPROW);
+  	   ^
+
+"splufctr.c", line 249: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	MEM_STAT_REG(tmp,TYPE_VEC);
+  	^
+
+"splufctr.c", line 328: warning: variable "m" was set but never used [set_but_not_used]
+      int		i, k, idx, idx_piv, m, n, old_idx, old_idx_piv;
+         		                    ^
+
+"spbkp.c", line 647: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(deg_list,TYPE_IVEC);
+      ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"spbkp.c", line 648: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(order,TYPE_PERM);
+      ^
+
+"spbkp.c", line 656: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(scan_row,TYPE_IVEC);
+      ^
+
+"spbkp.c", line 657: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(scan_idx,TYPE_IVEC);
+      ^
+
+"spbkp.c", line 658: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(col_list,TYPE_IVEC);
+      ^
+
+"spbkp.c", line 659: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(orig_idx,TYPE_IVEC);
+      ^
+
+"spbkp.c", line 660: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(orig1_idx,TYPE_IVEC);
+      ^
+
+"spbkp.c", line 661: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(tmp_iv,TYPE_IVEC);
+      ^
+
+"spbkp.c", line 612: warning: variable "r" was set but never used [set_but_not_used]
+      int		i, j, k, l, n, onebyone, r;
+         		                         ^
+
+"spbkp.c", line 614: warning: variable "row_num" was set but never used [set_but_not_used]
+      int		row_num;
+         		^
+
+"spbkp.c", line 1332: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(tmp,TYPE_VEC);
+      ^
+
+"spbkp.c", line 34: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	rcsid[] = "$Id: spbkp.c,v 1.6 1996/08/20 19:53:10 stewart Exp $";
+        	    	^
+
+"spswap.c", line 33: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	rcsid[] = "$Id: spswap.c,v 1.3 1994/01/13 05:44:43 des Exp $";
+        	    	^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"iter0.c", line 43: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static char rcsid[] = "$Id: iter0.c,v 1.3 1995/01/30 14:50:56 des Exp $";
+              ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"itersym.c", line 126: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(r,TYPE_VEC);
+     ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"itersym.c", line 127: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(p,TYPE_VEC);
+     ^
+
+"itersym.c", line 128: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(q,TYPE_VEC);
+     ^
+
+"itersym.c", line 132: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+        MEM_STAT_REG(z,TYPE_VEC);
+        ^
+
+"itersym.c", line 223: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(v,TYPE_VEC);
+     ^
+
+"itersym.c", line 224: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(w,TYPE_VEC);
+     ^
+
+"itersym.c", line 225: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(tmp,TYPE_VEC);
+     ^
+
+"itersym.c", line 302: warning: allowing all exceptions is incompatible with previous function "frexp(double, int *) noexcept(true)" (declared at line 98 of "/usr/include/bits/mathcalls.h") [omitted_exception_specification]
+  extern	double	frexp(double num, int *exponent),
+        	      	                                ^
+
+"itersym.c", line 303: warning: allowing all exceptions is incompatible with previous function "ldexp(double, int) noexcept(true)" (declared at line 101 of "/usr/include/bits/mathcalls.h") [omitted_exception_specification]
+    ldexp(double num, int exponent);
+                                   ^
+
+"itersym.c", line 442: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(b,TYPE_VEC);
+     ^
+
+"itersym.c", line 458: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(a2,TYPE_VEC);
+     ^
+
+"itersym.c", line 459: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(b2,TYPE_VEC);
+     ^
+
+"itersym.c", line 580: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(r,TYPE_VEC);
+     ^
+
+"itersym.c", line 581: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(p,TYPE_VEC);
+     ^
+
+"itersym.c", line 582: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(q,TYPE_VEC);
+     ^
+
+"itersym.c", line 586: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+        MEM_STAT_REG(z,TYPE_VEC);
+        ^
+
+"itersym.c", line 42: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static char rcsid[] = "$Id: itersym.c,v 1.2 1995/01/30 14:55:54 des Exp $";
+              ^
+
+"iternsym.c", line 87: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(p,TYPE_VEC);
+     ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"iternsym.c", line 88: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(q,TYPE_VEC);
+     ^
+
+"iternsym.c", line 89: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(r,TYPE_VEC);
+     ^
+
+"iternsym.c", line 90: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(u,TYPE_VEC);
+     ^
+
+"iternsym.c", line 91: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(v,TYPE_VEC);
+     ^
+
+"iternsym.c", line 95: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+        MEM_STAT_REG(z,TYPE_VEC); 
+        ^
+
+"iternsym.c", line 259: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(u,TYPE_VEC);
+     ^
+
+"iternsym.c", line 260: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(v,TYPE_VEC);
+     ^
+
+"iternsym.c", line 261: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(w,TYPE_VEC);
+     ^
+
+"iternsym.c", line 262: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(tmp,TYPE_VEC);  
+     ^
+
+"iternsym.c", line 404: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(u,TYPE_VEC);
+     ^
+
+"iternsym.c", line 405: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(r,TYPE_VEC);
+     ^
+
+"iternsym.c", line 406: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(s,TYPE_VEC);
+     ^
+
+"iternsym.c", line 407: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(tmp,TYPE_VEC);
+     ^
+
+"iternsym.c", line 507: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(u,TYPE_VEC);
+     ^
+
+"iternsym.c", line 508: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(r,TYPE_VEC);
+     ^
+
+"iternsym.c", line 607: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(Q1,TYPE_MAT);
+     ^
+
+"iternsym.c", line 608: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(R1,TYPE_MAT);
+     ^
+
+"iternsym.c", line 688: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(r,TYPE_VEC);
+     ^
+
+"iternsym.c", line 689: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(u,TYPE_VEC);
+     ^
+
+"iternsym.c", line 690: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(rhs,TYPE_VEC);
+     ^
+
+"iternsym.c", line 691: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(givs,TYPE_VEC);
+     ^
+
+"iternsym.c", line 692: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(givc,TYPE_VEC);
+     ^
+
+"iternsym.c", line 696: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(R,TYPE_MAT);
+     ^
+
+"iternsym.c", line 697: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(Q,TYPE_MAT);		
+     ^
+
+"iternsym.c", line 709: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+        MEM_STAT_REG(z,TYPE_VEC);
+        ^
+
+"iternsym.c", line 921: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(R1,TYPE_MAT);
+     ^
+
+"iternsym.c", line 922: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(r,TYPE_VEC);
+     ^
+
+"iternsym.c", line 923: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(r1,TYPE_VEC);
+     ^
+
+"iternsym.c", line 1005: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(As,TYPE_VEC);
+     ^
+
+"iternsym.c", line 1006: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(alpha,TYPE_VEC);
+     ^
+
+"iternsym.c", line 1007: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(beta,TYPE_VEC);
+     ^
+
+"iternsym.c", line 1012: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(H,TYPE_MAT);
+     ^
+
+"iternsym.c", line 1013: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(N,TYPE_MAT);
+     ^
+
+"iternsym.c", line 1018: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+        MEM_STAT_REG(z,TYPE_VEC);
+        ^
+
+"iternsym.c", line 1270: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(r,TYPE_VEC);
+     ^
+
+"iternsym.c", line 1271: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(p,TYPE_VEC);
+     ^
+
+"iternsym.c", line 1272: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(q,TYPE_VEC);
+     ^
+
+"iternsym.c", line 1275: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+     MEM_STAT_REG(z,TYPE_VEC);
+     ^
+
+"iternsym.c", line 42: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static char rcsid[] = "$Header: iternsym.c,v 1.6 1995/01/30 14:53:01 des Exp $";
+              ^
+
+"iternsym.c", line 594: warning: function "test_gmres" was declared but never referenced [declared_but_not_referenced]
+  static void test_gmres(ITER *ip, int i, MAT *Q, MAT *R,
+              ^
+
+"iternsym.c", line 902: warning: function "test_mgcr" was declared but never referenced [declared_but_not_referenced]
+  static void test_mgcr(ITER *ip, int i, MAT *Q, MAT *R)
+              ^
+
+"zmachine.c", line 34: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  static	char	*rcsid = "$Id: zmachine.c,v 1.1 1994/01/13 04:25:41 des Exp $";
+        	    	         ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"zmachine.c", line 34: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	*rcsid = "$Id: zmachine.c,v 1.1 1994/01/13 04:25:41 des Exp $";
+        	    	 ^
+
+"zcopy.c", line 202: warning: variable "dim0" was set but never used [set_but_not_used]
+      int		dim0, i;
+         		^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"zcopy.c", line 27: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	rcsid[] = "$Id: zcopy.c,v 1.1 1994/01/13 04:28:42 des Exp $";
+        	    	^
+
+"zmatio.c", line 32: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static char rcsid[] = "$Id: zmatio.c,v 1.1 1994/01/13 04:25:18 des Exp $";
+              ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"zmemory.c", line 32: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	rcsid[] = "$Id: zmemory.c,v 1.2 1994/04/05 02:13:14 des Exp $";
+        	    	^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"zvecop.c", line 30: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	rcsid[] = "$Id: zvecop.c,v 1.3 1997/10/07 16:13:54 stewart Exp stewart $";
+        	    	^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"zmatop.c", line 31: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	rcsid[] = "$Id: zmatop.c,v 1.2 1995/03/27 15:49:03 des Exp $";
+        	    	^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"znorm.c", line 31: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	rcsid[] = "$Id: znorm.c,v 1.1 1994/01/13 04:21:31 des Exp $";
+        	    	^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"zfunc.c", line 34: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static char rcsid[] = "$Id: zfunc.c,v 1.3 1995/04/07 16:27:25 des Exp $";
+              ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"zlufctr.c", line 59: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	MEM_STAT_REG(scale,TYPE_VEC);
+  	^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"zlufctr.c", line 194: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	MEM_STAT_REG(A_cp,TYPE_ZMAT);
+  	^
+
+"zlufctr.c", line 195: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	MEM_STAT_REG(tmp, TYPE_ZVEC);
+  	^
+
+"zlufctr.c", line 196: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	MEM_STAT_REG(tmp2,TYPE_ZVEC);
+  	^
+
+"zlufctr.c", line 197: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	MEM_STAT_REG(pivot,TYPE_PERM);
+  	^
+
+"zlufctr.c", line 237: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(y,TYPE_ZVEC);
+      ^
+
+"zlufctr.c", line 238: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(z,TYPE_ZVEC);
+      ^
+
+"zlufctr.c", line 31: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	rcsid[] = "$Id: zlufctr.c,v 1.3 1996/08/20 20:07:09 stewart Exp $";
+        	    	^
+
+"zsolve.c", line 32: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	rcsid[] = "$Id: zsolve.c,v 1.1 1994/01/13 04:20:33 des Exp $";
+        	    	^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"zmatlab.c", line 97: warning: variable "j" was declared but never referenced [declared_but_not_referenced]
+      int	i, j;
+         	   ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"zmatlab.c", line 40: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static char rcsid[] = "$Id: zmatlab.c,v 1.2 1995/02/14 20:13:27 des Exp $";
+              ^
+
+"zhsehldr.c", line 202: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	MEM_STAT_REG(w,TYPE_ZVEC);
+  	^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"zhsehldr.c", line 187: warning: variable "scale" was declared but never referenced [declared_but_not_referenced]
+  	complex	scale;
+  	       	^
+
+"zhsehldr.c", line 188: warning: variable "i" was declared but never referenced [declared_but_not_referenced]
+  	int	i /*, k */;
+  	   	^
+
+"zhsehldr.c", line 37: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	rcsid[] = "$Id: zhsehldr.c,v 1.2 1994/04/07 01:43:47 des Exp $";
+        	    	^
+
+"zqrfctr.c", line 80: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(tmp1,TYPE_ZVEC);
+      ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"zqrfctr.c", line 81: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(w,   TYPE_ZVEC);
+      ^
+
+"zqrfctr.c", line 126: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(tmp1,TYPE_ZVEC);
+      ^
+
+"zqrfctr.c", line 127: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(tmp2,TYPE_ZVEC);
+      ^
+
+"zqrfctr.c", line 128: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(gamma,TYPE_VEC);
+      ^
+
+"zqrfctr.c", line 129: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(w,   TYPE_ZVEC);
+      ^
+
+"zqrfctr.c", line 256: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(tmp1,TYPE_ZVEC);
+      ^
+
+"zqrfctr.c", line 257: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(tmp2,TYPE_ZVEC);
+      ^
+
+"zqrfctr.c", line 325: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(tmp,TYPE_ZVEC);
+      ^
+
+"zqrfctr.c", line 363: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(tmp,TYPE_ZVEC);
+      ^
+
+"zqrfctr.c", line 478: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(y,TYPE_ZVEC);
+      ^
+
+"zqrfctr.c", line 41: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	rcsid[] = "$Id: zqrfctr.c,v 1.1 1994/01/13 04:21:22 des Exp $";
+        	    	^
+
+"zgivens.c", line 35: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	rcsid[] = "$Id: ";
+        	    	^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"zhessen.c", line 62: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	MEM_STAT_REG(tmp1,TYPE_ZVEC);
+  	^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"zhessen.c", line 63: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	MEM_STAT_REG(w,   TYPE_ZVEC);
+  	^
+
+"zhessen.c", line 117: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	    MEM_STAT_REG(tmp1,TYPE_ZVEC);
+  	    ^
+
+"zhessen.c", line 118: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+  	    MEM_STAT_REG(tmp2,TYPE_ZVEC);
+  	    ^
+
+"zhessen.c", line 34: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static	char	rcsid[] = "$Id: zhessen.c,v 1.2 1995/03/27 15:47:50 des Exp $";
+        	    	^
+
+"zschur.c", line 67: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+      MEM_STAT_REG(diag,TYPE_ZVEC);
+      ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"zschur.c", line 39: warning: variable "rcsid" was declared but never referenced [declared_but_not_referenced]
+  static char rcsid[] = "$Id: zschur.c,v 1.4 1995/04/07 16:28:58 des Exp $";
+              ^
+
 timeout was set to  600

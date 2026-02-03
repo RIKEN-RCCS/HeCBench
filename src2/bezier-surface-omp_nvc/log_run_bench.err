@@ -1,1 +1,48 @@
+read_input(XYZ*, Params const&):
+    129, Loop not vectorized/parallelized: contains call
+    135, Loop not vectorized: data dependency
+compare_output(XYZ*, XYZ*, int, int, int, int):
+    150, Outer loop unrolled 1 times (completely unrolled)
+    151, Loop nest collapsed
+         Loop not vectorized: recurrence
+BezierBlend(int, float, int):
+    170, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+    176, Loop not fused: complex flow graph
+BezierCPU(XYZ const*, XYZ*, int, int, int, int):
+    208, Loop not vectorized/parallelized: too deeply nested
+    210, Loop not vectorized/parallelized: too deeply nested
+         176, Loop not fused: complex flow graph
+         176, Loop not fused: complex flow graph
+run(XYZ*, int, int, int, int, Params const&):
+         208, Loop not fused: function call before adjacent loop
+              Loop not vectorized/parallelized: too deeply nested
+         210, Loop not vectorized/parallelized: too deeply nested
+         214, Loop not fused: complex flow graph
+         216, Loop not fused: complex flow graph
+    242, #omp target teams distribute parallel for simd thread_limit(256)
+        241, Generating map(from:gpu_out[:out_size_j*out_size_i]) 
+             Generating map(to:in[:(in_size_j+1)*(in_size_i+1)]) 
+        242, Generating "nvkernel__Z3runP3XYZiiiiRK6Params_F1L242_2" GPU kernel
+        245, Loop parallelized across teams and threads(128), schedule(static)
+    245, Loop not vectorized/parallelized: too deeply nested
+    247, Loop not vectorized/parallelized: too deeply nested
+         150, Outer loop unrolled 1 times (completely unrolled)
+         151, Loop nest collapsed
+              Loop not fused: function call before adjacent loop
+              Loop not vectorized: recurrence
+main:
+          72, Loop not vectorized/parallelized: contains call
+         124, Loop not vectorized/parallelized: contains call
+         135, Loop not vectorized/parallelized: not countable
+Params::Params(int, char**):
+     74, Loop not vectorized/parallelized: contains call
+Params::Params(int, char**):
+          72, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     40, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000l>>::_S_gcd(long, long):
+     40, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
 timeout was set to  600

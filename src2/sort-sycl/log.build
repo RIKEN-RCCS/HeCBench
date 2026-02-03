@@ -1,6 +1,0 @@
-clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c main.cpp -o main.o
-main.cpp:1:10: fatal error: 'oneapi/dpl/execution' file not found
-    1 | #include <oneapi/dpl/execution>
-      |          ^~~~~~~~~~~~~~~~~~~~~~
-1 error generated.
-make: *** [Makefile.NVD:73: main.o] Error 1

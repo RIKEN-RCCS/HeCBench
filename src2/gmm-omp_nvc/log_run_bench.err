@@ -1,0 +1,366 @@
+invert(float*, int, float*):
+     28, include "gaussian_kernel.cpp"
+          16, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          28, Loop not fused: different controlling conditions
+              Loop not vectorized: unknown
+              Loop unrolled 4 times
+          29, Loop not fused: different loop trip count
+          30, Loop not fused: complex flow graph
+          32, Generated vector simd code for the loop containing reductions
+          39, Generated vector simd code for the loop containing reductions
+          46, Loop not fused: enclosed in different number of nests
+              Loop not vectorized: data dependency
+              Loop unrolled 1 times
+          50, Loop not fused: dependence chain to sibling loop
+          55, Generated vector simd code for the loop containing reductions
+          60, Loop not fused: dependence chain to sibling loop
+          64, Generated vector simd code for the loop containing reductions
+          71, Generated vector simd code for the loop containing reductions
+compute_row_col(int, int, int*, int*):
+     28, include "gaussian_kernel.cpp"
+          87, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          90, Loop not vectorized/parallelized: potential early exits
+constants_kernel(float const*, float*, float const*, float*, float*, float*, float*, float*, float*, int, int):
+     28, include "gaussian_kernel.cpp"
+         119, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+         134, Loop not vectorized/parallelized: not countable
+         138, Barrier
+         152, Barrier
+         156, Loop not vectorized/parallelized: not countable
+         160, Barrier
+         169, Barrier
+         176, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 8 times
+         181, Barrier
+         183, Loop not vectorized/parallelized: not countable
+          28, Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+              Loop unrolled 4 times
+          29, Loop not fused: different loop trip count
+          30, Loop not fused: complex flow graph
+          32, Generated vector simd code for the loop containing reductions
+          39, Generated vector simd code for the loop containing reductions
+          46, Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+              Loop unrolled 1 times
+          50, Loop not fused: dependence chain to sibling loop
+          55, Generated vector simd code for the loop containing reductions
+          60, Loop not fused: different loop trip count
+          64, Generated vector simd code for the loop containing reductions
+          68, Loop not fused: function call before adjacent loop
+          71, Generated vector simd code for the loop containing reductions
+estep1_kernel(float*, float const*, float*, float*, float*, float*, float*, float*, int, int):
+     28, include "gaussian_kernel.cpp"
+         206, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+         245, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 4 times
+         253, Barrier
+         265, Zero trip check eliminated
+              Generated vector simd code for the loop containing reductions
+estep2_kernel(float*, float*, float*, int, int, int):
+     28, include "gaussian_kernel.cpp"
+         285, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+         320, Loop not fused: function call before adjacent loop
+         323, Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+         329, Loop not fused: dependence chain to sibling loop
+              Generated vector simd code for the loop containing reductions
+         338, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+         346, Barrier
+         349, Loop not vectorized/parallelized: contains call
+         351, Barrier
+         353, Barrier
+invert_cpu(float*, int, float*):
+     29, include "cluster.cpp"
+          18, Loop not fused: different controlling conditions
+              Loop not vectorized: unknown
+              Loop unrolled 4 times
+          19, Loop not fused: different loop trip count
+          20, Loop not fused: complex flow graph
+          22, Generated vector simd code for the loop containing reductions
+          29, Generated vector simd code for the loop containing reductions
+          36, Loop not fused: enclosed in different number of nests
+              Loop not vectorized: data dependency
+              Loop unrolled 1 times
+          40, Loop not fused: dependence chain to sibling loop
+          45, Generated vector simd code for the loop containing reductions
+          50, Loop not fused: dependence chain to sibling loop
+          54, Generated vector simd code for the loop containing reductions
+              Mixed precision reduction; consider promoting accmulator
+          58, Loop not fused: no successor loop
+          61, Generated vector simd code for the loop containing reductions
+              Mixed precision reduction; consider promoting accmulator
+writeCluster(_IO_FILE*, clusters_t&, int, int):
+     29, include "cluster.cpp"
+         138, Loop not vectorized/parallelized: contains call
+         145, Zero trip check eliminated
+              Loop not vectorized/parallelized: contains call
+add_clusters(clusters_t&, int, int, clusters_t&, int):
+     29, include "cluster.cpp"
+         161, Loop not fused: enclosed in different number of nests
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Vectorized loop was interleaved
+              Loop unrolled 4 times
+         166, Loop not fused: function call before adjacent loop
+         167, Loop not vectorized: data dependency
+          18, Loop not fused: different loop trip count
+              Loop not vectorized: unknown
+              Loop unrolled 4 times
+          19, Loop not fused: different loop trip count
+          20, Loop not fused: complex flow graph
+          22, Generated vector simd code for the loop containing reductions
+          29, Generated vector simd code for the loop containing reductions
+          36, Loop not fused: different loop trip count
+              Generated vector simd code for the loop containing reductions
+          40, Loop not fused: dependence chain to sibling loop
+          45, Generated vector simd code for the loop containing reductions
+          50, Loop not fused: different loop trip count
+          54, Generated vector simd code for the loop containing reductions
+              Mixed precision reduction; consider promoting accmulator
+          58, Loop not fused: no successor loop
+          61, Generated vector simd code for the loop containing reductions
+              Mixed precision reduction; consider promoting accmulator
+printCluster(clusters_t&, int, int):
+         138, Loop not vectorized/parallelized: contains call
+         145, Zero trip check eliminated
+              Loop not vectorized/parallelized: contains call
+copyClusterFromDevice(float*, float*, float*, float*, float*, float*, float*, int, int):
+     29, include "cluster.cpp"
+         269, Generating update from(N[:num_clusters],R[:num_clusters*(num_dimensions*num_dimensions)],pi[:num_clusters],means[:num_clusters*num_dimensions],avgvar[:num_clusters],Rinv[:num_clusters*(num_dimensions*num_dimensions)],constant[:num_clusters])
+copyClusterToDevice(float*, float*, float*, float*, float*, float*, float*, int, int):
+     29, include "cluster.cpp"
+         288, Generating update to(N[:num_clusters],R[:num_clusters*(num_dimensions*num_dimensions)],pi[:num_clusters],means[:num_clusters*num_dimensions],avgvar[:num_clusters],Rinv[:num_clusters*(num_dimensions*num_dimensions)],constant[:num_clusters])
+cluster(int, int, int*, int, int, float*):
+     29, include "cluster.cpp"
+         313, Loop not vectorized/parallelized: potential early exits
+         380, #omp target teams num_teams(1) thread_limit(256)
+             380, Generating "nvkernel__Z7clusteriiPiiiPf_F334L380_2" GPU kernel
+             386, #omp parallel
+               408, Barrier
+               423, Barrier
+               432, Barrier
+             388, Team private (means,avgvar,variances,total_variance) located in CUDA shared memory
+         400, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+         414, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+         427, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+         441, Invariant if transformation
+         446, Loop not vectorized/parallelized: not countable
+         469, #omp target teams num_teams(original_num_clusters) thread_limit(256)
+             469, Generating "nvkernel__Z7clusteriiPiiiPf_F334L469_4" GPU kernel
+             474, #omp parallel
+             475, Team private (sum,matrix,determinant_arg) located in CUDA shared memory
+         495, Loop not fused: function call before adjacent loop
+              Loop not vectorized: unknown
+         509, Loop unrolled 1 times (completely unrolled)
+         510, Zero trip check eliminated
+              Loop nest collapsed
+         515, Loop unrolled 1 times (completely unrolled)
+         516, Zero trip check eliminated
+              Loop nest collapsed
+         544, Loop not vectorized/parallelized: too deeply nested
+         553, #omp target teams num_teams(num_clusters*24) thread_limit(256)
+             553, Generating "nvkernel__Z7clusteriiPiiiPf_F334L553_6" GPU kernel
+             557, #omp parallel
+             558, Team private (means,Rinv) located in CUDA shared memory
+         574, #omp target teams num_teams(24) thread_limit(256)
+             574, Generating "nvkernel__Z7clusteriiPiiiPf_F334L574_8" GPU kernel
+             577, #omp parallel
+             578, Team private (total_likelihoods) located in CUDA shared memory
+         594, Generating update from(likelihoods[:24])
+         595, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+         607, Loop not vectorized/parallelized: too deeply nested
+         615, #omp target teams num_teams(num_clusters) thread_limit(256)
+             615, Generating "nvkernel__Z7clusteriiPiiiPf_F334L615_10" GPU kernel
+             618, #omp parallel
+               631, Barrier
+               637, Barrier
+               639, Barrier
+             621, Team private (temp_sums) located in CUDA shared memory
+         626, Loop not vectorized/parallelized: not countable
+         635, Loop not vectorized/parallelized: contains call
+         656, #omp target teams num_teams(num_dimensions*num_clusters) thread_limit(256)
+             656, Generating "nvkernel__Z7clusteriiPiiiPf_F334L656_12" GPU kernel
+             659, #omp parallel
+               671, Barrier
+               677, Barrier
+               679, Barrier
+             663, Team private (temp_sum) located in CUDA shared memory
+         656, Generating update from(clusters_N[:num_clusters])
+         666, Loop not vectorized/parallelized: not countable
+         675, Loop not vectorized/parallelized: contains call
+         684, Generating update from(clusters_means[:num_dimensions*num_clusters])
+         691, Loop not fused: function call before adjacent loop
+         693, Loop not vectorized: data dependency
+         719, #omp target teams num_teams(((num_clusters+5)*((num_dimensions*(num_dimensions+1))/2))/6) thread_limit(256)
+             719, Generating "nvkernel__Z7clusteriiPiiiPf_F334L719_14" GPU kernel
+             724, #omp parallel
+               733, Barrier
+               753, Barrier
+               785, Barrier
+               792, Barrier
+               794, Barrier
+               797, Barrier
+             736, Team private (means_col,temp_sums,means_row) located in CUDA shared memory
+         719, Generating update to(clusters_means[:num_dimensions*num_clusters])
+         764, Loop not vectorized: data dependency
+              Loop unrolled 6 times (completely unrolled)
+         768, Generated vector simd code for the loop containing reductions
+         790, Loop not vectorized/parallelized: contains call
+         801, Loop unrolled 6 times (completely unrolled)
+         815, Generating update from(clusters_R[:num_dimensions*(num_dimensions*num_clusters)])
+         822, Loop not fused: function call before adjacent loop
+         824, Loop not fused: no successor loop
+              Loop not vectorized: data dependency
+              Loop unrolled 4 times
+         829, Zero trip check eliminated
+              Generated vector simd code for the loop
+         846, Generating update to(clusters_R[:num_dimensions*(num_dimensions*num_clusters)])
+         853, #omp target teams num_teams(num_clusters) thread_limit(256)
+             853, Generating "nvkernel__Z7clusteriiPiiiPf_F334L853_16" GPU kernel
+             858, #omp parallel
+             859, Team private (sum,matrix,determinant_arg) located in CUDA shared memory
+         871, Generating update from(clusters_constant[:num_clusters])
+         886, #omp target teams num_teams(num_clusters*24) thread_limit(256)
+             886, Generating "nvkernel__Z7clusteriiPiiiPf_F334L886_18" GPU kernel
+             890, #omp parallel
+             891, Team private (means,Rinv) located in CUDA shared memory
+         906, #omp target teams num_teams(24) thread_limit(256)
+             372, Generating map(alloc:clusters_memberships[:num_events*((original_num_clusters+6)-(original_num_clusters%6))],clusters_avgvar[:original_num_clusters],clusters_Rinv[:original_num_clusters*(num_dimensions*num_dimensions)],clusters_constant[:original_num_clusters],clusters_N[:original_num_clusters],clusters_R[:original_num_clusters*(num_dimensions*num_dimensions)],clusters_means[:original_num_clusters*num_dimensions]) 
+                  Generating map(to:fcs_data_by_event[:num_dimensions*num_events]) 
+                  Generating map(alloc:likelihoods[:24]) 
+                  Generating map(to:fcs_data_by_dimension[:num_dimensions*num_events]) 
+                  Generating map(alloc:clusters_pi[:original_num_clusters]) 
+             906, Generating "nvkernel__Z7clusteriiPiiiPf_F334L906_20" GPU kernel
+             909, #omp parallel
+             910, Team private (total_likelihoods) located in CUDA shared memory
+         928, Generating update from(likelihoods[:24])
+         929, Loop not fused: no successor loop
+              Generated vector simd code for the loop containing reductions
+         951, Generating update from(clusters_memberships[:num_events*num_clusters])
+         978, Loop not vectorized/parallelized: contains call
+         992, Loop not vectorized/parallelized: contains call
+        1011, Loop not vectorized/parallelized: contains call
+         269, Generating update from(clusters_N[:original_num_clusters],clusters_R[:original_num_clusters*(num_dimensions*num_dimensions)],clusters_pi[:original_num_clusters],clusters_means[:original_num_clusters*num_dimensions],clusters_avgvar[:original_num_clusters],clusters_Rinv[:original_num_clusters*(num_dimensions*num_dimensions)],clusters_constant[:original_num_clusters])
+         288, Generating update to(clusters_N[:original_num_clusters],clusters_R[:original_num_clusters*(num_dimensions*num_dimensions)],clusters_pi[:original_num_clusters],clusters_means[:original_num_clusters*num_dimensions],clusters_avgvar[:original_num_clusters],clusters_Rinv[:original_num_clusters*(num_dimensions*num_dimensions)],clusters_constant[:original_num_clusters])
+          90, Loop not vectorized/parallelized: potential early exits
+         269, Generating update from(clusters_N[:num_clusters],clusters_R[:num_clusters*(num_dimensions*num_dimensions)],clusters_pi[:num_clusters],clusters_means[:num_clusters*num_dimensions],clusters_avgvar[:num_clusters],clusters_Rinv[:num_clusters*(num_dimensions*num_dimensions)],clusters_constant[:num_clusters])
+         288, Generating update to(clusters_N[:num_clusters],clusters_R[:num_clusters*(num_dimensions*num_dimensions)],clusters_pi[:num_clusters],clusters_means[:num_clusters*num_dimensions],clusters_avgvar[:num_clusters],clusters_Rinv[:num_clusters*(num_dimensions*num_dimensions)],clusters_constant[:num_clusters])
+readCSV(char*, int*, int*):
+     30, include "readData.cpp"
+          70, Loop not vectorized/parallelized: contains call
+          93, Loop not vectorized/parallelized: potential early exits
+               49, Loop not vectorized/parallelized: potential early exits
+main:
+         211, Zero trip check eliminated
+              Loop not vectorized/parallelized: contains call
+         138, Loop not vectorized/parallelized: contains call
+         145, Zero trip check eliminated
+              Loop not vectorized/parallelized: contains call
+    120, Loop not vectorized/parallelized: contains call
+    125, Loop not vectorized/parallelized: contains call
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>* std::__copy_move<true, false, std::random_access_iterator_tag>::__copy_m<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*):
+     22, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+                             403, Loop not vectorized/parallelized: contains call
+     29, include "cluster.cpp"
+std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>::_S_do_relocate(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>&, std::integral_constant<bool, true>):
+        1046, Loop not vectorized/parallelized: contains call
+std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>::_S_relocate(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>&):
+         456, Loop not vectorized/parallelized: contains call
+std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>::erase(__gnu_cxx::__normal_iterator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const*, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>):
+     24, include "vector"
+          67, include "stl_vector.h"
+                             175, Loop not vectorized/parallelized: contains call
+     29, include "cluster.cpp"
+std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>::_M_erase(__gnu_cxx::__normal_iterator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>):
+     24, include "vector"
+     29, include "cluster.cpp"
+         652, Loop not vectorized/parallelized: contains call
+void std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>::_M_realloc_insert<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&>(__gnu_cxx::__normal_iterator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     24, include "vector"
+     29, include "cluster.cpp"
+void std::_Destroy_aux<false>::__destroy<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*):
+     22, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    42, include "ios_base.h"
+                         41, include "locale_classes.h"
+                              40, include "string"
+                                   55, include "basic_string.h"
+                                        40, include "alloc_traits.h"
+                                             34, include "alloc_traits.h"
+                                                  33, include "stl_construct.h"
+                                                      162, Loop not vectorized/parallelized: contains call
+     24, include "vector"
+     29, include "cluster.cpp"
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     22, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    42, include "ios_base.h"
+                         41, include "locale_classes.h"
+                              40, include "string"
+                                   55, include "basic_string.h"
+     24, include "vector"
+     29, include "cluster.cpp"
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     21, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+     28, include "gaussian_kernel.cpp"
+     30, include "readData.cpp"
+std::fabs(float):
+                        242, Generating implicit omp declare target routine
+                             Generating NVIDIA GPU code
+     22, include "iostream"
+     24, include "vector"
+     29, include "cluster.cpp"
+void std::_Destroy<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*):
+     22, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    42, include "ios_base.h"
+                         41, include "locale_classes.h"
+                              40, include "string"
+                                   55, include "basic_string.h"
+                                        40, include "alloc_traits.h"
+                                             34, include "alloc_traits.h"
+                                                  33, include "stl_construct.h"
+     24, include "vector"
+     29, include "cluster.cpp"
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>* std::__relocate_a<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>&):
+        1031, Loop not vectorized/parallelized: contains call
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>* std::__relocate_a_1<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>&):
+     24, include "vector"
+          66, include "stl_uninitialized.h"
+             1031, Loop not vectorized/parallelized: contains call
+     29, include "cluster.cpp"
+void std::__relocate_object_a<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>&):
+     24, include "vector"
+          66, include "stl_uninitialized.h"
+     29, include "cluster.cpp"
+__gnu_cxx::__normal_iterator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>> std::move<__gnu_cxx::__normal_iterator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>, __gnu_cxx::__normal_iterator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>>(__gnu_cxx::__normal_iterator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>, __gnu_cxx::__normal_iterator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>, __gnu_cxx::__normal_iterator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>):
+         529, Loop not vectorized/parallelized: contains call
+__gnu_cxx::__normal_iterator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>> std::__copy_move_a<true, __gnu_cxx::__normal_iterator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>, __gnu_cxx::__normal_iterator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>>(__gnu_cxx::__normal_iterator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>, __gnu_cxx::__normal_iterator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>, __gnu_cxx::__normal_iterator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>):
+         522, Loop not vectorized/parallelized: contains call
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>* std::__copy_move_a1<true, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*):
+         494, Loop not vectorized/parallelized: contains call
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>* std::__copy_move_a2<true, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*):
+         403, Loop not vectorized/parallelized: contains call
+timeout was set to  600

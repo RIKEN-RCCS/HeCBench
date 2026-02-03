@@ -1,1 +1,9 @@
+OptionParser.cpp:213:8: warning: unused variable 'retVal' [-Wunused-variable]
+  213 |    int retVal;
+      |        ^~~~~~
+1 warning generated.
+OptionParser.cpp:213:8: warning: unused variable 'retVal' [-Wunused-variable]
+  213 |    int retVal;
+      |        ^~~~~~
+1 warning generated.
 timeout was set to  600

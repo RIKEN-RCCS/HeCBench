@@ -5,39 +5,39 @@ Using CTA of size 256 for Sweep
   Num_systems = 1000000, system_size = 128
 
 ----- CPU  solvers -----
-  CPU Time =    0.87632 s
-  Throughput =  1141.1343 systems/sec
+  CPU Time =    0.88107 s
+  Throughput =  1134.9773 systems/sec
 
 ----- optimized GPU solvers -----
 
  pcr_small_systems_kernel
   looping 100 times..
-Tridiagonal-pcrsmall-base, Throughput = 37022.7368 Systems/s, Time = 0.02701 s, Size = 1000000 Systems
+Tridiagonal-pcrsmall-base, Throughput = 37033.7989 Systems/s, Time = 0.02700 s, Size = 1000000 Systems
   err = 0.9653
 
  pcr_branch_free_kernel
   looping 100 times..
-Tridiagonal-pcrsmall-optimized, Throughput = 36258.7769 Systems/s, Time = 0.02758 s, Size = 1000000 Systems
+Tridiagonal-pcrsmall-optimized, Throughput = 36261.6295 Systems/s, Time = 0.02758 s, Size = 1000000 Systems
   err = 0.9653
 
  cyclic_small_systems_kernel
   looping 100 times..
-Tridiagonal-cyclicsmall-base, Throughput = 49887.2504 Systems/s, Time = 0.02005 s, Size = 1000000 Systems
+Tridiagonal-cyclicsmall-base, Throughput = 49893.6536 Systems/s, Time = 0.02004 s, Size = 1000000 Systems
   err = 1.3141
 
  cyclic_branch_free_kernel
   looping 100 times..
-Tridiagonal-cyclicsmall-optimized, Throughput = 48868.8565 Systems/s, Time = 0.02046 s, Size = 1000000 Systems
+Tridiagonal-cyclicsmall-optimized, Throughput = 48873.0361 Systems/s, Time = 0.02046 s, Size = 1000000 Systems
   err = 1.3141
 
 sweep_small_systems_global_kernel
   looping 100 times..
-Tridiagonal-sweepsmall-noreorder, Throughput = 54649.1969 Systems/s, Time = 0.01830 s, Size = 1000000 Systems
+Tridiagonal-sweepsmall-noreorder, Throughput = 54665.3936 Systems/s, Time = 0.01829 s, Size = 1000000 Systems
   err = 1.0123
 
 sweep_data_reorder_kernel
 sweep_small_systems_global_kernel
   looping 100 times..
-Tridiagonal-sweepsmall-reorder, Throughput = 24300.0891 Systems/s, Time = 0.04115 s, Size = 1000000 Systems
+Tridiagonal-sweepsmall-reorder, Throughput = 24301.8124 Systems/s, Time = 0.04115 s, Size = 1000000 Systems
   err = 1.0123
 

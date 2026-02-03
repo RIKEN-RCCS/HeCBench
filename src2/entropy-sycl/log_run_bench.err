@@ -1,1 +1,17 @@
+In file included from main.cpp:6:
+../entropy-cuda/reference.h:21:18: warning: array subscript is of type 'char' [-Wchar-subscripts]
+   21 |             count[val[yy * width + xx]]++;
+      |                  ^~~~~~~~~~~~~~~~~~~~~
+main.cpp:66:20: warning: array subscript is of type 'char' [-Wchar-subscripts]
+   66 |               count[d_input[yy * width + xx]]++;
+      |                    ^~~~~~~~~~~~~~~~~~~~~~~~~
+2 warnings generated.
+In file included from main.cpp:6:
+../entropy-cuda/reference.h:21:18: warning: array subscript is of type 'char' [-Wchar-subscripts]
+   21 |             count[val[yy * width + xx]]++;
+      |                  ^~~~~~~~~~~~~~~~~~~~~
+main.cpp:66:20: warning: array subscript is of type 'char' [-Wchar-subscripts]
+   66 |               count[d_input[yy * width + xx]]++;
+      |                    ^~~~~~~~~~~~~~~~~~~~~~~~~
+2 warnings generated.
 timeout was set to  600

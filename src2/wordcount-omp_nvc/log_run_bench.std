@@ -1,7 +1,8 @@
 nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c ../wordcount-sycl/main.cpp -o main.o
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c wc.cpp -o wc.o
 nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o wc.o -o main 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "time -p ( ./main 10 1>log.std 2>log.err ) 2> log.time"
 pkill nvidia-smi
 ../scripts/m.sh
-min max diff memory in [MB] : 1 922 921
+min max diff memory in [MB] : 1 923 922

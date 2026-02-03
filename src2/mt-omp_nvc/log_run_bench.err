@@ -1,1 +1,55 @@
+sgenrand_mt:
+     54, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+genrand_mt:
+     74, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+     80, Loop not vectorized: data dependency
+loadMTGPU(char const*, unsigned int, mt_struct_stripped*, unsigned long):
+     51, Loop not vectorized/parallelized: contains call
+     55, Loop not vectorized: unprofitable for target
+         Loop unrolled 4 times
+BoxMullerTrans(float*, float*):
+     61, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+main:
+          51, Loop not vectorized/parallelized: contains call
+          55, Loop not fused: function call before adjacent loop
+              Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+    105, Loop not vectorized/parallelized: contains call
+    106, #omp target teams distribute parallel for thread_limit(localWorkSize)
+        106, Generating "nvkernel_main_F1L106_2" GPU kernel
+        108, Loop parallelized across teams and threads, schedule(static)
+    108, Loop not vectorized/parallelized: not countable
+    121, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    126, Loop not vectorized: data dependency
+    151, #omp target teams distribute parallel for thread_limit(localWorkSize)
+        102, Generating map(to:h_MT[:4096]) 
+             Generating map(alloc:h_RandGPU[:24002560]) 
+        151, Generating "nvkernel_main_F1L151_4" GPU kernel
+        155, Loop parallelized across teams and threads, schedule(static)
+    155, Loop not vectorized/parallelized: not countable
+    156, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    173, Generating update from(h_RandGPU[:24002560])
+    184, Loop not fused: function call before adjacent loop
+    185, Generated vector simd code for the loop containing reductions
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     32, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1l>>::_S_gcd(long, long):
+     32, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<double, std::ratio<1l, 1l>>::_S_gcd(long, long):
+     32, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+initMTRef:
+     30, Loop not vectorized/parallelized: contains call
+RandomRef:
+     51, Loop not vectorized/parallelized: contains call
+BoxMullerRef:
+     67, Loop not vectorized: data dependency
+         Loop unrolled 2 times
 timeout was set to  600

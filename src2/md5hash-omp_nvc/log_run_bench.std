@@ -1,3 +1,5 @@
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c MD5Hash.cpp -o MD5Hash.o
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 MD5Hash.o -o MD5Hash 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "time -p ( ./MD5Hash 1 500 1>log.std 2>log.err ) 2> log.time"
 pkill nvidia-smi

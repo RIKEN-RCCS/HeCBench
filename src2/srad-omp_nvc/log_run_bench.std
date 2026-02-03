@@ -1,6 +1,7 @@
+nvc++  -std=c++11 -Wall -Minfo -mp=gpu -gpu=cc90 -O3	 ./main.c 		-c 		-o ./main.o 		-O3
+nvc++	./util/graphics/graphics.c 		-c 		-o ./util/graphics/graphics.o 		-O3
+nvc++	./util/graphics/resize.c 		-c 		-o ./util/graphics/resize.o 		-O3
+nvc++	./util/timer/timer.c 		-c 		-o ./util/timer/timer.o 		-O3
+nvc++  -std=c++11 -Wall -Minfo -mp=gpu -gpu=cc90 -O3	./main.o 		./util/graphics/graphics.o 		./util/graphics/resize.o 		./util/timer/timer.o 		-lm 		-lm -o srad
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
-bash -c "time -p ( ././srad 1000 0.5 10000 46258 1>log.std 2>log.err ) 2> log.time"
-pkill nvidia-smi
-../scripts/m.sh
-min max diff memory in [MB] : 14688 43482 28794
-pkill nvidia-smi
+bash -c "time -p ( ./ 1000 0.5 10000 46258 1>log.std 2>log.err ) 2> log.time"

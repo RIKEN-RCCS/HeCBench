@@ -1,1 +1,152 @@
+alloc_2d_dbl(int, int):
+     84, Loop not vectorized/parallelized: contains call
+bpnn_randomize_weights(float**, int, int):
+     97, Loop not vectorized/parallelized: contains call
+bpnn_randomize_row(float*, int):
+    107, Recognized memory set idiom
+bpnn_zero_weights(float**, int, int):
+    119, Recognized memory zero idiom
+bpnn_internal_create(int, int, int):
+          84, Loop not vectorized/parallelized: contains call
+          84, Loop not vectorized/parallelized: contains call
+          84, Loop not vectorized/parallelized: contains call
+          84, Loop not vectorized/parallelized: contains call
+bpnn_free(BPNN*):
+    179, Loop not vectorized/parallelized: contains call
+    186, Loop not vectorized/parallelized: contains call
+bpnn_create(int, int, int):
+         154, Loop not vectorized/parallelized: contains call
+         155, Loop not vectorized/parallelized: contains call
+         157, Loop not vectorized/parallelized: contains call
+         158, Loop not vectorized/parallelized: contains call
+          97, Loop not vectorized/parallelized: contains call
+          97, Loop not vectorized/parallelized: contains call
+         119, Recognized memory zero idiom
+         119, Recognized memory zero idiom
+         107, Recognized memory set idiom
+bpnn_layerforward(float*, float*, float**, int, int):
+    242, Generated vector simd code for the loop containing reductions
+bpnn_output_error(float*, float*, float*, int, float*):
+    254, Loop not vectorized: data dependency
+bpnn_hidden_error(float*, int, float*, int, float**, float*, float*):
+    279, Generated vector simd code for the loop containing reductions
+         Loop unrolled 4 times
+bpnn_adjust_weights(float*, int, float*, int, float**, float**):
+    303, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+bpnn_feedforward(BPNN*):
+         238, Loop not fused: different loop trip count
+         242, Generated vector simd code for the loop containing reductions
+         242, Generated vector simd code for the loop containing reductions
+bpnn_train(BPNN*, float*, float*):
+         238, Loop not fused: different loop trip count
+         242, Generated vector simd code for the loop containing reductions
+         238, Loop not fused: enclosed in different number of nests
+         242, Generated vector simd code for the loop containing reductions
+         254, Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+         276, Loop not fused: different loop trip count
+         279, Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+         302, Loop not fused: different loop trip count
+         303, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+         303, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+bpnn_save(BPNN*, char*):
+    397, Loop not vectorized/parallelized: not countable
+    399, Loop unrolled 4 times (completely unrolled)
+    411, Loop not vectorized/parallelized: not countable
+    413, Loop unrolled 4 times (completely unrolled)
+bpnn_read(char*):
+         154, Loop not vectorized/parallelized: contains call
+         155, Loop not vectorized/parallelized: contains call
+         157, Loop not vectorized/parallelized: contains call
+         158, Loop not vectorized/parallelized: contains call
+    450, Loop not vectorized/parallelized: not countable
+    451, Loop unrolled 4 times (completely unrolled)
+    463, Loop not vectorized/parallelized: not countable
+    464, Loop unrolled 4 times (completely unrolled)
+         119, Recognized memory zero idiom
+         119, Recognized memory zero idiom
+load(BPNN*):
+     19, Loop not vectorized/parallelized: contains call
+kernel_layerforward_ref(float const*, float*, float*, int, int):
+      9, include "reference.h"
+          11, Loop not fused: dependence chain to sibling loop
+          12, Loop not vectorized: unknown
+          21, Generated vector simd code for the loop
+          24, Loop not vectorized/parallelized: not countable
+          26, Loop not vectorized: data dependency
+          27, Invariant if transformation
+              Loop unrolled 16 times (completely unrolled)
+          33, Loop not fused: enclosed in different number of nests
+          34, Generated vector simd code for the loop
+          39, Generated vector simd code for the loop
+kernel_adjust_weights_ref(float const*, float*, float const*, float*, int, int):
+      9, include "reference.h"
+          53, Loop not fused: enclosed in different number of nests
+          54, Generated vector simd code for the loop
+          62, Generated vector simd code for the loop
+reference(int, int, int, BPNN*, float*, float const*, float*):
+      9, include "reference.h"
+          99, Loop not fused: function call before adjacent loop
+         101, Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+          11, Loop not fused: dependence chain to sibling loop
+          12, Loop not vectorized: unknown
+          21, Generated vector simd code for the loop
+          24, Loop not vectorized/parallelized: not countable
+          26, Loop not vectorized: data dependency
+          27, Invariant if transformation
+              Loop unrolled 16 times (completely unrolled)
+          33, Loop not fused: enclosed in different number of nests
+          34, Generated vector simd code for the loop
+          39, Generated vector simd code for the loop
+          52, Loop not fused: function call before adjacent loop
+          53, Loop not fused: enclosed in different number of nests
+          54, Generated vector simd code for the loop
+          62, Generated vector simd code for the loop
+bpnn_train_kernel(BPNN*, float*, float*):
+     54, Loop not fused: function call before adjacent loop
+     55, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 8 times
+     79, #omp target teams num_teams(num_blocks) thread_limit(256)
+         79, Generating "nvkernel__Z17bpnn_train_kernelP4BPNNPfS1__F1L79_2" GPU kernel
+         83, #omp parallel
+           94, Barrier
+           97, Barrier
+          100, Barrier
+          108, Barrier
+          114, Barrier
+         86, Team private (weight_matrix,input_node) located in CUDA shared memory
+    102, Loop not vectorized/parallelized: contains call
+    120, Generating update from(partial_sum[:num_blocks*16])
+    123, Loop not fused: function call before adjacent loop
+    125, Loop not vectorized: unprofitable for target
+         Loop unrolled 4 times
+    144, #omp target teams num_teams(num_blocks) thread_limit(256)
+         77, Generating map(to:hidden_delta[:hid+1],input[:in+1],input_prev_weights[:(hid+1)*(in+1)]) 
+             Generating map(alloc:partial_sum[:num_blocks*16]) 
+             Generating map(tofrom:input_weights[:(hid+1)*(in+1)]) 
+        144, Generating "nvkernel__Z17bpnn_train_kernelP4BPNNPfS1__F1L144_4" GPU kernel
+        146, #omp parallel
+          158, Barrier
+    144, Generating update to(input_weights[:(hid+1)*(in+1)])
+          96, Invariant if transformation
+              Loop unrolled 16 times (completely unrolled)
+              Loop not fused: dependence chain to sibling loop
+              Loop not fused: enclosed in different number of nests
+              Loop not vectorized/parallelized: not countable
+              Loop not vectorized: data dependency
+              Loop not vectorized: unknown
+              Generated vector simd code for the loop
+          99, Loop not fused: function call before adjacent loop
+         101, Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+         119, Loop not fused: function call before adjacent loop
+              Loop not fused: enclosed in different number of nests
+              Generated vector simd code for the loop
+    176, Loop not vectorized/parallelized: potential early exits
 timeout was set to  600

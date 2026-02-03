@@ -1,4 +1,4 @@
 used_bytes=268435456, N=16777216
 FFT PASS
 iFFT PASS
-Average kernel execution time 0.00115452 (s)
+Average kernel execution time 0.00114796 (s)

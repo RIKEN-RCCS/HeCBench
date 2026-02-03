@@ -7,4 +7,4 @@ nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.m
 bash -c "../kmeans-cuda/prepare_data.sh; time -p ( ./kmeans -r -n 5 -m 15 -l 10 -o -i ../data/kmeans/kdd_cup 1>log.std 2>log.err ) 2> log.time"
 pkill nvidia-smi
 ../scripts/m.sh
-min max diff memory in [MB] : 1 695 694
+min max diff memory in [MB] : 0 695 695

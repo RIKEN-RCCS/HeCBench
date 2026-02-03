@@ -1,2 +1,10 @@
+streamcluster.cpp:200:15: warning: variable 'open' set but not used [-Wunused-but-set-variable]
+  200 |   static bool open = false;
+      |               ^
+1 warning generated.
+streamcluster.cpp:200:15: warning: variable 'open' set but not used [-Wunused-but-set-variable]
+  200 |   static bool open = false;
+      |               ^
+1 warning generated.
 make: *** [Makefile.NVD:91: run_mem] Error 126
 timeout was set to  600

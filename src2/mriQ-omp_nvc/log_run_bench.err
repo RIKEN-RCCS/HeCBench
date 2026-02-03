@@ -1,1 +1,29 @@
+computeQ_GPU(int, int, float*, float*, float*, kValues*, kValues*, float*, float*):
+     34, include "computeQ.cpp"
+          47, Loop not vectorized/parallelized: contains call
+          56, #omp target teams distribute parallel for num_teams(QBlocks) thread_limit(256)
+              56, Generating "nvkernel__Z12computeQ_GPUiiPfS_S_P7kValuesS1_S_S__F151L56_2" GPU kernel
+              60, Loop parallelized across teams and threads(128), schedule(static)
+          56, Generating update to(ck[:numElems])
+          60, Invariant if transformation
+          79, Loop not vectorized/parallelized: potential early exits
+main:
+     74, #omp target teams distribute parallel for num_teams(phiMagBlocks) thread_limit(256)
+         73, Generating map(from:phiMag[:numK]) 
+             Generating map(to:phiR[:numK],phiI[:numK]) 
+         74, Generating "nvkernel_main_F1L74_6" GPU kernel
+         78, Loop parallelized across teams and threads(128), schedule(static)
+     78, Loop not vectorized/parallelized: not countable
+     90, Loop not vectorized: unprofitable for target
+         Loop unrolled 8 times
+    103, #omp target teams distribute parallel for thread_limit(256)
+        103, Generating "nvkernel_main_F1L103_8" GPU kernel
+             Generating map(alloc:ck[:]) 
+             Generating map(to:x[:numX],y[:numX],z[:numX]) 
+             Generating map(from:Qi[:numX],Qr[:numX]) 
+        105, Loop parallelized across teams and threads(128), schedule(static)
+    105, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     31, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
 timeout was set to  600

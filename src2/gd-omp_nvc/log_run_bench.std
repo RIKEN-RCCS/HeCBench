@@ -1,5 +1,8 @@
+nvc++  -std=c++17 -Wall -I../gd-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+nvc++  -std=c++17 -Wall -I../gd-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c ../gd-cuda/utils.cpp -o utils.o
+nvc++  -std=c++17 -Wall -I../gd-cuda -O3 -Minfo -mp=gpu -gpu=cc90 main.o utils.o  -o main 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "../gd-cuda/prepare_data.sh; time -p ( ./main ../gd-cuda/gisette_scale 0.0001 10 100 1>log.std 2>log.err ) 2> log.time"
 pkill nvidia-smi
 ../scripts/m.sh
-min max diff memory in [MB] : 0 787 787
+min max diff memory in [MB] : 0 786 786

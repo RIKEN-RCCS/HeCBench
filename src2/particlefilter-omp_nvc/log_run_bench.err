@@ -1,1 +1,96 @@
+setIf(int, int, unsigned char*, int*, int*, int*):
+    111, Generated vector simd code for the loop
+addNoise(unsigned char*, int*, int*, int*, int*):
+    131, Loop not vectorized: data dependency
+strelDisk(int*, int):
+    147, Zero trip check eliminated
+         Generated vector simd code for the loop
+dilate_matrix(unsigned char*, int, int, int, int, int, int, int):
+    183, Loop not vectorized: unsupported scatter
+imdilate_disk(unsigned char*, int, int, int, int, unsigned char*):
+    202, Loop not vectorized/parallelized: too deeply nested
+    203, Loop not vectorized/parallelized: too deeply nested
+         183, Loop not vectorized: unsupported scatter
+getneighbors(int*, int, int*, int):
+    226, Zero trip check eliminated
+         Loop not vectorized: data dependency
+videoSequence(unsigned char*, int, int, int, int*):
+    258, Loop not fused: function call before adjacent loop
+         Loop not vectorized: unsupported scatter
+         202, Loop not vectorized/parallelized: too deeply nested
+         203, Loop not vectorized/parallelized: too deeply nested
+         206, Loop not vectorized: unsupported scatter
+    273, Recognized memory copy idiom
+         109, Loop not fused: unsafe variable with target attribute
+         111, Generated vector simd code for the loop
+         109, Loop not fused: unsafe variable with target attribute
+         111, Generated vector simd code for the loop
+         131, Loop not vectorized: data dependency
+findIndex(float*, int, float):
+    299, Loop not vectorized/parallelized: potential early exits
+particleFilter(unsigned char*, int, int, int, int*, int):
+         146, Loop not fused: sibling loop may prevent vectorization
+         147, Generated vector simd code for the loop
+    335, Loop not fused: function call before adjacent loop
+    336, Loop not vectorized: data dependency
+         225, Loop not fused: function call before adjacent loop
+         226, Loop not vectorized: data dependency
+    346, Recognized memory set idiom
+    368, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 8 times
+    401, Loop not vectorized/parallelized: contains call
+    404, #omp target teams num_teams(num_blocks) thread_limit(256)
+        404, Generating "nvkernel__Z14particleFilterPhiiiPii_F1L404_2" GPU kernel
+        407, #omp parallel
+          433, Barrier
+          462, Barrier
+          470, Barrier
+        410, Team private (weights_local) located in CUDA shared memory
+    437, Loop not vectorized: data dependency
+    451, Loop not vectorized: unsupported gather
+         Loop unrolled 2 times
+    464, Loop not vectorized/parallelized: contains call
+    480, #omp target
+        480, Generating "nvkernel__Z14particleFilterPhiiiPii_F1L480_4" GPU kernel
+    483, Generated vector simd code for the loop containing reductions
+         Loop unrolled 8 times
+    497, #omp target teams num_teams(num_blocks) thread_limit(256)
+        497, Generating "nvkernel__Z14particleFilterPhiiiPii_F1L497_6" GPU kernel
+        501, #omp parallel
+          507, Barrier
+          512, Barrier
+          528, Barrier
+          532, Barrier
+        503, Team private (u1,sumWeights) located in CUDA shared memory
+    515, Loop not vectorized: data dependency
+         Loop unrolled 8 times
+    538, #omp target teams distribute parallel for thread_limit(256)
+        398, Generating map(alloc:ind[:countOnes*Nparticles]) 
+             Generating map(from:arrayY[:Nparticles]) 
+             Generating map(to:seed[:Nparticles],objxy[:countOnes*2],I[:Nfr*(IszY*IszX)]) 
+             Generating map(from:arrayX[:Nparticles]) 
+             Generating map(alloc:u[:Nparticles]) 
+             Generating map(tofrom:weights[:Nparticles]) 
+             Generating map(to:xj[:Nparticles],yj[:Nparticles]) 
+             Generating map(alloc:partial_sums[:Nparticles+1],CDF[:Nparticles],likelihood[:Nparticles+1]) 
+        538, Generating "nvkernel__Z14particleFilterPhiiiPii_F1L538_8" GPU kernel
+        563, Loop parallelized across teams and threads(128), schedule(static)
+    568, Loop not vectorized/parallelized: potential early exits
+    595, Loop not fused: complex flow graph
+         Generated vector simd code for the loop containing reductions
+main:
+    694, Loop not vectorized/parallelized: not countable
+         258, Loop not fused: function call before adjacent loop
+              Loop not vectorized: unsupported scatter
+         269, Loop not vectorized/parallelized: too deeply nested
+              Loop not vectorized: unsupported scatter
+         273, Recognized memory copy idiom
+         281, Loop not fused: unsafe variable with target attribute
+              Generated vector simd code for the loop
+         282, Loop not fused: unsafe variable with target attribute
+              Generated vector simd code for the loop
+         284, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
 timeout was set to  600

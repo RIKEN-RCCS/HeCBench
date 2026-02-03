@@ -1,1 +1,25 @@
+benchmark_func(float*, int, int, int):
+     21, #omp target teams num_teams(grid_dim) thread_limit(block_dim)
+         21, Generating "nvkernel__Z14benchmark_funcPfiii_F1L21_2" GPU kernel
+         23, #omp parallel
+     29, Loop not vectorized/parallelized: loop count too small
+     36, Loop not vectorized: unknown
+         Loop unrolled 8 times
+     43, Loop unrolled 4 times (completely unrolled)
+     47, Loop not vectorized: unknown
+         Loop unrolled 8 times (completely unrolled)
+mixbenchGPU(long, int, int):
+     58, Recognized memory zero idiom
+     65, Generating map(tofrom:cd[:size]) 
+     67, Loop not vectorized/parallelized: contains call
+     73, Loop not vectorized/parallelized: contains call
+     84, Loop not vectorized/parallelized: potential early exits
+main:
+          58, Recognized memory zero idiom
+          67, Loop not vectorized/parallelized: contains call
+          73, Loop not vectorized/parallelized: contains call
+          84, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     10, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
 timeout was set to  600

@@ -1,1 +1,47 @@
+matern_kernel_reference(int, int, float, float const*, float const*, float const*, float*):
+      6, include "reference.h"
+          17, Generated vector simd code for the loop containing reductions
+          19, Loop unrolled 3 times (completely unrolled)
+matern_kernel(int, float, float const*, float const*, float const*, float*):
+     21, #omp target teams distribute thread_limit(1024)
+         21, Generating "nvkernel__Z13matern_kernelifPKfS0_S0_Pf_F1L21_2" GPU kernel
+         23, Loop parallelized across teams, schedule(static)
+         26, Team private (t,sum) located in CUDA shared memory
+             #omp parallel
+           26, Generating reduction(+:sum)
+               Loop parallelized across threads, schedule(static)
+     23, Loop not vectorized/parallelized: contains structure move
+     26, Loop not vectorized/parallelized: not countable
+     28, Loop unrolled 3 times (completely unrolled)
+     39, Generating update from(result[:ntargets])
+matern_kernel2(int, float, float const*, float const*, float const*, float*):
+     54, #omp target teams num_teams(teams) thread_limit(1024)
+         54, Generating "nvkernel__Z14matern_kernel2ifPKfS0_S0_Pf_F1L54_7" GPU kernel
+         61, #omp parallel
+           79, Barrier
+           95, Barrier
+         64, Team private (local_sources,local_result,local_weights,local_targets) located in CUDA shared memory
+     69, Loop not vectorized: data dependency
+         Loop unrolled 3 times (completely unrolled)
+     74, Loop unrolled 3 times (completely unrolled)
+         Loop not vectorized: data dependency
+     84, Loop unrolled 3 times (completely unrolled)
+    100, Generated vector simd code for the loop containing reductions
+    108, Generating update from(result[:ntargets])
+main:
+    139, Loop not vectorized/parallelized: contains call
+    142, Loop not vectorized/parallelized: contains call
+    145, Loop not vectorized/parallelized: contains call
+    152, Generating map(alloc:result[:result_size]) 
+         Generating map(to:targets[:target_size],weights[:50],sources[:150]) 
+          15, Loop not fused: function call before adjacent loop
+          17, Generated vector simd code for the loop containing reductions
+          19, Loop unrolled 3 times (completely unrolled)
+    167, Loop not vectorized/parallelized: potential early exits
+    185, Loop not vectorized/parallelized: contains call
+    191, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      6, include "reference.h"
 timeout was set to  600

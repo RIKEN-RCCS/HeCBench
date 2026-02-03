@@ -1,3 +1,6 @@
+nvc++  -std=c++14 -Wall -I../mriQ-cuda -O3 -Minfo -mp=gpu -gpu=cc90,fastmath -c main.cpp -o main.o
+nvc++  -std=c++14 -Wall -I../mriQ-cuda -O3 -Minfo -mp=gpu -gpu=cc90,fastmath -c ../mriQ-cuda/file.cc -o file.o
+nvc++  -std=c++14 -Wall -I../mriQ-cuda -O3 -Minfo -mp=gpu -gpu=cc90,fastmath main.o file.o -o main 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "../mriQ-cuda/prepare_data.sh; time -p ( ./main ../mriQ-cuda/mri-q/datasets/128x128x128/input/128x128x128.bin output_128 1>log.std 2>log.err ) 2> log.time"
 pkill nvidia-smi

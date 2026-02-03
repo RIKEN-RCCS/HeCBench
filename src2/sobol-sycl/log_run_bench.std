@@ -1,3 +1,8 @@
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c sobol.cpp -o sobol.o
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c sobol_gold.cpp -o sobol_gold.o
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c sobol_gpu.cpp -o sobol_gpu.o
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c sobol_primitives.cpp -o sobol_primitives.o
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU sobol.o sobol_gold.o sobol_gpu.o sobol_primitives.o -o main 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "time -p ( ./main 1000000 1000 100 1>log.std 2>log.err ) 2> log.time"
 pkill nvidia-smi

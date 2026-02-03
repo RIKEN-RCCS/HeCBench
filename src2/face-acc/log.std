@@ -22,7 +22,7 @@ detecting faces, iter := 15
 detecting faces, iter := 16
 detecting faces, iter := 17
 detecting faces, iter := 18
-Object detection time 0.208898 (s)
+Object detection time 0.208102 (s)
 -- saving output --
 -- image saved --
 -- entering main function --
@@ -49,6 +49,6 @@ detecting faces, iter := 15
 detecting faces, iter := 16
 detecting faces, iter := 17
 detecting faces, iter := 18
-Object detection time 2.033752 (s)
+Object detection time 2.158453 (s)
 -- saving output --
 -- image saved --

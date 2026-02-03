@@ -1,1 +1,39 @@
+VerifyResult(float (*) [1536], float (*) [3072], float (*) [3072], float (*) [3072]):
+     29, include "verify.h"
+          18, Recognized memory zero idiom
+          22, Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 4 times
+          28, Loop not vectorized/parallelized: potential early exits
+          42, Loop not vectorized/parallelized: potential early exits
+main:
+     50, Outer loop unrolled 1 times (completely unrolled)
+     51, Loop nest collapsed
+         Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+     56, Loop nest collapsed
+         Loop not vectorized/parallelized: contains call
+     59, Loop not fused: function call before adjacent loop
+     61, Loop not fused: scalar dependence chain to sibling loop
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 8 times
+     63, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+     78, #omp target teams distribute parallel for thread_limit(256)
+         75, Generating map(to:a_host[:768][:]) 
+             Generating map(from:c_back[:768][:]) 
+             Generating map(to:b_host[:1536][:]) 
+         78, Generating "nvkernel_main_F1L78_2" GPU kernel
+         80, Loop parallelized across teams and threads(128), schedule(static)
+     78, Loop not vectorized/parallelized: contains call
+     81, Loop not vectorized/parallelized: contains call
+     83, Generated vector simd code for the loop containing reductions
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+     29, include "verify.h"
+std::signbit(float):
+              662, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
 timeout was set to  600

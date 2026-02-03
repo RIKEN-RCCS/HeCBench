@@ -1,1 +1,36 @@
+read_input(int*, task_t*, Params const&):
+    137, Loop not vectorized/parallelized: contains call
+    148, Loop not fused: different loop trip count
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 4 times
+    155, Loop not vectorized: data dependency
+main:
+          75, Loop not vectorized/parallelized: contains call
+         137, Loop not vectorized/parallelized: contains call
+         148, Loop not vectorized/parallelized: not countable
+         155, Loop not vectorized/parallelized: not countable
+    192, Generating map(alloc:d_data_queues[:p.n_gpu_threads*p.queue_size],h_task_queues[:p.queue_size],h_consumed[:1]) 
+    202, Loop not vectorized/parallelized: contains call
+    210, Generating update to(h_consumed[:1],h_task_queues[:p.queue_size])
+    214, Generating update to(d_data_queues[:p.n_gpu_threads*p.queue_size])
+    219, Generating update from(d_data_queues[:p.n_gpu_threads*p.queue_size])
+          41, Loop not fused: function call before adjacent loop
+Params::Params(int, char**):
+     75, Loop not vectorized/parallelized: contains call
+Params::Params(int, char**):
+          75, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     40, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+call_TaskQueue_gpu(int, int, task_t const*, int*, int*, int, int, int):
+     48, #omp target teams num_teams(blocks) thread_limit(threads)
+         48, Generating "nvkernel__Z18call_TaskQueue_gpuiiPK6task_tPiS2_iii_F1L48_2" GPU kernel
+         51, #omp parallel
+           66, Barrier
+           91, Barrier
+         56, Team private (l_mem) located in CUDA shared memory
+     68, Loop not vectorized/parallelized: contains call
+     71, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+     78, Loop unrolled 1 times (completely unrolled)
 timeout was set to  600

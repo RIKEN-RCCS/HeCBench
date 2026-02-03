@@ -1,1 +1,17 @@
+src/ans_table_generator.cc:141:25: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+  141 |     SYMBOL_TYPE symbols[num_states];
+      |                         ^~~~~~~~~~
+src/ans_table_generator.cc:141:25: note: function parameter 'num_states' with unknown value cannot be used in a constant expression
+src/ans_table_generator.cc:137:12: note: declared here
+  137 |     size_t num_states,
+      |            ^
+1 warning generated.
+src/ans_table_generator.cc:141:25: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+  141 |     SYMBOL_TYPE symbols[num_states];
+      |                         ^~~~~~~~~~
+src/ans_table_generator.cc:141:25: note: function parameter 'num_states' with unknown value cannot be used in a constant expression
+src/ans_table_generator.cc:137:12: note: declared here
+  137 |     size_t num_states,
+      |            ^
+1 warning generated.
 timeout was set to  600

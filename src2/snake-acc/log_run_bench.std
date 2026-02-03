@@ -4,4 +4,4 @@ nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.m
 bash -c "../snake-cuda/prepare_data.sh; time -p ( ./main 100 ../snake-cuda/Datasets/ERR240727_1_E2_30000Pairs.txt 30000 1000 1>log.std 2>log.err ) 2> log.time"
 pkill nvidia-smi
 ../scripts/m.sh
-min max diff memory in [MB] : 1 560 559
+min max diff memory in [MB] : 1 561 560

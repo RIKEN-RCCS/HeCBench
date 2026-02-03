@@ -1,1 +1,148 @@
+"main.cpp", line 51: warning: integer conversion resulted in a change of sign [integer_sign_change]
+        h_element_temp.value = -1;
+                               ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"main.cpp", line 86: warning: integer conversion resulted in a change of sign [integer_sign_change]
+        h_element_temp.value = -1;
+                               ^
+
+"main.cpp", line 112: warning: variable "memorySize_h_compact1" was declared but never referenced [declared_but_not_referenced]
+    int memorySize_h_compact1 = wordSize_h_compact1 * sizeof(h_element);
+        ^
+
+"main.cpp", line 113: warning: variable "memorySize_h_compact2" was declared but never referenced [declared_but_not_referenced]
+    int memorySize_h_compact2 = wordSize_h_compact2 * sizeof(h_element);
+        ^
+
+ldpc_cnp_kernel_1st_iter(float const*, float*, float*, char const*, h_element const*):
+     21, include "kernel.cpp"
+          30, #omp target teams num_teams(480) thread_limit(192)
+              30, Generating "nvkernel__Z24ldpc_cnp_kernel_1st_iterPKfPfS1_PKcPK9h_element_F190L30_2" GPU kernel
+              32, #omp parallel
+          74, Loop not vectorized: unknown
+         106, Loop not vectorized: data dependency
+ldpc_cnp_kernel(float const*, float*, float*, char const*, h_element const*):
+     21, include "kernel.cpp"
+         134, #omp target teams num_teams(480) thread_limit(192)
+             134, Generating "nvkernel__Z15ldpc_cnp_kernelPKfPfS1_PKcPK9h_element_F190L134_7" GPU kernel
+             137, #omp parallel
+               217, Barrier
+             148, Team private (RCache) located in CUDA shared memory
+         183, Loop not vectorized: data dependency
+         221, Loop not vectorized: data dependency
+ldpc_vnp_kernel_normal(float*, float*, char const*, h_element const*):
+     21, include "kernel.cpp"
+         249, #omp target teams num_teams(960) thread_limit(192)
+             249, Generating "nvkernel__Z22ldpc_vnp_kernel_normalPfS_PKcPK9h_element_F190L249_12" GPU kernel
+             251, #omp parallel
+         284, Loop not vectorized: unprofitable for target
+ldpc_vnp_kernel_last_iter(float const*, float const*, int*, char const*, h_element const*):
+     21, include "kernel.cpp"
+         317, #omp target teams num_teams(960) thread_limit(192)
+             317, Generating "nvkernel__Z25ldpc_vnp_kernel_last_iterPKfS0_PiPKcPK9h_element_F190L317_17" GPU kernel
+             319, #omp parallel
+         354, Loop not vectorized: unprofitable for target
+main:
+     45, Outer loop unrolled 1 times (completely unrolled)
+     47, Loop nest collapsed
+         Loop not fused: different loop trip count
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 8 times
+     58, Loop not fused: different loop trip count
+     80, Outer loop unrolled 1 times (completely unrolled)
+     82, Loop nest collapsed
+         Loop not fused: different loop trip count
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 8 times
+     92, Loop not fused: function call before adjacent loop
+    174, Generating map(alloc:dev_llr[:wordSize_llr],dev_hard_decision[:wordSize_hard_decision],dev_R[:wordSize_R]) 
+         Generating map(to:dev_h_element_count2[:24]) 
+         Generating map(alloc:dev_dt[:wordSize_dt]) 
+         Generating map(to:dev_h_compact1[:wordSize_h_compact1],dev_h_compact2[:wordSize_h_compact2],dev_h_element_count1[:12]) 
+    175, Loop not vectorized/parallelized: too deeply nested
+    189, Loop not vectorized/parallelized: contains call
+    220, Generating update to(llr_gpu[:wordSize_llr])
+    222, Loop not vectorized/parallelized: contains call
+    271, Generating update from(dev_hard_decision[:wordSize_hard_decision])
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     17, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+     21, include "kernel.cpp"
+info_gen(int*, long):
+     27, Loop not vectorized/parallelized: contains call
+modulation(int*, float*):
+     37, Generated vector simd code for the loop
+awgn(float*, float*, long):
+     58, Loop not vectorized/parallelized: contains call
+llr_init(float*, float*):
+     91, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 4 times
+parity_check(float*):
+    115, Loop not fused: sibling loop may prevent vectorization
+         Generated vector simd code for the loop
+    123, Loop not fused: function call before adjacent loop
+structure_encode(int*, int*, int (*) [24]):
+    183, Recognized memory zero idiom
+    186, Recognized memory zero idiom
+    188, Loop not fused: enclosed in different number of nests
+    194, Loop not vectorized: data dependency
+    203, Loop distributed: 2 new loops
+         Loop interchange produces reordered loop nest: 204,203
+         Generated vector simd code for the loop
+    204, Loop not fused: different loop trip count
+    210, Loop not fused: different controlling conditions
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 4 times
+    215, Invariant if transformation
+         Loop not fused: different controlling conditions
+         Loop not fused: no successor loop
+         Generated vector simd code for the loop
+    227, Loop not fused: dependence chain to sibling loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 2 times
+    231, Loop not fused: dependence chain to sibling loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 2 times
+    235, Loop not fused: dependence chain to sibling loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 2 times
+    240, Loop not fused: dependence chain to sibling loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 2 times
+    244, Loop not fused: dependence chain to sibling loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 2 times
+    249, Loop not fused: dependence chain to sibling loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+    253, Loop not fused: dependence chain to sibling loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 2 times
+    266, Loop not fused: dependence chain to sibling loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 2 times
+    270, Loop not fused: dependence chain to sibling loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 2 times
+    274, Loop not fused: dependence chain to sibling loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 2 times
+    278, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 2 times
+    283, Recognized memory copy idiom
 timeout was set to  600

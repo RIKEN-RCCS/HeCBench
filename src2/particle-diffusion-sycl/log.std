@@ -4,7 +4,7 @@
  The number of kernel execution is 100
  The number of particles is 147456
 
-Average kernel execution time: 0.00170488 (s)
+Average kernel execution time: 0.001697 (s)
 
-Simulation time: 0.570025 (s) 
+Simulation time: 0.554286 (s) 
 PASS

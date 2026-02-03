@@ -1,2 +1,6 @@
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c reference.cpp -o reference.o
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c utils.cpp -o utils.o
+nvc++  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o reference.o utils.o -o main 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "time -p ( ./main 100 10000000 1>log.std 2>log.err ) 2> log.time"

@@ -1,1 +1,117 @@
+../xsbench-cuda/io.cu:338:11: warning: variable 'binary_mode' is used uninitialized whenever 'if' condition is false [-Wsometimes-uninitialized]
+  338 |       if( ++i < argc )
+      |           ^~~~~~~~~~
+../xsbench-cuda/io.cu:343:18: note: uninitialized use occurs here
+  343 |       if( strcmp(binary_mode, "read") == 0 )
+      |                  ^~~~~~~~~~~
+../xsbench-cuda/io.cu:338:7: note: remove the 'if' if its condition is always true
+  338 |       if( ++i < argc )
+      |       ^~~~~~~~~~~~~~~~
+  339 |         binary_mode = argv[i];
+      |                              ~
+  340 |       else
+      |       ~~~~
+  341 |         print_CLI_error();
+      |         ~~~~~~~~~~~~~~~~~
+../xsbench-cuda/io.cu:337:25: note: initialize the variable 'binary_mode' to silence this warning
+  337 |       char * binary_mode;
+      |                         ^
+      |                          = nullptr
+../xsbench-cuda/io.cu:320:11: warning: variable 'grid_type' is used uninitialized whenever 'if' condition is false [-Wsometimes-uninitialized]
+  320 |       if( ++i < argc )
+      |           ^~~~~~~~~~
+../xsbench-cuda/io.cu:325:18: note: uninitialized use occurs here
+  325 |       if( strcmp(grid_type, "unionized") == 0 )
+      |                  ^~~~~~~~~
+../xsbench-cuda/io.cu:320:7: note: remove the 'if' if its condition is always true
+  320 |       if( ++i < argc )
+      |       ^~~~~~~~~~~~~~~~
+  321 |         grid_type = argv[i];
+      |                            ~
+  322 |       else
+      |       ~~~~
+  323 |         print_CLI_error();
+      |         ~~~~~~~~~~~~~~~~~
+../xsbench-cuda/io.cu:319:23: note: initialize the variable 'grid_type' to silence this warning
+  319 |       char * grid_type;
+      |                       ^
+      |                        = nullptr
+../xsbench-cuda/io.cu:258:11: warning: variable 'sim_type' is used uninitialized whenever 'if' condition is false [-Wsometimes-uninitialized]
+  258 |       if( ++i < argc )
+      |           ^~~~~~~~~~
+../xsbench-cuda/io.cu:263:18: note: uninitialized use occurs here
+  263 |       if( strcmp(sim_type, "history") == 0 )
+      |                  ^~~~~~~~
+../xsbench-cuda/io.cu:258:7: note: remove the 'if' if its condition is always true
+  258 |       if( ++i < argc )
+      |       ^~~~~~~~~~~~~~~~
+  259 |         sim_type = argv[i];
+      |                           ~
+  260 |       else
+      |       ~~~~
+  261 |         print_CLI_error();
+      |         ~~~~~~~~~~~~~~~~~
+../xsbench-cuda/io.cu:257:22: note: initialize the variable 'sim_type' to silence this warning
+  257 |       char * sim_type;
+      |                      ^
+      |                       = nullptr
+3 warnings generated.
+../xsbench-cuda/io.cu:338:11: warning: variable 'binary_mode' is used uninitialized whenever 'if' condition is false [-Wsometimes-uninitialized]
+  338 |       if( ++i < argc )
+      |           ^~~~~~~~~~
+../xsbench-cuda/io.cu:343:18: note: uninitialized use occurs here
+  343 |       if( strcmp(binary_mode, "read") == 0 )
+      |                  ^~~~~~~~~~~
+../xsbench-cuda/io.cu:338:7: note: remove the 'if' if its condition is always true
+  338 |       if( ++i < argc )
+      |       ^~~~~~~~~~~~~~~~
+  339 |         binary_mode = argv[i];
+      |                              ~
+  340 |       else
+      |       ~~~~
+  341 |         print_CLI_error();
+      |         ~~~~~~~~~~~~~~~~~
+../xsbench-cuda/io.cu:337:25: note: initialize the variable 'binary_mode' to silence this warning
+  337 |       char * binary_mode;
+      |                         ^
+      |                          = nullptr
+../xsbench-cuda/io.cu:320:11: warning: variable 'grid_type' is used uninitialized whenever 'if' condition is false [-Wsometimes-uninitialized]
+  320 |       if( ++i < argc )
+      |           ^~~~~~~~~~
+../xsbench-cuda/io.cu:325:18: note: uninitialized use occurs here
+  325 |       if( strcmp(grid_type, "unionized") == 0 )
+      |                  ^~~~~~~~~
+../xsbench-cuda/io.cu:320:7: note: remove the 'if' if its condition is always true
+  320 |       if( ++i < argc )
+      |       ^~~~~~~~~~~~~~~~
+  321 |         grid_type = argv[i];
+      |                            ~
+  322 |       else
+      |       ~~~~
+  323 |         print_CLI_error();
+      |         ~~~~~~~~~~~~~~~~~
+../xsbench-cuda/io.cu:319:23: note: initialize the variable 'grid_type' to silence this warning
+  319 |       char * grid_type;
+      |                       ^
+      |                        = nullptr
+../xsbench-cuda/io.cu:258:11: warning: variable 'sim_type' is used uninitialized whenever 'if' condition is false [-Wsometimes-uninitialized]
+  258 |       if( ++i < argc )
+      |           ^~~~~~~~~~
+../xsbench-cuda/io.cu:263:18: note: uninitialized use occurs here
+  263 |       if( strcmp(sim_type, "history") == 0 )
+      |                  ^~~~~~~~
+../xsbench-cuda/io.cu:258:7: note: remove the 'if' if its condition is always true
+  258 |       if( ++i < argc )
+      |       ^~~~~~~~~~~~~~~~
+  259 |         sim_type = argv[i];
+      |                           ~
+  260 |       else
+      |       ~~~~
+  261 |         print_CLI_error();
+      |         ~~~~~~~~~~~~~~~~~
+../xsbench-cuda/io.cu:257:22: note: initialize the variable 'sim_type' to silence this warning
+  257 |       char * sim_type;
+      |                      ^
+      |                       = nullptr
+3 warnings generated.
 timeout was set to  600

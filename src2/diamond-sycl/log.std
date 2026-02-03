@@ -6,14 +6,14 @@ Check http://github.com/bbuchfink/diamond for updates.
 Scoring parameters: (Matrix=BLOSUM62 Lambda=0.267 K=0.041 Penalties=11/1)
 #Target sequences to report alignments for: 25
 Temporary directory: /dev/shm
-Opening the database...  [0.00087s]
-Loading dummy query sequences...  [0.668121s]
-Loading dummy query sequences...  [2e-06s]
-Opening the input file...  [0.004085s]
-Opening the output file...  [0.000343s]
-Loading query sequences...  [1.28104s]
+Opening the database...  [0.001198s]
+Loading dummy query sequences...  [0.658826s]
+Loading dummy query sequences...  [1e-06s]
+Opening the input file...  [0.003704s]
+Opening the output file...  [0.000304s]
+Loading query sequences...  [1.26807s]
 Masking queries... Timing the mask sequences on CPU...
-Total time (maskSequences) on the CPU = 10.3978 s
+Total time (maskSequences) on the CPU = 10.3568 s
 There are 1696836 sequences and the total sequence length is 194131480
 Timing the mask sequences on device...
- [14.1662s]
+ [14.1465s]

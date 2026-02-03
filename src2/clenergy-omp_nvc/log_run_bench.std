@@ -1,3 +1,6 @@
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c clenergy.cpp -o clenergy.o
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c WKFUtils.cpp -o WKFUtils.o
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 clenergy.o WKFUtils.o -o main 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "time -p ( ./main 1>log.std 2>log.err ) 2> log.time"
 pkill nvidia-smi

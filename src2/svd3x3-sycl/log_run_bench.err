@@ -1,3 +1,1 @@
-bunzip2: Can't open input file ../svd3x3-cuda/Dataset_1M.txt.bz2: No such file or directory.
-make: *** [Makefile.NVD:85: run_mem] Error 255
 timeout was set to  600

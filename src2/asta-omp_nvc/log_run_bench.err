@@ -1,1 +1,35 @@
+compare_output(float*, float*, int):
+     45, include "verify.h"
+          42, Loop not vectorized/parallelized: potential early exits
+cpu_soa_asta(float*, float*, int, int, int):
+     45, include "verify.h"
+          60, Recognized memory copy idiom
+verify(float*, float*, int, int, int):
+          60, Recognized memory copy idiom
+          42, Loop not vectorized/parallelized: potential early exits
+read_input(float*, Params const&):
+    115, Loop not vectorized/parallelized: contains call
+main:
+          68, Loop not vectorized/parallelized: contains call
+         115, Loop not vectorized/parallelized: contains call
+    158, Loop not vectorized/parallelized: contains call
+    168, Generating update to(h_in_out[:in_size],h_head[:1],h_finished[:finished_size])
+    171, #omp target teams num_teams(blocks) thread_limit(threads)
+        155, Generating map(alloc:h_head[:1],h_in_out[:in_size],h_finished[:finished_size]) 
+        171, Generating "nvkernel_main_F1L171_2" GPU kernel
+        174, #omp parallel
+          182, Barrier
+          191, Barrier
+          212, Barrier
+          236, Barrier
+          270, Barrier
+        261, Team private (lmem) located in CUDA shared memory
+    231, Loop not vectorized/parallelized: contains a parallel region
+    281, Generating update from(h_in_out[:in_size])
+          70, Recognized memory copy idiom
+          71, Loop not vectorized/parallelized: potential early exits
+Params::Params(int, char**):
+     70, Loop not vectorized/parallelized: contains call
+Params::Params(int, char**):
+          68, Loop not vectorized/parallelized: contains call
 timeout was set to  600

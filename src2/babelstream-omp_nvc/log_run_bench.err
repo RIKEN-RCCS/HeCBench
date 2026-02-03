@@ -1,1 +1,321 @@
+parseArguments(int, char**):
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+void run<float>():
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    183, Generating map(alloc:a[:array_size],c[:array_size],b[:array_size]) 
+    194, Loop not vectorized/parallelized: contains call
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+    256, Loop not vectorized/parallelized: contains structure move
+         140, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+void run<double>():
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    183, Generating map(alloc:a[:array_size],c[:array_size],b[:array_size]) 
+    194, Loop not vectorized/parallelized: contains call
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+    256, Loop not vectorized/parallelized: contains structure move
+         140, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+void init_arrays<float>(float*, float*, float*, float, float, float):
+     70, #omp target teams distribute parallel for simd thread_limit(256)
+         70, Generating "nvkernel__Z11init_arraysIfEvPT_S1_S1_S0_S0_S0__F1L70_2" GPU kernel
+         72, Loop parallelized across teams and threads(128), schedule(static)
+     72, Loop not vectorized/parallelized: not countable
+void copy<float>(float const*, float*):
+     83, #omp target teams distribute parallel for simd thread_limit(256)
+         83, Generating "nvkernel__Z4copyIfEvPKT_PS0__F1L83_6" GPU kernel
+         85, Loop parallelized across teams and threads(128), schedule(static)
+     85, Loop not vectorized/parallelized: not countable
+void mul<float>(float*, float const*):
+     92, #omp target teams distribute parallel for simd thread_limit(256)
+         92, Generating "nvkernel__Z3mulIfEvPT_PKS0__F1L92_10" GPU kernel
+         94, Loop parallelized across teams and threads(128), schedule(static)
+     94, Loop not vectorized/parallelized: not countable
+void add<float>(float const*, float const*, float*):
+    103, #omp target teams distribute parallel for simd thread_limit(256)
+        103, Generating "nvkernel__Z3addIfEvPKT_S2_PS0__F1L103_14" GPU kernel
+        105, Loop parallelized across teams and threads(128), schedule(static)
+    105, Loop not vectorized/parallelized: not countable
+void triad<float>(float*, float const*, float const*):
+    114, #omp target teams distribute parallel for simd thread_limit(256)
+        114, Generating "nvkernel__Z5triadIfEvPT_PKS0_S3__F1L114_18" GPU kernel
+        116, Loop parallelized across teams and threads(128), schedule(static)
+    116, Loop not vectorized/parallelized: not countable
+float dot<float>(float const*, float const*):
+    140, #omp target teams distribute parallel for simd thread_limit(256)
+        140, Generating "nvkernel__Z3dotIfET_PKS0_S2__F1L140_22" GPU kernel
+             Loop parallelized across teams and threads(128), schedule(static)
+             Generating reduction(+:sum)
+    140, Generating map(tofrom:sum) 
+         Loop not vectorized/parallelized: not countable
+void nstream<float>(float*, float const*, float const*):
+    126, #omp target teams distribute parallel for simd thread_limit(256)
+        126, Generating "nvkernel__Z7nstreamIfEvPT_PKS0_S3__F1L126_26" GPU kernel
+        128, Loop parallelized across teams and threads(128), schedule(static)
+    128, Loop not vectorized/parallelized: not countable
+void init_arrays<double>(double*, double*, double*, double, double, double):
+     70, #omp target teams distribute parallel for simd thread_limit(256)
+         70, Generating "nvkernel__Z11init_arraysIdEvPT_S1_S1_S0_S0_S0__F1L70_30" GPU kernel
+         72, Loop parallelized across teams and threads(128), schedule(static)
+     72, Loop not vectorized/parallelized: not countable
+void copy<double>(double const*, double*):
+     83, #omp target teams distribute parallel for simd thread_limit(256)
+         83, Generating "nvkernel__Z4copyIdEvPKT_PS0__F1L83_34" GPU kernel
+         85, Loop parallelized across teams and threads(128), schedule(static)
+     85, Loop not vectorized/parallelized: not countable
+void mul<double>(double*, double const*):
+     92, #omp target teams distribute parallel for simd thread_limit(256)
+         92, Generating "nvkernel__Z3mulIdEvPT_PKS0__F1L92_38" GPU kernel
+         94, Loop parallelized across teams and threads(128), schedule(static)
+     94, Loop not vectorized/parallelized: not countable
+void add<double>(double const*, double const*, double*):
+    103, #omp target teams distribute parallel for simd thread_limit(256)
+        103, Generating "nvkernel__Z3addIdEvPKT_S2_PS0__F1L103_42" GPU kernel
+        105, Loop parallelized across teams and threads(128), schedule(static)
+    105, Loop not vectorized/parallelized: not countable
+void triad<double>(double*, double const*, double const*):
+    114, #omp target teams distribute parallel for simd thread_limit(256)
+        114, Generating "nvkernel__Z5triadIdEvPT_PKS0_S3__F1L114_46" GPU kernel
+        116, Loop parallelized across teams and threads(128), schedule(static)
+    116, Loop not vectorized/parallelized: not countable
+double dot<double>(double const*, double const*):
+    140, #omp target teams distribute parallel for simd thread_limit(256)
+        140, Generating "nvkernel__Z3dotIdET_PKS0_S2__F1L140_50" GPU kernel
+             Loop parallelized across teams and threads(128), schedule(static)
+             Generating reduction(+:sum)
+    140, Generating map(tofrom:sum) 
+         Loop not vectorized/parallelized: not countable
+void nstream<double>(double*, double const*, double const*):
+    126, #omp target teams distribute parallel for simd thread_limit(256)
+        126, Generating "nvkernel__Z7nstreamIdEvPT_PKS0_S3__F1L126_54" GPU kernel
+        128, Loop parallelized across teams and threads(128), schedule(static)
+    128, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>* std::__copy_move<false, false, std::random_access_iterator_tag>::__copy_m<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*):
+     36, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+                             383, Loop not vectorized/parallelized: potential early exits
+std::char_traits<char>::length(char const*):
+         171, Loop not vectorized/parallelized: not countable
+void std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>::_M_assign_aux<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const*>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const*, std::forward_iterator_tag):
+         619, Loop not vectorized/parallelized: potential early exits
+         619, Loop not vectorized/parallelized: potential early exits
+void std::_Destroy_aux<false>::__destroy<std::vector<double, std::allocator<double>>*>(std::vector<double, std::allocator<double>>*, std::vector<double, std::allocator<double>>*):
+     36, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    42, include "ios_base.h"
+                         41, include "locale_classes.h"
+                              40, include "string"
+                                   55, include "basic_string.h"
+                                        40, include "alloc_traits.h"
+                                             34, include "alloc_traits.h"
+                                                  33, include "stl_construct.h"
+                                                      162, Loop not vectorized/parallelized: contains call
+void std::_Destroy_aux<false>::__destroy<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*):
+     36, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    42, include "ios_base.h"
+                         41, include "locale_classes.h"
+                              40, include "string"
+                                   55, include "basic_string.h"
+                                        40, include "alloc_traits.h"
+                                             34, include "alloc_traits.h"
+                                                  33, include "stl_construct.h"
+                                                      162, Loop not vectorized/parallelized: contains call
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     36, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    42, include "ios_base.h"
+                         41, include "locale_classes.h"
+                              40, include "string"
+                                   55, include "basic_string.h"
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::replace(unsigned long, unsigned long, char const*, unsigned long):
+     36, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    42, include "ios_base.h"
+                         41, include "locale_classes.h"
+                              40, include "string"
+                                   55, include "basic_string.h"
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::replace(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, char*, char*):
+     36, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    42, include "ios_base.h"
+                         41, include "locale_classes.h"
+                              40, include "string"
+                                   55, include "basic_string.h"
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string<std::allocator<char>>(char const*, std::allocator<char> const&):
+         397, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string<std::allocator<char>>(char const*, std::allocator<char> const&):
+         536, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>& std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::assign<char*, void>(char*, char*):
+     36, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    42, include "ios_base.h"
+                         41, include "locale_classes.h"
+                              40, include "string"
+                                   55, include "basic_string.h"
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     42, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1l>>::_S_gcd(long, long):
+     42, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<double, std::ratio<1l, 1l>>::_S_gcd(long, long):
+     42, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+__gnu_cxx::char_traits<char>::length(char const*):
+     36, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                        171, Loop not vectorized/parallelized: not countable
+                    42, include "ios_base.h"
+     42, include "chrono"
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<char, std::char_traits<char>, std::allocator<char>>(std::basic_ostream<char, std::char_traits<char>>&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     36, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    42, include "ios_base.h"
+                         41, include "locale_classes.h"
+                              40, include "string"
+                                   55, include "basic_string.h"
+     42, include "chrono"
+std::basic_ostream<char, std::char_traits<char>>& std::endl<char, std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&):
+     36, include "iostream"
+          39, include "ostream"
+     42, include "chrono"
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&, char const*):
+         397, Loop not vectorized/parallelized: not countable
+double std::accumulate<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, double>(__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, double):
+     38, include "numeric"
+          10, include "numeric"
+               62, include "stl_numeric.h"
+                   140, Loop not vectorized/parallelized: not countable
+     42, include "chrono"
+void std::_Destroy<std::vector<double, std::allocator<double>>*>(std::vector<double, std::allocator<double>>*, std::vector<double, std::allocator<double>>*):
+     36, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    42, include "ios_base.h"
+                         41, include "locale_classes.h"
+                              40, include "string"
+                                   55, include "basic_string.h"
+                                        40, include "alloc_traits.h"
+                                             34, include "alloc_traits.h"
+                                                  33, include "stl_construct.h"
+     38, include "numeric"
+     42, include "chrono"
+void std::_Destroy<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*):
+     36, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    42, include "ios_base.h"
+                         41, include "locale_classes.h"
+                              40, include "string"
+                                   55, include "basic_string.h"
+                                        40, include "alloc_traits.h"
+                                             34, include "alloc_traits.h"
+                                                  33, include "stl_construct.h"
+     38, include "numeric"
+     42, include "chrono"
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>* std::copy<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*):
+         529, Loop not vectorized/parallelized: potential early exits
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>* std::__copy_move_a<false, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*):
+     36, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+                    42, include "ios_base.h"
+     38, include "numeric"
+     42, include "chrono"
+         522, Loop not vectorized/parallelized: potential early exits
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>* std::__copy_move_a1<false, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*):
+         494, Loop not vectorized/parallelized: potential early exits
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>* std::__copy_move_a2<false, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*):
+         383, Loop not vectorized/parallelized: potential early exits
+unsigned long* std::__copy_move_a<false, unsigned long const*, unsigned long*>(unsigned long const*, unsigned long const*, unsigned long*):
+     36, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+                    42, include "ios_base.h"
+     38, include "numeric"
+     42, include "chrono"
+std::pair<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>> std::__minmax_element<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__ops::_Iter_less_iter>(__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__ops::_Iter_less_iter):
+     43, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                  3354, Loop not vectorized/parallelized: potential early exits
 timeout was set to  600

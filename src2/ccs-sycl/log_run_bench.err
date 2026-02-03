@@ -1,7 +1,6 @@
-/usr/bin/ld: cannot find crtbegin.o: No such file or directory
-/usr/bin/ld: cannot find -lstdc++
-/usr/bin/ld: cannot find -lgcc_s
-/usr/bin/ld: cannot find -lgcc
-clang++: error: linker command failed with exit code 1 (use -v to see invocation)
-make: *** [Makefile.NVD:70: main] Error 1
+main.cpp:17:10: fatal error: 'chrono' file not found
+   17 | #include <chrono>
+      |          ^~~~~~~~
+1 error generated.
+make: *** [Makefile.NVD:73: main.o] Error 1
 timeout was set to  600

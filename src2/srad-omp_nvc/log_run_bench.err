@@ -1,2 +1,50 @@
-make: *** [Makefile.NVD:58: run_mem] Error 1
+main:
+    135, Loop not vectorized/parallelized: not countable
+    139, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 4 times
+    178, #omp target teams distribute parallel for num_teams(blocks_work_size) thread_limit(256)
+        178, Generating "nvkernel_main_F1L178_2" GPU kernel
+        182, Loop parallelized across teams and threads(128), schedule(static)
+    182, Loop not vectorized/parallelized: not countable
+    187, #omp target teams distribute parallel for num_teams(blocks_work_size) thread_limit(256)
+        187, Generating "nvkernel_main_F1L187_4" GPU kernel
+        190, Loop parallelized across teams and threads(128), schedule(static)
+    190, Loop not vectorized/parallelized: not countable
+    199, Loop not vectorized/parallelized: contains call
+    203, #omp target teams num_teams(blocks_work_size2) thread_limit(256)
+        203, Generating "nvkernel_main_F1L203_6" GPU kernel
+        207, #omp parallel
+          223, Barrier
+          235, Barrier
+          255, Barrier
+          279, Barrier
+        209, Team private (psum2,psum) located in CUDA shared memory
+    228, Loop not vectorized/parallelized: contains call
+    248, Loop not vectorized/parallelized: contains call
+    266, Loop not vectorized/parallelized: not countable
+    272, Loop not vectorized/parallelized: contains call
+    284, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    317, Generating update from(sums[:1],sums2[:1])
+    320, #omp target teams distribute parallel for num_teams(blocks_work_size) thread_limit(256)
+        320, Generating "nvkernel_main_F1L320_8" GPU kernel
+        325, Loop parallelized across teams and threads(128), schedule(static)
+    325, Loop not vectorized/parallelized: not countable
+    372, #omp target teams distribute parallel for num_teams(blocks_work_size) thread_limit(256)
+        372, Generating "nvkernel_main_F1L372_10" GPU kernel
+        376, Loop parallelized across teams and threads(128), schedule(static)
+    376, Loop not vectorized/parallelized: not countable
+    399, #omp target teams distribute parallel for num_teams(blocks_work_size) thread_limit(256)
+        177, Generating map(to:iS[:Nr]) 
+             Generating map(alloc:dW[:Ne]) 
+             Generating map(to:iN[:Nr],image[:Ne],jE[:Nc]) 
+             Generating map(alloc:dE[:Ne],dN[:Ne],dS[:Ne],c[:Ne],sums[:Ne],sums2[:Ne]) 
+             Generating map(to:jW[:Nc]) 
+        399, Generating "nvkernel_main_F1L399_12" GPU kernel
+        405, Loop parallelized across teams and threads(128), schedule(static)
+    405, Loop not vectorized/parallelized: not countable
+    412, Generating update from(image[:Ne])
+make: *** [Makefile.NVD:55: run_mem] Error 126
 timeout was set to  600

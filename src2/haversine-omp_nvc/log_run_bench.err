@@ -1,0 +1,21 @@
+verify(int, double const*, double const*):
+     10, Generated vector simd code for the loop containing reductions
+main:
+     44, Loop not vectorized/parallelized: potential early exits
+     53, Loop not vectorized/parallelized: contains call
+     57, Loop not fused: different loop trip count
+     59, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+     66, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+          10, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+distance_device(double4 const*, double*, int, int):
+      7, #omp target teams distribute parallel for thread_limit(256)
+          6, Generating map(from:dist[:n]) 
+             Generating map(to:loc[:n]) 
+          7, Generating "nvkernel__Z15distance_devicePK7double4Pdii_F1L7_2" GPU kernel
+          9, Loop parallelized across teams and threads(128), schedule(static)
+      7, Loop not vectorized/parallelized: contains call
+      9, Loop not vectorized/parallelized: not countable
+timeout was set to  600

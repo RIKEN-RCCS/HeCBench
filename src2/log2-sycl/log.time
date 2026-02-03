@@ -1,4 +1,4 @@
-bash: line 1: 1073568 Aborted                 (core dumped) ./main log2_parameters.config > log.std 2> log.err
-real 151.09
-user 118.80
-sys 30.55
+bash: line 1: 3869950 Aborted                 (core dumped) ./main log2_parameters.config > log.std 2> log.err
+real 151.51
+user 115.71
+sys 33.87

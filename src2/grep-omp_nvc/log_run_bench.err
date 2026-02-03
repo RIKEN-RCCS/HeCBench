@@ -1,3 +1,255 @@
+pstate(int, State*, State*, State*, int*):
+               14, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+pfrag(State*, Ptrlist*):
+               36, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+plist1(State**):
+               44, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+ppatch(Ptrlist*, State*):
+     39, include "pnfa.cpp"
+           1, include "putil.cpp"
+               55, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+               58, Loop not vectorized/parallelized: not countable
+pappend(Ptrlist*, Ptrlist*):
+     39, include "pnfa.cpp"
+           1, include "putil.cpp"
+               67, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+               71, Loop not vectorized/parallelized: not countable
+ppost2nfa(char*, State*, int*, State*):
+     39, include "pnfa.cpp"
+           1, include "putil.cpp"
+               85, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+          58, Loop not vectorized/parallelized: not countable
+          71, Loop not vectorized/parallelized: not countable
+          71, Loop not vectorized/parallelized: not countable
+          58, Loop not vectorized/parallelized: not countable
+          58, Loop not vectorized/parallelized: not countable
+          58, Loop not vectorized/parallelized: not countable
+pstrlen(char*):
+     39, include "pnfa.cpp"
+           8, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          10, Loop not vectorized/parallelized: not countable
+pre2post(char*, char*):
+          10, Loop not vectorized/parallelized: not countable
+     39, include "pnfa.cpp"
+          23, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          37, Loop not vectorized/parallelized: potential early exits
+          55, Loop not fused: no successor loop
+              Generated vector simd code for the loop
+          64, Loop not fused: complex flow graph
+              Generated vector simd code for the loop
+          66, Loop not fused: no successor loop
+              Generated vector simd code for the loop
+          92, Loop not fused: complex flow graph
+              Generated vector simd code for the loop
+          94, Generated vector simd code for the loop
+pstartlist(State*, List*):
+     39, include "pnfa.cpp"
+         106, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+         132, Loop not vectorized/parallelized: not countable
+ispmatch(List*):
+     39, include "pnfa.cpp"
+         117, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+         120, Loop not vectorized/parallelized: potential early exits
+paddstate(List*, State*, List*):
+     39, include "pnfa.cpp"
+         130, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+         134, Loop not vectorized/parallelized: not countable
+pstep(List*, int, List*):
+     39, include "pnfa.cpp"
+         159, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+         132, Loop not vectorized/parallelized: not countable
+panypmatch(State*, char*, List*, List*):
+     39, include "pnfa.cpp"
+         191, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+         110, Loop not vectorized/parallelized: not countable
+         168, Loop not vectorized/parallelized: not countable
+         120, Loop not vectorized/parallelized: potential early exits
+main:
+          73, Loop not vectorized/parallelized: potential early exits
+          73, Loop not vectorized/parallelized: potential early exits
+    138, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+          73, Loop not vectorized/parallelized: potential early exits
+    172, #omp target teams num_teams(512) thread_limit(160)
+        170, Generating map(to:device_match_state[:1],device_line[:len+1],device_regex[:postsize],device_line_table[:len]) 
+             Generating map(from:device_result[:num_lines]) 
+             Generating map(to:device_regex_table[:1]) 
+        172, Generating "nvkernel_main_F1L172_2" GPU kernel
+        178, #omp parallel
+          185, Barrier
+        200, Team private (buf,st,s,pnstate) located in CUDA shared memory
+          34, Loop not vectorized/parallelized: not countable
+          37, Loop not vectorized/parallelized: potential early exits
+          55, Generated vector simd code for the loop
+          64, Generated vector simd code for the loop
+          66, Generated vector simd code for the loop
+          92, Generated vector simd code for the loop
+          94, Generated vector simd code for the loop
+         112, Loop not vectorized/parallelized: not countable
+         119, Loop not vectorized/parallelized: not countable
+         124, Loop not vectorized/parallelized: not countable
+         129, Loop not vectorized/parallelized: not countable
+         135, Loop not vectorized/parallelized: not countable
+         146, Loop not vectorized/parallelized: not countable
+         191, Loop not vectorized/parallelized: too deeply nested
+         195, Loop not vectorized/parallelized: not countable
+         199, Loop not vectorized/parallelized: not countable
+         202, Loop not vectorized/parallelized: potential early exits
+          73, Loop not vectorized/parallelized: potential early exits
+    209, Loop not vectorized/parallelized: contains call
+          73, Loop not vectorized/parallelized: potential early exits
+CycleTimer::currentSeconds():
+         128, Loop not vectorized/parallelized: potential early exits
+CycleTimer::secondsPerTick():
+     38, include "cycleTimer.h"
+         129, Loop not vectorized/parallelized: potential early exits
+ismatch(List*):
+     35, Loop not vectorized/parallelized: potential early exits
+step(List*, int, List*):
+     73, Loop not vectorized/parallelized: potential early exits
+match(State*, char*):
+          73, Loop not vectorized/parallelized: potential early exits
+          35, Loop not vectorized/parallelized: potential early exits
+          35, Loop not vectorized/parallelized: potential early exits
+anyMatch(State*, char*):
+          91, Loop not vectorized/parallelized: potential early exits
+          95, Loop not vectorized/parallelized: potential early exits
+          99, Loop not vectorized/parallelized: potential early exits
+          91, Loop not vectorized/parallelized: potential early exits
+          95, Loop not vectorized/parallelized: potential early exits
+          99, Loop not vectorized/parallelized: potential early exits
+patch(Ptrlist*, State*):
+    164, Loop not vectorized/parallelized: not countable
+append(Ptrlist*, Ptrlist*):
+    177, Loop not vectorized/parallelized: not countable
+post2nfa(char*):
+         164, Loop not vectorized/parallelized: not countable
+         177, Loop not vectorized/parallelized: not countable
+         177, Loop not vectorized/parallelized: not countable
+         164, Loop not vectorized/parallelized: not countable
+         164, Loop not vectorized/parallelized: not countable
+         164, Loop not vectorized/parallelized: not countable
+re2post(char*):
+    280, Loop not vectorized/parallelized: potential early exits
+    298, Loop not fused: no successor loop
+         Generated vector simd code for the loop
+    307, Loop not fused: complex flow graph
+         Generated vector simd code for the loop
+    309, Loop not fused: no successor loop
+         Generated vector simd code for the loop
+    335, Loop not fused: complex flow graph
+         Generated vector simd code for the loop
+    337, Generated vector simd code for the loop
+parseCmdLine(int, char**, int*, int*, int*, int*, char**, char**):
+    413, Loop not vectorized/parallelized: contains call
+hasSeen(State*, int*):
+    451, Loop not vectorized/parallelized: potential early exits
+visualize_nfa_help(State*):
+         451, Loop not vectorized/parallelized: potential early exits
+visualize_nfa(State*):
+         467, Loop not vectorized/parallelized: potential early exits
+insertIntoComplexRe(char**, int, int*, char const*):
+     41, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+     47, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+     53, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+handle_escape(SimpleReBuilder*, char**, int*, int*, int*):
+          41, Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+          47, Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+          53, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+          41, Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+          47, Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+          53, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+          41, Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+          47, Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+          53, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+          41, Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+          47, Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+          53, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+          41, Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+          47, Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+          53, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+putRange(SimpleReBuilder*, char, char, int*):
+    114, Loop not vectorized/parallelized: not countable
+handle_range(SimpleReBuilder*, char*, int, int*, int*):
+         114, Loop not vectorized/parallelized: not countable
+simplifyRe(char**, SimpleReBuilder*):
+          72, Loop not fused: different loop trip count
+              Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 4 times
+              Loop unrolled 2 times
+          76, Loop not fused: different loop trip count
+              Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 4 times
+              Loop unrolled 2 times
+          80, Loop not fused: different loop trip count
+              Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 4 times
+              Loop unrolled 2 times
+          84, Loop not fused: different loop trip count
+              Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 4 times
+              Loop unrolled 2 times
+          88, Loop not fused: different loop trip count
+              Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 4 times
+              Loop unrolled 2 times
+         131, Loop not vectorized/parallelized: not countable
+stringifyRegex(char const*):
+    196, Loop not vectorized: data dependency
 tail: unrecognized option '--1'
 Try 'tail --help' for more information.
 tail: unrecognized option '--1'

@@ -1,2 +1,1 @@
-nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
-bash -c "../xlqc-cuda/prepare_data.sh; export LD_LIBRARY_PATH=D_LIBRARY_PATH:../lib/gsl/gsl-nvidia/lib; time -p ( ./main dp 1>log.std 2>log.err ) 2> log.time"
+clang++ -c -o basis.o ../xlqc-cuda/basis.cc  -I../xlqc-cuda -I../xlqc-cuda/int_lib -I../lib/gsl/gsl-nvidia/include           --gcc-toolchain=           -std=c++17 -Wall -fsycl -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU

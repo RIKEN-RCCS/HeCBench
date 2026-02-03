@@ -1,3 +1,8 @@
+clang++  -std=c++17 -Wall -I../include -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c lulesh.cc -o lulesh.o
+clang++  -std=c++17 -Wall -I../include -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c lulesh-viz.cc -o lulesh-viz.o
+clang++  -std=c++17 -Wall -I../include -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c lulesh-util.cc -o lulesh-util.o
+clang++  -std=c++17 -Wall -I../include -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c lulesh-init.cc -o lulesh-init.o
+clang++  -std=c++17 -Wall -I../include -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU lulesh.o lulesh-viz.o lulesh-util.o lulesh-init.o -o lulesh 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "time -p ( ./lulesh -i 5 -s 384  -r 11 -b 1 -c 1 1>log.std 2>log.err ) 2> log.time"
 pkill nvidia-smi

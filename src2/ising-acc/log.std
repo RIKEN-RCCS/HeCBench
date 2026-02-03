@@ -7,7 +7,7 @@ REPORT:
 	warmup iterations: 10
 	trial iterations: 100
 	lattice dimensions: 51200 x 51200
-	elapsed time: 1.545311 sec
-	updates per ns: 169.638345
+	elapsed time: 1.545214 sec
+	updates per ns: 169.648994
 Starting verification iterations ...
 PASS

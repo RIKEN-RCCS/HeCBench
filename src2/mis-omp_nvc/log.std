@@ -3,5 +3,5 @@ Copyright 2017-2020 Texas State University
 configuration: 124651 nodes and 387240 edges (../mis-cuda/internet.egr)
 average degree: 3.11 edges per node
 compute time: 0.000000 s
-throughput: 792256.780919 Mnodes/s
-throughput: 2461219.852574 Medges/s
+throughput: 793578.649836 Mnodes/s
+throughput: 2465326.362103 Medges/s

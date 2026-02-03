@@ -1,9 +1,27 @@
-NVC++-S-0155-OMP for loop increment not in canonical form
-  (stencil_1d.cpp: 38)
-NVC++-S-0094-Illegal type conversion required (stencil_1d.cpp: 38)
-NVC++-S-0094-Illegal type conversion required (stencil_1d.cpp: 38)
-NVC++-S-0094-Illegal type conversion required (stencil_1d.cpp: 38)
-NVC++-S-0094-Illegal type conversion required (stencil_1d.cpp: 38)
-NVC++/arm Linux 25.9-0: compilation completed with severe errors
-make: *** [Makefile.NVD:57: stencil_1d.o] Error 2
+main:
+     32, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+     36, #omp target teams distribute
+         36, Generating "nvkernel_main_F1L36_2" GPU kernel
+         39, Loop parallelized across teams, schedule(static)
+         42, #omp parallel
+           42, Loop parallelized across threads, schedule(static)
+         52, Team private (temp,i) located in CUDA shared memory
+             #omp parallel
+           52, Loop parallelized across threads, schedule(static)
+     36, Generating map(to:a[:pad_size]) 
+         Generating map(from:b[:size]) 
+         Loop not vectorized/parallelized: contains call
+     39, Loop not vectorized/parallelized: contains structure move
+     42, Loop not vectorized/parallelized: not countable
+     52, Loop not vectorized/parallelized: not countable
+     54, Generated vector simd code for the loop containing reductions
+     67, Loop not vectorized/parallelized: potential early exits
+     69, Generated vector simd code for the loop containing reductions
+     78, Loop not vectorized/parallelized: potential early exits
+     80, Generated vector simd code for the loop containing reductions
+         Loop unrolled 2 times
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     10, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
 timeout was set to  600

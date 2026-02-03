@@ -1,1 +1,3 @@
+bash: line 1: ../lsqt-hip/prepare_data.sh: No such file or directory
+make: *** [Makefile.NVD:87: run_mem] Error 1
 timeout was set to  600

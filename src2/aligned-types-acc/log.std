@@ -4,43 +4,43 @@ Generating host input data array...
 Uploading input data to GPU memory...
 Testing misaligned types...
 uchar_misaligned...
-Avg. time: 0.132155 ms / Copy throughput: 352.357829 GB/s.
+Avg. time: 0.132241 ms / Copy throughput: 352.131200 GB/s.
 	TEST PASS
 uchar4_misaligned...
-Avg. time: 0.050305 ms / Copy throughput: 925.665264 GB/s.
+Avg. time: 0.050124 ms / Copy throughput: 929.009484 GB/s.
 	TEST PASS
 uchar4_aligned...
-Avg. time: 0.050870 ms / Copy throughput: 915.388512 GB/s.
+Avg. time: 0.050591 ms / Copy throughput: 920.436234 GB/s.
 	TEST PASS
 ushort_misaligned...
-Avg. time: 0.076288 ms / Copy throughput: 610.399166 GB/s.
+Avg. time: 0.076221 ms / Copy throughput: 610.935258 GB/s.
 	TEST PASS
 uint_aligned...
-Avg. time: 0.048062 ms / Copy throughput: 968.877446 GB/s.
+Avg. time: 0.047977 ms / Copy throughput: 970.584082 GB/s.
 	TEST PASS
 uint2_misaligned...
-Avg. time: 0.038588 ms / Copy throughput: 1206.751648 GB/s.
+Avg. time: 0.038570 ms / Copy throughput: 1207.306307 GB/s.
 	TEST PASS
 uint2_aligned...
-Avg. time: 0.038673 ms / Copy throughput: 1204.095598 GB/s.
+Avg. time: 0.039042 ms / Copy throughput: 1192.711687 GB/s.
 	TEST PASS
 uint3_misaligned...
-Avg. time: 0.038041 ms / Copy throughput: 1224.094707 GB/s.
+Avg. time: 0.037545 ms / Copy throughput: 1240.268988 GB/s.
 	TEST PASS
 uint3_aligned...
-Avg. time: 0.049159 ms / Copy throughput: 947.256204 GB/s.
+Avg. time: 0.049066 ms / Copy throughput: 949.055784 GB/s.
 	TEST PASS
 uint4_misaligned...
-Avg. time: 0.037626 ms / Copy throughput: 1237.597175 GB/s.
+Avg. time: 0.037417 ms / Copy throughput: 1244.527785 GB/s.
 	TEST PASS
 uint4_aligned...
-Avg. time: 0.037679 ms / Copy throughput: 1235.876559 GB/s.
+Avg. time: 0.037472 ms / Copy throughput: 1242.688095 GB/s.
 	TEST PASS
 uint8_misaligned...
-Avg. time: 0.436340 ms / Copy throughput: 106.719457 GB/s.
+Avg. time: 0.435803 ms / Copy throughput: 106.851063 GB/s.
 	TEST PASS
 uint8_aligned...
-Avg. time: 0.436431 ms / Copy throughput: 106.697344 GB/s.
+Avg. time: 0.436000 ms / Copy throughput: 106.802771 GB/s.
 	TEST PASS
 
 [alignedTypes] -> Test Results: 0 Failures

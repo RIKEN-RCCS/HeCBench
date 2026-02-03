@@ -1,1 +1,73 @@
+"main.cpp", line 100: warning: variable "read" was set but never used [set_but_not_used]
+    ssize_t read;
+            ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+lsr(unsigned int, int):
+     45, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+lsl(unsigned int, int):
+     50, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+set_bit(unsigned int&, int):
+     55, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+popcnt(unsigned int):
+     62, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+__clz(int):
+     72, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+sneaky_snake(int, int, unsigned int const*, unsigned int const*, int*, int, int):
+     82, include "kernel.h"
+           9, #omp target teams distribute parallel for num_teams(nTeams) thread_limit(nThreads)
+               9, Generating "nvkernel__Z12sneaky_snakeiiPKjS0_Piii_F125L9_2" GPU kernel
+              11, Loop parallelized across teams and threads, schedule(static)
+          11, Loop not vectorized/parallelized: too deeply nested
+          17, Generated vector simd code for the loop
+          49, Loop not vectorized/parallelized: potential early exits
+          79, Generated vector simd code for the loop containing reductions
+         128, Invariant if transformation
+         172, Generated vector simd code for the loop containing reductions
+         180, Generated vector simd code for the loop containing reductions
+clz(int):
+     83, include "reference.h"
+           5, Loop not vectorized/parallelized: potential early exits
+sneaky_snake_ref(unsigned int const*, unsigned int const*, int*, int, int):
+           5, Loop not vectorized/parallelized: potential early exits
+     83, include "reference.h"
+          21, Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 8 times (completely unrolled)
+          83, Generated vector simd code for the loop containing reductions
+         176, Loop not fused: no successor loop
+              Generated vector simd code for the loop containing reductions
+         184, Generated vector simd code for the loop containing reductions
+           5, Loop not vectorized/parallelized: potential early exits
+           5, Loop not vectorized/parallelized: potential early exits
+           5, Loop not vectorized/parallelized: potential early exits
+           5, Loop not vectorized/parallelized: potential early exits
+          16, Loop not vectorized/parallelized: too deeply nested
+           5, Loop not vectorized/parallelized: potential early exits
+           5, Loop not vectorized/parallelized: potential early exits
+main:
+    124, Loop not vectorized/parallelized: contains call
+    128, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+    152, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+    181, Generating map(alloc:DFinal_Results[:NumReads]) 
+         Generating map(to:ReadSeq[:NumReads*8],RefSeq[:NumReads*8]) 
+    190, Loop not vectorized/parallelized: contains call
+    201, Generating update from(DFinal_Results[:NumReads])
+    207, Loop not fused: function call before adjacent loop
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     37, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+     83, include "reference.h"
+std::chrono::duration<long, std::ratio<1l, 1000000l>>::_S_gcd(long, long):
+     37, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+     83, include "reference.h"
 timeout was set to  600

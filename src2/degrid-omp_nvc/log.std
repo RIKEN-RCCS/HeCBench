@@ -1,7 +1,7 @@
 img size in bytes: 1140858880
 out size in bytes: 640000
 Computing on GPU...
-Average kernel execution time 0.0327715 (s)
+Average kernel execution time 0.032757 (s)
 Computing on CPU...
 Checking results against CPU:
 Error bound: 1e-07

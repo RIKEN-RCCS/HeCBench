@@ -1,1 +1,93 @@
+bScan(unsigned int, unsigned int, float const*, float*, float*):
+     28, #omp target teams num_teams(?) thread_limit(blockSize>>1)
+         28, Generating "nvkernel__Z5bScanjjPKfPfS1__F1L28_2" GPU kernel
+         31, #omp parallel
+           39, Barrier
+           50, Barrier
+           55, Barrier
+         33, Team private (block) located in CUDA shared memory
+     45, Loop not vectorized/parallelized: contains call
+pScan(unsigned int, unsigned int, float const*, float*):
+     79, #omp target teams num_teams(1) thread_limit(len>>1)
+         79, Generating "nvkernel__Z5pScanjjPKfPf_F1L79_7" GPU kernel
+         83, #omp parallel
+           91, Barrier
+          103, Barrier
+          108, Barrier
+         85, Team private (block) located in CUDA shared memory
+     97, Loop not vectorized/parallelized: contains call
+bAddition(unsigned int, unsigned int, float const*, float*):
+    129, #omp target teams num_teams(?) thread_limit(blockSize)
+        129, Generating "nvkernel__Z9bAdditionjjPKfPf_F1L129_12" GPU kernel
+        132, #omp parallel
+          138, Barrier
+        134, Team private (value) located in CUDA shared memory
+scanLargeArraysCPUReference(float*, float*, unsigned int):
+    156, Loop not vectorized: data dependency
+         Loop unrolled 8 times
+main:
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+          52, Loop not fused: complex flow graph
+              Loop not vectorized: recurrence
+              Loop unrolled 4 times (completely unrolled)
+         616, Loop not vectorized/parallelized: not countable
+          75, Loop not vectorized/parallelized: not countable
+          86, Loop not vectorized/parallelized: contains call
+    212, Loop not fused: function call before adjacent loop
+         Loop not vectorized: recurrence
+         Loop unrolled 2 times
+    223, Loop not fused: function call before adjacent loop
+         Loop not vectorized: recurrence
+         Loop unrolled 4 times
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    241, Generating map(alloc:blockSumBuffer[:blockSumBufferSize],tempBuffer[:tempLength],outputBuffer[:outputBufferSize]) 
+         Generating map(to:inputBuffer[:length]) 
+    251, Loop not vectorized/parallelized: contains call
+    268, Loop not vectorized/parallelized: contains call
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    283, Generating update from(outputBuffer[:.I0005])
+         156, Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+              Loop unrolled 8 times
+         100, Loop not fused: complex flow graph
+              Generated vector simd code for the loop containing reductions
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+int roundToPowerOf2<int>(int):
+     19, include "scan.h"
+          52, Loop not vectorized: recurrence
+              Loop unrolled 4 times (completely unrolled)
+int fillRandom<float>(float*, int, int, float, float, unsigned int):
+     19, include "scan.h"
+          86, Loop not vectorized/parallelized: contains call
+          86, Loop nest collapsed
+         616, Loop not vectorized/parallelized: not countable
+bool compare<float>(float const*, float const*, int, float):
+     19, include "scan.h"
+         100, Generated vector simd code for the loop containing reductions
+std::char_traits<char>::length(char const*):
+         171, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     17, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+     19, include "scan.h"
+__gnu_cxx::char_traits<char>::length(char const*):
+     19, include "scan.h"
+          21, include "iostream"
+               39, include "ostream"
+                    38, include "ios"
+                         40, include "char_traits.h"
+                             171, Loop not vectorized/parallelized: not countable
+std::basic_ostream<char, std::char_traits<char>>& std::endl<char, std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&):
+     19, include "scan.h"
+          21, include "iostream"
+               39, include "ostream"
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&, char const*):
+         397, Loop not vectorized/parallelized: not countable
 timeout was set to  600

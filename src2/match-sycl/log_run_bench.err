@@ -1,1 +1,27 @@
+main.cpp:737:50: warning: implicit conversion from 'int' to 'float' changes value from 2147483647 to 2147483648 [-Wimplicit-const-int-float-conversion]
+  737 |       sum1 += h_pts1[i*NDIM + d] = (float)rand()/RAND_MAX;
+      |                                                 ~^~~~~~~~
+/usr/include/stdlib.h:86:18: note: expanded from macro 'RAND_MAX'
+   86 | #define RAND_MAX        2147483647
+      |                         ^~~~~~~~~~
+main.cpp:738:50: warning: implicit conversion from 'int' to 'float' changes value from 2147483647 to 2147483648 [-Wimplicit-const-int-float-conversion]
+  738 |       sum2 += h_pts2[i*NDIM + d] = (float)rand()/RAND_MAX;
+      |                                                 ~^~~~~~~~
+/usr/include/stdlib.h:86:18: note: expanded from macro 'RAND_MAX'
+   86 | #define RAND_MAX        2147483647
+      |                         ^~~~~~~~~~
+2 warnings generated.
+main.cpp:737:50: warning: implicit conversion from 'int' to 'float' changes value from 2147483647 to 2147483648 [-Wimplicit-const-int-float-conversion]
+  737 |       sum1 += h_pts1[i*NDIM + d] = (float)rand()/RAND_MAX;
+      |                                                 ~^~~~~~~~
+/usr/include/stdlib.h:86:18: note: expanded from macro 'RAND_MAX'
+   86 | #define RAND_MAX        2147483647
+      |                         ^~~~~~~~~~
+main.cpp:738:50: warning: implicit conversion from 'int' to 'float' changes value from 2147483647 to 2147483648 [-Wimplicit-const-int-float-conversion]
+  738 |       sum2 += h_pts2[i*NDIM + d] = (float)rand()/RAND_MAX;
+      |                                                 ~^~~~~~~~
+/usr/include/stdlib.h:86:18: note: expanded from macro 'RAND_MAX'
+   86 | #define RAND_MAX        2147483647
+      |                         ^~~~~~~~~~
+2 warnings generated.
 timeout was set to  600

@@ -1,2 +1,8 @@
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda              -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c cluster.c -o cluster.o
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda              -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c getopt.c -o getopt.o
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda              -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c read_input.c -o read_input.o
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda              -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c rmse.c -o rmse.o
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda              -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c kmeans.c -o kmeans.o
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda              -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU cluster.o getopt.o read_input.o rmse.o kmeans.o -o main 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "../kmeans-cuda/prepare_data.sh; time -p ( ./kmeans -r -n 5 -m 15 -l 10 -o -i ../data/kmeans/kdd_cup 1>log.std 2>log.err ) 2> log.time"

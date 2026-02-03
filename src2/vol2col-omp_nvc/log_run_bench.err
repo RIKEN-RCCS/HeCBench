@@ -1,1 +1,72 @@
+main:
+    294, Loop not vectorized/parallelized: potential early exits
+void eval<float>(int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int):
+    180, Loop not vectorized/parallelized: contains call
+    188, Generating map(to:data_vol[:vol_size],data_col[:col_size]) 
+    191, Loop not vectorized/parallelized: contains call
+          25, Loop not fused: function call before adjacent loop
+              Loop not vectorized/parallelized: too deeply nested
+          26, Loop not vectorized/parallelized: too deeply nested
+          27, Loop not vectorized/parallelized: too deeply nested
+          28, Loop not vectorized/parallelized: too deeply nested
+          38, Loop not vectorized: data dependency
+    210, Generating update from(data_col[:col_size])
+    225, Loop not vectorized/parallelized: contains call
+          77, Loop not vectorized/parallelized: too deeply nested
+          78, Loop not vectorized/parallelized: too deeply nested
+          79, Loop not vectorized/parallelized: too deeply nested
+          80, Loop not vectorized/parallelized: too deeply nested
+         100, Invariant if transformation
+              Loop not fused: no successor loop
+              Loop not vectorized: unknown
+              Loop unrolled 8 times
+         101, Invariant if transformation
+              Loop not fused: no successor loop
+              Loop not vectorized: unknown
+              Loop unrolled 8 times
+         102, Invariant if transformation
+              Loop not fused: no successor loop
+              Loop not vectorized: may not be beneficial for target
+              Loop not vectorized: unknown
+              Loop unrolled 8 times
+    244, Generating update from(data_vol[:vol_size])
+    254, Loop not vectorized/parallelized: potential early exits
+void vol2col_kernel<float>(float const*, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, float*):
+     36, #omp target teams distribute parallel for
+         36, Generating "nvkernel__Z14vol2col_kernelIfEvPKT_iiiiiiiiiiiiiiiiiiiPS0__F1L36_2" GPU kernel
+         39, Loop parallelized across teams and threads(128), schedule(static)
+     42, Loop not vectorized/parallelized: too deeply nested
+     52, Loop not vectorized: data dependency
+void vol2col_reference<float>(float const*, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, float*):
+      8, include "reference.h"
+          25, Loop not vectorized/parallelized: too deeply nested
+          26, Loop not vectorized/parallelized: too deeply nested
+          27, Loop not vectorized/parallelized: too deeply nested
+          28, Loop not vectorized/parallelized: too deeply nested
+          38, Loop not vectorized: data dependency
+void col2vol_kernel<float, float>(float const*, long, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, float*):
+     90, #omp target teams distribute parallel for
+         90, Generating "nvkernel__Z14col2vol_kernelIffEvPKT_liiiiiiiiiiiiiiiiiiPS0__F1L90_6" GPU kernel
+         93, Loop parallelized across teams and threads(128), schedule(static)
+     96, Loop not vectorized/parallelized: too deeply nested
+    118, Invariant if transformation
+         Loop not vectorized: may not be beneficial for target
+void col2vol_reference<float, float>(float const*, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, float*):
+      8, include "reference.h"
+          77, Loop not vectorized/parallelized: too deeply nested
+          78, Loop not vectorized/parallelized: too deeply nested
+          79, Loop not vectorized/parallelized: too deeply nested
+          80, Loop not vectorized/parallelized: too deeply nested
+         102, Invariant if transformation
+              Loop not fused: no successor loop
+              Loop not vectorized: may not be beneficial for target
+              Loop not vectorized: unknown
+              Loop unrolled 8 times
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      5, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+int const& std::min<int>(int const&, int const&):
+                   231, Generating implicit omp declare target routine
+                        Generating NVIDIA GPU code
+      8, include "reference.h"
 timeout was set to  600

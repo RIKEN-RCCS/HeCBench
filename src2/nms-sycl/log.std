@@ -1,4 +1,4 @@
 Number of detections read from input file (../nms-cuda/detections.txt): 2997
 Average kernel execution time (generate_nms_bitmap): 0.000042 (s)
-Average kernel execution time (reduce_nms_bitmap): 0.000096 (s)
+Average kernel execution time (reduce_nms_bitmap): 0.000094 (s)
 Detections after NMS: 145

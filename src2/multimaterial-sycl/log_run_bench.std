@@ -1,3 +1,6 @@
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU compact.cpp full_matrix.cpp multimat.cpp -o multimat 
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -DFUSED -DLINKED compact.cpp full_matrix.cpp multimat.cpp -o multimat_FL 
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -DFUSED compact.cpp full_matrix.cpp multimat.cpp -o multimat_F 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "../multimaterial-cuda/prepare_data.sh; time -p ( ./multimat_FL 6000 6000 1>log.std 2>log.err ) 2> log.time"
 pkill nvidia-smi

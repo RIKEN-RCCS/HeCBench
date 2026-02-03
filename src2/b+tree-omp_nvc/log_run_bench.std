@@ -1,5 +1,11 @@
+nvc++  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90  ./main.c 		-c 		-o ./main.o
+nvc++  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90	 ./kernel/kernel_wrapper.c 		-c 		-o ./kernel/kernel_wrapper.o
+nvc++  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90	 ./kernel/kernel2_wrapper.c 		-c 		-o ./kernel/kernel2_wrapper.o 
+nvc++	./util/timer/timer.c 		-c 		-o ./util/timer/timer.o 		-O3
+nvc++	./util/num/num.c 		-c 		-o ./util/num/num.o 		-O3
+nvc++  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90	./main.o 			./kernel/kernel_wrapper.o 			./kernel/kernel2_wrapper.o 			./util/timer/timer.o 			./util/num/num.o 			-lm 	                -o b+tree.out
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "../b+tree-cuda/prepare_data.sh; time -p ( ./b+tree.out file ../data/b+tree/mil.txt command ../data/b+tree/command.txt 1>log.std 2>log.err ) 2> log.time"
 pkill nvidia-smi
 ../scripts/m.sh
-min max diff memory in [MB] : 1 578 577
+min max diff memory in [MB] : 1 579 578

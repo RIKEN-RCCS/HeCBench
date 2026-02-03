@@ -6,7 +6,7 @@ Looking for random key:
  randomIndex = 3100999
  randomKey   = 0x0909090000010300
  randomDigest= B51F8CE2F620E35F313044D6C42D8DCF
-time = 4043 ms, rate = 0.00247341 GHash/sec
+time = 2407 ms, rate = 0.00415455 GHash/sec
 
 Successfully found match (index, key, hash):
  foundIndex  = 3100999
@@ -300,7 +300,7 @@ Looking for random key:
  randomIndex = 3106595
  randomKey   = 0x0509050600010300
  randomDigest= AEBD8E15925FCCB7805F6D81794FA769
-time = 1 ms, rate = 10 GHash/sec
+time = 0 ms, rate = inf GHash/sec
 
 Successfully found match (index, key, hash):
  foundIndex  = 3106595
@@ -4276,7 +4276,7 @@ Looking for random key:
  randomIndex = 823077
  randomKey   = 0x0707000302080000
  randomDigest= 176B2DEFEEEC0D55399F3233C71F1878
-time = 1 ms, rate = 10 GHash/sec
+time = 0 ms, rate = inf GHash/sec
 
 Successfully found match (index, key, hash):
  foundIndex  = 823077
@@ -4976,7 +4976,7 @@ Looking for random key:
  randomIndex = 4228875
  randomKey   = 0x0507080802020400
  randomDigest= 8209C0660C28B3C9FC6D67CFFF5282F8
-time = 0 ms, rate = inf GHash/sec
+time = 1 ms, rate = 10 GHash/sec
 
 Successfully found match (index, key, hash):
  foundIndex  = 4228875
@@ -7526,7 +7526,7 @@ Looking for random key:
  randomIndex = 21966304
  randomKey   = 0x18170B160E000000
  randomDigest= AE8AA0D73FC9D847C9CFC4151557078F
-time = 1 ms, rate = 52.5219 GHash/sec
+time = 0 ms, rate = inf GHash/sec
 
 Successfully found match (index, key, hash):
  foundIndex  = 21966304
@@ -7862,7 +7862,7 @@ Looking for random key:
  randomIndex = 37394821
  randomKey   = 0x100D062018000000
  randomDigest= B3531308758451A0E46A26EF0A35BA49
-time = 0 ms, rate = inf GHash/sec
+time = 1 ms, rate = 52.5219 GHash/sec
 
 Successfully found match (index, key, hash):
  foundIndex  = 37394821
@@ -9206,7 +9206,7 @@ Looking for random key:
  randomIndex = 23633290
  randomKey   = 0x1E10071A0F000000
  randomDigest= 0FF05795181DE43BB8BA38B80DE991AD
-time = 1 ms, rate = 52.5219 GHash/sec
+time = 0 ms, rate = inf GHash/sec
 
 Successfully found match (index, key, hash):
  foundIndex  = 23633290
@@ -10872,7 +10872,7 @@ Looking for random key:
  randomIndex = 380123
  randomKey   = 0x170A1E0800000000
  randomDigest= 78F6178B851558635031E415EAB9C7EC
-time = 1 ms, rate = 52.5219 GHash/sec
+time = 0 ms, rate = inf GHash/sec
 
 Successfully found match (index, key, hash):
  foundIndex  = 380123
@@ -11292,7 +11292,7 @@ Looking for random key:
  randomIndex = 34915995
  randomKey   = 0x1E1D0C0917000000
  randomDigest= 36F6C45137BD7CB43B7BF87EA0EE113F
-time = 0 ms, rate = inf GHash/sec
+time = 1 ms, rate = 52.5219 GHash/sec
 
 Successfully found match (index, key, hash):
  foundIndex  = 34915995
@@ -11852,7 +11852,7 @@ Looking for random key:
  randomIndex = 45440573
  randomKey   = 0x030C1D091E000000
  randomDigest= 93BA6511C0CFE696EAB94E9D73BD62B4
-time = 1 ms, rate = 52.5219 GHash/sec
+time = 0 ms, rate = inf GHash/sec
 
 Successfully found match (index, key, hash):
  foundIndex  = 45440573
@@ -13406,7 +13406,7 @@ Looking for random key:
  randomIndex = 3176817
  randomKey   = 0x070B030402000000
  randomDigest= 8A903B85B94A01911D9003247133AFCC
-time = 0 ms, rate = inf GHash/sec
+time = 1 ms, rate = 52.5219 GHash/sec
 
 Successfully found match (index, key, hash):
  foundIndex  = 3176817
@@ -15326,7 +15326,7 @@ Looking for random key:
  randomIndex = 96320617
  randomKey   = 0x11180C0E15090000
  randomDigest= 1FB42E18E71565A3D754EF8C25698764
-time = 4 ms, rate = 61.0352 GHash/sec
+time = 3 ms, rate = 81.3802 GHash/sec
 
 Successfully found match (index, key, hash):
  foundIndex  = 96320617
@@ -20758,7 +20758,7 @@ Looking for random key:
  randomIndex = 150428401
  randomKey   = 0x010B0A020A0F0000
  randomDigest= E8B90ACFED4B176C37C54CF3A3091304
-time = 4 ms, rate = 61.0352 GHash/sec
+time = 3 ms, rate = 81.3802 GHash/sec
 
 Successfully found match (index, key, hash):
  foundIndex  = 150428401
@@ -22720,7 +22720,7 @@ Looking for random key:
  randomIndex = 593391073
  randomKey   = 0x170F003218000000
  randomDigest= 974392D8839D46E464B6DCA52CF21EB8
-time = 20 ms, rate = 84.035 GHash/sec
+time = 21 ms, rate = 80.0333 GHash/sec
 
 Successfully found match (index, key, hash):
  foundIndex  = 593391073

@@ -30,11 +30,11 @@ Simulation complete.
                                      RESULTS
 ================================================================================
 Total Time Statistics (Device Init / JIT Compilation + Simulation Kernel)
-Runtime:               2.343 seconds
+Runtime:               2.386 seconds
 Lookups:               17,000,000
-Lookups/s:             7,256,745
+Lookups/s:             7,125,074
 Simulation Kernel Only Statistics
 Average kernel execution time: 0.047 seconds
-Lookups/s:             359,052,727
+Lookups/s:             359,202,133
 Verification checksum: 50951281 (Valid)
 ================================================================================

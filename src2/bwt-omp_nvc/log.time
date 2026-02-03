@@ -1,4 +1,4 @@
-bash: line 1: 486539 Aborted                 (core dumped) ./main 100000000 > log.std 2> log.err
-real 189.74
-user 187.37
-sys 1.03
+bash: line 1: 2386230 Aborted                 (core dumped) ./main 100000000 > log.std 2> log.err
+real 189.46
+user 186.94
+sys 1.17

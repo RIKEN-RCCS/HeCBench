@@ -636,7 +636,7 @@ Initial ThreadBlockCount: 576 PointCount: 26624 Max degree: 1061
 QTC is complete. Clustering iteration count: 632
 
 Kernel execution time
-qtc: 29.4272 (s)
-trim: 2.56545 (s)
-update: 0.0486663 (s)
-total: 32.0413 (s)
+qtc: 29.4279 (s)
+trim: 2.56623 (s)
+update: 0.0478593 (s)
+total: 32.0419 (s)

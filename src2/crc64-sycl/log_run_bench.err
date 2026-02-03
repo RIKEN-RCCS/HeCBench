@@ -1,2 +1,32 @@
+CRC64.cpp:549:24: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+  549 |     uint64_t thread_cs[nthreads];
+      |                        ^~~~~~~~
+CRC64.cpp:549:24: note: read of non-const variable 'nthreads' is not allowed in a constant expression
+CRC64.cpp:544:9: note: declared here
+  544 |     int nthreads = 96*8*32;
+      |         ^
+CRC64.cpp:550:22: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+  550 |     size_t thread_sz[nthreads];
+      |                      ^~~~~~~~
+CRC64.cpp:550:22: note: read of non-const variable 'nthreads' is not allowed in a constant expression
+CRC64.cpp:544:9: note: declared here
+  544 |     int nthreads = 96*8*32;
+      |         ^
+2 warnings generated.
+CRC64.cpp:549:24: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+  549 |     uint64_t thread_cs[nthreads];
+      |                        ^~~~~~~~
+CRC64.cpp:549:24: note: read of non-const variable 'nthreads' is not allowed in a constant expression
+CRC64.cpp:544:9: note: declared here
+  544 |     int nthreads = 96*8*32;
+      |         ^
+CRC64.cpp:550:22: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+  550 |     size_t thread_sz[nthreads];
+      |                      ^~~~~~~~
+CRC64.cpp:550:22: note: read of non-const variable 'nthreads' is not allowed in a constant expression
+CRC64.cpp:544:9: note: declared here
+  544 |     int nthreads = 96*8*32;
+      |         ^
+2 warnings generated.
 make: *** [Makefile.NVD:85: run_mem] Error 134
 timeout was set to  600

@@ -1,1 +1,73 @@
+setcols(int (*) [3], int, int, int, int):
+     24, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+computeColor(float, float, unsigned char*):
+     31, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+     40, Loop not fused: different loop trip count
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 4 times
+     41, Loop not fused: different loop trip count
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 6 times (completely unrolled)
+     42, Loop not fused: different loop trip count
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 4 times (completely unrolled)
+     43, Loop not fused: different loop trip count
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 2 times
+     44, Loop not fused: different loop trip count
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 4 times
+     45, Loop not fused: different loop trip count
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 2 times
+     53, Invariant if transformation
+         Loop unrolled 3 times (completely unrolled)
+         Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 3 times (completely unrolled)
+main:
+     88, Loop not vectorized/parallelized: not countable
+          40, Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+          41, Loop unrolled 6 times (completely unrolled)
+              Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+          42, Loop unrolled 4 times (completely unrolled)
+          43, Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+              Loop unrolled 2 times
+          44, Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+          45, Loop not vectorized: unprofitable for target
+              Loop unrolled 2 times
+          53, Invariant if transformation
+              Loop unrolled 3 times (completely unrolled)
+    105, #omp target teams distribute parallel for
+        102, Generating map(tofrom:d_pix[:imgSize]) 
+        105, Generating "nvkernel_main_F1L105_2" GPU kernel
+        107, Loop parallelized across teams and threads(128), schedule(static)
+    105, Loop not vectorized/parallelized: contains call
+    108, Loop not vectorized/parallelized: not countable
+          40, Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+          41, Loop unrolled 6 times (completely unrolled)
+              Loop not vectorized: unprofitable for target
+          42, Loop unrolled 4 times (completely unrolled)
+          43, Loop not vectorized: unprofitable for target
+              Loop unrolled 2 times
+          44, Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+          45, Loop not vectorized: unprofitable for target
+              Loop unrolled 2 times
+          53, Invariant if transformation
+              Loop unrolled 3 times (completely unrolled)
+    128, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
 timeout was set to  600

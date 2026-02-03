@@ -4,6 +4,6 @@ WG size of kernel:compute_flux = 192
 WG size of kernel:time_step = 192
 --cambine: nel=97046, nelr=97152
 Saving solution...
-Device offloading time = 0.740663(s)
-Total execution time of kernels = 0.298804(s)
+Device offloading time = 2.749751(s)
+Total execution time of kernels = 0.300537(s)
 Done...

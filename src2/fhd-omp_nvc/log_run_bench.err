@@ -1,7 +1,9 @@
 
-cleaning up after signal(15)...
 Compilation terminated.
 cleaning up after signal(15)...
-unlink("/tmp/tmp-user-1901/nvc++xQi5cfjA66EmU.s") failed: No such file or directory
+cleaning up after signal(15)...
+unlink("/tmp/tmp-user-1901/nvc++GbGTlGq2351QE.il") failed: No such file or directory
+unlink("/tmp/tmp-user-1901/nvc++GbGTlGuOMv4Wk.s") failed: No such file or directory
+unlink("/tmp/tmp-user-1901/nvc++GbGTlG4QlESiA.ll") failed: No such file or directory
 make: *** [Makefile.NVD:57: main.o] Error 127
 timeout was set to  600

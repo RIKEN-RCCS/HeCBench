@@ -1,1 +1,125 @@
+"../diamond-sycl/src/basic/../util/../basic/packed_loc.h", line 39: warning: type qualifier on return type is meaningless [useless_type_qualifier_on_return_type]
+  	operator const uint64_t() const
+  	         ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"../diamond-sycl/src/basic/../util/../basic/packed_loc.h", line 44: warning: type qualifier is meaningless on cast type [cast_to_qualified_type]
+  	{ return (const uint64_t)(x) - (const uint64_t)(y); }
+  	          ^
+
+"../diamond-sycl/src/basic/../util/../basic/packed_loc.h", line 44: warning: type qualifier is meaningless on cast type [cast_to_qualified_type]
+  	{ return (const uint64_t)(x) - (const uint64_t)(y); }
+  	                                ^
+
+"masking.cpp", line 221: warning: variable "firstGapProb" was declared but never referenced [declared_but_not_referenced]
+    const double firstGapProb = 0;
+                 ^
+
+"masking.cpp", line 222: warning: variable "otherGapProb" was declared but never referenced [declared_but_not_referenced]
+    const double otherGapProb = 0;
+                 ^
+
+"masking.cpp", line 223: warning: variable "minMaskProb" was declared but never referenced [declared_but_not_referenced]
+    const double minMaskProb = 0.5;
+                 ^
+
+firstRepeatOffsetProb(double, int):
+     23, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+maskProbableLetters(int, unsigned char*, float const*, unsigned char const*):
+     33, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+     36, Loop not vectorized: data dependency
+calcRepeatProbs(float*, unsigned char const*, int, int, double const*, double, double, double, double, double const*, double*, int, double*):
+     54, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+     57, Loop not fused: different loop trip count
+     68, Loop not fused: complex flow graph
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+     87, Generated vector simd code for the loop
+     97, Loop not fused: different loop trip count
+         Generated vector simd code for the loop containing reductions
+    118, Loop not fused: complex flow graph
+         Generated vector simd code for the loop
+    128, Loop not vectorized: data dependency
+mask_worker(Atomic<unsigned long>*, Sequence_set*, Masking const*, bool):
+    327, Loop not vectorized/parallelized: potential early exits
+mask_seqs(Sequence_set&, Masking const&, bool):
+    359, #omp parallel
+    360, Loop not vectorized/parallelized: contains call
+    379, Loop not vectorized/parallelized: contains call
+    383, Loop not vectorized/parallelized: contains call
+Masking::Masking(Score_matrix const&):
+    152, Loop not fused: different loop trip count
+    155, Invariant if transformation
+         Loop not vectorized: may not be beneficial for target
+         619, Loop not vectorized: may not be beneficial for target
+              Loop unrolled 4 times
+Masking::Masking(Score_matrix const&):
+         152, Loop not fused: different loop trip count
+         155, Invariant if transformation
+              Loop not vectorized: may not be beneficial for target
+         159, Loop not vectorized: may not be beneficial for target
+              Loop unrolled 4 times
+Masking::call_opt(Sequence_set&) const:
+     19, include "masking.h"
+          27, include "sequence_set.h"
+               27, include "string_set.h"
+                   181, Loop not fused: function call before adjacent loop
+                        Loop not fused: no successor loop
+                        Generated vector simd code for the loop containing reductions
+                        Loop not vectorized: may not be beneficial for target
+    181, Invariant if transformation
+    189, Loop not vectorized/parallelized: contains call
+    197, Recognized memory copy idiom
+    202, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    228, #omp target teams distribute parallel for thread_limit(128)
+        228, Generating "nvkernel__ZNK7Masking8call_optER12Sequence_set_F1L228_3" GPU kernel
+             Generating map(to:maskTable[:size]) 
+             Generating map(tofrom:s[:total]) 
+             Generating map(to:likelihoodRatioMatrix[:size*size]) 
+        230, Loop parallelized across teams and threads(128), schedule(static)
+    248, Loop not vectorized: recurrence
+         Loop unrolled 8 times
+    259, Recognized memory zero idiom
+          68, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+          87, Generated vector simd code for the loop
+          97, Generated vector simd code for the loop containing reductions
+         118, Generated vector simd code for the loop
+         128, Loop not vectorized: data dependency
+          36, Loop not vectorized: data dependency
+Masking::bit_to_hard_mask(char*, unsigned long, unsigned long&) const:
+    308, Loop not vectorized: data dependency
+Masking::remove_bit_mask(char*, unsigned long) const:
+    317, Generated vector simd code for the loop
+double** std::__copy_move<false, false, std::random_access_iterator_tag>::__copy_m<double (*) [64], double**>(double (*) [64], double (*) [64], double**):
+     19, include "masking.h"
+          19, include "vector"
+               60, include "stl_algobase.h"
+                   383, Loop not vectorized: may not be beneficial for target
+                        Loop unrolled 4 times
+          27, include "sequence_set.h"
+std::basic_ostream<char, std::char_traits<char>>& std::endl<char, std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&):
+     19, include "masking.h"
+double** std::copy<double (*) [64], double**>(double (*) [64], double (*) [64], double**):
+         529, Loop not vectorized: may not be beneficial for target
+              Loop unrolled 4 times
+double** std::__copy_move_a<false, double (*) [64], double**>(double (*) [64], double (*) [64], double**):
+     19, include "masking.h"
+          19, include "vector"
+               60, include "stl_algobase.h"
+          27, include "sequence_set.h"
+         522, Loop not vectorized: may not be beneficial for target
+              Loop unrolled 4 times
+double** std::__copy_move_a1<false, double (*) [64], double**>(double (*) [64], double (*) [64], double**):
+         494, Loop not vectorized: may not be beneficial for target
+              Loop unrolled 4 times
+double** std::__copy_move_a2<false, double (*) [64], double**>(double (*) [64], double (*) [64], double**):
+         383, Loop not vectorized: may not be beneficial for target
+              Loop unrolled 4 times
 timeout was set to  600

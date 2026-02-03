@@ -105,7 +105,7 @@ fdtdGPU...
  set thread size to 32x8
  set team size to 12x47
  GPU FDTD loop
-Average kernel execution time 0.004781 (s)
+Average kernel execution time 0.004777 (s)
 fdtdGPU complete
 
 CompareData (tolerance 0.000100)...

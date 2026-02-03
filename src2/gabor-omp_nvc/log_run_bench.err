@@ -1,1 +1,19 @@
+generateGaborKernelHost(unsigned int, unsigned int, unsigned int, double, double):
+      6, include "reference.h"
+          24, Generated vector simd code for the loop
+generateGaborKernelDevice(int, unsigned int, unsigned int, unsigned int, double, double):
+     34, #omp target teams distribute parallel for thread_limit(256)
+         31, Generating map(from:gabor_spatial[:height*width]) 
+         34, Generating "nvkernel__Z25generateGaborKernelDeviceijjjdd_F1L34_2" GPU kernel
+         36, Loop parallelized across teams and threads(128), schedule(static)
+     34, Loop not vectorized/parallelized: contains call
+     37, Loop not vectorized/parallelized: not countable
+main:
+          21, Loop not fused: function call before adjacent loop
+          24, Generated vector simd code for the loop
+     73, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      6, include "reference.h"
 timeout was set to  600

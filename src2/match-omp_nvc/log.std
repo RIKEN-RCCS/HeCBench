@@ -1,23 +1,23 @@
 
 Data size:   16 MB
-MatchCPU1:   2539658773000 ms  2.5805e-08 Gflops
-MatchGPU1:   143434507590 ms  4.56905e-07 Gflops
+MatchCPU1:   2567509289000 ms  2.55251e-08 Gflops
+MatchGPU1:   143534545790 ms  4.56587e-07 Gflops
 Number of incorrect matches: 0
-MatchGPU2:   62580571300 ms  1.04723e-06 Gflops
+MatchGPU2:   62581627200 ms  1.04721e-06 Gflops
 Number of incorrect matches: 0
-MatchGPU3:   34180780360 ms  1.91733e-06 Gflops
+MatchGPU3:   34182925880 ms  1.91721e-06 Gflops
 Number of incorrect matches: 0
-MatchGPU4:   24868201400 ms  2.63533e-06 Gflops
+MatchGPU4:   24869533690 ms  2.63519e-06 Gflops
 Number of incorrect matches: 0
-MatchGPU5:   28853632290 ms  2.27133e-06 Gflops
+MatchGPU5:   28854048540 ms  2.27129e-06 Gflops
 Number of incorrect matches: 0
-MatchGPU6:   24303808320 ms  2.69653e-06 Gflops
+MatchGPU6:   24304690680 ms  2.69643e-06 Gflops
 Number of incorrect matches: 0
-MatchGPU7:   8305556280 ms  7.89062e-06 Gflops
+MatchGPU7:   8306099120 ms  7.89011e-06 Gflops
 Number of incorrect matches: 0
-MatchGPU8:   12283215070 ms  5.33541e-06 Gflops
+MatchGPU8:   12283559320 ms  5.33526e-06 Gflops
 Number of incorrect matches: 0
-Match9:   7735706290 ms  8.47188e-06 Gflops
+Match9:   7736403350 ms  8.47112e-06 Gflops
 Number of incorrect matches: 0
-MatchGPU10:   18411744320 ms  3.55947e-06 Gflops
+MatchGPU10:   18412135440 ms  3.55939e-06 Gflops
 Number of incorrect matches: 0
