@@ -1,3 +1,2 @@
-bash: line 1: ../lsqt-hip/prepare_data.sh: No such file or directory
-make: *** [Makefile.NVD:87: run_mem] Error 1
+../scripts/m.sh: line 5: warning: command substitution: ignored null byte in input
 timeout was set to  600
