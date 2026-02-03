@@ -51,7 +51,7 @@
 | ccs | build err | build err | build err |
 | cfd | 0.58 | 3.02 | 3.08 |
 | chacha20 | 4.80 | build err | 6.64 |
-| channelShuffle | build err | 19.66 | 19.34 |
+| channelShuffle | 538.46 | 19.23 | 19.24 |
 | channelSum | 64.97 | 65.55 | 68.17 |
 | chemv | 3.19 | build err | 3.24 |
 | che | 3.05 | 3.27 | 3.38 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 282 | 173 | 269 |
+| completed | 283 | 173 | 269 |
 
-sycl と acc がともに完了した件数 160
+sycl と acc がともに完了した件数 161
