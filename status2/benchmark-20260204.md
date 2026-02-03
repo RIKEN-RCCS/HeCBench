@@ -226,7 +226,7 @@
 | nqueen | 6.94 | 23.85 | 6.87 |
 | ntt | 6.63 | build err | 6.65 |
 | nw | 26.82 | build err | 33.48 |
-| openmp | build err | build err | 13.71 |
+| openmp | 81.27 | build err | 13.65 |
 | overlay | 5.33 | 9.20 | 10.50 |
 | p4 | 3.77 | build err | 16.94 |
 | page-rank | 375.35 | 46.20 | 46.72 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 295 | 178 | 272 |
+| completed | 296 | 178 | 272 |
 
 sycl と acc がともに完了した件数 174

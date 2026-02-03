@@ -1,0 +1,29 @@
+./main Starting...
+
+number of host CPUs:	72
+number of devices:	1
+Work took 0.013329 seconds with 1 CPU threads
+PASS
+Work took 0.009160 seconds with 2 CPU threads
+PASS
+Work took 0.008918 seconds with 4 CPU threads
+PASS
+Work took 0.008174 seconds with 8 CPU threads
+PASS
+Work took 0.008161 seconds with 16 CPU threads
+PASS
+Work took 0.007076 seconds with 32 CPU threads
+PASS
+Work took 0.007036 seconds with 1 CPU threads
+PASS
+Work took 0.007048 seconds with 2 CPU threads
+PASS
+Work took 0.007061 seconds with 4 CPU threads
+PASS
+Work took 0.007052 seconds with 8 CPU threads
+PASS
+Work took 0.007055 seconds with 16 CPU threads
+PASS
+Work took 0.007047 seconds with 32 CPU threads
+PASS
+Runtime overhead of first run is 0.006293 seconds

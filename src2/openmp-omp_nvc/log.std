@@ -2,28 +2,28 @@
 
 number of host CPUs:	72
 number of devices:	1
-Work took 2.427053 seconds with 1 CPU threads
+Work took 2.474429 seconds with 1 CPU threads
 PASS
-Work took 0.005573 seconds with 2 CPU threads
+Work took 0.005600 seconds with 2 CPU threads
 PASS
-Work took 0.003969 seconds with 4 CPU threads
+Work took 0.004286 seconds with 4 CPU threads
 PASS
-Work took 0.003762 seconds with 8 CPU threads
+Work took 0.004806 seconds with 8 CPU threads
 PASS
-Work took 0.004379 seconds with 16 CPU threads
+Work took 0.004549 seconds with 16 CPU threads
 PASS
-Work took 0.006600 seconds with 32 CPU threads
+Work took 0.006683 seconds with 32 CPU threads
 PASS
-Work took 0.006044 seconds with 1 CPU threads
+Work took 0.007102 seconds with 1 CPU threads
 PASS
-Work took 0.003903 seconds with 2 CPU threads
+Work took 0.003895 seconds with 2 CPU threads
 PASS
 Work took 0.002928 seconds with 4 CPU threads
 PASS
-Work took 0.002888 seconds with 8 CPU threads
+Work took 0.002464 seconds with 8 CPU threads
 PASS
-Work took 0.002756 seconds with 16 CPU threads
+Work took 0.002725 seconds with 16 CPU threads
 PASS
-Work took 0.002568 seconds with 32 CPU threads
+Work took 0.002736 seconds with 32 CPU threads
 PASS
-Runtime overhead of first run is 2.421009 seconds
+Runtime overhead of first run is 2.467327 seconds
