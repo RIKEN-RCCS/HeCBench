@@ -109,7 +109,7 @@
 | floydwarshall | 73.45 | 72.59 | 83.41 |
 | fluidSim | 17.67 | 17.30 | 17.36 |
 | fpc | 66.38 | build err | exe err |
-| fpdc | build err | build err | over 600 |
+| fpdc | 5.37 | build err | over 600 |
 | fresnel | 6.00 | 6.61 | 6.61 |
 | frna | 104.63 | build err | build err |
 | fwt | 1.08 | build err | 3.38 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| エラーなし | 297 | 179 | 284 |
+| エラーなし | 298 | 179 | 284 |
 
 sycl と acc がともに実行できた件数 171
