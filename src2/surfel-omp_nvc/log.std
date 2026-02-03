@@ -3,11 +3,11 @@
 -------------------------------------
 
 f = 0
-Average kernel execution time: 1471.205200 (ms)
+Average kernel execution time: 120.318771 (ms)
 
 f = 1
-Average kernel execution time: 1469.247070 (ms)
+Average kernel execution time: 119.229210 (ms)
 
 f = 2
-Average kernel execution time: 1469.346680 (ms)
+Average kernel execution time: 119.217209 (ms)
 PASS
