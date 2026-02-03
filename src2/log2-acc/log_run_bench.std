@@ -1,7 +1,7 @@
 nvc++ -acc  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
 nvc++ -acc  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
-bash -c "time -p ( ./main log2_parameters.config 1>log.std 2>log.err ) 2> log.time"
+bash -c "time -p ( ./main ../log2-cuda/log2_parameters.config 1>log.std 2>log.err ) 2> log.time"
 pkill nvidia-smi
 ../scripts/m.sh
-min max diff memory in [MB] : 291 1614 1323
+min max diff memory in [MB] : 1 1324 1323

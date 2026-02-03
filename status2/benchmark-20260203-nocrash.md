@@ -173,7 +173,7 @@
 | lid-driven-cavity | 10.91 | build err | 22.40 |
 | lif | 116.49 | 125.87 | 124.42 |
 | linearprobing | 102.65 | build err | build err |
-| log2 | exe err | 0.68 | exe err |
+| log2 | 0.74 | 2.77 | 2.81 |
 | lombscargle | 2.99 | 3.06 | 3.05 |
 | loopback | 5.38 | build err | 8.20 |
 | lrn | 105.73 | 111.48 | 78.63 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| エラーなし | 293 | 179 | 282 |
+| エラーなし | 294 | 179 | 283 |
 
-sycl と acc がともに実行できた件数 169
+sycl と acc がともに実行できた件数 170

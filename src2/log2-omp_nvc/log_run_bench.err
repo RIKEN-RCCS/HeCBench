@@ -1,0 +1,112 @@
+binary_log(float, int):
+      6, include "kernel.h"
+          12, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          27, Loop not vectorized/parallelized: potential early exits
+log2_approx(std::vector<float, std::allocator<float>>&, std::vector<float, std::allocator<float>>&, std::vector<int, std::allocator<int>>&, int, int, int):
+      6, include "kernel.h"
+          73, Loop not vectorized/parallelized: contains call
+          74, #omp target teams distribute parallel for thread_limit(256)
+              68, Generating map(to:d_inputs[:num_inputs]) 
+                  Generating map(from:d_outputs[:output_size]) 
+              74, Generating "nvkernel__Z11log2_approxRSt6vectorIfSaIfEES2_RS_IiSaIiEEiii_F354L74_2" GPU kernel
+              76, Loop parallelized across teams and threads(128), schedule(static)
+          27, Loop not vectorized/parallelized: potential early exits
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+main:
+         616, Loop not vectorized/parallelized: not countable
+     33, Loop not vectorized/parallelized: potential early exits
+     42, Loop not vectorized/parallelized: potential early exits
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+     79, Loop not vectorized/parallelized: contains call
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    100, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+         Loop unrolled 4 times
+         616, Loop not vectorized/parallelized: not countable
+std::char_traits<char>::length(char const*):
+         171, Loop not vectorized/parallelized: not countable
+float* std::__uninitialized_fill_n<true>::__uninit_fill_n<float*, unsigned long, float>(float*, unsigned long, float const&):
+        1149, Recognized memory set idiom
+int* std::__uninitialized_fill_n<true>::__uninit_fill_n<int*, unsigned long, int>(int*, unsigned long, int const&):
+        1149, Recognized memory set idiom
+float* std::__uninitialized_default_n_1<true>::__uninit_default_n<float*, unsigned long>(float*, unsigned long):
+        1149, Recognized memory set idiom
+std::vector<float, std::allocator<float>>::vector(unsigned long, std::allocator<float> const&):
+      6, include "kernel.h"
+std::vector<float, std::allocator<float>>::vector(unsigned long, float const&, std::allocator<float> const&):
+      6, include "kernel.h"
+std::vector<float, std::allocator<float>>::back():
+      6, include "kernel.h"
+std::vector<float, std::allocator<float>>::_M_fill_initialize(unsigned long, float const&):
+         410, Recognized memory set idiom
+std::vector<float, std::allocator<float>>::_M_default_initialize(unsigned long):
+         704, Recognized memory set idiom
+void std::vector<float, std::allocator<float>>::_M_realloc_insert<float>(__gnu_cxx::__normal_iterator<float*, std::vector<float, std::allocator<float>>>, float&&):
+      6, include "kernel.h"
+std::vector<int, std::allocator<int>>::vector(unsigned long, int const&, std::allocator<int> const&):
+      6, include "kernel.h"
+std::vector<int, std::allocator<int>>::_M_fill_initialize(unsigned long, int const&):
+         410, Recognized memory set idiom
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      6, include "kernel.h"
+           1, include "chrono"
+              472, Loop not vectorized/parallelized: not countable
+__gnu_cxx::char_traits<char>::length(char const*):
+      1, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                        171, Loop not vectorized/parallelized: not countable
+std::basic_ostream<char, std::char_traits<char>>& std::endl<char, std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&):
+      1, include "iostream"
+          39, include "ostream"
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&, char const*):
+         397, Loop not vectorized/parallelized: not countable
+float* std::__uninitialized_default_n_a<float*, unsigned long, float>(float*, unsigned long, std::allocator<float>&):
+         638, Recognized memory set idiom
+float* std::__uninitialized_default_n<float*, unsigned long>(float*, unsigned long):
+         603, Recognized memory set idiom
+float* std::fill_n<float*, unsigned long, float>(float*, unsigned long, float const&):
+        1120, Recognized memory set idiom
+float* std::__fill_n_a<float*, unsigned long, float>(float*, unsigned long, float const&, std::random_access_iterator_tag):
+         969, Recognized memory set idiom
+void std::__fill_a<float*, float>(float*, float*, float const&):
+         923, Recognized memory set idiom
+__gnu_cxx::__enable_if<std::__is_scalar<float>::__value, void>::__type std::__fill_a1<float*, float>(float*, float*, float const&):
+      1, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+                             923, Recognized memory set idiom
+float* std::__uninitialized_fill_n_a<float*, unsigned long, float, float>(float*, unsigned long, float const&, std::allocator<float>&):
+         296, Recognized memory set idiom
+float* std::uninitialized_fill_n<float*, unsigned long, float>(float*, unsigned long, float const&):
+         255, Recognized memory set idiom
+int* std::__uninitialized_fill_n_a<int*, unsigned long, int, int>(int*, unsigned long, int const&, std::allocator<int>&):
+         296, Recognized memory set idiom
+int* std::uninitialized_fill_n<int*, unsigned long, int>(int*, unsigned long, int const&):
+         255, Recognized memory set idiom
+int* std::fill_n<int*, unsigned long, int>(int*, unsigned long, int const&):
+        1120, Recognized memory set idiom
+int* std::__fill_n_a<int*, unsigned long, int>(int*, unsigned long, int const&, std::random_access_iterator_tag):
+         969, Recognized memory set idiom
+void std::__fill_a<int*, int>(int*, int*, int const&):
+         923, Recognized memory set idiom
+__gnu_cxx::__enable_if<std::__is_scalar<int>::__value, void>::__type std::__fill_a1<int*, int>(int*, int*, int const&):
+      1, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                         39, include "stl_algobase.h"
+                             923, Recognized memory set idiom
+timeout was set to  600
