@@ -1,12 +1,12 @@
-Number of sites = 50^4
+Number of sites = 42^4
 Executing 1000 iterations with 1 warmups
 Threads per group = 128
-Number of teams = 6250000
+Number of teams = 3111696
 Threads per team = 128
-Number of work items = 800000000
+Number of work items = 398297088
 Checksum SUCCESS... though please be diligent and check the following value is not NaN: checksum=36
-Total kernel execution time = 4.718474 (s)
-Total GFLOP/s = 1144.438
-Total GByte/s (GPU memory)  = 1695.464
-Total allocation for matrices = 7629.395 MiB
-Approximate memory usage = 9000.750 MiB
+Total kernel execution time = 2.349749 (s)
+Total GFLOP/s = 1144.167
+Total GByte/s (GPU memory)  = 1695.063
+Total allocation for matrices = 3798.458 MiB
+Approximate memory usage = 4733.312 MiB

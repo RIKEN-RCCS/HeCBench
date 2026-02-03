@@ -1,4 +1,6 @@
-clang++  -DMILC_COMPLEX -std=c++17 -Wall -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c su3_nn_bench.cpp -o su3_nn_bench.o
 clang++  -DMILC_COMPLEX -std=c++17 -Wall -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU su3_nn_bench.o -o main 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
-bash -c "time -p ( ./main -i 1000 -l 50 -t 128 -v 3 -w 1 1>log.std 2>log.err ) 2> log.time"
+bash -c "time -p ( ./main -i 1000 -l 42 -t 128 -v 3 -w 1 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 1 4359 4358
