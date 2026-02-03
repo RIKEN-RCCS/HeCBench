@@ -3,11 +3,11 @@ Grid Sizes: 65536 65536
 Iterations: 1
 
 Computing wavefield in device ..
-Total kernel execution time 32.0379 (ms)
-Average kernel execution time 32037.9 (us)
+Total kernel execution time 32.0298 (ms)
+Average kernel execution time 32029.8 (us)
 Computing wavefield in CPU ..
 Initializing ... 
-CPU time: 2518 ms
+CPU time: 2570 ms
 
 Check difference between final wavefields computed in device and host
 PASS
