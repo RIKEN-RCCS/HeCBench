@@ -5,3 +5,6 @@ clang++  -std=c++17 -Wall -I../include -I../hogbom-cuda           -fsycl --gcc-t
 clang++  -std=c++17 -Wall -I../include -I../hogbom-cuda           -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU main.o kernels.o reference.o timer.o -o main 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "../hogbom-cuda/prepare_data.sh; time -p ( ./main ../hogbom-cuda/data/dirty_4096.img ../hogbom-cuda/data/psf_4096.img 1000 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 1 687 686
