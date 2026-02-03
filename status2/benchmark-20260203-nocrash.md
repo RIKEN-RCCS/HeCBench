@@ -268,7 +268,7 @@
 | rushlarsen | over 600 | over 600 | over 600 |
 | s3d | 2.94 | build err | 2.90 |
 | s8n | 2.49 | 2.47 | 2.43 |
-| sad | build err | exe err | build err |
+| sad | 2.80 | exe err | build err |
 | sampling | 5.77 | build err | 5.65 |
 | scan2 | 2.91 | build err | 6.79 |
 | scan | over 600 | build err | over 600 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| エラーなし | 294 | 179 | 283 |
+| エラーなし | 295 | 179 | 283 |
 
 sycl と acc がともに実行できた件数 170
