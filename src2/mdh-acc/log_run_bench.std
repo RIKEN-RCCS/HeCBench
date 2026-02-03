@@ -1,5 +1,3 @@
-nvc++ -acc  -Wall  -O3 -Minfo -mp=multicore,gpu -gpu=cc90 -c main.cpp -o main.o
-nvc++ -acc  -Wall  -O3 -Minfo -mp=multicore,gpu -gpu=cc90 -c WKFUtils.cpp -o WKFUtils.o
 nvc++ -acc  -Wall  -O3 -Minfo -mp=multicore,gpu -gpu=cc90 main.o WKFUtils.o -o main 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "time -p ( ./main -itmax 20 1>log.std 2>log.err ) 2> log.time"
