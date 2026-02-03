@@ -138,7 +138,7 @@
 | hexciton | 6.03 | build err | 4.96 |
 | histogram | 2.98 | build err | 3.30 |
 | hmm | 8.56 | 14.71 | 2.81 |
-| hogbom | build err | build err | build err |
+| hogbom | 0.50 | build err | 2.71 |
 | hotspot3D | 16.21 | 18.11 | 18.00 |
 | hwt1d | 3.48 | build err | 3.58 |
 | hybridsort | 15.27 | build err | 12.96 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 268 | 171 | 264 |
+| completed | 269 | 171 | 265 |
 
 sycl と acc がともに完了した件数 149

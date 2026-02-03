@@ -73,7 +73,4 @@ HogbomGolden::findPeak(std::vector<float, std::allocator<float>> const&, float&,
      89, Loop not vectorized: unknown
 HogbomGolden::subtractPSF(std::vector<float, std::allocator<float>> const&, unsigned long, std::vector<float, std::allocator<float>>&, unsigned long, unsigned long, unsigned long, float, float):
      76, Loop not vectorized: may not be beneficial for target
-bunzip2: Can't open input file ../hogbom-cuda/data/dirty_4096.img.bz2: No such file or directory.
-bunzip2: Can't open input file ../hogbom-cuda/data/psf_4096.img.bz2: No such file or directory.
-make: *** [Makefile.NVD:83: run_mem] Error 1
 timeout was set to  600
