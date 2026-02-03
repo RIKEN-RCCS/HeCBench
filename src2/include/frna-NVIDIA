@@ -1,1 +1,1 @@
-COMMAND = ../prna-cuda/prepare_data.sh; export DATAPATH=../prna-cuda/data_tables; time -p ( ./$(program) ../prna-cuda/HIV1-NL43.seq  hiv1-nl43.out 1>log.std 2>log.err ) 2> log.time
+COMMAND = ../frna-cuda/prepare_data.sh; export DATAPATH=../prna-cuda/data_tables; time -p ( ./$(program) ../prna-cuda/HIV1-NL43.seq  hiv1-nl43.out 1>log.std 2>log.err ) 2> log.time

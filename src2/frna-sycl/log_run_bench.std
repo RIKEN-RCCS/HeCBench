@@ -1,8 +1,5 @@
-clang++  -D__CUDACC__ -DINT -std=c++17 -Wall -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -ffast-math -DUSE_GPU -c main.c -o main.o
-clang++  -D__CUDACC__ -DINT -std=c++17 -Wall -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -ffast-math -DUSE_GPU -c fbase.c -o fbase.o
-clang++  -D__CUDACC__ -DINT -std=c++17 -Wall -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -ffast-math -DUSE_GPU -c fparam.c -o fparam.o
-clang++  -D__CUDACC__ -DINT -std=c++17 -Wall -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -ffast-math -DUSE_GPU -c util.c -o util.o
-clang++  -D__CUDACC__ -DINT -std=c++17 -Wall -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -ffast-math -DUSE_GPU -c frna.cpp -o frna.o
-clang++  -D__CUDACC__ -DINT -std=c++17 -Wall -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -ffast-math -DUSE_GPU main.o fbase.o fparam.o util.o frna.o  -o main 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
-bash -c "../prna-cuda/prepare_data.sh; export DATAPATH=../prna-cuda/data_tables; time -p ( ./main ../prna-cuda/HIV1-NL43.seq  hiv1-nl43.out 1>log.std 2>log.err ) 2> log.time"
+bash -c "../frna-cuda/prepare_data.sh; export DATAPATH=../prna-cuda/data_tables; time -p ( ./main ../prna-cuda/HIV1-NL43.seq  hiv1-nl43.out 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 0 iB 
