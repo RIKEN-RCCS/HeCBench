@@ -111,7 +111,7 @@
 | fpc | 66.38 | build err | exe err |
 | fpdc | build err | build err | over 600 |
 | fresnel | 6.00 | 6.61 | 6.61 |
-| frna | build err | build err | build err |
+| frna | 104.63 | build err | build err |
 | fwt | 1.08 | build err | 3.38 |
 | gabor | 21.57 | 21.27 | 57.42 |
 | gamma-correction | 63.44 | 105.30 | 104.46 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 267 | 171 | 264 |
+| completed | 268 | 171 | 264 |
 
 sycl と acc がともに完了した件数 149
