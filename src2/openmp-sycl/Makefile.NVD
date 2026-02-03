@@ -30,7 +30,8 @@ obj = $(source:.cpp=.o)
 #===============================================================================
 
 # Standard Flags
-CFLAGS := $(EXTRA_CFLAGS) -std=c++17 -fopenmp -Wall -I../openmp-omp -fsycl           --gcc-toolchain=$(GCC_TOOLCHAIN)
+#CFLAGS := $(EXTRA_CFLAGS) -std=c++17 -fopenmp -Wall -I../openmp-omp -fsycl           --gcc-toolchain=$(GCC_TOOLCHAIN)
+CFLAGS := $(EXTRA_CFLAGS) -std=c++17 -Wall -I../openmp-omp -fsycl           --gcc-toolchain=$(GCC_TOOLCHAIN)
 
 ifeq ($(VENDOR), AdaptiveCpp)
     CFLAGS_TMP := $(CFLAGS)
@@ -41,7 +42,8 @@ endif
 LDFLAGS = 
 
 ifeq ($(CUDA), yes)
-  CFLAGS += -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=$(CUDA_ARCH)
+  CFLAGS += -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=$(CUDA_ARCH) -I/opt/nvidia/hpc_sdk/Linux_aarch64/25.9/compilers/include
+  LDFLAGS = -L/opt/nvidia/hpc_sdk/Linux_aarch64/25.9/compilers/lib -lnvomp
 endif
 
 ifeq ($(HIP), yes)
