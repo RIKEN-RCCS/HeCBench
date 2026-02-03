@@ -320,7 +320,7 @@
 | wedford | build err | build err | exe err |
 | winograd | 0.65 | 3.25 | 3.20 |
 | wlcpow | 4.50 | build err | 12.37 |
-| wordcount | build err | 8.00 | 8.08 |
+| wordcount | 7.98 | 8.18 | 7.93 |
 | wsm5 | 4.78 | 5.59 | 5.73 |
 | wyllie | 112.64 | 108.06 | over 600 |
 | xlqc | build err | build err | build err |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| エラーなし | 299 | 181 | 284 |
+| エラーなし | 300 | 181 | 284 |
 
-sycl と acc がともに実行できた件数 174
+sycl と acc がともに実行できた件数 175

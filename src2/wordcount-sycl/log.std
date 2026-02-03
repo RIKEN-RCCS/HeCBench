@@ -11,4 +11,4 @@ Device: Text sample contains 65 words
 Test word count with random inputs
 PASS
 Performance evaluation for random texts of character length 268435456
-Average time of word count: 0.00272609 (s)
+Average time of word count: 0.00375175 (s)
