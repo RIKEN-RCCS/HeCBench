@@ -71,7 +71,7 @@
 | convolution1D | over 600 | build err | over 600 |
 | convolution3D | 2.48 | 3.17 | 2.51 |
 | convolutionSeparable | 13.58 | build err | 22.05 |
-| cooling | over 600 | over 600 | over 600 |
+| cooling | 154.60 | 452.57 | 454.09 |
 | crc64 | exe err | 0.23 | 2.52 |
 | cross | 14.58 | 7.67 | 8.04 |
 | crs | 24.78 | build err | over 600 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 278 | 172 | 268 |
+| completed | 279 | 173 | 269 |
 
-sycl と acc がともに完了した件数 156
+sycl と acc がともに完了した件数 157
