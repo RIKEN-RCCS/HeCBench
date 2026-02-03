@@ -192,7 +192,7 @@
 | mcmd | 9.03 | 10.79 | 11.06 |
 | mcpr | 13.97 | build err | 15.03 |
 | md5hash | 15.14 | 15.35 | 15.50 |
-| mdh | build err | 35.33 | 2.67 |
+| mdh | 48.13 | 35.15 | 2.67 |
 | md | 14.68 | 14.24 | 14.22 |
 | meanshift | 4.43 | build err | 4.21 |
 | medianfilter | 3.75 | build err | 4.68 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 283 | 173 | 269 |
+| completed | 284 | 173 | 269 |
 
-sycl と acc がともに完了した件数 161
+sycl と acc がともに完了した件数 162
