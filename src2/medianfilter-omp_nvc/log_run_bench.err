@@ -111,7 +111,4 @@ MedianFilterHost:
      28, Loop not vectorized/parallelized: too deeply nested
      46, Loop not fused: complex flow graph
          Loop not vectorized/parallelized: loop count too small
-tar: ../medianfilter-cuda/data.tar.bz2: Cannot open: No such file or directory
-tar: Error is not recoverable: exiting now
-make: *** [Makefile.NVD:77: run_mem] Error 1
 timeout was set to  600

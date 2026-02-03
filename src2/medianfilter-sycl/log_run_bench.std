@@ -4,3 +4,6 @@ clang++  -std=c++17 -Wall -fsycl           -I../boxfilter-sycl -I../medianfilter
 clang++  -std=c++17 -Wall -fsycl           -I../boxfilter-sycl -I../medianfilter-cuda --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU main.o shrUtils.o MedianFilterHost.o -o main 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "../medianfilter-cuda/prepare_data.sh; time -p ( ./main ../medianfilter-cuda/data/SierrasRGB.ppm 10000 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 1 572 571

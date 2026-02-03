@@ -178,7 +178,7 @@
 | loopback | 5.38 | build err | 8.20 |
 | lrn | 105.73 | 111.48 | 78.63 |
 | lr | 6.36 | build err | build err |
-| lsqt | build err | | |
+| lsqt | 18.29 | | |
 | lud | 6.29 | build err | 46.11 |
 | lulesh | 11.28 | 11.70 | 8.41 |
 | mallocFree | 3.69 | 2.68 | 2.67 |
@@ -195,7 +195,7 @@
 | mdh | build err | 35.33 | 2.67 |
 | md | 14.68 | 14.24 | 14.22 |
 | meanshift | 4.43 | build err | 4.21 |
-| medianfilter | build err | build err | build err |
+| medianfilter | 3.75 | build err | 4.68 |
 | memcpy | 3.54 | 6.52 | 6.54 |
 | memtest | 18.85 | 19.78 | 19.45 |
 | merge | over 600 | build err | over 600 |
@@ -303,7 +303,7 @@
 | sw4ck | exe err | 28.84 | 28.05 |
 | swish | 24.54 | 5.48 | 5.39 |
 | tensorT | 2.56 | build err | 2.87 |
-| testSNAP | build err | build err | build err |
+| testSNAP | 3.73 | 66.16 | 4.19 |
 | thomas | 131.17 | 59.68 | 49.73 |
 | threadfence | 26.09 | build err | 35.11 |
 | tissue | 12.06 | 11.74 | 18.48 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 269 | 171 | 265 |
+| completed | 272 | 172 | 267 |
 
-sycl と acc がともに完了した件数 149
+sycl と acc がともに完了した件数 150
