@@ -1,6 +1,1 @@
-wc.cpp:1:10: fatal error: 'oneapi/dpl/execution' file not found
-    1 | #include <oneapi/dpl/execution>
-      |          ^~~~~~~~~~~~~~~~~~~~~~
-1 error generated.
-make: *** [Makefile.NVD:73: wc.o] Error 1
 timeout was set to  600
