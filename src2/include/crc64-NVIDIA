@@ -1,5 +1,6 @@
 #COMMAND = time -p ( ./$(program) 10 5 2100000000 1>log.std 2>log.err ) 2> log.time
+COMMAND = time -p ( ./$(program) 10 5  710000000 1>log.std 2>log.err ) 2> log.time
 #COMMAND = time -p ( ./$(program) 10 5 210000000 1>log.std 2>log.err ) 2> log.time
 #COMMAND = time -p ( ./$(program) 10 5 33554432 1>log.std 2>log.err ) 2> log.time
-COMMAND = time -p ( ./$(program)  200 5 1200  1>log.std 2>log.err ) 2> log.time
-                                 
+#COMMAND = time -p ( ./$(program) 10 5  67108864 1>log.std 2>log.err ) 2> log.time
+#COMMAND = time -p ( ./$(program)  200 5 1200  1>log.std 2>log.err ) 2> log.time

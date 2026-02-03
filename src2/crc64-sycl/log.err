@@ -1,2 +1,0 @@
-terminate called after throwing an instance of 'sycl::_V1::exception'
-  what():  Non-uniform work-groups are not supported by the target device
