@@ -60,7 +60,4 @@
  1398 |         bool result = true;
       |              ^
 6 warnings generated.
-tar: ../medianfilter-cuda/data.tar.bz2: Cannot open: No such file or directory
-tar: Error is not recoverable: exiting now
-make: *** [Makefile.NVD:91: run_mem] Error 1
 timeout was set to  600

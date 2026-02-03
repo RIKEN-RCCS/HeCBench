@@ -1,1 +1,8 @@
-nvc++ -acc  -Wall -DREFDATA_TWOJ=14  -O3 -Minfo -mp=gpu -gpu=cc90 -DOPENMP_TARGET -c main.cpp -o main.o
+tar xf ../testSNAP-omp/refdata.tar.gz -C ../testSNAP-omp
+nvc++ -acc  -Wall -DREFDATA_TWOJ=14 -I../testSNAP-omp -O3 -Minfo -mp=gpu -gpu=cc90 -DOPENMP_TARGET -c main.cpp -o main.o
+nvc++ -acc  -Wall -DREFDATA_TWOJ=14 -I../testSNAP-omp -O3 -Minfo -mp=gpu -gpu=cc90 -DOPENMP_TARGET main.o -o main 
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "time -p ( ./main --nsteps 100 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 1 3161 3160

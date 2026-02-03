@@ -1,6 +1,1 @@
-main.cpp:28:10: fatal error: 'refdata_2J14_W.h' file not found
-   28 | #include "refdata_2J14_W.h"
-      |          ^~~~~~~~~~~~~~~~~~
-1 error generated.
-make: *** [Makefile.NVD:78: main.o] Error 1
 timeout was set to  600
