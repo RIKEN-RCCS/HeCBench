@@ -1,7 +1,5 @@
-nvc++ -acc  -Wall -I../flip-cuda  -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
-nvc++ -acc  -Wall -I../flip-cuda  -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
-bash -c "time -p ( ./main 3 1300 100 1>log.std 2>log.err ) 2> log.time"
+bash -c "time -p ( ./main 3 1200 100 1>log.std 2>log.err ) 2> log.time"
 pkill nvidia-smi
 ../scripts/m.sh
-min max diff memory in [MB] : 1 50847 50846
+min max diff memory in [MB] : 1 40110 40109

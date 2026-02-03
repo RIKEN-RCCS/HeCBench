@@ -3,10 +3,10 @@ shape: ( 1200 1200 1200 )
 flip_dims: ( 0 1 2 )
 stride: ( 1440000 1200 1 )
 PASS
-Average execution time of the flip kernel: 31.709663 (ms)
+Average execution time of the flip kernel: 23.601025 (ms)
 =========== Data type is FP64 ==========
 shape: ( 1200 1200 1200 )
 flip_dims: ( 0 1 2 )
 stride: ( 1440000 1200 1 )
 PASS
-Average execution time of the flip kernel: 31.865599 (ms)
+Average execution time of the flip kernel: 23.615349 (ms)
