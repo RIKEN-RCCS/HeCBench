@@ -1,8 +1,1 @@
-"main.cpp", line 4: catastrophic error: cannot open source file "bitmap_image.hpp"
-  #include "bitmap_image.hpp"
-                             ^
-
-1 catastrophic error detected in the compilation of "main.cpp".
-Compilation terminated.
-make: *** [<builtin>: main.o] Error 2
 timeout was set to  600

@@ -1,7 +1,13 @@
-/opt/nvidia/hpc_sdk/Linux_aarch64/25.9/compilers/bin/nvc++    -c -o main.o main.cpp
 nvc++ -acc  -std=c++14 -Wall -I../sad-cuda -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
-bash -c "time -p ( ./main ../sad-cuda/coins.bmp ../sad-cuda/coin.bmp 100 1>log.std 2>log.err ) 2> log.time"
+bash -c "../sad-cuda/prepare_data.sh; time -p ( ./main ../sad-cuda/coins.bmp ../sad-cuda/coin.bmp 1 100>log.std 2>log.err ) 2> log.time"
+Parallel Computation Results: 
+Kernel time in msec: 48
+Elapsed time in msec = 48
+Main Image Dimensions: 630*459
+Template Image Dimensions: 116*116
+Found Minimum:  1
+Number of Occurances: 1
 pkill nvidia-smi
 ../scripts/m.sh
-min max diff memory in [MB] : inf  0
+min max diff memory in [MB] : 1 561 560
