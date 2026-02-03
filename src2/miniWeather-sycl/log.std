@@ -1,0 +1,10 @@
+nx_glob, nz_glob: 400 200
+dx,dz: 50.000000 50.000000
+dt: 0.166667
+Total main time step loop: 0.694251 sec
+d_mass: 9.297515e-14
+d_te:   -5.199325e-06
+PASS
+d_mass: 9.297515e-14
+d_te:   -5.199325e-06
+PASS

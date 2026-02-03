@@ -16,8 +16,10 @@ HIP_ARCH  = gfx908
 #GCC_TOOLCHAIN = "/auto/software/gcc/x86_64/gcc-9.1.0/"
 
 ifeq ($(CUDA), yes)
-  MPI_INCLUDE = "/opt/nvidia/hpc_sdk/Linux_x86_64/22.11/comm_libs/mpi/include"
-  MPI_LIB_DIR = "/opt/nvidia/hpc_sdk/Linux_x86_64/22.11/comm_libs/mpi/lib"
+#  MPI_INCLUDE = "/opt/nvidia/hpc_sdk/Linux_x86_64/22.11/comm_libs/mpi/include"
+#  MPI_LIB_DIR = "/opt/nvidia/hpc_sdk/Linux_x86_64/22.11/comm_libs/mpi/lib"
+  MPI_INCLUDE = "/opt/nvidia/hpc_sdk/Linux_aarch64/25.9/comm_libs/13.0/hpcx/hpcx-2.24/ompi/include/"
+  MPI_LIB_DIR = "/opt/nvidia/hpc_sdk/Linux_aarch64/25.9/comm_libs/13.0/hpcx/hpcx-2.24/ompi/lib"
 else
   MPI_INCLUDE = "/usr/lib/x86_64-linux-gnu/openmpi/include"
   MPI_LIB_DIR = "/usr/lib/x86_64-linux-gnu/openmpi/lib"

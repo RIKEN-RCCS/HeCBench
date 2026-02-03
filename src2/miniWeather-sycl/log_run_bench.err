@@ -1,6 +1,27 @@
-main.cpp:13:10: fatal error: 'mpi.h' file not found
-   13 | #include <mpi.h>
-      |          ^~~~~~~
-1 error generated.
-make: *** [Makefile.NVD:76: main.o] Error 1
+main.cpp:410:7: warning: variable 'ierr' set but not used [-Wunused-but-set-variable]
+  410 |   int ierr;
+      |       ^
+main.cpp:545:28: warning: variable 'ierr' set but not used [-Wunused-but-set-variable]
+  545 |   int    i, k, ii, kk, ll, ierr, inds, i_end;
+      |                            ^
+main.cpp:682:7: warning: variable 'ierr' set but not used [-Wunused-but-set-variable]
+  682 |   int ierr;
+      |       ^
+main.cpp:767:7: warning: unused variable 'ierr' [-Wunused-variable]
+  767 |   int ierr = MPI_Allreduce(loc,glob,2,MPI_DOUBLE,MPI_SUM,MPI_COMM_WORLD);
+      |       ^~~~
+4 warnings generated.
+main.cpp:410:7: warning: variable 'ierr' set but not used [-Wunused-but-set-variable]
+  410 |   int ierr;
+      |       ^
+main.cpp:545:28: warning: variable 'ierr' set but not used [-Wunused-but-set-variable]
+  545 |   int    i, k, ii, kk, ll, ierr, inds, i_end;
+      |                            ^
+main.cpp:682:7: warning: variable 'ierr' set but not used [-Wunused-but-set-variable]
+  682 |   int ierr;
+      |       ^
+main.cpp:767:7: warning: unused variable 'ierr' [-Wunused-variable]
+  767 |   int ierr = MPI_Allreduce(loc,glob,2,MPI_DOUBLE,MPI_SUM,MPI_COMM_WORLD);
+      |       ^~~~
+4 warnings generated.
 timeout was set to  600
