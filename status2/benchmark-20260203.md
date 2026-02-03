@@ -284,7 +284,7 @@
 | sobel | 2.89 | 3.18 | 3.32 |
 | sobol | 3.89 | build err | 4.51 |
 | softmax-online | 13.69 | build err | 15.10 |
-| softmax | 39.75 | build err | 43.09 |
+| softmax | 39.36 | 40.91 | 36.96 |
 | sort | build err | build err | 36.92 |
 | sosfil | 4.75 | build err | 13.32 |
 | sph | 5.41 | 22.53 | 5.40 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 285 | 173 | 269 |
+| completed | 285 | 174 | 269 |
 
-sycl と acc がともに完了した件数 163
+sycl と acc がともに完了した件数 164

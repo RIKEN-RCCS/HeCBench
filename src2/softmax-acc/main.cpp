@@ -25,14 +25,24 @@ void softMax_cpu(const int numSlice, const int sliceSize, const float* src, floa
 }
 
 int main(int argc, char* argv[]) {
+#if 0
   if (argc != 4) {
     printf("Usage: %s <number of slices> <slice size> <repeat>\n", argv[0]);
     return 1;
   }
-   
   int numSlice = atoi(argv[1]);
   int sliceSize = atoi(argv[2]);
   int repeat = atoi(argv[3]);
+#else
+  if (argc != 5) {
+    printf("Usage: %s <number of slices> <slice size> <dummy> <repeat>\n", argv[0]);
+    return 1;
+  }
+  int numSlice = atoi(argv[1]);
+  int sliceSize = atoi(argv[2]);
+  int kernel = atoi(argv[3]);
+  int repeat = atoi(argv[4]);
+#endif
   int numElem = numSlice * sliceSize;
 
   float* input = (float*) aligned_alloc(1024, sizeof(float) * numElem);
