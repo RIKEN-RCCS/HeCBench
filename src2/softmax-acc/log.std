@@ -1,1 +1,2 @@
-Usage: ./main <number of slices> <slice size> <repeat>
+Average kernel execution time: 3426.719971 (ms)
+PASS
