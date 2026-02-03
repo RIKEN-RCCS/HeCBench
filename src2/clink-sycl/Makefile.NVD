@@ -30,7 +30,8 @@ obj = $(source:.cpp=.o)
 #===============================================================================
 
 # Standard Flags
-CFLAGS := $(EXTRA_CFLAGS) -std=c++17 -Wall -fopenmp -I../clink-cuda           -fsycl --gcc-toolchain=$(GCC_TOOLCHAIN)
+#CFLAGS := $(EXTRA_CFLAGS) -std=c++17 -Wall -fopenmp -I../clink-cuda           -fsycl --gcc-toolchain=$(GCC_TOOLCHAIN)
+CFLAGS := $(EXTRA_CFLAGS) -std=c++17 -Wall -I../clink-cuda           -fsycl --gcc-toolchain=$(GCC_TOOLCHAIN)
 
 ifeq ($(VENDOR), AdaptiveCpp)
     CFLAGS_TMP := $(CFLAGS)
@@ -66,6 +67,11 @@ endif
 # Targets to Build
 #===============================================================================
 
+all : lib $(program)
+
+lib :
+	tar xf ./data.tar.gz 
+
 $(program): $(obj)
 	$(CC) $(CFLAGS) $(obj) -o $@ $(LDFLAGS)
 
@@ -77,10 +83,10 @@ clean:
 
 include ../include/clink-NVIDIA
 
-run: $(program)
+run: all
 	$(LAUNCHER) "$(COMMAND)"
 
-run_mem: $(program)
+run_mem: all
 	nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 	$(LAUNCHER) "$(COMMAND)"
 	pkill nvidia-smi

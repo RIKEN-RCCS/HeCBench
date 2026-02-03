@@ -1,1 +1,24 @@
-File input.hpp cannot be opened for read.
+Device offload time: 2466 ms
+PASS
+Device offload time: 66 ms
+PASS
+Device offload time: 46 ms
+Device offload time: 48 ms
+Device offload time: 46 ms
+Device offload time: 46 ms
+Device offload time: 49 ms
+Device offload time: 46 ms
+Device offload time: 1658 ms
+Device offload time: 49 ms
+Device offload time: 50 ms
+Device offload time: 46 ms
+Device offload time: 48 ms
+Device offload time: 48 ms
+Device offload time: 48 ms
+Device offload time: 48 ms
+Device offload time: 1657 ms
+Device offload time: 50 ms
+Device offload time: 50 ms
+Device offload time: 48 ms
+Average kernel time: 42.808 ms
+Processing complete.
