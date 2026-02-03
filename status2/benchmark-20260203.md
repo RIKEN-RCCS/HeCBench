@@ -48,7 +48,7 @@
 | car | 7.18 | 6.64 | 6.65 |
 | cbsfil | 31.48 | 35.01 | 33.19 |
 | ccsd-trpdrv | 2.67 | 2.55 | 2.63 |
-| ccs | build err | build err | build err |
+| ccs | 3.59 | build err | 3.57 |
 | cfd | 0.58 | 3.02 | 3.08 |
 | chacha20 | 4.80 | build err | 6.64 |
 | channelShuffle | 538.46 | 19.23 | 19.24 |
@@ -72,7 +72,7 @@
 | convolution3D | 2.48 | 3.17 | 2.51 |
 | convolutionSeparable | 13.58 | build err | 22.05 |
 | cooling | 154.60 | 452.57 | 454.09 |
-| crc64 | exe err | 0.23 | 2.52 |
+| crc64 | 58.47 | 57.16 | 57.25 |
 | cross | 14.58 | 7.67 | 8.04 |
 | crs | 24.78 | build err | over 600 |
 | d2q9-bgk | 2.85 | build err | 4.37 |
@@ -268,7 +268,7 @@
 | rushlarsen | over 600 | over 600 | over 600 |
 | s3d | 2.94 | build err | 2.90 |
 | s8n | 2.49 | 2.47 | 2.43 |
-| sad | build err | exe err | build err |
+| sad | 2.80 | exe err | build err |
 | sampling | 5.77 | build err | 5.65 |
 | scan2 | 2.91 | build err | 6.79 |
 | scan | over 600 | build err | over 600 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 286 | 174 | 270 |
+| completed | 289 | 174 | 271 |
 
-sycl と acc がともに完了した件数 165
+sycl と acc がともに完了した件数 166

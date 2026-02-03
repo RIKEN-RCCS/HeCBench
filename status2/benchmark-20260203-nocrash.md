@@ -72,7 +72,7 @@
 | convolution3D | 2.48 | 3.17 | 2.51 |
 | convolutionSeparable | 13.58 | build err | 22.05 |
 | cooling | 154.60 | 452.57 | 454.09 |
-| crc64 | exe err | 0.23 | 2.52 |
+| crc64 | 58.47 | 57.16 | 57.25 |
 | cross | 14.58 | 7.67 | 8.04 |
 | crs | 24.78 | build err | over 600 |
 | d2q9-bgk | 2.85 | build err | 4.37 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| エラーなし | 296 | 179 | 284 |
+| エラーなし | 297 | 179 | 284 |
 
-sycl と acc がともに実行できた件数 170
+sycl と acc がともに実行できた件数 171
