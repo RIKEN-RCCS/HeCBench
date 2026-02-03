@@ -41,7 +41,7 @@ endif
 LDFLAGS = 
 
 ifeq ($(CUDA), yes)
-  CFLAGS += -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=$(CUDA_ARCH)
+  CFLAGS += -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=$(CUDA_ARCH) -fno-sycl-id-queries-fit-in-int
 endif
 
 ifeq ($(HIP), yes)

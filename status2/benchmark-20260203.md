@@ -148,7 +148,7 @@
 | interval | 7.15 | 13.47 | 10.78 |
 | inversek2j | build err | over 600 | 14.94 |
 | ising | 258.64 | 13.36 | 13.31 |
-| iso2dfd | exe err | 14.32 | 14.60 |
+| iso2dfd | 17.67 | 13.97 | 14.20 |
 | jacobi | 2.77 | 3.56 | 3.50 |
 | jenkins-hash | 4.98 | 5.14 | 5.17 |
 | kalman | over 600 | build err | exe err |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 277 | 172 | 268 |
+| completed | 278 | 172 | 268 |
 
-sycl と acc がともに完了した件数 155
+sycl と acc がともに完了した件数 156

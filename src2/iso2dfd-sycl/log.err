@@ -1,2 +1,0 @@
-terminate called after throwing an instance of 'sycl::_V1::exception'
-  what():  Provided range and/or offset does not fit in int. Pass `-fno-sycl-id-queries-fit-in-int' to remove this limit.
