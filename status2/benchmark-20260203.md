@@ -57,7 +57,7 @@
 | che | 3.05 | 3.27 | 3.38 |
 | chi2 | 217.04 | 220.78 | 251.54 |
 | clenergy | 2.66 | 3.13 | 3.16 |
-| clink | build err | 6.21 | exe err |
+| clink | 56.20 | 8.31 | 8.15 |
 | cmp | exe err | build err | exe err |
 | cm | exe err | build err | exe err |
 | cobahh | 406.65 | 383.64 | 388.03 |
@@ -65,7 +65,7 @@
 | columnarSolver | 10.14 | build err | 9.89 |
 | complex | 22.28 | 12.59 | 12.96 |
 | compute-score | 3.19 | build err | 4.41 |
-| concat | build err | 16.73 | 17.39 |
+| concat | 15.08 | 16.24 | 15.73 |
 | contract | 11.40 | 28.95 | 10.82 |
 | conversion | 4.98 | 3.56 | 3.44 |
 | convolution1D | over 600 | build err | over 600 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 272 | 172 | 267 |
+| completed | 274 | 172 | 268 |
 
-sycl と acc がともに完了した件数 150
+sycl と acc がともに完了した件数 152
