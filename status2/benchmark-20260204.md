@@ -297,7 +297,7 @@
 | stencil1d | 4.68 | 30.81 | 35.77 |
 | stencil3d | 4.35 | build err | 4.24 |
 | streamcluster | exe err | build err | over 600 |
-| su3 | exe err | 11.03 | 12.48 |
+| su3 | 5.17 | 7.47 | 7.48 |
 | surfel | 510.01 | 12.02 | 11.97 |
 | svd3x3 | 1.96 | 2.87 | build err |
 | sw4ck | 6.40 | 29.28 | 28.11 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 296 | 178 | 272 |
+| completed | 297 | 178 | 272 |
 
-sycl と acc がともに完了した件数 174
+sycl と acc がともに完了した件数 175
