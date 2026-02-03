@@ -48,7 +48,7 @@
 | car | 7.18 | 6.64 | 6.65 |
 | cbsfil | 31.48 | 35.01 | 33.19 |
 | ccsd-trpdrv | 2.67 | 2.55 | 2.63 |
-| ccs | build err | build err | build err |
+| ccs | 3.59 | build err | 3.57 |
 | cfd | 0.58 | 3.02 | 3.08 |
 | chacha20 | 4.80 | build err | 6.64 |
 | channelShuffle | 538.46 | 19.23 | 19.24 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| エラーなし | 295 | 179 | 283 |
+| エラーなし | 296 | 179 | 284 |
 
 sycl と acc がともに実行できた件数 170

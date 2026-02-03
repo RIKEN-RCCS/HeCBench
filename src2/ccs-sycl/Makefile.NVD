@@ -13,7 +13,8 @@ CUDA      = yes
 CUDA_ARCH = sm_90
 HIP       = no
 HIP_ARCH  = gfx908
-GCC_TOOLCHAIN = "/auto/software/gcc/x86_64/gcc-9.1.0/"
+#GCC_TOOLCHAIN = "/auto/software/gcc/x86_64/gcc-9.1.0/"
+GCC_TOOLCHAIN =
 
 #===============================================================================
 # Program name & source code list
@@ -30,6 +31,7 @@ obj = $(source:.cpp=.o)
 #===============================================================================
 
 # Standard Flags
+#CFLAGS := $(EXTRA_CFLAGS) -std=c++17 -Wall -I../ccs-cuda -fsycl -I/usr/include/c++/11/
 CFLAGS := $(EXTRA_CFLAGS) -std=c++17 -Wall -I../ccs-cuda -fsycl
 
 ifeq ($(VENDOR), AdaptiveCpp)
