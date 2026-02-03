@@ -229,7 +229,7 @@
 | openmp | build err | build err | 13.71 |
 | overlay | 5.33 | 9.20 | 10.50 |
 | p4 | 3.77 | build err | 16.94 |
-| page-rank | build err | 48.46 | 47.03 |
+| page-rank | 375.35 | 46.20 | 46.72 |
 | particle-diffusion | 11.94 | 13.04 | 12.23 |
 | particlefilter | 198.39 | build err | 219.65 |
 | particles | 3.46 | build err | over 600 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 276 | 172 | 268 |
+| completed | 277 | 172 | 268 |
 
-sycl と acc がともに完了した件数 154
+sycl と acc がともに完了した件数 155

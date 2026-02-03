@@ -1,4 +1,9 @@
-clang++: warning: offloading target 'nvptx64-nvidia-cuda' is similar to target 'nvptx64-nvidia-cuda' already specified; will be ignored [-Woffload-target]
-clang++: error: cannot determine nvptx64 architecture: nvptx-arch: posix_spawn failed: No such file or directory; consider passing it via '--offload-arch'; environment variable CLANG_TOOLCHAIN_PROGRAM_TIMEOUT specifies the tool timeout (integer secs, <=0 is infinite)
-make: *** [Makefile.NVD:73: main.o] Error 1
+main.cpp:121:7: warning: unused variable 'j' [-Wunused-variable]
+  121 |   int j;
+      |       ^
+1 warning generated.
+main.cpp:121:7: warning: unused variable 'j' [-Wunused-variable]
+  121 |   int j;
+      |       ^
+1 warning generated.
 timeout was set to  600
