@@ -34,9 +34,12 @@ else
   CFLAGS +=-acc
 endif
 
-all: kmeans
+#########
+program = kmeans
 
-kmeans: cluster.o getopt.o read_input.o rmse.o kmeans.c
+all: $(program)
+
+$(program): cluster.o getopt.o read_input.o rmse.o kmeans.c
 	$(CC) $(KERNEL_DIM) $(CFLAGS) $^ -o kmeans $(LDFLAGS)
 
 %.o: %.c
@@ -57,10 +60,10 @@ clean:
 
 include ../include/kmeans-NVIDIA
 
-run: kmeans
+run: $(program)
 	$(LAUNCHER) "$(COMMAND)"
 
-run_mem: kmeans
+run_mem: $(program)
 	nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 	$(LAUNCHER) "$(COMMAND)"
 	pkill nvidia-smi

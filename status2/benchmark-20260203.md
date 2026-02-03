@@ -14,9 +14,9 @@
 | aligned-types | 3.68 | 4.40 | 4.71 |
 | all-pairs-distance | 5.23 | 4.81 | 21.34 |
 | amgmk | 2.45 | 2.42 | 2.44 |
-| ans | 5.42 | exe err | exe error |
+| ans | 5.42 | exe err | exe err |
 | aobench | 0.36 | 2.42 | 2.47 |
-| aop | 7.02 | build err | exe error |
+| aop | 7.02 | build err | build err |
 | asmooth | 5.70 | 7.38 | 7.33 |
 | assert | exe err | build err | 2.58 |
 | asta | build err | build err | 10.71 |
@@ -25,7 +25,7 @@
 | atomicIntrinsics | over 600 | 3.18 | 3.21 |
 | atomicPerf | 14.74 | build err | 13.89 |
 | atomicReduction | 3.46 | build err | 2.67 |
-| attention | 2.46 | 82.02 | exe error |
+| attention | 2.46 | 82.02 | build err |
 | axhelm | build err | build err | build err |
 | babelstream | 0.56 | 2.72 | 2.85 |
 | background-subtract | 8.07 | 8.66 | 8.33 |
@@ -37,18 +37,18 @@
 | bitonic-sort | 10.68 | build err | 8.25 |
 | black-scholes | 5.00 | 39.24 | 4.88 |
 | blas-gemm | build err | | -- |
-| bn | 5.00 | build err | exe error |
+| bn | 5.00 | build err | exe err |
 | bonds | 7.66 | 11.50 | 11.19 |
 | boxfilter | 8.17 | build err | 9.58 |
 | bsearch | 35.25 | build err | 31.81 |
 | bspline-vgh | 7.74 | 4.73 | 4.81 |
 | b+tree | 2.33 | build err | 2.45 |
 | burger | 72.44 | 68.61 | 112.53 |
-| bwt | 199.29 | 188.93 | exe error |
+| bwt | 199.29 | 188.93 | exe err |
 | car | 7.18 | 6.64 | 6.65 |
 | cbsfil | 31.48 | 35.01 | 33.19 |
 | ccsd-trpdrv | 2.67 | 2.55 | 2.63 |
-| ccs | build err | build err | exe error |
+| ccs | build err | build err | build err |
 | cfd | 0.58 | 3.02 | 3.08 |
 | chacha20 | 4.80 | build err | 6.64 |
 | channelShuffle | build err | 19.66 | 19.34 |
@@ -57,9 +57,9 @@
 | che | 3.05 | 3.27 | 3.38 |
 | chi2 | 217.04 | 220.78 | 251.54 |
 | clenergy | 2.66 | 3.13 | 3.16 |
-| clink | build err | 6.21 | exe error |
-| cmp | exe error | build err | exe error |
-| cm | exe error | build err | exe error |
+| clink | build err | 6.21 | exe err |
+| cmp | exe err | build err | exe err |
+| cm | exe err | build err | exe err |
 | cobahh | 406.65 | 383.64 | 388.03 |
 | colorwheel | 37.38 | 27.55 | 27.96 |
 | columnarSolver | 10.14 | build err | 9.89 |
@@ -72,19 +72,19 @@
 | convolution3D | 2.48 | 3.17 | 2.51 |
 | convolutionSeparable | 13.58 | build err | 22.05 |
 | cooling | over 600 | over 600 | over 600 |
-| crc64 | exe error | 0.23 | 2.52 |
+| crc64 | exe err | 0.23 | 2.52 |
 | cross | 14.58 | 7.67 | 8.04 |
 | crs | 24.78 | build err | over 600 |
 | d2q9-bgk | 2.85 | build err | 4.37 |
 | damage | 24.32 | build err | 243.23 |
-| dct8x8 | 130.74 | build err | exe error |
+| dct8x8 | 130.74 | build err | build err |
 | ddbp | 17.41 | build err | 17.27 |
 | debayer | 6.74 | build err | 6.75 |
 | degrid | 14.97 | 23.24 | 17.04 |
 | dense-embedding | 166.23 | build err | 164.57 |
 | depixel | over 600 | build err | over 600 |
 | deredundancy | 17.83 | build err | 15.72 |
-| diamond | exe error | build err | 37.30 |
+| diamond | build err | build err | 37.30 |
 | distort | 2.45 | 2.45 | 2.50 |
 | divergence | 5.17 | 3.18 | |
 | doh | 14.97 | 2.39 | 2.41 |
@@ -99,19 +99,19 @@
 | expdist | 7.45 | build err | 12.43 |
 | extend2 | 5.26 | build err | 5.09 |
 | extrema | 6.75 | 6.99 | 7.10 |
-| face | 2.64 | 2.45 | exe error |
+| face | 2.64 | 2.45 | exe err |
 | fdtd3d | 31.50 | build err | 43.29 |
 | feynman-kac | 41.84 | 48.24 | 22.16 |
 | fft | 3.19 | build err | 3.19 |
-| fhd | 183.93 | over 600 | exe error |
+| fhd | 183.93 | over 600 | exe err |
 | filter | build err | build err | 154.77 |
 | flip | build err | 15.07 | 16.72 |
 | floydwarshall | 73.45 | 72.59 | 83.41 |
 | fluidSim | 17.67 | 17.30 | 17.36 |
-| fpc | 66.38 | build err | exe error |
+| fpc | 66.38 | build err | exe err |
 | fpdc | build err | build err | over 600 |
 | fresnel | 6.00 | 6.61 | 6.61 |
-| frna | exe error | build err | exe error |
+| frna | build err | build err | build err |
 | fwt | 1.08 | build err | 3.38 |
 | gabor | 21.57 | 21.27 | 57.42 |
 | gamma-correction | 63.44 | 105.30 | 104.46 |
@@ -130,7 +130,7 @@
 | haccmk | 4.33 | 2.57 | 4.42 |
 | hausdorff | 32.45 | build err | 31.66 |
 | haversine | 2.18 | 2.49 | 2.43 |
-| heartwall | exe error | build err | exe error |
+| heartwall | exe err | build err | build err |
 | heat2d | build err | 25.56 | 6.20 |
 | heat | 22.03 | build err | 16.23 |
 | hellinger | 4.80 | 6.88 | 4.52 |
@@ -138,7 +138,7 @@
 | hexciton | 6.03 | build err | 4.96 |
 | histogram | 2.98 | build err | 3.30 |
 | hmm | 8.56 | 14.71 | 2.81 |
-| hogbom | exe error | build err | exe error |
+| hogbom | build err | build err | build err |
 | hotspot3D | 16.21 | 18.11 | 18.00 |
 | hwt1d | 3.48 | build err | 3.58 |
 | hybridsort | 15.27 | build err | 12.96 |
@@ -148,14 +148,14 @@
 | interval | 7.15 | 13.47 | 10.78 |
 | inversek2j | build err | over 600 | 14.94 |
 | ising | build err | 52.44 | 53.39 |
-| iso2dfd | exe error | 14.32 | 14.60 |
+| iso2dfd | exe err | 14.32 | 14.60 |
 | jacobi | 2.77 | 3.56 | 3.50 |
 | jenkins-hash | 4.98 | 5.14 | 5.17 |
-| kalman | over 600 | build err | exe error |
+| kalman | over 600 | build err | exe err |
 | keccaktreehash | 8.26 | 11.46 | 10.08 |
 | keogh | 7.03 | 5.80 | 5.89 |
 | kernelLaunch | 14.57 | build err | 73.69 |
-| kmeans | exe error | 25.51 | 22.62 |
+| kmeans | 28.93 | 27.05 | 22.68 |
 | knn | 4.44 | build err | 4.55 |
 | lanczos | 2.61 | build err | 2.81 |
 | langevin | build err | 6.18 | 35.79 |
@@ -173,15 +173,15 @@
 | lid-driven-cavity | 10.91 | build err | 22.40 |
 | lif | 116.49 | 125.87 | 124.42 |
 | linearprobing | 102.65 | build err | build err |
-| log2 | exe error | 0.68 | exe err |
+| log2 | exe err | 0.68 | exe err |
 | lombscargle | 2.99 | 3.06 | 3.05 |
 | loopback | 5.38 | build err | 8.20 |
 | lrn | 105.73 | 111.48 | 78.63 |
-| lr | 6.36 | build err | exe error |
-| lsqt | exe error | | |
+| lr | 6.36 | build err | build err |
+| lsqt | build err | | |
 | lud | 6.29 | build err | 46.11 |
 | lulesh | 11.28 | 11.70 | 8.41 |
-| mallocFree | 3.69 | 2.68 | build err |
+| mallocFree | 3.69 | 2.68 | 2.67 |
 | mandelbrot | 5.29 | 3.75 | 3.82 |
 | mask | build err | 27.53 | 27.72 |
 | match | 42.51 | build err | 41.46 |
@@ -195,7 +195,7 @@
 | mdh | build err | 35.33 | 2.67 |
 | md | 14.68 | 14.24 | 14.22 |
 | meanshift | 4.43 | build err | 4.21 |
-| medianfilter | exe error | build err | exe error |
+| medianfilter | build err | build err | build err |
 | memcpy | 3.54 | 6.52 | 6.54 |
 | memtest | 18.85 | 19.78 | 19.45 |
 | merge | over 600 | build err | over 600 |
@@ -216,7 +216,7 @@
 | mt | 4.65 | 4.29 | 4.08 |
 | multimaterial | 14.67 | 12.11 | 21.91 |
 | murmurhash3 | 2.80 | 2.67 | 2.69 |
-| myocyte | 3.03 | build err | exe error |
+| myocyte | 3.03 | build err | exe err |
 | nbody | over 600 | over 600 | over 600 |
 | ne | 5.37 | 4.90 | 4.94 |
 | nlll | 3.08 | build err | 3.06 |
@@ -233,22 +233,22 @@
 | particle-diffusion | 11.94 | 13.04 | 12.23 |
 | particlefilter | 198.39 | build err | 219.65 |
 | particles | 3.46 | build err | over 600 |
-| pathfinder | 64.27 | build err | exe error |
+| pathfinder | 64.27 | build err | exe err |
 | permutate | 24.87 | build err | 25.87 |
 | permute | 61.55 | 85.77 | 85.40 |
 | perplexity | 192.24 | 97.16 | 96.53 |
 | phmm | 3.53 | build err | 7.57 |
 | pnpoly | 21.12 | build err | 74.17 |
-| pns | 5.44 | build err | exe error |
+| pns | 5.44 | build err | exe err |
 | pointwise | 21.28 | 53.08 | 75.86 |
 | pool | 51.58 | 41.75 | 41.00 |
 | popcount | 178.30 | 279.36 | 134.99 |
 | present | 2.67 | 3.04 | 3.05 |
-| prna | build err | build err | exe error |
+| prna | build err | build err | exe err |
 | projectile | 0.91 | 2.66 | 2.55 |
 | pso | 2.83 | build err | 2.69 |
 | qrg | 6.30 | 8.57 | 10.24 |
-| qtclustering | 34.48 | build err | exe error |
+| qtclustering | 34.48 | build err | exe err |
 | quantBnB | 121.16 | 125.38 | 125.68 |
 | quicksort | 36.99 | build err | 33.98 |
 | radixsort | 2.90 | build err | 8.11 |
@@ -262,7 +262,7 @@
 | rng-wallace | 2.56 | build err | 3.55 |
 | rodrigues | 101.46 | 114.74 | 101.38 |
 | romberg | 2.72 | build err | 2.81 |
-| rsbench | 3.39 | build err | exe error |
+| rsbench | 3.39 | build err | build err |
 | rsc | 0.50 | build err | 2.73 |
 | rtm8 | 17.67 | 15.76 | 4.22 |
 | rushlarsen | over 600 | over 600 | over 600 |
@@ -284,26 +284,26 @@
 | sobel | 2.89 | 3.18 | 3.32 |
 | sobol | 3.89 | build err | 4.51 |
 | softmax-online | 13.69 | build err | 15.10 |
-| softmax | 39.75 | exe error | 43.09 |
+| softmax | 39.75 | build err | 43.09 |
 | sort | build err | build err | 36.92 |
 | sosfil | 4.75 | build err | 13.32 |
 | sph | 5.41 | 22.53 | 5.40 |
 | split | 35.78 | build err | 37.73 |
 | spm | 104.39 | 98.00 | 98.41 |
 | sptrsv | 2.70 | build err | 2.81 |
-| srad | 37.49 | build err | exe error |
+| srad | 37.49 | build err | exe err |
 | ss | 4.99 | build err | 18.06 |
 | stddev | 46.55 | build err | 51.00 |
-| stencil1d | 4.68 | 30.81 | build err |
+| stencil1d | 4.68 | 30.81 | 35.77 |
 | stencil3d | 4.35 | build err | 4.24 |
-| streamcluster | exe error | build err | over 600 |
-| su3 | exe error | 11.03 | 12.48 |
+| streamcluster | exe err | build err | over 600 |
+| su3 | exe err | 11.03 | 12.48 |
 | surfel | build err | 118.40 | 118.86 |
 | svd3x3 | 1.96 | 2.87 | build err |
-| sw4ck | exe error | 28.84 | 28.05 |
+| sw4ck | exe err | 28.84 | 28.05 |
 | swish | 24.54 | 5.48 | 5.39 |
 | tensorT | 2.56 | build err | 2.87 |
-| testSNAP | exe error | exe error | exe error |
+| testSNAP | build err | build err | build err |
 | thomas | 131.17 | 59.68 | 49.73 |
 | threadfence | 26.09 | build err | 35.11 |
 | tissue | 12.06 | 11.74 | 18.48 |
@@ -315,19 +315,19 @@
 | tsp | 7.82 | build err | build err |
 | urng | 2.43 | 2.21 | 2.20 |
 | vanGenuchten | 21.48 | 30.99 | 30.92 |
-| vmc | 4.38 | build err | exe error |
+| vmc | 4.38 | build err | build err |
 | vol2col | 5.26 | 7.87 | 8.13 |
-| wedford | build err | build err | exe error |
+| wedford | build err | build err | exe err |
 | winograd | 0.65 | 3.25 | 3.20 |
 | wlcpow | 4.50 | build err | 12.37 |
 | wordcount | build err | 8.00 | 8.08 |
 | wsm5 | 4.78 | 5.59 | 5.73 |
 | wyllie | 112.64 | 108.06 | over 600 |
-| xlqc | exe error | build err | exe error |
+| xlqc | build err | build err | build err |
 | xsbench | 37.40 | 37.18 | 3.89 |
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 266 | 171 | 262 |
+| completed | 267 | 171 | 264 |
 
-sycl と acc がともに完了した件数 148
+sycl と acc がともに完了した件数 149
