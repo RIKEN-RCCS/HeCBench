@@ -156,7 +156,7 @@
 | keogh | 7.03 | 5.80 | 5.89 |
 | kernelLaunch | 14.57 | build err | 73.69 |
 | kmeans | 28.93 | 27.05 | 22.68 |
-| knn | 4.44 | build err | 4.55 |
+| knn | 4.48 | 4.28 | 4.53 |
 | lanczos | 2.61 | build err | 2.81 |
 | langevin | build err | 6.18 | 35.79 |
 | langford | 2.54 | build err | build err |
@@ -292,7 +292,7 @@
 | spm | 104.39 | 98.00 | 98.41 |
 | sptrsv | 2.70 | build err | 2.81 |
 | srad | 37.49 | build err | exe err |
-| ss | 4.99 | build err | 18.06 |
+| ss | 7.23 | 9.95 | 18.10 |
 | stddev | 46.55 | build err | 51.00 |
 | stencil1d | 4.68 | 30.81 | 35.77 |
 | stencil3d | 4.35 | build err | 4.24 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 291 | 175 | 271 |
+| completed | 291 | 177 | 271 |
 
-sycl と acc がともに完了した件数 167
+sycl と acc がともに完了した件数 169

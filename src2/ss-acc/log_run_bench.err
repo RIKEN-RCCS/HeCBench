@@ -1,99 +1,171 @@
-"main.cpp", line 200: error: invalid text in pragma
-  #pragma acc data to: pattern[0:subStrLength], \
-                   ^
-
-"main.cpp", line 200: error: extra text after expected end of preprocessing directive
-  #pragma acc data to: pattern[0:subStrLength], \
-                     ^
-
-"main.cpp", line 230: error: invalid text in pragma
-        #pragma acc parallel teams num_teams(workGroupCount) thread_limit(LOCAL_SIZE) 
-                             ^
-
-"main.cpp", line 230: error: extra text after expected end of preprocessing directive
-        #pragma acc parallel teams num_teams(workGroupCount) thread_limit(LOCAL_SIZE) 
-                                   ^
-
-"main.cpp", line 236: error: identifier "omp_get_thread_num" is undefined
-            int localIdx = omp_get_thread_num();
-                           ^
-
-"main.cpp", line 237: error: identifier "omp_get_vector" is undefined
-            int localSize = omp_get_vector();
-                            ^
-
-"main.cpp", line 238: error: identifier "omp_get_team_num" is undefined
-            int groupIdx = omp_get_team_num(); 
-                           ^
-
-"main.cpp", line 281: error: invalid text in pragma
-      #pragma acc update from (resultCount[0:workGroupCount])
-                         ^
-
-"main.cpp", line 281: error: OpenACC data clause expected
-      #pragma acc update from (resultCount[0:workGroupCount])
-                         ^
-
-"main.cpp", line 281: error: extra text after expected end of preprocessing directive
-      #pragma acc update from (resultCount[0:workGroupCount])
-                              ^
-
-"main.cpp", line 282: error: invalid text in pragma
-      #pragma acc update from (result[0:textLength - subStrLength + 1])
-                         ^
-
-"main.cpp", line 282: error: OpenACC data clause expected
-      #pragma acc update from (result[0:textLength - subStrLength + 1])
-                         ^
-
-"main.cpp", line 282: error: extra text after expected end of preprocessing directive
-      #pragma acc update from (result[0:textLength - subStrLength + 1])
-                              ^
-
-"main.cpp", line 306: error: invalid text in pragma
-        #pragma acc parallel teams num_teams(workGroupCount) thread_limit(LOCAL_SIZE) 
-                             ^
-
-"main.cpp", line 306: error: extra text after expected end of preprocessing directive
-        #pragma acc parallel teams num_teams(workGroupCount) thread_limit(LOCAL_SIZE) 
-                                   ^
-
-"main.cpp", line 320: error: identifier "omp_get_thread_num" is undefined
-            int localIdx = omp_get_thread_num();
-                           ^
-
-"main.cpp", line 321: error: identifier "omp_get_vector" is undefined
-            int localSize = omp_get_vector();
-                            ^
-
-"main.cpp", line 322: error: identifier "omp_get_team_num" is undefined
-            int groupIdx = omp_get_team_num(); 
-                           ^
-
-"main.cpp", line 453: error: invalid text in pragma
-      #pragma acc update from (resultCount[0:workGroupCount])
-                         ^
-
-"main.cpp", line 453: error: OpenACC data clause expected
-      #pragma acc update from (resultCount[0:workGroupCount])
-                         ^
-
-"main.cpp", line 453: error: extra text after expected end of preprocessing directive
-      #pragma acc update from (resultCount[0:workGroupCount])
-                              ^
-
-"main.cpp", line 454: error: invalid text in pragma
-      #pragma acc update from (result[0:textLength - subStrLength + 1])
-                         ^
-
-"main.cpp", line 454: error: OpenACC data clause expected
-      #pragma acc update from (result[0:textLength - subStrLength + 1])
-                         ^
-
-"main.cpp", line 454: error: extra text after expected end of preprocessing directive
-      #pragma acc update from (result[0:textLength - subStrLength + 1])
-                              ^
-
-24 errors detected in the compilation of "main.cpp".
-make: *** [Makefile.NVD:57: main.o] Error 2
+verify(unsigned int*, unsigned int, unsigned int*, unsigned int, std::vector<unsigned int, std::allocator<unsigned int>>&):
+     33, Loop not vectorized/parallelized: contains call
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+compare(unsigned char const*, unsigned char const*, unsigned int):
+     71, Generating acc routine seq
+         Generating NVIDIA GPU code
+     72, Loop not vectorized/parallelized: potential early exits
+main:
+         536, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    155, Recognized memory set idiom
+    161, Loop not vectorized/parallelized: contains call
+    172, Loop not vectorized/parallelized: potential early exits
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    187, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+    209, Generating copyin(text[:textLength]) [if not already present]
+         Generating copy(result[:textLength-subStrLength+1]) [if not already present]
+         Generating copyin(pattern[:subStrLength]) [if not already present]
+         Generating copy(resultCount[:workGroupCount]) [if not already present]
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    232, Generating present(resultCount[:])
+    233, Generating implicit firstprivate(workGroupCount)
+         Generating NVIDIA GPU code
+        236, #pragma acc loop gang, vector(128) /* blockIdx.x threadIdx.x */
+    236, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    238, Generating present(text[:],result[:],resultCount[:],pattern[:])
+         Generating implicit firstprivate(workGroupCount)
+         Generating NVIDIA GPU code
+        243, #pragma acc loop gang /* blockIdx.x */
+        258, #pragma acc loop vector(128) /* threadIdx.x */
+    243, Generating implicit firstprivate(textLength,stringPos,maxSearchLength,patternLength)
+    258, Loop is parallelizable
+         Loop not vectorized/parallelized: contains call
+    281, Generating update self(result[:textLength-subStrLength+1],resultCount[:workGroupCount])
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    299, Generating present(resultCount[:])
+    300, Generating implicit firstprivate(workGroupCount)
+         Generating NVIDIA GPU code
+        303, #pragma acc loop gang, vector(128) /* blockIdx.x threadIdx.x */
+    303, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    305, Generating present(text[:],result[:],resultCount[:],pattern[:])
+         Generating implicit firstprivate(workGroupCount)
+         Generating NVIDIA GPU code
+        311, #pragma acc loop gang /* blockIdx.x */
+        329, #pragma acc loop vector(128) /* threadIdx.x */
+    311, Generating implicit firstprivate(textLength,stringPos,maxSearchLength,patternLength)
+    329, Loop is parallelizable
+         Loop not vectorized/parallelized: contains call
+    387, Generating update self(result[:textLength-subStrLength+1],resultCount[:workGroupCount])
+std::char_traits<char>::length(char const*):
+         171, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string<std::allocator<char>>(char const*, std::allocator<char> const&):
+         397, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string<std::allocator<char>>(char const*, std::allocator<char> const&):
+         536, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     24, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+__gnu_cxx::char_traits<char>::length(char const*):
+     17, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                        171, Loop not vectorized/parallelized: not countable
+     24, include "chrono"
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<char, std::char_traits<char>, std::allocator<char>>(std::basic_ostream<char, std::char_traits<char>>&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     17, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+     24, include "chrono"
+std::basic_ostream<char, std::char_traits<char>>& std::endl<char, std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&):
+     17, include "iostream"
+          39, include "ostream"
+     24, include "chrono"
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&, char const*):
+         397, Loop not vectorized/parallelized: not countable
+void std::__sort<unsigned int*, __gnu_cxx::__ops::_Iter_less_iter>(unsigned int*, unsigned int*, __gnu_cxx::__ops::_Iter_less_iter):
+        1937, Loop not vectorized/parallelized: not countable
+void std::__introsort_loop<unsigned int*, long, __gnu_cxx::__ops::_Iter_less_iter>(unsigned int*, unsigned int*, long, __gnu_cxx::__ops::_Iter_less_iter):
+        1906, Loop not vectorized/parallelized: not countable
+void std::__partial_sort<unsigned int*, __gnu_cxx::__ops::_Iter_less_iter>(unsigned int*, unsigned int*, unsigned int*, __gnu_cxx::__ops::_Iter_less_iter):
+        1646, Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: potential early exits
+        1649, Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: potential early exits
+         424, Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: potential early exits
+void std::__heap_select<unsigned int*, __gnu_cxx::__ops::_Iter_less_iter>(unsigned int*, unsigned int*, unsigned int*, __gnu_cxx::__ops::_Iter_less_iter):
+         355, Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: potential early exits
+         263, Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: potential early exits
+void std::__make_heap<unsigned int*, __gnu_cxx::__ops::_Iter_less_iter>(unsigned int*, unsigned int*, __gnu_cxx::__ops::_Iter_less_iter&):
+         228, Loop not vectorized/parallelized: not countable
+         246, Loop not vectorized/parallelized: potential early exits
+void std::__adjust_heap<unsigned int*, long, unsigned int, __gnu_cxx::__ops::_Iter_less_iter>(unsigned int*, long, long, unsigned int, __gnu_cxx::__ops::_Iter_less_iter):
+     18, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                    61, include "stl_heap.h"
+                        228, Loop not vectorized/parallelized: not countable
+         139, Loop not vectorized/parallelized: potential early exits
+void std::__push_heap<unsigned int*, long, unsigned int, __gnu_cxx::__ops::_Iter_less_val>(unsigned int*, long, long, unsigned int, __gnu_cxx::__ops::_Iter_less_val&):
+     18, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                    61, include "stl_heap.h"
+                        139, Loop not vectorized/parallelized: potential early exits
+void std::__pop_heap<unsigned int*, __gnu_cxx::__ops::_Iter_less_iter>(unsigned int*, unsigned int*, unsigned int*, __gnu_cxx::__ops::_Iter_less_iter&):
+         228, Loop not vectorized/parallelized: not countable
+         246, Loop not vectorized/parallelized: potential early exits
+void std::__sort_heap<unsigned int*, __gnu_cxx::__ops::_Iter_less_iter>(unsigned int*, unsigned int*, __gnu_cxx::__ops::_Iter_less_iter&):
+         263, Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: potential early exits
+unsigned int* std::__unguarded_partition_pivot<unsigned int*, __gnu_cxx::__ops::_Iter_less_iter>(unsigned int*, unsigned int*, __gnu_cxx::__ops::_Iter_less_iter):
+        1884, Loop not vectorized/parallelized: not countable
+        1887, Loop not vectorized/parallelized: not countable
+unsigned int* std::__unguarded_partition<unsigned int*, __gnu_cxx::__ops::_Iter_less_iter>(unsigned int*, unsigned int*, unsigned int*, __gnu_cxx::__ops::_Iter_less_iter):
+     18, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                  1884, Loop not vectorized/parallelized: not countable
+                  1887, Loop not vectorized/parallelized: not countable
+void std::__final_insertion_sort<unsigned int*, __gnu_cxx::__ops::_Iter_less_iter>(unsigned int*, unsigned int*, __gnu_cxx::__ops::_Iter_less_iter):
+        1834, Loop not vectorized/parallelized: not countable
+        1847, Loop not vectorized/parallelized: not countable
+        1834, Loop not vectorized/parallelized: not countable
+void std::__insertion_sort<unsigned int*, __gnu_cxx::__ops::_Iter_less_iter>(unsigned int*, unsigned int*, __gnu_cxx::__ops::_Iter_less_iter):
+        1806, Loop not vectorized/parallelized: not countable
+unsigned int* std::__copy_move_backward_a<true, unsigned int*, unsigned int*>(unsigned int*, unsigned int*, unsigned int*):
+     17, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+     24, include "chrono"
+void std::__unguarded_linear_insert<unsigned int*, __gnu_cxx::__ops::_Val_less_iter>(unsigned int*, __gnu_cxx::__ops::_Val_less_iter):
+     18, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                  1806, Loop not vectorized/parallelized: not countable
+void std::__unguarded_insertion_sort<unsigned int*, __gnu_cxx::__ops::_Iter_less_iter>(unsigned int*, unsigned int*, __gnu_cxx::__ops::_Iter_less_iter):
+        1806, Loop not vectorized/parallelized: not countable
+bool std::__equal_aux<unsigned int*, __gnu_cxx::__normal_iterator<unsigned int*, std::vector<unsigned int, std::allocator<unsigned int>>>>(unsigned int*, unsigned int*, __gnu_cxx::__normal_iterator<unsigned int*, std::vector<unsigned int, std::allocator<unsigned int>>>):
+     17, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+     24, include "chrono"
 timeout was set to  600

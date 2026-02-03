@@ -23,12 +23,11 @@
 #include <cstdio>
 #include <chrono>
 #include <climits>
-#include <openacc.h>
 #include "StringSearch.h"
 
-int verify(uint* resultCount, uint workGroupCount, 
-    uint* result, uint searchLenPerWG, 
-    std::vector<uint> &cpuResults) 
+int verify(uint* resultCount, uint workGroupCount,
+    uint* result, uint searchLenPerWG,
+    std::vector<uint> &cpuResults)
 {
   uint count = resultCount[0];
   for(uint i=1; i<workGroupCount; ++i)
@@ -43,7 +42,7 @@ int verify(uint* resultCount, uint workGroupCount,
   }
   std::sort(result, result+count);
 
-  std::cout << "Device: found " << count << " times\n"; 
+  std::cout << "Device: found " << count << " times\n";
 
   // compare the results and see if they match
   bool pass = (count == cpuResults.size());
@@ -67,6 +66,7 @@ int verify(uint* resultCount, uint workGroupCount,
 * @param length     Length to compare
 * @return 0-failure, 1-success
 */
+#pragma acc routine seq
 int compare(const uchar* text, const uchar* pattern, uint length)
 {
     for(uint l=0; l<length; ++l)
@@ -180,10 +180,13 @@ int main(int argc, char* argv[])
     curPos += (scan == curPos) ? 1 : badCharSkip[text[last+curPos]];
   }
 
-  std::cout << "CPU: found " << cpuResults.size() << " times\n"; 
+  std::cout << "CPU: found " << cpuResults.size() << " times\n";
 
   // Move subStr data host to device
-  const uchar* pattern = (const uchar*) subStr.c_str();
+  uchar* pattern = (uchar*)malloc(subStrLength);
+  for (uint i = 0; i < subStrLength; i++) {
+    pattern[i] = TOLOWER(subStr[i]);
+  }
 
   uint totalSearchPos = textLength - subStrLength + 1;
   uint searchLenPerWG = SEARCH_BYTES_PER_WORKITEM * LOCAL_SIZE;
@@ -192,29 +195,30 @@ int main(int argc, char* argv[])
   uint* resultCount = (uint*) malloc(workGroupCount * sizeof(uint));
   uint* result = (uint*) malloc((textLength - subStrLength + 1) * sizeof(uint));
 
+  // Initialize result arrays
+  memset(resultCount, 0, workGroupCount * sizeof(uint));
+  memset(result, 0, (textLength - subStrLength + 1) * sizeof(uint));
+
   const uint patternLength = subStrLength;
   const uint maxSearchLength = searchLenPerWG;
 
   double time = 0.0;
 
-#pragma acc data to: pattern[0:subStrLength], \
-                                text[0:textLength]) \
-                        map(alloc: resultCount[0:workGroupCount], \
-                                   result[0:textLength - subStrLength + 1])
-{
+  #pragma acc data copyin(pattern[0:subStrLength], text[0:textLength]) \
+                   copy(resultCount[0:workGroupCount], result[0:textLength - subStrLength + 1])
+  {
 
-/**
-* @brief Naive kernel version of string search.
-*        Find all pattern positions in the given text
-* @param text               Input Text
-* @param textLength         Length of the text
-* @param pattern            Pattern string
-* @param patternLength      Pattern length
-* @param result       Result of all matched positions
-* @param resultCount   Result counts per Work-Group
-* @param maxSearchLength    Maximum search positions for each work-group
-* @param localPattern       local buffer for the search pattern
-*/
+  /**
+  * @brief Naive kernel version of string search.
+  *        Find all pattern positions in the given text
+  * @param text               Input Text
+  * @param textLength         Length of the text
+  * @param pattern            Pattern string
+  * @param patternLength      Pattern length
+  * @param result             Result of all matched positions
+  * @param resultCount        Result counts per Work-Group
+  * @param maxSearchLength    Maximum search positions for each work-group
+  */
   if(subStrLength == 1)
   {
     std::cout <<
@@ -225,51 +229,44 @@ int main(int argc, char* argv[])
 
     auto start = std::chrono::steady_clock::now();
 
-    for(int i = 0; i < iterations; i++)
+    for(int iter = 0; iter < iterations; iter++)
     {
-      #pragma acc parallel teams num_teams(workGroupCount) thread_limit(LOCAL_SIZE) 
+      // Reset result counts for each iteration
+      #pragma acc parallel loop present(resultCount)
+      for (uint i = 0; i < workGroupCount; i++) {
+        resultCount[i] = 0;
+      }
+
+      // Process each work group
+      #pragma acc parallel loop gang \
+                present(text, pattern, result, resultCount)
+      for (uint groupIdx = 0; groupIdx < workGroupCount; groupIdx++)
       {
-        uchar localPattern[1];
-        uint groupSuccessCounter;
-        #pragma omp parallel 
-	{
-          int localIdx = omp_get_thread_num();
-          int localSize = omp_get_vector();
-          int groupIdx = omp_get_team_num(); 
+        // Last search idx for all work items
+        uint lastSearchIdx = textLength - patternLength + 1;
 
-          // Last search idx for all work items
-          uint lastSearchIdx = textLength - patternLength + 1;
+        // global idx for all work items in a WorkGroup
+        uint beginSearchIdx = groupIdx * maxSearchLength;
+        uint endSearchIdx = beginSearchIdx + maxSearchLength;
 
-          // global idx for all work items in a WorkGroup
-          uint beginSearchIdx = groupIdx * maxSearchLength;
-          uint endSearchIdx = beginSearchIdx + maxSearchLength;
-          if(beginSearchIdx <= lastSearchIdx) 
-	  {
-            if(endSearchIdx > lastSearchIdx) endSearchIdx = lastSearchIdx;
+        if(beginSearchIdx <= lastSearchIdx)
+        {
+          if(endSearchIdx > lastSearchIdx) endSearchIdx = lastSearchIdx;
 
-            // Copy the pattern from global to local buffer
-            for(int idx = localIdx; idx < patternLength; idx+=localSize)
+          // loop over positions in global buffer
+          #pragma acc loop vector
+          for(uint stringPos = beginSearchIdx; stringPos < endSearchIdx; stringPos++)
+          {
+            if (compare(text + stringPos, pattern, patternLength) == 1)
             {
-              localPattern[idx] = TOLOWER(pattern[idx]);
-            }
-
-            if(localIdx == 0) groupSuccessCounter = 0;
-            #pragma omp barrier
-
-            // loop over positions in global buffer
-            for(uint stringPos=beginSearchIdx+localIdx; stringPos<endSearchIdx; stringPos+=localSize)
-            {
-              if (compare(text+stringPos, localPattern, patternLength) == 1)
+              int count;
+              #pragma acc atomic capture
               {
-                int count;
-                #pragma acc atomic capture 
-                count = groupSuccessCounter++;
-                result[beginSearchIdx+count] = stringPos;
+                count = resultCount[groupIdx];
+                resultCount[groupIdx] = resultCount[groupIdx] + 1;
               }
+              result[beginSearchIdx + count] = stringPos;
             }
-
-            #pragma omp barrier
-            if(localIdx == 0) resultCount[groupIdx] = groupSuccessCounter;
           }
         }
       }
@@ -277,189 +274,125 @@ int main(int argc, char* argv[])
     auto end = std::chrono::steady_clock::now();
     time += std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
 
-    // Read Results Count per workGroup
-    #pragma acc update from (resultCount[0:workGroupCount])
-    #pragma acc update from (result[0:textLength - subStrLength + 1])
+    // Results are already available via copy clause
+    #pragma acc update host(resultCount[0:workGroupCount])
+    #pragma acc update host(result[0:textLength - subStrLength + 1])
 
-    verify(resultCount, workGroupCount, result, searchLenPerWG, cpuResults); 
+    verify(resultCount, workGroupCount, result, searchLenPerWG, cpuResults);
   }
 
   /*
- @param text               Input Text
- @param textLength         Length of the text
- @param pattern            Pattern string
- @param patternLength      Pattern length
- @param result       Result of all matched positions
- @param resultCount   Result counts per Work-Group
- @param maxSearchLength    Maximum search positions for each work-group
- @param localPattern       local buffer for the search pattern
- @param stack1             local stack for store initial 2-byte match 
- @param stack2             local stack for store initial 10-byte match positions
- */
+   @param text               Input Text
+   @param textLength         Length of the text
+   @param pattern            Pattern string
+   @param patternLength      Pattern length
+   @param result             Result of all matched positions
+   @param resultCount        Result counts per Work-Group
+   @param maxSearchLength    Maximum search positions for each work-group
+   */
   if(subStrLength > 1) {
     std::cout << "\nExecuting String search with load balance for " <<
       iterations << " iterations" << std::endl;
 
     auto start = std::chrono::steady_clock::now();
 
-    for(int i = 0; i < iterations; i++) {
-      #pragma acc parallel teams num_teams(workGroupCount) thread_limit(LOCAL_SIZE) 
-      {  //uchar localPattern[subStrLength];
-        #ifdef ENABLE_2ND_LEVEL_FILTER
-        uchar localPattern[32];
-        #else
-        uchar localPattern[16];
-        #endif
-        uint stack1[LOCAL_SIZE*2];
-        uint stack2[LOCAL_SIZE*2];
-        uint stack1Counter;
-        uint stack2Counter;
-        uint groupSuccessCounter;
-        #pragma omp parallel 
-	{
-          int localIdx = omp_get_thread_num();
-          int localSize = omp_get_vector();
-          int groupIdx = omp_get_team_num(); 
-            
-            // Initialize the local variaables
-            if(localIdx == 0)
+    for(int iter = 0; iter < iterations; iter++)
+    {
+      // Reset result counts for each iteration
+      #pragma acc parallel loop present(resultCount)
+      for (uint i = 0; i < workGroupCount; i++) {
+        resultCount[i] = 0;
+      }
+
+      // Simplified approach: each gang processes one work group
+      // Each vector element checks one position
+      #pragma acc parallel loop gang \
+                present(text, pattern, result, resultCount)
+      for (uint groupIdx = 0; groupIdx < workGroupCount; groupIdx++)
+      {
+        // Last search idx for all work items
+        uint lastSearchIdx = textLength - patternLength + 1;
+
+        // global idx for all work items in a WorkGroup
+        uint beginSearchIdx = groupIdx * maxSearchLength;
+        uint endSearchIdx = beginSearchIdx + maxSearchLength;
+
+        if(beginSearchIdx <= lastSearchIdx)
+        {
+          if(endSearchIdx > lastSearchIdx) endSearchIdx = lastSearchIdx;
+
+          uchar first = pattern[0];
+          uchar second = pattern[1];
+
+          // Level 1: Quick filter on 2-char match
+          #pragma acc loop vector
+          for(uint stringPos = beginSearchIdx; stringPos < endSearchIdx; stringPos++)
+          {
+            // Check first two characters
+            if ((first == TOLOWER(text[stringPos])) &&
+                (second == TOLOWER(text[stringPos + 1])))
             {
-                groupSuccessCounter = 0;
-                stack1Counter = 0;
-                stack2Counter = 0;
-            }
-            
-            // Last search idx for all work items
-            uint lastSearchIdx = textLength - patternLength + 1;
-            uint stackSize = 0;
-        
-            // global idx for all work items in a WorkGroup
-            uint beginSearchIdx = groupIdx * maxSearchLength;
-            uint endSearchIdx = beginSearchIdx + maxSearchLength;
-            if(beginSearchIdx <= lastSearchIdx) {
-              if(endSearchIdx > lastSearchIdx) endSearchIdx = lastSearchIdx;
-              uint searchLength = endSearchIdx - beginSearchIdx;
-        
-              // Copy the pattern from global to local buffer
-              for(uint idx = localIdx; idx < patternLength; idx+=localSize)
+              #ifdef ENABLE_2ND_LEVEL_FILTER
+              // Level 2: Check next 8 characters (positions 2-9)
+              bool status = true;
+              status = status && (pattern[2] == TOLOWER(text[stringPos + 2]));
+              status = status && (pattern[3] == TOLOWER(text[stringPos + 3]));
+              status = status && (pattern[4] == TOLOWER(text[stringPos + 4]));
+              status = status && (pattern[5] == TOLOWER(text[stringPos + 5]));
+              status = status && (pattern[6] == TOLOWER(text[stringPos + 6]));
+              status = status && (pattern[7] == TOLOWER(text[stringPos + 7]));
+              status = status && (pattern[8] == TOLOWER(text[stringPos + 8]));
+              status = status && (pattern[9] == TOLOWER(text[stringPos + 9]));
+
+              if (status)
               {
-                localPattern[idx] = TOLOWER(pattern[idx]);
-              }
-        
-              #pragma omp barrier
-        
-              uchar first = localPattern[0];
-              uchar second = localPattern[1];
-              int stringPos = localIdx;
-              int stackPos = 0;
-              int revStackPos = 0;
-        
-              while (true)    // loop over positions in global buffer
-              {
-        
-                // Level-1 : Quick filter on 2 char match and store the good positions on stack1.
-                if(stringPos < searchLength)
+                // Level 3: Check remaining characters
+                if (compare(text + stringPos + 10, pattern + 10, patternLength - 10) == 1)
                 {
-                  // Queue the initial match positions. Make sure queue has sufficient positions for each work-item.
-                  if ((first == TOLOWER(text[beginSearchIdx+stringPos])) && (second == TOLOWER(text[beginSearchIdx+stringPos+1])))
+                  int count;
+                  #pragma acc atomic capture
                   {
-                    #pragma acc atomic capture 
-                    stackPos = stack1Counter++;
-                    stack1[stackPos] = stringPos;
+                    count = resultCount[groupIdx];
+                    resultCount[groupIdx] = resultCount[groupIdx] + 1;
                   }
+                  result[beginSearchIdx + count] = stringPos;
                 }
-        
-                stringPos += localSize;     // next search idx
-        
-                #pragma omp barrier
-                stackSize = stack1Counter;
-                #pragma omp barrier
-                
-                // continue until stack1 has sufficient good positions for proceed to next Level
-                if((stackSize < localSize) && ((((stringPos)/localSize)*localSize) < searchLength)) continue;
-        
-               #ifdef ENABLE_2ND_LEVEL_FILTER
-               // Level-2 : (Processing the stack1 and filling the stack2) For large patterns roll over
-               // another 8-bytes from the positions in stack1 and store the match positions in stack2.
-                if(localIdx < stackSize)
-                {
-                    #pragma acc atomic capture 
-                    revStackPos = stack1Counter--;
-                    int pos = stack1[--revStackPos];
-                    bool status = (localPattern[2] == TOLOWER(text[beginSearchIdx+pos+2]));
-                    status = status && (localPattern[3] == TOLOWER(text[beginSearchIdx+pos+3]));
-                    status = status && (localPattern[4] == TOLOWER(text[beginSearchIdx+pos+4]));
-                    status = status && (localPattern[5] == TOLOWER(text[beginSearchIdx+pos+5]));
-                    status = status && (localPattern[6] == TOLOWER(text[beginSearchIdx+pos+6]));
-                    status = status && (localPattern[7] == TOLOWER(text[beginSearchIdx+pos+7]));
-                    status = status && (localPattern[8] == TOLOWER(text[beginSearchIdx+pos+8]));
-                    status = status && (localPattern[9] == TOLOWER(text[beginSearchIdx+pos+9]));
-        
-                    if (status)
-                    {
-                        #pragma acc atomic capture 
-                        stackPos = stack2Counter++;
-                        stack2[stackPos] = pos;
-                    }
-                }
-        
-                #pragma omp barrier
-                stackSize = stack2Counter;
-                #pragma omp barrier
-        
-                // continue until stack2 has sufficient good positions proceed to next level
-                if((stackSize < localSize) && ((((stringPos)/localSize)*localSize) < searchLength)) continue;
-                #endif
-        
-        
-              // Level-3 : (Processing stack1/stack2) Check the remaining positions.
-                if(localIdx < stackSize)
-                {
-                    #ifdef ENABLE_2ND_LEVEL_FILTER
-                    #pragma acc atomic capture 
-                    revStackPos = stack2Counter--;
-                    int pos = stack2[--revStackPos];
-                    if (compare(text+beginSearchIdx+pos+10, localPattern+10, patternLength-10) == 1)
-                    #else
-                    #pragma acc atomic capture 
-                    revStackPos = stack1Counter--;
-                    int pos = stack1[--revStackPos];
-                    if (compare(text+beginSearchIdx+pos+2, localPattern+2, patternLength-2) == 1)
-                    #endif
-                    {
-                        // Full match found
-			int count;
-                        #pragma acc atomic capture 
-                        count = groupSuccessCounter++;
-                        result[beginSearchIdx+count] = beginSearchIdx+pos;
-                    }
-                }
-        
-                #pragma omp barrier
-                if((((stringPos/localSize)*localSize) >= searchLength) && 
-                   (stack1Counter <= 0) && (stack2Counter <= 0)) break;
               }
-        
-              if(localIdx == 0) resultCount[groupIdx] = groupSuccessCounter;
+              #else
+              // Level 2: Check remaining characters (from position 2)
+              if (compare(text + stringPos + 2, pattern + 2, patternLength - 2) == 1)
+              {
+                int count;
+                #pragma acc atomic capture
+                {
+                  count = resultCount[groupIdx];
+                  resultCount[groupIdx] = resultCount[groupIdx] + 1;
+                }
+                result[beginSearchIdx + count] = stringPos;
+              }
+              #endif
             }
           }
+        }
       }
     }
 
     auto end = std::chrono::steady_clock::now();
     time += std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
 
-    // Read Results Count per workGroup
-    #pragma acc update from (resultCount[0:workGroupCount])
-    #pragma acc update from (result[0:textLength - subStrLength + 1])
+    // Results are already available via copy clause
+    #pragma acc update host(resultCount[0:workGroupCount])
+    #pragma acc update host(result[0:textLength - subStrLength + 1])
 
-    verify(resultCount, workGroupCount, result, searchLenPerWG, cpuResults); 
+    verify(resultCount, workGroupCount, result, searchLenPerWG, cpuResults);
   }
 
   printf("Average kernel execution time: %f (us)\n", (time * 1e-3f) / iterations);
-}
+
+  } // end of acc data region
 
   free(text);
+  free(pattern);
   free(result);
   free(resultCount);
   return 0;

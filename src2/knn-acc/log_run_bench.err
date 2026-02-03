@@ -1,51 +1,92 @@
-"main.cpp", line 178: error: invalid text in pragma
-      #pragma acc data to: ref[0:ref_nb * dim], query[0:query_nb * dim]) \
-                       ^
-
-"main.cpp", line 178: error: extra text after expected end of preprocessing directive
-      #pragma acc data to: ref[0:ref_nb * dim], query[0:query_nb * dim]) \
-                         ^
-
-"main.cpp", line 182: error: invalid text in pragma
-        #pragma acc parallel teams num_teams((ref_nb + 15)*(query_nb + 15)/256) vector_length(256) 
-                             ^
-
-"main.cpp", line 182: error: extra text after expected end of preprocessing directive
-        #pragma acc parallel teams num_teams((ref_nb + 15)*(query_nb + 15)/256) vector_length(256) 
-                                   ^
-
-"main.cpp", line 195: error: identifier "omp_get_thread_num" is undefined
-            int tx = omp_get_thread_num() % 16;
-                     ^
-
-"main.cpp", line 203: error: identifier "omp_get_team_num" is undefined
-            begin_A = BLOCK_DIM * (omp_get_team_num() / ((query_nb+15)/16));
-                                   ^
-
-"main.cpp", line 313: error: invalid text in pragma
-        #pragma acc update from (dist[0:query_nb * k]) 
-                           ^
-
-"main.cpp", line 313: error: OpenACC data clause expected
-        #pragma acc update from (dist[0:query_nb * k]) 
-                           ^
-
-"main.cpp", line 313: error: extra text after expected end of preprocessing directive
-        #pragma acc update from (dist[0:query_nb * k]) 
-                                ^
-
-"main.cpp", line 314: error: invalid text in pragma
-        #pragma acc update from (ind[0:query_nb * k])
-                           ^
-
-"main.cpp", line 314: error: OpenACC data clause expected
-        #pragma acc update from (ind[0:query_nb * k])
-                           ^
-
-"main.cpp", line 314: error: extra text after expected end of preprocessing directive
-        #pragma acc update from (ind[0:query_nb * k])
-                                ^
-
-12 errors detected in the compilation of "main.cpp".
-make: *** [Makefile.NVD:58: main.o] Error 2
+compute_distance(float const*, int, float const*, int, int, int, int):
+     26, Generated vector simd code for the loop containing reductions
+modified_insertion_sort(float*, int*, int, int):
+     54, Loop not vectorized/parallelized: potential early exits
+knn_serial(float const*, int, float const*, int, int, int, float*, int*):
+          26, Generated vector simd code for the loop containing reductions
+          54, Loop not vectorized/parallelized: potential early exits
+     94, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+main:
+    134, Loop not vectorized/parallelized: contains call
+    136, Loop not vectorized/parallelized: contains call
+          86, Generated vector simd code for the loop containing reductions
+          91, Loop not vectorized/parallelized: potential early exits
+          94, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+          86, Generated vector simd code for the loop containing reductions
+          91, Loop not vectorized/parallelized: potential early exits
+          94, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+         163, Loop not vectorized/parallelized: too deeply nested
+    175, Loop not vectorized/parallelized: too deeply nested
+    179, Generating copyin(query[:dim*query_nb],ref[:dim*ref_nb]) [if not already present]
+         Generating copyout(ind[:query_nb*k]) [if not already present]
+         Generating create(dist[:ref_nb*query_nb]) [if not already present]
+    183, Generating present(ref[:],query[:],dist[:])
+         Generating implicit firstprivate(dim)
+         Generating NVIDIA GPU code
+        187, #pragma acc loop gang collapse(2) /* blockIdx.x */
+        188,   /* blockIdx.x collapsed */
+        191, #pragma acc loop vector(128) collapse(2) /* threadIdx.x */
+        192,   /* threadIdx.x collapsed */
+        199, #pragma acc loop seq
+    187, Loop not fused: no successor loop
+         Loop not vectorized/parallelized: too deeply nested
+    188, Loop not vectorized/parallelized: too deeply nested
+    191, Loop is parallelizable
+    192, Loop is parallelizable
+         Generating implicit firstprivate(ref_nb,query_nb)
+    199, Generated vector simd code for the loop containing reductions
+    208, Generating present(ind[:],dist[:])
+         Generating implicit firstprivate(ref_nb,query_nb,k)
+         Generating NVIDIA GPU code
+        213, #pragma acc loop gang, vector(128) /* blockIdx.x threadIdx.x */
+        219, #pragma acc loop seq
+        230, #pragma acc loop seq
+        244, #pragma acc loop seq
+        254, #pragma acc loop seq
+    219, Complex loop carried dependence of dist-> prevents parallelization
+         Loop carried dependence of dist-> prevents parallelization
+         Loop carried backward dependence of dist-> prevents vectorization
+         Loop carried dependence of ind-> prevents parallelization
+         Loop carried backward dependence of ind-> prevents vectorization
+         Loop carried scalar dependence for max_dist at line 222
+         Complex loop carried dependence of ind-> prevents parallelization
+    224, Loop not vectorized/parallelized: potential early exits
+    225, Accelerator restriction: induction variable live-out from loop: a
+    229, Accelerator restriction: induction variable live-out from loop: a
+    230, Complex loop carried dependence of dist-> prevents parallelization
+         Loop carried dependence of dist-> prevents parallelization
+         Loop carried backward dependence of dist-> prevents vectorization
+         Complex loop carried dependence of ind-> prevents parallelization
+         Loop carried dependence of ind-> prevents parallelization
+         Loop carried backward dependence of ind-> prevents vectorization
+         Loop not fused: no successor loop
+         Loop unrolled 4 times
+    244, Complex loop carried dependence of dist-> prevents parallelization
+         Loop carried dependence of dist-> prevents parallelization
+         Loop carried backward dependence of dist-> prevents vectorization
+         Loop carried dependence of ind-> prevents parallelization
+         Loop carried backward dependence of ind-> prevents vectorization
+         Loop carried scalar dependence for max_dist at line 246
+         Complex loop carried dependence of ind-> prevents parallelization
+    248, Loop not vectorized/parallelized: potential early exits
+    249, Accelerator restriction: induction variable live-out from loop: a
+    253, Accelerator restriction: induction variable live-out from loop: a
+    254, Complex loop carried dependence of dist-> prevents parallelization
+         Loop carried dependence of dist-> prevents parallelization
+         Loop carried backward dependence of dist-> prevents vectorization
+         Complex loop carried dependence of ind-> prevents parallelization
+         Loop carried dependence of ind-> prevents parallelization
+         Loop carried backward dependence of ind-> prevents vectorization
+         Loop unrolled 4 times
+    263, Generating present(dist[:])
+         Generating implicit firstprivate(query_nb,k)
+         Generating NVIDIA GPU code
+        268, #pragma acc loop gang, vector(128) /* blockIdx.x threadIdx.x */
+    268, Loop not fused: no successor loop
+         Generated vector simd code for the loop
+    273, Generating update self(dist[:query_nb*k])
+    282, Loop not fused: function call before adjacent loop
 timeout was set to  600
