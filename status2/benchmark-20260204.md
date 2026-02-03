@@ -158,7 +158,7 @@
 | kmeans | 28.93 | 27.05 | 22.68 |
 | knn | 4.48 | 4.28 | 4.53 |
 | lanczos | 2.61 | build err | 2.81 |
-| langevin | build err | 6.18 | 35.79 |
+| langevin | 17.73 | 6.26 | 31.31 |
 | langford | 2.54 | build err | build err |
 | laplace3d | 64.92 | 14.60 | 14.64 |
 | laplace | 333.46 | 11.93 | 11.34 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 294 | 178 | 272 |
+| completed | 295 | 178 | 272 |
 
-sycl と acc がともに完了した件数 173
+sycl と acc がともに完了した件数 174
