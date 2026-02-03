@@ -1,1 +1,3 @@
-ERROR: failed to open ../svd3x3-cuda/Dataset_1M.txt
+dataset size: 1048576
+Average kernel execution time: 48.790451 (us)
+PASS

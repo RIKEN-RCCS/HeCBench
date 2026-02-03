@@ -1,0 +1,79 @@
+zeroInit(std::vector<float, std::allocator<float>>&):
+     10, include "utils.h"
+          39, Recognized memory zero idiom
+compare(std::vector<float, std::allocator<float>> const&, std::vector<float, std::allocator<float>> const&):
+     10, include "utils.h"
+          52, Loop not vectorized/parallelized: potential early exits
+main:
+          39, Recognized memory zero idiom
+float* std::__uninitialized_default_n_1<true>::__uninit_default_n<float*, unsigned long>(float*, unsigned long):
+        1149, Recognized memory set idiom
+std::vector<float, std::allocator<float>>::vector(unsigned long, std::allocator<float> const&):
+     10, include "utils.h"
+std::vector<float, std::allocator<float>>::_M_default_initialize(unsigned long):
+         704, Recognized memory set idiom
+float* std::__uninitialized_default_n_a<float*, unsigned long, float>(float*, unsigned long, std::allocator<float>&):
+         638, Recognized memory set idiom
+float* std::__uninitialized_default_n<float*, unsigned long>(float*, unsigned long):
+         603, Recognized memory set idiom
+float* std::fill_n<float*, unsigned long, float>(float*, unsigned long, float const&):
+        1120, Recognized memory set idiom
+float* std::__fill_n_a<float*, unsigned long, float>(float*, unsigned long, float const&, std::random_access_iterator_tag):
+         969, Recognized memory set idiom
+void std::__fill_a<float*, float>(float*, float*, float const&):
+         923, Recognized memory set idiom
+__gnu_cxx::__enable_if<std::__is_scalar<float>::__value, void>::__type std::__fill_a1<float*, float>(float*, float*, float const&):
+      1, include "string"
+          40, include "char_traits.h"
+               39, include "stl_algobase.h"
+                   923, Recognized memory set idiom
+k_findPeak(float const*, unsigned long, Peak*):
+     46, #omp target teams num_teams(128) thread_limit(256)
+         46, Generating "nvkernel__Z10k_findPeakPKfmP4Peak_F1L46_2" GPU kernel
+         50, #omp parallel
+           64, Barrier
+         52, Team private (maxVal,maxPos) located in CUDA shared memory
+     57, Loop not vectorized: data dependency
+     69, Loop not vectorized: unknown
+HogbomTest::deconvolve(std::vector<float, std::allocator<float>> const&, unsigned long, std::vector<float, std::allocator<float>> const&, unsigned long, std::vector<float, std::allocator<float>>&, std::vector<float, std::allocator<float>>&):
+    158, Generating map(alloc:d_peaks[:]) 
+         Generating map(to:d_psf[:psf_size]) 
+         Generating map(tofrom:d_residual[:residual_size]) 
+          92, Generating update from(d_peaks[:])
+          94, Loop not fused: function call before adjacent loop
+              Loop not vectorized: unknown
+    170, Loop not vectorized/parallelized: contains call
+          92, Generating update from(d_peaks[:])
+          94, Loop not fused: function call before adjacent loop
+              Loop not vectorized: unknown
+Position::Position(int, int):
+     21, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_11_kernels_cpp_a605e829::idxToPos(unsigned long, int):
+     27, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_11_kernels_cpp_a605e829::posToIdx(int, Position const&):
+     34, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_11_kernels_cpp_a605e829::findPeak(float const*, Peak*, unsigned long):
+     92, Generating update from(d_peaks[:128])
+     94, Loop not vectorized: unknown
+_INTERNAL_11_kernels_cpp_a605e829::subtractPSF(float const*, int, float*, int, unsigned long, unsigned long, float, float):
+    122, #omp target teams distribute parallel for thread_limit(256)
+        122, Generating "nvkernel__ZN33_INTERNAL_11_kernels_cpp_a605e82911subtractPSFEPKfiPfimmff_F1L122_7" GPU kernel
+        125, Loop parallelized across teams and threads(128), schedule(static)
+    126, Loop not vectorized/parallelized: not countable
+HogbomGolden::deconvolve(std::vector<float, std::allocator<float>> const&, unsigned long, std::vector<float, std::allocator<float>> const&, unsigned long, std::vector<float, std::allocator<float>>&, std::vector<float, std::allocator<float>>&):
+          89, Loop not fused: function call before adjacent loop
+              Loop not vectorized: unknown
+     31, Loop not vectorized/parallelized: potential early exits
+          89, Loop not vectorized: unknown
+          76, Loop not vectorized: data dependency
+HogbomGolden::findPeak(std::vector<float, std::allocator<float>> const&, float&, unsigned long&):
+     89, Loop not vectorized: unknown
+HogbomGolden::subtractPSF(std::vector<float, std::allocator<float>> const&, unsigned long, std::vector<float, std::allocator<float>>&, unsigned long, unsigned long, unsigned long, float, float):
+     76, Loop not vectorized: may not be beneficial for target
+bunzip2: Can't open input file ../hogbom-cuda/data/dirty_4096.img.bz2: No such file or directory.
+bunzip2: Can't open input file ../hogbom-cuda/data/psf_4096.img.bz2: No such file or directory.
+make: *** [Makefile.NVD:83: run_mem] Error 1
+timeout was set to  600

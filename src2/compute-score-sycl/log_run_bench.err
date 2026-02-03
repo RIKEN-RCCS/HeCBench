@@ -1,1 +1,11 @@
+In file included from main.cpp:29:
+./scoped_ptrs.h:33:7: warning: variable 'rc' set but not used [-Wunused-but-set-variable]
+   33 |   int rc;
+      |       ^
+1 warning generated.
+In file included from main.cpp:29:
+./scoped_ptrs.h:33:7: warning: variable 'rc' set but not used [-Wunused-but-set-variable]
+   33 |   int rc;
+      |       ^
+1 warning generated.
 timeout was set to  600

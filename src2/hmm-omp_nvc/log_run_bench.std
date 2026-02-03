@@ -1,5 +1,9 @@
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c HiddenMarkovModel.cpp -o HiddenMarkovModel.o
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c ViterbiCPU.cpp -o ViterbiCPU.o
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c ViterbiGPU.cpp -o ViterbiGPU.o
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 HiddenMarkovModel.o ViterbiCPU.o ViterbiGPU.o -o main 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "time -p ( ./main 1>log.std 2>log.err ) 2> log.time"
 pkill nvidia-smi
 ../scripts/m.sh
-min max diff memory in [MB] : 1 695 694
+min max diff memory in [MB] : 1 694 693

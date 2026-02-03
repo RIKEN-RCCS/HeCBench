@@ -1,1 +1,29 @@
+indexTo1D(int, int, int):
+     13, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+rtm8_cpu(float*, float*, float*, float*, float*, float*, float*, unsigned long):
+     22, #omp parallel
+     24, Loop not vectorized: data dependency
+main:
+     99, Outer loop unrolled 1 times (completely unrolled)
+    100, Outer loop unrolled 1 times (completely unrolled)
+    101, Loop nest collapsed
+         Loop not fused: function call before adjacent loop
+         Unable to version for aliasing; too many tests
+         Loop not vectorized: data dependency
+         Loop unrolled 8 times
+    122, #omp target teams distribute parallel for thread_limit(256)
+        119, Generating map(to:current_r[:41004000],a[:]) 
+             Generating map(alloc:next_s[:41004000]) 
+             Generating map(to:vsq[:41004000]) 
+             Generating map(tofrom:image_gpu[:41004000]) 
+             Generating map(alloc:next_r[:41004000]) 
+             Generating map(to:current_s[:41004000]) 
+        122, Generating "nvkernel_main_F1L122_3" GPU kernel
+        124, Loop parallelized across teams and threads(128), schedule(static)
+    122, Generating implicit map(tofrom:a[:]) 
+         Loop not vectorized/parallelized: contains call
+    126, Loop not vectorized/parallelized: not countable
+    174, Loop not vectorized/parallelized: contains call
+    181, Loop not vectorized/parallelized: potential early exits
 timeout was set to  600

@@ -39,5 +39,5 @@ TS:950	np_i:500000	np_e:500000	dphi:9.76
 TS:975	np_i:500000	np_e:500000	dphi:10.7
 TS:1000	np_i:500000	np_e:500000	dphi:9.22
 Total kernel execution time (scatter particles) : 1.09 (s)
-Total time for 1000 time steps: 3.37 (s)
-Time per time step: 3.37 (ms)
+Total time for 1000 time steps: 3.4 (s)
+Time per time step: 3.4 (ms)

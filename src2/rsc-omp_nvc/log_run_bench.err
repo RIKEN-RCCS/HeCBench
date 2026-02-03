@@ -1,1 +1,112 @@
+gen_firstOrderFlow_vectors(float*, int, flowvector*, flowvector*):
+     46, include "verify.h"
+          55, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+estimate_ego_motion_first_order_flow(flowvector*, int, int*, int*, int*, int*, int, int, float):
+     46, include "verify.h"
+         168, Loop not fused: function call before adjacent loop
+          55, Loop not fused: unsafe variable with target attribute
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+          73, Loop not vectorized: data dependency
+verify(flowvector*, int, int*, int, int, float, int, int):
+     46, include "verify.h"
+         197, Loop not vectorized: unknown
+read_input(flowvector*, int*, Params const&):
+    153, Loop not vectorized/parallelized: contains call
+    166, Loop not vectorized/parallelized: contains call
+main:
+          74, Loop not vectorized/parallelized: contains call
+         153, Loop not vectorized/parallelized: contains call
+         166, Loop not vectorized/parallelized: contains call
+    202, Generating map(to:h_g_out_id[:1],h_model_param_local[:p.max_iter*4],h_outliers_candidate[:p.max_iter],h_model_candidate[:p.max_iter],h_flow_vector_array[:n_flow_vectors]) 
+    206, Loop not vectorized/parallelized: contains call
+    220, Generating update to(h_g_out_id[:1],h_model_param_local[:p.max_iter*4],h_model_candidate[:p.max_iter],h_outliers_candidate[:p.max_iter])
+    229, Generating update to(h_model_param_local[:p.max_iter*4])
+    234, Generating update from(h_outliers_candidate[:candidates],h_model_candidate[:candidates],h_g_out_id[:1])
+    240, Loop not fused: function call before adjacent loop
+         Loop not vectorized: unknown
+         197, Loop not fused: function call before adjacent loop
+              Loop not vectorized: unknown
+Params::Params(int, char**):
+     74, Loop not vectorized/parallelized: contains call
+Params::Params(int, char**):
+          74, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     38, include "thread"
+          44, include "this_thread_sleep.h"
+               38, include "chrono"
+                   472, Loop not vectorized/parallelized: not countable
+std::tuple_element<0ul, std::tuple<void (*)(float*, flowvector*, int, int*, int, int, float, int*, int), float*, flowvector*, int, int*, int, int, float, int*, int>>::type&& std::get<0ul, void (*)(float*, flowvector*, int, int*, int, int, float, int*, int), float*, flowvector*, int, int*, int, int, float, int*, int>(std::tuple<void (*)(float*, flowvector*, int, int*, int, int, float, int*, int), float*, flowvector*, int, int*, int, int, float, int*, int>&&):
+     38, include "thread"
+std::tuple_element<1ul, std::tuple<void (*)(float*, flowvector*, int, int*, int, int, float, int*, int), float*, flowvector*, int, int*, int, int, float, int*, int>>::type&& std::get<1ul, void (*)(float*, flowvector*, int, int*, int, int, float, int*, int), float*, flowvector*, int, int*, int, int, float, int*, int>(std::tuple<void (*)(float*, flowvector*, int, int*, int, int, float, int*, int), float*, flowvector*, int, int*, int, int, float, int*, int>&&):
+     38, include "thread"
+std::tuple_element<2ul, std::tuple<void (*)(float*, flowvector*, int, int*, int, int, float, int*, int), float*, flowvector*, int, int*, int, int, float, int*, int>>::type&& std::get<2ul, void (*)(float*, flowvector*, int, int*, int, int, float, int*, int), float*, flowvector*, int, int*, int, int, float, int*, int>(std::tuple<void (*)(float*, flowvector*, int, int*, int, int, float, int*, int), float*, flowvector*, int, int*, int, int, float, int*, int>&&):
+     38, include "thread"
+std::tuple_element<3ul, std::tuple<void (*)(float*, flowvector*, int, int*, int, int, float, int*, int), float*, flowvector*, int, int*, int, int, float, int*, int>>::type&& std::get<3ul, void (*)(float*, flowvector*, int, int*, int, int, float, int*, int), float*, flowvector*, int, int*, int, int, float, int*, int>(std::tuple<void (*)(float*, flowvector*, int, int*, int, int, float, int*, int), float*, flowvector*, int, int*, int, int, float, int*, int>&&):
+     38, include "thread"
+std::tuple_element<4ul, std::tuple<void (*)(float*, flowvector*, int, int*, int, int, float, int*, int), float*, flowvector*, int, int*, int, int, float, int*, int>>::type&& std::get<4ul, void (*)(float*, flowvector*, int, int*, int, int, float, int*, int), float*, flowvector*, int, int*, int, int, float, int*, int>(std::tuple<void (*)(float*, flowvector*, int, int*, int, int, float, int*, int), float*, flowvector*, int, int*, int, int, float, int*, int>&&):
+     38, include "thread"
+std::tuple_element<5ul, std::tuple<void (*)(float*, flowvector*, int, int*, int, int, float, int*, int), float*, flowvector*, int, int*, int, int, float, int*, int>>::type&& std::get<5ul, void (*)(float*, flowvector*, int, int*, int, int, float, int*, int), float*, flowvector*, int, int*, int, int, float, int*, int>(std::tuple<void (*)(float*, flowvector*, int, int*, int, int, float, int*, int), float*, flowvector*, int, int*, int, int, float, int*, int>&&):
+     38, include "thread"
+std::tuple_element<6ul, std::tuple<void (*)(float*, flowvector*, int, int*, int, int, float, int*, int), float*, flowvector*, int, int*, int, int, float, int*, int>>::type&& std::get<6ul, void (*)(float*, flowvector*, int, int*, int, int, float, int*, int), float*, flowvector*, int, int*, int, int, float, int*, int>(std::tuple<void (*)(float*, flowvector*, int, int*, int, int, float, int*, int), float*, flowvector*, int, int*, int, int, float, int*, int>&&):
+     38, include "thread"
+std::tuple_element<7ul, std::tuple<void (*)(float*, flowvector*, int, int*, int, int, float, int*, int), float*, flowvector*, int, int*, int, int, float, int*, int>>::type&& std::get<7ul, void (*)(float*, flowvector*, int, int*, int, int, float, int*, int), float*, flowvector*, int, int*, int, int, float, int*, int>(std::tuple<void (*)(float*, flowvector*, int, int*, int, int, float, int*, int), float*, flowvector*, int, int*, int, int, float, int*, int>&&):
+     38, include "thread"
+std::tuple_element<8ul, std::tuple<void (*)(float*, flowvector*, int, int*, int, int, float, int*, int), float*, flowvector*, int, int*, int, int, float, int*, int>>::type&& std::get<8ul, void (*)(float*, flowvector*, int, int*, int, int, float, int*, int), float*, flowvector*, int, int*, int, int, float, int*, int>(std::tuple<void (*)(float*, flowvector*, int, int*, int, int, float, int*, int), float*, flowvector*, int, int*, int, int, float, int*, int>&&):
+     38, include "thread"
+std::tuple_element<9ul, std::tuple<void (*)(float*, flowvector*, int, int*, int, int, float, int*, int), float*, flowvector*, int, int*, int, int, float, int*, int>>::type&& std::get<9ul, void (*)(float*, flowvector*, int, int*, int, int, float, int*, int), float*, flowvector*, int, int*, int, int, float, int*, int>(std::tuple<void (*)(float*, flowvector*, int, int*, int, int, float, int*, int), float*, flowvector*, int, int*, int, int, float, int*, int>&&):
+     38, include "thread"
+call_RANSAC_kernel_block(int, int, float*, flowvector*, int, int, int, float, int*, int*, int*):
+     45, #omp target teams num_teams(blocks) thread_limit(threads)
+         45, Generating "nvkernel__Z24call_RANSAC_kernel_blockiiPfP10flowvectoriiifPiS2_S2__F1L45_2" GPU kernel
+         48, #omp parallel
+           67, Barrier
+           90, Barrier
+         82, Team private (outlier_block_count) located in CUDA shared memory
+     76, Loop not vectorized/parallelized: not countable
+std::fabs(float):
+                        242, Generating implicit omp declare target routine
+                             Generating NVIDIA GPU code
+run_cpu_threads(float*, flowvector*, int, int*, int, int, float, int*, int):
+     73, Loop not vectorized/parallelized: potential early exits
+        3819, Loop not vectorized/parallelized: potential early exits
+std::thread::_Invoker<std::tuple<run_cpu_threads(float*, flowvector*, int, int*, int, int, float, int*, int)::'lambda'()>>::operator()():
+         259, Loop not vectorized/parallelized: not countable
+void std::thread::_Invoker<std::tuple<run_cpu_threads(float*, flowvector*, int, int*, int, int, float, int*, int)::'lambda'()>>::_M_invoke<0ul>(std::_Index_tuple<0ul>):
+     37, include "thread"
+          43, include "std_thread.h"
+                    96, Loop not vectorized/parallelized: not countable
+std::thread::_State_impl<std::thread::_Invoker<std::tuple<run_cpu_threads(float*, flowvector*, int, int*, int, int, float, int*, int)::'lambda'()>>>::_M_run():
+         266, Loop not vectorized/parallelized: not countable
+std::vector<std::thread, std::allocator<std::thread>>::~vector():
+         848, Loop not vectorized/parallelized: contains call
+void std::_Destroy_aux<false>::__destroy<std::thread*>(std::thread*, std::thread*):
+     38, include "vector"
+          65, include "stl_construct.h"
+              162, Loop not vectorized/parallelized: contains call
+std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State>>::~unique_ptr():
+     37, include "thread"
+          43, include "std_thread.h"
+run_cpu_threads(float*, flowvector*, int, int*, int, int, float, int*, int)::'lambda'(std::thread&) std::for_each<__gnu_cxx::__normal_iterator<std::thread*, std::vector<std::thread, std::allocator<std::thread>>>, run_cpu_threads(float*, flowvector*, int, int*, int, int, float, int*, int)::'lambda'(std::thread&)>(__gnu_cxx::__normal_iterator<std::thread*, std::vector<std::thread, std::allocator<std::thread>>>, __gnu_cxx::__normal_iterator<std::thread*, std::vector<std::thread, std::allocator<std::thread>>>, run_cpu_threads(float*, flowvector*, int, int*, int, int, float, int*, int)::'lambda'(std::thread&)):
+             3819, Loop not vectorized/parallelized: potential early exits
+void std::_Destroy<std::thread*, std::thread>(std::thread*, std::thread*, std::allocator<std::thread>&):
+         195, Loop not vectorized/parallelized: contains call
+void std::_Destroy<std::thread*>(std::thread*, std::thread*):
+         162, Loop not vectorized/parallelized: contains call
+std::thread* std::__relocate_a<std::thread*, std::thread*, std::allocator<std::thread>>(std::thread*, std::thread*, std::thread*, std::allocator<std::thread>&):
+     38, include "vector"
+std::thread* std::__relocate_a_1<std::thread*, std::thread*, std::allocator<std::thread>>(std::thread*, std::thread*, std::thread*, std::allocator<std::thread>&):
+     38, include "vector"
+          66, include "stl_uninitialized.h"
+             1031, Loop not vectorized/parallelized: contains call
+std::tuple_element<0ul, std::tuple<run_cpu_threads(float*, flowvector*, int, int*, int, int, float, int*, int)::'lambda'()>>::type&& std::get<0ul, run_cpu_threads(float*, flowvector*, int, int*, int, int, float, int*, int)::'lambda'()>(std::tuple<run_cpu_threads(float*, flowvector*, int, int*, int, int, float, int*, int)::'lambda'()>&&):
+     37, include "thread"
+          43, include "std_thread.h"
+std::__invoke_result<run_cpu_threads(float*, flowvector*, int, int*, int, int, float, int*, int)::'lambda'()>::type std::__invoke<run_cpu_threads(float*, flowvector*, int, int*, int, int, float, int*, int)::'lambda'()>(run_cpu_threads(float*, flowvector*, int, int*, int, int, float, int*, int)::'lambda'()&&):
+          61, Loop not vectorized/parallelized: not countable
+void std::__invoke_impl<void, run_cpu_threads(float*, flowvector*, int, int*, int, int, float, int*, int)::'lambda'()>(std::__invoke_other, run_cpu_threads(float*, flowvector*, int, int*, int, int, float, int*, int)::'lambda'()&&):
+          79, Loop not vectorized/parallelized: not countable
+run_cpu_threads(float*, flowvector*, int, int*, int, int, float, int*, int)::'lambda'()::operator()() const:
+     79, Loop not vectorized/parallelized: not countable
 timeout was set to  600

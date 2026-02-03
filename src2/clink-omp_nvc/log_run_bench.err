@@ -1,2 +1,71 @@
+reference(float const*, float const*, float const*, float const*, float const*, float const*, float*):
+     12, include "reference.h"
+          14, #omp parallel
+          27, Outer loop unrolled 5 times (completely unrolled)
+          29, Generated vector simd code for the loop containing reductions
+          35, Outer loop unrolled 5 times (completely unrolled)
+          37, Generated vector simd code for the loop containing reductions
+          43, Outer loop unrolled 5 times (completely unrolled)
+          45, Generated vector simd code for the loop containing reductions
+          51, Outer loop unrolled 5 times (completely unrolled)
+          53, Generated vector simd code for the loop containing reductions
+          59, Generated vector simd code for the loop
+          65, Generated vector simd code for the loop containing reductions
+          72, Loop not vectorized/parallelized: potential early exits
+init(char const*, char const*, char const*, float*, float*, float*, float*, float*, float*):
+     52, Loop not vectorized/parallelized: contains call
+     58, Loop not vectorized/parallelized: contains call
+     68, Loop nest collapsed
+         Loop not vectorized/parallelized: contains call
+     75, Loop nest collapsed
+         Loop not vectorized/parallelized: contains call
+     82, Loop nest collapsed
+         Loop not vectorized/parallelized: contains call
+     87, Loop not vectorized/parallelized: contains call
+lstm_n5(float const*, float const*, float const*, float const*, float const*, float const*, float*):
+    113, #omp target teams distribute parallel for thread_limit(256)
+        112, Generating map(to:outW[:5],intB[:20],inW[:20],outB[:1],intW[:100]) 
+             Generating map(from:y[:163840000]) 
+             Generating map(to:x[:163840000]) 
+        113, Generating "nvkernel__Z7lstm_n5PKfS0_S0_S0_S0_S0_Pf_F1L113_3" GPU kernel
+        116, Loop parallelized across teams and threads(128), schedule(static)
+    116, Loop not vectorized/parallelized: not countable
+    129, Outer loop unrolled 5 times (completely unrolled)
+    131, Loop not vectorized: data dependency
+         Loop unrolled 5 times (completely unrolled)
+    137, Outer loop unrolled 5 times (completely unrolled)
+    139, Loop not vectorized: data dependency
+         Loop unrolled 5 times (completely unrolled)
+    145, Outer loop unrolled 5 times (completely unrolled)
+    147, Loop not vectorized: data dependency
+         Loop unrolled 5 times (completely unrolled)
+    153, Outer loop unrolled 5 times (completely unrolled)
+    155, Loop not vectorized: data dependency
+         Loop unrolled 5 times (completely unrolled)
+    161, Generated vector simd code for the loop
+    167, Generated vector simd code for the loop containing reductions
+main:
+          52, Loop not vectorized/parallelized: contains call
+          58, Loop not vectorized/parallelized: contains call
+          68, Loop not vectorized/parallelized: contains call
+          75, Loop not vectorized/parallelized: contains call
+          82, Loop not vectorized/parallelized: contains call
+          87, Loop not vectorized/parallelized: contains call
+          52, Loop not vectorized/parallelized: contains call
+          58, Loop not vectorized/parallelized: contains call
+          68, Loop nest collapsed
+              Loop not vectorized/parallelized: contains call
+          75, Loop nest collapsed
+              Loop not vectorized/parallelized: contains call
+          82, Loop nest collapsed
+              Loop not vectorized/parallelized: contains call
+          87, Loop not vectorized/parallelized: contains call
+         204, Loop not vectorized/parallelized: too deeply nested
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
 make: *** [Makefile.NVD:69: run_mem] Error 255
 timeout was set to  600

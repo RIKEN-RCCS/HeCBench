@@ -1,1 +1,33 @@
+In file included from main.cpp:30:
+./kernel_metropolis.h:160:9: warning: use of bitwise '|' with boolean operands [-Wbitwise-instead-of-logical]
+  160 |     c = sycl::signbit(dh - EPSILON) |
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                     ||
+  161 |         sycl::signbit(gpu_rand01(&lstate, &linc) - sycl::exp(dh * B));
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./kernel_metropolis.h:160:9: note: cast one or both operands to int to silence this warning
+./kernel_metropolis.h:172:9: warning: use of bitwise '|' with boolean operands [-Wbitwise-instead-of-logical]
+  172 |     c = sycl::signbit(dh - EPSILON) |
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                     ||
+  173 |         sycl::signbit(gpu_rand01(&lstate, &linc) - sycl::exp(dh * B));
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./kernel_metropolis.h:172:9: note: cast one or both operands to int to silence this warning
+2 warnings generated.
+In file included from main.cpp:30:
+./kernel_metropolis.h:160:9: warning: use of bitwise '|' with boolean operands [-Wbitwise-instead-of-logical]
+  160 |     c = sycl::signbit(dh - EPSILON) |
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                     ||
+  161 |         sycl::signbit(gpu_rand01(&lstate, &linc) - sycl::exp(dh * B));
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./kernel_metropolis.h:160:9: note: cast one or both operands to int to silence this warning
+./kernel_metropolis.h:172:9: warning: use of bitwise '|' with boolean operands [-Wbitwise-instead-of-logical]
+  172 |     c = sycl::signbit(dh - EPSILON) |
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                     ||
+  173 |         sycl::signbit(gpu_rand01(&lstate, &linc) - sycl::exp(dh * B));
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./kernel_metropolis.h:172:9: note: cast one or both operands to int to silence this warning
+2 warnings generated.
 timeout was set to  600

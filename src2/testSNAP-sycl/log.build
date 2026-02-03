@@ -1,3 +1,0 @@
-tar xf ../testSNAP-omp/refdata.tar.gz -C ../testSNAP-omp
-clang++  -DREFDATA_TWOJ=14 -I. -I../testSNAP-omp           --gcc-toolchain=           -std=c++17 -Wall -fsycl -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c main.cpp -o main.o
-clang++  -DREFDATA_TWOJ=14 -I. -I../testSNAP-omp           --gcc-toolchain=           -std=c++17 -Wall -fsycl -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU main.o -o main 

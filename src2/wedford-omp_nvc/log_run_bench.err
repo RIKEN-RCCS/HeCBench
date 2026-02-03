@@ -1,2 +1,30 @@
+main:
+    100, Loop not vectorized/parallelized: contains call
+    112, Generating map(to:input[:input_size]) 
+         Generating map(from:mean[:feature_size],var[:feature_size]) 
+    115, Loop not vectorized/parallelized: contains call
+    129, Loop not vectorized/parallelized: potential early exits
+void welford_kernel<float, float, float>(float const*, float*, float*, int, int, int):
+     36, #omp target teams num_teams(fs) thread_limit(512)
+         36, Generating "nvkernel__Z14welford_kernelIfffEvPKT_PT1_S4_iii_F1L36_2" GPU kernel
+         41, #omp parallel
+           65, Barrier
+         72, Team private (count_sm,var_sm,mean_sm) located in CUDA shared memory
+     54, Loop not vectorized: recurrence
+         Loop unrolled 2 times
+     71, Loop not vectorized: recurrence
+void welford_reference<float, float, float>(float const*, float*, float*, int, int, int):
+      6, include "reference.h"
+          11, #omp parallel
+              14, #omp parallel
+                14, Generating reduction(+:naive_sum,naive_sum_square)
+          11, Loop not vectorized/parallelized: contains structure move
+void welford_merge_element<float, int>(int&, float&, float&, int const&, float const&, float const&):
+     17, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      6, include "reference.h"
 make: *** [Makefile.NVD:70: run_mem] Error 134
 timeout was set to  600

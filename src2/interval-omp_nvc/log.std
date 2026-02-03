@@ -4,7 +4,7 @@ Found 2 intervals that may contain the root(s)
  i[0] = [0.999655515093009, 1.00011722206639]
  i[1] = [1.00011907576551, 1.00044661086269]
 Number of equations solved: 65536
-Average execution time of test_interval_newton: 36.9312171936035 us
+Average execution time of test_interval_newton: 36.9730567932129 us
 
 Check against Host computation...
 
@@ -15,7 +15,7 @@ Found 2 intervals that may contain the root(s)
  i[0] = [1.00011907576551, 1.00044661086269]
  i[1] = [0.999655515093009, 1.00011722206639]
 Number of equations solved: 65536
-Average execution time of test_interval_newton: 37.1216239929199 us
+Average execution time of test_interval_newton: 37.1528358459473 us
 
 Check against Host computation...
 

@@ -1,3 +1,6 @@
+clang++  -std=c++17 -I../mcmd-cuda -fsycl           --gcc-toolchain=           -D_MWAITXINTRIN_H_INCLUDED -D_FORCE_INLINES -D__STRICT_ANSI__           -DSYCL -DGPU -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -c ../mcmd-cuda/main.cpp -o main.o
+clang++  -std=c++17 -I../mcmd-cuda -fsycl           --gcc-toolchain=           -D_MWAITXINTRIN_H_INCLUDED -D_FORCE_INLINES -D__STRICT_ANSI__           -DSYCL -DGPU -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -c force_kernel.cpp -o force_kernel.o
+clang++  -std=c++17 -I../mcmd-cuda -fsycl           --gcc-toolchain=           -D_MWAITXINTRIN_H_INCLUDED -D_FORCE_INLINES -D__STRICT_ANSI__           -DSYCL -DGPU -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 main.o force_kernel.o -o main 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "../mcmd-cuda/prepare_data.sh; cd dataset; time -p ( ../main mcmd.inp 1> ../log.std 2> ../log.err ) 2> ../log.time; cd .."
 pkill nvidia-smi

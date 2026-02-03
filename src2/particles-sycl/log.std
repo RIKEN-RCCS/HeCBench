@@ -1,5 +1,5 @@
  grid: 64 x 64 x 64 = 262144 cells
  particles: 16384
 
-Total execution time of 10000 loop iterations: 1.023199 (s)
-Average execution time of a loop iteration: 102.319954 (us)
+Total execution time of 10000 loop iterations: 0.993724 (s)
+Average execution time of a loop iteration: 99.372421 (us)

@@ -1,2 +1,9 @@
+nvc++	  ./main.cpp 		  -I./util/timer/ 		  -I./util/file/ 			-c 			-o ./main.o 
+nvc++  -std=c++11 -Wall -O3 -Minfo -mp=gpu -gpu=cc90  	./kernel/kernel.cpp 			-c 			-o ./kernel/kernel.o 
+nvc++	 -std=c++11 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 ./util/avi/avilib.c 		  -I./util/avi 			-c 			-o ./util/avi/avilib.o 
+nvc++	 -std=c++11 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 ./util/avi/avimod.c 		  -I./util/avi 			-c 			-o ./util/avi/avimod.o 
+nvc++	 -std=c++11 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 ./util/file/file.c 		  -I./util/file 		  -I./util/timer 			-c 			-o ./util/file/file.o 
+nvc++	 -std=c++11 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 ./util/timer/timer.c 		  -I./util/timer 			-c 			-o ./util/timer/timer.o 
+nvc++	 -std=c++11 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 ./main.o 		  ./kernel/kernel.o 			./util/avi/avilib.o 			./util/avi/avimod.o 			./util/file/file.o 			./util/timer/timer.o 			-lm -o heartwall
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "../heartwall-cuda/prepare_data.sh; time -p ( ./heartwall 104 1>log.std 2>log.err ) 2> log.time"

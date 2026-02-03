@@ -1,2 +1,34 @@
+../cmp-cuda/su_cdp.cpp:31:20: warning: field '_cdp' will be initialized after field '_traces' [-Wreorder-ctor]
+   31 | su_cdp::su_cdp() : _cdp(INT_MIN), _traces(0) {
+      |                    ^~~~~~~~~~~~~  ~~~~~~~~~~
+      |                    _traces(0)     _cdp(INT_MIN)
+1 warning generated.
+../cmp-cuda/su_cdp.cpp:31:20: warning: field '_cdp' will be initialized after field '_traces' [-Wreorder-ctor]
+   31 | su_cdp::su_cdp() : _cdp(INT_MIN), _traces(0) {
+      |                    ^~~~~~~~~~~~~  ~~~~~~~~~~
+      |                    _traces(0)     _cdp(INT_MIN)
+1 warning generated.
+../cmp-cuda/su_gather.cpp:34:3: warning: initializer order does not match the declaration order [-Wreorder-ctor]
+   34 |   _ttraces(0), _nos(0), _ns(-1), _ntrs(0)
+      |   ^~~~~~~~~~~  ~~~~~~~  ~~~~~~~  ~~~~~~~~
+      |   _ns(-1)      _ntrs(0) _nos(0)  _ttraces(0)
+../cmp-cuda/su_gather.cpp:34:3: note: field '_ttraces' will be initialized after field '_nos'
+   34 |   _ttraces(0), _nos(0), _ns(-1), _ntrs(0)
+      |   ^~~~~~~~~~~
+../cmp-cuda/su_gather.cpp:34:16: note: field '_nos' will be initialized after field '_ns'
+   34 |   _ttraces(0), _nos(0), _ns(-1), _ntrs(0)
+      |                ^~~~~~~
+1 warning generated.
+../cmp-cuda/su_gather.cpp:34:3: warning: initializer order does not match the declaration order [-Wreorder-ctor]
+   34 |   _ttraces(0), _nos(0), _ns(-1), _ntrs(0)
+      |   ^~~~~~~~~~~  ~~~~~~~  ~~~~~~~  ~~~~~~~~
+      |   _ns(-1)      _ntrs(0) _nos(0)  _ttraces(0)
+../cmp-cuda/su_gather.cpp:34:3: note: field '_ttraces' will be initialized after field '_nos'
+   34 |   _ttraces(0), _nos(0), _ns(-1), _ntrs(0)
+      |   ^~~~~~~~~~~
+../cmp-cuda/su_gather.cpp:34:16: note: field '_nos' will be initialized after field '_ns'
+   34 |   _ttraces(0), _nos(0), _ns(-1), _ntrs(0)
+      |                ^~~~~~~
+1 warning generated.
 make: *** [Makefile.NVD:106: run_mem] Error 134
 timeout was set to  600

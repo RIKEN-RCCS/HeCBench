@@ -1,1 +1,35 @@
+main:
+     29, Loop not vectorized/parallelized: contains call
+     36, Loop not vectorized/parallelized: contains call
+        1861, Loop not fused: function call before adjacent loop
+              Loop not vectorized: may not be beneficial for target
+           9, Loop not fused: function call before adjacent loop
+     53, Loop not vectorized/parallelized: contains call
+     54, #omp target teams distribute num_teams(ngrid)
+         46, Generating map(to:data[:data_size],label[:nrows]) 
+             Generating map(alloc:count[:]) 
+         54, Generating "nvkernel_main_F1L54_2" GPU kernel
+         58, Loop parallelized across teams, schedule(static)
+         63, Team private (label_pred,row,ngt,label_data) located in CUDA shared memory
+             #omp parallel
+           63, Generating reduction(+:ngt)
+               Loop parallelized across threads, schedule(static)
+     54, Generating update to(count[:])
+         Generating implicit map(tofrom:count[:]) 
+     58, Loop not vectorized/parallelized: contains structure move
+     63, Loop not vectorized/parallelized: not countable
+     81, Generating update from(count[:])
+float std::uniform_real_distribution<float>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&):
+        1870, Loop not vectorized: data dependency
+float std::uniform_real_distribution<float>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&, std::uniform_real_distribution<float>::param_type const&):
+         189, Loop not vectorized: data dependency
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      3, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::__detail::_Adaptor<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>, float>::operator()():
+        3364, Loop not vectorized: data dependency
+float std::generate_canonical<float, 24ul, std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&):
+      4, include "random"
+          51, include "random.tcc"
+             3364, Loop not vectorized: data dependency
 timeout was set to  600

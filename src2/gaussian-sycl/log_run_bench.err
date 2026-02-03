@@ -1,1 +1,21 @@
+gaussianElim.cpp:20:13: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+   20 |   float coe[2*size-1];
+      |             ^~~~~~~~
+gaussianElim.cpp:20:15: note: function parameter 'size' with unknown value cannot be used in a constant expression
+   20 |   float coe[2*size-1];
+      |               ^
+gaussianElim.cpp:17:32: note: declared here
+   17 | void init_matrix(float *m, int size){
+      |                                ^
+1 warning generated.
+gaussianElim.cpp:20:13: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+   20 |   float coe[2*size-1];
+      |             ^~~~~~~~
+gaussianElim.cpp:20:15: note: function parameter 'size' with unknown value cannot be used in a constant expression
+   20 |   float coe[2*size-1];
+      |               ^
+gaussianElim.cpp:17:32: note: declared here
+   17 | void init_matrix(float *m, int size){
+      |                                ^
+1 warning generated.
 timeout was set to  600

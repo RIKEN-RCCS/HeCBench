@@ -1,10 +1,10 @@
 =========== Data type is FP32 ==========
-Average execution time of cross1 kernel: 774.129456 (us)
-Average execution time of cross2 kernel: 772.939087 (us)
-Average execution time of cross3 kernel: 772.597656 (us)
+Average execution time of cross1 kernel: 774.256592 (us)
+Average execution time of cross2 kernel: 773.518677 (us)
+Average execution time of cross3 kernel: 773.344604 (us)
 PASS
 =========== Data type is FP64 ==========
-Average execution time of cross1 kernel: 1547.967163 (us)
-Average execution time of cross2 kernel: 1546.490356 (us)
-Average execution time of cross3 kernel: 1546.349243 (us)
+Average execution time of cross1 kernel: 1548.396118 (us)
+Average execution time of cross2 kernel: 1547.305420 (us)
+Average execution time of cross3 kernel: 1547.009888 (us)
 PASS

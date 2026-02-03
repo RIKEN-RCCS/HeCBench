@@ -1,1 +1,33 @@
+In file included from main.cpp:6:
+../romberg-cuda/reference.h:22:13: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+   22 |   double R1[max_steps], R2[max_steps]; // buffers
+      |             ^~~~~~~~~
+../romberg-cuda/reference.h:22:13: note: function parameter 'max_steps' with unknown value cannot be used in a constant expression
+../romberg-cuda/reference.h:21:67: note: declared here
+   21 | double reference (double (*f)(double), double a, double b, size_t max_steps, double acc) {
+      |                                                                   ^
+../romberg-cuda/reference.h:22:28: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+   22 |   double R1[max_steps], R2[max_steps]; // buffers
+      |                            ^~~~~~~~~
+../romberg-cuda/reference.h:22:28: note: function parameter 'max_steps' with unknown value cannot be used in a constant expression
+../romberg-cuda/reference.h:21:67: note: declared here
+   21 | double reference (double (*f)(double), double a, double b, size_t max_steps, double acc) {
+      |                                                                   ^
+2 warnings generated.
+In file included from main.cpp:6:
+../romberg-cuda/reference.h:22:13: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+   22 |   double R1[max_steps], R2[max_steps]; // buffers
+      |             ^~~~~~~~~
+../romberg-cuda/reference.h:22:13: note: function parameter 'max_steps' with unknown value cannot be used in a constant expression
+../romberg-cuda/reference.h:21:67: note: declared here
+   21 | double reference (double (*f)(double), double a, double b, size_t max_steps, double acc) {
+      |                                                                   ^
+../romberg-cuda/reference.h:22:28: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+   22 |   double R1[max_steps], R2[max_steps]; // buffers
+      |                            ^~~~~~~~~
+../romberg-cuda/reference.h:22:28: note: function parameter 'max_steps' with unknown value cannot be used in a constant expression
+../romberg-cuda/reference.h:21:67: note: declared here
+   21 | double reference (double (*f)(double), double a, double b, size_t max_steps, double acc) {
+      |                                                                   ^
+2 warnings generated.
 timeout was set to  600

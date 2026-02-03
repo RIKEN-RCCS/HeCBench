@@ -3,7 +3,7 @@ Reading input image...
    Reading RAW Image
    Bytes read = 524288
 
-   Average kernel execution time 9.84599e-06 (s)
+   Average kernel execution time 9.825e-06 (s)
    Max output error is 0
 
    Writing RAW Image

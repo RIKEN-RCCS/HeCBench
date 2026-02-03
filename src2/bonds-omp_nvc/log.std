@@ -7,9 +7,9 @@ Bond Maturity Date: 9-12-2001
 Bond rate: 0.030055
 
 Run on GPU
-Average kernel execution time on GPU: 27.098200 (ms)  
+Average kernel execution time on GPU: 27.109110 (ms)  
 
-Average processing time on GPU: 50.703580 (ms)  
+Average processing time on GPU: 50.543470 (ms)  
 
 Sum of output dirty prices on GPU: 93956279.500450
 Outputs on GPU for bond with index 500000: 
@@ -19,7 +19,7 @@ Clean Price: 89.976921
 Bond Forward Val: 272731840.000000
 
 Run on CPU
-Average processing time on CPU: 3017.351000 (ms)  
+Average processing time on CPU: 2982.898000 (ms)  
 
 Sum of output dirty prices on CPU: 93956279.538177
 Outputs on CPU for bond with index 500000: 
@@ -28,4 +28,4 @@ Accrued Amount: 1.494384
 Clean Price: 89.976929
 Bond Forward Val: 272731968.000000
 
-Speedup using GPU: 59.509624
+Speedup using GPU: 59.016486

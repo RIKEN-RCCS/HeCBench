@@ -1,5 +1,9 @@
+nvc++  -Wall  -I../rsc-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+nvc++  -Wall  -I../rsc-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c model_eval.cpp -o model_eval.o
+nvc++  -Wall  -I../rsc-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c ../rsc-cuda/model_fitting.cpp -o model_fitting.o
+nvc++  -Wall  -I../rsc-cuda -O3 -Minfo -mp=gpu -gpu=cc90 main.o model_eval.o model_fitting.o  -o main -lpthread 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "time -p ( ./main -m 2000 -f ../rsc-cuda/input/vectors.csv -g 512 1>log.std 2>log.err ) 2> log.time"
 pkill nvidia-smi
 ../scripts/m.sh
-min max diff memory in [MB] : 1 558 557
+min max diff memory in [MB] : 1 559 558

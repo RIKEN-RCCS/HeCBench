@@ -1,0 +1,4 @@
+bunzip2: Can't open input file ../hogbom-cuda/data/dirty_4096.img.bz2: No such file or directory.
+bunzip2: Can't open input file ../hogbom-cuda/data/psf_4096.img.bz2: No such file or directory.
+make: *** [Makefile.NVD:99: run_mem] Error 1
+timeout was set to  600

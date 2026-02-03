@@ -10,15 +10,15 @@ Number of input blocks                  NB_INPUT_BLOCK       1024
 CPU speed test started 
 
 506f1eca ab60120a b402f830 ea46f6c2 75d8b317 0f7944a5 60b36a16 64d38a43 
-CPU speed : 110442.50 kB/s 
+CPU speed : 110076.26 kB/s 
 
-CPU time : 9.72218 s 
+CPU time : 9.75453 s 
 
 GPU speed test started
 
 506f1eca ab60120a b402f830 ea46f6c2 75d8b317 0f7944a5 60b36a16 64d38a43 
-GPU speed : 735831.07 kB/s 
+GPU speed : 736137.96 kB/s 
 
-GPU time : 1.45922 s 
+GPU time : 1.45861 s 
 
 PASS

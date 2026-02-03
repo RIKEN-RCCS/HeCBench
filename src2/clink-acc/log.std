@@ -1,24 +1,24 @@
-Device offload time: 2430 ms
+Device offload time: 2468 ms
 PASS
-Device offload time: 76 ms
+Device offload time: 77 ms
 PASS
+Device offload time: 54 ms
+Device offload time: 1227 ms
+Device offload time: 57 ms
+Device offload time: 54 ms
+Device offload time: 54 ms
+Device offload time: 54 ms
+Device offload time: 54 ms
+Device offload time: 54 ms
+Device offload time: 54 ms
 Device offload time: 56 ms
-Device offload time: 53 ms
+Device offload time: 54 ms
 Device offload time: 56 ms
-Device offload time: 53 ms
-Device offload time: 53 ms
+Device offload time: 54 ms
+Device offload time: 54 ms
+Device offload time: 56 ms
 Device offload time: 53 ms
 Device offload time: 54 ms
-Device offload time: 53 ms
-Device offload time: 53 ms
-Device offload time: 53 ms
-Device offload time: 53 ms
-Device offload time: 56 ms
-Device offload time: 53 ms
-Device offload time: 53 ms
 Device offload time: 54 ms
-Device offload time: 1342 ms
-Device offload time: 56 ms
-Device offload time: 64 ms
-Average kernel time: 49.66 ms
+Average kernel time: 50.0029 ms
 Processing complete.

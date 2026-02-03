@@ -1,4 +1,4 @@
 Running on NVIDIA GH200 480GB
-After warmup for 1000 iterations, average kernel execution time over 79000 iterations:			5.526684 (us)
+After warmup for 1000 iterations, average kernel execution time over 79000 iterations:			5.528380 (us)
 ==done==
 Reynolds number:		1.006663608551E+01

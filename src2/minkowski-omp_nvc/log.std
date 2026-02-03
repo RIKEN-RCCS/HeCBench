@@ -1,6 +1,6 @@
 Problem size: c(512,2048) = a(512,1024) * b(1024,2048)
 Minkowski distance with p = 1
-Average kernel execution time: 0.000562 (s)
+Average kernel execution time: 0.000556 (s)
 PASS
 Minkowski distance with p = 2
 Average kernel execution time: 0.000549 (s)

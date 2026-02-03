@@ -1,7 +1,7 @@
 
 ### Initial depth: 7 - Size: 15:
 ### Regular BP-DFS search. ###
-Average kernel execution time: 0.213985 (s)
+Average kernel execution time: 0.213919 (s)
 
 Tree size: 2466109
 Number of solutions found: 2279184 

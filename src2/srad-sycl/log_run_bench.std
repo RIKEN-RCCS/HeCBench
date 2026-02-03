@@ -1,5 +1,10 @@
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU  ./main.cpp 		-c 		-o ./main.o 		-O3
+clang++	./util/graphics/graphics.c 		-c 		-o ./util/graphics/graphics.o 		-O3
+clang++	./util/graphics/resize.c 		-c 		-o ./util/graphics/resize.o 		-O3
+clang++	./util/timer/timer.c 		-c 		-o ./util/timer/timer.o 		-O3
+clang++  -std=c++17 -Wall -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU	./main.o 		./util/graphics/graphics.o 		./util/graphics/resize.o 		./util/timer/timer.o 		-lm 		 -o srad
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "time -p ( ././srad 1000 0.5 10000 46258 1>log.std 2>log.err ) 2> log.time"
 pkill nvidia-smi
 ../scripts/m.sh
-min max diff memory in [MB] : 28799 43482 14683
+min max diff memory in [MB] : 1 14686 14685

@@ -1,2 +1,17 @@
-../scripts/m.sh: line 5: warning: command substitution: ignored null byte in input
+In file included from main.cpp:8:
+./util.h:18:9: warning: 'assert' macro redefined [-Wmacro-redefined]
+   18 | #define assert(X)
+      |         ^
+/usr/include/assert.h:89:11: note: previous definition is here
+   89 | #  define assert(expr)                                                  \
+      |           ^
+1 warning generated.
+In file included from main.cpp:8:
+./util.h:18:9: warning: 'assert' macro redefined [-Wmacro-redefined]
+   18 | #define assert(X)
+      |         ^
+/usr/include/assert.h:89:11: note: previous definition is here
+   89 | #  define assert(expr)                                                  \
+      |           ^
+1 warning generated.
 timeout was set to  600

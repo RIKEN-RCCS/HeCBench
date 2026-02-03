@@ -1,1 +1,229 @@
+main.cpp:887:9: warning: 'nd_range' is deprecated: offsets are deprecated in SYCL2020 [-Wdeprecated-declarations]
+  887 |         sycl::nd_range<2>(sycl::range<2>((Imax-Imin+16)/16*16, (Jmax-Jmin+16)/16*16), 
+      |         ^
+/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/nd_range.hpp:40:3: note: 'nd_range' has been explicitly marked deprecated here
+   40 |   __SYCL2020_DEPRECATED("offsets are deprecated in SYCL2020")
+      |   ^
+/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/detail/defines_elementary.hpp:71:40: note: expanded from macro '__SYCL2020_DEPRECATED'
+   71 | #define __SYCL2020_DEPRECATED(message) __SYCL_DEPRECATED(message)
+      |                                        ^
+/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/detail/defines_elementary.hpp:62:38: note: expanded from macro '__SYCL_DEPRECATED'
+   62 | #define __SYCL_DEPRECATED(message) [[deprecated(message)]]
+      |                                      ^
+main.cpp:887:9: warning: 'nd_range' is deprecated: offsets are deprecated in SYCL2020 [-Wdeprecated-declarations]
+  887 |         sycl::nd_range<2>(sycl::range<2>((Imax-Imin+16)/16*16, (Jmax-Jmin+16)/16*16), 
+      |         ^
+/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/nd_range.hpp:40:3: note: 'nd_range' has been explicitly marked deprecated here
+   40 |   __SYCL2020_DEPRECATED("offsets are deprecated in SYCL2020")
+      |   ^
+/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/detail/defines_elementary.hpp:71:40: note: expanded from macro '__SYCL2020_DEPRECATED'
+   71 | #define __SYCL2020_DEPRECATED(message) __SYCL_DEPRECATED(message)
+      |                                        ^
+/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/detail/defines_elementary.hpp:62:38: note: expanded from macro '__SYCL_DEPRECATED'
+   62 | #define __SYCL_DEPRECATED(message) [[deprecated(message)]]
+      |                                      ^
+main.cpp:963:7: warning: 'nd_range' is deprecated: offsets are deprecated in SYCL2020 [-Wdeprecated-declarations]
+  963 |       sycl::nd_range<2>(sycl::range<2>((Imax-Imin+16)/16*16, (Jmax-Jmin+16)/16*16), 
+      |       ^
+/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/nd_range.hpp:40:3: note: 'nd_range' has been explicitly marked deprecated here
+   40 |   __SYCL2020_DEPRECATED("offsets are deprecated in SYCL2020")
+      |   ^
+/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/detail/defines_elementary.hpp:71:40: note: expanded from macro '__SYCL2020_DEPRECATED'
+   71 | #define __SYCL2020_DEPRECATED(message) __SYCL_DEPRECATED(message)
+      |                                        ^
+/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/detail/defines_elementary.hpp:62:38: note: expanded from macro '__SYCL_DEPRECATED'
+   62 | #define __SYCL_DEPRECATED(message) [[deprecated(message)]]
+      |                                      ^
+main.cpp:963:7: warning: 'nd_range' is deprecated: offsets are deprecated in SYCL2020 [-Wdeprecated-declarations]
+  963 |       sycl::nd_range<2>(sycl::range<2>((Imax-Imin+16)/16*16, (Jmax-Jmin+16)/16*16), 
+      |       ^
+/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/nd_range.hpp:40:3: note: 'nd_range' has been explicitly marked deprecated here
+   40 |   __SYCL2020_DEPRECATED("offsets are deprecated in SYCL2020")
+      |   ^
+/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/detail/defines_elementary.hpp:71:40: note: expanded from macro '__SYCL2020_DEPRECATED'
+   71 | #define __SYCL2020_DEPRECATED(message) __SYCL_DEPRECATED(message)
+      |                                        ^
+/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/detail/defines_elementary.hpp:62:38: note: expanded from macro '__SYCL_DEPRECATED'
+   62 | #define __SYCL_DEPRECATED(message) [[deprecated(message)]]
+      |                                      ^
+4 warnings generated.
+main.cpp:887:9: warning: 'nd_range' is deprecated: offsets are deprecated in SYCL2020 [-Wdeprecated-declarations]
+  887 |         sycl::nd_range<2>(sycl::range<2>((Imax-Imin+16)/16*16, (Jmax-Jmin+16)/16*16), 
+      |         ^
+/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/nd_range.hpp:40:3: note: 'nd_range' has been explicitly marked deprecated here
+   40 |   __SYCL2020_DEPRECATED("offsets are deprecated in SYCL2020")
+      |   ^
+/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/detail/defines_elementary.hpp:71:40: note: expanded from macro '__SYCL2020_DEPRECATED'
+   71 | #define __SYCL2020_DEPRECATED(message) __SYCL_DEPRECATED(message)
+      |                                        ^
+/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/detail/defines_elementary.hpp:62:38: note: expanded from macro '__SYCL_DEPRECATED'
+   62 | #define __SYCL_DEPRECATED(message) [[deprecated(message)]]
+      |                                      ^
+main.cpp:887:9: warning: 'nd_range' is deprecated: offsets are deprecated in SYCL2020 [-Wdeprecated-declarations]
+  887 |         sycl::nd_range<2>(sycl::range<2>((Imax-Imin+16)/16*16, (Jmax-Jmin+16)/16*16), 
+      |         ^
+/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/nd_range.hpp:40:3: note: 'nd_range' has been explicitly marked deprecated here
+   40 |   __SYCL2020_DEPRECATED("offsets are deprecated in SYCL2020")
+      |   ^
+/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/detail/defines_elementary.hpp:71:40: note: expanded from macro '__SYCL2020_DEPRECATED'
+   71 | #define __SYCL2020_DEPRECATED(message) __SYCL_DEPRECATED(message)
+      |                                        ^
+/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/detail/defines_elementary.hpp:62:38: note: expanded from macro '__SYCL_DEPRECATED'
+   62 | #define __SYCL_DEPRECATED(message) [[deprecated(message)]]
+      |                                      ^
+main.cpp:963:7: warning: 'nd_range' is deprecated: offsets are deprecated in SYCL2020 [-Wdeprecated-declarations]
+  963 |       sycl::nd_range<2>(sycl::range<2>((Imax-Imin+16)/16*16, (Jmax-Jmin+16)/16*16), 
+      |       ^
+/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/nd_range.hpp:40:3: note: 'nd_range' has been explicitly marked deprecated here
+   40 |   __SYCL2020_DEPRECATED("offsets are deprecated in SYCL2020")
+      |   ^
+/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/detail/defines_elementary.hpp:71:40: note: expanded from macro '__SYCL2020_DEPRECATED'
+   71 | #define __SYCL2020_DEPRECATED(message) __SYCL_DEPRECATED(message)
+      |                                        ^
+/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/detail/defines_elementary.hpp:62:38: note: expanded from macro '__SYCL_DEPRECATED'
+   62 | #define __SYCL_DEPRECATED(message) [[deprecated(message)]]
+      |                                      ^
+main.cpp:963:7: warning: 'nd_range' is deprecated: offsets are deprecated in SYCL2020 [-Wdeprecated-declarations]
+  963 |       sycl::nd_range<2>(sycl::range<2>((Imax-Imin+16)/16*16, (Jmax-Jmin+16)/16*16), 
+      |       ^
+/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/nd_range.hpp:40:3: note: 'nd_range' has been explicitly marked deprecated here
+   40 |   __SYCL2020_DEPRECATED("offsets are deprecated in SYCL2020")
+      |   ^
+/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/detail/defines_elementary.hpp:71:40: note: expanded from macro '__SYCL2020_DEPRECATED'
+   71 | #define __SYCL2020_DEPRECATED(message) __SYCL_DEPRECATED(message)
+      |                                        ^
+/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/detail/defines_elementary.hpp:62:38: note: expanded from macro '__SYCL_DEPRECATED'
+   62 | #define __SYCL_DEPRECATED(message) [[deprecated(message)]]
+      |                                      ^
+4 warnings generated.
+cOgrd.cpp:178:7: warning: variable 'ierr' set but not used [-Wunused-but-set-variable]
+  178 |   int ierr,isBin;
+      |       ^
+cOgrd.cpp:180:9: warning: unused variable 'fval' [-Wunused-variable]
+  180 |   float fval;
+      |         ^~~~
+cOgrd.cpp:243:11: warning: variable 'ierr' set but not used [-Wunused-but-set-variable]
+  243 |   int i,j,ierr,isBin;
+      |           ^
+cOgrd.cpp:459:10: warning: unused variable 'x0' [-Wunused-variable]
+  459 |   double x0,x,y0,y,z;
+      |          ^~
+cOgrd.cpp:459:13: warning: unused variable 'x' [-Wunused-variable]
+  459 |   double x0,x,y0,y,z;
+      |             ^
+cOgrd.cpp:459:15: warning: unused variable 'y0' [-Wunused-variable]
+  459 |   double x0,x,y0,y,z;
+      |               ^~
+cOgrd.cpp:459:18: warning: unused variable 'y' [-Wunused-variable]
+  459 |   double x0,x,y0,y,z;
+      |                  ^
+cOgrd.cpp:459:20: warning: unused variable 'z' [-Wunused-variable]
+  459 |   double x0,x,y0,y,z;
+      |                    ^
+8 warnings generated.
+cOgrd.cpp:178:7: warning: variable 'ierr' set but not used [-Wunused-but-set-variable]
+  178 |   int ierr,isBin;
+      |       ^
+cOgrd.cpp:180:9: warning: unused variable 'fval' [-Wunused-variable]
+  180 |   float fval;
+      |         ^~~~
+cOgrd.cpp:243:11: warning: variable 'ierr' set but not used [-Wunused-but-set-variable]
+  243 |   int i,j,ierr,isBin;
+      |           ^
+cOgrd.cpp:459:10: warning: unused variable 'x0' [-Wunused-variable]
+  459 |   double x0,x,y0,y,z;
+      |          ^~
+cOgrd.cpp:459:13: warning: unused variable 'x' [-Wunused-variable]
+  459 |   double x0,x,y0,y,z;
+      |             ^
+cOgrd.cpp:459:15: warning: unused variable 'y0' [-Wunused-variable]
+  459 |   double x0,x,y0,y,z;
+      |               ^~
+cOgrd.cpp:459:18: warning: unused variable 'y' [-Wunused-variable]
+  459 |   double x0,x,y0,y,z;
+      |                  ^
+cOgrd.cpp:459:20: warning: unused variable 'z' [-Wunused-variable]
+  459 |   double x0,x,y0,y,z;
+      |                    ^
+8 warnings generated.
+cOkadaFault.cpp:73:7: warning: unused variable 'ierr' [-Wunused-variable]
+   73 |   int ierr;
+      |       ^~~~
+cOkadaFault.cpp:333:23: warning: explicitly assigning value of variable of type 'double' to itself [-Wself-assign]
+  333 |   case FLT_POS_BT: lx = lx           ; ly = ly + wp  ; break;
+      |                    ~~ ^ ~~
+cOkadaFault.cpp:334:23: warning: explicitly assigning value of variable of type 'double' to itself [-Wself-assign]
+  334 |   case FLT_POS_BB: lx = lx           ; ly = ly       ; break;
+      |                    ~~ ^ ~~
+cOkadaFault.cpp:334:43: warning: explicitly assigning value of variable of type 'double' to itself [-Wself-assign]
+  334 |   case FLT_POS_BB: lx = lx           ; ly = ly       ; break;
+      |                                        ~~ ^ ~~
+cOkadaFault.cpp:335:43: warning: explicitly assigning value of variable of type 'double' to itself [-Wself-assign]
+  335 |   case FLT_POS_MB: lx = lx + length/2; ly = ly       ; break;
+      |                                        ~~ ^ ~~
+cOkadaFault.cpp:379:7: warning: unused variable 'ierr' [-Wunused-variable]
+  379 |   int ierr;
+      |       ^~~~
+cOkadaFault.cpp:415:7: warning: unused variable 'ierr' [-Wunused-variable]
+  415 |   int ierr;
+      |       ^~~~
+cOkadaFault.cpp:438:7: warning: unused variable 'ierr' [-Wunused-variable]
+  438 |   int ierr;
+      |       ^~~~
+8 warnings generated.
+cOkadaFault.cpp:73:7: warning: unused variable 'ierr' [-Wunused-variable]
+   73 |   int ierr;
+      |       ^~~~
+cOkadaFault.cpp:333:23: warning: explicitly assigning value of variable of type 'double' to itself [-Wself-assign]
+  333 |   case FLT_POS_BT: lx = lx           ; ly = ly + wp  ; break;
+      |                    ~~ ^ ~~
+cOkadaFault.cpp:334:23: warning: explicitly assigning value of variable of type 'double' to itself [-Wself-assign]
+  334 |   case FLT_POS_BB: lx = lx           ; ly = ly       ; break;
+      |                    ~~ ^ ~~
+cOkadaFault.cpp:334:43: warning: explicitly assigning value of variable of type 'double' to itself [-Wself-assign]
+  334 |   case FLT_POS_BB: lx = lx           ; ly = ly       ; break;
+      |                                        ~~ ^ ~~
+cOkadaFault.cpp:335:43: warning: explicitly assigning value of variable of type 'double' to itself [-Wself-assign]
+  335 |   case FLT_POS_MB: lx = lx + length/2; ly = ly       ; break;
+      |                                        ~~ ^ ~~
+cOkadaFault.cpp:379:7: warning: unused variable 'ierr' [-Wunused-variable]
+  379 |   int ierr;
+      |       ^~~~
+cOkadaFault.cpp:415:7: warning: unused variable 'ierr' [-Wunused-variable]
+  415 |   int ierr;
+      |       ^~~~
+cOkadaFault.cpp:438:7: warning: unused variable 'ierr' [-Wunused-variable]
+  438 |   int ierr;
+      |       ^~~~
+8 warnings generated.
+cOkadaEarthquake.cpp:90:8: warning: unused variable 'msg' [-Wunused-variable]
+   90 |   char msg[32];
+      |        ^~~
+1 warning generated.
+cOkadaEarthquake.cpp:90:8: warning: unused variable 'msg' [-Wunused-variable]
+   90 |   char msg[32];
+      |        ^~~
+1 warning generated.
+cSphere.cpp:129:10: warning: unused variable 'lonr' [-Wunused-variable]
+  129 |   double lonr,latr;
+      |          ^~~~
+cSphere.cpp:129:15: warning: unused variable 'latr' [-Wunused-variable]
+  129 |   double lonr,latr;
+      |               ^~~~
+2 warnings generated.
+cSphere.cpp:129:10: warning: unused variable 'lonr' [-Wunused-variable]
+  129 |   double lonr,latr;
+      |          ^~~~
+cSphere.cpp:129:15: warning: unused variable 'latr' [-Wunused-variable]
+  129 |   double lonr,latr;
+      |               ^~~~
+2 warnings generated.
+utilits.cpp:806:19: warning: unused variable 'cp' [-Wunused-variable]
+  806 |   char buf[256], *cp;
+      |                   ^~
+1 warning generated.
+utilits.cpp:806:19: warning: unused variable 'cp' [-Wunused-variable]
+  806 |   char buf[256], *cp;
+      |                   ^~
+1 warning generated.
 timeout was set to  600

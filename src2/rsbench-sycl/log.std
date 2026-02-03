@@ -45,10 +45,10 @@ Simulation Complete.
                                      RESULTS
 ================================================================================
 Total Time Statistics (SYCL Init / JIT Compilation + Simulation Kernel)
-Runtime:               4.941 seconds
+Runtime:               3.321 seconds
 Lookups:               10,200,000
-Lookups/s:             2,064,359
+Lookups/s:             3,071,364
 Simulation Kernel Only Statistics
-Lookups/s:             10,885,805
+Lookups/s:             10,874,200
 Verification checksum: 358389 (Valid)
 ================================================================================

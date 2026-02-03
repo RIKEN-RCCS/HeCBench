@@ -1,12 +1,12 @@
 Random number generator seed = 123
 Initializing keyvalue pairs with random numbers...
 Testing insertion/deletion of 33554432/16777216 elements into GPU hash table...
-Average kernel execution time (insert): 0.000184 (s)
-Average kernel execution time (delete): 0.000182 (s)
-Kernel execution time (iterate): 0.001779 (s)
-Total time (including memory copies, readback, etc): 27.193001 ms (1233.936345 million keys/second)
+Average kernel execution time (insert): 0.000182 (s)
+Average kernel execution time (delete): 0.000179 (s)
+Kernel execution time (iterate): 0.001776 (s)
+Total time (including memory copies, readback, etc): 18.600000 ms (1804.001683 million keys/second)
 Timing std::unordered_map...
-Total time for std::unordered_map: 33538.308594 ms (1.000481 million keys/second)
+Total time for std::unordered_map: 32299.183594 ms (1.038863 million keys/second)
 Testing that there are no duplicate keys...
     Verifying 0/16679187
     Verifying 10000000/16679187

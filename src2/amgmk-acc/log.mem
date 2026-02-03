@@ -13,9 +13,8 @@ memory.used [MiB], memory.total [MiB]
 1 MiB, 97871 MiB
 3 MiB, 97871 MiB
 3 MiB, 97871 MiB
-3 MiB, 97871 MiB
 20 MiB, 97871 MiB
-22 MiB, 97871 MiB
+20 MiB, 97871 MiB
 22 MiB, 97871 MiB
 22 MiB, 97871 MiB
 24 MiB, 97871 MiB
@@ -41,8 +40,8 @@ memory.used [MiB], memory.total [MiB]
 44 MiB, 97871 MiB
 44 MiB, 97871 MiB
 44 MiB, 97871 MiB
-46 MiB, 97871 MiB
-46 MiB, 97871 MiB
+44 MiB, 97871 MiB
+48 MiB, 97871 MiB
 48 MiB, 97871 MiB
 50 MiB, 97871 MiB
 52 MiB, 97871 MiB
@@ -97,8 +96,11 @@ memory.used [MiB], memory.total [MiB]
 572 MiB, 97871 MiB
 572 MiB, 97871 MiB
 572 MiB, 97871 MiB
+572 MiB, 97871 MiB
 570 MiB, 97871 MiB
 570 MiB, 97871 MiB
+570 MiB, 97871 MiB
+2 MiB, 97871 MiB
 2 MiB, 97871 MiB
 2 MiB, 97871 MiB
 2 MiB, 97871 MiB

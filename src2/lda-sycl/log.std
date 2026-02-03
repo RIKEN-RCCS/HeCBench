@@ -1,3 +1,3 @@
-Average kernel execution time (training): 0.006535 (s)
-Average kernel execution time (validation): 0.000376 (s)
+Average kernel execution time (training): 0.006530 (s)
+Average kernel execution time (validation): 0.000375 (s)
 Total train and validate loss: -424185.937500 -428572.218750

@@ -1,2 +1,186 @@
+main:
+    988, Loop not vectorized/parallelized: contains call
+   1061, Generating map(alloc:h_paths[:num_timesteps*num_paths],h_all_out_of_the_money[:num_timesteps],h_samples[:num_timesteps*num_paths],h_svds[:num_timesteps*16],h_temp_storage[:max_temp_storage]) 
+   1070, Loop not vectorized/parallelized: contains call
+         924, Loop not fused: different loop trip count
+              Loop not vectorized: recurrence
+              Loop unrolled 2 times
+         930, Loop not fused: function call before adjacent loop
+         933, Loop not vectorized: data dependency
+         924, Loop not fused: different loop trip count
+              Loop not vectorized: recurrence
+              Loop unrolled 2 times
+         930, Loop not fused: function call before adjacent loop
+         933, Loop not vectorized: data dependency
+void _INTERNAL_8_main_cpp_main::do_run<PayoffPut>(double*, int, int, PayoffPut const&, double, double, double, double, double*, double*, double*, int*, double*, double&):
+    823, Generating update to(h_samples[:num_paths*num_timesteps])
+    824, #omp target teams distribute parallel for thread_limit(256)
+        824, Generating "nvkernel__ZN25_INTERNAL_8_main_cpp_main6do_runI9PayoffPutEEvPdiiRKT_ddddS2_S2_S2_PiS2_Rd_F1L824_2" GPU kernel
+        837, Loop parallelized across teams and threads(128), schedule(static)
+    837, Loop not vectorized/parallelized: not countable
+    875, Loop not vectorized/parallelized: contains call
+void _INTERNAL_8_main_cpp_main::do_run<PayoffCall>(double*, int, int, PayoffCall const&, double, double, double, double, double*, double*, double*, int*, double*, double&):
+    823, Generating update to(h_samples[:num_paths*num_timesteps])
+    824, #omp target teams distribute parallel for thread_limit(256)
+        824, Generating "nvkernel__ZN25_INTERNAL_8_main_cpp_main6do_runI10PayoffCallEEvPdiiRKT_ddddS2_S2_S2_PiS2_Rd_F1L824_6" GPU kernel
+        837, Loop parallelized across teams and threads(128), schedule(static)
+    837, Loop not vectorized/parallelized: not countable
+    875, Loop not vectorized/parallelized: contains call
+void compute_sums_kernel<128>(int, double const*, double, double&):
+    795, #omp target teams distribute parallel for thread_limit(128)
+        795, Generating "nvkernel__Z19compute_sums_kernelILi128EEviPKddRd_F1L795_10" GPU kernel
+             Loop parallelized across teams and threads(128), schedule(static)
+             Generating reduction(+:sum)
+    795, Generating map(tofrom:sum) 
+         Loop not vectorized/parallelized: not countable
+void generate_paths_kernel<256, PayoffPut>(int, int, PayoffPut, double, double, double, double, double const*, double*):
+     95, #omp target teams distribute parallel for thread_limit(256)
+         95, Generating "nvkernel__Z21generate_paths_kernelILi256E9PayoffPutEviiT0_ddddPKdPd_F1L95_14" GPU kernel
+         98, Loop parallelized across teams and threads(128), schedule(static)
+     95, Generating implicit map(tofrom:payoff) 
+     98, Loop not vectorized/parallelized: not countable
+    112, Loop not vectorized: recurrence
+void prepare_svd_kernel<256, PayoffPut>(int, int, int, PayoffPut, double const*, int*, double*):
+    492, #omp target teams num_teams(numTeams) thread_limit(256)
+        492, Generating "nvkernel__Z18prepare_svd_kernelILi256E9PayoffPutEviiiT0_PKdPiPd_F1L492_18" GPU kernel
+        504, #omp parallel
+          520, Barrier
+          536, Barrier
+          542, Barrier
+          550, Barrier
+          556, Barrier
+          561, Barrier
+          584, Barrier
+          589, Barrier
+          607, Barrier
+          618, Barrier
+          624, Barrier
+        622, Team private (smem_svds,scan_output,lsums,scan_input,lsum) located in CUDA shared memory
+    492, Generating implicit map(tofrom:payoff) 
+    526, Loop not vectorized/parallelized: contains call
+    539, Loop not vectorized: data dependency
+         276, Loop not vectorized/parallelized: potential early exits
+void compute_beta_kernel<128, PayoffPut>(int, PayoffPut, double const*, double const*, double const*, int const*, double*):
+    650, #omp target teams distribute parallel for thread_limit(128)
+        650, Generating "nvkernel__Z19compute_beta_kernelILi128E9PayoffPutEviT0_PKdS3_S3_PKiPd_F1L650_23" GPU kernel
+             Loop parallelized across teams and threads(128), schedule(static)
+             Generating reduction(+:beta)
+    650, Generating implicit map(tofrom:payoff) 
+         Generating map(tofrom:beta[:3]) 
+         Loop not vectorized/parallelized: not countable
+    726, Loop not vectorized/parallelized: not countable
+void update_cashflow_kernel<128, PayoffPut>(int, int, PayoffPut, double, double const*, double const*, int const*, double*):
+    742, #omp target teams distribute parallel for num_teams(numTeams) thread_limit(128)
+        742, Generating "nvkernel__Z22update_cashflow_kernelILi128E9PayoffPutEviiT0_dPKdS3_PKiPd_F1L742_27" GPU kernel
+        745, Loop parallelized across teams and threads(128), schedule(static)
+    742, Generating implicit map(tofrom:payoff_object) 
+    745, Invariant if transformation
+         Loop not vectorized/parallelized: not countable
+void generate_paths_kernel<256, PayoffCall>(int, int, PayoffCall, double, double, double, double, double const*, double*):
+     95, #omp target teams distribute parallel for thread_limit(256)
+         95, Generating "nvkernel__Z21generate_paths_kernelILi256E10PayoffCallEviiT0_ddddPKdPd_F1L95_31" GPU kernel
+         98, Loop parallelized across teams and threads(128), schedule(static)
+     95, Generating implicit map(tofrom:payoff) 
+     98, Loop not vectorized/parallelized: not countable
+    112, Loop not vectorized: recurrence
+void prepare_svd_kernel<256, PayoffCall>(int, int, int, PayoffCall, double const*, int*, double*):
+    492, #omp target teams num_teams(numTeams) thread_limit(256)
+        492, Generating "nvkernel__Z18prepare_svd_kernelILi256E10PayoffCallEviiiT0_PKdPiPd_F1L492_35" GPU kernel
+        504, #omp parallel
+          520, Barrier
+          536, Barrier
+          542, Barrier
+          550, Barrier
+          556, Barrier
+          561, Barrier
+          584, Barrier
+          589, Barrier
+          607, Barrier
+          618, Barrier
+          624, Barrier
+        622, Team private (smem_svds,scan_output,lsums,scan_input,lsum) located in CUDA shared memory
+    492, Generating implicit map(tofrom:payoff) 
+    526, Loop not vectorized/parallelized: contains call
+    539, Loop not vectorized: data dependency
+         276, Loop not vectorized/parallelized: potential early exits
+void compute_beta_kernel<128, PayoffCall>(int, PayoffCall, double const*, double const*, double const*, int const*, double*):
+    650, #omp target teams distribute parallel for thread_limit(128)
+        650, Generating "nvkernel__Z19compute_beta_kernelILi128E10PayoffCallEviT0_PKdS3_S3_PKiPd_F1L650_40" GPU kernel
+             Loop parallelized across teams and threads(128), schedule(static)
+             Generating reduction(+:beta)
+    650, Generating implicit map(tofrom:payoff) 
+         Generating map(tofrom:beta[:3]) 
+         Loop not vectorized/parallelized: not countable
+    726, Loop not vectorized/parallelized: not countable
+void update_cashflow_kernel<128, PayoffCall>(int, int, PayoffCall, double, double const*, double const*, int const*, double*):
+    742, #omp target teams distribute parallel for num_teams(numTeams) thread_limit(128)
+        742, Generating "nvkernel__Z22update_cashflow_kernelILi128E10PayoffCallEviiT0_dPKdS3_PKiPd_F1L742_44" GPU kernel
+        745, Loop parallelized across teams and threads(128), schedule(static)
+    742, Generating implicit map(tofrom:payoff_object) 
+    745, Invariant if transformation
+         Loop not vectorized/parallelized: not countable
+PayoffCall::operator()(double) const:
+     72, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+PayoffCall::is_in_the_money(double) const:
+     73, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+PayoffPut::operator()(double) const:
+     80, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+PayoffPut::is_in_the_money(double) const:
+     81, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+double std::normal_distribution<double>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&):
+        1821, Loop not fused: function call before adjacent loop
+              Loop not vectorized/parallelized: contains call
+              Loop not vectorized: data dependency
+        1822, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+double std::normal_distribution<double>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&, std::normal_distribution<double>::param_type const&):
+     32, include "random"
+          51, include "random.tcc"
+             1821, Loop not vectorized/parallelized: contains call
+         189, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+         189, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+std::__detail::_Adaptor<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>, double>::operator()():
+        3364, Loop not vectorized: data dependency
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     33, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000l>>::_S_gcd(long, long):
+     33, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+double std::generate_canonical<double, 53ul, std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&):
+     32, include "random"
+          51, include "random.tcc"
+             3364, Loop not vectorized: data dependency
+_INTERNAL_8_main_cpp_main::assemble_R(int, double4&, double*):
+    128, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_main::off_diag_norm(double, double, double):
+    232, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_main::swap(double&, double&):
+    237, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_main::svd_3x3(int, double4&, double*):
+    242, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+    276, Loop not vectorized/parallelized: potential early exits
+double _INTERNAL_8_main_cpp_main::binomial_tree<PayoffPut>(int, PayoffPut const&, double, double, double, double):
+    924, Loop not fused: different loop trip count
+         Loop not vectorized: recurrence
+         Loop unrolled 2 times
+    930, Loop not fused: function call before adjacent loop
+    933, Loop not vectorized: data dependency
+double _INTERNAL_8_main_cpp_main::binomial_tree<PayoffCall>(int, PayoffCall const&, double, double, double, double):
+    924, Loop not fused: different loop trip count
+         Loop not vectorized: recurrence
+         Loop unrolled 2 times
+    930, Loop not fused: function call before adjacent loop
+    933, Loop not vectorized: data dependency
 make: *** [Makefile.NVD:69: run_mem] Error 1
 timeout was set to  600

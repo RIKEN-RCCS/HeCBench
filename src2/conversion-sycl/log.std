@@ -21,39 +21,39 @@ size(GB):6.30, average time(sec):0.005349, BW:1177.790245
 float -> float
 size(GB):16.80, average time(sec):0.006438, BW:2609.506006
 float -> half
-size(GB):12.60, average time(sec):0.005829, BW:2161.605796
+size(GB):12.60, average time(sec):0.005828, BW:2161.976613
 float -> int
-size(GB):16.80, average time(sec):0.006489, BW:2588.996837
+size(GB):16.80, average time(sec):0.006490, BW:2588.597820
 float -> char
 size(GB):10.50, average time(sec):0.005581, BW:1881.383302
 float -> uchar
 size(GB):10.50, average time(sec):0.005582, BW:1881.046177
 int -> int
-size(GB):16.80, average time(sec):0.006438, BW:2609.506006
+size(GB):16.80, average time(sec):0.006437, BW:2609.911495
 int -> float
-size(GB):16.80, average time(sec):0.006455, BW:2602.633608
+size(GB):16.80, average time(sec):0.006454, BW:2603.036964
 int -> half
-size(GB):12.60, average time(sec):0.005846, BW:2155.319947
+size(GB):12.60, average time(sec):0.005845, BW:2155.688609
 int -> char
 size(GB):10.50, average time(sec):0.005526, BW:1900.108520
 int -> uchar
-size(GB):10.50, average time(sec):0.005526, BW:1900.108520
+size(GB):10.50, average time(sec):0.005525, BW:1900.452514
 char -> int
 size(GB):10.50, average time(sec):0.005605, BW:1873.327362
 char -> float
-size(GB):10.50, average time(sec):0.005622, BW:1867.662764
+size(GB):10.50, average time(sec):0.005621, BW:1867.994955
 char -> half
 size(GB):6.30, average time(sec):0.005298, BW:1189.128011
 char -> char
-size(GB):4.20, average time(sec):0.005043, BW:832.837600
+size(GB):4.20, average time(sec):0.005044, BW:832.672445
 char -> uchar
 size(GB):4.20, average time(sec):0.005037, BW:833.829671
 uchar -> int
-size(GB):10.50, average time(sec):0.005606, BW:1872.993273
+size(GB):10.50, average time(sec):0.005605, BW:1873.327362
 uchar -> float
-size(GB):10.50, average time(sec):0.005621, BW:1867.994955
+size(GB):10.50, average time(sec):0.005618, BW:1868.992545
 uchar -> half
-size(GB):6.30, average time(sec):0.005299, BW:1188.903551
+size(GB):6.30, average time(sec):0.005298, BW:1189.128011
 uchar -> char
 size(GB):4.20, average time(sec):0.005038, BW:833.664123
 uchar -> uchar

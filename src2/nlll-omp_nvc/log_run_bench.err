@@ -1,1 +1,119 @@
+"main.cpp", line 78: warning: variable "input_size" was declared but never referenced [declared_but_not_referenced]
+    int64_t input_size = nframe * n_classes;
+            ^
+          detected during instantiation of "void driver<scalar_t,index_t>(char **) [with scalar_t=float, index_t=int]" at line 195
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"main.cpp", line 79: warning: variable "weights_size" was declared but never referenced [declared_but_not_referenced]
+    int64_t weights_size = nframe;
+            ^
+          detected during instantiation of "void driver<scalar_t,index_t>(char **) [with scalar_t=float, index_t=int]" at line 195
+
+"main.cpp", line 80: warning: variable "target_size" was declared but never referenced [declared_but_not_referenced]
+    int64_t target_size = nframe;
+            ^
+          detected during instantiation of "void driver<scalar_t,index_t>(char **) [with scalar_t=float, index_t=int]" at line 195
+
+void driver<float, int>(char**):
+    148, Loop not vectorized/parallelized: contains call
+        1861, Loop not fused: function call before adjacent loop
+              Loop not vectorized: may not be beneficial for target
+    151, Loop not vectorized/parallelized: contains call
+        1861, Loop not fused: function call before adjacent loop
+              Loop not vectorized: may not be beneficial for target
+    154, Loop not vectorized/parallelized: potential early exits
+          15, Loop not fused: function call before adjacent loop
+          92, Loop not vectorized/parallelized: contains call
+          92, Loop not vectorized/parallelized: contains call
+          92, Loop not vectorized/parallelized: contains call
+          92, Loop not vectorized/parallelized: contains call
+          92, Loop not vectorized/parallelized: contains call
+void eval<float, int, 64>(long, long, bool, long, float, float, float*, float*, int*, int):
+     89, Generating map(to:h_weights[:weights_size]) 
+         Generating map(from:h_total_weight[:],h_output[:]) 
+         Generating map(to:h_input[:input_size],h_target[:target_size]) 
+     92, Loop not vectorized/parallelized: contains call
+void nll_loss_forward_reduce2d_kernel<float, float, int, 64>(float*, float*, float const*, int const*, float const*, bool, long, long, long):
+     23, #omp target teams num_teams(1) thread_limit(64)
+         23, Generating "nvkernel__Z32nll_loss_forward_reduce2d_kernelIffiLi64EEvPT_S1_PKS0_PKT1_S3_blll_F1L23_2" GPU kernel
+         27, #omp parallel
+           45, Barrier
+         29, Team private (sm_inputs,acc_weight) located in CUDA shared memory
+     35, Loop not vectorized/parallelized: not countable
+     51, Generated vector simd code for the loop containing reductions
+void eval<float, int, 128>(long, long, bool, long, float, float, float*, float*, int*, int):
+     89, Generating map(to:h_weights[:weights_size]) 
+         Generating map(from:h_total_weight[:],h_output[:]) 
+         Generating map(to:h_input[:input_size],h_target[:target_size]) 
+     92, Loop not vectorized/parallelized: contains call
+void nll_loss_forward_reduce2d_kernel<float, float, int, 128>(float*, float*, float const*, int const*, float const*, bool, long, long, long):
+     23, #omp target teams num_teams(1) thread_limit(128)
+         23, Generating "nvkernel__Z32nll_loss_forward_reduce2d_kernelIffiLi128EEvPT_S1_PKS0_PKT1_S3_blll_F1L23_7" GPU kernel
+         27, #omp parallel
+           45, Barrier
+         29, Team private (sm_inputs,acc_weight) located in CUDA shared memory
+     35, Loop not vectorized/parallelized: not countable
+     51, Generated vector simd code for the loop containing reductions
+void eval<float, int, 256>(long, long, bool, long, float, float, float*, float*, int*, int):
+     89, Generating map(to:h_weights[:weights_size]) 
+         Generating map(from:h_total_weight[:],h_output[:]) 
+         Generating map(to:h_input[:input_size],h_target[:target_size]) 
+     92, Loop not vectorized/parallelized: contains call
+void nll_loss_forward_reduce2d_kernel<float, float, int, 256>(float*, float*, float const*, int const*, float const*, bool, long, long, long):
+     23, #omp target teams num_teams(1) thread_limit(256)
+         23, Generating "nvkernel__Z32nll_loss_forward_reduce2d_kernelIffiLi256EEvPT_S1_PKS0_PKT1_S3_blll_F1L23_12" GPU kernel
+         27, #omp parallel
+           45, Barrier
+         29, Team private (sm_inputs,acc_weight) located in CUDA shared memory
+     35, Loop not vectorized/parallelized: not countable
+     51, Generated vector simd code for the loop containing reductions
+void eval<float, int, 512>(long, long, bool, long, float, float, float*, float*, int*, int):
+     89, Generating map(to:h_weights[:weights_size]) 
+         Generating map(from:h_total_weight[:],h_output[:]) 
+         Generating map(to:h_input[:input_size],h_target[:target_size]) 
+     92, Loop not vectorized/parallelized: contains call
+void nll_loss_forward_reduce2d_kernel<float, float, int, 512>(float*, float*, float const*, int const*, float const*, bool, long, long, long):
+     23, #omp target teams num_teams(1) thread_limit(512)
+         23, Generating "nvkernel__Z32nll_loss_forward_reduce2d_kernelIffiLi512EEvPT_S1_PKS0_PKT1_S3_blll_F1L23_17" GPU kernel
+         27, #omp parallel
+           45, Barrier
+         29, Team private (sm_inputs,acc_weight) located in CUDA shared memory
+     35, Loop not vectorized/parallelized: not countable
+     51, Generated vector simd code for the loop containing reductions
+void eval<float, int, 1024>(long, long, bool, long, float, float, float*, float*, int*, int):
+     89, Generating map(to:h_weights[:weights_size]) 
+         Generating map(from:h_total_weight[:],h_output[:]) 
+         Generating map(to:h_input[:input_size],h_target[:target_size]) 
+     92, Loop not vectorized/parallelized: contains call
+void nll_loss_forward_reduce2d_kernel<float, float, int, 1024>(float*, float*, float const*, int const*, float const*, bool, long, long, long):
+     23, #omp target teams num_teams(1) thread_limit(1024)
+         23, Generating "nvkernel__Z32nll_loss_forward_reduce2d_kernelIffiLi1024EEvPT_S1_PKS0_PKT1_S3_blll_F1L23_22" GPU kernel
+         27, #omp parallel
+           45, Barrier
+         29, Team private (sm_inputs,acc_weight) located in CUDA shared memory
+     35, Loop not vectorized/parallelized: not countable
+     51, Generated vector simd code for the loop containing reductions
+float std::uniform_real_distribution<float>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&):
+        1870, Loop not vectorized: data dependency
+float std::uniform_real_distribution<float>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&, std::uniform_real_distribution<float>::param_type const&):
+         189, Loop not vectorized: data dependency
+int std::uniform_int_distribution<int>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&):
+         324, Loop not vectorized/parallelized: not countable
+         349, Loop not vectorized/parallelized: potential early exits
+int std::uniform_int_distribution<int>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&, std::uniform_int_distribution<int>::param_type const&):
+      5, include "random"
+          49, include "random.h"
+               35, include "uniform_int_dist.h"
+                   324, Loop not vectorized/parallelized: not countable
+                   349, Loop not vectorized/parallelized: potential early exits
+std::__detail::_Adaptor<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>, float>::operator()():
+        3364, Loop not vectorized: data dependency
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+float std::generate_canonical<float, 24ul, std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&):
+      5, include "random"
+          51, include "random.tcc"
+             3364, Loop not vectorized: data dependency
 timeout was set to  600

@@ -1,1 +1,123 @@
+pc(unsigned int):
+      7, include "reference.h"
+           4, Loop not vectorized/parallelized: not countable
+reference(unsigned int const*, unsigned int const*, float*, int, int, int, int, int):
+      7, include "reference.h"
+          30, Loop not vectorized/parallelized: too deeply nested
+          35, Recognized memory zero idiom
+         153, Generated vector simd code for the loop containing reductions
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized/parallelized: not countable
+min_score(float const*, int, int):
+      7, include "reference.h"
+         168, Loop not vectorized: unknown
+gammafunction(unsigned int):
+     27, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+popcount(unsigned int):
+     34, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+main:
+     53, Loop not vectorized/parallelized: contains call
+     57, Loop not vectorized/parallelized: contains call
+     63, Loop not vectorized/parallelized: not countable
+     67, Loop not fused: function call before adjacent loop
+     81, Loop not vectorized/parallelized: not countable
+     88, Loop not vectorized: data dependency
+    120, Loop not fused: different loop trip count
+         Loop not vectorized: unknown
+         Loop unrolled 4 times
+    124, Loop not fused: function call before adjacent loop
+         Loop not vectorized: unknown
+         Loop unrolled 4 times
+    131, Loop not vectorized/parallelized: not countable
+    140, Loop not vectorized/parallelized: not countable
+    148, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 8 times
+    161, Loop not vectorized/parallelized: not countable
+    167, #omp target teams distribute parallel for thread_limit(block_snp)
+        159, Generating map(to:dev_data_ones[:(num_snp*PP_ones)*2]) 
+             Generating map(tofrom:dev_scores[:num_snp*num_snp]) 
+             Generating map(to:dev_data_zeros[:(num_snp*PP_zeros)*2]) 
+        167, Generating "nvkernel_main_F1L167_2" GPU kernel
+        170, Loop parallelized across teams and threads, schedule(static)
+    167, Loop not vectorized/parallelized: contains call
+    179, Recognized memory zero idiom
+    190, Loop not vectorized/parallelized: not countable
+    246, Loop not vectorized/parallelized: not countable
+    300, Generated vector simd code for the loop containing reductions
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         168, Loop not fused: function call before adjacent loop
+              Loop not vectorized: unknown
+         168, Loop not fused: complex flow graph
+              Loop not vectorized: unknown
+          53, Loop nest collapsed
+         616, Loop not vectorized/parallelized: not countable
+std::char_traits<char>::length(char const*):
+         171, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      5, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      7, include "reference.h"
+std::chrono::duration<long, std::ratio<1l, 1l>>::_S_gcd(long, long):
+      5, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      7, include "reference.h"
+std::chrono::duration<float, std::ratio<1l, 1l>>::_S_gcd(long, long):
+      5, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      7, include "reference.h"
+__gnu_cxx::char_traits<char>::length(char const*):
+      4, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                        171, Loop not vectorized/parallelized: not countable
+std::fabs(float):
+                        242, Generating implicit omp declare target routine
+                             Generating NVIDIA GPU code
+      5, include "chrono"
+      7, include "reference.h"
+std::basic_ostream<char, std::char_traits<char>>& std::endl<char, std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&):
+      4, include "iostream"
+          39, include "ostream"
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&, char const*):
+         397, Loop not vectorized/parallelized: not countable
 timeout was set to  600

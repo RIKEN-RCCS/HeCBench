@@ -1,2 +1,154 @@
+main:
+     84, Loop not vectorized/parallelized: potential early exits
+    147, Loop not vectorized/parallelized: contains call
+    154, Loop not vectorized/parallelized: contains call
+    160, Loop not vectorized/parallelized: contains call
+    171, Loop not vectorized/parallelized: potential early exits
+    177, Loop not vectorized/parallelized: potential early exits
+    199, Loop not vectorized/parallelized: contains call
+    211, Loop not vectorized/parallelized: contains call
+    219, Loop not vectorized/parallelized: contains call
+    225, Loop not vectorized/parallelized: contains call
+kernel_ecc(float, float const*, float*, int, float const*):
+                          7, Generating implicit omp declare target routine
+                             Generating NVIDIA GPU code
+kernel_cam(float, float const*, float*, int, float const*, int, float*, int, float):
+                         11, Generating implicit omp declare target routine
+                             Generating NVIDIA GPU code
+master(float, float*, float*, float*, float*, double*, double*, double*):
+      5, include "solver.c"
+          56, include "embedded_fehlberg_7_8.c"
+               76, include "master.c"
+                    50, Generating update to(params[:18],initvalu[:91])
+                    55, #omp target teams num_teams(2) thread_limit(2)
+                        55, Generating "nvkernel__Z6masterfPfS_S_S_PdS0_S0__F190L55_2" GPU kernel
+                        57, #omp parallel
+                   168, Generating update from(finavalu[:91],com[:3])
+                   195, Loop not vectorized/parallelized: potential early exits
+embedded_fehlberg_7_8(float, float, float*, float*, float*, float*, float*, double*, double*, double*):
+      5, include "solver.c"
+          56, include "embedded_fehlberg_7_8.c"
+              183, Loop not vectorized/parallelized: contains call
+              197, Recognized memory copy idiom
+              203, Generating map(alloc:finavalu[:91],initvalu[:91]) 
+              225, Loop not fused: function call before adjacent loop
+                   Loop versioned for possible aliasing
+                   Generated vector simd code for the loop
+                   Loop unrolled 4 times
+              249, Loop not fused: function call before adjacent loop
+                   Loop versioned for possible aliasing
+                   Generated vector simd code for the loop
+                   Loop unrolled 4 times
+              274, Loop not fused: function call before adjacent loop
+                   Loop versioned for possible aliasing
+                   Generated vector simd code for the loop
+                   Loop unrolled 4 times
+              299, Loop not fused: function call before adjacent loop
+                   Loop versioned for possible aliasing
+                   Generated vector simd code for the loop
+                   Loop unrolled 2 times
+              324, Loop not fused: function call before adjacent loop
+                   Loop versioned for possible aliasing
+                   Generated vector simd code for the loop
+                   Loop unrolled 2 times
+              352, Loop not fused: function call before adjacent loop
+                   Loop versioned for possible aliasing
+                   Generated vector simd code for the loop
+                   Loop unrolled 2 times
+              375, Loop not fused: function call before adjacent loop
+                   Loop versioned for possible aliasing
+                   Generated vector simd code for the loop
+                   Loop unrolled 2 times
+              400, Loop not fused: function call before adjacent loop
+                   Loop versioned for possible aliasing
+                   Generated vector simd code for the loop
+              425, Loop not fused: function call before adjacent loop
+                   Loop versioned for possible aliasing
+                   Generated vector simd code for the loop
+              450, Loop not fused: function call before adjacent loop
+                   Loop versioned for possible aliasing
+                   Generated vector simd code for the loop
+              475, Loop not fused: function call before adjacent loop
+                   Loop versioned for possible aliasing
+                   Generated vector simd code for the loop
+              500, Loop not fused: function call before adjacent loop
+                   Loop versioned for possible aliasing
+                   Generated vector simd code for the loop
+              525, Loop not fused: dependence chain to sibling loop
+                   Loop not vectorized: data dependency
+              532, Loop not fused: function call before adjacent loop
+                   Loop versioned for possible aliasing
+                   Generated vector simd code for the loop
+                   Loop unrolled 2 times
+solver(float**, float*, int, float*, float*, double*, double*, double*):
+      5, include "solver.c"
+         133, Generating target enter data map(create: com[:3],params[:18])
+         178, Loop not vectorized: unknown
+         192, Loop not fused: complex flow graph
+              Loop not vectorized: data dependency
+         213, Loop not vectorized: unknown
+         258, Generating target exit data(release: com[:3],params[:18])
+         278, Generating target exit data(release: params[:18],com[:3])
+         183, Loop not vectorized/parallelized: contains call
+         197, Recognized memory copy idiom
+         225, Loop not fused: function call before adjacent loop
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 4 times
+         249, Loop not fused: function call before adjacent loop
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 4 times
+         274, Loop not fused: function call before adjacent loop
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 4 times
+         299, Loop not fused: function call before adjacent loop
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 2 times
+         324, Loop not fused: function call before adjacent loop
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 2 times
+         352, Loop not fused: function call before adjacent loop
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 2 times
+         375, Loop not fused: function call before adjacent loop
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 2 times
+         400, Loop not fused: function call before adjacent loop
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+         425, Loop not fused: function call before adjacent loop
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+         450, Loop not fused: function call before adjacent loop
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+         475, Loop not fused: function call before adjacent loop
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+         500, Loop not fused: function call before adjacent loop
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+         525, Loop not fused: dependence chain to sibling loop
+              Loop not vectorized: data dependency
+         532, Loop not fused: function call before adjacent loop
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 2 times
+kernel_wrapper(int, int, float***, float**, float**, float*):
+     29, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      3, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      5, include "solver.c"
+std::fmod(float, float):
+      5, include "solver.c"
+                             280, Generating implicit omp declare target routine
+                                  Generating NVIDIA GPU code
 make: *** [Makefile.NVD:55: run_mem] Error 126
 timeout was set to  600

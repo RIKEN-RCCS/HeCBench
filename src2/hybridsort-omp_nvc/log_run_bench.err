@@ -1,1 +1,106 @@
+main:
+     58, Loop not vectorized/parallelized: contains call
+     78, Loop not vectorized/parallelized: contains call
+     91, Loop not vectorized/parallelized: contains call
+    100, Loop not vectorized/parallelized: contains call
+    120, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+    151, Loop not vectorized/parallelized: potential early exits
+bucketSort(float*, float*, int, int*, int*, float, float, unsigned int*):
+     35, Recognized memory zero idiom
+     46, Generating update from(h_offsets[:1024])
+     62, include "kernel_histogram.h"
+           5, #omp target teams num_teams(?) thread_limit(local)
+               5, Generating "nvkernel__Z10bucketSortPfS_iPiS0_ffPj_F173L5_2" GPU kernel
+               8, #omp parallel
+                25, Barrier
+                35, Barrier
+              14, Team private (s_Hist) located in CUDA shared memory
+          21, Loop not vectorized/parallelized: not countable
+          28, Loop not vectorized/parallelized: not countable
+          37, Loop not vectorized/parallelized: not countable
+          39, Loop unrolled 3 times (completely unrolled)
+     66, Generated vector simd code for the loop
+         152, Loop not vectorized/parallelized: contains call
+         168, Recognized memory copy idiom
+     82, include "kernel_bucketcount.h"
+           2, #omp target teams num_teams(blocks) thread_limit(32)
+               2, Generating "nvkernel__Z10bucketSortPfS_iPiS0_ffPj_F174L2_4" GPU kernel
+               5, #omp parallel
+                18, Barrier
+                41, Barrier
+              10, Team private (s_offset) located in CUDA shared memory
+           2, Generating update to(pivotPoints[:1024])
+          15, Loop not vectorized/parallelized: not countable
+          27, Loop not vectorized/parallelized: not countable
+          44, Loop not vectorized/parallelized: not countable
+     98, include "kernel_bucketprefix.h"
+           2, Loop not vectorized/parallelized: not countable
+           4, Loop not vectorized: recurrence
+              Loop unrolled 2 times
+          96, #omp target teams distribute parallel for num_teams(?) thread_limit(localpre)
+               2, Loop parallelized across teams and threads, schedule(static)
+              96, Generating "nvkernel__Z10bucketSortPfS_iPiS0_ffPj_F175L96_6" GPU kernel
+    102, Generating update from(h_offsets[:1024])
+    103, Loop not fused: sibling loop may prevent vectorization
+         Loop not vectorized: data dependency
+    110, Loop not fused: dependence chain to sibling loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 2 times
+    111, Loop not fused: different loop trip count
+         Generated vector simd code for the loop
+    114, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    115, Recognized memory copy idiom
+    123, include "kernel_bucketsort.h"
+           2, #omp target teams num_teams(blocks) thread_limit(32)
+               2, Generating "nvkernel__Z10bucketSortPfS_iPiS0_ffPj_F176L2_8" GPU kernel
+               5, #omp parallel
+                20, Barrier
+              10, Team private (s_offset) located in CUDA shared memory
+              60, Generating map(alloc:d_prefixoffsets[:blocks*1024],d_indice[:listsize]) 
+                  Generating map(tofrom:d_output[:listsize+4096]) 
+                  Generating map(alloc:pivotPoints[:1024]) 
+                  Generating map(to:h_offsets[:1024],d_input[:listsize+4096]) 
+           2, Generating update to(h_offsets[:1024])
+          16, Loop not vectorized/parallelized: not countable
+          22, Loop not vectorized/parallelized: not countable
+calcPivotPoints(float*, int, int, int, float, float, float*, float):
+    152, Loop not vectorized/parallelized: contains call
+    168, Recognized memory copy idiom
+sortElem(float4):
+     34, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+getLowest(float4, float4):
+     62, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+getHighest(float4, float4):
+     81, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+runMergeSort(int, int, float4*, float4*, int*, int*, unsigned int*):
+    106, Loop not vectorized/parallelized: not countable
+    132, #omp target teams distribute parallel for thread_limit(256)
+        132, Generating "nvkernel__Z12runMergeSortiiP6float4S0_PiS1_Pj_F1L132_2" GPU kernel
+        134, Loop parallelized across teams and threads(128), schedule(static)
+    132, Generating implicit map(tofrom:global[:],local[:],grid[:]) 
+    134, Loop not vectorized/parallelized: not countable
+    151, Loop not vectorized/parallelized: contains call
+    183, include "kernel_mergeSortPass.h"
+          16, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+          30, Loop not vectorized/parallelized: not countable
+         181, #omp target teams distribute parallel for num_teams(grid[0]) thread_limit(local[0])
+               2, Loop parallelized across teams and threads, schedule(static)
+             181, Generating "nvkernel__Z12runMergeSortiiP6float4S0_PiS1_Pj_F173L181_4" GPU kernel
+         181, Generating implicit map(tofrom:global[:],local[:],grid[:]) 
+    208, #omp target teams distribute parallel for
+        132, Generating map(to:nullElements[:divisions]) 
+             Generating map(alloc:d_resultList[:listsize/4]) 
+             Generating map(to:origOffsets[:divisions+1],startaddr[:divisions+1],d_origList[:listsize/4]) 
+        208, Generating "nvkernel__Z12runMergeSortiiP6float4S0_PiS1_Pj_F1L208_6" GPU kernel
+        212, Loop parallelized across teams and threads(128), schedule(static)
+    213, Loop not vectorized/parallelized: not countable
+    218, Generating update from(d_origList[:listsize/4])
 timeout was set to  600

@@ -1,1 +1,79 @@
+shrUtils.cpp:374:30: warning: format string is not a string literal (potentially insecure) [-Wformat-security]
+  374 |                                                         szNumWritten = printf(sFormatSpec.c_str());                             // console 
+      |                                                                               ^~~~~~~~~~~~~~~~~~~
+shrUtils.cpp:374:30: note: treat the string as an argument to avoid this
+  374 |                                                         szNumWritten = printf(sFormatSpec.c_str());                             // console 
+      |                                                                               ^
+      |                                                                               "%s", 
+shrUtils.cpp:378:46: warning: format string is not a string literal (potentially insecure) [-Wformat-security]
+  378 |                                                         szNumWritten = fprintf (pFileStream0, sFormatSpec.c_str());             // sample log file
+      |                                                                                               ^~~~~~~~~~~~~~~~~~~
+shrUtils.cpp:378:46: note: treat the string as an argument to avoid this
+  378 |                                                         szNumWritten = fprintf (pFileStream0, sFormatSpec.c_str());             // sample log file
+      |                                                                                               ^
+      |                                                                                               "%s", 
+shrUtils.cpp:381:47: warning: format string is not a string literal (potentially insecure) [-Wformat-security]
+  381 |                                                                 szNumWritten  = fprintf(pFileStream1, sFormatSpec.c_str());         // master log file
+      |                                                                                                       ^~~~~~~~~~~~~~~~~~~
+shrUtils.cpp:381:47: note: treat the string as an argument to avoid this
+  381 |                                                                 szNumWritten  = fprintf(pFileStream1, sFormatSpec.c_str());         // master log file
+      |                                                                                                       ^
+      |                                                                                                       "%s", 
+shrUtils.cpp:176:9: warning: variable 'szNumWritten' set but not used [-Wunused-but-set-variable]
+  176 |         size_t szNumWritten = 0;
+      |                ^
+shrUtils.cpp:1356:7: warning: variable 'result' set but not used [-Wunused-but-set-variable]
+ 1356 |         bool result = true;
+      |              ^
+shrUtils.cpp:1398:7: warning: variable 'result' set but not used [-Wunused-but-set-variable]
+ 1398 |         bool result = true;
+      |              ^
+6 warnings generated.
+shrUtils.cpp:374:30: warning: format string is not a string literal (potentially insecure) [-Wformat-security]
+  374 |                                                         szNumWritten = printf(sFormatSpec.c_str());                             // console 
+      |                                                                               ^~~~~~~~~~~~~~~~~~~
+shrUtils.cpp:374:30: note: treat the string as an argument to avoid this
+  374 |                                                         szNumWritten = printf(sFormatSpec.c_str());                             // console 
+      |                                                                               ^
+      |                                                                               "%s", 
+shrUtils.cpp:378:46: warning: format string is not a string literal (potentially insecure) [-Wformat-security]
+  378 |                                                         szNumWritten = fprintf (pFileStream0, sFormatSpec.c_str());             // sample log file
+      |                                                                                               ^~~~~~~~~~~~~~~~~~~
+shrUtils.cpp:378:46: note: treat the string as an argument to avoid this
+  378 |                                                         szNumWritten = fprintf (pFileStream0, sFormatSpec.c_str());             // sample log file
+      |                                                                                               ^
+      |                                                                                               "%s", 
+shrUtils.cpp:381:47: warning: format string is not a string literal (potentially insecure) [-Wformat-security]
+  381 |                                                                 szNumWritten  = fprintf(pFileStream1, sFormatSpec.c_str());         // master log file
+      |                                                                                                       ^~~~~~~~~~~~~~~~~~~
+shrUtils.cpp:381:47: note: treat the string as an argument to avoid this
+  381 |                                                                 szNumWritten  = fprintf(pFileStream1, sFormatSpec.c_str());         // master log file
+      |                                                                                                       ^
+      |                                                                                                       "%s", 
+shrUtils.cpp:176:9: warning: variable 'szNumWritten' set but not used [-Wunused-but-set-variable]
+  176 |         size_t szNumWritten = 0;
+      |                ^
+shrUtils.cpp:1356:7: warning: variable 'result' set but not used [-Wunused-but-set-variable]
+ 1356 |         bool result = true;
+      |              ^
+shrUtils.cpp:1398:7: warning: variable 'result' set but not used [-Wunused-but-set-variable]
+ 1398 |         bool result = true;
+      |              ^
+6 warnings generated.
+reference.cpp:110:25: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+  110 |     uchar4 uc4LocalData[iRadiusAligned+uiNumOutputPix+iRadius];
+      |                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+reference.cpp:110:25: note: initializer of 'iRadiusAligned' is not a constant expression
+reference.cpp:98:13: note: declared here
+   98 |   const int iRadiusAligned = ((iRadius + 15)/16) * 16;  // 16
+      |             ^
+1 warning generated.
+reference.cpp:110:25: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+  110 |     uchar4 uc4LocalData[iRadiusAligned+uiNumOutputPix+iRadius];
+      |                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+reference.cpp:110:25: note: initializer of 'iRadiusAligned' is not a constant expression
+reference.cpp:98:13: note: declared here
+   98 |   const int iRadiusAligned = ((iRadius + 15)/16) * 16;  // 16
+      |             ^
+1 warning generated.
 timeout was set to  600

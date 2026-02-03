@@ -1,4 +1,4 @@
-Compact matrix, cell centric, alg 1: 0.544731 msec
-Compact matrix, cell centric, alg 2: 0.417116 msec
-Compact matrix, cell centric, alg 3: 1.5085 msec
+Compact matrix, cell centric, alg 1: 0.536987 msec
+Compact matrix, cell centric, alg 2: 0.415611 msec
+Compact matrix, cell centric, alg 3: 1.50991 msec
 Checking results of compact representation... All tests passed!

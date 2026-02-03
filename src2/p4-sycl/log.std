@@ -1,3 +1,3 @@
-Average execution time of postprocess kernel: 85.120509 (us)
-Comparing values at location 224986 and reference location 242392
+Average execution time of postprocess kernel: 85.222182 (us)
+Comparing values at location 225502 and reference location 242392
 PASS

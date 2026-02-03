@@ -1,1 +1,38 @@
+clang++: warning: treating 'c' input as 'c++' when -fsycl is used [-Wexpected-file-type]
+clang++: warning: treating 'c' input as 'c++' when -fsycl is used [-Wexpected-file-type]
+clang++: warning: treating 'c' input as 'c++' when -fsycl is used [-Wexpected-file-type]
+In file included from mergesort.c:177:
+./kernel_mergeSortPass.sycl:16:3: warning: misleading indentation; statement is not part of the previous 'if' [-Wmisleading-indentation]
+   16 |   if(Bstart >= constStartAddr_acc[division + 1]){
+      |   ^
+./kernel_mergeSortPass.sycl:14:1: note: previous statement is here
+   14 | if(Astart >= constStartAddr_acc[division + 1])
+      | ^
+mergesort.c:23:30: warning: unused variable 'sycl_read_write' [-Wunused-const-variable]
+   23 | constexpr sycl::access::mode sycl_read_write = sycl::access::mode::read_write;
+      |                              ^~~~~~~~~~~~~~~
+mergesort.c:24:30: warning: unused variable 'sycl_discard_read_write' [-Wunused-const-variable]
+   24 | constexpr sycl::access::mode sycl_discard_read_write = sycl::access::mode::discard_read_write;
+      |                              ^~~~~~~~~~~~~~~~~~~~~~~
+mergesort.c:25:30: warning: unused variable 'sycl_discard_write' [-Wunused-const-variable]
+   25 | constexpr sycl::access::mode sycl_discard_write = sycl::access::mode::discard_write;
+      |                              ^~~~~~~~~~~~~~~~~~
+4 warnings generated.
+In file included from mergesort.c:177:
+./kernel_mergeSortPass.sycl:16:3: warning: misleading indentation; statement is not part of the previous 'if' [-Wmisleading-indentation]
+   16 |   if(Bstart >= constStartAddr_acc[division + 1]){
+      |   ^
+./kernel_mergeSortPass.sycl:14:1: note: previous statement is here
+   14 | if(Astart >= constStartAddr_acc[division + 1])
+      | ^
+mergesort.c:23:30: warning: unused variable 'sycl_read_write' [-Wunused-const-variable]
+   23 | constexpr sycl::access::mode sycl_read_write = sycl::access::mode::read_write;
+      |                              ^~~~~~~~~~~~~~~
+mergesort.c:24:30: warning: unused variable 'sycl_discard_read_write' [-Wunused-const-variable]
+   24 | constexpr sycl::access::mode sycl_discard_read_write = sycl::access::mode::discard_read_write;
+      |                              ^~~~~~~~~~~~~~~~~~~~~~~
+mergesort.c:25:30: warning: unused variable 'sycl_discard_write' [-Wunused-const-variable]
+   25 | constexpr sycl::access::mode sycl_discard_write = sycl::access::mode::discard_write;
+      |                              ^~~~~~~~~~~~~~~~~~
+4 warnings generated.
 timeout was set to  600

@@ -4,4 +4,4 @@ nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.m
 bash -c "time -p ( ./main 1000 1>log.std 2>log.err ) 2> log.time"
 pkill nvidia-smi
 ../scripts/m.sh
-min max diff memory in [MB] : 1 5474 5473
+min max diff memory in [MB] : 1 5475 5474

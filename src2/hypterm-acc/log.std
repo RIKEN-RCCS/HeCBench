@@ -1,6 +1,6 @@
-Average kernel execution time (k1): 1.401746 (ms)
-Average kernel execution time (k2): 2.035464 (ms)
-Average kernel execution time (k3): 2.388981 (ms)
+Average kernel execution time (k1): 1.401989 (ms)
+Average kernel execution time (k2): 2.035705 (ms)
+Average kernel execution time (k3): 2.389157 (ms)
 Check flux_0
 checksum = 6.846462e+00
 RMS Error : 1.227100e-18

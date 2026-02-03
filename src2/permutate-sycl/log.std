@@ -52,5 +52,5 @@ End the permutation testing.
     19       73         0         6 
 >------------------------------------------------------< 
 
-Execution time of the permutation testing processed in the GPU : 2.429 sec
+Execution time of the permutation testing processed in the GPU : 2.424 sec
 ==> Assume that the noise source outputs are IID! 

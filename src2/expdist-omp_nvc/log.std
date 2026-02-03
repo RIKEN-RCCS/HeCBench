@@ -5,7 +5,7 @@ Average kernel execution time 0.003788 (s)
 analytical result: 98751885.543881
 
 Test double precision
-Average kernel execution time 0.004781 (s)
+Average kernel execution time 0.004783 (s)
     device result: 98751885.543882
       host result: 98751885.832254
 analytical result: 98751885.543881

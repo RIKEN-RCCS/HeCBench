@@ -1,4 +1,4 @@
 Image height = 512 and width = 512
 Executing kernel for 100000 iterations-------------------------------------------
-Average kernel execution time: 11.017753 (us)
+Average kernel execution time: 11.095191 (us)
 PASS

@@ -1,1 +1,115 @@
+print_results(char const*, int, int, unsigned long (*) [3][2]):
+      8, include "benchmark.h"
+          85, Loop not vectorized/parallelized: contains call
+          89, Loop not vectorized/parallelized: contains call
+          99, Loop not vectorized/parallelized: contains call
+mr32_sf(unsigned int const*, unsigned int const*, int*, int):
+      9, include "kernels.h"
+           6, #omp target teams distribute parallel for thread_limit(256)
+               6, Generating "nvkernel__Z7mr32_sfPKjS0_Pii_F123L6_2" GPU kernel
+               8, Loop parallelized across teams and threads(128), schedule(static)
+           8, Loop not vectorized/parallelized: too deeply nested
+          37, Loop not vectorized/parallelized: contains a parallel region
+          50, Loop not vectorized/parallelized: contains a parallel region
+          54, Loop not vectorized/parallelized: potential early exits
+mr32_eff(unsigned int const*, unsigned int const*, int*, int):
+      9, include "kernels.h"
+          22, #omp target teams distribute parallel for thread_limit(256)
+              22, Generating "nvkernel__Z8mr32_effPKjS0_Pii_F123L22_6" GPU kernel
+              24, Loop parallelized across teams and threads(128), schedule(static)
+          24, Loop not vectorized/parallelized: too deeply nested
+          70, Loop not vectorized/parallelized: contains a parallel region
+          87, Loop not vectorized/parallelized: contains a parallel region
+          93, Loop not vectorized/parallelized: potential early exits
+run_benchmark(int):
+     31, Loop not vectorized/parallelized: too deeply nested
+     37, Generating update to(d_n32[:100000])
+          37, Loop not vectorized/parallelized: too deeply nested
+          70, Loop not vectorized/parallelized: not countable
+          87, Loop not vectorized/parallelized: not countable
+          93, Loop not vectorized/parallelized: potential early exits
+          37, Loop not vectorized/parallelized: not countable
+          44, Loop not vectorized/parallelized: too deeply nested
+          50, Loop not vectorized/parallelized: not countable
+          54, Loop not vectorized/parallelized: potential early exits
+     59, Loop not vectorized/parallelized: contains call
+     61, #omp target
+         61, Generating "nvkernel__Z13run_benchmarki_F1L61_10" GPU kernel
+     75, Generating update from(d_val[:1])
+     82, Loop not vectorized/parallelized: contains call
+     84, #omp target
+         30, Generating map(to:d_bases32[:bases32_size]) 
+             Generating map(alloc:d_val[:1],d_n32[:100000]) 
+         84, Generating "nvkernel__Z13run_benchmarki_F1L84_12" GPU kernel
+     97, Generating update from(d_val[:1])
+          85, Loop not vectorized/parallelized: contains call
+          89, Loop not vectorized/parallelized: contains call
+          99, Loop not vectorized/parallelized: contains call
+main:
+          57, Loop not vectorized/parallelized: too deeply nested
+          59, Loop not vectorized/parallelized: too deeply nested
+          63, Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: potential early exits
+          72, Outer loop unrolled 4 times (completely unrolled)
+          73, Loop not fused: scalar dependence chain to sibling loop
+              Loop not fused: function call before adjacent loop
+              Loop not vectorized: recurrence
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      7, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      9, include "kernels.h"
+_INTERNAL_8_main_cpp___rand_x::mont_prod32(unsigned int, unsigned int, unsigned int, unsigned int):
+      8, include "benchmark.h"
+               12, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp___rand_x::mont_square32(unsigned int, unsigned int, unsigned int):
+      8, include "benchmark.h"
+               28, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp___rand_x::modular_inverse32(unsigned int):
+      8, include "benchmark.h"
+               36, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp___rand_x::compute_modn32(unsigned int):
+      8, include "benchmark.h"
+               49, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp___rand_x::efficient_mr32(unsigned int const*, int, unsigned int):
+      8, include "benchmark.h"
+          29, include "sprp32.h"
+               62, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+               70, Loop not vectorized/parallelized: not countable
+               87, Loop not vectorized/parallelized: not countable
+               93, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_8_main_cpp___rand_x::modular_exponentiation32(unsigned int, unsigned int, unsigned int):
+      8, include "benchmark.h"
+          30, include "sprp32_sf.h"
+               14, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+               17, Loop not vectorized/parallelized: not countable
+_INTERNAL_8_main_cpp___rand_x::square_modulo32(unsigned int, unsigned int):
+      8, include "benchmark.h"
+          30, include "sprp32_sf.h"
+               27, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp___rand_x::straightforward_mr32(unsigned int const*, int, unsigned int):
+      8, include "benchmark.h"
+          30, include "sprp32_sf.h"
+               33, Generating implicit omp declare target routine
+                   Generating NVIDIA GPU code
+               37, Loop not vectorized/parallelized: not countable
+               54, Loop not vectorized/parallelized: potential early exits
+          17, Loop not vectorized/parallelized: not countable
+_INTERNAL_8_main_cpp___rand_x::set_nprimes():
+          57, Loop not vectorized/parallelized: too deeply nested
+          59, Loop not vectorized/parallelized: too deeply nested
+          70, Loop not vectorized/parallelized: not countable
+          87, Loop not vectorized/parallelized: not countable
+          93, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_8_main_cpp___rand_x::set_nintegers():
+      8, include "benchmark.h"
+          72, Outer loop unrolled 4 times (completely unrolled)
+          73, Loop not fused: scalar dependence chain to sibling loop
+              Loop not vectorized: recurrence
 timeout was set to  600

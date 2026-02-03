@@ -1,6 +1,6 @@
-MCMD started on 02-02-2026 at 06:31:24
-qc-gh200-06.cloud.r-ccs.riken.jp
-477.554 GB memory available on this node (Linux).
+MCMD started on 02-03-2026 at 07:47:34
+qc-gh200-04.cloud.r-ccs.riken.jp
+477.553 GB memory available on this node (Linux).
 Reading input parameters from mcmd.inp.
 Got job name = gpu_md_water_octane_SMALL
 Got mode = md
@@ -140,11 +140,11 @@ Calculated Nose-Hoover Q parameter = 683135200.000000 K fs^2 with scale factor =
 |  BEGINNING MOLECULAR DYNAMICS SIMULATION  |
 | ========================================= |
 
-Device offload time: 3.002121 (s)
+Device offload time: 3.080965 (s)
 MCMD (GPU) Molecular Dynamics: gpu_md_water_octane_SMALL (mcmd.inp)
 Input atoms: input.pqr
 Ensemble: NVT; N_movables = 955 N_atoms = 3371
-Time elapsed = 3.20 s = inf sec/step; ETA = inf min = inf hrs
+Time elapsed = 3.28 s = inf sec/step; ETA = inf min = inf hrs
 Step: 0 / 10; Progress = 0.000%; Realtime = 0.00000 fs
         Input T = 298.0000 K | simulated annealing (off)
       Average T = 297.9480 +- 0.0000 K
@@ -167,20 +167,20 @@ Average v = 895.77 m/s; v_init = 895.77 m/s
     H2O VACF = 0.00000e+00
 --------------------
 
-Device offload time: 0.757778 (s)
-Device offload time: 0.757447 (s)
-Device offload time: 0.757653 (s)
-Device offload time: 0.757400 (s)
-Device offload time: 0.757653 (s)
-Device offload time: 0.757630 (s)
-Device offload time: 0.757655 (s)
-Device offload time: 0.757401 (s)
-Device offload time: 0.757678 (s)
-Device offload time: 0.757414 (s)
+Device offload time: 0.758160 (s)
+Device offload time: 0.757836 (s)
+Device offload time: 0.758006 (s)
+Device offload time: 0.757810 (s)
+Device offload time: 0.758015 (s)
+Device offload time: 0.758076 (s)
+Device offload time: 0.758056 (s)
+Device offload time: 0.757833 (s)
+Device offload time: 0.758034 (s)
+Device offload time: 0.757823 (s)
 MCMD (GPU) Molecular Dynamics: gpu_md_water_octane_SMALL (mcmd.inp)
 Input atoms: input.pqr
 Ensemble: NVT; N_movables = 955 N_atoms = 3371
-Time elapsed = 10.89 s = 1.0889 sec/step; ETA = 0.000 min = 0.000 hrs
+Time elapsed = 10.97 s = 1.0970 sec/step; ETA = 0.000 min = 0.000 hrs
 Step: 10 / 10; Progress = 100.000%; Realtime = 10.00000 fs
         Input T = 298.0000 K | simulated annealing (off)
       Average T = 299.3604 +- 1.4124 K
@@ -203,4 +203,4 @@ Average v = 897.34 m/s; v_init = 895.77 m/s
     H2O VACF = 9.92869e-01
 --------------------
 
-Total wall time = 10.912305 s
+Total wall time = 10.993339 s

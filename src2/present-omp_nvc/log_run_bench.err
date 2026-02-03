@@ -1,1 +1,49 @@
+present_rounds(unsigned char const*, unsigned char const*, unsigned char, unsigned char*):
+    207, Loop not vectorized/parallelized: not countable
+main:
+    323, Loop not vectorized/parallelized: contains call
+                       3774, Loop not vectorized/parallelized: potential early exits
+                       3790, Loop not vectorized/parallelized: potential early exits
+         207, Loop not vectorized/parallelized: not countable
+    336, Generated vector simd code for the loop containing reductions
+    357, Loop not vectorized/parallelized: contains call
+    358, #omp target teams distribute parallel for thread_limit(256)
+        354, Generating map(to:keys[:num*10]) 
+             Generating map(alloc:ciphers[:num*8]) 
+             Generating map(to:plains[:num*8],sbox_pmt_2[:],sbox_pmt_3[:],sbox_pmt_1[:],sbox_pmt_0[:],sbox[:]) 
+        358, Generating "nvkernel_main_F1L358_2" GPU kernel
+        361, Loop parallelized across teams and threads(128), schedule(static)
+    358, Generating implicit map(tofrom:sbox_pmt_3[:],sbox_pmt_2[:],sbox_pmt_1[:],sbox_pmt_0[:],sbox[:]) 
+    442, Loop not vectorized/parallelized: not countable
+    532, Generating update from(ciphers[:num*8])
+    535, Generated vector simd code for the loop containing reductions
+unsigned long std::uniform_int_distribution<unsigned long>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&, std::uniform_int_distribution<unsigned long>::param_type const&):
+     37, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                    66, include "uniform_int_dist.h"
+                        325, Loop not vectorized/parallelized: not countable
+                        349, Loop not vectorized/parallelized: potential early exits
+unsigned long std::uniform_int_distribution<unsigned long>::_S_nd<unsigned __int128, std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>, unsigned long>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&, unsigned long):
+     37, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                    66, include "uniform_int_dist.h"
+                        263, Loop not vectorized/parallelized: not countable
+unsigned int std::uniform_int_distribution<unsigned long>::_S_nd<unsigned long, std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>, unsigned int>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&, unsigned int):
+     37, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                    66, include "uniform_int_dist.h"
+                        263, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     33, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+     37, include "algorithm"
+void std::shuffle<unsigned char*, std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(unsigned char*, unsigned char*, std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&&):
+     37, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                  3774, Loop not vectorized/parallelized: potential early exits
+                  3790, Loop not vectorized/parallelized: potential early exits
 timeout was set to  600

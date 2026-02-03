@@ -1,35 +1,35 @@
 
 ------
-1769956680771 Computing PL(2, 7)
-Kernel execution time:  0.000936758 (s)
-1769956680774 Result 0 for n = 7 MATCHES previously published result
+1770067049247 Computing PL(2, 7)
+Kernel execution time:  0.000922298 (s)
+1770067049251 Result 0 for n = 7 MATCHES previously published result
 ------
 
 
 ------
-1769956680774 Computing PL(2, 8)
-Kernel execution time:  0.00137272 (s)
-1769956680777 Result 4 for n = 8 MATCHES previously published result
+1770067049251 Computing PL(2, 8)
+Kernel execution time:  0.00136911 (s)
+1770067049254 Result 4 for n = 8 MATCHES previously published result
 ------
 
 
 ------
-1769956680777 Computing PL(2, 11)
-Kernel execution time:  0.00850983 (s)
-1769956680790 Result 16 for n = 11 MATCHES previously published result
+1770067049254 Computing PL(2, 11)
+Kernel execution time:  0.00850778 (s)
+1770067049266 Result 16 for n = 11 MATCHES previously published result
 ------
 
 
 ------
-1769956680790 Computing PL(2, 12)
-Kernel execution time:  0.0144491 (s)
-1769956680808 Result 40 for n = 12 MATCHES previously published result
+1770067049266 Computing PL(2, 12)
+Kernel execution time:  0.0144483 (s)
+1770067049285 Result 40 for n = 12 MATCHES previously published result
 ------
 
 
 ------
-1769956680808 Computing PL(2, 15)
-Kernel execution time:  0.0958833 (s)
-1769956680908 Result 194 for n = 15 MATCHES previously published result
+1770067049285 Computing PL(2, 15)
+Kernel execution time:  0.0958699 (s)
+1770067049384 Result 194 for n = 15 MATCHES previously published result
 ------
 

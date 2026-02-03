@@ -1,9 +1,9 @@
 
 Launch kernel to evaluate the impact of assertion on performance 
 Each thread in the kernel executes threadID + 1 assertions
-Kernel time : 0.017459
+Kernel time : 0.017407
 Each thread in the kernel executes threadID assertions
-Kernel time : 0.015071
+Kernel time : 0.015077
 
 Launch kernel to generate assertion failures
 

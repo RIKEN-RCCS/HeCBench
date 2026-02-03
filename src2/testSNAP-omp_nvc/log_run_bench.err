@@ -1,1 +1,8 @@
+"main.cpp", line 27: catastrophic error: cannot open source file "refdata_2J14_W.h"
+  #include "refdata_2J14_W.h"
+                             ^
+
+1 catastrophic error detected in the compilation of "main.cpp".
+Compilation terminated.
+make: *** [Makefile.NVD:54: main.o] Error 2
 timeout was set to  600

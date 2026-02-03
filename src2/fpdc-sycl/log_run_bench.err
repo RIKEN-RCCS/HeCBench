@@ -1,7 +1,8 @@
-/usr/bin/ld: cannot find crtbegin.o: No such file or directory
-/usr/bin/ld: cannot find -lstdc++
-/usr/bin/ld: cannot find -lgcc_s
-/usr/bin/ld: cannot find -lgcc
-clang++: error: linker command failed with exit code 1 (use -v to see invocation)
-make: *** [Makefile.NVD:70: main] Error 1
+In file included from main.cpp:43:
+In file included from /hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/stl_wrappers/assert.h:21:
+/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/__spirv/spirv_vars.hpp:15:10: fatal error: 'cstddef' file not found
+   15 | #include <cstddef> // for size_t
+      |          ^~~~~~~~~
+1 error generated.
+make: *** [Makefile.NVD:73: main.o] Error 1
 timeout was set to  600

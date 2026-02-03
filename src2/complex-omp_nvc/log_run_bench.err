@@ -1,1 +1,88 @@
+LCG_random_double(unsigned long*):
+           4, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+fast_forward_LCG(unsigned long, unsigned long):
+      6, include "kernels.h"
+          13, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          23, Loop not vectorized/parallelized: not countable
+complex_float(char*, int):
+      6, include "kernels.h"
+          41, #omp target teams distribute parallel for thread_limit(256)
+              41, Generating "nvkernel__Z13complex_floatPci_F183L41_2" GPU kernel
+              43, Loop parallelized across teams and threads(128), schedule(static)
+          23, Loop not vectorized/parallelized: not countable
+complex_double(char*, int):
+      6, include "kernels.h"
+          73, #omp target teams distribute parallel for thread_limit(256)
+              73, Generating "nvkernel__Z14complex_doublePci_F183L73_6" GPU kernel
+              75, Loop parallelized across teams and threads(128), schedule(static)
+          23, Loop not vectorized/parallelized: not countable
+check(char const*, int):
+     11, Loop not vectorized/parallelized: potential early exits
+main:
+     31, Generating map(alloc:cs[:n]) 
+     39, Loop not vectorized/parallelized: contains call
+          11, Loop not vectorized/parallelized: potential early exits
+     49, Generating update from(cs[:n])
+     54, Loop not vectorized/parallelized: contains call
+          11, Loop not vectorized/parallelized: potential early exits
+     63, Generating update from(cs[:n])
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      3, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+_INTERNAL_8_main_cpp_671624bc::Crealf(float2):
+          25, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_671624bc::Cimagf(float2):
+          30, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_671624bc::make_FloatComplex(float, float):
+          35, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_671624bc::Conjf(float2):
+          43, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_671624bc::Caddf(float2, float2):
+          48, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_671624bc::Csubf(float2, float2):
+          54, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_671624bc::Cmulf(float2, float2):
+          65, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_671624bc::Cdivf(float2, float2):
+          80, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_671624bc::Cabsf(float2):
+         104, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_671624bc::Creal(double2):
+         130, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_671624bc::Cimag(double2):
+         135, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_671624bc::make_DoubleComplex(double, double):
+         140, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_671624bc::Conj(double2):
+         148, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_671624bc::Cadd(double2, double2):
+         153, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_671624bc::Csub(double2, double2):
+         159, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_671624bc::Cmul(double2, double2):
+         170, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_671624bc::Cdiv(double2, double2):
+         185, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_671624bc::Cabs(double2):
+         207, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
 timeout was set to  600

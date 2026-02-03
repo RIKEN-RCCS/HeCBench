@@ -1,1 +1,335 @@
+main:
+          14, Loop not vectorized/parallelized: contains call
+          20, Loop not vectorized/parallelized: contains call
+          28, Generating update to(.inl_hostMem_1212[:2097152])
+          35, Generating update to(.inl_hostMem_1212[:2097152])
+          42, Generating update to(.inl_hostMem_1212[:2097152])
+          49, Generating update to(.inl_hostMem_1212[:2097152])
+          56, Loop not vectorized/parallelized: contains call
+          70, Generating update to(.inl_hostMem_1212[:2097152])
+          77, Generating update to(.inl_hostMem_1212[:2097152])
+          84, Generating update to(.inl_hostMem_1212[:2097152])
+          91, Loop not vectorized/parallelized: contains call
+          99, Generating update to(.inl_hostMem_1212[:2097152])
+         106, Generating update to(.inl_hostMem_1212[:2097152])
+         113, Generating update to(.inl_hostMem_1212[:2097152])
+         120, Generating update to(.inl_hostMem_1212[:2097152])
+         127, Loop not vectorized/parallelized: contains call
+         135, Generating update to(.inl_hostMem_1212[:2097152])
+         142, Generating update to(.inl_hostMem_1212[:2097152])
+         149, Generating update to(.inl_hostMem_1212[:2097152])
+         156, Generating update to(.inl_hostMem_1212[:2097152])
+          14, Loop not vectorized/parallelized: contains call
+          20, Loop not vectorized/parallelized: contains call
+          28, Generating update to(.inl_hostMem_1272[:2097152])
+          35, Generating update to(.inl_hostMem_1272[:2097152])
+          42, Generating update to(.inl_hostMem_1272[:2097152])
+          49, Generating update to(.inl_hostMem_1272[:2097152])
+          56, Loop not vectorized/parallelized: contains call
+          70, Generating update to(.inl_hostMem_1272[:2097152])
+          77, Generating update to(.inl_hostMem_1272[:2097152])
+          84, Generating update to(.inl_hostMem_1272[:2097152])
+          91, Loop not vectorized/parallelized: contains call
+          99, Generating update to(.inl_hostMem_1272[:2097152])
+         106, Generating update to(.inl_hostMem_1272[:2097152])
+         113, Generating update to(.inl_hostMem_1272[:2097152])
+         120, Generating update to(.inl_hostMem_1272[:2097152])
+         127, Loop not vectorized/parallelized: contains call
+         135, Generating update to(.inl_hostMem_1272[:2097152])
+         142, Generating update to(.inl_hostMem_1272[:2097152])
+         149, Generating update to(.inl_hostMem_1272[:2097152])
+         156, Generating update to(.inl_hostMem_1272[:2097152])
+void test<float>(int, int):
+     14, Loop not vectorized/parallelized: contains call
+     18, Generating map(alloc:hostMem[:numFloats]) 
+     20, Loop not vectorized/parallelized: contains call
+     28, Generating update to(hostMem[:numFloats])
+     35, Generating update to(hostMem[:numFloats])
+     42, Generating update to(hostMem[:numFloats])
+     49, Generating update to(hostMem[:numFloats])
+     56, Loop not vectorized/parallelized: contains call
+     70, Generating update to(hostMem[:numFloats])
+     77, Generating update to(hostMem[:numFloats])
+     84, Generating update to(hostMem[:numFloats])
+     91, Loop not vectorized/parallelized: contains call
+     99, Generating update to(hostMem[:numFloats])
+    106, Generating update to(hostMem[:numFloats])
+    113, Generating update to(hostMem[:numFloats])
+    120, Generating update to(hostMem[:numFloats])
+    127, Loop not vectorized/parallelized: contains call
+    135, Generating update to(hostMem[:numFloats])
+    142, Generating update to(hostMem[:numFloats])
+    149, Generating update to(hostMem[:numFloats])
+    156, Generating update to(hostMem[:numFloats])
+void test<double>(int, int):
+     14, Loop not vectorized/parallelized: contains call
+     18, Generating map(alloc:hostMem[:numFloats]) 
+     20, Loop not vectorized/parallelized: contains call
+     28, Generating update to(hostMem[:numFloats])
+     35, Generating update to(hostMem[:numFloats])
+     42, Generating update to(hostMem[:numFloats])
+     49, Generating update to(hostMem[:numFloats])
+     56, Loop not vectorized/parallelized: contains call
+     70, Generating update to(hostMem[:numFloats])
+     77, Generating update to(hostMem[:numFloats])
+     84, Generating update to(hostMem[:numFloats])
+     91, Loop not vectorized/parallelized: contains call
+     99, Generating update to(hostMem[:numFloats])
+    106, Generating update to(hostMem[:numFloats])
+    113, Generating update to(hostMem[:numFloats])
+    120, Generating update to(hostMem[:numFloats])
+    127, Loop not vectorized/parallelized: contains call
+    135, Generating update to(hostMem[:numFloats])
+    142, Generating update to(hostMem[:numFloats])
+    149, Generating update to(hostMem[:numFloats])
+    156, Generating update to(hostMem[:numFloats])
+void Add1<float>(float*, int, int, float):
+      5, include "kernels.h"
+          77, #omp target teams distribute parallel for thread_limit(256)
+              77, Generating "nvkernel__Z4Add1IfEvPT_iiS0__F268L77_2" GPU kernel
+              79, Loop parallelized across teams and threads(128), schedule(static)
+          79, Loop not vectorized/parallelized: not countable
+          81, Loop not vectorized: unknown
+              Loop unrolled 8 times
+void Add2<float>(float*, int, int, float):
+      5, include "kernels.h"
+          93, #omp target teams distribute parallel for thread_limit(256)
+              93, Generating "nvkernel__Z4Add2IfEvPT_iiS0__F268L93_6" GPU kernel
+              95, Loop parallelized across teams and threads(128), schedule(static)
+          95, Loop not vectorized/parallelized: not countable
+          97, Loop not vectorized: unknown
+              Loop unrolled 8 times
+void Add4<float>(float*, int, int, float):
+      5, include "kernels.h"
+         109, #omp target teams distribute parallel for thread_limit(256)
+             109, Generating "nvkernel__Z4Add4IfEvPT_iiS0__F268L109_10" GPU kernel
+             111, Loop parallelized across teams and threads(128), schedule(static)
+         111, Loop not vectorized/parallelized: not countable
+         113, Loop not vectorized: unknown
+              Loop unrolled 4 times
+void Add8<float>(float*, int, int, float):
+      5, include "kernels.h"
+         125, #omp target teams distribute parallel for thread_limit(256)
+             125, Generating "nvkernel__Z4Add8IfEvPT_iiS0__F268L125_14" GPU kernel
+             127, Loop parallelized across teams and threads(128), schedule(static)
+         127, Loop not vectorized/parallelized: not countable
+         130, Loop not vectorized: unknown
+              Loop unrolled 2 times
+void Mul1<float>(float*, int, int, float):
+      5, include "kernels.h"
+         143, #omp target teams distribute parallel for thread_limit(256)
+             143, Generating "nvkernel__Z4Mul1IfEvPT_iiS0__F268L143_18" GPU kernel
+             145, Loop parallelized across teams and threads(128), schedule(static)
+         145, Loop not vectorized/parallelized: not countable
+         147, Loop not vectorized: recurrence
+              Loop unrolled 8 times
+void Mul2<float>(float*, int, int, float):
+      5, include "kernels.h"
+         159, #omp target teams distribute parallel for thread_limit(256)
+             159, Generating "nvkernel__Z4Mul2IfEvPT_iiS0__F268L159_22" GPU kernel
+             161, Loop parallelized across teams and threads(128), schedule(static)
+         161, Loop not vectorized/parallelized: not countable
+         163, Loop not vectorized: recurrence
+              Loop unrolled 4 times
+void Mul4<float>(float*, int, int, float):
+      5, include "kernels.h"
+         175, #omp target teams distribute parallel for thread_limit(256)
+             175, Generating "nvkernel__Z4Mul4IfEvPT_iiS0__F268L175_26" GPU kernel
+             177, Loop parallelized across teams and threads(128), schedule(static)
+         177, Loop not vectorized/parallelized: not countable
+         179, Loop not vectorized: recurrence
+              Loop unrolled 2 times
+void Mul8<float>(float*, int, int, float):
+      5, include "kernels.h"
+         191, #omp target teams distribute parallel for thread_limit(256)
+             191, Generating "nvkernel__Z4Mul8IfEvPT_iiS0__F268L191_30" GPU kernel
+             193, Loop parallelized across teams and threads(128), schedule(static)
+         193, Loop not vectorized/parallelized: not countable
+         196, Loop not vectorized: recurrence
+void MAdd1<float>(float*, int, int, float, float):
+      5, include "kernels.h"
+         208, #omp target teams distribute parallel for thread_limit(256)
+             208, Generating "nvkernel__Z5MAdd1IfEvPT_iiS0_S0__F268L208_34" GPU kernel
+             210, Loop parallelized across teams and threads(128), schedule(static)
+         210, Loop not vectorized/parallelized: not countable
+         212, Loop not vectorized: unknown
+              Loop unrolled 8 times
+void MAdd2<float>(float*, int, int, float, float):
+      5, include "kernels.h"
+         224, #omp target teams distribute parallel for thread_limit(256)
+             224, Generating "nvkernel__Z5MAdd2IfEvPT_iiS0_S0__F268L224_38" GPU kernel
+             226, Loop parallelized across teams and threads(128), schedule(static)
+         226, Loop not vectorized/parallelized: not countable
+         228, Loop not vectorized: unknown
+              Loop unrolled 4 times
+void MAdd4<float>(float*, int, int, float, float):
+      5, include "kernels.h"
+         240, #omp target teams distribute parallel for thread_limit(256)
+             240, Generating "nvkernel__Z5MAdd4IfEvPT_iiS0_S0__F268L240_42" GPU kernel
+             242, Loop parallelized across teams and threads(128), schedule(static)
+         242, Loop not vectorized/parallelized: not countable
+         244, Loop not vectorized: unknown
+              Loop unrolled 2 times
+void MAdd8<float>(float*, int, int, float, float):
+      5, include "kernels.h"
+         256, #omp target teams distribute parallel for thread_limit(256)
+             256, Generating "nvkernel__Z5MAdd8IfEvPT_iiS0_S0__F268L256_46" GPU kernel
+             258, Loop parallelized across teams and threads(128), schedule(static)
+         258, Loop not vectorized/parallelized: not countable
+         261, Loop not vectorized: unknown
+void MulMAdd1<float>(float*, int, int, float, float):
+      5, include "kernels.h"
+         273, #omp target teams distribute parallel for thread_limit(256)
+             273, Generating "nvkernel__Z8MulMAdd1IfEvPT_iiS0_S0__F268L273_50" GPU kernel
+             275, Loop parallelized across teams and threads(128), schedule(static)
+         275, Loop not vectorized/parallelized: not countable
+         277, Loop not vectorized: recurrence
+              Loop unrolled 8 times
+void MulMAdd2<float>(float*, int, int, float, float):
+      5, include "kernels.h"
+         289, #omp target teams distribute parallel for thread_limit(256)
+             289, Generating "nvkernel__Z8MulMAdd2IfEvPT_iiS0_S0__F268L289_54" GPU kernel
+             291, Loop parallelized across teams and threads(128), schedule(static)
+         291, Loop not vectorized/parallelized: not countable
+         293, Loop not vectorized: recurrence
+              Loop unrolled 4 times
+void MulMAdd4<float>(float*, int, int, float, float):
+      5, include "kernels.h"
+         305, #omp target teams distribute parallel for thread_limit(256)
+             305, Generating "nvkernel__Z8MulMAdd4IfEvPT_iiS0_S0__F268L305_58" GPU kernel
+             307, Loop parallelized across teams and threads(128), schedule(static)
+         307, Loop not vectorized/parallelized: not countable
+         309, Loop not vectorized: recurrence
+              Loop unrolled 2 times
+void MulMAdd8<float>(float*, int, int, float, float):
+      5, include "kernels.h"
+         321, #omp target teams distribute parallel for thread_limit(256)
+             321, Generating "nvkernel__Z8MulMAdd8IfEvPT_iiS0_S0__F268L321_62" GPU kernel
+             323, Loop parallelized across teams and threads(128), schedule(static)
+         323, Loop not vectorized/parallelized: not countable
+         326, Loop not vectorized: recurrence
+void Add1<double>(double*, int, int, double):
+      5, include "kernels.h"
+          77, #omp target teams distribute parallel for thread_limit(256)
+              77, Generating "nvkernel__Z4Add1IdEvPT_iiS0__F268L77_66" GPU kernel
+              79, Loop parallelized across teams and threads(128), schedule(static)
+          79, Loop not vectorized/parallelized: not countable
+          81, Loop not vectorized: unknown
+              Loop unrolled 8 times
+void Add2<double>(double*, int, int, double):
+      5, include "kernels.h"
+          93, #omp target teams distribute parallel for thread_limit(256)
+              93, Generating "nvkernel__Z4Add2IdEvPT_iiS0__F268L93_70" GPU kernel
+              95, Loop parallelized across teams and threads(128), schedule(static)
+          95, Loop not vectorized/parallelized: not countable
+          97, Loop not vectorized: unknown
+              Loop unrolled 4 times
+void Add4<double>(double*, int, int, double):
+      5, include "kernels.h"
+         109, #omp target teams distribute parallel for thread_limit(256)
+             109, Generating "nvkernel__Z4Add4IdEvPT_iiS0__F268L109_74" GPU kernel
+             111, Loop parallelized across teams and threads(128), schedule(static)
+         111, Loop not vectorized/parallelized: not countable
+         113, Loop not vectorized: unknown
+              Loop unrolled 2 times
+void Add8<double>(double*, int, int, double):
+      5, include "kernels.h"
+         125, #omp target teams distribute parallel for thread_limit(256)
+             125, Generating "nvkernel__Z4Add8IdEvPT_iiS0__F268L125_78" GPU kernel
+             127, Loop parallelized across teams and threads(128), schedule(static)
+         127, Loop not vectorized/parallelized: not countable
+         130, Loop not vectorized: unknown
+void Mul1<double>(double*, int, int, double):
+      5, include "kernels.h"
+         143, #omp target teams distribute parallel for thread_limit(256)
+             143, Generating "nvkernel__Z4Mul1IdEvPT_iiS0__F268L143_82" GPU kernel
+             145, Loop parallelized across teams and threads(128), schedule(static)
+         145, Loop not vectorized/parallelized: not countable
+         147, Loop not vectorized: recurrence
+              Loop unrolled 4 times
+void Mul2<double>(double*, int, int, double):
+      5, include "kernels.h"
+         159, #omp target teams distribute parallel for thread_limit(256)
+             159, Generating "nvkernel__Z4Mul2IdEvPT_iiS0__F268L159_86" GPU kernel
+             161, Loop parallelized across teams and threads(128), schedule(static)
+         161, Loop not vectorized/parallelized: not countable
+         163, Loop not vectorized: recurrence
+              Loop unrolled 2 times
+void Mul4<double>(double*, int, int, double):
+      5, include "kernels.h"
+         175, #omp target teams distribute parallel for thread_limit(256)
+             175, Generating "nvkernel__Z4Mul4IdEvPT_iiS0__F268L175_90" GPU kernel
+             177, Loop parallelized across teams and threads(128), schedule(static)
+         177, Loop not vectorized/parallelized: not countable
+         179, Loop not vectorized: recurrence
+void Mul8<double>(double*, int, int, double):
+      5, include "kernels.h"
+         191, #omp target teams distribute parallel for thread_limit(256)
+             191, Generating "nvkernel__Z4Mul8IdEvPT_iiS0__F268L191_94" GPU kernel
+             193, Loop parallelized across teams and threads(128), schedule(static)
+         193, Loop not vectorized/parallelized: not countable
+         196, Loop not vectorized: recurrence
+void MAdd1<double>(double*, int, int, double, double):
+      5, include "kernels.h"
+         208, #omp target teams distribute parallel for thread_limit(256)
+             208, Generating "nvkernel__Z5MAdd1IdEvPT_iiS0_S0__F268L208_98" GPU kernel
+             210, Loop parallelized across teams and threads(128), schedule(static)
+         210, Loop not vectorized/parallelized: not countable
+         212, Loop not vectorized: unknown
+              Loop unrolled 4 times
+void MAdd2<double>(double*, int, int, double, double):
+      5, include "kernels.h"
+         224, #omp target teams distribute parallel for thread_limit(256)
+             224, Generating "nvkernel__Z5MAdd2IdEvPT_iiS0_S0__F268L224_102" GPU kernel
+             226, Loop parallelized across teams and threads(128), schedule(static)
+         226, Loop not vectorized/parallelized: not countable
+         228, Loop not vectorized: unknown
+              Loop unrolled 2 times
+void MAdd4<double>(double*, int, int, double, double):
+      5, include "kernels.h"
+         240, #omp target teams distribute parallel for thread_limit(256)
+             240, Generating "nvkernel__Z5MAdd4IdEvPT_iiS0_S0__F268L240_106" GPU kernel
+             242, Loop parallelized across teams and threads(128), schedule(static)
+         242, Loop not vectorized/parallelized: not countable
+         244, Loop not vectorized: unknown
+void MAdd8<double>(double*, int, int, double, double):
+      5, include "kernels.h"
+         256, #omp target teams distribute parallel for thread_limit(256)
+             256, Generating "nvkernel__Z5MAdd8IdEvPT_iiS0_S0__F268L256_110" GPU kernel
+             258, Loop parallelized across teams and threads(128), schedule(static)
+         258, Loop not vectorized/parallelized: not countable
+         261, Loop not vectorized: unknown
+void MulMAdd1<double>(double*, int, int, double, double):
+      5, include "kernels.h"
+         273, #omp target teams distribute parallel for thread_limit(256)
+             273, Generating "nvkernel__Z8MulMAdd1IdEvPT_iiS0_S0__F268L273_114" GPU kernel
+             275, Loop parallelized across teams and threads(128), schedule(static)
+         275, Loop not vectorized/parallelized: not countable
+         277, Loop not vectorized: recurrence
+              Loop unrolled 4 times
+void MulMAdd2<double>(double*, int, int, double, double):
+      5, include "kernels.h"
+         289, #omp target teams distribute parallel for thread_limit(256)
+             289, Generating "nvkernel__Z8MulMAdd2IdEvPT_iiS0_S0__F268L289_118" GPU kernel
+             291, Loop parallelized across teams and threads(128), schedule(static)
+         291, Loop not vectorized/parallelized: not countable
+         293, Loop not vectorized: recurrence
+              Loop unrolled 2 times
+void MulMAdd4<double>(double*, int, int, double, double):
+      5, include "kernels.h"
+         305, #omp target teams distribute parallel for thread_limit(256)
+             305, Generating "nvkernel__Z8MulMAdd4IdEvPT_iiS0_S0__F268L305_122" GPU kernel
+             307, Loop parallelized across teams and threads(128), schedule(static)
+         307, Loop not vectorized/parallelized: not countable
+         309, Loop not vectorized: recurrence
+void MulMAdd8<double>(double*, int, int, double, double):
+      5, include "kernels.h"
+         321, #omp target teams distribute parallel for thread_limit(256)
+             321, Generating "nvkernel__Z8MulMAdd8IdEvPT_iiS0_S0__F268L321_126" GPU kernel
+             323, Loop parallelized across teams and threads(128), schedule(static)
+         323, Loop not vectorized/parallelized: not countable
+         326, Loop not vectorized: recurrence
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
 timeout was set to  600

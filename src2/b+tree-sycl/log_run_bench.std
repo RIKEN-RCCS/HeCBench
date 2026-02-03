@@ -1,5 +1,11 @@
+clang++  -std=c++17 -fsycl -Wall           -I. -I./util/num -I./util/timer -I./kernel           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU  ./main.c -c -o main.o
+clang++  -std=c++17 -fsycl -Wall           -I. -I./util/num -I./util/timer -I./kernel           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU	 ./kernel/kernel_wrapper.c 		-c 		-o ./kernel/kernel_wrapper.o
+clang++  -std=c++17 -fsycl -Wall           -I. -I./util/num -I./util/timer -I./kernel           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU	 ./kernel/kernel2_wrapper.c 		-c 		-o ./kernel/kernel2_wrapper.o 
+clang++	./util/timer/timer.c 		-c 		-o ./util/timer/timer.o 		-O3
+clang++	./util/num/num.c 		-c 		-o ./util/num/num.o 		-O3
+clang++  -std=c++17 -fsycl -Wall           -I. -I./util/num -I./util/timer -I./kernel           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU	./main.o 			./kernel/kernel_wrapper.o 			./kernel/kernel2_wrapper.o 			./util/timer/timer.o 			./util/num/num.o 			 	                -o b+tree.out
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "../b+tree-cuda/prepare_data.sh; time -p ( ./b+tree.out file ../data/b+tree/mil.txt command ../data/b+tree/command.txt 1>log.std 2>log.err ) 2> log.time"
 pkill nvidia-smi
 ../scripts/m.sh
-min max diff memory in [MB] : 1 560 559
+min max diff memory in [MB] : 1 558 557

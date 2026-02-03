@@ -4,5 +4,5 @@ Height of the image 768
 Average luminance value in the image 0.313225
 Executing kernel for 10000 iterations
 -------------------------------------------
-Average kernel execution time: 18.392544 (us)
+Average kernel execution time: 18.211000 (us)
 PASS

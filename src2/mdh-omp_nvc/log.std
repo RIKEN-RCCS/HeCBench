@@ -4,10 +4,10 @@ Run parameters:
 Generating Data.. 
 Done generating inputs.
 
-Average kernel execution time: 0.05034065
-CPU Time: 1.006825 (Number of tests = 20)
+Average kernel execution time: 0.0504117
+CPU Time: 1.008247 (Number of tests = 20)
 
-Average kernel time on the device: 0.01102275
-GPU Time: 1.594111 (Number of tests = 20)
+Average kernel time on the device: 0.01103225
+GPU Time: 1.597395 (Number of tests = 20)
 
 PASS

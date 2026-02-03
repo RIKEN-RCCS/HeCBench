@@ -1,1 +1,18 @@
+ParallelBitonicSort(int*, int):
+     56, Loop not vectorized/parallelized: contains call
+     63, #omp target teams distribute parallel for thread_limit(256)
+         51, Generating map(tofrom:input[:size]) 
+         63, Generating "nvkernel__Z19ParallelBitonicSortPii_F1L63_2" GPU kernel
+         67, Loop parallelized across teams and threads(128), schedule(static)
+     67, Loop not vectorized/parallelized: not countable
+SwapElements(int, int, int, int, int*):
+    118, Loop not vectorized: data dependency
+BitonicSort(int*, int):
+    137, Loop not vectorized/parallelized: too deeply nested
+         118, Loop not vectorized: data dependency
+DisplayArray(int*, int):
+    152, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     39, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
 timeout was set to  600

@@ -1,4 +1,0 @@
-clang++  -std=c++17 -Wall -I../ccsd-trpdrv-cuda           -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c main.cpp -o main.o
-clang++  -std=c++17 -Wall -I../ccsd-trpdrv-cuda           -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c ccsd_trpdrv.cpp -o ccsd_trpdrv.o
-clang++  -std=c++17 -Wall -I../ccsd-trpdrv-cuda           -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c ccsd_tengy.cpp -o ccsd_tengy.o
-clang++  -std=c++17 -Wall -I../ccsd-trpdrv-cuda           -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU main.o ccsd_trpdrv.o ccsd_tengy.o -o main 

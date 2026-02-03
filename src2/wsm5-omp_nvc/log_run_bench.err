@@ -1,1 +1,56 @@
+wsm(float*, float const*, float*, float*, float*, float*, float*, float const*, float const*, float const*, float*, float*, float*, float*, float*, float, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int):
+      7, include "kernel.h"
+          32, #omp target teams num_teams(teamY*teamX) thread_limit(64)
+              32, Generating "nvkernel__Z3wsmPfPKfS_S_S_S_S_S1_S1_S1_S_S_S_S_S_fiiiiiiiiiiiiiiiiiiii_F183L32_2" GPU kernel
+              34, #omp parallel
+          70, Loop not vectorized: unprofitable for target
+          74, Loop not vectorized: data dependency
+          88, Generated vector simd code for the loop
+         118, Generated vector simd code for the loop
+         155, Recognized memory set idiom
+         245, Loop not vectorized: data dependency
+         261, Loop not vectorized: data dependency
+         282, Loop not vectorized: unknown
+         304, Loop not vectorized: data dependency
+         759, Generated vector simd code for the loop
+main:
+     37, Recognized memory set idiom
+     38, Recognized memory set idiom
+     39, Recognized memory set idiom
+     40, Recognized memory set idiom
+     41, Recognized memory set idiom
+     42, Recognized memory set idiom
+     43, Recognized memory set idiom
+     44, Recognized memory set idiom
+     45, Recognized memory set idiom
+     46, Recognized memory set idiom
+     47, Recognized memory set idiom
+     48, Recognized memory set idiom
+     49, Recognized memory set idiom
+     50, Recognized memory set idiom
+     51, Recognized memory set idiom
+     74, Generating map(to:th[:d3],sr[:d2],p[:d3],pii[:d3],q[:d3],qc[:d3],qi[:d3],qr[:d3],delz[:d3],den[:d3]) 
+         Generating map(tofrom:rain[:d2],snow[:d2]) 
+         Generating map(to:snowncv[:d2],qs[:d3],rainncv[:d2]) 
+     98, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::abs(float):
+                              76, Generating implicit omp declare target routine
+                                  Generating NVIDIA GPU code
+      4, include "chrono"
+std::pow(float, float):
+                        389, Generating implicit omp declare target routine
+                             Generating NVIDIA GPU code
+      7, include "kernel.h"
+std::sqrt(float):
+                        464, Generating implicit omp declare target routine
+                             Generating NVIDIA GPU code
+      7, include "kernel.h"
+std::trunc(float):
+                       1829, Generating implicit omp declare target routine
+                             Generating NVIDIA GPU code
+      7, include "kernel.h"
 timeout was set to  600

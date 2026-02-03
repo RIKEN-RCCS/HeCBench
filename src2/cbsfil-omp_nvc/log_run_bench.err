@@ -1,1 +1,62 @@
+InitialCausalCoefficient(float*, unsigned int, int):
+      7, include "kernels.h"
+          18, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          25, Loop not vectorized: recurrence
+              Loop unrolled 2 times
+InitialAntiCausalCoefficient(float*, unsigned int, int):
+      7, include "kernels.h"
+          37, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+ConvertToInterpolationCoefficients(float*, unsigned int, int):
+      7, include "kernels.h"
+          46, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          55, Loop not fused: different controlling conditions
+              Loop not vectorized: unknown
+              Loop unrolled 2 times
+          62, Loop not vectorized: unknown
+              Loop unrolled 4 times
+          25, Loop not fused: different loop trip count
+              Loop not vectorized: recurrence
+              Loop unrolled 2 times
+toCoef2DX(float*, unsigned int, unsigned int, unsigned int, unsigned int):
+      7, include "kernels.h"
+          75, #omp target teams distribute parallel for thread_limit(numThreads)
+              75, Generating "nvkernel__Z9toCoef2DXPfjjjj_F185L75_2" GPU kernel
+              78, Loop parallelized across teams and threads, schedule(static)
+          53, Loop not vectorized: recurrence
+              Loop unrolled 4 times
+          55, Loop not vectorized: unknown
+              Loop unrolled 4 times
+          62, Loop not vectorized: unknown
+              Loop unrolled 8 times
+          78, Loop not vectorized/parallelized: not countable
+toCoef2DY(float*, unsigned int, unsigned int, unsigned int, unsigned int):
+      7, include "kernels.h"
+          90, #omp target teams distribute parallel for thread_limit(numThreads)
+              90, Generating "nvkernel__Z9toCoef2DYPfjjjj_F185L90_6" GPU kernel
+              93, Loop parallelized across teams and threads, schedule(static)
+          53, Loop not vectorized: recurrence
+              Loop unrolled 2 times
+          55, Loop not vectorized: unknown
+              Loop unrolled 2 times
+          62, Loop not vectorized: unknown
+              Loop unrolled 4 times
+          93, Loop not vectorized/parallelized: not countable
+PowTwoDivider(int):
+     13, Loop not vectorized/parallelized: not countable
+main:
+     35, Loop not vectorized/parallelized: contains call
+     45, Generating map(from:image[:numPix]) 
+          13, Loop not vectorized/parallelized: not countable
+          13, Loop not vectorized/parallelized: not countable
+     49, Loop not vectorized/parallelized: contains call
+     52, Generating update to(image[:numPix])
+     65, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      5, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      7, include "kernels.h"
 timeout was set to  600

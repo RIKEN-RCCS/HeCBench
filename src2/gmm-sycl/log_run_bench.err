@@ -1,1 +1,23 @@
-../scripts/m.sh: line 5: warning: command substitution: ignored null byte in input
+In file included from main.cpp:29:
+./cluster.cpp:296:7: warning: variable 'regroup_iterations' set but not used [-Wunused-but-set-variable]
+  296 |   int regroup_iterations = 0;
+      |       ^
+./cluster.cpp:297:7: warning: variable 'params_iterations' set but not used [-Wunused-but-set-variable]
+  297 |   int params_iterations = 0;
+      |       ^
+./cluster.cpp:298:7: warning: variable 'reduce_iterations' set but not used [-Wunused-but-set-variable]
+  298 |   int reduce_iterations = 0;
+      |       ^
+3 warnings generated.
+In file included from main.cpp:29:
+./cluster.cpp:296:7: warning: variable 'regroup_iterations' set but not used [-Wunused-but-set-variable]
+  296 |   int regroup_iterations = 0;
+      |       ^
+./cluster.cpp:297:7: warning: variable 'params_iterations' set but not used [-Wunused-but-set-variable]
+  297 |   int params_iterations = 0;
+      |       ^
+./cluster.cpp:298:7: warning: variable 'reduce_iterations' set but not used [-Wunused-but-set-variable]
+  298 |   int reduce_iterations = 0;
+      |       ^
+3 warnings generated.
+timeout was set to  600

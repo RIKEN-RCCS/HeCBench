@@ -1,5 +1,0 @@
-clang++  -std=c++17 -Wall -I../include -I../hogbom-cuda           -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c ../hogbom-cuda/main.cpp -o main.o
-clang++  -std=c++17 -Wall -I../include -I../hogbom-cuda           -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c kernels.cpp -o kernels.o
-clang++  -std=c++17 -Wall -I../include -I../hogbom-cuda           -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c ../hogbom-cuda/reference.cpp -o reference.o
-clang++  -std=c++17 -Wall -I../include -I../hogbom-cuda           -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c ../hogbom-cuda/timer.cpp -o timer.o
-clang++  -std=c++17 -Wall -I../include -I../hogbom-cuda           -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU main.o kernels.o reference.o timer.o -o main 

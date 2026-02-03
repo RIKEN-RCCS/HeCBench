@@ -1,5 +1,12 @@
+nvc++ -x c++  -Wall -I../xsbench-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c ../xsbench-cuda/Main.cu -o Main.o
+nvc++ -x c++  -Wall -I../xsbench-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c ../xsbench-cuda/io.cu -o io.o
+nvc++ -x c++  -Wall -I../xsbench-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c Simulation.cpp -o Simulation.o
+nvc++ -x c++  -Wall -I../xsbench-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c ../xsbench-cuda/GridInit.cu -o GridInit.o
+nvc++ -x c++  -Wall -I../xsbench-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c ../xsbench-cuda/XSutils.cu -o XSutils.o
+nvc++ -x c++  -Wall -I../xsbench-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c ../xsbench-cuda/Materials.cu -o Materials.o
+nvc++  -Wall -I../xsbench-cuda -O3 -Minfo -mp=gpu -gpu=cc90 Main.o io.o Simulation.o GridInit.o XSutils.o Materials.o -o XSBench -lm
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "time -p ( ./XSBench -s large -m event -r 10 1>log.std 2>log.err ) 2> log.time"
 pkill nvidia-smi
 ../scripts/m.sh
-min max diff memory in [MB] : 1 6274 6273
+min max diff memory in [MB] : 1 6275 6274

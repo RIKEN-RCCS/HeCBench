@@ -5,13 +5,13 @@ size(GB):16.80, average time(sec):0.004993, BW:3364.710595
 float -> char
 size(GB):10.50, average time(sec):0.004976, BW:2110.128617
 float -> uchar
-size(GB):10.50, average time(sec):0.004979, BW:2108.857200
+size(GB):10.50, average time(sec):0.004976, BW:2110.128617
 int -> int
 size(GB):16.80, average time(sec):0.004992, BW:3365.384615
 int -> float
-size(GB):16.80, average time(sec):0.004996, BW:3362.690152
+size(GB):16.80, average time(sec):0.004992, BW:3365.384615
 int -> char
-size(GB):10.50, average time(sec):0.004974, BW:2110.977081
+size(GB):10.50, average time(sec):0.004973, BW:2111.401568
 int -> uchar
 size(GB):10.50, average time(sec):0.004973, BW:2111.401568
 char -> int
@@ -19,7 +19,7 @@ size(GB):10.50, average time(sec):0.004971, BW:2112.251056
 char -> float
 size(GB):10.50, average time(sec):0.004971, BW:2112.251056
 char -> char
-size(GB):4.20, average time(sec):0.004959, BW:846.944949
+size(GB):4.20, average time(sec):0.004960, BW:846.774194
 char -> uchar
 size(GB):4.20, average time(sec):0.004959, BW:846.944949
 uchar -> int
@@ -29,4 +29,4 @@ size(GB):10.50, average time(sec):0.004972, BW:2111.826227
 uchar -> char
 size(GB):4.20, average time(sec):0.004960, BW:846.774194
 uchar -> uchar
-size(GB):4.20, average time(sec):0.004960, BW:846.774194
+size(GB):4.20, average time(sec):0.004961, BW:846.603507

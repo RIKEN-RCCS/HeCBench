@@ -1,1 +1,3 @@
+nvc++  -std=c++14 -Wall -Ddfloat=float -Ddlong=int           -I../axhelm-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+nvc++  -std=c++14 -Wall -Ddfloat=float -Ddlong=int           -I../axhelm-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c meshBasis.cpp -o meshBasis.o
 cd BlasLapack && make -j8 && cd ..

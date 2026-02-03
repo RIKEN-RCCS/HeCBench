@@ -2,6 +2,6 @@ ECL-MIS v1.3 (main.cpp)
 Copyright 2017-2020 Texas State University
 configuration: 124651 nodes and 387240 edges (../mis-cuda/internet.egr)
 average degree: 3.11 edges per node
-compute time: 0.000106 s
-throughput: 1175.758174 Mnodes/s
-throughput: 3652.602831 Medges/s
+compute time: 0.000108 s
+throughput: 1158.065475 Mnodes/s
+throughput: 3597.638805 Medges/s

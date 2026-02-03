@@ -1,1 +1,11 @@
+In file included from divergence.cpp:6:
+./divergence.hpp:16:9: warning: G++ <4.9 Does not support vectorization pragmas [-W#pragma-messages]
+   16 | #pragma message( \
+      |         ^
+1 warning generated.
+In file included from divergence.cpp:6:
+./divergence.hpp:16:9: warning: G++ <4.9 Does not support vectorization pragmas [-W#pragma-messages]
+   16 | #pragma message( \
+      |         ^
+1 warning generated.
 timeout was set to  600

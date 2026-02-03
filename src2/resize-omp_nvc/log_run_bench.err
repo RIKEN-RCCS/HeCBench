@@ -1,1 +1,92 @@
+main:
+         136, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+         153, Loop not vectorized/parallelized: contains call
+         136, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+         147, Loop not vectorized/parallelized: contains call
+         136, Loop not fused: function call before adjacent loop
+              Loop not vectorized: may not be beneficial for target
+              Loop unrolled 2 times
+         153, Loop not vectorized/parallelized: contains call
+         136, Loop not fused: function call before adjacent loop
+              Loop not vectorized: may not be beneficial for target
+              Loop unrolled 2 times
+         147, Loop not vectorized/parallelized: contains call
+         136, Loop not fused: function call before adjacent loop
+              Loop not vectorized: may not be beneficial for target
+              Loop unrolled 4 times
+         153, Loop not vectorized/parallelized: contains call
+         136, Loop not fused: function call before adjacent loop
+              Loop not vectorized: may not be beneficial for target
+              Loop unrolled 4 times
+         147, Loop not vectorized/parallelized: contains call
+void resize_image<unsigned char>(int, int, int, int, int, int, bool):
+    136, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    142, Generating map(from:out_images[:out_size]) 
+         Generating map(to:in_images[:in_size]) 
+    147, Loop not vectorized/parallelized: contains call
+    153, Loop not vectorized/parallelized: contains call
+void resize_image<unsigned short>(int, int, int, int, int, int, bool):
+    136, Loop not fused: function call before adjacent loop
+         Loop not vectorized: may not be beneficial for target
+         Loop unrolled 2 times
+    142, Generating map(from:out_images[:out_size]) 
+         Generating map(to:in_images[:in_size]) 
+    147, Loop not vectorized/parallelized: contains call
+    153, Loop not vectorized/parallelized: contains call
+void resize_image<unsigned int>(int, int, int, int, int, int, bool):
+    136, Loop not fused: function call before adjacent loop
+         Loop not vectorized: may not be beneficial for target
+         Loop unrolled 4 times
+    142, Generating map(from:out_images[:out_size]) 
+         Generating map(to:in_images[:in_size]) 
+    147, Loop not vectorized/parallelized: contains call
+    153, Loop not vectorized/parallelized: contains call
+void resize_bilinear<unsigned char, 8ul>(unsigned char*, unsigned long, int, int, unsigned char const*, int, int, float, float, bool):
+     63, #omp target teams distribute parallel for num_teams(29184) thread_limit(256)
+         63, Generating "nvkernel__Z15resize_bilinearIhLm8EEvPT_miiPKS0_iiffb_F1L63_2" GPU kernel
+         66, Loop parallelized across teams and threads(128), schedule(static)
+     66, Invariant if transformation
+         Loop not vectorized/parallelized: not countable
+     96, Loop not vectorized: recurrence
+void resize<unsigned char, 8ul>(unsigned char*, unsigned long, int, int, unsigned char const*, int, int, float, float, bool, bool):
+     16, #omp target teams distribute parallel for num_teams(29184) thread_limit(256)
+         16, Generating "nvkernel__Z6resizeIhLm8EEvPT_miiPKS0_iiffbb_F1L16_6" GPU kernel
+         19, Loop parallelized across teams and threads(128), schedule(static)
+     19, Loop not vectorized/parallelized: contains call
+     48, Loop not vectorized: unsupported gather
+void resize_bilinear<unsigned short, 8ul>(unsigned short*, unsigned long, int, int, unsigned short const*, int, int, float, float, bool):
+     63, #omp target teams distribute parallel for num_teams(29184) thread_limit(256)
+         63, Generating "nvkernel__Z15resize_bilinearItLm8EEvPT_miiPKS0_iiffb_F1L63_10" GPU kernel
+         66, Loop parallelized across teams and threads(128), schedule(static)
+     66, Invariant if transformation
+         Loop not vectorized/parallelized: not countable
+     96, Loop not vectorized: recurrence
+void resize<unsigned short, 8ul>(unsigned short*, unsigned long, int, int, unsigned short const*, int, int, float, float, bool, bool):
+     16, #omp target teams distribute parallel for num_teams(29184) thread_limit(256)
+         16, Generating "nvkernel__Z6resizeItLm8EEvPT_miiPKS0_iiffbb_F1L16_14" GPU kernel
+         19, Loop parallelized across teams and threads(128), schedule(static)
+     19, Loop not vectorized/parallelized: contains call
+     48, Loop not vectorized: unsupported gather
+void resize_bilinear<unsigned int, 8ul>(unsigned int*, unsigned long, int, int, unsigned int const*, int, int, float, float, bool):
+     63, #omp target teams distribute parallel for num_teams(29184) thread_limit(256)
+         63, Generating "nvkernel__Z15resize_bilinearIjLm8EEvPT_miiPKS0_iiffb_F1L63_18" GPU kernel
+         66, Loop parallelized across teams and threads(128), schedule(static)
+     66, Invariant if transformation
+         Loop not vectorized/parallelized: not countable
+     96, Loop not vectorized: recurrence
+void resize<unsigned int, 8ul>(unsigned int*, unsigned long, int, int, unsigned int const*, int, int, float, float, bool, bool):
+     16, #omp target teams distribute parallel for num_teams(29184) thread_limit(256)
+         16, Generating "nvkernel__Z6resizeIjLm8EEvPT_miiPKS0_iiffbb_F1L16_22" GPU kernel
+         19, Loop parallelized across teams and threads(128), schedule(static)
+     19, Loop not vectorized/parallelized: contains call
+     48, Loop not vectorized: unsupported gather
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
 timeout was set to  600

@@ -1,7 +1,0 @@
-nvc++ -acc  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90,fast -c xchebyshev.cpp -o xchebyshev.o
-xChebyshev_Tn_Series:
-     49, Generating acc routine seq
-         Generating NVIDIA GPU code
-     62, Loop not vectorized: unknown
-         Loop unrolled 2 times
-nvc++ -acc  -Wall  -O3 -Minfo -mp=gpu -gpu=cc90,fast cosine.o fresnel.o main.o sine.o xchebyshev.o -o main 

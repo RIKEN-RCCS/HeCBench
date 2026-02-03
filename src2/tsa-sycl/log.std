@@ -1,7 +1,7 @@
 TSA in float32
-Average kernel execution time: 7466.882324 (us)
+Average kernel execution time: 7476.690430 (us)
 PASS
 
 TSA in float64
-Average kernel execution time: 10155.052734 (us)
+Average kernel execution time: 10149.558594 (us)
 PASS

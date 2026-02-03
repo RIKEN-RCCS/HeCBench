@@ -1,9 +1,9 @@
 Test driver for cbody with nocc=200, nvir=600, maxiter=20, nkpass=1
 This test requires 3.315846 GB of memory.
 Stopping after 20 iterations...
-Kernel timing: min=0.000033, max=0.000226, avg=0.000046
+Kernel timing: min=0.000033, max=0.000233, avg=0.000045
 OPS: dgemm_flops= 2.304e+09 dgemm_mops= 1.344e+07 tengy_ops= 3.384e+07
-PERF: GF/s= 5.130e+04 GB/s= 8.300e+03
+PERF: GF/s= 5.146e+04 GB/s= 8.325e+03
 These are meaningless but should not vary for a particular input:
 emp4=-15966512.029362 emp5=19566024.139578
 FAIL

@@ -6,7 +6,7 @@ Looking for random key:
  randomIndex = 3100999
  randomKey   = 0x0909090000010300
  randomDigest= B51F8CE2F620E35F313044D6C42D8DCF
-time = 2463 ms, rate = 0.00406009 GHash/sec
+time = 2427 ms, rate = 0.00412031 GHash/sec
 
 Successfully found match (index, key, hash):
  foundIndex  = 3100999

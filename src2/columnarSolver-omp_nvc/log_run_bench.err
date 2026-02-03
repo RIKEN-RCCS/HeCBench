@@ -1,0 +1,91 @@
+LCG_random_float(unsigned int*):
+           2, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+LCG_random_init(unsigned int*):
+          10, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+decrypt(int const*, int const*, int*):
+     38, include "kernels.cpp"
+          17, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          23, Loop not fused: enclosed in different number of nests
+              Generated vector simd code for the loop
+          29, Loop not fused: different loop trip count
+          31, Loop not fused: different loop trip count
+              Generated vector simd code for the loop containing reductions
+          35, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+          39, Loop not vectorized: data dependency
+swapElements(int*, int, int):
+     38, include "kernels.cpp"
+          43, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+swapBlock(int*, int, int, int):
+     38, include "kernels.cpp"
+          52, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          53, Loop not vectorized: data dependency
+decodeKernel(float const*, int const*, unsigned int const*, int*, float*):
+     38, include "kernels.cpp"
+          62, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          83, Recognized memory copy idiom
+          87, Barrier
+          89, Loop not fused: sibling loop may prevent vectorization
+              Generated vector simd code for the loop
+          92, Loop not vectorized: data dependency
+          98, Recognized memory copy idiom
+         107, Loop not vectorized/parallelized: not countable
+         117, Loop not vectorized/parallelized: not countable
+         132, Recognized memory copy idiom
+         138, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+         148, Loop not fused: function call before adjacent loop
+              Loop not vectorized: unprofitable for target
+         154, Recognized memory copy idiom
+         161, Recognized memory copy idiom
+         166, Recognized memory copy idiom
+          53, Loop not vectorized: data dependency
+          23, Loop not fused: enclosed in different number of nests
+              Generated vector simd code for the loop
+          29, Loop not fused: different loop trip count
+          31, Loop not fused: different loop trip count
+              Generated vector simd code for the loop containing reductions
+          35, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+          39, Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+extractBigrams(float*, char const*):
+     46, Loop not vectorized/parallelized: contains call
+verify(int*):
+     60, Loop not vectorized/parallelized: potential early exits
+candidateScore(int*, float*):
+     70, Loop not vectorized: unprofitable for target
+main:
+     85, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+          46, Loop not vectorized/parallelized: contains call
+    100, #omp target teams distribute parallel for thread_limit(32)
+        100, Generating "nvkernel_main_F1L100_2" GPU kernel
+        103, Loop parallelized across teams and threads(128), schedule(static)
+    100, Generating implicit map(tofrom:state[:]) 
+    103, Loop not vectorized/parallelized: not countable
+    105, Loop not vectorized: may not be beneficial for target
+         Loop unrolled 2 times
+    110, #omp target teams num_teams(32) thread_limit(32)
+         99, Generating map(to:encryptedMap[:]) 
+             Generating map(from:decrypted[:406528]) 
+             Generating map(to:scores[:]) 
+             Generating map(alloc:state[:]) 
+        110, Generating "nvkernel_main_F1L110_4" GPU kernel
+        113, #omp parallel
+        114, Team private (shared_scores) located in CUDA shared memory
+    110, Generating implicit map(tofrom:encryptedMap[:],state[:],scores[:]) 
+          70, Loop not vectorized: unprofitable for target
+          60, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     12, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+     38, include "kernels.cpp"
+timeout was set to  600

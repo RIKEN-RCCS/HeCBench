@@ -1,1 +1,46 @@
+damage_of_node(int, int const*, int const*, int*, double*):
+      9, include "kernel.h"
+          18, #omp target teams num_teams((n+255)/256) thread_limit(256)
+              18, Generating "nvkernel__Z14damage_of_nodeiPKiS0_PiPd_F112L18_2" GPU kernel
+              21, #omp parallel
+                33, Barrier
+                40, Barrier
+              24, Team private (local_cache) located in CUDA shared memory
+          35, Loop not vectorized/parallelized: contains call
+damage_of_node_optimized(int, int, int const*, int const*, int*, double*):
+      9, include "kernel.h"
+          60, #omp target teams distribute num_teams(m)
+              60, Generating "nvkernel__Z24damage_of_node_optimizediiPKiS0_PiPd_F112L60_7" GPU kernel
+              62, Loop parallelized across teams, schedule(static)
+              68, Team private (lb,ub,sum) located in CUDA shared memory
+                  #omp parallel
+                68, Generating reduction(+:sum)
+                    Loop parallelized across threads, schedule(static)
+          62, Loop not vectorized/parallelized: contains structure move
+          68, Loop not vectorized/parallelized: not countable
+validate(int, int, int, int const*, int const*, int*, double*):
+     10, include "reference.h"
+          21, Generated vector simd code for the loop containing reductions
+          31, Loop not vectorized/parallelized: potential early exits
+main:
+     37, Loop not fused: different loop trip count
+         Loop not vectorized: unknown
+     41, Loop not fused: function call before adjacent loop
+     43, Generated vector simd code for the loop containing reductions
+     52, Generating map(to:nlist[:n]) 
+         Generating map(from:n_neigh[:m],damage[:m]) 
+         Generating map(to:family[:m]) 
+     55, Loop not vectorized/parallelized: contains call
+          21, Generated vector simd code for the loop containing reductions
+          31, Loop not vectorized/parallelized: potential early exits
+     67, Generating map(to:nlist[:n]) 
+         Generating map(from:n_neigh[:m],damage[:m]) 
+         Generating map(to:family[:m]) 
+     70, Loop not vectorized/parallelized: contains call
+          21, Generated vector simd code for the loop containing reductions
+          31, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      3, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      9, include "kernel.h"
 timeout was set to  600

@@ -1,2 +1,10 @@
+nvc++  -std=c++14 -Wall -I../cmp-cuda -O3 -Minfo -mp=gpu -gpu=cc90,nofma -c main.cpp -o main.o
+nvc++  -std=c++14 -Wall -I../cmp-cuda -O3 -Minfo -mp=gpu -gpu=cc90,nofma -c ../cmp-cuda/reference.cpp -o reference.o
+nvc++  -std=c++14 -Wall -I../cmp-cuda -O3 -Minfo -mp=gpu -gpu=cc90,nofma -c ../cmp-cuda/su_cdp.cpp -o su_cdp.o
+nvc++  -std=c++14 -Wall -I../cmp-cuda -O3 -Minfo -mp=gpu -gpu=cc90,nofma -c ../cmp-cuda/su_gather.cpp -o su_gather.o
+nvc++  -std=c++14 -Wall -I../cmp-cuda -O3 -Minfo -mp=gpu -gpu=cc90,nofma -c ../cmp-cuda/su_trace.cpp -o su_trace.o
+nvc++  -std=c++14 -Wall -I../cmp-cuda -O3 -Minfo -mp=gpu -gpu=cc90,nofma -c ../cmp-cuda/log.cpp -o log.o
+nvc++  -std=c++14 -Wall -I../cmp-cuda -O3 -Minfo -mp=gpu -gpu=cc90,nofma -c ../cmp-cuda/parser.cpp -o parser.o
+nvc++  -std=c++14 -Wall -I../cmp-cuda -O3 -Minfo -mp=gpu -gpu=cc90,nofma main.o reference.o su_cdp.o su_gather.o su_trace.o log.o parser.o -o main 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "time -p ( ./main -c0 1.975e-7 -c1 1.384e-6 -nc 5 -aph 2600 -tau 0.004 -v 2 -i ../cmp-cuda/fold1000.su 1>log.std 2>log.err ) 2> log.time"

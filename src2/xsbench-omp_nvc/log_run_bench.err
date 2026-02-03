@@ -1,1 +1,123 @@
+center_print(char const*, int):
+     12, Loop not vectorized/parallelized: contains call
+print_results(Inputs, int, double, int, unsigned long long*, double):
+          12, Loop not vectorized/parallelized: contains call
+print_inputs(Inputs, int, int):
+          12, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: contains call
+read_CLI(int, char**):
+    239, Loop not vectorized/parallelized: contains call
+run_event_based_simulation(Inputs, SimulationData, int):
+     41, #omp parallel
+         493, Loop not vectorized/parallelized: not countable
+         459, Loop not vectorized/parallelized: potential early exits
+         462, Generated vector simd code for negative stride loop
+         392, Generated vector simd code for the loop
+         401, Loop not vectorized/parallelized: not countable
+         418, Invariant if transformation
+         423, Loop not vectorized/parallelized: not countable
+         426, Generated vector simd code for the loop
+     86, Loop unrolled 5 times (completely unrolled)
+     99, Generated vector simd code for the loop containing reductions
+void calculate_macro_xs<double*, int*, NuclideGridPoint*, double*, int*>(double, int, long, long, int*, double*, double*, int*, NuclideGridPoint*, int*, double*, int, int, int):
+    392, Loop not fused: complex flow graph
+         Generated vector simd code for the loop
+         268, Loop not vectorized/parallelized: not countable
+         301, Loop not vectorized/parallelized: not countable
+         346, Loop not vectorized/parallelized: not countable
+    426, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 5 times (completely unrolled)
+run_event_based_simulation(Inputs, SimulationData, int, double*):
+    178, Loop not vectorized/parallelized: contains call
+    182, #omp target teams distribute parallel for thread_limit(256)
+        174, Generating map(to:SD_nuclide_grid[:SD.length_nuclide_grid],SD_index_grid[:SD.length_index_grid],SD_num_nucs[:SD.length_num_nucs],SD_concs[:SD.length_concs],SD_mats[:SD.length_mats]) 
+             Generating map(from:verification[:in.lookups]) 
+             Generating map(to:SD_unionized_energy_array[:SD.length_unionized_energy_array]) 
+        182, Generating "nvkernel__Z26run_event_based_simulation6Inputs14SimulationDataiPd_F1L182_3" GPU kernel
+             Loop parallelized across teams and threads(128), schedule(static)
+    182, Generating map(to:in) 
+         493, Loop not vectorized/parallelized: not countable
+         459, Loop not vectorized/parallelized: potential early exits
+         462, Generated vector simd code for negative stride loop
+         392, Generated vector simd code for the loop
+         401, Loop not vectorized/parallelized: not countable
+         418, Invariant if transformation
+         423, Loop not vectorized/parallelized: not countable
+         426, Generated vector simd code for the loop
+    227, Loop unrolled 5 times (completely unrolled)
+    246, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+void calculate_macro_xs<double const*, int const*, NuclideGridPoint const*, double const*, int const*>(double, int, long, long, int const*, double const*, double const*, int const*, NuclideGridPoint const*, int const*, double*, int, int, int):
+    386, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+    392, Loop not fused: complex flow graph
+         Generated vector simd code for the loop
+         268, Loop not vectorized/parallelized: not countable
+         301, Loop not vectorized/parallelized: not countable
+         346, Loop not vectorized/parallelized: not countable
+    426, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 5 times (completely unrolled)
+pick_mat(unsigned long*):
+    433, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+    459, Loop not vectorized/parallelized: potential early exits
+    462, Generated vector simd code for negative stride loop
+         Loop unrolled 4 times
+LCG_random_double(unsigned long*):
+    472, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+fast_forward_LCG(unsigned long, unsigned long):
+    482, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+    493, Loop not vectorized/parallelized: not countable
+long grid_search<double*>(long, double, double*):
+    268, Loop not vectorized/parallelized: not countable
+void calculate_micro_xs<double*, int*, NuclideGridPoint*>(double, int, long, long, double*, int*, NuclideGridPoint*, long, double*, int, int):
+         157, Loop not vectorized/parallelized: not countable
+         157, Loop not vectorized/parallelized: not countable
+long grid_search_nuclide<NuclideGridPoint*>(long, double, NuclideGridPoint*, long, long):
+      2, include "XSbench_header.h"
+         157, Loop not vectorized/parallelized: not countable
+long grid_search<double const*>(long, double, double const*):
+    262, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+    268, Loop not vectorized/parallelized: not countable
+void calculate_micro_xs<double const*, int const*, NuclideGridPoint const*>(double, int, long, long, double const*, int const*, NuclideGridPoint const*, long, double*, int, int):
+    289, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+         157, Loop not vectorized/parallelized: not countable
+         157, Loop not vectorized/parallelized: not countable
+long grid_search_nuclide<NuclideGridPoint const*>(long, double, NuclideGridPoint const*, long, long):
+      2, include "XSbench_header.h"
+         151, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+         157, Loop not vectorized/parallelized: not countable
+grid_init_do_not_profile(Inputs, int):
+     36, Loop not vectorized/parallelized: potential early exits
+     47, Loop not vectorized/parallelized: contains call
+     82, Loop not vectorized/parallelized: not countable
+    100, Loop not vectorized: unprofitable for target
+    103, Loop not vectorized/parallelized: not countable
+    106, Loop not vectorized: data dependency
+         157, Loop not vectorized/parallelized: not countable
+long grid_search_nuclide<NuclideGridPoint*>(long, double, NuclideGridPoint*, long, long):
+      1, include "XSbench_header.h"
+         157, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      1, include "XSbench_header.h"
+          12, include "chrono"
+              472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000l>>::_S_gcd(long, long):
+      1, include "XSbench_header.h"
+          12, include "chrono"
+              472, Loop not vectorized/parallelized: not countable
+load_mats(int*, long, int*):
+     38, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+     53, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+load_concs(int*, int):
+    105, Loop not vectorized/parallelized: potential early exits
 timeout was set to  600

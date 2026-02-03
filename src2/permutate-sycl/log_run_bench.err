@@ -1,1 +1,9 @@
+../permutate-cuda/permutation_testing.cpp:63:12: warning: variable 'completed' set but not used [-Wunused-but-set-variable]
+   63 |     size_t completed = 0;
+      |            ^
+1 warning generated.
+../permutate-cuda/permutation_testing.cpp:63:12: warning: variable 'completed' set but not used [-Wunused-but-set-variable]
+   63 |     size_t completed = 0;
+      |            ^
+1 warning generated.
 timeout was set to  600

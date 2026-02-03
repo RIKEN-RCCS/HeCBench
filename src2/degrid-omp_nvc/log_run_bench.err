@@ -1,1 +1,52 @@
+init_gcf(double2*, unsigned long):
+     11, Loop not vectorized/parallelized: too deeply nested
+     14, Zero trip check eliminated
+         Generated vector simd code for the loop
+degridCPU(double2*, double2*, double2*, double2*):
+     39, Invariant if transformation
+         Loop not fused: no successor loop
+         Loop not vectorized: unprofitable for target
+         Loop not vectorized: unknown
+         Loop unrolled 4 times
+main:
+          11, Loop not fused: function call before adjacent loop
+              Loop not vectorized/parallelized: too deeply nested
+          14, Generated vector simd code for the loop
+     90, Loop not vectorized/parallelized: contains call
+     94, Loop not fused: different loop trip count
+     95, Generated vector simd code for the loop
+    100, Loop not fused: dependence chain to sibling loop
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 8 times
+    103, Loop not fused: function call before adjacent loop
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 8 times
+          57, Loop not vectorized/parallelized: contains call
+          31, Loop not fused: function call before adjacent loop
+          39, Invariant if transformation
+              Loop not fused: no successor loop
+              Loop not vectorized: unprofitable for target
+              Loop not vectorized: unknown
+              Loop unrolled 4 times
+    121, Loop not vectorized/parallelized: potential early exits
+void degridGPU<double2>(double2*, double2*, double2*, double2*):
+      7, include "kernels.cpp"
+          54, Generating map(to:gcf[:4194304],img[:71303680],in[:40000]) 
+              Generating map(from:out[:40000]) 
+          57, Loop not vectorized/parallelized: contains call
+void degrid_kernel<double2>(double2*, double2 const*, unsigned long, double2 const*, unsigned long, double2 const*):
+      7, include "kernels.cpp"
+          11, #omp target teams distribute num_teams(1250) thread_limit(256)
+              11, Generating "nvkernel__Z13degrid_kernelI7double2EvPT_PKS1_mS4_mS4__F297L11_2" GPU kernel
+              14, Loop parallelized across teams, schedule(static)
+              22, Team private (sum_r,sum_i,sub_y,main_x,sub_x,main_y) located in CUDA shared memory
+                  #omp parallel
+                22, Generating reduction(+:sum_r,sum_i)
+                23, Loop parallelized across threads, schedule(static)
+          14, Loop not vectorized/parallelized: contains structure move
+          23, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      7, include "kernels.cpp"
+           1, include "chrono"
+              472, Loop not vectorized/parallelized: not countable
 timeout was set to  600

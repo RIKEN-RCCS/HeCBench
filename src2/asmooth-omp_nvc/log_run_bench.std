@@ -1,3 +1,5 @@
+nvc++  -Wall -I../asmooth-cuda/ -O3 -Minfo -mp=gpu -gpu=cc90,fastmath -c main.cpp -o main.o
+nvc++  -Wall -I../asmooth-cuda/ -O3 -Minfo -mp=gpu -gpu=cc90,fastmath main.o -o main 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "time -p ( ./main 8192 2000 9 100 1>log.std 2>log.err ) 2> log.time"
 pkill nvidia-smi

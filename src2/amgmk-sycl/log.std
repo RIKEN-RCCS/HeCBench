@@ -15,7 +15,7 @@
 // 
 //------------ 
 
-Wall time = 0.256243 seconds. 
+Wall time = 0.239437 seconds. 
 
 //------------ 
 // 
@@ -23,7 +23,7 @@ Wall time = 0.256243 seconds.
 // 
 //------------ 
 
-Total kernel time = 0.002704 seconds. 
+Total kernel time = 0.002711 seconds. 
 
 //------------ 
 // 
@@ -31,6 +31,6 @@ Total kernel time = 0.002704 seconds.
 // 
 //------------ 
 
-Wall time = 0.013040 seconds. 
+Wall time = 0.012656 seconds. 
 
-Total Wall time = 4.236861 seconds. 
+Total Wall time = 2.392950 seconds. 

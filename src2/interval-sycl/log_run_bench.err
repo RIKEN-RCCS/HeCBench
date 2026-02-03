@@ -1,1 +1,59 @@
+In file included from main.cpp:43:
+In file included from ../interval-cuda/cpu_interval.h:41:
+In file included from ../interval-cuda/boost/numeric/interval.hpp:24:
+In file included from ../interval-cuda/boost/numeric/interval/compare.hpp:17:
+In file included from ../interval-cuda/boost/numeric/interval/compare/set.hpp:15:
+../interval-cuda/boost/numeric/interval/utility.hpp:147:33: warning: '&&' within '||' [-Wlogical-op-parentheses]
+  147 |   return x.lower() <= y.lower() && y.lower() <= x.upper() ||
+      |          ~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+../interval-cuda/boost/numeric/interval/utility.hpp:147:33: note: place parentheses around the '&&' expression to silence this warning
+  147 |   return x.lower() <= y.lower() && y.lower() <= x.upper() ||
+      |                                 ^
+      |          (                                               )
+../interval-cuda/boost/numeric/interval/utility.hpp:148:33: warning: '&&' within '||' [-Wlogical-op-parentheses]
+  147 |   return x.lower() <= y.lower() && y.lower() <= x.upper() ||
+      |                                                           ~~
+  148 |          y.lower() <= x.lower() && x.lower() <= y.upper();
+      |          ~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+../interval-cuda/boost/numeric/interval/utility.hpp:148:33: note: place parentheses around the '&&' expression to silence this warning
+  148 |          y.lower() <= x.lower() && x.lower() <= y.upper();
+      |                                 ^                        
+      |          (                                               )
+../interval-cuda/boost/numeric/interval/utility.hpp:251:33: warning: unused typedef 'I' [-Wunused-local-typedef]
+  251 |   typedef interval<T, Policies> I;
+      |                                 ^
+In file included from main.cpp:43:
+../interval-cuda/cpu_interval.h:238:33: warning: unused typedef 'T' [-Wunused-local-typedef]
+  238 |   typedef typename I::base_type T;
+      |                                 ^
+4 warnings generated.
+In file included from main.cpp:43:
+In file included from ../interval-cuda/cpu_interval.h:41:
+In file included from ../interval-cuda/boost/numeric/interval.hpp:24:
+In file included from ../interval-cuda/boost/numeric/interval/compare.hpp:17:
+In file included from ../interval-cuda/boost/numeric/interval/compare/set.hpp:15:
+../interval-cuda/boost/numeric/interval/utility.hpp:147:33: warning: '&&' within '||' [-Wlogical-op-parentheses]
+  147 |   return x.lower() <= y.lower() && y.lower() <= x.upper() ||
+      |          ~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+../interval-cuda/boost/numeric/interval/utility.hpp:147:33: note: place parentheses around the '&&' expression to silence this warning
+  147 |   return x.lower() <= y.lower() && y.lower() <= x.upper() ||
+      |                                 ^
+      |          (                                               )
+../interval-cuda/boost/numeric/interval/utility.hpp:148:33: warning: '&&' within '||' [-Wlogical-op-parentheses]
+  147 |   return x.lower() <= y.lower() && y.lower() <= x.upper() ||
+      |                                                           ~~
+  148 |          y.lower() <= x.lower() && x.lower() <= y.upper();
+      |          ~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+../interval-cuda/boost/numeric/interval/utility.hpp:148:33: note: place parentheses around the '&&' expression to silence this warning
+  148 |          y.lower() <= x.lower() && x.lower() <= y.upper();
+      |                                 ^                        
+      |          (                                               )
+../interval-cuda/boost/numeric/interval/utility.hpp:251:33: warning: unused typedef 'I' [-Wunused-local-typedef]
+  251 |   typedef interval<T, Policies> I;
+      |                                 ^
+In file included from main.cpp:43:
+../interval-cuda/cpu_interval.h:238:33: warning: unused typedef 'T' [-Wunused-local-typedef]
+  238 |   typedef typename I::base_type T;
+      |                                 ^
+4 warnings generated.
 timeout was set to  600

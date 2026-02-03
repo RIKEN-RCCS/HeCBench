@@ -1,2 +1,7 @@
+clang++: warning: treating 'c' input as 'c++' when in C++ mode, this behavior is deprecated [-Wdeprecated]
+clang++: warning: treating 'c' input as 'c++' when -fsycl is used [-Wexpected-file-type]
+clang++: warning: treating 'c' input as 'c++' when -fsycl is used [-Wexpected-file-type]
+clang++: warning: treating 'c' input as 'c++' when -fsycl is used [-Wexpected-file-type]
+clang++: warning: treating 'c' input as 'c++' when -fsycl is used [-Wexpected-file-type]
 make: *** [Makefile.NVD:111: run_mem] Error 134
 timeout was set to  600

@@ -1,1 +1,25 @@
+laplace3d(int, int, int, int, float const*, float*):
+     12, include "kernel.h"
+          33, #omp target teams distribute parallel for thread_limit(256)
+              33, Generating "nvkernel__Z9laplace3diiiiPKfPf_F207L33_2" GPU kernel
+              35, Loop parallelized across teams and threads(128), schedule(static)
+          37, Loop not vectorized/parallelized: not countable
+reference(int, int, int, float const*, float*):
+     13, include "reference.h"
+           8, Loop not vectorized: data dependency
+main:
+     56, Loop not fused: function call before adjacent loop
+     58, Loop not vectorized: data dependency
+     70, Generating map(alloc:h_u2[:grid3D_size]) 
+         Generating map(tofrom:h_u1[:grid3D_size]) 
+     77, Loop not vectorized/parallelized: contains call
+     90, Loop not fused: different loop trip count
+           8, Loop not vectorized: data dependency
+          90, Loop not vectorized/parallelized: too deeply nested
+     98, Loop not fused: function call before adjacent loop
+    100, Loop not vectorized: unknown
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     10, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+     12, include "kernel.h"
 timeout was set to  600

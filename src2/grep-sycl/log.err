@@ -1,110 +1,110 @@
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 36: 848750 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 36: 3314068 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 37: 850481 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 37: 3315009 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 36: 850500 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 36: 3315027 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 37: 850603 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 37: 3315131 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 36: 850622 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 36: 3315151 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 37: 850640 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 37: 3315169 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 36: 850659 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 36: 3315188 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 37: 850677 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 37: 3315205 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 36: 850696 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 36: 3315223 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 37: 850713 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 37: 3315241 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 36: 850730 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 36: 3315260 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 37: 850747 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 37: 3315278 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 36: 850767 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 36: 3315296 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 37: 850784 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 37: 3315313 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 36: 850802 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 36: 3315331 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 37: 850820 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 37: 3315349 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 36: 850837 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 36: 3315367 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 37: 850854 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 37: 3315384 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 36: 850873 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 36: 3315402 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 37: 850890 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 37: 3315419 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 36: 850908 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 36: 3315437 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 37: 850925 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 37: 3315454 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 36: 850943 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 36: 3315472 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 37: 850960 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 37: 3315489 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 36: 850979 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 36: 3315507 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 37: 850996 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 37: 3315524 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 36: 851013 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 36: 3315542 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 37: 851030 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 37: 3315559 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 36: 851048 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 36: 3315577 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 37: 851065 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 37: 3315594 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 36: 851084 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 36: 3315612 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 37: 851101 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 37: 3315629 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 36: 851119 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 36: 3315647 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 37: 851138 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 37: 3315664 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 36: 851156 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 36: 3315682 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 37: 851173 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 37: 3315699 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 36: 851191 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 36: 3315717 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 37: 851209 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 37: 3315734 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 36: 851226 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 36: 3315752 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 37: 851244 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 37: 3315770 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 36: 851262 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 36: 3315789 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 37: 851280 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 37: 3315807 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 36: 851298 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 36: 3315825 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 37: 851315 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 37: 3315842 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 36: 851333 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 36: 3315860 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 37: 851351 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 37: 3315878 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 36: 851369 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 36: 3315896 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 37: 851386 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 37: 3315914 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 36: 851404 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 36: 3315932 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 37: 851421 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 37: 3315950 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 36: 851440 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 36: 3315968 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 37: 851457 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 37: 3315985 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 36: 851475 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 36: 3316003 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 37: 851492 Segmentation fault      (core dumped) ./$prog -f $file $testcase
+./runtests.sh: line 37: 3316020 Segmentation fault      (core dumped) ./$prog -f $file $testcase
 grep: ../grep-cuda/testcases/*: No such file or directory
-./runtests.sh: line 49: 851509 Segmentation fault      (core dumped) ./$prog -f $file '.*'
+./runtests.sh: line 49: 3316038 Segmentation fault      (core dumped) ./$prog -f $file '.*'

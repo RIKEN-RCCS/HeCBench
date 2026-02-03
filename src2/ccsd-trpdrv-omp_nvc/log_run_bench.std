@@ -1,5 +1,9 @@
+nvc++  -std=c++14 -Wall -I../ccsd-trpdrv-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c ccsd_tengy.cpp -o ccsd_tengy.o
+nvc++  -std=c++14 -Wall -I../ccsd-trpdrv-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c ccsd_trpdrv.cpp -o ccsd_trpdrv.o
+nvc++  -std=c++14 -Wall -I../ccsd-trpdrv-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+nvc++  -std=c++14 -Wall -I../ccsd-trpdrv-cuda -O3 -Minfo -mp=gpu -gpu=cc90 ccsd_tengy.o ccsd_trpdrv.o main.o -o main 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "time -p ( ./main  200 600 20 1>log.std 2>log.err ) 2> log.time"
 pkill nvidia-smi
 ../scripts/m.sh
-min max diff memory in [MB] : 1 591 590
+min max diff memory in [MB] : 1 590 589

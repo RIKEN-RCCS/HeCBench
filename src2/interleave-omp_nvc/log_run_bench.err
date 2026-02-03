@@ -1,1 +1,32 @@
+initialize(INTERLEAVED_T (&) [4096], INTERLEAVED_T (&) [4096], NON_INTERLEAVED_T&, NON_INTERLEAVED_T&, int):
+     59, include "util.h"
+           9, Loop not vectorized/parallelized: contains call
+verify(INTERLEAVED_T (&) [4096], NON_INTERLEAVED_T&, int):
+     59, include "util.h"
+          49, Loop not vectorized/parallelized: contains call
+add_test_interleaved(INTERLEAVED_T*, INTERLEAVED_T const*, unsigned int, unsigned int):
+     71, #omp target teams distribute parallel for thread_limit(256)
+         68, Generating map(tofrom:h_dst[:num_elements]) 
+             Generating map(to:h_src[:num_elements]) 
+         71, Generating "nvkernel__Z20add_test_interleavedP13INTERLEAVED_TPKS_jj_F1L71_2" GPU kernel
+         73, Loop parallelized across teams and threads(128), schedule(static)
+     71, Loop not vectorized/parallelized: contains call
+     73, Loop not vectorized/parallelized: not countable
+     75, Loop not vectorized: data dependency
+add_test_non_interleaved(NON_INTERLEAVED_T*, NON_INTERLEAVED_T const*, unsigned int, unsigned int):
+    113, #omp target teams distribute parallel for thread_limit(256)
+        110, Generating map(tofrom:h_dst[:1]) 
+             Generating map(to:h_src[:1]) 
+        113, Generating "nvkernel__Z24add_test_non_interleavedP17NON_INTERLEAVED_TPKS_jj_F1L113_6" GPU kernel
+        115, Loop parallelized across teams and threads(128), schedule(static)
+    113, Loop not vectorized/parallelized: contains call
+    115, Loop not vectorized/parallelized: not countable
+    117, Loop not vectorized: data dependency
+main:
+           9, Loop not vectorized/parallelized: contains call
+          49, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      6, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+     59, include "util.h"
 timeout was set to  600

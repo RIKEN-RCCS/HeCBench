@@ -20,9 +20,9 @@ max_num_threads = 72
 // 
 //------------ 
 
-Wall time = 0.021056 seconds. 
+Wall time = 0.061896 seconds. 
  
- Relax: error: 7.120639e-01
+ Relax: error: 7.112264e-01
 
 //------------ 
 // 
@@ -30,7 +30,7 @@ Wall time = 0.021056 seconds.
 // 
 //------------ 
 
-Wall time = 0.006489 seconds. 
+Wall time = 0.006505 seconds. 
 
 //------------ 
 // 
@@ -38,6 +38,6 @@ Wall time = 0.006489 seconds.
 // 
 //------------ 
 
-Wall time = 0.013218 seconds. 
+Wall time = 0.013184 seconds. 
 
-Total Wall time = 2.394901 seconds. 
+Total Wall time = 2.384402 seconds. 

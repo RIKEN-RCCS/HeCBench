@@ -5,4 +5,4 @@ Executing String search with load balance for 20000 iterations
 Device: found 36 times
 Passed!
 
-Average kernel execution time: 790.451316 (us)
+Average kernel execution time: 790.753170 (us)

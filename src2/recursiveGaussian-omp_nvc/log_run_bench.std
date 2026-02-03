@@ -1,5 +1,9 @@
+nvc++  -std=c++14 -Wall           -I../boxfilter-sycl -I../recursiveGaussian-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+nvc++  -std=c++14 -Wall           -I../boxfilter-sycl -I../recursiveGaussian-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c ../recursiveGaussian-cuda/RecursiveGaussianHost.cpp -o RecursiveGaussianHost.o
+nvc++  -std=c++14 -Wall           -I../boxfilter-sycl -I../recursiveGaussian-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c ../boxfilter-sycl/shrUtils.cpp -o shrUtils.o
+nvc++  -std=c++14 -Wall           -I../boxfilter-sycl -I../recursiveGaussian-cuda -O3 -Minfo -mp=gpu -gpu=cc90 main.o RecursiveGaussianHost.o shrUtils.o -o main 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "time -p ( ./main ../recursiveGaussian-cuda/StoneRGB.ppm 1000 1>log.std 2>log.err ) 2> log.time"
 pkill nvidia-smi
 ../scripts/m.sh
-min max diff memory in [MB] : 1 582 581
+min max diff memory in [MB] : 1 583 582

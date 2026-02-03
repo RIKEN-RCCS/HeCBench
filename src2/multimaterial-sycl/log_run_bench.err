@@ -1,1 +1,181 @@
+compact.cpp:81:11: warning: unused variable 'd_nextfrac' [-Wunused-variable]
+   81 |   int    *d_nextfrac = (int *)cp_to_device(q, (char*)ccc.nextfrac, mm_len*sizeof(int));
+      |           ^~~~~~~~~~
+1 warning generated.
+compact.cpp:81:11: warning: unused variable 'd_nextfrac' [-Wunused-variable]
+   81 |   int    *d_nextfrac = (int *)cp_to_device(q, (char*)ccc.nextfrac, mm_len*sizeof(int));
+      |           ^~~~~~~~~~
+1 warning generated.
+multimat.cpp:106:7: warning: unused variable 'sizex' [-Wunused-variable]
+  106 |   int sizex = cc.sizex;
+      |       ^~~~~
+multimat.cpp:108:7: warning: unused variable 'Nmats' [-Wunused-variable]
+  108 |   int Nmats = cc.Nmats;
+      |       ^~~~~
+multimat.cpp:281:7: warning: unused variable 'width' [-Wunused-variable]
+  281 |   int width = sizex/Nmats;
+      |       ^~~~~
+multimat.cpp:489:11: warning: unused variable 'f' [-Wunused-variable]
+  489 |     FILE *f = fopen("map.txt","w");
+      |           ^
+multimat.cpp:629:10: warning: variable 'alg1' set but not used [-Wunused-but-set-variable]
+  629 |   size_t alg1 = 0;
+      |          ^
+multimat.cpp:662:10: warning: variable 'alg2' set but not used [-Wunused-but-set-variable]
+  662 |   size_t alg2 = 0;
+      |          ^
+multimat.cpp:701:10: warning: variable 'alg3' set but not used [-Wunused-but-set-variable]
+  701 |   size_t alg3 = 0;
+      |          ^
+7 warnings generated.
+multimat.cpp:106:7: warning: unused variable 'sizex' [-Wunused-variable]
+  106 |   int sizex = cc.sizex;
+      |       ^~~~~
+multimat.cpp:108:7: warning: unused variable 'Nmats' [-Wunused-variable]
+  108 |   int Nmats = cc.Nmats;
+      |       ^~~~~
+multimat.cpp:281:7: warning: unused variable 'width' [-Wunused-variable]
+  281 |   int width = sizex/Nmats;
+      |       ^~~~~
+multimat.cpp:489:11: warning: unused variable 'f' [-Wunused-variable]
+  489 |     FILE *f = fopen("map.txt","w");
+      |           ^
+multimat.cpp:629:10: warning: variable 'alg1' set but not used [-Wunused-but-set-variable]
+  629 |   size_t alg1 = 0;
+      |          ^
+multimat.cpp:662:10: warning: variable 'alg2' set but not used [-Wunused-but-set-variable]
+  662 |   size_t alg2 = 0;
+      |          ^
+multimat.cpp:701:10: warning: variable 'alg3' set but not used [-Wunused-but-set-variable]
+  701 |   size_t alg3 = 0;
+      |          ^
+7 warnings generated.
+compact.cpp:83:11: warning: unused variable 'd_mmc_index' [-Wunused-variable]
+   83 |   int    *d_mmc_index = (int *)cp_to_device(q, (char*)ccc.mmc_index, (mmc_cells+1)*sizeof(int));
+      |           ^~~~~~~~~~~
+compact.cpp:85:11: warning: unused variable 'd_mmc_i' [-Wunused-variable]
+   85 |   int    *d_mmc_i = (int *)cp_to_device(q, (char*)ccc.mmc_i, (mmc_cells)*sizeof(int));
+      |           ^~~~~~~
+compact.cpp:87:11: warning: unused variable 'd_mmc_j' [-Wunused-variable]
+   87 |   int    *d_mmc_j = (int *)cp_to_device(q, (char*)ccc.mmc_j, (mmc_cells)*sizeof(int));
+      |           ^~~~~~~
+3 warnings generated.
+compact.cpp:83:11: warning: unused variable 'd_mmc_index' [-Wunused-variable]
+   83 |   int    *d_mmc_index = (int *)cp_to_device(q, (char*)ccc.mmc_index, (mmc_cells+1)*sizeof(int));
+      |           ^~~~~~~~~~~
+compact.cpp:85:11: warning: unused variable 'd_mmc_i' [-Wunused-variable]
+   85 |   int    *d_mmc_i = (int *)cp_to_device(q, (char*)ccc.mmc_i, (mmc_cells)*sizeof(int));
+      |           ^~~~~~~
+compact.cpp:87:11: warning: unused variable 'd_mmc_j' [-Wunused-variable]
+   87 |   int    *d_mmc_j = (int *)cp_to_device(q, (char*)ccc.mmc_j, (mmc_cells)*sizeof(int));
+      |           ^~~~~~~
+3 warnings generated.
+multimat.cpp:106:7: warning: unused variable 'sizex' [-Wunused-variable]
+  106 |   int sizex = cc.sizex;
+      |       ^~~~~
+multimat.cpp:108:7: warning: unused variable 'Nmats' [-Wunused-variable]
+  108 |   int Nmats = cc.Nmats;
+      |       ^~~~~
+multimat.cpp:281:7: warning: unused variable 'width' [-Wunused-variable]
+  281 |   int width = sizex/Nmats;
+      |       ^~~~~
+multimat.cpp:489:11: warning: unused variable 'f' [-Wunused-variable]
+  489 |     FILE *f = fopen("map.txt","w");
+      |           ^
+multimat.cpp:629:10: warning: variable 'alg1' set but not used [-Wunused-but-set-variable]
+  629 |   size_t alg1 = 0;
+      |          ^
+multimat.cpp:662:10: warning: variable 'alg2' set but not used [-Wunused-but-set-variable]
+  662 |   size_t alg2 = 0;
+      |          ^
+multimat.cpp:701:10: warning: variable 'alg3' set but not used [-Wunused-but-set-variable]
+  701 |   size_t alg3 = 0;
+      |          ^
+7 warnings generated.
+multimat.cpp:106:7: warning: unused variable 'sizex' [-Wunused-variable]
+  106 |   int sizex = cc.sizex;
+      |       ^~~~~
+multimat.cpp:108:7: warning: unused variable 'Nmats' [-Wunused-variable]
+  108 |   int Nmats = cc.Nmats;
+      |       ^~~~~
+multimat.cpp:281:7: warning: unused variable 'width' [-Wunused-variable]
+  281 |   int width = sizex/Nmats;
+      |       ^~~~~
+multimat.cpp:489:11: warning: unused variable 'f' [-Wunused-variable]
+  489 |     FILE *f = fopen("map.txt","w");
+      |           ^
+multimat.cpp:629:10: warning: variable 'alg1' set but not used [-Wunused-but-set-variable]
+  629 |   size_t alg1 = 0;
+      |          ^
+multimat.cpp:662:10: warning: variable 'alg2' set but not used [-Wunused-but-set-variable]
+  662 |   size_t alg2 = 0;
+      |          ^
+multimat.cpp:701:10: warning: variable 'alg3' set but not used [-Wunused-but-set-variable]
+  701 |   size_t alg3 = 0;
+      |          ^
+7 warnings generated.
+compact.cpp:81:11: warning: unused variable 'd_nextfrac' [-Wunused-variable]
+   81 |   int    *d_nextfrac = (int *)cp_to_device(q, (char*)ccc.nextfrac, mm_len*sizeof(int));
+      |           ^~~~~~~~~~
+compact.cpp:85:11: warning: unused variable 'd_mmc_i' [-Wunused-variable]
+   85 |   int    *d_mmc_i = (int *)cp_to_device(q, (char*)ccc.mmc_i, (mmc_cells)*sizeof(int));
+      |           ^~~~~~~
+compact.cpp:87:11: warning: unused variable 'd_mmc_j' [-Wunused-variable]
+   87 |   int    *d_mmc_j = (int *)cp_to_device(q, (char*)ccc.mmc_j, (mmc_cells)*sizeof(int));
+      |           ^~~~~~~
+3 warnings generated.
+compact.cpp:81:11: warning: unused variable 'd_nextfrac' [-Wunused-variable]
+   81 |   int    *d_nextfrac = (int *)cp_to_device(q, (char*)ccc.nextfrac, mm_len*sizeof(int));
+      |           ^~~~~~~~~~
+compact.cpp:85:11: warning: unused variable 'd_mmc_i' [-Wunused-variable]
+   85 |   int    *d_mmc_i = (int *)cp_to_device(q, (char*)ccc.mmc_i, (mmc_cells)*sizeof(int));
+      |           ^~~~~~~
+compact.cpp:87:11: warning: unused variable 'd_mmc_j' [-Wunused-variable]
+   87 |   int    *d_mmc_j = (int *)cp_to_device(q, (char*)ccc.mmc_j, (mmc_cells)*sizeof(int));
+      |           ^~~~~~~
+3 warnings generated.
+multimat.cpp:106:7: warning: unused variable 'sizex' [-Wunused-variable]
+  106 |   int sizex = cc.sizex;
+      |       ^~~~~
+multimat.cpp:108:7: warning: unused variable 'Nmats' [-Wunused-variable]
+  108 |   int Nmats = cc.Nmats;
+      |       ^~~~~
+multimat.cpp:281:7: warning: unused variable 'width' [-Wunused-variable]
+  281 |   int width = sizex/Nmats;
+      |       ^~~~~
+multimat.cpp:489:11: warning: unused variable 'f' [-Wunused-variable]
+  489 |     FILE *f = fopen("map.txt","w");
+      |           ^
+multimat.cpp:629:10: warning: variable 'alg1' set but not used [-Wunused-but-set-variable]
+  629 |   size_t alg1 = 0;
+      |          ^
+multimat.cpp:662:10: warning: variable 'alg2' set but not used [-Wunused-but-set-variable]
+  662 |   size_t alg2 = 0;
+      |          ^
+multimat.cpp:701:10: warning: variable 'alg3' set but not used [-Wunused-but-set-variable]
+  701 |   size_t alg3 = 0;
+      |          ^
+7 warnings generated.
+multimat.cpp:106:7: warning: unused variable 'sizex' [-Wunused-variable]
+  106 |   int sizex = cc.sizex;
+      |       ^~~~~
+multimat.cpp:108:7: warning: unused variable 'Nmats' [-Wunused-variable]
+  108 |   int Nmats = cc.Nmats;
+      |       ^~~~~
+multimat.cpp:281:7: warning: unused variable 'width' [-Wunused-variable]
+  281 |   int width = sizex/Nmats;
+      |       ^~~~~
+multimat.cpp:489:11: warning: unused variable 'f' [-Wunused-variable]
+  489 |     FILE *f = fopen("map.txt","w");
+      |           ^
+multimat.cpp:629:10: warning: variable 'alg1' set but not used [-Wunused-but-set-variable]
+  629 |   size_t alg1 = 0;
+      |          ^
+multimat.cpp:662:10: warning: variable 'alg2' set but not used [-Wunused-but-set-variable]
+  662 |   size_t alg2 = 0;
+      |          ^
+multimat.cpp:701:10: warning: variable 'alg3' set but not used [-Wunused-but-set-variable]
+  701 |   size_t alg3 = 0;
+      |          ^
+7 warnings generated.
 timeout was set to  600

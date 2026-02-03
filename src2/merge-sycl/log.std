@@ -4,7 +4,7 @@ PASS. Warmup run
 
 uint32_t 1000000000 :
 	errors 	: 0
-PASS. Average kernel execution time: 51856.532463 (us).
+PASS. Average kernel execution time: 51863.930463 (us).
 
 float 1000000000 :
 	errors 	: 0

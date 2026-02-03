@@ -1,1 +1,154 @@
+"kernel.h", line 52: warning: variable "nTeams" was declared but never referenced [declared_but_not_referenced]
+    const int nTeams =  nTeamsX * (n / (block_size_y * tile_size_y));
+              ^
+          detected during:
+            instantiation of "void distance(const T *, const T *, int, int, const T *, const T *, T *) [with T=float]" at line 65 of "main.cpp"
+            instantiation of "void test<FP>(int, int) [with FP=float]" at line 98 of "main.cpp"
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+main:
+          37, Loop not fused: function call before adjacent loop
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 4 times
+          44, Loop not fused: function call before adjacent loop
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 8 times
+          64, Loop not vectorized/parallelized: contains call
+          75, Loop unrolled 2 times (completely unrolled)
+              Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+          37, Loop not fused: function call before adjacent loop
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 4 times
+          44, Loop not fused: function call before adjacent loop
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 8 times
+          64, Loop not vectorized/parallelized: contains call
+          75, Loop unrolled 2 times (completely unrolled)
+              Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+void test<float>(int, int):
+     37, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 4 times
+     44, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 8 times
+     56, Generating map(to:A[:size*2]) 
+         Generating map(alloc:cost[:nblocks]) 
+         Generating map(to:scaleB[:size],scaleA[:size],B[:size*2]) 
+     64, Loop not vectorized/parallelized: contains call
+          12, Loop not fused: function call before adjacent loop
+          13, Generated vector simd code for the loop containing reductions
+          15, Loop unrolled 2 times (completely unrolled)
+void test<double>(int, int):
+     37, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 4 times
+     44, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 8 times
+     56, Generating map(to:A[:size*2]) 
+         Generating map(alloc:cost[:nblocks]) 
+         Generating map(to:scaleB[:size],scaleA[:size],B[:size*2]) 
+     64, Loop not vectorized/parallelized: contains call
+          12, Loop not fused: function call before adjacent loop
+          13, Generated vector simd code for the loop containing reductions
+          15, Loop unrolled 2 times (completely unrolled)
+void distance_tiled<float, 2>(float const*, float const*, int, int, float const*, float const*, float*):
+      7, include "kernel.h"
+          54, #omp target teams num_teams(nTeams) thread_limit(256)
+              54, Generating "nvkernel__Z14distance_tiledIfLi2EEvPKT_S2_iiS2_S2_PS0__F298L54_2" GPU kernel
+              61, #omp parallel
+               102, Barrier
+              94, Team private (sum,sh_scale_B,sh_A,sh_B,sh_scale_A) located in CUDA shared memory
+          72, Loop unrolled 2 times (completely unrolled)
+          83, Invariant if transformation
+              Loop unrolled 4 times (completely unrolled)
+          90, Loop unrolled 2 times (completely unrolled)
+          27, Loop unrolled 4 times (completely unrolled)
+          27, Loop unrolled 4 times (completely unrolled)
+          27, Loop not vectorized: data dependency
+              Loop unrolled 4 times (completely unrolled)
+          27, Loop not vectorized: data dependency
+              Loop unrolled 4 times (completely unrolled)
+void fill_shared_mem_tiled_1D<4, 32, float>(float (&) [4 * 32], float const*, int, int):
+      7, include "kernel.h"
+          25, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          27, Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times (completely unrolled)
+void fill_shared_mem_tiled_1D<4, 8, float>(float (&) [4 * 8], float const*, int, int):
+      7, include "kernel.h"
+          25, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          27, Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times (completely unrolled)
+float reduce_cross_term<float>(float const*, int, int, int):
+      7, include "kernel.h"
+         142, #omp target teams distribute parallel for thread_limit(256)
+             142, Generating "nvkernel__Z17reduce_cross_termIfET_PKS0_iii_F298L142_7" GPU kernel
+                  Loop parallelized across teams and threads(128), schedule(static)
+                  Generating reduction(+:sum)
+         142, Generating map(tofrom:sum) 
+              Loop not vectorized/parallelized: not countable
+float host_cost<float, 2>(float*, float*, float*, float*, int, int):
+     13, Generated vector simd code for the loop containing reductions
+     15, Loop unrolled 2 times (completely unrolled)
+void distance_tiled<double, 2>(double const*, double const*, int, int, double const*, double const*, double*):
+      7, include "kernel.h"
+          54, #omp target teams num_teams(nTeams) thread_limit(256)
+              54, Generating "nvkernel__Z14distance_tiledIdLi2EEvPKT_S2_iiS2_S2_PS0__F298L54_11" GPU kernel
+              61, #omp parallel
+               102, Barrier
+              77, Team private (sum,sh_scale_B,sh_A,sh_B,sh_scale_A) located in CUDA shared memory
+          72, Loop unrolled 2 times (completely unrolled)
+          83, Invariant if transformation
+              Loop unrolled 4 times (completely unrolled)
+          90, Loop unrolled 2 times (completely unrolled)
+          27, Loop unrolled 4 times (completely unrolled)
+          27, Loop unrolled 4 times (completely unrolled)
+          27, Loop not vectorized: data dependency
+              Loop unrolled 4 times (completely unrolled)
+          27, Loop not vectorized: data dependency
+              Loop unrolled 4 times (completely unrolled)
+void fill_shared_mem_tiled_1D<4, 32, double>(double (&) [4 * 32], double const*, int, int):
+      7, include "kernel.h"
+          25, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          27, Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times (completely unrolled)
+void fill_shared_mem_tiled_1D<4, 8, double>(double (&) [4 * 8], double const*, int, int):
+      7, include "kernel.h"
+          25, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          27, Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times (completely unrolled)
+double reduce_cross_term<double>(double const*, int, int, int):
+      7, include "kernel.h"
+         142, #omp target teams distribute parallel for thread_limit(256)
+             142, Generating "nvkernel__Z17reduce_cross_termIdET_PKS0_iii_F298L142_16" GPU kernel
+                  Loop parallelized across teams and threads(128), schedule(static)
+                  Generating reduction(+:sum)
+         142, Generating map(tofrom:sum) 
+              Loop not vectorized/parallelized: not countable
+double host_cost<double, 2>(double*, double*, double*, double*, int, int):
+     13, Generated vector simd code for the loop containing reductions
+     15, Loop unrolled 2 times (completely unrolled)
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::exp(float):
+                        223, Generating implicit omp declare target routine
+                             Generating NVIDIA GPU code
+      7, include "kernel.h"
 timeout was set to  600

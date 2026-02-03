@@ -5,7 +5,7 @@ echo "|" name "|" sycl "|" acc  "|"  omp_nvc "|"
 echo "|" "--" "|" "--" "|" "--" "|" "--"     "|"
 
 ##############################
-SRCDIR=../for-main-branch2/
+SRCDIR=../src2
 
 ######################
 sum0=0
@@ -88,4 +88,4 @@ done
 echo "|"           "|"        "|"       "|"       "|"
 echo "|" "completed" "|"  $sum0 "|" $sum1 "|" $sum2 "|"
 echo ""
-echo "sycl と acc が動作した件数" $sum_both
+echo "sycl と acc がともに完了した件数" $sum_both

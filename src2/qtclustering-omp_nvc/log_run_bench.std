@@ -1,2 +1,9 @@
+nvc++  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+nvc++  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 -c Option.cpp -o Option.o
+nvc++  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 -c OptionParser.cpp -o OptionParser.o
+nvc++  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 -c QTC.cpp -o QTC.o
+nvc++  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 -c comm.cpp -o comm.o
+nvc++  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 -c libdata.cpp -o libdata.o
+nvc++  -std=c++14 -Wall -O3 -Minfo -mp=gpu -gpu=cc90 main.o Option.o OptionParser.o QTC.o comm.o libdata.o -o qtc 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "time -p ( ./qtc --size 5 --Verbose 1>log.std 2>log.err ) 2> log.time"

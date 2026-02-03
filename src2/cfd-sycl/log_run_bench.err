@@ -1,1 +1,9 @@
+euler3d.cpp:45:2: warning: "the kernels may fail too launch on some systems if the block length is too large" [-W#warnings]
+   45 | #warning "the kernels may fail too launch on some systems if the block length is too large"
+      |  ^
+1 warning generated.
+euler3d.cpp:45:2: warning: "the kernels may fail too launch on some systems if the block length is too large" [-W#warnings]
+   45 | #warning "the kernels may fail too launch on some systems if the block length is too large"
+      |  ^
+1 warning generated.
 timeout was set to  600

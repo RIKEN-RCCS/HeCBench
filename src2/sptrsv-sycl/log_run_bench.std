@@ -1,3 +1,6 @@
+clang++  -std=c++17 -Wall -I../include -fsycl           --gcc-toolchain=           -DWARP_PER_BLOCK=8           -DVALUE_TYPE=double -DBENCH_REPEAT=100  -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90             -DWARP_SIZE=32  -O3 -DUSE_GPU -c main.cpp -o main.o
+clang++  -std=c++17 -Wall -I../include -fsycl           --gcc-toolchain=           -DWARP_PER_BLOCK=8           -DVALUE_TYPE=double -DBENCH_REPEAT=100  -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90             -DWARP_SIZE=32  -O3 -DUSE_GPU -c sptrsv_syncfree.cpp -o sptrsv_syncfree.o
+clang++  -std=c++17 -Wall -I../include -fsycl           --gcc-toolchain=           -DWARP_PER_BLOCK=8           -DVALUE_TYPE=double -DBENCH_REPEAT=100  -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90             -DWARP_SIZE=32  -O3 -DUSE_GPU main.o sptrsv_syncfree.o -o main 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "../sptrsv-cuda/prepare_data.sh; time -p ( ./main ../sptrsv-sycl/lp1.mtx 2000 1>log.std 2>log.err ) 2> log.time"
 pkill nvidia-smi

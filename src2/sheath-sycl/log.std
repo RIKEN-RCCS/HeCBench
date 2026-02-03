@@ -14,7 +14,7 @@ TS:325	np_i:500000	np_e:500000	dphi:8.15
 TS:350	np_i:500000	np_e:500000	dphi:7.53
 TS:375	np_i:500000	np_e:500000	dphi:8.27
 TS:400	np_i:500000	np_e:500000	dphi:9.73
-TS:425	np_i:500000	np_e:500000	dphi:9.82
+TS:425	np_i:500000	np_e:500000	dphi:9.81
 TS:450	np_i:500000	np_e:500000	dphi:8.39
 TS:475	np_i:500000	np_e:500000	dphi:8.64
 TS:500	np_i:500000	np_e:500000	dphi:9.76
@@ -38,6 +38,6 @@ TS:925	np_i:500000	np_e:500000	dphi:8.68
 TS:950	np_i:500000	np_e:500000	dphi:9.76
 TS:975	np_i:500000	np_e:500000	dphi:10.7
 TS:1000	np_i:500000	np_e:500000	dphi:9.22
-Total kernel execution time (scatter particles) : 0.925 (s)
-Total time for 1000 time steps: 3.4 (s)
-Time per time step: 3.4 (ms)
+Total kernel execution time (scatter particles) : 0.927 (s)
+Total time for 1000 time steps: 3.42 (s)
+Time per time step: 3.42 (ms)

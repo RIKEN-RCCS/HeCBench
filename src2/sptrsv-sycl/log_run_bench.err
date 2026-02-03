@@ -1,1 +1,33 @@
+In file included from main.cpp:2:
+./mmio.h:607:13: warning: unused variable 'rt' [-Wunused-variable]
+  607 |         int rt = fscanf(f, "%d %d %lg\n", &I[i], &J[i], &val[i]);
+      |             ^~
+In file included from main.cpp:3:
+./tranpose.h:146:9: warning: variable 'warp_greater' set but not used [-Wunused-but-set-variable]
+  146 |     int warp_greater=0,warp_lower=0;
+      |         ^
+./tranpose.h:146:24: warning: variable 'warp_lower' set but not used [-Wunused-but-set-variable]
+  146 |     int warp_greater=0,warp_lower=0;
+      |                        ^
+In file included from main.cpp:4:
+./read_mtx.h:79:13: warning: variable 'returnvalue' set but not used [-Wunused-but-set-variable]
+   79 |         int returnvalue;
+      |             ^
+4 warnings generated.
+In file included from main.cpp:2:
+./mmio.h:607:13: warning: unused variable 'rt' [-Wunused-variable]
+  607 |         int rt = fscanf(f, "%d %d %lg\n", &I[i], &J[i], &val[i]);
+      |             ^~
+In file included from main.cpp:3:
+./tranpose.h:146:9: warning: variable 'warp_greater' set but not used [-Wunused-but-set-variable]
+  146 |     int warp_greater=0,warp_lower=0;
+      |         ^
+./tranpose.h:146:24: warning: variable 'warp_lower' set but not used [-Wunused-but-set-variable]
+  146 |     int warp_greater=0,warp_lower=0;
+      |                        ^
+In file included from main.cpp:4:
+./read_mtx.h:79:13: warning: variable 'returnvalue' set but not used [-Wunused-but-set-variable]
+   79 |         int returnvalue;
+      |             ^
+4 warnings generated.
 timeout was set to  600

@@ -1,1 +1,1 @@
-clang++  -D__CUDACC__ -DFLOAT           -std=c++17 -Wall -fsycl -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90             --gcc-toolchain="/auto/software/gcc/x86_64/gcc-9.1.0/" -O3 -ffast-math -DUSE_GPU main.o base.o param.o util.o prna.o  -o main 
+clang++  -D__CUDACC__ -DFLOAT           -std=c++17 -Wall -fsycl -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90             --gcc-toolchain="/auto/software/gcc/x86_64/gcc-9.1.0/" -O3 -ffast-math -DUSE_GPU -c main.c -o main.o

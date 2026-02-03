@@ -1,1 +1,66 @@
+../boxfilter-sycl/shrUtils.cpp:374:30: warning: format string is not a string literal (potentially insecure) [-Wformat-security]
+  374 |                                                         szNumWritten = printf(sFormatSpec.c_str());                             // console 
+      |                                                                               ^~~~~~~~~~~~~~~~~~~
+../boxfilter-sycl/shrUtils.cpp:374:30: note: treat the string as an argument to avoid this
+  374 |                                                         szNumWritten = printf(sFormatSpec.c_str());                             // console 
+      |                                                                               ^
+      |                                                                               "%s", 
+../boxfilter-sycl/shrUtils.cpp:378:46: warning: format string is not a string literal (potentially insecure) [-Wformat-security]
+  378 |                                                         szNumWritten = fprintf (pFileStream0, sFormatSpec.c_str());             // sample log file
+      |                                                                                               ^~~~~~~~~~~~~~~~~~~
+../boxfilter-sycl/shrUtils.cpp:378:46: note: treat the string as an argument to avoid this
+  378 |                                                         szNumWritten = fprintf (pFileStream0, sFormatSpec.c_str());             // sample log file
+      |                                                                                               ^
+      |                                                                                               "%s", 
+../boxfilter-sycl/shrUtils.cpp:381:47: warning: format string is not a string literal (potentially insecure) [-Wformat-security]
+  381 |                                                                 szNumWritten  = fprintf(pFileStream1, sFormatSpec.c_str());         // master log file
+      |                                                                                                       ^~~~~~~~~~~~~~~~~~~
+../boxfilter-sycl/shrUtils.cpp:381:47: note: treat the string as an argument to avoid this
+  381 |                                                                 szNumWritten  = fprintf(pFileStream1, sFormatSpec.c_str());         // master log file
+      |                                                                                                       ^
+      |                                                                                                       "%s", 
+../boxfilter-sycl/shrUtils.cpp:176:9: warning: variable 'szNumWritten' set but not used [-Wunused-but-set-variable]
+  176 |         size_t szNumWritten = 0;
+      |                ^
+../boxfilter-sycl/shrUtils.cpp:1356:7: warning: variable 'result' set but not used [-Wunused-but-set-variable]
+ 1356 |         bool result = true;
+      |              ^
+../boxfilter-sycl/shrUtils.cpp:1398:7: warning: variable 'result' set but not used [-Wunused-but-set-variable]
+ 1398 |         bool result = true;
+      |              ^
+6 warnings generated.
+../boxfilter-sycl/shrUtils.cpp:374:30: warning: format string is not a string literal (potentially insecure) [-Wformat-security]
+  374 |                                                         szNumWritten = printf(sFormatSpec.c_str());                             // console 
+      |                                                                               ^~~~~~~~~~~~~~~~~~~
+../boxfilter-sycl/shrUtils.cpp:374:30: note: treat the string as an argument to avoid this
+  374 |                                                         szNumWritten = printf(sFormatSpec.c_str());                             // console 
+      |                                                                               ^
+      |                                                                               "%s", 
+../boxfilter-sycl/shrUtils.cpp:378:46: warning: format string is not a string literal (potentially insecure) [-Wformat-security]
+  378 |                                                         szNumWritten = fprintf (pFileStream0, sFormatSpec.c_str());             // sample log file
+      |                                                                                               ^~~~~~~~~~~~~~~~~~~
+../boxfilter-sycl/shrUtils.cpp:378:46: note: treat the string as an argument to avoid this
+  378 |                                                         szNumWritten = fprintf (pFileStream0, sFormatSpec.c_str());             // sample log file
+      |                                                                                               ^
+      |                                                                                               "%s", 
+../boxfilter-sycl/shrUtils.cpp:381:47: warning: format string is not a string literal (potentially insecure) [-Wformat-security]
+  381 |                                                                 szNumWritten  = fprintf(pFileStream1, sFormatSpec.c_str());         // master log file
+      |                                                                                                       ^~~~~~~~~~~~~~~~~~~
+../boxfilter-sycl/shrUtils.cpp:381:47: note: treat the string as an argument to avoid this
+  381 |                                                                 szNumWritten  = fprintf(pFileStream1, sFormatSpec.c_str());         // master log file
+      |                                                                                                       ^
+      |                                                                                                       "%s", 
+../boxfilter-sycl/shrUtils.cpp:176:9: warning: variable 'szNumWritten' set but not used [-Wunused-but-set-variable]
+  176 |         size_t szNumWritten = 0;
+      |                ^
+../boxfilter-sycl/shrUtils.cpp:1356:7: warning: variable 'result' set but not used [-Wunused-but-set-variable]
+ 1356 |         bool result = true;
+      |              ^
+../boxfilter-sycl/shrUtils.cpp:1398:7: warning: variable 'result' set but not used [-Wunused-but-set-variable]
+ 1398 |         bool result = true;
+      |              ^
+6 warnings generated.
+tar: ../medianfilter-cuda/data.tar.bz2: Cannot open: No such file or directory
+tar: Error is not recoverable: exiting now
+make: *** [Makefile.NVD:91: run_mem] Error 1
 timeout was set to  600

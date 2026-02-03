@@ -1,4 +1,0 @@
-nvc++  -Wall -I../mis-cuda -O3 -DOMP_TARGET -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
-NVC++-F-0155-Compiler failed to translate OpenMP region  (main.cpp: 162)
-NVC++/arm Linux 25.9-0: compilation aborted
-make: *** [Makefile.NVD:57: main.o] Error 2

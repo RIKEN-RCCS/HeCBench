@@ -1,4 +1,4 @@
 input string: Four score and seven years ago hash is cd628161
-Average kernel execution time : 0.003538 (s)
+Average kernel execution time : 0.003586 (s)
 Verify the results computed on the device..
 PASS

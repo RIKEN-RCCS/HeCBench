@@ -1,3 +1,7 @@
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c genmtrand.cpp -o genmtrand.o
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c MT.cpp -o MT.o
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 -c MT_gold.cpp -o MT_gold.o
+nvc++  -std=c++14 -Wall  -O3 -Minfo -mp=gpu -gpu=cc90 genmtrand.o MT.o MT_gold.o -o main 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "tar xf data.tar.gz; time -p ( ./main 1000 1>log.std 2>log.err ) 2> log.time"
 pkill nvidia-smi
