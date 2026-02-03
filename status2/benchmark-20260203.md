@@ -109,7 +109,7 @@
 | floydwarshall | 73.45 | 72.59 | 83.41 |
 | fluidSim | 17.67 | 17.30 | 17.36 |
 | fpc | 66.38 | build err | exe err |
-| fpdc | build err | build err | over 600 |
+| fpdc | 5.37 | build err | over 600 |
 | fresnel | 6.00 | 6.61 | 6.61 |
 | frna | 104.63 | build err | build err |
 | fwt | 1.08 | build err | 3.38 |
@@ -146,7 +146,7 @@
 | idivide | 8.31 | 8.02 | 9.39 |
 | interleave | 4.13 | 4.07 | 3.44 |
 | interval | 7.15 | 13.47 | 10.78 |
-| inversek2j | build err | over 600 | 14.94 |
+| inversek2j | 1.05 | 225.58 | 111.49 |
 | ising | 258.64 | 13.36 | 13.31 |
 | iso2dfd | 17.67 | 13.97 | 14.20 |
 | jacobi | 2.77 | 3.56 | 3.50 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 289 | 174 | 271 |
+| completed | 291 | 175 | 271 |
 
-sycl と acc がともに完了した件数 166
+sycl と acc がともに完了した件数 167
