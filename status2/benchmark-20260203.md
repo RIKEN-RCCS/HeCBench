@@ -161,7 +161,7 @@
 | langevin | build err | 6.18 | 35.79 |
 | langford | 2.54 | build err | build err |
 | laplace3d | 64.92 | 14.60 | 14.64 |
-| laplace | build err | 11.47 | 11.23 |
+| laplace | 333.46 | 11.93 | 11.34 |
 | lavaMD | 102.55 | build err | 116.55 |
 | layout | 3.27 | 2.66 | 2.93 |
 | lci | 10.00 | 4.36 | 4.36 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 279 | 173 | 269 |
+| completed | 280 | 173 | 269 |
 
-sycl と acc がともに完了した件数 157
+sycl と acc がともに完了した件数 158
