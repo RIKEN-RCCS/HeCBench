@@ -6,8 +6,8 @@ REPORT:
 	seed: 1234
 	warmup iterations: 10
 	trial iterations: 100
-	lattice dimensions: 51200 x 51200
-	elapsed time: 1.937110 sec
-	updates per ns: 135.327369
+	lattice dimensions: 25600 x 25600
+	elapsed time: 0.485978 sec
+	updates per ns: 134.853841
 Starting verification iterations ...
 PASS
