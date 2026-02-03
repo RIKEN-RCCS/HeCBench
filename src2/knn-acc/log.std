@@ -6,9 +6,9 @@ Processing kNN search           :
 Ground truth computation in progress...
 
 On CPU: 
- done in 1.840049 s for 1 iterations (1.840049 s by iteration)
+ done in 1.806797 s for 1 iterations (1.806797 s by iteration)
 on GPU: 
- done in 0.778023 s for 100 iterations (0.007780 s by iteration)
+ done in 0.592046 s for 100 iterations (0.005920 s by iteration)
 Precision accuracy 1.000000
 Index accuracy 0.999878
 PASS
