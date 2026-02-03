@@ -19,5 +19,4 @@ read_input.c:81:8: warning: variable 'len' set but not used [-Wunused-but-set-va
 1 warning generated.
 clang++: warning: treating 'c' input as 'c++' when -fsycl is used [-Wexpected-file-type]
 clang++: warning: treating 'c' input as 'c++' when -fsycl is used [-Wexpected-file-type]
-make: *** [Makefile.NVD:96: run_mem] Error 127
 timeout was set to  600
