@@ -1,1 +1,1 @@
-COMMAND = time -p ( ./$(program) log2_parameters.config 1>log.std 2>log.err ) 2> log.time
+COMMAND = time -p ( ./$(program) ../log2-cuda/log2_parameters.config 1>log.std 2>log.err ) 2> log.time
