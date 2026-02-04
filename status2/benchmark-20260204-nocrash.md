@@ -26,7 +26,7 @@
 | atomicPerf | 14.74 | build err | 13.89 |
 | atomicReduction | 3.46 | build err | 2.67 |
 | attention | 2.46 | 82.02 | build err |
-| axhelm | build err | build err | build err |
+| axhelm | 2.41 | build err | 2.47 |
 | babelstream | 0.56 | 2.72 | 2.85 |
 | background-subtract | 8.07 | 8.66 | 8.33 |
 | backprop | 2.47 | build err | 2.48 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| エラーなし | 307 | 182 | 285 |
+| エラーなし | 308 | 182 | 286 |
 
 sycl と acc がともに実行できた件数 180

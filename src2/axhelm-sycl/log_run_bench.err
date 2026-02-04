@@ -128,6 +128,4 @@ In file included from main.cpp:23:
    21 | axhelmElementReference(int cubNq,
       |                            ^
 9 warnings generated.
-/bin/sh: line 1: cd: BlasLapack: No such file or directory
-make: *** [Makefile.NVD:77: BlasLapack/libBlasLapack.a] Error 1
 timeout was set to  600
