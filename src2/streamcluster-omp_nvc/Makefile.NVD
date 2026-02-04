@@ -34,22 +34,22 @@ else
 endif
 
 SRC = streamcluster.cpp
-EXE = streamcluster
+program = streamcluster
 
-$(EXE):$(SRC) kernel.h streamcluster.h  streamcluster_cl.h
-	$(CC) $(CFLAGS) $(SRC) -o $(EXE) $(LDFLAGS)
+$(program):$(SRC) kernel.h streamcluster.h  streamcluster_cl.h
+	$(CC) $(CFLAGS) $(SRC) -o $(program) $(LDFLAGS)
 
 include ../include/streamcluster-NVIDIA
 
-run: $(EXE)
+run: $(program)
 	$(LAUNCHER) "$(COMMAND)"
 
-run_mem: $(EXE)
+run_mem: $(program)
 	nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 	$(LAUNCHER) "$(COMMAND)"
 	pkill nvidia-smi
 	../scripts/m.sh
 
 clean: 
-	rm -f $(EXE) output.txt result*
+	rm -f $(program) output.txt result*
 

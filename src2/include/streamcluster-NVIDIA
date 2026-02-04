@@ -1,2 +1,5 @@
 #COMMAND = time -p ( ./$(EXE) 10 20  256 65536 65536 100 none output.txt 1 1>log.std 2>log.err ) 2> log.time
-COMMAND = time -p ( ./$(EXE) 10 20 256 220000 65536 1000 none output.txt 1 1>log.std 2>log.err ) 2> log.time
+#COMMAND = time -p ( ./$(program) 10 20 256 220000 65536 1000 none output.txt 1 1>log.std 2>log.err ) 2> log.time
+#COMMAND = time -p ( ./$(program) 10 20 256 81920 81920 1000 none output.txt 1 1>log.std 2>log.err ) 2> log.time
+#COMMAND = time -p ( ./$(program) 10 20 256 98304 98304 1000 none output.txt 1 1>log.std 2>log.err ) 2> log.time
+COMMAND = time -p ( ./$(program) 10 20 256 131072 131072 1000 none output.txt 1 1>log.std 2>log.err ) 2> log.time
