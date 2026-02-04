@@ -445,6 +445,4 @@ meshInterpolateHex3D(float*, float*, int, float*, int):
 meshInterpolateTet3D(float*, float*, int, float*, int):
    1404, Generated vector simd code for the loop containing reductions
          Loop unrolled 4 times
-/bin/sh: line 1: cd: BlasLapack: No such file or directory
-make: *** [Makefile.NVD:60: BlasLapack/libBlasLapack.a] Error 1
 timeout was set to  600

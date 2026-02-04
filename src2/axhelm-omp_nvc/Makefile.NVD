@@ -47,6 +47,11 @@ endif
 #===============================================================================
 # Targets to Build
 #===============================================================================
+all: lib $(program)
+
+lib:
+	tar xf BlasLapack.tar.gz
+
 $(program): $(obj) BlasLapack/libBlasLapack.a 
 	$(CC) $(CFLAGS) $+ -o $@ $(LDFLAGS)
 
@@ -66,10 +71,10 @@ clean:
 # run one- and three-dimensional kernels
 include ../include/axhelm-NVIDIA
 
-run: $(program)
+run: all
 	$(LAUNCHER) "$(COMMAND)"
 
-run_mem: $(program)
+run_mem: all
 	nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 	$(LAUNCHER) "$(COMMAND)"
 	pkill nvidia-smi
