@@ -10,7 +10,7 @@
 | adv | 3.35 | build err | 3.49 |
 | aes | 2.79 | build err | 2.70 |
 | affine | 5.42 | 12.78 | 12.37 |
-| aidw | build err | build err | 4.51 |
+| aidw | 12.83 | build err | 4.46 |
 | aligned-types | 3.68 | 4.40 | 4.71 |
 | all-pairs-distance | 5.23 | 4.81 | 21.34 |
 | amgmk | 2.45 | 2.42 | 2.44 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 298 | 178 | 273 |
+| completed | 299 | 178 | 273 |
 
 sycl と acc がともに完了した件数 175
