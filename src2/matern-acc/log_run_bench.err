@@ -1,69 +1,45 @@
-"main.cpp", line 22: error: invalid text in pragma
-    #pragma acc parallel loop thread_limit(SX*64)
-                              ^
-
-"main.cpp", line 22: error: extra text after expected end of preprocessing directive
-    #pragma acc parallel loop thread_limit(SX*64)
-                                          ^
-
-"main.cpp", line 38: error: invalid text in pragma
-    #pragma acc update from(result[0:ntargets])
-                       ^
-
-"main.cpp", line 38: error: OpenACC data clause expected
-    #pragma acc update from(result[0:ntargets])
-                       ^
-
-"main.cpp", line 38: error: extra text after expected end of preprocessing directive
-    #pragma acc update from(result[0:ntargets])
-                           ^
-
-"main.cpp", line 53: error: invalid text in pragma
-    #pragma acc parallel teams num_teams(teams) thread_limit(SX*64)
-                         ^
-
-"main.cpp", line 53: error: extra text after expected end of preprocessing directive
-    #pragma acc parallel teams num_teams(teams) thread_limit(SX*64)
-                               ^
-
-"main.cpp", line 62: error: identifier "omp_get_thread_num" is undefined
-        int tx = omp_get_thread_num() % SX;
-                 ^
-
-"main.cpp", line 64: error: identifier "omp_get_team_num" is undefined
-        int px = omp_get_team_num() * SX + tx; // range [0:ntargets)
-                 ^
-
-"main.cpp", line 107: error: invalid text in pragma
-    #pragma acc update from(result[0:ntargets])
-                       ^
-
-"main.cpp", line 107: error: OpenACC data clause expected
-    #pragma acc update from(result[0:ntargets])
-                       ^
-
-"main.cpp", line 107: error: extra text after expected end of preprocessing directive
-    #pragma acc update from(result[0:ntargets])
-                           ^
-
-"main.cpp", line 50: warning: variable "teams" was declared but never referenced [declared_but_not_referenced]
-    const int teams = (ntargets + SX - 1) / SX;
-              ^
-
-Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
-
-"main.cpp", line 148: error: invalid text in pragma
-    #pragma acc data to: sources[0:source_size],\
-                     ^
-
-"main.cpp", line 148: error: extra text after expected end of preprocessing directive
-    #pragma acc data to: sources[0:source_size],\
-                       ^
-
-"main.cpp", line 129: warning: variable "result_size" was declared but never referenced [declared_but_not_referenced]
-    const int result_size = ntargets;
-              ^
-
-14 errors detected in the compilation of "main.cpp".
-make: *** [Makefile.NVD:57: main.o] Error 2
+matern_kernel_reference(int, int, float, float const*, float const*, float const*, float*):
+      6, include "reference.h"
+          17, Generated vector simd code for the loop containing reductions
+          19, Loop unrolled 3 times (completely unrolled)
+matern_kernel(int, float, float const*, float const*, float const*, float*):
+     21, Generating present(result[:],sources[:],weights[:],targets[:])
+         Generating implicit firstprivate(ntargets)
+         Generating NVIDIA GPU code
+         23, #pragma acc loop gang, vector(128) /* blockIdx.x threadIdx.x */
+         26, #pragma acc loop seq
+         28, #pragma acc loop seq
+             Generating implicit reduction(+:squared_diff)
+     23, Loop not fused: no successor loop
+     26, Generating implicit firstprivate(l)
+         Generated vector simd code for the loop containing reductions
+     28, Loop is parallelizable
+         Loop unrolled 3 times (completely unrolled)
+matern_kernel2(int, float, float const*, float const*, float const*, float*):
+     48, Generating present(result[:],sources[:],weights[:],targets[:])
+         Generating implicit firstprivate(ntargets)
+         Generating NVIDIA GPU code
+         50, #pragma acc loop gang, vector(128) /* blockIdx.x threadIdx.x */
+         54, #pragma acc loop seq
+         58, #pragma acc loop seq
+     50, Loop not fused: no successor loop
+     54, Generating implicit firstprivate(l)
+         Generated vector simd code for the loop containing reductions
+     58, Loop unrolled 3 times (completely unrolled)
+main:
+    101, Loop not vectorized/parallelized: contains call
+    104, Loop not vectorized/parallelized: contains call
+    107, Loop not vectorized/parallelized: contains call
+    114, Generating create(result[:result_size]) [if not already present]
+         Generating copyin(targets[:target_size],weights[:50],sources[:150]) [if not already present]
+          15, Loop not fused: function call before adjacent loop
+          17, Generated vector simd code for the loop containing reductions
+          19, Loop unrolled 3 times (completely unrolled)
+    129, Loop not vectorized/parallelized: potential early exits
+    147, Loop not vectorized/parallelized: contains call
+    153, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      6, include "reference.h"
 timeout was set to  600

@@ -19,10 +19,10 @@ void matern_kernel (
         float *__restrict result)
 
 {
-  #pragma acc parallel loop thread_limit(SX*64)
+  #pragma acc parallel loop present(sources, targets, weights, result)
   for (int t = 0; t < ntargets; t++) {
     float sum = 0.f;
-    #pragma acc loop reduction(+:sum)
+    #pragma acc loop seq
     for (int s = 0; s < nsources; s++) {
       float squared_diff = 0.f;
       for (int i = 0; i < 3; i++) {
@@ -30,12 +30,11 @@ void matern_kernel (
                         (sources[s*3+i] - targets[t*3+i]);
       }
       float diff = sqrtf(squared_diff);
-      sum += (1.f + sqrtf(5.f) * diff / l + 5.f * squared_diff / (3.f * l * l)) *  
+      sum += (1.f + sqrtf(5.f) * diff / l + 5.f * squared_diff / (3.f * l * l)) *
              expf(-sqrtf(5.f) * diff  / l) * weights[s];
     }
     result[t] = sum;
   }
-  #pragma acc update from(result[0:ntargets])
 }
 
 void matern_kernel2 (
@@ -47,64 +46,27 @@ void matern_kernel2 (
         float *__restrict result)
 
 {
-  const int teams = (ntargets + SX - 1) / SX;
+  #pragma acc parallel loop present(sources, targets, weights, result) gang
+  for (int t = 0; t < ntargets; t++) {
+    float sum = 0.f;
 
-  // SY is a known value less than 64
-  #pragma acc parallel teams num_teams(teams) thread_limit(SX*64)
-  {
-    float local_result[SX * SY];
-    float local_targets[SX * 3];
-    float local_sources[SY * 3];
-    float local_weights[SY];
+    #pragma acc loop seq
+    for (int s = 0; s < nsources; s++) {
+      float squared_diff = 0.f;
 
-    #pragma omp parallel
-    {
-      int tx = omp_get_thread_num() % SX;
-      int ty = omp_get_thread_num() / SX;
-      int px = omp_get_team_num() * SX + tx; // range [0:ntargets)
-      int py = ty; // range [0:nsources)
-
-      if (px < ntargets && py < SY) {
-        if (ty == 0) {
-          for (int i = 0; i < 3; i++)
-            local_targets[tx * 3 + i] = targets[px * 3 + i];
-        }
-
-        if (tx == 0) {
-          for (int i = 0; i < 3; i++)
-            local_sources[ty * 3 + i] = sources[py * 3 + i];
-          local_weights[ty] = weights[ty];
-        }
+      #pragma acc loop seq
+      for (int i = 0; i < 3; i++) {
+        squared_diff += (sources[s*3+i] - targets[t*3+i]) *
+                        (sources[s*3+i] - targets[t*3+i]);
       }
-      #pragma omp barrier
 
-      if (px < ntargets && py < SY) {
-        float squared_diff = 0.f;
-        
-        for (int i = 0; i < 3; i++) {
-          squared_diff += (local_targets[tx * 3 + i] - local_sources[ty * 3 + i]) *
-                          (local_targets[tx * 3 + i] - local_sources[ty * 3 + i]);
-        }
-        float diff = sqrtf(squared_diff);
-
-        local_result[tx * SY + ty] = 
-          (1.f + sqrtf(5.f) * diff / l + 5.f * squared_diff / (3.f * l * l)) *  
-          expf(-sqrtf(5.f) * diff / l) * local_weights[ty];
-
-      }
-      #pragma omp barrier
-
-      if (px < ntargets && py < SY) {
-        if (ty == 0) {
-          float res = 0.f;
-          for (int i = 0; i < SY; i++)
-            res += local_result[tx * SY + i];
-          result[px] = res;
-        }
-      }
+      float diff = sqrtf(squared_diff);
+      sum += (1.f + sqrtf(5.f) * diff / l + 5.f * squared_diff / (3.f * l * l)) *
+             expf(-sqrtf(5.f) * diff / l) * weights[s];
     }
+
+    result[t] = sum;
   }
-  #pragma acc update from(result[0:ntargets])
 }
 
 int main(int argc, char* argv[])
@@ -145,10 +107,10 @@ int main(int argc, char* argv[])
   for (int i = 0; i < target_size; i++) 
     targets[i] = rand() / (float)RAND_MAX;
 
-  #pragma acc data to: sources[0:source_size],\
+  #pragma acc data copyin( sources[0:source_size],\
                                   weights[0:weight_size],\
                                   targets[0:target_size]) \
-                          map(alloc: result[0:result_size])
+                          create( result[0:result_size])
   {
     float l = 0.1f; // length scale lower bound
 
