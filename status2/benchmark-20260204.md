@@ -185,7 +185,7 @@
 | mandelbrot | 5.29 | 3.75 | 3.82 |
 | mask | 55.31 | 21.60 | 29.68 |
 | match | 42.51 | build err | 41.46 |
-| matern | 15.34 | build err | 99.92 |
+| matern | 6.24 | 3.85 | 31.37 |
 | matrix-rotate | 35.98 | 35.18 | 35.00 |
 | maxFlops | 25.56 | 26.46 | 25.46 |
 | maxpool3d | 33.75 | 32.80 | 32.24 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 300 | 178 | 274 |
+| completed | 300 | 179 | 274 |
 
-sycl と acc がともに完了した件数 175
+sycl と acc がともに完了した件数 176
