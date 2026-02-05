@@ -93,7 +93,7 @@
 | dxtc2 | 2.49 | build err | over 600 |
 | easyWave | 2.97 | 2.79 | 3.08 |
 | ecdh | 11.26 | 18.09 | 19.13 |
-| eigenvalue | 21.89 | | |
+| eigenvalue | 19.92 | over 600 | 22.02 |
 | entropy | 46.86 | build err | 49.60 |
 | epistasis | 53.82 | 259.15 | 110.41 |
 | expdist | 7.45 | build err | 12.43 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| エラーなし | 308 | 183 | 289 |
+| エラーなし | 308 | 184 | 290 |
 
-sycl と acc がともに実行できた件数 181
+sycl と acc がともに実行できた件数 182

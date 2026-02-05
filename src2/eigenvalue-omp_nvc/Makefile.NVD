@@ -16,7 +16,7 @@ LAUNCHER = bash -c
 
 program = main
 
-source = main2.cpp reference.cpp
+source = main.cpp reference.cpp
 
 obj = $(source:.cpp=.o)
 
