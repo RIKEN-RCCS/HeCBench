@@ -1,2 +1,1199 @@
-make: *** No rule to make target 'run_mem'.  Stop.
+main:
+          72, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+          80, Loop not vectorized/parallelized: not countable
+          81, Loop not vectorized/parallelized: not countable
+          82, Loop not vectorized/parallelized: not countable
+_INTERNAL_8_main_cpp_main::print_welcome():
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+_INTERNAL_8_main_cpp_main::print_finish(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, double):
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+std::char_traits<char>::length(char const*):
+         171, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     24, include "lsqt.h"
+          22, include "chrono"
+              472, Loop not vectorized/parallelized: not countable
+__gnu_cxx::char_traits<char>::length(char const*):
+     24, include "lsqt.h"
+          23, include "string"
+               40, include "char_traits.h"
+                   171, Loop not vectorized/parallelized: not countable
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<char, std::char_traits<char>, std::allocator<char>>(std::basic_ostream<char, std::char_traits<char>>&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     24, include "lsqt.h"
+          23, include "string"
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&, char const*):
+         397, Loop not vectorized/parallelized: not countable
+_INTERNAL_8_main_cpp_main::check_argc(int):
+         616, Loop not vectorized/parallelized: not countable
+_INTERNAL_8_main_cpp_main::print_start(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>):
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+lsqt(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>):
+          34, Loop not vectorized/parallelized: not countable
+          36, Loop not vectorized/parallelized: not countable
+          43, Loop not vectorized/parallelized: not countable
+          44, Loop not vectorized/parallelized: not countable
+std::char_traits<char>::length(char const*):
+         171, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     25, include "lsqt.h"
+          22, include "chrono"
+              472, Loop not vectorized/parallelized: not countable
+__gnu_cxx::char_traits<char>::length(char const*):
+     25, include "lsqt.h"
+          23, include "string"
+               40, include "char_traits.h"
+                   171, Loop not vectorized/parallelized: not countable
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&, char const*):
+         397, Loop not vectorized/parallelized: not countable
+_INTERNAL_8_lsqt_cpp_f691eb8b::print_started_random_vector(int):
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+_INTERNAL_8_lsqt_cpp_f691eb8b::print_finished_random_vector(int):
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+_INTERNAL_8_lsqt_cpp_f691eb8b::print_started_ldos():
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+_INTERNAL_8_lsqt_cpp_f691eb8b::print_finished_ldos():
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+_INTERNAL_8_lsqt_cpp_f691eb8b::run_dos(Model&, Hamiltonian&, Vector&):
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+_INTERNAL_8_lsqt_cpp_f691eb8b::run_vac0(Model&, Hamiltonian&, Vector&):
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+_INTERNAL_8_lsqt_cpp_f691eb8b::run_vac(Model&, Hamiltonian&, Vector&):
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+_INTERNAL_8_lsqt_cpp_f691eb8b::run_msd(Model&, Hamiltonian&, Vector&):
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+_INTERNAL_8_lsqt_cpp_f691eb8b::run_spin(Model&, Hamiltonian&, Vector&):
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+_INTERNAL_8_lsqt_cpp_f691eb8b::run_ldos(Model&, Hamiltonian&, Vector&):
+          51, Loop not vectorized/parallelized: not countable
+          53, Loop not vectorized/parallelized: not countable
+    128, Loop not vectorized/parallelized: potential early exits
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+          60, Loop not vectorized/parallelized: not countable
+          61, Loop not vectorized/parallelized: not countable
+find_moments_chebyshev(Model&, Hamiltonian&, Vector&, Vector&, Vector&):
+     52, Loop not vectorized/parallelized: potential early exits
+apply_damping(Model&, double*, double*):
+     78, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+perform_chebyshev_summation(Model&, double*, double*, double*):
+     98, Loop not vectorized: unknown
+         Loop unrolled 2 times
+evolve(Model&, int, double, Hamiltonian&, Vector&):
+    129, Loop not vectorized/parallelized: potential early exits
+evolvex(Model&, int, double, Hamiltonian&, Vector&):
+    174, Loop not vectorized/parallelized: potential early exits
+find_dos(Model&, Hamiltonian&, Vector&, int):
+          78, Loop not fused: different loop trip count
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+          92, Loop not fused: complex flow graph
+          98, Loop not vectorized: unknown
+              Loop unrolled 2 times
+         536, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+find_vac0(Model&, Hamiltonian&, Vector&):
+          78, Loop not fused: different loop trip count
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+          92, Loop not fused: complex flow graph
+          98, Loop not vectorized: unknown
+              Loop unrolled 2 times
+         536, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+find_vac(Model&, Hamiltonian&, Vector&):
+         536, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+          78, Loop not fused: different loop trip count
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+          98, Loop not vectorized: unknown
+              Loop unrolled 2 times
+         616, Loop not vectorized/parallelized: not countable
+find_msd(Model&, Hamiltonian&, Vector&):
+         536, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+          78, Loop not fused: different loop trip count
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+          98, Loop not vectorized: unknown
+              Loop unrolled 2 times
+         616, Loop not vectorized/parallelized: not countable
+find_spin_polarization(Model&, Hamiltonian&, Vector&):
+         536, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+          78, Loop not fused: different loop trip count
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+          98, Loop not vectorized: unknown
+              Loop unrolled 2 times
+         616, Loop not vectorized/parallelized: not countable
+std::char_traits<char>::length(char const*):
+         171, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string<std::allocator<char>>(char const*, std::allocator<char> const&):
+         397, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string<std::allocator<char>>(char const*, std::allocator<char> const&):
+         536, Loop not vectorized/parallelized: not countable
+__gnu_cxx::char_traits<char>::length(char const*):
+     21, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    40, include "string"
+                         40, include "char_traits.h"
+                             171, Loop not vectorized/parallelized: not countable
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<char, std::char_traits<char>, std::allocator<char>>(std::basic_ostream<char, std::char_traits<char>>&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     21, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    40, include "string"
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&, char const*):
+         397, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> std::operator+<char, std::char_traits<char>, std::allocator<char>>(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     21, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    40, include "string"
+         397, Loop not vectorized/parallelized: not countable
+gpu_set_zero(int, double*, double*):
+     28, #omp target teams distribute parallel for thread_limit(256)
+         28, Generating "nvkernel__Z12gpu_set_zeroiPdS__F1L28_2" GPU kernel
+         30, Loop parallelized across teams and threads(128), schedule(static)
+     30, Loop not vectorized/parallelized: not countable
+gpu_copy_state(int, double const*, double const*, double*, double*):
+     82, #omp target teams distribute parallel for thread_limit(256)
+         82, Generating "nvkernel__Z14gpu_copy_stateiPKdS0_PdS1__F1L82_6" GPU kernel
+         84, Loop parallelized across teams and threads(128), schedule(static)
+     84, Loop not vectorized/parallelized: not countable
+gpu_add_state(int, double const*, double const*, double*, double*):
+    131, #omp target teams distribute parallel for thread_limit(256)
+        131, Generating "nvkernel__Z13gpu_add_stateiPKdS0_PdS1__F1L131_10" GPU kernel
+        133, Loop parallelized across teams and threads(128), schedule(static)
+    133, Loop not vectorized/parallelized: not countable
+gpu_apply_sz(int, double const*, double const*, double*, double*):
+    173, #omp target teams distribute parallel for thread_limit(256)
+        173, Generating "nvkernel__Z12gpu_apply_sziPKdS0_PdS1__F1L173_14" GPU kernel
+        175, Loop parallelized across teams and threads(128), schedule(static)
+    175, Loop not vectorized/parallelized: not countable
+gpu_find_inner_product_1(int, int, double const*, double const*, double const*, double const*, double*, double*, int):
+    257, #omp target teams distribute
+        257, Generating "nvkernel__Z24gpu_find_inner_product_1iiPKdS0_S0_S0_PdS1_i_F1L257_18" GPU kernel
+        259, Loop parallelized across teams, schedule(static)
+        263, Team private (s_data_real,s_data_imag,m) located in CUDA shared memory
+             #omp parallel
+          263, Generating reduction(+:s_data_real,s_data_imag)
+               Loop parallelized across threads, schedule(static)
+    259, Loop not vectorized/parallelized: contains structure move
+    263, Loop not vectorized/parallelized: not countable
+gpu_find_inner_product_2(int, int, double const*, double const*, double*, double*):
+    332, #omp target teams distribute
+        332, Generating "nvkernel__Z24gpu_find_inner_product_2iiPKdS0_PdS1__F1L332_23" GPU kernel
+        334, Loop parallelized across teams, schedule(static)
+        338, Team private (s_data_real,s_data_imag,m) located in CUDA shared memory
+             #omp parallel
+          338, Generating reduction(+:s_data_real,s_data_imag)
+               Loop parallelized across threads, schedule(static)
+    334, Loop not vectorized/parallelized: contains structure move
+    338, Loop not vectorized/parallelized: not countable
+Vector::Vector(int):
+          53, Generating target enter data map(create: this->real_part[:n],this->imag_part[:n])
+Vector::Vector(int):
+          67, Generating target enter data map(create: this->real_part[:_T7_1156],this->imag_part[:_T7_1156])
+Vector::Vector(Vector&):
+          53, Generating target enter data map(create: this->real_part[:original->n],this->imag_part[:original->n])
+Vector::Vector(Vector&):
+         104, Generating target enter data map(create: this->real_part[:_T15_1158->n],this->imag_part[:_T15_1158->n])
+Vector::~Vector():
+    116, Generating target exit data map(delete: real_part[:n],imag_part[:n]) finalize
+Vector::~Vector():
+         116, Generating target exit data map(delete: this->real_part[:this->n],this->imag_part[:this->n]) finalize
+Vector::copy_from_host(double*, double*):
+    221, Generating update to(real_part[:n],imag_part[:n])
+Vector::copy_to_host(double*, double*):
+    228, Generating update from(real_part[:n],imag_part[:n])
+Vector::initialize_gpu(int):
+     53, Generating target enter data map(create: real_part[:n],imag_part[:n])
+gpu_apply_hamiltonian(int, double, int const*, int const*, double const*, double const*, double const*, double const*, double const*, double*, double*):
+    166, #omp target teams distribute parallel for thread_limit(256)
+        166, Generating "nvkernel__Z21gpu_apply_hamiltonianidPKiS0_PKdS2_S2_S2_S2_PdS3__F1L166_2" GPU kernel
+        168, Loop parallelized across teams and threads(128), schedule(static)
+    168, Loop not vectorized/parallelized: not countable
+    172, Generated vector simd code for the loop containing reductions
+gpu_apply_commutator(int, double, int*, int*, double*, double*, double*, double*, double*, double*, double*):
+    252, #omp target teams distribute parallel for thread_limit(256)
+        252, Generating "nvkernel__Z20gpu_apply_commutatoridPiS_PdS0_S0_S0_S0_S0_S0__F1L252_6" GPU kernel
+        254, Loop parallelized across teams and threads(128), schedule(static)
+    254, Loop not vectorized/parallelized: not countable
+    257, Generated vector simd code for the loop containing reductions
+gpu_apply_current(int, int const*, int const*, double const*, double const*, double const*, double const*, double const*, double*, double*):
+    333, #omp target teams distribute parallel for thread_limit(256)
+        333, Generating "nvkernel__Z17gpu_apply_currentiPKiS0_PKdS2_S2_S2_S2_PdS3__F1L333_10" GPU kernel
+        335, Loop parallelized across teams and threads(128), schedule(static)
+    335, Loop not vectorized/parallelized: not countable
+    338, Generated vector simd code for the loop containing reductions
+gpu_chebyshev_01(int, double const*, double const*, double const*, double const*, double*, double*, double, double, int):
+    413, #omp target teams distribute parallel for thread_limit(256)
+        413, Generating "nvkernel__Z16gpu_chebyshev_01iPKdS0_S0_S0_PdS1_ddi_F1L413_14" GPU kernel
+        415, Loop parallelized across teams and threads(128), schedule(static)
+    415, Loop not vectorized/parallelized: not countable
+gpu_chebyshev_2(int, double, int const*, int const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double*, double*, double*, double*, double, int):
+    480, #omp target teams distribute parallel for thread_limit(256)
+        480, Generating "nvkernel__Z15gpu_chebyshev_2idPKiS0_PKdS2_S2_S2_S2_S2_S2_PdS3_S3_S3_di_F1L480_18" GPU kernel
+        482, Loop parallelized across teams and threads(128), schedule(static)
+    482, Invariant if transformation
+         Loop not vectorized/parallelized: not countable
+    486, Generated vector simd code for the loop containing reductions
+gpu_chebyshev_1x(int, double const*, double const*, double*, double*, double):
+    622, #omp target teams distribute parallel for thread_limit(256)
+        622, Generating "nvkernel__Z16gpu_chebyshev_1xiPKdS0_PdS1_d_F1L622_22" GPU kernel
+        624, Loop parallelized across teams and threads(128), schedule(static)
+    624, Loop not vectorized/parallelized: not countable
+gpu_chebyshev_2x(int, double, int const*, int const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double*, double*, double*, double*, double*, double*, double, int):
+    686, #omp target teams distribute parallel for thread_limit(256)
+        686, Generating "nvkernel__Z16gpu_chebyshev_2xidPKiS0_PKdS2_S2_S2_S2_S2_S2_S2_S2_S2_S2_S2_PdS3_S3_S3_S3_S3_di_F1L686_26" GPU kernel
+        688, Loop parallelized across teams and threads(128), schedule(static)
+    688, Invariant if transformation
+         Loop not vectorized/parallelized: not countable
+    694, Loop not vectorized: recurrence
+gpu_kernel_polynomial(int, double, int const*, int const*, double const*, double const*, double const*, double const*, double const*, double const*, double const*, double*, double*):
+    894, #omp target teams distribute parallel for thread_limit(256)
+        894, Generating "nvkernel__Z21gpu_kernel_polynomialidPKiS0_PKdS2_S2_S2_S2_S2_S2_PdS3__F1L894_30" GPU kernel
+        896, Loop parallelized across teams and threads(128), schedule(static)
+    896, Loop not vectorized/parallelized: not countable
+    900, Generated vector simd code for the loop containing reductions
+Hamiltonian::Hamiltonian(Model&):
+          37, Generating target enter data map(to: this->neighbor_number[:this->n])
+          40, Generating target enter data map(to: this->potential[:this->n])
+          41, Loop not fused: function call before adjacent loop
+          42, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+          51, Generating target enter data map(to: this->neighbor_list[:model->number_of_pairs])
+          52, Loop not fused: function call before adjacent loop
+          53, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+          62, Generating target enter data map(to: this->hopping_real[:model->number_of_pairs])
+          63, Loop not fused: function call before adjacent loop
+          64, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+          73, Generating target enter data map(to: this->hopping_imag[:model->number_of_pairs])
+          74, Loop not fused: function call before adjacent loop
+          75, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+          83, Generating target enter data map(to: this->xx[:model->number_of_pairs])
+Hamiltonian::Hamiltonian(Model&):
+         121, Generating target enter data map(to: this->neighbor_list[:_T17_9233->number_of_pairs],this->neighbor_number[:this->n],this->hopping_real[:_T17_9233->number_of_pairs],this->hopping_imag[:_T17_9233->number_of_pairs],this->xx[:_T17_9233->number_of_pairs],this->potential[:this->n])
+              Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 4 times
+Hamiltonian::~Hamiltonian():
+    137, Generating target exit data map(delete: neighbor_list[:n*max_neighbor],hopping_real[:n*max_neighbor],neighbor_number[:n],hopping_imag[:n*max_neighbor],xx[:n*max_neighbor],potential[:n]) finalize
+Hamiltonian::~Hamiltonian():
+         137, Generating target exit data map(delete: this->neighbor_list[:this->n*this->max_neighbor],this->hopping_real[:this->n*this->max_neighbor],this->neighbor_number[:this->n],this->hopping_imag[:this->n*this->max_neighbor],this->xx[:this->n*this->max_neighbor],this->potential[:this->n]) finalize
+Hamiltonian::initialize_gpu(Model&):
+     37, Generating target enter data map(to: neighbor_number[:n])
+     40, Generating target enter data map(to: potential[:n])
+     41, Loop not fused: function call before adjacent loop
+     42, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+     51, Generating target enter data map(to: neighbor_list[:model->number_of_pairs])
+     52, Loop not fused: function call before adjacent loop
+     53, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+     62, Generating target enter data map(to: hopping_real[:model->number_of_pairs])
+     63, Loop not fused: function call before adjacent loop
+     64, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+     73, Generating target enter data map(to: hopping_imag[:model->number_of_pairs])
+     74, Loop not fused: function call before adjacent loop
+     75, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+     83, Generating target enter data map(to: xx[:model->number_of_pairs])
+Model::Model(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>):
+         527, Loop not fused: dependence chain to sibling loop
+              Loop not vectorized: data dependency
+         531, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+Model::initialize_state(Vector&, int):
+     84, Loop not fused: no successor loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 4 times
+     91, Loop not vectorized/parallelized: potential early exits
+    100, Loop not vectorized/parallelized: potential early exits
+Model::print_started_reading(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>):
+         616, Loop not vectorized/parallelized: not countable
+Model::print_finished_reading(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>):
+         616, Loop not vectorized/parallelized: not countable
+Model::initialize_parameters():
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+Model::verify_parameters():
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+Model::initialize_energy():
+         616, Loop not vectorized/parallelized: not countable
+    327, Loop not vectorized/parallelized: potential early exits
+Model::initialize_time():
+         616, Loop not vectorized/parallelized: not countable
+    378, Loop not vectorized/parallelized: potential early exits
+Model::initialize_local_orbitals():
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+std::char_traits<char>::length(char const*):
+         171, Loop not vectorized/parallelized: not countable
+int* std::__uninitialized_default_n_1<true>::__uninit_default_n<int*, unsigned long>(int*, unsigned long):
+        1149, Recognized memory set idiom
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::mersenne_twister_engine():
+         531, Loop not vectorized: data dependency
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::mersenne_twister_engine():
+         527, Loop not vectorized: data dependency
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::mersenne_twister_engine(unsigned long):
+         330, Loop not vectorized: data dependency
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::mersenne_twister_engine(unsigned long):
+         531, Loop not vectorized: data dependency
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::seed(unsigned long):
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    51, include "random.tcc"
+                        330, Loop not vectorized: data dependency
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::operator()():
+         401, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+         409, Loop not vectorized: data dependency
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::_M_gen_rand():
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    51, include "random.tcc"
+                        401, Loop not fused: different loop trip count
+                             Generated vector simd code for the loop
+                        409, Loop not vectorized: data dependency
+double std::uniform_real_distribution<double>::operator()<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&):
+        1870, Loop not fused: function call before adjacent loop
+              Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+double std::uniform_real_distribution<double>::operator()<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&, std::uniform_real_distribution<double>::param_type const&):
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    51, include "random.tcc"
+         189, Loop not fused: function call before adjacent loop
+              Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::_M_check_length(unsigned long, unsigned long, char const*) const:
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::append(char const*):
+         397, Loop not vectorized/parallelized: not countable
+std::__detail::_Adaptor<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>, double>::operator()():
+        3364, Loop not fused: function call before adjacent loop
+        3366, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+__gnu_cxx::char_traits<char>::length(char const*):
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    40, include "string"
+                         40, include "char_traits.h"
+                             171, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> std::operator+<char, std::char_traits<char>, std::allocator<char>>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, char const*):
+        1258, Loop not vectorized/parallelized: not countable
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&, char const*):
+         397, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> std::operator+<char, std::char_traits<char>, std::allocator<char>>(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+         397, Loop not vectorized/parallelized: not countable
+int* std::__uninitialized_default_n_a<int*, unsigned long, int>(int*, unsigned long, std::allocator<int>&):
+         638, Recognized memory set idiom
+int* std::__uninitialized_default_n<int*, unsigned long>(int*, unsigned long):
+         603, Recognized memory set idiom
+int* std::fill_n<int*, unsigned long, int>(int*, unsigned long, int const&):
+        1120, Recognized memory set idiom
+int* std::__fill_n_a<int*, unsigned long, int>(int*, unsigned long, int const&, std::random_access_iterator_tag):
+         969, Recognized memory set idiom
+void std::__fill_a<int*, int>(int*, int*, int const&):
+         923, Recognized memory set idiom
+__gnu_cxx::__enable_if<std::__is_scalar<int>::__value, void>::__type std::__fill_a1<int*, int>(int*, int*, int const&):
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    38, include "cmath"
+                         17, include "cmath"
+                            1935, include "specfun.h"
+                                   45, include "stl_algobase.h"
+                                       923, Recognized memory set idiom
+                    40, include "string"
+double std::generate_canonical<double, 53ul, std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&):
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    51, include "random.tcc"
+                       3364, Loop not fused: function call before adjacent loop
+         456, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+Model::initialize_neighbor():
+     51, Loop not vectorized/parallelized: potential early exits
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+Model::initialize_positions():
+     89, Loop not vectorized/parallelized: potential early exits
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+     97, Loop not fused: function call before adjacent loop
+     98, Loop not vectorized: data dependency
+Model::initialize_potential():
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    125, Loop not vectorized/parallelized: potential early exits
+Model::initialize_hopping():
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    170, Loop not vectorized/parallelized: potential early exits
+std::char_traits<char>::length(char const*):
+         171, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::append(char const*):
+         397, Loop not vectorized/parallelized: not countable
+__gnu_cxx::char_traits<char>::length(char const*):
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    40, include "string"
+                         40, include "char_traits.h"
+                             171, Loop not vectorized/parallelized: not countable
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<char, std::char_traits<char>, std::allocator<char>>(std::basic_ostream<char, std::char_traits<char>>&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    40, include "string"
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> std::operator+<char, std::char_traits<char>, std::allocator<char>>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, char const*):
+        1258, Loop not vectorized/parallelized: not countable
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&, char const*):
+         397, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> std::operator+<char, std::char_traits<char>, std::allocator<char>>(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    40, include "string"
+         397, Loop not vectorized/parallelized: not countable
+Model::initialize_lattice_model():
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    263, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 3 times (completely unrolled)
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    290, Recognized memory zero idiom
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    343, Loop not vectorized/parallelized: too deeply nested
+    344, Loop not vectorized/parallelized: too deeply nested
+    357, Loop not vectorized/parallelized: contains call
+Model::add_vacancies():
+     79, Recognized memory copy idiom
+     82, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+          48, Recognized memory copy idiom
+              Loop not vectorized/parallelized: potential early exits
+              Generated vector simd code for the loop
+          50, Recognized memory zero idiom
+          53, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+          62, Loop not fused: enclosed in different number of nests
+    118, Loop not fused: function call before adjacent loop
+    121, Loop not vectorized: data dependency
+Model::create_random_numbers(int, int, int*):
+     29, Generated vector simd code for the loop
+     33, Loop not vectorized/parallelized: potential early exits
+     39, Recognized memory copy idiom
+Model::specify_vacancies(int*, int):
+          29, Generated vector simd code for the loop
+          33, Loop not vectorized/parallelized: potential early exits
+          39, Recognized memory copy idiom
+     50, Recognized memory zero idiom
+     53, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+std::char_traits<char>::length(char const*):
+         171, Loop not vectorized/parallelized: not countable
+double* std::__uninitialized_fill_n<true>::__uninit_fill_n<double*, unsigned long, double>(double*, unsigned long, double const&):
+        1149, Recognized memory set idiom
+int* std::__uninitialized_fill_n<true>::__uninit_fill_n<int*, unsigned long, int>(int*, unsigned long, int const&):
+        1149, Recognized memory set idiom
+double* std::__uninitialized_default_n_1<true>::__uninit_default_n<double*, unsigned long>(double*, unsigned long):
+        1149, Recognized memory set idiom
+int* std::__uninitialized_default_n_1<true>::__uninit_default_n<int*, unsigned long>(int*, unsigned long):
+        1149, Recognized memory set idiom
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::operator()():
+         401, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+         409, Loop not vectorized: data dependency
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::_M_gen_rand():
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    51, include "random.tcc"
+                        401, Loop not fused: different loop trip count
+                             Generated vector simd code for the loop
+                        409, Loop not vectorized: data dependency
+std::vector<double, std::allocator<double>>::vector(unsigned long, double const&, std::allocator<double> const&):
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    51, include "random.tcc"
+std::vector<double, std::allocator<double>>::vector(std::vector<double, std::allocator<double>> const&):
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    51, include "random.tcc"
+std::vector<double, std::allocator<double>>::operator=(std::vector<double, std::allocator<double>> const&):
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    51, include "random.tcc"
+std::vector<double, std::allocator<double>>::_M_fill_initialize(unsigned long, double const&):
+         410, Recognized memory set idiom
+double* std::vector<double, std::allocator<double>>::_M_allocate_and_copy<__gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double>>>>(unsigned long, __gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double>>>, __gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double>>>):
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    51, include "random.tcc"
+std::vector<int, std::allocator<int>>::vector(unsigned long, int const&, std::allocator<int> const&):
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    51, include "random.tcc"
+std::vector<int, std::allocator<int>>::vector(std::vector<int, std::allocator<int>> const&):
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    51, include "random.tcc"
+std::vector<int, std::allocator<int>>::operator=(std::vector<int, std::allocator<int>> const&):
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    51, include "random.tcc"
+std::vector<int, std::allocator<int>>::_M_fill_initialize(unsigned long, int const&):
+         410, Recognized memory set idiom
+int* std::vector<int, std::allocator<int>>::_M_allocate_and_copy<__gnu_cxx::__normal_iterator<int const*, std::vector<int, std::allocator<int>>>>(unsigned long, __gnu_cxx::__normal_iterator<int const*, std::vector<int, std::allocator<int>>>, __gnu_cxx::__normal_iterator<int const*, std::vector<int, std::allocator<int>>>):
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    51, include "random.tcc"
+int std::uniform_int_distribution<int>::operator()<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&, std::uniform_int_distribution<int>::param_type const&):
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    49, include "random.h"
+                         35, include "uniform_int_dist.h"
+                             349, Loop not vectorized/parallelized: potential early exits
+                    51, include "random.tcc"
+         258, Loop not fused: different loop trip count
+              Loop not fused: complex flow graph
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+         263, Loop not vectorized/parallelized: not countable
+         265, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+         456, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+         456, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+unsigned int std::uniform_int_distribution<int>::_S_nd<unsigned long, std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>, unsigned int>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&, unsigned int):
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    49, include "random.h"
+                         35, include "uniform_int_dist.h"
+                             263, Loop not vectorized/parallelized: not countable
+                    51, include "random.tcc"
+         456, Loop not fused: different loop trip count
+              Loop not fused: complex flow graph
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+         456, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+std::vector<std::vector<int, std::allocator<int>>, std::allocator<std::vector<int, std::allocator<int>>>>::_M_fill_assign(unsigned long, std::vector<int, std::allocator<int>> const&):
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    49, include "random.h"
+                    51, include "random.tcc"
+                   999, Loop not vectorized/parallelized: potential early exits
+        1149, Loop not vectorized/parallelized: potential early exits
+std::vector<std::vector<double, std::allocator<double>>, std::allocator<std::vector<double, std::allocator<double>>>>::_M_fill_assign(unsigned long, std::vector<double, std::allocator<double>> const&):
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    49, include "random.h"
+                    51, include "random.tcc"
+                   999, Loop not vectorized/parallelized: potential early exits
+        1149, Loop not vectorized/parallelized: potential early exits
+void std::_Destroy_aux<false>::__destroy<std::vector<int, std::allocator<int>>*>(std::vector<int, std::allocator<int>>*, std::vector<int, std::allocator<int>>*):
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    40, include "string"
+                         55, include "basic_string.h"
+                              40, include "alloc_traits.h"
+                                   34, include "alloc_traits.h"
+                                        33, include "stl_construct.h"
+                                            162, Loop not vectorized/parallelized: contains call
+void std::_Destroy_aux<false>::__destroy<std::vector<double, std::allocator<double>>*>(std::vector<double, std::allocator<double>>*, std::vector<double, std::allocator<double>>*):
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    40, include "string"
+                         55, include "basic_string.h"
+                              40, include "alloc_traits.h"
+                                   34, include "alloc_traits.h"
+                                        33, include "stl_construct.h"
+                                            162, Loop not vectorized/parallelized: contains call
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::_M_check_length(unsigned long, unsigned long, char const*) const:
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    40, include "string"
+                         55, include "basic_string.h"
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::append(char const*):
+         397, Loop not vectorized/parallelized: not countable
+__gnu_cxx::char_traits<char>::length(char const*):
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    40, include "string"
+                         40, include "char_traits.h"
+                             171, Loop not vectorized/parallelized: not countable
+                         55, include "basic_string.h"
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<char, std::char_traits<char>, std::allocator<char>>(std::basic_ostream<char, std::char_traits<char>>&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    40, include "string"
+                         55, include "basic_string.h"
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> std::operator+<char, std::char_traits<char>, std::allocator<char>>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, char const*):
+        1258, Loop not vectorized/parallelized: not countable
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&, char const*):
+         397, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> std::operator+<char, std::char_traits<char>, std::allocator<char>>(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    40, include "string"
+         397, Loop not vectorized/parallelized: not countable
+double* std::__uninitialized_fill_n_a<double*, unsigned long, double, double>(double*, unsigned long, double const&, std::allocator<double>&):
+         296, Recognized memory set idiom
+double* std::uninitialized_fill_n<double*, unsigned long, double>(double*, unsigned long, double const&):
+         255, Recognized memory set idiom
+double* std::fill_n<double*, unsigned long, double>(double*, unsigned long, double const&):
+        1120, Recognized memory set idiom
+double* std::__fill_n_a<double*, unsigned long, double>(double*, unsigned long, double const&, std::random_access_iterator_tag):
+         969, Recognized memory set idiom
+void std::__fill_a<double*, double>(double*, double*, double const&):
+         923, Recognized memory set idiom
+__gnu_cxx::__enable_if<std::__is_scalar<double>::__value, void>::__type std::__fill_a1<double*, double>(double*, double*, double const&):
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    38, include "cmath"
+                         17, include "cmath"
+                            1935, include "specfun.h"
+                                   45, include "stl_algobase.h"
+                                       923, Recognized memory set idiom
+                    40, include "string"
+double* std::__uninitialized_default_n_a<double*, unsigned long, double>(double*, unsigned long, std::allocator<double>&):
+         638, Recognized memory set idiom
+double* std::__uninitialized_default_n<double*, unsigned long>(double*, unsigned long):
+         603, Recognized memory set idiom
+int* std::__uninitialized_fill_n_a<int*, unsigned long, int, int>(int*, unsigned long, int const&, std::allocator<int>&):
+         296, Recognized memory set idiom
+int* std::uninitialized_fill_n<int*, unsigned long, int>(int*, unsigned long, int const&):
+         255, Recognized memory set idiom
+int* std::fill_n<int*, unsigned long, int>(int*, unsigned long, int const&):
+        1120, Recognized memory set idiom
+int* std::__fill_n_a<int*, unsigned long, int>(int*, unsigned long, int const&, std::random_access_iterator_tag):
+         969, Recognized memory set idiom
+void std::__fill_a<int*, int>(int*, int*, int const&):
+         923, Recognized memory set idiom
+__gnu_cxx::__enable_if<std::__is_scalar<int>::__value, void>::__type std::__fill_a1<int*, int>(int*, int*, int const&):
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    38, include "cmath"
+                         17, include "cmath"
+                            1935, include "specfun.h"
+                                   45, include "stl_algobase.h"
+                                       923, Recognized memory set idiom
+                    40, include "string"
+int* std::__uninitialized_default_n_a<int*, unsigned long, int>(int*, unsigned long, std::allocator<int>&):
+         638, Recognized memory set idiom
+int* std::__uninitialized_default_n<int*, unsigned long>(int*, unsigned long):
+         603, Recognized memory set idiom
+void std::_Destroy<std::vector<int, std::allocator<int>>*>(std::vector<int, std::allocator<int>>*, std::vector<int, std::allocator<int>>*):
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    40, include "string"
+                         55, include "basic_string.h"
+                              40, include "alloc_traits.h"
+                                   34, include "alloc_traits.h"
+                                        33, include "stl_construct.h"
+void std::fill<__gnu_cxx::__normal_iterator<std::vector<int, std::allocator<int>>*, std::vector<std::vector<int, std::allocator<int>>, std::allocator<std::vector<int, std::allocator<int>>>>>, std::vector<int, std::allocator<int>>>(__gnu_cxx::__normal_iterator<std::vector<int, std::allocator<int>>*, std::vector<std::vector<int, std::allocator<int>>, std::allocator<std::vector<int, std::allocator<int>>>>>, __gnu_cxx::__normal_iterator<std::vector<int, std::allocator<int>>*, std::vector<std::vector<int, std::allocator<int>>, std::allocator<std::vector<int, std::allocator<int>>>>>, std::vector<int, std::allocator<int>> const&):
+         969, Loop not vectorized/parallelized: potential early exits
+void std::__fill_a<__gnu_cxx::__normal_iterator<std::vector<int, std::allocator<int>>*, std::vector<std::vector<int, std::allocator<int>>, std::allocator<std::vector<int, std::allocator<int>>>>>, std::vector<int, std::allocator<int>>>(__gnu_cxx::__normal_iterator<std::vector<int, std::allocator<int>>*, std::vector<std::vector<int, std::allocator<int>>, std::allocator<std::vector<int, std::allocator<int>>>>>, __gnu_cxx::__normal_iterator<std::vector<int, std::allocator<int>>*, std::vector<std::vector<int, std::allocator<int>>, std::allocator<std::vector<int, std::allocator<int>>>>>, std::vector<int, std::allocator<int>> const&):
+         953, Loop not vectorized/parallelized: potential early exits
+void std::__fill_a1<std::vector<int, std::allocator<int>>*, std::vector<std::vector<int, std::allocator<int>>, std::allocator<std::vector<int, std::allocator<int>>>>, std::vector<int, std::allocator<int>>>(__gnu_cxx::__normal_iterator<std::vector<int, std::allocator<int>>*, std::vector<std::vector<int, std::allocator<int>>, std::allocator<std::vector<int, std::allocator<int>>>>>, __gnu_cxx::__normal_iterator<std::vector<int, std::allocator<int>>*, std::vector<std::vector<int, std::allocator<int>>, std::allocator<std::vector<int, std::allocator<int>>>>>, std::vector<int, std::allocator<int>> const&):
+         911, Loop not vectorized/parallelized: potential early exits
+__gnu_cxx::__enable_if<!std::__is_scalar<std::vector<int, std::allocator<int>>>::__value, void>::__type std::__fill_a1<std::vector<int, std::allocator<int>>*, std::vector<int, std::allocator<int>>>(std::vector<int, std::allocator<int>>*, std::vector<int, std::allocator<int>>*, std::vector<int, std::allocator<int>> const&):
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    38, include "cmath"
+                         17, include "cmath"
+                            1935, include "specfun.h"
+                                   45, include "stl_algobase.h"
+                                       911, Loop not vectorized/parallelized: potential early exits
+                    40, include "string"
+int* std::__copy_move_a<false, int*, int*>(int*, int*, int*):
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    38, include "cmath"
+                         17, include "cmath"
+                            1935, include "specfun.h"
+                                   45, include "stl_algobase.h"
+                    40, include "string"
+std::vector<int, std::allocator<int>>* std::fill_n<std::vector<int, std::allocator<int>>*, unsigned long, std::vector<int, std::allocator<int>>>(std::vector<int, std::allocator<int>>*, unsigned long, std::vector<int, std::allocator<int>> const&):
+        1120, Loop not vectorized/parallelized: potential early exits
+std::vector<int, std::allocator<int>>* std::__fill_n_a<std::vector<int, std::allocator<int>>*, unsigned long, std::vector<int, std::allocator<int>>>(std::vector<int, std::allocator<int>>*, unsigned long, std::vector<int, std::allocator<int>> const&, std::random_access_iterator_tag):
+         969, Loop not vectorized/parallelized: potential early exits
+void std::__fill_a<std::vector<int, std::allocator<int>>*, std::vector<int, std::allocator<int>>>(std::vector<int, std::allocator<int>>*, std::vector<int, std::allocator<int>>*, std::vector<int, std::allocator<int>> const&):
+         911, Loop not vectorized/parallelized: potential early exits
+void std::_Destroy<std::vector<double, std::allocator<double>>*>(std::vector<double, std::allocator<double>>*, std::vector<double, std::allocator<double>>*):
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    40, include "string"
+                         55, include "basic_string.h"
+                              40, include "alloc_traits.h"
+                                   34, include "alloc_traits.h"
+                                        33, include "stl_construct.h"
+void std::fill<__gnu_cxx::__normal_iterator<std::vector<double, std::allocator<double>>*, std::vector<std::vector<double, std::allocator<double>>, std::allocator<std::vector<double, std::allocator<double>>>>>, std::vector<double, std::allocator<double>>>(__gnu_cxx::__normal_iterator<std::vector<double, std::allocator<double>>*, std::vector<std::vector<double, std::allocator<double>>, std::allocator<std::vector<double, std::allocator<double>>>>>, __gnu_cxx::__normal_iterator<std::vector<double, std::allocator<double>>*, std::vector<std::vector<double, std::allocator<double>>, std::allocator<std::vector<double, std::allocator<double>>>>>, std::vector<double, std::allocator<double>> const&):
+         969, Loop not vectorized/parallelized: potential early exits
+void std::__fill_a<__gnu_cxx::__normal_iterator<std::vector<double, std::allocator<double>>*, std::vector<std::vector<double, std::allocator<double>>, std::allocator<std::vector<double, std::allocator<double>>>>>, std::vector<double, std::allocator<double>>>(__gnu_cxx::__normal_iterator<std::vector<double, std::allocator<double>>*, std::vector<std::vector<double, std::allocator<double>>, std::allocator<std::vector<double, std::allocator<double>>>>>, __gnu_cxx::__normal_iterator<std::vector<double, std::allocator<double>>*, std::vector<std::vector<double, std::allocator<double>>, std::allocator<std::vector<double, std::allocator<double>>>>>, std::vector<double, std::allocator<double>> const&):
+         953, Loop not vectorized/parallelized: potential early exits
+void std::__fill_a1<std::vector<double, std::allocator<double>>*, std::vector<std::vector<double, std::allocator<double>>, std::allocator<std::vector<double, std::allocator<double>>>>, std::vector<double, std::allocator<double>>>(__gnu_cxx::__normal_iterator<std::vector<double, std::allocator<double>>*, std::vector<std::vector<double, std::allocator<double>>, std::allocator<std::vector<double, std::allocator<double>>>>>, __gnu_cxx::__normal_iterator<std::vector<double, std::allocator<double>>*, std::vector<std::vector<double, std::allocator<double>>, std::allocator<std::vector<double, std::allocator<double>>>>>, std::vector<double, std::allocator<double>> const&):
+         911, Loop not vectorized/parallelized: potential early exits
+__gnu_cxx::__enable_if<!std::__is_scalar<std::vector<double, std::allocator<double>>>::__value, void>::__type std::__fill_a1<std::vector<double, std::allocator<double>>*, std::vector<double, std::allocator<double>>>(std::vector<double, std::allocator<double>>*, std::vector<double, std::allocator<double>>*, std::vector<double, std::allocator<double>> const&):
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    38, include "cmath"
+                         17, include "cmath"
+                            1935, include "specfun.h"
+                                   45, include "stl_algobase.h"
+                                       911, Loop not vectorized/parallelized: potential early exits
+                    40, include "string"
+double* std::__copy_move_a<false, double*, double*>(double*, double*, double*):
+     20, include "model.h"
+          21, include "anderson.h"
+               22, include "random"
+                    38, include "cmath"
+                         17, include "cmath"
+                            1935, include "specfun.h"
+                                   45, include "stl_algobase.h"
+                    40, include "string"
+std::vector<double, std::allocator<double>>* std::fill_n<std::vector<double, std::allocator<double>>*, unsigned long, std::vector<double, std::allocator<double>>>(std::vector<double, std::allocator<double>>*, unsigned long, std::vector<double, std::allocator<double>> const&):
+        1120, Loop not vectorized/parallelized: potential early exits
+std::vector<double, std::allocator<double>>* std::__fill_n_a<std::vector<double, std::allocator<double>>*, unsigned long, std::vector<double, std::allocator<double>>>(std::vector<double, std::allocator<double>>*, unsigned long, std::vector<double, std::allocator<double>> const&, std::random_access_iterator_tag):
+         969, Loop not vectorized/parallelized: potential early exits
+void std::__fill_a<std::vector<double, std::allocator<double>>*, std::vector<double, std::allocator<double>>>(std::vector<double, std::allocator<double>>*, std::vector<double, std::allocator<double>>*, std::vector<double, std::allocator<double>> const&):
+         911, Loop not vectorized/parallelized: potential early exits
+Anderson::add_disorder(int, std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&, double*):
+     26, Loop not vectorized/parallelized: potential early exits
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::operator()():
+         401, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+         409, Loop not vectorized: data dependency
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::_M_gen_rand():
+     20, include "anderson.h"
+          22, include "random"
+               51, include "random.tcc"
+                   401, Loop not fused: different loop trip count
+                        Generated vector simd code for the loop
+                   409, Loop not vectorized: data dependency
+double std::uniform_real_distribution<double>::operator()<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&):
+        1870, Loop not fused: function call before adjacent loop
+              Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+double std::uniform_real_distribution<double>::operator()<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&, std::uniform_real_distribution<double>::param_type const&):
+     20, include "anderson.h"
+          22, include "random"
+               51, include "random.tcc"
+         189, Loop not fused: function call before adjacent loop
+              Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+std::__detail::_Adaptor<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>, double>::operator()():
+        3364, Loop not fused: function call before adjacent loop
+        3366, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+double std::generate_canonical<double, 53ul, std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&):
+     20, include "anderson.h"
+          22, include "random"
+               51, include "random.tcc"
+                  3364, Loop not fused: function call before adjacent loop
+         456, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+Charge::add_impurities(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&, int, double*, int*, std::vector<double, std::allocator<double>>&, std::vector<double, std::allocator<double>>&, std::vector<double, std::allocator<double>>&, double*):
+          49, Generated vector simd code for the loop
+          53, Loop not vectorized/parallelized: potential early exits
+          59, Recognized memory copy idiom
+          69, Loop not vectorized/parallelized: potential early exits
+         102, Loop not vectorized/parallelized: not countable
+         105, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+         111, Loop not vectorized/parallelized: not countable
+         141, Loop not fused: function call before adjacent loop
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 3 times (completely unrolled)
+         143, Recognized memory zero idiom
+         145, Loop not vectorized/parallelized: too deeply nested
+         151, Loop not vectorized/parallelized: not countable
+         155, Loop not vectorized/parallelized: too deeply nested
+         157, Invariant if transformation
+              Loop not fused: no successor loop
+         159, Loop not vectorized: data dependency
+         165, Loop unrolled 3 times (completely unrolled)
+Charge::find_impurity_indices(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&, int):
+     49, Generated vector simd code for the loop
+     53, Loop not vectorized/parallelized: potential early exits
+     59, Recognized memory copy idiom
+Charge::find_impurity_strength(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&):
+     69, Loop not vectorized/parallelized: potential early exits
+Charge::find_potentials(int, double*, int*, std::vector<double, std::allocator<double>>&, std::vector<double, std::allocator<double>>&, std::vector<double, std::allocator<double>>&, double*):
+    120, Loop unrolled 3 times (completely unrolled)
+    141, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 3 times (completely unrolled)
+    143, Recognized memory zero idiom
+    145, Loop not vectorized/parallelized: too deeply nested
+         200, Loop not vectorized/parallelized: not countable
+         202, Loop not vectorized/parallelized: not countable
+         204, Loop not vectorized/parallelized: not countable
+         206, Loop not vectorized/parallelized: not countable
+         208, Loop not vectorized/parallelized: not countable
+         210, Loop not vectorized/parallelized: not countable
+    155, Loop not vectorized/parallelized: too deeply nested
+    157, Invariant if transformation
+         Loop not fused: no successor loop
+    159, Loop not vectorized: data dependency
+Charge::find_cell_id(double, double, double, double):
+    179, Loop not vectorized/parallelized: not countable
+    181, Loop not vectorized/parallelized: not countable
+    183, Loop not vectorized/parallelized: not countable
+    185, Loop not vectorized/parallelized: not countable
+    187, Loop not vectorized/parallelized: not countable
+    189, Loop not vectorized/parallelized: not countable
+Charge::find_cell_id(double, double, double, double, int&, int&, int&, int&):
+    200, Loop not vectorized/parallelized: not countable
+    202, Loop not vectorized/parallelized: not countable
+    204, Loop not vectorized/parallelized: not countable
+    206, Loop not vectorized/parallelized: not countable
+    208, Loop not vectorized/parallelized: not countable
+    210, Loop not vectorized/parallelized: not countable
+Charge::find_cell_contents(int, int*, double*, std::vector<double, std::allocator<double>>&, std::vector<double, std::allocator<double>>&, std::vector<double, std::allocator<double>>&):
+         179, Loop not vectorized/parallelized: not countable
+         181, Loop not vectorized/parallelized: not countable
+         183, Loop not vectorized/parallelized: not countable
+         185, Loop not vectorized/parallelized: not countable
+         187, Loop not vectorized/parallelized: not countable
+         189, Loop not vectorized/parallelized: not countable
+    105, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+         179, Loop not vectorized/parallelized: not countable
+         181, Loop not vectorized/parallelized: not countable
+         183, Loop not vectorized/parallelized: not countable
+         185, Loop not vectorized/parallelized: not countable
+         187, Loop not vectorized/parallelized: not countable
+         189, Loop not vectorized/parallelized: not countable
+int* std::__uninitialized_fill_n<true>::__uninit_fill_n<int*, unsigned long, int>(int*, unsigned long, int const&):
+        1149, Recognized memory set idiom
+double* std::__uninitialized_default_n_1<true>::__uninit_default_n<double*, unsigned long>(double*, unsigned long):
+        1149, Recognized memory set idiom
+int* std::__uninitialized_default_n_1<true>::__uninit_default_n<int*, unsigned long>(int*, unsigned long):
+        1149, Recognized memory set idiom
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::operator()():
+         401, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+         409, Loop not vectorized: data dependency
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::_M_gen_rand():
+     20, include "charge.h"
+          22, include "random"
+               51, include "random.tcc"
+                   401, Loop not fused: different loop trip count
+                        Generated vector simd code for the loop
+                   409, Loop not vectorized: data dependency
+std::vector<int, std::allocator<int>>::vector(unsigned long, int const&, std::allocator<int> const&):
+     20, include "charge.h"
+          22, include "random"
+               51, include "random.tcc"
+std::vector<int, std::allocator<int>>::assign(unsigned long, int const&):
+     20, include "charge.h"
+          22, include "random"
+               51, include "random.tcc"
+std::vector<int, std::allocator<int>>::_M_fill_initialize(unsigned long, int const&):
+         410, Recognized memory set idiom
+std::vector<int, std::allocator<int>>::_M_fill_assign(unsigned long, int const&):
+     20, include "charge.h"
+          22, include "random"
+               51, include "random.tcc"
+                   999, Recognized memory set idiom
+         410, Recognized memory set idiom
+        1149, Recognized memory set idiom
+int std::uniform_int_distribution<int>::operator()<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&, std::uniform_int_distribution<int>::param_type const&):
+     20, include "charge.h"
+          22, include "random"
+               49, include "random.h"
+                    35, include "uniform_int_dist.h"
+                        349, Loop not vectorized/parallelized: potential early exits
+               51, include "random.tcc"
+         258, Loop not fused: different loop trip count
+              Loop not fused: complex flow graph
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+         263, Loop not vectorized/parallelized: not countable
+         265, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+         456, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+         456, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+unsigned int std::uniform_int_distribution<int>::_S_nd<unsigned long, std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>, unsigned int>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&, unsigned int):
+     20, include "charge.h"
+          22, include "random"
+               49, include "random.h"
+                    35, include "uniform_int_dist.h"
+                        263, Loop not vectorized/parallelized: not countable
+               51, include "random.tcc"
+         456, Loop not fused: different loop trip count
+              Loop not fused: complex flow graph
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+         456, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+double std::uniform_real_distribution<double>::operator()<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&):
+        1870, Loop not fused: function call before adjacent loop
+              Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+double std::uniform_real_distribution<double>::operator()<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&, std::uniform_real_distribution<double>::param_type const&):
+     20, include "charge.h"
+          22, include "random"
+               49, include "random.h"
+               51, include "random.tcc"
+         189, Loop not fused: function call before adjacent loop
+              Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+std::__detail::_Adaptor<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>, double>::operator()():
+        3364, Loop not fused: function call before adjacent loop
+        3366, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+double* std::__uninitialized_default_n_a<double*, unsigned long, double>(double*, unsigned long, std::allocator<double>&):
+         638, Recognized memory set idiom
+double* std::__uninitialized_default_n<double*, unsigned long>(double*, unsigned long):
+         603, Recognized memory set idiom
+double* std::fill_n<double*, unsigned long, double>(double*, unsigned long, double const&):
+        1120, Recognized memory set idiom
+double* std::__fill_n_a<double*, unsigned long, double>(double*, unsigned long, double const&, std::random_access_iterator_tag):
+         969, Recognized memory set idiom
+void std::__fill_a<double*, double>(double*, double*, double const&):
+         923, Recognized memory set idiom
+__gnu_cxx::__enable_if<std::__is_scalar<double>::__value, void>::__type std::__fill_a1<double*, double>(double*, double*, double const&):
+     20, include "charge.h"
+          22, include "random"
+               38, include "cmath"
+                    17, include "cmath"
+                       1935, include "specfun.h"
+                              45, include "stl_algobase.h"
+                                  923, Recognized memory set idiom
+int* std::__uninitialized_fill_n_a<int*, unsigned long, int, int>(int*, unsigned long, int const&, std::allocator<int>&):
+         296, Recognized memory set idiom
+int* std::uninitialized_fill_n<int*, unsigned long, int>(int*, unsigned long, int const&):
+         255, Recognized memory set idiom
+int* std::fill_n<int*, unsigned long, int>(int*, unsigned long, int const&):
+        1120, Recognized memory set idiom
+int* std::__fill_n_a<int*, unsigned long, int>(int*, unsigned long, int const&, std::random_access_iterator_tag):
+         969, Recognized memory set idiom
+void std::__fill_a<int*, int>(int*, int*, int const&):
+         923, Recognized memory set idiom
+__gnu_cxx::__enable_if<std::__is_scalar<int>::__value, void>::__type std::__fill_a1<int*, int>(int*, int*, int const&):
+     20, include "charge.h"
+          22, include "random"
+               38, include "cmath"
+                    17, include "cmath"
+                       1935, include "specfun.h"
+                              45, include "stl_algobase.h"
+                                  923, Recognized memory set idiom
+void std::fill<__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int>>>, int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int>>>, __gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int>>>, int const&):
+         969, Recognized memory set idiom
+void std::__fill_a<__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int>>>, int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int>>>, __gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int>>>, int const&):
+         953, Recognized memory set idiom
+void std::__fill_a1<int*, std::vector<int, std::allocator<int>>, int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int>>>, __gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int>>>, int const&):
+         923, Recognized memory set idiom
+int* std::__uninitialized_default_n_a<int*, unsigned long, int>(int*, unsigned long, std::allocator<int>&):
+         638, Recognized memory set idiom
+int* std::__uninitialized_default_n<int*, unsigned long>(int*, unsigned long):
+         603, Recognized memory set idiom
+double std::generate_canonical<double, 53ul, std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&):
+     20, include "charge.h"
+          22, include "random"
+               51, include "random.tcc"
+                  3364, Loop not fused: function call before adjacent loop
+         456, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+_INTERNAL_10_charge_cpp_6686b092::find_d12_square(int*, double*, double*, double*):
+    120, Loop unrolled 3 times (completely unrolled)
 timeout was set to  600

@@ -32,10 +32,10 @@ void Hamiltonian::initialize_gpu(Model& model)
   grid_size = (model.number_of_atoms - 1) / BLOCK_SIZE + 1;
 
   neighbor_number = model.neighbor_number;
-  #pragma acc parallel enter data map (to: neighbor_number[0:n])
+#pragma acc enter data copyin(neighbor_number[0:n])
 
   potential = model.potential;
-  #pragma acc parallel enter data map (to: potential[0:n])
+#pragma acc enter data copyin(potential[0:n])
 
   int* neighbor_list_new = new int[model.number_of_pairs];
   for (int m = 0; m < max_neighbor; ++m) {
@@ -46,7 +46,7 @@ void Hamiltonian::initialize_gpu(Model& model)
   memcpy(model.neighbor_list, neighbor_list_new, model.number_of_pairs * sizeof(int));
   delete[] neighbor_list_new;
   neighbor_list = model.neighbor_list;
-  #pragma acc parallel enter data map (to: neighbor_list[0:model.number_of_pairs])
+#pragma acc enter data copyin(neighbor_list[0:model.number_of_pairs])
 
   real* hopping_real_new = new real[model.number_of_pairs];
   for (int m = 0; m < max_neighbor; ++m) {
@@ -57,7 +57,7 @@ void Hamiltonian::initialize_gpu(Model& model)
   memcpy(model.hopping_real, hopping_real_new, model.number_of_pairs * sizeof(real));
   delete[] hopping_real_new;
   hopping_real = model.hopping_real;
-  #pragma acc parallel enter data map (to: hopping_real[0:model.number_of_pairs])
+#pragma acc enter data copyin(hopping_real[0:model.number_of_pairs])
 
   real* hopping_imag_new = new real[model.number_of_pairs];
   for (int m = 0; m < max_neighbor; ++m) {
@@ -68,7 +68,7 @@ void Hamiltonian::initialize_gpu(Model& model)
   memcpy(model.hopping_imag, hopping_imag_new, model.number_of_pairs * sizeof(real));
   delete[] hopping_imag_new;
   hopping_imag = model.hopping_imag;
-  #pragma acc parallel enter data map (to: hopping_imag[0:model.number_of_pairs])
+#pragma acc enter data copyin(hopping_imag[0:model.number_of_pairs])
 
   real* xx_new = new real[model.number_of_pairs];
   for (int m = 0; m < max_neighbor; ++m) {
@@ -79,7 +79,7 @@ void Hamiltonian::initialize_gpu(Model& model)
   memcpy(model.xx, xx_new, model.number_of_pairs * sizeof(real));
   delete[] xx_new;
   xx = model.xx;
-  #pragma acc parallel enter data map (to: xx[0:model.number_of_pairs])
+#pragma acc enter data copyin(xx[0:model.number_of_pairs])
 }
 #else
 void Hamiltonian::initialize_cpu(Model& model)
@@ -128,12 +128,12 @@ Hamiltonian::~Hamiltonian()
 {
 #ifndef CPU_ONLY
 
-  #pragma acc parallel exit data map(delete: neighbor_number[0:n])
-  #pragma acc parallel exit data map(delete: neighbor_list[0:max_neighbor*n])
-  #pragma acc parallel exit data map(delete: potential[0:n])
-  #pragma acc parallel exit data map(delete: hopping_real[0:max_neighbor*n])
-  #pragma acc parallel exit data map(delete: hopping_imag[0:max_neighbor*n])
-  #pragma acc parallel exit data map(delete: xx[0:max_neighbor*n])
+  #pragma acc  exit data delete(neighbor_number[0:n])
+  #pragma acc  exit data delete(neighbor_list[0:max_neighbor*n])
+  #pragma acc  exit data delete(potential[0:n])
+  #pragma acc  exit data delete(hopping_real[0:max_neighbor*n])
+  #pragma acc  exit data delete(hopping_imag[0:max_neighbor*n])
+  #pragma acc  exit data delete(xx[0:max_neighbor*n])
   delete[] neighbor_number;
   delete[] neighbor_list;
   delete[] potential;
@@ -164,7 +164,7 @@ void gpu_apply_hamiltonian(
         real* __restrict g_state_out_real,
         real* __restrict g_state_out_imag)
 {
-  #pragma acc parallel loop thread_limit(BLOCK_SIZE)
+  #pragma acc parallel loop vector_length(BLOCK_SIZE)
   for (int n = 0; n < number_of_atoms; n++) {
     real temp_real = g_potential[n] * g_state_in_real[n]; // on-site
     real temp_imag = g_potential[n] * g_state_in_imag[n]; // on-site
@@ -250,7 +250,7 @@ void gpu_apply_commutator(
   real* g_state_out_real,
   real* g_state_out_imag)
 {
-  #pragma acc parallel loop thread_limit(BLOCK_SIZE)
+  #pragma acc parallel loop vector_length(BLOCK_SIZE)
   for (int n = 0; n < number_of_atoms; n++) {
     real temp_real = 0.0;
     real temp_imag = 0.0;
@@ -331,7 +331,7 @@ void gpu_apply_current(
         real* __restrict g_state_out_real,
         real* __restrict g_state_out_imag)
 {
-  #pragma acc parallel loop thread_limit(BLOCK_SIZE)
+  #pragma acc parallel loop vector_length(BLOCK_SIZE)
   for (int n = 0; n < number_of_atoms; n++) {
     real temp_real = 0.0;
     real temp_imag = 0.0;
@@ -411,7 +411,7 @@ void gpu_chebyshev_01(
   const real b1,
   const int direction)
 {
-  #pragma acc parallel loop thread_limit(BLOCK_SIZE)
+  #pragma acc parallel loop vector_length(BLOCK_SIZE)
   for (int n = 0; n < number_of_atoms; n++) {
     real bessel_0 = b0;
     real bessel_1 = b1 * direction;
@@ -478,7 +478,7 @@ void gpu_chebyshev_2(
   const real bessel_m,
   const int label)
 {
-  #pragma acc parallel loop thread_limit(BLOCK_SIZE)
+  #pragma acc parallel loop vector_length(BLOCK_SIZE)
   for (int n = 0; n < number_of_atoms; n++) {
     real temp_real = g_potential[n] * g_state_1_real[n]; // on-site
     real temp_imag = g_potential[n] * g_state_1_imag[n]; // on-site
@@ -620,7 +620,7 @@ void gpu_chebyshev_1x(
         real* __restrict g_state_imag,
   const real g_bessel_1)
 {
-  #pragma acc parallel loop thread_limit(BLOCK_SIZE)
+  #pragma acc parallel loop vector_length(BLOCK_SIZE)
   for (int n = 0; n < number_of_atoms; n++) {
     real b1 = g_bessel_1;
     g_state_real[n] = +b1 * g_state_1x_imag[n];
@@ -684,7 +684,7 @@ void gpu_chebyshev_2x(
   const real g_bessel_m,
   const int g_label)
 {
-  #pragma acc parallel loop thread_limit(BLOCK_SIZE)
+  #pragma acc parallel loop vector_length(BLOCK_SIZE)
   for (int n = 0; n < number_of_atoms; n++) {
     real temp_real = g_potential[n] * g_state_1_real[n];    // on-site
     real temp_imag = g_potential[n] * g_state_1_imag[n];    // on-site
@@ -892,7 +892,7 @@ void gpu_kernel_polynomial(
         real* __restrict g_state_2_real,
         real* __restrict g_state_2_imag)
 {
-  #pragma acc parallel loop thread_limit(BLOCK_SIZE)
+  #pragma acc parallel loop vector_length(BLOCK_SIZE)
   for (int n = 0; n < number_of_atoms; n++) {
     real temp_real = g_potential[n] * g_state_1_real[n]; // on-site
     real temp_imag = g_potential[n] * g_state_1_imag[n]; // on-site

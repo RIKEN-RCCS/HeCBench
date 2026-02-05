@@ -26,7 +26,7 @@ void gpu_set_zero(int number_of_elements,
   real* __restrict g_state_real, 
   real* __restrict g_state_imag)
 {
-  #pragma acc parallel loop thread_limit (BLOCK_SIZE)
+  #pragma acc parallel loop vector_length(BLOCK_SIZE)
   for (int n = 0; n < number_of_elements; n++) {
     g_state_real[n] = 0;
     g_state_imag[n] = 0;
@@ -49,7 +49,7 @@ void Vector::initialize_gpu(int n)
   array_size = n * sizeof(real);
   real_part = new real[n];
   imag_part = new real[n];
-  #pragma acc parallel enter data map (alloc: real_part[0:n], imag_part[0:n])
+#pragma acc enter data create(real_part[0:n], imag_part[0:n])
 }
 #else
 void Vector::initialize_cpu(int n)
@@ -80,7 +80,7 @@ void gpu_copy_state(
         real* __restrict out_real, 
         real* __restrict out_imag)
 {
-  #pragma acc parallel loop thread_limit (BLOCK_SIZE)
+  #pragma acc parallel loop vector_length(BLOCK_SIZE)
   for (int n = 0; n < N; n++) {
     out_real[n] = in_real[n];
     out_imag[n] = in_imag[n];
@@ -112,7 +112,7 @@ Vector::Vector(Vector& original)
 Vector::~Vector()
 {
 #ifndef CPU_ONLY
-  #pragma acc parallel exit data map (delete: real_part[0:n], imag_part[0:n])
+#pragma acc  exit data delete(real_part[0:n], imag_part[0:n])
   delete[] real_part;
   delete[] imag_part;
 #else
@@ -129,7 +129,7 @@ void gpu_add_state(
         real*__restrict out_real, 
         real*__restrict out_imag)
 {
-  #pragma acc parallel loop thread_limit (BLOCK_SIZE)
+  #pragma acc parallel loop vector_length (BLOCK_SIZE)
   for (int i = 0; i < n; i++) {
     out_real[i] += in_real[i];
     out_imag[i] += in_imag[i];
@@ -171,7 +171,7 @@ void gpu_apply_sz(
         real* __restrict out_real, 
         real* __restrict out_imag)
 {
-  #pragma acc parallel loop thread_limit (BLOCK_SIZE)
+  #pragma acc parallel loop vector_length (BLOCK_SIZE)
   for (int i = 0; i < n; i++) {
     if (i % 2 == 0) {
       out_real[i] = in_real[i];
@@ -212,8 +212,8 @@ void Vector::copy_from_host(real* other_real, real* other_imag)
  
   memcpy(real_part, other_real, array_size);
   memcpy(imag_part, other_imag, array_size);
-  #pragma acc update to (real_part[0:n])
-  #pragma acc update to (imag_part[0:n])
+  #pragma acc update device (real_part[0:n])
+  #pragma acc update device (imag_part[0:n])
 #else
   memcpy(real_part, other_real, array_size);
   memcpy(imag_part, other_imag, array_size);
@@ -223,8 +223,8 @@ void Vector::copy_from_host(real* other_real, real* other_imag)
 void Vector::copy_to_host(real* target_real, real* target_imag)
 {
 #ifndef CPU_ONLY
-  #pragma acc update from (real_part[0:n])
-  #pragma acc update from (imag_part[0:n])
+  #pragma acc update host (real_part[0:n])
+  #pragma acc update host (imag_part[0:n])
   memcpy(target_real, real_part, array_size);
   memcpy(target_imag, imag_part, array_size);
 #else
