@@ -37,7 +37,7 @@ attention_device(float const*, float const*, float const*, int, int, int):
      48, Generated vector simd code for the loop containing reductions
 main:
          531, Loop not vectorized: data dependency
-     87, Loop not vectorized/parallelized: potential early exits
+     98, Loop not vectorized/parallelized: potential early exits
           10, Loop not fused: enclosed in different number of nests
           12, Generated vector simd code for the loop containing reductions
               Loop unrolled 4 times
@@ -49,7 +49,7 @@ main:
               Loop unrolled 4 times
           24, Loop not fused: function call before adjacent loop
           26, Generated vector simd code for the loop containing reductions
-     97, Loop not vectorized/parallelized: potential early exits
+    108, Loop not vectorized/parallelized: potential early exits
 std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::mersenne_twister_engine(unsigned long):
          330, Loop not vectorized: data dependency
 std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::mersenne_twister_engine(unsigned long):
@@ -99,5 +99,4 @@ float std::generate_canonical<float, 24ul, std::mersenne_twister_engine<unsigned
          456, Loop not fused: different loop trip count
               Generated vector simd code for the loop
               Loop not vectorized: data dependency
-make: *** [Makefile.NVD:69: run_mem] Error 1
 timeout was set to  600
