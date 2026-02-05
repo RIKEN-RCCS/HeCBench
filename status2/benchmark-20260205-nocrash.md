@@ -86,7 +86,7 @@
 | deredundancy | 17.83 | build err | 15.72 |
 | diamond | build err | build err | 37.30 |
 | distort | 2.45 | 2.45 | 2.50 |
-| divergence | 5.17 | 3.18 | |
+| divergence | 3.11 | 3.12 | 3.13 |
 | doh | 14.97 | 2.39 | 2.41 |
 | dp | build err | 25.04 | 25.25 |
 | dslash | 2.70 | 2.68 | 2.66 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| エラーなし | 308 | 183 | 288 |
+| エラーなし | 308 | 183 | 289 |
 
 sycl と acc がともに実行できた件数 181

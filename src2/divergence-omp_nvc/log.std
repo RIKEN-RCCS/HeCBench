@@ -22,10 +22,5 @@ CPU             GPU
 -3.05311e-16    -2.77556e-16
 2.22045e-16    2.22045e-16
 
-CPU Time:
-Instantaneous Time: 0.000342464
-Total Time: 0.000342464
-
-GPU Time:
-Instantaneous Time: 0.323014240
-Total Time: 0.323014240
+Total CPU Time: 0.338 (ms)
+Total GPU Time: 337.642 (ms)
