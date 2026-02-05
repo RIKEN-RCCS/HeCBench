@@ -40,8 +40,8 @@ void runKernels(
     // index of the two eigenInterval buffers
     uint &in )
 {
-  #pragma acc update to (eigenIntervalBuffer0[0:length*2])
-  #pragma acc update to (eigenIntervalBuffer1[0:length*2])
+  #pragma acc update device (eigenIntervalBuffer0[0:length*2])
+  #pragma acc update device (eigenIntervalBuffer1[0:length*2])
 
   in = 0;
   while (isComplete(eigenIntervals[in], length, tolerance)) {
@@ -67,7 +67,7 @@ void runKernels(
     eigenIntervalBuffer1 = eigenIntervalBuffer0,
     eigenIntervalBuffer0 = e;
 
-    #pragma acc update from (eigenIntervalBuffer0[0:length*2])
+    #pragma acc update host (eigenIntervalBuffer0[0:length*2])
   }
 }
 
@@ -174,12 +174,12 @@ int main(int argc, char * argv[])
   float *eigenIntervalBuffer0 = eigenIntervals[0];
   float *eigenIntervalBuffer1 = eigenIntervals[1];
 
-#pragma acc data to: diagonalBuffer[0:length], \
-                                offDiagonalBuffer[0:length-1]) \
-                        map(alloc: numEigenValuesIntervalBuffer[0:length], \
-                                   eigenIntervalBuffer0[0:length*2], \
-                                   eigenIntervalBuffer1[0:length*2])
-{
+#pragma acc data copyin(diagonalBuffer[0:length],	       \
+			offDiagonalBuffer[0:length-1])			\
+  create(numEigenValuesIntervalBuffer[0:length],		\
+	 eigenIntervalBuffer0[0:length*2],				\
+	 eigenIntervalBuffer1[0:length*2])
+  {
   // Warm up
   for(int i = 0; i < 2 && iterations != 1; i++)
   {

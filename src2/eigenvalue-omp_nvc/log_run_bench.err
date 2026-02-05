@@ -1,2 +1,138 @@
-make: *** No rule to make target 'main2.o', needed by 'main'.  Stop.
+calNumEigenValuesLessThan(float, unsigned int, float const*, float const*):
+     26, include "kernels.cpp"
+          22, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+          27, Loop not vectorized: unknown
+calNumEigenValueInterval(unsigned int*, float const*, float const*, float const*, unsigned int):
+     26, include "kernels.cpp"
+          43, #omp target teams distribute parallel for thread_limit(256)
+              43, Generating "nvkernel__Z24calNumEigenValueIntervalPjPKfS1_S1_j_F327L43_2" GPU kernel
+              45, Loop parallelized across teams and threads(128), schedule(static)
+          27, Loop not vectorized: unknown
+          27, Loop not vectorized: unknown
+          45, Loop not vectorized/parallelized: not countable
+recalculateEigenIntervals(float*, float const*, unsigned int const*, float const*, float const*, unsigned int, float):
+     26, include "kernels.cpp"
+          65, #omp target teams distribute parallel for thread_limit(256)
+              65, Generating "nvkernel__Z25recalculateEigenIntervalsPfPKfPKjS1_S1_jf_F327L65_6" GPU kernel
+              67, Loop parallelized across teams and threads(128), schedule(static)
+          73, Loop not vectorized/parallelized: not countable
+          27, Loop not vectorized: unknown
+          27, Loop not vectorized: unknown
+runKernels(float*, unsigned int*, float*, float*, float*, float**, int, float, unsigned int&):
+     46, Generating update to(eigenIntervalBuffer0[:length*2],eigenIntervalBuffer1[:length*2])
+     47, Loop not vectorized/parallelized: potential early exits
+     71, Generating update from(eigenIntervalBuffer0[:length*2])
+main:
+          21, Loop not fused: function call before adjacent loop
+              Loop not vectorized: recurrence
+              Loop unrolled 4 times (completely unrolled)
+           3, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+           3, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    128, Loop not vectorized/parallelized: potential early exits
+           3, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    149, Loop not fused: function call before adjacent loop
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 4 times
+    182, Generating map(to:offDiagonalBuffer[:length-1]) 
+         Generating map(alloc:numEigenValuesIntervalBuffer[:length],eigenIntervalBuffer1[:length*2]) 
+         Generating map(to:diagonalBuffer[:length]) 
+         Generating map(alloc:eigenIntervalBuffer0[:length*2]) 
+          46, Generating update to(.inl_eigenIntervalBuffer0_2594[:length*2],.inl_eigenIntervalBuffer1_2595[:length*2])
+          47, Loop not vectorized/parallelized: contains call
+          71, Generating update from(.inl_eigenIntervalBuffer0_2594[:length*2])
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+          46, Generating update to(.inl_eigenIntervalBuffer0_2712[:length*2],.inl_eigenIntervalBuffer1_2713[:length*2])
+          47, Loop not vectorized/parallelized: contains call
+          71, Generating update from(.inl_eigenIntervalBuffer0_2712[:length*2])
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    227, Loop not vectorized/parallelized: potential early exits
+           3, Loop not vectorized/parallelized: not countable
+         536, Loop not vectorized/parallelized: not countable
+    244, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 4 times
+    249, Loop not vectorized/parallelized: potential early exits
+          85, Loop not fused: complex flow graph
+              Generated vector simd code for the loop containing reductions
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+int roundToPowerOf2<int>(int):
+     25, include "utils.cpp"
+          21, Loop not vectorized: recurrence
+              Loop unrolled 4 times (completely unrolled)
+int fillRandom<float>(float*, int, int, float, float, unsigned int):
+     25, include "utils.cpp"
+          50, Loop not vectorized/parallelized: contains call
+           3, Loop not vectorized/parallelized: not countable
+          50, Loop nest collapsed
+         536, Loop not vectorized/parallelized: not countable
+std::char_traits<char>::length(char const*):
+         171, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string<std::allocator<char>>(char const*, std::allocator<char> const&):
+     25, include "utils.cpp"
+         397, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string<std::allocator<char>>(char const*, std::allocator<char> const&):
+         536, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     17, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+     26, include "kernels.cpp"
+__gnu_cxx::char_traits<char>::length(char const*):
+     20, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                        171, Loop not vectorized/parallelized: not countable
+     25, include "utils.cpp"
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<char, std::char_traits<char>, std::allocator<char>>(std::basic_ostream<char, std::char_traits<char>>&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     20, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+     25, include "utils.cpp"
+std::basic_ostream<char, std::char_traits<char>>& std::endl<char, std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&):
+     20, include "iostream"
+          39, include "ostream"
+     25, include "utils.cpp"
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&, char const*):
+         397, Loop not vectorized/parallelized: not countable
+_INTERNAL_8_main_cpp_60228110::error(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>):
+         616, Loop not vectorized/parallelized: not countable
+     25, include "utils.cpp"
+_INTERNAL_8_main_cpp_60228110::compare(float const*, float const*, int, float):
+     25, include "utils.cpp"
+          85, Generated vector simd code for the loop containing reductions
+calNumEigenValuesLessThan(float const*, float const*, unsigned int, float):
+     16, Loop not vectorized: unknown
+eigenValueCPUReference(float*, float*, unsigned int, float*, float*, float):
+          16, Loop not fused: complex flow graph
+              Loop not vectorized: unknown
+          16, Loop not fused: complex flow graph
+              Loop not vectorized: unknown
+     54, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+          16, Loop not vectorized: unknown
+isComplete(float*, int, float):
+    101, Loop not vectorized/parallelized: potential early exits
+computeGerschgorinInterval(float*, float*, float const*, float const*, unsigned int):
+    127, Loop not fused: complex flow graph
+         Loop not vectorized: unknown
+         Loop unrolled 2 times
 timeout was set to  600
