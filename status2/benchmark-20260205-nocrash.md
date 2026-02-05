@@ -97,7 +97,7 @@
 | entropy | 46.86 | build err | 49.60 |
 | epistasis | 53.82 | 259.15 | 110.41 |
 | expdist | 7.45 | build err | 12.43 |
-| extend2 | 5.26 | build err | 5.09 |
+| extend2 | 5.17 | 4.68 | 4.94 |
 | extrema | 6.75 | 6.99 | 7.10 |
 | face | 2.64 | 2.45 | exe err |
 | fdtd3d | 31.50 | build err | 43.29 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| エラーなし | 308 | 185 | 291 |
+| エラーなし | 308 | 186 | 291 |
 
-sycl と acc がともに実行できた件数 183
+sycl と acc がともに実行できた件数 184

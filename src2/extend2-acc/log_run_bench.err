@@ -1,11 +1,32 @@
-"main.cpp", line 74: error: invalid text in pragma
-    #pragma acc parallel map(to: query[0:qlen], \
-                         ^
-
-"main.cpp", line 74: error: extra text after expected end of preprocessing directive
-    #pragma acc parallel map(to: query[0:qlen], \
-                            ^
-
-2 errors detected in the compilation of "main.cpp".
-make: *** [Makefile.NVD:58: main.o] Error 2
+extend2(extend2_dat*):
+     80, Generating copyin(qp[:qlen*m],target[:tlen],query[:qlen],eh[:qlen+1]) [if not already present]
+         Generating copyout(d_tle) [if not already present]
+         Generating copyin(mat[:m*m]) [if not already present]
+         Generating copyout(d_max_off,d_score,d_gscore,d_qle,d_gtle) [if not already present]
+     82, Generating implicit firstprivate(qlen,o_ins,m,e_del,o_del,h0,end_bonus,e_ins,tlen)
+         Accelerator serial kernel generated
+         Generating implicit firstprivate(w)
+         Generating NVIDIA GPU code
+         92, #pragma acc for seq
+         94, #pragma acc for seq
+        107, #pragma acc for seq
+        136, #pragma acc for seq
+     92, Generating implicit private(p)
+     94, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    102, Loop not vectorized/parallelized: potential early exits
+    107, Generated vector simd code for the loop containing reductions
+    119, Generating implicit firstprivate(zdrop,q)
+    136, Loop not vectorized: data dependency
+    160, Accelerator restriction: induction variable live-out from loop: j
+    168, Accelerator restriction: induction variable live-out from loop: max_i
+    178, Accelerator restriction: induction variable live-out from loop: j
+         Loop not vectorized/parallelized: potential early exits
+    180, Accelerator restriction: induction variable live-out from loop: j
+         Loop not vectorized/parallelized: potential early exits
+main:
+    230, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     29, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
 timeout was set to  600

@@ -71,13 +71,15 @@ float extend2(struct extend2_dat *d)
 
   auto start = std::chrono::steady_clock::now();
 
-  #pragma acc parallel map(to: query[0:qlen], \
-                             target[0:tlen], \
-                             mat[0:m*m], \
-                             eh[0:qlen+1], \
-                             qp[0:qlen*m])\
-  map(from: d_qle, d_tle, d_gtle, d_gscore, d_score, d_max_off) 
+#pragma acc data copyin(query[0:qlen],	\
+			target[0:tlen],		\
+			mat[0:m*m],		\
+			eh[0:qlen+1],				\
+			qp[0:qlen*m])				\
+  copyout(d_qle, d_tle, d_gtle, d_gscore, d_score, d_max_off) 
   {
+    #pragma acc parallel
+    {
     int oe_del = o_del + e_del;
     int oe_ins = o_ins + e_ins; 
     int i, j, k;
@@ -185,6 +187,7 @@ float extend2(struct extend2_dat *d)
     d_gscore = gscore;
     d_max_off = max_off;
     d_score = max;
+    }
   }
 
   auto stop = std::chrono::steady_clock::now();
