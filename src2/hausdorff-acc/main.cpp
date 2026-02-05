@@ -18,18 +18,20 @@ void computeDistance(const float2* __restrict Apoints,
                            float*  __restrict distance,
                      const int numA, const int numB)
 {
-  #pragma acc parallel loop \
-   reduction(max:distance[0]) vector_length(256) 
+  float max_d = distance[0]; 
+
+#pragma acc parallel loop reduction(max:max_d) vector_length(256)
   for (int i = 0; i < numA; i++) {
     float d = FLT_MAX;
     float2 p = Apoints[i];
-    for (int j = 0; j < numB; j++)
-    {
+    for (int j = 0; j < numB; j++) {
       float t = hd(p, Bpoints[j]);
-      d = std::min(t, d);
+      if (t < d) d = t;
     }
-    distance[0] = std::max(distance[0], d);
+    if (d > max_d) max_d = d; 
   }
+  distance[0] = max_d; 
+
 }
 
 int main(int argc, char* argv[]) {
@@ -61,15 +63,15 @@ int main(int argc, char* argv[]) {
 
   float h_distance[2] = {-1.f, -1.f};
 
-#pragma acc parallel data map (to: h_Apoints[0:num_Apoints], \
-                                 h_Bpoints[0:num_Bpoints]) \
-                        map (from: h_distance[0:2]) 
+#pragma acc data copyin(h_Apoints[0:num_Apoints],	\
+			h_Bpoints[0:num_Bpoints])	\
+  copyout(h_distance[0:2]) 
   {
     double time = 0.0;
 
     for (int i = 0; i < repeat; i++) {
 
-      #pragma acc update to (h_distance[0:2])
+      #pragma acc update device (h_distance[0:2])
 
       auto start = std::chrono::steady_clock::now();
 
