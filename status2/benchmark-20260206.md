@@ -140,7 +140,7 @@
 | hmm | 8.56 | 14.71 | 2.81 |
 | hogbom | 0.50 | build err | 2.71 |
 | hotspot3D | 16.21 | 18.11 | 18.00 |
-| hwt1d | 3.48 | build err | 3.58 |
+| hwt1d | 3.13 | 3.27 | 3.23 |
 | hybridsort | 15.27 | build err | 12.96 |
 | hypterm | 5.86 | 13.14 | 13.12 |
 | idivide | 8.31 | 8.02 | 9.39 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 300 | 183 | 279 |
+| completed | 300 | 184 | 279 |
 
-sycl と acc がともに完了した件数 180
+sycl と acc がともに完了した件数 181
