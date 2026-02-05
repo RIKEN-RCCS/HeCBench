@@ -128,7 +128,7 @@
 | grep | 29.24 | build err | 1.72 |
 | grrt | 14.59 | build err | 12.78 |
 | haccmk | 4.33 | 2.57 | 4.42 |
-| hausdorff | 32.45 | build err | 31.66 |
+| hausdorff | 30.37 | 32.21 | 31.92 |
 | haversine | 2.18 | 2.49 | 2.43 |
 | heartwall | exe err | build err | build err |
 | heat2d | 61.50 | 25.22 | 5.92 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 300 | 181 | 279 |
+| completed | 300 | 182 | 279 |
 
-sycl と acc がともに完了した件数 178
+sycl と acc がともに完了した件数 179
