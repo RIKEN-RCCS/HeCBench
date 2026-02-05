@@ -178,7 +178,7 @@
 | loopback | 5.38 | build err | 8.20 |
 | lrn | 105.73 | 111.48 | 78.63 |
 | lr | 6.36 | build err | build err |
-| lsqt | 18.29 | | |
+| lsqt | 19.99 | 32.63 | 32.86 |
 | lud | 6.29 | build err | 46.11 |
 | lulesh | 11.28 | 11.70 | 8.41 |
 | mallocFree | 3.69 | 2.68 | 2.67 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 300 | 179 | 278 |
+| completed | 300 | 180 | 279 |
 
-sycl と acc がともに完了した件数 176
+sycl と acc がともに完了した件数 177

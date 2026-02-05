@@ -1,0 +1,16 @@
+nvc++ -acc -O3 -DDEBUG -Wall -Minfo -mp=gpu -gpu=cc90,fastmath -c main.cpp -o obj_gpu/main.o
+nvc++ -acc -O3 -DDEBUG -Wall -Minfo -mp=gpu -gpu=cc90,fastmath -c lsqt.cpp -o obj_gpu/lsqt.o
+nvc++ -acc -O3 -DDEBUG -Wall -Minfo -mp=gpu -gpu=cc90,fastmath -c sigma.cpp -o obj_gpu/sigma.o
+nvc++ -acc -O3 -DDEBUG -Wall -Minfo -mp=gpu -gpu=cc90,fastmath -c vector.cpp -o obj_gpu/vector.o
+nvc++ -acc -O3 -DDEBUG -Wall -Minfo -mp=gpu -gpu=cc90,fastmath -c hamiltonian.cpp -o obj_gpu/hamiltonian.o
+nvc++ -acc -O3 -DDEBUG -Wall -Minfo -mp=gpu -gpu=cc90,fastmath -c model.cpp -o obj_gpu/model.o
+nvc++ -acc -O3 -DDEBUG -Wall -Minfo -mp=gpu -gpu=cc90,fastmath -c model_general.cpp -o obj_gpu/model_general.o
+nvc++ -acc -O3 -DDEBUG -Wall -Minfo -mp=gpu -gpu=cc90,fastmath -c model_lattice.cpp -o obj_gpu/model_lattice.o
+nvc++ -acc -O3 -DDEBUG -Wall -Minfo -mp=gpu -gpu=cc90,fastmath -c anderson.cpp -o obj_gpu/anderson.o
+nvc++ -acc -O3 -DDEBUG -Wall -Minfo -mp=gpu -gpu=cc90,fastmath -c charge.cpp -o obj_gpu/charge.o
+nvc++ -acc -O3 -DDEBUG -Wall -Minfo -mp=gpu -gpu=cc90,fastmath obj_gpu/main.o obj_gpu/lsqt.o obj_gpu/sigma.o obj_gpu/vector.o obj_gpu/hamiltonian.o obj_gpu/model.o obj_gpu/model_general.o obj_gpu/model_lattice.o obj_gpu/anderson.o obj_gpu/charge.o -o lsqt_gpu
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "../lsqt-hip/prepare_data.sh; time -p ( ./lsqt_gpu ../lsqt-hip/examples/input.txt 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 1 2040 2039
