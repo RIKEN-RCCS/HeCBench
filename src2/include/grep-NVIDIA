@@ -1,1 +1,1 @@
-COMMAND = time -p ( ./runtests.sh 1>log.std 2>log.err ) 2> log.time
+COMMAND = ../grep-cuda/prepare_data.sh; time -p ( ./runtests.sh 1>log.std 2>log.err ) 2> log.time
