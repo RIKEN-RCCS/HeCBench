@@ -71,70 +71,104 @@ bpnn_read(char*):
          119, Recognized memory zero idiom
 load(BPNN*):
      19, Loop not vectorized/parallelized: contains call
-"main.cpp", line 72: error: invalid text in pragma
-    #pragma acc data to: input[0:in+1], \
-                     ^
+"main.cpp", line 42: warning: variable "sum" was declared but never referenced [declared_but_not_referenced]
+    float sum;
+          ^
 
-"main.cpp", line 72: error: extra text after expected end of preprocessing directive
-    #pragma acc data to: input[0:in+1], \
-                       ^
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
 
-"main.cpp", line 78: error: invalid text in pragma
-      #pragma acc parallel teams num_teams(num_blocks) thread_limit(BLOCK_SIZE*BLOCK_SIZE)
-                           ^
-
-"main.cpp", line 78: error: extra text after expected end of preprocessing directive
-      #pragma acc parallel teams num_teams(num_blocks) thread_limit(BLOCK_SIZE*BLOCK_SIZE)
-                                 ^
-
-"main.cpp", line 84: error: identifier "omp_get_team_num" is undefined
-          int by = omp_get_team_num();
-                   ^
-
-"main.cpp", line 85: error: identifier "omp_get_thread_num" is undefined
-          int tx = omp_get_thread_num() % BLOCK_SIZE;
-                   ^
-
-"main.cpp", line 122: error: invalid text in pragma
-      #pragma acc update from(partial_sum[0:num_blocks*WIDTH])
-                         ^
-
-"main.cpp", line 122: error: OpenACC data clause expected
-      #pragma acc update from(partial_sum[0:num_blocks*WIDTH])
-                         ^
-
-"main.cpp", line 122: error: extra text after expected end of preprocessing directive
-      #pragma acc update from(partial_sum[0:num_blocks*WIDTH])
-                             ^
-
-"main.cpp", line 141: error: invalid text in pragma
-      #pragma acc update to(input_weights[0:(in+1)*(hid+1)])
-                         ^
-
-"main.cpp", line 141: error: OpenACC data clause expected
-      #pragma acc update to(input_weights[0:(in+1)*(hid+1)])
-                         ^
-
-"main.cpp", line 141: error: extra text after expected end of preprocessing directive
-      #pragma acc update to(input_weights[0:(in+1)*(hid+1)])
-                           ^
-
-"main.cpp", line 143: error: invalid text in pragma
-      #pragma acc parallel teams num_teams(num_blocks) thread_limit(BLOCK_SIZE*BLOCK_SIZE)
-                           ^
-
-"main.cpp", line 143: error: extra text after expected end of preprocessing directive
-      #pragma acc parallel teams num_teams(num_blocks) thread_limit(BLOCK_SIZE*BLOCK_SIZE)
-                                 ^
-
-"main.cpp", line 147: error: identifier "omp_get_team_num" is undefined
-          int by = omp_get_team_num();
-                   ^
-
-"main.cpp", line 148: error: identifier "omp_get_thread_num" is undefined
-          int tx = omp_get_thread_num() % BLOCK_SIZE;
-                   ^
-
-16 errors detected in the compilation of "main.cpp".
-make: *** [Makefile.NVD:63: main.o] Error 2
+kernel_layerforward_ref(float const*, float*, float*, int, int):
+      9, include "reference.h"
+          11, Loop not fused: dependence chain to sibling loop
+          12, Loop not vectorized: unknown
+          21, Generated vector simd code for the loop
+          24, Loop not vectorized/parallelized: not countable
+          26, Loop not vectorized: data dependency
+          27, Invariant if transformation
+              Loop unrolled 16 times (completely unrolled)
+          33, Loop not fused: enclosed in different number of nests
+          34, Generated vector simd code for the loop
+          39, Generated vector simd code for the loop
+kernel_adjust_weights_ref(float const*, float*, float const*, float*, int, int):
+      9, include "reference.h"
+          53, Loop not fused: enclosed in different number of nests
+          54, Generated vector simd code for the loop
+          62, Generated vector simd code for the loop
+reference(int, int, int, BPNN*, float*, float const*, float*):
+      9, include "reference.h"
+          99, Loop not fused: function call before adjacent loop
+         101, Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+          11, Loop not fused: dependence chain to sibling loop
+          12, Loop not vectorized: unknown
+          21, Generated vector simd code for the loop
+          24, Loop not vectorized/parallelized: not countable
+          26, Loop not vectorized: data dependency
+          27, Invariant if transformation
+              Loop unrolled 16 times (completely unrolled)
+          33, Loop not fused: enclosed in different number of nests
+          34, Generated vector simd code for the loop
+          39, Generated vector simd code for the loop
+          52, Loop not fused: function call before adjacent loop
+          53, Loop not fused: enclosed in different number of nests
+          54, Generated vector simd code for the loop
+          62, Generated vector simd code for the loop
+bpnn_train_kernel(BPNN*, float*, float*):
+     54, Loop not fused: function call before adjacent loop
+     55, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 8 times
+     82, Generating copyin(hidden_delta[:hid+1],input[:in+1],input_prev_weights[:(hid+1)*(in+1)]) [if not already present]
+         Generating create(partial_sum[:num_blocks*16]) [if not already present]
+         Generating copy(input_weights[:(hid+1)*(in+1)]) [if not already present]
+         Generating implicit firstprivate(num_blocks)
+         Generating NVIDIA GPU code
+         85, #pragma acc loop gang(num_blocks) /* blockIdx.x */
+         91, #pragma acc loop vector(256) /* threadIdx.x */
+        105, #pragma acc loop vector(256) /* threadIdx.x */
+        111, #pragma acc loop seq
+        114, #pragma acc loop vector(256) /* threadIdx.x */
+        128, #pragma acc loop vector(256) /* threadIdx.x */
+     82, CUDA shared memory used for weight_matrix,input_node
+     91, Loop is parallelizable
+         Generating implicit firstprivate(hid)
+         Loop not fused: dependence chain to sibling loop
+         Loop not vectorized: data dependency
+    105, Loop is parallelizable
+         Loop not vectorized: data dependency
+    111, Loop carried scalar dependence for i at line 112,125
+         Loop carried reuse of weight_matrix prevents parallelization
+         Loop not vectorized/parallelized: not countable
+    114, Loop is parallelizable
+         Loop not vectorized: data dependency
+    128, Loop is parallelizable
+         Loop not vectorized: data dependency
+    139, Generating update self(partial_sum[:num_blocks*16])
+    142, Loop not fused: function call before adjacent loop
+    144, Loop not vectorized: unprofitable for target
+         Loop unrolled 4 times
+    159, Generating update device(input_weights[:(hid+1)*(in+1)])
+         Generating implicit firstprivate(num_blocks)
+         Generating NVIDIA GPU code
+        164, #pragma acc loop gang(num_blocks) /* blockIdx.x */
+        166, #pragma acc loop vector(256) /* threadIdx.x */
+    164, Loop not fused: no successor loop
+    166, Loop is parallelizable
+         Generating implicit firstprivate(hid)
+         Loop not vectorized: data dependency
+          96, Invariant if transformation
+              Loop unrolled 16 times (completely unrolled)
+              Loop not fused: dependence chain to sibling loop
+              Loop not fused: enclosed in different number of nests
+              Loop not vectorized/parallelized: not countable
+              Loop not vectorized: data dependency
+              Loop not vectorized: unknown
+              Generated vector simd code for the loop
+          99, Loop not fused: function call before adjacent loop
+         101, Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+         119, Loop not fused: function call before adjacent loop
+              Loop not fused: enclosed in different number of nests
+              Generated vector simd code for the loop
+    196, Loop not vectorized/parallelized: potential early exits
 timeout was set to  600

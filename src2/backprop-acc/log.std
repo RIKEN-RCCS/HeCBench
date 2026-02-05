@@ -2,7 +2,7 @@ Random number generator seed: 7
 Input layer size : 65536
 Starting training kernel
 Performing device offload
-Device offloading time = 2.370696(s)
+Device offloading time = 2.363628(s)
 Performing host execution 
 PASS
 

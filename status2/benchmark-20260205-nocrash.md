@@ -29,7 +29,7 @@
 | axhelm | 2.41 | build err | 2.47 |
 | babelstream | 0.56 | 2.72 | 2.85 |
 | background-subtract | 8.07 | 8.66 | 8.33 |
-| backprop | 2.47 | build err | 2.48 |
+| backprop | 2.45 | 2.44 | 2.47 |
 | bezier-surface | 12.93 | 14.25 | 10.71 |
 | bfs | 1.03 | 2.48 | 2.46 |
 | bilateral | 15.09 | 205.59 | 7.85 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| エラーなし | 308 | 187 | 291 |
+| エラーなし | 308 | 188 | 291 |
 
-sycl と acc がともに実行できた件数 185
+sycl と acc がともに実行できた件数 186
