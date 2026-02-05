@@ -2,3 +2,6 @@ nvc++  -Wall -I../attention-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o mai
 nvc++  -Wall -I../attention-cuda -O3 -Minfo -mp=gpu -gpu=cc90 main.o -o main 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "time -p ( ./main 8192 8192 2 100 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 0 1070 1070
