@@ -71,9 +71,9 @@ int main(int argc, char * argv[])
             << iterations << " iterations" << std::endl;
   std::cout << "-------------------------------------------" << std::endl;
 
-#pragma acc data alloc: inData[0:signalLength], \
-                                   dOutData[0:signalLength], \
-                                   dPartialOutData[0:signalLength])
+#pragma acc data create(inData[0:signalLength],	     \
+			dOutData[0:signalLength],			\
+			dPartialOutData[0:signalLength])
 {
   auto start = std::chrono::steady_clock::now();
 
@@ -117,79 +117,68 @@ int main(int argc, char * argv[])
 
       unsigned int totalLevels = levels;
 
-      #pragma acc update to(inData[0:signalLength])
+      #pragma acc update device(inData[0:signalLength])
 
       const int teams = (curSignalLength >> 1) / groupSize;
 
-      #pragma acc parallel teams num_teams(teams) thread_limit(groupSize)
-      {
-        float lmem [512];
-        #pragma omp parallel 
-        {
-          size_t localId = omp_get_thread_num();
-          size_t groupId = omp_get_team_num();
-          size_t localSize = omp_get_vector();
-          
-          /**
-           * Read input signal data from global memory
-           * to shared memory
-           */
-          float t0 = inData[groupId * localSize * 2 + localId];
-          float t1 = inData[groupId * localSize * 2 + localSize + localId];
-          // Divide with signal length for normalized decomposition
-          if(0 == levelsDone)
-          {
-             float r = 1.f / sqrtf((float)curSignalLength);
-             t0 *= r;
-             t1 *= r;
-          }
-          lmem[localId] = t0;
-          lmem[localSize + localId] = t1;
-           
-          #pragma omp barrier
-          
-          unsigned int levels = totalLevels > maxLevelsOnDevice ? maxLevelsOnDevice: totalLevels;
-          unsigned int activeThreads = (1 << levels) / 2;
-          unsigned int midOutPos = curSignalLength / 2;
-          
-          const float rsqrt_two = 0.7071f;
-          for(unsigned int i = 0; i < levels; ++i)
-          {
+#pragma acc parallel loop gang num_gangs(teams) vector_length(groupSize)
+      for (int groupId = 0; groupId < teams; groupId++) {
+  
+	float lmem[512];
 
-              float data0, data1;
-              if(localId < activeThreads)
-              {
-                  data0 = lmem[2 * localId];
-                  data1 = lmem[2 * localId + 1];
-              }
+#pragma acc loop vector
+	for (int localId = 0; localId < groupSize; localId++) {
+	  float t0 = inData[groupId * groupSize * 2 + localId];
+	  float t1 = inData[groupId * groupSize * 2 + groupSize + localId];
 
-              /* make sure all work items have read from lmem before modifying it */
-              #pragma omp barrier
+	  if (0 == levelsDone) {
+	    float r = 1.f / sqrtf((float)curSignalLength);
+	    t0 *= r;
+	    t1 *= r;
+	  }
+	  lmem[localId] = t0;
+	  lmem[groupSize + localId] = t1;
+	} 
 
-              if(localId < activeThreads)
-              {
-                  lmem[localId] = (data0 + data1) * rsqrt_two;
-                  unsigned int globalPos = midOutPos + groupId * activeThreads + localId;
-                  dOutData[globalPos] = (data0 - data1) * rsqrt_two;
-             
-                  midOutPos >>= 1;
-              }
-              activeThreads >>= 1;
-              #pragma omp barrier
-          }
-      
-          /**
-           * Write 0th element for the next decomposition
-           * steps which are performed on host 
-           */
-          
-           if(0 == localId)
-              dPartialOutData[groupId] = lmem[0];
-        }
+	unsigned int levels = totalLevels > maxLevelsOnDevice ? maxLevelsOnDevice : totalLevels;
+	unsigned int activeThreads = (1 << levels) / 2;
+	unsigned int midOutPos = curSignalLength / 2;
+	const float rsqrt_two = 0.7071f;
+
+	for (unsigned int i = 0; i < levels; ++i) {
+	  float data0 = 0.f, data1 = 0.f;
+
+#pragma acc loop vector
+	  for (int localId = 0; localId < groupSize; localId++) {
+	    if (localId < activeThreads) {
+	      data0 = lmem[2 * localId];
+	      data1 = lmem[2 * localId + 1];
+	    }
+	  } 
+
+#pragma acc loop vector
+	  for (int localId = 0; localId < groupSize; localId++) {
+	    if (localId < activeThreads) {
+	      lmem[localId] = (data0 + data1) * rsqrt_two;
+	      unsigned int globalPos = midOutPos + groupId * activeThreads + localId;
+	      dOutData[globalPos] = (data0 - data1) * rsqrt_two;
+	    }
+	  } 
+
+	  midOutPos >>= 1;
+	  activeThreads >>= 1;
+	}
+
+#pragma acc loop vector
+	for (int localId = 0; localId < groupSize; localId++) {
+	  if (0 == localId) {
+	    dPartialOutData[groupId] = lmem[0];
+	  }
+	}
       }
 
-      #pragma acc update from(dOutData[0:signalLength])
-      #pragma acc update from(dPartialOutData[0:signalLength])
+      #pragma acc update host(dOutData[0:signalLength])
+      #pragma acc update host(dPartialOutData[0:signalLength])
 
       if(levels <= maxLevelsOnDevice)
       {

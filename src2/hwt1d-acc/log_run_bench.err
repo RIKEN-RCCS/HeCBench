@@ -1,73 +1,80 @@
-"main.cpp", line 74: error: invalid text in pragma
-  #pragma acc data alloc: inData[0:signalLength], \
-                   ^
-
-"main.cpp", line 74: error: extra text after expected end of preprocessing directive
-  #pragma acc data alloc: inData[0:signalLength], \
-                        ^
-
-"main.cpp", line 120: error: invalid text in pragma
-        #pragma acc update to(inData[0:signalLength])
-                           ^
-
-"main.cpp", line 120: error: OpenACC data clause expected
-        #pragma acc update to(inData[0:signalLength])
-                           ^
-
-"main.cpp", line 120: error: extra text after expected end of preprocessing directive
-        #pragma acc update to(inData[0:signalLength])
-                             ^
-
-"main.cpp", line 124: error: invalid text in pragma
-        #pragma acc parallel teams num_teams(teams) thread_limit(groupSize)
-                             ^
-
-"main.cpp", line 124: error: extra text after expected end of preprocessing directive
-        #pragma acc parallel teams num_teams(teams) thread_limit(groupSize)
-                                   ^
-
-"main.cpp", line 129: error: identifier "omp_get_thread_num" is undefined
-            size_t localId = omp_get_thread_num();
-                             ^
-
-"main.cpp", line 130: error: identifier "omp_get_team_num" is undefined
-            size_t groupId = omp_get_team_num();
-                             ^
-
-"main.cpp", line 131: error: identifier "omp_get_vector" is undefined
-            size_t localSize = omp_get_vector();
-                               ^
-
-"main.cpp", line 191: error: invalid text in pragma
-        #pragma acc update from(dOutData[0:signalLength])
-                           ^
-
-"main.cpp", line 191: error: OpenACC data clause expected
-        #pragma acc update from(dOutData[0:signalLength])
-                           ^
-
-"main.cpp", line 191: error: extra text after expected end of preprocessing directive
-        #pragma acc update from(dOutData[0:signalLength])
-                               ^
-
-"main.cpp", line 192: error: invalid text in pragma
-        #pragma acc update from(dPartialOutData[0:signalLength])
-                           ^
-
-"main.cpp", line 192: error: OpenACC data clause expected
-        #pragma acc update from(dPartialOutData[0:signalLength])
-                           ^
-
-"main.cpp", line 192: error: extra text after expected end of preprocessing directive
-        #pragma acc update from(dPartialOutData[0:signalLength])
-                               ^
-
-"main.cpp", line 122: warning: variable "teams" was declared but never referenced [declared_but_not_referenced]
-        const int teams = (curSignalLength >> 1) / groupSize;
-                  ^
-
-Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
-
-16 errors detected in the compilation of "main.cpp".
-make: *** [Makefile.NVD:57: main.o] Error 2
+main:
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+          25, Loop not fused: function call before adjacent loop
+              Loop not vectorized: recurrence
+              Loop unrolled 4 times (completely unrolled)
+         616, Loop not vectorized/parallelized: not countable
+     53, Loop not vectorized/parallelized: contains call
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+     77, Generating create(inData[:signalLength],dPartialOutData[:signalLength],dOutData[:signalLength]) [if not already present]
+     80, Loop not vectorized/parallelized: too deeply nested
+    101, Loop not vectorized/parallelized: too deeply nested
+    122, Generating update device(inData[:signalLength])
+         Generating NVIDIA GPU code
+        125, #pragma acc loop gang(teams) /* blockIdx.x */
+        130, #pragma acc loop vector(groupSize) /* threadIdx.x */
+        148, #pragma acc loop seq
+        152, #pragma acc loop vector(groupSize) /* threadIdx.x */
+        160, #pragma acc loop vector(groupSize) /* threadIdx.x */
+        173, #pragma acc loop vector(groupSize) /* threadIdx.x */
+    130, Loop is parallelizable
+         Invariant if transformation
+         Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 8 times
+         Loop unrolled 4 times
+    148, Loop carried scalar dependence for midOutPos at line 163,168,122
+         Loop carried scalar dependence for activeThreads at line 161,163,153,169,122
+         Complex loop carried dependence of lmem prevents parallelization
+         Loop carried dependence of lmem prevents parallelization
+         Loop carried backward dependence of lmem prevents vectorization
+         Complex loop carried dependence of dOutData-> prevents parallelization
+         Loop carried dependence of dOutData-> prevents parallelization
+         Loop carried backward dependence of dOutData-> prevents vectorization
+    152, Scalar last value needed after loop for data0 at line 162
+         Loop not vectorized: unknown
+    160, Loop is parallelizable
+         Loop not vectorized/parallelized: not countable
+    173, Loop is parallelizable
+         Loop not vectorized/parallelized: not countable
+    183, Generating update self(dPartialOutData[:signalLength],dOutData[:signalLength])
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    213, Loop not vectorized/parallelized: potential early exits
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+unsigned int roundToPowerOf2<unsigned int>(unsigned int):
+     25, Loop not vectorized: recurrence
+         Loop unrolled 4 times (completely unrolled)
+std::char_traits<char>::length(char const*):
+         171, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     17, include "hwt.h"
+          30, include "chrono"
+              472, Loop not vectorized/parallelized: not countable
+__gnu_cxx::char_traits<char>::length(char const*):
+     17, include "hwt.h"
+          29, include "iostream"
+               39, include "ostream"
+                    38, include "ios"
+                         40, include "char_traits.h"
+                             171, Loop not vectorized/parallelized: not countable
+std::basic_ostream<char, std::char_traits<char>>& std::endl<char, std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&):
+     17, include "hwt.h"
+          29, include "iostream"
+               39, include "ostream"
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&, char const*):
+         397, Loop not vectorized/parallelized: not countable
+calApproxFinalOnHost(float*, float*, unsigned int):
+     10, Generated vector simd code for the loop
+     16, Loop not vectorized/parallelized: contains call
+     18, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+getLevels(unsigned int, unsigned int*):
+     37, Loop not vectorized/parallelized: potential early exits
 timeout was set to  600
