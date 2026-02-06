@@ -1,37 +1,276 @@
-"main.cpp", line 127: error: invalid text in pragma
-      #pragma acc parallel teams num_teams(numTeams) thread_limit(blockSize)
-                           ^
-
-"main.cpp", line 127: error: extra text after expected end of preprocessing directive
-      #pragma acc parallel teams num_teams(numTeams) thread_limit(blockSize)
-                                 ^
-
-"main.cpp", line 132: error: identifier "omp_get_thread_num" is undefined
-          int lid = omp_get_thread_num();
-                    ^
-
-"main.cpp", line 133: error: identifier "omp_get_team_num" is undefined
-          int gidx = omp_get_team_num() % uiBlockWidth;
-                     ^
-
-"main.cpp", line 120: warning: variable "numTeams" was declared but never referenced [declared_but_not_referenced]
-    const int numTeams = uiHeight * uiBlockWidth;
-              ^
+rgbaUintToFloat4(unsigned int):
+     50, Generating acc routine seq
+         Generating NVIDIA GPU code
+rgbaUintToUchar4(unsigned int):
+     61, Generating acc routine seq
+         Generating NVIDIA GPU code
+rgbaFloat4ToUint(float4, float):
+     73, Generating acc routine seq
+         Generating NVIDIA GPU code
+operator*(float4, float4):
+     84, Generating acc routine seq
+         Generating NVIDIA GPU code
+operator+=(float4&, float4):
+     90, Generating acc routine seq
+         Generating NVIDIA GPU code
+operator-=(float4&, float4):
+     99, Generating acc routine seq
+         Generating NVIDIA GPU code
+BoxFilterGPU(unsigned int*, unsigned int*, unsigned int*, int, int, int, float, float):
+    129, Loop not vectorized/parallelized: too deeply nested
+    132, Generating implicit firstprivate(blockSize,numTeams)
+         Generating NVIDIA GPU code
+        135, #pragma acc loop gang(numTeams) /* blockIdx.x */
+        140, #pragma acc loop vector(blockSize) /* threadIdx.x */
+        153, #pragma acc loop vector(blockSize) /* threadIdx.x */
+        166, #pragma acc loop seq
+    132, CUDA shared memory used for uc4LocalData
+         Local memory used for f4Sum,.inl_rgba_140,.inl_.X10143_143,.inl__T2_10143_142,_T6_10148
+         Generating implicit copy(uiTmp[:]) [if not already present]
+         Generating implicit copyin(uiInput[:]) [if not already present]
+    135, Generating implicit firstprivate(uiBlockWidth)
+         Loop not fused: no successor loop
+    140, Loop is parallelizable
+         Generating implicit firstprivate(iRadiusAligned,uiNumOutputPix,uiWidth)
+         Loop not fused: enclosed in different number of nests
+         Loop not vectorized: data dependency
+    153, Loop is parallelizable
+         Generating implicit firstprivate(fScale,iRadius)
+    166, Scalar last value needed after loop for f4Sum.x at line 74
+         Scalar last value needed after loop for f4Sum.y at line 75
+         Scalar last value needed after loop for f4Sum.z at line 76
+         Scalar last value needed after loop for f4Sum.w at line 77
+         Generated vector simd code for the loop containing reductions
+    180, Generating implicit firstprivate(iRadius,uiHeight,uiWidth)
+         Generating NVIDIA GPU code
+        184, #pragma acc loop gang, vector(64) /* blockIdx.x threadIdx.x */
+        194, #pragma acc loop seq
+        199, #pragma acc loop seq
+        206, #pragma acc loop seq
+        213, #pragma acc loop seq
+    180, Local memory used for bot_color,.inl_.X10142_199,.inl__T1_10142_198,.inl_rgba_196,.inl_.X10142_150,.inl__T1_10142_149,.inl_rgba_147,top_color,f4iRadius,.inl_.X10145_158,.inl__T3_10145_155,f4Sum,.inl_.X10142_154,.inl__T1_10142_153,.inl_rgba_151,.inl_.X10142_162,.inl__T1_10142_161,.inl_rgba_159,.inl_.X10142_182,.inl__T1_10142_181,.inl_rgba_179,.inl_.X10142_171,.inl__T1_10142_170,.inl_rgba_168,.inl_.X10142_188,.inl__T1_10142_187,.inl_rgba_185
+         Generating implicit copyin(uiTmp,uiDevOutput) [if not already present]
+    184, Generating implicit private(uiOutputImage,uiInputImage,fScale)
+         Loop not fused: no successor loop
+    194, Scalar last value needed after loop for f4Sum.x at line 74
+         Scalar last value needed after loop for f4Sum.y at line 75
+         Scalar last value needed after loop for f4Sum.z at line 76
+         Scalar last value needed after loop for f4Sum.w at line 77
+         Loop not fused: different loop trip count
+         Loop not vectorized: unsupported gather
+    199, Complex loop carried dependence of uiInputImage-> prevents parallelization
+         Loop carried scalar dependence for f4Sum.x at line 57
+         Loop carried scalar dependence for f4Sum.y at line 91
+         Loop carried scalar dependence for f4Sum.z at line 92
+         Loop carried scalar dependence for f4Sum.w at line 93
+         Loop carried dependence of uiOutputImage-> prevents parallelization
+         Loop carried backward dependence of uiOutputImage-> prevents vectorization
+         Complex loop carried dependence of uiOutputImage-> prevents parallelization
+         Loop not fused: different loop trip count
+    206, Complex loop carried dependence of uiInputImage-> prevents parallelization
+         Loop carried scalar dependence for f4Sum.x at line 57
+         Loop carried scalar dependence for f4Sum.y at line 91
+         Loop carried scalar dependence for f4Sum.z at line 92
+         Loop carried scalar dependence for f4Sum.w at line 93
+         Loop carried dependence of uiOutputImage-> prevents parallelization
+         Loop carried backward dependence of uiOutputImage-> prevents vectorization
+         Complex loop carried dependence of uiOutputImage-> prevents parallelization
+         Loop not fused: different loop trip count
+    213, Complex loop carried dependence of uiInputImage-> prevents parallelization
+         Loop carried scalar dependence for f4Sum.x at line 215
+         Loop carried scalar dependence for f4Sum.y at line 91
+         Loop carried scalar dependence for f4Sum.z at line 92
+         Loop carried scalar dependence for f4Sum.w at line 93
+         Loop carried dependence of uiOutputImage-> prevents parallelization
+         Loop carried backward dependence of uiOutputImage-> prevents vectorization
+         Complex loop carried dependence of uiOutputImage-> prevents parallelization
+main:
+    266, Generating copy(uiDevOutput[:szBuff]) [if not already present]
+         Generating copyin(uiTmp[:szBuff],uiInput[:szBuff]) [if not already present]
+    286, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     12, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+"../boxfilter-sycl/shrUtils.cpp", line 176: warning: variable "szNumWritten" was set but never used [set_but_not_used]
+  	size_t szNumWritten = 0;
+  	       ^
 
 Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
 
-"main.cpp", line 121: warning: variable "blockSize" was declared but never referenced [declared_but_not_referenced]
-    const int blockSize = iRadiusAligned + uiNumOutputPix + iRadius;
-              ^
-
-"main.cpp", line 254: error: invalid text in pragma
-    #pragma acc data to: uiInput[0:szBuff]) \
-                     ^
-
-"main.cpp", line 254: error: extra text after expected end of preprocessing directive
-    #pragma acc data to: uiInput[0:szBuff]) \
-                       ^
-
-6 errors detected in the compilation of "main.cpp".
-make: *** [Makefile.NVD:60: main.o] Error 2
+shrFillArray:
+     45, Loop not vectorized/parallelized: contains call
+shrPrintArray:
+     56, Loop not vectorized/parallelized: contains call
+shrFindFilePath:
+    650, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrReadFile<float>(char const*, float**, unsigned int*, bool):
+    723, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrReadFile<double>(char const*, double**, unsigned int*, bool):
+    723, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrReadFile<int>(char const*, int**, unsigned int*, bool):
+    723, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrReadFile<unsigned int>(char const*, unsigned int**, unsigned int*, bool):
+    723, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrReadFile<char>(char const*, char**, unsigned int*, bool):
+    723, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrReadFile<unsigned char>(char const*, unsigned char**, unsigned int*, bool):
+    723, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrWriteFile<float>(char const*, float const*, unsigned int, float, bool):
+    799, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrWriteFile<double>(char const*, double const*, unsigned int, double, bool):
+    799, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrWriteFile<int>(char const*, int const*, unsigned int, int, bool):
+    799, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrWriteFile<unsigned int>(char const*, unsigned int const*, unsigned int, unsigned int, bool):
+    799, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrWriteFile<char>(char const*, char const*, unsigned int, char, bool):
+    799, Loop not vectorized/parallelized: potential early exits
+shrBOOL shrWriteFile<unsigned char>(char const*, unsigned char const*, unsigned int, unsigned char, bool):
+    799, Loop not vectorized/parallelized: potential early exits
+loadPPM(char const*, unsigned char**, unsigned int*, unsigned int*, unsigned int*):
+   1057, Loop not vectorized/parallelized: potential early exits
+savePPM(char const*, unsigned char*, unsigned int, unsigned int, unsigned int):
+   1165, Loop not vectorized/parallelized: potential early exits
+shrLoadPPM4ub:
+   1219, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+shrSavePPM4ub:
+   1254, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+shrComparef:
+        1312, Loop not vectorized: unknown
+shrBOOL compareData<float, float>(float const*, float const*, unsigned long, float, float):
+   1312, Loop not fused: complex flow graph
+         Loop not vectorized: unknown
+shrComparei:
+        1312, Loop not vectorized: unknown
+shrBOOL compareData<int, int>(int const*, int const*, unsigned long, int, float):
+   1312, Loop not fused: complex flow graph
+         Loop not vectorized: unknown
+shrCompareuit:
+        1400, Loop not fused: complex flow graph
+shrBOOL compareDataAsFloatThreshold<unsigned int, float>(unsigned int const*, unsigned int const*, unsigned long, float, float):
+   1400, Loop not fused: complex flow graph
+shrCompareub:
+        1312, Loop not vectorized: unknown
+shrBOOL compareData<unsigned char, int>(unsigned char const*, unsigned char const*, unsigned long, int, float):
+   1312, Loop not fused: complex flow graph
+         Loop not vectorized: unknown
+shrCompareubt:
+        1400, Loop not fused: complex flow graph
+shrBOOL compareDataAsFloatThreshold<unsigned char, float>(unsigned char const*, unsigned char const*, unsigned long, float, float):
+   1400, Loop not fused: complex flow graph
+shrComparefe:
+        1312, Loop not vectorized: unknown
+shrComparefet:
+        1400, Loop not fused: complex flow graph
+shrBOOL compareDataAsFloatThreshold<float, float>(float const*, float const*, unsigned long, float, float):
+   1400, Loop not fused: complex flow graph
+shrCompareL2fe:
+   1558, Generated vector simd code for the loop containing reductions
+shrComparePPM:
+        1219, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+        1219, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+        1496, Loop not fused: complex flow graph
+shrComparePGM:
+        1219, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+        1219, Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+        1496, Loop not fused: complex flow graph
+_INTERNAL_30____boxfilter_sycl_shrUtils_cpp_shrFree::shrLogV(int, int, char const*, __va_list_tag):
+    345, Loop not vectorized/parallelized: potential early exits
+CmdArgReader::~CmdArgReader():
+          76, Loop not vectorized/parallelized: potential early exits
+CmdArgReader::createArgsMaps(int, char const**):
+    123, Loop not vectorized/parallelized: potential early exits
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>>::_M_erase(std::_Rb_tree_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>*):
+     13, include "cmd_arg_reader.h"
+          18, include "map"
+               60, include "stl_tree.h"
+                  1887, Loop not vectorized/parallelized: potential early exits
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::pair<std::type_info const*, void*>>>>::~_Rb_tree():
+     13, include "cmd_arg_reader.h"
+          18, include "map"
+               60, include "stl_tree.h"
+                       1887, Loop not vectorized/parallelized: potential early exits
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::_S_key(std::_Rb_tree_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>> const*):
+     13, include "cmd_arg_reader.h"
+          18, include "map"
+               60, include "stl_tree.h"
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::_M_get_insert_unique_pos(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     13, include "cmd_arg_reader.h"
+          18, include "map"
+               60, include "stl_tree.h"
+                  2068, Loop not vectorized/parallelized: contains call
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::_M_get_insert_hint_unique_pos(std::_Rb_tree_const_iterator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+        2068, Loop not vectorized/parallelized: contains call
+        2068, Loop not vectorized/parallelized: contains call
+        2068, Loop not vectorized/parallelized: contains call
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::_M_erase(std::_Rb_tree_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>*):
+     13, include "cmd_arg_reader.h"
+          18, include "map"
+               60, include "stl_tree.h"
+                  1887, Loop not vectorized/parallelized: potential early exits
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::_M_lower_bound(std::_Rb_tree_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>*, std::_Rb_tree_node_base*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     13, include "cmd_arg_reader.h"
+          18, include "map"
+               60, include "stl_tree.h"
+                  1904, Loop not vectorized/parallelized: contains call
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::~_Rb_tree():
+        1887, Loop not vectorized/parallelized: potential early exits
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::lower_bound(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+        1904, Loop not vectorized/parallelized: contains call
+std::_Rb_tree_iterator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>> std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::_M_emplace_hint_unique<std::piecewise_construct_t const&, std::tuple<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>&&>, std::tuple<>>(std::_Rb_tree_const_iterator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::piecewise_construct_t const&, std::tuple<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>&&>&&, std::tuple<>&&):
+     13, include "cmd_arg_reader.h"
+          18, include "map"
+               60, include "stl_tree.h"
+std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::operator[](std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>&&):
+     13, include "cmd_arg_reader.h"
+          18, include "map"
+        1259, Loop not vectorized/parallelized: contains call
+std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::lower_bound(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+        1270, Loop not vectorized/parallelized: contains call
+std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>&&>(std::piecewise_construct_t, std::tuple<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>&&>, std::tuple<>):
+     13, include "cmd_arg_reader.h"
+          18, include "map"
+std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>&&, 0ul>(std::tuple<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>&&>&, std::tuple<>&, std::_Index_tuple<0ul>, std::_Index_tuple<>):
+     13, include "cmd_arg_reader.h"
+          18, include "map"
+void std::_Destroy_aux<false>::__destroy<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*):
+     12, include "vector"
+          65, include "stl_construct.h"
+              162, Loop not vectorized/parallelized: contains call
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::replace(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, char*, char*):
+     13, include "cmd_arg_reader.h"
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::compare(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&) const:
+     13, include "cmd_arg_reader.h"
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>& std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::assign<char*, void>(char*, char*):
+     13, include "cmd_arg_reader.h"
+std::__cxx11::basic_stringbuf<char, std::char_traits<char>, std::allocator<char>>::str() const:
+     13, include "cmd_arg_reader.h"
+void __gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::destroy<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>(std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>*):
+     12, include "vector"
+void std::_Destroy<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*):
+     12, include "vector"
+          65, include "stl_construct.h"
+BoxFilterHost(unsigned int*, unsigned int*, unsigned int*, int, int, int, float):
+    108, Loop not vectorized/parallelized: contains call
+    111, Loop not fused: enclosed in different number of nests
+         Loop not vectorized: data dependency
+    126, Loop not fused: function call before adjacent loop
+    141, Generated vector simd code for the loop containing reductions
+    164, Loop not fused: different loop trip count
+         Loop not vectorized: unsupported gather
+    170, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+    179, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+    188, Loop not vectorized: data dependency
 timeout was set to  600

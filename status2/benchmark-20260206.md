@@ -39,7 +39,7 @@
 | blas-gemm | build err | | -- |
 | bn | 5.00 | build err | exe err |
 | bonds | 7.66 | 11.50 | 11.19 |
-| boxfilter | 8.17 | build err | 9.58 |
+| boxfilter | 8.46 | 6.47 | 9.55 |
 | bsearch | 35.25 | build err | 31.81 |
 | bspline-vgh | 7.74 | 4.73 | 4.81 |
 | b+tree | 2.46 | 2.46 | 2.46 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 306 | 191 | 285 |
+| completed | 306 | 192 | 285 |
 
-sycl と acc がともに完了した件数 188
+sycl と acc がともに完了した件数 189
