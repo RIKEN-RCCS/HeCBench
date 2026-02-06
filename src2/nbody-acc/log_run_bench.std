@@ -2,4 +2,7 @@ nvc++ -acc  -std=c++14 -Wall -I../nbody-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c mai
 nvc++ -acc  -std=c++14 -Wall -I../nbody-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c GSimulation.cpp -o GSimulation.o
 nvc++ -acc  -std=c++14 -Wall -I../nbody-cuda -O3 -Minfo -mp=gpu -gpu=cc90 main.o GSimulation.o -o main 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
-bash -c "time -p ( ./main 1600000 10 1>log.std 2>log.err ) 2> log.time"
+bash -c "time -p ( ./main 25000  10 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 1 561 560

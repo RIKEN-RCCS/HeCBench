@@ -210,5 +210,4 @@ __gnu_cxx::__enable_if<std::__is_scalar<float>::__value, void>::__type std::__fi
                               39, include "stl_algobase.h"
                                   923, Recognized memory set idiom
           18, include "chrono"
-make: *** [Makefile.NVD:69: run_mem] Terminated
 timeout was set to  600
