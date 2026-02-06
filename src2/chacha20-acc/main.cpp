@@ -5,12 +5,11 @@
 #include <openacc.h>
 #include "chacha20.h"
 
-void hex_to_raw(const char* src, const int n /*src size*/, uint8_t* dst, const uint8_t* char_to_uint){
-  for (int i = omp_get_thread_num(); i < n/2; i = i + omp_get_vector()) {
-    uint8_t hi = char_to_uint[src[i*2 + 0]];
-    uint8_t lo = char_to_uint[src[i*2 + 1]];
-    dst[i] = (hi << 4) | lo;
-  }
+#pragma acc routine seq
+void hex_to_raw_element(const char* src, uint8_t* dst, const uint8_t* char_to_uint, int i){
+  uint8_t hi = char_to_uint[(unsigned char)src[i*2 + 0]];
+  uint8_t lo = char_to_uint[(unsigned char)src[i*2 + 1]];
+  dst[i] = (hi << 4) | lo;
 }
 
 void test_keystreams (
@@ -27,19 +26,25 @@ void test_keystreams (
     const int text_keystream_size)
 
 {
-  #pragma acc parallel teams gang(1) vector_length(256)
+  #pragma acc parallel loop present(text_key, char_to_uint, raw_key)
+  for (int i = 0; i < text_key_size/2; i++) {
+    hex_to_raw_element(text_key, raw_key, char_to_uint, i);
+  }
+
+  #pragma acc parallel loop present(text_nonce, char_to_uint, raw_nonce)
+  for (int i = 0; i < text_nonce_size/2; i++) {
+    hex_to_raw_element(text_nonce, raw_nonce, char_to_uint, i);
+  }
+
+  #pragma acc parallel loop present(text_keystream, char_to_uint, raw_keystream)
+  for (int i = 0; i < text_keystream_size/2; i++) {
+    hex_to_raw_element(text_keystream, raw_keystream, char_to_uint, i);
+  }
+
+  #pragma acc serial present(raw_key, raw_nonce, result)
   {
-    #pragma omp parallel 
-    {
-      hex_to_raw(text_key, text_key_size, raw_key, char_to_uint);
-      hex_to_raw(text_nonce, text_nonce_size, raw_nonce, char_to_uint);
-      hex_to_raw(text_keystream, text_keystream_size, raw_keystream, char_to_uint);
-   
-      if (omp_get_thread_num() == 0) {
-        Chacha20 chacha(raw_key, raw_nonce);
-        chacha.crypt(result, text_keystream_size / 2);
-      }
-    }
+    Chacha20 chacha(raw_key, raw_nonce);
+    chacha.crypt(result, text_keystream_size / 2);
   }
 }
 
@@ -72,19 +77,19 @@ int main(int argc, char* argv[])
   uint8_t *raw_keystream = (uint8_t*) malloc (result_len);
   uint8_t *result = (uint8_t*) malloc (result_len);
 
-  #pragma acc data to: char_to_uint[0:256], \
+  #pragma acc data copyin( char_to_uint[0:256], \
                                   key[0:key_len], \
                                   nonce[0:nonce_len], \
                                   keystream[0:keystream_len]) \
-                          map(alloc: raw_key[0:key_len/2], \
+                          create( raw_key[0:key_len/2], \
                                      raw_nonce[0:nonce_len/2]) \
-                          map(from: raw_keystream[0:result_len], \
+                          copyout( raw_keystream[0:result_len], \
                                     result[0:result_len])
   {
     auto start = std::chrono::steady_clock::now();
 
     for (int i = 0; i < repeat; i++) {
-      #pragma acc parallel loop 
+      #pragma acc parallel loop present(result)
       for (int i = 0; i < result_len; i++)
         result[i] = 0;
 
