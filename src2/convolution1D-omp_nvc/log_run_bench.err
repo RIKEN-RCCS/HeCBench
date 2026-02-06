@@ -170,5 +170,4 @@ void conv1d_tiled_caching<short>(short const*, short const*, short*, int, int):
 std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
      11, include "chrono"
          472, Loop not vectorized/parallelized: not countable
-make: *** [Makefile.NVD:69: run_mem] Terminated
 timeout was set to  600

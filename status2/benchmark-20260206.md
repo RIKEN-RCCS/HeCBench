@@ -68,7 +68,7 @@
 | concat | 15.08 | 16.24 | 15.73 |
 | contract | 11.40 | 28.95 | 10.82 |
 | conversion | 4.98 | 3.56 | 3.44 |
-| convolution1D | over 600 | build err | over 600 |
+| convolution1D | 346.88 | build err | 353.39 |
 | convolution3D | 2.48 | 3.17 | 2.51 |
 | convolutionSeparable | 13.58 | build err | 22.05 |
 | cooling | 154.60 | 452.57 | 454.09 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 300 | 184 | 279 |
+| completed | 301 | 184 | 280 |
 
 sycl と acc がともに完了した件数 181
