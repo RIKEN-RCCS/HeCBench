@@ -82,7 +82,7 @@
 | debayer | 6.74 | build err | 6.75 |
 | degrid | 14.97 | 23.24 | 17.04 |
 | dense-embedding | 166.23 | build err | 164.57 |
-| depixel | over 600 | build err | over 600 |
+| depixel | build err | 208.27 | 152.65 |
 | deredundancy | 17.83 | build err | 15.72 |
 | diamond | build err | build err | 37.30 |
 | distort | 2.45 | 2.45 | 2.50 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| エラーなし | 308 | 189 | 291 |
+| エラーなし | 307 | 190 | 291 |
 
 sycl と acc がともに実行できた件数 187

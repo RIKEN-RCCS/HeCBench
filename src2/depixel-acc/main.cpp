@@ -33,8 +33,8 @@ int main(int argc, char** argv) {
   float sum = 0;
   float total_time = 0;
 
-  #pragma acc parallel data map (alloc: img[0:size], tmp[0:size]) \
-                          map (from: out[0:size])
+#pragma acc data create(img[0:size], tmp[0:size])	\
+  copyout(out[0:size])
   {
     for (int n = 0; n < repeat; n++) {
 
@@ -44,7 +44,7 @@ int main(int argc, char** argv) {
         img[i].z = dis(gen);
       }
 
-      #pragma acc update to (img[0:size])
+      #pragma acc update device (img[0:size])
 
       auto start = std::chrono::steady_clock::now();
 
@@ -53,7 +53,7 @@ int main(int argc, char** argv) {
 
       auto end = std::chrono::steady_clock::now();
 
-      #pragma acc update from (out[0:size])
+      #pragma acc update host (out[0:size])
 
       std::chrono::duration<float> time = end - start;
       total_time += time.count();

@@ -1,2 +1,2 @@
-make: *** [Makefile.NVD:85: run_mem] Terminated
+make: *** [Makefile.NVD:86: run_mem] Error 1
 timeout was set to  600

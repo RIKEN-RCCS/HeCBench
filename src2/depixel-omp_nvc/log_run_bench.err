@@ -91,5 +91,4 @@ float std::generate_canonical<float, 24ul, std::mersenne_twister_engine<unsigned
          456, Loop not fused: different loop trip count
               Generated vector simd code for the loop
               Loop not vectorized: data dependency
-make: *** [Makefile.NVD:69: run_mem] Terminated
 timeout was set to  600
