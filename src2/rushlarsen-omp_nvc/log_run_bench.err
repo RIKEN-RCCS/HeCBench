@@ -20,5 +20,4 @@ init_state_values(double*, int):
 init_parameters_values(double*, int):
      32, Loop not vectorized: data dependency
          Loop unrolled 8 times
-make: *** [Makefile.NVD:69: run_mem] Terminated
 timeout was set to  600

@@ -1,0 +1,7 @@
+num_timesteps set to 20
+num_nodes set to 10000000
+Host: Rush Larsen (exp integrator on all gates)
+Device: Rush Larsen (exp integrator on all gates)
+Device: computed 20 time steps in 0.324498 s. Time steps per second: 61.6337
+
+RMSE = 0.000000

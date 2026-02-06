@@ -265,7 +265,7 @@
 | rsbench | 3.39 | build err | build err |
 | rsc | 0.50 | build err | 2.73 |
 | rtm8 | 17.67 | 15.76 | 4.22 |
-| rushlarsen | over 600 | over 600 | over 600 |
+| rushlarsen | 129.52 | 135.46 | 135.06 |
 | s3d | 2.94 | build err | 2.90 |
 | s8n | 2.49 | 2.47 | 2.43 |
 | sad | 2.53 | 2.16 | 8.52 |
