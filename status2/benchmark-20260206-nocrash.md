@@ -62,7 +62,7 @@
 | cm | exe err | build err | exe err |
 | cobahh | 406.65 | 383.64 | 388.03 |
 | colorwheel | 37.38 | 27.55 | 27.96 |
-| columnarSolver | 10.14 | build err | 9.89 |
+| columnarSolver | 10.16 | 16.87 | 10.22 |
 | complex | 22.28 | 12.59 | 12.96 |
 | compute-score | 3.19 | build err | 4.41 |
 | concat | 15.08 | 16.24 | 15.73 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| エラーなし | 308 | 191 | 291 |
+| エラーなし | 308 | 192 | 291 |
 
-sycl と acc がともに実行できた件数 189
+sycl と acc がともに実行できた件数 190

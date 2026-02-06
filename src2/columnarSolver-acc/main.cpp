@@ -92,27 +92,23 @@ int main(int argc, char* argv[]) {
   int* decrypted = new int[ENCRYPTEDLEN*THREADS];
   unsigned int state[THREADS];
 
-#pragma acc data to: scores[0:totalBigrams], \
+#pragma acc data copyin( scores[0:totalBigrams], \
                                 encryptedMap[0:ENCRYPTEDLEN]) \
-                        map(from: decrypted[0:ENCRYPTEDLEN * THREADS]) \
-                        map(alloc: state[0:THREADS])
+                        copyout( decrypted[0:ENCRYPTEDLEN * THREADS]) \
+                        create( state[0:THREADS])
   {
     auto start = std::chrono::steady_clock::now();
 
-    #pragma acc parallel loop thread_limit(T)
+    #pragma acc parallel loop gang vector
     for (int idx = 0; idx < THREADS; idx++) {
       state[idx] = idx;
       for (int i = 0; i < idx; i++)
         LCG_random_init(&state[idx]);
     }
 
-    #pragma acc parallel teams num_teams(B) thread_limit(T)
-    {
-      float shared_scores[ALPHABET*ALPHABET];
-      #pragma omp parallel 
-      {
-        decodeKernel(scores, encryptedMap, state, decrypted, shared_scores);
-      }
+    #pragma acc parallel loop gang vector
+    for (int idx = 0; idx < THREADS; idx++) {
+      decodeKernel(scores, encryptedMap, state, decrypted, idx);
     }
 
     auto end = std::chrono::steady_clock::now();
