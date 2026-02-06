@@ -44,10 +44,14 @@
 void ParallelBitonicSort(int input[], int n) {
 
   // n: the exponent used to set the array size. Array size = power(2, n)
+#if 0
   int size = pow(2, n);
+#else
+  int size = 1 << n;
+#endif
 
   // step from 0, 1, 2, ...., n-1
-  #pragma acc data tofrom: input[0:size]) 
+#pragma acc data copy(input[0:size]) 
   {
     auto start = std::chrono::steady_clock::now();
 
@@ -58,8 +62,11 @@ void ParallelBitonicSort(int input[], int n) {
         // size seq_len (2, 4, ...) num_seq stores the number of bitonic sequences
         // at each stage. seq_len stores the length of the bitonic sequence at
         // each stage.
+#if 0
         int seq_len = pow(2, stage + 1);
-        // Constant used in the kernel: 2**(step-stage).
+#else
+	int seq_len = 1 << (stage + 1);
+#endif
         int two_power = 1 << (step - stage);
 
         // Offload the work to kernel.
@@ -109,7 +116,11 @@ void ParallelBitonicSort(int input[], int n) {
 void SwapElements(int step, int stage, int num_sequence, int seq_len,
                   int *array) {
   for (int seq_num = 0; seq_num < num_sequence; seq_num++) {
+#if 0
     int odd = seq_num / (pow(2, (step - stage)));
+#else
+    int odd = seq_num / ( 1 << (step -stage) );
+#endif
     bool increasing = ((odd % 2) == 0);
 
     int h_len = seq_len / 2;
@@ -138,10 +149,15 @@ inline void BitonicSort(int a[], int n) {
     // for each step s, stage goes s, s-1,..., 0
     for (int stage = step; stage >= 0; stage--) {
       // Sequences (same size) are formed at each stage.
+#if 0
       int num_sequence = pow(2, (n - stage - 1));
       // The length of the sequences (2, 4, ...).
       int sequence_len = pow(2, stage + 1);
-
+#else
+      int num_sequence =  1 << ( n -stage - 1);
+      int sequence_len =  1 << (stage + 1);
+#endif
+      
       SwapElements(step, stage, num_sequence, sequence_len, a);
     }
   }
@@ -179,7 +195,11 @@ int main(int argc, char *argv[]) {
     }
 
     seed = std::stoi(argv[2]);
+#if 0
     size = pow(2, n);
+#else
+    size = 1 << n;
+#endif
   } catch (...) {
     Usage(argv[0], exp_max);
     return -1;

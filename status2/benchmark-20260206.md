@@ -34,7 +34,7 @@
 | bfs | 1.03 | 2.48 | 2.46 |
 | bilateral | 15.09 | 205.59 | 7.85 |
 | binomial | 3.10 | | -- |
-| bitonic-sort | 10.68 | build err | 8.25 |
+| bitonic-sort | 10.81 | 7.80 | 8.49 |
 | black-scholes | 5.00 | 39.24 | 4.88 |
 | blas-gemm | build err | | -- |
 | bn | 5.00 | build err | exe err |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 306 | 190 | 285 |
+| completed | 306 | 191 | 285 |
 
-sycl と acc がともに完了した件数 187
+sycl と acc がともに完了した件数 188
