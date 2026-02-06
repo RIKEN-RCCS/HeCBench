@@ -1,2 +1,628 @@
-make: *** [Makefile.NVD:69: run_mem] Terminated
+main:
+         192, Loop not vectorized/parallelized: contains call
+         192, Loop not vectorized/parallelized: contains call
+         192, Loop not vectorized/parallelized: contains call
+         192, Loop not vectorized/parallelized: contains call
+         192, Loop not vectorized/parallelized: contains call
+void run<128>(int, int):
+    192, Loop not vectorized/parallelized: contains call
+void run<256>(int, int):
+    192, Loop not vectorized/parallelized: contains call
+void run<512>(int, int):
+    192, Loop not vectorized/parallelized: contains call
+void run<1024>(int, int):
+    192, Loop not vectorized/parallelized: contains call
+void run<2048>(int, int):
+    192, Loop not vectorized/parallelized: contains call
+void runTest<char, 128>(long, int, bool):
+     40, Loop not vectorized/parallelized: contains call
+     44, Loop not vectorized/parallelized: not countable
+     46, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+     56, Loop not vectorized/parallelized: contains call
+     58, #omp target teams num_teams(num_blocks) thread_limit(64)
+         58, Generating "nvkernel__Z7runTestIcLi128EEvlib_F1L58_2" GPU kernel
+         61, #omp parallel
+           75, Barrier
+           89, Barrier
+        101, Team private (temp) located in CUDA shared memory
+     73, Loop not vectorized/parallelized: contains call
+     86, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    113, Generating update from(out[:nelems])
+    117, Loop not vectorized/parallelized: contains call
+    119, #omp target teams num_teams(num_blocks) thread_limit(64)
+         53, Generating map(alloc:out[:nelems]) 
+             Generating map(to:in[:nelems]) 
+        119, Generating "nvkernel__Z7runTestIcLi128EEvlib_F1L119_4" GPU kernel
+        122, #omp parallel
+          140, Barrier
+          156, Barrier
+          168, Barrier
+        172, Team private (temp) located in CUDA shared memory
+    138, Loop not vectorized/parallelized: contains call
+    153, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    186, Generating update from(out[:nelems])
+void verify<char>(char const*, char const*, long):
+     12, Loop not vectorized/parallelized: potential early exits
+void runTest<short, 128>(long, int, bool):
+     40, Loop not vectorized/parallelized: contains call
+     44, Loop not fused: function call before adjacent loop
+     46, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+     56, Loop not vectorized/parallelized: contains call
+     58, #omp target teams num_teams(num_blocks) thread_limit(64)
+         58, Generating "nvkernel__Z7runTestIsLi128EEvlib_F1L58_12" GPU kernel
+         61, #omp parallel
+           75, Barrier
+           89, Barrier
+        101, Team private (temp) located in CUDA shared memory
+     73, Loop not vectorized/parallelized: contains call
+     86, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    113, Generating update from(out[:nelems])
+    117, Loop not vectorized/parallelized: contains call
+    119, #omp target teams num_teams(num_blocks) thread_limit(64)
+         53, Generating map(alloc:out[:nelems]) 
+             Generating map(to:in[:nelems]) 
+        119, Generating "nvkernel__Z7runTestIsLi128EEvlib_F1L119_14" GPU kernel
+        122, #omp parallel
+          140, Barrier
+          156, Barrier
+          168, Barrier
+        172, Team private (temp) located in CUDA shared memory
+    138, Loop not vectorized/parallelized: contains call
+    153, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    186, Generating update from(out[:nelems])
+void verify<short>(short const*, short const*, long):
+     12, Loop not vectorized/parallelized: potential early exits
+void runTest<int, 128>(long, int, bool):
+     40, Loop not vectorized/parallelized: contains call
+     44, Loop not fused: function call before adjacent loop
+     46, Loop not vectorized: data dependency
+         Loop unrolled 8 times
+     56, Loop not vectorized/parallelized: contains call
+     58, #omp target teams num_teams(num_blocks) thread_limit(64)
+         58, Generating "nvkernel__Z7runTestIiLi128EEvlib_F1L58_22" GPU kernel
+         61, #omp parallel
+           75, Barrier
+           89, Barrier
+        101, Team private (temp) located in CUDA shared memory
+     73, Loop not vectorized/parallelized: contains call
+     86, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    113, Generating update from(out[:nelems])
+    117, Loop not vectorized/parallelized: contains call
+    119, #omp target teams num_teams(num_blocks) thread_limit(64)
+         53, Generating map(alloc:out[:nelems]) 
+             Generating map(to:in[:nelems]) 
+        119, Generating "nvkernel__Z7runTestIiLi128EEvlib_F1L119_24" GPU kernel
+        122, #omp parallel
+          140, Barrier
+          156, Barrier
+          168, Barrier
+        172, Team private (temp) located in CUDA shared memory
+    138, Loop not vectorized/parallelized: contains call
+    153, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    186, Generating update from(out[:nelems])
+void verify<int>(int const*, int const*, long):
+     12, Loop not vectorized/parallelized: potential early exits
+void runTest<long, 128>(long, int, bool):
+     40, Loop not vectorized/parallelized: contains call
+     44, Loop not vectorized/parallelized: not countable
+     46, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+     56, Loop not vectorized/parallelized: contains call
+     58, #omp target teams num_teams(num_blocks) thread_limit(64)
+         58, Generating "nvkernel__Z7runTestIlLi128EEvlib_F1L58_32" GPU kernel
+         61, #omp parallel
+           75, Barrier
+           89, Barrier
+        101, Team private (temp) located in CUDA shared memory
+     73, Loop not vectorized/parallelized: contains call
+     86, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    113, Generating update from(out[:nelems])
+    117, Loop not vectorized/parallelized: contains call
+    119, #omp target teams num_teams(num_blocks) thread_limit(64)
+         53, Generating map(alloc:out[:nelems]) 
+             Generating map(to:in[:nelems]) 
+        119, Generating "nvkernel__Z7runTestIlLi128EEvlib_F1L119_34" GPU kernel
+        122, #omp parallel
+          140, Barrier
+          156, Barrier
+          168, Barrier
+        172, Team private (temp) located in CUDA shared memory
+    138, Loop not vectorized/parallelized: contains call
+    153, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    186, Generating update from(out[:nelems])
+void verify<long>(long const*, long const*, long):
+     12, Loop not vectorized/parallelized: potential early exits
+void runTest<char, 256>(long, int, bool):
+     40, Loop not vectorized/parallelized: contains call
+     44, Loop not vectorized/parallelized: not countable
+     46, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+     56, Loop not vectorized/parallelized: contains call
+     58, #omp target teams num_teams(num_blocks) thread_limit(128)
+         58, Generating "nvkernel__Z7runTestIcLi256EEvlib_F1L58_42" GPU kernel
+         61, #omp parallel
+           75, Barrier
+           89, Barrier
+        101, Team private (temp) located in CUDA shared memory
+     73, Loop not vectorized/parallelized: contains call
+     86, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    113, Generating update from(out[:nelems])
+    117, Loop not vectorized/parallelized: contains call
+    119, #omp target teams num_teams(num_blocks) thread_limit(128)
+         53, Generating map(alloc:out[:nelems]) 
+             Generating map(to:in[:nelems]) 
+        119, Generating "nvkernel__Z7runTestIcLi256EEvlib_F1L119_44" GPU kernel
+        122, #omp parallel
+          140, Barrier
+          156, Barrier
+          168, Barrier
+        172, Team private (temp) located in CUDA shared memory
+    138, Loop not vectorized/parallelized: contains call
+    153, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    186, Generating update from(out[:nelems])
+void runTest<short, 256>(long, int, bool):
+     40, Loop not vectorized/parallelized: contains call
+     44, Loop not fused: function call before adjacent loop
+     46, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+     56, Loop not vectorized/parallelized: contains call
+     58, #omp target teams num_teams(num_blocks) thread_limit(128)
+         58, Generating "nvkernel__Z7runTestIsLi256EEvlib_F1L58_52" GPU kernel
+         61, #omp parallel
+           75, Barrier
+           89, Barrier
+        101, Team private (temp) located in CUDA shared memory
+     73, Loop not vectorized/parallelized: contains call
+     86, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    113, Generating update from(out[:nelems])
+    117, Loop not vectorized/parallelized: contains call
+    119, #omp target teams num_teams(num_blocks) thread_limit(128)
+         53, Generating map(alloc:out[:nelems]) 
+             Generating map(to:in[:nelems]) 
+        119, Generating "nvkernel__Z7runTestIsLi256EEvlib_F1L119_54" GPU kernel
+        122, #omp parallel
+          140, Barrier
+          156, Barrier
+          168, Barrier
+        172, Team private (temp) located in CUDA shared memory
+    138, Loop not vectorized/parallelized: contains call
+    153, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    186, Generating update from(out[:nelems])
+void runTest<int, 256>(long, int, bool):
+     40, Loop not vectorized/parallelized: contains call
+     44, Loop not fused: function call before adjacent loop
+     46, Loop not vectorized: data dependency
+         Loop unrolled 8 times
+     56, Loop not vectorized/parallelized: contains call
+     58, #omp target teams num_teams(num_blocks) thread_limit(128)
+         58, Generating "nvkernel__Z7runTestIiLi256EEvlib_F1L58_62" GPU kernel
+         61, #omp parallel
+           75, Barrier
+           89, Barrier
+        101, Team private (temp) located in CUDA shared memory
+     73, Loop not vectorized/parallelized: contains call
+     86, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    113, Generating update from(out[:nelems])
+    117, Loop not vectorized/parallelized: contains call
+    119, #omp target teams num_teams(num_blocks) thread_limit(128)
+         53, Generating map(alloc:out[:nelems]) 
+             Generating map(to:in[:nelems]) 
+        119, Generating "nvkernel__Z7runTestIiLi256EEvlib_F1L119_64" GPU kernel
+        122, #omp parallel
+          140, Barrier
+          156, Barrier
+          168, Barrier
+        172, Team private (temp) located in CUDA shared memory
+    138, Loop not vectorized/parallelized: contains call
+    153, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    186, Generating update from(out[:nelems])
+void runTest<long, 256>(long, int, bool):
+     40, Loop not vectorized/parallelized: contains call
+     44, Loop not vectorized/parallelized: not countable
+     46, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+     56, Loop not vectorized/parallelized: contains call
+     58, #omp target teams num_teams(num_blocks) thread_limit(128)
+         58, Generating "nvkernel__Z7runTestIlLi256EEvlib_F1L58_72" GPU kernel
+         61, #omp parallel
+           75, Barrier
+           89, Barrier
+        101, Team private (temp) located in CUDA shared memory
+     73, Loop not vectorized/parallelized: contains call
+     86, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    113, Generating update from(out[:nelems])
+    117, Loop not vectorized/parallelized: contains call
+    119, #omp target teams num_teams(num_blocks) thread_limit(128)
+         53, Generating map(alloc:out[:nelems]) 
+             Generating map(to:in[:nelems]) 
+        119, Generating "nvkernel__Z7runTestIlLi256EEvlib_F1L119_74" GPU kernel
+        122, #omp parallel
+          140, Barrier
+          156, Barrier
+          168, Barrier
+        172, Team private (temp) located in CUDA shared memory
+    138, Loop not vectorized/parallelized: contains call
+    153, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    186, Generating update from(out[:nelems])
+void runTest<char, 512>(long, int, bool):
+     40, Loop not vectorized/parallelized: contains call
+     44, Loop not vectorized/parallelized: not countable
+     46, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+     56, Loop not vectorized/parallelized: contains call
+     58, #omp target teams num_teams(num_blocks) thread_limit(256)
+         58, Generating "nvkernel__Z7runTestIcLi512EEvlib_F1L58_82" GPU kernel
+         61, #omp parallel
+           75, Barrier
+           89, Barrier
+        101, Team private (temp) located in CUDA shared memory
+     73, Loop not vectorized/parallelized: contains call
+     86, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    113, Generating update from(out[:nelems])
+    117, Loop not vectorized/parallelized: contains call
+    119, #omp target teams num_teams(num_blocks) thread_limit(256)
+         53, Generating map(alloc:out[:nelems]) 
+             Generating map(to:in[:nelems]) 
+        119, Generating "nvkernel__Z7runTestIcLi512EEvlib_F1L119_84" GPU kernel
+        122, #omp parallel
+          140, Barrier
+          156, Barrier
+          168, Barrier
+        172, Team private (temp) located in CUDA shared memory
+    138, Loop not vectorized/parallelized: contains call
+    153, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    186, Generating update from(out[:nelems])
+void runTest<short, 512>(long, int, bool):
+     40, Loop not vectorized/parallelized: contains call
+     44, Loop not fused: function call before adjacent loop
+     46, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+     56, Loop not vectorized/parallelized: contains call
+     58, #omp target teams num_teams(num_blocks) thread_limit(256)
+         58, Generating "nvkernel__Z7runTestIsLi512EEvlib_F1L58_92" GPU kernel
+         61, #omp parallel
+           75, Barrier
+           89, Barrier
+        101, Team private (temp) located in CUDA shared memory
+     73, Loop not vectorized/parallelized: contains call
+     86, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    113, Generating update from(out[:nelems])
+    117, Loop not vectorized/parallelized: contains call
+    119, #omp target teams num_teams(num_blocks) thread_limit(256)
+         53, Generating map(alloc:out[:nelems]) 
+             Generating map(to:in[:nelems]) 
+        119, Generating "nvkernel__Z7runTestIsLi512EEvlib_F1L119_94" GPU kernel
+        122, #omp parallel
+          140, Barrier
+          156, Barrier
+          168, Barrier
+        172, Team private (temp) located in CUDA shared memory
+    138, Loop not vectorized/parallelized: contains call
+    153, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    186, Generating update from(out[:nelems])
+void runTest<int, 512>(long, int, bool):
+     40, Loop not vectorized/parallelized: contains call
+     44, Loop not fused: function call before adjacent loop
+     46, Loop not vectorized: data dependency
+         Loop unrolled 8 times
+     56, Loop not vectorized/parallelized: contains call
+     58, #omp target teams num_teams(num_blocks) thread_limit(256)
+         58, Generating "nvkernel__Z7runTestIiLi512EEvlib_F1L58_102" GPU kernel
+         61, #omp parallel
+           75, Barrier
+           89, Barrier
+        101, Team private (temp) located in CUDA shared memory
+     73, Loop not vectorized/parallelized: contains call
+     86, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    113, Generating update from(out[:nelems])
+    117, Loop not vectorized/parallelized: contains call
+    119, #omp target teams num_teams(num_blocks) thread_limit(256)
+         53, Generating map(alloc:out[:nelems]) 
+             Generating map(to:in[:nelems]) 
+        119, Generating "nvkernel__Z7runTestIiLi512EEvlib_F1L119_104" GPU kernel
+        122, #omp parallel
+          140, Barrier
+          156, Barrier
+          168, Barrier
+        172, Team private (temp) located in CUDA shared memory
+    138, Loop not vectorized/parallelized: contains call
+    153, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    186, Generating update from(out[:nelems])
+void runTest<long, 512>(long, int, bool):
+     40, Loop not vectorized/parallelized: contains call
+     44, Loop not vectorized/parallelized: not countable
+     46, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+     56, Loop not vectorized/parallelized: contains call
+     58, #omp target teams num_teams(num_blocks) thread_limit(256)
+         58, Generating "nvkernel__Z7runTestIlLi512EEvlib_F1L58_112" GPU kernel
+         61, #omp parallel
+           75, Barrier
+           89, Barrier
+        101, Team private (temp) located in CUDA shared memory
+     73, Loop not vectorized/parallelized: contains call
+     86, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    113, Generating update from(out[:nelems])
+    117, Loop not vectorized/parallelized: contains call
+    119, #omp target teams num_teams(num_blocks) thread_limit(256)
+         53, Generating map(alloc:out[:nelems]) 
+             Generating map(to:in[:nelems]) 
+        119, Generating "nvkernel__Z7runTestIlLi512EEvlib_F1L119_114" GPU kernel
+        122, #omp parallel
+          140, Barrier
+          156, Barrier
+          168, Barrier
+        172, Team private (temp) located in CUDA shared memory
+    138, Loop not vectorized/parallelized: contains call
+    153, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    186, Generating update from(out[:nelems])
+void runTest<char, 1024>(long, int, bool):
+     40, Loop not vectorized/parallelized: contains call
+     44, Loop not vectorized/parallelized: not countable
+     46, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+     56, Loop not vectorized/parallelized: contains call
+     58, #omp target teams num_teams(num_blocks) thread_limit(512)
+         58, Generating "nvkernel__Z7runTestIcLi1024EEvlib_F1L58_122" GPU kernel
+         61, #omp parallel
+           75, Barrier
+           89, Barrier
+        101, Team private (temp) located in CUDA shared memory
+     73, Loop not vectorized/parallelized: contains call
+     86, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    113, Generating update from(out[:nelems])
+    117, Loop not vectorized/parallelized: contains call
+    119, #omp target teams num_teams(num_blocks) thread_limit(512)
+         53, Generating map(alloc:out[:nelems]) 
+             Generating map(to:in[:nelems]) 
+        119, Generating "nvkernel__Z7runTestIcLi1024EEvlib_F1L119_124" GPU kernel
+        122, #omp parallel
+          140, Barrier
+          156, Barrier
+          168, Barrier
+        172, Team private (temp) located in CUDA shared memory
+    138, Loop not vectorized/parallelized: contains call
+    153, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    186, Generating update from(out[:nelems])
+void runTest<short, 1024>(long, int, bool):
+     40, Loop not vectorized/parallelized: contains call
+     44, Loop not fused: function call before adjacent loop
+     46, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+     56, Loop not vectorized/parallelized: contains call
+     58, #omp target teams num_teams(num_blocks) thread_limit(512)
+         58, Generating "nvkernel__Z7runTestIsLi1024EEvlib_F1L58_132" GPU kernel
+         61, #omp parallel
+           75, Barrier
+           89, Barrier
+        101, Team private (temp) located in CUDA shared memory
+     73, Loop not vectorized/parallelized: contains call
+     86, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    113, Generating update from(out[:nelems])
+    117, Loop not vectorized/parallelized: contains call
+    119, #omp target teams num_teams(num_blocks) thread_limit(512)
+         53, Generating map(alloc:out[:nelems]) 
+             Generating map(to:in[:nelems]) 
+        119, Generating "nvkernel__Z7runTestIsLi1024EEvlib_F1L119_134" GPU kernel
+        122, #omp parallel
+          140, Barrier
+          156, Barrier
+          168, Barrier
+        172, Team private (temp) located in CUDA shared memory
+    138, Loop not vectorized/parallelized: contains call
+    153, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    186, Generating update from(out[:nelems])
+void runTest<int, 1024>(long, int, bool):
+     40, Loop not vectorized/parallelized: contains call
+     44, Loop not fused: function call before adjacent loop
+     46, Loop not vectorized: data dependency
+         Loop unrolled 8 times
+     56, Loop not vectorized/parallelized: contains call
+     58, #omp target teams num_teams(num_blocks) thread_limit(512)
+         58, Generating "nvkernel__Z7runTestIiLi1024EEvlib_F1L58_142" GPU kernel
+         61, #omp parallel
+           75, Barrier
+           89, Barrier
+        101, Team private (temp) located in CUDA shared memory
+     73, Loop not vectorized/parallelized: contains call
+     86, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    113, Generating update from(out[:nelems])
+    117, Loop not vectorized/parallelized: contains call
+    119, #omp target teams num_teams(num_blocks) thread_limit(512)
+         53, Generating map(alloc:out[:nelems]) 
+             Generating map(to:in[:nelems]) 
+        119, Generating "nvkernel__Z7runTestIiLi1024EEvlib_F1L119_144" GPU kernel
+        122, #omp parallel
+          140, Barrier
+          156, Barrier
+          168, Barrier
+        172, Team private (temp) located in CUDA shared memory
+    138, Loop not vectorized/parallelized: contains call
+    153, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    186, Generating update from(out[:nelems])
+void runTest<long, 1024>(long, int, bool):
+     40, Loop not vectorized/parallelized: contains call
+     44, Loop not vectorized/parallelized: not countable
+     46, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+     56, Loop not vectorized/parallelized: contains call
+     58, #omp target teams num_teams(num_blocks) thread_limit(512)
+         58, Generating "nvkernel__Z7runTestIlLi1024EEvlib_F1L58_152" GPU kernel
+         61, #omp parallel
+           75, Barrier
+           89, Barrier
+        101, Team private (temp) located in CUDA shared memory
+     73, Loop not vectorized/parallelized: contains call
+     86, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    113, Generating update from(out[:nelems])
+    117, Loop not vectorized/parallelized: contains call
+    119, #omp target teams num_teams(num_blocks) thread_limit(512)
+         53, Generating map(alloc:out[:nelems]) 
+             Generating map(to:in[:nelems]) 
+        119, Generating "nvkernel__Z7runTestIlLi1024EEvlib_F1L119_154" GPU kernel
+        122, #omp parallel
+          140, Barrier
+          156, Barrier
+          168, Barrier
+        172, Team private (temp) located in CUDA shared memory
+    138, Loop not vectorized/parallelized: contains call
+    153, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    186, Generating update from(out[:nelems])
+void runTest<char, 2048>(long, int, bool):
+     40, Loop not vectorized/parallelized: contains call
+     44, Loop not vectorized/parallelized: not countable
+     46, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+     56, Loop not vectorized/parallelized: contains call
+     58, #omp target teams num_teams(num_blocks) thread_limit(1024)
+         58, Generating "nvkernel__Z7runTestIcLi2048EEvlib_F1L58_162" GPU kernel
+         61, #omp parallel
+           75, Barrier
+           89, Barrier
+        101, Team private (temp) located in CUDA shared memory
+     73, Loop not vectorized/parallelized: contains call
+     86, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    113, Generating update from(out[:nelems])
+    117, Loop not vectorized/parallelized: contains call
+    119, #omp target teams num_teams(num_blocks) thread_limit(1024)
+         53, Generating map(alloc:out[:nelems]) 
+             Generating map(to:in[:nelems]) 
+        119, Generating "nvkernel__Z7runTestIcLi2048EEvlib_F1L119_164" GPU kernel
+        122, #omp parallel
+          140, Barrier
+          156, Barrier
+          168, Barrier
+        172, Team private (temp) located in CUDA shared memory
+    138, Loop not vectorized/parallelized: contains call
+    153, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    186, Generating update from(out[:nelems])
+void runTest<short, 2048>(long, int, bool):
+     40, Loop not vectorized/parallelized: contains call
+     44, Loop not fused: function call before adjacent loop
+     46, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+     56, Loop not vectorized/parallelized: contains call
+     58, #omp target teams num_teams(num_blocks) thread_limit(1024)
+         58, Generating "nvkernel__Z7runTestIsLi2048EEvlib_F1L58_172" GPU kernel
+         61, #omp parallel
+           75, Barrier
+           89, Barrier
+        101, Team private (temp) located in CUDA shared memory
+     73, Loop not vectorized/parallelized: contains call
+     86, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    113, Generating update from(out[:nelems])
+    117, Loop not vectorized/parallelized: contains call
+    119, #omp target teams num_teams(num_blocks) thread_limit(1024)
+         53, Generating map(alloc:out[:nelems]) 
+             Generating map(to:in[:nelems]) 
+        119, Generating "nvkernel__Z7runTestIsLi2048EEvlib_F1L119_174" GPU kernel
+        122, #omp parallel
+          140, Barrier
+          156, Barrier
+          168, Barrier
+        172, Team private (temp) located in CUDA shared memory
+    138, Loop not vectorized/parallelized: contains call
+    153, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    186, Generating update from(out[:nelems])
+void runTest<int, 2048>(long, int, bool):
+     40, Loop not vectorized/parallelized: contains call
+     44, Loop not fused: function call before adjacent loop
+     46, Loop not vectorized: data dependency
+         Loop unrolled 8 times
+     56, Loop not vectorized/parallelized: contains call
+     58, #omp target teams num_teams(num_blocks) thread_limit(1024)
+         58, Generating "nvkernel__Z7runTestIiLi2048EEvlib_F1L58_182" GPU kernel
+         61, #omp parallel
+           75, Barrier
+           89, Barrier
+        101, Team private (temp) located in CUDA shared memory
+     73, Loop not vectorized/parallelized: contains call
+     86, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    113, Generating update from(out[:nelems])
+    117, Loop not vectorized/parallelized: contains call
+    119, #omp target teams num_teams(num_blocks) thread_limit(1024)
+         53, Generating map(alloc:out[:nelems]) 
+             Generating map(to:in[:nelems]) 
+        119, Generating "nvkernel__Z7runTestIiLi2048EEvlib_F1L119_184" GPU kernel
+        122, #omp parallel
+          140, Barrier
+          156, Barrier
+          168, Barrier
+        172, Team private (temp) located in CUDA shared memory
+    138, Loop not vectorized/parallelized: contains call
+    153, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    186, Generating update from(out[:nelems])
+void runTest<long, 2048>(long, int, bool):
+     40, Loop not vectorized/parallelized: contains call
+     44, Loop not vectorized/parallelized: not countable
+     46, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+     56, Loop not vectorized/parallelized: contains call
+     58, #omp target teams num_teams(num_blocks) thread_limit(1024)
+         58, Generating "nvkernel__Z7runTestIlLi2048EEvlib_F1L58_192" GPU kernel
+         61, #omp parallel
+           75, Barrier
+           89, Barrier
+        101, Team private (temp) located in CUDA shared memory
+     73, Loop not vectorized/parallelized: contains call
+     86, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    113, Generating update from(out[:nelems])
+    117, Loop not vectorized/parallelized: contains call
+    119, #omp target teams num_teams(num_blocks) thread_limit(1024)
+         53, Generating map(alloc:out[:nelems]) 
+             Generating map(to:in[:nelems]) 
+        119, Generating "nvkernel__Z7runTestIlLi2048EEvlib_F1L119_194" GPU kernel
+        122, #omp parallel
+          140, Barrier
+          156, Barrier
+          168, Barrier
+        172, Team private (temp) located in CUDA shared memory
+    138, Loop not vectorized/parallelized: contains call
+    153, Loop not vectorized/parallelized: contains call
+          12, Loop not vectorized/parallelized: potential early exits
+    186, Generating update from(out[:nelems])
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
 timeout was set to  600
