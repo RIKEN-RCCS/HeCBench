@@ -43,7 +43,7 @@ inline uint DivUp(uint a, uint b){
     return (a % b != 0) ? (a / b + 1) : (a / b);
 }
 
-#pragma omp declare target
+#pragma acc routine seq
 // Helper function to convert float[4] rgba color to 32-bit unsigned integer
 //*****************************************************************
 float4 rgbaUintToFloat4(unsigned int c)
@@ -56,6 +56,7 @@ float4 rgbaUintToFloat4(unsigned int c)
     return rgba;
 }
 
+#pragma acc routine seq
 uchar4 rgbaUintToUchar4(unsigned int c)
 {
     uchar4 rgba;
@@ -67,6 +68,7 @@ uchar4 rgbaUintToUchar4(unsigned int c)
 }
 
 // Inline device function to convert floating point rgba color to 32-bit unsigned integer
+#pragma acc routine seq
 unsigned int rgbaFloat4ToUint(float4 rgba, float fScale)
 {
     unsigned int uiPackedPix = 0U;
@@ -77,11 +79,13 @@ unsigned int rgbaFloat4ToUint(float4 rgba, float fScale)
     return uiPackedPix;
 }
 
+#pragma acc routine seq
 inline float4 operator*(float4 a, float4 b)
 {
     return {a.x * b.x, a.y * b.y, a.z * b.z,  a.w * b.w};
 }
 
+#pragma acc routine seq
 inline void operator+=(float4 &a, float4 b)
 {
     a.x += b.x;
@@ -90,6 +94,7 @@ inline void operator+=(float4 &a, float4 b)
     a.w += b.w;
 }
 
+#pragma acc routine seq
 inline void operator-=(float4 &a, float4 b)
 {
     a.x -= b.x;
@@ -97,7 +102,6 @@ inline void operator-=(float4 &a, float4 b)
     a.z -= b.z;
     a.w -= b.w;
 }
-#pragma omp end declare target
 
 void BoxFilterGPU ( unsigned int *uiInput,
                     unsigned int *uiTmp,
@@ -124,49 +128,54 @@ void BoxFilterGPU ( unsigned int *uiInput,
 
   for (int i = 0; i < iCycles; i++) {
     // Launch row kernel
-    #pragma acc parallel teams num_teams(numTeams) thread_limit(blockSize)
+#pragma acc parallel num_gangs(numTeams) vector_length(blockSize)
     {
       uchar4 uc4LocalData[90]; //16+64+10;
-      #pragma omp parallel
-      {
-        int lid = omp_get_thread_num();
-        int gidx = omp_get_team_num() % uiBlockWidth;
-        int gidy = omp_get_team_num() / uiBlockWidth;
+#pragma acc loop gang
+      for (int gmid = 0; gmid < numTeams; gmid++) {
+	int gidx = gmid % uiBlockWidth;
+	int gidy = gmid / uiBlockWidth;
 
-        int globalPosX = gidx * uiNumOutputPix + lid - iRadiusAligned;
-        int globalPosY = gidy;
-        int iGlobalOffset = globalPosY * uiWidth + globalPosX;
+#pragma acc loop vector
+	for (int lid = 0; lid < blockSize; lid++) {
+	  int globalPosX = gidx * uiNumOutputPix + lid - iRadiusAligned;
+	  int iGlobalOffset = gidy * uiWidth + globalPosX;
 
         // Read global data into LMEM
-        if (globalPosX >= 0 && globalPosX < uiWidth)
+	  if (globalPosX >= 0 && globalPosX < uiWidth)
             // IBM xlc: no known conversion from 'unsigned int *' to 'uchar4 *'
             uc4LocalData[lid] = rgbaUintToUchar4(uiInput[iGlobalOffset]);
-        else
+	  else
             uc4LocalData[lid] = {0, 0, 0, 0};
+	}
 
-        #pragma omp barrier
+#pragma acc loop vector
+	for (int lid = 0; lid < blockSize; lid++) {
+	  int globalPosX = gidx * uiNumOutputPix + lid - iRadiusAligned;
+	  int iGlobalOffset = gidy * uiWidth + globalPosX;
 
-        if((globalPosX >= 0) && (globalPosX < uiWidth) && (lid >= iRadiusAligned) &&
-           (lid < (iRadiusAligned + (int)uiNumOutputPix)))
-        {
-            // Init summation registers to zero
-            float4 f4Sum = {0.0f, 0.0f, 0.0f, 0.0f};
-
-            // Do summation, using inline function to break up uint value from LMEM into independent RGBA values
-            int iOffsetX = lid - iRadius;
-            int iLimit = iOffsetX + (2 * iRadius) + 1;
-            for(; iOffsetX < iLimit; iOffsetX++)
-            {
-                f4Sum.x += uc4LocalData[iOffsetX].x;
-                f4Sum.y += uc4LocalData[iOffsetX].y;
-                f4Sum.z += uc4LocalData[iOffsetX].z;
-                f4Sum.w += uc4LocalData[iOffsetX].w;
-            }
-
-            // Use inline function to scale and convert registers to packed RGBA values in a uchar4,
-            // and write back out to GMEM
-            uiTmp[iGlobalOffset] = rgbaFloat4ToUint(f4Sum, fScale);
-        }
+	  if((globalPosX >= 0) && (globalPosX < uiWidth) && (lid >= iRadiusAligned) &&
+	     (lid < (iRadiusAligned + (int)uiNumOutputPix)))
+	    {
+	      // Init summation registers to zero
+	      float4 f4Sum = {0.0f, 0.0f, 0.0f, 0.0f};
+	      
+	      // Do summation, using inline function to break up uint value from LMEM into independent RGBA values
+	      int iOffsetX = lid - iRadius;
+	      int iLimit = iOffsetX + (2 * iRadius) + 1;
+	      for(; iOffsetX < iLimit; iOffsetX++)
+		{
+		  f4Sum.x += uc4LocalData[iOffsetX].x;
+		  f4Sum.y += uc4LocalData[iOffsetX].y;
+		  f4Sum.z += uc4LocalData[iOffsetX].z;
+		  f4Sum.w += uc4LocalData[iOffsetX].w;
+		}
+	      
+	      // Use inline function to scale and convert registers to packed RGBA values in a uchar4,
+	      // and write back out to GMEM
+	      uiTmp[iGlobalOffset] = rgbaFloat4ToUint(f4Sum, fScale);
+	    }
+	}
       }
     }
 
@@ -251,9 +260,9 @@ int main(int argc, char** argv)
   uiHostOutput = (unsigned int*)calloc(szBuff, sizeof(unsigned int));
   uiDevOutput = (unsigned int*)calloc(szBuff, sizeof(unsigned int));
 
-  #pragma acc data to: uiInput[0:szBuff]) \
-                          map(to: uiTmp[0:szBuff]) \
-                          map(tofrom: uiDevOutput[0:szBuff])
+#pragma acc data copyin(uiInput[0:szBuff])	   \
+  copyin(uiTmp[0:szBuff])				\
+  copy(uiDevOutput[0:szBuff])
   {
     const int iCycles = atoi(argv[2]);
 
