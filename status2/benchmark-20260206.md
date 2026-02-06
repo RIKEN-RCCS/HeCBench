@@ -50,7 +50,7 @@
 | ccsd-trpdrv | 2.67 | 2.55 | 2.63 |
 | ccs | 3.59 | build err | 3.57 |
 | cfd | 0.58 | 3.02 | 3.08 |
-| chacha20 | 4.80 | build err | 6.64 |
+| chacha20 | 4.68 | 9.24 | 6.66 |
 | channelShuffle | 538.46 | 19.23 | 19.24 |
 | channelSum | 64.97 | 65.55 | 68.17 |
 | chemv | 3.19 | build err | 3.24 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 302 | 185 | 281 |
+| completed | 302 | 186 | 281 |
 
-sycl と acc がともに完了した件数 182
+sycl と acc がともに完了した件数 183
