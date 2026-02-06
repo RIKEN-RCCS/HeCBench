@@ -270,8 +270,8 @@
 | s8n | 2.49 | 2.47 | 2.43 |
 | sad | 2.53 | 2.16 | 8.52 |
 | sampling | 5.77 | build err | 5.65 |
-| scan2 | 2.91 | build err | 6.79 |
-| scan | over 600 | build err | over 600 |
+| scan2 | 2.91 | build err | 6.76 |
+| scan | 514.43 | build err | over 600 |
 | scatterAdd | 8.10 | 8.05 | 7.79 |
 | scel | 322.81 | 11.91 | 11.29 |
 | secp256k1 | 2.68 | 2.79 | 2.69 |
