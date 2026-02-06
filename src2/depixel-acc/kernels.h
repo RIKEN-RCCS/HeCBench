@@ -56,7 +56,7 @@ void check_connect(
   const int w, const int h)
 {
   int size = w * h;
-  #pragma acc parallel loop thread_limit(nthreads)
+  #pragma acc parallel loop vector_length(nthreads)
   for (int center = 0; center < size; center++) {
     int row = center/w;
     int column = center%w;
@@ -124,7 +124,7 @@ void eliminate_crosses(
   const int w, const int h)
 {
   int size = w * h;
-  #pragma acc parallel loop thread_limit(nthreads)
+#pragma acc parallel loop vector_length(nthreads) present(id)
   for (int center = 0; center < size; center++) {
     int row = center/w;
     int column = center%w;
