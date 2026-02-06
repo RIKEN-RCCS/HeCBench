@@ -1,4 +1,4 @@
-#pragma omp declare target
+#pragma acc routine seq
 float LCG_random_float(unsigned int * seed) {
   const unsigned int m = 2147483648;
   const unsigned int a = 26757677;
@@ -7,6 +7,7 @@ float LCG_random_float(unsigned int * seed) {
   return (float) (*seed) / (float) m;
 }
 
+#pragma acc routine seq
 void LCG_random_init(unsigned int * seed) {
   const unsigned int m = 2147483648;
   const unsigned int a = 26757677;
@@ -14,6 +15,7 @@ void LCG_random_init(unsigned int * seed) {
   *seed = (a * (*seed) + c) % m;
 }
 
+#pragma acc routine seq
 void decrypt(const int* encrypted, const int* key, int* decrypted) {
 
   int columns[KEY_LENGTH][SECTION_CONSTANT+1];
@@ -40,6 +42,7 @@ void decrypt(const int* encrypted, const int* key, int* decrypted) {
     decrypted[j] = columns[key[j % KEY_LENGTH]][j / KEY_LENGTH];  
 } 
 
+#pragma acc routine seq
 void swapElements(int *key, int posLeft, int posRight) {
   if (posLeft != posRight)
   {
@@ -49,21 +52,23 @@ void swapElements(int *key, int posLeft, int posRight) {
   }
 }
 
+#pragma acc routine seq
 void swapBlock(int *key, int posLeft, int posRight, int length) {  
   for (int i=0; i<length; i++) 
     swapElements(key, (posLeft+i)%KEY_LENGTH, (posRight+i)%KEY_LENGTH);
 }
 
+#pragma acc routine seq
 void decodeKernel(
-  const float *__restrict d_scores, 
+  const float *__restrict d_scores,
     const int *__restrict d_encrypted,
-  const unsigned int*__restrict globalState, 
+  const unsigned int*__restrict globalState,
           int *__restrict d_decrypted,
-        float *__restrict shared_scores) {
+          int idx) {
 
   int key[KEY_LENGTH];
-  int localDecrypted[ENCRYPTEDLEN];  
-  int bestLocalDecrypted[ENCRYPTEDLEN];  
+  int localDecrypted[ENCRYPTEDLEN];
+  int bestLocalDecrypted[ENCRYPTEDLEN];
   int leftLetter = 0;
   int rightLetter = 0;
   int backupKey[KEY_LENGTH];
@@ -74,17 +79,7 @@ void decodeKernel(
   float bestScore = CAP;
   int j = 0, jj = 0;
 
-  int lid = omp_get_thread_num();
-  int idx = omp_get_team_num() * T + lid;
   unsigned int localState = globalState[idx];
-
-  if (lid == 0) {
-    for (j=0; j<ALPHABET;++j)
-      for (jj=0; jj<ALPHABET; ++jj)
-        shared_scores[j*ALPHABET + jj] = d_scores[j*ALPHABET + jj];
-  }
-
-  #pragma omp barrier
 
   for (j=0; j<KEY_LENGTH; ++j) 
     key[j]=j;
@@ -146,7 +141,7 @@ void decodeKernel(
     decrypt(d_encrypted, key, localDecrypted);    
 
     for (j=0; j<ENCRYPTEDLEN-1; ++j) {
-      tempScore += shared_scores[ALPHABET*localDecrypted[j] + localDecrypted[j+1]];
+      tempScore += d_scores[ALPHABET*localDecrypted[j] + localDecrypted[j+1]];
     }
 
     if (tempScore < bestScore) {
@@ -166,5 +161,3 @@ void decodeKernel(
   for (j=0; j<ENCRYPTEDLEN; ++j)
     d_decrypted[idx*ENCRYPTEDLEN+j] = bestLocalDecrypted[j];
 }
-
-#pragma omp end declare target

@@ -1,35 +1,187 @@
-"kernels.cpp", line 77: error: identifier "omp_get_thread_num" is undefined
-    int lid = omp_get_thread_num();
-              ^
+"kernels.cpp", line 80: warning: variable "jj" was declared but never referenced [declared_but_not_referenced]
+    int j = 0, jj = 0;
+               ^
 
-"kernels.cpp", line 78: error: identifier "omp_get_team_num" is undefined
-    int idx = omp_get_team_num() * T + lid;
-              ^
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
 
-"main.cpp", line 95: error: invalid text in pragma
-  #pragma acc data to: scores[0:totalBigrams], \
-                   ^
-
-"main.cpp", line 95: error: extra text after expected end of preprocessing directive
-  #pragma acc data to: scores[0:totalBigrams], \
-                     ^
-
-"main.cpp", line 102: error: invalid text in pragma
-      #pragma acc parallel loop thread_limit(T)
-                                ^
-
-"main.cpp", line 102: error: extra text after expected end of preprocessing directive
-      #pragma acc parallel loop thread_limit(T)
-                                            ^
-
-"main.cpp", line 109: error: invalid text in pragma
-      #pragma acc parallel teams num_teams(B) thread_limit(T)
-                           ^
-
-"main.cpp", line 109: error: extra text after expected end of preprocessing directive
-      #pragma acc parallel teams num_teams(B) thread_limit(T)
-                                 ^
-
-8 errors detected in the compilation of "main.cpp".
-make: *** [Makefile.NVD:57: main.o] Error 2
+LCG_random_float(unsigned int*):
+     38, include "kernels.cpp"
+           2, Generating acc routine seq
+              Generating NVIDIA GPU code
+LCG_random_init(unsigned int*):
+     38, include "kernels.cpp"
+          11, Generating acc routine seq
+              Generating NVIDIA GPU code
+decrypt(int const*, int const*, int*):
+     38, include "kernels.cpp"
+          19, Generating acc routine seq
+              Generating NVIDIA GPU code
+          25, Loop not fused: enclosed in different number of nests
+              Generated vector simd code for the loop
+          31, Loop not fused: different loop trip count
+          33, Loop not fused: different loop trip count
+              Generated vector simd code for the loop containing reductions
+          37, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+          41, Loop not vectorized: data dependency
+swapElements(int*, int, int):
+     38, include "kernels.cpp"
+          46, Generating acc routine seq
+              Generating NVIDIA GPU code
+swapBlock(int*, int, int, int):
+     38, include "kernels.cpp"
+          56, Generating acc routine seq
+              Generating NVIDIA GPU code
+          57, Loop not vectorized: data dependency
+decodeKernel(float const*, int const*, unsigned int const*, int*, int):
+     38, include "kernels.cpp"
+          67, Generating acc routine seq
+              Generating NVIDIA GPU code
+          84, Loop not fused: sibling loop may prevent vectorization
+              Generated vector simd code for the loop
+          87, Loop not vectorized: data dependency
+          93, Recognized memory copy idiom
+         102, Loop not vectorized/parallelized: not countable
+         112, Loop not vectorized/parallelized: not countable
+         127, Recognized memory copy idiom
+         133, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+         143, Loop not fused: function call before adjacent loop
+              Loop not vectorized: unprofitable for target
+         149, Recognized memory copy idiom
+         156, Recognized memory copy idiom
+         161, Recognized memory copy idiom
+          57, Loop not vectorized: data dependency
+          25, Loop not fused: enclosed in different number of nests
+              Generated vector simd code for the loop
+          31, Loop not fused: different loop trip count
+          33, Loop not fused: different loop trip count
+              Generated vector simd code for the loop containing reductions
+          37, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+          41, Loop not fused: different loop trip count
+              Loop not vectorized: data dependency
+extractBigrams(float*, char const*):
+     46, Loop not vectorized/parallelized: contains call
+verify(int*):
+     60, Loop not vectorized/parallelized: potential early exits
+candidateScore(int*, float*):
+     70, Loop not vectorized: unprofitable for target
+main:
+     85, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+          46, Loop not vectorized/parallelized: contains call
+     99, Generating copyin(encryptedMap[:]) [if not already present]
+         Generating copyout(decrypted[:406528]) [if not already present]
+         Generating copyin(scores[:]) [if not already present]
+         Generating create(state[:]) [if not already present]
+    100, Generating NVIDIA GPU code
+        103, #pragma acc loop gang, vector(128) /* blockIdx.x threadIdx.x */
+        105, #pragma acc loop seq
+    103, Loop not fused: no successor loop
+    105, Complex loop carried dependence of +((idx)*4)-> prevents parallelization
+         Loop not vectorized: may not be beneficial for target
+         Loop unrolled 2 times
+    107, Generating NVIDIA GPU code
+         84, #pragma acc loop seq
+         87, #pragma acc loop seq
+         91, #pragma acc loop seq
+         93, #pragma acc loop seq
+        102, #pragma acc loop seq
+        110, #pragma acc loop gang, vector(128) /* blockIdx.x threadIdx.x */
+        112, #pragma acc loop seq
+        116, #pragma acc loop seq
+        127, #pragma acc loop seq
+        133, #pragma acc loop seq
+        141, #pragma acc loop seq
+             Generating implicit reduction(+:.inl_.inl_offset_68_507)
+        143, #pragma acc loop seq
+             Generating implicit reduction(+:.inl_tempScore_396)
+        149, #pragma acc loop seq
+        156, #pragma acc loop seq
+        161, #pragma acc loop seq
+    107, Local memory used for .inl_backupKey_415,.inl_key_403,.inl_shiftHelper_496,.inl_localDecrypted_504,.inl_.inl_columns_75_513,.inl_bestLocalDecrypted_517,.inl_.inl_colLength_70_509
+          84, Loop is parallelizable
+              Loop not fused: sibling loop may prevent vectorization
+              Generated vector simd code for the loop
+          87, Loop carried scalar dependence for .inl_localState_400 at line 88
+              Loop carried dependence of .inl_key_403 prevents parallelization
+              Complex loop carried dependence of .inl_key_403 prevents parallelization
+              Loop carried backward dependence of .inl_key_403 prevents vectorization
+              Loop carried reuse of .inl_key_403 prevents parallelization
+          91, Loop carried scalar dependence for .inl_localState_400 at line 98
+              Complex loop carried dependence of .inl_key_403 prevents parallelization
+              Loop carried scalar dependence for .inl_bestScore_397 at line 145
+              Loop carried reuse of .inl_key_403 prevents parallelization
+              Complex loop carried dependence of .inl_backupKey_415 prevents parallelization
+              Loop carried dependence of .inl_backupKey_415 prevents parallelization
+              Loop carried backward dependence of .inl_backupKey_415 prevents vectorization
+              Complex loop carried dependence of .inl_.inl_colLength_70_509,->,.inl_.inl_columns_75_513,.inl_localDecrypted_504 prevents parallelization
+              Loop carried reuse of .inl_localDecrypted_504 prevents parallelization
+              Complex loop carried dependence of .inl_bestLocalDecrypted_517 prevents parallelization
+              Loop carried reuse of .inl_bestLocalDecrypted_517 prevents parallelization
+              Loop carried dependence of -> prevents parallelization
+              Loop carried dependence of -> prevents vectorization
+              Loop carried backward dependence of -> prevents vectorization
+              Loop carried reuse of .inl_shiftHelper_496 prevents parallelization
+              Complex loop carried dependence of .inl_shiftHelper_496 prevents parallelization
+          93, Loop is parallelizable
+              Recognized memory copy idiom
+         102, Complex loop carried dependence of .inl_key_403 prevents parallelization
+              Loop carried dependence of .inl_key_403 prevents parallelization
+              Loop carried backward dependence of .inl_key_403 prevents vectorization
+              Loop carried scalar dependence for .inl_localState_400 at line 104
+              Scalar last value needed after loop for .inl_localState_400 at line 98
+              Loop not vectorized/parallelized: not countable
+         110, Loop not vectorized/parallelized: too deeply nested
+         112, Loop carried scalar dependence for .inl_localState_400 at line 114
+              Scalar last value needed after loop for .inl_localState_400 at line 98
+              Complex loop carried dependence of .inl_key_403 prevents parallelization
+              Loop carried dependence of -> prevents parallelization
+              Loop carried dependence of -> prevents vectorization
+              Loop carried backward dependence of -> prevents vectorization
+              Complex loop carried dependence of -> prevents parallelization
+              Loop not vectorized/parallelized: not countable
+         116, Complex loop carried dependence of .inl_key_403,-> prevents parallelization
+              Loop carried dependence of -> prevents parallelization
+              Loop carried backward dependence of -> prevents vectorization
+         127, Loop is parallelizable
+              Recognized memory copy idiom
+         133, Loop carried dependence of .inl_key_403 prevents parallelization
+              Loop carried backward dependence of .inl_key_403 prevents vectorization
+              Loop not fused: different loop trip count
+         141, Loop is parallelizable
+              Complex loop carried dependence of ->,.inl_.inl_columns_75_513 prevents parallelization
+              Loop carried reuse of .inl_.inl_columns_75_513 prevents parallelization
+              Complex loop carried dependence of .inl_.inl_columns_75_513 prevents parallelization
+              Loop is parallelizable
+              Complex loop carried dependence of ->,.inl_localDecrypted_504 prevents parallelization
+              Loop is parallelizable
+              Complex loop carried dependence of -> prevents parallelization
+              Loop carried reuse of .inl_.inl_columns_75_513 prevents parallelization
+              Complex loop carried dependence of .inl_.inl_columns_75_513 prevents parallelization
+              Loop is parallelizable
+              Complex loop carried dependence of -> prevents parallelization
+              Loop not fused: different loop trip count
+              Loop not fused: enclosed in different number of nests
+              Generated vector simd code for the loop
+              Generated vector simd code for the loop containing reductions
+              Loop not vectorized: data dependency
+              Loop unrolled 2 times
+         143, Loop is parallelizable
+              Loop not fused: function call before adjacent loop
+              Loop not vectorized: unprofitable for target
+         149, Loop is parallelizable
+              Recognized memory copy idiom
+         156, Loop is parallelizable
+              Recognized memory copy idiom
+         161, Loop is parallelizable
+              Recognized memory copy idiom
+          70, Loop not vectorized: unprofitable for target
+          60, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     12, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+     38, include "kernels.cpp"
 timeout was set to  600
