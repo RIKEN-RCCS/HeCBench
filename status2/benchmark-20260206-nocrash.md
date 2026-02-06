@@ -198,7 +198,7 @@
 | medianfilter | 3.75 | build err | 4.68 |
 | memcpy | 3.54 | 6.52 | 6.54 |
 | memtest | 18.85 | 19.78 | 19.45 |
-| merge | over 600 | build err | over 600 |
+| merge | 442.02 | build err | 425.74 |
 | metropolis | 14.03 | build err | 65.32 |
 | michalewicz | 150.55 | over 600 | 63.30 |
 | minibude | 3.31 | build err | 3.54 |
