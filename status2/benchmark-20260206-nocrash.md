@@ -217,7 +217,7 @@
 | multimaterial | 14.67 | 12.11 | 21.91 |
 | murmurhash3 | 2.80 | 2.67 | 2.69 |
 | myocyte | 3.03 | build err | exe err |
-| nbody | over 600 | over 600 | over 600 |
+| nbody | 25.24 | 19.63 | 19.61 |
 | ne | 5.37 | 4.90 | 4.94 |
 | nlll | 3.08 | build err | 3.06 |
 | nms | 2.59 | build err | 2.73 |
