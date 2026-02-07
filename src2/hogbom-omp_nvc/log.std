@@ -3,7 +3,7 @@ Iterations = 1000
 Image dimensions = 4096x4096
 +++++ Offload processing on a device +++++
 Found peak of PSF: Maximum = 1 at location 2048,2048
-    Time 0.3 (s) 
-    Time per cycle 0.3 (ms)
-    Cleaning rate  3333.33 (iterations per second)
+    Time 0.31 (s) 
+    Time per cycle 0.31 (ms)
+    Cleaning rate  3225.81 (iterations per second)
 Done

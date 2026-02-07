@@ -1,2 +1,10 @@
 nvc++ -acc  -std=c++14 -Wall -I../hogbom-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c ../hogbom-cuda/main.cpp -o main.o
 nvc++ -acc  -std=c++14 -Wall -I../hogbom-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c kernels.cpp -o kernels.o
+nvc++ -acc  -std=c++14 -Wall -I../hogbom-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c ../hogbom-cuda/reference.cpp -o reference.o
+nvc++ -acc  -std=c++14 -Wall -I../hogbom-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c ../hogbom-cuda/timer.cpp -o timer.o
+nvc++ -acc  -std=c++14 -Wall -I../hogbom-cuda -O3 -Minfo -mp=gpu -gpu=cc90 main.o kernels.o reference.o timer.o -o main 
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "../hogbom-cuda/prepare_data.sh; time -p ( ./main ../hogbom-cuda/data/dirty_4096.img ../hogbom-cuda/data/psf_4096.img 1000 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 1 686 685

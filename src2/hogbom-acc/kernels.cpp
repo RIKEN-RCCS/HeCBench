@@ -16,13 +16,13 @@ struct Peak {
   float val;
 };
 
-#pragma omp declare target
 struct Position {
     Position(int _x, int _y) : x(_x), y(_y) { };
   int x;
   int y;
 };
 
+#pragma acc routine seq
 static Position idxToPos(const size_t idx, const int width)
 {
   const int y = idx / width;
@@ -30,11 +30,12 @@ static Position idxToPos(const size_t idx, const int width)
   return Position(x, y);
 }
 
+#pragma acc routine seq
 static size_t posToIdx(const int width, const Position& pos)
 {
   return (pos.y * width) + pos.x;
 }
-#pragma omp end declare target
+
 
 void k_findPeak(
   const float *__restrict image, 
@@ -42,37 +43,37 @@ void k_findPeak(
   Peak *__restrict absPeak)
 {
 
-  #pragma acc parallel teams num_teams(findPeakNBlocks) thread_limit(findPeakWidth)
+#pragma acc parallel num_gangs(findPeakNBlocks) vector_length(findPeakWidth)
   {
     float maxVal[findPeakWidth];
     size_t maxPos[findPeakWidth];
-    #pragma omp parallel
-    {
-      int tid = omp_get_thread_num();
-      int bid = omp_get_team_num();
-      const int column = tid + bid * findPeakWidth;
-      maxVal[tid] = 0.f;
-      maxPos[tid] = 0;
 
-      for (int idx = column; idx < size; idx += findPeakWidth*findPeakNBlocks) {
-        if (fabsf(image[idx]) > fabsf(maxVal[tid])) {
-          maxVal[tid] = image[idx];
-          maxPos[tid] = idx;
-        }
-      }
-
-      #pragma omp barrier
-
-      if (tid == 0) {
-        absPeak[bid].val = 0.f;
-        absPeak[bid].pos = 0;
-        for (int i = 0; i < findPeakWidth; ++i) {
-          if (fabsf(maxVal[i]) > fabsf(absPeak[bid].val)) {
-            absPeak[bid].val = maxVal[i];
-            absPeak[bid].pos = maxPos[i];
+#pragma acc loop gang
+    for (int bid = 0; bid < findPeakNBlocks; bid++) {
+      
+#pragma acc loop vector
+      for (int tid = 0; tid < findPeakWidth; tid++) {
+        const int column = tid + bid * findPeakWidth;
+        maxVal[tid] = 0.f;
+        maxPos[tid] = 0;
+	
+        for (int idx = column; idx < size; idx += findPeakWidth * findPeakNBlocks) {
+          if (fabsf(image[idx]) > fabsf(maxVal[tid])) {
+            maxVal[tid] = image[idx];
+            maxPos[tid] = idx;
           }
         }
       }
+
+      absPeak[bid].val = 0.f;
+      absPeak[bid].pos = 0;
+      for (int j = 0; j < findPeakWidth; ++j) {
+	if (fabsf(maxVal[j]) > fabsf(absPeak[bid].val)) {
+	  absPeak[bid].val = maxVal[j];
+	  absPeak[bid].pos = maxPos[j];
+	}
+      }
+      
     }
   }
 }
@@ -85,7 +86,7 @@ static Peak findPeak(const float* d_image, Peak *d_peaks, size_t size)
   k_findPeak(d_image, size, d_peaks);
 
   // Get the peaks array back from the device
-  #pragma acc update from (d_peaks[0:nBlocks])
+  #pragma acc update host (d_peaks[0:nBlocks])
 
   // Each thread block returned a peak, find the absolute maximum
   Peak p;
@@ -152,9 +153,9 @@ void HogbomTest::deconvolve(const std::vector<float>& dirty,
   const float* d_psf = &psf[0];
   float* d_residual = &residual[0];
 
-  #pragma acc data to: d_psf[0:psf_size])\
-                          map(tofrom: d_residual[0:residual_size]) \
-                          map(alloc: d_peaks[0:findPeakNBlocks])
+#pragma acc data copyin(d_psf[0:psf_size])			   \
+  copy(d_residual[0:residual_size])			   \
+  create(d_peaks[0:findPeakNBlocks])
   {
     // Find peak of PSF
     Peak psfPeak = findPeak(d_psf, d_peaks, psf_size);
