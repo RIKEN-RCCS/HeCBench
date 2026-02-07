@@ -24,7 +24,7 @@
 | atomicCost | 18.89 | 18.84 | 5.36 |
 | atomicIntrinsics | over 600 | 3.18 | 3.21 |
 | atomicPerf | 14.74 | build err | 13.89 |
-| atomicReduction | 3.46 | build err | 2.67 |
+| atomicReduction | 3.44 | 2.65 | 2.63 |
 | attention | 2.47 | 83.27 | 83.85 |
 | axhelm | 2.41 | build err | 2.47 |
 | babelstream | 0.56 | 2.72 | 2.85 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| エラーなし | 308 | 195 | 291 |
+| エラーなし | 308 | 196 | 291 |
 
-sycl と acc がともに実行できた件数 193
+sycl と acc がともに実行できた件数 194

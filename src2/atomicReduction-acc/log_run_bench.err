@@ -1,183 +1,283 @@
-"reduction.cpp", line 56: error: invalid text in pragma
-    #pragma acc data to: array[0:arrayLength]) map(alloc: sum)
-                     ^
-
-"reduction.cpp", line 56: error: extra text after expected end of preprocessing directive
-    #pragma acc data to: array[0:arrayLength]) map(alloc: sum)
-                       ^
-
-"reduction.cpp", line 61: error: invalid text in pragma
-        #pragma acc update to(sum)
-                           ^
-
-"reduction.cpp", line 61: error: OpenACC data clause expected
-        #pragma acc update to(sum)
-                           ^
-
-"reduction.cpp", line 61: error: extra text after expected end of preprocessing directive
-        #pragma acc update to(sum)
-                             ^
-
-"reduction.cpp", line 77: error: invalid text in pragma
-          #pragma acc update to(sum)
-                             ^
-
-"reduction.cpp", line 77: error: OpenACC data clause expected
-          #pragma acc update to(sum)
-                             ^
-
-"reduction.cpp", line 77: error: extra text after expected end of preprocessing directive
-          #pragma acc update to(sum)
-                               ^
-
-"reduction.cpp", line 79: error: invalid text in pragma
-          num_teams(blocks) num_threads(threads) reduction(+:sum)
-          ^
-
-"reduction.cpp", line 79: error: extra text after expected end of preprocessing directive
-          num_teams(blocks) num_threads(threads) reduction(+:sum)
-                   ^
-
-"reduction.cpp", line 84: error: invalid text in pragma
-        #pragma acc update from(sum)
-                           ^
-
-"reduction.cpp", line 84: error: OpenACC data clause expected
-        #pragma acc update from(sum)
-                           ^
-
-"reduction.cpp", line 84: error: extra text after expected end of preprocessing directive
-        #pragma acc update from(sum)
-                               ^
-
-"reduction.cpp", line 100: error: invalid text in pragma
-          #pragma acc update to(sum)
-                             ^
-
-"reduction.cpp", line 100: error: OpenACC data clause expected
-          #pragma acc update to(sum)
-                             ^
-
-"reduction.cpp", line 100: error: extra text after expected end of preprocessing directive
-          #pragma acc update to(sum)
-                               ^
-
-"reduction.cpp", line 102: error: invalid text in pragma
-          num_teams(blocks/2) num_threads(threads) reduction(+:sum)
-          ^
-
-"reduction.cpp", line 102: error: extra text after expected end of preprocessing directive
-          num_teams(blocks/2) num_threads(threads) reduction(+:sum)
-                   ^
-
-"reduction.cpp", line 107: error: invalid text in pragma
-        #pragma acc update from(sum)
-                           ^
-
-"reduction.cpp", line 107: error: OpenACC data clause expected
-        #pragma acc update from(sum)
-                           ^
-
-"reduction.cpp", line 107: error: extra text after expected end of preprocessing directive
-        #pragma acc update from(sum)
-                               ^
-
-"reduction.cpp", line 121: error: invalid text in pragma
-          #pragma acc update to(sum)
-                             ^
-
-"reduction.cpp", line 121: error: OpenACC data clause expected
-          #pragma acc update to(sum)
-                             ^
-
-"reduction.cpp", line 121: error: extra text after expected end of preprocessing directive
-          #pragma acc update to(sum)
-                               ^
-
-"reduction.cpp", line 123: error: invalid text in pragma
-          num_teams(blocks/4) num_threads(threads) reduction(+:sum)
-          ^
-
-"reduction.cpp", line 123: error: extra text after expected end of preprocessing directive
-          num_teams(blocks/4) num_threads(threads) reduction(+:sum)
-                   ^
-
-"reduction.cpp", line 128: error: invalid text in pragma
-        #pragma acc update from(sum)
-                           ^
-
-"reduction.cpp", line 128: error: OpenACC data clause expected
-        #pragma acc update from(sum)
-                           ^
-
-"reduction.cpp", line 128: error: extra text after expected end of preprocessing directive
-        #pragma acc update from(sum)
-                               ^
-
-"reduction.cpp", line 142: error: invalid text in pragma
-          #pragma acc update to(sum)
-                             ^
-
-"reduction.cpp", line 142: error: OpenACC data clause expected
-          #pragma acc update to(sum)
-                             ^
-
-"reduction.cpp", line 142: error: extra text after expected end of preprocessing directive
-          #pragma acc update to(sum)
-                               ^
-
-"reduction.cpp", line 144: error: invalid text in pragma
-          num_teams(blocks/8) num_threads(threads) reduction(+:sum)
-          ^
-
-"reduction.cpp", line 144: error: extra text after expected end of preprocessing directive
-          num_teams(blocks/8) num_threads(threads) reduction(+:sum)
-                   ^
-
-"reduction.cpp", line 150: error: invalid text in pragma
-        #pragma acc update from(sum)
-                           ^
-
-"reduction.cpp", line 150: error: OpenACC data clause expected
-        #pragma acc update from(sum)
-                           ^
-
-"reduction.cpp", line 150: error: extra text after expected end of preprocessing directive
-        #pragma acc update from(sum)
-                               ^
-
-"reduction.cpp", line 164: error: invalid text in pragma
-          #pragma acc update to(sum)
-                             ^
-
-"reduction.cpp", line 164: error: OpenACC data clause expected
-          #pragma acc update to(sum)
-                             ^
-
-"reduction.cpp", line 164: error: extra text after expected end of preprocessing directive
-          #pragma acc update to(sum)
-                               ^
-
-"reduction.cpp", line 166: error: invalid text in pragma
-          num_teams(blocks/16) num_threads(threads) reduction(+:sum)
-          ^
-
-"reduction.cpp", line 166: error: extra text after expected end of preprocessing directive
-          num_teams(blocks/16) num_threads(threads) reduction(+:sum)
-                   ^
-
-"reduction.cpp", line 174: error: invalid text in pragma
-        #pragma acc update from(sum)
-                           ^
-
-"reduction.cpp", line 174: error: OpenACC data clause expected
-        #pragma acc update from(sum)
-                           ^
-
-"reduction.cpp", line 174: error: extra text after expected end of preprocessing directive
-        #pragma acc update from(sum)
-                               ^
-
-45 errors detected in the compilation of "reduction.cpp".
-make: *** [Makefile.NVD:58: reduction.o] Error 2
+main:
+    131, Loop not vectorized/parallelized: contains call
+    143, Generating copyin(array[:arrayLength]) [if not already present]
+         Generating create(sum) [if not already present]
+    147, Loop not vectorized/parallelized: contains call
+void run_reduction1<256>(int, int*, int&, int, int):
+     33, Generating present(array[:arrayLength])
+     34, Loop not vectorized/parallelized: contains call
+     35, Generating update device(sum[:1])
+         Generating implicit firstprivate(arrayLength)
+         Generating NVIDIA GPU code
+         38, #pragma acc loop gang(blocks), vector(256) /* blockIdx.x threadIdx.x */
+             Generating reduction(+:sum[:1])
+     35, Local memory used for sum
+         Generating implicit copy(sum[:1]) [if not already present]
+     38, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+     43, Generating update self(sum[:1])
+void run_reduction1<128>(int, int*, int&, int, int):
+     33, Generating present(array[:arrayLength])
+     34, Loop not vectorized/parallelized: contains call
+     35, Generating update device(sum[:1])
+         Generating implicit firstprivate(arrayLength)
+         Generating NVIDIA GPU code
+         38, #pragma acc loop gang(blocks), vector(128) /* blockIdx.x threadIdx.x */
+             Generating reduction(+:sum[:1])
+     35, Local memory used for sum
+         Generating implicit copy(sum[:1]) [if not already present]
+     38, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+     43, Generating update self(sum[:1])
+void run_reduction1<512>(int, int*, int&, int, int):
+     33, Generating present(array[:arrayLength])
+     34, Loop not vectorized/parallelized: contains call
+     35, Generating update device(sum[:1])
+         Generating implicit firstprivate(arrayLength)
+         Generating NVIDIA GPU code
+         38, #pragma acc loop gang(blocks), vector(512) /* blockIdx.x threadIdx.x */
+             Generating reduction(+:sum[:1])
+     35, Local memory used for sum
+         Generating implicit copy(sum[:1]) [if not already present]
+     38, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+     43, Generating update self(sum[:1])
+void run_reduction1<1024>(int, int*, int&, int, int):
+     33, Generating present(array[:arrayLength])
+     34, Loop not vectorized/parallelized: contains call
+     35, Generating update device(sum[:1])
+         Generating implicit firstprivate(arrayLength)
+         Generating NVIDIA GPU code
+         38, #pragma acc loop gang(blocks), vector(1024) /* blockIdx.x threadIdx.x */
+             Generating reduction(+:sum[:1])
+     35, Local memory used for sum
+         Generating implicit copy(sum[:1]) [if not already present]
+     38, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+     43, Generating update self(sum[:1])
+void run_reduction2<128>(int, int*, int&, int, int):
+     49, Generating present(array[:arrayLength])
+     50, Loop not vectorized/parallelized: contains call
+     51, Generating update device(sum[:1])
+         Generating implicit firstprivate(arrayLength)
+         Generating NVIDIA GPU code
+         54, #pragma acc loop gang(blocks/2), vector(128) /* blockIdx.x threadIdx.x */
+             Generating reduction(+:sum[:1])
+     51, Local memory used for sum
+         Generating implicit copy(sum[:1]) [if not already present]
+     54, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+     59, Generating update self(sum[:1])
+void run_reduction2<256>(int, int*, int&, int, int):
+     49, Generating present(array[:arrayLength])
+     50, Loop not vectorized/parallelized: contains call
+     51, Generating update device(sum[:1])
+         Generating implicit firstprivate(arrayLength)
+         Generating NVIDIA GPU code
+         54, #pragma acc loop gang(blocks/2), vector(256) /* blockIdx.x threadIdx.x */
+             Generating reduction(+:sum[:1])
+     51, Local memory used for sum
+         Generating implicit copy(sum[:1]) [if not already present]
+     54, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+     59, Generating update self(sum[:1])
+void run_reduction2<512>(int, int*, int&, int, int):
+     49, Generating present(array[:arrayLength])
+     50, Loop not vectorized/parallelized: contains call
+     51, Generating update device(sum[:1])
+         Generating implicit firstprivate(arrayLength)
+         Generating NVIDIA GPU code
+         54, #pragma acc loop gang(blocks/2), vector(512) /* blockIdx.x threadIdx.x */
+             Generating reduction(+:sum[:1])
+     51, Local memory used for sum
+         Generating implicit copy(sum[:1]) [if not already present]
+     54, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+     59, Generating update self(sum[:1])
+void run_reduction2<1024>(int, int*, int&, int, int):
+     49, Generating present(array[:arrayLength])
+     50, Loop not vectorized/parallelized: contains call
+     51, Generating update device(sum[:1])
+         Generating implicit firstprivate(arrayLength)
+         Generating NVIDIA GPU code
+         54, #pragma acc loop gang(blocks/2), vector(1024) /* blockIdx.x threadIdx.x */
+             Generating reduction(+:sum[:1])
+     51, Local memory used for sum
+         Generating implicit copy(sum[:1]) [if not already present]
+     54, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+     59, Generating update self(sum[:1])
+void run_reduction3<128>(int, int*, int&, int, int):
+     65, Generating present(array[:arrayLength])
+     66, Loop not vectorized/parallelized: contains call
+     67, Generating update device(sum[:1])
+         Generating implicit firstprivate(arrayLength)
+         Generating NVIDIA GPU code
+         70, #pragma acc loop gang(blocks/4), vector(128) /* blockIdx.x threadIdx.x */
+             Generating reduction(+:sum[:1])
+     67, Local memory used for sum
+         Generating implicit copy(sum[:1]) [if not already present]
+     70, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+     75, Generating update self(sum[:1])
+void run_reduction3<256>(int, int*, int&, int, int):
+     65, Generating present(array[:arrayLength])
+     66, Loop not vectorized/parallelized: contains call
+     67, Generating update device(sum[:1])
+         Generating implicit firstprivate(arrayLength)
+         Generating NVIDIA GPU code
+         70, #pragma acc loop gang(blocks/4), vector(256) /* blockIdx.x threadIdx.x */
+             Generating reduction(+:sum[:1])
+     67, Local memory used for sum
+         Generating implicit copy(sum[:1]) [if not already present]
+     70, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+     75, Generating update self(sum[:1])
+void run_reduction3<512>(int, int*, int&, int, int):
+     65, Generating present(array[:arrayLength])
+     66, Loop not vectorized/parallelized: contains call
+     67, Generating update device(sum[:1])
+         Generating implicit firstprivate(arrayLength)
+         Generating NVIDIA GPU code
+         70, #pragma acc loop gang(blocks/4), vector(512) /* blockIdx.x threadIdx.x */
+             Generating reduction(+:sum[:1])
+     67, Local memory used for sum
+         Generating implicit copy(sum[:1]) [if not already present]
+     70, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+     75, Generating update self(sum[:1])
+void run_reduction3<1024>(int, int*, int&, int, int):
+     65, Generating present(array[:arrayLength])
+     66, Loop not vectorized/parallelized: contains call
+     67, Generating update device(sum[:1])
+         Generating implicit firstprivate(arrayLength)
+         Generating NVIDIA GPU code
+         70, #pragma acc loop gang(blocks/4), vector(1024) /* blockIdx.x threadIdx.x */
+             Generating reduction(+:sum[:1])
+     67, Local memory used for sum
+         Generating implicit copy(sum[:1]) [if not already present]
+     70, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+     75, Generating update self(sum[:1])
+void run_reduction4<128>(int, int*, int&, int, int):
+     81, Generating present(array[:arrayLength])
+     82, Loop not vectorized/parallelized: contains call
+     83, Generating update device(sum[:1])
+         Generating implicit firstprivate(arrayLength)
+         Generating NVIDIA GPU code
+         86, #pragma acc loop gang(blocks/8), vector(128) /* blockIdx.x threadIdx.x */
+             Generating reduction(+:sum[:1])
+     83, Local memory used for sum
+         Generating implicit copy(sum[:1]) [if not already present]
+     86, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+     92, Generating update self(sum[:1])
+void run_reduction4<256>(int, int*, int&, int, int):
+     81, Generating present(array[:arrayLength])
+     82, Loop not vectorized/parallelized: contains call
+     83, Generating update device(sum[:1])
+         Generating implicit firstprivate(arrayLength)
+         Generating NVIDIA GPU code
+         86, #pragma acc loop gang(blocks/8), vector(256) /* blockIdx.x threadIdx.x */
+             Generating reduction(+:sum[:1])
+     83, Local memory used for sum
+         Generating implicit copy(sum[:1]) [if not already present]
+     86, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+     92, Generating update self(sum[:1])
+void run_reduction4<512>(int, int*, int&, int, int):
+     81, Generating present(array[:arrayLength])
+     82, Loop not vectorized/parallelized: contains call
+     83, Generating update device(sum[:1])
+         Generating implicit firstprivate(arrayLength)
+         Generating NVIDIA GPU code
+         86, #pragma acc loop gang(blocks/8), vector(512) /* blockIdx.x threadIdx.x */
+             Generating reduction(+:sum[:1])
+     83, Local memory used for sum
+         Generating implicit copy(sum[:1]) [if not already present]
+     86, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+     92, Generating update self(sum[:1])
+void run_reduction4<1024>(int, int*, int&, int, int):
+     81, Generating present(array[:arrayLength])
+     82, Loop not vectorized/parallelized: contains call
+     83, Generating update device(sum[:1])
+         Generating implicit firstprivate(arrayLength)
+         Generating NVIDIA GPU code
+         86, #pragma acc loop gang(blocks/8), vector(1024) /* blockIdx.x threadIdx.x */
+             Generating reduction(+:sum[:1])
+     83, Local memory used for sum
+         Generating implicit copy(sum[:1]) [if not already present]
+     86, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+     92, Generating update self(sum[:1])
+void run_reduction5<128>(int, int*, int&, int, int):
+     98, Generating present(array[:arrayLength])
+     99, Loop not vectorized/parallelized: contains call
+    100, Generating update device(sum[:1])
+         Generating implicit firstprivate(arrayLength)
+         Generating NVIDIA GPU code
+        103, #pragma acc loop gang(blocks/16), vector(128) /* blockIdx.x threadIdx.x */
+             Generating reduction(+:sum[:1])
+    100, Local memory used for sum
+         Generating implicit copy(sum[:1]) [if not already present]
+    103, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+    111, Generating update self(sum[:1])
+void run_reduction5<256>(int, int*, int&, int, int):
+     98, Generating present(array[:arrayLength])
+     99, Loop not vectorized/parallelized: contains call
+    100, Generating update device(sum[:1])
+         Generating implicit firstprivate(arrayLength)
+         Generating NVIDIA GPU code
+        103, #pragma acc loop gang(blocks/16), vector(256) /* blockIdx.x threadIdx.x */
+             Generating reduction(+:sum[:1])
+    100, Local memory used for sum
+         Generating implicit copy(sum[:1]) [if not already present]
+    103, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+    111, Generating update self(sum[:1])
+void run_reduction5<512>(int, int*, int&, int, int):
+     98, Generating present(array[:arrayLength])
+     99, Loop not vectorized/parallelized: contains call
+    100, Generating update device(sum[:1])
+         Generating implicit firstprivate(arrayLength)
+         Generating NVIDIA GPU code
+        103, #pragma acc loop gang(blocks/16), vector(512) /* blockIdx.x threadIdx.x */
+             Generating reduction(+:sum[:1])
+    100, Local memory used for sum
+         Generating implicit copy(sum[:1]) [if not already present]
+    103, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+    111, Generating update self(sum[:1])
+void run_reduction5<1024>(int, int*, int&, int, int):
+     98, Generating present(array[:arrayLength])
+     99, Loop not vectorized/parallelized: contains call
+    100, Generating update device(sum[:1])
+         Generating implicit firstprivate(arrayLength)
+         Generating NVIDIA GPU code
+        103, #pragma acc loop gang(blocks/16), vector(1024) /* blockIdx.x threadIdx.x */
+             Generating reduction(+:sum[:1])
+    100, Local memory used for sum
+         Generating implicit copy(sum[:1]) [if not already present]
+    103, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+    111, Generating update self(sum[:1])
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     26, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1l>>::_S_gcd(long, long):
+     26, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<double, std::ratio<1l, 1l>>::_S_gcd(long, long):
+     26, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
 timeout was set to  600
