@@ -27,42 +27,64 @@ __gnu_cxx::__enable_if<std::__is_scalar<float>::__value, void>::__type std::__fi
           40, include "char_traits.h"
                39, include "stl_algobase.h"
                    923, Recognized memory set idiom
-"kernels.cpp", line 45: error: invalid text in pragma
-    #pragma acc parallel teams num_teams(findPeakNBlocks) thread_limit(findPeakWidth)
-                         ^
-
-"kernels.cpp", line 45: error: extra text after expected end of preprocessing directive
-    #pragma acc parallel teams num_teams(findPeakNBlocks) thread_limit(findPeakWidth)
-                               ^
-
-"kernels.cpp", line 51: error: identifier "omp_get_thread_num" is undefined
-        int tid = omp_get_thread_num();
-                  ^
-
-"kernels.cpp", line 52: error: identifier "omp_get_team_num" is undefined
-        int bid = omp_get_team_num();
-                  ^
-
-"kernels.cpp", line 88: error: invalid text in pragma
-    #pragma acc update from (d_peaks[0:nBlocks])
-                       ^
-
-"kernels.cpp", line 88: error: OpenACC data clause expected
-    #pragma acc update from (d_peaks[0:nBlocks])
-                       ^
-
-"kernels.cpp", line 88: error: extra text after expected end of preprocessing directive
-    #pragma acc update from (d_peaks[0:nBlocks])
-                            ^
-
-"kernels.cpp", line 155: error: invalid text in pragma
-    #pragma acc data to: d_psf[0:psf_size])\
-                     ^
-
-"kernels.cpp", line 155: error: extra text after expected end of preprocessing directive
-    #pragma acc data to: d_psf[0:psf_size])\
-                       ^
-
-9 errors detected in the compilation of "kernels.cpp".
-make: *** [Makefile.NVD:71: kernels.o] Error 2
+k_findPeak(float const*, unsigned long, Peak*):
+     47, Generating NVIDIA GPU code
+         52, #pragma acc loop gang(128) /* blockIdx.x */
+         55, #pragma acc loop vector(256) /* threadIdx.x */
+         60, #pragma acc loop seq
+         70, #pragma acc loop seq
+     47, CUDA shared memory used for maxVal
+         Generating implicit copyin(image[:]) [if not already present]
+         Generating implicit copy(absPeak[:128]) [if not already present]
+     52, Loop not fused: no successor loop
+     55, Loop is parallelizable
+         Generating implicit firstprivate(size)
+         Loop not fused: enclosed in different number of nests
+     60, Complex loop carried dependence of maxVal prevents parallelization
+         Loop carried reuse of maxVal,maxPos prevents parallelization
+         Loop not vectorized: unknown
+     70, Complex loop carried dependence of absPeak->val prevents parallelization
+         Loop carried dependence of absPeak->val prevents parallelization
+         Loop carried backward dependence of absPeak->val prevents vectorization
+HogbomTest::deconvolve(std::vector<float, std::allocator<float>> const&, unsigned long, std::vector<float, std::allocator<float>> const&, unsigned long, std::vector<float, std::allocator<float>>&, std::vector<float, std::allocator<float>>&):
+    159, Generating create(d_peaks[:]) [if not already present]
+         Generating copyin(d_psf[:psf_size]) [if not already present]
+         Generating copy(d_residual[:residual_size]) [if not already present]
+    171, Loop not vectorized/parallelized: contains call
+Position::Position(int, int):
+     20, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+_INTERNAL_11_kernels_cpp_a605e829::idxToPos(unsigned long, int):
+     27, Generating acc routine seq
+         Generating NVIDIA GPU code
+_INTERNAL_11_kernels_cpp_a605e829::posToIdx(int, Position const&):
+     35, Generating acc routine seq
+         Generating NVIDIA GPU code
+_INTERNAL_11_kernels_cpp_a605e829::findPeak(float const*, Peak*, unsigned long):
+     92, Generating update self(d_peaks[:128])
+     95, Loop not vectorized: unknown
+_INTERNAL_11_kernels_cpp_a605e829::subtractPSF(float const*, int, float*, int, unsigned long, unsigned long, float, float):
+    123, Generating implicit firstprivate(starty,stopy,stopx,startx)
+         Generating NVIDIA GPU code
+        126, #pragma acc loop gang, vector(256) collapse(2) /* blockIdx.x threadIdx.x */
+        127,   /* blockIdx.x threadIdx.x collapsed */
+    123, Local memory used for _T7_6841,_T6_6841
+         Generating implicit copy(d_residual[:]) [if not already present]
+         Generating implicit copyin(d_psf[:]) [if not already present]
+    126, Loop not fused: no successor loop
+    127, Generating implicit firstprivate(absPeakVal,diffx,residualWidth,psfWidth,gain,diffy)
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Vectorized loop was interleaved
+         Loop unrolled 4 times
+HogbomGolden::deconvolve(std::vector<float, std::allocator<float>> const&, unsigned long, std::vector<float, std::allocator<float>> const&, unsigned long, std::vector<float, std::allocator<float>>&, std::vector<float, std::allocator<float>>&):
+          89, Loop not fused: function call before adjacent loop
+              Loop not vectorized: unknown
+     31, Loop not vectorized/parallelized: potential early exits
+          89, Loop not vectorized: unknown
+          76, Loop not vectorized: data dependency
+HogbomGolden::findPeak(std::vector<float, std::allocator<float>> const&, float&, unsigned long&):
+     89, Loop not vectorized: unknown
+HogbomGolden::subtractPSF(std::vector<float, std::allocator<float>> const&, unsigned long, std::vector<float, std::allocator<float>>&, unsigned long, unsigned long, unsigned long, float, float):
+     76, Loop not vectorized: may not be beneficial for target
 timeout was set to  600

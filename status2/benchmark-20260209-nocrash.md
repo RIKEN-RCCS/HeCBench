@@ -68,7 +68,7 @@
 | concat | 15.08 | 16.24 | 15.73 |
 | contract | 11.40 | 28.95 | 10.82 |
 | conversion | 4.98 | 3.56 | 3.44 |
-| convolution1D | 346.88 | build err | 353.39 |
+| convolution1D | 380.96 | 333.42 | 383.27 |
 | convolution3D | 2.48 | 3.17 | 2.51 |
 | convolutionSeparable | 13.58 | build err | 22.05 |
 | cooling | 154.60 | 452.57 | 454.09 |
@@ -138,7 +138,7 @@
 | hexciton | 6.03 | build err | 4.96 |
 | histogram | 2.98 | build err | 3.30 |
 | hmm | 8.56 | 14.71 | 2.81 |
-| hogbom | 0.50 | build err | 2.71 |
+| hogbom | 2.67 | 2.65 | 2.76 |
 | hotspot3D | 16.21 | 18.11 | 18.00 |
 | hwt1d | 3.13 | 3.27 | 3.23 |
 | hybridsort | 15.27 | build err | 12.96 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 306 | 193 | 285 |
+| エラーなし | 308 | 198 | 291 |
 
-sycl と acc がともに完了した件数 190
+sycl と acc がともに実行できた件数 196

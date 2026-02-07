@@ -22,7 +22,7 @@ void conv1d(const T * __restrict__ mask,
             const int input_width,
             const int mask_width)
 {
-  #pragma acc parallel loop num_threads(BLOCK_SIZE)
+  #pragma acc parallel loop vector_length(BLOCK_SIZE)
   for (int i = 0; i < input_width; i++) {
     T s = 0;
     int start = i - mask_width / 2;
@@ -42,38 +42,41 @@ void conv1d_tiled(const T *__restrict__ mask,
                   const int input_width,
                   const int mask_width)
 {
-  #pragma acc parallel teams num_teams(input_width/BLOCK_SIZE) thread_limit(BLOCK_SIZE)
+  #pragma acc parallel num_gangs(input_width/BLOCK_SIZE) vector_length(BLOCK_SIZE)
   {
     T tile[TILE_SIZE + MAX_MASK_WIDTH - 1];
-    #pragma omp parallel 
-    {
-      int bid = omp_get_team_num();
-      int lid = omp_get_thread_num();
-      int dim = omp_get_vector();
-      int i = bid * dim + lid;
+#pragma acc loop gang
+    for (int bid = 0; bid < input_width / BLOCK_SIZE; bid++) {
 
-      int n = mask_width / 2;  // last n cells of the previous tile
+#pragma acc loop vector
+      for (int lid = 0; lid < BLOCK_SIZE; lid++) {
+	const int dim = BLOCK_SIZE;
+	const int i = bid * dim + lid;
+	const int n = mask_width / 2;  // last n cells of the previous tile
 
       // load left cells 
-      int halo_left = (bid - 1) * dim + lid;
-      if (lid >= dim - n)
-         tile[lid - (dim - n)] = halo_left < 0 ? 0 : in[halo_left];
-
+	int halo_left = (bid - 1) * dim + lid;
+	if (lid >= dim - n)
+	  tile[lid - (dim - n)] = halo_left < 0 ? 0 : in[halo_left];
+	
       // load center cells
-      tile[n + lid] = in[bid * dim + lid];
-
+	tile[n + lid] = in[bid * dim + lid];
+      
       // load right cells
-      int halo_right = (bid + 1) * dim + lid;
-      if (lid < n)
-         tile[lid + dim + n] = halo_right >= input_width ? 0 : in[halo_right];
+	int halo_right = (bid + 1) * dim + lid;
+	if (lid < n)
+	  tile[lid + dim + n] = halo_right >= input_width ? 0 : in[halo_right];
+      }
 
-      #pragma omp barrier
-
-      T s = 0;
-      for (int j = 0; j < mask_width; j++)
-        s += tile[lid + j] * mask[j];
-
-      out[i] = s;
+#pragma acc loop vector
+      for (int lid = 0; lid < BLOCK_SIZE; lid++) {
+	const int i = bid * BLOCK_SIZE + lid;
+	T s = 0;
+	for (int j = 0; j < mask_width; j++) {
+	  s += tile[lid + j] * mask[j];
+	}
+	out[i] = s;
+      }
     }
   }
 }
@@ -85,35 +88,42 @@ void conv1d_tiled_caching(const T *__restrict__ mask,
                           const int input_width,
                           const int mask_width)
 {
-  #pragma acc parallel teams num_teams(input_width/BLOCK_SIZE) thread_limit(BLOCK_SIZE)
+  #pragma acc parallel num_gangs(input_width/BLOCK_SIZE) vector_length(BLOCK_SIZE)
   {
     T tile[TILE_SIZE];
-    #pragma omp parallel 
-    {
-      int bid = omp_get_team_num();
-      int lid = omp_get_thread_num();
-      int dim = omp_get_vector();
-      int i = bid * dim + lid;
-      tile[lid] = in[i];
-      #pragma omp barrier
 
-      int this_tile_start = bid * dim;
-      int next_tile_start = (bid + 1) * dim;
-      int start = i - (mask_width / 2);
-      T s = 0;
-      for (int j = 0; j < mask_width; j++) {
-        int in_index = start + j;
-        if (in_index >= 0 && in_index < input_width) {
-          if (in_index >= this_tile_start && in_index < next_tile_start) {
-            // in_index = (start + j) = (i - mask_width/2 +j) >= 0,
-            // then map in_index to tile_index
-            s += tile[lid + j - (mask_width / 2)] * mask[j];
-          } else {
-            s += in[in_index] * mask[j];
-          }
-        }
+#pragma acc loop gang
+    for (int bid = 0; bid < input_width / BLOCK_SIZE; bid++) {
+
+#pragma acc loop vector
+      for (int lid = 0; lid < BLOCK_SIZE; lid++) {
+	int i = bid * BLOCK_SIZE + lid;
+	tile[lid] = in[i];
       }
-      out[i] = s;
+
+#pragma acc loop vector
+      for (int lid = 0; lid < BLOCK_SIZE; lid++) {
+	int dim = BLOCK_SIZE;
+	int i = bid * dim + lid;
+	int this_tile_start = bid * dim;
+	int next_tile_start = (bid + 1) * dim;
+	int start = i - (mask_width / 2);
+	
+	T s = 0;
+	for (int j = 0; j < mask_width; j++) {
+	  int in_index = start + j;
+	  if (in_index >= 0 && in_index < input_width) {
+	    if (in_index >= this_tile_start && in_index < next_tile_start) {
+	      // in_index = (start + j) = (i - mask_width/2 +j) >= 0,
+	      // then map in_index to tile_index
+	      s += tile[lid + j - (mask_width / 2)] * mask[j];
+	    } else {
+	      s += in[in_index] * mask[j];
+	    }
+	  }
+	}
+	out[i] = s;
+      }
     }
   }
 }
@@ -160,9 +170,9 @@ void conv1D(const int input_width, const int mask_width, const int repeat)
     a[i] = rand() % 256;
   }
 
-  #pragma acc data to: a[0:input_width], \
-                                  mask[0:mask_width]) \
-                          map(alloc: b[0:input_width])
+#pragma acc data copyin(a[0:input_width],	      \
+			mask[0:mask_width])		\
+  create(b[0:input_width])
   {
     // conv1D basic
     auto start = std::chrono::steady_clock::now();
@@ -173,7 +183,7 @@ void conv1D(const int input_width, const int mask_width, const int repeat)
     auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
     printf("Average kernel execution time of conv1d kernel: %f (us)\n",
            (time * 1e-3f) / repeat);
-    #pragma acc update from (b[0:input_width])
+    #pragma acc update host (b[0:input_width])
     reference(a, b, mask, input_width, mask_width);
 
     // conv1D tiling
@@ -185,7 +195,7 @@ void conv1D(const int input_width, const int mask_width, const int repeat)
     time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
     printf("Average kernel execution time of conv1d-tiled kernel: %f (us)\n",
            (time * 1e-3f) / repeat);
-    #pragma acc update from (b[0:input_width])
+    #pragma acc update host (b[0:input_width])
     reference(a, b, mask, input_width, mask_width);
 
     // conv1D tiling and caching
@@ -197,7 +207,7 @@ void conv1D(const int input_width, const int mask_width, const int repeat)
     time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
     printf("Average kernel execution time of conv1d-tiled-caching kernel: %f (us)\n",
            (time * 1e-3f) / repeat);
-    #pragma acc update from (b[0:input_width])
+    #pragma acc update host (b[0:input_width])
     reference(a, b, mask, input_width, mask_width);
   }
 

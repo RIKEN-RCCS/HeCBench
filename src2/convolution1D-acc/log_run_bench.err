@@ -1,107 +1,220 @@
-"main.cpp", line 163: error: invalid text in pragma
-    #pragma acc data to: a[0:input_width], \
-                     ^
+"main.cpp", line 54: warning: variable "i" was declared but never referenced [declared_but_not_referenced]
+  	const int i = bid * dim + lid;
+  	          ^
+          detected during instantiation of "void conv1D<T>(int, int, int) [with T=double]" at line 235
 
-"main.cpp", line 163: error: extra text after expected end of preprocessing directive
-    #pragma acc data to: a[0:input_width], \
-                       ^
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
 
-"main.cpp", line 176: error: invalid text in pragma
-      #pragma acc update from (b[0:input_width])
-                         ^
-
-"main.cpp", line 176: error: OpenACC data clause expected
-      #pragma acc update from (b[0:input_width])
-                         ^
-
-"main.cpp", line 176: error: extra text after expected end of preprocessing directive
-      #pragma acc update from (b[0:input_width])
-                              ^
-
-"main.cpp", line 188: error: invalid text in pragma
-      #pragma acc update from (b[0:input_width])
-                         ^
-
-"main.cpp", line 188: error: OpenACC data clause expected
-      #pragma acc update from (b[0:input_width])
-                         ^
-
-"main.cpp", line 188: error: extra text after expected end of preprocessing directive
-      #pragma acc update from (b[0:input_width])
-                              ^
-
-"main.cpp", line 200: error: invalid text in pragma
-      #pragma acc update from (b[0:input_width])
-                         ^
-
-"main.cpp", line 200: error: OpenACC data clause expected
-      #pragma acc update from (b[0:input_width])
-                         ^
-
-"main.cpp", line 200: error: extra text after expected end of preprocessing directive
-      #pragma acc update from (b[0:input_width])
-                              ^
-
-"main.cpp", line 25: error: invalid text in pragma
-    #pragma acc parallel loop num_threads(BLOCK_SIZE)
-                              ^
-          detected during instantiation of "void conv1D<T>(int, int, int) [with T=double]" at line 225
-
-"main.cpp", line 25: error: extra text after expected end of preprocessing directive
-    #pragma acc parallel loop num_threads(BLOCK_SIZE)
-                                         ^
-          detected during instantiation of "void conv1D<T>(int, int, int) [with T=double]" at line 225
-
-"main.cpp", line 45: error: invalid text in pragma
-    #pragma acc parallel teams num_teams(input_width/BLOCK_SIZE) thread_limit(BLOCK_SIZE)
-                         ^
-          detected during instantiation of "void conv1D<T>(int, int, int) [with T=double]" at line 225
-
-"main.cpp", line 45: error: extra text after expected end of preprocessing directive
-    #pragma acc parallel teams num_teams(input_width/BLOCK_SIZE) thread_limit(BLOCK_SIZE)
-                               ^
-          detected during instantiation of "void conv1D<T>(int, int, int) [with T=double]" at line 225
-
-"main.cpp", line 50: error: identifier "omp_get_team_num" is undefined
-        int bid = omp_get_team_num();
-                  ^
-          detected during instantiation of "void conv1D<T>(int, int, int) [with T=double]" at line 225
-
-"main.cpp", line 51: error: identifier "omp_get_thread_num" is undefined
-        int lid = omp_get_thread_num();
-                  ^
-          detected during instantiation of "void conv1D<T>(int, int, int) [with T=double]" at line 225
-
-"main.cpp", line 52: error: identifier "omp_get_vector" is undefined
-        int dim = omp_get_vector();
-                  ^
-          detected during instantiation of "void conv1D<T>(int, int, int) [with T=double]" at line 225
-
-"main.cpp", line 88: error: invalid text in pragma
-    #pragma acc parallel teams num_teams(input_width/BLOCK_SIZE) thread_limit(BLOCK_SIZE)
-                         ^
-          detected during instantiation of "void conv1D<T>(int, int, int) [with T=double]" at line 225
-
-"main.cpp", line 88: error: extra text after expected end of preprocessing directive
-    #pragma acc parallel teams num_teams(input_width/BLOCK_SIZE) thread_limit(BLOCK_SIZE)
-                               ^
-          detected during instantiation of "void conv1D<T>(int, int, int) [with T=double]" at line 225
-
-"main.cpp", line 93: error: identifier "omp_get_team_num" is undefined
-        int bid = omp_get_team_num();
-                  ^
-          detected during instantiation of "void conv1D<T>(int, int, int) [with T=double]" at line 225
-
-"main.cpp", line 94: error: identifier "omp_get_thread_num" is undefined
-        int lid = omp_get_thread_num();
-                  ^
-          detected during instantiation of "void conv1D<T>(int, int, int) [with T=double]" at line 225
-
-"main.cpp", line 95: error: identifier "omp_get_vector" is undefined
-        int dim = omp_get_vector();
-                  ^
-          detected during instantiation of "void conv1D<T>(int, int, int) [with T=double]" at line 225
-
-23 errors detected in the compilation of "main.cpp".
-make: *** [Makefile.NVD:57: main.o] Error 2
+main:
+    230, Loop not vectorized/parallelized: potential early exits
+void conv1D<double>(int, int, int):
+    166, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+    169, Loop not vectorized/parallelized: contains call
+    176, Generating copyin(mask[:mask_width]) [if not already present]
+         Generating create(b[:input_width]) [if not already present]
+         Generating copyin(a[:input_width]) [if not already present]
+    179, Loop not vectorized/parallelized: contains call
+         139, Loop not vectorized/parallelized: potential early exits
+         142, Generated vector simd code for the loop containing reductions
+    187, Generating update self(b[:input_width])
+    191, Loop not vectorized/parallelized: contains call
+         139, Loop not vectorized/parallelized: potential early exits
+         142, Generated vector simd code for the loop containing reductions
+    199, Generating update self(b[:input_width])
+    203, Loop not vectorized/parallelized: contains call
+         139, Loop not vectorized/parallelized: potential early exits
+         142, Generated vector simd code for the loop containing reductions
+    211, Generating update self(b[:input_width])
+void conv1D<float>(int, int, int):
+    166, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+    169, Loop not vectorized/parallelized: contains call
+    176, Generating copyin(mask[:mask_width]) [if not already present]
+         Generating create(b[:input_width]) [if not already present]
+         Generating copyin(a[:input_width]) [if not already present]
+    179, Loop not vectorized/parallelized: contains call
+         139, Loop not vectorized/parallelized: potential early exits
+         142, Generated vector simd code for the loop containing reductions
+    187, Generating update self(b[:input_width])
+    191, Loop not vectorized/parallelized: contains call
+         139, Loop not vectorized/parallelized: potential early exits
+         142, Generated vector simd code for the loop containing reductions
+    199, Generating update self(b[:input_width])
+    203, Loop not vectorized/parallelized: contains call
+         139, Loop not vectorized/parallelized: potential early exits
+         142, Generated vector simd code for the loop containing reductions
+    211, Generating update self(b[:input_width])
+void conv1D<short>(int, int, int):
+    166, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+    169, Loop not vectorized/parallelized: contains call
+    176, Generating copyin(mask[:mask_width]) [if not already present]
+         Generating create(b[:input_width]) [if not already present]
+         Generating copyin(a[:input_width]) [if not already present]
+    179, Loop not vectorized/parallelized: contains call
+         139, Loop not vectorized/parallelized: potential early exits
+         142, Generated vector simd code for the loop containing reductions
+    187, Generating update self(b[:input_width])
+    191, Loop not vectorized/parallelized: contains call
+         139, Loop not vectorized/parallelized: potential early exits
+         142, Generated vector simd code for the loop containing reductions
+    199, Generating update self(b[:input_width])
+    203, Loop not vectorized/parallelized: contains call
+         139, Loop not vectorized/parallelized: potential early exits
+         142, Generated vector simd code for the loop containing reductions
+    211, Generating update self(b[:input_width])
+void conv1d<double>(double const*, double const*, double*, int, int):
+     24, Generating implicit firstprivate(input_width,mask_width)
+         Generating NVIDIA GPU code
+         26, #pragma acc loop gang /* blockIdx.x */
+         29, #pragma acc loop vector(256) /* threadIdx.x */
+             Generating implicit reduction(+:s)
+     24, Generating implicit copyin(in[:]) [if not already present]
+         Generating implicit copyout(out[:input_width]) [if not already present]
+         Generating implicit copyin(mask[:mask_width]) [if not already present]
+     26, Loop not fused: no successor loop
+     29, Loop is parallelizable
+         Generated vector simd code for the loop containing reductions
+void reference<double>(double const*, double const*, double const*, int, int):
+    139, Loop not vectorized/parallelized: potential early exits
+    142, Generated vector simd code for the loop containing reductions
+void conv1d_tiled<double>(double const*, double const*, double*, int, int):
+     46, Generating implicit firstprivate(mask_width,input_width)
+         Generating NVIDIA GPU code
+         49, #pragma acc loop gang(input_width/256) /* blockIdx.x */
+         52, #pragma acc loop vector(256) /* threadIdx.x */
+         72, #pragma acc loop vector(256) /* threadIdx.x */
+         75, #pragma acc loop seq
+             Generating implicit reduction(+:s)
+     46, Generating implicit copyin(in[:]) [if not already present]
+         Generating implicit copyout(out[:]) [if not already present]
+         Generating implicit copyin(mask[:mask_width]) [if not already present]
+     49, Loop not fused: no successor loop
+     52, Loop is parallelizable
+         Loop not fused: enclosed in different number of nests
+         Loop not vectorized: data dependency
+     72, Loop is parallelizable
+     75, Loop is parallelizable
+         Generated vector simd code for the loop containing reductions
+         Loop unrolled 2 times
+void conv1d_tiled_caching<double>(double const*, double const*, double*, int, int):
+     92, Generating implicit firstprivate(mask_width,input_width)
+         Generating NVIDIA GPU code
+         96, #pragma acc loop gang(input_width/256) /* blockIdx.x */
+         99, #pragma acc loop vector(256) /* threadIdx.x */
+        105, #pragma acc loop vector(256) /* threadIdx.x */
+        113, #pragma acc loop seq
+     92, Generating implicit copyin(in[:]) [if not already present]
+         Generating implicit copyout(out[:]) [if not already present]
+         Generating implicit copyin(mask[:mask_width]) [if not already present]
+     99, Loop is parallelizable
+         Recognized memory copy idiom
+    105, Loop is parallelizable
+    113, Loop carried scalar dependence for s at line 119,121
+         Scalar last value needed after loop for s at line 125
+void conv1d<float>(float const*, float const*, float*, int, int):
+     24, Generating implicit firstprivate(input_width,mask_width)
+         Generating NVIDIA GPU code
+         26, #pragma acc loop gang /* blockIdx.x */
+         29, #pragma acc loop vector(256) /* threadIdx.x */
+             Generating implicit reduction(+:s)
+     24, Generating implicit copyin(in[:]) [if not already present]
+         Generating implicit copyout(out[:input_width]) [if not already present]
+         Generating implicit copyin(mask[:mask_width]) [if not already present]
+     26, Loop not fused: no successor loop
+     29, Loop is parallelizable
+         Generated vector simd code for the loop containing reductions
+void reference<float>(float const*, float const*, float const*, int, int):
+    139, Loop not vectorized/parallelized: potential early exits
+    142, Generated vector simd code for the loop containing reductions
+void conv1d_tiled<float>(float const*, float const*, float*, int, int):
+     46, Generating implicit firstprivate(mask_width,input_width)
+         Generating NVIDIA GPU code
+         49, #pragma acc loop gang(input_width/256) /* blockIdx.x */
+         52, #pragma acc loop vector(256) /* threadIdx.x */
+         72, #pragma acc loop vector(256) /* threadIdx.x */
+         75, #pragma acc loop seq
+             Generating implicit reduction(+:s)
+     46, CUDA shared memory used for tile
+         Generating implicit copyin(in[:]) [if not already present]
+         Generating implicit copyout(out[:]) [if not already present]
+         Generating implicit copyin(mask[:mask_width]) [if not already present]
+     49, Loop not fused: no successor loop
+     52, Loop is parallelizable
+         Loop not fused: enclosed in different number of nests
+         Loop not vectorized: data dependency
+     72, Loop is parallelizable
+     75, Loop is parallelizable
+         Generated vector simd code for the loop containing reductions
+         Loop unrolled 4 times
+void conv1d_tiled_caching<float>(float const*, float const*, float*, int, int):
+     92, Generating implicit firstprivate(input_width,mask_width)
+         Generating NVIDIA GPU code
+         96, #pragma acc loop gang(input_width/256) /* blockIdx.x */
+         99, #pragma acc loop vector(256) /* threadIdx.x */
+        105, #pragma acc loop vector(256) /* threadIdx.x */
+        113, #pragma acc loop seq
+     92, CUDA shared memory used for tile
+         Generating implicit copyin(in[:]) [if not already present]
+         Generating implicit copyout(out[:]) [if not already present]
+         Generating implicit copyin(mask[:mask_width]) [if not already present]
+     99, Loop is parallelizable
+         Recognized memory copy idiom
+    105, Loop is parallelizable
+    113, Loop carried scalar dependence for s at line 119,121
+         Scalar last value needed after loop for s at line 125
+void conv1d<short>(short const*, short const*, short*, int, int):
+     24, Generating implicit firstprivate(input_width,mask_width)
+         Generating NVIDIA GPU code
+         26, #pragma acc loop gang /* blockIdx.x */
+         29, #pragma acc loop vector(256) /* threadIdx.x */
+             Generating implicit reduction(+:s)
+     24, Generating implicit copyin(in[:]) [if not already present]
+         Generating implicit copyout(out[:input_width]) [if not already present]
+         Generating implicit copyin(mask[:mask_width]) [if not already present]
+     26, Loop not fused: no successor loop
+     29, Loop is parallelizable
+         Generated vector simd code for the loop containing reductions
+void reference<short>(short const*, short const*, short const*, int, int):
+    139, Loop not vectorized/parallelized: potential early exits
+    142, Generated vector simd code for the loop containing reductions
+void conv1d_tiled<short>(short const*, short const*, short*, int, int):
+     46, Generating implicit firstprivate(mask_width,input_width)
+         Generating NVIDIA GPU code
+         49, #pragma acc loop gang(input_width/256) /* blockIdx.x */
+         52, #pragma acc loop vector(256) /* threadIdx.x */
+         72, #pragma acc loop vector(256) /* threadIdx.x */
+         75, #pragma acc loop seq
+             Generating implicit reduction(+:s)
+     46, CUDA shared memory used for tile
+         Generating implicit copyin(in[:]) [if not already present]
+         Generating implicit copyout(out[:]) [if not already present]
+         Generating implicit copyin(mask[:mask_width]) [if not already present]
+     49, Loop not fused: no successor loop
+     52, Loop is parallelizable
+         Loop not fused: enclosed in different number of nests
+         Loop not vectorized: data dependency
+     72, Loop is parallelizable
+     75, Loop is parallelizable
+         Generated vector simd code for the loop containing reductions
+void conv1d_tiled_caching<short>(short const*, short const*, short*, int, int):
+     92, Generating implicit firstprivate(input_width,mask_width)
+         Generating NVIDIA GPU code
+         96, #pragma acc loop gang(input_width/256) /* blockIdx.x */
+         99, #pragma acc loop vector(256) /* threadIdx.x */
+        105, #pragma acc loop vector(256) /* threadIdx.x */
+        113, #pragma acc loop seq
+     92, CUDA shared memory used for tile
+         Generating implicit copyin(in[:]) [if not already present]
+         Generating implicit copyout(out[:]) [if not already present]
+         Generating implicit copyin(mask[:mask_width]) [if not already present]
+     99, Loop is parallelizable
+         Recognized memory copy idiom
+    105, Loop is parallelizable
+    113, Loop carried scalar dependence for s at line 119,121
+         Scalar last value needed after loop for s at line 125
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     11, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
 timeout was set to  600

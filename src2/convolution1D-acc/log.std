@@ -1,0 +1,96 @@
+
+---------------------
+Mask width: 3
+1D convolution (FP64)
+Average kernel execution time of conv1d kernel: 1673065.875000 (us)
+PASS
+Average kernel execution time of conv1d-tiled kernel: 32521.248047 (us)
+PASS
+Average kernel execution time of conv1d-tiled-caching kernel: 8908.639648 (us)
+PASS
+1D convolution (FP32)
+Average kernel execution time of conv1d kernel: 1566060.750000 (us)
+PASS
+Average kernel execution time of conv1d-tiled kernel: 16182.160156 (us)
+PASS
+Average kernel execution time of conv1d-tiled-caching kernel: 6718.455078 (us)
+PASS
+1D convolution (INT16)
+Average kernel execution time of conv1d kernel: 1716038.375000 (us)
+PASS
+Average kernel execution time of conv1d-tiled kernel: 7795.857422 (us)
+PASS
+Average kernel execution time of conv1d-tiled-caching kernel: 6573.694336 (us)
+PASS
+
+---------------------
+Mask width: 5
+1D convolution (FP64)
+Average kernel execution time of conv1d kernel: 1674937.375000 (us)
+PASS
+Average kernel execution time of conv1d-tiled kernel: 19855.988281 (us)
+PASS
+Average kernel execution time of conv1d-tiled-caching kernel: 10205.049805 (us)
+PASS
+1D convolution (FP32)
+Average kernel execution time of conv1d kernel: 1569237.625000 (us)
+PASS
+Average kernel execution time of conv1d-tiled kernel: 17226.609375 (us)
+PASS
+Average kernel execution time of conv1d-tiled-caching kernel: 7920.016602 (us)
+PASS
+1D convolution (INT16)
+Average kernel execution time of conv1d kernel: 1715556.000000 (us)
+PASS
+Average kernel execution time of conv1d-tiled kernel: 8369.803711 (us)
+PASS
+Average kernel execution time of conv1d-tiled-caching kernel: 8361.034180 (us)
+PASS
+
+---------------------
+Mask width: 7
+1D convolution (FP64)
+Average kernel execution time of conv1d kernel: 1674125.375000 (us)
+PASS
+Average kernel execution time of conv1d-tiled kernel: 20436.753906 (us)
+PASS
+Average kernel execution time of conv1d-tiled-caching kernel: 11333.901367 (us)
+PASS
+1D convolution (FP32)
+Average kernel execution time of conv1d kernel: 1567421.625000 (us)
+PASS
+Average kernel execution time of conv1d-tiled kernel: 17641.613281 (us)
+PASS
+Average kernel execution time of conv1d-tiled-caching kernel: 9043.076172 (us)
+PASS
+1D convolution (INT16)
+Average kernel execution time of conv1d kernel: 1714528.500000 (us)
+PASS
+Average kernel execution time of conv1d-tiled kernel: 8682.023438 (us)
+PASS
+Average kernel execution time of conv1d-tiled-caching kernel: 9987.931641 (us)
+PASS
+
+---------------------
+Mask width: 9
+1D convolution (FP64)
+Average kernel execution time of conv1d kernel: 1681243.125000 (us)
+PASS
+Average kernel execution time of conv1d-tiled kernel: 21753.955078 (us)
+PASS
+Average kernel execution time of conv1d-tiled-caching kernel: 12449.921875 (us)
+PASS
+1D convolution (FP32)
+Average kernel execution time of conv1d kernel: 1570206.375000 (us)
+PASS
+Average kernel execution time of conv1d-tiled kernel: 18604.712891 (us)
+PASS
+Average kernel execution time of conv1d-tiled-caching kernel: 10016.892578 (us)
+PASS
+1D convolution (INT16)
+Average kernel execution time of conv1d kernel: 1713763.875000 (us)
+PASS
+Average kernel execution time of conv1d-tiled kernel: 9413.409180 (us)
+PASS
+Average kernel execution time of conv1d-tiled-caching kernel: 11459.341797 (us)
+PASS
