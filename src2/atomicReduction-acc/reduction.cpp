@@ -26,6 +26,92 @@ THE SOFTWARE.
 #include <chrono>
 #include <cmath>
 
+
+template<int THREADS>
+void run_reduction1(int arrayLength, int* array, int& sum, int blocks, int N) {
+#pragma acc data present(array[0:arrayLength])
+  {
+    for(int n = 0; n < N; n++) {
+      sum = 0;
+#pragma acc update device(sum)
+#pragma acc parallel loop num_gangs(blocks) vector_length(THREADS) reduction(+:sum)
+      for (int i = 0; i < arrayLength; i++) {
+	sum += array[i];
+      }
+    }
+#pragma acc update self(sum)
+  }
+}
+
+template<int threads>
+void run_reduction2(int arrayLength, int* array, int& sum, int blocks, int N) {
+#pragma acc data present(array[0:arrayLength])
+  {
+    for(int n = 0; n < N; n++) {
+      sum = 0;
+#pragma acc update device(sum)
+#pragma acc parallel loop num_gangs(blocks/2) vector_length(threads) reduction(+:sum)
+      for (int i = 0; i < arrayLength/2; i++) {
+	sum += array[i*2] + array[i*2+1];
+      }
+    }
+#pragma acc update self(sum)
+  }
+}
+
+template<int threads>
+void run_reduction3(int arrayLength, int* array, int& sum, int blocks, int N) {
+#pragma acc data present(array[0:arrayLength])
+  {
+    for(int n = 0; n < N; n++) {
+      sum = 0;
+#pragma acc update device(sum)
+#pragma acc parallel loop num_gangs(blocks/4) vector_length(threads) reduction(+:sum)
+      for (int i = 0; i < arrayLength/4; i++) {
+	sum += array[i*4] + array[i*4+1] + array[i*4+2] + array[i*4+3];
+      }
+    }
+#pragma acc update self(sum)
+  }
+}
+
+template<int threads>
+void run_reduction4(int arrayLength, int* array, int& sum, int blocks, int N) {
+#pragma acc data present(array[0:arrayLength])
+  {
+    for(int n = 0; n < N; n++) {
+      sum = 0;
+#pragma acc update device(sum)
+#pragma acc parallel loop num_gangs(blocks/8) vector_length(threads) reduction(+:sum)
+      for (int i = 0; i < arrayLength/8; i++) { 
+	sum += array[i*8] + array[i*8+1] + array[i*8+2] + array[i*8+3] + 
+	  array[i*8+4] + array[i*8+5] + array[i*8+6] + array[i*8+7];
+      }
+    }
+#pragma acc update self(sum)
+  }
+}
+
+template<int threads>
+void run_reduction5(int arrayLength, int* array, int& sum, int blocks, int N) {
+#pragma acc data present(array[0:arrayLength])
+  {
+    for(int n = 0; n < N; n++) {
+      sum = 0;
+#pragma acc update device(sum)
+#pragma acc parallel loop num_gangs(blocks/16) vector_length(threads) reduction(+:sum)
+      for (int i = 0; i < arrayLength/16; i++) { 
+	sum += array[i*16] + array[i*16+1] + array[i*16+2] + array[i*16+3] + 
+	  array[i*16+4] + array[i*16+5] + array[i*16+6] + array[i*16+7] +
+	  array[i*16+8] + array[i*16+9] + array[i*16+10] + array[i*16+11] +
+	  array[i*16+12] + array[i*16+13] + array[i*16+14] + array[i*16+15];
+      }
+    }
+#pragma acc update self(sum)
+  }
+}
+
+
 int main(int argc, char** argv)
 {
   int arrayLength = 52428800;
@@ -53,58 +139,46 @@ int main(int argc, char** argv)
   float GB=(float)arrayLength*sizeof(int)*N;
   int sum;
 
-  #pragma acc data to: array[0:arrayLength]) map(alloc: sum)
+#pragma acc data copyin(array[0:arrayLength]) create(sum)
   {
     // warmup
-    for(int n=0;n<N;n++) {
-      sum = 0;
-      #pragma acc update to(sum)
-      #pragma acc parallel loop \
-      gang(2048) vector(256) reduction(+:sum)
-      for (int i = 0; i < arrayLength; i++) {
-        sum += array[i];
-      }
-    }
+    run_reduction1<256>(arrayLength, array, sum, 2048, N);
 
     for (size_t k = 0; k < sizeof(block_sizes) / sizeof(int); k++) {
-      int threads = block_sizes[k];
-      int blocks=std::min((arrayLength+threads-1)/threads,2048);
+      const int threads = block_sizes[k];
+      const int blocks=std::min((arrayLength+threads-1)/threads,2048);
 
       // start timing
       t1 = std::chrono::high_resolution_clock::now();
-      for(int n=0;n<N;n++) {
-        sum = 0;
-        #pragma acc update to(sum)
-        #pragma acc parallel loop \
-        num_teams(blocks) num_threads(threads) reduction(+:sum)
-        for (int i = 0; i < arrayLength; i++) {
-          sum += array[i];
-        }
+
+      switch(threads) {
+      case 128:  run_reduction1<128>(arrayLength, array, sum, blocks, N); break;
+      case 256:  run_reduction1<256>(arrayLength, array, sum, blocks, N); break;
+      case 512:  run_reduction1<512>(arrayLength, array, sum, blocks, N); break;      
+      case 1024:  run_reduction1<1024>(arrayLength, array, sum, blocks, N); break;      
       }
-      #pragma acc update from(sum)
+
       t2 = std::chrono::high_resolution_clock::now();
       double times =  std::chrono::duration_cast<std::chrono::duration<double> >(t2 - t1).count();
       std::cout << "Thread block size: " << threads << ", ";
       std::cout << "The average performance of reduction is "<< 1.0E-09 * GB/times<<" GBytes/sec"<<std::endl;
 
 
-      printf("%d %d\n", sum, checksum);
+      //      printf("%d %d\n", sum, checksum);
       if(sum==checksum)
         std::cout<<"VERIFICATION: PASS"<<std::endl<<std::endl;
       else
         std::cout<<"VERIFICATION: FAIL!!"<<std::endl<<std::endl;
 
       t1 = std::chrono::high_resolution_clock::now();
-      for(int n=0;n<N;n++) {
-        sum = 0;
-        #pragma acc update to(sum)
-        #pragma acc parallel loop \
-        num_teams(blocks/2) num_threads(threads) reduction(+:sum)
-        for (int i = 0; i < arrayLength/2; i++) { 
-          sum += array[i*2] + array[i*2+1];
-        }
+
+      switch(threads) {
+      case 128:  run_reduction2<128>(arrayLength, array, sum, blocks, N); break;
+      case 256:  run_reduction2<256>(arrayLength, array, sum, blocks, N); break;
+      case 512:  run_reduction2<512>(arrayLength, array, sum, blocks, N); break;      
+      case 1024:  run_reduction2<1024>(arrayLength, array, sum, blocks, N); break;      
       }
-      #pragma acc update from(sum)
+
       t2 = std::chrono::high_resolution_clock::now();
       times =  std::chrono::duration_cast<std::chrono::duration<double> >(t2 - t1).count();
       std::cout << "Thread block size: " << threads << ", ";
@@ -116,16 +190,15 @@ int main(int argc, char** argv)
         std::cout<<"VERIFICATION: FAIL!!"<<std::endl<<std::endl;
 
       t1 = std::chrono::high_resolution_clock::now();
-      for(int n=0;n<N;n++) {
-        sum = 0;
-        #pragma acc update to(sum)
-        #pragma acc parallel loop \
-        num_teams(blocks/4) num_threads(threads) reduction(+:sum)
-        for (int i = 0; i < arrayLength/4; i++) { 
-          sum += array[i*4] + array[i*4+1] + array[i*4+2] + array[i*4+3];
-        }
+
+
+      switch(threads) {
+      case 128:  run_reduction3<128>(arrayLength, array, sum, blocks, N); break;
+      case 256:  run_reduction3<256>(arrayLength, array, sum, blocks, N); break;
+      case 512:  run_reduction3<512>(arrayLength, array, sum, blocks, N); break;      
+      case 1024:  run_reduction3<1024>(arrayLength, array, sum, blocks, N); break;      
       }
-      #pragma acc update from(sum)
+
       t2 = std::chrono::high_resolution_clock::now();
       times =  std::chrono::duration_cast<std::chrono::duration<double> >(t2 - t1).count();
       std::cout << "Thread block size: " << threads << ", ";
@@ -137,17 +210,14 @@ int main(int argc, char** argv)
         std::cout<<"VERIFICATION: FAIL!!"<<std::endl<<std::endl;
 
       t1 = std::chrono::high_resolution_clock::now();
-      for(int n=0;n<N;n++) {
-        sum = 0;
-        #pragma acc update to(sum)
-        #pragma acc parallel loop \
-        num_teams(blocks/8) num_threads(threads) reduction(+:sum)
-        for (int i = 0; i < arrayLength/8; i++) { 
-          sum += array[i*8] + array[i*8+1] + array[i*8+2] + array[i*8+3] + 
-                 array[i*8+4] + array[i*8+5] + array[i*8+6] + array[i*8+7];
-        }
+
+      switch(threads) {
+      case 128:  run_reduction4<128>(arrayLength, array, sum, blocks, N); break;
+      case 256:  run_reduction4<256>(arrayLength, array, sum, blocks, N); break;
+      case 512:  run_reduction4<512>(arrayLength, array, sum, blocks, N); break;      
+      case 1024:  run_reduction4<1024>(arrayLength, array, sum, blocks, N); break;      
       }
-      #pragma acc update from(sum)
+
       t2 = std::chrono::high_resolution_clock::now();
       times =  std::chrono::duration_cast<std::chrono::duration<double> >(t2 - t1).count();
       std::cout << "Thread block size: " << threads << ", ";
@@ -159,19 +229,14 @@ int main(int argc, char** argv)
         std::cout<<"VERIFICATION: FAIL!!"<<std::endl<<std::endl;
 
       t1 = std::chrono::high_resolution_clock::now();
-      for(int n=0;n<N;n++) {
-        sum = 0;
-        #pragma acc update to(sum)
-        #pragma acc parallel loop \
-        num_teams(blocks/16) num_threads(threads) reduction(+:sum)
-        for (int i = 0; i < arrayLength/16; i++) { 
-          sum += array[i*16] + array[i*16+1] + array[i*16+2] + array[i*16+3] + 
-                 array[i*16+4] + array[i*16+5] + array[i*16+6] + array[i*16+7] +
-                 array[i*16+8] + array[i*16+9] + array[i*16+10] + array[i*16+11] +
-                 array[i*16+12] + array[i*16+13] + array[i*16+14] + array[i*16+15];
-        }
+
+      switch(threads) {
+      case 128:  run_reduction5<128>(arrayLength, array, sum, blocks, N); break;
+      case 256:  run_reduction5<256>(arrayLength, array, sum, blocks, N); break;
+      case 512:  run_reduction5<512>(arrayLength, array, sum, blocks, N); break;      
+      case 1024:  run_reduction5<1024>(arrayLength, array, sum, blocks, N); break;      
       }
-      #pragma acc update from(sum)
+
       t2 = std::chrono::high_resolution_clock::now();
       times =  std::chrono::duration_cast<std::chrono::duration<double> >(t2 - t1).count();
       std::cout << "Thread block size: " << threads << ", ";
