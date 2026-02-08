@@ -23,7 +23,7 @@
 | atan2 | 3.24 | 2.52 | 2.54 |
 | atomicCost | 18.89 | 18.84 | 5.36 |
 | atomicIntrinsics | over 600 | 3.18 | 3.21 |
-| atomicPerf | 14.74 | build err | 13.89 |
+| atomicPerf | 14.66 | 13.47 | 13.88 |
 | atomicReduction | 3.44 | 2.65 | 2.63 |
 | attention | 2.47 | 83.27 | 83.85 |
 | axhelm | 2.41 | build err | 2.47 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 306 | 204 | 285 |
+| completed | 306 | 205 | 285 |
 
-sycl と acc がともに完了した件数 201
+sycl と acc がともに完了した件数 202
