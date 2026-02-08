@@ -1,39 +1,32 @@
-"kernel.h", line 12: error: invalid text in pragma
-    #pragma acc parallel teams num_teams(teamX * teamY) thread_limit(tile_cols*tile_rows)
-                         ^
-
-"kernel.h", line 12: error: extra text after expected end of preprocessing directive
-    #pragma acc parallel teams num_teams(teamX * teamY) thread_limit(tile_cols*tile_rows)
-                               ^
-
-"kernel.h", line 19: error: identifier "omp_get_team_num" is undefined
-    const uint tile_col_block = omp_get_team_num() % teamX;
-                                ^
-
-"kernel.h", line 21: error: identifier "omp_get_thread_num" is undefined
-    const uint tile_col = omp_get_thread_num() % tile_cols;
-                          ^
-
-"main.cpp", line 42: error: invalid text in pragma
-    #pragma acc data to: input[0:numPix]) map(from: output[0:4*numPix])
-                     ^
-
-"main.cpp", line 42: error: extra text after expected end of preprocessing directive
-    #pragma acc data to: input[0:numPix]) map(from: output[0:4*numPix])
-                       ^
-
-"main.cpp", line 49: error: invalid text in pragma
-        #pragma acc update to(output[0:4*numPix])
-                           ^
-
-"main.cpp", line 49: error: OpenACC data clause expected
-        #pragma acc update to(output[0:4*numPix])
-                           ^
-
-"main.cpp", line 49: error: extra text after expected end of preprocessing directive
-        #pragma acc update to(output[0:4*numPix])
-                             ^
-
-9 errors detected in the compilation of "main.cpp".
-make: *** [Makefile.NVD:57: main.o] Error 2
+tex2D(int, int, int, int, unsigned int):
+          44, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+image_pixel_at_(unsigned char*, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int):
+          86, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+image_tex2D_(unsigned char*, unsigned int, unsigned int, unsigned int, int, int, unsigned int, unsigned int):
+          98, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+malvar_he_cutler_demosaic(unsigned int, unsigned int, unsigned int, unsigned int, unsigned char const*, unsigned int, unsigned char*, unsigned int, int):
+      8, include "kernel.h"
+          11, Generating present(input_image_p[:],output_image_p[:])
+              Generating implicit firstprivate(height,width)
+              Generating NVIDIA GPU code
+              13, #pragma acc loop gang, vector(128) collapse(2) /* blockIdx.x threadIdx.x */
+              14,   /* blockIdx.x threadIdx.x collapsed */
+          11, Local memory used for output,.inl_p2_3402,.inl_p2_3362,.inl__T2_4891_3334,.inl_.inl_.X4889_21_3361,.inl_.inl__T1_4889_20_3360,.inl_.inl_result_19_3359,.inl_p2_3322,.inl__T2_4891_3294,.inl_.inl_.X4889_21_3321,.inl_.inl__T1_4889_20_3320,.inl_.inl_result_19_3319,.inl_p2_3282,.inl__T2_4891_3254,.inl_.inl_.X4889_21_3281,.inl_.inl__T1_4889_20_3280,.inl_.inl_result_19_3279,.inl_p2_3242,.inl__T2_4891_3214,.inl_.inl_.X4889_21_3241,.inl_.inl__T1_4889_20_3240,.inl_.inl_result_19_3239,.inl_p2_3202,.inl__T2_4891_3174,.inl_.inl_.X4889_21_3201,.inl_.inl__T1_4889_20_3200,.inl_.inl_result_19_3199,.inl_p2_3162,.inl__T2_4891_3134,.inl_.inl_.X4889_21_3161,.inl_.inl__T1_4889_20_3160,.inl_.inl_result_19_3159,.inl_p2_3122,.inl__T2_4891_3094,.inl_.inl_.X4889_21_3121,.inl_.inl__T1_4889_20_3120,.inl_.inl_result_19_3119,.inl_p2_3082,.inl__T2_4891_3054,.inl_.inl_.X4889_21_3081,.inl_.inl__T1_4889_20_3080,.inl_.inl_result_19_3079,.inl_p2_3042,.inl__T2_4891_3014,.inl_.inl_.X4889_21_3041,.inl_.inl__T1_4889_20_3040,.inl_.inl_result_19_3039,.inl_p2_3002,.inl__T2_4891_2974,.inl_.inl_.X4889_21_3001,.inl_.inl__T1_4889_20_3000,.inl_.inl_result_19_2999,.inl_p2_2962,.inl__T2_4891_2934,.inl_.inl_.X4889_21_2961,.inl_.inl__T1_4889_20_2960,.inl_.inl_result_19_2959,.inl_p2_2922,.inl__T2_4891_2894,.inl_.inl_.X4889_21_2921,.inl_.inl__T1_4889_20_2920,.inl_.inl_result_19_2919,.inl_p2_2882,.inl__T2_4891_2854,.inl_.inl_.X4889_21_2881,.inl_.inl__T1_4889_20_2880,.inl_.inl_result_19_2879,.inl_p2_2842,.inl__T2_4891_2814,.inl_.inl_.X4889_21_2841,.inl_.inl__T1_4889_20_2840,.inl_.inl_result_19_2839,.inl_p2_2802,.inl__T2_4891_2774,.inl_.inl_.X4889_21_2801,.inl_.inl__T1_4889_20_2800,.inl_.inl_result_19_2799,.inl_p2_2762,.inl__T2_4891_2734,.inl_.inl_.X4889_21_2761,.inl_.inl__T1_4889_20_2760,.inl_.inl_result_19_2759,.inl_p2_2722,.inl__T2_4891_2694,.inl_.inl_.X4889_21_2721,.inl_.inl__T1_4889_20_2720,.inl_.inl_result_19_2719,.inl_p2_2682,.inl__T2_4891_2654,.inl_.inl_.X4889_21_2681,.inl_.inl__T1_4889_20_2680,.inl_.inl_result_19_2679,.inl_p2_2642,.inl__T2_4891_2614,.inl_.inl_.X4889_21_2641,.inl_.inl__T1_4889_20_2640,.inl_.inl_result_19_2639,.inl_p2_2602,.inl__T2_4891_2574,.inl_.inl_.X4889_21_2601,.inl_.inl__T1_4889_20_2600,.inl_.inl_result_19_2599,.inl_p2_2562,.inl__T2_4891_2534,.inl_.inl_.X4889_21_2561,.inl_.inl__T1_4889_20_2560,.inl_.inl_result_19_2559,.inl_p2_2522,.inl__T2_4891_2494,.inl_.inl_.X4889_21_2521,.inl_.inl__T1_4889_20_2520,.inl_.inl_result_19_2519,.inl_p2_2482,.inl__T2_4891_2454,.inl_.inl_.X4889_21_2481,.inl_.inl__T1_4889_20_2480,.inl_.inl_result_19_2479,.inl_p2_2442,.inl__T2_4891_2414,.inl_.inl_.X4889_21_2441,.inl_.inl__T1_4889_20_2440,.inl_.inl_result_19_2439,.inl_p2_2402,.inl__T2_4891_2374,.inl_.inl_.X4889_21_2401,.inl_.inl__T1_4889_20_2400,.inl_.inl_result_19_2399,.inl_p2_2362,.inl__T2_4891_2334,.inl_.inl_.X4889_21_2361,.inl_.inl__T1_4889_20_2360,.inl_.inl_result_19_2359,.inl_p2_2322,.inl__T2_4891_2294,.inl_.inl_.X4889_21_2321,.inl_.inl__T1_4889_20_2320,.inl_.inl_result_19_2319,.inl_p2_2282,.inl__T2_4891_2254,.inl_.inl_.X4889_21_2281,.inl_.inl__T1_4889_20_2280,.inl_.inl_result_19_2279,.inl_p2_2242,.inl__T2_4891_2214,.inl_.inl_.X4889_21_2241,.inl_.inl__T1_4889_20_2240,.inl_.inl_result_19_2239,.inl_p2_2202,.inl__T2_4891_2174,.inl_.inl_.X4889_21_2201,.inl_.inl__T1_4889_20_2200,.inl_.inl_result_19_2199,.inl_p2_2162,.inl__T2_4891_2134,.inl_.inl_.X4889_21_2161,.inl_.inl__T1_4889_20_2160,.inl_.inl_result_19_2159,.inl_p2_2122,.inl__T2_4891_2094,.inl_.inl_.X4889_21_2121,.inl_.inl__T1_4889_20_2120,.inl_.inl_result_19_2119,.inl_p2_2082,.inl__T2_4891_2054,.inl_.inl_.X4889_21_2081,.inl_.inl__T1_4889_20_2080,.inl_.inl_result_19_2079,.inl_p2_2042,.inl__T2_4891_2014,.inl_.inl_.X4889_21_2041,.inl_.inl__T1_4889_20_2040,.inl_.inl_result_19_2039,.inl_p2_2002,.inl__T2_4891_1974,.inl_.inl_.X4889_21_2001,.inl_.inl__T1_4889_20_2000,.inl_.inl_result_19_1999,.inl_p2_1962,.inl__T2_4891_1934,.inl_.inl_.X4889_21_1961,.inl_.inl__T1_4889_20_1960,.inl_.inl_result_19_1959,.inl_p2_1922,.inl__T2_4891_1894,.inl_.inl_.X4889_21_1921,.inl_.inl__T1_4889_20_1920,.inl_.inl_result_19_1919,.inl_p2_1882,.inl__T2_4891_1854,.inl_.inl_.X4889_21_1881,.inl_.inl__T1_4889_20_1880,.inl_.inl_result_19_1879,.inl_p2_1842,.inl__T2_4891_1814,.inl_.inl_.X4889_21_1841,.inl_.inl__T1_4889_20_1840,.inl_.inl_result_19_1839,.inl_p2_1802,.inl__T2_4891_1774,.inl_.inl_.X4889_21_1801,.inl_.inl__T1_4889_20_1800,.inl_.inl_result_19_1799,.inl__T2_4891_3374,.inl_.inl_result_19_3399,.inl_.inl_.X4889_21_3401,.inl_.inl__T1_4889_20_3400
+          14, Generating implicit firstprivate(bayer_pattern,output_image_pitch,input_image_pitch)
+              Loop not vectorized/parallelized: not countable
+main:
+     35, Loop not vectorized/parallelized: contains call
+     43, Generating copyout(output[:numPix*4]) [if not already present]
+         Generating copyin(input[:numPix]) [if not already present]
+     47, Loop not vectorized/parallelized: contains call
+     50, Generating update device(output[:numPix*4])
+     64, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      8, include "kernel.h"
 timeout was set to  600

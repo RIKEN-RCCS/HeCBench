@@ -4,52 +4,23 @@ void malvar_he_cutler_demosaic (
   const uint height,
   const uint width,
   const uchar *__restrict__ input_image_p,
-  const uint input_image_pitch, 
+  const uint input_image_pitch,
         uchar *__restrict__ output_image_p,
-  const uint output_image_pitch, 
+  const uint output_image_pitch,
   const int bayer_pattern )
 {
-  #pragma acc parallel teams num_teams(teamX * teamY) thread_limit(tile_cols*tile_rows)
-  {
-  LDSPixelT apron[apron_rows * apron_cols];
-  #pragma omp parallel 
-  {
-  const uint tile_col_blocksize = tile_cols;
-  const uint tile_row_blocksize = tile_rows;
-  const uint tile_col_block = omp_get_team_num() % teamX;
-  const uint tile_row_block = omp_get_team_num() / teamX;
-  const uint tile_col = omp_get_thread_num() % tile_cols;
-  const uint tile_row = omp_get_thread_num() / tile_cols;
-  const uint g_c = tile_col_blocksize * tile_col_block + tile_col;
-  const uint g_r = tile_row_blocksize * tile_row_block + tile_row;
-  const bool valid_pixel_task = (g_r < height) & (g_c < width);
-
-  const uint tile_flat_id = tile_row * tile_cols + tile_col;
-  for(uint apron_fill_task_id = tile_flat_id; apron_fill_task_id < n_apron_fill_tasks; apron_fill_task_id += n_tile_pixels){
-    const uint apron_read_row = apron_fill_task_id / apron_cols;
-    const uint apron_read_col = apron_fill_task_id % apron_cols;
-    const int ag_c = ((int)(apron_read_col + tile_col_block * tile_col_blocksize)) - shalf_ksize;
-    const int ag_r = ((int)(apron_read_row + tile_row_block * tile_row_blocksize)) - shalf_ksize;
-
-    apron[apron_read_row * apron_cols + apron_read_col] = tex2D_at(PixelT, input_image, ag_r, ag_c);
-  }
-
-  #pragma omp barrier
-
-  //valid tasks read from [half_ksize, (tile_rows|tile_cols) + kernel_size - 1)
-  const uint a_c = tile_col + half_ksize;
-  const uint a_r = tile_row + half_ksize;
-  assert_val(a_c >= half_ksize && a_c < apron_cols - half_ksize, a_c);
-  assert_val(a_r >= half_ksize && a_r < apron_rows - half_ksize, a_r);
+  #pragma acc parallel loop collapse(2) present(input_image_p, output_image_p)
+  for (uint g_r = 0; g_r < height; g_r++) {
+    for (uint g_c = 0; g_c < width; g_c++) {
 
   //note the following formulas are col, row convention and uses i,j - this is done to preserve readability with the originating paper
-  const uint i = a_c;
-  const uint j = a_r;
-#define F(_i, _j) apron_pixel((_j), (_i))
+  const uint i = half_ksize;
+  const uint j = half_ksize;
+#define F(_i, _j) tex2D_at(PixelT, input_image, (int)g_r + ((int)(_j) - shalf_ksize), (int)g_c + ((int)(_i) - shalf_ksize))
 
   const int Fij = F(i,j);
   //symmetric 4,2,-1 response - cross
-  const int R1 = (4*F(i, j) + 2*(F(i-1,j) + F(i,j-1) + F(i+1,j) + F(i,j+1)) - 
+  const int R1 = (4*F(i, j) + 2*(F(i-1,j) + F(i,j-1) + F(i+1,j) + F(i,j+1)) -
                     F(i-2,j) - F(i+2,j) - F(i,j-2) - F(i,j+2)) / 8;
 
   //left-right symmetric response - with .5,1,4,5 - theta
@@ -126,7 +97,6 @@ void malvar_he_cutler_demosaic (
   //at B locations: symmetric 4,2,-1
   const RGBPixelBaseT G = output_pixel_cast(Fij * is_green_pixel + G_at_red_or_blue * (!is_green_pixel));
 
-  if(valid_pixel_task){
     RGBPixelT output;
 #if OUTPUT_CHANNELS == 3 || OUTPUT_CHANNELS == 4
     output.x = R;
@@ -139,8 +109,6 @@ void malvar_he_cutler_demosaic (
 #error "Unsupported number of output channels"
 #endif
     pixel_at(RGBPixelT, output_image, g_r, g_c) = output;
-  }
-  }
+    }
   }
 }
-
