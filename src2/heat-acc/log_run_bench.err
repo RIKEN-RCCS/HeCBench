@@ -1,45 +1,43 @@
-"heat.cpp", line 45: error: identifier "omp_get_wtime" is undefined
-    double start = omp_get_wtime();
-                   ^
-
-"heat.cpp", line 113: error: invalid text in pragma
-  #pragma acc data tofrom: u[0:n*n], u_tmp[0:n*n]) 
-                   ^
-
-"heat.cpp", line 113: error: extra text after expected end of preprocessing directive
-  #pragma acc data tofrom: u[0:n*n], u_tmp[0:n*n]) 
-                         ^
-
-"heat.cpp", line 116: error: invalid text in pragma
-    #pragma acc parallel loop simd collapse(2) thread_limit(block_size)
-                              ^
-
-"heat.cpp", line 116: error: extra text after expected end of preprocessing directive
-    #pragma acc parallel loop simd collapse(2) thread_limit(block_size)
-                                   ^
-
-"heat.cpp", line 125: error: invalid text in pragma
-    #pragma acc parallel loop simd collapse(2) thread_limit(block_size)
-                              ^
-
-"heat.cpp", line 125: error: extra text after expected end of preprocessing directive
-    #pragma acc parallel loop simd collapse(2) thread_limit(block_size)
-                                   ^
-
-"heat.cpp", line 148: error: invalid text in pragma
-      #pragma acc parallel loop simd collapse(2) thread_limit(block_size)
-                                ^
-
-"heat.cpp", line 148: error: extra text after expected end of preprocessing directive
-      #pragma acc parallel loop simd collapse(2) thread_limit(block_size)
-                                     ^
-
-"heat.cpp", line 111: warning: variable "block_size" was declared but never referenced [declared_but_not_referenced]
-    const int block_size = 256;
-              ^
-
-Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
-
-9 errors detected in the compilation of "heat.cpp".
-make: *** [Makefile.NVD:59: heat.o] Error 2
+main:
+    115, Generating copy(u_tmp[:n*n],u[:n*n]) [if not already present]
+         Generating implicit firstprivate(n)
+         Generating NVIDIA GPU code
+        118, #pragma acc loop gang, vector(256) collapse(2) /* blockIdx.x threadIdx.x */
+        119,   /* blockIdx.x threadIdx.x collapsed */
+    118, Loop not fused: no successor loop
+    119, Generating implicit firstprivate(dx,length)
+         Zero trip check eliminated
+         Generated vector simd code for the loop
+    124, Generating implicit firstprivate(n)
+         Generating NVIDIA GPU code
+        127, #pragma acc loop gang, vector(256) collapse(2) /* blockIdx.x threadIdx.x */
+        128,   /* blockIdx.x threadIdx.x collapsed */
+    128, Recognized memory zero idiom
+    143, Generating present(u_tmp[:],u[:])
+         Generating implicit firstprivate(n)
+         Generating NVIDIA GPU code
+        150, #pragma acc loop gang, vector(256) collapse(2) /* blockIdx.x threadIdx.x */
+        151,   /* blockIdx.x threadIdx.x collapsed */
+    143, Loop not vectorized/parallelized: contains call
+    150, Loop not fused: no successor loop
+    151, Generating implicit firstprivate(r2,r)
+         Zero trip check eliminated
+         Invariant if transformation
+         Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         222, Loop not fused: function call before adjacent loop
+         224, Zero trip check eliminated
+              Loop not vectorized: recurrence
+l2norm(int, double const*, int, double, double, double, double):
+    224, Zero trip check eliminated
+         Loop not vectorized: recurrence
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     35, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1l>>::_S_gcd(long, long):
+     35, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<double, std::ratio<1l, 1l>>::_S_gcd(long, long):
+     35, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
 timeout was set to  600

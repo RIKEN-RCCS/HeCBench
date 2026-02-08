@@ -21,7 +21,7 @@ Stability
 Results
 
 Error (L2norm): 1.845486E-09
-Solve time (s): 7.624950
-Total time (s): 16.148730
-Bandwidth (GB/s): 2253.112322
+Solve time (s): 6.470945
+Total time (s): 15.267861
+Bandwidth (GB/s): 2654.924460
 --------------------
