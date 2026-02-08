@@ -1,67 +1,68 @@
-"kernels.cpp", line 114: error: invalid text in pragma
-      #pragma acc parallel teams num_teams(M) thread_limit(N/4)
-                           ^
-
-"kernels.cpp", line 114: error: extra text after expected end of preprocessing directive
-      #pragma acc parallel teams num_teams(M) thread_limit(N/4)
-                                 ^
-
-"kernels.cpp", line 119: error: identifier "omp_get_thread_num" is undefined
-          int lid = omp_get_thread_num();
-                    ^
-
-"kernels.cpp", line 120: error: identifier "omp_get_team_num" is undefined
-          int gid = omp_get_team_num();
-                    ^
-
-"kernels.cpp", line 121: error: identifier "omp_get_vector" is undefined
-          int gsz = omp_get_vector(); 
-                    ^
-
-"main.cpp", line 90: error: invalid text in pragma
-    #pragma acc parallel data map (alloc: d_Kernel[0:dataN], d_Data[0:dataN])
-                         ^
-
-"main.cpp", line 90: error: extra text after expected end of preprocessing directive
-    #pragma acc parallel data map (alloc: d_Kernel[0:dataN], d_Data[0:dataN])
-                              ^
-
-"main.cpp", line 98: error: invalid text in pragma
-        #pragma acc update to (d_Kernel[0:dataN])
-                           ^
-
-"main.cpp", line 98: error: OpenACC data clause expected
-        #pragma acc update to (d_Kernel[0:dataN])
-                           ^
-
-"main.cpp", line 98: error: extra text after expected end of preprocessing directive
-        #pragma acc update to (d_Kernel[0:dataN])
-                              ^
-
-"main.cpp", line 101: error: invalid text in pragma
-        #pragma acc update to (d_Data[0:dataN])
-                           ^
-
-"main.cpp", line 101: error: OpenACC data clause expected
-        #pragma acc update to (d_Data[0:dataN])
-                           ^
-
-"main.cpp", line 101: error: extra text after expected end of preprocessing directive
-        #pragma acc update to (d_Data[0:dataN])
-                              ^
-
-"main.cpp", line 117: error: invalid text in pragma
-      #pragma acc update from (d_Data[0:dataN])
-                         ^
-
-"main.cpp", line 117: error: OpenACC data clause expected
-      #pragma acc update from (d_Data[0:dataN])
-                         ^
-
-"main.cpp", line 117: error: extra text after expected end of preprocessing directive
-      #pragma acc update from (d_Data[0:dataN])
-                              ^
-
-16 errors detected in the compilation of "main.cpp".
-make: *** [Makefile.NVD:57: main.o] Error 2
+fwtBatchGPU(float*, int, int):
+     44, include "kernels.cpp"
+          28, Loop not vectorized/parallelized: contains call
+          30, Generating present(d_Data[:])
+              Generating implicit firstprivate(sN,sM)
+              Generating NVIDIA GPU code
+              32, #pragma acc loop gang, vector(256) collapse(2) /* blockIdx.x threadIdx.x */
+              33,   /* blockIdx.x threadIdx.x collapsed */
+          32, Loop not fused: no successor loop
+          33, Generating implicit private(d_Dst,d_Src)
+              Loop not vectorized: data dependency
+         115, Generating present(d_Data[:])
+              Generating implicit firstprivate(M)
+              Generating NVIDIA GPU code
+             117, #pragma acc loop gang(M) /* blockIdx.x */
+             127, #pragma acc loop vector(256) /* threadIdx.x */
+             133, #pragma acc loop seq
+             136, #pragma acc loop vector(256) /* threadIdx.x */
+             169, #pragma acc loop vector(256) /* threadIdx.x */
+             182, #pragma acc loop vector(256) /* threadIdx.x */
+         117, Generating implicit firstprivate(log2N,d_Src,d_Dst)
+         127, Loop is parallelizable
+              Recognized memory copy idiom
+         133, Loop carried scalar dependence for stride at line 138,140,141,142,163
+              Loop carried dependence of s_data prevents parallelization
+              Loop carried dependence of s_data prevents vectorization
+              Loop carried backward dependence of s_data prevents vectorization
+              Loop not vectorized/parallelized: not countable
+         136, Loop is parallelizable
+              Loop not vectorized: data dependency
+         169, Loop is parallelizable
+              Loop not fused: function call before adjacent loop
+              Loop not vectorized: data dependency
+         182, Loop is parallelizable
+              Recognized memory copy idiom
+modulateGPU(float*, float const*, int):
+     44, include "kernels.cpp"
+         193, Generating present(d_A[:],d_B[:])
+              Generating implicit firstprivate(N)
+              Generating NVIDIA GPU code
+             195, #pragma acc loop gang(128), vector(256) /* blockIdx.x threadIdx.x */
+         195, Generating implicit firstprivate(rcpN)
+              Loop not fused: no successor loop
+              Generated vector simd code for the loop
+main:
+     75, Loop not vectorized/parallelized: contains call
+     80, Loop not vectorized/parallelized: contains call
+     91, Generating create(d_Data[:8388608],d_Kernel[:8388608]) [if not already present]
+     94, Loop not vectorized/parallelized: contains call
+    100, Generating update device(d_Kernel[:8388608])
+    103, Generating update device(d_Data[:8388608])
+    118, Generating update self(d_Data[:8388608])
+    127, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     29, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+     44, include "kernels.cpp"
+fwtCPU:
+     17, Recognized memory copy idiom
+     24, Loop not vectorized/parallelized: not countable
+     27, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+slowWTcpu:
+     55, Loop not vectorized/parallelized: not countable
+dyadicConvolutionCPU:
+     81, Generated vector simd code for the loop containing reductions
 timeout was set to  600

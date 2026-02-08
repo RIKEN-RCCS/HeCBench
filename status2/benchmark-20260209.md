@@ -112,7 +112,7 @@
 | fpdc | 5.37 | build err | over 600 |
 | fresnel | 6.00 | 6.61 | 6.61 |
 | frna | 104.63 | build err | build err |
-| fwt | 1.08 | build err | 3.38 |
+| fwt | 3.12 | 3.35 | 3.47 |
 | gabor | 21.57 | 21.27 | 57.42 |
 | gamma-correction | 63.44 | 105.30 | 104.46 |
 | ga | 36.53 | 32.72 | 33.46 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 306 | 197 | 285 |
+| completed | 306 | 198 | 285 |
 
-sycl と acc がともに完了した件数 194
+sycl と acc がともに完了した件数 195
