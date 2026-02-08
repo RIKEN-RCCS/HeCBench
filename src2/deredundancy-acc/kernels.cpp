@@ -1,7 +1,7 @@
 // kernel_baseToNumber
 void kernel_baseToNumber(char *reads, const long length)
 {
-  #pragma acc parallel loop gang(128) vector(128)
+  #pragma acc parallel loop present(reads)
   for (long index = 0; index < length; index++) {
     switch (reads[index]) {
       case 'A':
@@ -38,7 +38,6 @@ void kernel_baseToNumber(char *reads, const long length)
         reads[index] = 4;
         break;
     }
-    index += 128*128;
   }
 }
 
@@ -52,7 +51,7 @@ void kernel_compressData(
     int *gaps, 
     const int readsCount)
 {
-  #pragma acc parallel loop vector(128)
+  #pragma acc parallel loop present(lengths, offsets, reads, compressed, gaps)
   for (int index = 0; index < readsCount; index++) {
     long mark = offsets[index]/16;  // compressed data offset
     int round = 0;  // write when round is 16
@@ -90,7 +89,7 @@ void kernel_createIndex4(
     int *magicBase,
     const int readsCount)
 {
-  #pragma acc parallel loop vector(128)
+  #pragma acc parallel loop present(reads, lengths, offsets, indexs, orders, words, magicBase)
   for (int index = 0; index < readsCount; index++) {
     int start = offsets[index];
     int end = start + lengths[index];
@@ -146,7 +145,7 @@ void kernel_createIndex5(
     int *magicBase,
     const int readsCount)
 {
-  #pragma acc parallel loop vector(128)
+  #pragma acc parallel loop present(reads, lengths, offsets, indexs, orders, words, magicBase)
   for (int index = 0; index < readsCount; index++) {
     int start = offsets[index];
     int end = start + lengths[index];
@@ -202,7 +201,7 @@ void kernel_createIndex6(
     int *magicBase,
     const int readsCount)
 {
-  #pragma acc parallel loop vector(128)
+  #pragma acc parallel loop present(reads, lengths, offsets, indexs, orders, words, magicBase)
   for (int index = 0; index < readsCount; index++) {
     int start = offsets[index];
     int end = start + lengths[index];
@@ -258,7 +257,7 @@ void kernel_createIndex7(
     int *magicBase,
     const int readsCount)
 {
-  #pragma acc parallel loop vector(128)
+  #pragma acc parallel loop present(reads, lengths, offsets, indexs, orders, words, magicBase)
   for (int index = 0; index < readsCount; index++) {
     int start = offsets[index];
     int end = start + lengths[index];
@@ -312,7 +311,7 @@ void kernel_createCutoff(
     int *wordCutoff, 
     const int readsCount)
 {
-  #pragma acc parallel loop vector(128)
+  #pragma acc parallel loop present(lengths, words, wordCutoff)
   for (long index = 0; index < readsCount; index++) {
     int length = lengths[index];
     int required = length - wordLength + 1;
@@ -329,7 +328,7 @@ void kernel_mergeIndex(
     const long *words, 
     const int readsCount)
 {
-  #pragma acc parallel loop vector(128)
+  #pragma acc parallel loop present(offsets, indexs, orders, words)
   for (long index = 0; index < readsCount; index++) {
     int start = offsets[index];
     int end = start + words[index];
@@ -354,12 +353,12 @@ void kernel_mergeIndex(
 
 // updateRepresentative
 void updateRepresentative(
-    int *cluster, 
-    int *r, // representative, 
-    const int readsCount) 
+    int *cluster,
+    int *r, // representative,
+    const int readsCount)
 {
 
-  #pragma acc parallel map (tofrom: r[0:1]) map(tofrom: cluster[0:readsCount])
+  #pragma acc serial present(cluster) copy(r[0:1])
   {
     r[0]++;
     while (r[0] < readsCount) {
@@ -381,7 +380,7 @@ void kernel_makeTable(
     unsigned short *table,
     int representative)
 {
-  #pragma acc parallel loop gang(128) vector(128)
+  #pragma acc parallel loop present(offsets, indexs, orders, words, table)
   for (int index = 0; index < 128*128; index++) {
     int start = offsets[representative];
     int end = start + words[representative];
@@ -402,7 +401,7 @@ void kernel_cleanTable(
     unsigned short *table,
     const int representative)
 {
-  #pragma acc parallel loop gang(128) vector(128)
+  #pragma acc parallel loop present(offsets, indexs, orders, words, table)
   for (int index = 0; index < 128*128; index++) {
     int start = offsets[representative];
     int end = start + words[representative];
@@ -420,7 +419,7 @@ void kernel_magic(float threshold,
     const int representative, 
     const int readsCount)
 {
-  #pragma acc parallel loop vector(128)
+  #pragma acc parallel loop present(lengths, magicBase, cluster)
   for (int index = 0; index < readsCount; index++)  {
     if (cluster[index] < 0) {
       int offsetOne = representative*4;  // representative magic offset
@@ -453,11 +452,12 @@ void kernel_filter(
     const int readsCount)
 {  
 #ifdef OMP_REDUCE
-  #pragma acc parallel loop num_teams(readsCount) vector_length(128)
+  #pragma acc parallel loop gang num_gangs(readsCount) vector_length(128) \
+    present(lengths, offsets, indexs, orders, words, wordCutoff, cluster, table)
   for (int gid = 0; gid < readsCount; gid++) {
     if (cluster[gid] == -2) {
       int result = 0;
-      #pragma acc loop reduction(+:result) 
+      #pragma acc loop vector reduction(+:result) 
       for (int lid = 0; lid < 128; lid++) {
         int start = offsets[gid];
         int end = start + words[gid];
@@ -473,7 +473,7 @@ void kernel_filter(
     }
   }
 #else
-  #pragma acc parallel teams num_teams(readsCount) vector_length(128)
+  #pragma acc parallel num_gangs(readsCount) thread_limit(128)
   {
     int result[128];
     #pragma omp parallel 
@@ -517,7 +517,7 @@ void kernel_align(
     int *cluster,
     const int readsCount)
 {
-  #pragma acc parallel loop vector(128)
+  #pragma acc parallel loop present(lengths, offsets, compressed, gaps, cluster)
   for (int index = 0; index < readsCount; index++) {
     if (cluster[index] == -3) {
       int target = representative;  // representative read

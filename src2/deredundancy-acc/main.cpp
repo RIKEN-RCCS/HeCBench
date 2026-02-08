@@ -50,18 +50,18 @@ int main(int argc, char **argv) {
 
   int *h_wordCutoff = (int*) malloc (readsCount * sizeof(int));
 
-#pragma acc data to: h_lengths[0:readsCount], \
+#pragma acc data copyin( h_lengths[0:readsCount], \
                                 h_offsets[0:1+readsCount], \
                                 h_reads[0:total_length], \
                                 h_table[0:65536]) \
-                        map(alloc: h_compressed[0:total_length/16], \
+                        create( h_compressed[0:total_length/16], \
                                    h_gaps[0:readsCount], \
                                    h_indexs[0:total_length], \
                                    h_words[0:readsCount], \
                                    h_magicBase[0:readsCount*4], \
                                    h_orders[0:total_length], \
                                    h_wordCutoff[0:readsCount]), \
-                        map(tofrom: h_cluster[0:readsCount])
+                        copy(h_cluster[0:readsCount])
 {
   kernel_baseToNumber(h_reads, total_length);
 
@@ -137,9 +137,9 @@ int main(int argc, char **argv) {
       readsCount);
 
   // sortIndex(data);
-  #pragma acc update from (h_indexs[0:total_length])
-  #pragma acc update from (h_offsets[0:1+readsCount])
-  #pragma acc update from (h_words[0:readsCount])
+  #pragma acc update host(h_indexs[0:total_length])
+  #pragma acc update host(h_offsets[0:1+readsCount])
+  #pragma acc update host(h_words[0:readsCount])
 
   for (int i = 0; i< readsCount; i++) {
     int start = h_offsets[i];
@@ -148,7 +148,7 @@ int main(int argc, char **argv) {
   }
 
   // mergeIndex(data);
-  #pragma acc update to (h_indexs[0:total_length])
+  #pragma acc update device(h_indexs[0:total_length])
 
   kernel_mergeIndex(
       h_offsets, 
