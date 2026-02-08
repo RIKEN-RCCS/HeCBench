@@ -32,6 +32,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <openacc.h>
+#include <chrono>
 
 // Key constants used in this program
 #define LINE "--------------------\n" // A line for fancy output
@@ -42,8 +43,8 @@ double l2norm(const int n, const double * __restrict u, const int nsteps, const 
 int main(int argc, char *argv[]) {
 
   // Start the total program runtime timer
-  double start = omp_get_wtime();
-
+  auto start = std::chrono::high_resolution_clock::now();
+  
   // Problem size, forms an nxn grid
   int n = 1000;
 
@@ -107,13 +108,13 @@ int main(int argc, char *argv[]) {
   double *u     = (double*) malloc(sizeof(double)*n*n);
   double *u_tmp = (double*) malloc(sizeof(double)*n*n);
 
-  double tic, toc;
+  double tdiff1, tdiff2;
   const int block_size = 256;
 
-#pragma acc data tofrom: u[0:n*n], u_tmp[0:n*n]) 
+#pragma acc data copy(u[0:n*n], u_tmp[0:n*n]) 
 {
   // Set the initial value of the grid under the MMS scheme
-  #pragma acc parallel loop simd collapse(2) thread_limit(block_size)
+#pragma acc parallel loop collapse(2) vector_length(block_size)
   for (int j = 0; j < n; ++j) {
     for (int i = 0; i < n; ++i) {
       double y = (j+1)*dx; // Physical y position
@@ -122,7 +123,7 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  #pragma acc parallel loop simd collapse(2) thread_limit(block_size)
+#pragma acc parallel loop collapse(2) vector_length(block_size)
   for (int j = 0; j < n; ++j) {
     for (int i = 0; i < n; ++i) {
       u_tmp[i+j*n] = 0.0;
@@ -137,15 +138,15 @@ int main(int argc, char *argv[]) {
   const double r2 = 1.0 - 4.0*r;
 
   // Start the solve timer
-  tic = omp_get_wtime();
-
+  auto tic = std::chrono::high_resolution_clock::now();
+  
   for (int t = 0; t < nsteps; ++t) {
 
     // Call the solve kernel
     // Computes u_tmp at the next timestep
     // given the value of u at the current timestep
     // Loop over the nxn grid
-    #pragma acc parallel loop simd collapse(2) thread_limit(block_size)
+#pragma acc parallel loop collapse(2) vector_length(block_size) present(u, u_tmp)
     for (int j = 0; j < n; ++j) {
       for (int i = 0; i < n; ++i) {
         // Update the 5-point stencil, using boundary conditions on the edges of the domain.
@@ -164,8 +165,11 @@ int main(int argc, char *argv[]) {
     u_tmp = tmp;
   }
   // Stop solve timer
-  toc = omp_get_wtime();
-}
+  auto toc = std::chrono::high_resolution_clock::now();
+
+  std::chrono::duration<double> elapsed = toc -tic;
+  tdiff1 = elapsed.count();
+ }
 
   //
   // Check the L2-norm of the computed solution
@@ -174,14 +178,18 @@ int main(int argc, char *argv[]) {
   double norm = l2norm(n, u, nsteps, dt, alpha, dx, length);
 
   // Stop total timer
-  double stop = omp_get_wtime();
-
+  auto stop = std::chrono::high_resolution_clock::now();
+ 
   // Print results
+    
+  std::chrono::duration<double> elapsed = stop -start;
+  tdiff2 = elapsed.count();
+
   printf("Results\n\n");
   printf("Error (L2norm): %E\n", norm);
-  printf("Solve time (s): %lf\n", toc-tic);
-  printf("Total time (s): %lf\n", stop-start);
-  printf("Bandwidth (GB/s): %lf\n", 1.0E-9*2.0*n*n*nsteps*sizeof(double)/(toc-tic));
+  printf("Solve time (s): %lf\n", tdiff1 );
+  printf("Total time (s): %lf\n", tdiff2 );
+  printf("Bandwidth (GB/s): %lf\n", 1.0E-9*2.0*n*n*nsteps*sizeof(double)/tdiff1);
   printf(LINE);
 
   // Free the memory

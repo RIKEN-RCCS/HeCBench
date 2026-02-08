@@ -132,7 +132,7 @@
 | haversine | 2.18 | 2.49 | 2.43 |
 | heartwall | exe err | build err | build err |
 | heat2d | 61.50 | 25.22 | 5.92 |
-| heat | 22.03 | build err | 16.23 |
+| heat | 22.04 | 15.34 | 16.22 |
 | hellinger | 4.80 | 6.88 | 4.52 |
 | henry | 3.77 | 2.86 | 2.74 |
 | hexciton | 6.03 | build err | 4.96 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 306 | 195 | 285 |
+| completed | 306 | 196 | 285 |
 
-sycl と acc がともに完了した件数 192
+sycl と acc がともに完了した件数 193
