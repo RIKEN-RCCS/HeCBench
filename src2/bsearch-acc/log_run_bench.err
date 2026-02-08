@@ -1,31 +1,67 @@
-"main.cpp", line 199: error: invalid text in pragma
-    #pragma acc data to: a[0:aSize], z[0:zSize]) \
-                     ^
-
-"main.cpp", line 199: error: extra text after expected end of preprocessing directive
-    #pragma acc data to: a[0:aSize], z[0:zSize]) \
-                       ^
-
-"main.cpp", line 117: error: invalid text in pragma
-      #pragma acc parallel teams num_teams(zSize/256)  vector_length(256)
-                           ^
-
-"main.cpp", line 117: error: extra text after expected end of preprocessing directive
-      #pragma acc parallel teams num_teams(zSize/256)  vector_length(256)
-                                 ^
-
-"main.cpp", line 122: error: identifier "omp_get_thread_num" is undefined
-          size_t lid = omp_get_thread_num();
-                       ^
-
-"main.cpp", line 123: error: identifier "omp_get_team_num" is undefined
-          size_t gid = omp_get_team_num()*omp_get_vector()+lid;
-                       ^
-
-"main.cpp", line 123: error: identifier "omp_get_vector" is undefined
-          size_t gid = omp_get_team_num()*omp_get_vector()+lid;
-                                          ^
-
-7 errors detected in the compilation of "main.cpp".
-make: *** [Makefile.NVD:58: main.o] Error 2
+main:
+    198, Generated vector simd code for the loop
+    201, Loop not vectorized/parallelized: contains call
+    207, Generating copyin(z[:zSize]) [if not already present]
+         Generating copyout(r[:zSize]) [if not already present]
+         Generating copyin(a[:aSize]) [if not already present]
+void bs<float>(unsigned long, unsigned long, float const*, float const*, unsigned long*, unsigned long, int):
+     20, Generating present(acc_r[:zSize],acc_z[:zSize],acc_a[:aSize])
+         Generating implicit firstprivate(zSize)
+         Generating NVIDIA GPU code
+         23, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+         27, #pragma acc loop seq
+     23, Generating implicit firstprivate(n)
+     27, Loop carried scalar dependence for high at line 28,33
+         Loop carried scalar dependence for low at line 28,33
+         Scalar last value needed after loop for low at line 34
+         Loop not vectorized/parallelized: not countable
+void bs2<float>(unsigned long, unsigned long, float const*, float const*, unsigned long*, unsigned long, int):
+     52, Generating present(acc_z[:zSize],acc_r[:zSize],acc_a[:aSize])
+         Generating implicit firstprivate(zSize)
+         Generating NVIDIA GPU code
+         55, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+         57, #pragma acc loop seq
+         61, #pragma acc loop seq
+     55, Generating implicit firstprivate(n)
+     57, Accelerator restriction: induction variable live-out from loop: nbits
+         Loop not vectorized/parallelized: not countable
+     61, Loop carried scalar dependence for idx at line 62
+         Scalar last value needed after loop for idx at line 67
+         Loop carried scalar dependence for k at line 62,73
+         Loop not vectorized/parallelized: not countable
+void bs3<float>(unsigned long, unsigned long, float const*, float const*, unsigned long*, unsigned long, int):
+     85, Generating present(acc_z[:zSize],acc_r[:zSize],acc_a[:aSize])
+         Generating implicit firstprivate(zSize)
+         Generating NVIDIA GPU code
+         88, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+         90, #pragma acc loop seq
+         94, #pragma acc loop seq
+     88, Generating implicit firstprivate(n)
+     90, Accelerator restriction: induction variable live-out from loop: nbits
+         Loop not vectorized/parallelized: not countable
+     94, Loop carried scalar dependence for idx at line 95
+         Scalar last value needed after loop for idx at line 101
+         Loop carried scalar dependence for k at line 95,107
+         Loop not vectorized/parallelized: not countable
+void bs4<float>(unsigned long, unsigned long, float const*, float const*, unsigned long*, unsigned long, int):
+    120, Generating present(acc_r[:zSize],acc_z[:zSize],acc_a[:aSize])
+         Loop not vectorized/parallelized: too deeply nested
+    123, Generating implicit firstprivate(num_gangs_val)
+         Generating NVIDIA GPU code
+        125, #pragma acc loop gang(num_gangs_val) /* blockIdx.x */
+        128, #pragma acc loop seq
+        132, #pragma acc loop vector(256) /* threadIdx.x */
+        138, #pragma acc loop seq
+    125, Generating implicit firstprivate(n)
+    128, Accelerator restriction: induction variable live-out from loop: nbits
+         Loop not vectorized/parallelized: not countable
+    132, Loop is parallelizable
+         Generating implicit firstprivate(zSize)
+    138, Loop carried scalar dependence for idx at line 139
+         Scalar last value needed after loop for idx at line 145
+         Loop carried scalar dependence for p at line 139,154
+         Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      2, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
 timeout was set to  600

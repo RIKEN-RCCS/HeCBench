@@ -18,8 +18,9 @@ void bs ( const size_t aSize,
 {
   auto start = std::chrono::steady_clock::now();
   for (int i= 0; i < repeat; i++) {
-    #pragma acc parallel loop vector_length(256)
-    for (int i = 0; i < zSize; i++) { 
+    #pragma acc parallel loop gang vector vector_length(256) \
+    present(acc_a[0:aSize], acc_z[0:zSize], acc_r[0:zSize])
+    for (int i = 0; i < zSize; i++) {
       T z = acc_z[i];
       size_t low = 0;
       size_t high = n;
@@ -49,8 +50,9 @@ void bs2 ( const size_t aSize,
 {
   auto start = std::chrono::steady_clock::now();
   for (int i= 0; i < repeat; i++) {
-    #pragma acc parallel loop vector_length(256)
-    for (int i = 0; i < zSize; i++) { 
+    #pragma acc parallel loop gang vector vector_length(256) \
+    present(acc_a[0:aSize], acc_z[0:zSize], acc_r[0:zSize])
+    for (int i = 0; i < zSize; i++) {
       unsigned  nbits = 0;
       while (n >> nbits) nbits++;
       size_t k = 1ULL << (nbits - 1);
@@ -58,7 +60,7 @@ void bs2 ( const size_t aSize,
       size_t idx = (acc_a[k] <= z) ? k : 0;
       while (k >>= 1) {
         size_t r = idx | k;
-        if (r < n && z >= acc_a[r]) { 
+        if (r < n && z >= acc_a[r]) {
           idx = r;
         }
       }
@@ -81,8 +83,9 @@ void bs3 ( const size_t aSize,
 {
   auto start = std::chrono::steady_clock::now();
   for (int i= 0; i < repeat; i++) {
-    #pragma acc parallel loop vector_length(256)
-    for (int i = 0; i < zSize; i++) { 
+    #pragma acc parallel loop gang vector vector_length(256) \
+    present(acc_a[0:aSize], acc_z[0:zSize], acc_r[0:zSize])
+    for (int i = 0; i < zSize; i++) {
       unsigned nbits = 0;
       while (n >> nbits) nbits++;
       size_t k = 1ULL << (nbits - 1);
@@ -90,8 +93,8 @@ void bs3 ( const size_t aSize,
       size_t idx = (acc_a[k] <= z) ? k : 0;
       while (k >>= 1) {
         size_t r = idx | k;
-        size_t w = r < n ? r : n; 
-        if (z >= acc_a[w]) { 
+        size_t w = r < n ? r : n;
+        if (z >= acc_a[w]) {
           idx = r;
         }
       }
@@ -112,33 +115,36 @@ void bs4 ( const size_t aSize,
     const size_t n,
     const int repeat )
 {
+  int num_gangs_val = (zSize + 255) / 256;
   auto start = std::chrono::steady_clock::now();
   for (int i= 0; i < repeat; i++) {
-    #pragma acc parallel teams num_teams(zSize/256)  vector_length(256)
+    #pragma acc parallel num_gangs(num_gangs_val) vector_length(256) \
+    present(acc_a[0:aSize], acc_z[0:zSize], acc_r[0:zSize])
     {
-      size_t k;
-      #pragma omp parallel
-      {
-        size_t lid = omp_get_thread_num();
-        size_t gid = omp_get_team_num()*omp_get_vector()+lid;
-        if (lid == 0) {
-          unsigned nbits = 0;
-          while (n >> nbits) nbits++;
-          k = 1ULL << (nbits - 1);
-        }
-        #pragma omp barrier
+      #pragma acc loop gang
+      for (int g = 0; g < num_gangs_val; g++) {
+        size_t k;
+        unsigned nbits = 0;
+        while (n >> nbits) nbits++;
+        k = 1ULL << (nbits - 1);
 
-        size_t p = k;
-        T z = acc_z[gid];
-        size_t idx = (acc_a[p] <= z) ? p : 0;
-        while (p >>= 1) {
-          size_t r = idx | p;
-          size_t w = r < n ? r : n;
-          if (z >= acc_a[w]) { 
-            idx = r;
+        #pragma acc loop vector
+        for (int v = 0; v < 256; v++) {
+          int gid = g * 256 + v;
+          if (gid < (int)zSize) {
+            size_t p = k;
+            T z = acc_z[gid];
+            size_t idx = (acc_a[p] <= z) ? p : 0;
+            while (p >>= 1) {
+              size_t r = idx | p;
+              size_t w = r < n ? r : n;
+              if (z >= acc_a[w]) {
+                idx = r;
+              }
+            }
+            acc_r[gid] = idx;
           }
         }
-        acc_r[gid] = idx;
       }
     }
   }
@@ -196,34 +202,34 @@ int main(int argc, char* argv[])
     z[i] = rand() % N;
   }
 
-  #pragma acc data to: a[0:aSize], z[0:zSize]) \
-                          map(from: r[0:zSize])
+  #pragma acc data copyin( a[0:aSize], z[0:zSize]) \
+                          copyout( r[0:zSize])
   {
     bs(aSize, zSize, a, z, r, N, repeat);
   
   #ifdef DEBUG
-    #pragma acc update from (r[0:zSize])
+    #pragma acc update host(r[0:zSize])
     verify(a, z, r, aSize, zSize, "bs1");
   #endif
   
     bs2(aSize, zSize, a, z, r, N, repeat);
   
   #ifdef DEBUG
-    #pragma acc update from (r[0:zSize])
+    #pragma acc update host(r[0:zSize])
     verify(a, z, r, aSize, zSize, "bs2");
   #endif
   
     bs3(aSize, zSize, a, z, r, N, repeat);
   
   #ifdef DEBUG
-    #pragma acc update from (r[0:zSize])
+    #pragma acc update host(r[0:zSize])
     verify(a, z, r, aSize, zSize, "bs3");
   #endif
   
     bs4(aSize, zSize, a, z, r, N, repeat);
   
   #ifdef DEBUG
-    #pragma acc update from (r[0:zSize])
+    #pragma acc update host(r[0:zSize])
     verify(a, z, r, aSize, zSize, "bs4");
   #endif
   }
