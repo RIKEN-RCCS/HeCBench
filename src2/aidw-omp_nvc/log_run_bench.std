@@ -1,4 +1,3 @@
-nvc++  -Wall -I../aidw-cuda -O3 -Minfo -mp=gpu -gpu=cc90,fastmath main.o -o main 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "time -p ( ./main 10 1 100 1>log.std 2>log.err;./main 100 0 100 1>>log.std 2>>log.err ) 2> log.time"
 pkill nvidia-smi

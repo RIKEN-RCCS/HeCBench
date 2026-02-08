@@ -44,7 +44,7 @@ void AIDW_Kernel(
     const float *__restrict avg_dist) 
 
 {
-  #pragma acc parallel loop thread_limit(BLOCK_SIZE)
+  #pragma acc parallel loop vector_length(BLOCK_SIZE)
   for (int tid = 0; tid < inum; tid++) {
     float sum = 0.f, dist = 0.f, t = 0.f, z = 0.f, alpha = 0.f;
 
@@ -79,72 +79,108 @@ void AIDW_Kernel(
 // Calculate the power parameter, and then weighted interpolating
 // With using shared memory (Tiled version of the stage 2)
 void AIDW_Kernel_Tiled(
-    const float *__restrict dx, 
-    const float *__restrict dy,
-    const float *__restrict dz,
-    const int dnum,
-    const float *__restrict ix,
-    const float *__restrict iy,
-          float *__restrict iz,
-    const int inum,
-    const float area,
-    const float *__restrict avg_dist)
+		       const float *__restrict dx, 
+		       const float *__restrict dy,
+		       const float *__restrict dz,
+		       const int dnum,
+		       const float *__restrict ix,
+		       const float *__restrict iy,
+		       float *__restrict iz,
+		       const int inum,
+		       const float area,
+		       const float *__restrict avg_dist)
 {
-  #pragma acc parallel teams num_teams((inum+BLOCK_SIZE-1)/BLOCK_SIZE) thread_limit(BLOCK_SIZE)
+#pragma acc parallel num_gangs((inum + BLOCK_SIZE - 1) / BLOCK_SIZE) vector_length(BLOCK_SIZE) \
+  copyin(ix[0:inum], iy[0:inum], avg_dist[0:inum],			\
+	 dx[0:dnum], dy[0:dnum], dz[0:dnum])				\
+  copyout(iz[0:inum])
   {
     float sdx[BLOCK_SIZE];
     float sdy[BLOCK_SIZE];
     float sdz[BLOCK_SIZE];
-    #pragma omp parallel
-    {
-      int lid = omp_get_thread_num();
-      int tid = omp_get_team_num() * BLOCK_SIZE + lid;
-      if (tid < inum) {
-        float dist = 0.f, t = 0.f, alpha = 0.f;
-        int part = (dnum - 1) / BLOCK_SIZE;
-        int m, e;
 
-        float sum_up = 0.f;
-        float sum_dn = 0.f;   
-        float six_s, siy_s;
+    float sum_up[BLOCK_SIZE];
+    float sum_dn[BLOCK_SIZE];
+    float six_t[BLOCK_SIZE];
+    float siy_t[BLOCK_SIZE];
+    float alpha[BLOCK_SIZE];
 
-        float r_obs = avg_dist[tid];               //The observed average nearest neighbor distance
-        float r_exp = 1.f / (2.f * sqrtf(dnum / area)); // The expected nearest neighbor distance for a random pattern
-        float R_S0 = r_obs / r_exp;                //The nearest neighbor statistic
+#pragma acc loop gang
+    for (int g = 0; g < (inum + BLOCK_SIZE - 1) / BLOCK_SIZE; g++) {
 
-        float u_R = 0.f;
-        if(R_S0 >= R_min) u_R = 0.5f-0.5f * cosf(3.1415926f / R_max * (R_S0 - R_min));
-        if(R_S0 >= R_max) u_R = 1.f;
+#pragma acc loop vector
+      for (int lid = 0; lid < BLOCK_SIZE; lid++) {
+	int tid = g * BLOCK_SIZE + lid;
+	sum_up[lid] = 0.f;
+	sum_dn[lid] = 0.f;
 
-        // Determine the appropriate distance-decay parameter alpha by a triangular membership function
-        // Adaptive power parameter: a (alpha)
-        if(u_R>= 0.f && u_R<=0.1f)  alpha = a1; 
-        if(u_R>0.1f && u_R<=0.3f)  alpha = a1*(1.f-5.f*(u_R-0.1f)) + a2*5.f*(u_R-0.1f);
-        if(u_R>0.3f && u_R<=0.5f)  alpha = a3*5.f*(u_R-0.3f) + a1*(1.f-5.f*(u_R-0.3f));
-        if(u_R>0.5f && u_R<=0.7f)  alpha = a3*(1.f-5.f*(u_R-0.5f)) + a4*5.f*(u_R-0.5f);
-        if(u_R>0.7f && u_R<=0.9f)  alpha = a5*5.f*(u_R-0.7f) + a4*(1.f-5.f*(u_R-0.7f));
-        if(u_R>0.9f && u_R<=1.f)  alpha = a5;
-        alpha *= 0.5f; // Half of the power
+	if (tid < inum) {
+	  float r_obs = avg_dist[tid];
+	  float r_exp = 1.f / (2.f * sqrtf((float)dnum / area));
+	  float R_S0 = r_obs / r_exp;
 
-        float six_t = ix[tid];
-        float siy_t = iy[tid];
-        for(m = 0; m <= part; m++) {  // Weighted Sum  
-          int num_threads = min(BLOCK_SIZE, dnum - BLOCK_SIZE*m);
-          if (lid < num_threads) {
-            sdx[lid] = dx[lid + BLOCK_SIZE * m];
-            sdy[lid] = dy[lid + BLOCK_SIZE * m];
-            sdz[lid] = dz[lid + BLOCK_SIZE * m];
-          }
-          #pragma omp barrier
-          for(e = 0; e < BLOCK_SIZE; e++) {            
-            six_s = six_t - sdx[e];
-            siy_s = siy_t - sdy[e];
-            dist = (six_s * six_s + siy_s * siy_s);
-            t = 1.f / (powf(dist, alpha));  sum_dn += t;  sum_up += t * sdz[e];                
-          }
-          #pragma omp barrier
-        }
-        iz[tid] = sum_up / sum_dn;
+	  float u_R = 0.f;
+	  if(R_S0 >= R_min) u_R = 0.5f - 0.5f * cosf(3.1415926f / R_max * (R_S0 - R_min));
+	  if(R_S0 >= R_max) u_R = 1.f;
+
+	  float a = 0.f;
+	  if(u_R >= 0.f && u_R <= 0.1f)  a = a1;
+	  else if(u_R > 0.1f && u_R <= 0.3f) a = a1*(1.f-5.f*(u_R-0.1f)) + a2*5.f*(u_R-0.1f);
+	  else if(u_R > 0.3f && u_R <= 0.5f) a = a3*5.f*(u_R-0.3f) + a1*(1.f-5.f*(u_R-0.3f));
+	  else if(u_R > 0.5f && u_R <= 0.7f) a = a3*(1.f-5.f*(u_R-0.5f)) + a4*5.f*(u_R-0.5f);
+	  else if(u_R > 0.7f && u_R <= 0.9f) a = a5*5.f*(u_R-0.7f) + a4*(1.f-5.f*(u_R-0.7f));
+	  else if(u_R > 0.9f && u_R <= 1.f)  a = a5;
+        
+	  alpha[lid] = a * 0.5f;
+	  six_t[lid] = ix[tid]; 
+	  siy_t[lid] = iy[tid]; 
+	}
+      }
+
+      int part = (dnum - 1) / BLOCK_SIZE;
+      for (int m = 0; m <= part; m++) {
+
+#pragma acc loop vector
+	for (int lid = 0; lid < BLOCK_SIZE; lid++) {
+	  int fetch_idx = m * BLOCK_SIZE + lid;
+	  if (fetch_idx < dnum) {
+	    sdx[lid] = dx[fetch_idx];
+	    sdy[lid] = dy[fetch_idx];
+	    sdz[lid] = dz[fetch_idx];
+	  } else {
+	    sdx[lid] = 0.f; sdy[lid] = 0.f; sdz[lid] = 0.f;
+	  }
+	}
+
+#pragma acc loop vector
+	for (int lid = 0; lid < BLOCK_SIZE; lid++) {
+	  int tid = g * BLOCK_SIZE + lid;
+	  if (tid < inum) {
+	    float dist, t;
+	    float six_s, siy_s;
+	    for (int e = 0; e < BLOCK_SIZE; e++) {
+	      if (m * BLOCK_SIZE + e < dnum) {
+		six_s = six_t[lid] - sdx[e];
+		siy_s = siy_t[lid] - sdy[e];
+		dist = (six_s * six_s + siy_s * siy_s);
+              
+		//		if (dist < 1e-12f) dist = 1e-12f; 
+              
+		t = 1.f / powf(dist, alpha[lid]);
+		sum_dn[lid] += t;
+		sum_up[lid] += t * sdz[e];
+	      }
+	    }
+	  }
+	}
+      }
+
+#pragma acc loop vector
+      for (int lid = 0; lid < BLOCK_SIZE; lid++) {
+	int tid = g * BLOCK_SIZE + lid;
+	if (tid < inum) {
+	  iz[tid] = sum_up[lid] / sum_dn[lid];
+	}
       }
     }
   }
@@ -214,17 +250,17 @@ int main(int argc, char *argv[])
   float *d_iy = iy.data();
   float *d_iz = iz.data();
 
-#pragma acc data to: d_dx[0:dnum], \
-                                d_dy[0:dnum], \
-                                d_dz[0:dnum], \
-                                d_ix[0:inum], \
-                                d_iy[0:inum], \
-                                d_avg_dist[0:dnum]) \
-                        map(alloc: d_iz[0:inum])
+#pragma acc data copyin(d_dx[0:dnum],      \
+			d_dy[0:dnum],	      \
+			d_dz[0:dnum],	      \
+			d_ix[0:inum],	      \
+			d_iy[0:inum],		    \
+			d_avg_dist[0:dnum])	    \
+create(d_iz[0:inum])
   {
     // Weighted Interpolate using AIDW
     AIDW_Kernel(d_dx, d_dy, d_dz, dnum, d_ix, d_iy, d_iz, inum, area, d_avg_dist);
-    #pragma acc update from (d_iz[0:inum])
+    #pragma acc update host (d_iz[0:inum])
 
     if (check) {
       bool ok = verify (iz.data(), h_iz.data(), inum, EPS);
@@ -232,7 +268,7 @@ int main(int argc, char *argv[])
     }
 
     AIDW_Kernel_Tiled(d_dx, d_dy, d_dz, dnum, d_ix, d_iy, d_iz, inum, area, d_avg_dist);
-    #pragma acc update from (d_iz[0:inum])
+    #pragma acc update host (d_iz[0:inum])
     if (check) {
       bool ok = verify (iz.data(), h_iz.data(), inum, EPS);
       printf("%s\n", ok ? "PASS" : "FAIL");
