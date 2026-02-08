@@ -268,7 +268,7 @@
 | rushlarsen | 129.52 | 135.46 | 135.06 |
 | s3d | 2.94 | build err | 2.90 |
 | s8n | 2.49 | 2.47 | 2.43 |
-| sad | 2.53 | 2.16 | 8.52 |
+| sad | 2.48 | 2.63 | 81.81 |
 | sampling | 5.77 | build err | 5.65 |
 | scan2 | 2.91 | build err | 6.76 |
 | scan | 31.87 | build err | 33.05 |
