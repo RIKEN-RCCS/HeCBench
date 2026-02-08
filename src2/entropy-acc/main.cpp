@@ -10,7 +10,7 @@ void entropy(
   const char*__restrict d_val, 
   int height, int width)
 {
-  #pragma acc parallel loop collapse(2) vector_length(256) 
+  #pragma acc parallel loop collapse(2) present(d_entropy, d_val)
   for (int y = 0; y < height; y++) {
     for (int x = 0; x < width; x++) {
       // value of matrix element ranges from 0 inclusive to 16 exclusive
@@ -54,25 +54,11 @@ void entropy_opt(
   const float*__restrict d_logTable,
   int m, int n)
 {
-  const int teamX = (n+bsize_x-1)/bsize_x;
-  const int teamY = (m+bsize_y-1)/bsize_y;
-  const int numTeams = teamX * teamY;
-
-  #pragma acc parallel teams num_teams(numTeams) thread_limit(bsize_x*bsize_y)
-  {
-    int sd_count[16][bsize_x*bsize_y];
-    #pragma omp parallel
-    {
-      const int threadIdx_x = omp_get_vector() % bsize_x;
-      const int threadIdx_y = omp_get_vector() / bsize_x;
-      const int teamIdx_x = omp_get_gang() % teamX;
-      const int teamIdx_y = omp_get_gang() / teamX;
-      const int x = teamIdx_x * bsize_x + threadIdx_x;
-      const int y = teamIdx_y * bsize_y + threadIdx_y;
-
-      const int idx = threadIdx_y*bsize_x + threadIdx_x;
-
-      for(int i = 0; i < 16; i++) sd_count[i][idx] = 0;
+  #pragma acc parallel loop collapse(2) present(d_entropy, d_val, d_logTable)
+  for (int y = 0; y < m; y++) {
+    for (int x = 0; x < n; x++) {
+      int count[16];
+      for(int i = 0; i < 16; i++) count[i] = 0;
 
       char total = 0;
       for(int dy = -2; dy <= 2; dy++) {
@@ -81,7 +67,7 @@ void entropy_opt(
               yy = y + dy;
 
           if(xx >= 0 && yy >= 0 && yy < m && xx < n) {
-            sd_count[d_val[yy*n+xx]][idx]++;
+            count[d_val[yy*n+xx]]++;
             total++;
           }
         }
@@ -89,10 +75,10 @@ void entropy_opt(
 
       float entropy = 0;
       for(int k = 0; k < 16; k++)
-        entropy -= d_logTable[sd_count[k][idx]];
-      
+        entropy -= d_logTable[count[k]];
+
       entropy = entropy / total + log2f(total);
-      if(y < m && x < n) d_entropy[y*n+x] = entropy;
+      d_entropy[y*n+x] = entropy;
     }
   }
 }
@@ -120,8 +106,8 @@ int main(int argc, char* argv[]) {
     for (int j = 0; j < width; j++)
       input[i * width + j] = rand() % 16;
 
-  #pragma acc data to: input[0:width*height], logTable[0:26]) \
-                          map(from: output[0:width*height])
+  #pragma acc data copyin( input[0:width*height], logTable[0:26]) \
+                          copyout( output[0:width*height])
   {
     auto start = std::chrono::steady_clock::now();
 

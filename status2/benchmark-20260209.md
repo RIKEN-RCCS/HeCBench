@@ -94,7 +94,7 @@
 | easyWave | 2.97 | 2.79 | 3.08 |
 | ecdh | 11.26 | 18.09 | 19.13 |
 | eigenvalue | 19.92 | over 600 | 22.02 |
-| entropy | 46.86 | build err | 49.60 |
+| entropy | 47.60 | 94.05 | 49.43 |
 | epistasis | 53.82 | 259.15 | 110.41 |
 | expdist | 7.45 | build err | 12.43 |
 | extend2 | 5.17 | 4.68 | 4.94 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 306 | 201 | 285 |
+| completed | 306 | 202 | 285 |
 
-sycl と acc がともに完了した件数 198
+sycl と acc がともに完了した件数 199
