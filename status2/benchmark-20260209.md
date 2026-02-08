@@ -79,7 +79,7 @@
 | damage | 24.45 | 36.68 | 243.28 |
 | dct8x8 | 130.74 | build err | build err |
 | ddbp | 17.41 | build err | 17.27 |
-| debayer | 6.74 | build err | 6.75 |
+| debayer | 6.37 | 6.68 | 6.79 |
 | degrid | 14.97 | 23.24 | 17.04 |
 | dense-embedding | 166.23 | build err | 164.57 |
 | depixel | 157.40 | 208.93 | 168.04 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 306 | 200 | 285 |
+| completed | 306 | 201 | 285 |
 
-sycl と acc がともに完了した件数 197
+sycl と acc がともに完了した件数 198
