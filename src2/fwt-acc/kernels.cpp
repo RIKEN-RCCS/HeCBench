@@ -28,7 +28,7 @@ void fwtBatchGPU(float *d_Data, int M, int log2N)
     for (; log2N > ELEMENTARY_LOG2SIZE; log2N -= 2, N >>= 2, M <<= 2)
     {
       const int stride = N/4;
-      #pragma acc parallel loop collapse(2) vector_length(256)
+      #pragma acc parallel loop collapse(2) present(d_Data) vector_length(256)
       for (int m = 0; m < sM; m++) {
         for (int pos = 0; pos < sN/4; pos++) {
           const float *d_Src = d_Data  + m * sN;
@@ -68,7 +68,7 @@ void fwtBatchGPU(float *d_Data, int M, int log2N)
     for (; log2N > ELEMENTARY_LOG2SIZE; log2N -= 2, N >>= 2, M <<= 2)
     {
       const int stride = N/4;
-      #pragma acc parallel teams num_teams(numTeams) vector_length(256)
+      #pragma acc parallel num_gangs(numTeams) thread_limit(256)
       {
         #pragma omp parallel
         {
@@ -111,14 +111,10 @@ void fwtBatchGPU(float *d_Data, int M, int log2N)
     }
 #endif
 
-    #pragma acc parallel teams num_teams(M) thread_limit(N/4)
     {
       float s_data[2048];
-      #pragma omp parallel 
-      {
-        int lid = omp_get_thread_num();
-        int gid = omp_get_team_num();
-        int gsz = omp_get_vector(); 
+      #pragma acc parallel loop gang private(s_data) present(d_Data) num_gangs(M) vector_length(256)
+      for (int gid = 0; gid < M; gid++) {
 
         // Handle to thread block group
         const int    N = 1 << log2N;
@@ -127,23 +123,24 @@ void fwtBatchGPU(float *d_Data, int M, int log2N)
         const float *d_Src = d_Data + base;
         float *d_Dst = d_Data + base;
 
-        for (int pos = lid; pos < N; pos += gsz)
+        #pragma acc loop vector
+        for (int pos = 0; pos < N; pos++)
         {
             s_data[pos] = d_Src[pos];
         }
 
         //Main radix-4 stages
-        const int pos = lid;
-
         for (int stride = N >> 2; stride > 0; stride >>= 2)
         {
+            #pragma acc loop vector
+            for (int pos = 0; pos < N / 4; pos++)
+            {
             int lo = pos & (stride - 1);
             int i0 = ((pos - lo) << 2) + lo;
             int i1 = i0 + stride;
             int i2 = i1 + stride;
             int i3 = i2 + stride;
 
-            #pragma omp barrier
             float D0 = s_data[i0];
             float D1 = s_data[i1];
             float D2 = s_data[i2];
@@ -162,14 +159,14 @@ void fwtBatchGPU(float *d_Data, int M, int log2N)
             T = D2;
             s_data[i2] = D2 + D3;
             s_data[i3] = T - D3;
+            }
         }
 
         //Do single radix-2 stage for odd power of two
         if (log2N & 1)
         {
-            #pragma omp barrier
-
-            for (int pos = lid; pos < N / 2; pos += gsz)
+            #pragma acc loop vector
+            for (int pos = 0; pos < N / 2; pos++)
             {
                 int i0 = pos << 1;
                 int i1 = i0 + 1;
@@ -181,9 +178,8 @@ void fwtBatchGPU(float *d_Data, int M, int log2N)
             }
         }
 
-        #pragma omp barrier
-
-        for (int pos = lid; pos < N; pos += gsz)
+        #pragma acc loop vector
+        for (int pos = 0; pos < N; pos++)
         {
             d_Dst[pos] = s_data[pos];
         }
@@ -195,7 +191,7 @@ void fwtBatchGPU(float *d_Data, int M, int log2N)
 void modulateGPU(float *__restrict d_A, const float *__restrict d_B, int N)
 {
     const float rcpN = 1.0f / (float)N;
-    #pragma acc parallel loop gang(128) vector_length(256)
+    #pragma acc parallel loop present(d_A, d_B) num_gangs(128) vector_length(256)
     for (int pos = 0; pos < N; pos++)
     {
         d_A[pos] *= d_B[pos] * rcpN;

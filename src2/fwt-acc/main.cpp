@@ -87,7 +87,7 @@ int main(int argc, char *argv[])
   float *d_Kernel = (float *)malloc(DATA_SIZE);
   float *d_Data   = (float *)malloc(DATA_SIZE);
 
-  #pragma acc parallel data map (alloc: d_Kernel[0:dataN], d_Data[0:dataN])
+  #pragma acc data create(d_Kernel[0:dataN], d_Data[0:dataN])
   {
     float total_time = 0.f;
 
@@ -95,10 +95,10 @@ int main(int argc, char *argv[])
     {
       memset(d_Kernel, 0, DATA_SIZE);
       memcpy(d_Kernel, h_Kernel, KERNEL_SIZE);
-      #pragma acc update to (d_Kernel[0:dataN])
+      #pragma acc update device(d_Kernel[0:dataN])
   
       memcpy(d_Data, h_Data, DATA_SIZE);
-      #pragma acc update to (d_Data[0:dataN])
+      #pragma acc update device(d_Data[0:dataN])
   
       auto start = std::chrono::steady_clock::now();
 
@@ -114,7 +114,7 @@ int main(int argc, char *argv[])
     printf("Average device execution time %f (s)\n", (total_time * 1e-9f) / repeat);
   
     printf("Reading back GPU results...\n");
-    #pragma acc update from (d_Data[0:dataN])
+    #pragma acc update host(d_Data[0:dataN])
   }
 
   printf("Running straightforward CPU dyadic convolution...\n");
