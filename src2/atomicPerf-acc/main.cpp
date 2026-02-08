@@ -10,7 +10,7 @@
 template <typename T>
 void BlockRangeAtomicOnGlobalMem(T* data, int n)
 {
-  #pragma acc parallel loop thread_limit(BLOCK_SIZE)
+  #pragma acc parallel loop vector_length(BLOCK_SIZE)
   for ( unsigned int i = 0; i < n; i++) {
     #pragma acc atomic update
     data[i % BLOCK_SIZE]++;  //arbitrary number to add
@@ -20,7 +20,7 @@ void BlockRangeAtomicOnGlobalMem(T* data, int n)
 template <typename T>
 void WarpRangeAtomicOnGlobalMem(T* data, int n)
 {
-  #pragma acc parallel loop thread_limit(BLOCK_SIZE)
+  #pragma acc parallel loop vector_length(BLOCK_SIZE)
   for ( unsigned int i = 0; i < n; i++) {
     #pragma acc atomic update
     data[i & 0x1F]++; //arbitrary number to add
@@ -30,7 +30,7 @@ void WarpRangeAtomicOnGlobalMem(T* data, int n)
 template <typename T>
 void SingleRangeAtomicOnGlobalMem(T* data, int offset, int n)
 {
-  #pragma acc parallel loop thread_limit(BLOCK_SIZE)
+  #pragma acc parallel loop vector_length(BLOCK_SIZE)
   for ( unsigned int i = 0; i < n; i++) {
     #pragma acc atomic update
     data[offset]++;    //arbitrary number to add
@@ -40,22 +40,33 @@ void SingleRangeAtomicOnGlobalMem(T* data, int offset, int n)
 template <typename T>
 void BlockRangeAtomicOnSharedMem(T* data, int n)
 {
-  #pragma acc parallel teams num_teams(n / BLOCK_SIZE) thread_limit(BLOCK_SIZE)
+  unsigned int gridDim_x = (n / BLOCK_SIZE);
+  
+#pragma acc parallel num_gangs(gridDim_x) vector_length(BLOCK_SIZE) \
+  copy(data[0:BLOCK_SIZE])
   {
     T smem_data[BLOCK_SIZE];
-    #pragma omp parallel 
-    {
-      unsigned int blockIdx_x = omp_get_team_num();
-      unsigned int gridDim_x = omp_get_gang();
-      unsigned int blockDim_x = omp_get_vector();
-      unsigned int threadIdx_x = omp_get_thread_num();
-      unsigned int tid = (blockIdx_x * blockDim_x) + threadIdx_x;
-      for ( unsigned int i = tid; i < n; i += blockDim_x*gridDim_x){
-        #pragma acc atomic update
-        smem_data[threadIdx_x]++;
+
+#pragma acc loop gang
+    for (unsigned int blockIdx_x = 0; blockIdx_x < gridDim_x; blockIdx_x++) {
+    
+#pragma acc loop vector
+      for (unsigned int threadIdx_x = 0; threadIdx_x < BLOCK_SIZE; threadIdx_x++) {
+      
+	smem_data[threadIdx_x] = 0;
+
+	unsigned int blockDim_x = BLOCK_SIZE;
+	unsigned int tid = (blockIdx_x * blockDim_x) + threadIdx_x;
+
+	for (unsigned int i = tid; i < n; i += blockDim_x * gridDim_x) {
+#pragma acc atomic update
+	  smem_data[threadIdx_x]++;
+	}
+
+	if (blockIdx_x == gridDim_x ) {
+	  data[threadIdx_x] = smem_data[threadIdx_x];
+	}
       }
-      if (blockIdx_x == gridDim_x)
-        data[threadIdx_x] = smem_data[threadIdx_x];
     }
   }
 }
@@ -63,45 +74,71 @@ void BlockRangeAtomicOnSharedMem(T* data, int n)
 template <typename T>
 void WarpRangeAtomicOnSharedMem(T* data, int n)
 {
-  #pragma acc parallel teams num_teams(n / BLOCK_SIZE) thread_limit(BLOCK_SIZE)
-  {
-    T smem_data[32];
-    #pragma omp parallel 
-    {
-      unsigned int blockIdx_x = omp_get_team_num();
-      unsigned int gridDim_x = omp_get_gang();
-      unsigned int blockDim_x = omp_get_vector();
-      unsigned int threadIdx_x = omp_get_thread_num();
-      unsigned int tid = (blockIdx_x * blockDim_x) + threadIdx_x;
-      for ( unsigned int i = tid; i < n; i += blockDim_x*gridDim_x){
-        #pragma acc atomic update
-        smem_data[i & 0x1F]++;
-      }
-      if (blockIdx_x == gridDim_x && threadIdx_x < 0x1F)
-        data[threadIdx_x] = smem_data[threadIdx_x];
-    }
-  }
+unsigned int gridDim_x = n / BLOCK_SIZE;
+
+#pragma acc parallel num_gangs(gridDim_x) vector_length(BLOCK_SIZE) copy(data[0:32])
+ {
+   T smem_data[32];
+
+#pragma acc loop gang
+   for (unsigned int blockIdx_x = 0; blockIdx_x < gridDim_x; blockIdx_x++) {
+    
+#pragma acc loop vector
+     for (unsigned int v = 0; v < BLOCK_SIZE; v++) {
+       if (v < 32) smem_data[v] = 0;
+     }
+
+#pragma acc loop vector
+     for (unsigned int threadIdx_x = 0; threadIdx_x < BLOCK_SIZE; threadIdx_x++) {
+      
+       unsigned int blockDim_x = BLOCK_SIZE;
+       unsigned int tid = (blockIdx_x * blockDim_x) + threadIdx_x;
+
+       for (unsigned int i = tid; i < n; i += blockDim_x * gridDim_x) {
+#pragma acc atomic update
+	 smem_data[i & 0x1F]++;
+       }
+
+       if (blockIdx_x == (gridDim_x) && threadIdx_x < 32) {
+	 data[threadIdx_x] = smem_data[threadIdx_x];
+       }
+     }
+   }
+ }
 }
 
 template <typename T>
 void SingleRangeAtomicOnSharedMem(T* data, int offset, int n)
 {
-  #pragma acc parallel teams num_teams(n / BLOCK_SIZE) thread_limit(BLOCK_SIZE)
+  unsigned int gridDim_x = n / BLOCK_SIZE;
+
+#pragma acc parallel num_gangs(gridDim_x) vector_length(BLOCK_SIZE) \
+  copy(data[0:BLOCK_SIZE])
   {
     T smem_data[BLOCK_SIZE];
-    #pragma omp parallel 
-    {
-      unsigned int blockIdx_x = omp_get_team_num();
-      unsigned int gridDim_x = omp_get_gang();
-      unsigned int blockDim_x = omp_get_vector();
-      unsigned int threadIdx_x = omp_get_thread_num();
-      unsigned int tid = (blockIdx_x * blockDim_x) + threadIdx_x;
-      for ( unsigned int i = tid; i < n; i += blockDim_x*gridDim_x){
-        #pragma acc atomic update
-        smem_data[offset]++;
+
+#pragma acc loop gang
+    for (unsigned int blockIdx_x = 0; blockIdx_x < gridDim_x; blockIdx_x++) {
+
+#pragma acc loop vector
+      for (unsigned int v = 0; v < BLOCK_SIZE; v++) {
+	smem_data[v] = 0;
       }
-      if (blockIdx_x == gridDim_x && threadIdx_x == 0)
-        data[threadIdx_x] = smem_data[threadIdx_x];
+
+#pragma acc loop vector
+      for (unsigned int threadIdx_x = 0; threadIdx_x < BLOCK_SIZE; threadIdx_x++) {
+	unsigned int blockDim_x = BLOCK_SIZE;
+	unsigned int tid = (blockIdx_x * blockDim_x) + threadIdx_x;
+
+	for (unsigned int i = tid; i < n; i += blockDim_x * gridDim_x) {
+# pragma acc atomic update
+	  smem_data[offset]++;
+	}
+
+	if (blockIdx_x == gridDim_x && threadIdx_x == 0) {
+	  data[0] = smem_data[0];
+	}
+      }
     }
   }
 }
@@ -120,9 +157,9 @@ void atomicPerf (int n, int t, int repeat)
     data[i] = h_data[i] = i%1024+1;
   }
 
-  #pragma acc data alloc: data[0:t])
+#pragma acc data create(data[0:t])
   {
-    #pragma acc update to (data[0:t])
+    #pragma acc update device (data[0:t])
     auto start = std::chrono::steady_clock::now();
     for(int i=0; i<repeat; i++)
     {
@@ -133,7 +170,7 @@ void atomicPerf (int n, int t, int repeat)
     printf("Average execution time of BlockRangeAtomicOnGlobalMem: %f (us)\n",
             time * 1e-3f / repeat);
 
-    #pragma acc update from (data[0:t])
+    #pragma acc update host (data[0:t])
     memcpy(r_data, h_data, data_size);
     for(int i=0; i<repeat; i++)
       BlockRangeAtomicOnGlobalMem_ref<T>(r_data, n);
@@ -141,7 +178,7 @@ void atomicPerf (int n, int t, int repeat)
     printf("%s\n", fail ? "FAIL" : "PASS");
 
     memcpy(data, h_data, data_size);
-    #pragma acc update to (data[0:t])
+    #pragma acc update device (data[0:t])
     start = std::chrono::steady_clock::now();
     for(int i=0; i<repeat; i++)
     {
@@ -153,14 +190,14 @@ void atomicPerf (int n, int t, int repeat)
             time * 1e-3f / repeat);
 
     memcpy(r_data, h_data, data_size);
-    #pragma acc update from (data[0:t])
+    #pragma acc update host (data[0:t])
     for(int i=0; i<repeat; i++)
       WarpRangeAtomicOnGlobalMem_ref<T>(r_data, n);
     fail = memcmp(data, r_data, data_size);
     printf("%s\n", fail ? "FAIL" : "PASS");
 
     memcpy(data, h_data, data_size);
-    #pragma acc update to (data[0:t])
+    #pragma acc update device (data[0:t])
     start = std::chrono::steady_clock::now();
     for(int i=0; i<repeat; i++)
     {
@@ -172,14 +209,14 @@ void atomicPerf (int n, int t, int repeat)
             time * 1e-3f / repeat);
 
     memcpy(r_data, h_data, data_size);
-    #pragma acc update from (data[0:t])
+    #pragma acc update host (data[0:t])
     for(int i=0; i<repeat; i++)
       SingleRangeAtomicOnGlobalMem_ref<T>(r_data, i % BLOCK_SIZE, n);
     fail = memcmp(data, r_data, data_size);
     printf("%s\n", fail ? "FAIL" : "PASS");
 
     memcpy(data, h_data, data_size);
-    #pragma acc update to (data[0:t])
+    #pragma acc update device (data[0:t])
     start = std::chrono::steady_clock::now();
     for(int i=0; i<repeat; i++)
     {
@@ -190,12 +227,12 @@ void atomicPerf (int n, int t, int repeat)
     printf("Average execution time of BlockRangeAtomicOnSharedMem: %f (us)\n",
             time * 1e-3f / repeat);
 
-    #pragma acc update from (data[0:t])
+    #pragma acc update host (data[0:t])
     fail = memcmp(h_data, data, data_size);
     printf("%s\n", fail ? "FAIL" : "PASS");
 
     memcpy(data, h_data, data_size);
-    #pragma acc update to (data[0:t])
+    #pragma acc update device (data[0:t])
     start = std::chrono::steady_clock::now();
     for(int i=0; i<repeat; i++)
     {
@@ -206,12 +243,12 @@ void atomicPerf (int n, int t, int repeat)
     printf("Average execution time of WarpRangeAtomicOnSharedMem: %f (us)\n",
             time * 1e-3f / repeat);
 
-    #pragma acc update from (data[0:t])
+    #pragma acc update host (data[0:t])
     fail = memcmp(h_data, data, data_size);
     printf("%s\n", fail ? "FAIL" : "PASS");
 
     memcpy(data, h_data, data_size);
-    #pragma acc update to (data[0:t])
+    #pragma acc update device (data[0:t])
     start = std::chrono::steady_clock::now();
     for(int i=0; i<repeat; i++)
     {
@@ -222,7 +259,7 @@ void atomicPerf (int n, int t, int repeat)
     printf("Average execution time of SingleRangeAtomicOnSharedMem: %f (us)\n",
             time * 1e-3f / repeat);
 
-    #pragma acc update from (data[0:t])
+    #pragma acc update host (data[0:t])
     fail = memcmp(h_data, data, data_size);
     printf("%s\n", fail ? "FAIL" : "PASS");
 
