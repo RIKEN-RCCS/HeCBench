@@ -72,10 +72,10 @@ clean:
 # run one- and three-dimensional kernels
 include ../include/axhelm-NVIDIA
 
-run: $all
+run: all
 	$(LAUNCHER) "$(COMMAND)"
 
-run_mem: $all
+run_mem: all
 	nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 	$(LAUNCHER) "$(COMMAND)"
 	pkill nvidia-smi
