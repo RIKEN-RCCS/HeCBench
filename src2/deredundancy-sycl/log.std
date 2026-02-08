@@ -3,5 +3,5 @@ output:	result.fasta
 threshold:	0.95
 word length:	6
 reads count:	10000
-Device offload time 15.476151 secs 
+Device offload time 15.479346 secs 
 cluster count: 1357

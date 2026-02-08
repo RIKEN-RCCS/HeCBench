@@ -83,7 +83,7 @@
 | degrid | 14.97 | 23.24 | 17.04 |
 | dense-embedding | 166.23 | build err | 164.57 |
 | depixel | 157.40 | 208.93 | 168.04 |
-| deredundancy | 17.83 | build err | 15.72 |
+| deredundancy | 17.89 | 15.82 | 15.76 |
 | diamond | build err | build err | 37.30 |
 | distort | 2.45 | 2.45 | 2.50 |
 | divergence | 3.11 | 3.12 | 3.13 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 306 | 199 | 285 |
+| completed | 306 | 200 | 285 |
 
-sycl と acc がともに完了した件数 196
+sycl と acc がともに完了した件数 197
