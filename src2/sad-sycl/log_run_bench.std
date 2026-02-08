@@ -1,13 +1,7 @@
+clang++  -std=c++17 -Wall -I../sad-cuda -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c main.cpp -o main.o
 clang++  -std=c++17 -Wall -I../sad-cuda -fsycl           --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU main.o -o main 
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
-bash -c "../sad-cuda/prepare_data.sh; time -p ( ./main ../sad-cuda/coins.bmp ../sad-cuda/coin.bmp 1 100>log.std 2>log.err ) 2> log.time"
-Parallel Computation Results: 
-Kernel time in msec: 4
-Elapsed time in msec = 4
-Main Image Dimensions: 630*459
-Template Image Dimensions: 116*116
-Found Minimum:  1
-Number of Occurances: 1
+bash -c "../sad-cuda/prepare_data.sh; time -p ( ./main ../sad-cuda/coins.bmp ../sad-cuda/coin.bmp 10 1>log.std 2>log.err ) 2> log.time"
 pkill nvidia-smi
 ../scripts/m.sh
 min max diff memory in [MB] : 1 558 557

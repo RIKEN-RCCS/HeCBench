@@ -1,1 +1,2 @@
-COMMAND = ../kmeans-cuda/prepare_data.sh; time -p ( ./kmeans -r -n 5 -m 15 -l 10 -o -i ../data/kmeans/kdd_cup 1>log.std 2>log.err ) 2> log.time
+#COMMAND = ../kmeans-cuda/prepare_data.sh; time -p ( ./kmeans -r -n 5 -m 15 -l 10 -o -i ../data/kmeans/kdd_cup 1>log.std 2>log.err ) 2> log.time
+COMMAND = ../kmeans-cuda/prepare_data.sh; time -p ( ./$(program) -r -n 5 -m 15 -l 10 -o -i ../data/kmeans/kdd_cup 1>log.std 2>log.err ) 2> log.time
