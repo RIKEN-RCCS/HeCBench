@@ -4,11 +4,11 @@ inum = : 10240
 Verification enabled
 PASS
 PASS
-Average execution time of AIDW_Kernel       0.002047 (s)
+Average execution time of AIDW_Kernel       0.002048 (s)
 Average execution time of AIDW_Kernel_Tiled 0.001795 (s)
 Size = : 100 K 
 dnum = : 102400
 inum = : 102400
 Verification disabled
-Average execution time of AIDW_Kernel       0.051162 (s)
-Average execution time of AIDW_Kernel_Tiled 0.045447 (s)
+Average execution time of AIDW_Kernel       0.051177 (s)
+Average execution time of AIDW_Kernel_Tiled 0.045456 (s)
