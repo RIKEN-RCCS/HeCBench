@@ -1,51 +1,57 @@
-"kernel.h", line 17: error: invalid text in pragma
-    #pragma acc parallel teams num_teams((n+BLOCK_SIZE-1)/BLOCK_SIZE) thread_limit(BLOCK_SIZE)
-                         ^
-
-"kernel.h", line 17: error: extra text after expected end of preprocessing directive
-    #pragma acc parallel teams num_teams((n+BLOCK_SIZE-1)/BLOCK_SIZE) thread_limit(BLOCK_SIZE)
-                               ^
-
-"kernel.h", line 22: error: identifier "omp_get_thread_num" is undefined
-        const int local_id = omp_get_thread_num();
-                             ^
-
-"kernel.h", line 24: error: identifier "omp_get_team_num" is undefined
-        const int nid = omp_get_team_num();
-                        ^
-
-"kernel.h", line 61: error: invalid text in pragma
-    #pragma acc parallel loop num_teams(m) 
-                              ^
-
-"kernel.h", line 61: error: extra text after expected end of preprocessing directive
-    #pragma acc parallel loop num_teams(m) 
-                                       ^
-
-"kernel.h", line 67: error: invalid text in pragma
-      #pragma acc loop reduction(+:sum) num_threads(BLOCK_SIZE)
-                                        ^
-
-"kernel.h", line 67: error: extra text after expected end of preprocessing directive
-      #pragma acc loop reduction(+:sum) num_threads(BLOCK_SIZE)
-                                                   ^
-
-"main.cpp", line 50: error: invalid text in pragma
-    #pragma acc data to: nlist[0:n], family[0:m]) \
-                     ^
-
-"main.cpp", line 50: error: extra text after expected end of preprocessing directive
-    #pragma acc data to: nlist[0:n], family[0:m]) \
-                       ^
-
-"main.cpp", line 65: error: invalid text in pragma
-    #pragma acc data to: nlist[0:n], family[0:m]) \
-                     ^
-
-"main.cpp", line 65: error: extra text after expected end of preprocessing directive
-    #pragma acc data to: nlist[0:n], family[0:m]) \
-                       ^
-
-12 errors detected in the compilation of "main.cpp".
-make: *** [Makefile.NVD:57: main.o] Error 2
+damage_of_node(int, int const*, int const*, int*, double*):
+      9, include "kernel.h"
+          21, Generating present(n_neigh[:],nlist[:],damage[:],family[:])
+              Generating implicit firstprivate(num_gangs)
+              Generating NVIDIA GPU code
+              25, #pragma acc loop gang(num_gangs) /* blockIdx.x */
+              29, #pragma acc loop vector(256) /* threadIdx.x */
+              38, #pragma acc loop seq
+              40, #pragma acc loop vector(256) /* threadIdx.x */
+          21, CUDA shared memory used for local_cache
+          29, Loop is parallelizable
+              Generating implicit firstprivate(n)
+              Generated vector simd code for the loop
+          38, Loop carried scalar dependence for i at line 41,42,45
+              Loop carried dependence of local_cache prevents parallelization
+              Loop carried backward dependence of local_cache prevents vectorization
+              Loop not vectorized/parallelized: not countable
+          40, Loop is parallelizable
+              Loop not vectorized: data dependency
+damage_of_node_optimized(int, int, int const*, int const*, int*, double*):
+      9, include "kernel.h"
+          62, Generating present(nlist[:],n_neigh[:],damage[:],family[:])
+              Generating implicit firstprivate(m)
+              Generating NVIDIA GPU code
+              66, #pragma acc loop gang(m) /* blockIdx.x */
+              72, #pragma acc loop vector(256) /* threadIdx.x */
+                  Generating reduction(+:sum)
+          66, Generating implicit private(i,n)
+              Loop not fused: no successor loop
+          72, Loop is parallelizable
+              Generated vector simd code for the loop containing reductions
+validate(int, int, int, int const*, int const*, int*, double*):
+     10, include "reference.h"
+          21, Generated vector simd code for the loop containing reductions
+          31, Loop not vectorized/parallelized: potential early exits
+main:
+     37, Loop not fused: different loop trip count
+         Loop not vectorized: unknown
+     41, Loop not fused: function call before adjacent loop
+     43, Generated vector simd code for the loop containing reductions
+     52, Generating copyin(nlist[:n]) [if not already present]
+         Generating copyout(n_neigh[:m],damage[:m]) [if not already present]
+         Generating copyin(family[:m]) [if not already present]
+     55, Loop not vectorized/parallelized: contains call
+          21, Generated vector simd code for the loop containing reductions
+          31, Loop not vectorized/parallelized: potential early exits
+     67, Generating copyin(nlist[:n]) [if not already present]
+         Generating copyout(n_neigh[:m],damage[:m]) [if not already present]
+         Generating copyin(family[:m]) [if not already present]
+     70, Loop not vectorized/parallelized: contains call
+          21, Generated vector simd code for the loop containing reductions
+          31, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      3, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      9, include "kernel.h"
 timeout was set to  600

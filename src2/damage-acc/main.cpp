@@ -47,8 +47,8 @@ int main(int argc, char* argv[]) {
     family[i] = s + 1 + s * LCG_random_double(&seed);
   }
 
-  #pragma acc data to: nlist[0:n], family[0:m]) \
-                          map(from: n_neigh[0:m], damage[0:m])
+  #pragma acc data copyin( nlist[0:n], family[0:m]) \
+                          copyout( n_neigh[0:m], damage[0:m])
   {
     auto start = std::chrono::steady_clock::now();
 
@@ -62,8 +62,8 @@ int main(int argc, char* argv[]) {
 
   validate(BLOCK_SIZE, m, n, nlist, family, n_neigh, damage);
 
-  #pragma acc data to: nlist[0:n], family[0:m]) \
-                          map(from: n_neigh[0:m], damage[0:m])
+  #pragma acc data copyin( nlist[0:n], family[0:m]) \
+                          copyout( n_neigh[0:m], damage[0:m])
   {
     auto start = std::chrono::steady_clock::now();
 

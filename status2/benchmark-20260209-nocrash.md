@@ -76,7 +76,7 @@
 | cross | 14.58 | 7.67 | 8.04 |
 | crs | 24.78 | build err | over 600 |
 | d2q9-bgk | 2.85 | build err | 4.37 |
-| damage | 24.32 | build err | 243.23 |
+| damage | 24.45 | 36.68 | 243.28 |
 | dct8x8 | 130.74 | build err | build err |
 | ddbp | 17.41 | build err | 17.27 |
 | debayer | 6.74 | build err | 6.75 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| エラーなし | 308 | 201 | 291 |
+| エラーなし | 308 | 202 | 291 |
 
-sycl と acc がともに実行できた件数 199
+sycl と acc がともに実行できた件数 200
