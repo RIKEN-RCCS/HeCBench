@@ -26,11 +26,10 @@
 #include <openacc.h>
 
 
-#define DO_NOT_OPTIMIZE_AWAY                                                       \
-  unsigned i = omp_get_gang() * omp_get_vector() + omp_get_thread_num(); \
+#define DO_NOT_OPTIMIZE_AWAY \
+  unsigned i = 0;            \
   if (out) *out = args.args[i];
 
-#pragma omp declare target
 struct SmallKernelArgs {
   char args[16];
 };
@@ -43,12 +42,14 @@ struct LargeKernelArgs {
   char args[4096];
 };
 
+#pragma acc routine seq
 void KernelWithSmallArgs(SmallKernelArgs args, char* out) { DO_NOT_OPTIMIZE_AWAY; }
 
+#pragma acc routine seq
 void KernelWithMediumArgs(MediumKernelArgs args, char* out) { DO_NOT_OPTIMIZE_AWAY; }
 
+#pragma acc routine seq
 void KernelWithLargeArgs(LargeKernelArgs args, char* out) { DO_NOT_OPTIMIZE_AWAY; }
-#pragma omp end declare target
 
 int main(int argc, char* argv[])
 {
@@ -64,14 +65,18 @@ int main(int argc, char* argv[])
 
   // warmup
   for (int i = 0; i < repeat; i++) {
-    #pragma acc parallel map(to:small_kernel_args)
-    KernelWithSmallArgs(small_kernel_args, nullptr);
+    #pragma acc parallel copyin(small_kernel_args) num_gangs(1) num_workers(1) vector_length(1)
+    {
+      KernelWithSmallArgs(small_kernel_args, nullptr);
+    }
   }
 
   auto start = std::chrono::steady_clock::now();
   for (int i = 0; i < repeat; i++) {
-    #pragma acc parallel map(to:small_kernel_args)
-    KernelWithSmallArgs(small_kernel_args, nullptr);
+    #pragma acc parallel copyin(small_kernel_args) num_gangs(1) num_workers(1) vector_length(1)
+    {
+      KernelWithSmallArgs(small_kernel_args, nullptr);
+    }
   }
   auto end = std::chrono::steady_clock::now();
   auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
@@ -79,14 +84,18 @@ int main(int argc, char* argv[])
 
   // warmup
   for (int i = 0; i < repeat; i++) {
-    #pragma acc parallel map(to:medium_kernel_args)
-    KernelWithMediumArgs(medium_kernel_args, nullptr);
+    #pragma acc parallel copyin(medium_kernel_args) num_gangs(1) num_workers(1) vector_length(1)
+    {
+      KernelWithMediumArgs(medium_kernel_args, nullptr);
+    }
   }
 
   start = std::chrono::steady_clock::now();
   for (int i = 0; i < repeat; i++) {
-    #pragma acc parallel map(to:medium_kernel_args)
-    KernelWithMediumArgs(medium_kernel_args, nullptr);
+    #pragma acc parallel copyin(medium_kernel_args) num_gangs(1) num_workers(1) vector_length(1)
+    {
+      KernelWithMediumArgs(medium_kernel_args, nullptr);
+    }
   }
   end = std::chrono::steady_clock::now();
   time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
@@ -94,14 +103,18 @@ int main(int argc, char* argv[])
 
   // warmup
   for (int i = 0; i < repeat; i++) {
-    #pragma acc parallel map(to:large_kernel_args)
-    KernelWithLargeArgs(large_kernel_args, nullptr);
+    #pragma acc parallel copyin(large_kernel_args) num_gangs(1) num_workers(1) vector_length(1)
+    {
+      KernelWithLargeArgs(large_kernel_args, nullptr);
+    }
   }
 
   start = std::chrono::steady_clock::now();
   for (int i = 0; i < repeat; i++) {
-    #pragma acc parallel map(to:large_kernel_args)
-    KernelWithLargeArgs(large_kernel_args, nullptr);
+    #pragma acc parallel copyin(large_kernel_args) num_gangs(1) num_workers(1) vector_length(1)
+    {
+      KernelWithLargeArgs(large_kernel_args, nullptr);
+    }
   }
   end = std::chrono::steady_clock::now();
   time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();

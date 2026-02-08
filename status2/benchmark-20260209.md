@@ -154,7 +154,7 @@
 | kalman | over 600 | build err | exe err |
 | keccaktreehash | 8.26 | 11.46 | 10.08 |
 | keogh | 7.03 | 5.80 | 5.89 |
-| kernelLaunch | 14.57 | build err | 73.69 |
+| kernelLaunch | 14.84 | 281.99 | 73.99 |
 | kmeans | 28.93 | 27.05 | 22.68 |
 | knn | 4.48 | 4.28 | 4.53 |
 | lanczos | 2.61 | build err | 2.81 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 306 | 202 | 285 |
+| completed | 306 | 203 | 285 |
 
-sycl と acc がともに完了した件数 199
+sycl と acc がともに完了した件数 200

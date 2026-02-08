@@ -1,87 +1,36 @@
-"main.cpp", line 46: error: identifier "omp_get_gang" is undefined
-  void KernelWithSmallArgs(SmallKernelArgs args, char* out) { DO_NOT_OPTIMIZE_AWAY; }
-                                                              ^
-
-"main.cpp", line 46: error: identifier "omp_get_vector" is undefined
-  void KernelWithSmallArgs(SmallKernelArgs args, char* out) { DO_NOT_OPTIMIZE_AWAY; }
-                                                              ^
-
-"main.cpp", line 46: error: identifier "omp_get_thread_num" is undefined
-  void KernelWithSmallArgs(SmallKernelArgs args, char* out) { DO_NOT_OPTIMIZE_AWAY; }
-                                                              ^
-
-"main.cpp", line 48: error: identifier "omp_get_gang" is undefined
-  void KernelWithMediumArgs(MediumKernelArgs args, char* out) { DO_NOT_OPTIMIZE_AWAY; }
-                                                                ^
-
-"main.cpp", line 48: error: identifier "omp_get_vector" is undefined
-  void KernelWithMediumArgs(MediumKernelArgs args, char* out) { DO_NOT_OPTIMIZE_AWAY; }
-                                                                ^
-
-"main.cpp", line 48: error: identifier "omp_get_thread_num" is undefined
-  void KernelWithMediumArgs(MediumKernelArgs args, char* out) { DO_NOT_OPTIMIZE_AWAY; }
-                                                                ^
-
-"main.cpp", line 50: error: identifier "omp_get_gang" is undefined
-  void KernelWithLargeArgs(LargeKernelArgs args, char* out) { DO_NOT_OPTIMIZE_AWAY; }
-                                                              ^
-
-"main.cpp", line 50: error: identifier "omp_get_vector" is undefined
-  void KernelWithLargeArgs(LargeKernelArgs args, char* out) { DO_NOT_OPTIMIZE_AWAY; }
-                                                              ^
-
-"main.cpp", line 50: error: identifier "omp_get_thread_num" is undefined
-  void KernelWithLargeArgs(LargeKernelArgs args, char* out) { DO_NOT_OPTIMIZE_AWAY; }
-                                                              ^
-
-"main.cpp", line 67: error: invalid text in pragma
-      #pragma acc parallel map(to:small_kernel_args)
-                           ^
-
-"main.cpp", line 67: error: extra text after expected end of preprocessing directive
-      #pragma acc parallel map(to:small_kernel_args)
-                              ^
-
-"main.cpp", line 73: error: invalid text in pragma
-      #pragma acc parallel map(to:small_kernel_args)
-                           ^
-
-"main.cpp", line 73: error: extra text after expected end of preprocessing directive
-      #pragma acc parallel map(to:small_kernel_args)
-                              ^
-
-"main.cpp", line 82: error: invalid text in pragma
-      #pragma acc parallel map(to:medium_kernel_args)
-                           ^
-
-"main.cpp", line 82: error: extra text after expected end of preprocessing directive
-      #pragma acc parallel map(to:medium_kernel_args)
-                              ^
-
-"main.cpp", line 88: error: invalid text in pragma
-      #pragma acc parallel map(to:medium_kernel_args)
-                           ^
-
-"main.cpp", line 88: error: extra text after expected end of preprocessing directive
-      #pragma acc parallel map(to:medium_kernel_args)
-                              ^
-
-"main.cpp", line 97: error: invalid text in pragma
-      #pragma acc parallel map(to:large_kernel_args)
-                           ^
-
-"main.cpp", line 97: error: extra text after expected end of preprocessing directive
-      #pragma acc parallel map(to:large_kernel_args)
-                              ^
-
-"main.cpp", line 103: error: invalid text in pragma
-      #pragma acc parallel map(to:large_kernel_args)
-                           ^
-
-"main.cpp", line 103: error: extra text after expected end of preprocessing directive
-      #pragma acc parallel map(to:large_kernel_args)
-                              ^
-
-21 errors detected in the compilation of "main.cpp".
-make: *** [Makefile.NVD:57: main.o] Error 2
+KernelWithSmallArgs(SmallKernelArgs, char*):
+     46, Generating acc routine seq
+         Generating NVIDIA GPU code
+KernelWithMediumArgs(MediumKernelArgs, char*):
+     49, Generating acc routine seq
+         Generating NVIDIA GPU code
+KernelWithLargeArgs(LargeKernelArgs, char*):
+     52, Generating acc routine seq
+         Generating NVIDIA GPU code
+main:
+     67, Generating copyin(small_kernel_args) [if not already present]
+         Loop not vectorized/parallelized: contains structure move
+     69, Generating NVIDIA GPU code
+         CUDA shared memory used for .inl_args_179
+     75, Generating copyin(small_kernel_args) [if not already present]
+         Loop not vectorized/parallelized: contains structure move
+     77, Generating NVIDIA GPU code
+         CUDA shared memory used for .inl_args_182
+     86, Generating copyin(medium_kernel_args) [if not already present]
+         Loop not vectorized/parallelized: contains structure move
+     88, Generating NVIDIA GPU code
+         CUDA shared memory used for .inl_args_225
+     94, Generating copyin(medium_kernel_args) [if not already present]
+         Loop not vectorized/parallelized: contains structure move
+     96, Generating NVIDIA GPU code
+         CUDA shared memory used for .inl_args_228
+    105, Generating copyin(large_kernel_args) [if not already present]
+         Loop not vectorized/parallelized: contains structure move
+    107, Generating NVIDIA GPU code
+    113, Generating copyin(large_kernel_args) [if not already present]
+         Loop not vectorized/parallelized: contains structure move
+    115, Generating NVIDIA GPU code
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     25, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
 timeout was set to  600
