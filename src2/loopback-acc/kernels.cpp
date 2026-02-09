@@ -1,15 +1,18 @@
+#pragma acc routine seq
 unsigned TausStep(unsigned &z, int S1, int S2, int S3, unsigned M)
 {
   unsigned b = (((z << S1) ^ z) >> S2);
   return z = (((z & M) << S3) ^ b);
 }
 
+#pragma acc routine seq
 unsigned LCGStep(unsigned &z)
 {
   return z = (1664525 * z + 1013904223);
 }
 
 // Uniform, need to do box muller on this
+#pragma acc routine seq
 float getRandomValueTauswortheUniform(unsigned &z1, unsigned &z2, unsigned &z3, unsigned &z4)
 {
   unsigned taus = TausStep(z1, 13, 19, 12, 4294967294U) ^ 
@@ -19,6 +22,7 @@ float getRandomValueTauswortheUniform(unsigned &z1, unsigned &z2, unsigned &z3, 
   return 2.3283064365387e-10f * (taus ^ lcg);  // taus+
 }
 
+#pragma acc routine seq
 void boxMuller(float u1, float u2, float &uo1, float &uo2)
 {
   float z1 = sqrtf(-2.0f * logf(u1));
@@ -28,7 +32,8 @@ void boxMuller(float u1, float u2, float &uo1, float &uo2)
   uo2 = z1 * s2;
 }
 
-float getRandomValueTausworthe(unsigned &z1, unsigned &z2, unsigned &z3, 
+#pragma acc routine seq
+float getRandomValueTausworthe(unsigned &z1, unsigned &z2, unsigned &z3,
                                unsigned &z4, float &temporary, unsigned phase)
 {
   if (phase & 1)
@@ -47,8 +52,9 @@ float getRandomValueTausworthe(unsigned &z1, unsigned &z2, unsigned &z3,
   }
 }
 
+#pragma acc routine seq
 float tausworthe_lookback_sim(
-    unsigned T, float VOL_0, float EPS_0, 
+    unsigned T, float VOL_0, float EPS_0,
     float A_0, float A_1, float A_2, float S_0,
     float MU, unsigned &z1, unsigned &z2,
     unsigned &z3, unsigned &z4, float* path)
@@ -56,13 +62,13 @@ float tausworthe_lookback_sim(
   float temp_random_value;
   float vol = VOL_0, eps = EPS_0;
   float s = S_0;
-  int base = omp_get_thread_num();
+  int base = 0;
 
   for (unsigned t = 0; t < T; t++)
   {
     // store the current asset price
     path[base] = s;
-    base += LOOKBACK_TAUSWORTHE_NUM_THREADS;
+    base += 1;
 
     // time-varying volatility in the GARCH model
     vol = sqrtf(A_0 + A_1 * vol * vol + A_2 * eps * eps);
@@ -80,7 +86,7 @@ float tausworthe_lookback_sim(
   float sum = 0;
   for (unsigned t = 0; t < T; t++)
   {
-    base -= LOOKBACK_TAUSWORTHE_NUM_THREADS;
+    base -= 1;
     sum += fmaxf(path[base] - s, 0.f);
   }
   return sum;
@@ -99,46 +105,46 @@ void tausworthe_lookback(
     const float *__restrict g_S_0,
     const float *__restrict g_MU)
 {
-  #pragma acc parallel teams num_teams(LOOKBACK_TAUSWORTHE_NUM_BLOCKS) \
-                           thread_limit (LOOKBACK_TAUSWORTHE_NUM_THREADS)
+  #pragma acc parallel loop gang vector \
+    num_gangs(LOOKBACK_TAUSWORTHE_NUM_BLOCKS) \
+    vector_length(LOOKBACK_TAUSWORTHE_NUM_THREADS) \
+    present(seedValues, simulationResultsMean, simulationResultsVariance, \
+            g_VOL_0, g_EPS_0, g_A_0, g_A_1, g_A_2, g_S_0, g_MU)
+  for (unsigned address = 0; address < LOOKBACK_NUM_PARAMETER_VALUES; address++)
   {
-    float path[LOOKBACK_TAUSWORTHE_NUM_THREADS*LOOKBACK_MAX_T];
-    #pragma omp parallel
+    float path[LOOKBACK_MAX_T];
+    // Initialise tausworth with seeds
+    unsigned z1 = seedValues[address];
+    unsigned z2 = seedValues[address +     TAUSWORTHE_TOTAL_NUM_THREADS];
+    unsigned z3 = seedValues[address + 2 * TAUSWORTHE_TOTAL_NUM_THREADS];
+    unsigned z4 = seedValues[address + 3 * TAUSWORTHE_TOTAL_NUM_THREADS];
+
+    float VOL_0, EPS_0, A_0, A_1, A_2, S_0, MU;
+    VOL_0 = g_VOL_0[address];
+    EPS_0 = g_EPS_0[address];
+    A_0 = g_A_0[address];
+    A_1 = g_A_1[address];
+    A_2 = g_A_2[address];
+    S_0 = g_S_0[address];
+    MU = g_MU[address];
+
+    float mean = 0, variance = 0;
+    for (unsigned i = 1; i <= LOOKBACK_PATHS_PER_SIM; i++)
     {
-      unsigned address = omp_get_team_num() * LOOKBACK_TAUSWORTHE_NUM_THREADS + omp_get_thread_num();
-      // Initialise tausworth with seeds
-      unsigned z1 = seedValues[address];
-      unsigned z2 = seedValues[address +     TAUSWORTHE_TOTAL_NUM_THREADS];
-      unsigned z3 = seedValues[address + 2 * TAUSWORTHE_TOTAL_NUM_THREADS];
-      unsigned z4 = seedValues[address + 3 * TAUSWORTHE_TOTAL_NUM_THREADS];
+      // simulate a path for num_cyles cyles
+      float res = tausworthe_lookback_sim(num_cycles, VOL_0, EPS_0,
+          A_0, A_1, A_2, S_0,
+          MU,
+          z1, z2, z3, z4,  // rng state variables
+          path);
 
-      float VOL_0, EPS_0, A_0, A_1, A_2, S_0, MU;
-      VOL_0 = g_VOL_0[address];
-      EPS_0 = g_EPS_0[address];
-      A_0 = g_A_0[address];
-      A_1 = g_A_1[address];
-      A_2 = g_A_2[address];
-      S_0 = g_S_0[address];
-      MU = g_MU[address];
-
-      float mean = 0, variance = 0;
-      for (unsigned i = 1; i <= LOOKBACK_PATHS_PER_SIM; i++)
-      {
-        // simulate a path for num_cyles cyles 
-        float res = tausworthe_lookback_sim(num_cycles, VOL_0, EPS_0,
-            A_0, A_1, A_2, S_0,
-            MU,
-            z1, z2, z3, z4,  // rng state variables
-            path);
-
-        // update mean and variance in a numerically stable way
-        float delta = res - mean;
-        mean += delta / i;
-        variance += delta * (res - mean);
-      }
-
-      simulationResultsMean[address] = mean;
-      simulationResultsVariance[address] = variance / (LOOKBACK_PATHS_PER_SIM - 1);
+      // update mean and variance in a numerically stable way
+      float delta = res - mean;
+      mean += delta / i;
+      variance += delta * (res - mean);
     }
+
+    simulationResultsMean[address] = mean;
+    simulationResultsVariance[address] = variance / (LOOKBACK_PATHS_PER_SIM - 1);
   }
 }

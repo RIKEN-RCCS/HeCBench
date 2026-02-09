@@ -1,31 +1,74 @@
-"kernels.cpp", line 59: error: identifier "omp_get_thread_num" is undefined
-    int base = omp_get_thread_num();
-               ^
-
-"kernels.cpp", line 102: error: invalid text in pragma
-    #pragma acc parallel teams num_teams(LOOKBACK_TAUSWORTHE_NUM_BLOCKS) \
-                         ^
-
-"kernels.cpp", line 102: error: extra text after expected end of preprocessing directive
-    #pragma acc parallel teams num_teams(LOOKBACK_TAUSWORTHE_NUM_BLOCKS) \
-                               ^
-
-"kernels.cpp", line 108: error: identifier "omp_get_team_num" is undefined
-        unsigned address = omp_get_team_num() * LOOKBACK_TAUSWORTHE_NUM_THREADS + omp_get_thread_num();
-                           ^
-
-"kernels.cpp", line 108: error: identifier "omp_get_thread_num" is undefined
-        unsigned address = omp_get_team_num() * LOOKBACK_TAUSWORTHE_NUM_THREADS + omp_get_thread_num();
-                                                                                  ^
-
-"main.cpp", line 51: error: invalid text in pragma
-  #pragma acc data to:\
-                   ^
-
-"main.cpp", line 51: error: extra text after expected end of preprocessing directive
-  #pragma acc data to:\
-                     ^
-
-7 errors detected in the compilation of "main.cpp".
-make: *** [Makefile.NVD:57: main.o] Error 2
+TausStep(unsigned int&, int, int, int, unsigned int):
+     12, include "kernels.cpp"
+           3, Generating acc routine seq
+              Generating NVIDIA GPU code
+LCGStep(unsigned int&):
+     12, include "kernels.cpp"
+          10, Generating acc routine seq
+              Generating NVIDIA GPU code
+getRandomValueTauswortheUniform(unsigned int&, unsigned int&, unsigned int&, unsigned int&):
+     12, include "kernels.cpp"
+          17, Generating acc routine seq
+              Generating NVIDIA GPU code
+boxMuller(float, float, float&, float&):
+     12, include "kernels.cpp"
+          27, Generating acc routine seq
+              Generating NVIDIA GPU code
+getRandomValueTausworthe(unsigned int&, unsigned int&, unsigned int&, unsigned int&, float&, unsigned int):
+     12, include "kernels.cpp"
+          38, Generating acc routine seq
+              Generating NVIDIA GPU code
+tausworthe_lookback_sim(unsigned int, float, float, float, float, float, float, float, unsigned int&, unsigned int&, unsigned int&, unsigned int&, float*):
+     12, include "kernels.cpp"
+          61, Generating acc routine seq
+              Generating NVIDIA GPU code
+          67, Loop not fused: scalar dependence chain to sibling loop
+              Loop not vectorized: data dependency
+          87, Generated vector simd code for negative stride loop
+              Loop unrolled 4 times
+tausworthe_lookback(unsigned int, unsigned int const*, float*, float*, float const*, float const*, float const*, float const*, float const*, float const*, float const*):
+     12, include "kernels.cpp"
+         107, Generating present(g_VOL_0[:],seedValues[:],simulationResultsVariance[:],simulationResultsMean[:],g_S_0[:],g_A_2[:],g_A_0[:],g_A_1[:],g_MU[:],g_EPS_0[:])
+              Generating NVIDIA GPU code
+              67, #pragma acc loop seq
+              87, #pragma acc loop seq
+                  Generating implicit reduction(+:.inl_sum_692)
+             113, #pragma acc loop gang(4096), vector(256) /* blockIdx.x threadIdx.x */
+             132, #pragma acc loop seq
+                  Generating implicit reduction(+:variance)
+         107, Local memory used for path
+         113, Loop not fused: no successor loop
+         132, Loop carried scalar dependence for mean at line 142,143
+              Scalar last value needed after loop for mean at line 147
+              Loop carried dependence of path prevents parallelization
+              Complex loop carried dependence of path prevents parallelization
+              Loop carried backward dependence of path prevents vectorization
+              Complex loop carried dependence of -> prevents parallelization
+              Generating implicit firstprivate(num_cycles)
+              Complex loop carried dependence of -> prevents parallelization
+          67, Complex loop carried dependence of path prevents parallelization
+              Loop carried scalar dependence for .inl_vol_579 at line 71
+              Complex loop carried dependence of -> prevents parallelization
+              Loop carried scalar dependence for .inl_eps_581 at line 71
+              Loop carried scalar dependence for .inl_s_583 at line 68,79
+              Scalar last value needed after loop for .inl_s_583 at line 89
+              Loop not fused: different controlling conditions
+              Loop not vectorized: unknown
+          70, Accelerator restriction: induction variable live-out from loop: .inl_base_585
+          87, Loop is parallelizable
+              Generated vector simd code for negative stride loop
+              Loop unrolled 4 times
+main:
+     36, Loop not fused: function call before adjacent loop
+         Loop not vectorized: recurrence
+     48, Loop not vectorized/parallelized: contains call
+     62, Generating copyin(tauswortheSeeds[:4194304],lookback_VOL_0[:1048576],lookback_S_0[:1048576]) [if not already present]
+         Generating copyout(lookbackSimulationResultsVariance[:1048576]) [if not already present]
+         Generating copyin(lookback_A_0[:1048576],lookback_A_1[:1048576],lookback_MU[:1048576],lookback_A_2[:1048576],lookback_EPS_0[:1048576]) [if not already present]
+         Generating copyout(lookbackSimulationResultsMean[:1048576]) [if not already present]
+     68, Loop not vectorized/parallelized: contains call
+     89, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      9, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
 timeout was set to  600

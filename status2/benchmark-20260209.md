@@ -175,7 +175,7 @@
 | linearprobing | 102.65 | build err | build err |
 | log2 | 0.74 | 2.77 | 2.81 |
 | lombscargle | 2.99 | 3.06 | 3.05 |
-| loopback | 5.38 | build err | 8.20 |
+| loopback | 5.33 | 5.38 | 8.16 |
 | lrn | 105.73 | 111.48 | 78.63 |
 | lr | 6.36 | build err | build err |
 | lsqt | 19.99 | 32.63 | 32.86 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 306 | 208 | 285 |
+| completed | 306 | 209 | 285 |
 
-sycl と acc がともに完了した件数 205
+sycl と acc がともに完了した件数 206
