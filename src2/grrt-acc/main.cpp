@@ -61,10 +61,10 @@ int main()
   ImaDimX = (int)ceil((double)IMAGE_SIZE / (BlockDimX * GridDimX));
   ImaDimY = (int)ceil((double)IMAGE_SIZE / (BlockDimY * GridDimY));
 
-#pragma acc data alloc: VariablesIn[0:VarINNUM], \
-                                   Results[0: IMAGE_SIZE * IMAGE_SIZE * 3])
+#pragma acc data create(VariablesIn[0:VarINNUM],			\
+			Results[0: IMAGE_SIZE * IMAGE_SIZE * 3])
 {
-  #pragma acc update to (VariablesIn[0:VarINNUM])
+  #pragma acc update device (VariablesIn[0:VarINNUM])
 
   auto start = std::chrono::steady_clock::now();
 
@@ -78,7 +78,7 @@ int main()
   auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
   printf("Total kernel execution time (task1) %f (s)\n", time * 1e-9f);
 
-  #pragma acc update from (Results[0:IMAGE_SIZE* IMAGE_SIZE * 3])
+  #pragma acc update host (Results[0:IMAGE_SIZE* IMAGE_SIZE * 3])
 
   //save result to output
   fp=fopen("Output_task1.txt","w");  
@@ -101,7 +101,7 @@ int main()
   freq_obs    = 340e9; // observed frequency
   printf("task2: image size = %d  x  %d  pixels\n",IMAGE_SIZE,IMAGE_SIZE);
 
-  #pragma acc update to (VariablesIn[0:VarINNUM])
+  #pragma acc update device (VariablesIn[0:VarINNUM])
 
   start = std::chrono::steady_clock::now();
 
@@ -115,7 +115,7 @@ int main()
   time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
   printf("Total kernel execution time (task2) %f (s)\n", time * 1e-9f);
 
-  #pragma acc update from (Results[0:IMAGE_SIZE * IMAGE_SIZE * 3])
+  #pragma acc update host (Results[0:IMAGE_SIZE * IMAGE_SIZE * 3])
 }
 
   fp=fopen("Output_task2.txt","w");  

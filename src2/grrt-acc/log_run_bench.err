@@ -1,59 +1,188 @@
-"main.cpp", line 64: error: invalid text in pragma
-  #pragma acc data alloc: VariablesIn[0:VarINNUM], \
-                   ^
-
-"main.cpp", line 64: error: extra text after expected end of preprocessing directive
-  #pragma acc data alloc: VariablesIn[0:VarINNUM], \
-                        ^
-
-"main.cpp", line 67: error: invalid text in pragma
-    #pragma acc update to (VariablesIn[0:VarINNUM])
-                       ^
-
-"main.cpp", line 67: error: OpenACC data clause expected
-    #pragma acc update to (VariablesIn[0:VarINNUM])
-                       ^
-
-"main.cpp", line 67: error: extra text after expected end of preprocessing directive
-    #pragma acc update to (VariablesIn[0:VarINNUM])
-                          ^
-
-"main.cpp", line 81: error: invalid text in pragma
-    #pragma acc update from (Results[0:IMAGE_SIZE* IMAGE_SIZE * 3])
-                       ^
-
-"main.cpp", line 81: error: OpenACC data clause expected
-    #pragma acc update from (Results[0:IMAGE_SIZE* IMAGE_SIZE * 3])
-                       ^
-
-"main.cpp", line 81: error: extra text after expected end of preprocessing directive
-    #pragma acc update from (Results[0:IMAGE_SIZE* IMAGE_SIZE * 3])
-                            ^
-
-"main.cpp", line 104: error: invalid text in pragma
-    #pragma acc update to (VariablesIn[0:VarINNUM])
-                       ^
-
-"main.cpp", line 104: error: OpenACC data clause expected
-    #pragma acc update to (VariablesIn[0:VarINNUM])
-                       ^
-
-"main.cpp", line 104: error: extra text after expected end of preprocessing directive
-    #pragma acc update to (VariablesIn[0:VarINNUM])
-                          ^
-
-"main.cpp", line 118: error: invalid text in pragma
-    #pragma acc update from (Results[0:IMAGE_SIZE * IMAGE_SIZE * 3])
-                       ^
-
-"main.cpp", line 118: error: OpenACC data clause expected
-    #pragma acc update from (Results[0:IMAGE_SIZE * IMAGE_SIZE * 3])
-                       ^
-
-"main.cpp", line 118: error: extra text after expected end of preprocessing directive
-    #pragma acc update from (Results[0:IMAGE_SIZE * IMAGE_SIZE * 3])
-                            ^
-
-14 errors detected in the compilation of "main.cpp".
-make: *** [Makefile.NVD:57: main.o] Error 2
+task1fun_GetZ(double*, double*, double*):
+     29, include "kernels.cpp"
+         362, Generating acc routine seq
+              Generating NVIDIA GPU code
+task1(double*, double*, int, int):
+     29, include "kernels.cpp"
+         373, Generating NVIDIA GPU code
+             139, #pragma acc loop seq
+             141, #pragma acc loop seq
+             144, #pragma acc loop seq
+                  Generating implicit reduction(max:.inl_errmax_1002)
+             375, #pragma acc loop gang, vector(256) collapse(2) /* blockIdx.x threadIdx.x */
+             376,   /* blockIdx.x threadIdx.x collapsed */
+             408, #pragma acc loop seq
+             412, #pragma acc loop seq
+         373, Local memory used for yscal,ylaststep,y,Variables,dydx,.inl_ytemp_872,.inl_.inl_ytemp5_106_887,.inl_yerr_873,.inl_.inl_ytemp4_105_886,.inl_.inl_ytemp3_104_885,.inl_.inl_ytemp2_103_884,.inl_.inl_ytemp1_102_883,.inl_.inl_ak_113_892
+              Generating implicit copyin(VariablesIn[:3]) [if not already present]
+              Generating implicit copy(ResultsPixel[:]) [if not already present]
+         376, Generating implicit firstprivate(GridIdxY,GridIdxX)
+         406, Complex loop carried dependence of y,Variables,dydx prevents parallelization
+              Loop carried dependence of dydx prevents parallelization
+              Loop carried backward dependence of dydx prevents vectorization
+              Complex loop carried dependence of VariablesIn->,.inl_ytemp_872,-> prevents parallelization
+              Loop carried dependence of ylaststep prevents parallelization
+              Loop carried backward dependence of ylaststep prevents vectorization
+              Complex loop carried dependence of ylaststep prevents parallelization
+              Loop carried scalar dependence for htry at line 72,415
+              Loop carried dependence of yscal prevents parallelization
+              Complex loop carried dependence of yscal prevents parallelization
+              Loop carried backward dependence of yscal prevents vectorization
+              Complex loop carried dependence of .inl_.inl_ytemp1_102_883,.inl_.inl_ak_113_892,.inl_.inl_ytemp2_103_884,.inl_.inl_ytemp3_104_885,.inl_.inl_ytemp4_105_886,.inl_.inl_ytemp5_106_887,.inl_yerr_873 prevents parallelization
+         408, Loop not fused: complex flow graph
+              Generated vector simd code for the loop
+         412, Generated vector simd code for the loop
+         139, Complex loop carried dependence of ->,.inl_.inl_ak_113_892,VariablesIn-> prevents parallelization
+              Scalar last value needed after loop for .inl_errmax_1002 at line 167
+              Loop carried scalar dependence for .inl_h_861 at line 141,153
+              Scalar last value needed after loop for .inl_h_861 at line 167,173,176
+              Complex loop carried dependence of .inl_.inl_ytemp1_102_883,.inl_.inl_ytemp2_103_884,.inl_.inl_ytemp3_104_885,.inl_.inl_ytemp4_105_886,.inl_.inl_ytemp5_106_887 prevents parallelization
+              Loop carried dependence of .inl_ytemp_872 prevents parallelization
+              Complex loop carried dependence of .inl_ytemp_872 prevents parallelization
+              Loop carried backward dependence of .inl_ytemp_872 prevents vectorization
+              Loop carried dependence of .inl_yerr_873 prevents parallelization
+              Complex loop carried dependence of .inl_yerr_873 prevents parallelization
+              Loop carried backward dependence of .inl_yerr_873 prevents vectorization
+              Loop not vectorized/parallelized: not countable
+         141, Complex loop carried dependence of ->,.inl_.inl_ytemp1_102_883,.inl_.inl_ytemp2_103_884,.inl_.inl_ytemp3_104_885,.inl_.inl_ytemp4_105_886,.inl_.inl_ytemp5_106_887,.inl_ytemp_872,.inl_yerr_873 prevents parallelization
+              Loop not fused: complex flow graph
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 2 times
+         144, Loop unrolled 6 times (completely unrolled)
+         375, Loop not vectorized/parallelized: too deeply nested
+         376, Loop not vectorized/parallelized: too deeply nested
+task2fun_GetZ(double*, double*, double*):
+     29, include "kernels.cpp"
+         439, Generating acc routine seq
+              Generating NVIDIA GPU code
+task2(double*, double*, int, int):
+     29, include "kernels.cpp"
+         501, Generating NVIDIA GPU code
+             139, #pragma acc loop seq
+             141, #pragma acc loop seq
+             144, #pragma acc loop seq
+                  Generating implicit reduction(max:.inl_errmax_1222)
+             504, #pragma acc loop gang, vector(256) collapse(2) /* blockIdx.x threadIdx.x */
+             505,   /* blockIdx.x threadIdx.x collapsed */
+             547, #pragma acc loop seq
+         501, Local memory used for y,yscal,Variables,dydx,.inl_ytemp_1092,.inl_.inl_ytemp5_106_1107,.inl_yerr_1093,.inl_.inl_ytemp4_105_1106,.inl_.inl_ytemp3_104_1105,.inl_.inl_ytemp2_103_1104,.inl_.inl_ytemp1_102_1103,.inl_.inl_ak_113_1112
+              Generating implicit copyin(K2_tab[:]) [if not already present]
+              Generating implicit copy(ResultsPixel[:]) [if not already present]
+              Generating implicit copyin(VariablesIn[:4]) [if not already present]
+         505, Generating implicit firstprivate(GridIdxY,GridIdxX)
+         543, Complex loop carried dependence of y,Variables,dydx prevents parallelization
+              Loop carried dependence of dydx prevents parallelization
+              Loop carried backward dependence of dydx prevents vectorization
+              Complex loop carried dependence of VariablesIn->,.inl_ytemp_1092,->,K2_tab prevents parallelization
+              Loop carried scalar dependence for dtau at line 590
+              Loop carried scalar dependence for htry at line 72,550,589
+              Loop carried dependence of yscal prevents parallelization
+              Complex loop carried dependence of yscal prevents parallelization
+              Loop carried backward dependence of yscal prevents vectorization
+              Complex loop carried dependence of .inl_.inl_ytemp1_102_1103,.inl_.inl_ak_113_1112,.inl_.inl_ytemp2_103_1104,.inl_.inl_ytemp3_104_1105,.inl_.inl_ytemp4_105_1106,.inl_.inl_ytemp5_106_1107,.inl_yerr_1093 prevents parallelization
+         547, Generated vector simd code for the loop
+         139, Complex loop carried dependence of ->,.inl_.inl_ak_113_1112,VariablesIn-> prevents parallelization
+              Scalar last value needed after loop for .inl_errmax_1222 at line 167
+              Loop carried scalar dependence for .inl_h_1081 at line 141,153
+              Scalar last value needed after loop for .inl_h_1081 at line 167,173,176
+              Complex loop carried dependence of .inl_.inl_ytemp1_102_1103,.inl_.inl_ytemp2_103_1104,.inl_.inl_ytemp3_104_1105,.inl_.inl_ytemp4_105_1106,.inl_.inl_ytemp5_106_1107 prevents parallelization
+              Loop carried dependence of .inl_ytemp_1092 prevents parallelization
+              Complex loop carried dependence of .inl_ytemp_1092 prevents parallelization
+              Loop carried backward dependence of .inl_ytemp_1092 prevents vectorization
+              Loop carried dependence of .inl_yerr_1093 prevents parallelization
+              Complex loop carried dependence of .inl_yerr_1093 prevents parallelization
+              Loop carried backward dependence of .inl_yerr_1093 prevents vectorization
+              Loop not vectorized/parallelized: not countable
+         141, Complex loop carried dependence of ->,.inl_.inl_ytemp1_102_1103,.inl_.inl_ytemp2_103_1104,.inl_.inl_ytemp3_104_1105,.inl_.inl_ytemp4_105_1106,.inl_.inl_ytemp5_106_1107,.inl_ytemp_1092,.inl_yerr_1093 prevents parallelization
+              Loop not fused: complex flow graph
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+              Loop unrolled 2 times
+         144, Loop unrolled 6 times (completely unrolled)
+         504, Loop not vectorized/parallelized: too deeply nested
+         505, Loop not vectorized/parallelized: too deeply nested
+main:
+     66, Generating create(VariablesIn[:],Results[:3145728]) [if not already present]
+     69, Generating update device(VariablesIn[:])
+     72, Loop not vectorized/parallelized: contains call
+     84, Generating update self(Results[:3145728])
+     89, Loop nest collapsed
+         Loop not vectorized/parallelized: contains call
+    106, Generating update device(VariablesIn[:])
+    109, Loop not vectorized/parallelized: contains call
+    119, Generating update self(Results[:3145728])
+    126, Loop nest collapsed
+         Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     25, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::abs(double):
+                                                            72, Generating implicit omp declare target routine
+                                                                Generating NVIDIA GPU code
+     25, include "chrono"
+_INTERNAL_8_main_cpp_d2ea417d::geodesic(double*, double*, double*, double*):
+     29, include "kernels.cpp"
+          20, Generating acc routine seq
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_d2ea417d::rkstep(double*, double*, double*, double*, double, double*, double*):
+     29, include "kernels.cpp"
+          56, Generating acc routine seq
+              Generating NVIDIA GPU code
+          63, Loop not fused: complex flow graph
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+          78, Loop not fused: complex flow graph
+              Generated vector simd code for the loop
+          89, Loop not fused: complex flow graph
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+         101, Loop not fused: complex flow graph
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+         112, Loop not fused: complex flow graph
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+         121, Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+_INTERNAL_8_main_cpp_d2ea417d::rk5(double*, double*, double*, double*, double, double, double*, double*):
+     29, include "kernels.cpp"
+         132, Generating acc routine seq
+              Generating NVIDIA GPU code
+         138, Loop not vectorized/parallelized: not countable
+         144, Loop unrolled 6 times (completely unrolled)
+          63, Loop not fused: complex flow graph
+              Loop versioned for possible aliasing
+              Generated vector simd code for the loop
+          78, Loop not fused: complex flow graph
+              Generated vector simd code for the loop
+          89, Loop not fused: complex flow graph
+              Generated vector simd code for the loop
+         101, Loop not fused: complex flow graph
+              Generated vector simd code for the loop
+         112, Loop not fused: complex flow graph
+              Generated vector simd code for the loop
+         121, Generated vector simd code for the loop
+_INTERNAL_8_main_cpp_d2ea417d::initial(double*, double*, double*, double*):
+     29, include "kernels.cpp"
+         185, Generating acc routine seq
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_d2ea417d::ISCO(double*):
+     29, include "kernels.cpp"
+         247, Generating acc routine seq
+              Generating NVIDIA GPU code
+NVC++-W-1053-External and Static variables are not supported in acc routine - K2_tab (kernels.cpp: 320)
+_INTERNAL_8_main_cpp_d2ea417d::K2_find(double):
+     29, include "kernels.cpp"
+         316, Generating acc routine seq
+NVC++-W-1057-Static variables are not supported in acc routine - K2_tab (kernels.cpp: 318)
+_INTERNAL_8_main_cpp_d2ea417d::Jansky_Correction(double*, double):
+     29, include "kernels.cpp"
+         344, Generating acc routine seq
+              Generating NVIDIA GPU code
+_INTERNAL_8_main_cpp_d2ea417d::Luminosity_Correction(double*, double):
+     29, include "kernels.cpp"
+         353, Generating acc routine seq
+              Generating NVIDIA GPU code
+NVC++/arm Linux 25.9-0: compilation completed with warnings
 timeout was set to  600

@@ -15,7 +15,7 @@ The current distribution website is:
 https://github.com/hungyipu/Odyssey/ 
  */
 
-#pragma omp declare target
+#pragma acc routine seq
 static void geodesic(double* Variables, double* VariablesIn, double *y, double *dydx)
 {
   double r = y[0];
@@ -51,6 +51,7 @@ static void geodesic(double* Variables, double* VariablesIn, double *y, double *
   dydx[5] = -sintheta * costheta*(L * L / (sin2 * sin2) - a2) * siginv;
 }
 
+#pragma acc routine seq
 static void rkstep(double* Variables, double* VariablesIn,double *y, double *dydx, double h, double *yout, double *yerr)
 {
   int i;
@@ -125,6 +126,7 @@ static void rkstep(double* Variables, double* VariablesIn,double *y, double *dyd
   }
 }
 
+#pragma acc routine seq
 static double rk5(double* Variables, double* VariablesIn, double *y, double *dydx, 
     double htry, double escal, double *yscal, double *hdid)
 {
@@ -178,6 +180,7 @@ static double rk5(double* Variables, double* VariablesIn, double *y, double *dyd
   return hnext;
 }
 
+#pragma acc routine seq
 static void initial(double* Variables, double* VariablesIn, double *y0, double *ydot0)
 {
   double alpha = grid_x;
@@ -239,6 +242,7 @@ static void initial(double* Variables, double* VariablesIn, double *y0, double *
   kappa = y0[5]*y0[5]+a2*sin2+L*L/sin2;
 }
 
+#pragma acc routine seq
 static float ISCO(double* VariablesIn)
 {
   double z1       = 1 + pow(1 - A * A, 1 / 3.0) * pow(1 + A, 1 / 3.0) + pow(1 - A, 1 / 3.0);
@@ -307,6 +311,7 @@ static double K2_tab[] = {
   +9.627144  //Te=87.09
 };
 
+#pragma acc routine seq
 static double K2_find(double Te)
 {
   double d = Te_grids*(log(Te / Te_min)/ log(Te_max / Te_min));
@@ -315,6 +320,7 @@ static double K2_find(double Te)
   return (1 - (double)(d-i)) * K2_tab[i] + (double)(d-i) * K2_tab[i+1];
 }
 
+#pragma acc routine seq
 static  double K2(double Te)
 {
   double tab_K2;
@@ -333,6 +339,7 @@ static  double K2(double Te)
   return exp(tab_K2);
 }
 
+#pragma acc routine seq
 static double Jansky_Correction(double* VariablesIn,double ima_width)
 {
   double distance=C_sgrA_d*C_pc;
@@ -341,6 +348,7 @@ static double Jansky_Correction(double* VariablesIn,double ima_width)
   return pix_str/C_Jansky;
 }
 
+#pragma acc routine seq
 static double Luminosity_Correction(double* VariablesIn,double ima_width)
 {
   double distance=C_sgrA_d*C_pc;
@@ -349,6 +357,7 @@ static double Luminosity_Correction(double* VariablesIn,double ima_width)
   return pix_str*distance*distance*4.*PI*freq_obs;
 }
 
+#pragma acc routine seq
 double task1fun_GetZ(double* Variables, double* VariablesIn, double *y)
 {
   double r1 = y[0];
@@ -357,69 +366,75 @@ double task1fun_GetZ(double* Variables, double* VariablesIn, double *y)
   double E_inf = -1.0;      
   return E_local / E_inf; 
 }
-#pragma omp end declare target
 
 void task1(double*__restrict ResultsPixel,
            double*__restrict VariablesIn,
            int GridIdxX, int GridIdxY)
 {
-  #pragma acc parallel loop collapse(2) vector_length(256)
-  for (int y1 = 0; y1 < 50; y1++)
-    for (int x1 = 0; x1 < 100; x1++)
-      if (X1 < SIZE && Y1 < SIZE) { // to check whether the photon is inside image plane
-        double Variables[VarNUM];
+#pragma acc parallel loop collapse(2) vector_length(256) 
+  for (int y1 = 0; y1 < 50; y1++) {
+    for (int x1 = 0; x1 < 100; x1++) {
+      int abs_X1 = GridIdxX * 100 + x1;
+      int abs_Y1 = GridIdxY * 50 + y1;
 
-        r0       = 1000.0;                 
-        theta0   = (PI/180.0) * INCLINATION;     
-        a2       = A * A;                
-        Rhor     = 1.0 + sqrt(1.0 - a2) + 1e-5;      
-        Rmstable = ISCO(VariablesIn);                
+      if (abs_X1 < IMAGE_SIZE && abs_Y1 < IMAGE_SIZE) {
+        long long pixel_base = 3LL * ( (long long)IMAGE_SIZE * abs_Y1 + abs_X1 );
+	
+        double Variables[VarNUM];
+        r0       = 1000.0;
+        theta0   = (PI/180.0) * INCLINATION;
+        a2       = A * A;
+        Rhor     = 1.0 + sqrt(1.0 - a2) + 1e-5;
+        Rmstable = ISCO(VariablesIn);
 
         double htry = 0.5, escal = 1e14, hdid = 0.0, hnext = 0.0;
         double y[N], dydx[N], yscal[N], ylaststep[N];
         double Rdisk   = 50.;
         double ima_width = 55.;
-        double s1  = ima_width;                      
-        double s2  = 2.*ima_width/((int)SIZE+1.);   
+        double s1  = ima_width;
+        double s2  = 2.*ima_width/((double)SIZE+1.);
 
         grid_x = -s1 + s2*(X1+1.);
         grid_y = -s1 + s2*(Y1+1.);
 
         initial(Variables, VariablesIn, y, dydx);
 
-        ResultsPixel(0) = grid_x;
-        ResultsPixel(1) = grid_y;
-        ResultsPixel(2) = 0;
+        ResultsPixel[pixel_base + 0] = grid_x;
+        ResultsPixel[pixel_base + 1] = grid_y;
+        ResultsPixel[pixel_base + 2] = 0.0;
 
         while (1)
-        {
-          for(int i = 0; i < N; i++) ylaststep[i] = y[i];
+	  {
+	    for(int i = 0; i < N; i++) ylaststep[i] = y[i];
 
-          geodesic(Variables, VariablesIn, y, dydx);
+	    geodesic(Variables, VariablesIn, y, dydx);
 
-          for (int i = 0; i < N; i++) yscal[i] = fabs(y[i]) + fabs(dydx[i] * htry) + 1.0e-3;
+	    for (int i = 0; i < N; i++) yscal[i] = std::abs(y[i]) + std::abs(dydx[i] * htry) + 1.0e-3;
 
-          //fifth-order Runge-Kutta method
-          hnext = rk5(Variables, VariablesIn, y, dydx, htry, escal, yscal, &hdid);
+	    // fifth-order Runge-Kutta method
+	    hnext = rk5(Variables, VariablesIn, y, dydx, htry, escal, yscal, &hdid);
 
-          // hit the disk, compute redshift
-          if( y[0] < Rdisk && y[0] > Rmstable && (ylaststep[1] - PI/2.) * (y[1] - PI/2.) < 0. )
-          {    
-            ResultsPixel(2) = 1./task1fun_GetZ(Variables, VariablesIn, y);
-            break;
-          }
+	    // hit the disk, compute redshift
+	    if( y[0] < Rdisk && y[0] > Rmstable && (ylaststep[1] - PI/2.) * (y[1] - PI/2.) < 0. )
+	      {
+		ResultsPixel[pixel_base + 2] = 1.0 / task1fun_GetZ(Variables, VariablesIn, y);
+		break;
+	      }
 
-          // Inside the event horizon radius or escape to infinity
-          if ((y[0] > r0) && (dydx[0]>0)) break;
+	    // Inside the event horizon radius or escape to infinity
+	    if ((y[0] > r0) && (dydx[0] > 0)) break;
+	    if (y[0] < Rhor) break;
 
-          if (y[0] < Rhor) break;
-
-          htry = hnext;
-        }
+	    htry = hnext;
+          
+	    //	    if (htry < 1e-18) break;
+	  }
       }
+    }
+  }
 }
 
-#pragma omp declare target
+#pragma acc routine seq
 double task2fun_GetZ(double* Variables, double* VariablesIn, double *y)
 {
   double ut,uphi,ur,E_local;
@@ -479,100 +494,108 @@ double task2fun_GetZ(double* Variables, double* VariablesIn, double *y)
   return E_local/E_inf; 
 
 }
-#pragma omp end declare target
 
-void task2(double*__restrict ResultsPixel, double*__restrict VariablesIn, int GridIdxX, int GridIdxY)
+void task2( double*__restrict ResultsPixel,
+	    double*__restrict VariablesIn,
+	    int GridIdxX, int GridIdxY )
 {
-  #pragma acc parallel loop collapse(2) vector_length(256)
-  for (int y1 = 0; y1 < 50; y1++)
-    for (int x1 = 0; x1 < 100; x1++)
-      if (X1 < SIZE && Y1 < SIZE) { // to check whether the photon is inside image plane
+#pragma acc parallel loop collapse(2) vector_length(256) 
+
+  for (int y1 = 0; y1 < 50; y1++) {
+    for (int x1 = 0; x1 < 100; x1++) {
+      int X1_abs = GridIdxX * 100 + x1;
+      int Y1_abs = GridIdxY * 50 + y1;
+
+      if (X1_abs < IMAGE_SIZE && Y1_abs < IMAGE_SIZE) {
+        long long pixel_base = 3LL * ( (long long)IMAGE_SIZE * Y1_abs + X1_abs );
 
         double Variables[VarNUM];
-        r0       = 1000.0;                 
-        theta0   = (PI/180.0) * INCLINATION;     
-        a2       = A * A;                
-        Rhor     = 1.0 + sqrt(1.0 - a2) + 1e-5;   
-        Rmstable = ISCO(VariablesIn);  
+        r0       = 1000.0;
+        theta0   = (PI/180.0) * INCLINATION;
+        a2       = A * A;
+        Rhor     = 1.0 + sqrt(1.0 - a2) + 1e-5;
+        Rmstable = ISCO(VariablesIn);
 
         double htry = 0.5, escal = 1e14, hdid = 0.0, hnext = 0.0;
         double y[N], dydx[N], yscal[N];
 
-        double Rdisk   = 500.;
+        double Rdisk     = 500.;
         double ima_width = 10.;
-        double s1  = ima_width;                      
-        double s2  = 2.*ima_width/((int)SIZE+1.);   
-        double Jy_corr=Jansky_Correction(VariablesIn,ima_width);
-        double L_corr=Luminosity_Correction(VariablesIn,ima_width);
+        double s1        = ima_width;
+        double s2        = 2.*ima_width/((double)SIZE+1.);
+        
+        double Jy_corr = Jansky_Correction(VariablesIn, ima_width);
+        double L_corr  = Luminosity_Correction(VariablesIn, ima_width);
 
         grid_x = -s1 + s2*(X1+1.);
         grid_y = -s1 + s2*(Y1+1.);
 
         initial(Variables, VariablesIn, y, dydx);
 
-        ResultsPixel(0) = grid_x;
-        ResultsPixel(1) = grid_y;
-        ResultsPixel(2) = 0;
+        ResultsPixel[pixel_base + 0] = grid_x;
+        ResultsPixel[pixel_base + 1] = grid_y;
+        ResultsPixel[pixel_base + 2] = 0;
 
-        double ds=0.;  
-        double dtau=0.;
-        double dI=0.;
+        double ds   = 0.;
+        double dtau = 0.;
+        double dI   = 0.;
 
         while (1)
-        {
-          geodesic(Variables, VariablesIn, y, dydx);
+	  {
+	    geodesic(Variables, VariablesIn, y, dydx);
 
-          for (int i = 0; i < N; i++)
-            yscal[i] = fabs(y[i]) + fabs(dydx[i] * htry) + 1.0e-3;
+	    for (int i = 0; i < N; i++)
+	      yscal[i] = std::abs(y[i]) + std::abs(dydx[i] * htry) + 1.0e-3;
 
-          hnext = rk5(Variables, VariablesIn, y, dydx, htry, escal, yscal, &hdid);
+	    hnext = rk5(Variables, VariablesIn, y, dydx, htry, escal, yscal, &hdid);
 
-          if ((y[0] > r0) && (dydx[0]>0)){
-            ResultsPixel(2) = dI*freq_obs*freq_obs*freq_obs*L_corr; 
-            break;
-          }
+	    if ((y[0] > r0) && (dydx[0] > 0)) {
+	      ResultsPixel[pixel_base + 2] = dI * freq_obs * freq_obs * freq_obs * L_corr;
+	      break;
+	    }
 
-          if (y[0] < Rhor){
-            ResultsPixel(2) = dI*freq_obs*freq_obs*freq_obs*L_corr; 
-            break;
-          }
+	    if (y[0] < Rhor) {
+	      ResultsPixel[pixel_base + 2] = dI * freq_obs * freq_obs * freq_obs * L_corr;
+	      break;
+	    }
 
-          double r=y[0];
-          double theta=y[1];
+	    double r     = y[0];
+	    double theta = y[1];
 
-          if(y[0]<Rdisk){
+	    if (y[0] < Rdisk) {
+	      double zzz        = task2fun_GetZ(Variables, VariablesIn, y); 
+	      double freq_local = freq_obs * zzz;
 
-            double zzz        = task2fun_GetZ(Variables, VariablesIn, y); //zzz=E_em/E_obs
-            double freq_local = freq_obs*zzz;  
+	      double nth0 = 3e7;
+	      double zc   = r * std::cos(theta);
+	      double rc   = r * std::sin(theta);
 
-            // thermal synchrotron
-            double nth0=3e7;
-            double zc=r*cos(theta);
-            double rc=r*sin(theta);
+	      double nth     = nth0 * std::exp(-zc*zc / 2.0 / rc/rc) * std::pow(r, -1.1);
+	      double Te      = 1.7e11 * std::pow(r, -0.84);
+	      double b       = std::sqrt(8.0 * PI * 0.1 * nth * C_mp * C_c * C_c / 6.0 / r);
 
-            double nth=nth0*exp(-zc*zc/2./rc/rc)*pow(r,-1.1);
-            double Te=1.7e11*pow(r,-0.84); 
-            double b=sqrt(8.*PI*0.1*nth*C_mp*C_c*C_c/6./r);
+	      double vb      = C_e * b / 2.0 / PI / C_me / C_c;
+	      double theta_E = C_kB * Te / C_me / C_c / C_c;
+	      double v       = freq_local;
+	      double x       = 2.0 * v / 3.0 / vb / theta_E / theta_E;
 
-            double vb=C_e*b/2./PI/C_me/C_c;
-            double theta_E= C_kB*Te/C_me/C_c/C_c;
-            double v=freq_local;
-            double x=2.*v/3./vb/theta_E/theta_E;
+	      double K_value = K2(theta_E);
 
-            double K_value=K2(theta_E);
+	      double comp1 = 4.0 * PI * nth * C_e * C_e * v / std::sqrt(3.0) / K_value / C_c;
+	      double comp2 = 4.0505 / std::pow(x, (1.0/6.0)) * (1.0 + 0.4 / std::pow(x, 0.25) + 0.5316 / std::sqrt(x)) * std::exp(-1.8899 * std::pow(x, 1.0/3.0));
+	      double j_nu  = comp1 * comp2;
+	      double B_nu  = 2.0 * v * v * v * C_h / C_c / C_c / (std::exp(C_h * v / C_kB / Te) - 1.0);
 
-            double comp1=4.*PI*nth*C_e*C_e*v/sqrt(3.)/K_value/C_c;
-            double comp2=4.0505/pow(x,(1./6.))*(1.+0.4/pow(x,0.25)+0.5316/sqrt(x))*exp(-1.8899*pow(x,1./3.));
-            double j_nu=comp1*comp2;
-            double B_nu=2.0*v*v*v*C_h/C_c/C_c/(exp(C_h*v/C_kB/Te)-1.0);
-
-            // integrate intensity along ray
-            ds    =  htry;
-
-            dtau  =  dtau + ds*C_sgrA_mbh*C_rgeo*j_nu/B_nu*zzz;  
-            dI    =  dI + ds*C_sgrA_mbh*C_rgeo*j_nu/freq_local/freq_local/freq_local*exp(-dtau)*zzz;  
-          }
-          htry = hnext;
-        }
+	      ds   = htry;
+	      dtau = dtau + ds * C_sgrA_mbh * C_rgeo * j_nu / B_nu * zzz;
+	      dI   = dI + ds * C_sgrA_mbh * C_rgeo * j_nu / freq_local / freq_local / freq_local * std::exp(-dtau) * zzz;
+	    }
+	    htry = hnext;
+          
+	    //	    if (htry < 1e-15) break;
+	  }
       }
+    }
+  }
 }
+
