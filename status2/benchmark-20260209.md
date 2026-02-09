@@ -64,7 +64,7 @@
 | colorwheel | 37.38 | 27.55 | 27.96 |
 | columnarSolver | 10.16 | 16.87 | 10.22 |
 | complex | 22.28 | 12.59 | 12.96 |
-| compute-score | 3.19 | build err | 4.41 |
+| compute-score | 3.24 | 3.27 | 4.34 |
 | concat | 15.08 | 16.24 | 15.73 |
 | contract | 11.40 | 28.95 | 10.82 |
 | conversion | 4.98 | 3.56 | 3.44 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 306 | 212 | 285 |
+| completed | 306 | 213 | 285 |
 
-sycl と acc がともに完了した件数 209
+sycl と acc がともに完了した件数 210
