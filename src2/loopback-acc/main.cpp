@@ -48,7 +48,7 @@ int main(int argc, char* argv[]) {
   for (unsigned i = 0; i < TAUSWORTHE_NUM_SEEDS; i++)
     tauswortheSeeds[i] = (uint)rand() + 16;
 
-#pragma acc data to:\
+#pragma acc data copyin(\
   tauswortheSeeds[0:TAUSWORTHE_NUM_SEEDS], \
   lookback_VOL_0[0:LOOKBACK_NUM_PARAMETER_VALUES], \
   lookback_A_0[0:LOOKBACK_NUM_PARAMETER_VALUES], \
@@ -57,7 +57,7 @@ int main(int argc, char* argv[]) {
   lookback_S_0[0:LOOKBACK_NUM_PARAMETER_VALUES], \
   lookback_EPS_0[0:LOOKBACK_NUM_PARAMETER_VALUES], \
   lookback_MU[0:LOOKBACK_NUM_PARAMETER_VALUES]) \
-  map(from: lookbackSimulationResultsMean[0:LOOKBACK_NUM_PARAMETER_VALUES], \
+  copyout( lookbackSimulationResultsMean[0:LOOKBACK_NUM_PARAMETER_VALUES], \
             lookbackSimulationResultsVariance[0:LOOKBACK_NUM_PARAMETER_VALUES])
   {
     // Execute the Tausworthe version of the lookback option
