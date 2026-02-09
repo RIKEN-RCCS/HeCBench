@@ -1,30 +1,30 @@
 main:
-          15, Loop not vectorized/parallelized: potential early exits
-          26, Loop not vectorized/parallelized: potential early exits
-          31, Loop not vectorized/parallelized: too deeply nested
-          34, Loop not vectorized/parallelized: potential early exits
-          46, Loop not vectorized/parallelized: potential early exits
-          56, Loop not vectorized/parallelized: potential early exits
+          14, Loop not vectorized/parallelized: potential early exits
+          25, Loop not vectorized/parallelized: potential early exits
+          30, Loop not vectorized/parallelized: too deeply nested
+          33, Loop not vectorized/parallelized: potential early exits
+          45, Loop not vectorized/parallelized: potential early exits
+          55, Loop not vectorized/parallelized: potential early exits
 void readVelocity<double>(double*, int, std::istream*):
-     15, Zero trip check eliminated
+     14, Zero trip check eliminated
          Loop not vectorized/parallelized: potential early exits
 void readElement<4, double>(element<4, double>&, std::istream*):
-     26, Loop not vectorized/parallelized: potential early exits
-     31, Loop not vectorized/parallelized: too deeply nested
-     34, Loop not vectorized/parallelized: potential early exits
+     25, Loop not vectorized/parallelized: potential early exits
+     30, Loop not vectorized/parallelized: too deeply nested
+     33, Loop not vectorized/parallelized: potential early exits
 void readDerivative<4, double>(derivative<4, double>&, std::istream*):
-     46, Loop not vectorized/parallelized: potential early exits
+     45, Loop not vectorized/parallelized: potential early exits
 void readDivergence<double>(double*, int, std::istream*):
-     56, Zero trip check eliminated
+     55, Zero trip check eliminated
          Loop not vectorized/parallelized: potential early exits
 void compareDivergences<4, double>(double const*, element<4, double> const&, derivative<4, double> const&, double const*, int):
-     75, Loop not vectorized/parallelized: contains call
-     80, Loop not vectorized/parallelized: contains call
-     90, Loop not vectorized/parallelized: contains call
-     94, Loop not vectorized/parallelized: contains call
-    101, Loop not vectorized/parallelized: potential early exits
+     73, Loop not vectorized/parallelized: contains call
+     78, Loop not vectorized/parallelized: contains call
+     88, Loop not vectorized/parallelized: contains call
+     93, Loop not vectorized/parallelized: contains call
+    102, Loop not vectorized/parallelized: potential early exits
 void divergence_sphere_cpu<4, double>(double const*, derivative<4, double> const&, element<4, double> const&, double*):
-      7, include "divergence.hpp"
+      6, include "divergence.hpp"
          115, Loop unrolled 4 times (completely unrolled)
          116, Loop unrolled 4 times (completely unrolled)
          117, Loop unrolled 2 times (completely unrolled)
@@ -37,7 +37,7 @@ void divergence_sphere_cpu<4, double>(double const*, derivative<4, double> const
               Generated vector simd code for the loop
               Loop unrolled 2 times
 void divergence_sphere_gpu<4, double>(double const*, derivative<4, double> const&, element<4, double> const&, double*):
-      7, include "divergence.hpp"
+      6, include "divergence.hpp"
           56, Loop unrolled 4 times (completely unrolled)
           57, Loop unrolled 4 times (completely unrolled)
           58, Loop unrolled 2 times (completely unrolled)
@@ -61,6 +61,12 @@ void divergence_sphere_gpu<4, double>(double const*, derivative<4, double> const
               Loop not fused: no successor loop
               Loop not vectorized: data dependency
               Loop unrolled 2 times
-std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string(char const*, std::allocator<char> const&):
-      7, include "divergence.hpp"
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::basic_ostream<char, std::char_traits<char>>& std::endl<char, std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&):
+      4, include "chrono"
 timeout was set to  600
