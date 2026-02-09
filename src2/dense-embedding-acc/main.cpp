@@ -85,7 +85,7 @@ int main(int argc, char* argv[])
 
     reference(input, dense, output_ref, ncols, batch_size, offset);
 
-    #pragma acc data to: input[0:input_size], \
+    #pragma acc data copyin( input[0:input_size], \
                                     dense[0:dense_size], \
                                     offset[0:batch_size+1], \
                                     output_k1[0:input_size], \
@@ -98,19 +98,14 @@ int main(int argc, char* argv[])
         auto start = std::chrono::steady_clock::now();
 
         for (int i = 0; i < repeat; i++) {
-          #pragma acc parallel teams num_teams(batch_size)
-          {
-            #pragma omp parallel num_threads(block_size)
-            {
-              const int batch_idx  = omp_get_team_num(); // each batch is handled by a block
-              const int grain_size = omp_get_vector();
-              const int tid = omp_get_thread_num();
-              const int range = offset[batch_idx + 1] - offset[batch_idx];
-              for (int idx = tid; idx < ncols; idx += grain_size) {
-                const auto dense_elem = dense[batch_idx * ncols + idx];
-                for (int nested_idx = idx; nested_idx < range; nested_idx += ncols) {
-                  output_k1[offset[batch_idx] + nested_idx] = input[offset[batch_idx] + nested_idx] + dense_elem;
-                }
+          #pragma acc parallel loop gang num_gangs(batch_size) vector_length(block_size)
+          for (int batch_idx = 0; batch_idx < batch_size; batch_idx++) {
+            const int range = offset[batch_idx + 1] - offset[batch_idx];
+            #pragma acc loop vector
+            for (int idx = 0; idx < ncols; idx++) {
+              const auto dense_elem = dense[batch_idx * ncols + idx];
+              for (int nested_idx = idx; nested_idx < range; nested_idx += ncols) {
+                output_k1[offset[batch_idx] + nested_idx] = input[offset[batch_idx] + nested_idx] + dense_elem;
               }
             }
           }
@@ -120,23 +115,20 @@ int main(int argc, char* argv[])
         auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
         printf("Average execution time of dense embedding kernel (k1): %f (us)\n", (time * 1e-3f) / repeat);
 
-        #pragma acc update from (output_k1[0:input_size])
+        #pragma acc update host(output_k1[0:input_size])
 
         start = std::chrono::steady_clock::now();
 
         for (int i = 0; i < repeat; i++) {
-          #pragma acc parallel teams num_teams(batch_size)
-          {
-            #pragma omp parallel num_threads(block_size)
-            {
-              const int batch_idx  = omp_get_team_num(); // each batch is handled by a block
-              const int start = offset[batch_idx];
-              const int range = offset[batch_idx + 1] - start;
-              for (int idx = omp_get_thread_num(); idx < ncols; idx += omp_get_vector()) {
-                const auto dense_elem = dense[batch_idx * ncols + idx];
-                for (int nested_idx = idx; nested_idx < range; nested_idx += ncols) {
-                  output_k2[start + nested_idx] = input[start + nested_idx] + dense_elem;
-                }
+          #pragma acc parallel loop gang num_gangs(batch_size) vector_length(block_size)
+          for (int batch_idx = 0; batch_idx < batch_size; batch_idx++) {
+            const int start = offset[batch_idx];
+            const int range = offset[batch_idx + 1] - start;
+            #pragma acc loop vector
+            for (int idx = 0; idx < ncols; idx++) {
+              const auto dense_elem = dense[batch_idx * ncols + idx];
+              for (int nested_idx = idx; nested_idx < range; nested_idx += ncols) {
+                output_k2[start + nested_idx] = input[start + nested_idx] + dense_elem;
               }
             }
           }
@@ -146,16 +138,16 @@ int main(int argc, char* argv[])
         time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
         printf("Average execution time of dense embedding kernel (k2): %f (us)\n", (time * 1e-3f) / repeat);
 
-        #pragma acc update from (output_k2[0:input_size])
+        #pragma acc update host(output_k2[0:input_size])
 
         start = std::chrono::steady_clock::now();
 
         for (int i = 0; i < repeat; i++) {
-          #pragma acc parallel loop num_teams(batch_size)
-          for (int batch_idx = 0; batch_idx < batch_size; batch_idx++) { 
+          #pragma acc parallel loop gang num_gangs(batch_size) vector_length(block_size)
+          for (int batch_idx = 0; batch_idx < batch_size; batch_idx++) {
             const int start = offset[batch_idx];
             const int range = offset[batch_idx + 1] - start;
-            #pragma acc loop num_threads(block_size)
+            #pragma acc loop vector
             for (int idx = 0; idx < range; idx++) {
               auto input_elem = input[start + idx];
               auto dense_elem = dense[batch_idx * ncols + idx % ncols];
@@ -168,7 +160,7 @@ int main(int argc, char* argv[])
         time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
         printf("Average execution time of dense embedding kernel (k3): %f (us)\n", (time * 1e-3f) / repeat);
 
-        #pragma acc update from (output_k3[0:input_size])
+        #pragma acc update host(output_k3[0:input_size])
         bool ok = true;
         for (int i = 0; i < input_size; i++) {
           if (fabsf(output_k1[i] - output_ref[i]) > 1e-3f ||

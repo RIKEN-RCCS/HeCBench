@@ -1,103 +1,65 @@
-"main.cpp", line 88: error: invalid text in pragma
-      #pragma acc data to: input[0:input_size], \
-                       ^
-
-"main.cpp", line 88: error: extra text after expected end of preprocessing directive
-      #pragma acc data to: input[0:input_size], \
-                         ^
-
-"main.cpp", line 101: error: invalid text in pragma
-            #pragma acc parallel teams num_teams(batch_size)
-                                 ^
-
-"main.cpp", line 101: error: extra text after expected end of preprocessing directive
-            #pragma acc parallel teams num_teams(batch_size)
-                                       ^
-
-"main.cpp", line 105: error: identifier "omp_get_team_num" is undefined
-                const int batch_idx  = omp_get_team_num(); // each batch is handled by a block
-                                       ^
-
-"main.cpp", line 106: error: identifier "omp_get_vector" is undefined
-                const int grain_size = omp_get_vector();
-                                       ^
-
-"main.cpp", line 107: error: identifier "omp_get_thread_num" is undefined
-                const int tid = omp_get_thread_num();
-                                ^
-
-"main.cpp", line 123: error: invalid text in pragma
-          #pragma acc update from (output_k1[0:input_size])
-                             ^
-
-"main.cpp", line 123: error: OpenACC data clause expected
-          #pragma acc update from (output_k1[0:input_size])
-                             ^
-
-"main.cpp", line 123: error: extra text after expected end of preprocessing directive
-          #pragma acc update from (output_k1[0:input_size])
-                                  ^
-
-"main.cpp", line 128: error: invalid text in pragma
-            #pragma acc parallel teams num_teams(batch_size)
-                                 ^
-
-"main.cpp", line 128: error: extra text after expected end of preprocessing directive
-            #pragma acc parallel teams num_teams(batch_size)
-                                       ^
-
-"main.cpp", line 132: error: identifier "omp_get_team_num" is undefined
-                const int batch_idx  = omp_get_team_num(); // each batch is handled by a block
-                                       ^
-
-"main.cpp", line 135: error: identifier "omp_get_thread_num" is undefined
-                for (int idx = omp_get_thread_num(); idx < ncols; idx += omp_get_vector()) {
-                               ^
-
-"main.cpp", line 135: error: identifier "omp_get_vector" is undefined
-                for (int idx = omp_get_thread_num(); idx < ncols; idx += omp_get_vector()) {
-                                                                         ^
-
-"main.cpp", line 149: error: invalid text in pragma
-          #pragma acc update from (output_k2[0:input_size])
-                             ^
-
-"main.cpp", line 149: error: OpenACC data clause expected
-          #pragma acc update from (output_k2[0:input_size])
-                             ^
-
-"main.cpp", line 149: error: extra text after expected end of preprocessing directive
-          #pragma acc update from (output_k2[0:input_size])
-                                  ^
-
-"main.cpp", line 154: error: invalid text in pragma
-            #pragma acc parallel loop num_teams(batch_size)
-                                      ^
-
-"main.cpp", line 154: error: extra text after expected end of preprocessing directive
-            #pragma acc parallel loop num_teams(batch_size)
-                                               ^
-
-"main.cpp", line 158: error: invalid text in pragma
-              #pragma acc loop num_threads(block_size)
-                               ^
-
-"main.cpp", line 158: error: extra text after expected end of preprocessing directive
-              #pragma acc loop num_threads(block_size)
-                                          ^
-
-"main.cpp", line 171: error: invalid text in pragma
-          #pragma acc update from (output_k3[0:input_size])
-                             ^
-
-"main.cpp", line 171: error: OpenACC data clause expected
-          #pragma acc update from (output_k3[0:input_size])
-                             ^
-
-"main.cpp", line 171: error: extra text after expected end of preprocessing directive
-          #pragma acc update from (output_k3[0:input_size])
-                                  ^
-
-25 errors detected in the compilation of "main.cpp".
-make: *** [Makefile.NVD:57: main.o] Error 2
+main:
+     45, Loop not vectorized/parallelized: too deeply nested
+     72, Loop not vectorized/parallelized: contains call
+     77, Loop not vectorized/parallelized: contains call
+        1861, Loop not fused: function call before adjacent loop
+              Loop not vectorized: may not be beneficial for target
+     81, Loop not vectorized/parallelized: contains call
+        1861, Loop not fused: function call before adjacent loop
+              Loop not vectorized: may not be beneficial for target
+          21, Loop not vectorized/parallelized: not countable
+     94, Generating copyin(dense[:dense_size],input[:input_size],offset[:batch_size+1],output_k1[:input_size],output_k3[:input_size],output_k2[:input_size]) [if not already present]
+     95, Loop not vectorized/parallelized: too deeply nested
+    100, Generating implicit firstprivate(batch_size)
+         Generating NVIDIA GPU code
+        102, #pragma acc loop gang(batch_size) /* blockIdx.x */
+        105, #pragma acc loop vector(block_size) /* threadIdx.x */
+        107, #pragma acc loop seq
+    100, Loop not vectorized/parallelized: too deeply nested
+    105, Loop is parallelizable
+    107, Complex loop carried dependence of input-> prevents parallelization
+         Loop carried dependence of output_k1-> prevents parallelization
+         Loop carried backward dependence of output_k1-> prevents vectorization
+         Complex loop carried dependence of output_k1-> prevents parallelization
+         Loop not vectorized/parallelized: not countable
+    120, Generating update self(output_k1[:input_size])
+    122, Generating implicit firstprivate(batch_size)
+         Generating NVIDIA GPU code
+        124, #pragma acc loop gang(batch_size) /* blockIdx.x */
+        128, #pragma acc loop vector(block_size) /* threadIdx.x */
+        130, #pragma acc loop seq
+    122, Loop not vectorized/parallelized: too deeply nested
+    128, Loop is parallelizable
+    130, Complex loop carried dependence of input-> prevents parallelization
+         Loop carried dependence of output_k2-> prevents parallelization
+         Loop carried backward dependence of output_k2-> prevents vectorization
+         Complex loop carried dependence of output_k2-> prevents parallelization
+         Loop not vectorized/parallelized: not countable
+    143, Generating update self(output_k2[:input_size])
+    145, Generating implicit firstprivate(batch_size)
+         Generating NVIDIA GPU code
+        147, #pragma acc loop gang(batch_size) /* blockIdx.x */
+        151, #pragma acc loop vector(block_size) /* threadIdx.x */
+    145, Loop not vectorized/parallelized: contains call
+    147, Loop not fused: no successor loop
+    151, Loop is parallelizable
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    164, Generating update self(output_k3[:input_size])
+    165, Loop not vectorized/parallelized: potential early exits
+void reference<float>(float const*, float const*, float*, int, int, int const*):
+     21, Loop not vectorized/parallelized: not countable
+float std::uniform_real_distribution<float>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&):
+        1870, Loop not vectorized: data dependency
+float std::uniform_real_distribution<float>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&, std::uniform_real_distribution<float>::param_type const&):
+         189, Loop not vectorized: data dependency
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::__detail::_Adaptor<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>, float>::operator()():
+        3364, Loop not vectorized: data dependency
+float std::generate_canonical<float, 24ul, std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&):
+      5, include "random"
+          51, include "random.tcc"
+             3364, Loop not vectorized: data dependency
 timeout was set to  600
