@@ -108,8 +108,8 @@ void chemv_gpu(float alpha_re, float alpha_im, float beta_re, float beta_im,
                struct ComplexFloat AT[AT_SIZE], struct ComplexFloat X[X_SIZE],
                struct ComplexFloat Y[Y_SIZE])
 {
-  #pragma acc data to: AT[0:AT_SIZE], X[0:X_SIZE]) \
-                          map(tofrom: Y[0:Y_SIZE])
+#pragma acc data copyin(AT[0:AT_SIZE], X[0:X_SIZE])	\
+  copy(Y[0:Y_SIZE])
   {
     auto start = std::chrono::steady_clock::now();
 
