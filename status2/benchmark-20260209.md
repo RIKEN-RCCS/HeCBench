@@ -306,7 +306,7 @@
 | testSNAP | 3.73 | 66.16 | 4.19 |
 | thomas | 131.17 | 59.68 | 49.73 |
 | threadfence | 26.09 | build err | 35.11 |
-| tissue | 12.06 | 11.74 | 18.48 |
+| tissue | 12.45 | 11.82 | 18.23 |
 | tonemapping | 3.15 | 3.02 | 2.95 |
 | tqs | 2.57 | build err | 2.59 |
 | triad | 2.62 | 2.82 | 2.75 |

@@ -1,29 +1,34 @@
+"main.cpp", line 39: warning: variable "istep" was declared but never referenced [declared_but_not_referenced]
+      int jtp,ixyz,ix,iy,iz,jx,jy,jz,istep;
+                                     ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
 tissue(int const*, float const*, float const*, float*, float const*, float const*, int, int, int, int):
-     32, Generating implicit firstprivate(nnt,step)
+     32, Generating present(d_ct[:])
+         Generating implicit firstprivate(nnt)
          Generating NVIDIA GPU code
-         34, #pragma acc loop gang /* blockIdx.x */
-         45, #pragma acc loop vector(256) /* threadIdx.x */
+         34, #pragma acc loop gang, vector(128) /* blockIdx.x threadIdx.x */
+     34, Generating present(d_tisspoints[:],d_qt[:],d_gbartt[:],d_ctprev[:],d_ct[:],d_gtt[:])
+         Generating implicit firstprivate(step,nnt)
+         Generating NVIDIA GPU code
+         38, #pragma acc loop gang /* blockIdx.x */
+         49, #pragma acc loop vector(256) /* threadIdx.x */
              Generating implicit reduction(+:p)
-         55, #pragma acc loop seq
-     32, Generating implicit copyin(d_gbartt[:]) [if not already present]
-         Generating implicit copy(d_ct[:]) [if not already present]
-         Generating implicit copyin(d_ctprev[:],d_gtt[:],d_tisspoints[:],d_qt[:]) [if not already present]
-     45, Loop is parallelizable
-         Generating implicit firstprivate(nntDev,isp)
+     34, Recognized memory zero idiom
+     49, Loop is parallelizable
+         Generating implicit firstprivate(isp,nntDev)
          Loop not vectorized/parallelized: not countable
-     55, Complex loop carried dependence of d_ct-> prevents parallelization
-         Loop carried dependence of d_ct-> prevents parallelization
-         Loop carried backward dependence of d_ct-> prevents vectorization
 main:
-     86, Loop not vectorized/parallelized: contains call
-     89, Loop not vectorized/parallelized: contains call
-     93, Loop not vectorized/parallelized: contains call
-    107, Generating copyin(h_tisspoints[:98304],h_qt[:32768],h_gbartt[:65536],h_ctprev[:32768],h_ct[:32768],h_gtt[:65536]) [if not already present]
-    109, Loop not vectorized/parallelized: contains call
-    115, Loop not vectorized/parallelized: contains call
-    120, Generating update self(h_ct[:32768])
-    122, Loop not vectorized/parallelized: potential early exits
-    135, Loop not vectorized/parallelized: contains call
+     88, Loop not vectorized/parallelized: contains call
+     91, Loop not vectorized/parallelized: contains call
+     95, Loop not vectorized/parallelized: contains call
+    109, Generating copyin(h_tisspoints[:98304],h_qt[:32768],h_gbartt[:65536],h_ctprev[:32768],h_ct[:32768],h_gtt[:65536]) [if not already present]
+    111, Loop not vectorized/parallelized: contains call
+    117, Loop not vectorized/parallelized: contains call
+    122, Generating update self(h_ct[:32768])
+    124, Loop not vectorized/parallelized: potential early exits
+    137, Loop not vectorized/parallelized: contains call
 std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
      12, include "chrono"
          472, Loop not vectorized/parallelized: not countable
