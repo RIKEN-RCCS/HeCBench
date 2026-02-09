@@ -30,7 +30,11 @@ void tissue(
     const float *__restrict d_qt,
     int nnt, int nntDev, int step, int isp)
 {
-  #pragma acc parallel loop vector_length(256)
+  #pragma acc parallel loop present(d_ct)
+  for (int i = 0; i < nnt; i++) d_ct[i] = 0.0f;
+
+#pragma acc parallel loop vector_length(256)				\
+    present(d_tisspoints, d_gtt, d_gbartt, d_ct, d_ctprev, d_qt)
   for (int i = 0; i < step * nnt; i++) {
     int jtp,ixyz,ix,iy,iz,jx,jy,jz,istep;
     int nnt2 = 2*nnt;
@@ -49,11 +53,9 @@ void tissue(
         ixyz = abs(jx-ix) + abs(jy-iy) + abs(jz-iz) + (isp-1)*nntDev;
         p += d_gtt[ixyz]*d_ctprev[jtp] + d_gbartt[ixyz]*d_qt[jtp];
       }
-      if(itp1 == 0) d_ct[itp] = p;
+#pragma acc atomic update
+      d_ct[itp] += p;
     }
-    // d_ct is incremented in sequence from the needed threads
-    for(istep=1; istep<step; istep++)
-      if(itp1 == istep && itp < nnt) d_ct[itp] += p;
   }
 }
 
