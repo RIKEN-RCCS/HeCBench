@@ -1,69 +1,174 @@
 lud.cpp:
-"lud.cpp", line 113: error: invalid text in pragma
-    #pragma acc data tofrom: m[0:(size_t)matrix_dim*matrix_dim])
-                     ^
-
-"lud.cpp", line 113: error: extra text after expected end of preprocessing directive
-    #pragma acc data tofrom: m[0:(size_t)matrix_dim*matrix_dim])
-                           ^
-
-"lud.cpp", line 122: error: invalid text in pragma
-      #pragma acc parallel teams gang(1) thread_limit(BLOCK_SIZE)
-                           ^
-
-"lud.cpp", line 122: error: extra text after expected end of preprocessing directive
-      #pragma acc parallel teams gang(1) thread_limit(BLOCK_SIZE)
-                                 ^
-
-"lud.cpp", line 128: error: identifier "omp_get_thread_num" is undefined
-          int tx = omp_get_thread_num() ;
-                   ^
-
-"lud.cpp", line 164: error: invalid text in pragma
-      #pragma acc parallel teams num_teams((matrix_dim-i)/BLOCK_SIZE-1) thread_limit(2*BLOCK_SIZE)
-                           ^
-
-"lud.cpp", line 164: error: extra text after expected end of preprocessing directive
-      #pragma acc parallel teams num_teams((matrix_dim-i)/BLOCK_SIZE-1) thread_limit(2*BLOCK_SIZE)
-                                 ^
-
-"lud.cpp", line 175: error: identifier "omp_get_team_num" is undefined
-           int  bx = omp_get_team_num();  
-                     ^
-
-"lud.cpp", line 176: error: identifier "omp_get_thread_num" is undefined
-           int  tx = omp_get_thread_num();
-                     ^
-
-"lud.cpp", line 243: error: invalid text in pragma
-      #pragma acc parallel teams num_teams(((matrix_dim-i)/BLOCK_SIZE-1) * ((matrix_dim-i)/BLOCK_SIZE-1)) \
-                           ^
-
-"lud.cpp", line 243: error: extra text after expected end of preprocessing directive
-      #pragma acc parallel teams num_teams(((matrix_dim-i)/BLOCK_SIZE-1) * ((matrix_dim-i)/BLOCK_SIZE-1)) \
-                                 ^
-
-"lud.cpp", line 250: error: identifier "omp_get_team_num" is undefined
-          int  bx = omp_get_team_num() % ((matrix_dim-i)/BLOCK_SIZE-1); // item.get_group(1);  
-                    ^
-
-"lud.cpp", line 253: error: identifier "omp_get_thread_num" is undefined
-          int  tx = omp_get_thread_num() % BLOCK_SIZE; //item.get_local_id(1);
-                    ^
-
-"lud.cpp", line 276: error: invalid text in pragma
-    #pragma acc parallel teams gang(1) thread_limit(BLOCK_SIZE)
-                         ^
-
-"lud.cpp", line 276: error: extra text after expected end of preprocessing directive
-    #pragma acc parallel teams gang(1) thread_limit(BLOCK_SIZE)
-                               ^
-
-"lud.cpp", line 282: error: identifier "omp_get_thread_num" is undefined
-        int tx = omp_get_thread_num() ;
-                 ^
-
-16 errors detected in the compilation of "lud.cpp".
+main:
+     39, Loop not vectorized/parallelized: contains call
+    114, Generating copy(m[:?]) [if not already present]
+    120, Loop not vectorized/parallelized: too deeply nested
+    123, Generating present(m[:])
+         Generating NVIDIA GPU code
+        127, #pragma acc loop vector(16) /* threadIdx.x */
+        129, #pragma acc loop seq
+        135, #pragma acc loop seq
+        138, #pragma acc loop vector(16) /* threadIdx.x */
+        140, #pragma acc loop seq
+        147, #pragma acc loop vector(16) /* threadIdx.x */
+        149, #pragma acc loop seq
+        156, #pragma acc loop vector(16) /* threadIdx.x */
+        158, #pragma acc loop seq
+    123, CUDA shared memory used for shadow
+    127, Loop is parallelizable
+         Generating implicit firstprivate(offset,matrix_dim)
+         Loop not fused: different loop trip count
+    129, Complex loop carried dependence of m->,shadow prevents parallelization
+         Loop not vectorized: data dependency
+    135, Loop carried dependence of shadow prevents parallelization
+         Loop carried backward dependence of shadow prevents vectorization
+         Complex loop carried dependence of shadow prevents parallelization
+         Loop carried dependence of shadow prevents vectorization
+         Loop not fused: different loop trip count
+    138, Loop is parallelizable
+         Loop not fused: dependence chain to sibling loop
+    140, Complex loop carried dependence of shadow prevents parallelization
+         Loop carried dependence of shadow prevents parallelization
+         Loop carried backward dependence of shadow prevents vectorization
+         Loop unrolled 4 times
+    147, Loop is parallelizable
+    149, Complex loop carried dependence of shadow prevents parallelization
+         Loop carried dependence of shadow prevents parallelization
+         Loop carried backward dependence of shadow prevents vectorization
+         Loop unrolled 4 times
+    156, Loop is parallelizable
+         Loop not fused: no successor loop
+    158, Complex loop carried dependence of shadow prevents parallelization
+         Loop carried dependence of m-> prevents parallelization
+         Loop carried backward dependence of m-> prevents vectorization
+         Complex loop carried dependence of m-> prevents parallelization
+         Loop unrolled 8 times
+    166, Generating present(m[:])
+         Generating NVIDIA GPU code
+        168, #pragma acc loop gang(num_peri) /* blockIdx.x */
+        174, #pragma acc loop vector(32) /* threadIdx.x */
+        181, #pragma acc loop seq
+        187, #pragma acc loop seq
+        196, #pragma acc loop seq
+        202, #pragma acc loop seq
+        210, #pragma acc loop vector(32) /* threadIdx.x */
+        213, #pragma acc loop seq
+        214, #pragma acc loop seq
+        219, #pragma acc loop seq
+        220, #pragma acc loop seq
+        228, #pragma acc loop vector(32) /* threadIdx.x */
+        233, #pragma acc loop seq
+        240, #pragma acc loop seq
+    166, CUDA shared memory used for dia,peri_row,peri_col
+    168, Loop not fused: no successor loop
+         Loop not vectorized/parallelized: too deeply nested
+    174, Loop is parallelizable
+         Generating implicit firstprivate(offset,matrix_dim)
+         Loop not fused: enclosed in different number of nests
+    181, Complex loop carried dependence of m->,dia prevents parallelization
+         Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+         Loop unrolled 8 times (completely unrolled)
+    187, Complex loop carried dependence of m->,peri_row prevents parallelization
+         Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 16 times (completely unrolled)
+    196, Complex loop carried dependence of m->,dia prevents parallelization
+         Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+         Loop unrolled 8 times (completely unrolled)
+    202, Complex loop carried dependence of m->,peri_col prevents parallelization
+         Loop not vectorized: data dependency
+         Loop unrolled 16 times (completely unrolled)
+    210, Loop is parallelizable
+         Loop not fused: enclosed in different number of nests
+    213, Loop carried dependence of peri_row prevents parallelization
+         Loop carried backward dependence of peri_row prevents vectorization
+         Complex loop carried dependence of peri_row prevents parallelization
+         Loop not fused: no successor loop
+    214, Complex loop carried dependence of peri_row prevents parallelization
+         Loop carried dependence of peri_row prevents parallelization
+         Loop carried backward dependence of peri_row prevents vectorization
+         Loop unrolled 4 times
+    219, Loop carried dependence of peri_col prevents parallelization
+         Loop carried backward dependence of peri_col prevents vectorization
+         Complex loop carried dependence of peri_col prevents parallelization
+    220, Complex loop carried dependence of peri_col prevents parallelization
+         Loop carried dependence of peri_col prevents parallelization
+         Loop carried backward dependence of peri_col prevents vectorization
+         Loop unrolled 4 times
+    228, Loop is parallelizable
+    233, Complex loop carried dependence of peri_row prevents parallelization
+         Loop carried dependence of m-> prevents parallelization
+         Loop carried backward dependence of m-> prevents vectorization
+         Complex loop carried dependence of m-> prevents parallelization
+         Loop not fused: no successor loop
+         Loop unrolled 15 times (completely unrolled)
+    240, Complex loop carried dependence of peri_col prevents parallelization
+         Loop carried dependence of m-> prevents parallelization
+         Loop carried backward dependence of m-> prevents vectorization
+         Complex loop carried dependence of m-> prevents parallelization
+         Loop unrolled 16 times (completely unrolled)
+    250, Generating present(m[:])
+         Generating NVIDIA GPU code
+        252, #pragma acc loop gang(num_int*num_int) /* blockIdx.x */
+        263, #pragma acc loop vector(256) /* threadIdx.x */
+        272, #pragma acc loop vector(256) /* threadIdx.x */
+        277, #pragma acc loop seq
+             Generating implicit reduction(+:sum)
+    250, CUDA shared memory used for peri_row,peri_col
+    252, Generating implicit firstprivate(offset)
+         Loop not fused: no successor loop
+    263, Loop is parallelizable
+         Generating implicit firstprivate(matrix_dim)
+         Loop not fused: enclosed in different number of nests
+         Loop not vectorized: data dependency
+    272, Loop is parallelizable
+    277, Loop is parallelizable
+         Generated vector simd code for the loop containing reductions
+    287, Generating present(m[:])
+         Generating NVIDIA GPU code
+        291, #pragma acc loop vector(16) /* threadIdx.x */
+        293, #pragma acc loop seq
+        299, #pragma acc loop seq
+        301, #pragma acc loop vector(16) /* threadIdx.x */
+        303, #pragma acc loop seq
+        310, #pragma acc loop vector(16) /* threadIdx.x */
+        312, #pragma acc loop seq
+        319, #pragma acc loop vector(16) /* threadIdx.x */
+        321, #pragma acc loop seq
+    287, CUDA shared memory used for shadow
+    291, Loop is parallelizable
+         Generating implicit firstprivate(offset,matrix_dim)
+         Loop not fused: different loop trip count
+    293, Complex loop carried dependence of m->,shadow prevents parallelization
+         Loop not vectorized: data dependency
+    299, Loop carried dependence of shadow prevents parallelization
+         Loop carried backward dependence of shadow prevents vectorization
+         Complex loop carried dependence of shadow prevents parallelization
+         Loop carried dependence of shadow prevents vectorization
+         Loop not fused: different loop trip count
+    301, Loop is parallelizable
+         Loop not fused: dependence chain to sibling loop
+    303, Complex loop carried dependence of shadow prevents parallelization
+         Loop carried dependence of shadow prevents parallelization
+         Loop carried backward dependence of shadow prevents vectorization
+         Loop unrolled 4 times
+    310, Loop is parallelizable
+    312, Complex loop carried dependence of shadow prevents parallelization
+         Loop carried dependence of shadow prevents parallelization
+         Loop carried backward dependence of shadow prevents vectorization
+         Loop unrolled 4 times
+    319, Loop is parallelizable
+         Loop not fused: no successor loop
+    321, Complex loop carried dependence of shadow prevents parallelization
+         Loop carried dependence of m-> prevents parallelization
+         Loop carried backward dependence of m-> prevents vectorization
+         Complex loop carried dependence of m-> prevents parallelization
+         Loop unrolled 8 times
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      8, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
 ../lud-cuda/common/common.cpp:
 create_matrix_from_file(float**, char const*, int*):
      61, Loop not vectorized/parallelized: contains call
@@ -85,5 +190,4 @@ create_matrix(float**, int):
          Loop not vectorized: data dependency
          Loop unrolled 2 times
     183, Recognized memory copy idiom
-make: *** [Makefile.NVD:55: main] Error 2
 timeout was set to  600

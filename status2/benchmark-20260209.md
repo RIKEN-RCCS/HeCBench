@@ -179,7 +179,7 @@
 | lrn | 105.73 | 111.48 | 78.63 |
 | lr | 6.36 | build err | build err |
 | lsqt | 19.99 | 32.63 | 32.86 |
-| lud | 6.29 | build err | 46.11 |
+| lud | 8.19 | 9.54 | 46.07 |
 | lulesh | 11.28 | 11.70 | 8.41 |
 | mallocFree | 3.69 | 2.68 | 2.67 |
 | mandelbrot | 5.29 | 3.75 | 3.82 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 306 | 209 | 285 |
+| completed | 306 | 210 | 285 |
 
-sycl と acc がともに完了した件数 206
+sycl と acc がともに完了した件数 207
