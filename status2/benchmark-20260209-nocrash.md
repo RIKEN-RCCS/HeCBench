@@ -86,7 +86,7 @@
 | deredundancy | 17.89 | 15.82 | 15.76 |
 | diamond | build err | build err | 37.30 |
 | distort | 2.45 | 2.45 | 2.50 |
-| divergence | 3.11 | 3.12 | 3.13 |
+| divergence | 5.32 | 3.15 | 3.15 |
 | doh | 14.97 | 2.39 | 2.41 |
 | dp | build err | 25.04 | 25.25 |
 | dslash | 2.70 | 2.68 | 2.66 |
