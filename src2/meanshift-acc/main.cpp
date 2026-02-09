@@ -9,7 +9,7 @@
 namespace mean_shift::gpu {
   void mean_shift(const float *data, float *data_next,
                   const int teams, const int threads) {
-    #pragma acc parallel loop num_teams(teams) vector_length(64)
+    #pragma acc parallel loop present(data[0:N*D], data_next[0:N*D]) num_gangs(teams) vector_length(64)
     for (size_t tid = 0; tid < N; tid++) {
       size_t row = tid * D;
       float new_position[D] = {0.f};
@@ -36,21 +36,25 @@ namespace mean_shift::gpu {
 
   void mean_shift_tiling(const float* data, float* data_next,
                          const int teams, const int threads) {
-    #pragma acc parallel teams num_teams(teams) thread_limit(threads)
-    {
+    #pragma acc parallel loop gang present(data[0:N*D], data_next[0:N*D]) num_gangs(teams) vector_length(threads)
+    for (int bid = 0; bid < teams; ++bid) {
       float local_data[TILE_WIDTH * D];
       float valid_data[TILE_WIDTH];
-      #pragma omp parallel 
-      {
-        int lid = omp_get_thread_num();
-        int bid = omp_get_team_num();
-        int tid = bid * omp_get_vector() + lid;
-        int row = tid * D;
-        int local_row = lid * D;
-        float new_position[D] = {0.f};
-        float tot_weight = 0.f;
-        // Load data in shared memory
-        for (int t = 0; t < BLOCKS; ++t) {
+      float new_position[TILE_WIDTH * D];
+      float tot_weight[TILE_WIDTH];
+
+      #pragma acc loop vector
+      for (int lid = 0; lid < TILE_WIDTH; ++lid) {
+        for (int j = 0; j < D; ++j)
+          new_position[lid * D + j] = 0.f;
+        tot_weight[lid] = 0.f;
+      }
+
+      // Load data in shared memory
+      for (int t = 0; t < BLOCKS; ++t) {
+        #pragma acc loop vector
+        for (int lid = 0; lid < TILE_WIDTH; ++lid) {
+          int local_row = lid * D;
           int tid_in_tile = t * TILE_WIDTH + lid;
           if (tid_in_tile < N) {
             int row_in_tile = tid_in_tile * D;
@@ -65,7 +69,12 @@ namespace mean_shift::gpu {
             }
             valid_data[lid] = 0;
           }
-          #pragma omp barrier
+        }
+
+        #pragma acc loop vector
+        for (int lid = 0; lid < TILE_WIDTH; ++lid) {
+          int tid = bid * TILE_WIDTH + lid;
+          int row = tid * D;
           for (int i = 0; i < TILE_WIDTH; ++i) {
             int local_row_tile = i * D;
             float valid_radius = RADIUS * valid_data[i];
@@ -77,16 +86,21 @@ namespace mean_shift::gpu {
             if (sq_dist <= valid_radius) {
               float weight = expf(-sq_dist / DBL_SIGMA_SQ);
               for (int j = 0; j < D; ++j) {
-                new_position[j] += (weight * local_data[local_row_tile + j]);
+                new_position[lid * D + j] += (weight * local_data[local_row_tile + j]);
               }
-              tot_weight += (weight * valid_data[i]);
+              tot_weight[lid] += (weight * valid_data[i]);
             }
           }
-          #pragma omp barrier
         }
+      }
+
+      #pragma acc loop vector
+      for (int lid = 0; lid < TILE_WIDTH; ++lid) {
+        int tid = bid * TILE_WIDTH + lid;
         if (tid < N) {
+          int row = tid * D;
           for (int j = 0; j < D; ++j) {
-            data_next[row + j] = new_position[j] / tot_weight;
+            data_next[row + j] = new_position[lid * D + j] / tot_weight[lid];
           }
         }
       }
@@ -123,7 +137,7 @@ int main(int argc, char* argv[]) {
   float *d_data_next = (float*) malloc (data_bytes);
 
   // Copy to GPU memory
-  #pragma acc data to: d_data[0:N*D]) map(alloc: d_data_next[0:N*D])
+  #pragma acc data copyin(d_data[0:N*D]) create(d_data_next[0:N*D])
   {
     // Run mean shift clustering and time the execution
     auto start = std::chrono::steady_clock::now();
@@ -139,7 +153,7 @@ int main(int argc, char* argv[]) {
               << (time * 1e-6f) / mean_shift::gpu::NUM_ITER << " ms\n" << std::endl;
 
     // Verify these centroids are sufficiently close to real ones
-    #pragma acc update from (d_data[0:N*D])
+    #pragma acc update host(d_data[0:N*D])
     auto centroids = mean_shift::gpu::utils::reduce_to_centroids<N, D>(result, mean_shift::gpu::MIN_DISTANCE);
     bool are_close = mean_shift::gpu::utils::are_close_to_real<M, D>(centroids, real, DIST_TO_REAL);
     if (centroids.size() == M && are_close)
@@ -149,7 +163,7 @@ int main(int argc, char* argv[]) {
 
     // Reset device data
     result = data;
-    #pragma acc update to (d_data[0:N*D])
+    #pragma acc update device(d_data[0:N*D])
 
     start = std::chrono::steady_clock::now();
     for (size_t i = 0; i < mean_shift::gpu::NUM_ITER; ++i) {
@@ -162,7 +176,7 @@ int main(int argc, char* argv[]) {
               << (time * 1e-6f) / mean_shift::gpu::NUM_ITER << " ms\n" << std::endl;
 
     // Verify these centroids are sufficiently close to real ones
-    #pragma acc update from (d_data[0:N*D])
+    #pragma acc update host(d_data[0:N*D])
     centroids = mean_shift::gpu::utils::reduce_to_centroids<N, D>(result, mean_shift::gpu::MIN_DISTANCE);
     are_close = mean_shift::gpu::utils::are_close_to_real<M, D>(centroids, real, DIST_TO_REAL);
     if (centroids.size() == M && are_close)

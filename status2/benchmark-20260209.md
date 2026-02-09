@@ -194,7 +194,7 @@
 | md5hash | 15.14 | 15.35 | 15.50 |
 | mdh | 48.13 | 35.15 | 2.67 |
 | md | 14.68 | 14.24 | 14.22 |
-| meanshift | 4.43 | build err | 4.21 |
+| meanshift | 4.42 | 4.71 | 4.40 |
 | medianfilter | 3.75 | build err | 4.68 |
 | memcpy | 3.54 | 6.52 | 6.54 |
 | memtest | 18.85 | 19.78 | 19.45 |
@@ -328,6 +328,6 @@
 | zeropoint | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | build err | 14.28 |
 | | | | |
-| completed | 306 | 211 | 285 |
+| completed | 306 | 212 | 285 |
 
-sycl と acc がともに完了した件数 208
+sycl と acc がともに完了した件数 209
