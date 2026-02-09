@@ -8,46 +8,177 @@ Remark: individual warnings can be suppressed with "--diag_suppress <warning-nam
       h_profileScore[i] = -1;
                           ^
 
-"main.cpp", line 306: error: invalid text in pragma
-  #pragma acc data to: d_docWordFrequencies_dimm1[0:total_doc_size/2],\
-                   ^
-
-"main.cpp", line 306: error: extra text after expected end of preprocessing directive
-  #pragma acc data to: d_docWordFrequencies_dimm1[0:total_doc_size/2],\
-                     ^
-
-"main.cpp", line 318: error: invalid text in pragma
-      #pragma acc parallel teams num_teams(global_size) thread_limit(local_size) 
-                           ^
-
-"main.cpp", line 318: error: extra text after expected end of preprocessing directive
-      #pragma acc parallel teams num_teams(global_size) thread_limit(local_size) 
-                                 ^
-
-"main.cpp", line 323: error: identifier "omp_get_team_num" is undefined
-           int gid = omp_get_team_num() * omp_get_vector() + omp_get_thread_num();
-                     ^
-
-"main.cpp", line 323: error: identifier "omp_get_vector" is undefined
-           int gid = omp_get_team_num() * omp_get_vector() + omp_get_thread_num();
-                                          ^
-
-"main.cpp", line 323: error: identifier "omp_get_thread_num" is undefined
-           int gid = omp_get_team_num() * omp_get_vector() + omp_get_thread_num();
-                                                             ^
-
-"main.cpp", line 376: error: invalid text in pragma
-      #pragma acc parallel loop thread_limit(block_size)
-                                ^
-
-"main.cpp", line 376: error: extra text after expected end of preprocessing directive
-      #pragma acc parallel loop thread_limit(block_size)
-                                            ^
-
-"main.cpp", line 290: warning: variable "global_size" was declared but never referenced [declared_but_not_referenced]
-    size_t global_size = total_doc_size / 2 / MANUAL_VECTOR / local_size;
-           ^
-
-9 errors detected in the compilation of "main.cpp".
-make: *** [Makefile.NVD:58: main.o] Error 2
+setupData():
+    121, Loop not vectorized/parallelized: potential early exits
+    143, Loop not vectorized/parallelized: not countable
+    147, Loop not vectorized/parallelized: not countable
+    152, Loop not vectorized: data dependency
+    170, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    174, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    178, Loop not vectorized: data dependency
+runOnCPU():
+    197, Loop not fused: function call before adjacent loop
+    204, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+    222, Loop not vectorized: data dependency
+    244, Loop not vectorized/parallelized: potential early exits
+mulfp(unsigned long, unsigned int):
+    258, Generating acc routine seq
+         Generating NVIDIA GPU code
+main:
+    313, Generating copyin(d_docInfo[:total_num_docs],d_docWordFrequencies_dimm1[:total_doc_size>>1],d_profileWeights[:16777216]) [if not already present]
+         Generating copyout(d_profileScore[:total_num_docs]) [if not already present]
+         Generating copyin(d_docWordFrequencies_dimm2[:total_doc_size>>1],d_isWordInProfileHash[:16384]) [if not already present]
+         Generating create(d_partialSums_dimm1[:?],d_partialSums_dimm2[:?]) [if not already present]
+    316, Loop not vectorized/parallelized: too deeply nested
+    319, Generating implicit firstprivate(local_size,global_size)
+         Generating NVIDIA GPU code
+        323, #pragma acc loop gang(global_size) /* blockIdx.x */
+        326, #pragma acc loop vector(local_size) /* threadIdx.x */
+        330, #pragma acc loop seq
+             Generating implicit reduction(+:sum)
+        344, #pragma acc loop seq
+             Generating implicit reduction(+:sum)
+        362, #pragma acc loop vector(local_size) /* threadIdx.x */
+        365, #pragma acc loop seq
+             Generating implicit reduction(+:final_res)
+    319, CUDA shared memory used for partial
+    323, Loop not fused: no successor loop
+    326, Loop is parallelizable
+         Loop not fused: different loop trip count
+    330, Loop is parallelizable
+         Loop not fused: scalar dependence chain to sibling loop
+    344, Loop is parallelizable
+    362, Loop is parallelizable
+         Outer loop unrolled 1 times (completely unrolled)
+    365, Loop is parallelizable
+         Generated vector simd code for the loop containing reductions
+    371, Generating present(d_docInfo[:],d_partialSums_dimm1[:],d_profileScore[:],d_partialSums_dimm2[:])
+         Generating implicit firstprivate(total_num_docs)
+         Generating NVIDIA GPU code
+        374, #pragma acc loop gang, vector(128) /* blockIdx.x threadIdx.x */
+        380, #pragma acc loop seq
+             Generating implicit reduction(+:total)
+    374, Loop not fused: no successor loop
+    380, Loop is parallelizable
+         Generated vector simd code for the loop containing reductions
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::_M_erase(std::_Rb_tree_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>*):
+     28, include "options.h"
+          27, include "map"
+               60, include "stl_tree.h"
+                  1887, Loop not vectorized/parallelized: potential early exits
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::~_Rb_tree():
+     28, include "options.h"
+          27, include "map"
+               60, include "stl_tree.h"
+                       1887, Loop not vectorized/parallelized: potential early exits
+void std::_Destroy_aux<false>::__destroy<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*):
+     28, include "options.h"
+          27, include "map"
+               60, include "stl_tree.h"
+                    67, include "alloc_traits.h"
+                         34, include "alloc_traits.h"
+                              33, include "stl_construct.h"
+                                  162, Loop not vectorized/parallelized: contains call
+void __gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::destroy<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>(std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>*):
+     28, include "options.h"
+          27, include "map"
+               60, include "stl_tree.h"
+                    67, include "alloc_traits.h"
+unsigned int aocl_utils::Options::get<unsigned int>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&) const:
+     28, include "options.h"
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<char, std::char_traits<char>, std::allocator<char>>(std::basic_ostream<char, std::char_traits<char>>&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     28, include "options.h"
+void std::_Destroy<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*):
+     28, include "options.h"
+          27, include "map"
+               60, include "stl_tree.h"
+                    67, include "alloc_traits.h"
+                         34, include "alloc_traits.h"
+                              33, include "stl_construct.h"
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::_M_get_insert_unique_pos(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     26, include "options.h"
+          27, include "map"
+               60, include "stl_tree.h"
+                  2068, Loop not vectorized/parallelized: contains call
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::_M_get_insert_hint_unique_pos(std::_Rb_tree_const_iterator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+        2068, Loop not vectorized/parallelized: contains call
+        2068, Loop not vectorized/parallelized: contains call
+        2068, Loop not vectorized/parallelized: contains call
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::_M_erase(std::_Rb_tree_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>*):
+     26, include "options.h"
+          27, include "map"
+               60, include "stl_tree.h"
+                  1887, Loop not vectorized/parallelized: potential early exits
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::_M_lower_bound(std::_Rb_tree_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>*, std::_Rb_tree_node_base*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     26, include "options.h"
+          27, include "map"
+               60, include "stl_tree.h"
+                  1904, Loop not vectorized/parallelized: contains call
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::_M_lower_bound(std::_Rb_tree_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>> const*, std::_Rb_tree_node_base const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&) const:
+     26, include "options.h"
+          27, include "map"
+               60, include "stl_tree.h"
+                  1920, Loop not vectorized/parallelized: contains call
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::~_Rb_tree():
+        1887, Loop not vectorized/parallelized: potential early exits
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::find(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&) const:
+        1920, Loop not vectorized/parallelized: contains call
+std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::lower_bound(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+        1904, Loop not vectorized/parallelized: contains call
+std::_Rb_tree_iterator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>> std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::_M_emplace_hint_unique<std::piecewise_construct_t const&, std::tuple<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&>, std::tuple<>>(std::_Rb_tree_const_iterator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>, std::piecewise_construct_t const&, std::tuple<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&>&&, std::tuple<>&&):
+     26, include "options.h"
+          27, include "map"
+               60, include "stl_tree.h"
+std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::operator[](std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     26, include "options.h"
+          27, include "map"
+        1259, Loop not vectorized/parallelized: contains call
+std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::find(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&) const:
+        2536, Loop not vectorized/parallelized: contains call
+std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>::lower_bound(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+        1270, Loop not vectorized/parallelized: contains call
+std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>::_S_do_relocate(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>&, std::integral_constant<bool, true>):
+        1046, Loop not vectorized/parallelized: contains call
+std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>::_S_relocate(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>&):
+         456, Loop not vectorized/parallelized: contains call
+std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, 0ul>(std::tuple<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&>&, std::tuple<>&, std::_Index_tuple<0ul>, std::_Index_tuple<>):
+     26, include "options.h"
+          27, include "map"
+void std::_Destroy_aux<false>::__destroy<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*):
+     22, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                    62, include "stl_tempbuf.h"
+                         60, include "stl_construct.h"
+                             162, Loop not vectorized/parallelized: contains call
+     26, include "options.h"
+std::__cxx11::basic_stringbuf<char, std::char_traits<char>, std::allocator<char>>::str() const:
+     26, include "options.h"
+aocl_utils::Options::has(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&) const:
+        1195, Loop not vectorized/parallelized: contains call
+aocl_utils::Options::get(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&) const:
+        1195, Loop not vectorized/parallelized: contains call
+aocl_utils::Options::addFromCommandLine(int, char**):
+     56, Loop not vectorized/parallelized: potential early exits
+void std::_Destroy<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*):
+     22, include "algorithm"
+          10, include "algorithm"
+               62, include "stl_algo.h"
+                    62, include "stl_tempbuf.h"
+                         60, include "stl_construct.h"
+     26, include "options.h"
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>* std::__relocate_a<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>&):
+        1031, Loop not vectorized/parallelized: contains call
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>* std::__relocate_a_1<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>&):
+     25, include "vector"
+          66, include "stl_uninitialized.h"
+             1031, Loop not vectorized/parallelized: contains call
+void std::__relocate_object_a<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>&):
+     25, include "vector"
+          66, include "stl_uninitialized.h"
 timeout was set to  600

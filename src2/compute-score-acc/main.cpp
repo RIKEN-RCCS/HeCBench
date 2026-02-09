@@ -253,7 +253,7 @@ void runOnCPU()
 }
 
 
-#pragma omp declare target
+#pragma acc routine seq
 ulong mulfp( ulong weight, uint freq )
 {
   uint part1 = weight & 0xFFFFF;         // lower 24-bits of weight
@@ -264,7 +264,6 @@ ulong mulfp( ulong weight, uint freq )
 
   return (ulong)res1 + (((ulong)res2) << 24);
 }
-#pragma omp end declare target
 
 
 int main(int argc, char** argv)
@@ -302,100 +301,97 @@ int main(int argc, char** argv)
   uint* d_isWordInProfileHash = h_isWordInProfileHash.get() ;
   ulong* d_docInfo = h_docInfo.get();
   ulong* d_profileScore = h_profileScore.get();
-   
-#pragma acc data to: d_docWordFrequencies_dimm1[0:total_doc_size/2],\
-                                d_docWordFrequencies_dimm2[0:total_doc_size/2],\
-                                d_profileWeights[0:(1L << 24)],\
-                                d_isWordInProfileHash[0:(1L << BLOOM_SIZE)],\
-                                d_docInfo[0: total_num_docs]) \
-                        map(alloc: d_partialSums_dimm1[0:total_doc_size/(2*block_size)], \
-                                   d_partialSums_dimm2[0:total_doc_size/(2*block_size)]) \
-                        map(from: d_profileScore[0: total_num_docs])
-
-{
-  const double start_time = getCurrentTimestamp();
-  for (uint i=0; i<repeat; i++) {
-    #pragma acc parallel teams num_teams(global_size) thread_limit(local_size) 
-    {
-       ulong partial[NUM_THREADS_PER_WG/MANUAL_VECTOR];
-       #pragma omp parallel 
-       {
-         int gid = omp_get_team_num() * omp_get_vector() + omp_get_thread_num();
-     
-         uint curr_entry[MANUAL_VECTOR];
-         uint word_id[MANUAL_VECTOR];
-         uint freq[MANUAL_VECTOR];
-         uint hash1[MANUAL_VECTOR];
-         uint hash2[MANUAL_VECTOR];
-         bool is_end[MANUAL_VECTOR];
-         bool make_access[MANUAL_VECTOR];
-     
-         ulong sum = 0;
-         //#pragma unroll
-         for (uint i=0; i<MANUAL_VECTOR; i++) {
-           curr_entry[i] = d_docWordFrequencies_dimm1[gid*MANUAL_VECTOR + i]; 
-           freq[i] = curr_entry[i] & 0xff;
-           word_id[i] = curr_entry[i] >> 8;
-           is_end[i] = curr_entry[i] == docEndingTag;
-           hash1[i] = word_id[i] >> BLOOM_1;
-           hash2[i] = word_id[i] & BLOOM_2;
-           make_access[i] = !is_end[i] && ((d_isWordInProfileHash[ hash1[i] >> 5 ] >> (hash1[i] & 0x1f)) & 0x1) 
-             && ((d_isWordInProfileHash[ hash2[i] >> 5 ] >> (hash2[i] & 0x1f)) & 0x1); 
-           if (make_access[i]) {
-             sum += mulfp(d_profileWeights[word_id[i]],freq[i]);
-           }
-         }
-     
-         //#pragma unroll
-         for (uint i=0; i<MANUAL_VECTOR; i++) {
-           curr_entry[i] = d_docWordFrequencies_dimm2[gid*MANUAL_VECTOR + i]; 
-           freq[i] = curr_entry[i] & 0xff;
-           word_id[i] = curr_entry[i] >> 8;
-           is_end[i] = curr_entry[i] == docEndingTag;
-           hash1[i] = word_id[i] >> BLOOM_1;
-           hash2[i] = word_id[i] & BLOOM_2;
-           make_access[i] = !is_end[i] && ((d_isWordInProfileHash[ hash1[i] >> 5 ] >> (hash1[i] & 0x1f)) & 0x1) 
-             && ((d_isWordInProfileHash[ hash2[i] >> 5 ] >> (hash2[i] & 0x1f)) & 0x1); 
-           if (make_access[i]) {
-             sum += mulfp(d_profileWeights[word_id[i]],freq[i]);
-           }
-         }
-     
-         partial[omp_get_thread_num()] = sum;
-         #pragma omp barrier
-     
-         if (omp_get_thread_num() == 0) {
-           ulong final_result = partial[0] + partial[1] + partial[2] + partial[3] + 
-                                partial[4] + partial[5] + partial[6] + partial[7] ;
-           d_partialSums_dimm1[omp_get_team_num()] = (uint) (final_result >> 32); 
-           d_partialSums_dimm2[omp_get_team_num()] = (uint) (final_result & 0xFFFFFFFF); 
-         }
-       }
-    }
-     
-    #pragma acc parallel loop thread_limit(block_size)
-    for (int gid = 0; gid < total_num_docs; gid++) {
-      ulong info = d_docInfo[gid];
-      unsigned start = info >> 32;
-      unsigned end = info & 0xFFFFFFFF;
+  
+#pragma acc data copyin(d_docWordFrequencies_dimm1[0:total_doc_size/2], \
+                        d_docWordFrequencies_dimm2[0:total_doc_size/2], \
+                        d_profileWeights[0:(1L << 24)],			\
+                        d_isWordInProfileHash[0:(1L << BLOOM_SIZE)],	\
+                        d_docInfo[0:total_num_docs])			\
+  create(d_partialSums_dimm1[0:total_doc_size/(2*block_size)],		\
+	 d_partialSums_dimm2[0:total_doc_size/(2*block_size)])		\
+  copyout(d_profileScore[0:total_num_docs])
+  {
+    const double start_time = getCurrentTimestamp();
+  
+    for (uint r = 0; r < repeat; r++) {
     
-      ulong total = 0;
-      //#pragma unroll 2
-      for (unsigned i=start; i<=end; i++) {
-        ulong upper = d_partialSums_dimm1[i];
-        ulong lower = d_partialSums_dimm2[i];
-        ulong sum = (upper << 32) | lower;
-        total += sum;
+#pragma acc parallel num_gangs(global_size) vector_length(local_size)
+      {
+	unsigned long partial[NUM_THREADS_PER_WG / MANUAL_VECTOR];
+
+#pragma acc loop gang
+	for (int gn = 0; gn < global_size; gn++) {
+        
+#pragma acc loop vector
+	  for (int lid = 0; lid < local_size; lid++) {
+	    int gid = gn * local_size + lid;
+	    unsigned long sum = 0;
+          
+	    for (uint i = 0; i < MANUAL_VECTOR; i++) {
+	      uint entry = d_docWordFrequencies_dimm1[gid * MANUAL_VECTOR + i];
+	      uint freq = entry & 0xff;
+	      uint word_id = entry >> 8;
+	      uint h1 = word_id >> BLOOM_1;
+	      uint h2 = word_id & BLOOM_2;
+            
+	      bool access = (entry != docEndingTag) &&
+		((d_isWordInProfileHash[h1 >> 5] >> (h1 & 0x1f)) & 0x1) &&
+		((d_isWordInProfileHash[h2 >> 5] >> (h2 & 0x1f)) & 0x1);
+            
+	      if (access) sum += (unsigned long)d_profileWeights[word_id] * freq;
+	    }
+
+	    for (uint i = 0; i < MANUAL_VECTOR; i++) {
+	      uint entry = d_docWordFrequencies_dimm2[gid * MANUAL_VECTOR + i];
+	      uint freq = entry & 0xff;
+	      uint word_id = entry >> 8;
+	      uint h1 = word_id >> BLOOM_1;
+	      uint h2 = word_id & BLOOM_2;
+            
+	      bool access = (entry != docEndingTag) &&
+		((d_isWordInProfileHash[h1 >> 5] >> (h1 & 0x1f)) & 0x1) &&
+		((d_isWordInProfileHash[h2 >> 5] >> (h2 & 0x1f)) & 0x1);
+            
+	      if (access) sum += (unsigned long)d_profileWeights[word_id] * freq;
+	    }
+          
+	    partial[lid] = sum;
+	  } 
+
+#pragma acc loop vector
+	  for (int lid = 0; lid < 1; lid++) {
+	    unsigned long final_res = 0;
+#pragma unroll
+	    for(int k=0; k<8; k++) final_res += partial[k];
+
+	    d_partialSums_dimm1[gn] = (uint)(final_res >> 32);
+	    d_partialSums_dimm2[gn] = (uint)(final_res & 0xFFFFFFFF);
+	  }
+	}
       }
-      d_profileScore[gid] = total;
+
+#pragma acc parallel loop gang vector present(d_docInfo, d_partialSums_dimm1, d_partialSums_dimm2, d_profileScore)
+      for (int gid = 0; gid < total_num_docs; gid++) {
+	unsigned long info = d_docInfo[gid];
+	unsigned start = info >> 32;
+	unsigned end = info & 0xFFFFFFFF;
+	unsigned long total = 0;
+
+	for (unsigned i = start; i <= end; i++) {
+	  unsigned long upper = d_partialSums_dimm1[i];
+	  unsigned long lower = d_partialSums_dimm2[i];
+	  total += (upper << 32) | lower;
+	}
+	d_profileScore[gid] = total;
+      }
     }
+  
+    const double end_time = getCurrentTimestamp();
+    double kernelExecutionTime = (end_time - start_time)/repeat;
+    printf("======================================================\n");
+    printf("Kernel Time = %f ms (averaged over %d times)\n", kernelExecutionTime * 1000.0f, repeat );
+    printf("Throughput = %f\n", total_doc_size_no_padding / kernelExecutionTime / 1.0e+6f );
   }
-  const double end_time = getCurrentTimestamp();
-  double kernelExecutionTime = (end_time - start_time)/repeat;
-  printf("======================================================\n");
-  printf("Kernel Time = %f ms (averaged over %d times)\n", kernelExecutionTime * 1000.0f, repeat );
-  printf("Throughput = %f\n", total_doc_size_no_padding / kernelExecutionTime / 1.0e+6f );
-}
 
   printf("Done\n");
 

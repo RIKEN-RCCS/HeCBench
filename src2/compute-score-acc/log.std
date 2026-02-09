@@ -5,9 +5,8 @@ Allocating and setting up data
 Creating Documents total_terms=108236928 (no_pad=91562463)
 Creating Profile
 ======================================================
-Kernel Time = 1.788474 ms (averaged over 1000 times)
-Throughput = 51195.851592
+Kernel Time = 0.699995 ms (averaged over 1000 times)
+Throughput = 130804.454014
 Done
 total_access = 412852 , falsies = 323606, percentage = 0.003814 hit= 0.000824543
-FAILED
-   : doc[0] score: CPU = 0, Device = 34359738360
+Verification: PASS
