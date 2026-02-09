@@ -1,103 +1,210 @@
-"kernels.h", line 9: error: invalid text in pragma
-    num_teams(blocks) thread_limit(threads)
-    ^
-
-"kernels.h", line 9: error: extra text after expected end of preprocessing directive
-    num_teams(blocks) thread_limit(threads)
-             ^
-
-"kernels.h", line 54: error: invalid text in pragma
-    num_teams(blocks) thread_limit(threads)
-    ^
-
-"kernels.h", line 54: error: extra text after expected end of preprocessing directive
-    num_teams(blocks) thread_limit(threads)
-             ^
-
-"kernels.h", line 100: error: invalid text in pragma
-    #pragma acc parallel teams num_teams(blocks) thread_limit(threads)
-                         ^
-
-"kernels.h", line 100: error: extra text after expected end of preprocessing directive
-    #pragma acc parallel teams num_teams(blocks) thread_limit(threads)
-                               ^
-
-"kernels.h", line 105: error: identifier "omp_get_thread_num" is undefined
-        int threadIdx_x = omp_get_thread_num();
-                          ^
-
-"kernels.h", line 107: error: identifier "omp_get_team_num" is undefined
-        int i = omp_get_team_num() * threads + threadIdx_x;
-                ^
-
-"main.cpp", line 66: error: invalid text in pragma
-    #pragma acc parallel data map (to: rands[0:rands_size], alphas[0:alphas_size]) \
-                         ^
-
-"main.cpp", line 66: error: extra text after expected end of preprocessing directive
-    #pragma acc parallel data map (to: rands[0:rands_size], alphas[0:alphas_size]) \
-                              ^
-
-"main.cpp", line 82: error: invalid text in pragma
-      #pragma acc update from (probs[0:alphas_size])
-                         ^
-
-"main.cpp", line 82: error: OpenACC data clause expected
-      #pragma acc update from (probs[0:alphas_size])
-                         ^
-
-"main.cpp", line 82: error: extra text after expected end of preprocessing directive
-      #pragma acc update from (probs[0:alphas_size])
-                              ^
-
-"main.cpp", line 95: error: invalid text in pragma
-      #pragma acc update to (rands[0:rands_size])
-                         ^
-
-"main.cpp", line 95: error: OpenACC data clause expected
-      #pragma acc update to (rands[0:rands_size])
-                         ^
-
-"main.cpp", line 95: error: extra text after expected end of preprocessing directive
-      #pragma acc update to (rands[0:rands_size])
-                            ^
-
-"main.cpp", line 96: error: invalid text in pragma
-      #pragma acc update to (alphas[0:alphas_size])
-                         ^
-
-"main.cpp", line 96: error: OpenACC data clause expected
-      #pragma acc update to (alphas[0:alphas_size])
-                         ^
-
-"main.cpp", line 96: error: extra text after expected end of preprocessing directive
-      #pragma acc update to (alphas[0:alphas_size])
-                            ^
-
-"main.cpp", line 108: error: invalid text in pragma
-      #pragma acc update from (probs[0:alphas_size])
-                         ^
-
-"main.cpp", line 108: error: OpenACC data clause expected
-      #pragma acc update from (probs[0:alphas_size])
-                         ^
-
-"main.cpp", line 108: error: extra text after expected end of preprocessing directive
-      #pragma acc update from (probs[0:alphas_size])
-                              ^
-
-"main.cpp", line 126: error: invalid text in pragma
-      #pragma acc update from (probs[0:alphas_size])
-                         ^
-
-"main.cpp", line 126: error: OpenACC data clause expected
-      #pragma acc update from (probs[0:alphas_size])
-                         ^
-
-"main.cpp", line 126: error: extra text after expected end of preprocessing directive
-      #pragma acc update from (probs[0:alphas_size])
-                              ^
-
-25 errors detected in the compilation of "main.cpp".
-make: *** [Makefile.NVD:57: main.o] Error 2
+compute_probs(double const*, double const*, double*, int, int, int, int, int):
+      8, include "kernels.h"
+           7, Generating present(rands[:],probs[:],alphas[:])
+              Generating implicit firstprivate(K,M,n)
+              Generating NVIDIA GPU code
+               9, #pragma acc loop gang /* blockIdx.x */
+              16, #pragma acc loop vector(128) /* threadIdx.x */
+              21, #pragma acc loop seq
+              22, #pragma acc loop vector(128) /* threadIdx.x */
+              29, #pragma acc loop seq
+              39, #pragma acc loop vector(128) /* threadIdx.x */
+           7, CUDA shared memory used for w
+          16, Loop is parallelizable
+              Recognized memory zero idiom
+          21, Loop carried reuse of w prevents parallelization
+              Complex loop carried dependence of probs-> prevents parallelization
+              Loop carried dependence of probs-> prevents parallelization
+              Loop carried backward dependence of probs-> prevents vectorization
+              Loop not fused: different loop trip count
+          22, Loop is parallelizable
+              Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+          29, Loop carried scalar dependence for maxval at line 30
+              Loop not vectorized: unknown
+          31, Accelerator restriction: induction variable live-out from loop: maxind
+          39, Loop is parallelizable
+              Generated vector simd code for the loop
+compute_probs_unitStrides(double const*, double const*, double*, int, int, int, int, int):
+      8, include "kernels.h"
+          51, Generating present(probs[:],rands[:],alphas[:])
+              Generating implicit firstprivate(K,M,n)
+              Generating NVIDIA GPU code
+              53, #pragma acc loop gang, vector(128) /* blockIdx.x threadIdx.x */
+              60, #pragma acc loop seq
+              65, #pragma acc loop seq
+              66, #pragma acc loop seq
+              74, #pragma acc loop seq
+              84, #pragma acc loop seq
+          51, Local memory used for w
+          53, Loop not fused: no successor loop
+          60, Loop is parallelizable
+              Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+          65, Loop carried reuse of w prevents parallelization
+              Complex loop carried dependence of probs-> prevents parallelization
+              Loop carried dependence of probs-> prevents parallelization
+              Loop carried backward dependence of probs-> prevents vectorization
+              Loop not fused: different loop trip count
+          66, Loop is parallelizable
+              Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+          74, Loop carried scalar dependence for maxval at line 75
+              Loop not vectorized: unknown
+          76, Accelerator restriction: induction variable live-out from loop: maxind
+          84, Complex loop carried dependence of probs-> prevents parallelization
+              Loop carried dependence of probs-> prevents parallelization
+              Loop carried backward dependence of probs-> prevents vectorization
+              Loop unrolled 2 times
+compute_probs_unitStrides_sharedMem(double const*, double const*, double*, int, int, int, int, int):
+      8, include "kernels.h"
+          97, Generating present(rands[:],probs[:],alphas[:])
+              Generating implicit firstprivate(K,M,n)
+              Generating NVIDIA GPU code
+              99, #pragma acc loop gang, vector(128) /* blockIdx.x threadIdx.x */
+             111, #pragma acc loop seq
+             116, #pragma acc loop seq
+             117, #pragma acc loop seq
+             122, #pragma acc loop seq
+             131, #pragma acc loop seq
+             136, #pragma acc loop seq
+          97, Local memory used for w,probs_local
+         111, Loop is parallelizable
+              Recognized memory zero idiom
+         116, Loop carried reuse of w prevents parallelization
+              Complex loop carried dependence of probs_local prevents parallelization
+              Loop carried dependence of probs_local prevents parallelization
+              Loop carried backward dependence of probs_local prevents vectorization
+              Loop not fused: different loop trip count
+         117, Loop is parallelizable
+              Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+         122, Loop carried scalar dependence for maxval at line 123
+              Loop not vectorized: unknown
+         124, Accelerator restriction: induction variable live-out from loop: maxind
+         131, Loop is parallelizable
+              Loop not fused: sibling loop may prevent vectorization
+              Generated vector simd code for the loop
+         136, Loop carried dependence of probs-> prevents parallelization
+              Loop carried backward dependence of probs-> prevents vectorization
+              Loop unrolled 8 times
+verify(double const*, double const*, int):
+      9, include "reference.h"
+           3, Loop not vectorized/parallelized: potential early exits
+reference(double const*, double const*, double*, int, int, int):
+      9, include "reference.h"
+          25, Recognized memory zero idiom
+          30, Loop not fused: different loop trip count
+          31, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+          38, Loop not vectorized: unknown
+          48, Generated vector simd code for the loop
+reference_unitStrides(double const*, double const*, double*, int, int, int):
+      9, include "reference.h"
+          67, Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+          72, Loop not fused: different loop trip count
+          73, Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+          81, Loop not vectorized: unknown
+          91, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+t(double const*, int, int):
+     16, Loop not vectorized: data dependency
+         Loop unrolled 8 times
+main:
+     55, Loop not vectorized/parallelized: contains call
+         531, Loop not vectorized: data dependency
+     62, Loop not vectorized/parallelized: potential early exits
+          25, Recognized memory zero idiom
+          30, Loop not fused: different loop trip count
+          31, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+          38, Loop not vectorized: unknown
+          48, Generated vector simd code for the loop
+     68, Generating copyin(rands[:rands_size]) [if not already present]
+         Generating create(probs[:alphas_size]) [if not already present]
+         Generating copyin(alphas[:alphas_size]) [if not already present]
+     75, Loop not vectorized/parallelized: contains call
+           3, Loop not vectorized/parallelized: potential early exits
+     84, Generating update self(probs[:alphas_size])
+          15, Loop not fused: function call before adjacent loop
+          16, Loop not vectorized: data dependency
+              Loop unrolled 8 times
+          15, Loop not fused: enclosed in different number of nests
+          16, Loop not vectorized: data dependency
+              Loop unrolled 8 times
+          60, Loop not fused: function call before adjacent loop
+          67, Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+              Loop unrolled 8 times
+          72, Loop not fused: different loop trip count
+          73, Loop not fused: different loop trip count
+              Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+          81, Loop not vectorized: unknown
+          91, Generated vector simd code for the loop
+     98, Generating update device(rands[:rands_size],alphas[:alphas_size])
+    100, Loop not vectorized/parallelized: contains call
+           3, Loop not vectorized/parallelized: potential early exits
+    110, Generating update self(probs[:alphas_size])
+    118, Loop not vectorized/parallelized: contains call
+           3, Loop not vectorized/parallelized: potential early exits
+    128, Generating update self(probs[:alphas_size])
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::mersenne_twister_engine(unsigned long):
+         330, Loop not vectorized: data dependency
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::mersenne_twister_engine(unsigned long):
+         531, Loop not vectorized: data dependency
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::seed(unsigned long):
+      5, include "random"
+          51, include "random.tcc"
+              330, Loop not vectorized: data dependency
+      9, include "reference.h"
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::operator()():
+         401, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+         409, Loop not vectorized: data dependency
+std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::_M_gen_rand():
+      5, include "random"
+          51, include "random.tcc"
+              401, Loop not fused: different loop trip count
+                   Generated vector simd code for the loop
+              409, Loop not vectorized: data dependency
+      9, include "reference.h"
+double std::normal_distribution<double>::operator()<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&):
+      5, include "random"
+          51, include "random.tcc"
+      9, include "reference.h"
+double std::normal_distribution<double>::operator()<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&, std::normal_distribution<double>::param_type const&):
+      5, include "random"
+          51, include "random.tcc"
+             1821, Loop not vectorized/parallelized: contains call
+      9, include "reference.h"
+         189, Loop not fused: function call before adjacent loop
+              Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+         189, Loop not fused: function call before adjacent loop
+              Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+std::__detail::_Adaptor<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>, double>::operator()():
+        3364, Loop not fused: function call before adjacent loop
+        3366, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      6, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      8, include "kernels.h"
+double std::generate_canonical<double, 53ul, std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>>(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&):
+      5, include "random"
+          51, include "random.tcc"
+             3364, Loop not fused: function call before adjacent loop
+      9, include "reference.h"
+         456, Loop not fused: different loop trip count
+              Generated vector simd code for the loop
+              Loop not vectorized: data dependency
 timeout was set to  600
