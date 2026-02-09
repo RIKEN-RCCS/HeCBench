@@ -1,43 +1,88 @@
-"kernel.cpp", line 7: error: invalid text in pragma
-    #pragma acc parallel teams gang(12) vector_length(32) 
-                         ^
+"kernel.cpp", line 20: warning: variable "private_Re" was declared but never referenced [declared_but_not_referenced]
+      float private_Re, private_Im; 
+            ^
 
-"kernel.cpp", line 7: error: extra text after expected end of preprocessing directive
-    #pragma acc parallel teams gang(12) vector_length(32) 
-                               ^
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
 
-"kernel.cpp", line 11: error: identifier "omp_get_team_num" is undefined
-      int b0 = omp_get_team_num();
-               ^
+"kernel.cpp", line 20: warning: variable "private_Im" was declared but never referenced [declared_but_not_referenced]
+      float private_Re, private_Im; 
+                        ^
 
-"kernel.cpp", line 12: error: identifier "omp_get_thread_num" is undefined
-      int t0 = omp_get_thread_num();
-               ^
-
-"kernel.cpp", line 63: error: invalid text in pragma
-    #pragma acc parallel teams gang(12) vector_length(32) 
-                         ^
-
-"kernel.cpp", line 63: error: extra text after expected end of preprocessing directive
-    #pragma acc parallel teams gang(12) vector_length(32) 
-                               ^
-
-"kernel.cpp", line 67: error: identifier "omp_get_team_num" is undefined
-      int b0 = omp_get_team_num();
-               ^
-
-"kernel.cpp", line 68: error: identifier "omp_get_thread_num" is undefined
-      int t0 = omp_get_thread_num();
-               ^
-
-"main.cpp", line 111: error: invalid text in pragma
-    #pragma acc data to: AT[0:AT_SIZE], X[0:X_SIZE]) \
-                     ^
-
-"main.cpp", line 111: error: extra text after expected end of preprocessing directive
-    #pragma acc data to: AT[0:AT_SIZE], X[0:X_SIZE]) \
-                       ^
-
-10 errors detected in the compilation of "main.cpp".
-make: *** [Makefile.NVD:57: main.o] Error 2
+ppcg_min(int, int):
+     28, include "kernel.cpp"
+           7, Generating acc routine seq
+              Generating NVIDIA GPU code
+ppcg_max(int, int):
+     28, include "kernel.cpp"
+          10, Generating acc routine seq
+              Generating NVIDIA GPU code
+chemv_kernel0(ComplexFloat*, ComplexFloat*, ComplexFloat*, float, float, float, float):
+     28, include "kernel.cpp"
+          19, Generating present(AT[:],Y[:],X[:])
+              Generating NVIDIA GPU code
+              23, #pragma acc loop gang(12) /* blockIdx.x */
+              24, #pragma acc loop seq
+              27, #pragma acc loop vector(32) /* threadIdx.x */
+              44, #pragma acc loop vector(32) /* threadIdx.x */
+              48, #pragma acc loop seq
+                  Generating implicit reduction(+:sum_Re,sum_Im)
+          23, Loop not fused: no successor loop
+              Loop not vectorized/parallelized: too deeply nested
+          24, Loop carried dependence of Y->Re,Y->Im prevents parallelization
+              Complex loop carried dependence of Y->Re prevents parallelization
+              Loop carried backward dependence of Y->Re prevents vectorization
+              Complex loop carried dependence of Y->Im prevents parallelization
+              Loop carried backward dependence of Y->Im prevents vectorization
+              Complex loop carried dependence of AT->Re,X->Re,X->Im,AT->Im prevents parallelization
+          27, Loop is parallelizable
+              Generating implicit firstprivate(beta_re,beta_im,alpha_re,alpha_im)
+              Loop not fused: enclosed in different number of nests
+              Loop not vectorized: data dependency
+          44, Loop is parallelizable
+          48, Generated vector simd code for the loop containing reductions
+chemv_kernel1(ComplexFloat*, ComplexFloat*, ComplexFloat*, float, float):
+     28, include "kernel.cpp"
+          68, Generating present(AT[:],Y[:],X[:])
+              Generating NVIDIA GPU code
+              70, #pragma acc loop gang(12) /* blockIdx.x */
+              71, #pragma acc loop seq
+              74, #pragma acc loop vector(32) /* threadIdx.x */
+              78, #pragma acc loop seq
+                  Generating implicit reduction(+:local_sum_Re,local_sum_Im)
+          70, Loop not fused: no successor loop
+              Loop not vectorized/parallelized: too deeply nested
+          71, Loop carried dependence of Y->Re prevents parallelization
+              Loop carried backward dependence of Y->Re prevents vectorization
+              Complex loop carried dependence of Y->Re prevents parallelization
+              Loop carried dependence of Y->Im prevents parallelization
+              Loop carried backward dependence of Y->Im prevents vectorization
+              Complex loop carried dependence of Y->Im,AT->Re,AT->Im,X->Re,X->Im prevents parallelization
+          74, Loop is parallelizable
+          78, Generating implicit firstprivate(alpha_re,alpha_im)
+              Generated vector simd code for the loop containing reductions
+chemv_cpu(float, float, float, float, ComplexFloat*, ComplexFloat*, ComplexFloat*):
+     34, Loop not fused: dependence chain to sibling loop
+         Generated vector simd code for the loop
+     45, Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+     63, Loop not vectorized: data dependency
+chemv_gpu(float, float, float, float, ComplexFloat*, ComplexFloat*, ComplexFloat*):
+    113, Generating copyin(AT[:136900]) [if not already present]
+         Generating copy(Y[:370]) [if not already present]
+         Generating copyin(X[:370]) [if not already present]
+    116, Loop not vectorized/parallelized: contains call
+main:
+    133, Loop not fused: enclosed in different number of nests
+    137, Loop not vectorized: unprofitable for target
+         Loop unrolled 8 times
+          34, Loop not fused: different loop trip count
+              2 loops fused
+              Generated vector simd code for the loop
+          62, Loop not fused: function call before adjacent loop
+          63, Loop not vectorized: unknown
+    150, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     11, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+     28, include "kernel.cpp"
 timeout was set to  600
