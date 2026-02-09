@@ -1,0 +1,6 @@
+Average execution time of compute_probs kernel: 0.127721 (s)
+PASS
+Average kernel execution time: 0.014650 (s)
+PASS
+Average kernel execution time: 0.013531 (s)
+PASS

@@ -63,8 +63,8 @@ int main(int argc, char* argv[]) {
 
   reference(alphas, rands, probs_ref, n, K, M);
 
-  #pragma acc parallel data map (to: rands[0:rands_size], alphas[0:alphas_size]) \
-                          map (alloc: probs[0:alphas_size])
+  #pragma acc data copyin(rands[0:rands_size], alphas[0:alphas_size]) \
+                  create(probs[0:alphas_size])
   {
     // kernel 1
     int threads_per_block = 192;
@@ -79,7 +79,7 @@ int main(int argc, char* argv[]) {
     auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
     printf("Average execution time of compute_probs kernel: %f (s)\n", (time * 1e-9f) / repeat);
 
-    #pragma acc update from (probs[0:alphas_size])
+    #pragma acc update host(probs[0:alphas_size])
 
     verify(probs, probs_ref, alphas_size);
 
@@ -92,8 +92,8 @@ int main(int argc, char* argv[]) {
     memcpy(rands, t_rands, rands_size_byte);
     memcpy(alphas, t_alphas, alphas_size_byte);
 
-    #pragma acc update to (rands[0:rands_size])
-    #pragma acc update to (alphas[0:alphas_size])
+    #pragma acc update device(rands[0:rands_size])
+    #pragma acc update device(alphas[0:alphas_size])
 
     start = std::chrono::steady_clock::now();
 
@@ -105,7 +105,7 @@ int main(int argc, char* argv[]) {
     time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
     printf("Average kernel execution time: %f (s)\n", (time * 1e-9f) / repeat);
 
-    #pragma acc update from (probs[0:alphas_size])
+    #pragma acc update host(probs[0:alphas_size])
 
     verify(probs, probs_ref, alphas_size);
 
@@ -123,7 +123,7 @@ int main(int argc, char* argv[]) {
     time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
     printf("Average kernel execution time: %f (s)\n", (time * 1e-9f) / repeat);
 
-    #pragma acc update from (probs[0:alphas_size])
+    #pragma acc update host(probs[0:alphas_size])
 
     verify(probs, probs_ref, alphas_size);
  

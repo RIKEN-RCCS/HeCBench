@@ -5,8 +5,7 @@ void compute_probs(
   int n, int K, int M,
   int threads, int blocks)
 {
-  #pragma acc parallel loop \
-  num_teams(blocks) thread_limit(threads)
+  #pragma acc parallel loop present(alphas, rands, probs)
   for (int i = 0; i < n; i++) {
     double maxval;    
     int m, k;
@@ -50,8 +49,7 @@ void compute_probs_unitStrides(
   int n, int K, int M,
   int threads, int blocks)
 {
-  #pragma acc parallel loop \
-  num_teams(blocks) thread_limit(threads)
+  #pragma acc parallel loop present(alphas, rands, probs)
   for (int i = 0; i < n; i++) {
     double maxval;    
     int m, k;
@@ -97,57 +95,46 @@ void compute_probs_unitStrides_sharedMem(
   int n, int K, int M,
   int threads, int blocks)
 {
-  #pragma acc parallel teams num_teams(blocks) thread_limit(threads)
-  {
-    double shared[21 * 96 * 2];  // static
-    #pragma omp parallel 
-    {
-      int threadIdx_x = omp_get_thread_num();
-      int threads_per_block = threads;
-      int i = omp_get_team_num() * threads + threadIdx_x;
-      if (i < n) {
+  #pragma acc parallel loop present(alphas, rands, probs)
+  for (int i = 0; i < n; i++) {
 
-        // set up shared memory: half for probs and half for w
-        double* probs_shared = shared;
+    // set up local memory: half for probs and half for w
+    double probs_local[21]; // K
+    double w[21]; // K
 
-        // shared mem is one big block, so need to index into latter portion of it to use for w
-        double* w = &shared[K*threads_per_block];
+    double maxval;
+    int m, k;
+    int maxind;
+    double M_d = (double) M;
 
-        double maxval;    
-        int m, k;
-        int maxind;
-        double M_d = (double) M; 
+    // initialize local probs
+    for(k = 0; k < K; ++k) {
+      probs_local[k] = 0.0;
+    }
 
-        // initialize shared memory probs
-        for(k = 0; k < K; ++k) {
-          probs_shared[k*threads_per_block + threadIdx_x] = 0.0;
-        }
-
-        // core computation
-        for(m = 0; m < M; ++m){     // loop over Monte Carlo iterations 
-          for(k = 0; k < K; ++k){   // generate W ~ N(alpha, 1)
-            w[k*threads_per_block + threadIdx_x] = alphas[k*n + i] + rands[k*M + m];
-          }
-          maxind = K-1;
-          maxval = w[(K-1)*threads_per_block + threadIdx_x];
-          for(k = 0; k < (K-1); ++k){
-            if(w[k*threads_per_block + threadIdx_x] > maxval){
-              maxind = k;
-              maxval = w[k*threads_per_block + threadIdx_x];
-            } 
-          }
-          probs_shared[maxind*threads_per_block + threadIdx_x] += 1.0;
-        }
-
-        for(k = 0; k < K; ++k) {
-          probs_shared[k*threads_per_block + threadIdx_x] /= M_d;
-        }
-
-        // copy to device memory so can be returned to CPU
-        for(k = 0; k < K; ++k) {
-          probs[k*n + i] = probs_shared[k*threads_per_block + threadIdx_x];
+    // core computation
+    for(m = 0; m < M; ++m){     // loop over Monte Carlo iterations
+      for(k = 0; k < K; ++k){   // generate W ~ N(alpha, 1)
+        w[k] = alphas[k*n + i] + rands[k*M + m];
+      }
+      maxind = K-1;
+      maxval = w[K-1];
+      for(k = 0; k < (K-1); ++k){
+        if(w[k] > maxval){
+          maxind = k;
+          maxval = w[k];
         }
       }
+      probs_local[maxind] += 1.0;
+    }
+
+    for(k = 0; k < K; ++k) {
+      probs_local[k] /= M_d;
+    }
+
+    // copy to device memory so can be returned to CPU
+    for(k = 0; k < K; ++k) {
+      probs[k*n + i] = probs_local[k];
     }
   }
 }
