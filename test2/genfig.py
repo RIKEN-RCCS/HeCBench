@@ -78,6 +78,9 @@ def extend_markdown(markd, imagedir='SVGs', src_dir='../src2', mark_command=Fals
                     if mark_command:
                         line += compare_command(src_dir, bname)+'|'
                     
+            else:
+                line = line.strip()
+                        
         print(line)
     f.close()
 
@@ -134,7 +137,7 @@ if __name__ == '__main__':
             if line.find("completed") > 0: pass
             if line.find("|") > 0:
                 line = line.strip()
-                print("line ", line )
+#                print("line ", line )
                 gen_plt(x,line,imagedir=options.imagedir)
     f.close()
 
