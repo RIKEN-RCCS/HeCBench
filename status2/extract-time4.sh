@@ -74,7 +74,7 @@ do
 			    if [ $num = 3 ]; then let sum3="$sum3 +1"; fi
 
 			    if [ $num == 0 ]; then
-				mem=`tail $dir/log_run_bench.std | grep max | awk '{printf("%5.1f\n",$(NF-1)/1E3)}'`
+				mem=`tail $dir/log_run_bench.std | grep max | tail -1 | awk '{printf("%5.1f\n",$(NF-1)/1E3)}'`
 			    fi
 				
 			    if [ $num = 1 ]; then flag1=1; fi
