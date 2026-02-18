@@ -1,1 +1,14 @@
-nvcc -gencode arch=compute_60,code=sm_60 --std=c++17 -O3 -arch=sm_60 -I include -c -o bin/ans_encoder.o src/ans_encoder.cc
+nvcc -gencode arch=compute_90,code=sm_90 --std=c++17 -O3 -arch=sm_90 -I include -c -o bin/ans_encoder.o src/ans_encoder.cc
+nvcc -gencode arch=compute_90,code=sm_90 --std=c++17 -O3 -arch=sm_90 -I include -c -o bin/ans_table_generator.o src/ans_table_generator.cc
+nvcc -gencode arch=compute_90,code=sm_90 --std=c++17 -O3 -arch=sm_90 -I include -c -o bin/multians_codetable.o src/multians_codetable.cc
+nvcc -gencode arch=compute_90,code=sm_90 --std=c++17 -O3 -arch=sm_90 -I include -c -o bin/multians_input_buffer.o src/multians_input_buffer.cc
+nvcc -gencode arch=compute_90,code=sm_90 --std=c++17 -O3 -arch=sm_90 -I include -c -o bin/multians_output_buffer.o src/multians_output_buffer.cc
+nvcc -gencode arch=compute_90,code=sm_90 --std=c++17 -O3 -arch=sm_90 -I include -c -o bin/multians_util.o src/multians_util.cc
+nvcc -gencode arch=compute_90,code=sm_90 --std=c++17 -O3 -arch=sm_90 -I include -c -o bin/main.obj src/main.cu
+nvcc -gencode arch=compute_90,code=sm_90 --std=c++17 -O3 -arch=sm_90 -I include -c -o bin/multians_gpu_decoder.obj src/multians_gpu_decoder.cu
+nvcc bin/ans_encoder.o bin/ans_table_generator.o bin/multians_codetable.o bin/multians_input_buffer.o bin/multians_output_buffer.o bin/multians_util.o bin/main.obj bin/multians_gpu_decoder.obj -o bin/main
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "time -p ( ./bin/main 10 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 1 584 583
