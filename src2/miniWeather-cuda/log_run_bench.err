@@ -1,6 +1,42 @@
-main.cu:11:10: fatal error: mpi.h: No such file or directory
-   11 | #include <mpi.h>
-      |          ^~~~~~~
-compilation terminated.
-make: *** [Makefile.NVD:53: main.o] Error 1
+main.cu(296): warning #550-D: variable "ierr" was set but never used
+    int ierr;
+        ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+main.cu(360): warning #550-D: variable "ierr" was set but never used
+    int i, k, ii, kk, ll, ierr, inds, i_end;
+                          ^
+
+main.cu(494): warning #550-D: variable "ierr" was set but never used
+    int ierr;
+        ^
+
+main.cu(686): warning #177-D: variable "state_size" was declared but never referenced
+    const int state_size = (nz+2*hs)*(nx+2*hs)*NUM_VARS;
+              ^
+
+main.cu: In function ‘void set_halo_values_x(int, int, int, int, double, double*, double*, double*, double*, double*, double*, double*)’:
+main.cu:296:5: warning: variable ‘ierr’ set but not used [-Wunused-but-set-variable]
+  296 |   int ierr;
+      |     ^~~~
+main.cu: In function ‘void init(int*, char***)’:
+main.cu:360:23: warning: variable ‘ierr’ set but not used [-Wunused-but-set-variable]
+  360 |   int    i, k, ii, kk, ll, ierr, inds, i_end;
+      |                       ^~~~
+main.cu: In function ‘void finalize()’:
+main.cu:494:5: warning: variable ‘ierr’ set but not used [-Wunused-but-set-variable]
+  494 |   int ierr;
+      |     ^~~~
+main.cu: In function ‘void init(int*, char***)’:
+main.cu:488:30: warning: ‘ht’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  488 |     hy_dens_theta_int[k] = hr*ht;
+      |                          ~~~~^~~~ 
+main.cu:488:30: warning: ‘hr’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+main.cu:452:52: warning: ‘t’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  452 |           state[inds] = state[inds] + ( (r+hr)*(t+ht) - hr*ht ) * qweights[ii]*qweights[kk];
+      |                                                 ~~~^~~~~
+main.cu:448:46: warning: ‘u’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  448 |           state[inds] = state[inds] + (r+hr)*u                  * qweights[ii]*qweights[kk];
+      |                                    ~~~~~~~~~~^~~~
 timeout was set to  600
