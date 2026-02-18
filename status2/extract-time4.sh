@@ -15,6 +15,9 @@ sum3=0
 
 sum_both=0
 
+sum2A=0
+sum_bothA=0
+
 ##############################
 for n in `cat List_full`
 do
@@ -75,6 +78,10 @@ do
 			    if [ $num = 0 ]; then let sum0="$sum0 +1"; fi
 			    if [ $num = 1 ]; then let sum1="$sum1 +1"; fi
 			    if [ $num = 2 ]; then let sum2="$sum2 +1"; fi
+			    if [ $num = 2 ]; then
+				if [ $has_omp_func = 0 ]; then let sum2A="$sum2A +1"; fi
+			    fi
+
 			    if [ $num = 3 ]; then let sum3="$sum3 +1"; fi
 
 			    if [ $num == 0 ]; then
@@ -85,6 +92,12 @@ do
 			    if [ $num = 1 ]; then flag1=1; fi
 			    if [ $flag1 = 1 ]; then
 				if [ $num = 2 ]; then let sum_both="$sum_both +1"; fi
+			    fi
+			    if [ $flag1 = 1 ]; then
+				if [ $num = 2 ]; then
+				    if [ $has_omp_func = 0 ]; then
+					let sum_bothA="$sum_bothA +1"; fi
+				fi
 			    fi
 			fi
 		    else
@@ -115,9 +128,9 @@ do
 done
 ######################
 echo "|"        "|"        "|"       "|"       "|"         "|"    "|"  "|"
-echo "|" "完了" "|"  $sum0 "|" $sum1 "|" $sum2 "|"  $sum3  "|"    "|"  "|"
+echo "|" "完了した件数" "|"  $sum0 "|" $sum1 "|" $sum2 "(A:"$sum2A")" "|"  $sum3  "|"    "|"  "|"
 echo ""
-echo "sycl と acc がともに完了した件数" $sum_both
+echo "sycl と acc がともに完了した件数" $sum_both "(A:"$sum_bothA")"
 
 echo ""
 echo "分類: OpenMP コードが omp_get_* を (A) 含まない (B) 含む"
