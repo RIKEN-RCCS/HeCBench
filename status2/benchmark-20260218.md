@@ -103,7 +103,7 @@
 | fdtd3d | 30.14 | 31.50 | build err | 43.29 | B | 1.0 |
 | feynman-kac | 81.22 | 41.84 | 48.24 | 22.16 | A | 0.6 |
 | fft | 3.17 | 3.19 | build err | 3.19 | B | 0.8 |
-| fhd | over 600 | 183.93 | over 600 | exe err | A | 0.8 |
+| fhd | over 600 | 183.93 | over 600 | exe err | A | 2.5 |
 | filter | 168.70 | build err | build err | 154.77 | B | 11.3 |
 | flip | 10.43 | 37.32 | 14.45 | 15.50 | A | 26.9 |
 | floydwarshall | 74.91 | 73.45 | 72.59 | 83.41 | A | 0.7 |

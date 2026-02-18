@@ -59,6 +59,9 @@ do
 		    if [ "$c5" != "" ]; then
 			tmp1=`echo $c5 | awk '{print $NF}'`
 			time="over "$tmp1
+			if [ $num == 0 ]; then
+			    mem=`sort -n -k 1 $dir/log.mem | tail -1 | awk '{printf("%5.1f\n",$1/1E3)}'`
+			fi
 		    else
 			time="TLE error"
 		    fi
@@ -74,7 +77,8 @@ do
 			    if [ $num = 3 ]; then let sum3="$sum3 +1"; fi
 
 			    if [ $num == 0 ]; then
-				mem=`tail $dir/log_run_bench.std | grep max | tail -1 | awk '{printf("%5.1f\n",$(NF-1)/1E3)}'`
+#				mem=`tail $dir/log_run_bench.std | grep max | tail -1 | awk '{printf("%5.1f\n",$(NF-1)/1E3)}'`
+				mem=`sort -n -k 1 $dir/log.mem | tail -1 | awk '{printf("%5.1f\n",$1/1E3)}'`
 			    fi
 				
 			    if [ $num = 1 ]; then flag1=1; fi
