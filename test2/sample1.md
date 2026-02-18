@@ -328,8 +328,8 @@
 | zeropoint | 18.63 | 55.54 | 21.82 | 24.23 | A | 15.8 |![zeropoint](SVGs/zeropoint.svg) |
 | zmddft | 2.63 | 2.63 | build err | 14.28 | B | 1.6 |![zmddft](SVGs/zmddft.svg) |
 | | | | | | | |
-| 完了した件数 | 318 | 306 | 214 (A:178) | 285 | | |![完了した件数](SVGs/完了した件数.svg) |
+| 完了した件数 | 318 | 306 | 214 (A:178) | 285 | | ||
 
-sycl と acc がともに完了した件数 211 (A:175)
+sycl と acc がともに完了した件数 211 (A:175)|
 
 分類: OpenMP コードが omp_get_* を (A) 含まない (B) 含む
