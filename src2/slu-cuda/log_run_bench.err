@@ -1,2 +1,6 @@
-make: *** No rule to make target 'run_mem'.  Stop.
+clang: error: unsupported option '-msse2' for target 'aarch64-unknown-linux-gnu'
+make[3]: *** [Makefile:51: nicslu_aegraph.o] Error 1
+make[2]: *** [Makefile:2: all] Error 2
+make[1]: *** [Makefile:74: nicslu/lib/nicslu.a] Error 2
+make: *** [Makefile.NVD:14: main] Error 2
 timeout was set to  600

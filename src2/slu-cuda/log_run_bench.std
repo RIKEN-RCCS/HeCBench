@@ -1,0 +1,17 @@
+tar xf ./src/nicslu.tar.bz2 -C ./src
+tar xf ./src/nicslu.tar.bz2 -C ./src
+cd src; make -f Makefile
+make[1]: Entering directory '/hs/work0/home/users/u0001901/2026/test5/tmp2-for-cuda/slu-cuda/src'
+nvcc  -std=c++17 -Xcompiler -Wall -I./../include -I./nicslu/include -I./nicslu/util -O3 -DVERIFY -c preprocess.cpp -o preprocess.o
+nvcc  -std=c++17 -Xcompiler -Wall -I./../include -I./nicslu/include -I./nicslu/util -O3 -DVERIFY -c Timer.cpp -o Timer.o
+nvcc  -std=c++17 -Xcompiler -Wall -I./../include -I./nicslu/include -I./nicslu/util -O3 -DVERIFY -c numeric.cu -o numeric.o
+nvcc  -std=c++17 -Xcompiler -Wall -I./../include -I./nicslu/include -I./nicslu/util -O3 -DVERIFY -c symbolic.cpp -o symbolic.o
+nvcc  -std=c++17 -Xcompiler -Wall -I./../include -I./nicslu/include -I./nicslu/util -O3 -DVERIFY -c main.cpp -o main.o
+make -C ./nicslu/
+make[2]: Entering directory '/hs/work0/home/users/u0001901/2026/test5/tmp2-for-cuda/slu-cuda/src/nicslu'
+(cd lib; make)
+make[3]: Entering directory '/hs/work0/home/users/u0001901/2026/test5/tmp2-for-cuda/slu-cuda/src/nicslu/lib'
+clang -fPIE -c -g -O2 -Wall -Wextra -msse2 -DNO_ATOMIC -DSSE2 ../source/nicslu_aegraph.c -o nicslu_aegraph.o
+make[3]: Leaving directory '/hs/work0/home/users/u0001901/2026/test5/tmp2-for-cuda/slu-cuda/src/nicslu/lib'
+make[2]: Leaving directory '/hs/work0/home/users/u0001901/2026/test5/tmp2-for-cuda/slu-cuda/src/nicslu'
+make[1]: Leaving directory '/hs/work0/home/users/u0001901/2026/test5/tmp2-for-cuda/slu-cuda/src'

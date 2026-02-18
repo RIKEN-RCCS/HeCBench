@@ -58,8 +58,8 @@
 | chi2 | 197.09 | 217.04 | 220.78 | 251.54 | A | 51.0 |
 | clenergy | 2.68 | 2.66 | 3.13 | 3.16 | A | 0.6 |
 | clink | 4.98 | 56.20 | 8.31 | 8.15 | A | 1.8 |
-| cmp | exe err | exe err | build err | exe err | A | 1.8 |
-| cm | exe err | exe err | build err | exe err | B | 1.8 |
+| cmp | exe err | exe err | build err | exe err | A | |
+| cm | exe err | exe err | build err | exe err | B | |
 | cobahh | 487.96 | 406.65 | 383.64 | 388.03 | A | 55.9 |
 | colorwheel | 39.48 | 37.38 | 27.55 | 27.96 | A | 2.3 |
 | columnarSolver | 9.83 | 10.16 | 16.87 | 10.22 | B | 1.6 |
@@ -202,7 +202,7 @@
 | metropolis | 12.73 | 14.03 | build err | 65.32 | B | 17.2 |
 | michalewicz | 43.63 | 150.55 | over 600 | 63.30 | A | 50.2 |
 | minibude | 2.89 | 3.31 | build err | 3.54 | B | 0.6 |
-| miniFE | | | | -- | A | 0.6 |
+| miniFE | | | | -- | A | |
 | minimap2 | 1.51 | 2.32 | | 2.19 | A | 1.0 |
 | minisweep | 50.83 | 56.83 | 35.43 | 35.90 | A | 7.7 |
 | miniWeather | 8.49 | 8.19 | 33.30 | 33.14 | A | 0.6 |
@@ -279,7 +279,7 @@
 | shmembench | 5.25 | 9.16 | build err | exe err | B | 0.6 |
 | simplemoc | 233.38 | 400.17 | 293.35 | 294.34 | B | 15.4 |
 | simpleSpmv | 317.74 | 319.81 | 320.00 | 317.47 | A | 7.0 |
-| slu | | build err | build err | build err | B | 7.0 |
+| slu | build err | build err | build err | build err | B | |
 | snake | 8.17 | 8.43 | 10.57 | 10.42 | A | 0.6 |
 | sobel | 2.81 | 2.89 | 3.18 | 3.32 | A | 0.6 |
 | sobol | 4.71 | 3.89 | build err | 4.51 | B | 4.4 |
@@ -317,13 +317,13 @@
 | vanGenuchten | 21.39 | 21.48 | 30.99 | 30.92 | A | 6.2 |
 | vmc | 5.07 | 4.38 | build err | build err | B | 0.6 |
 | vol2col | 8.27 | 5.26 | 7.87 | 8.13 | A | 3.5 |
-| wedford | exe err | build err | build err | exe err | B | 3.5 |
+| wedford | exe err | build err | build err | exe err | B | |
 | winograd | 0.84 | 0.65 | 3.25 | 3.20 | A | 0.6 |
 | wlcpow | 4.53 | 4.50 | build err | 12.37 | B | 0.7 |
 | wordcount | 8.03 | 7.98 | 8.18 | 7.93 | A | 0.8 |
 | wsm5 | 5.57 | 4.78 | 5.59 | 5.73 | B | 0.6 |
 | wyllie | 107.36 | 112.64 | 108.06 | over 600 | B | 1.3 |
-| xlqc | build err | build err | build err | build err | B | 1.3 |
+| xlqc | build err | build err | build err | build err | B | |
 | xsbench | 46.19 | 37.40 | 37.18 | 3.89 | A | 6.3 |
 | zeropoint | 18.63 | 55.54 | 21.82 | 24.23 | A | 15.8 |
 | zmddft | 2.63 | 2.63 | build err | 14.28 | B | 1.6 |
