@@ -1,0 +1,53 @@
+main.cu(491): warning #1444-D: type "double4" was declared deprecated ("use double4_16a or double4_32a")
+              double4 lsums;
+                      ^
+/opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/vector_types.h(559): note #3287-D: because of a "deprecated" attribute
+  typedef __attribute__((device_builtin)) struct double4 __attribute__((deprecated("use double4_16a or double4_32a"))) double4;
+                                                                        ^
+          detected during instantiation of "void do_run(double *, int, int, const Payoff &, double, double, double, double, double *, double *, double *, double *, int *, double *, double *) [with Payoff=PayoffPut]" at line 1174
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+main.cu(504): warning #1444-D: type "double4" was declared deprecated ("use double4_16a or double4_32a")
+    double4 sums = make_double4(0,0,0,0);
+            ^
+/opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/vector_types.h(559): note #3287-D: because of a "deprecated" attribute
+  typedef __attribute__((device_builtin)) struct double4 __attribute__((deprecated("use double4_16a or double4_32a"))) double4;
+                                                                        ^
+          detected during instantiation of "void do_run(double *, int, int, const Payoff &, double, double, double, double, double *, double *, double *, double *, int *, double *, double *) [with Payoff=PayoffPut]" at line 1174
+
+main.cu:59:45: warning: ‘double4’ is deprecated: use double4_16a or double4_32a [-Wdeprecated-declarations]
+   59 | HOST_DEVICE_INLINE double4 operator+(const double4 &u, const double4 &v )
+      |                                             ^
+In file included from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/driver_types.h:61,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/builtin_types.h:59,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/crt/host_runtime.h:58,
+                 from /usr/lib/gcc/aarch64-redhat-linux/11/include/stddef.h:213:
+/opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/vector_types.h:559:104: note: declared here
+  559 | typedef __device_builtin__ struct double4 __VECTOR_TYPE_DEPRECATED__("use double4_16a or double4_32a") double4;
+      |                                                                                                        ^~~~~~~
+main.cu:59:45: warning: ‘double4’ is deprecated [-Wdeprecated-declarations]
+   59 | HOST_DEVICE_INLINE double4 operator+(const double4 &u, const double4 &v )
+      |                                             ^
+main.cu:59:45: warning: ‘double4’ is deprecated [-Wdeprecated-declarations]
+main.cu:124:51: warning: ‘double4’ is deprecated: use double4_16a or double4_32a [-Wdeprecated-declarations]
+  124 | static __device__ __forceinline__ void assemble_R(int m, double4 &sums, double *smem_svds)
+      |                                                   ^
+In file included from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/driver_types.h:61,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/builtin_types.h:59,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/crt/host_runtime.h:58,
+                 from /usr/lib/gcc/aarch64-redhat-linux/11/include/stddef.h:213:
+/opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/vector_types.h:472:42: note: declared here
+  472 | __device_builtin__ __builtin_align__(16) double4
+      |                                          ^~~~~~~
+main.cu:238:48: warning: ‘double4’ is deprecated: use double4_16a or double4_32a [-Wdeprecated-declarations]
+  238 | static __device__ __forceinline__ void svd_3x3(int m, double4 &sums, double *smem_svds)
+      |                                                ^
+In file included from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/driver_types.h:61,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/builtin_types.h:59,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/crt/host_runtime.h:58,
+                 from /usr/lib/gcc/aarch64-redhat-linux/11/include/stddef.h:213:
+/opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/vector_types.h:472:42: note: declared here
+  472 | __device_builtin__ __builtin_align__(16) double4
+      |                                          ^~~~~~~
+timeout was set to  600

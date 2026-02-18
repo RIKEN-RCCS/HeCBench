@@ -1,0 +1,24 @@
+Running kernels 100 times
+Precision: float
+Array size: 134.2 MB (=0.1 GB)
+Total size: 402.7 MB (=0.4 GB)
+Function    MBytes/sec  Min (sec)   Max         Average     
+Copy        2476730.262 0.00011     0.00011     0.00011     
+Mul         2444967.766 0.00011     0.00011     0.00011     
+Add         3007433.070 0.00013     0.00014     0.00013     
+Triad       3057862.240 0.00013     0.00013     0.00013     
+Dot         1129180.048 0.00024     0.00025     0.00024     
+Nstream     3451436.271 0.00016     0.00016     0.00016     
+
+Running kernels 100 times
+Precision: double
+Array size: 268.4 MB (=0.3 GB)
+Total size: 805.3 MB (=0.8 GB)
+Function    MBytes/sec  Min (sec)   Max         Average     
+Copy        3318319.501 0.00016     0.00017     0.00016     
+Mul         3281326.243 0.00016     0.00017     0.00017     
+Add         3588485.424 0.00022     0.00023     0.00023     
+Triad       3628323.352 0.00022     0.00023     0.00022     
+Dot         2080266.090 0.00026     0.00027     0.00027     
+Nstream     3772319.916 0.00028     0.00029     0.00029     
+

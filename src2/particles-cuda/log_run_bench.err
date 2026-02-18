@@ -1,0 +1,14 @@
+bitonicSort.cu: In function ‘void bitonicSort(unsigned int*, unsigned int*, unsigned int*, unsigned int*, unsigned int, unsigned int, unsigned int)’:
+bitonicSort.cu:93:79: warning: passing argument 1 to ‘restrict’-qualified parameter aliases with argument 3 [-Wrestrict]
+   93 |           bitonicMergeGlobal<<<bmg_gws, bmg_lws>>>(
+      |                                                                               ^                                                                       
+bitonicSort.cu:93:79: warning: passing argument 2 to ‘restrict’-qualified parameter aliases with argument 4 [-Wrestrict]
+   93 |           bitonicMergeGlobal<<<bmg_gws, bmg_lws>>>(
+      |                                                                               ^                                                                       
+bitonicSort.cu:113:78: warning: passing argument 1 to ‘restrict’-qualified parameter aliases with argument 3 [-Wrestrict]
+  113 |           bitonicMergeLocal<<<bml_gws, bml_lws>>>(
+      |                                                                              ^                                                                       
+bitonicSort.cu:113:78: warning: passing argument 2 to ‘restrict’-qualified parameter aliases with argument 4 [-Wrestrict]
+  113 |           bitonicMergeLocal<<<bml_gws, bml_lws>>>(
+      |                                                                              ^                                                                       
+timeout was set to  600

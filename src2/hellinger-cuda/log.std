@@ -1,0 +1,3 @@
+Average kernel execution time 0.00286686 (s)
+Problem size: c(768,3072) = a(768,1536) * b(1536,3072)
+PASS

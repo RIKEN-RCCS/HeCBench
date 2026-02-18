@@ -1,0 +1,13 @@
+"main.cu", line 108: warning: CUDA C++ compilation is unsupported in nvc++; nvcc is the recommended CUDA compiler [cuda_compile]
+      dot_product<<<grid, block>>>(d_srcA, d_srcB, d_dst, src_size / 4);
+                 ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"shrUtils.cu", line 86: warning: variable "szNumWritten" was set but never used [set_but_not_used]
+      size_t szNumWritten = 0;
+             ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+timeout was set to  600

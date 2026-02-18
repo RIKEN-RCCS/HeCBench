@@ -1,0 +1,27 @@
+------------------------------------------------------------
+Verifying the kernel results with the problem size (16 cube)
+------------------------------------------------------------
+Length scale = 1.0e-01 check = PASS
+Length scale = 1.0e+00 check = PASS
+Length scale = 1.0e+01 check = PASS
+Length scale = 1.0e+02 check = PASS
+Length scale = 1.0e+03 check = PASS
+Length scale = 1.0e+04 check = PASS
+Length scale = 1.0e+05 check = PASS
+--------------------------------------------------------------------
+Timing the kernel execution with the problem size (200 cube)
+--------------------------------------------------------------------
+Warmup..
+Length scale = 1.0e-01 Average kernel execution time: 2586.588379 (us)
+Warmup..
+Length scale = 1.0e+00 Average kernel execution time: 2586.442383 (us)
+Warmup..
+Length scale = 1.0e+01 Average kernel execution time: 2586.448975 (us)
+Warmup..
+Length scale = 1.0e+02 Average kernel execution time: 2587.154785 (us)
+Warmup..
+Length scale = 1.0e+03 Average kernel execution time: 2586.779541 (us)
+Warmup..
+Length scale = 1.0e+04 Average kernel execution time: 2586.720215 (us)
+Warmup..
+Length scale = 1.0e+05 Average kernel execution time: 2586.736084 (us)

@@ -1,0 +1,3 @@
+Average execution time of kernelWithSmallArgs: 1.935879 (us)
+Average execution time of kernelWithMediumArgs: 1.838070 (us)
+Average execution time of kernelWithLargeArgs: 1.826412 (us)

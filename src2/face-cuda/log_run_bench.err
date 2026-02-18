@@ -1,0 +1,25 @@
+image.cu(159): warning #514-D: pointless comparison of unsigned integer with a negative constant
+    while ((ch = fgetc(in_file)) != 
+                                 ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+image.cu(167): warning #514-D: pointless comparison of unsigned integer with a negative constant
+      while ((ch = fgetc(in_file)) != 
+                                   ^
+
+image.cu(159): warning #514-D: pointless comparison of unsigned integer with a negative constant
+    while ((ch = fgetc(in_file)) != 
+                                 ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+image.cu(167): warning #514-D: pointless comparison of unsigned integer with a negative constant
+      while ((ch = fgetc(in_file)) != 
+                                   ^
+
+image.cu(121): warning #177-D: variable "version" was declared but never referenced
+    char version[3];
+         ^
+
+timeout was set to  600

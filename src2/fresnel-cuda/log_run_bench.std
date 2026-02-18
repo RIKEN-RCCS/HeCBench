@@ -1,0 +1,11 @@
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -use_fast_math -dc main.cu -o main.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -use_fast_math -dc cosine.cu -o cosine.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -use_fast_math -dc fresnel.cu -o fresnel.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -use_fast_math -dc sine.cu -o sine.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -use_fast_math -dc xchebyshev.cu -o xchebyshev.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -use_fast_math main.o cosine.o fresnel.o sine.o xchebyshev.o -o main 
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "time -p ( ./main 100 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 1 1783 1782

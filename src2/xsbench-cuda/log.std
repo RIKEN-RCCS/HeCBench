@@ -1,0 +1,42 @@
+                                  INPUT SUMMARY
+================================================================================
+Simulation Method:            Event Based
+Grid Type:                    Unionized Grid
+Materials:                    12
+H-M Benchmark Size:           large
+Total Nuclides:               355
+Gridpoints (per Nuclide):     11,303
+Unionized Energy Gridpoints:  4,012,565
+Total XS Lookups:             17,000,000
+Est. Memory Usage (MB):       5,649
+Binary File Mode:             Off
+================================================================================
+                         INITIALIZATION - DO NOT PROFILE
+================================================================================
+Intializing nuclide grids...
+Intializing unionized grid...
+Intializing material data...
+Intialization complete. Allocated 5648 MB of data.
+
+================================================================================
+                                   SIMULATION
+================================================================================
+Beginning event based simulation...
+Allocating an additional 64.8 MB of memory for verification arrays...
+Running on: NVIDIA GH200 480GB
+Initializing device buffers and JIT compiling kernel...
+Beginning event based simulation on the host for verification...
+
+Simulation complete.
+================================================================================
+                                     RESULTS
+================================================================================
+Total Time Statistics (Device Init / JIT Compilation + Simulation Kernel)
+Runtime:               44.489 seconds
+Lookups:               17,000,000
+Lookups/s:             382,120
+Simulation Kernel Only Statistics
+Average kernel execution time: 0.045 seconds
+Lookups/s:             378,052,548
+Verification checksum: 50951281 (Valid)
+================================================================================

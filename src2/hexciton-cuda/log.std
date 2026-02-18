@@ -1,0 +1,91 @@
+VEC_LENGTH_AUTO:      4
+VEC_LENGTH:           4
+PACKAGES_PER_WG:      64
+NUM_SUB_GROUPS:       2
+CHUNK_SIZE:           16
+WARP_SIZE:            32
+NAIVE_WG_LIMIT:       undefined
+DIM:                  7
+NUM:                  2048
+NUM_ITERATIONS:       1001
+NUM_WARMUP:           1
+DEFAULT_ALIGNMENT:    64
+VEC_LIB:              NO_VEC_LIB
+USE_VCL_ORIGINAL      undefined
+USE_INITZERO:         undefined
+Total execution time of kernel comm_empty : 0.00712742 (s)
+Deviation of kernel comm_emptyN/A
+
+Total execution time of kernel comm_init : 0.063486 (s)
+Deviation of kernel comm_init: 1.93352e-05
+
+Total execution time of kernel comm_refactor : 0.102642 (s)
+Deviation of kernel comm_refactor: 2.4782e-05
+
+Total execution time of kernel comm_refactor_direct_store : 0.102156 (s)
+Deviation of kernel comm_refactor_direct_store: 2.79393e-05
+
+Total execution time of kernel comm_aosoa_naive : 0.0488586 (s)
+Deviation of kernel comm_aosoa_naive: 3.27208e-05
+
+Total execution time of kernel comm_aosoa_naive_constants : 0.0314327 (s)
+Deviation of kernel comm_aosoa_naive_constants: 3.27208e-05
+
+Total execution time of kernel comm_aosoa_naive_constants_perm : 0.0605661 (s)
+Deviation of kernel comm_aosoa_naive_constants_perm: 3.27208e-05
+
+Total execution time of kernel comm_aosoa_naive_direct : 0.0597886 (s)
+Deviation of kernel comm_aosoa_naive_direct: 3.27208e-05
+
+Total execution time of kernel comm_aosoa_naive_constants_direct : 0.0546974 (s)
+Deviation of kernel comm_aosoa_naive_constants_direct: 3.27208e-05
+
+Total execution time of kernel comm_aosoa_naive_constants_direct_perm : 0.070123 (s)
+Deviation of kernel comm_aosoa_naive_constants_direct_perm: 3.27208e-05
+
+Total execution time of kernel comm_aosoa : 0.0528028 (s)
+Deviation of kernel comm_aosoa: 3.27208e-05
+
+Total execution time of kernel comm_aosoa_constants : 0.0371797 (s)
+Deviation of kernel comm_aosoa_constants: 3.27208e-05
+
+Total execution time of kernel comm_aosoa_constants_perm : 0.0717262 (s)
+Deviation of kernel comm_aosoa_constants_perm: 3.27208e-05
+
+Total execution time of kernel comm_aosoa_direct : 0.0671685 (s)
+Deviation of kernel comm_aosoa_direct: 3.27208e-05
+
+Total execution time of kernel comm_aosoa_constants_direct : 0.0623231 (s)
+Deviation of kernel comm_aosoa_constants_direct: 3.27208e-05
+
+Total execution time of kernel comm_aosoa_constants_direct_perm : 0.0671521 (s)
+Deviation of kernel comm_aosoa_constants_direct_perm: 3.27208e-05
+
+Total execution time of kernel comm_manual_aosoa : 0.0487954 (s)
+Deviation of kernel comm_manual_aosoa: 3.27208e-05
+
+Total execution time of kernel comm_manual_aosoa_constants : 0.043232 (s)
+Deviation of kernel comm_manual_aosoa_constants: 3.27208e-05
+
+Total execution time of kernel comm_manual_aosoa_constants_perm : 0.0846988 (s)
+Deviation of kernel comm_manual_aosoa_constants_perm: 3.27208e-05
+
+Total execution time of kernel comm_manual_aosoa_constants_prefetch : 0.0432005 (s)
+Deviation of kernel comm_manual_aosoa_constants_prefetch: 3.27208e-05
+
+Total execution time of kernel comm_manual_aosoa_direct : 0.0473465 (s)
+Deviation of kernel comm_manual_aosoa_direct: 3.27208e-05
+
+Total execution time of kernel comm_manual_aosoa_constants_direct : 0.0431268 (s)
+Deviation of kernel comm_manual_aosoa_constants_direct: 3.27208e-05
+
+Total execution time of kernel comm_manual_aosoa_constants_direct_prefetch : 0.0430827 (s)
+Deviation of kernel comm_manual_aosoa_constants_direct_prefetch: 3.27208e-05
+
+Total execution time of kernel comm_manual_aosoa_constants_direct_perm : 0.0523038 (s)
+Deviation of kernel comm_manual_aosoa_constants_direct_perm: 3.27208e-05
+
+Total execution time of kernel final_gpu_kernel : 0.0120339 (s)
+Deviation of kernel final_gpu_kernel: 2.79393e-05
+
+Total kernel time for all benchmarks 1.377051 (s)

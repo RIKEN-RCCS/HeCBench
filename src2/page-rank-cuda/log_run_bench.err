@@ -1,0 +1,7 @@
+main.cu(156): warning #177-D: variable "j" was declared but never referenced
+    int j;
+        ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+timeout was set to  600

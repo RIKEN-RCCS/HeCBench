@@ -1,0 +1,16 @@
+-------------------------------------
+ surfelRenderTest with type float32  
+-------------------------------------
+
+f = 0
+Average execution time of surfel_render(base): 101.728981 (ms)
+Average execution time of surfel_render(tile): 84.822525 (ms)
+
+f = 1
+Average execution time of surfel_render(base): 101.667130 (ms)
+Average execution time of surfel_render(tile): 84.983810 (ms)
+
+f = 2
+Average execution time of surfel_render(base): 101.539925 (ms)
+Average execution time of surfel_render(tile): 84.967773 (ms)
+PASS

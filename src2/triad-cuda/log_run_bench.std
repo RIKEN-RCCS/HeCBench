@@ -1,0 +1,11 @@
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c main.cpp -o main.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c Option.cpp -o Option.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c OptionParser.cpp -o OptionParser.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c Timer.cpp -o Timer.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c triad.cu -o triad.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 main.o Option.o OptionParser.o Timer.o triad.o -o triad 
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "time -p ( ./triad --passes 100 -v 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 1 655 654

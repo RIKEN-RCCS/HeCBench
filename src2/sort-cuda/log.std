@@ -1,0 +1,6 @@
+Initializing host memory.
+Running benchmark with input array length 16777216
+Average elapsed time of sort: 0.021344 (s)
+PASS
+Average elapsed time of Thrust::sort: 0.000598 (s)
+PASS

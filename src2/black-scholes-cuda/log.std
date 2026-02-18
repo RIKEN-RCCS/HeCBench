@@ -1,0 +1,14 @@
+Number of options: 50000000
+
+Run on GPU
+Average kernel execution time on GPU: 0.786800 (ms)
+Processing time on GPU: 2078.211182 (ms)
+Summation of output prices on GPU: 268435456.000000
+Output price at index 25000000 on GPU: 10.847914
+
+Run on CPU
+Processing time on CPU: 2155.987061 (ms)
+Summation of output prices on CPU: 268435456.000000
+Output price at index 25000000 on CPU: 10.847914
+
+Speedup on GPU: 1.037424

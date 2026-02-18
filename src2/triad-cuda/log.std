@@ -1,0 +1,45 @@
+>> Executing Triad with vectors of length 4194304 and block size of 16384 elements.
+Block: 64KB
+Average TriadFlops 205.118 GFLOPS/s
+Average TriadBdwth 1230.71 GB/s
+PASS
+>> Executing Triad with vectors of length 4194304 and block size of 32768 elements.
+Block: 128KB
+Average TriadFlops 272.612 GFLOPS/s
+Average TriadBdwth 1635.67 GB/s
+PASS
+>> Executing Triad with vectors of length 4194304 and block size of 65536 elements.
+Block: 256KB
+Average TriadFlops 327.009 GFLOPS/s
+Average TriadBdwth 1962.05 GB/s
+PASS
+>> Executing Triad with vectors of length 4194304 and block size of 131072 elements.
+Block: 512KB
+Average TriadFlops 346.196 GFLOPS/s
+Average TriadBdwth 2077.18 GB/s
+PASS
+>> Executing Triad with vectors of length 4194304 and block size of 262144 elements.
+Block: 1024KB
+Average TriadFlops 275.604 GFLOPS/s
+Average TriadBdwth 1653.63 GB/s
+PASS
+>> Executing Triad with vectors of length 4194304 and block size of 524288 elements.
+Block: 2048KB
+Average TriadFlops 185.545 GFLOPS/s
+Average TriadBdwth 1113.27 GB/s
+PASS
+>> Executing Triad with vectors of length 4194304 and block size of 1048576 elements.
+Block: 4096KB
+Average TriadFlops 120.719 GFLOPS/s
+Average TriadBdwth 724.312 GB/s
+PASS
+>> Executing Triad with vectors of length 4194304 and block size of 2097152 elements.
+Block: 8192KB
+Average TriadFlops 69.1813 GFLOPS/s
+Average TriadBdwth 415.088 GB/s
+PASS
+>> Executing Triad with vectors of length 4194304 and block size of 4194304 elements.
+Block: 16384KB
+Average TriadFlops 58.3457 GFLOPS/s
+Average TriadBdwth 350.074 GB/s
+PASS

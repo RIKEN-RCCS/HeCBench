@@ -1,0 +1,8 @@
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c main.cu -o main.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c lanczos.cu -o lanczos.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 main.o lanczos.o -o main 
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "../lanczos-cuda/prepare_data.sh; time -p ( ./main -g ../lanczos-cuda/data/social-large-800k.txt -n 800000 -k 3 -d float 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 0 645 645

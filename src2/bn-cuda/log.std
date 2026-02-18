@@ -1,0 +1,4 @@
+NODE_N=45
+Initialization...
+Average execution time of genScoreKernel: 0.162080 (s)
+Find best graph time 0.263157 (s)

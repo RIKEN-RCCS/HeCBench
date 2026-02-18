@@ -1,0 +1,16 @@
+jerasure.cu: In function ‘int** jerasure_smart_bitmatrix_to_schedule(int, int, int, int*)’:
+jerasure.cu:1282:15: warning: ‘bestrow’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+ 1282 |     if (blink[row] == -1) {
+      |               ^
+GCRSMatrix.cu: In function ‘unsigned int* gcrs_create_column_coding_bitmatrix(int, int, int, int*)’:
+GCRSMatrix.cu:108:18: warning: comparison of integer expressions of different signedness: ‘int’ and ‘long unsigned int’ [-Wsign-compare]
+  108 |         if ((bitIdx + w) > sizeof(int) * 8) {
+      |         ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+GCRSMatrix.cu:114:12: warning: comparison of integer expressions of different signedness: ‘int’ and ‘long unsigned int’ [-Wsign-compare]
+  114 |       if (bitIdx >= sizeof(int) * 8) {
+      |       ~~~~~^~~~~~~~~~~~~~~~~~~~~~
+GCRSMatrix.cu: In function ‘void gcrs_print_column_encoded_bitmatrix(unsigned int*, int, int, int)’:
+GCRSMatrix.cu:443:13: warning: comparison of integer expressions of different signedness: ‘int’ and ‘long unsigned int’ [-Wsign-compare]
+  443 |     if (m*w > sizeof(int)*8) {
+      |     ~~~~~~~~^~~~~~~~~~~~~~~~~~   
+timeout was set to  600

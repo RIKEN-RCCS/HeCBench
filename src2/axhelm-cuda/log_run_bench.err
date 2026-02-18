@@ -1,0 +1,7 @@
+meshBasis.cpp: In function ‘int meshWarpBlendNodesTet3D(int, float**, float**, float**)’:
+meshBasis.cpp:379:13: warning: ‘rstn’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  379 |     s[0][n] = rstn[1];
+      |     ~~~~~~~~^~~~~~~~~
+/bin/sh: line 1: cd: BlasLapack: No such file or directory
+make: *** [Makefile.NVD:55: BlasLapack/libBlasLapack.a] Error 1
+timeout was set to  600

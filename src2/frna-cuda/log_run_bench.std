@@ -1,0 +1,11 @@
+nvcc  -DINT -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -use_fast_math -c main.c -o main.o
+nvcc  -DINT -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -use_fast_math -c fbase.c -o fbase.o
+nvcc  -DINT -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -use_fast_math -c fparam.c -o fparam.o
+nvcc  -DINT -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -use_fast_math -c util.c -o util.o
+nvcc  -DINT -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -use_fast_math -c frna.cu -o frna.o
+nvcc  -DINT -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -use_fast_math main.o fbase.o fparam.o util.o frna.o  -o main 
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "../frna-cuda/prepare_data.sh; export DATAPATH=../prna-cuda/data_tables; time -p ( ./main ../prna-cuda/HIV1-NL43.seq  hiv1-nl43.out 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 1 3918 3917

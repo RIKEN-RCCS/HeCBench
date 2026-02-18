@@ -1,0 +1,13 @@
+Poses     : 65536
+Iterations: 100
+Ligands   : 26
+Proteins  : 938
+Deck      : ../minibude-sycl/data/bm1
+Types     : 34
+WG        : 256
+- Total kernel time:    765.987 ms
+- Average kernel time:   7.660 ms
+- Interactions/s: 208.658 billion
+- GFLOP/s:        8559.887
+Largest difference was 0.002%.
+

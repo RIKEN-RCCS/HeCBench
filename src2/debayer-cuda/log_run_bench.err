@@ -1,0 +1,11 @@
+In file included from main.cu:5:
+../debayer-sycl/util.h:18: warning: "assert" redefined
+   18 | #define assert(X)
+      | 
+In file included from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/crt/common_functions.h:174,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/cuda_runtime.h:117,
+                 from <command-line>:
+/usr/include/assert.h:89: note: this is the location of the previous definition
+   89 | #  define assert(expr)                                                  \
+      | 
+timeout was set to  600

@@ -1,0 +1,1 @@
+main: su_trace.cpp:38: bool su_trace::fgettr(std::ifstream&): Assertion `file' failed.

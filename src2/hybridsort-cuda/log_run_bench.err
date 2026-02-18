@@ -1,0 +1,8 @@
+bucketsort.cu: In function ‘void bucketSort(float*, float*, int, int*, int*, float, float, unsigned int*)’:
+bucketsort.cu:171:24: warning: array subscript [1024, 2147483646] is outside array bounds of ‘float [1024]’ [-Warray-bounds]
+  171 |         pivotPoints[p_idx++] = startsAt + (we_need/histogram[i]) * histo_width;
+      |         ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+bucketsort.cu:43:37: note: referencing an object of size 4096 allocated by ‘void* malloc(size_t)’
+   43 |   float* pivotPoints = (float *)malloc(DIVISIONS * sizeof(float));
+      |                               ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~
+timeout was set to  600

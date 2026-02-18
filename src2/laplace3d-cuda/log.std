@@ -1,0 +1,17 @@
+
+Grid dimensions: 1024 x 1024 x 1024
+Result verification enabled 
+
+dimGrid  = 32 128 1 
+dimBlock = 32 8 1 
+Average kernel execution time: 0.005062 (s)
+
+ RMS error = 0.000000 
+ PASS
+
+Grid dimensions: 1024 x 1024 x 1024
+Result verification disabled 
+
+dimGrid  = 32 128 1 
+dimBlock = 32 8 1 
+Average kernel execution time: 0.005061 (s)

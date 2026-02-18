@@ -1,0 +1,9 @@
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c main.cu -o main.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c linear_iter.cu -o linear_iter.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c linear_par.cu -o linear_par.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 main.o linear_iter.o linear_par.o -o main 
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "../lr-cuda/prepare_data.sh; time -p ( ./main 500000 0  1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 1 558 557

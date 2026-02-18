@@ -1,0 +1,12 @@
+=========== Data type is FP32 ==========
+shape: ( 1200 1200 1200 )
+flip_dims: ( 0 1 2 )
+stride: ( 1440000 1200 1 )
+PASS
+Average execution time of the flip kernel: 20.452400 (ms)
+=========== Data type is FP64 ==========
+shape: ( 1200 1200 1200 )
+flip_dims: ( 0 1 2 )
+stride: ( 1440000 1200 1 )
+PASS
+Average execution time of the flip kernel: 20.744307 (ms)

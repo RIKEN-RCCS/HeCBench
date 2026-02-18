@@ -1,0 +1,21 @@
+main.cu(51): warning #68-D: integer conversion resulted in a change of sign
+        h_element_temp.value = -1;
+                               ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+main.cu(86): warning #68-D: integer conversion resulted in a change of sign
+        h_element_temp.value = -1;
+                               ^
+
+main.cu(51): warning #68-D: integer conversion resulted in a change of sign
+        h_element_temp.value = -1;
+                               ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+main.cu(86): warning #68-D: integer conversion resulted in a change of sign
+        h_element_temp.value = -1;
+                               ^
+
+timeout was set to  600

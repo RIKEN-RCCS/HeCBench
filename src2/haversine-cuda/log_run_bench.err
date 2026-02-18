@@ -1,0 +1,83 @@
+main.cu:6:90: warning: ‘double4’ is deprecated [-Wdeprecated-declarations]
+    6 | void distance_device(const double4* loc, double* dist, const int N, const int iteration);
+      |                                                                                          ^
+main.cu: In function ‘int main(int, char**)’:
+main.cu:40:10: warning: ‘double4’ is deprecated: use double4_16a or double4_32a [-Wdeprecated-declarations]
+   40 |   double4* input  = (double4*) aligned_alloc(4096, N*sizeof(double4));
+      |          ^~~~~
+In file included from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/driver_types.h:61,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/builtin_types.h:59,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/crt/host_runtime.h:58,
+                 from /usr/lib/gcc/aarch64-redhat-linux/11/include/stddef.h:213:
+/opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/vector_types.h:559:104: note: declared here
+  559 | typedef __device_builtin__ struct double4 __VECTOR_TYPE_DEPRECATED__("use double4_16a or double4_32a") double4;
+      |                                                                                                        ^~~~~~~
+main.cu:40:27: warning: ‘double4’ is deprecated: use double4_16a or double4_32a [-Wdeprecated-declarations]
+   40 |   double4* input  = (double4*) aligned_alloc(4096, N*sizeof(double4));
+      |                           ^
+In file included from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/driver_types.h:61,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/builtin_types.h:59,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/crt/host_runtime.h:58,
+                 from /usr/lib/gcc/aarch64-redhat-linux/11/include/stddef.h:213:
+/opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/vector_types.h:559:104: note: declared here
+  559 | typedef __device_builtin__ struct double4 __VECTOR_TYPE_DEPRECATED__("use double4_16a or double4_32a") double4;
+      |                                                                                                        ^~~~~~~
+main.cu:40:60: warning: ‘double4’ is deprecated: use double4_16a or double4_32a [-Wdeprecated-declarations]
+   40 |   double4* input  = (double4*) aligned_alloc(4096, N*sizeof(double4));
+      |                                                            ^~~~~~~
+In file included from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/driver_types.h:61,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/builtin_types.h:59,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/crt/host_runtime.h:58,
+                 from /usr/lib/gcc/aarch64-redhat-linux/11/include/stddef.h:213:
+/opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/vector_types.h:559:104: note: declared here
+  559 | typedef __device_builtin__ struct double4 __VECTOR_TYPE_DEPRECATED__("use double4_16a or double4_32a") double4;
+      |                                                                                                        ^~~~~~~
+distance.cu:6:2: warning: ‘double4’ is deprecated [-Wdeprecated-declarations]
+    6 |   const int n)
+      |  ^
+distance.cu:25:88: warning: ‘double4’ is deprecated [-Wdeprecated-declarations]
+   25 | void distance_device(const double4* loc, double* dist, const int n, const int iteration) {
+      |                                                                                        ^
+distance.cu: In function ‘void distance_device(const double4*, double*, int, int)’:
+distance.cu:30:10: warning: ‘double4’ is deprecated: use double4_16a or double4_32a [-Wdeprecated-declarations]
+   30 |   double4 *d_loc;
+      |          ^~~~~
+In file included from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/driver_types.h:61,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/builtin_types.h:59,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/crt/host_runtime.h:58,
+                 from /usr/lib/gcc/aarch64-redhat-linux/11/include/stddef.h:213:
+/opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/vector_types.h:559:104: note: declared here
+  559 | typedef __device_builtin__ struct double4 __VECTOR_TYPE_DEPRECATED__("use double4_16a or double4_32a") double4;
+      |                                                                                                        ^~~~~~~
+distance.cu:32:38: warning: ‘double4’ is deprecated: use double4_16a or double4_32a [-Wdeprecated-declarations]
+   32 |   cudaMalloc((void**)&d_loc, sizeof(double4)*n);
+      |                                      ^~~~~~~
+In file included from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/driver_types.h:61,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/builtin_types.h:59,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/crt/host_runtime.h:58,
+                 from /usr/lib/gcc/aarch64-redhat-linux/11/include/stddef.h:213:
+/opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/vector_types.h:559:104: note: declared here
+  559 | typedef __device_builtin__ struct double4 __VECTOR_TYPE_DEPRECATED__("use double4_16a or double4_32a") double4;
+      |                                                                                                        ^~~~~~~
+distance.cu:33:31: warning: ‘double4’ is deprecated: use double4_16a or double4_32a [-Wdeprecated-declarations]
+   33 |   cudaMemcpy(d_loc, loc, sizeof(double4)*n, cudaMemcpyHostToDevice);
+      |                               ^~~~~~~
+In file included from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/driver_types.h:61,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/builtin_types.h:59,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/crt/host_runtime.h:58,
+                 from /usr/lib/gcc/aarch64-redhat-linux/11/include/stddef.h:213:
+/opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/vector_types.h:559:104: note: declared here
+  559 | typedef __device_builtin__ struct double4 __VECTOR_TYPE_DEPRECATED__("use double4_16a or double4_32a") double4;
+      |                                                                                                        ^~~~~~~
+In file included from tmpxft_002c6c79_00000000-6_distance.cudafe1.stub.c:1:
+distance.cu: At global scope:
+distance.cu:3:128: warning: ‘double4’ is deprecated [-Wdeprecated-declarations]
+    3 | __global__ void compute_haversine_distance(
+      |                                                                                                                                ^
+In file included from /tmp/tmp-user-1901/tmpxft_002c6c79_00000000-6_distance.cudafe1.stub.c:8,
+                 from tmpxft_002c6c79_00000000-6_distance.cudafe1.stub.c:1:
+/tmp/tmp-user-1901/tmpxft_002c6c79_00000000-6_distance.cudafe1.stub.c: In function ‘void __nv_cudaEntityRegisterCallback(void**)’:
+/tmp/tmp-user-1901/tmpxft_002c6c79_00000000-6_distance.cudafe1.stub.c:1:240: warning: ‘double4’ is deprecated [-Wdeprecated-declarations]
+    1 | #pragma GCC diagnostic push
+      |                                                                                                                                                                                                                                                ^
+timeout was set to  600

@@ -1,0 +1,1 @@
+nvcc -c -o basis.o basis.cc  -std=c++17 -Xcompiler -Wall -I/path/to/gsl/include -arch=sm_90 -O3

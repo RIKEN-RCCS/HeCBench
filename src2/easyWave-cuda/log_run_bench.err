@@ -1,0 +1,168 @@
+main.cu: In function ‘int main(int, char**)’:
+main.cu:925:11: warning: ‘IndexFile’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  925 |         fp = fopen( IndexFile, "at" );
+      |         ~~^~~~~~~~~~~~~~~~~
+main.cu:811:7: note: ‘IndexFile’ was declared here
+  811 |   char* IndexFile;
+      |       ^~~~~~~~~
+main.cu:960:38: warning: ‘NtPOI’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  960 |       for( it=0; (timePOI[it] != -1 && it < NtPOI); it++ ) {
+      |              ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~
+main.cu:480:5: note: ‘NtPOI’ was declared here
+  480 |   int NtPOI;
+      |     ^~~~~
+main.cu:883:11: warning: ‘sshPOI’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  883 |         sshPOI[n][it] = ampFactor * Node(idxPOI[n], iH);
+      |         ~~^~
+main.cu:478:9: note: ‘sshPOI’ was declared here
+  478 |   float **sshPOI;
+      |         ^~~~~~
+main.cu:881:19: warning: ‘flagRunupPOI’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  881 |         if( flagRunupPOI[n] )
+      |         ~~~~~~~~~~^
+main.cu:477:6: note: ‘flagRunupPOI’ was declared here
+  477 |   int* flagRunupPOI;
+      |      ^~~~~~~~~~~~
+main.cu:882:33: warning: ‘idxPOI’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  882 |           ampFactor = pow( Node(idxPOI[n], iD), 0.25 );
+      |                        ~~~~~~~~~^~
+main.cu:476:7: note: ‘idxPOI’ was declared here
+  476 |   long* idxPOI;
+      |       ^~~~~~
+main.cu:957:8: warning: ‘idPOI’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  957 |         fprintf( fp, "   %s", idPOI[n] );
+      |        ^~~~~~~~~~~~~~~~~~~~~~~
+main.cu:475:8: note: ‘idPOI’ was declared here
+  475 |   char **idPOI;
+      |        ^~~~~
+main.cu:580:29: warning: ‘fpRej’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  580 |           if( Par.poiReport ) fprintf( fpRej, "%s\n", record );
+      |                      ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~
+main.cu:469:15: note: ‘fpRej’ was declared here
+  469 |   FILE *fpAcc,*fpRej;
+      |               ^~~~~
+main.cu:591:8: warning: ‘fpAcc’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  591 |           fprintf( fpAcc, "%s %.4f %.4f   %.4f %.4f %.1f   %.3f\n",
+      |        ^  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                                                                                                      
+main.cu:469:7: note: ‘fpAcc’ was declared here
+  469 |   FILE *fpAcc,*fpRej;
+      |       ^~~~~
+cOgrd.cpp: In member function ‘int cOgrd::readHeader(const char*)’:
+cOgrd.cpp:178:7: warning: variable ‘ierr’ set but not used [-Wunused-but-set-variable]
+  178 |   int ierr,isBin;
+      |       ^~~~
+cOgrd.cpp:180:9: warning: unused variable ‘fval’ [-Wunused-variable]
+  180 |   float fval;
+      |         ^~~~
+cOgrd.cpp: In member function ‘int cOgrd::readGRD(const char*)’:
+cOgrd.cpp:243:11: warning: variable ‘ierr’ set but not used [-Wunused-but-set-variable]
+  243 |   int i,j,ierr,isBin;
+      |           ^~~~
+cOgrd.cpp: In member function ‘int cOgrd::readRasterStream(FILE*, int, int)’:
+cOgrd.cpp:459:10: warning: unused variable ‘x0’ [-Wunused-variable]
+  459 |   double x0,x,y0,y,z;
+      |          ^~
+cOgrd.cpp:459:13: warning: unused variable ‘x’ [-Wunused-variable]
+  459 |   double x0,x,y0,y,z;
+      |             ^
+cOgrd.cpp:459:15: warning: unused variable ‘y0’ [-Wunused-variable]
+  459 |   double x0,x,y0,y,z;
+      |               ^~
+cOgrd.cpp:459:18: warning: unused variable ‘y’ [-Wunused-variable]
+  459 |   double x0,x,y0,y,z;
+      |                  ^
+cOgrd.cpp:459:20: warning: unused variable ‘z’ [-Wunused-variable]
+  459 |   double x0,x,y0,y,z;
+      |                    ^
+cOgrd.cpp: In member function ‘int cOgrd::readXYZ(const char*)’:
+cOgrd.cpp:437:10: warning: ‘ydirection’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  437 |     else if( ydirection == TOP2BOT ) {
+      |          ^~
+cOkadaFault.cpp: In member function ‘int cOkadaFault::read(char*)’:
+cOkadaFault.cpp:73:7: warning: unused variable ‘ierr’ [-Wunused-variable]
+   73 |   int ierr;
+      |       ^~~~
+cOkadaFault.cpp: In member function ‘int cOkadaFault::getDeformArea(double&, double&, double&, double&)’:
+cOkadaFault.cpp:396:3: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  396 |   if( glon<lonmin ) lonmin = glon; if( glon>lonmax ) lonmax = glon;
+      |   ^~
+cOkadaFault.cpp:396:36: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  396 |   if( glon<lonmin ) lonmin = glon; if( glon>lonmax ) lonmax = glon;
+      |                                    ^~
+cOkadaFault.cpp:397:3: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  397 |   if( glat<latmin ) latmin = glat; if( glat>latmax ) latmax = glat;
+      |   ^~
+cOkadaFault.cpp:397:36: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  397 |   if( glat<latmin ) latmin = glat; if( glat>latmax ) latmax = glat;
+      |                                    ^~
+cOkadaFault.cpp:400:3: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  400 |   if( glon<lonmin ) lonmin = glon; if( glon>lonmax ) lonmax = glon;
+      |   ^~
+cOkadaFault.cpp:400:36: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  400 |   if( glon<lonmin ) lonmin = glon; if( glon>lonmax ) lonmax = glon;
+      |                                    ^~
+cOkadaFault.cpp:401:3: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  401 |   if( glat<latmin ) latmin = glat; if( glat>latmax ) latmax = glat;
+      |   ^~
+cOkadaFault.cpp:401:36: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  401 |   if( glat<latmin ) latmin = glat; if( glat>latmax ) latmax = glat;
+      |                                    ^~
+cOkadaFault.cpp:404:3: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  404 |   if( glon<lonmin ) lonmin = glon; if( glon>lonmax ) lonmax = glon;
+      |   ^~
+cOkadaFault.cpp:404:36: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  404 |   if( glon<lonmin ) lonmin = glon; if( glon>lonmax ) lonmax = glon;
+      |                                    ^~
+cOkadaFault.cpp:405:3: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  405 |   if( glat<latmin ) latmin = glat; if( glat>latmax ) latmax = glat;
+      |   ^~
+cOkadaFault.cpp:405:36: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  405 |   if( glat<latmin ) latmin = glat; if( glat>latmax ) latmax = glat;
+      |                                    ^~
+cOkadaFault.cpp:379:7: warning: unused variable ‘ierr’ [-Wunused-variable]
+  379 |   int ierr;
+      |       ^~~~
+cOkadaFault.cpp: In member function ‘int cOkadaFault::calculate(double, double, double&, double&, double&)’:
+cOkadaFault.cpp:415:7: warning: unused variable ‘ierr’ [-Wunused-variable]
+  415 |   int ierr;
+      |       ^~~~
+cOkadaFault.cpp: In member function ‘int cOkadaFault::calculate(double, double, double&)’:
+cOkadaFault.cpp:438:7: warning: unused variable ‘ierr’ [-Wunused-variable]
+  438 |   int ierr;
+      |       ^~~~
+cOkadaFault.cpp: In member function ‘int cOkadaFault::local2global(double, double, double&, double&)’:
+cOkadaFault.cpp:361:22: warning: ‘y’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  361 |   gy = -x*(-sins) + y*coss;
+      |                     ~^~~~~
+cOkadaFault.cpp:361:6: warning: ‘x’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  361 |   gy = -x*(-sins) + y*coss;
+      |   ~~~^~~~~~~~~~~~~~~~~~~~~
+cOkadaEarthquake.cpp: In member function ‘int cOkadaEarthquake::finalizeInput()’:
+cOkadaEarthquake.cpp:90:8: warning: unused variable ‘msg’ [-Wunused-variable]
+   90 |   char msg[32];
+      |        ^~~
+cOkadaEarthquake.cpp: In member function ‘int cOkadaEarthquake::getDeformArea(int, double&, double&, double&, double&)’:
+cOkadaEarthquake.cpp:147:5: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  147 |     if( xmin < lonmin ) lonmin = xmin; if( xmax > lonmax ) lonmax = xmax;
+      |     ^~
+cOkadaEarthquake.cpp:147:40: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  147 |     if( xmin < lonmin ) lonmin = xmin; if( xmax > lonmax ) lonmax = xmax;
+      |                                        ^~
+cOkadaEarthquake.cpp:148:5: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  148 |     if( ymin < latmin ) latmin = ymin; if( ymax > latmax ) latmax = ymax;
+      |     ^~
+cOkadaEarthquake.cpp:148:40: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  148 |     if( ymin < latmin ) latmin = ymin; if( ymax > latmax ) latmax = ymax;
+      |                                        ^~
+cSphere.cpp: In member function ‘int cObsArray::read(char*)’:
+cSphere.cpp:129:10: warning: unused variable ‘lonr’ [-Wunused-variable]
+  129 |   double lonr,latr;
+      |          ^~~~
+cSphere.cpp:129:15: warning: unused variable ‘latr’ [-Wunused-variable]
+  129 |   double lonr,latr;
+      |               ^~~~
+utilits.cpp: In function ‘char* utlFileAddExtension(const char*, const char*)’:
+utilits.cpp:806:19: warning: unused variable ‘cp’ [-Wunused-variable]
+  806 |   char buf[256], *cp;
+      |                   ^~
+timeout was set to  600

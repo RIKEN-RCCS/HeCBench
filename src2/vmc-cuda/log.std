@@ -1,0 +1,5 @@
+ <r1>  = 0.843331 +- 0.000005
+ <r2>  = 0.843353 +- 0.000005
+ <r12> = 1.299823 +- 0.000008
+ acceptance ratio=19.3%
+Average execution time of kernels: 0.002524 (s)

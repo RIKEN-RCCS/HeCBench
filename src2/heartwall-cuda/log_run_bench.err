@@ -1,0 +1,2003 @@
+./util/avi/avilib.c: In function ‘avi_update_header’:
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:360:4: note: in expansion of macro ‘OUT4CC’
+  360 |    OUT4CC ("RIFF");
+      |    ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:360:4: note: in expansion of macro ‘OUT4CC’
+  360 |    OUT4CC ("RIFF");
+      |    ^~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:361:4: note: in expansion of macro ‘OUTLONG’
+  361 |    OUTLONG(movi_len);    // assume max size
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:361:4: note: in expansion of macro ‘OUTLONG’
+  361 |    OUTLONG(movi_len);    // assume max size
+      |    ^~~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:362:4: note: in expansion of macro ‘OUT4CC’
+  362 |    OUT4CC ("AVI ");
+      |    ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:362:4: note: in expansion of macro ‘OUT4CC’
+  362 |    OUT4CC ("AVI ");
+      |    ^~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:366:4: note: in expansion of macro ‘OUT4CC’
+  366 |    OUT4CC ("LIST");
+      |    ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:366:4: note: in expansion of macro ‘OUT4CC’
+  366 |    OUT4CC ("LIST");
+      |    ^~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:367:4: note: in expansion of macro ‘OUTLONG’
+  367 |    OUTLONG(0);        /* Length of list in bytes, don't know yet */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:367:4: note: in expansion of macro ‘OUTLONG’
+  367 |    OUTLONG(0);        /* Length of list in bytes, don't know yet */
+      |    ^~~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:369:4: note: in expansion of macro ‘OUT4CC’
+  369 |    OUT4CC ("hdrl");
+      |    ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:369:4: note: in expansion of macro ‘OUT4CC’
+  369 |    OUT4CC ("hdrl");
+      |    ^~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:382:4: note: in expansion of macro ‘OUT4CC’
+  382 |    OUT4CC ("avih");
+      |    ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:382:4: note: in expansion of macro ‘OUT4CC’
+  382 |    OUT4CC ("avih");
+      |    ^~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:383:4: note: in expansion of macro ‘OUTLONG’
+  383 |    OUTLONG(56);                 /* # of bytes to follow */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:383:4: note: in expansion of macro ‘OUTLONG’
+  383 |    OUTLONG(56);                 /* # of bytes to follow */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:384:4: note: in expansion of macro ‘OUTLONG’
+  384 |    OUTLONG(ms_per_frame);       /* Microseconds per frame */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:384:4: note: in expansion of macro ‘OUTLONG’
+  384 |    OUTLONG(ms_per_frame);       /* Microseconds per frame */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:387:4: note: in expansion of macro ‘OUTLONG’
+  387 |    OUTLONG(0);
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:387:4: note: in expansion of macro ‘OUTLONG’
+  387 |    OUTLONG(0);
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:388:4: note: in expansion of macro ‘OUTLONG’
+  388 |    OUTLONG(0);                  /* PaddingGranularity (whatever that might be) */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:388:4: note: in expansion of macro ‘OUTLONG’
+  388 |    OUTLONG(0);                  /* PaddingGranularity (whatever that might be) */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:393:4: note: in expansion of macro ‘OUTLONG’
+  393 |    OUTLONG(flag);               /* Flags */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:393:4: note: in expansion of macro ‘OUTLONG’
+  393 |    OUTLONG(flag);               /* Flags */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:394:4: note: in expansion of macro ‘OUTLONG’
+  394 |    OUTLONG(0);                  // no frames yet
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:394:4: note: in expansion of macro ‘OUTLONG’
+  394 |    OUTLONG(0);                  // no frames yet
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:395:4: note: in expansion of macro ‘OUTLONG’
+  395 |    OUTLONG(0);                  /* InitialFrames */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:395:4: note: in expansion of macro ‘OUTLONG’
+  395 |    OUTLONG(0);                  /* InitialFrames */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:397:4: note: in expansion of macro ‘OUTLONG’
+  397 |    OUTLONG(AVI->anum+1);
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:397:4: note: in expansion of macro ‘OUTLONG’
+  397 |    OUTLONG(AVI->anum+1);
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:399:4: note: in expansion of macro ‘OUTLONG’
+  399 |    OUTLONG(0);                  /* SuggestedBufferSize */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:399:4: note: in expansion of macro ‘OUTLONG’
+  399 |    OUTLONG(0);                  /* SuggestedBufferSize */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:400:4: note: in expansion of macro ‘OUTLONG’
+  400 |    OUTLONG(AVI->width);         /* Width */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:400:4: note: in expansion of macro ‘OUTLONG’
+  400 |    OUTLONG(AVI->width);         /* Width */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:401:4: note: in expansion of macro ‘OUTLONG’
+  401 |    OUTLONG(AVI->height);        /* Height */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:401:4: note: in expansion of macro ‘OUTLONG’
+  401 |    OUTLONG(AVI->height);        /* Height */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:403:4: note: in expansion of macro ‘OUTLONG’
+  403 |    OUTLONG(0);                  /* TimeScale:  Unit used to measure time */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:403:4: note: in expansion of macro ‘OUTLONG’
+  403 |    OUTLONG(0);                  /* TimeScale:  Unit used to measure time */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:404:4: note: in expansion of macro ‘OUTLONG’
+  404 |    OUTLONG(0);                  /* DataRate:   Data rate of playback     */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:404:4: note: in expansion of macro ‘OUTLONG’
+  404 |    OUTLONG(0);                  /* DataRate:   Data rate of playback     */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:405:4: note: in expansion of macro ‘OUTLONG’
+  405 |    OUTLONG(0);                  /* StartTime:  Starting time of AVI data */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:405:4: note: in expansion of macro ‘OUTLONG’
+  405 |    OUTLONG(0);                  /* StartTime:  Starting time of AVI data */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:406:4: note: in expansion of macro ‘OUTLONG’
+  406 |    OUTLONG(0);                  /* DataLength: Size of AVI data chunk    */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:406:4: note: in expansion of macro ‘OUTLONG’
+  406 |    OUTLONG(0);                  /* DataLength: Size of AVI data chunk    */
+      |    ^~~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:411:4: note: in expansion of macro ‘OUT4CC’
+  411 |    OUT4CC ("LIST");
+      |    ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:411:4: note: in expansion of macro ‘OUT4CC’
+  411 |    OUT4CC ("LIST");
+      |    ^~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:412:4: note: in expansion of macro ‘OUTLONG’
+  412 |    OUTLONG(0);        /* Length of list in bytes, don't know yet */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:412:4: note: in expansion of macro ‘OUTLONG’
+  412 |    OUTLONG(0);        /* Length of list in bytes, don't know yet */
+      |    ^~~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:414:4: note: in expansion of macro ‘OUT4CC’
+  414 |    OUT4CC ("strl");
+      |    ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:414:4: note: in expansion of macro ‘OUT4CC’
+  414 |    OUT4CC ("strl");
+      |    ^~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:418:4: note: in expansion of macro ‘OUT4CC’
+  418 |    OUT4CC ("strh");
+      |    ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:418:4: note: in expansion of macro ‘OUT4CC’
+  418 |    OUT4CC ("strh");
+      |    ^~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:419:4: note: in expansion of macro ‘OUTLONG’
+  419 |    OUTLONG(56);                 /* # of bytes to follow */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:419:4: note: in expansion of macro ‘OUTLONG’
+  419 |    OUTLONG(56);                 /* # of bytes to follow */
+      |    ^~~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:420:4: note: in expansion of macro ‘OUT4CC’
+  420 |    OUT4CC ("vids");             /* Type */
+      |    ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:420:4: note: in expansion of macro ‘OUT4CC’
+  420 |    OUT4CC ("vids");             /* Type */
+      |    ^~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:421:4: note: in expansion of macro ‘OUT4CC’
+  421 |    OUT4CC (AVI->compressor);    /* Handler */
+      |    ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:421:4: note: in expansion of macro ‘OUT4CC’
+  421 |    OUT4CC (AVI->compressor);    /* Handler */
+      |    ^~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:422:4: note: in expansion of macro ‘OUTLONG’
+  422 |    OUTLONG(0);                  /* Flags */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:422:4: note: in expansion of macro ‘OUTLONG’
+  422 |    OUTLONG(0);                  /* Flags */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:423:4: note: in expansion of macro ‘OUTLONG’
+  423 |    OUTLONG(0);                  /* Reserved, MS says: wPriority, wLanguage */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:423:4: note: in expansion of macro ‘OUTLONG’
+  423 |    OUTLONG(0);                  /* Reserved, MS says: wPriority, wLanguage */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:424:4: note: in expansion of macro ‘OUTLONG’
+  424 |    OUTLONG(0);                  /* InitialFrames */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:424:4: note: in expansion of macro ‘OUTLONG’
+  424 |    OUTLONG(0);                  /* InitialFrames */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:425:4: note: in expansion of macro ‘OUTLONG’
+  425 |    OUTLONG(FRAME_RATE_SCALE);              /* Scale */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:425:4: note: in expansion of macro ‘OUTLONG’
+  425 |    OUTLONG(FRAME_RATE_SCALE);              /* Scale */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:426:4: note: in expansion of macro ‘OUTLONG’
+  426 |    OUTLONG(frate);              /* Rate: Rate/Scale == samples/second */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:426:4: note: in expansion of macro ‘OUTLONG’
+  426 |    OUTLONG(frate);              /* Rate: Rate/Scale == samples/second */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:427:4: note: in expansion of macro ‘OUTLONG’
+  427 |    OUTLONG(0);                  /* Start */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:427:4: note: in expansion of macro ‘OUTLONG’
+  427 |    OUTLONG(0);                  /* Start */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:428:4: note: in expansion of macro ‘OUTLONG’
+  428 |    OUTLONG(0);                  // no frames yet
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:428:4: note: in expansion of macro ‘OUTLONG’
+  428 |    OUTLONG(0);                  // no frames yet
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:429:4: note: in expansion of macro ‘OUTLONG’
+  429 |    OUTLONG(0);                  /* SuggestedBufferSize */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:429:4: note: in expansion of macro ‘OUTLONG’
+  429 |    OUTLONG(0);                  /* SuggestedBufferSize */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:430:4: note: in expansion of macro ‘OUTLONG’
+  430 |    OUTLONG(-1);                 /* Quality */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:430:4: note: in expansion of macro ‘OUTLONG’
+  430 |    OUTLONG(-1);                 /* Quality */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:431:4: note: in expansion of macro ‘OUTLONG’
+  431 |    OUTLONG(0);                  /* SampleSize */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:431:4: note: in expansion of macro ‘OUTLONG’
+  431 |    OUTLONG(0);                  /* SampleSize */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:432:4: note: in expansion of macro ‘OUTLONG’
+  432 |    OUTLONG(0);                  /* Frame */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:432:4: note: in expansion of macro ‘OUTLONG’
+  432 |    OUTLONG(0);                  /* Frame */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:433:4: note: in expansion of macro ‘OUTLONG’
+  433 |    OUTLONG(0);                  /* Frame */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:433:4: note: in expansion of macro ‘OUTLONG’
+  433 |    OUTLONG(0);                  /* Frame */
+      |    ^~~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:439:4: note: in expansion of macro ‘OUT4CC’
+  439 |    OUT4CC ("strf");
+      |    ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:439:4: note: in expansion of macro ‘OUT4CC’
+  439 |    OUT4CC ("strf");
+      |    ^~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:440:4: note: in expansion of macro ‘OUTLONG’
+  440 |    OUTLONG(40);                 /* # of bytes to follow */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:440:4: note: in expansion of macro ‘OUTLONG’
+  440 |    OUTLONG(40);                 /* # of bytes to follow */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:441:4: note: in expansion of macro ‘OUTLONG’
+  441 |    OUTLONG(40);                 /* Size */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:441:4: note: in expansion of macro ‘OUTLONG’
+  441 |    OUTLONG(40);                 /* Size */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:442:4: note: in expansion of macro ‘OUTLONG’
+  442 |    OUTLONG(AVI->width);         /* Width */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:442:4: note: in expansion of macro ‘OUTLONG’
+  442 |    OUTLONG(AVI->width);         /* Width */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:443:4: note: in expansion of macro ‘OUTLONG’
+  443 |    OUTLONG(AVI->height);        /* Height */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:443:4: note: in expansion of macro ‘OUTLONG’
+  443 |    OUTLONG(AVI->height);        /* Height */
+      |    ^~~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:445:4: note: in expansion of macro ‘OUT4CC’
+  445 |    OUT4CC (AVI->compressor);    /* Compression */
+      |    ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:445:4: note: in expansion of macro ‘OUT4CC’
+  445 |    OUT4CC (AVI->compressor);    /* Compression */
+      |    ^~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:447:4: note: in expansion of macro ‘OUTLONG’
+  447 |    OUTLONG(AVI->width*AVI->height*3);  /* SizeImage (in bytes?) */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:447:4: note: in expansion of macro ‘OUTLONG’
+  447 |    OUTLONG(AVI->width*AVI->height*3);  /* SizeImage (in bytes?) */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:448:4: note: in expansion of macro ‘OUTLONG’
+  448 |    OUTLONG(0);                  /* XPelsPerMeter */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:448:4: note: in expansion of macro ‘OUTLONG’
+  448 |    OUTLONG(0);                  /* XPelsPerMeter */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:449:4: note: in expansion of macro ‘OUTLONG’
+  449 |    OUTLONG(0);                  /* YPelsPerMeter */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:449:4: note: in expansion of macro ‘OUTLONG’
+  449 |    OUTLONG(0);                  /* YPelsPerMeter */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:450:4: note: in expansion of macro ‘OUTLONG’
+  450 |    OUTLONG(0);                  /* ClrUsed: Number of colors used */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:450:4: note: in expansion of macro ‘OUTLONG’
+  450 |    OUTLONG(0);                  /* ClrUsed: Number of colors used */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:451:4: note: in expansion of macro ‘OUTLONG’
+  451 |    OUTLONG(0);                  /* ClrImportant: Number of colors important */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:451:4: note: in expansion of macro ‘OUTLONG’
+  451 |    OUTLONG(0);                  /* ClrImportant: Number of colors important */
+      |    ^~~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:464:8: note: in expansion of macro ‘OUT4CC’
+  464 |        OUT4CC ("LIST");
+      |        ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:464:8: note: in expansion of macro ‘OUT4CC’
+  464 |        OUT4CC ("LIST");
+      |        ^~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:465:8: note: in expansion of macro ‘OUTLONG’
+  465 |        OUTLONG(0);        /* Length of list in bytes, don't know yet */
+      |        ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:465:8: note: in expansion of macro ‘OUTLONG’
+  465 |        OUTLONG(0);        /* Length of list in bytes, don't know yet */
+      |        ^~~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:467:8: note: in expansion of macro ‘OUT4CC’
+  467 |        OUT4CC ("strl");
+      |        ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:467:8: note: in expansion of macro ‘OUT4CC’
+  467 |        OUT4CC ("strl");
+      |        ^~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:471:8: note: in expansion of macro ‘OUT4CC’
+  471 |        OUT4CC ("strh");
+      |        ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:471:8: note: in expansion of macro ‘OUT4CC’
+  471 |        OUT4CC ("strh");
+      |        ^~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:472:8: note: in expansion of macro ‘OUTLONG’
+  472 |        OUTLONG(56);            /* # of bytes to follow */
+      |        ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:472:8: note: in expansion of macro ‘OUTLONG’
+  472 |        OUTLONG(56);            /* # of bytes to follow */
+      |        ^~~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:473:8: note: in expansion of macro ‘OUT4CC’
+  473 |        OUT4CC ("auds");
+      |        ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:473:8: note: in expansion of macro ‘OUT4CC’
+  473 |        OUT4CC ("auds");
+      |        ^~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:477:8: note: in expansion of macro ‘OUTLONG’
+  477 |        OUTLONG(0);             /* Format (Optionally) */
+      |        ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:477:8: note: in expansion of macro ‘OUTLONG’
+  477 |        OUTLONG(0);             /* Format (Optionally) */
+      |        ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:480:8: note: in expansion of macro ‘OUTLONG’
+  480 |        OUTLONG(0);             /* Flags */
+      |        ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:480:8: note: in expansion of macro ‘OUTLONG’
+  480 |        OUTLONG(0);             /* Flags */
+      |        ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:481:8: note: in expansion of macro ‘OUTLONG’
+  481 |        OUTLONG(0);             /* Reserved, MS says: wPriority, wLanguage */
+      |        ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:481:8: note: in expansion of macro ‘OUTLONG’
+  481 |        OUTLONG(0);             /* Reserved, MS says: wPriority, wLanguage */
+      |        ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:482:8: note: in expansion of macro ‘OUTLONG’
+  482 |        OUTLONG(0);             /* InitialFrames */
+      |        ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:482:8: note: in expansion of macro ‘OUTLONG’
+  482 |        OUTLONG(0);             /* InitialFrames */
+      |        ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:485:8: note: in expansion of macro ‘OUTLONG’
+  485 |        OUTLONG(sampsize/4);      /* Scale */
+      |        ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:485:8: note: in expansion of macro ‘OUTLONG’
+  485 |        OUTLONG(sampsize/4);      /* Scale */
+      |        ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:486:8: note: in expansion of macro ‘OUTLONG’
+  486 |        OUTLONG(1000*AVI->track[j].mp3rate/8);
+      |        ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:486:8: note: in expansion of macro ‘OUTLONG’
+  486 |        OUTLONG(1000*AVI->track[j].mp3rate/8);
+      |        ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:487:8: note: in expansion of macro ‘OUTLONG’
+  487 |        OUTLONG(0);             /* Start */
+      |        ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:487:8: note: in expansion of macro ‘OUTLONG’
+  487 |        OUTLONG(0);             /* Start */
+      |        ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:488:8: note: in expansion of macro ‘OUTLONG’
+  488 |        OUTLONG(4*AVI->track[j].audio_bytes/sampsize);   /* Length */
+      |        ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:488:8: note: in expansion of macro ‘OUTLONG’
+  488 |        OUTLONG(4*AVI->track[j].audio_bytes/sampsize);   /* Length */
+      |        ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:489:8: note: in expansion of macro ‘OUTLONG’
+  489 |        OUTLONG(0);             /* SuggestedBufferSize */
+      |        ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:489:8: note: in expansion of macro ‘OUTLONG’
+  489 |        OUTLONG(0);             /* SuggestedBufferSize */
+      |        ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:490:8: note: in expansion of macro ‘OUTLONG’
+  490 |        OUTLONG(-1);            /* Quality */
+      |        ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:490:8: note: in expansion of macro ‘OUTLONG’
+  490 |        OUTLONG(-1);            /* Quality */
+      |        ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:493:8: note: in expansion of macro ‘OUTLONG’
+  493 |        OUTLONG(sampsize/4);    /* SampleSize */
+      |        ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:493:8: note: in expansion of macro ‘OUTLONG’
+  493 |        OUTLONG(sampsize/4);    /* SampleSize */
+      |        ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:495:8: note: in expansion of macro ‘OUTLONG’
+  495 |        OUTLONG(0);             /* Frame */
+      |        ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:495:8: note: in expansion of macro ‘OUTLONG’
+  495 |        OUTLONG(0);             /* Frame */
+      |        ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:496:8: note: in expansion of macro ‘OUTLONG’
+  496 |        OUTLONG(0);             /* Frame */
+      |        ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:496:8: note: in expansion of macro ‘OUTLONG’
+  496 |        OUTLONG(0);             /* Frame */
+      |        ^~~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:502:8: note: in expansion of macro ‘OUT4CC’
+  502 |        OUT4CC ("strf");
+      |        ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:502:8: note: in expansion of macro ‘OUT4CC’
+  502 |        OUT4CC ("strf");
+      |        ^~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:503:8: note: in expansion of macro ‘OUTLONG’
+  503 |        OUTLONG(16);                   /* # of bytes to follow */
+      |        ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:503:8: note: in expansion of macro ‘OUTLONG’
+  503 |        OUTLONG(16);                   /* # of bytes to follow */
+      |        ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:506:8: note: in expansion of macro ‘OUTLONG’
+  506 |        OUTLONG(AVI->track[j].a_rate);          /* SamplesPerSec */
+      |        ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:506:8: note: in expansion of macro ‘OUTLONG’
+  506 |        OUTLONG(AVI->track[j].a_rate);          /* SamplesPerSec */
+      |        ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:508:8: note: in expansion of macro ‘OUTLONG’
+  508 |        OUTLONG(1000*AVI->track[j].mp3rate/8);
+      |        ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:508:8: note: in expansion of macro ‘OUTLONG’
+  508 |        OUTLONG(1000*AVI->track[j].mp3rate/8);
+      |        ^~~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:540:4: note: in expansion of macro ‘OUT4CC’
+  540 |    OUT4CC ("JUNK");
+      |    ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:540:4: note: in expansion of macro ‘OUT4CC’
+  540 |    OUT4CC ("JUNK");
+      |    ^~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:541:4: note: in expansion of macro ‘OUTLONG’
+  541 |    OUTLONG(njunk);
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:541:4: note: in expansion of macro ‘OUTLONG’
+  541 |    OUTLONG(njunk);
+      |    ^~~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:555:4: note: in expansion of macro ‘OUT4CC’
+  555 |    OUT4CC ("LIST");
+      |    ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:555:4: note: in expansion of macro ‘OUT4CC’
+  555 |    OUT4CC ("LIST");
+      |    ^~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:556:4: note: in expansion of macro ‘OUTLONG’
+  556 |    OUTLONG(movi_len); /* Length of list in bytes */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:556:4: note: in expansion of macro ‘OUTLONG’
+  556 |    OUTLONG(movi_len); /* Length of list in bytes */
+      |    ^~~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:557:4: note: in expansion of macro ‘OUT4CC’
+  557 |    OUT4CC ("movi");
+      |    ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:557:4: note: in expansion of macro ‘OUT4CC’
+  557 |    OUT4CC ("movi");
+      |    ^~~~~~
+./util/avi/avilib.c: In function ‘avi_close_output_file’:
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:628:4: note: in expansion of macro ‘OUT4CC’
+  628 |    OUT4CC ("RIFF");
+      |    ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:628:4: note: in expansion of macro ‘OUT4CC’
+  628 |    OUT4CC ("RIFF");
+      |    ^~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:629:4: note: in expansion of macro ‘OUTLONG’
+  629 |    OUTLONG(AVI->pos - 8);    /* # of bytes to follow */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:629:4: note: in expansion of macro ‘OUTLONG’
+  629 |    OUTLONG(AVI->pos - 8);    /* # of bytes to follow */
+      |    ^~~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:630:4: note: in expansion of macro ‘OUT4CC’
+  630 |    OUT4CC ("AVI ");
+      |    ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:630:4: note: in expansion of macro ‘OUT4CC’
+  630 |    OUT4CC ("AVI ");
+      |    ^~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:634:4: note: in expansion of macro ‘OUT4CC’
+  634 |    OUT4CC ("LIST");
+      |    ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:634:4: note: in expansion of macro ‘OUT4CC’
+  634 |    OUT4CC ("LIST");
+      |    ^~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:635:4: note: in expansion of macro ‘OUTLONG’
+  635 |    OUTLONG(0);        /* Length of list in bytes, don't know yet */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:635:4: note: in expansion of macro ‘OUTLONG’
+  635 |    OUTLONG(0);        /* Length of list in bytes, don't know yet */
+      |    ^~~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:637:4: note: in expansion of macro ‘OUT4CC’
+  637 |    OUT4CC ("hdrl");
+      |    ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:637:4: note: in expansion of macro ‘OUT4CC’
+  637 |    OUT4CC ("hdrl");
+      |    ^~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:650:4: note: in expansion of macro ‘OUT4CC’
+  650 |    OUT4CC ("avih");
+      |    ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:650:4: note: in expansion of macro ‘OUT4CC’
+  650 |    OUT4CC ("avih");
+      |    ^~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:651:4: note: in expansion of macro ‘OUTLONG’
+  651 |    OUTLONG(56);                 /* # of bytes to follow */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:651:4: note: in expansion of macro ‘OUTLONG’
+  651 |    OUTLONG(56);                 /* # of bytes to follow */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:652:4: note: in expansion of macro ‘OUTLONG’
+  652 |    OUTLONG(ms_per_frame);       /* Microseconds per frame */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:652:4: note: in expansion of macro ‘OUTLONG’
+  652 |    OUTLONG(ms_per_frame);       /* Microseconds per frame */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:655:4: note: in expansion of macro ‘OUTLONG’
+  655 |    OUTLONG(0);
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:655:4: note: in expansion of macro ‘OUTLONG’
+  655 |    OUTLONG(0);
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:656:4: note: in expansion of macro ‘OUTLONG’
+  656 |    OUTLONG(0);                  /* PaddingGranularity (whatever that might be) */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:656:4: note: in expansion of macro ‘OUTLONG’
+  656 |    OUTLONG(0);                  /* PaddingGranularity (whatever that might be) */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:661:4: note: in expansion of macro ‘OUTLONG’
+  661 |    OUTLONG(flag);               /* Flags */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:661:4: note: in expansion of macro ‘OUTLONG’
+  661 |    OUTLONG(flag);               /* Flags */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:662:4: note: in expansion of macro ‘OUTLONG’
+  662 |    OUTLONG(AVI->video_frames);  /* TotalFrames */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:662:4: note: in expansion of macro ‘OUTLONG’
+  662 |    OUTLONG(AVI->video_frames);  /* TotalFrames */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:663:4: note: in expansion of macro ‘OUTLONG’
+  663 |    OUTLONG(0);                  /* InitialFrames */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:663:4: note: in expansion of macro ‘OUTLONG’
+  663 |    OUTLONG(0);                  /* InitialFrames */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:665:4: note: in expansion of macro ‘OUTLONG’
+  665 |    OUTLONG(AVI->anum+1);
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:665:4: note: in expansion of macro ‘OUTLONG’
+  665 |    OUTLONG(AVI->anum+1);
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:671:4: note: in expansion of macro ‘OUTLONG’
+  671 |    OUTLONG(0);                  /* SuggestedBufferSize */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:671:4: note: in expansion of macro ‘OUTLONG’
+  671 |    OUTLONG(0);                  /* SuggestedBufferSize */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:672:4: note: in expansion of macro ‘OUTLONG’
+  672 |    OUTLONG(AVI->width);         /* Width */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:672:4: note: in expansion of macro ‘OUTLONG’
+  672 |    OUTLONG(AVI->width);         /* Width */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:673:4: note: in expansion of macro ‘OUTLONG’
+  673 |    OUTLONG(AVI->height);        /* Height */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:673:4: note: in expansion of macro ‘OUTLONG’
+  673 |    OUTLONG(AVI->height);        /* Height */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:675:4: note: in expansion of macro ‘OUTLONG’
+  675 |    OUTLONG(0);                  /* TimeScale:  Unit used to measure time */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:675:4: note: in expansion of macro ‘OUTLONG’
+  675 |    OUTLONG(0);                  /* TimeScale:  Unit used to measure time */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:676:4: note: in expansion of macro ‘OUTLONG’
+  676 |    OUTLONG(0);                  /* DataRate:   Data rate of playback     */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:676:4: note: in expansion of macro ‘OUTLONG’
+  676 |    OUTLONG(0);                  /* DataRate:   Data rate of playback     */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:677:4: note: in expansion of macro ‘OUTLONG’
+  677 |    OUTLONG(0);                  /* StartTime:  Starting time of AVI data */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:677:4: note: in expansion of macro ‘OUTLONG’
+  677 |    OUTLONG(0);                  /* StartTime:  Starting time of AVI data */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:678:4: note: in expansion of macro ‘OUTLONG’
+  678 |    OUTLONG(0);                  /* DataLength: Size of AVI data chunk    */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:678:4: note: in expansion of macro ‘OUTLONG’
+  678 |    OUTLONG(0);                  /* DataLength: Size of AVI data chunk    */
+      |    ^~~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:683:4: note: in expansion of macro ‘OUT4CC’
+  683 |    OUT4CC ("LIST");
+      |    ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:683:4: note: in expansion of macro ‘OUT4CC’
+  683 |    OUT4CC ("LIST");
+      |    ^~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:684:4: note: in expansion of macro ‘OUTLONG’
+  684 |    OUTLONG(0);        /* Length of list in bytes, don't know yet */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:684:4: note: in expansion of macro ‘OUTLONG’
+  684 |    OUTLONG(0);        /* Length of list in bytes, don't know yet */
+      |    ^~~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:686:4: note: in expansion of macro ‘OUT4CC’
+  686 |    OUT4CC ("strl");
+      |    ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:686:4: note: in expansion of macro ‘OUT4CC’
+  686 |    OUT4CC ("strl");
+      |    ^~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:690:4: note: in expansion of macro ‘OUT4CC’
+  690 |    OUT4CC ("strh");
+      |    ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:690:4: note: in expansion of macro ‘OUT4CC’
+  690 |    OUT4CC ("strh");
+      |    ^~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:691:4: note: in expansion of macro ‘OUTLONG’
+  691 |    OUTLONG(56);                 /* # of bytes to follow */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:691:4: note: in expansion of macro ‘OUTLONG’
+  691 |    OUTLONG(56);                 /* # of bytes to follow */
+      |    ^~~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:692:4: note: in expansion of macro ‘OUT4CC’
+  692 |    OUT4CC ("vids");             /* Type */
+      |    ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:692:4: note: in expansion of macro ‘OUT4CC’
+  692 |    OUT4CC ("vids");             /* Type */
+      |    ^~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:693:4: note: in expansion of macro ‘OUT4CC’
+  693 |    OUT4CC (AVI->compressor);    /* Handler */
+      |    ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:693:4: note: in expansion of macro ‘OUT4CC’
+  693 |    OUT4CC (AVI->compressor);    /* Handler */
+      |    ^~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:694:4: note: in expansion of macro ‘OUTLONG’
+  694 |    OUTLONG(0);                  /* Flags */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:694:4: note: in expansion of macro ‘OUTLONG’
+  694 |    OUTLONG(0);                  /* Flags */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:695:4: note: in expansion of macro ‘OUTLONG’
+  695 |    OUTLONG(0);                  /* Reserved, MS says: wPriority, wLanguage */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:695:4: note: in expansion of macro ‘OUTLONG’
+  695 |    OUTLONG(0);                  /* Reserved, MS says: wPriority, wLanguage */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:696:4: note: in expansion of macro ‘OUTLONG’
+  696 |    OUTLONG(0);                  /* InitialFrames */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:696:4: note: in expansion of macro ‘OUTLONG’
+  696 |    OUTLONG(0);                  /* InitialFrames */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:697:4: note: in expansion of macro ‘OUTLONG’
+  697 |    OUTLONG(FRAME_RATE_SCALE);              /* Scale */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:697:4: note: in expansion of macro ‘OUTLONG’
+  697 |    OUTLONG(FRAME_RATE_SCALE);              /* Scale */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:698:4: note: in expansion of macro ‘OUTLONG’
+  698 |    OUTLONG(frate);              /* Rate: Rate/Scale == samples/second */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:698:4: note: in expansion of macro ‘OUTLONG’
+  698 |    OUTLONG(frate);              /* Rate: Rate/Scale == samples/second */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:699:4: note: in expansion of macro ‘OUTLONG’
+  699 |    OUTLONG(0);                  /* Start */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:699:4: note: in expansion of macro ‘OUTLONG’
+  699 |    OUTLONG(0);                  /* Start */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:700:4: note: in expansion of macro ‘OUTLONG’
+  700 |    OUTLONG(AVI->video_frames);  /* Length */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:700:4: note: in expansion of macro ‘OUTLONG’
+  700 |    OUTLONG(AVI->video_frames);  /* Length */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:701:4: note: in expansion of macro ‘OUTLONG’
+  701 |    OUTLONG(0);                  /* SuggestedBufferSize */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:701:4: note: in expansion of macro ‘OUTLONG’
+  701 |    OUTLONG(0);                  /* SuggestedBufferSize */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:702:4: note: in expansion of macro ‘OUTLONG’
+  702 |    OUTLONG(-1);                 /* Quality */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:702:4: note: in expansion of macro ‘OUTLONG’
+  702 |    OUTLONG(-1);                 /* Quality */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:703:4: note: in expansion of macro ‘OUTLONG’
+  703 |    OUTLONG(0);                  /* SampleSize */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:703:4: note: in expansion of macro ‘OUTLONG’
+  703 |    OUTLONG(0);                  /* SampleSize */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:704:4: note: in expansion of macro ‘OUTLONG’
+  704 |    OUTLONG(0);                  /* Frame */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:704:4: note: in expansion of macro ‘OUTLONG’
+  704 |    OUTLONG(0);                  /* Frame */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:705:4: note: in expansion of macro ‘OUTLONG’
+  705 |    OUTLONG(0);                  /* Frame */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:705:4: note: in expansion of macro ‘OUTLONG’
+  705 |    OUTLONG(0);                  /* Frame */
+      |    ^~~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:711:4: note: in expansion of macro ‘OUT4CC’
+  711 |    OUT4CC ("strf");
+      |    ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:711:4: note: in expansion of macro ‘OUT4CC’
+  711 |    OUT4CC ("strf");
+      |    ^~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:712:4: note: in expansion of macro ‘OUTLONG’
+  712 |    OUTLONG(40);                 /* # of bytes to follow */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:712:4: note: in expansion of macro ‘OUTLONG’
+  712 |    OUTLONG(40);                 /* # of bytes to follow */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:713:4: note: in expansion of macro ‘OUTLONG’
+  713 |    OUTLONG(40);                 /* Size */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:713:4: note: in expansion of macro ‘OUTLONG’
+  713 |    OUTLONG(40);                 /* Size */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:714:4: note: in expansion of macro ‘OUTLONG’
+  714 |    OUTLONG(AVI->width);         /* Width */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:714:4: note: in expansion of macro ‘OUTLONG’
+  714 |    OUTLONG(AVI->width);         /* Width */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:715:4: note: in expansion of macro ‘OUTLONG’
+  715 |    OUTLONG(AVI->height);        /* Height */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:715:4: note: in expansion of macro ‘OUTLONG’
+  715 |    OUTLONG(AVI->height);        /* Height */
+      |    ^~~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:717:4: note: in expansion of macro ‘OUT4CC’
+  717 |    OUT4CC (AVI->compressor);    /* Compression */
+      |    ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:717:4: note: in expansion of macro ‘OUT4CC’
+  717 |    OUT4CC (AVI->compressor);    /* Compression */
+      |    ^~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:719:4: note: in expansion of macro ‘OUTLONG’
+  719 |    OUTLONG(AVI->width*AVI->height*3);  /* SizeImage (in bytes?) */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:719:4: note: in expansion of macro ‘OUTLONG’
+  719 |    OUTLONG(AVI->width*AVI->height*3);  /* SizeImage (in bytes?) */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:720:4: note: in expansion of macro ‘OUTLONG’
+  720 |    OUTLONG(0);                  /* XPelsPerMeter */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:720:4: note: in expansion of macro ‘OUTLONG’
+  720 |    OUTLONG(0);                  /* XPelsPerMeter */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:721:4: note: in expansion of macro ‘OUTLONG’
+  721 |    OUTLONG(0);                  /* YPelsPerMeter */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:721:4: note: in expansion of macro ‘OUTLONG’
+  721 |    OUTLONG(0);                  /* YPelsPerMeter */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:722:4: note: in expansion of macro ‘OUTLONG’
+  722 |    OUTLONG(0);                  /* ClrUsed: Number of colors used */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:722:4: note: in expansion of macro ‘OUTLONG’
+  722 |    OUTLONG(0);                  /* ClrUsed: Number of colors used */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:723:4: note: in expansion of macro ‘OUTLONG’
+  723 |    OUTLONG(0);                  /* ClrImportant: Number of colors important */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:723:4: note: in expansion of macro ‘OUTLONG’
+  723 |    OUTLONG(0);                  /* ClrImportant: Number of colors important */
+      |    ^~~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:738:10: note: in expansion of macro ‘OUT4CC’
+  738 |          OUT4CC ("LIST");
+      |          ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:738:10: note: in expansion of macro ‘OUT4CC’
+  738 |          OUT4CC ("LIST");
+      |          ^~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:739:10: note: in expansion of macro ‘OUTLONG’
+  739 |          OUTLONG(0);        /* Length of list in bytes, don't know yet */
+      |          ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:739:10: note: in expansion of macro ‘OUTLONG’
+  739 |          OUTLONG(0);        /* Length of list in bytes, don't know yet */
+      |          ^~~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:741:10: note: in expansion of macro ‘OUT4CC’
+  741 |          OUT4CC ("strl");
+      |          ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:741:10: note: in expansion of macro ‘OUT4CC’
+  741 |          OUT4CC ("strl");
+      |          ^~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:745:10: note: in expansion of macro ‘OUT4CC’
+  745 |          OUT4CC ("strh");
+      |          ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:745:10: note: in expansion of macro ‘OUT4CC’
+  745 |          OUT4CC ("strh");
+      |          ^~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:746:10: note: in expansion of macro ‘OUTLONG’
+  746 |          OUTLONG(56);            /* # of bytes to follow */
+      |          ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:746:10: note: in expansion of macro ‘OUTLONG’
+  746 |          OUTLONG(56);            /* # of bytes to follow */
+      |          ^~~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:747:10: note: in expansion of macro ‘OUT4CC’
+  747 |          OUT4CC ("auds");
+      |          ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:747:10: note: in expansion of macro ‘OUT4CC’
+  747 |          OUT4CC ("auds");
+      |          ^~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:751:10: note: in expansion of macro ‘OUTLONG’
+  751 |          OUTLONG(0);             /* Format (Optionally) */
+      |          ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:751:10: note: in expansion of macro ‘OUTLONG’
+  751 |          OUTLONG(0);             /* Format (Optionally) */
+      |          ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:754:10: note: in expansion of macro ‘OUTLONG’
+  754 |          OUTLONG(0);             /* Flags */
+      |          ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:754:10: note: in expansion of macro ‘OUTLONG’
+  754 |          OUTLONG(0);             /* Flags */
+      |          ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:755:10: note: in expansion of macro ‘OUTLONG’
+  755 |          OUTLONG(0);             /* Reserved, MS says: wPriority, wLanguage */
+      |          ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:755:10: note: in expansion of macro ‘OUTLONG’
+  755 |          OUTLONG(0);             /* Reserved, MS says: wPriority, wLanguage */
+      |          ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:756:10: note: in expansion of macro ‘OUTLONG’
+  756 |          OUTLONG(0);             /* InitialFrames */
+      |          ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:756:10: note: in expansion of macro ‘OUTLONG’
+  756 |          OUTLONG(0);             /* InitialFrames */
+      |          ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:759:10: note: in expansion of macro ‘OUTLONG’
+  759 |          OUTLONG(sampsize/4);      /* Scale */
+      |          ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:759:10: note: in expansion of macro ‘OUTLONG’
+  759 |          OUTLONG(sampsize/4);      /* Scale */
+      |          ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:760:10: note: in expansion of macro ‘OUTLONG’
+  760 |          OUTLONG(1000*AVI->track[j].mp3rate/8);
+      |          ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:760:10: note: in expansion of macro ‘OUTLONG’
+  760 |          OUTLONG(1000*AVI->track[j].mp3rate/8);
+      |          ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:761:10: note: in expansion of macro ‘OUTLONG’
+  761 |          OUTLONG(0);             /* Start */
+      |          ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:761:10: note: in expansion of macro ‘OUTLONG’
+  761 |          OUTLONG(0);             /* Start */
+      |          ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:762:10: note: in expansion of macro ‘OUTLONG’
+  762 |          OUTLONG(4*AVI->track[j].audio_bytes/sampsize);   /* Length */
+      |          ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:762:10: note: in expansion of macro ‘OUTLONG’
+  762 |          OUTLONG(4*AVI->track[j].audio_bytes/sampsize);   /* Length */
+      |          ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:763:10: note: in expansion of macro ‘OUTLONG’
+  763 |          OUTLONG(0);             /* SuggestedBufferSize */
+      |          ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:763:10: note: in expansion of macro ‘OUTLONG’
+  763 |          OUTLONG(0);             /* SuggestedBufferSize */
+      |          ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:764:10: note: in expansion of macro ‘OUTLONG’
+  764 |          OUTLONG(-1);            /* Quality */
+      |          ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:764:10: note: in expansion of macro ‘OUTLONG’
+  764 |          OUTLONG(-1);            /* Quality */
+      |          ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:767:10: note: in expansion of macro ‘OUTLONG’
+  767 |          OUTLONG(sampsize/4);    /* SampleSize */
+      |          ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:767:10: note: in expansion of macro ‘OUTLONG’
+  767 |          OUTLONG(sampsize/4);    /* SampleSize */
+      |          ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:769:10: note: in expansion of macro ‘OUTLONG’
+  769 |          OUTLONG(0);             /* Frame */
+      |          ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:769:10: note: in expansion of macro ‘OUTLONG’
+  769 |          OUTLONG(0);             /* Frame */
+      |          ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:770:10: note: in expansion of macro ‘OUTLONG’
+  770 |          OUTLONG(0);             /* Frame */
+      |          ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:770:10: note: in expansion of macro ‘OUTLONG’
+  770 |          OUTLONG(0);             /* Frame */
+      |          ^~~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:776:10: note: in expansion of macro ‘OUT4CC’
+  776 |          OUT4CC ("strf");
+      |          ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:776:10: note: in expansion of macro ‘OUT4CC’
+  776 |          OUT4CC ("strf");
+      |          ^~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:777:10: note: in expansion of macro ‘OUTLONG’
+  777 |          OUTLONG(16);                   /* # of bytes to follow */
+      |          ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:777:10: note: in expansion of macro ‘OUTLONG’
+  777 |          OUTLONG(16);                   /* # of bytes to follow */
+      |          ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:780:10: note: in expansion of macro ‘OUTLONG’
+  780 |          OUTLONG(AVI->track[j].a_rate);          /* SamplesPerSec */
+      |          ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:780:10: note: in expansion of macro ‘OUTLONG’
+  780 |          OUTLONG(AVI->track[j].a_rate);          /* SamplesPerSec */
+      |          ^~~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:782:10: note: in expansion of macro ‘OUTLONG’
+  782 |          OUTLONG(1000*AVI->track[j].mp3rate/8);
+      |          ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:782:10: note: in expansion of macro ‘OUTLONG’
+  782 |          OUTLONG(1000*AVI->track[j].mp3rate/8);
+      |          ^~~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:803:4: note: in expansion of macro ‘OUT4CC’
+  803 |    OUT4CC ("LIST");
+      |    ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:803:4: note: in expansion of macro ‘OUT4CC’
+  803 |    OUT4CC ("LIST");
+      |    ^~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:807:4: note: in expansion of macro ‘OUTLONG’
+  807 |    OUTLONG(info_len);
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:807:4: note: in expansion of macro ‘OUTLONG’
+  807 |    OUTLONG(info_len);
+      |    ^~~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:808:4: note: in expansion of macro ‘OUT4CC’
+  808 |    OUT4CC ("INFO");
+      |    ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:808:4: note: in expansion of macro ‘OUT4CC’
+  808 |    OUT4CC ("INFO");
+      |    ^~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:818:4: note: in expansion of macro ‘OUT4CC’
+  818 |    OUT4CC ("ISFT");
+      |    ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:818:4: note: in expansion of macro ‘OUT4CC’
+  818 |    OUT4CC ("ISFT");
+      |    ^~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:819:4: note: in expansion of macro ‘OUTLONG’
+  819 |    OUTLONG(MAX_INFO_STRLEN);
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:819:4: note: in expansion of macro ‘OUTLONG’
+  819 |    OUTLONG(MAX_INFO_STRLEN);
+      |    ^~~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:852:4: note: in expansion of macro ‘OUT4CC’
+  852 |    OUT4CC ("JUNK");
+      |    ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:852:4: note: in expansion of macro ‘OUT4CC’
+  852 |    OUT4CC ("JUNK");
+      |    ^~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:853:4: note: in expansion of macro ‘OUTLONG’
+  853 |    OUTLONG(njunk);
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:853:4: note: in expansion of macro ‘OUTLONG’
+  853 |    OUTLONG(njunk);
+      |    ^~~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:860:4: note: in expansion of macro ‘OUT4CC’
+  860 |    OUT4CC ("LIST");
+      |    ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:860:4: note: in expansion of macro ‘OUT4CC’
+  860 |    OUT4CC ("LIST");
+      |    ^~~~~~
+./util/avi/avilib.c:322:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |    ^~
+./util/avi/avilib.c:861:4: note: in expansion of macro ‘OUTLONG’
+  861 |    OUTLONG(movi_len); /* Length of list in bytes */
+      |    ^~~~~~~
+./util/avi/avilib.c:322:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  322 |    if(nhb<=HEADERBYTES-4) long2str(AVI_header+nhb,n); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:861:4: note: in expansion of macro ‘OUTLONG’
+  861 |    OUTLONG(movi_len); /* Length of list in bytes */
+      |    ^~~~~~~
+./util/avi/avilib.c:319:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |    ^~
+./util/avi/avilib.c:862:4: note: in expansion of macro ‘OUT4CC’
+  862 |    OUT4CC ("movi");
+      |    ^~~~~~
+./util/avi/avilib.c:319:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  319 |    if(nhb<=HEADERBYTES-4) memcpy(AVI_header+nhb,s,4); nhb += 4
+      |                                                       ^~~
+./util/avi/avilib.c:862:4: note: in expansion of macro ‘OUT4CC’
+  862 |    OUT4CC ("movi");
+      |    ^~~~~~
+./util/avi/avilib.c: In function ‘AVI_write_frame’:
+./util/avi/avilib.c:907:28: warning: ‘%1d’ directive writing between 1 and 11 bytes into a region of size 4 [-Wformat-overflow=]
+  907 |    sprintf((char *)astr, "0%1dwb", AVI->aptr+1);
+      |                            ^~~
+./util/avi/avilib.c:907:26: note: directive argument in the range [-2147483647, 2147483647]
+  907 |    sprintf((char *)astr, "0%1dwb", AVI->aptr+1);
+      |                          ^~~~~~~~
+./util/avi/avilib.c:907:4: note: ‘sprintf’ output between 5 and 15 bytes into a destination of size 5
+  907 |    sprintf((char *)astr, "0%1dwb", AVI->aptr+1);
+      |    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./util/avi/avilib.c: In function ‘AVI_write_audio’:
+./util/avi/avilib.c:907:28: warning: ‘%1d’ directive writing between 1 and 11 bytes into a region of size 4 [-Wformat-overflow=]
+  907 |    sprintf((char *)astr, "0%1dwb", AVI->aptr+1);
+      |                            ^~~
+./util/avi/avilib.c:907:26: note: directive argument in the range [-2147483647, 2147483647]
+  907 |    sprintf((char *)astr, "0%1dwb", AVI->aptr+1);
+      |                          ^~~~~~~~
+./util/avi/avilib.c:907:4: note: ‘sprintf’ output between 5 and 15 bytes into a destination of size 5
+  907 |    sprintf((char *)astr, "0%1dwb", AVI->aptr+1);
+      |    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+timeout was set to  600

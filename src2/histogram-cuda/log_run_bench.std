@@ -1,0 +1,7 @@
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c histogram_compare.cu -o histogram_compare.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 histogram_compare.o -o main 
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "time -p ( ./main --i=1000 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 1 591 590

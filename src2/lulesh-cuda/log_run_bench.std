@@ -1,0 +1,10 @@
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c lulesh.cu -o lulesh.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c lulesh-viz.cu -o lulesh-viz.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c lulesh-util.cu -o lulesh-util.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c lulesh-init.cu -o lulesh-init.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 lulesh.o lulesh-viz.o lulesh-util.o lulesh-init.o -o lulesh 
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "time -p ( ./lulesh -i 5 -s 384  -r 11 -b 1 -c 1 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 0 54181 54181

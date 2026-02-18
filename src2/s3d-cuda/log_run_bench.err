@@ -1,0 +1,43 @@
+OptionParser.cu(213): warning #177-D: variable "retVal" was declared but never referenced
+     int retVal;
+         ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+OptionParser.cu: In member function ‘bool OptionParser::parse(const std::vector<std::__cxx11::basic_string<char> >&)’:
+OptionParser.cu:65:19: warning: comparison of integer expressions of different signedness: ‘int’ and ‘std::vector<std::__cxx11::basic_string<char> >::size_type’ {aka ‘long unsigned int’} [-Wsign-compare]
+   65 |    for (int i=0; i<args.size(); i++) {
+      |                 ~~^~~~~~~~~~~~~
+OptionParser.cu:78:48: warning: comparison of integer expressions of different signedness: ‘int’ and ‘std::vector<std::__cxx11::basic_string<char> >::size_type’ {aka ‘long unsigned int’} [-Wsign-compare]
+   78 |          if (longName=="configFile" && ! (i+1>=args.size())) {
+      |                                        ~~~~~~~~^~~~~~~~~~~~~~
+OptionParser.cu:95:13: warning: comparison of integer expressions of different signedness: ‘int’ and ‘std::vector<std::__cxx11::basic_string<char> >::size_type’ {aka ‘long unsigned int’} [-Wsign-compare]
+   95 |             if (i+1 >= args.size()) {
+      |             ^~~~~~~~~~~~~~
+OptionParser.cu:117:48: warning: comparison of integer expressions of different signedness: ‘int’ and ‘std::vector<std::__cxx11::basic_string<char> >::size_type’ {aka ‘long unsigned int’} [-Wsign-compare]
+  117 |               if (longName=="configFile" && ! (i+1>=args.size())) {
+      |                                        ~~~~~~~~^~~~~~~~~~~~~~
+OptionParser.cu:130:14: warning: comparison of integer expressions of different signedness: ‘int’ and ‘std::vector<std::__cxx11::basic_string<char> >::size_type’ {aka ‘long unsigned int’} [-Wsign-compare]
+  130 |                   if (i+1 >= args.size() || p < nopts-1)
+      |              ^    ~~~~~~~~~
+OptionParser.cu: In member function ‘void OptionParser::print() const’:
+OptionParser.cu:165:19: warning: comparison of integer expressions of different signedness: ‘int’ and ‘std::vector<std::__cxx11::basic_string<char> >::size_type’ {aka ‘long unsigned int’} [-Wsign-compare]
+  165 |       for (int j=0; j<printed.size(); j++) {
+      |                 ~~^~~~~~~~~~~~~~~~
+OptionParser.cu: In member function ‘std::vector<long long int> OptionParser::getOptionVecInt(const string&) const’:
+OptionParser.cu:243:19: warning: comparison of integer expressions of different signedness: ‘int’ and ‘std::vector<std::__cxx11::basic_string<char> >::size_type’ {aka ‘long unsigned int’} [-Wsign-compare]
+  243 |    for (int i=0; i<tokens.size(); i++) {
+      |                 ~~^~~~~~~~~~~~~~~
+OptionParser.cu: In member function ‘std::vector<float> OptionParser::getOptionVecFloat(const string&) const’:
+OptionParser.cu:260:19: warning: comparison of integer expressions of different signedness: ‘int’ and ‘std::vector<std::__cxx11::basic_string<char> >::size_type’ {aka ‘long unsigned int’} [-Wsign-compare]
+  260 |    for (int i=0; i<tokens.size(); i++) {
+      |                 ~~^~~~~~~~~~~~~~~
+OptionParser.cu: In member function ‘std::vector<std::__cxx11::basic_string<char> > OptionParser::getOptionVecString(const string&) const’:
+OptionParser.cu:279:19: warning: comparison of integer expressions of different signedness: ‘int’ and ‘std::vector<std::__cxx11::basic_string<char> >::size_type’ {aka ‘long unsigned int’} [-Wsign-compare]
+  279 |    for (int i=0; i<tokens.size(); i++) {
+      |                 ~~^~~~~~~~~~~~~~~
+OptionParser.cu: In member function ‘bool OptionParser::parseFile(const string&)’:
+OptionParser.cu:316:19: warning: comparison of integer expressions of different signedness: ‘int’ and ‘std::vector<std::__cxx11::basic_string<char> >::size_type’ {aka ‘long unsigned int’} [-Wsign-compare]
+  316 |          for (int i=0; i<tokens.size(); i++) {
+      |                 ~~^~~~~~~~~~~~~~~
+timeout was set to  600

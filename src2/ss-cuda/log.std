@@ -1,0 +1,8 @@
+Search Pattern : clEnqueueNDRangeKernel
+CPU: found 36 times
+
+Executing String search with load balance for 20000 iterations
+Device: found 36 times
+Passed!
+
+Average kernel execution time: 248.747460 (us)

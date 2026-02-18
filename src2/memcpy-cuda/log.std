@@ -1,0 +1,64 @@
+Copy 64 bytes from host to device takes 0.910069 us
+Copy 64 bytes from device to host takes 6.26021 us
+Timing gap in nanoseconds per byte: 83.596
+
+Copy 128 bytes from host to device takes 0.921655 us
+Copy 128 bytes from device to host takes 6.25438 us
+Timing gap in nanoseconds per byte: 41.6619
+
+Copy 256 bytes from host to device takes 0.994463 us
+Copy 256 bytes from device to host takes 6.26286 us
+Timing gap in nanoseconds per byte: 20.5797
+
+Copy 512 bytes from host to device takes 1.00775 us
+Copy 512 bytes from device to host takes 6.27253 us
+Timing gap in nanoseconds per byte: 10.2828
+
+Copy 1024 bytes from host to device takes 1.18114 us
+Copy 1024 bytes from device to host takes 6.27544 us
+Timing gap in nanoseconds per byte: 4.9749
+
+Copy 2048 bytes from host to device takes 1.34676 us
+Copy 2048 bytes from device to host takes 6.33903 us
+Timing gap in nanoseconds per byte: 2.43763
+
+Copy 4096 bytes from host to device takes 1.36463 us
+Copy 4096 bytes from device to host takes 6.356 us
+Timing gap in nanoseconds per byte: 1.2186
+
+Copy 8192 bytes from host to device takes 1.39757 us
+Copy 8192 bytes from device to host takes 6.46377 us
+Timing gap in nanoseconds per byte: 0.618432
+
+Copy 16384 bytes from host to device takes 1.54528 us
+Copy 16384 bytes from device to host takes 6.48301 us
+Timing gap in nanoseconds per byte: 0.301375
+
+Copy 32768 bytes from host to device takes 2.48938 us
+Copy 32768 bytes from device to host takes 6.4999 us
+Timing gap in nanoseconds per byte: 0.122391
+
+Copy 65536 bytes from host to device takes 4.35344 us
+Copy 65536 bytes from device to host takes 6.73764 us
+Timing gap in nanoseconds per byte: 0.0363801
+
+Copy 131072 bytes from host to device takes 7.1282 us
+Copy 131072 bytes from device to host takes 7.03278 us
+Timing gap in nanoseconds per byte: 0.000727973
+
+Copy 262144 bytes from host to device takes 7.53969 us
+Copy 262144 bytes from device to host takes 7.55987 us
+Timing gap in nanoseconds per byte: 7.70087e-05
+
+Copy 524288 bytes from host to device takes 8.2279 us
+Copy 524288 bytes from device to host takes 8.48383 us
+Timing gap in nanoseconds per byte: 0.000488142
+
+Copy 1048576 bytes from host to device takes 9.693 us
+Copy 1048576 bytes from device to host takes 10.2671 us
+Timing gap in nanoseconds per byte: 0.000547545
+
+Copy 2097152 bytes from host to device takes 14.1536 us
+Copy 2097152 bytes from device to host takes 14.3089 us
+Timing gap in nanoseconds per byte: 7.40543e-05
+

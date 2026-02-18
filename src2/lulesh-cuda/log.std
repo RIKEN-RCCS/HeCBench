@@ -1,0 +1,30 @@
+Running problem size 384^3 per domain until completion
+Num processors: 1
+Num threads (hardcoded): 2
+Total number of elements: 56623104
+
+To run other sizes, use -s <integer>.
+To run a fixed number of iterations, use -i <integer>.
+To run a more or less balanced region set, use -b <integer>.
+To change the relative costs of regions, use -c <integer>.
+To print out progress, use -p
+To write an output file for VisIt, use -v
+To only execute the first iteration, use -z (used when profiling: nvprof --metrics all)
+See help (-h) for more options
+
+numNode=57066625 numElem=56623104
+Run completed:  
+   Problem size        =  384 
+   MPI tasks           =  1 
+   Iteration count     =  5 
+   Final Origin Energy = 2.453665e+10 
+   Testing Plane 0 of Energy Array on rank 0:
+        MaxAbsDiff   = 0.000000e+00
+        TotalAbsDiff = 0.000000e+00
+        MaxRelDiff   = 0.000000e+00
+
+
+Elapsed time         =       4.59 (s)
+Grind time (us/z/c)  = 0.016214508 (per dom)  (0.016214508 overall)
+FOM                  =  61673.161 (z/s)
+

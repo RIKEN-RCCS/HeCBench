@@ -1,0 +1,7 @@
+reference.h:22: warning: ignoring ‘#pragma unroll ’ [-Wunknown-pragmas]
+   22 |       for(int i = -R; i <= R; i++)
+      | 
+reference.h:24: warning: ignoring ‘#pragma unroll ’ [-Wunknown-pragmas]
+   24 |         for(int j = -R; j <= R; j++) {
+      | 
+timeout was set to  600

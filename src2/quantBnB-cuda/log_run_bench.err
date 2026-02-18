@@ -1,0 +1,101 @@
+utils.h:58:31: warning: ‘long4’ is deprecated: use long4_16a or long4_32a [-Wdeprecated-declarations]
+   58 | __ALIGN_BYTES(long4, 16)
+      |                               ^    
+In file included from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/driver_types.h:61,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/builtin_types.h:59,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/crt/host_runtime.h:58,
+                 from /usr/lib/gcc/aarch64-redhat-linux/11/include/stddef.h:213:
+/opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/vector_types.h:530:98: note: declared here
+  530 | typedef __device_builtin__ struct long4 __VECTOR_TYPE_DEPRECATED__("use long4_16a or long4_32a") long4;
+      |                                                                                                  ^~~~~
+utils.h:58:1: warning: ‘long4’ is deprecated: use long4_16a or long4_32a [-Wdeprecated-declarations]
+   58 | __ALIGN_BYTES(long4, 16)
+      | ^~~~
+In file included from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/driver_types.h:61,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/builtin_types.h:59,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/crt/host_runtime.h:58,
+                 from /usr/lib/gcc/aarch64-redhat-linux/11/include/stddef.h:213:
+/opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/vector_types.h:530:98: note: declared here
+  530 | typedef __device_builtin__ struct long4 __VECTOR_TYPE_DEPRECATED__("use long4_16a or long4_32a") long4;
+      |                                                                                                  ^~~~~
+utils.h:59:31: warning: ‘ulong4’ is deprecated: use ulong4_16a or ulong4_32a [-Wdeprecated-declarations]
+   59 | __ALIGN_BYTES(ulong4, 16)
+      |                               ^     
+In file included from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/driver_types.h:61,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/builtin_types.h:59,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/crt/host_runtime.h:58,
+                 from /usr/lib/gcc/aarch64-redhat-linux/11/include/stddef.h:213:
+/opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/vector_types.h:531:101: note: declared here
+  531 | typedef __device_builtin__ struct ulong4 __VECTOR_TYPE_DEPRECATED__("use ulong4_16a or ulong4_32a") ulong4;
+      |                                                                                                     ^~~~~~
+utils.h:59:1: warning: ‘ulong4’ is deprecated: use ulong4_16a or ulong4_32a [-Wdeprecated-declarations]
+   59 | __ALIGN_BYTES(ulong4, 16)
+      | ^~~~
+In file included from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/driver_types.h:61,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/builtin_types.h:59,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/crt/host_runtime.h:58,
+                 from /usr/lib/gcc/aarch64-redhat-linux/11/include/stddef.h:213:
+/opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/vector_types.h:531:101: note: declared here
+  531 | typedef __device_builtin__ struct ulong4 __VECTOR_TYPE_DEPRECATED__("use ulong4_16a or ulong4_32a") ulong4;
+      |                                                                                                     ^~~~~~
+utils.h:63:31: warning: ‘longlong4’ is deprecated: use longlong4_16a or longlong4_32a [-Wdeprecated-declarations]
+   63 | __ALIGN_BYTES(longlong4, 16)
+      |                               ^        
+In file included from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/driver_types.h:61,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/builtin_types.h:59,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/crt/host_runtime.h:58,
+                 from /usr/lib/gcc/aarch64-redhat-linux/11/include/stddef.h:213:
+/opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/vector_types.h:548:110: note: declared here
+  548 | typedef __device_builtin__ struct longlong4 __VECTOR_TYPE_DEPRECATED__("use longlong4_16a or longlong4_32a") longlong4;
+      |                                                                                                              ^~~~~~~~~
+utils.h:63:1: warning: ‘longlong4’ is deprecated: use longlong4_16a or longlong4_32a [-Wdeprecated-declarations]
+   63 | __ALIGN_BYTES(longlong4, 16)
+      | ^~~~
+In file included from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/driver_types.h:61,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/builtin_types.h:59,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/crt/host_runtime.h:58,
+                 from /usr/lib/gcc/aarch64-redhat-linux/11/include/stddef.h:213:
+/opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/vector_types.h:548:110: note: declared here
+  548 | typedef __device_builtin__ struct longlong4 __VECTOR_TYPE_DEPRECATED__("use longlong4_16a or longlong4_32a") longlong4;
+      |                                                                                                              ^~~~~~~~~
+utils.h:64:31: warning: ‘ulonglong4’ is deprecated: use ulonglong4_16a or ulonglong4_32a [-Wdeprecated-declarations]
+   64 | __ALIGN_BYTES(ulonglong4, 16)
+      |                               ^         
+In file included from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/driver_types.h:61,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/builtin_types.h:59,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/crt/host_runtime.h:58,
+                 from /usr/lib/gcc/aarch64-redhat-linux/11/include/stddef.h:213:
+/opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/vector_types.h:549:113: note: declared here
+  549 | typedef __device_builtin__ struct ulonglong4 __VECTOR_TYPE_DEPRECATED__("use ulonglong4_16a or ulonglong4_32a") ulonglong4;
+      |                                                                                                                 ^~~~~~~~~~
+utils.h:64:1: warning: ‘ulonglong4’ is deprecated: use ulonglong4_16a or ulonglong4_32a [-Wdeprecated-declarations]
+   64 | __ALIGN_BYTES(ulonglong4, 16)
+      | ^~~~
+In file included from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/driver_types.h:61,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/builtin_types.h:59,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/crt/host_runtime.h:58,
+                 from /usr/lib/gcc/aarch64-redhat-linux/11/include/stddef.h:213:
+/opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/vector_types.h:549:113: note: declared here
+  549 | typedef __device_builtin__ struct ulonglong4 __VECTOR_TYPE_DEPRECATED__("use ulonglong4_16a or ulonglong4_32a") ulonglong4;
+      |                                                                                                                 ^~~~~~~~~~
+utils.h:65:31: warning: ‘double4’ is deprecated: use double4_16a or double4_32a [-Wdeprecated-declarations]
+   65 | __ALIGN_BYTES(double4, 16)
+      |                               ^      
+In file included from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/driver_types.h:61,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/builtin_types.h:59,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/crt/host_runtime.h:58,
+                 from /usr/lib/gcc/aarch64-redhat-linux/11/include/stddef.h:213:
+/opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/vector_types.h:559:104: note: declared here
+  559 | typedef __device_builtin__ struct double4 __VECTOR_TYPE_DEPRECATED__("use double4_16a or double4_32a") double4;
+      |                                                                                                        ^~~~~~~
+utils.h:65:1: warning: ‘double4’ is deprecated: use double4_16a or double4_32a [-Wdeprecated-declarations]
+   65 | __ALIGN_BYTES(double4, 16)
+      | ^~~~
+In file included from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/driver_types.h:61,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/builtin_types.h:59,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/crt/host_runtime.h:58,
+                 from /usr/lib/gcc/aarch64-redhat-linux/11/include/stddef.h:213:
+/opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/vector_types.h:559:104: note: declared here
+  559 | typedef __device_builtin__ struct double4 __VECTOR_TYPE_DEPRECATED__("use double4_16a or double4_32a") double4;
+      |                                                                                                        ^~~~~~~
+timeout was set to  600

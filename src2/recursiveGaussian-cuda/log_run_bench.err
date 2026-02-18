@@ -1,0 +1,9 @@
+In file included from RecursiveGaussianHost.cpp:13:
+main.h:37:19: warning: ‘GP’ defined but not used [-Wunused-variable]
+   37 | static GaussParms GP;
+      |                   ^~
+../boxfilter-sycl/shrUtils.cpp: In function ‘int shrLogV(int, int, const char*, va_list)’:
+../boxfilter-sycl/shrUtils.cpp:176:16: warning: variable ‘szNumWritten’ set but not used [-Wunused-but-set-variable]
+  176 |         size_t szNumWritten = 0;
+      |                ^~~~~~~~~~~~
+timeout was set to  600

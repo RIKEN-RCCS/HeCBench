@@ -1,0 +1,146 @@
+full_matrix.cu:136: warning: ignoring ‘#pragma omp simd’ [-Wunknown-pragmas]
+  136 | #pragma omp simd
+      | 
+full_matrix.cu:298: warning: ignoring ‘#pragma omp simd’ [-Wunknown-pragmas]
+  298 | #pragma omp simd
+      | 
+multimat.cu(623): warning #177-D: variable "a1" was declared but never referenced
+    double a1,a2,a3;
+           ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+multimat.cu(623): warning #177-D: variable "a2" was declared but never referenced
+    double a1,a2,a3;
+              ^
+
+multimat.cu(623): warning #177-D: variable "a3" was declared but never referenced
+    double a1,a2,a3;
+                 ^
+
+multimat.cu:162: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+  162 | #pragma omp parallel for
+      | 
+multimat.cu:176: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+  176 | #pragma omp parallel for
+      | 
+multimat.cu:188: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+  188 | #pragma omp parallel for
+      | 
+multimat.cu:201: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+  201 | #pragma omp parallel for
+      | 
+multimat.cu:211: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+  211 | #pragma omp parallel for
+      | 
+multimat.cu:267: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+  267 | #pragma omp parallel for
+      | 
+multimat.cu:533: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+  533 | #pragma omp parallel for
+      | 
+multimat.cu: In function ‘void initialise_field_rand(full_data, double, double, double)’:
+multimat.cu:141:32: warning: ‘m3’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  141 |       while (m4 == m && m4 == m2 && m4 == m3)
+      |        ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~
+multimat.cu:119:9: note: ‘m3’ was declared here
+  119 |     int m2, m3, m4;
+      |         ^~
+full_matrix.cu:136: warning: ignoring ‘#pragma omp simd’ [-Wunknown-pragmas]
+  136 | #pragma omp simd
+      | 
+full_matrix.cu:298: warning: ignoring ‘#pragma omp simd’ [-Wunknown-pragmas]
+  298 | #pragma omp simd
+      | 
+multimat.cu(623): warning #177-D: variable "a1" was declared but never referenced
+    double a1,a2,a3;
+           ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+multimat.cu(623): warning #177-D: variable "a2" was declared but never referenced
+    double a1,a2,a3;
+              ^
+
+multimat.cu(623): warning #177-D: variable "a3" was declared but never referenced
+    double a1,a2,a3;
+                 ^
+
+multimat.cu:162: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+  162 | #pragma omp parallel for
+      | 
+multimat.cu:176: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+  176 | #pragma omp parallel for
+      | 
+multimat.cu:188: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+  188 | #pragma omp parallel for
+      | 
+multimat.cu:201: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+  201 | #pragma omp parallel for
+      | 
+multimat.cu:211: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+  211 | #pragma omp parallel for
+      | 
+multimat.cu:267: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+  267 | #pragma omp parallel for
+      | 
+multimat.cu:533: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+  533 | #pragma omp parallel for
+      | 
+multimat.cu: In function ‘void initialise_field_rand(full_data, double, double, double)’:
+multimat.cu:141:32: warning: ‘m3’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  141 |       while (m4 == m && m4 == m2 && m4 == m3)
+      |        ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~
+multimat.cu:119:9: note: ‘m3’ was declared here
+  119 |     int m2, m3, m4;
+      |         ^~
+full_matrix.cu:136: warning: ignoring ‘#pragma omp simd’ [-Wunknown-pragmas]
+  136 | #pragma omp simd
+      | 
+full_matrix.cu:298: warning: ignoring ‘#pragma omp simd’ [-Wunknown-pragmas]
+  298 | #pragma omp simd
+      | 
+multimat.cu(623): warning #177-D: variable "a1" was declared but never referenced
+    double a1,a2,a3;
+           ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+multimat.cu(623): warning #177-D: variable "a2" was declared but never referenced
+    double a1,a2,a3;
+              ^
+
+multimat.cu(623): warning #177-D: variable "a3" was declared but never referenced
+    double a1,a2,a3;
+                 ^
+
+multimat.cu:162: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+  162 | #pragma omp parallel for
+      | 
+multimat.cu:176: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+  176 | #pragma omp parallel for
+      | 
+multimat.cu:188: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+  188 | #pragma omp parallel for
+      | 
+multimat.cu:201: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+  201 | #pragma omp parallel for
+      | 
+multimat.cu:211: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+  211 | #pragma omp parallel for
+      | 
+multimat.cu:267: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+  267 | #pragma omp parallel for
+      | 
+multimat.cu:533: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+  533 | #pragma omp parallel for
+      | 
+multimat.cu: In function ‘void initialise_field_rand(full_data, double, double, double)’:
+multimat.cu:141:32: warning: ‘m3’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  141 |       while (m4 == m && m4 == m2 && m4 == m3)
+      |        ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~
+multimat.cu:119:9: note: ‘m3’ was declared here
+  119 |     int m2, m3, m4;
+      |         ^~
+cp: '../multimaterial-cuda/volfrac.dat.tgz' and './volfrac.dat.tgz' are the same file
+timeout was set to  600

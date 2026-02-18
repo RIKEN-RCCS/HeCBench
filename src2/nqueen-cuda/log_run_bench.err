@@ -1,0 +1,37 @@
+main.cu(85): warning #68-D: integer conversion resulted in a change of sign
+        vertice[i] = -1;
+                     ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+main.cu(101): warning #68-D: integer conversion resulted in a change of sign
+          vertice[depth] = -1;
+                           ^
+
+main.cu(131): warning #68-D: integer conversion resulted in a change of sign
+      vertice[i] = -1;
+                   ^
+
+main.cu(143): warning #68-D: integer conversion resulted in a change of sign
+        vertice[nivel] = -1;
+                         ^
+
+main.cu(85): warning #68-D: integer conversion resulted in a change of sign
+        vertice[i] = -1;
+                     ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+main.cu(101): warning #68-D: integer conversion resulted in a change of sign
+          vertice[depth] = -1;
+                           ^
+
+main.cu(131): warning #68-D: integer conversion resulted in a change of sign
+      vertice[i] = -1;
+                   ^
+
+main.cu(143): warning #68-D: integer conversion resulted in a change of sign
+        vertice[nivel] = -1;
+                         ^
+
+timeout was set to  600

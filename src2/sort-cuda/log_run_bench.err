@@ -1,0 +1,5 @@
+main.cu: In function ‘int main(int, char**)’:
+main.cu:131:11: warning: ‘d_out’ may be used uninitialized [-Wmaybe-uninitialized]
+  131 |   cudaMemcpy(h_odata, d_out, size * sizeof(T), cudaMemcpyDeviceToHost);
+      |   ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+timeout was set to  600

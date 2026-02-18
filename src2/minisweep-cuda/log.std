@@ -1,0 +1,3 @@
+Normsq result: 1.54549617e+13  diff: 0.000e+00  verify: PASS  host time: 50.389 (s) kernel time: 50.312 (s)
+GF/s (host): 4.773
+GF/s (device): 4.781

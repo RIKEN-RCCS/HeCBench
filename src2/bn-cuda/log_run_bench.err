@@ -1,0 +1,5 @@
+main.cu: In function ‘float findBestGraph(float*, int*, float*, bool*)’:
+main.cu:408:15: warning: ‘bestpN’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  408 |       for (i = 0; i < bestpN; i++) {
+      |             ~~^~~~~~~~
+timeout was set to  600

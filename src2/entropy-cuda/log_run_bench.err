@@ -1,0 +1,5 @@
+reference.h: In function ‘void reference(float*, const char*, int, int)’:
+reference.h:21:29: warning: array subscript has type ‘char’ [-Wchar-subscripts]
+   21 |             count[val[yy * width + xx]]++;
+      |             ~~~~~~~~~~~~~~~~^
+timeout was set to  600

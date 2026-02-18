@@ -1,0 +1,11 @@
+main.cu(81): warning #550-D: variable "read" was set but never used
+    ssize_t read;
+            ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+main.cu: In function ‘int main(int, const char* const*)’:
+main.cu:81:9: warning: variable ‘read’ set but not used [-Wunused-but-set-variable]
+   81 |   ssize_t read;
+      |         ^~~~
+timeout was set to  600

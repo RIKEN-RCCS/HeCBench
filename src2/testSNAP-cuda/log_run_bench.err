@@ -1,0 +1,6 @@
+main.cu:28:10: fatal error: refdata_2J14_W.h: No such file or directory
+   28 | #include "refdata_2J14_W.h"
+      |          ^~~~~~~~~~~~~~~~~~
+compilation terminated.
+make: *** [Makefile.NVD:51: main.o] Error 1
+timeout was set to  600

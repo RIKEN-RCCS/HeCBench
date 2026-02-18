@@ -1,0 +1,16 @@
+In file included from ../sptrsv-sycl/main.cpp:2:
+../sptrsv-sycl/mmio.h: In function ‘int mm_read_unsymmetric_sparse(const char*, int*, int*, int*, double**, int**, int**)’:
+../sptrsv-sycl/mmio.h:607:13: warning: unused variable ‘rt’ [-Wunused-variable]
+  607 |         int rt = fscanf(f, "%d %d %lg\n", &I[i], &J[i], &val[i]);
+      |             ^~
+In file included from ../sptrsv-sycl/main.cpp:3:
+../sptrsv-sycl/tranpose.h: In function ‘int matrix_layer(int, int, int, const int*, const int*, const double*, int*, double*)’:
+../sptrsv-sycl/tranpose.h:110:15: warning: comparison of integer expressions of different signedness: ‘unsigned int’ and ‘int’ [-Wsign-compare]
+  110 |         if(min>layer_num[j])
+      |            ~~~^~~~~~~~~~~~~
+In file included from ../sptrsv-sycl/main.cpp:4:
+../sptrsv-sycl/read_mtx.h: In function ‘int read_mtx(char*, int*, int*, int*, int**, int**, double**)’:
+../sptrsv-sycl/read_mtx.h:79:13: warning: variable ‘returnvalue’ set but not used [-Wunused-but-set-variable]
+   79 |         int returnvalue;
+      |             ^~~~~~~~~~~
+timeout was set to  600

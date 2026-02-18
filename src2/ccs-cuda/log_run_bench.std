@@ -1,0 +1,7 @@
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c main.cu -o main.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 main.o -o main 
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "../ccs-cuda/prepare_data.sh; time -p ( ./main -t 0.9 -i ../ccs-cuda/Data_Constant_100_1_bicluster.txt -o ./Output.txt -m 50 -p 1 -g 100.0 -r 100 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 1 559 558

@@ -1,0 +1,759 @@
+In file included from main.cu:7:
+kernels.cu:135: warning: "sigma_real" redefined
+  135 | #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + (sigma_id))
+      | 
+kernels.cu:91: note: this is the location of the previous definition
+   91 | #define sigma_real(i, j) (sigma_id + 2 * ((i) * dim + (j)))
+      | 
+kernels.cu:136: warning: "sigma_imag" redefined
+  136 | #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + VEC_LENGTH_AUTO + (sigma_id))
+      | 
+kernels.cu:92: note: this is the location of the previous definition
+   92 | #define sigma_imag(i, j) (sigma_id + 2 * ((i) * dim + (j)) + 1)
+      | 
+kernels.cu:138: warning: "ham_real" redefined
+  138 | #define ham_real(i, j) ((i) * dim + (j))
+      | 
+kernels.cu:93: note: this is the location of the previous definition
+   93 | #define ham_real(i, j) (2 * ((i) * dim + (j)))
+      | 
+kernels.cu:139: warning: "ham_imag" redefined
+  139 | #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+      | 
+kernels.cu:94: note: this is the location of the previous definition
+   94 | #define ham_imag(i, j) (2 * ((i) * dim + (k)) + 1)
+      | 
+kernels.cu:174: warning: "package_id" redefined
+  174 | #define package_id ((gid / VEC_LENGTH_AUTO) * VEC_LENGTH_AUTO * 2 * DIM * DIM)
+      | 
+kernels.cu:132: note: this is the location of the previous definition
+  132 | #define package_id ((gid / VEC_LENGTH_AUTO) * VEC_LENGTH_AUTO * 2 * dim * dim)
+      | 
+kernels.cu:177: warning: "sigma_real" redefined
+  177 | #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + (sigma_id))
+      | 
+kernels.cu:135: note: this is the location of the previous definition
+  135 | #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + (sigma_id))
+      | 
+kernels.cu:178: warning: "sigma_imag" redefined
+  178 | #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + VEC_LENGTH_AUTO + (sigma_id))
+      | 
+kernels.cu:136: note: this is the location of the previous definition
+  136 | #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + VEC_LENGTH_AUTO + (sigma_id))
+      | 
+kernels.cu:180: warning: "ham_real" redefined
+  180 | #define ham_real(i, j) ((i) * DIM + (j))
+      | 
+kernels.cu:138: note: this is the location of the previous definition
+  138 | #define ham_real(i, j) ((i) * dim + (j))
+      | 
+kernels.cu:181: warning: "ham_imag" redefined
+  181 | #define ham_imag(i, j) (DIM * DIM + (i) * DIM + (j))
+      | 
+kernels.cu:139: note: this is the location of the previous definition
+  139 | #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+      | 
+kernels.cu:271: warning: "package_id" redefined
+  271 | #define package_id ((gid / VEC_LENGTH_AUTO) * VEC_LENGTH_AUTO * 2 * dim * dim)
+      | 
+kernels.cu:214: note: this is the location of the previous definition
+  214 | #define package_id ((gid / VEC_LENGTH_AUTO) * VEC_LENGTH_AUTO * 2 * DIM * DIM)
+      | 
+kernels.cu:274: warning: "sigma_real" redefined
+  274 | #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + (sigma_id))
+      | 
+kernels.cu:217: note: this is the location of the previous definition
+  217 | #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + (sigma_id))
+      | 
+kernels.cu:275: warning: "sigma_imag" redefined
+  275 | #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + VEC_LENGTH_AUTO + (sigma_id))
+      | 
+kernels.cu:218: note: this is the location of the previous definition
+  218 | #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + VEC_LENGTH_AUTO + (sigma_id))
+      | 
+kernels.cu:277: warning: "ham_real" redefined
+  277 | #define ham_real(i, j) ((i) * dim + (j))
+      | 
+kernels.cu:220: note: this is the location of the previous definition
+  220 | #define ham_real(i, j) ((i) * DIM + (j))
+      | 
+kernels.cu:278: warning: "ham_imag" redefined
+  278 | #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+      | 
+kernels.cu:221: note: this is the location of the previous definition
+  221 | #define ham_imag(i, j) (DIM * DIM + (i) * DIM + (j))
+      | 
+kernels.cu:308: warning: "package_id" redefined
+  308 | #define package_id ((gid / VEC_LENGTH_AUTO) * VEC_LENGTH_AUTO * 2 * DIM * DIM)
+      | 
+kernels.cu:271: note: this is the location of the previous definition
+  271 | #define package_id ((gid / VEC_LENGTH_AUTO) * VEC_LENGTH_AUTO * 2 * dim * dim)
+      | 
+kernels.cu:311: warning: "sigma_real" redefined
+  311 | #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + (sigma_id))
+      | 
+kernels.cu:274: note: this is the location of the previous definition
+  274 | #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + (sigma_id))
+      | 
+kernels.cu:312: warning: "sigma_imag" redefined
+  312 | #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + VEC_LENGTH_AUTO + (sigma_id))
+      | 
+kernels.cu:275: note: this is the location of the previous definition
+  275 | #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + VEC_LENGTH_AUTO + (sigma_id))
+      | 
+kernels.cu:314: warning: "ham_real" redefined
+  314 | #define ham_real(i, j) ((i) * DIM + (j))
+      | 
+kernels.cu:277: note: this is the location of the previous definition
+  277 | #define ham_real(i, j) ((i) * dim + (j))
+      | 
+kernels.cu:315: warning: "ham_imag" redefined
+  315 | #define ham_imag(i, j) (DIM * DIM + (i) * DIM + (j))
+      | 
+kernels.cu:278: note: this is the location of the previous definition
+  278 | #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+      | 
+kernels.cu:386: warning: "package_id" redefined
+  386 | #define package_id ((PACKAGES_PER_WG * blockIdx.y + threadIdx.y) * (VEC_LENGTH_AUTO * 2 * dim * dim))
+      | 
+kernels.cu:345: note: this is the location of the previous definition
+  345 | #define package_id ((gid / VEC_LENGTH_AUTO) * VEC_LENGTH_AUTO * 2 * DIM * DIM)
+      | 
+kernels.cu:387: warning: "sigma_id" redefined
+  387 | #define sigma_id threadIdx.x
+      | 
+kernels.cu:346: note: this is the location of the previous definition
+  346 | #define sigma_id (gid % VEC_LENGTH_AUTO)
+      | 
+kernels.cu:389: warning: "sigma_real" redefined
+  389 | #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + sigma_id)
+      | 
+kernels.cu:348: note: this is the location of the previous definition
+  348 | #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + (sigma_id))
+      | 
+kernels.cu:390: warning: "sigma_imag" redefined
+  390 | #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + VEC_LENGTH_AUTO + sigma_id)
+      | 
+kernels.cu:349: note: this is the location of the previous definition
+  349 | #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + VEC_LENGTH_AUTO + (sigma_id))
+      | 
+kernels.cu:392: warning: "ham_real" redefined
+  392 | #define ham_real(i, j) ((i) * dim + (j))
+      | 
+kernels.cu:351: note: this is the location of the previous definition
+  351 | #define ham_real(i, j) ((i) * DIM + (j))
+      | 
+kernels.cu:393: warning: "ham_imag" redefined
+  393 | #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+      | 
+kernels.cu:352: note: this is the location of the previous definition
+  352 | #define ham_imag(i, j) (DIM * DIM + (i) * DIM + (j))
+      | 
+kernels.cu:425: warning: "package_id" redefined
+  425 | #define package_id ((PACKAGES_PER_WG * blockIdx.y + threadIdx.y) * (VEC_LENGTH_AUTO * 2 * DIM * DIM))
+      | 
+kernels.cu:386: note: this is the location of the previous definition
+  386 | #define package_id ((PACKAGES_PER_WG * blockIdx.y + threadIdx.y) * (VEC_LENGTH_AUTO * 2 * dim * dim))
+      | 
+kernels.cu:428: warning: "sigma_real" redefined
+  428 | #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + sigma_id)
+      | 
+kernels.cu:389: note: this is the location of the previous definition
+  389 | #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + sigma_id)
+      | 
+kernels.cu:429: warning: "sigma_imag" redefined
+  429 | #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + VEC_LENGTH_AUTO + sigma_id)
+      | 
+kernels.cu:390: note: this is the location of the previous definition
+  390 | #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + VEC_LENGTH_AUTO + sigma_id)
+      | 
+kernels.cu:431: warning: "ham_real" redefined
+  431 | #define ham_real(i, j) ((i) * DIM + (j))
+      | 
+kernels.cu:392: note: this is the location of the previous definition
+  392 | #define ham_real(i, j) ((i) * dim + (j))
+      | 
+kernels.cu:432: warning: "ham_imag" redefined
+  432 | #define ham_imag(i, j) (DIM * DIM + (i) * DIM + (j))
+      | 
+kernels.cu:393: note: this is the location of the previous definition
+  393 | #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+      | 
+kernels.cu:517: warning: "package_id" redefined
+  517 | #define package_id ((PACKAGES_PER_WG * blockIdx.y + threadIdx.y) * (VEC_LENGTH_AUTO * 2 * dim * dim))
+      | 
+kernels.cu:464: note: this is the location of the previous definition
+  464 | #define package_id ((PACKAGES_PER_WG * blockIdx.y + threadIdx.y) * (VEC_LENGTH_AUTO * 2 * DIM * DIM))
+      | 
+kernels.cu:520: warning: "sigma_real" redefined
+  520 | #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + sigma_id)
+      | 
+kernels.cu:467: note: this is the location of the previous definition
+  467 | #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + sigma_id)
+      | 
+kernels.cu:521: warning: "sigma_imag" redefined
+  521 | #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + VEC_LENGTH_AUTO + sigma_id)
+      | 
+kernels.cu:468: note: this is the location of the previous definition
+  468 | #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + VEC_LENGTH_AUTO + sigma_id)
+      | 
+kernels.cu:523: warning: "ham_real" redefined
+  523 | #define ham_real(i, j) ((i) * dim + (j))
+      | 
+kernels.cu:470: note: this is the location of the previous definition
+  470 | #define ham_real(i, j) ((i) * DIM + (j))
+      | 
+kernels.cu:524: warning: "ham_imag" redefined
+  524 | #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+      | 
+kernels.cu:471: note: this is the location of the previous definition
+  471 | #define ham_imag(i, j) (DIM * DIM + (i) * DIM + (j))
+      | 
+kernels.cu:552: warning: "package_id" redefined
+  552 | #define package_id ((PACKAGES_PER_WG * blockIdx.y + threadIdx.y) * (VEC_LENGTH_AUTO * 2 * DIM * DIM))
+      | 
+kernels.cu:517: note: this is the location of the previous definition
+  517 | #define package_id ((PACKAGES_PER_WG * blockIdx.y + threadIdx.y) * (VEC_LENGTH_AUTO * 2 * dim * dim))
+      | 
+kernels.cu:555: warning: "sigma_real" redefined
+  555 | #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + sigma_id)
+      | 
+kernels.cu:520: note: this is the location of the previous definition
+  520 | #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + sigma_id)
+      | 
+kernels.cu:556: warning: "sigma_imag" redefined
+  556 | #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + VEC_LENGTH_AUTO + sigma_id)
+      | 
+kernels.cu:521: note: this is the location of the previous definition
+  521 | #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + VEC_LENGTH_AUTO + sigma_id)
+      | 
+kernels.cu:557: warning: "ham_real" redefined
+  557 | #define ham_real(i, j) ((i) * DIM + (j))
+      | 
+kernels.cu:523: note: this is the location of the previous definition
+  523 | #define ham_real(i, j) ((i) * dim + (j))
+      | 
+kernels.cu:558: warning: "ham_imag" redefined
+  558 | #define ham_imag(i, j) (DIM * DIM + (i) * DIM + (j))
+      | 
+kernels.cu:524: note: this is the location of the previous definition
+  524 | #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+      | 
+kernels.cu:629: warning: "package_id" redefined
+  629 | #define package_id (gid * dim * dim * 2)
+      | 
+kernels.cu:586: note: this is the location of the previous definition
+  586 | #define package_id ((PACKAGES_PER_WG * blockIdx.y + threadIdx.y) * (VEC_LENGTH_AUTO * 2 * DIM * DIM))
+      | 
+kernels.cu:631: warning: "sigma_real" redefined
+  631 | #define sigma_real(i, j) (package_id + 2 * (dim * (i) + (j)))
+      | 
+kernels.cu:589: note: this is the location of the previous definition
+  589 | #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + sigma_id)
+      | 
+kernels.cu:632: warning: "sigma_imag" redefined
+  632 | #define sigma_imag(i, j) (package_id + 2 * (dim * (i) + (j)) + 1)
+      | 
+kernels.cu:590: note: this is the location of the previous definition
+  590 | #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + VEC_LENGTH_AUTO + sigma_id)
+      | 
+kernels.cu:634: warning: "ham_real" redefined
+  634 | #define ham_real(i, j) ((i) * dim + (j))
+      | 
+kernels.cu:592: note: this is the location of the previous definition
+  592 | #define ham_real(i, j) ((i) * DIM + (j))
+      | 
+kernels.cu:635: warning: "ham_imag" redefined
+  635 | #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+      | 
+kernels.cu:593: note: this is the location of the previous definition
+  593 | #define ham_imag(i, j) (DIM * DIM + (i) * DIM + (j))
+      | 
+kernels.cu:669: warning: "package_id" redefined
+  669 |   #define package_id (gid * DIM * DIM * 2)
+      | 
+kernels.cu:629: note: this is the location of the previous definition
+  629 | #define package_id (gid * dim * dim * 2)
+      | 
+kernels.cu:671: warning: "sigma_real" redefined
+  671 |   #define sigma_real(i, j) (package_id + 2 * (DIM * (i) + (j)))
+      | 
+kernels.cu:631: note: this is the location of the previous definition
+  631 | #define sigma_real(i, j) (package_id + 2 * (dim * (i) + (j)))
+      | 
+kernels.cu:672: warning: "sigma_imag" redefined
+  672 |   #define sigma_imag(i, j) (package_id + 2 * (DIM * (i) + (j)) + 1)
+      | 
+kernels.cu:632: note: this is the location of the previous definition
+  632 | #define sigma_imag(i, j) (package_id + 2 * (dim * (i) + (j)) + 1)
+      | 
+kernels.cu:674: warning: "ham_real" redefined
+  674 |   #define ham_real(i, j) ((i) * DIM + (j))
+      | 
+kernels.cu:634: note: this is the location of the previous definition
+  634 | #define ham_real(i, j) ((i) * dim + (j))
+      | 
+kernels.cu:675: warning: "ham_imag" redefined
+  675 |   #define ham_imag(i, j) (DIM * DIM + (i) * DIM + (j))
+      | 
+kernels.cu:635: note: this is the location of the previous definition
+  635 | #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+      | 
+kernels.cu:807: warning: "package_id" redefined
+  807 |   #define package_id (gid * dim * dim * 2)
+      | 
+kernels.cu:763: note: this is the location of the previous definition
+  763 |   #define package_id (gid * DIM * DIM * 2)
+      | 
+kernels.cu:809: warning: "sigma_real" redefined
+  809 |   #define sigma_real(i, j) (package_id + 2 * (dim * (i) + (j)))
+      | 
+kernels.cu:765: note: this is the location of the previous definition
+  765 |   #define sigma_real(i, j) (package_id + 2 * (DIM * (i) + (j)))
+      | 
+kernels.cu:810: warning: "sigma_imag" redefined
+  810 |   #define sigma_imag(i, j) (package_id + 2 * (dim * (i) + (j)) + 1)
+      | 
+kernels.cu:766: note: this is the location of the previous definition
+  766 |   #define sigma_imag(i, j) (package_id + 2 * (DIM * (i) + (j)) + 1)
+      | 
+kernels.cu:812: warning: "ham_real" redefined
+  812 |   #define ham_real(i, j) ((i) * dim + (j))
+      | 
+kernels.cu:768: note: this is the location of the previous definition
+  768 |   #define ham_real(i, j) ((i) * DIM + (j))
+      | 
+kernels.cu:813: warning: "ham_imag" redefined
+  813 |   #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+      | 
+kernels.cu:769: note: this is the location of the previous definition
+  769 |   #define ham_imag(i, j) (DIM * DIM + (i) * DIM + (j))
+      | 
+kernels.cu:842: warning: "package_id" redefined
+  842 |   #define package_id (gid * DIM * DIM * 2)
+      | 
+kernels.cu:807: note: this is the location of the previous definition
+  807 |   #define package_id (gid * dim * dim * 2)
+      | 
+kernels.cu:844: warning: "sigma_real" redefined
+  844 |   #define sigma_real(i, j) (package_id + 2 * (DIM * (i) + (j)))
+      | 
+kernels.cu:809: note: this is the location of the previous definition
+  809 |   #define sigma_real(i, j) (package_id + 2 * (dim * (i) + (j)))
+      | 
+kernels.cu:845: warning: "sigma_imag" redefined
+  845 |   #define sigma_imag(i, j) (package_id + 2 * (DIM * (i) + (j)) + 1)
+      | 
+kernels.cu:810: note: this is the location of the previous definition
+  810 |   #define sigma_imag(i, j) (package_id + 2 * (dim * (i) + (j)) + 1)
+      | 
+kernels.cu:847: warning: "ham_real" redefined
+  847 |   #define ham_real(i, j) ((i) * DIM + (j))
+      | 
+kernels.cu:812: note: this is the location of the previous definition
+  812 |   #define ham_real(i, j) ((i) * dim + (j))
+      | 
+kernels.cu:848: warning: "ham_imag" redefined
+  848 |   #define ham_imag(i, j) (DIM * DIM + (i) * DIM + (j))
+      | 
+kernels.cu:813: note: this is the location of the previous definition
+  813 |   #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+      | 
+kernels.cu:954: warning: "sigma_id" redefined
+  954 |   #define sigma_id(i,j,m) ((m) * DIM * DIM + ((i) * DIM + (j)))
+      | 
+kernels.cu:587: note: this is the location of the previous definition
+  587 | #define sigma_id threadIdx.x
+      | 
+In file included from main.cu:7:
+kernels.cu:135: warning: "sigma_real" redefined
+  135 | #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + (sigma_id))
+      | 
+kernels.cu:91: note: this is the location of the previous definition
+   91 | #define sigma_real(i, j) (sigma_id + 2 * ((i) * dim + (j)))
+      | 
+kernels.cu:136: warning: "sigma_imag" redefined
+  136 | #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + VEC_LENGTH_AUTO + (sigma_id))
+      | 
+kernels.cu:92: note: this is the location of the previous definition
+   92 | #define sigma_imag(i, j) (sigma_id + 2 * ((i) * dim + (j)) + 1)
+      | 
+kernels.cu:138: warning: "ham_real" redefined
+  138 | #define ham_real(i, j) ((i) * dim + (j))
+      | 
+kernels.cu:93: note: this is the location of the previous definition
+   93 | #define ham_real(i, j) (2 * ((i) * dim + (j)))
+      | 
+kernels.cu:139: warning: "ham_imag" redefined
+  139 | #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+      | 
+kernels.cu:94: note: this is the location of the previous definition
+   94 | #define ham_imag(i, j) (2 * ((i) * dim + (k)) + 1)
+      | 
+kernels.cu:174: warning: "package_id" redefined
+  174 | #define package_id ((gid / VEC_LENGTH_AUTO) * VEC_LENGTH_AUTO * 2 * DIM * DIM)
+      | 
+kernels.cu:132: note: this is the location of the previous definition
+  132 | #define package_id ((gid / VEC_LENGTH_AUTO) * VEC_LENGTH_AUTO * 2 * dim * dim)
+      | 
+kernels.cu:177: warning: "sigma_real" redefined
+  177 | #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + (sigma_id))
+      | 
+kernels.cu:135: note: this is the location of the previous definition
+  135 | #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + (sigma_id))
+      | 
+kernels.cu:178: warning: "sigma_imag" redefined
+  178 | #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + VEC_LENGTH_AUTO + (sigma_id))
+      | 
+kernels.cu:136: note: this is the location of the previous definition
+  136 | #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + VEC_LENGTH_AUTO + (sigma_id))
+      | 
+kernels.cu:180: warning: "ham_real" redefined
+  180 | #define ham_real(i, j) ((i) * DIM + (j))
+      | 
+kernels.cu:138: note: this is the location of the previous definition
+  138 | #define ham_real(i, j) ((i) * dim + (j))
+      | 
+kernels.cu:181: warning: "ham_imag" redefined
+  181 | #define ham_imag(i, j) (DIM * DIM + (i) * DIM + (j))
+      | 
+kernels.cu:139: note: this is the location of the previous definition
+  139 | #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+      | 
+kernels.cu:271: warning: "package_id" redefined
+  271 | #define package_id ((gid / VEC_LENGTH_AUTO) * VEC_LENGTH_AUTO * 2 * dim * dim)
+      | 
+kernels.cu:214: note: this is the location of the previous definition
+  214 | #define package_id ((gid / VEC_LENGTH_AUTO) * VEC_LENGTH_AUTO * 2 * DIM * DIM)
+      | 
+kernels.cu:274: warning: "sigma_real" redefined
+  274 | #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + (sigma_id))
+      | 
+kernels.cu:217: note: this is the location of the previous definition
+  217 | #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + (sigma_id))
+      | 
+kernels.cu:275: warning: "sigma_imag" redefined
+  275 | #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + VEC_LENGTH_AUTO + (sigma_id))
+      | 
+kernels.cu:218: note: this is the location of the previous definition
+  218 | #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + VEC_LENGTH_AUTO + (sigma_id))
+      | 
+kernels.cu:277: warning: "ham_real" redefined
+  277 | #define ham_real(i, j) ((i) * dim + (j))
+      | 
+kernels.cu:220: note: this is the location of the previous definition
+  220 | #define ham_real(i, j) ((i) * DIM + (j))
+      | 
+kernels.cu:278: warning: "ham_imag" redefined
+  278 | #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+      | 
+kernels.cu:221: note: this is the location of the previous definition
+  221 | #define ham_imag(i, j) (DIM * DIM + (i) * DIM + (j))
+      | 
+kernels.cu:308: warning: "package_id" redefined
+  308 | #define package_id ((gid / VEC_LENGTH_AUTO) * VEC_LENGTH_AUTO * 2 * DIM * DIM)
+      | 
+kernels.cu:271: note: this is the location of the previous definition
+  271 | #define package_id ((gid / VEC_LENGTH_AUTO) * VEC_LENGTH_AUTO * 2 * dim * dim)
+      | 
+kernels.cu:311: warning: "sigma_real" redefined
+  311 | #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + (sigma_id))
+      | 
+kernels.cu:274: note: this is the location of the previous definition
+  274 | #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + (sigma_id))
+      | 
+kernels.cu:312: warning: "sigma_imag" redefined
+  312 | #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + VEC_LENGTH_AUTO + (sigma_id))
+      | 
+kernels.cu:275: note: this is the location of the previous definition
+  275 | #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + VEC_LENGTH_AUTO + (sigma_id))
+      | 
+kernels.cu:314: warning: "ham_real" redefined
+  314 | #define ham_real(i, j) ((i) * DIM + (j))
+      | 
+kernels.cu:277: note: this is the location of the previous definition
+  277 | #define ham_real(i, j) ((i) * dim + (j))
+      | 
+kernels.cu:315: warning: "ham_imag" redefined
+  315 | #define ham_imag(i, j) (DIM * DIM + (i) * DIM + (j))
+      | 
+kernels.cu:278: note: this is the location of the previous definition
+  278 | #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+      | 
+kernels.cu:386: warning: "package_id" redefined
+  386 | #define package_id ((PACKAGES_PER_WG * blockIdx.y + threadIdx.y) * (VEC_LENGTH_AUTO * 2 * dim * dim))
+      | 
+kernels.cu:345: note: this is the location of the previous definition
+  345 | #define package_id ((gid / VEC_LENGTH_AUTO) * VEC_LENGTH_AUTO * 2 * DIM * DIM)
+      | 
+kernels.cu:387: warning: "sigma_id" redefined
+  387 | #define sigma_id threadIdx.x
+      | 
+kernels.cu:346: note: this is the location of the previous definition
+  346 | #define sigma_id (gid % VEC_LENGTH_AUTO)
+      | 
+kernels.cu:389: warning: "sigma_real" redefined
+  389 | #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + sigma_id)
+      | 
+kernels.cu:348: note: this is the location of the previous definition
+  348 | #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + (sigma_id))
+      | 
+kernels.cu:390: warning: "sigma_imag" redefined
+  390 | #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + VEC_LENGTH_AUTO + sigma_id)
+      | 
+kernels.cu:349: note: this is the location of the previous definition
+  349 | #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + VEC_LENGTH_AUTO + (sigma_id))
+      | 
+kernels.cu:392: warning: "ham_real" redefined
+  392 | #define ham_real(i, j) ((i) * dim + (j))
+      | 
+kernels.cu:351: note: this is the location of the previous definition
+  351 | #define ham_real(i, j) ((i) * DIM + (j))
+      | 
+kernels.cu:393: warning: "ham_imag" redefined
+  393 | #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+      | 
+kernels.cu:352: note: this is the location of the previous definition
+  352 | #define ham_imag(i, j) (DIM * DIM + (i) * DIM + (j))
+      | 
+kernels.cu:425: warning: "package_id" redefined
+  425 | #define package_id ((PACKAGES_PER_WG * blockIdx.y + threadIdx.y) * (VEC_LENGTH_AUTO * 2 * DIM * DIM))
+      | 
+kernels.cu:386: note: this is the location of the previous definition
+  386 | #define package_id ((PACKAGES_PER_WG * blockIdx.y + threadIdx.y) * (VEC_LENGTH_AUTO * 2 * dim * dim))
+      | 
+kernels.cu:428: warning: "sigma_real" redefined
+  428 | #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + sigma_id)
+      | 
+kernels.cu:389: note: this is the location of the previous definition
+  389 | #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + sigma_id)
+      | 
+kernels.cu:429: warning: "sigma_imag" redefined
+  429 | #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + VEC_LENGTH_AUTO + sigma_id)
+      | 
+kernels.cu:390: note: this is the location of the previous definition
+  390 | #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + VEC_LENGTH_AUTO + sigma_id)
+      | 
+kernels.cu:431: warning: "ham_real" redefined
+  431 | #define ham_real(i, j) ((i) * DIM + (j))
+      | 
+kernels.cu:392: note: this is the location of the previous definition
+  392 | #define ham_real(i, j) ((i) * dim + (j))
+      | 
+kernels.cu:432: warning: "ham_imag" redefined
+  432 | #define ham_imag(i, j) (DIM * DIM + (i) * DIM + (j))
+      | 
+kernels.cu:393: note: this is the location of the previous definition
+  393 | #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+      | 
+kernels.cu:517: warning: "package_id" redefined
+  517 | #define package_id ((PACKAGES_PER_WG * blockIdx.y + threadIdx.y) * (VEC_LENGTH_AUTO * 2 * dim * dim))
+      | 
+kernels.cu:464: note: this is the location of the previous definition
+  464 | #define package_id ((PACKAGES_PER_WG * blockIdx.y + threadIdx.y) * (VEC_LENGTH_AUTO * 2 * DIM * DIM))
+      | 
+kernels.cu:520: warning: "sigma_real" redefined
+  520 | #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + sigma_id)
+      | 
+kernels.cu:467: note: this is the location of the previous definition
+  467 | #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + sigma_id)
+      | 
+kernels.cu:521: warning: "sigma_imag" redefined
+  521 | #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + VEC_LENGTH_AUTO + sigma_id)
+      | 
+kernels.cu:468: note: this is the location of the previous definition
+  468 | #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + VEC_LENGTH_AUTO + sigma_id)
+      | 
+kernels.cu:523: warning: "ham_real" redefined
+  523 | #define ham_real(i, j) ((i) * dim + (j))
+      | 
+kernels.cu:470: note: this is the location of the previous definition
+  470 | #define ham_real(i, j) ((i) * DIM + (j))
+      | 
+kernels.cu:524: warning: "ham_imag" redefined
+  524 | #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+      | 
+kernels.cu:471: note: this is the location of the previous definition
+  471 | #define ham_imag(i, j) (DIM * DIM + (i) * DIM + (j))
+      | 
+kernels.cu:552: warning: "package_id" redefined
+  552 | #define package_id ((PACKAGES_PER_WG * blockIdx.y + threadIdx.y) * (VEC_LENGTH_AUTO * 2 * DIM * DIM))
+      | 
+kernels.cu:517: note: this is the location of the previous definition
+  517 | #define package_id ((PACKAGES_PER_WG * blockIdx.y + threadIdx.y) * (VEC_LENGTH_AUTO * 2 * dim * dim))
+      | 
+kernels.cu:555: warning: "sigma_real" redefined
+  555 | #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + sigma_id)
+      | 
+kernels.cu:520: note: this is the location of the previous definition
+  520 | #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + sigma_id)
+      | 
+kernels.cu:556: warning: "sigma_imag" redefined
+  556 | #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + VEC_LENGTH_AUTO + sigma_id)
+      | 
+kernels.cu:521: note: this is the location of the previous definition
+  521 | #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (dim * (i) + (j)) + VEC_LENGTH_AUTO + sigma_id)
+      | 
+kernels.cu:557: warning: "ham_real" redefined
+  557 | #define ham_real(i, j) ((i) * DIM + (j))
+      | 
+kernels.cu:523: note: this is the location of the previous definition
+  523 | #define ham_real(i, j) ((i) * dim + (j))
+      | 
+kernels.cu:558: warning: "ham_imag" redefined
+  558 | #define ham_imag(i, j) (DIM * DIM + (i) * DIM + (j))
+      | 
+kernels.cu:524: note: this is the location of the previous definition
+  524 | #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+      | 
+kernels.cu:629: warning: "package_id" redefined
+  629 | #define package_id (gid * dim * dim * 2)
+      | 
+kernels.cu:586: note: this is the location of the previous definition
+  586 | #define package_id ((PACKAGES_PER_WG * blockIdx.y + threadIdx.y) * (VEC_LENGTH_AUTO * 2 * DIM * DIM))
+      | 
+kernels.cu:631: warning: "sigma_real" redefined
+  631 | #define sigma_real(i, j) (package_id + 2 * (dim * (i) + (j)))
+      | 
+kernels.cu:589: note: this is the location of the previous definition
+  589 | #define sigma_real(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + sigma_id)
+      | 
+kernels.cu:632: warning: "sigma_imag" redefined
+  632 | #define sigma_imag(i, j) (package_id + 2 * (dim * (i) + (j)) + 1)
+      | 
+kernels.cu:590: note: this is the location of the previous definition
+  590 | #define sigma_imag(i, j) (package_id + 2 * VEC_LENGTH_AUTO * (DIM * (i) + (j)) + VEC_LENGTH_AUTO + sigma_id)
+      | 
+kernels.cu:634: warning: "ham_real" redefined
+  634 | #define ham_real(i, j) ((i) * dim + (j))
+      | 
+kernels.cu:592: note: this is the location of the previous definition
+  592 | #define ham_real(i, j) ((i) * DIM + (j))
+      | 
+kernels.cu:635: warning: "ham_imag" redefined
+  635 | #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+      | 
+kernels.cu:593: note: this is the location of the previous definition
+  593 | #define ham_imag(i, j) (DIM * DIM + (i) * DIM + (j))
+      | 
+kernels.cu:669: warning: "package_id" redefined
+  669 |   #define package_id (gid * DIM * DIM * 2)
+      | 
+kernels.cu:629: note: this is the location of the previous definition
+  629 | #define package_id (gid * dim * dim * 2)
+      | 
+kernels.cu:671: warning: "sigma_real" redefined
+  671 |   #define sigma_real(i, j) (package_id + 2 * (DIM * (i) + (j)))
+      | 
+kernels.cu:631: note: this is the location of the previous definition
+  631 | #define sigma_real(i, j) (package_id + 2 * (dim * (i) + (j)))
+      | 
+kernels.cu:672: warning: "sigma_imag" redefined
+  672 |   #define sigma_imag(i, j) (package_id + 2 * (DIM * (i) + (j)) + 1)
+      | 
+kernels.cu:632: note: this is the location of the previous definition
+  632 | #define sigma_imag(i, j) (package_id + 2 * (dim * (i) + (j)) + 1)
+      | 
+kernels.cu:674: warning: "ham_real" redefined
+  674 |   #define ham_real(i, j) ((i) * DIM + (j))
+      | 
+kernels.cu:634: note: this is the location of the previous definition
+  634 | #define ham_real(i, j) ((i) * dim + (j))
+      | 
+kernels.cu:675: warning: "ham_imag" redefined
+  675 |   #define ham_imag(i, j) (DIM * DIM + (i) * DIM + (j))
+      | 
+kernels.cu:635: note: this is the location of the previous definition
+  635 | #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+      | 
+kernels.cu:807: warning: "package_id" redefined
+  807 |   #define package_id (gid * dim * dim * 2)
+      | 
+kernels.cu:763: note: this is the location of the previous definition
+  763 |   #define package_id (gid * DIM * DIM * 2)
+      | 
+kernels.cu:809: warning: "sigma_real" redefined
+  809 |   #define sigma_real(i, j) (package_id + 2 * (dim * (i) + (j)))
+      | 
+kernels.cu:765: note: this is the location of the previous definition
+  765 |   #define sigma_real(i, j) (package_id + 2 * (DIM * (i) + (j)))
+      | 
+kernels.cu:810: warning: "sigma_imag" redefined
+  810 |   #define sigma_imag(i, j) (package_id + 2 * (dim * (i) + (j)) + 1)
+      | 
+kernels.cu:766: note: this is the location of the previous definition
+  766 |   #define sigma_imag(i, j) (package_id + 2 * (DIM * (i) + (j)) + 1)
+      | 
+kernels.cu:812: warning: "ham_real" redefined
+  812 |   #define ham_real(i, j) ((i) * dim + (j))
+      | 
+kernels.cu:768: note: this is the location of the previous definition
+  768 |   #define ham_real(i, j) ((i) * DIM + (j))
+      | 
+kernels.cu:813: warning: "ham_imag" redefined
+  813 |   #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+      | 
+kernels.cu:769: note: this is the location of the previous definition
+  769 |   #define ham_imag(i, j) (DIM * DIM + (i) * DIM + (j))
+      | 
+kernels.cu:842: warning: "package_id" redefined
+  842 |   #define package_id (gid * DIM * DIM * 2)
+      | 
+kernels.cu:807: note: this is the location of the previous definition
+  807 |   #define package_id (gid * dim * dim * 2)
+      | 
+kernels.cu:844: warning: "sigma_real" redefined
+  844 |   #define sigma_real(i, j) (package_id + 2 * (DIM * (i) + (j)))
+      | 
+kernels.cu:809: note: this is the location of the previous definition
+  809 |   #define sigma_real(i, j) (package_id + 2 * (dim * (i) + (j)))
+      | 
+kernels.cu:845: warning: "sigma_imag" redefined
+  845 |   #define sigma_imag(i, j) (package_id + 2 * (DIM * (i) + (j)) + 1)
+      | 
+kernels.cu:810: note: this is the location of the previous definition
+  810 |   #define sigma_imag(i, j) (package_id + 2 * (dim * (i) + (j)) + 1)
+      | 
+kernels.cu:847: warning: "ham_real" redefined
+  847 |   #define ham_real(i, j) ((i) * DIM + (j))
+      | 
+kernels.cu:812: note: this is the location of the previous definition
+  812 |   #define ham_real(i, j) ((i) * dim + (j))
+      | 
+kernels.cu:848: warning: "ham_imag" redefined
+  848 |   #define ham_imag(i, j) (DIM * DIM + (i) * DIM + (j))
+      | 
+kernels.cu:813: note: this is the location of the previous definition
+  813 |   #define ham_imag(i, j) (dim * dim + (i) * dim + (j))
+      | 
+kernels.cu:954: warning: "sigma_id" redefined
+  954 |   #define sigma_id(i,j,m) ((m) * DIM * DIM + ((i) * DIM + (j)))
+      | 
+kernels.cu:587: note: this is the location of the previous definition
+  587 | #define sigma_id threadIdx.x
+      | 
+utils.cu:68: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+   68 |   #pragma omp parallel for
+      | 
+utils.cu:104: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+  104 |   #pragma omp parallel for
+      | 
+utils.cu:136: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+  136 |   #pragma omp parallel for
+      | 
+utils.cu:168: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+  168 |   #pragma omp parallel for
+      | 
+reference.cu:15: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+   15 |   #pragma omp parallel for
+      | 
+reference.cu:20: warning: ignoring ‘#pragma novector ’ [-Wunknown-pragmas]
+   20 |     #pragma novector
+      | 
+reference.cu:23: warning: ignoring ‘#pragma novector ’ [-Wunknown-pragmas]
+   23 |       #pragma novector
+      | 
+reference.cu:27: warning: ignoring ‘#pragma novector ’ [-Wunknown-pragmas]
+   27 |         #pragma novector
+      | 
+timeout was set to  600

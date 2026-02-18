@@ -1,0 +1,12 @@
+read_input.cpp: In function ‘int setup(int, char**)’:
+read_input.cpp:80:17: warning: variable ‘len’ set but not used [-Wunused-but-set-variable]
+   80 |         float   len;
+      |                 ^~~
+rmse.cpp:72: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+   72 |     #pragma omp parallel for \
+      | 
+rmse.cpp: In function ‘float rms_err(float**, int, int, float**, int)’:
+rmse.cpp:84:110: warning: ‘index’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+   84 |                                                                         cluster_centres[nearest_cluster_index],
+      |                                                                                                              ^
+timeout was set to  600

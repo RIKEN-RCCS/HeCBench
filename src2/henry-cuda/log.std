@@ -1,0 +1,7 @@
+L = 25.832000
+424 atoms
+Used 1024 blocks with 256 thread each
+Henry constant = 2.506131e-04 mol/(m3 - Pa)
+Number of actual insertions: 262144000
+Number of times we called the device kernel: 1000
+Average kernel execution time 0.001245 (s)

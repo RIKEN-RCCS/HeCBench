@@ -1,0 +1,8 @@
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -I../extend2-sycl -O3 -o main.o -c main.cu
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -I../extend2-sycl -O3 -o read_data.o -c ../extend2-sycl/read_data.cpp
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -I../extend2-sycl -O3 main.o read_data.o -o main 
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "time -p ( ./main 2000 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 1 558 557

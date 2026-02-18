@@ -1,0 +1,7 @@
+main.cu:23: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+   23 | #pragma omp parallel for collapse(2)
+      | 
+main.cu:209: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+  209 | #pragma omp parallel for collapse(2)
+      | 
+timeout was set to  600

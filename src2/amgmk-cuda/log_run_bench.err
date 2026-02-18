@@ -1,0 +1,81 @@
+csr_matrix.cu(423): warning #2464-D: conversion from a string literal to "char *" is deprecated
+    ,"hypre_assert failed: %s\n", "num_rows == hypre_CSRMatrixNumRows(B)"); hypre_error_handler("csr_matrix.cu", 423, 1);};
+                                                                                                ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+csr_matrix.cu(424): warning #2464-D: conversion from a string literal to "char *" is deprecated
+                          ,"hypre_assert failed: %s\n", "col_map_offd_A"); hypre_error_handler("csr_matrix.cu", 424, 1);};
+                                                                                               ^
+
+csr_matrix.cu(425): warning #2464-D: conversion from a string literal to "char *" is deprecated
+                          ,"hypre_assert failed: %s\n", "col_map_offd_B"); hypre_error_handler("csr_matrix.cu", 425, 1);};
+                                                                                               ^
+
+csr_matrix.cu(547): warning #2464-D: conversion from a string literal to "char *" is deprecated
+    ,"hypre_assert failed: %s\n", "mc == num_nonzeros"); hypre_error_handler("csr_matrix.cu", 547, 1);};
+                                                                             ^
+
+csr_matrix.cu(423): warning #2464-D: conversion from a string literal to "char *" is deprecated
+    ,"hypre_assert failed: %s\n", "num_rows == hypre_CSRMatrixNumRows(B)"); hypre_error_handler("csr_matrix.cu", 423, 1);};
+                                                                                                ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+csr_matrix.cu(424): warning #2464-D: conversion from a string literal to "char *" is deprecated
+                          ,"hypre_assert failed: %s\n", "col_map_offd_A"); hypre_error_handler("csr_matrix.cu", 424, 1);};
+                                                                                               ^
+
+csr_matrix.cu(425): warning #2464-D: conversion from a string literal to "char *" is deprecated
+                          ,"hypre_assert failed: %s\n", "col_map_offd_B"); hypre_error_handler("csr_matrix.cu", 425, 1);};
+                                                                                               ^
+
+csr_matrix.cu(547): warning #2464-D: conversion from a string literal to "char *" is deprecated
+    ,"hypre_assert failed: %s\n", "mc == num_nonzeros"); hypre_error_handler("csr_matrix.cu", 547, 1);};
+                                                                             ^
+
+csr_matvec.cu(94): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     ,"hypre_assert failed: %s\n", "num_vectors == hypre_VectorNumVectors(y)"); hypre_error_handler("csr_matvec.cu", 94, 1);};
+                                                                                                    ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+csr_matvec.cu(263): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     ,"hypre_assert failed: %s\n", "num_vectors == hypre_VectorNumVectors(y)"); hypre_error_handler("csr_matvec.cu", 263, 1);};
+                                                                                                    ^
+
+csr_matvec.cu(94): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     ,"hypre_assert failed: %s\n", "num_vectors == hypre_VectorNumVectors(y)"); hypre_error_handler("csr_matvec.cu", 94, 1);};
+                                                                                                    ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+csr_matvec.cu(263): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     ,"hypre_assert failed: %s\n", "num_vectors == hypre_VectorNumVectors(y)"); hypre_error_handler("csr_matvec.cu", 263, 1);};
+                                                                                                    ^
+
+hypre_memory.cu(78): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     hypre_error_handler("hypre_memory.cu", 78, 2);
+                         ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+hypre_memory.cu(78): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     hypre_error_handler("hypre_memory.cu", 78, 2);
+                         ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+vector.cu(177): warning #2464-D: conversion from a string literal to "char *" is deprecated
+    ,"hypre_assert failed: %s\n", "hypre_VectorNumVectors(vector) == 1"); hypre_error_handler("vector.cu", 177, 1);};
+                                                                                              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+vector.cu(177): warning #2464-D: conversion from a string literal to "char *" is deprecated
+    ,"hypre_assert failed: %s\n", "hypre_VectorNumVectors(vector) == 1"); hypre_error_handler("vector.cu", 177, 1);};
+                                                                                              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+timeout was set to  600

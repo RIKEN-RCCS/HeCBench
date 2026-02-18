@@ -1,0 +1,8 @@
+2-opt TSP CUDA GPU code v2.3
+Copyright (c) 2014-2020, Texas State University. All rights reserved.
+configuration: 493 cities, 24 restarts, ../tsp-cuda/d493.tsp input
+thread block size: 128
+Average kernel time: 0.0252 s
+65.961 Gmoves/s
+Best found tour length is 37041 with 13747 climbers
+PASS
