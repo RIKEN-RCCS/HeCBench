@@ -51,6 +51,10 @@ def compare_command(srcdir, bench_name):
 
 def extend_markdown(markd, imagedir='SVGs', src_dir='../src2', mark_command=False):
     f = open(markd)
+
+    line = f.readline().strip();  print(line);
+    line = f.readline().strip();  print(line);
+    
     firstline = f.readline().strip()
     firstline += ' plot |'
     if mark_command:
@@ -62,17 +66,28 @@ def extend_markdown(markd, imagedir='SVGs', src_dir='../src2', mark_command=Fals
         secondline += ' -- |'
     print(secondline)
     for line in f:
-        line = line.strip()
-        bname = line.split('|')[1].strip()
-        line += '!['+bname+']('+imagedir+'/'+bname+'.svg) |'
-        if mark_command:
-            line += compare_command(src_dir, bname)+'|'
+        if line.find("completed") > 0:
+            line = line.strip()
+            line += '|';
+        else:
+            if line.find("|") >= 0:
+                line = line.strip()
+                bname = line.split('|')[1].strip()
+                if bname != "":
+                    line += '!['+bname+']('+imagedir+'/'+bname+'.svg) |'
+                    if mark_command:
+                        line += compare_command(src_dir, bname)+'|'
+                    
         print(line)
     f.close()
 
 def gen_plt(x, line, imagedir='SVGs'):
     words = line.strip().split('|')
     bname = words[1].strip()
+
+    if bname == "":  return
+    if bname == "completed":  return
+    
     words = words[2:len(words)-1]
     y = []
     for w in words:
@@ -105,15 +120,22 @@ if __name__ == '__main__':
         print('the specified markdown file does not exist')
         sys.exit()
     f = open(options.markdown)
+
     line0 = f.readline()
+    line0 = f.readline()
+    line0 = f.readline()
+
     columns = line0.strip().split('|')
     x = columns[2:len(columns)-1]
     dumm = f.readline()
 
     if not options.noplot:
         for line in f:
-            line = line.strip()
-            gen_plt(x,line,imagedir=options.imagedir)
+            if line.find("completed") > 0: pass
+            if line.find("|") > 0:
+                line = line.strip()
+                print("line ", line )
+                gen_plt(x,line,imagedir=options.imagedir)
     f.close()
 
     if options.extend:
