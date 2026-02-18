@@ -15,7 +15,7 @@ LAUNCHER = bash -c
 
 program = rsbench
 
-source = main.cu simulation.cuio.cu init.cu material.cu utils.cu
+source = main.cu simulation.cu io.cu init.cu material.cu utils.cu
 
 obj = $(source:.cu=.o)
 

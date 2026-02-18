@@ -1,1 +1,11 @@
-nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c main.cu -o main.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c simulation.cu -o simulation.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c io.cu -o io.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c init.cu -o init.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c material.cu -o material.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c utils.cu -o utils.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 main.o simulation.o io.o init.o material.o utils.o -o rsbench -lm
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "time -p ( ./rsbench -s large -m event 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 1 629 628
