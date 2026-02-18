@@ -1,3 +1,1 @@
-nvcc fatal   : Unsupported gpu architecture 'sm_60'
-make: *** [Makefile.NVD:25: bin/ans_encoder.o] Error 1
 timeout was set to  600
