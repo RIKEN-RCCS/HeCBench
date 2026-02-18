@@ -117,3 +117,7 @@ echo "|"        "|"        "|"       "|"       "|"         "|"    "|"  "|"
 echo "|" "完了" "|"  $sum0 "|" $sum1 "|" $sum2 "|"  $sum3  "|"    "|"  "|"
 echo ""
 echo "sycl と acc がともに完了した件数" $sum_both
+
+echo ""
+echo "分類: OpenMP コードが omp_get_* を (A) 含まない (B) 含む"
+
