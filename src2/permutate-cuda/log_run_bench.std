@@ -1,0 +1,18 @@
+nvcc -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c main.cpp -o main.o
+nvcc -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c permutation_testing.cpp -o permutation_testing.o
+nvcc -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c utils.cpp -o utils.o
+nvcc -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c statistical_test.cpp -o statistical_test.o
+nvcc -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c bzip/blocksort.cpp -o bzip/blocksort.o
+nvcc -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c bzip/bzlib.cpp -o bzip/bzlib.o
+nvcc -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c bzip/compress.cpp -o bzip/compress.o
+nvcc -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c bzip/crctable.cpp -o bzip/crctable.o
+nvcc -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c bzip/decompress.cpp -o bzip/decompress.o
+nvcc -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c bzip/huffman.cpp -o bzip/huffman.o
+nvcc -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c bzip/randtable.cpp -o bzip/randtable.o
+nvcc -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c gpu_permutation_testing.cu -o gpu_permutation_testing.o
+nvcc -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 main.o permutation_testing.o utils.o statistical_test.o bzip/blocksort.o bzip/bzlib.o bzip/compress.o bzip/crctable.o bzip/decompress.o bzip/huffman.o bzip/randtable.o gpu_permutation_testing.o  -o main 
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "../permutate-cuda/prepare_data.sh; time -p ( ./main ../permutate-cuda/test_data/truerand_1bit.bin 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 1 2944 2943

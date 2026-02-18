@@ -1,0 +1,7 @@
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c stencil_1d.cu -o stencil_1d.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 stencil_1d.o -o stencil_1d 
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "time -p ( ./stencil_1d 536800000 100 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 1 4652 4651

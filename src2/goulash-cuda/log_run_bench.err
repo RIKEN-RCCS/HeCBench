@@ -1,0 +1,8 @@
+main.cu: In function ‘int main(int, char**)’:
+main.cu:101:16: warning: ‘kernel_starttime’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  101 |   kernel_runtime = kernel_endtime-kernel_starttime;
+      |   ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+main.cu:87:8: note: ‘kernel_starttime’ was declared here
+   87 |   double kernel_starttime, kernel_endtime, kernel_runtime;
+      |        ^~~~~~~~~~~~~~~~
+timeout was set to  600

@@ -1,0 +1,14 @@
+main.cu(42): warning #2464-D: conversion from a string literal to "char *" is deprecated
+    params.filename = "assets/temperature.txt";
+                    ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+main.cu(42): warning #2464-D: conversion from a string literal to "char *" is deprecated
+    params.filename = "assets/temperature.txt";
+                    ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+cp: '../lr-cuda/assets.tar.gz' and './assets.tar.gz' are the same file
+timeout was set to  600

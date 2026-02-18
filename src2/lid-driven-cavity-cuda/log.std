@@ -1,0 +1,6 @@
+Problem size: 512 x 512 
+Time = 0.000477, delt = 4.768372e-04, iter = 92522, res = 9.999751e-04
+Time = 0.000954, delt = 4.768372e-04, iter = 88410, res = 9.999561e-04
+Time = 0.001000, delt = 4.632568e-05, iter = 86674, res = 9.999808e-04
+
+Total execution time of the iteration loop: 7.556795 (s)

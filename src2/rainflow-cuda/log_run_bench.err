@@ -1,0 +1,11 @@
+reference.h(36): warning #550-D: variable "xRange" was set but never used
+      double xRange, yRange;
+             ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+main.cu(108): warning #550-D: variable "xRange" was set but never used
+      double xRange, yRange;
+             ^
+
+timeout was set to  600

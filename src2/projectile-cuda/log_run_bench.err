@@ -1,0 +1,4 @@
+reference.h:5: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+    5 |   #pragma omp parallel for simd
+      | 
+timeout was set to  600

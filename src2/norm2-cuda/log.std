@@ -1,0 +1,12 @@
+#elements = 0.50 M: average cublasSnrm2 execution time = 36.554184 (us), performance = 28.685556 (Gop/s)
+#elements = 1.00 M: average cublasSnrm2 execution time = 25.745022 (us), performance = 81.458588 (Gop/s)
+#elements = 2.00 M: average cublasSnrm2 execution time = 29.009621 (us), performance = 144.583237 (Gop/s)
+#elements = 4.00 M: average cublasSnrm2 execution time = 29.168032 (us), performance = 287.596008 (Gop/s)
+#elements = 8.00 M: average cublasSnrm2 execution time = 29.045792 (us), performance = 577.612671 (Gop/s)
+#elements = 16.00 M: average cublasSnrm2 execution time = 54.212891 (us), performance = 618.938293 (Gop/s)
+#elements = 32.00 M: average cublasSnrm2 execution time = 79.074715 (us), performance = 848.676697 (Gop/s)
+#elements = 64.00 M: average cublasSnrm2 execution time = 137.317017 (us), performance = 977.429749 (Gop/s)
+#elements = 128.00 M: average cublasSnrm2 execution time = 246.646469 (us), performance = 1088.341064 (Gop/s)
+#elements = 256.00 M: average cublasSnrm2 execution time = 469.949463 (us), performance = 1142.401489 (Gop/s)
+#elements = 512.00 M: average cublasSnrm2 execution time = 910.617981 (us), performance = 1179.135376 (Gop/s)
+PASS

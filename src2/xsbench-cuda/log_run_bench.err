@@ -1,0 +1,4 @@
+Simulation.cu:101: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+  101 |   #pragma omp parallel for
+      | 
+timeout was set to  600

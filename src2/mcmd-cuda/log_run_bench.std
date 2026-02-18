@@ -1,0 +1,8 @@
+nvcc  -std=c++17 -arch=sm_90           -D_MWAITXINTRIN_H_INCLUDED -D_FORCE_INLINES -D__STRICT_ANSI__           -DGPU -O3 -c main.cpp -o main.o
+nvcc  -std=c++17 -arch=sm_90           -D_MWAITXINTRIN_H_INCLUDED -D_FORCE_INLINES -D__STRICT_ANSI__           -DGPU -O3 -c force_kernel.cu -o force_kernel.o
+nvcc main.o force_kernel.o  -std=c++17 -arch=sm_90           -D_MWAITXINTRIN_H_INCLUDED -D_FORCE_INLINES -D__STRICT_ANSI__           -DGPU -O3 -o main 
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "../mcmd-cuda/prepare_data.sh; cd dataset; time -p ( ../main mcmd.inp 1> ../log.std 2> ../log.err ) 2> ../log.time; cd .."
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 1 560 559

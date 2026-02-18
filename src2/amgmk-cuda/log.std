@@ -1,0 +1,36 @@
+**** Warning: OpenMP is disabled ****
+
+//------------ 
+// 
+//  CORAL  AMGmk Benchmark Version 1.0 
+// 
+//------------ 
+
+ testIter   = 500 
+
+
+//------------ 
+// 
+//   MATVEC
+// 
+//------------ 
+
+Wall time = 0.228779 seconds. 
+
+//------------ 
+// 
+//   Relax
+// 
+//------------ 
+
+Total kernel time = 0.002553 seconds. 
+
+//------------ 
+// 
+//   Axpy
+// 
+//------------ 
+
+Wall time = 0.013019 seconds. 
+
+Total Wall time = 2.452756 seconds. 

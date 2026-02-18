@@ -1,0 +1,49 @@
+In file included from su_cdp.cpp:23:
+su_cdp.hpp: In constructor ‘su_cdp::su_cdp()’:
+su_cdp.hpp:37:9: warning: ‘su_cdp::_cdp’ will be initialized after [-Wreorder]
+   37 |     int _cdp;
+      |         ^~~~
+su_cdp.hpp:36:27: warning:   ‘std::vector<su_trace> su_cdp::_traces’ [-Wreorder]
+   36 |     std::vector<su_trace> _traces;
+      |                           ^~~~~~~
+su_cdp.cpp:31:1: warning:   when initialized here [-Wreorder]
+   31 | su_cdp::su_cdp() : _cdp(INT_MIN), _traces(0) {
+      | ^~~~~~
+In file included from su_gather.cpp:23:
+su_gather.hpp: In constructor ‘su_gather::su_gather(std::string&, int, int)’:
+su_gather.hpp:42:9: warning: ‘su_gather::_ttraces’ will be initialized after [-Wreorder]
+   42 |     int _ttraces;              // total number of traces
+      |         ^~~~~~~~
+su_gather.hpp:41:9: warning:   ‘int su_gather::_nos’ [-Wreorder]
+   41 |     int _nos;                  // total number of semblances
+      |         ^~~~
+su_gather.cpp:33:1: warning:   when initialized here [-Wreorder]
+   33 | su_gather::su_gather(std::string& file_path, int aph, int nc) :
+      | ^~~~~~~~~
+In file included from su_gather.cpp:23:
+su_gather.hpp:41:9: warning: ‘su_gather::_nos’ will be initialized after [-Wreorder]
+   41 |     int _nos;                  // total number of semblances
+      |         ^~~~
+su_gather.hpp:39:9: warning:   ‘int su_gather::_ns’ [-Wreorder]
+   39 |     int _ns;                   // total number of samples
+      |         ^~~
+su_gather.cpp:33:1: warning:   when initialized here [-Wreorder]
+   33 | su_gather::su_gather(std::string& file_path, int aph, int nc) :
+      | ^~~~~~~~~
+su_gather.cpp:54:25: warning: comparison of integer expressions of different signedness: ‘int’ and ‘size_t’ {aka ‘long unsigned int’} [-Wsign-compare]
+   54 |     max_ntrs = max_ntrs < traces_by_cdp[tr.cdp()].size() ? traces_by_cdp[tr.cdp()].size() : max_ntrs;
+      |                ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+su_gather.cpp: In member function ‘void su_gather::linearize(int*&, float*&, float&, float*&, float*&, float*&, float*&, float*&, int)’:
+su_gather.cpp:85:18: warning: comparison of integer expressions of different signedness: ‘int’ and ‘std::vector<su_cdp>::size_type’ {aka ‘long unsigned int’} [-Wsign-compare]
+   85 |   for(int i=0; i < _cdps.size(); i++) {
+      |                ~~^~~~~~~~~~~~~~
+su_gather.cpp:89:20: warning: comparison of integer expressions of different signedness: ‘int’ and ‘std::vector<su_trace>::size_type’ {aka ‘long unsigned int’} [-Wsign-compare]
+   89 |     for(int j=0; j < _cdps[i].traces().size(); j++, n_traces++) {
+      |                  ~~^~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /usr/include/c++/11/cassert:44,
+                 from su_gather.cpp:29:
+su_gather.cpp:101:33: warning: comparison of integer expressions of different signedness: ‘std::vector<float>::size_type’ {aka ‘long unsigned int’} and ‘int’ [-Wsign-compare]
+  101 |         assert(tr.data().size() == _ns);
+      |                ~~~~~~~~~~~~~~~~~^~~~~~
+make: *** [Makefile.NVD:76: run_mem] Error 134
+timeout was set to  600

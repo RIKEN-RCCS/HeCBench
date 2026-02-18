@@ -1,0 +1,13 @@
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c csr_matrix.cu -o csr_matrix.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c csr_matvec.cu -o csr_matvec.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c hypre_error.cu -o hypre_error.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c hypre_memory.cu -o hypre_memory.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c laplace.cu -o laplace.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c main.cu -o main.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c vector.cu -o vector.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 csr_matrix.o csr_matvec.o hypre_error.o hypre_memory.o laplace.o main.o vector.o -o AMGMk 
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "time -p ( ./AMGMk 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 1 572 571

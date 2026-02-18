@@ -1,0 +1,13 @@
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -o main.o -c main.cu
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -o haar-cpu.o -c haar.cu
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -o image.o -c image.cu
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -o stdio-wrapper.o -c stdio-wrapper.cu
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -o rectangles.o -c rectangles.cu
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -o vj-cpu main.o haar-cpu.o image.o stdio-wrapper.o rectangles.o 
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -DGPU -o haar-gpu.o -c haar.cu
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -o vj-gpu main.o haar-gpu.o image.o stdio-wrapper.o rectangles.o 
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "../face-cuda/prepare_data.sh; time -p ( ./vj-cpu Face.pgm info.txt class.txt Output-cpu.pgm 1>log.std 2>log.err;./vj-gpu Face.pgm info.txt class.txt Output-gpu.pgm 1>>log.std 2>>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 1 559 558

@@ -1,0 +1,12 @@
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c Main.cu -o Main.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c Simulation.cu -o Simulation.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c io.cu -o io.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c GridInit.cu -o GridInit.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c Materials.cu -o Materials.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c XSutils.cu -o XSutils.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 Main.o Simulation.o io.o GridInit.o Materials.o XSutils.o -o xsbench -lm
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "time -p ( ./xsbench -s large -m event -r 10 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 1 6274 6273

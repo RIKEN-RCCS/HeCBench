@@ -1,0 +1,1 @@
+nvcc -gencode arch=compute_60,code=sm_60 --std=c++17 -O3 -arch=sm_60 -I include -c -o bin/ans_encoder.o src/ans_encoder.cc

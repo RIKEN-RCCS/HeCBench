@@ -1,0 +1,79 @@
+mersenne.h: In function ‘void mersenne::init_genrand(unsigned int)’:
+mersenne.h:62:19: warning: comparison of integer expressions of different signedness: ‘int’ and ‘const unsigned int’ [-Wsign-compare]
+   62 |     for (mti = 1; mti < N; mti++)
+      |               ~~~~^~~
+mersenne.h: In function ‘void mersenne::init_by_array(unsigned int*, int)’:
+mersenne.h:86:9: warning: comparison of integer expressions of different signedness: ‘const unsigned int’ and ‘int’ [-Wsign-compare]
+   86 |     k = (N > key_length ? N : key_length);
+      |       ~~^~~~~~~~~~~~
+mersenne.h:94:7: warning: comparison of integer expressions of different signedness: ‘int’ and ‘const unsigned int’ [-Wsign-compare]
+   94 |         if (i >= N)
+      |       ^ ~~
+mersenne.h:106:7: warning: comparison of integer expressions of different signedness: ‘int’ and ‘const unsigned int’ [-Wsign-compare]
+  106 |         if (i >= N)
+      |       ^ ~~
+mersenne.h: In function ‘unsigned int mersenne::genrand_int32()’:
+mersenne.h:124:9: warning: comparison of integer expressions of different signedness: ‘int’ and ‘const unsigned int’ [-Wsign-compare]
+  124 |     if (mti >= N)
+      |     ~~~~^~~~
+mersenne.h:131:17: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  131 |         for (kk = 0; kk < N - M; kk++)
+      |              ~~~^~~~~~~~~
+mersenne.h:136:11: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  136 |         for (; kk < N - 1; kk++)
+      |         ~~^~~~~~~~~~~
+test_util.h: In function ‘bool IsNaN(T) [with T = float]’:
+test_util.h:314:56: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+  314 |     volatile unsigned int bits = reinterpret_cast<unsigned int &>(val);
+      |                                                        ^~~
+test_util.h: In function ‘bool IsNaN(T) [with T = double]’:
+test_util.h:349:38: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+  349 |     volatile unsigned long long bits = *reinterpret_cast<unsigned long long *>(&val);
+      |                                     ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+test_util.h: At global scope:
+test_util.h:376:24: warning: ‘double4’ is deprecated: use double4_16a or double4_32a [-Wdeprecated-declarations]
+  376 |  bool IsNaN<double4>(double4 val)
+      |                        ^~~~~~~
+In file included from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/driver_types.h:61,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/builtin_types.h:59,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/crt/host_runtime.h:58,
+                 from /usr/lib/gcc/aarch64-redhat-linux/11/include/stddef.h:213:
+/opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/vector_types.h:559:104: note: declared here
+  559 | typedef __device_builtin__ struct double4 __VECTOR_TYPE_DEPRECATED__("use double4_16a or double4_32a") double4;
+      |                                                                                                        ^~~~~~~
+test_util.h:376:45: warning: ‘double4’ is deprecated: use double4_16a or double4_32a [-Wdeprecated-declarations]
+  376 |  bool IsNaN<double4>(double4 val)
+      |                                             ^
+In file included from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/driver_types.h:61,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/builtin_types.h:59,
+                 from /opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/crt/host_runtime.h:58,
+                 from /usr/lib/gcc/aarch64-redhat-linux/11/include/stddef.h:213:
+/opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/vector_types.h:472:42: note: declared here
+  472 | __device_builtin__ __builtin_align__(16) double4
+      |                                          ^~~~~~~
+histogram_compare.cu: In function ‘void ReadTga(uchar4*&, int&, int&, const char*)’:
+histogram_compare.cu:242:44: warning: comparison of integer expressions of different signedness: ‘size_t’ {aka ‘long unsigned int’} and ‘int’ [-Wsign-compare]
+  242 |             if (fread(tga_pixel, 1, pixel_bytes, fptr) != pixel_bytes)
+      |             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+histogram_compare.cu:253:48: warning: comparison of integer expressions of different signedness: ‘size_t’ {aka ‘long unsigned int’} and ‘int’ [-Wsign-compare]
+  253 |             if (fread(tga_pixel, 1, pixel_bytes + 1, fptr) != pixel_bytes + 1)
+      |             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~
+histogram_compare.cu:276:44: warning: comparison of integer expressions of different signedness: ‘size_t’ {aka ‘long unsigned int’} and ‘int’ [-Wsign-compare]
+  276 |                     if (fread(tga_pixel, 1, pixel_bytes, fptr) != pixel_bytes)
+      |                     ~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+histogram_compare.cu: In function ‘int main(int, char**)’:
+histogram_compare.cu:649:19: warning: comparison of integer expressions of different signedness: ‘int’ and ‘std::vector<std::__cxx11::basic_string<char> >::size_type’ {aka ‘long unsigned int’} [-Wsign-compare]
+  649 |         for (int i = 0; i < file_tests.size(); ++i)
+      |                 ~~^~~~~~~~~~~~~~~~~~~
+histogram_compare.cu: In instantiation of ‘void TestMethods(PixelType*, int, int, int, double) [with int NUM_CHANNELS = 1; int ACTIVE_CHANNELS = 1; int NUM_BINS = 256; PixelType = uchar1]’:
+histogram_compare.cu:522:25:   required from here
+histogram_compare.cu:480:19: warning: comparison of integer expressions of different signedness: ‘int’ and ‘std::vector<std::pair<std::__cxx11::basic_string<char>, double> >::size_type’ {aka ‘long unsigned int’} [-Wsign-compare]
+  480 |         for (int i = 0; i < timings.size(); i++)
+      |                 ~~^~~~~~~~~~~~~~~~
+histogram_compare.cu: In instantiation of ‘void TestMethods(PixelType*, int, int, int, double) [with int NUM_CHANNELS = 4; int ACTIVE_CHANNELS = 3; int NUM_BINS = 256; PixelType = uchar4]’:
+histogram_compare.cu:529:25:   required from here
+histogram_compare.cu:480:19: warning: comparison of integer expressions of different signedness: ‘int’ and ‘std::vector<std::pair<std::__cxx11::basic_string<char>, double> >::size_type’ {aka ‘long unsigned int’} [-Wsign-compare]
+histogram_compare.cu: In instantiation of ‘void TestMethods(PixelType*, int, int, int, double) [with int NUM_CHANNELS = 4; int ACTIVE_CHANNELS = 3; int NUM_BINS = 256; PixelType = float4]’:
+histogram_compare.cu:546:25:   required from here
+histogram_compare.cu:480:19: warning: comparison of integer expressions of different signedness: ‘int’ and ‘std::vector<std::pair<std::__cxx11::basic_string<char>, double> >::size_type’ {aka ‘long unsigned int’} [-Wsign-compare]
+timeout was set to  600

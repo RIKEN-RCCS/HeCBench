@@ -1,0 +1,5 @@
+main.cu: In function ‘int main(int, char**)’:
+main.cu:254:7: warning: array subscript ‘unsigned char [64][0]’ is partly outside array bounds of ‘const char [31]’ [-Warray-bounds]
+  254 |   memcpy(src, str, 64);
+      |   ~~~~^~~~~~~~~~~~~~
+timeout was set to  600

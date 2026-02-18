@@ -1,0 +1,8 @@
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c CRC64.cu -o CRC64.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c CRC64Test.cu -o CRC64Test.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 CRC64.o CRC64Test.o -o main 
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "time -p ( ./main 10 5  710000000 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 0 1875 1875

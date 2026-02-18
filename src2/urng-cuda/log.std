@@ -1,0 +1,7 @@
+Image ../urng-sycl/URNG_Input.bmp height: 512 width: 512
+Executing kernel for 1000 iterations
+-------------------------------------------
+Average kernel execution time: 4.86728 (us)
+The averaged mean of the image: -0.114968
+PASS
+

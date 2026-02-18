@@ -1,0 +1,22 @@
+Setting random primes...
+Starting benchmark...
+Total kernel execution time (mr32_simple  ): 1.093766 (ms)
+Total kernel execution time (mr32_efficent): 0.312277 (ms)
+PASS
+         |     8-bit integer   |    16-bit integer   |    24-bit integer   |    32-bit integer   
+  bases  |  effcnt  |  simple  |  effcnt  |  simple  |  effcnt  |  simple  |  effcnt  |  simple  
+ 1 base  |    26 ns |    18 ns |    54 ns |    61 ns |    79 ns |   114 ns |   111 ns |   181 ns
+ 2 bases |    39 ns |    36 ns |   102 ns |   122 ns |   151 ns |   230 ns |   218 ns |   365 ns
+ 3 bases |    54 ns |    55 ns |   146 ns |   185 ns |   219 ns |   348 ns |   321 ns |   553 ns
+
+Setting random odd integers...
+Starting benchmark...
+Total kernel execution time (mr32_simple  ): 0.642788 (ms)
+Total kernel execution time (mr32_efficent): 0.203124 (ms)
+PASS
+         |     8-bit integer   |    16-bit integer   |    24-bit integer   |    32-bit integer   
+  bases  |  effcnt  |  simple  |  effcnt  |  simple  |  effcnt  |  simple  |  effcnt  |  simple  
+ 1 base  |    26 ns |    19 ns |    53 ns |    59 ns |    77 ns |   110 ns |   111 ns |   177 ns
+ 2 bases |    33 ns |    26 ns |    64 ns |    73 ns |    88 ns |   127 ns |   121 ns |   196 ns
+ 3 bases |    39 ns |    33 ns |    74 ns |    87 ns |    97 ns |   143 ns |   131 ns |   214 ns
+

@@ -1,0 +1,9 @@
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c main.cu -o main.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c model_eval.cu -o model_eval.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c model_fitting.cpp -o model_fitting.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 main.o model_eval.o model_fitting.o  -o main -lpthread
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "time -p ( ./main -m 2000 -f ../rsc-cuda/input/vectors.csv -g 512 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 1 559 558

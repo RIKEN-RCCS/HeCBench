@@ -1,0 +1,22 @@
+main.cu:838: warning: ignoring ‘#pragma unroll ’ [-Wunknown-pragmas]
+  838 |   for (int col = 0; col < NUM + 2; ++col) {
+      | 
+main.cu:840: warning: ignoring ‘#pragma unroll ’ [-Wunknown-pragmas]
+  840 |     for (int row = 1; row < NUM + 2; ++row) {
+      | 
+main.cu:846: warning: ignoring ‘#pragma unroll ’ [-Wunknown-pragmas]
+  846 |   for (int col = 1; col < NUM + 2; ++col) {
+      | 
+main.cu:848: warning: ignoring ‘#pragma unroll ’ [-Wunknown-pragmas]
+  848 |     for (int row = 0; row < NUM + 2; ++row) {
+      | 
+main.cu:917: warning: ignoring ‘#pragma unroll ’ [-Wunknown-pragmas]
+  917 |     for (int i = 0; i < size_res; ++i) {
+      | 
+main.cu:962: warning: ignoring ‘#pragma unroll ’ [-Wunknown-pragmas]
+  962 |       for (int i = 0; i < size_res; ++i) {
+      | 
+main.cu:990: warning: ignoring ‘#pragma unroll ’ [-Wunknown-pragmas]
+  990 |     for (int i = 0; i < size_max; ++i) {
+      | 
+timeout was set to  600

@@ -1,0 +1,35 @@
+main.cu(134): warning #68-D: integer conversion resulted in a change of sign
+      h_profileScore[i] = -1;
+                          ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+scoped_ptrs.h(33): warning #550-D: variable "rc" was set but never used
+    int rc;
+        ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+main.cu(134): warning #68-D: integer conversion resulted in a change of sign
+      h_profileScore[i] = -1;
+                          ^
+
+main.cu(323): warning #1444-D: type "ulong4" was declared deprecated ("use ulong4_16a or ulong4_32a")
+      ulong4 res= *(ulong4*)&partial[0];
+             ^
+/opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/vector_types.h(531): note #3287-D: because of a "deprecated" attribute
+  typedef __attribute__((device_builtin)) struct ulong4 __attribute__((deprecated("use ulong4_16a or ulong4_32a"))) ulong4;
+                                                                       ^
+
+main.cu(324): warning #1444-D: type "ulong4" was declared deprecated ("use ulong4_16a or ulong4_32a")
+      ulong4 res2= *(ulong4*)&partial[4];
+             ^
+/opt/nvidia/hpc_sdk/Linux_aarch64/25.9/cuda/13.0/include/vector_types.h(531): note #3287-D: because of a "deprecated" attribute
+  typedef __attribute__((device_builtin)) struct ulong4 __attribute__((deprecated("use ulong4_16a or ulong4_32a"))) ulong4;
+                                                                       ^
+
+scoped_ptrs.h: In function ‘void* aocl_utils::alignedMalloc(size_t)’:
+scoped_ptrs.h:33:5: warning: variable ‘rc’ set but not used [-Wunused-but-set-variable]
+   33 |   int rc;
+      |     ^~
+timeout was set to  600

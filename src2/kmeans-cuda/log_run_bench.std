@@ -1,0 +1,10 @@
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 cluster.cu -c
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 getopt.cpp -c
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 read_input.cpp -c
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 rmse.cpp -c
+nvcc   -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 cluster.o getopt.o read_input.o rmse.o kmeans.cpp -o main 
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "../kmeans-cuda/prepare_data.sh; time -p ( ./main -r -n 5 -m 15 -l 10 -o -i ../data/kmeans/kdd_cup 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 0 691 691

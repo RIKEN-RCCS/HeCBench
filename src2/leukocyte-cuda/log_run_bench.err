@@ -1,0 +1,2172 @@
+detect_main.c: In function ‘int main(int, char**)’:
+detect_main.c:246:15: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  246 |   for(i = 0; i < gicov->m; i++) {
+      |             ~~^~~~~~~~~~~~
+detect_main.c:247:15: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  247 |     for(j = 0; j < gicov->n; j++) {
+      |             ~~^~~~~~~~~~~~
+detect_main.c:343:15: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  343 |         for (i = 0; i < Cy->m; i++)
+      |             ~~^~~~~~~~~
+detect_main.c:353:15: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  353 |         for (i = 0; i < Ys->dim; i++)
+      |             ~~^~~~~~~~~~~
+detect_main.c:357:15: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  357 |         for (i = 0; i < Xs->dim; i++)
+      |             ~~^~~~~~~~~~~
+detect_main.c:361:15: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  361 |         for (i = 0; i < Nx->dim; i++)
+      |             ~~^~~~~~~~~~~
+avilib.c(82): warning #186-D: pointless comparison of unsigned integer with zero
+        if (n < 0)
+              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+avilib.c(337): warning #68-D: integer conversion resulted in a change of sign
+     movi_len = (
+                ^
+
+avilib.c(1768): warning #940-D: missing return statement at end of non-void function "AVI_read_data"
+  }
+  ^
+
+avilib.c(82): warning #186-D: pointless comparison of unsigned integer with zero
+        if (n < 0)
+              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+avilib.c(337): warning #68-D: integer conversion resulted in a change of sign
+     movi_len = (
+                ^
+
+avilib.c(1768): warning #940-D: missing return statement at end of non-void function "AVI_read_data"
+  }
+  ^
+
+avilib.c: In function ‘int avi_add_chunk(avi_t*, unsigned char*, unsigned char*, int)’:
+avilib.c:155:98: warning: comparison of integer expressions of different signedness: ‘size_t’ {aka ‘long unsigned int’} and ‘int’ [-Wsign-compare]
+  155 |    if( avi_write(AVI->fdes,(char *)c,8) != 8 ||
+      |                                                                                                  ^        
+avilib.c: In function ‘int avi_update_header(avi_t*)’:
+avilib.c:542:11: warning: comparison of integer expressions of different signedness: ‘int’ and ‘size_t’ {aka ‘long unsigned int’} [-Wsign-compare]
+  542 |    if(njunk > strlen(id_str)+8) {
+      |     ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~ 
+avilib.c: In function ‘int avi_parse_input_file(avi_t*, int)’:
+avilib.c:1176:47: warning: comparison of integer expressions of different signedness: ‘size_t’ {aka ‘long unsigned int’} and ‘long int’ [-Wsign-compare]
+ 1176 |             if( avi_read(AVI->fdes,(char *)hdrl_data,n) != n ) ERR_EXIT(AVI_ERR_READ)
+      |             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+avilib.c:1194:48: warning: comparison of integer expressions of different signedness: ‘size_t’ {aka ‘long unsigned int’} and ‘long int’ [-Wsign-compare]
+ 1194 |          if(avi_read(AVI->fdes, (char *) AVI->idx, n) != n ) ERR_EXIT(AVI_ERR_READ)
+      |          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+avilib.c:1348:113: warning: comparison of integer expressions of different signedness: ‘long unsigned int’ and ‘long int’ [-Wsign-compare]
+ 1348 |       if( strncasecmp((char *)data,(char *)AVI->idx[i],4)==0 &&
+      |                                                                                                                 ^     
+avilib.c:1357:113: warning: comparison of integer expressions of different signedness: ‘long unsigned int’ and ‘long int’ [-Wsign-compare]
+ 1357 |          if( strncasecmp((char *)data,(char *)AVI->idx[i],4)==0 && str2ulong((unsigned char *)data+4)==len )
+      |                                                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~    ^     
+avilib.c: In function ‘long int AVI_read_frame(avi_t*, char*, int*)’:
+avilib.c:1624:36: warning: comparison of integer expressions of different signedness: ‘size_t’ {aka ‘long unsigned int’} and ‘long int’ [-Wsign-compare]
+ 1624 |    if (avi_read(AVI->fdes,vidbuf,n) != n)
+      |     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+avilib.c: In function ‘int AVI_set_audio_position(avi_t*, long int)’:
+avilib.c:1652:56: warning: comparison of integer expressions of different signedness: ‘long unsigned int’ and ‘long int’ [-Wsign-compare]
+ 1652 |       if(AVI->track[AVI->aptr].audio_index[n].tot>byte)
+      |       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^     
+avilib.c: In function ‘long int AVI_read_audio(avi_t*, char*, long int)’:
+avilib.c:1689:44: warning: comparison of integer expressions of different signedness: ‘size_t’ {aka ‘long unsigned int’} and ‘long int’ [-Wsign-compare]
+ 1689 |       if (avi_read(AVI->fdes,audbuf+nr,todo) != todo)
+      |       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~
+avilib.c: In function ‘int AVI_read_data(avi_t*, char*, long int, char*, long int, long int*)’:
+avilib.c:1750:36: warning: comparison of integer expressions of different signedness: ‘size_t’ {aka ‘long unsigned int’} and ‘int’ [-Wsign-compare]
+ 1750 |          if(avi_read(AVI->fdes,vidbuf,n) != n ) return 0;
+      |          ~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+avilib.c:1761:36: warning: comparison of integer expressions of different signedness: ‘size_t’ {aka ‘long unsigned int’} and ‘int’ [-Wsign-compare]
+ 1761 |          if(avi_read(AVI->fdes,audbuf,n) != n ) return 0;
+      |          ~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+avilib.c: In function ‘int AVI_write_frame(avi_t*, char*, long int, int)’:
+avilib.c:903:25: warning: ‘%1d’ directive writing between 1 and 11 bytes into a region of size 4 [-Wformat-overflow=]
+  903 |    sprintf((char *)astr, "0%1dwb", AVI->aptr+1);
+      |                         ^~~~~~~~
+avilib.c:903:25: note: directive argument in the range [-2147483647, 2147483647]
+avilib.c:903:8: note: ‘sprintf’ output between 5 and 15 bytes into a destination of size 5
+  903 |    sprintf((char *)astr, "0%1dwb", AVI->aptr+1);
+      |    ~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  
+avilib.c: In function ‘int AVI_write_audio(avi_t*, char*, long int)’:
+avilib.c:903:25: warning: ‘%1d’ directive writing between 1 and 11 bytes into a region of size 4 [-Wformat-overflow=]
+  903 |    sprintf((char *)astr, "0%1dwb", AVI->aptr+1);
+      |                         ^~~~~~~~
+avilib.c:903:25: note: directive argument in the range [-2147483647, 2147483647]
+avilib.c:903:8: note: ‘sprintf’ output between 5 and 15 bytes into a destination of size 5
+  903 |    sprintf((char *)astr, "0%1dwb", AVI->aptr+1);
+      |    ~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  
+track_ellipse.c: In function ‘void ellipsetrack(avi_t*, double*, double*, int, int, int, int)’:
+track_ellipse.c:137:15: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  137 |       for (i = 0; i < Isub[cell_num]->m; i++) {
+      |             ~~^~~~~~~~~~~~~~~~~~~~~~~
+track_ellipse.c:138:15: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  138 |         for (j = 0; j < Isub[cell_num]->n; j++) {
+      |             ~~^~~~~~~~~~~~~~~~~~~~~~~
+find_ellipse.c: In function ‘MAT* TMatrix(unsigned int, unsigned int)’:
+find_ellipse.c:207:22: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  207 |         for(i = 1; i < N; i++)
+      |                    ~~^~~
+find_ellipse.c:211:22: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  211 |         for(i = 0; i < N; i++)
+      |                    ~~^~~
+find_ellipse.c:214:22: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  214 |         for(i = 0; i < N-1; i++)
+      |                    ~~^~~~~~~~~~~
+find_ellipse.c:218:22: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  218 |         for(i = 0; i < N-2; i++)
+      |                    ~~^~~~~~~~~~~
+find_ellipse.c:227:22: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  227 |         for(i = 0; i < N; i++)
+      |                    ~~^~~
+find_ellipse.c:231:29: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  231 |                 for(j = 0; j < M; j++)
+      |                           ~~^~~
+find_ellipse.c:248:35: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  248 |                 for(m = i*M; m < (i+1)*M; m++)
+      |                                 ~~^~~~~~~~~~~~   
+find_ellipse.c:249:36: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  249 |                         for(n = 0; n < N; n++)
+      |                                  ~~^~~
+find_ellipse.c: In function ‘double m_min(MAT*)’:
+find_ellipse.c:315:22: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  315 |         for(i = 0; i < m->m; i++)
+      |                    ~~^~~~~~~~
+find_ellipse.c:317:29: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  317 |                 for(j = 0; j < m->n; j++)
+      |                           ~~^~~~~~~~
+find_ellipse.c: In function ‘double m_max(MAT*)’:
+find_ellipse.c:332:22: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  332 |         for(i = 0; i < m->m; i++)
+      |                    ~~^~~~~~~~
+find_ellipse.c:334:29: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  334 |                 for(j = 0; j < m->n; j++)
+      |                           ~~^~~~~~~~
+find_ellipse.c: In function ‘MAT* linear_interp2(MAT*, VEC*, VEC*)’:
+find_ellipse.c:457:22: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  457 |         for(i = 0; i < X->dim; i++)
+      |                    ~~^~~~~~~~~~
+find_ellipse.c: In function ‘void splineenergyform01(MAT*, MAT*, MAT*, MAT*, int, double, double, int)’:
+find_ellipse.c:493:22: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  493 |         for(i = 0; i < Nx->dim; i++)
+      |                    ~~^~~~~~~~~~~
+find_ellipse.c:497:22: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  497 |         for(i = 0; i < Ny->dim; i++)
+      |                    ~~^~~~~~~~~~~
+find_ellipse.c:501:22: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  501 |         for(i = 0; i < X1->dim; i++)
+      |                    ~~^~~~~~~~~~~
+find_ellipse.c:505:22: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  505 |         for(i = 0; i < Y1->dim; i++)
+      |                    ~~^~~~~~~~~~~
+find_ellipse.c:509:22: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  509 |         for(i = 0; i < X2->dim; i++)
+      |                    ~~^~~~~~~~~~~
+find_ellipse.c:513:22: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  513 |         for(i = 0; i < Y2->dim; i++)
+      |                    ~~^~~~~~~~~~~
+find_ellipse.c:558:22: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  558 |         for(i = 0; i < Xs->dim; i++)
+      |                    ~~^~~~~~~~~~~
+find_ellipse.c:562:22: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  562 |         for(i = 0; i < Xs->dim; i++)
+      |                    ~~^~~~~~~~~~~
+find_ellipse.c:566:22: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  566 |         for(i = 0; i < Xs->dim; i++)
+      |                    ~~^~~~~~~~~~~
+find_ellipse.c:573:22: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  573 |         for(i = 0; i < Cx->m; i++)
+      |                    ~~^~~~~~~~~
+find_ellipse.c:659:29: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  659 |                 for(i = 0; i < Cx->n; i++)
+      |                           ~~^~~~~~~~~
+find_ellipse.c:662:29: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  662 |                 for(i = 0; i < Cy->n; i++)
+      |                           ~~^~~~~~~~~
+find_ellipse.c:667:29: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  667 |                 for(i = 0; i < Cx->n; i++)
+      |                           ~~^~~~~~~~~
+find_ellipse.c:670:29: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  670 |                 for(i = 0; i < Cy->n; i++)
+      |                           ~~^~~~~~~~~
+misc_math.c: In function ‘MAT* gradient_x(MAT*)’:
+misc_math.c:21:22: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+   21 |         for(i = 0; i < result->m; i++)
+      |                    ~~^~~~~~~~~~~~~
+misc_math.c:23:29: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+   23 |                 for(j = 0; j < result->n; j++)
+      |                           ~~^~~~~~~~~~~~~
+misc_math.c:27:28: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+   27 |                         else if(j==input->n-1)
+      |                          ~~^~~~~~~~~~~~~~~~~~~  
+misc_math.c: In function ‘MAT* gradient_y(MAT*)’:
+misc_math.c:43:22: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+   43 |         for(i = 0; i < result->n; i++)
+      |                    ~~^~~~~~~~~~~~~
+misc_math.c:45:29: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+   45 |                 for(j = 0; j < result->m; j++)
+      |                           ~~^~~~~~~~~~~~~
+misc_math.c:49:28: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+   49 |                         else if(j==input->m-1)
+      |                          ~~^~~~~~~~~~~~~~~~~~~  
+misc_math.c: In function ‘double mean(VEC*)’:
+misc_math.c:63:22: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+   63 |         for(i = 0; i < in->dim; i++)
+      |                    ~~^~~~~~~~~~~
+misc_math.c: In function ‘double std_dev(VEC*)’:
+misc_math.c:74:22: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+   74 |         for(i = 0; i < in->dim; i++)
+      |                    ~~^~~~~~~~~~~
+copy.c(229): warning #550-D: variable "dim0" was set but never used
+      int dim0, i;
+          ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+copy.c(27): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: copy.c,v 1.2 1994/01/13 05:37:14 des Exp $";
+              ^
+
+err.c(62): warning #2464-D: conversion from a string literal to "char *" is deprecated
+  { "unknown error",
+    ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+err.c(63): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "sizes of objects don't match",
+     ^
+
+err.c(64): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "index out of bounds",
+     ^
+
+err.c(65): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "can't allocate memory",
+     ^
+
+err.c(66): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "singular matrix",
+     ^
+
+err.c(67): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "matrix not positive definite",
+     ^
+
+err.c(68): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "incorrect format input",
+     ^
+
+err.c(69): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "bad input file/device",
+     ^
+
+err.c(70): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "NULL objects passed",
+     ^
+
+err.c(71): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "matrix not square",
+     ^
+
+err.c(72): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "object out of range",
+     ^
+
+err.c(73): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "can't do operation in situ for non-square matrix",
+     ^
+
+err.c(74): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "can't do operation in situ",
+     ^
+
+err.c(75): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "excessive number of iterations",
+     ^
+
+err.c(76): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "convergence criterion failed",
+     ^
+
+err.c(77): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "bad starting value",
+     ^
+
+err.c(78): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "floating exception",
+     ^
+
+err.c(79): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "internal inconsistency (data structure)",
+     ^
+
+err.c(80): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "unexpected end-of-file",
+     ^
+
+err.c(81): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "shared vectors (cannot release them)",
+     ^
+
+err.c(82): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "negative argument",
+     ^
+
+err.c(83): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "cannot overwrite object",
+     ^
+
+err.c(84): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "breakdown in iterative method"
+     ^
+
+err.c(90): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "unknown warning",
+     ^
+
+err.c(91): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "wrong type number (use macro TYPE_*)",
+     ^
+
+err.c(92): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "no corresponding mem_stat_mark",
+     ^
+
+err.c(93): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "computed norm of a residual is less than 0",
+     ^
+
+err.c(94): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "resizing a shared vector"
+     ^
+
+err.c(62): warning #2464-D: conversion from a string literal to "char *" is deprecated
+  { "unknown error",
+    ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+err.c(63): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "sizes of objects don't match",
+     ^
+
+err.c(64): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "index out of bounds",
+     ^
+
+err.c(65): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "can't allocate memory",
+     ^
+
+err.c(66): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "singular matrix",
+     ^
+
+err.c(67): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "matrix not positive definite",
+     ^
+
+err.c(68): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "incorrect format input",
+     ^
+
+err.c(69): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "bad input file/device",
+     ^
+
+err.c(70): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "NULL objects passed",
+     ^
+
+err.c(71): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "matrix not square",
+     ^
+
+err.c(72): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "object out of range",
+     ^
+
+err.c(73): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "can't do operation in situ for non-square matrix",
+     ^
+
+err.c(74): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "can't do operation in situ",
+     ^
+
+err.c(75): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "excessive number of iterations",
+     ^
+
+err.c(76): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "convergence criterion failed",
+     ^
+
+err.c(77): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "bad starting value",
+     ^
+
+err.c(78): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "floating exception",
+     ^
+
+err.c(79): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "internal inconsistency (data structure)",
+     ^
+
+err.c(80): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "unexpected end-of-file",
+     ^
+
+err.c(81): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "shared vectors (cannot release them)",
+     ^
+
+err.c(82): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "negative argument",
+     ^
+
+err.c(83): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "cannot overwrite object",
+     ^
+
+err.c(84): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "breakdown in iterative method"
+     ^
+
+err.c(90): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "unknown warning",
+     ^
+
+err.c(91): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "wrong type number (use macro TYPE_*)",
+     ^
+
+err.c(92): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "no corresponding mem_stat_mark",
+     ^
+
+err.c(93): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "computed norm of a residual is less than 0",
+     ^
+
+err.c(94): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "resizing a shared vector"
+     ^
+
+err.c(31): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: err.c,v 1.6 1995/01/30 14:49:14 des Exp $";
+              ^
+
+matrixio.c(34): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: matrixio.c,v 1.4 1994/01/13 05:31:10 des Exp $";
+              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+memory.c(32): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: memory.c,v 1.13 1994/04/05 02:10:37 des Exp $";
+              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+vecop.c(32): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: vecop.c,v 1.5 1996/08/20 18:18:10 stewart Exp $";
+              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+matop.c(33): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: matop.c,v 1.4 1995/03/27 15:43:57 des Exp $";
+              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+pxop.c(33): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: pxop.c,v 1.6 1995/06/08 14:57:11 des Exp $";
+              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+submat.c(32): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: submat.c,v 1.2 1994/01/13 05:28:12 des Exp $";
+              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+init.c(33): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: init.c,v 1.6 1994/01/13 05:36:58 des Exp $";
+              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+otherio.c(31): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: otherio.c,v 1.2 1994/01/13 05:34:52 des Exp $";
+              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+machine.c(34): warning #2464-D: conversion from a string literal to "char *" is deprecated
+  static char *rcsid = "$Id: machine.c,v 1.4 1994/01/13 05:28:56 des Exp $";
+                       ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+machine.c(34): warning #2464-D: conversion from a string literal to "char *" is deprecated
+  static char *rcsid = "$Id: machine.c,v 1.4 1994/01/13 05:28:56 des Exp $";
+                       ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+machine.c(34): warning #177-D: variable "rcsid" was declared but never referenced
+  static char *rcsid = "$Id: machine.c,v 1.4 1994/01/13 05:28:56 des Exp $";
+               ^
+
+matlab.c(39): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: matlab.c,v 1.8 1995/02/14 20:12:36 des Exp $";
+              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+ivecop.c(32): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: ivecop.c,v 1.6 1996/08/20 18:19:21 stewart Exp $";
+              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+ivecop.c(34): warning #177-D: variable "line" was declared but never referenced
+  static char line[81];
+              ^
+
+meminfo.c(53): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "MAT",
+     ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+meminfo.c(54): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "BAND",
+     ^
+
+meminfo.c(55): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "PERM",
+     ^
+
+meminfo.c(56): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "VEC",
+     ^
+
+meminfo.c(57): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "IVEC"
+     ^
+
+meminfo.c(59): warning #2464-D: conversion from a string literal to "char *" is deprecated
+       ,"ITER",
+        ^
+
+meminfo.c(60): warning #2464-D: conversion from a string literal to "char *" is deprecated
+       "SPROW",
+       ^
+
+meminfo.c(61): warning #2464-D: conversion from a string literal to "char *" is deprecated
+       "SPMAT"
+       ^
+
+meminfo.c(64): warning #2464-D: conversion from a string literal to "char *" is deprecated
+         ,"ZVEC",
+          ^
+
+meminfo.c(65): warning #2464-D: conversion from a string literal to "char *" is deprecated
+         "ZMAT"
+         ^
+
+meminfo.c(53): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "MAT",
+     ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+meminfo.c(54): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "BAND",
+     ^
+
+meminfo.c(55): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "PERM",
+     ^
+
+meminfo.c(56): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "VEC",
+     ^
+
+meminfo.c(57): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     "IVEC"
+     ^
+
+meminfo.c(59): warning #2464-D: conversion from a string literal to "char *" is deprecated
+       ,"ITER",
+        ^
+
+meminfo.c(60): warning #2464-D: conversion from a string literal to "char *" is deprecated
+       "SPROW",
+       ^
+
+meminfo.c(61): warning #2464-D: conversion from a string literal to "char *" is deprecated
+       "SPMAT"
+       ^
+
+meminfo.c(64): warning #2464-D: conversion from a string literal to "char *" is deprecated
+         ,"ZVEC",
+          ^
+
+meminfo.c(65): warning #2464-D: conversion from a string literal to "char *" is deprecated
+         "ZMAT"
+         ^
+
+meminfo.c(45): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: meminfo.c,v 1.1 1994/01/13 05:31:39 des Exp $";
+              ^
+
+memstat.c(43): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: memstat.c,v 1.1 1994/01/13 05:32:44 des Exp $";
+              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+ar: creating meschach.a
+lufactor.c(65): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(scale),3,0,"lufactor.c",65);
+                                           ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+lufactor.c(218): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(A_cp),0,0,"lufactor.c",218);
+                                          ^
+
+lufactor.c(219): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(tmp),3,0,"lufactor.c",219);
+                                         ^
+
+lufactor.c(220): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(tmp2),3,0,"lufactor.c",220);
+                                          ^
+
+lufactor.c(221): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(pivot),2,0,"lufactor.c",221);
+                                           ^
+
+lufactor.c(265): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(y),3,0,"lufactor.c",265);
+                                          ^
+
+lufactor.c(266): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(z),3,0,"lufactor.c",266);
+                                          ^
+
+lufactor.c(65): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(scale),3,0,"lufactor.c",65);
+                                           ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+lufactor.c(218): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(A_cp),0,0,"lufactor.c",218);
+                                          ^
+
+lufactor.c(219): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(tmp),3,0,"lufactor.c",219);
+                                         ^
+
+lufactor.c(220): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(tmp2),3,0,"lufactor.c",220);
+                                          ^
+
+lufactor.c(221): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(pivot),2,0,"lufactor.c",221);
+                                           ^
+
+lufactor.c(265): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(y),3,0,"lufactor.c",265);
+                                          ^
+
+lufactor.c(266): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(z),3,0,"lufactor.c",266);
+                                          ^
+
+lufactor.c(32): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: lufactor.c,v 1.10 1995/05/16 17:26:44 des Exp $";
+              ^
+
+bkpfacto.c(253): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(tmp),3,0,"bkpfacto.c",253);
+                                         ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+bkpfacto.c(53): warning #550-D: variable "A_me" was set but never used
+   double **A_me, tmp;
+            ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+bkpfacto.c(110): warning #550-D: variable "A_me" was set but never used
+   double **A_me, aii, aip1, aip1i, lambda, sigma, tmp;
+            ^
+
+bkpfacto.c(253): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(tmp),3,0,"bkpfacto.c",253);
+                                         ^
+
+bkpfacto.c(242): warning #550-D: variable "A_me" was set but never used
+   double **A_me, a11, a12, a22, b1, b2, det, sum, *tmp_ve, tmp_diag;
+            ^
+
+bkpfacto.c(242): warning #550-D: variable "tmp_ve" was set but never used
+   double **A_me, a11, a12, a22, b1, b2, det, sum, *tmp_ve, tmp_diag;
+                                                    ^
+
+bkpfacto.c(31): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: bkpfacto.c,v 1.7 1994/01/13 05:45:50 des Exp $";
+              ^
+
+chfactor.c(132): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(r),3,0,"chfactor.c",132);
+                                       ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+chfactor.c(132): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(r),3,0,"chfactor.c",132);
+                                       ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+chfactor.c(32): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: chfactor.c,v 1.2 1994/01/13 05:36:36 des Exp $";
+              ^
+
+qrfactor.c(83): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(hh),3,0,"qrfactor.c",83);
+                                           ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+qrfactor.c(84): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(w),3,0,"qrfactor.c",84);
+                                          ^
+
+qrfactor.c(132): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(tmp1),3,0,"qrfactor.c",132);
+                                             ^
+
+qrfactor.c(133): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(tmp2),3,0,"qrfactor.c",133);
+                                             ^
+
+qrfactor.c(134): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(gamma),3,0,"qrfactor.c",134);
+                                              ^
+
+qrfactor.c(135): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(w),3,0,"qrfactor.c",135);
+                                          ^
+
+qrfactor.c(269): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(tmp1),3,0,"qrfactor.c",269);
+                                             ^
+
+qrfactor.c(270): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(tmp2),3,0,"qrfactor.c",270);
+                                             ^
+
+qrfactor.c(343): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(tmp),3,0,"qrfactor.c",343);
+                                            ^
+
+qrfactor.c(378): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(tmp),3,0,"qrfactor.c",378);
+                                            ^
+
+qrfactor.c(528): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(y),3,0,"qrfactor.c",528);
+                                          ^
+
+qrfactor.c(83): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(hh),3,0,"qrfactor.c",83);
+                                           ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+qrfactor.c(84): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(w),3,0,"qrfactor.c",84);
+                                          ^
+
+qrfactor.c(132): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(tmp1),3,0,"qrfactor.c",132);
+                                             ^
+
+qrfactor.c(133): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(tmp2),3,0,"qrfactor.c",133);
+                                             ^
+
+qrfactor.c(134): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(gamma),3,0,"qrfactor.c",134);
+                                              ^
+
+qrfactor.c(135): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(w),3,0,"qrfactor.c",135);
+                                          ^
+
+qrfactor.c(269): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(tmp1),3,0,"qrfactor.c",269);
+                                             ^
+
+qrfactor.c(270): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(tmp2),3,0,"qrfactor.c",270);
+                                             ^
+
+qrfactor.c(343): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(tmp),3,0,"qrfactor.c",343);
+                                            ^
+
+qrfactor.c(378): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(tmp),3,0,"qrfactor.c",378);
+                                            ^
+
+qrfactor.c(528): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(y),3,0,"qrfactor.c",528);
+                                          ^
+
+qrfactor.c(41): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: qrfactor.c,v 1.5 1994/01/13 05:35:07 des Exp $";
+              ^
+
+solve.c(32): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: solve.c,v 1.3 1994/01/13 05:29:57 des Exp $";
+              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+hsehldr.c(190): warning #2464-D: conversion from a string literal to "char *" is deprecated
+    mem_stat_reg_list((void **)&(w),3,0,"hsehldr.c",190);
+                                        ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+hsehldr.c(190): warning #2464-D: conversion from a string literal to "char *" is deprecated
+    mem_stat_reg_list((void **)&(w),3,0,"hsehldr.c",190);
+                                        ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+hsehldr.c(36): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: hsehldr.c,v 1.2 1994/01/13 05:36:29 des Exp $";
+              ^
+
+givens.c(37): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: givens.c,v 1.3 1995/03/27 15:41:15 des Exp $";
+              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+update.c(32): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: update.c,v 1.2 1994/01/13 05:26:06 des Exp $";
+              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+norm.c(30): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: norm.c,v 1.6 1994/01/13 05:34:35 des Exp $";
+              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+hessen.c(65): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(hh),3,0,"hessen.c",65);
+                                        ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+hessen.c(66): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(w),3,0,"hessen.c",66);
+                                       ^
+
+hessen.c(117): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(tmp1),3,0,"hessen.c",117);
+                                          ^
+
+hessen.c(118): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(tmp2),3,0,"hessen.c",118);
+                                          ^
+
+hessen.c(65): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(hh),3,0,"hessen.c",65);
+                                        ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+hessen.c(66): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(w),3,0,"hessen.c",66);
+                                       ^
+
+hessen.c(117): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(tmp1),3,0,"hessen.c",117);
+                                          ^
+
+hessen.c(118): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(tmp2),3,0,"hessen.c",118);
+                                          ^
+
+hessen.c(33): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: hessen.c,v 1.2 1994/01/13 05:36:24 des Exp $";
+              ^
+
+symmeig.c(201): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(tmp),0,0,"symmeig.c",201);
+                                         ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+symmeig.c(202): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(b),3,0,"symmeig.c",202);
+                                       ^
+
+symmeig.c(203): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(diag),3,0,"symmeig.c",203);
+                                          ^
+
+symmeig.c(204): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(beta),3,0,"symmeig.c",204);
+                                          ^
+
+symmeig.c(201): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(tmp),0,0,"symmeig.c",201);
+                                         ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+symmeig.c(202): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(b),3,0,"symmeig.c",202);
+                                       ^
+
+symmeig.c(203): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(diag),3,0,"symmeig.c",203);
+                                          ^
+
+symmeig.c(204): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(beta),3,0,"symmeig.c",204);
+                                          ^
+
+symmeig.c(37): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: symmeig.c,v 1.6 1995/03/27 15:45:55 des Exp $";
+              ^
+
+schur.c(176): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(diag),3,0,"schur.c",176);
+                                             ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+schur.c(177): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(beta),3,0,"schur.c",177);
+                                             ^
+
+schur.c(533): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(tmp1_re),3,0,"schur.c",533);
+                                             ^
+
+schur.c(534): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(tmp1_im),3,0,"schur.c",534);
+                                             ^
+
+schur.c(535): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(tmp2_re),3,0,"schur.c",535);
+                                             ^
+
+schur.c(536): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(tmp2_im),3,0,"schur.c",536);
+                                             ^
+
+schur.c(73): warning #550-D: variable "A_me" was set but never used
+   double **A_me, ip, prod;
+            ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+schur.c(122): warning #550-D: variable "A_me" was set but never used
+   double **A_me, ip, prod;
+            ^
+
+schur.c(176): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(diag),3,0,"schur.c",176);
+                                             ^
+
+schur.c(177): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(beta),3,0,"schur.c",177);
+                                             ^
+
+schur.c(162): warning #177-D: variable "t" was declared but never referenced
+      double beta2, c, discrim, dummy, nu1, s, t, tmp, x, y, z;
+                                               ^
+
+schur.c(533): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(tmp1_re),3,0,"schur.c",533);
+                                             ^
+
+schur.c(534): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(tmp1_im),3,0,"schur.c",534);
+                                             ^
+
+schur.c(535): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(tmp2_re),3,0,"schur.c",535);
+                                             ^
+
+schur.c(536): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(tmp2_im),3,0,"schur.c",536);
+                                             ^
+
+schur.c(39): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: schur.c,v 1.7 1994/03/17 05:36:53 des Exp $";
+              ^
+
+svd.c(328): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(tmp1),3,0,"svd.c",328);
+                                          ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+svd.c(329): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(tmp2),3,0,"svd.c",329);
+                                          ^
+
+svd.c(330): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(w),3,0,"svd.c",330);
+                                       ^
+
+svd.c(402): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(f),3,0,"svd.c",402);
+                                       ^
+
+svd.c(328): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(tmp1),3,0,"svd.c",328);
+                                          ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+svd.c(329): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(tmp2),3,0,"svd.c",329);
+                                          ^
+
+svd.c(330): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(w),3,0,"svd.c",330);
+                                       ^
+
+svd.c(402): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(f),3,0,"svd.c",402);
+                                       ^
+
+svd.c(37): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: svd.c,v 1.7 1995/09/08 14:45:43 des Exp $";
+              ^
+
+fft.c(33): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: fft.c,v 1.4 1996/08/20 14:21:05 stewart Exp $";
+              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+mfunc.c(118): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(wkspace),0,0,"mfunc.c",118);
+                                               ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+mfunc.c(122): warning #2464-D: conversion from a string literal to "char *" is deprecated
+         mem_stat_reg_list((void **)&(tmp),0,0,"mfunc.c",122);
+                                               ^
+
+mfunc.c(178): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(N),0,0,"mfunc.c",178);
+                                         ^
+
+mfunc.c(179): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(D),0,0,"mfunc.c",179);
+                                         ^
+
+mfunc.c(180): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(Apow),0,0,"mfunc.c",180);
+                                            ^
+
+mfunc.c(209): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(c1),3,0,"mfunc.c",209);
+                                          ^
+
+mfunc.c(215): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(tmp),3,0,"mfunc.c",215);
+                                           ^
+
+mfunc.c(223): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(Y),0,0,"mfunc.c",223);
+                                         ^
+
+mfunc.c(272): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(pivot),2,0,"mfunc.c",272);
+                                             ^
+
+mfunc.c(360): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(Apow),0,0,"mfunc.c",360);
+                                            ^
+
+mfunc.c(362): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(tmp),3,0,"mfunc.c",362);
+                                           ^
+
+mfunc.c(384): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(Y),0,0,"mfunc.c",384);
+                                         ^
+
+mfunc.c(118): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(wkspace),0,0,"mfunc.c",118);
+                                               ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+mfunc.c(122): warning #2464-D: conversion from a string literal to "char *" is deprecated
+         mem_stat_reg_list((void **)&(tmp),0,0,"mfunc.c",122);
+                                               ^
+
+mfunc.c(178): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(N),0,0,"mfunc.c",178);
+                                         ^
+
+mfunc.c(179): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(D),0,0,"mfunc.c",179);
+                                         ^
+
+mfunc.c(180): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(Apow),0,0,"mfunc.c",180);
+                                            ^
+
+mfunc.c(209): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(c1),3,0,"mfunc.c",209);
+                                          ^
+
+mfunc.c(215): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(tmp),3,0,"mfunc.c",215);
+                                           ^
+
+mfunc.c(223): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(Y),0,0,"mfunc.c",223);
+                                         ^
+
+mfunc.c(272): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(pivot),2,0,"mfunc.c",272);
+                                             ^
+
+mfunc.c(360): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(Apow),0,0,"mfunc.c",360);
+                                            ^
+
+mfunc.c(362): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(tmp),3,0,"mfunc.c",362);
+                                           ^
+
+mfunc.c(384): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(Y),0,0,"mfunc.c",384);
+                                         ^
+
+mfunc.c(38): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: mfunc.c,v 1.2 1994/11/01 05:57:56 des Exp $";
+              ^
+
+bdfactor.c(33): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: ";
+              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+sparse.c(534): warning #2464-D: conversion from a string literal to "char *" is deprecated
+        mem_stat_reg_list((void **)&(tmp),6,0,"sparse.c",534);
+                                              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+sparse.c(589): warning #2464-D: conversion from a string literal to "char *" is deprecated
+        mem_stat_reg_list((void **)&(tmp),6,0,"sparse.c",589);
+                                              ^
+
+sparse.c(645): warning #2464-D: conversion from a string literal to "char *" is deprecated
+        mem_stat_reg_list((void **)&(tmp),6,0,"sparse.c",645);
+                                              ^
+
+sparse.c(745): warning #2464-D: conversion from a string literal to "char *" is deprecated
+        mem_stat_reg_list((void **)&(scratch),6,0,"sparse.c",745);
+                                                  ^
+
+sparse.c(138): warning #550-D: variable "n" was set but never used
+     int i, j_idx, m, n, max_idx;
+                      ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+sparse.c(178): warning #550-D: variable "n" was set but never used
+     int i, j_idx, m, n, max_idx;
+                      ^
+
+sparse.c(534): warning #2464-D: conversion from a string literal to "char *" is deprecated
+        mem_stat_reg_list((void **)&(tmp),6,0,"sparse.c",534);
+                                              ^
+
+sparse.c(589): warning #2464-D: conversion from a string literal to "char *" is deprecated
+        mem_stat_reg_list((void **)&(tmp),6,0,"sparse.c",589);
+                                              ^
+
+sparse.c(645): warning #2464-D: conversion from a string literal to "char *" is deprecated
+        mem_stat_reg_list((void **)&(tmp),6,0,"sparse.c",645);
+                                              ^
+
+sparse.c(745): warning #2464-D: conversion from a string literal to "char *" is deprecated
+        mem_stat_reg_list((void **)&(scratch),6,0,"sparse.c",745);
+                                                  ^
+
+sparse.c(939): warning #177-D: variable "k" was declared but never referenced
+    int i, j, k, idx, cp;
+              ^
+
+sparse.c(37): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: sparse.c,v 1.10 1994/03/08 05:46:07 des Exp $";
+              ^
+
+sprow.c(37): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: sprow.c,v 1.1 1994/01/13 05:35:36 des Exp $";
+              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+sparseio.c(35): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: sparseio.c,v 1.4 1994/01/13 05:34:25 des Exp $";
+              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+spchfctr.c(409): warning #550-D: variable "n" was set but never used
+   int k, m, n, nxt_row, nxt_idx, diag_idx;
+             ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+spchfctr.c(33): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: spchfctr.c,v 1.5 1996/08/20 19:45:33 stewart Exp $";
+              ^
+
+splufctr.c(71): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(col_vals),3,0,"splufctr.c",71);
+                                              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+splufctr.c(81): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(merge),6,0,"splufctr.c",81);
+                                              ^
+
+splufctr.c(249): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(tmp),3,0,"splufctr.c",249);
+                                         ^
+
+splufctr.c(71): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(col_vals),3,0,"splufctr.c",71);
+                                              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+splufctr.c(81): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(merge),6,0,"splufctr.c",81);
+                                              ^
+
+splufctr.c(249): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(tmp),3,0,"splufctr.c",249);
+                                         ^
+
+splufctr.c(328): warning #550-D: variable "m" was set but never used
+      int i, k, idx, idx_piv, m, n, old_idx, old_idx_piv;
+                              ^
+
+spbkp.c(647): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(deg_list),4,0,"spbkp.c",647);
+                                                 ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+spbkp.c(648): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(order),2,0,"spbkp.c",648);
+                                              ^
+
+spbkp.c(656): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(scan_row),4,0,"spbkp.c",656);
+                                                 ^
+
+spbkp.c(657): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(scan_idx),4,0,"spbkp.c",657);
+                                                 ^
+
+spbkp.c(658): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(col_list),4,0,"spbkp.c",658);
+                                                 ^
+
+spbkp.c(659): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(orig_idx),4,0,"spbkp.c",659);
+                                                 ^
+
+spbkp.c(660): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(orig1_idx),4,0,"spbkp.c",660);
+                                                  ^
+
+spbkp.c(661): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(tmp_iv),4,0,"spbkp.c",661);
+                                               ^
+
+spbkp.c(1332): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(tmp),3,0,"spbkp.c",1332);
+                                            ^
+
+spbkp.c(647): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(deg_list),4,0,"spbkp.c",647);
+                                                 ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+spbkp.c(648): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(order),2,0,"spbkp.c",648);
+                                              ^
+
+spbkp.c(656): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(scan_row),4,0,"spbkp.c",656);
+                                                 ^
+
+spbkp.c(657): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(scan_idx),4,0,"spbkp.c",657);
+                                                 ^
+
+spbkp.c(658): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(col_list),4,0,"spbkp.c",658);
+                                                 ^
+
+spbkp.c(659): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(orig_idx),4,0,"spbkp.c",659);
+                                                 ^
+
+spbkp.c(660): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(orig1_idx),4,0,"spbkp.c",660);
+                                                  ^
+
+spbkp.c(661): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(tmp_iv),4,0,"spbkp.c",661);
+                                               ^
+
+spbkp.c(612): warning #550-D: variable "r" was set but never used
+      int i, j, k, l, n, onebyone, r;
+                                   ^
+
+spbkp.c(614): warning #550-D: variable "row_num" was set but never used
+      int row_num;
+          ^
+
+spbkp.c(1332): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(tmp),3,0,"spbkp.c",1332);
+                                            ^
+
+spbkp.c(34): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: spbkp.c,v 1.6 1996/08/20 19:53:10 stewart Exp $";
+              ^
+
+spswap.c(33): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: spswap.c,v 1.3 1994/01/13 05:44:43 des Exp $";
+              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+iter0.c(43): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: iter0.c,v 1.3 1995/01/30 14:50:56 des Exp $";
+              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+itersym.c(126): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(r),3,0,"itersym.c",126);
+                                         ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+itersym.c(127): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(p),3,0,"itersym.c",127);
+                                         ^
+
+itersym.c(128): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(q),3,0,"itersym.c",128);
+                                         ^
+
+itersym.c(132): warning #2464-D: conversion from a string literal to "char *" is deprecated
+        mem_stat_reg_list((void **)&(z),3,0,"itersym.c",132);
+                                            ^
+
+itersym.c(223): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(v),3,0,"itersym.c",223);
+                                         ^
+
+itersym.c(224): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(w),3,0,"itersym.c",224);
+                                         ^
+
+itersym.c(225): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(tmp),3,0,"itersym.c",225);
+                                           ^
+
+itersym.c(442): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(b),3,0,"itersym.c",442);
+                                         ^
+
+itersym.c(458): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(a2),3,0,"itersym.c",458);
+                                          ^
+
+itersym.c(459): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(b2),3,0,"itersym.c",459);
+                                          ^
+
+itersym.c(580): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(r),3,0,"itersym.c",580);
+                                         ^
+
+itersym.c(581): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(p),3,0,"itersym.c",581);
+                                         ^
+
+itersym.c(582): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(q),3,0,"itersym.c",582);
+                                         ^
+
+itersym.c(586): warning #2464-D: conversion from a string literal to "char *" is deprecated
+        mem_stat_reg_list((void **)&(z),3,0,"itersym.c",586);
+                                            ^
+
+itersym.c(126): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(r),3,0,"itersym.c",126);
+                                         ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+itersym.c(127): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(p),3,0,"itersym.c",127);
+                                         ^
+
+itersym.c(128): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(q),3,0,"itersym.c",128);
+                                         ^
+
+itersym.c(132): warning #2464-D: conversion from a string literal to "char *" is deprecated
+        mem_stat_reg_list((void **)&(z),3,0,"itersym.c",132);
+                                            ^
+
+itersym.c(223): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(v),3,0,"itersym.c",223);
+                                         ^
+
+itersym.c(224): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(w),3,0,"itersym.c",224);
+                                         ^
+
+itersym.c(225): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(tmp),3,0,"itersym.c",225);
+                                           ^
+
+itersym.c(442): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(b),3,0,"itersym.c",442);
+                                         ^
+
+itersym.c(458): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(a2),3,0,"itersym.c",458);
+                                          ^
+
+itersym.c(459): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(b2),3,0,"itersym.c",459);
+                                          ^
+
+itersym.c(580): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(r),3,0,"itersym.c",580);
+                                         ^
+
+itersym.c(581): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(p),3,0,"itersym.c",581);
+                                         ^
+
+itersym.c(582): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(q),3,0,"itersym.c",582);
+                                         ^
+
+itersym.c(586): warning #2464-D: conversion from a string literal to "char *" is deprecated
+        mem_stat_reg_list((void **)&(z),3,0,"itersym.c",586);
+                                            ^
+
+itersym.c(42): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: itersym.c,v 1.2 1995/01/30 14:55:54 des Exp $";
+              ^
+
+iternsym.c(87): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(p),3,0,"iternsym.c",87);
+                                         ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+iternsym.c(88): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(q),3,0,"iternsym.c",88);
+                                         ^
+
+iternsym.c(89): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(r),3,0,"iternsym.c",89);
+                                         ^
+
+iternsym.c(90): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(u),3,0,"iternsym.c",90);
+                                         ^
+
+iternsym.c(91): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(v),3,0,"iternsym.c",91);
+                                         ^
+
+iternsym.c(95): warning #2464-D: conversion from a string literal to "char *" is deprecated
+        mem_stat_reg_list((void **)&(z),3,0,"iternsym.c",95);
+                                            ^
+
+iternsym.c(259): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(u),3,0,"iternsym.c",259);
+                                         ^
+
+iternsym.c(260): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(v),3,0,"iternsym.c",260);
+                                         ^
+
+iternsym.c(261): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(w),3,0,"iternsym.c",261);
+                                         ^
+
+iternsym.c(262): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(tmp),3,0,"iternsym.c",262);
+                                           ^
+
+iternsym.c(404): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(u),3,0,"iternsym.c",404);
+                                         ^
+
+iternsym.c(405): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(r),3,0,"iternsym.c",405);
+                                         ^
+
+iternsym.c(406): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(s),3,0,"iternsym.c",406);
+                                         ^
+
+iternsym.c(407): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(tmp),3,0,"iternsym.c",407);
+                                           ^
+
+iternsym.c(507): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(u),3,0,"iternsym.c",507);
+                                         ^
+
+iternsym.c(508): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(r),3,0,"iternsym.c",508);
+                                         ^
+
+iternsym.c(607): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(Q1),0,0,"iternsym.c",607);
+                                          ^
+
+iternsym.c(608): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(R1),0,0,"iternsym.c",608);
+                                          ^
+
+iternsym.c(688): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(r),3,0,"iternsym.c",688);
+                                         ^
+
+iternsym.c(689): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(u),3,0,"iternsym.c",689);
+                                         ^
+
+iternsym.c(690): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(rhs),3,0,"iternsym.c",690);
+                                           ^
+
+iternsym.c(691): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(givs),3,0,"iternsym.c",691);
+                                            ^
+
+iternsym.c(692): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(givc),3,0,"iternsym.c",692);
+                                            ^
+
+iternsym.c(696): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(R),0,0,"iternsym.c",696);
+                                         ^
+
+iternsym.c(697): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(Q),0,0,"iternsym.c",697);
+                                         ^
+
+iternsym.c(709): warning #2464-D: conversion from a string literal to "char *" is deprecated
+        mem_stat_reg_list((void **)&(z),3,0,"iternsym.c",709);
+                                            ^
+
+iternsym.c(921): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(R1),0,0,"iternsym.c",921);
+                                          ^
+
+iternsym.c(922): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(r),3,0,"iternsym.c",922);
+                                         ^
+
+iternsym.c(923): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(r1),3,0,"iternsym.c",923);
+                                          ^
+
+iternsym.c(1005): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(As),3,0,"iternsym.c",1005);
+                                          ^
+
+iternsym.c(1006): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(alpha),3,0,"iternsym.c",1006);
+                                             ^
+
+iternsym.c(1007): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(beta),3,0,"iternsym.c",1007);
+                                            ^
+
+iternsym.c(1012): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(H),0,0,"iternsym.c",1012);
+                                         ^
+
+iternsym.c(1013): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(N),0,0,"iternsym.c",1013);
+                                         ^
+
+iternsym.c(1018): warning #2464-D: conversion from a string literal to "char *" is deprecated
+        mem_stat_reg_list((void **)&(z),3,0,"iternsym.c",1018);
+                                            ^
+
+iternsym.c(1270): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(r),3,0,"iternsym.c",1270);
+                                         ^
+
+iternsym.c(1271): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(p),3,0,"iternsym.c",1271);
+                                         ^
+
+iternsym.c(1272): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(q),3,0,"iternsym.c",1272);
+                                         ^
+
+iternsym.c(1275): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(z),3,0,"iternsym.c",1275);
+                                         ^
+
+iternsym.c(87): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(p),3,0,"iternsym.c",87);
+                                         ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+iternsym.c(88): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(q),3,0,"iternsym.c",88);
+                                         ^
+
+iternsym.c(89): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(r),3,0,"iternsym.c",89);
+                                         ^
+
+iternsym.c(90): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(u),3,0,"iternsym.c",90);
+                                         ^
+
+iternsym.c(91): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(v),3,0,"iternsym.c",91);
+                                         ^
+
+iternsym.c(95): warning #2464-D: conversion from a string literal to "char *" is deprecated
+        mem_stat_reg_list((void **)&(z),3,0,"iternsym.c",95);
+                                            ^
+
+iternsym.c(259): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(u),3,0,"iternsym.c",259);
+                                         ^
+
+iternsym.c(260): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(v),3,0,"iternsym.c",260);
+                                         ^
+
+iternsym.c(261): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(w),3,0,"iternsym.c",261);
+                                         ^
+
+iternsym.c(262): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(tmp),3,0,"iternsym.c",262);
+                                           ^
+
+iternsym.c(404): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(u),3,0,"iternsym.c",404);
+                                         ^
+
+iternsym.c(405): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(r),3,0,"iternsym.c",405);
+                                         ^
+
+iternsym.c(406): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(s),3,0,"iternsym.c",406);
+                                         ^
+
+iternsym.c(407): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(tmp),3,0,"iternsym.c",407);
+                                           ^
+
+iternsym.c(507): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(u),3,0,"iternsym.c",507);
+                                         ^
+
+iternsym.c(508): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(r),3,0,"iternsym.c",508);
+                                         ^
+
+iternsym.c(607): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(Q1),0,0,"iternsym.c",607);
+                                          ^
+
+iternsym.c(608): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(R1),0,0,"iternsym.c",608);
+                                          ^
+
+iternsym.c(688): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(r),3,0,"iternsym.c",688);
+                                         ^
+
+iternsym.c(689): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(u),3,0,"iternsym.c",689);
+                                         ^
+
+iternsym.c(690): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(rhs),3,0,"iternsym.c",690);
+                                           ^
+
+iternsym.c(691): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(givs),3,0,"iternsym.c",691);
+                                            ^
+
+iternsym.c(692): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(givc),3,0,"iternsym.c",692);
+                                            ^
+
+iternsym.c(696): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(R),0,0,"iternsym.c",696);
+                                         ^
+
+iternsym.c(697): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(Q),0,0,"iternsym.c",697);
+                                         ^
+
+iternsym.c(709): warning #2464-D: conversion from a string literal to "char *" is deprecated
+        mem_stat_reg_list((void **)&(z),3,0,"iternsym.c",709);
+                                            ^
+
+iternsym.c(921): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(R1),0,0,"iternsym.c",921);
+                                          ^
+
+iternsym.c(922): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(r),3,0,"iternsym.c",922);
+                                         ^
+
+iternsym.c(923): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(r1),3,0,"iternsym.c",923);
+                                          ^
+
+iternsym.c(1005): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(As),3,0,"iternsym.c",1005);
+                                          ^
+
+iternsym.c(1006): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(alpha),3,0,"iternsym.c",1006);
+                                             ^
+
+iternsym.c(1007): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(beta),3,0,"iternsym.c",1007);
+                                            ^
+
+iternsym.c(1012): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(H),0,0,"iternsym.c",1012);
+                                         ^
+
+iternsym.c(1013): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(N),0,0,"iternsym.c",1013);
+                                         ^
+
+iternsym.c(1018): warning #2464-D: conversion from a string literal to "char *" is deprecated
+        mem_stat_reg_list((void **)&(z),3,0,"iternsym.c",1018);
+                                            ^
+
+iternsym.c(1270): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(r),3,0,"iternsym.c",1270);
+                                         ^
+
+iternsym.c(1271): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(p),3,0,"iternsym.c",1271);
+                                         ^
+
+iternsym.c(1272): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(q),3,0,"iternsym.c",1272);
+                                         ^
+
+iternsym.c(1275): warning #2464-D: conversion from a string literal to "char *" is deprecated
+     mem_stat_reg_list((void **)&(z),3,0,"iternsym.c",1275);
+                                         ^
+
+iternsym.c(42): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Header: iternsym.c,v 1.6 1995/01/30 14:53:01 des Exp $";
+              ^
+
+iternsym.c(594): warning #177-D: function "test_gmres" was declared but never referenced
+  static void test_gmres(ITER *ip, int i, MAT *Q, MAT *R,
+              ^
+
+iternsym.c(902): warning #177-D: function "test_mgcr" was declared but never referenced
+  static void test_mgcr(ITER *ip, int i, MAT *Q, MAT *R)
+              ^
+
+zmachine.c(34): warning #2464-D: conversion from a string literal to "char *" is deprecated
+  static char *rcsid = "$Id: zmachine.c,v 1.1 1994/01/13 04:25:41 des Exp $";
+                       ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+zmachine.c(34): warning #2464-D: conversion from a string literal to "char *" is deprecated
+  static char *rcsid = "$Id: zmachine.c,v 1.1 1994/01/13 04:25:41 des Exp $";
+                       ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+zmachine.c(34): warning #177-D: variable "rcsid" was declared but never referenced
+  static char *rcsid = "$Id: zmachine.c,v 1.1 1994/01/13 04:25:41 des Exp $";
+               ^
+
+zcopy.c(202): warning #550-D: variable "dim0" was set but never used
+      int dim0, i;
+          ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+zcopy.c(27): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: zcopy.c,v 1.1 1994/01/13 04:28:42 des Exp $";
+              ^
+
+zmatio.c(32): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: zmatio.c,v 1.1 1994/01/13 04:25:18 des Exp $";
+              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+zmemory.c(32): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: zmemory.c,v 1.2 1994/04/05 02:13:14 des Exp $";
+              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+zvecop.c(30): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: zvecop.c,v 1.3 1997/10/07 16:13:54 stewart Exp stewart $";
+              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+zmatop.c(31): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: zmatop.c,v 1.2 1995/03/27 15:49:03 des Exp $";
+              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+znorm.c(31): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: znorm.c,v 1.1 1994/01/13 04:21:31 des Exp $";
+              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+zfunc.c(34): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: zfunc.c,v 1.3 1995/04/07 16:27:25 des Exp $";
+              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+zlufctr.c(59): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(scale),3,0,"zlufctr.c",59);
+                                           ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+zlufctr.c(194): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(A_cp),9,0,"zlufctr.c",194);
+                                          ^
+
+zlufctr.c(195): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(tmp),8,0,"zlufctr.c",195);
+                                         ^
+
+zlufctr.c(196): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(tmp2),8,0,"zlufctr.c",196);
+                                          ^
+
+zlufctr.c(197): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(pivot),2,0,"zlufctr.c",197);
+                                           ^
+
+zlufctr.c(237): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(y),8,0,"zlufctr.c",237);
+                                          ^
+
+zlufctr.c(238): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(z),8,0,"zlufctr.c",238);
+                                          ^
+
+zlufctr.c(59): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(scale),3,0,"zlufctr.c",59);
+                                           ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+zlufctr.c(194): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(A_cp),9,0,"zlufctr.c",194);
+                                          ^
+
+zlufctr.c(195): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(tmp),8,0,"zlufctr.c",195);
+                                         ^
+
+zlufctr.c(196): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(tmp2),8,0,"zlufctr.c",196);
+                                          ^
+
+zlufctr.c(197): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(pivot),2,0,"zlufctr.c",197);
+                                           ^
+
+zlufctr.c(237): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(y),8,0,"zlufctr.c",237);
+                                          ^
+
+zlufctr.c(238): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(z),8,0,"zlufctr.c",238);
+                                          ^
+
+zlufctr.c(31): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: zlufctr.c,v 1.3 1996/08/20 20:07:09 stewart Exp $";
+              ^
+
+zsolve.c(32): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: zsolve.c,v 1.1 1994/01/13 04:20:33 des Exp $";
+              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+zmatlab.c(97): warning #177-D: variable "j" was declared but never referenced
+      int i, j;
+             ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+zmatlab.c(40): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: zmatlab.c,v 1.2 1995/02/14 20:13:27 des Exp $";
+              ^
+
+zhsehldr.c(202): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(w),8,0,"zhsehldr.c",202);
+                                       ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+zhsehldr.c(202): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(w),8,0,"zhsehldr.c",202);
+                                       ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+zhsehldr.c(187): warning #177-D: variable "scale" was declared but never referenced
+   complex scale;
+           ^
+
+zhsehldr.c(188): warning #177-D: variable "i" was declared but never referenced
+   int i ;
+       ^
+
+zhsehldr.c(37): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: zhsehldr.c,v 1.2 1994/04/07 01:43:47 des Exp $";
+              ^
+
+zqrfctr.c(80): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(tmp1),8,0,"zqrfctr.c",80);
+                                             ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+zqrfctr.c(81): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(w),8,0,"zqrfctr.c",81);
+                                          ^
+
+zqrfctr.c(126): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(tmp1),8,0,"zqrfctr.c",126);
+                                             ^
+
+zqrfctr.c(127): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(tmp2),8,0,"zqrfctr.c",127);
+                                             ^
+
+zqrfctr.c(128): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(gamma),3,0,"zqrfctr.c",128);
+                                              ^
+
+zqrfctr.c(129): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(w),8,0,"zqrfctr.c",129);
+                                          ^
+
+zqrfctr.c(256): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(tmp1),8,0,"zqrfctr.c",256);
+                                             ^
+
+zqrfctr.c(257): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(tmp2),8,0,"zqrfctr.c",257);
+                                             ^
+
+zqrfctr.c(325): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(tmp),8,0,"zqrfctr.c",325);
+                                            ^
+
+zqrfctr.c(363): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(tmp),8,0,"zqrfctr.c",363);
+                                            ^
+
+zqrfctr.c(478): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(y),8,0,"zqrfctr.c",478);
+                                          ^
+
+zqrfctr.c(80): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(tmp1),8,0,"zqrfctr.c",80);
+                                             ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+zqrfctr.c(81): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(w),8,0,"zqrfctr.c",81);
+                                          ^
+
+zqrfctr.c(126): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(tmp1),8,0,"zqrfctr.c",126);
+                                             ^
+
+zqrfctr.c(127): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(tmp2),8,0,"zqrfctr.c",127);
+                                             ^
+
+zqrfctr.c(128): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(gamma),3,0,"zqrfctr.c",128);
+                                              ^
+
+zqrfctr.c(129): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(w),8,0,"zqrfctr.c",129);
+                                          ^
+
+zqrfctr.c(256): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(tmp1),8,0,"zqrfctr.c",256);
+                                             ^
+
+zqrfctr.c(257): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(tmp2),8,0,"zqrfctr.c",257);
+                                             ^
+
+zqrfctr.c(325): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(tmp),8,0,"zqrfctr.c",325);
+                                            ^
+
+zqrfctr.c(363): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(tmp),8,0,"zqrfctr.c",363);
+                                            ^
+
+zqrfctr.c(478): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(y),8,0,"zqrfctr.c",478);
+                                          ^
+
+zqrfctr.c(41): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: zqrfctr.c,v 1.1 1994/01/13 04:21:22 des Exp $";
+              ^
+
+zgivens.c(35): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: ";
+              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+zhessen.c(62): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(tmp1),8,0,"zhessen.c",62);
+                                          ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+zhessen.c(63): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(w),8,0,"zhessen.c",63);
+                                       ^
+
+zhessen.c(117): warning #2464-D: conversion from a string literal to "char *" is deprecated
+       mem_stat_reg_list((void **)&(tmp1),8,0,"zhessen.c",117);
+                                              ^
+
+zhessen.c(118): warning #2464-D: conversion from a string literal to "char *" is deprecated
+       mem_stat_reg_list((void **)&(tmp2),8,0,"zhessen.c",118);
+                                              ^
+
+zhessen.c(62): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(tmp1),8,0,"zhessen.c",62);
+                                          ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+zhessen.c(63): warning #2464-D: conversion from a string literal to "char *" is deprecated
+   mem_stat_reg_list((void **)&(w),8,0,"zhessen.c",63);
+                                       ^
+
+zhessen.c(117): warning #2464-D: conversion from a string literal to "char *" is deprecated
+       mem_stat_reg_list((void **)&(tmp1),8,0,"zhessen.c",117);
+                                              ^
+
+zhessen.c(118): warning #2464-D: conversion from a string literal to "char *" is deprecated
+       mem_stat_reg_list((void **)&(tmp2),8,0,"zhessen.c",118);
+                                              ^
+
+zhessen.c(34): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: zhessen.c,v 1.2 1995/03/27 15:47:50 des Exp $";
+              ^
+
+zschur.c(67): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(diag),8,0,"zschur.c",67);
+                                             ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+zschur.c(67): warning #2464-D: conversion from a string literal to "char *" is deprecated
+      mem_stat_reg_list((void **)&(diag),8,0,"zschur.c",67);
+                                             ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+zschur.c(39): warning #177-D: variable "rcsid" was declared but never referenced
+  static char rcsid[] = "$Id: zschur.c,v 1.4 1995/04/07 16:28:58 des Exp $";
+              ^
+
+timeout was set to  600

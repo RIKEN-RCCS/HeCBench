@@ -1,0 +1,26 @@
+./main.cu: In function ‘void print_tree(node*)’:
+./main.cu:913:8: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 2 has type ‘node*’ [-Wformat=]
+  913 |       printf("(%x)", n);
+      |        ^~~~~~  ~
+      |                |
+      |                node*
+./main.cu:916:8: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 2 has type ‘void*’ [-Wformat=]
+  916 |         printf("%x ", n->pointers[i]);
+      |        ^~~~~  ~~~~~~~~~~~~~~~~
+      |                              |
+      |                              void*
+./main.cu:924:8: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 2 has type ‘void*’ [-Wformat=]
+  924 |         printf("%x ", n->pointers[order - 1]);
+      |        ^~~~~  ~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                      |
+      |                                      void*
+./main.cu:926:8: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 2 has type ‘void*’ [-Wformat=]
+  926 |         printf("%x ", n->pointers[n->num_keys]);
+      |        ^~~~~  ~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                        |
+      |                                        void*
+./main.cu: In function ‘int main(int, char**)’:
+./main.cu:1920:12: warning: comparison of integer expressions of different signedness: ‘size_t’ {aka ‘long unsigned int’} and ‘long int’ [-Wsign-compare]
+ 1920 |   if (result != lSize) {fputs ("Command file reading error",stderr); exit (3);}
+      |     ~~~~~~~^~~~~~~~
+timeout was set to  600

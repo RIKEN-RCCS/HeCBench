@@ -1,0 +1,6 @@
+input image width 8192 Hstride 2
+input image height 8192 Vstride 2
+output image width 4096
+output image height 4096
+Average kernel execution time: 0.003944 (s)
+PASS

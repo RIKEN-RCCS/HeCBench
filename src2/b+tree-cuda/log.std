@@ -1,0 +1,25 @@
+WG size of kernel 1 & 2  = 256 
+Selecting device 0
+Input File: ../data/b+tree/mil.txt 
+Command File: ../data/b+tree/command.txt 
+Command Buffer: 
+j 6000 3000
+k 10000
+
+
+Getting input from file ../data/b+tree/mil.txt...
+Transforming data to a GPU suitable structure...
+Tree transformation took 0.100658
+Waiting for command
+> 
+******command: j count=6000, rSize=6000 
+knodes_elem=7874, knodes_unit_mem=2068, knodes_mem=16283432
+# of blocks = 6000, # of threads/block = 256 (ensure that device can handle)
+Kernel execution time: 129.000000 (us)
+> > > > > > > > > > > > 
+ ******command: k count=10000 
+records_elem=1000000, records_unit_mem=4, records_mem=4000000
+knodes_elem=7874, knodes_unit_mem=2068, knodes_mem=16283432
+# of blocks = 10000, # of threads/block = 256 (ensure that device can handle)
+Kernel execution time: 77.000000 (us)
+> > > > > > > > > > 

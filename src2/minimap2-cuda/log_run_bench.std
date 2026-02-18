@@ -1,0 +1,20 @@
+Creating directories
+Compiling: src/host_data_io.cpp -> build/host_data_io.o
+g++  -I include/ -I /usr/local/include -MP -MMD -c src/host_data_io.cpp -o build/host_data_io.o
+Compiling: src/host_kernel.cpp -> build/host_kernel.o
+g++  -I include/ -I /usr/local/include -MP -MMD -c src/host_kernel.cpp -o build/host_kernel.o
+Compiling: src/main.cpp -> build/main.o
+g++  -I include/ -I /usr/local/include -MP -MMD -c src/main.cpp -o build/main.o
+Compiling: src/memory_scheduler.cpp -> build/memory_scheduler.o
+g++  -I include/ -I /usr/local/include -MP -MMD -c src/memory_scheduler.cpp -o build/memory_scheduler.o
+Compiling: device/device_kernel.cu -> build/cuda/device_kernel.o
+nvcc  -I include/ -I /usr/local/include -c device/device_kernel.cu -o build/cuda/device_kernel.o
+Compiling: device/device_kernel_wrapper.cu -> build/cuda/device_kernel_wrapper.o
+nvcc  -I include/ -I /usr/local/include -c device/device_kernel_wrapper.cu -o build/cuda/device_kernel_wrapper.o
+Linking: build/bin/kernel-2d
+nvcc build/host_data_io.o build/host_kernel.o build/main.o build/memory_scheduler.o build/cuda/device_kernel.o build/cuda/device_kernel_wrapper.o -o build/bin/kernel-2d
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "../minimap2-cuda/prepare_data.sh; time -p ( ./build/bin/kernel-2d ../minimap2-sycl/in-1k.txt kernel-out.txt 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 0 993 993

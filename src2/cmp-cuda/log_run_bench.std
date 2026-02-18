@@ -1,0 +1,10 @@
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c main.cu -o main.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c reference.cpp -o reference.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c su_cdp.cpp -o su_cdp.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c su_gather.cpp -o su_gather.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c su_trace.cpp -o su_trace.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c log.cpp -o log.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c parser.cpp -o parser.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 main.o reference.o su_cdp.o su_gather.o su_trace.o log.o parser.o -o main 
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "time -p ( ./main -c0 1.975e-7 -c1 1.384e-6 -nc 5 -aph 2600 -tau 0.004 -v 2 -i ../cmp-cuda/fold1000.su 1>log.std 2>log.err ) 2> log.time"

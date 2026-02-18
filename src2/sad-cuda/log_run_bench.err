@@ -1,0 +1,2 @@
+make: *** No rule to make target 'main.o', needed by 'main'.  Stop.
+timeout was set to  600

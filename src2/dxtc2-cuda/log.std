@@ -1,0 +1,12 @@
+Image Loaded '../dxtc2-sycl/data/lena_std.ppm', 512 x 512 pixels
+
+Running DXT Compression on 512 x 512 image...
+
+16384 Blocks, 64 Threads per Block, 1048576 Threads in Grid...
+
+Average kernel execution time 315.709137 (us)
+
+Checking accuracy...
+RMS(reference, result) = 0.012630
+
+PASS

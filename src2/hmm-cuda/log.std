@@ -1,0 +1,10 @@
+# of states = 4096
+# of possible observations = 4096 
+Size of observational sequence = 250
+
+
+Compute Viterbi path on GPU
+Device execution time of Viterbi iterations 0.138638 (s)
+
+Compute Viterbi path on CPU
+Success

@@ -1,0 +1,60 @@
+bfloat16 -> half
+size(GB):8.40, average time(sec):0.005790, BW:1450.777202
+bfloat16 -> float
+size(GB):12.60, average time(sec):0.006125, BW:2057.142857
+bfloat16 -> int
+size(GB):12.60, average time(sec):0.006166, BW:2043.464158
+bfloat16 -> char
+size(GB):6.30, average time(sec):0.005537, BW:1137.800253
+bfloat16 -> uchar
+size(GB):6.30, average time(sec):0.005537, BW:1137.800253
+half -> half
+size(GB):8.40, average time(sec):0.005723, BW:1467.761663
+half -> float
+size(GB):12.60, average time(sec):0.006125, BW:2057.142857
+half -> int
+size(GB):12.60, average time(sec):0.006167, BW:2043.132804
+half -> char
+size(GB):6.30, average time(sec):0.005517, BW:1141.924959
+half -> uchar
+size(GB):6.30, average time(sec):0.005518, BW:1141.718014
+float -> float
+size(GB):16.80, average time(sec):0.006593, BW:2548.157136
+float -> half
+size(GB):12.60, average time(sec):0.006033, BW:2088.513178
+float -> int
+size(GB):16.80, average time(sec):0.006646, BW:2527.836293
+float -> char
+size(GB):10.50, average time(sec):0.005760, BW:1822.916667
+float -> uchar
+size(GB):10.50, average time(sec):0.005760, BW:1822.916667
+int -> int
+size(GB):16.80, average time(sec):0.006593, BW:2548.157136
+int -> float
+size(GB):16.80, average time(sec):0.006609, BW:2541.988198
+int -> half
+size(GB):12.60, average time(sec):0.006077, BW:2073.391476
+int -> char
+size(GB):10.50, average time(sec):0.005699, BW:1842.428496
+int -> uchar
+size(GB):10.50, average time(sec):0.005701, BW:1841.782143
+char -> int
+size(GB):10.50, average time(sec):0.005672, BW:1851.198872
+char -> float
+size(GB):10.50, average time(sec):0.005683, BW:1847.615696
+char -> half
+size(GB):6.30, average time(sec):0.005376, BW:1171.875000
+char -> char
+size(GB):4.20, average time(sec):0.005095, BW:824.337586
+char -> uchar
+size(GB):4.20, average time(sec):0.005087, BW:825.633969
+uchar -> int
+size(GB):10.50, average time(sec):0.005675, BW:1850.220264
+uchar -> float
+size(GB):10.50, average time(sec):0.005682, BW:1847.940866
+uchar -> half
+size(GB):6.30, average time(sec):0.005377, BW:1171.657058
+uchar -> char
+size(GB):4.20, average time(sec):0.005088, BW:825.471698
+uchar -> uchar
+size(GB):4.20, average time(sec):0.005096, BW:824.175824

@@ -1,0 +1,10 @@
+ViterbiCPU.cu:35: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+   35 |     #pragma omp parallel for
+      | 
+ViterbiCPU.cu:44: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+   44 |         #pragma omp parallel for
+      | 
+ViterbiCPU.cu:63: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+   63 |         #pragma omp parallel for
+      | 
+timeout was set to  600

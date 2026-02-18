@@ -1,0 +1,14 @@
+param.c: In function ‘read_dangle’:
+param.c:345:25: warning: ‘j’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  345 |           (*d)[i][j][k] = val;
+      |           ~~~~~~~~~~~~~~^~~~~
+param.c:345:25: warning: ‘i’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+param.c: In function ‘read_stack’:
+param.c:196:28: warning: ‘j’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  196 |           (*p)[j][i][k][l] = val;
+      |           ~~~~~~~~~~~~~~~~~^~~~~
+param.c:196:28: warning: ‘i’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+prna.cu:197:12: warning: ‘int int_min(int, int)’ defined but not used [-Wunused-function]
+  197 | DEV HOST static int int_min(int a, int b) { return a < b ? a : b; }
+      |            ^~~~~~~
+timeout was set to  600

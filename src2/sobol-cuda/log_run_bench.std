@@ -1,0 +1,10 @@
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c sobol.cu -o sobol.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c sobol_gold.cu -o sobol_gold.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c sobol_gpu.cu -o sobol_gpu.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c sobol_primitives.cu -o sobol_primitives.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 sobol.o sobol_gold.o sobol_gpu.o sobol_primitives.o -o SobolQRNG 
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "time -p ( ./SobolQRNG 1000000 1000 100 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 1 4374 4373

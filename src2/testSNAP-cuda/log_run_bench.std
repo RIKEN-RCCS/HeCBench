@@ -1,0 +1,1 @@
+nvcc  -std=c++17 -Xcompiler -Wall -I. -I../testSNAP-omp           -DREFDATA_TWOJ=14  -arch=sm_90 -O3 -c main.cu -o main.o

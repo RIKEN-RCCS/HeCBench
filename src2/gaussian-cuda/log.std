@@ -1,0 +1,7 @@
+Workgroup size of kernel 1 = 256, Workgroup size of kernel 2= 16 X 16
+Create a square matrix (4096 x 4096) internally
+Total kernel execution time 197811 (us)
+Device offloading time 460995 (us)
+
+Checking the results..
+PASS

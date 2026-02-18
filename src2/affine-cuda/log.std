@@ -1,0 +1,11 @@
+Reading input image...
+
+   Reading RAW Image
+   Bytes read = 524288
+
+   Average kernel execution time 3.12685e-06 (s)
+   Max output error is 0
+
+   Writing RAW Image
+   Bytes written = 524288
+

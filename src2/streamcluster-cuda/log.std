@@ -1,0 +1,19 @@
+PARSEC Benchmark Suite
+Streamcluster time = 5.835657 (s)
+Total time = 5.837166 (s)
+==== Detailed timing info ====
+pgain = 0.000000 (s)
+pgain_dist = 0.000000 (s)
+pgain_init = 0.000000 (s)
+pselect = 0.000254 (s)
+pspeedy = 1.298646 (s)
+pshuffle = 0.008374 (s)
+FL = 4.354910 (s)
+localSearch = 5.679737 (s)
+
+serial = 3.343890 (s)
+CPU to GPU memory copy = 0.841574 (s)
+GPU to CPU memory copy back = 0.070867 (s)
+GPU malloc = 0.778537 (s)
+GPU free = 0.001507 (s)
+GPU kernels = 0.098068 (s)

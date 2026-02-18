@@ -1,0 +1,6 @@
+Initializing test problem (this can take several minutes for large problems).
+Finished.
+9437184 of 9437184 pairs within cutoff distance = 100 %
+Performing Correctness Check (may take several minutes)
+Max error between host and device: 0
+Average kernel execution time 6.55655e-05 (s)

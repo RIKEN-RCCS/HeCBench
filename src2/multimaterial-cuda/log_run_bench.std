@@ -1,0 +1,8 @@
+nvcc  -std=c++17 -Xcompiler -Wall  -O3 compact.cu full_matrix.cu multimat.cu -o multimat 
+nvcc  -std=c++17 -Xcompiler -Wall  -O3 -DFUSED -DLINKED compact.cu full_matrix.cu multimat.cu -o multimat_FL 
+nvcc  -std=c++17 -Xcompiler -Wall  -O3 -DFUSED compact.cu full_matrix.cu multimat.cu -o multimat_F 
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "../multimaterial-cuda/prepare_data.sh; time -p ( ./multimat_FL 6000 6000 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 0 3097 3097

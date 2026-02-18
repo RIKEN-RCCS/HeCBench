@@ -1,0 +1,10 @@
+euler3d.cu:44:2: warning: #warning "the kernels may fail too launch on some systems if the block length is too large" [-Wcpp]
+   44 | #warning "the kernels may fail too launch on some systems if the block length is too large"
+      |  ^~~~~~~
+euler3d.cu:44:2: warning: #warning "the kernels may fail too launch on some systems if the block length is too large" [-Wcpp]
+   44 | #warning "the kernels may fail too launch on some systems if the block length is too large"
+      |  ^~~~~~~
+util.h:97: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+   97 | #pragma omp parallel for
+      | 
+timeout was set to  600

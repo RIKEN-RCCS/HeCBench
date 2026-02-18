@@ -1,0 +1,8 @@
+main.cu: In function ‘int main(int, char**)’:
+main.cu:516:101: warning: ‘tic’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  516 |   printf("average kernel execution time over %d iterations:\t\t\t%.6lf (us)\n",
+      |                                                                                                     ^     
+main.cu:333:8: note: ‘tic’ was declared here
+  333 |   double tic, toc;              /* floating point numbers to calculate elapsed wallclock time */
+      |        ^~~
+timeout was set to  600

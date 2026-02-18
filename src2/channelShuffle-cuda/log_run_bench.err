@@ -1,0 +1,5 @@
+main.cu: In function ‘int main(int, char**)’:
+main.cu:162:67: warning: ‘time’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  162 |         printf("Average time of channel shuffle (NHWC): %f (ms)\n", (time * 1e-6f) / repeat);
+      |                                                             ~~~~~~^~~~~~~~~~~~~~~~~~~~~
+timeout was set to  600

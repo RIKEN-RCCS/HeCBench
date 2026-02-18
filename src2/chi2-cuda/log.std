@@ -1,0 +1,5 @@
+Individuals=23000 SNPs=2300000 cases=2000 controls=2000 nthreads=256
+Size of the data = 52900000000
+Average chi_kernel execution time = 0.013565 (s)
+Host execution time = 24.946011 (s)
+PASS

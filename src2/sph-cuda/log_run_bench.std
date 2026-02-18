@@ -1,0 +1,9 @@
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c fileio.cu -o fileio.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c fluid.cu -o fluid.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c geometry.cu -o geometry.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 fileio.o fluid.o geometry.o -o sph 
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "time -p ( ./sph 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 1 558 557

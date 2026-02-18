@@ -1,0 +1,16 @@
+Average kernel execution time (n_diff = 0): 0.320046 (s)
+PASS
+Average kernel execution time (n_diff = 1): 0.321722 (s)
+FAIL
+Average kernel execution time (n_diff = 2): 0.321660 (s)
+FAIL
+Average kernel execution time (n_diff = 3): 0.321708 (s)
+FAIL
+Average kernel execution time (n_diff = 4): 0.321592 (s)
+FAIL
+Average kernel execution time (n_diff = 5): 0.321648 (s)
+FAIL
+Average kernel execution time (n_diff = 6): 0.321593 (s)
+FAIL
+Average kernel execution time (n_diff = 7): 0.321601 (s)
+FAIL

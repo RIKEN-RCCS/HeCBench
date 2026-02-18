@@ -1,0 +1,24 @@
+Random number generator seed = 123
+Initializing keyvalue pairs with random numbers...
+Testing insertion/deletion of 33554432/16777216 elements into GPU hash table...
+Average kernel execution time (insert): 0.000174 (s)
+Average kernel execution time (delete): 0.000175 (s)
+Kernel execution time (iterate): 0.001760 (s)
+Total time (including memory copies, readback, etc): 1638.947021 ms (20.473165 million keys/second)
+Timing std::unordered_map...
+Total time for std::unordered_map: 34675.765625 ms (0.967662 million keys/second)
+Testing that there are no duplicate keys...
+    Verifying 0/16679187
+    Verifying 10000000/16679187
+Building unordered_map from original list...
+    Inserting 0/33554432
+    Inserting 10000000/33554432
+    Inserting 20000000/33554432
+    Inserting 30000000/33554432
+    Deleting 0/16777216
+    Deleting 10000000/16777216
+Testing that each key/value in hashtable is in the original list...
+    Verifying 0/16679187
+    Verifying 10000000/16679187
+Deleting std::unordered_map and std::unique_set...
+PASS

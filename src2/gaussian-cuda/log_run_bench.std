@@ -1,0 +1,8 @@
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c gaussianElim.cu -o gaussianElim.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c utils.cu -o utils.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 gaussianElim.o utils.o -o main 
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "time -p ( ./main -q -t -s 4096 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 0 686 686

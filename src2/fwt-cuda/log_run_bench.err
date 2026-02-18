@@ -1,0 +1,8 @@
+kernels.cu: In function ‘void fwtBatchGPU(float*, int, int)’:
+kernels.cu:142:74: warning: passing argument 1 to ‘restrict’-qualified parameter aliases with argument 2 [-Wrestrict]
+  142 |         fwtBatch2Kernel<<<grid, THREAD_N>>>(d_Data, d_Data, N / 4);
+      |                                                           ~~~~~~~~~      ^                      
+kernels.cu:145:87: warning: passing argument 1 to ‘restrict’-qualified parameter aliases with argument 2 [-Wrestrict]
+  145 |     fwtBatch1Kernel<<<M, N / 4, N *sizeof(float)>>>(
+      |                                                                                       ^                      
+timeout was set to  600

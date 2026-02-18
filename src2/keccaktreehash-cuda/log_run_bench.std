@@ -1,0 +1,11 @@
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c KeccakF.cu -o KeccakF.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c KeccakTreeCPU.cu -o KeccakTreeCPU.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c KeccakTreeGPU.cu -o KeccakTreeGPU.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c Test.cu -o Test.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c main.cu -o main.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 KeccakF.o KeccakTreeCPU.o KeccakTreeGPU.o Test.o main.o -o keccektree 
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "time -p ( ./keccektree 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 0 686 686

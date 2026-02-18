@@ -1,0 +1,8 @@
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c 3D.cu -o 3D.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c 3D_helper.cu -o 3D_helper.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 3D.o 3D_helper.o -o main 
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "../hotspot3D-cuda/prepare_data.sh; time -p ( ./main 512 8 5000 ../data/hotspot3D/power_512x8 ../data/hotspot3D/temp_512x8 output.out 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 0 580 580

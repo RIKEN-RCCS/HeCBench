@@ -1,0 +1,17 @@
+==============
+Num Timesteps         : 100
+Num Paths             : 32K
+Num Runs              : 100
+T                     : 1.000000
+S0                    : 3.600000
+K                     : 4.000000
+r                     : 0.060000
+sigma                 : 0.200000
+Option Type           : American Put
+==============
+GPU Longstaff-Schwartz: 0.44747600
+Binonmial             : 0.44880498
+European Price        : 0.38443078
+==============
+elapsed time for each run         : 4.000ms
+==============

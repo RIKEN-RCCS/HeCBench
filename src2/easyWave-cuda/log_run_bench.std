@@ -1,0 +1,13 @@
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c main.cu -o main.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c cOgrd.cpp -o cOgrd.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c cOkadaFault.cpp -o cOkadaFault.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c cOkadaEarthquake.cpp -o cOkadaEarthquake.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c cSphere.cpp -o cSphere.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c okada.cpp -o okada.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 -c utilits.cpp -o utilits.o
+nvcc  -std=c++17 -Xcompiler -Wall -arch=sm_90 -O3 main.o cOgrd.o  cOkadaFault.o  cOkadaEarthquake.o cSphere.o okada.o utilits.o -o main 
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "time -p ( ./main -grid ../easyWave-omp/data/grids/e2Asean.grd -source ../easyWave-omp/data/faults/BengkuluSept2007.flt -time 120 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 1 795 794

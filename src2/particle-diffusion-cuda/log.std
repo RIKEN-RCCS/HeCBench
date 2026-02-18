@@ -1,0 +1,10 @@
+ Running on NVIDIA GH200 480GB
+ The device max work-group size is 1024
+ The number of iterations is 2000
+ The number of kernel execution is 100
+ The number of particles is 147456
+
+Average kernel execution time: 0.00220372 (s)
+
+Simulation time: 0.593556 (s) 
+PASS

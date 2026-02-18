@@ -1,0 +1,4 @@
+ Ly,Lx = 8192,4096
+ niter = 1000
+Device: iters =     1000, (Lx,Ly) =   4096,   8192, t =    165.0 usec/iter, BW = 1627.049 GB/s, P = 1220.287 Gflop/s
+PASS

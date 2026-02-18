@@ -1,0 +1,6 @@
+main.cu:11:10: fatal error: mpi.h: No such file or directory
+   11 | #include <mpi.h>
+      |          ^~~~~~~
+compilation terminated.
+make: *** [Makefile.NVD:53: main.o] Error 1
+timeout was set to  600

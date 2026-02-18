@@ -1,0 +1,11 @@
+shrUtils.cu(87): warning #550-D: variable "szNumWritten" was set but never used
+    size_t szNumWritten = 0;
+           ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+shrUtils.cu: In function ‘int shrLogV(int, int, const char*, va_list)’:
+shrUtils.cu:87:10: warning: variable ‘szNumWritten’ set but not used [-Wunused-but-set-variable]
+   87 |   size_t szNumWritten = 0;
+      |          ^~~~~~~~~~~~
+timeout was set to  600

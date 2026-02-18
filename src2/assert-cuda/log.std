@@ -1,0 +1,17 @@
+
+Launch kernel to evaluate the impact of assertion on performance 
+Each thread in the kernel executes threadID + 1 assertions
+Kernel time : 2.419853
+Each thread in the kernel executes threadID assertions
+Kernel time : 0.011555
+
+Launch kernel to generate assertion failures
+
+-- Begin assert output
+
+
+-- End assert output
+
+Device assert failed as expected, CUDA error message is: device-side assert triggered
+
+Test assert completed, returned OK

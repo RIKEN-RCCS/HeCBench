@@ -1,0 +1,4 @@
+nvcc  -std=c++17 -Xcompiler -fopenmp -Xcompiler -Wall -arch=sm_90 -O3 -c main.cu -o main.o
+nvcc  -std=c++17 -Xcompiler -fopenmp -Xcompiler -Wall -arch=sm_90 -O3 main.o -o main 
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "time -p ( ./main 100000000 2097152 0 1>log.std 2>log.err ) 2> log.time"
