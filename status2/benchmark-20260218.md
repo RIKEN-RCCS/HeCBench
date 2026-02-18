@@ -14,7 +14,7 @@
 | aligned-types | 3.82 | 3.68 | 4.40 | 4.71 |
 | all-pairs-distance | 4.96 | 5.23 | 4.81 | 21.34 |
 | amgmk | 2.51 | 2.45 | 2.42 | 2.44 |
-| ans | build err | 5.42 | exe err | exe err |
+| ans | 5.19 | 5.42 | exe err | exe err |
 | aobench | 2.46 | 0.36 | 2.42 | 2.47 |
 | aop | 7.03 | 7.02 | build err | build err |
 | asmooth | 12.47 | 5.70 | 7.38 | 7.33 |
@@ -26,7 +26,7 @@
 | atomicPerf | 14.33 | 14.66 | 13.47 | 13.88 |
 | atomicReduction | 2.70 | 3.44 | 2.65 | 2.63 |
 | attention | 2.48 | 2.47 | 83.27 | 83.85 |
-| axhelm | build err | 2.41 | build err | 2.47 |
+| axhelm | 2.46 | 2.41 | build err | 2.47 |
 | babelstream | 2.74 | 0.56 | 2.72 | 2.85 |
 | background-subtract | 6.52 | 8.07 | 8.66 | 8.33 |
 | backprop | 2.53 | 2.45 | 2.44 | 2.47 |
@@ -328,6 +328,6 @@
 | zeropoint | 18.63 | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | 2.63 | build err | 14.28 |
 | | | | | |
-| completed | 310 | 306 | 214 | 285 |
+| completed | 312 | 306 | 214 | 285 |
 
 sycl と acc がともに完了した件数 211
