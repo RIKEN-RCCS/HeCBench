@@ -66,7 +66,7 @@ def extend_markdown(markd, imagedir='SVGs', src_dir='../src2', mark_command=Fals
         secondline += ' -- |'
     print(secondline)
     for line in f:
-        if line.find("completed") > 0:
+        if line.find("完了") > 0:
             line = line.strip()
             line += '|';
         else:
@@ -89,9 +89,12 @@ def gen_plt(x, line, imagedir='SVGs'):
     bname = words[1].strip()
 
     if bname == "":  return
-    if bname == "completed":  return
+    if bname == "完了":  return
     
-    words = words[2:len(words)-1]
+#    words = words[2:len(words)-1]
+    words = words[2:6]
+#    print("qors ", words )
+    
     y = []
     for w in words:
         w = w.strip()
@@ -129,13 +132,17 @@ if __name__ == '__main__':
     line0 = f.readline()
 
     columns = line0.strip().split('|')
-    x = columns[2:len(columns)-1]
+#    x = columns[2:len(columns)-1]
+    x = columns[2:6]
+#    print("x",x)
+#    exit(-1)
+    
     dumm = f.readline()
 
     if not options.noplot:
         for line in f:
-            if line.find("completed") > 0: pass
-            if line.find("|") > 0:
+            if line.find("完了") > 0: pass
+            if line.find("|") >= 0:
                 line = line.strip()
 #                print("line ", line )
                 gen_plt(x,line,imagedir=options.imagedir)
