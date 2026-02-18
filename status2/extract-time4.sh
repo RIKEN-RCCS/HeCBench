@@ -28,6 +28,7 @@ do
 	fi
     done
 
+    mem=""
     num=0
     while [ $num -lt 4 ];
     do
