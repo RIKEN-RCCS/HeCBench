@@ -205,7 +205,7 @@
 | miniFE | | | | -- |
 | minimap2 | 1.51 | 2.32 | | 2.19 |
 | minisweep | 50.83 | 56.83 | 35.43 | 35.90 |
-| miniWeather | build err | 8.19 | 33.30 | 33.14 |
+| miniWeather | 8.49 | 8.19 | 33.30 | 33.14 |
 | minkowski | 23.94 | 24.25 | 22.27 | 22.36 |
 | mis | 24.24 | 13.22 | build err | 2.60 |
 | mixbench | 3.77 | 3.62 | build err | 3.80 |
@@ -328,6 +328,6 @@
 | zeropoint | 18.63 | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | 2.63 | build err | 14.28 |
 | | | | | |
-| completed | 317 | 306 | 214 | 285 |
+| completed | 318 | 306 | 214 | 285 |
 
 sycl と acc がともに完了した件数 211
