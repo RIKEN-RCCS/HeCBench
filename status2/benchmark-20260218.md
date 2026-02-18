@@ -262,13 +262,13 @@
 | rng-wallace | 2.62 | 2.56 | build err | 3.55 |
 | rodrigues | 96.39 | 101.46 | 114.74 | 101.38 |
 | romberg | 2.75 | 2.72 | build err | 2.81 |
-| rsbench | | 3.39 | build err | build err |
+| rsbench | 3.01 | 3.39 | build err | build err |
 | rsc | 2.75 | 0.50 | build err | 2.73 |
 | rtm8 | 4.35 | 17.67 | 15.76 | 4.22 |
 | rushlarsen | 140.36 | 129.52 | 135.46 | 135.06 |
 | s3d | 2.92 | 2.94 | build err | 2.90 |
 | s8n | 2.58 | 2.49 | 2.47 | 2.43 |
-| sad | | 2.48 | 2.63 | 81.81 |
+| sad | 2.40 | 2.48 | 2.63 | 81.81 |
 | sampling | 5.85 | 5.77 | build err | 5.65 |
 | scan2 | 2.93 | 2.91 | build err | 6.76 |
 | scan | 33.88 | 31.87 | build err | 33.05 |
@@ -328,6 +328,6 @@
 | zeropoint | 18.63 | 55.54 | 21.82 | 24.23 |
 | zmddft | 2.63 | 2.63 | build err | 14.28 |
 | | | | | |
-| completed | 314 | 306 | 214 | 285 |
+| completed | 316 | 306 | 214 | 285 |
 
 sycl と acc がともに完了した件数 211
