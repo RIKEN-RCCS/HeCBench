@@ -1,1 +1,8 @@
+tar xf ../testSNAP-omp/refdata.tar.gz -C ../testSNAP-omp
 nvcc  -std=c++17 -Xcompiler -Wall -I. -I../testSNAP-omp           -DREFDATA_TWOJ=14  -arch=sm_90 -O3 -c main.cu -o main.o
+nvcc  -std=c++17 -Xcompiler -Wall -I. -I../testSNAP-omp           -DREFDATA_TWOJ=14  -arch=sm_90 -O3 main.o -o main 
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "time -p ( ./main --nsteps 100 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 1 3160 3159
