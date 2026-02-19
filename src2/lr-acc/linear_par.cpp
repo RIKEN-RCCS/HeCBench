@@ -99,8 +99,8 @@ void r_squared(linear_param_t *params, data_t *dataset, sum_t *linreg, result_t 
   size_t gpu_global_size = globalWorkSize - cpu_global_size;
 
   if (gpu_global_size > 0) {
-    #pragma acc parallel data map (to: dataset[0:size])\
-                            map (alloc: results[0:wg_count])
+    #pragma acc data copyin ( dataset[0:size])\
+                            create ( results[0:wg_count])
     {
       const int nTeams = gpu_global_size / wg_size;
 
@@ -113,7 +113,9 @@ void r_squared(linear_param_t *params, data_t *dataset, sum_t *linreg, result_t 
       auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
       response->ktime += time;
 
-      #pragma acc update from (results[0:(wg_count * (100-cpu_offset) / 100)])
+      //int update_size = wg_count * (100-cpu_offset) / 100;
+      //#pragma acc update self (results[0:update_size])
+      #pragma acc update self (results[0:(wg_count * (100-cpu_offset) / 100)])
     }
   }
 
@@ -156,8 +158,7 @@ void parallelized_regression(linear_param_t *params, data_t *dataset, result_t *
 
   if (gpu_global_size > 0) {
     /* Create data buffer */
-    #pragma acc parallel data map (to: dataset[0:size])\
-                            map (alloc: results[0:wg_count])
+    #pragma acc data copyin(dataset[0:size]) create(results[0:wg_count])
     {
       const int nTeams = gpu_global_size / wg_size;
 
@@ -170,7 +171,7 @@ void parallelized_regression(linear_param_t *params, data_t *dataset, result_t *
       auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
       response->ktime += time;
 
-      #pragma acc update from (results[0:(wg_count * (100-cpu_offset) / 100)])
+      #pragma acc update self (results[0:(wg_count * (100-cpu_offset) / 100)])
     }
   }
 

@@ -1,16 +1,1 @@
-main.cpp:42:21: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
-   42 |   params.filename = TEMP_FILENAME;
-      |                     ^
-./linear.h:7:23: note: expanded from macro 'TEMP_FILENAME'
-    7 | #define TEMP_FILENAME "assets/temperature.txt"
-      |                       ^
-1 warning generated.
-main.cpp:42:21: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
-   42 |   params.filename = TEMP_FILENAME;
-      |                     ^
-./linear.h:7:23: note: expanded from macro 'TEMP_FILENAME'
-    7 | #define TEMP_FILENAME "assets/temperature.txt"
-      |                       ^
-1 warning generated.
-cp: cannot stat '../lr-cuda/assets.tar.gz': No such file or directory
-timeout was set to  600
+cp: '../lr-sycl/assets.tar.gz' and './assets.tar.gz' are the same file
