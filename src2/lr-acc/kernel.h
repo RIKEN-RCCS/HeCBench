@@ -17,14 +17,13 @@ void linear_regression(
   const float2 *__restrict dataset,
         float4 *__restrict result)
 {
-  #pragma acc parallel teams num_teams(nTeams) thread_limit(TEMP_WORKGROUP_SIZE)
-  {
+  #pragma acc parallel loop gang num_gangs(nTeams) vector_length(TEMP_WORKGROUP_SIZE)
+  for( int blk_id = 0; blk_id < nTeams; blk_id++ ) {
     float4 interns[TEMP_WORKGROUP_SIZE];
-    #pragma omp parallel
-    {
-      size_t loc_id   = omp_get_thread_num();
-      size_t blk_id   = omp_get_team_num();
-      size_t loc_size = TEMP_WORKGROUP_SIZE; 
+    size_t loc_size = TEMP_WORKGROUP_SIZE; 
+
+    #pragma acc loop vector
+    for( int loc_id = 0; loc_id < loc_size; loc_id++ ) {
       size_t glob_id  = blk_id * loc_size + loc_id;
 
       /* Initialize local buffer */
@@ -32,11 +31,11 @@ void linear_regression(
       interns[loc_id].y = dataset[glob_id].y;
       interns[loc_id].z = (dataset[glob_id].x * dataset[glob_id].y);
       interns[loc_id].w = (dataset[glob_id].x * dataset[glob_id].x);
-      
-      #pragma omp barrier
-
-      for (size_t i = (loc_size / 2), old_i = loc_size; i > 0; old_i = i, i /= 2)
-      {
+    }
+    // auto barrier
+    for (size_t i = (loc_size / 2), old_i = loc_size; i > 0; old_i = i, i /= 2) {
+      #pragma acc loop vector
+      for( int loc_id = 0; loc_id < loc_size; loc_id++ ) {
         if (loc_id < i) {
           // Only first half of workitems on each workgroup
           interns[loc_id] += interns[loc_id + i];
@@ -45,10 +44,13 @@ void linear_regression(
             interns[loc_id] += interns[old_i - 1];
           }
         }
-        #pragma omp barrier
       }
+      // auto barrier
+    }
 
-      if (loc_id == 0) result[blk_id] = interns[0];
+    #pragma acc loop vector
+    for( int loc_id = 0; loc_id < 1; loc_id++ ) {
+      result[blk_id] = interns[0];
     }
   }
 }
@@ -60,25 +62,24 @@ void rsquared(
   const float2 equation, // [a0,a1]
   float2 *__restrict result)
 {
-  #pragma acc parallel teams num_teams(nTeams) thread_limit(TEMP_WORKGROUP_SIZE)
-  {
+  #pragma acc parallel loop gang num_gangs(nTeams) vector_length(TEMP_WORKGROUP_SIZE)
+  for (int blk_id = 0; blk_id < nTeams; blk_id++) {
     float2 dist[TEMP_WORKGROUP_SIZE];
-    #pragma omp parallel 
-    {
-      size_t loc_id   = omp_get_thread_num();
-      size_t blk_id   = omp_get_team_num();
-      size_t loc_size = TEMP_WORKGROUP_SIZE; 
+    size_t loc_size = TEMP_WORKGROUP_SIZE; 
+
+    #pragma acc loop vector
+    for( int loc_id = 0; loc_id < loc_size; loc_id++ ) {
       size_t glob_id  = blk_id * loc_size + loc_id;
 
       dist[loc_id].x = powf((dataset[glob_id].y - mean), 2.f);
 
       float y_estimated = dataset[glob_id].x * equation.y + equation.x;
       dist[loc_id].y = powf((y_estimated - mean), 2.f);
-
-      #pragma omp barrier
-
-      for (size_t i = (loc_size / 2), old_i = loc_size; i > 0; old_i = i, i /= 2)
-      {
+    }
+    // auto barrier
+    for (size_t i = (loc_size / 2), old_i = loc_size; i > 0; old_i = i, i /= 2) {
+      #pragma acc loop vector
+      for( int loc_id = 0; loc_id < loc_size; loc_id++ ) {
         if (loc_id < i) {
           // Only first half of workitems on each workgroup
           dist[loc_id] += dist[loc_id + i];
@@ -87,10 +88,13 @@ void rsquared(
             dist[loc_id] += dist[old_i - 1];
           }
         }
-        #pragma omp barrier
       }
+      // auto barrier
+    }
 
-      if (loc_id == 0) result[blk_id] = dist[0];
+    #pragma acc loop vector
+    for( int loc_id = 0; loc_id < 1; loc_id++ ) {
+      result[blk_id] = dist[0];
     }
   }
 }
