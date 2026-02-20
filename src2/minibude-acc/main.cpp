@@ -220,16 +220,16 @@ std::vector<float> runKernel(Params params) {
   FFParams *forcefield = params.forcefield.data();
   float *results = energies.data();
 
-#pragma acc data to: protein[0:params.natpro],\
-                                ligand[0:params.natlig],\
-                                transforms_0[0:params.nposes],\
-                                transforms_1[0:params.nposes],\
-                                transforms_2[0:params.nposes],\
-                                transforms_3[0:params.nposes],\
-                                transforms_4[0:params.nposes],\
-                                transforms_5[0:params.nposes],\
-                                forcefield[0:params.ntypes]) \
-                        map(from: results[0:params.nposes])
+#pragma acc data copyin(protein[0:params.natpro],\
+                        ligand[0:params.natlig],\
+                        transforms_0[0:params.nposes],\
+                        transforms_1[0:params.nposes],\
+                        transforms_2[0:params.nposes],\
+                        transforms_3[0:params.nposes],\
+                        transforms_4[0:params.nposes],\
+                        transforms_5[0:params.nposes],\
+                        forcefield[0:params.ntypes]) \
+                 copyout(results[0:params.nposes])
 {
   size_t global = ceil((params.nposes) / static_cast<double> (NUM_TD_PER_THREAD));
   size_t teams = ceil(static_cast<double> (global) / params.wgSize);
