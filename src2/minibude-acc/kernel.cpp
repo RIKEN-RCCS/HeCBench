@@ -37,14 +37,18 @@ void fasten_main(
     const FFParams *__restrict forcefield,
     float *__restrict etotals) 
 {
-  #pragma acc parallel teams num_teams(teams) thread_limit(block)
+  #pragma acc parallel num_gangs(teams) vector_length(block) \
+          present(protein_molecule, ligand_molecule, forcefield, etotals, \
+                  transforms_0, transforms_1, transforms_2, transforms_3, \
+                  transforms_4, transforms_5)
   {
     FFParams local_forcefield[64];  // size dependent on the input data (deck)
-    #pragma omp parallel 
+    #pragma acc loop gang worker vector
+    for (size_t g_idx = 0; g_idx < teams * block; g_idx++)
     {
-      const size_t lid = omp_get_thread_num();
-      const size_t gid = omp_get_team_num();
-      const size_t lrange = omp_get_vector();
+      const size_t lid = g_idx % block;
+      const size_t gid = g_idx / block;
+      const size_t lrange = block;
 
       float etot[NUM_TD_PER_THREAD];
       float3 lpos[NUM_TD_PER_THREAD];
@@ -81,8 +85,7 @@ void fasten_main(
 
         etot[i] = ZERO;
       }
-
-      #pragma omp barrier
+      // auto barrier
 
       // Loop over ligand atoms
       size_t il = 0;

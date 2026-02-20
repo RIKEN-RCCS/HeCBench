@@ -1,11 +1,39 @@
-"main.cpp", line 223: error: invalid text in pragma
-  #pragma acc data to: protein[0:params.natpro],\
-                   ^
-
-"main.cpp", line 223: error: extra text after expected end of preprocessing directive
-  #pragma acc data to: protein[0:params.natpro],\
-                     ^
-
-2 errors detected in the compilation of "main.cpp".
-make: *** [Makefile.NVD:57: main.o] Error 2
-timeout was set to  600
+fasten_main(unsigned long, int, unsigned long, unsigned long, unsigned long, unsigned long, Atom const*, Atom const*, float const*, float const*, float const*, float const*, float const*, float const*, FFParams const*, float*):
+     44, Generating present(ligand_molecule[:],forcefield[:],etotals[:],protein_molecule[:],transforms_0[:],transforms_1[:],transforms_2[:],transforms_3[:],transforms_5[:],transforms_4[:])
+         Generating implicit firstprivate(block,teams)
+         Generating NVIDIA GPU code
+         47, #pragma acc loop gang(teams), vector(block) /* blockIdx.x threadIdx.y threadIdx.x */
+         60, #pragma acc loop seq
+         63, #pragma acc loop seq
+         92, #pragma acc loop seq
+        100, #pragma acc loop seq
+        118, #pragma acc loop seq
+        141, #pragma acc loop seq
+        175, #pragma acc loop seq
+     44, Local memory used for linitpos
+         CUDA shared memory used for local_forcefield
+         Local memory used for transform,p_params,l_params,l_atom,etot,p_atom,lpos
+     47, Generating implicit firstprivate(ntypes,nposes)
+         Loop not vectorized/parallelized: too deeply nested
+     60, Loop carried reuse of local_forcefield.hbtype prevents parallelization
+         Loop carried scalar dependence for i at line 60
+         Loop not vectorized/parallelized: not countable
+     63, Loop is parallelizable
+         Loop unrolled 1 times (completely unrolled)
+     92, Loop carried scalar dependence for il at line 94,169
+         Loop carried reuse of lpos.x,etot prevents parallelization
+         Complex loop carried dependence of etot prevents parallelization
+         Generating implicit firstprivate(natlig)
+         Complex loop carried dependence of etot prevents parallelization
+    100, Loop is parallelizable
+         Loop unrolled 1 times (completely unrolled)
+    118, Loop carried scalar dependence for ip at line 120,168
+         Loop carried dependence of etot prevents parallelization
+         Loop carried backward dependence of etot prevents vectorization
+         Generating implicit firstprivate(natpro)
+         Loop carried dependence of etot prevents parallelization
+    141, Loop is parallelizable
+         Loop not vectorized/parallelized: loop count too small
+    175, Loop carried dependence of etotals-> prevents parallelization
+         Loop carried backward dependence of etotals-> prevents vectorization
+         Loop unrolled 1 times (completely unrolled)
