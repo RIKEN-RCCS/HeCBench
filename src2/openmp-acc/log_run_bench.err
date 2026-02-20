@@ -1,31 +1,24 @@
-"main.cpp", line 40: error: identifier "omp_get_num_procs" is undefined
-    printf("number of host CPUs:\t%d\n", omp_get_num_procs());
-                                         ^
-
-"main.cpp", line 59: error: identifier "omp_get_wtime" is undefined
-        double start = omp_get_wtime();
-                       ^
-
-"main.cpp", line 60: error: identifier "omp_set_num_threads" is undefined
-        omp_set_num_threads(f * num_gpus); 
-        ^
-
-"main.cpp", line 63: error: identifier "omp_get_thread_num" is undefined
-          unsigned int cpu_thread_id = omp_get_thread_num();
-                                       ^
-
-"main.cpp", line 64: error: identifier "omp_get_vector" is undefined
-          unsigned int num_cpu_threads = omp_get_vector();
-                                         ^
-
-"main.cpp", line 73: error: invalid text in pragma
-          #pragma acc parallel data map (tofrom: sub_a[0:nwords_per_kernel])
-                               ^
-
-"main.cpp", line 73: error: extra text after expected end of preprocessing directive
-          #pragma acc parallel data map (tofrom: sub_a[0:nwords_per_kernel])
-                                    ^
-
-7 errors detected in the compilation of "main.cpp".
-make: *** [Makefile.NVD:57: main.o] Error 2
-timeout was set to  600
+correctResult(int*, int, int, int):
+     32, include "reference.h"
+           2, Loop not vectorized/parallelized: potential early exits
+           4, Generated vector simd code for the loop containing reductions
+              Loop unrolled 2 times
+main:
+     63, #omp parallel
+     71, Generated vector simd code for the loop
+     75, Generating copy(sub_a[:nwords_per_kernel]) [if not already present]
+         Generating implicit firstprivate(nwords_per_kernel)
+         Generating NVIDIA GPU code
+         77, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+         78, #pragma acc loop seq
+     77, Generating implicit firstprivate(repeat)
+     78, Complex loop carried dependence of sub_a-> prevents parallelization
+         Loop carried dependence of sub_a-> prevents parallelization
+         Loop carried backward dependence of sub_a-> prevents vectorization
+         Generating implicit firstprivate(b)
+         Loop carried backward dependence of sub_a-> prevents vectorization
+         Loop unrolled 2 times
+           2, Loop not vectorized/parallelized: potential early exits
+           4, Generated vector simd code for the loop containing reductions
+              Loop unrolled 2 times
+          58, Loop not vectorized/parallelized: too deeply nested

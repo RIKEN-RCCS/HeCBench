@@ -1,1 +1,20 @@
-timeout was set to  600
+correctResult(int*, int, int, int):
+     31, include "reference.h"
+           2, Loop not vectorized/parallelized: potential early exits
+           4, Generated vector simd code for the loop containing reductions
+              Loop unrolled 2 times
+main:
+     62, #omp parallel
+     70, Loop not vectorized/parallelized: not countable
+     74, #omp target teams distribute parallel for thread_limit(256)
+         74, Generating "nvkernel_main_F1L62_1_F1L74_3" GPU kernel
+             Generating map(tofrom:sub_a[:nwords_per_kernel]) 
+         76, Loop parallelized across teams and threads(128), schedule(static)
+             #omp parallel
+     76, Loop not vectorized/parallelized: not countable
+     77, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+           2, Loop not vectorized/parallelized: potential early exits
+           4, Generated vector simd code for the loop containing reductions
+              Loop unrolled 2 times
+          57, Loop not vectorized/parallelized: too deeply nested

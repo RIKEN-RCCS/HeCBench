@@ -27,6 +27,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <omp.h>
 #include <openacc.h>
 #include "reference.h"
 
@@ -61,7 +62,7 @@ int main(int argc, char *argv[]) {
       #pragma omp parallel
       {
         unsigned int cpu_thread_id = omp_get_thread_num();
-        unsigned int num_cpu_threads = omp_get_vector();
+        unsigned int num_cpu_threads = omp_get_num_threads();
 
         // pointer to this CPU thread's portion of data
         unsigned int nwords_per_kernel = nwords / num_cpu_threads;
@@ -70,7 +71,7 @@ int main(int argc, char *argv[]) {
         for (unsigned int n = 0; n < nwords_per_kernel; n++)
           sub_a[n] = n + cpu_thread_id * nwords_per_kernel;
 
-        #pragma acc parallel data map (tofrom: sub_a[0:nwords_per_kernel])
+        #pragma acc data copy (sub_a[0:nwords_per_kernel])
         {
           #pragma acc parallel loop vector_length(256)
           for (int idx = 0; idx < nwords_per_kernel; idx++) {
