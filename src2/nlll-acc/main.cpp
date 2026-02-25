@@ -5,6 +5,7 @@
 #include <random>
 #include <openacc.h>
 #include "reference.h"
+//#include <cuda_fp16.h>
 
 template <typename scalar_t, typename accscalar_t, 
           typename index_t, int NLL_LOSS_THREADS>
@@ -19,14 +20,15 @@ void nll_loss_forward_reduce2d_kernel(
     int64_t kdim,
     int64_t ignore_index)
 {
-  #pragma acc parallel teams gang(1) thread_limit(NLL_LOSS_THREADS)
+  #pragma acc parallel num_gangs(1) vector_length(NLL_LOSS_THREADS) \
+                       present(output, total_weight, input, target, weights)
   {
     accscalar_t sm_inputs[NLL_LOSS_THREADS],
                 acc_weight[NLL_LOSS_THREADS];
-    #pragma omp parallel
+    #pragma acc loop vector
+    for (int tid = 0; tid < NLL_LOSS_THREADS; tid++)
     {
-      int tid = omp_get_thread_num();
-      int nthreads = omp_get_vector();
+      int nthreads = NLL_LOSS_THREADS;
 
       sm_inputs[tid] = static_cast<accscalar_t>(0);
       acc_weight[tid] = static_cast<accscalar_t>(0);
@@ -41,24 +43,27 @@ void nll_loss_forward_reduce2d_kernel(
           acc_weight[tid] += static_cast<accscalar_t>(cur_weight);
         }
       }
+      //auto barrier
 
-      #pragma omp barrier
-
-      if (tid == 0) {
-        accscalar_t output_acc = 0;
-        accscalar_t total_weight_acc = 0;
-        //for (int i = 0; i < NLL_LOSS_THREADS; ++i) {
-        for (int i = 0; i < nthreads; ++i) {
-          output_acc += sm_inputs[i];
-          total_weight_acc += acc_weight[i];
-        }
-        *total_weight = static_cast<scalar_t>(total_weight_acc);
-        if (size_average) {
-          *output = static_cast<scalar_t>(output_acc / total_weight_acc);
-        } else {
-          *output = static_cast<scalar_t>(output_acc);
+      #pragma acc loop vector
+      for (int tid = 0; tid < NLL_LOSS_THREADS; tid++) {
+        if (tid == 0) {
+          accscalar_t output_acc = 0;
+          accscalar_t total_weight_acc = 0;
+          //for (int i = 0; i < NLL_LOSS_THREADS; ++i) {
+          for (int i = 0; i < nthreads; ++i) {
+            output_acc += sm_inputs[i];
+            total_weight_acc += acc_weight[i];
+          }
+          *total_weight = static_cast<scalar_t>(total_weight_acc);
+          if (size_average) {
+            *output = static_cast<scalar_t>(output_acc / total_weight_acc);
+          } else {
+            *output = static_cast<scalar_t>(output_acc);
+          }
         }
       }
+      //auto barrier
     }
   }
 }
@@ -82,10 +87,10 @@ void eval(const int64_t nframe,
   scalar_t h_output[1];
   scalar_t h_total_weight[1];
 
-  #pragma acc data to: h_input[0:input_size], \
-                                  h_weights[0:weights_size], \
-                                  h_target[0:target_size]) \
-                          map(from: h_output[0:1], h_total_weight[0:1])
+  #pragma acc data copyin(h_input[0:input_size], \
+                          h_weights[0:weights_size], \
+                          h_target[0:target_size]) \
+                   copyout(h_output[0:1], h_total_weight[0:1])
   {
     auto start = std::chrono::steady_clock::now();
 
@@ -193,6 +198,9 @@ int main(int argc, char* argv[])
 
   printf("=========== Data type is FP32 ==========\n");
   driver<float, int>(argv);
+
+  //printf("=========== Data type is FP16 ==========\n");
+  //driver<__half, int>(argv);
 
   return 0;
 }
