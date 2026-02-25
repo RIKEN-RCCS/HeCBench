@@ -1,2 +1,102 @@
-make: *** No rule to make target 'device/device_kernel_wrapper.o', needed by 'main'.  Stop.
-timeout was set to  600
+"device/device_kernel_wrapper.cpp", line 84: warning: variable "end" was declared but never referenced [declared_but_not_referenced]
+    struct timespec start, end;
+                           ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+device_ilog2(int):
+     13, Generating acc routine seq
+         Generating NVIDIA GPU code
+chain_dp_score(anchor_dt const*, anchor_dt, float, int, int, int, int):
+     33, Generating acc routine seq
+         Generating NVIDIA GPU code
+update_anchor(anchor_dt const*, anchor_dt*, int, int):
+     58, Generating acc routine seq
+         Generating NVIDIA GPU code
+update_return(return_dt const*, return_dt*, int, int):
+     63, Generating acc routine seq
+         Generating NVIDIA GPU code
+device_chain_kernel_wrapper(std::vector<control_dt, std::allocator<control_dt>>&, std::vector<anchor_dt, std::allocator<anchor_dt>>&, std::vector<return_dt, std::allocator<return_dt>>&, int, int, int):
+     93, Generating copyin(h_arg[:]) [if not already present]
+         Generating create(max_tracker_g[:][:],j_tracker_g[:][:]) [if not already present]
+         Generating copyout(h_ret[:?]) [if not already present]
+         Generating copyin(h_control[:]) [if not already present]
+     96, Generating present(h_arg[:],max_tracker_g[:][:],j_tracker_g[:][:],h_ret[:],h_control[:])
+         Loop not vectorized/parallelized: too deeply nested
+     99, Generating NVIDIA GPU code
+        105, #pragma acc loop gang(1792) /* blockIdx.x */
+        110, #pragma acc loop vector(64) /* threadIdx.x */
+        123, #pragma acc loop seq
+        136, #pragma acc loop vector(64) /* threadIdx.x */
+        146, #pragma acc loop vector(64) /* threadIdx.x */
+        153, #pragma acc loop vector(64) /* threadIdx.x */
+        161, #pragma acc loop vector(64) /* threadIdx.x */
+        173, #pragma acc loop vector(64) /* threadIdx.x */
+     99, CUDA shared memory used for max_tracker_sm,curr,j_tracker_sm
+         Local memory used for .inl_act_1000
+         CUDA shared memory used for active_sm,control
+         Local memory used for tmp
+         CUDA shared memory used for sc_local
+    105, Generating implicit firstprivate(batch)
+         Loop not fused: no successor loop
+    110, Loop is parallelizable
+         Invariant if transformation
+         Loop not fused: different loop trip count
+         Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+    123, Loop carried reuse of active_sm prevents parallelization
+         Complex loop carried dependence of max_tracker_sm,j_tracker_sm,h_arg+((batch*1951488)*8)->,active_sm prevents parallelization
+         Loop carried dependence of max_tracker_sm prevents parallelization
+         Loop carried backward dependence of max_tracker_sm prevents vectorization
+         Loop carried dependence of j_tracker_sm prevents parallelization
+         Loop carried backward dependence of j_tracker_sm prevents vectorization
+         Complex loop carried dependence of sc_local prevents parallelization
+         Loop carried reuse of sc_local prevents parallelization
+         Complex loop carried dependence of h_ret+((batch*1835008)*8)-> prevents parallelization
+         Loop carried dependence of h_ret+((batch*1835008)*8)-> prevents parallelization
+         Loop carried dependence of h_ret+((batch*1835008)*8)-> prevents vectorization
+         Loop carried backward dependence of h_ret+((batch*1835008)*8)-> prevents vectorization
+         Loop not fused: different loop trip count
+    136, Loop is parallelizable
+         Loop not fused: dependence chain to sibling loop
+         Loop not vectorized: data dependency
+    146, Loop is parallelizable
+         Generating implicit firstprivate(bw,max_dist_y,max_dist_x)
+         Loop not fused: dependence chain to sibling loop
+         2 loops fused
+    153, Loop is parallelizable
+    161, Loop is parallelizable
+         Loop not vectorized: data dependency
+    173, Loop is parallelizable
+         Generated vector simd code for the loop
+return_dt* std::__uninitialized_default_n_1<true>::__uninit_default_n<return_dt*, unsigned long>(return_dt*, unsigned long):
+        1149, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      1, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+return_dt* std::__uninitialized_default_n_a<return_dt*, unsigned long, return_dt>(return_dt*, unsigned long, std::allocator<return_dt>&):
+         638, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+return_dt* std::__uninitialized_default_n<return_dt*, unsigned long>(return_dt*, unsigned long):
+         603, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+return_dt* std::fill_n<return_dt*, unsigned long, return_dt>(return_dt*, unsigned long, return_dt const&):
+        1120, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+return_dt* std::__fill_n_a<return_dt*, unsigned long, return_dt>(return_dt*, unsigned long, return_dt const&, std::random_access_iterator_tag):
+         969, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+void std::__fill_a<return_dt*, return_dt>(return_dt*, return_dt*, return_dt const&):
+         911, Loop not vectorized: data dependency
+              Loop unrolled 2 times
+__gnu_cxx::__enable_if<!std::__is_scalar<return_dt>::__value, void>::__type std::__fill_a1<return_dt*, return_dt>(return_dt*, return_dt*, return_dt const&):
+      5, include "vector"
+          60, include "stl_algobase.h"
+              911, Loop not vectorized: data dependency
+                   Loop unrolled 2 times
+return_dt* std::__uninitialized_move_if_noexcept_a<return_dt*, return_dt*, std::allocator<return_dt>>(return_dt*, return_dt*, return_dt*, std::allocator<return_dt>&):
+      5, include "vector"
+return_dt* std::__copy_move_a<true, return_dt*, return_dt*>(return_dt*, return_dt*, return_dt*):
+      5, include "vector"
+          60, include "stl_algobase.h"

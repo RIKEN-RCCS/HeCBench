@@ -3,12 +3,12 @@
 #include <cstdio>
 #include <cstdlib>
 #include <vector>
-#include <omp.h>
+#include <openacc.h>
 #include "datatypes.h"
 #include "kernel_common.h"
 #include "memory_scheduler.h"
 
-#pragma omp declare target
+#pragma acc routine seq
 score_dt device_ilog2(const score_dt v)
 {
   if (v < 2) return 0;
@@ -22,6 +22,7 @@ score_dt device_ilog2(const score_dt v)
   else return 8;
 }
 
+#pragma acc routine seq
 score_dt chain_dp_score(const anchor_dt *active,
                         const anchor_dt curr,
                         const float avg_qspan,
@@ -53,14 +54,15 @@ score_dt chain_dp_score(const anchor_dt *active,
   return sc;
 }
 
+#pragma acc routine seq
 void update_anchor(const anchor_dt *in, anchor_dt* out, const int src, const int dst) {
   ((short4*)out)[dst] = ((short4*)in)[src];
 }
 
+#pragma acc routine seq
 void update_return(const return_dt *in, return_dt* out, const int src, const int dst) {
   ((short4*)out)[dst] = ((short4*)in)[src];
 }
-#pragma omp end declare target
 
 void device_chain_kernel_wrapper(
     std::vector<control_dt> &cont,
@@ -85,40 +87,41 @@ void device_chain_kernel_wrapper(
   score_dt max_tracker_g[PE_NUM][BACK_SEARCH_COUNT_GPU];
   parent_dt j_tracker_g[PE_NUM][BACK_SEARCH_COUNT_GPU];
 
-#pragma omp target data map(to: h_control[0:cont.size()], h_arg[0:arg.size()]) \
-                        map(alloc: max_tracker_g[0:PE_NUM][0:BACK_SEARCH_COUNT_GPU], \
-                                   j_tracker_g[0:PE_NUM][0:BACK_SEARCH_COUNT_GPU]) \
-                        map(from: h_ret[0:batch_count * TILE_SIZE * PE_NUM])
+#pragma acc data copyin(h_control[0:cont.size()], h_arg[0:arg.size()]) \
+                   create(max_tracker_g, j_tracker_g) \
+                   copyout(h_ret[0:batch_count * TILE_SIZE * PE_NUM])
   {
     auto k_start = std::chrono::steady_clock::now();
 
     for (auto batch = 0; batch < batch_count; batch++) {
-      #pragma omp target teams num_teams(BLOCK_NUM) thread_limit(BACK_SEARCH_COUNT_GPU)
+      #pragma acc parallel num_gangs(BLOCK_NUM) vector_length(BACK_SEARCH_COUNT_GPU) \
+                           present(h_control, h_arg, max_tracker_g, j_tracker_g, h_ret)
       {
         anchor_dt active_sm[BACK_SEARCH_COUNT_GPU];
         score_dt max_tracker_sm[BACK_SEARCH_COUNT_GPU];
         parent_dt j_tracker_sm[BACK_SEARCH_COUNT_GPU];
-        #pragma omp parallel 
+	score_dt sc_local[BACK_SEARCH_COUNT_GPU];
+	#pragma acc loop gang
+        for (int block = 0; block < BLOCK_NUM; block++)
         {
-          int block = omp_get_team_num();
-          int id = omp_get_thread_num();
           int ofs = block;
           auto control = h_control[batch * PE_NUM + ofs];
+          #pragma acc loop vector
+          for (int id = 0; id < BACK_SEARCH_COUNT_GPU; id++) {
 
-          update_anchor(h_arg + batch * PE_NUM * TILE_SIZE_ACTUAL, 
-              active_sm, ofs*TILE_SIZE_ACTUAL+id, id);
+            update_anchor(h_arg + batch * PE_NUM * TILE_SIZE_ACTUAL, 
+                active_sm, ofs*TILE_SIZE_ACTUAL+id, id);
 
-          if (control.is_new_read) {
-            max_tracker_sm[id] = 0;
-            j_tracker_sm[id] = -1;
-          } else {
-            max_tracker_sm[id] = max_tracker_g[ofs][id];
-            j_tracker_sm[id] = j_tracker_g[ofs][id];
-          }
-
+            if (control.is_new_read) {
+              max_tracker_sm[id] = 0;
+              j_tracker_sm[id] = -1;
+            } else {
+              max_tracker_sm[id] = max_tracker_g[ofs][id];
+              j_tracker_sm[id] = j_tracker_g[ofs][id];
+            }
+	  }
           for (int i = BACK_SEARCH_COUNT_GPU, curr_idx = 0; curr_idx < TILE_SIZE; i++, curr_idx++) {
 
-            #pragma omp barrier
             anchor_dt curr;
             update_anchor(active_sm, &curr, i % BACK_SEARCH_COUNT_GPU, 0);
             score_dt f_curr = max_tracker_sm[i % BACK_SEARCH_COUNT_GPU];
@@ -129,37 +132,49 @@ void device_chain_kernel_wrapper(
             }
 
             // read in new query anchor, put into active array
-            #pragma omp barrier
+	    #pragma acc loop vector
+            for (int id = 0; id < BACK_SEARCH_COUNT_GPU; id++) {
             if (id == i % BACK_SEARCH_COUNT_GPU) {
               update_anchor(h_arg + batch * PE_NUM * TILE_SIZE_ACTUAL,
                   active_sm, ofs*TILE_SIZE_ACTUAL+i, id);
               max_tracker_sm[id] = 0;
               j_tracker_sm[id] = -1;
             }
-
-            #pragma omp barrier
-            score_dt sc = chain_dp_score(active_sm, curr,
-                control.avg_qspan, max_dist_x, max_dist_y, bw, id);
-
-            #pragma omp barrier
-            if (sc + f_curr >= max_tracker_sm[id]) {
-              max_tracker_sm[id] = sc + f_curr;
-              j_tracker_sm[id] = (parent_dt)curr_idx + (parent_dt)control.tile_num * TILE_SIZE;
             }
 
-            #pragma omp barrier
+            #pragma acc loop vector
+            for (int id = 0; id < BACK_SEARCH_COUNT_GPU; id++) {
+            sc_local[id] = chain_dp_score(active_sm, curr,
+                control.avg_qspan, max_dist_x, max_dist_y, bw, id);
+	    }
+
+
+	    #pragma acc loop vector
+            for (int id = 0; id < BACK_SEARCH_COUNT_GPU; id++) {
+            if (sc_local[id] + f_curr >= max_tracker_sm[id]) {
+              max_tracker_sm[id] = sc_local[id] + f_curr;
+              j_tracker_sm[id] = (parent_dt)curr_idx + (parent_dt)control.tile_num * TILE_SIZE;
+            }
+	    }
+
+            #pragma acc loop vector
+            for (int id = 0; id < BACK_SEARCH_COUNT_GPU; id++) {
             if (id == curr_idx % BACK_SEARCH_COUNT_GPU) {
               return_dt tmp;
               tmp.score = f_curr;
               tmp.parent = p_curr;
               update_return(&tmp, h_ret + batch * PE_NUM * TILE_SIZE, 0, ofs*TILE_SIZE+curr_idx);
             }
+	    }
           }
 
-          #pragma omp barrier
+          // auto barrier
+          #pragma acc loop vector
+          for (int id = 0; id < BACK_SEARCH_COUNT_GPU; id++) {
           max_tracker_g[ofs][id] = max_tracker_sm[id];
           j_tracker_g[ofs][id] = j_tracker_sm[id];
-        }
+	  }
+	}
       }
     }
 
