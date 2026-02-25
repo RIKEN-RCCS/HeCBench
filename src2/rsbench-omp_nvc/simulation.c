@@ -18,7 +18,8 @@ void run_event_based_simulation(Input input, SimulationData data, unsigned long 
   unsigned long verification = 0;
 
   // Main simulation loop over macroscopic cross section lookups
-  #pragma omp target data map(to:data.n_poles[:data.length_n_poles])\
+  #pragma omp target data map(to:data) \
+                          map(to:data.n_poles[:data.length_n_poles])\
                           map(to:data.n_windows[:data.length_n_windows])\
                           map(to:data.poles[:data.length_poles])\
                           map(to:data.windows[:data.length_windows])\

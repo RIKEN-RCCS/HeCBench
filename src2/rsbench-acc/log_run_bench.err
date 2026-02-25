@@ -1,59 +1,112 @@
-initialize_simulation(Input):
-          46, Loop not vectorized/parallelized: not countable
-          50, Loop not vectorized/parallelized: potential early exits
-          68, Loop not vectorized/parallelized: not countable
-          72, Loop not vectorized/parallelized: potential early exits
-          93, Loop not fused: function call before adjacent loop
-              Generated vector simd code for the loop containing reductions
-         105, Loop not vectorized/parallelized: potential early exits
-         139, Loop not fused: function call before adjacent loop
-              Generated vector simd code for the loop containing reductions
-         155, Loop not vectorized/parallelized: potential early exits
-         181, Loop not vectorized/parallelized: potential early exits
-generate_n_poles(Input, unsigned long*):
-     46, Recognized memory set idiom
-     50, Loop not vectorized/parallelized: potential early exits
-generate_n_windows(Input, unsigned long*):
-     68, Recognized memory set idiom
-     72, Loop not vectorized/parallelized: potential early exits
-generate_poles(Input, int*, unsigned long*, int*):
-     93, Loop not fused: function call before adjacent loop
-         Generated vector simd code for the loop containing reductions
-    105, Loop not vectorized/parallelized: potential early exits
-generate_window_params(Input, int*, int*, unsigned long*, int*):
-    139, Loop not fused: function call before adjacent loop
-         Generated vector simd code for the loop containing reductions
-    155, Loop not vectorized/parallelized: potential early exits
-generate_pseudo_K0RS(Input, unsigned long*):
-    181, Loop not vectorized/parallelized: potential early exits
-logo(int):
-          28, Loop not vectorized/parallelized: contains call
-          28, Loop not vectorized/parallelized: contains call
-center_print(char const*, int):
-     28, Loop not vectorized/parallelized: contains call
-read_CLI(int, char**):
-     95, Loop not vectorized/parallelized: contains call
-get_materials(Input, unsigned long*):
-          51, Loop not fused: function call before adjacent loop
-              Loop not vectorized: data dependency
-          67, Loop not fused: function call before adjacent loop
-              Generated vector simd code for the loop
-         118, Loop not vectorized/parallelized: potential early exits
-load_mats(Input, int*, int*, unsigned long*):
-     51, Loop not fused: function call before adjacent loop
-         Loop not vectorized: data dependency
-     67, Loop not fused: function call before adjacent loop
-         Generated vector simd code for the loop
-load_concs(int*, unsigned long*, int):
-    118, Loop not vectorized/parallelized: potential early exits
-"simulation.c", line 21: error: invalid text in pragma
-    #pragma acc data to:data.n_poles[:data.length_n_poles])\
-                     ^
-
-"simulation.c", line 21: error: extra text after expected end of preprocessing directive
-    #pragma acc data to:data.n_poles[:data.length_n_poles])\
-                       ^
-
-2 errors detected in the compilation of "simulation.c".
-make: *** [Makefile.NVD:57: simulation.o] Error 2
-timeout was set to  600
+run_event_based_simulation(Input, SimulationData, unsigned long*, double*):
+     61, Generating copyin(data.max_num_windows,data.n_poles[:data.length_n_poles],data.num_nucs[:data.length_num_nucs],data.pseudo_K0RS[:data.length_pseudo_K0RS],data.poles[:data.length_poles],data.n_windows[:data.length_n_windows],data.concs[:data.length_concs],data,data.mats[:data.length_mats],data.max_num_nucs,data.max_num_poles,data.windows[:data.length_windows]) [if not already present]
+         Generating copy(verification) [if not already present]
+         Generating copyin(input) [if not already present]
+     62, Generating NVIDIA GPU code
+         65, #pragma acc loop gang /* blockIdx.x */
+             Generating reduction(+:verification)
+         93, #pragma acc loop seq
+        118, #pragma acc loop seq
+        122, #pragma acc loop seq
+        130, #pragma acc loop vector(128) /* threadIdx.x */
+             #pragma acc loop seq
+             Generating implicit reduction(+:.inl_.inl_sigA_629_877,.inl_.inl_sigT_628_876,.inl_.inl_sigF_630_878)
+        132, #pragma acc loop seq
+        287, #pragma acc loop seq
+             Generating implicit reduction(+:.inl_running_838)
+        433, #pragma acc loop seq
+             Generating implicit reduction(*:.inl_a_new_822)
+     62, CUDA shared memory used for .inl_micro_xs_849,.inl_.inl_w_625_875,seed,macro_xs
+         Local memory used for .inl_.inl_t2_636_882,.inl_.inl_pole_632_880
+         CUDA shared memory used for .inl_dist_829
+         Local memory used for .inl_.inl_.inl_.X2091_601_683_929,.inl_.inl_.inl__T5_2091_600_682_928,.inl_.inl_.inl_C_599_681_927,.inl_.inl_.inl_.X2091_592_675_921,.inl_.inl_.inl__T5_2091_591_674_920,.inl_.inl_.inl_C_590_673_919,.inl_.inl_.inl_.X2091_583_668_914,.inl_.inl_.inl__T5_2091_582_667_913,.inl_.inl_.inl_C_581_666_912,.inl_.inl_.inl_.X2090_554_641_887,.inl_.inl_.inl__T4_2090_553_640_886,.inl_.inl_.inl_C_572_657_903,.inl_.inl_.inl__T6_2092_573_658_904,.inl_.inl_.inl_.X2092_564_649_895,.inl_.inl_.inl__T6_2092_563_648_894,.inl_.inl_.inl_C_562_647_893,.inl_.inl_CDUM_651_897,.inl_.inl_E_c_650_896,.inl_.inl_.inl_.X2091_610_691_937,.inl_.inl_.inl__T5_2091_609_690_936,.inl_.inl_.inl_C_550_639_885,.inl_.inl_.inl_C_608_689_935,.inl_.inl_.inl_.X2092_574_659_905,.inl_.inl_t1_635_881
+         CUDA shared memory used for .inl_.inl_sigTfactors_618_868
+         Local memory used for .inl_.inl_PSIIKI_637_883
+         433, Loop carried scalar dependence for .inl_c_new_823 at line 437
+              Scalar last value needed after loop for .inl_c_new_823 at line 444
+              Loop carried scalar dependence for .inl_c_820 at line 437,440
+              Loop carried scalar dependence for .inl_a_819 at line 435,437,440
+              Loop carried scalar dependence for .inl_n_821 at line 433,441
+              Loop not vectorized/parallelized: not countable
+         107, Accelerator restriction: induction variable live-out from loop: .inl_i_837
+         284, Loop not vectorized/parallelized: potential early exits
+         286, Accelerator restriction: induction variable live-out from loop: .inl_i_837
+         287, Generated vector simd code for negative stride loop
+              Loop unrolled 4 times
+         290, Accelerator restriction: induction variable live-out from loop: .inl_i_837
+         291, Accelerator restriction: induction variable live-out from loop: .inl_i_837
+         118, Loop is parallelizable
+              Loop unrolled 4 times (completely unrolled)
+         122, Complex loop carried dependence of data.mats->,data.poles->,data.windows->,data.pseudo_K0RS->,data.n_windows->,.inl_micro_xs_849,data.windows->T,data.windows->A,data.windows->F,data.windows->start,data.windows->end,data.num_nucs->,data.concs->,macro_xs prevents parallelization
+              Loop carried reuse of macro_xs prevents parallelization
+              Complex loop carried dependence of .inl_.inl_sigTfactors_618_868.r,.inl_.inl_sigTfactors_618_868.i prevents parallelization
+         130, Complex loop carried dependence of data.pseudo_K0RS->,.inl_.inl_sigTfactors_618_868.r,.inl_.inl_sigTfactors_618_868.i prevents parallelization
+              Loop is parallelizable
+              Complex loop carried dependence of data.pseudo_K0RS->,.inl_.inl_sigTfactors_618_868.r,.inl_.inl_sigTfactors_618_868.i prevents parallelization
+              Loop is parallelizable
+              Loop not vectorized/parallelized: loop count too small
+              Loop not vectorized/parallelized: contains structure move
+         132, Complex loop carried dependence of data.concs->,macro_xs prevents parallelization
+              Loop unrolled 4 times (completely unrolled)
+     93, Loop carried scalar dependence for max at line 95
+         Loop unrolled 4 times (completely unrolled)
+     98, Accelerator restriction: induction variable live-out from loop: max_idx
+calculate_macro_xs(double*, int, double, Input, int*, int*, int, double*, int*, double*, Window*, Pole*, int, int):
+    116, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+    118, Generated vector simd code for the loop
+         169, Loop not vectorized/parallelized: loop count too small
+         178, Loop not vectorized/parallelized: contains structure move
+    132, Loop unrolled 4 times (completely unrolled)
+calculate_micro_xs(double*, int, double, Input, int*, double*, Window*, Pole*, int, int):
+    154, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+    178, Loop not vectorized/parallelized: contains structure move
+calculate_micro_xs_doppler(double*, int, double, Input, int*, double*, Window*, Pole*, int, int):
+    207, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+    233, Loop not vectorized/parallelized: contains structure move
+         373, Loop not fused: no successor loop
+              Loop not vectorized: unknown
+pick_mat(unsigned long*):
+    261, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+    284, Loop not vectorized/parallelized: potential early exits
+    287, Generated vector simd code for negative stride loop
+         Loop unrolled 4 times
+calculate_sig_T(int, double, Input, double*, RSComplex*):
+    297, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+fast_nuclear_W(RSComplex):
+    322, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+    373, Loop not fused: no successor loop
+         Loop not vectorized: unknown
+LCG_random_double(unsigned long*):
+    405, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+fast_forward_LCG(unsigned long, unsigned long):
+    423, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+    433, Loop not vectorized/parallelized: not countable
+c_add(RSComplex, RSComplex):
+    452, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+c_sub(RSComplex, RSComplex):
+    460, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+c_mul(RSComplex, RSComplex):
+    468, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+c_div(RSComplex, RSComplex):
+    480, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+c_abs(RSComplex):
+    493, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+fast_exp(double):
+    505, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code
+fast_cexp(RSComplex):
+    517, Generating implicit omp declare target routine
+         Generating NVIDIA GPU code

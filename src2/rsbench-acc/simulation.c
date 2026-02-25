@@ -17,20 +17,47 @@ void run_event_based_simulation(Input input, SimulationData data, unsigned long 
   printf("Beginning event based simulation ...\n");
   unsigned long verification = 0;
 
+/*
+  int * d_n_poles = data.n_poles;
+  unsigned long len_n_poles = data.length_n_poles;
+  int * d_n_windows = data.n_windows;
+  unsigned long len_n_windows = data.length_n_windows;
+  Pole * d_poles = data.poles;
+  unsigned long len_poles = data.length_poles;
+  Window * d_windows = data.windows;
+  unsigned long len_windows = data.length_windows;
+  double * d_pseudo_K0RS = data.pseudo_K0RS;
+  unsigned long len_pseudo_K0RS = data.length_pseudo_K0RS;
+  int * d_num_nucs = data.num_nucs;
+  unsigned long len_num_nucs = data.length_num_nucs;
+  int * d_mats = data.mats;
+  unsigned long len_mats = data.length_mats;
+  double * d_concs = data.concs;
+  unsigned long len_concs = data.length_concs;
+  int d_max_num_nucs = data.max_num_nucs;
+  int d_max_num_poles = data.max_num_poles;
+  int d_max_num_windows = data.max_num_windows;
+  double * d_p_energy_samples = data.p_energy_samples;
+  unsigned long len_p_energy_samples = data.length_p_energy_samples;
+  int * d_mat_samples = data.mat_samples;
+  unsigned long len_mat_samples = data.length_mat_samples;
+*/
+
   // Main simulation loop over macroscopic cross section lookups
-  #pragma acc data to:data.n_poles[:data.length_n_poles])\
-                          map(to:data.n_windows[:data.length_n_windows])\
-                          map(to:data.poles[:data.length_poles])\
-                          map(to:data.windows[:data.length_windows])\
-                          map(to:data.pseudo_K0RS[:data.length_pseudo_K0RS])\
-                          map(to:data.num_nucs[:data.length_num_nucs])\
-                          map(to:data.mats[:data.length_mats])\
-                          map(to:data.concs[:data.length_concs])\
-                          map(to:data.max_num_nucs)\
-                          map(to:data.max_num_poles)\
-                          map(to:data.max_num_windows)\
-                          map(to:input) \
-                          map(tofrom:verification)
+  #pragma acc data copyin(data) \
+		   copyin(data.n_poles[:data.length_n_poles], \
+                          data.n_windows[:data.length_n_windows], \
+                          data.poles[:data.length_poles], \
+                          data.windows[:data.length_windows], \
+                          data.pseudo_K0RS[:data.length_pseudo_K0RS], \
+                          data.num_nucs[:data.length_num_nucs], \
+                          data.mats[:data.length_mats], \
+                          data.concs[:data.length_concs], \
+                          data.max_num_nucs, \
+                          data.max_num_poles, \
+                          data.max_num_windows, \
+                          input) \
+                   copy(verification)
   {
     double start = get_time();
 
