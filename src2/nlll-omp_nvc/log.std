@@ -2,21 +2,21 @@
 Initialization of input data may take a while..
 
 Thread block size: 64
-Average execution time of nll loss forward kernel: 25.885509 (us)
+Average execution time of nll loss forward kernel: 26.097658 (us)
 PASS
 
 Thread block size: 128
-Average execution time of nll loss forward kernel: 19.252016 (us)
+Average execution time of nll loss forward kernel: 19.754938 (us)
 PASS
 
 Thread block size: 256
-Average execution time of nll loss forward kernel: 17.163734 (us)
+Average execution time of nll loss forward kernel: 17.226061 (us)
 PASS
 
 Thread block size: 512
-Average execution time of nll loss forward kernel: 18.355728 (us)
+Average execution time of nll loss forward kernel: 18.318140 (us)
 PASS
 
 Thread block size: 1024
-Average execution time of nll loss forward kernel: 18.280853 (us)
+Average execution time of nll loss forward kernel: 18.645947 (us)
 PASS

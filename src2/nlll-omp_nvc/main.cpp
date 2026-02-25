@@ -5,6 +5,7 @@
 #include <random>
 #include <omp.h>
 #include "reference.h"
+//#include <cuda_fp16.h>
 
 template <typename scalar_t, typename accscalar_t, 
           typename index_t, int NLL_LOSS_THREADS>
@@ -193,6 +194,9 @@ int main(int argc, char* argv[])
 
   printf("=========== Data type is FP32 ==========\n");
   driver<float, int>(argv);
+
+  //printf("=========== Data type is FP16 ==========\n");
+  //driver<__half, int>(argv);
 
   return 0;
 }

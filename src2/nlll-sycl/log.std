@@ -2,43 +2,43 @@
 Initialization of input data may take a while..
 
 Thread block size: 64
-Average execution time of nll loss forward kernel: 13.847946 (us)
+Average execution time of nll loss forward kernel: 13.733562 (us)
 PASS
 
 Thread block size: 128
-Average execution time of nll loss forward kernel: 8.574332 (us)
+Average execution time of nll loss forward kernel: 8.546500 (us)
 PASS
 
 Thread block size: 256
-Average execution time of nll loss forward kernel: 6.322729 (us)
+Average execution time of nll loss forward kernel: 6.276534 (us)
 PASS
 
 Thread block size: 512
-Average execution time of nll loss forward kernel: 6.264015 (us)
+Average execution time of nll loss forward kernel: 6.200844 (us)
 PASS
 
 Thread block size: 1024
-Average execution time of nll loss forward kernel: 8.237552 (us)
+Average execution time of nll loss forward kernel: 8.130850 (us)
 PASS
 =========== Data type is FP16 ==========
 Initialization of input data may take a while..
 
 Thread block size: 64
-Average execution time of nll loss forward kernel: 14.153217 (us)
+Average execution time of nll loss forward kernel: 14.154715 (us)
 PASS
 
 Thread block size: 128
-Average execution time of nll loss forward kernel: 9.090332 (us)
+Average execution time of nll loss forward kernel: 9.073604 (us)
 PASS
 
 Thread block size: 256
-Average execution time of nll loss forward kernel: 7.405427 (us)
+Average execution time of nll loss forward kernel: 7.302128 (us)
 PASS
 
 Thread block size: 512
-Average execution time of nll loss forward kernel: 8.295220 (us)
+Average execution time of nll loss forward kernel: 8.295990 (us)
 PASS
 
 Thread block size: 1024
-Average execution time of nll loss forward kernel: 12.358506 (us)
+Average execution time of nll loss forward kernel: 12.361464 (us)
 PASS

@@ -1,58 +1,176 @@
-"main.cpp", line 85: error: invalid text in pragma
-    #pragma acc data to: h_input[0:input_size], \
-                     ^
-          detected during instantiation of "void driver<scalar_t,index_t>(char **) [with scalar_t=float, index_t=int]" at line 195
-
-"main.cpp", line 85: error: extra text after expected end of preprocessing directive
-    #pragma acc data to: h_input[0:input_size], \
-                       ^
-          detected during instantiation of "void driver<scalar_t,index_t>(char **) [with scalar_t=float, index_t=int]" at line 195
-
-"main.cpp", line 78: warning: variable "input_size" was declared but never referenced [declared_but_not_referenced]
-    int64_t input_size = nframe * n_classes;
-            ^
-          detected during instantiation of "void driver<scalar_t,index_t>(char **) [with scalar_t=float, index_t=int]" at line 195
+"main.cpp", line 48: warning: Parallelism order violation detected: "vector" construct is not allowed within "vector" construct. [invalid_parallelism_order]
+        #pragma acc loop vector
+        ^
+          detected during:
+            instantiation of "void eval<scalar_t,index_t,GPU_THREADS>(int64_t, int64_t, bool, int64_t, scalar_t, scalar_t, scalar_t *, scalar_t *, index_t *, int) [with scalar_t=float, index_t=int, GPU_THREADS=64]" at line 181
+            instantiation of "void driver<scalar_t,index_t>(char **) [with scalar_t=float, index_t=int]" at line 200
 
 Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
 
-"main.cpp", line 79: warning: variable "weights_size" was declared but never referenced [declared_but_not_referenced]
-    int64_t weights_size = nframe;
-            ^
-          detected during instantiation of "void driver<scalar_t,index_t>(char **) [with scalar_t=float, index_t=int]" at line 195
-
-"main.cpp", line 80: warning: variable "target_size" was declared but never referenced [declared_but_not_referenced]
-    int64_t target_size = nframe;
-            ^
-          detected during instantiation of "void driver<scalar_t,index_t>(char **) [with scalar_t=float, index_t=int]" at line 195
-
-"main.cpp", line 22: error: invalid text in pragma
-    #pragma acc parallel teams gang(1) thread_limit(NLL_LOSS_THREADS)
-                         ^
-          detected during:
-            instantiation of "void eval<scalar_t,index_t,GPU_THREADS>(int64_t, int64_t, bool, int64_t, scalar_t, scalar_t, scalar_t *, scalar_t *, index_t *, int) [with scalar_t=float, index_t=int, GPU_THREADS=64]" at line 176
-            instantiation of "void driver<scalar_t,index_t>(char **) [with scalar_t=float, index_t=int]" at line 195
-
-"main.cpp", line 22: error: extra text after expected end of preprocessing directive
-    #pragma acc parallel teams gang(1) thread_limit(NLL_LOSS_THREADS)
-                               ^
-          detected during:
-            instantiation of "void eval<scalar_t,index_t,GPU_THREADS>(int64_t, int64_t, bool, int64_t, scalar_t, scalar_t, scalar_t *, scalar_t *, index_t *, int) [with scalar_t=float, index_t=int, GPU_THREADS=64]" at line 176
-            instantiation of "void driver<scalar_t,index_t>(char **) [with scalar_t=float, index_t=int]" at line 195
-
-"main.cpp", line 28: error: identifier "omp_get_thread_num" is undefined
-        int tid = omp_get_thread_num();
-                  ^
-          detected during:
-            instantiation of "void eval<scalar_t,index_t,GPU_THREADS>(int64_t, int64_t, bool, int64_t, scalar_t, scalar_t, scalar_t *, scalar_t *, index_t *, int) [with scalar_t=float, index_t=int, GPU_THREADS=64]" at line 176
-            instantiation of "void driver<scalar_t,index_t>(char **) [with scalar_t=float, index_t=int]" at line 195
-
-"main.cpp", line 29: error: identifier "omp_get_vector" is undefined
-        int nthreads = omp_get_vector();
-                       ^
-          detected during:
-            instantiation of "void eval<scalar_t,index_t,GPU_THREADS>(int64_t, int64_t, bool, int64_t, scalar_t, scalar_t, scalar_t *, scalar_t *, index_t *, int) [with scalar_t=float, index_t=int, GPU_THREADS=64]" at line 176
-            instantiation of "void driver<scalar_t,index_t>(char **) [with scalar_t=float, index_t=int]" at line 195
-
-6 errors detected in the compilation of "main.cpp".
-make: *** [Makefile.NVD:57: main.o] Error 2
-timeout was set to  600
+void driver<float, int>(char**):
+    153, Loop not vectorized/parallelized: contains call
+        1861, Loop not fused: function call before adjacent loop
+              Loop not vectorized: may not be beneficial for target
+    156, Loop not vectorized/parallelized: contains call
+        1861, Loop not fused: function call before adjacent loop
+              Loop not vectorized: may not be beneficial for target
+    159, Loop not vectorized/parallelized: potential early exits
+          15, Loop not fused: function call before adjacent loop
+void eval<float, int, 64>(long, long, bool, long, float, float, float*, float*, int*, int):
+     94, Generating copyin(h_weights[:weights_size]) [if not already present]
+         Generating copyout(h_total_weight[:],h_output[:]) [if not already present]
+         Generating copyin(h_input[:input_size],h_target[:target_size]) [if not already present]
+     97, Loop not vectorized/parallelized: contains call
+NVC++-W-1042-acc loop vector clause ignored because of inner vector loop. (main.cpp: 26)
+void nll_loss_forward_reduce2d_kernel<float, float, int, 64>(float*, float*, float const*, int const*, float const*, bool, long, long, long):
+     25, Generating present(input[:],target[:],output[:],total_weight[:],weights[:])
+         Generating NVIDIA GPU code
+         29, #pragma acc loop seq
+         37, #pragma acc loop seq
+         49, #pragma acc loop vector(64) /* threadIdx.x */
+         54, #pragma acc loop seq
+             Generating implicit reduction(+:total_weight_acc,output_acc)
+     25, CUDA shared memory used for acc_weight,sm_inputs
+     29, Loop is parallelizable
+         Generating implicit firstprivate(nframe)
+         Loop not fused: no successor loop
+     37, Complex loop carried dependence of sm_inputs,acc_weight prevents parallelization
+         Loop carried reuse of sm_inputs,acc_weight prevents parallelization
+         Generating implicit firstprivate(kdim,ignore_index)
+         Complex loop carried dependence of sm_inputs,acc_weight prevents parallelization
+         Loop not fused: different loop trip count
+     49, Loop is parallelizable
+         Generating implicit firstprivate(size_average)
+     54, Loop is parallelizable
+         Generated vector simd code for the loop containing reductions
+void eval<float, int, 128>(long, long, bool, long, float, float, float*, float*, int*, int):
+     94, Generating copyin(h_weights[:weights_size]) [if not already present]
+         Generating copyout(h_total_weight[:],h_output[:]) [if not already present]
+         Generating copyin(h_input[:input_size],h_target[:target_size]) [if not already present]
+     97, Loop not vectorized/parallelized: contains call
+NVC++-W-1042-acc loop vector clause ignored because of inner vector loop. (main.cpp: 26)
+void nll_loss_forward_reduce2d_kernel<float, float, int, 128>(float*, float*, float const*, int const*, float const*, bool, long, long, long):
+     25, Generating present(input[:],target[:],output[:],total_weight[:],weights[:])
+         Generating NVIDIA GPU code
+         29, #pragma acc loop seq
+         37, #pragma acc loop seq
+         49, #pragma acc loop vector(128) /* threadIdx.x */
+         54, #pragma acc loop seq
+             Generating implicit reduction(+:total_weight_acc,output_acc)
+     25, CUDA shared memory used for acc_weight,sm_inputs
+     29, Loop is parallelizable
+         Generating implicit firstprivate(nframe)
+         Loop not fused: no successor loop
+     37, Complex loop carried dependence of sm_inputs,acc_weight prevents parallelization
+         Loop carried reuse of sm_inputs,acc_weight prevents parallelization
+         Generating implicit firstprivate(kdim,ignore_index)
+         Complex loop carried dependence of sm_inputs,acc_weight prevents parallelization
+         Loop not fused: different loop trip count
+     49, Loop is parallelizable
+         Generating implicit firstprivate(size_average)
+     54, Loop is parallelizable
+         Generated vector simd code for the loop containing reductions
+void eval<float, int, 256>(long, long, bool, long, float, float, float*, float*, int*, int):
+     94, Generating copyin(h_weights[:weights_size]) [if not already present]
+         Generating copyout(h_total_weight[:],h_output[:]) [if not already present]
+         Generating copyin(h_input[:input_size],h_target[:target_size]) [if not already present]
+     97, Loop not vectorized/parallelized: contains call
+NVC++-W-1042-acc loop vector clause ignored because of inner vector loop. (main.cpp: 26)
+void nll_loss_forward_reduce2d_kernel<float, float, int, 256>(float*, float*, float const*, int const*, float const*, bool, long, long, long):
+     25, Generating present(input[:],target[:],output[:],total_weight[:],weights[:])
+         Generating NVIDIA GPU code
+         29, #pragma acc loop seq
+         37, #pragma acc loop seq
+         49, #pragma acc loop vector(256) /* threadIdx.x */
+         54, #pragma acc loop seq
+             Generating implicit reduction(+:total_weight_acc,output_acc)
+     25, CUDA shared memory used for acc_weight,sm_inputs
+     29, Loop is parallelizable
+         Generating implicit firstprivate(nframe)
+         Loop not fused: no successor loop
+     37, Complex loop carried dependence of sm_inputs,acc_weight prevents parallelization
+         Loop carried reuse of sm_inputs,acc_weight prevents parallelization
+         Generating implicit firstprivate(kdim,ignore_index)
+         Complex loop carried dependence of sm_inputs,acc_weight prevents parallelization
+         Loop not fused: different loop trip count
+     49, Loop is parallelizable
+         Generating implicit firstprivate(size_average)
+     54, Loop is parallelizable
+         Generated vector simd code for the loop containing reductions
+void eval<float, int, 512>(long, long, bool, long, float, float, float*, float*, int*, int):
+     94, Generating copyin(h_weights[:weights_size]) [if not already present]
+         Generating copyout(h_total_weight[:],h_output[:]) [if not already present]
+         Generating copyin(h_input[:input_size],h_target[:target_size]) [if not already present]
+     97, Loop not vectorized/parallelized: contains call
+NVC++-W-1042-acc loop vector clause ignored because of inner vector loop. (main.cpp: 26)
+void nll_loss_forward_reduce2d_kernel<float, float, int, 512>(float*, float*, float const*, int const*, float const*, bool, long, long, long):
+     25, Generating present(input[:],target[:],output[:],total_weight[:],weights[:])
+         Generating NVIDIA GPU code
+         29, #pragma acc loop seq
+         37, #pragma acc loop seq
+         49, #pragma acc loop vector(512) /* threadIdx.x */
+         54, #pragma acc loop seq
+             Generating implicit reduction(+:total_weight_acc,output_acc)
+     29, Loop is parallelizable
+         Generating implicit firstprivate(nframe)
+         Loop not fused: no successor loop
+     37, Complex loop carried dependence of sm_inputs,acc_weight prevents parallelization
+         Loop carried reuse of sm_inputs prevents parallelization
+         Complex loop carried dependence of acc_weight prevents parallelization
+         Loop carried reuse of acc_weight prevents parallelization
+         Generating implicit firstprivate(kdim,ignore_index)
+         Loop not fused: different loop trip count
+     49, Loop is parallelizable
+         Generating implicit firstprivate(size_average)
+     54, Loop is parallelizable
+         Generated vector simd code for the loop containing reductions
+void eval<float, int, 1024>(long, long, bool, long, float, float, float*, float*, int*, int):
+     94, Generating copyin(h_weights[:weights_size]) [if not already present]
+         Generating copyout(h_total_weight[:],h_output[:]) [if not already present]
+         Generating copyin(h_input[:input_size],h_target[:target_size]) [if not already present]
+     97, Loop not vectorized/parallelized: contains call
+NVC++-W-1042-acc loop vector clause ignored because of inner vector loop. (main.cpp: 26)
+void nll_loss_forward_reduce2d_kernel<float, float, int, 1024>(float*, float*, float const*, int const*, float const*, bool, long, long, long):
+     25, Generating present(input[:],target[:],output[:],total_weight[:],weights[:])
+         Generating NVIDIA GPU code
+         29, #pragma acc loop seq
+         37, #pragma acc loop seq
+         49, #pragma acc loop vector(1024) /* threadIdx.x */
+         54, #pragma acc loop seq
+             Generating implicit reduction(+:total_weight_acc,output_acc)
+     29, Loop is parallelizable
+         Generating implicit firstprivate(nframe)
+         Loop not fused: no successor loop
+     37, Complex loop carried dependence of sm_inputs,acc_weight prevents parallelization
+         Loop carried reuse of sm_inputs prevents parallelization
+         Complex loop carried dependence of acc_weight prevents parallelization
+         Loop carried reuse of acc_weight prevents parallelization
+         Generating implicit firstprivate(kdim,ignore_index)
+         Loop not fused: different loop trip count
+     49, Loop is parallelizable
+         Generating implicit firstprivate(size_average)
+     54, Loop is parallelizable
+         Generated vector simd code for the loop containing reductions
+float std::uniform_real_distribution<float>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&):
+        1870, Loop not vectorized: data dependency
+float std::uniform_real_distribution<float>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&, std::uniform_real_distribution<float>::param_type const&):
+         189, Loop not vectorized: data dependency
+int std::uniform_int_distribution<int>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&):
+         324, Loop not vectorized/parallelized: not countable
+         349, Loop not vectorized/parallelized: potential early exits
+int std::uniform_int_distribution<int>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&, std::uniform_int_distribution<int>::param_type const&):
+      5, include "random"
+          49, include "random.h"
+               35, include "uniform_int_dist.h"
+                   324, Loop not vectorized/parallelized: not countable
+                   349, Loop not vectorized/parallelized: potential early exits
+std::__detail::_Adaptor<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>, float>::operator()():
+        3364, Loop not vectorized: data dependency
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+float std::generate_canonical<float, 24ul, std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&):
+      5, include "random"
+          51, include "random.tcc"
+             3364, Loop not vectorized: data dependency
+NVC++/arm Linux 25.9-0: compilation completed with warnings
