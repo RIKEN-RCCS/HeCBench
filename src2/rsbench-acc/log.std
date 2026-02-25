@@ -12,7 +12,7 @@
 ================================================================================
                                   INPUT SUMMARY
 ================================================================================
-Programming Model:           SYCL
+Programming Model:           OpenMP Taget Offloading
 Simulation Method:           Event Based
 Materials:                   12
 H-M Benchmark Size:          Large
@@ -35,20 +35,17 @@ Initialization Complete. (0.01 seconds)
 ================================================================================
                                    SIMULATION
 ================================================================================
-Beginning event based simulation...
-Allocating an additional 38.9 MB of memory for verification arrays...
-Running on: NVIDIA GH200 480GB
-Initializing device buffers and JIT compiling kernel...
-Kernel initialization, compilation, and execution took 0.94 seconds.
+Beginning event based simulation ...
+Kernel initialization, compilation, and execution took 7.23 seconds.
 Simulation Complete.
 ================================================================================
                                      RESULTS
 ================================================================================
-Total Time Statistics (SYCL Init / JIT Compilation + Simulation Kernel)
-Runtime:               1.221 seconds
+Total Time Statistics (OpenMP Init / JIT Compilation + Simulation Kernel)
+Runtime:               9.661 seconds
 Lookups:               10,200,000
-Lookups/s:             8,353,808
+Lookups/s:             1,055,812
 Simulation Kernel Only Statistics
-Lookups/s:             10,874,198
+Lookups/s:             1,411,714
 Verification checksum: 358389 (Valid)
 ================================================================================
