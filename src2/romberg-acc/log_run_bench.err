@@ -1,47 +1,71 @@
-"main.cpp", line 42: error: invalid text in pragma
-    #pragma acc parallel data map (from: result[0:nwg])
-                         ^
-
-"main.cpp", line 42: error: extra text after expected end of preprocessing directive
-    #pragma acc parallel data map (from: result[0:nwg])
-                              ^
-
-"main.cpp", line 47: error: invalid text in pragma
-        #pragma acc parallel teams num_teams(nwg) thread_limit(wgs) 
-                             ^
-
-"main.cpp", line 47: error: extra text after expected end of preprocessing directive
-        #pragma acc parallel teams num_teams(nwg) thread_limit(wgs) 
-                                   ^
-
-"main.cpp", line 52: error: identifier "omp_get_thread_num" is undefined
-            int threadIdx_x = omp_get_thread_num();
-                              ^
-
-"main.cpp", line 53: error: identifier "omp_get_team_num" is undefined
-            int blockIdx_x = omp_get_team_num();
-                             ^
-
-"main.cpp", line 54: error: identifier "omp_get_gang" is undefined
-            int gridDim_x = omp_get_gang();
-                            ^
-
-"main.cpp", line 55: error: identifier "omp_get_vector" is undefined
-            int blockDim_x = omp_get_vector();
-                             ^
-
-"main.cpp", line 108: error: invalid text in pragma
-        #pragma acc update from (result[0:nwg])
-                           ^
-
-"main.cpp", line 108: error: OpenACC data clause expected
-        #pragma acc update from (result[0:nwg])
-                           ^
-
-"main.cpp", line 108: error: extra text after expected end of preprocessing directive
-        #pragma acc update from (result[0:nwg])
-                                ^
-
-11 errors detected in the compilation of "main.cpp".
-make: *** [Makefile.NVD:57: main.o] Error 2
-timeout was set to  600
+reference(double (*)(double), double, double, unsigned long, double):
+      6, include "reference.h"
+          35, Loop not vectorized/parallelized: potential early exits
+          40, Loop not vectorized: data dependency
+f(double):
+     18, Generating acc routine seq
+         Generating NVIDIA GPU code
+getFirstSetBitPos(int):
+     24, Generating acc routine seq
+         Generating NVIDIA GPU code
+main:
+     48, Generating create(result[:nwg]) [if not already present]
+     51, Generating copyin(base_b,base_a) [if not already present]
+         Loop not vectorized/parallelized: too deeply nested
+     53, Generating implicit firstprivate(nwg,wgs)
+         Generating NVIDIA GPU code
+         56, #pragma acc loop gang(nwg) /* blockIdx.x */
+         74, #pragma acc loop vector(wgs) /* threadIdx.x */
+         79, #pragma acc loop seq
+         88, #pragma acc loop seq
+         92, #pragma acc loop seq
+         98, #pragma acc loop vector(wgs) /* threadIdx.x */
+        102, #pragma acc loop seq
+             Generating implicit reduction(+:sum)
+        110, #pragma acc loop vector(wgs) /* threadIdx.x */
+        117, #pragma acc loop seq
+        120, #pragma acc loop seq
+        123, #pragma acc loop seq
+        124, #pragma acc loop seq
+     53, Local memory used for table,local_col
+     56, Loop not vectorized/parallelized: too deeply nested
+     74, Loop is parallelizable
+     79, Loop is parallelizable
+         Recognized memory zero idiom
+     88, Complex loop carried dependence of local_col prevents parallelization
+         Loop carried dependence of local_col prevents parallelization
+         Loop carried backward dependence of local_col prevents vectorization
+         Loop not vectorized/parallelized: contains call
+     92, Loop is parallelizable
+         Recognized memory copy idiom
+     98, Loop is parallelizable
+         Loop not fused: enclosed in different number of nests
+    102, Loop is parallelizable
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 4 times
+    110, Loop is parallelizable
+    117, Loop carried dependence of table prevents parallelization
+         Loop carried backward dependence of table prevents vectorization
+         Loop not fused: different loop trip count
+         Loop unrolled 16 times (completely unrolled)
+    120, Loop is parallelizable
+         Loop not fused: different loop trip count
+         Generated vector simd code for the loop
+    123, Loop carried dependence of table prevents parallelization
+         Complex loop carried dependence of table prevents parallelization
+         Loop carried backward dependence of table prevents vectorization
+    124, Loop carried dependence of table prevents parallelization
+         Loop is vectorizable
+         Loop carried dependence of table prevents parallelization
+         Loop is vectorizable
+         Generated vector simd code for negative stride loop
+    133, Generating update self(result[:nwg])
+    134, Generated vector simd code for the loop containing reductions
+         Loop unrolled 4 times
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      6, include "reference.h"
+std::log2(float):
+                       1571, Generating implicit omp declare target routine
+                             Generating NVIDIA GPU code
