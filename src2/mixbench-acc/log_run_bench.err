@@ -1,31 +1,33 @@
-"main.cpp", line 20: error: invalid text in pragma
-    #pragma acc parallel teams num_teams(grid_dim) thread_limit(block_dim)
-                         ^
-
-"main.cpp", line 20: error: extra text after expected end of preprocessing directive
-    #pragma acc parallel teams num_teams(grid_dim) thread_limit(block_dim)
-                               ^
-
-"main.cpp", line 26: error: identifier "omp_get_team_num" is undefined
-        int idx = omp_get_team_num()*blockSize*granularity + omp_get_thread_num();
-                  ^
-
-"main.cpp", line 26: error: identifier "omp_get_thread_num" is undefined
-        int idx = omp_get_team_num()*blockSize*granularity + omp_get_thread_num();
-                                                             ^
-
-"main.cpp", line 27: error: identifier "omp_get_gang" is undefined
-        const int big_stride = omp_get_gang()*blockSize*granularity;
-                               ^
-
-"main.cpp", line 64: error: invalid text in pragma
-    #pragma acc data tofrom: cd[0:size]) 
-                     ^
-
-"main.cpp", line 64: error: extra text after expected end of preprocessing directive
-    #pragma acc data tofrom: cd[0:size]) 
-                           ^
-
-7 errors detected in the compilation of "main.cpp".
-make: *** [Makefile.NVD:58: main.o] Error 2
-timeout was set to  600
+benchmark_func(float*, int, int, int):
+     19, Generating present(cd[:8388608])
+         Generating implicit firstprivate(compute_iterations,total_threads)
+         Generating NVIDIA GPU code
+         23, #pragma acc loop gang(grid_dim), vector(block_dim) /* blockIdx.x threadIdx.x */
+         42, #pragma acc loop seq
+         44, #pragma acc loop seq
+         49, #pragma acc loop seq
+         56, #pragma acc loop seq
+     19, Local memory used for tmps
+     23, Generating implicit firstprivate(grid_dim,block_dim)
+         Loop not fused: no successor loop
+     42, Complex loop carried dependence of cd-> prevents parallelization
+         Loop carried dependence of cd-> prevents parallelization
+         Loop carried backward dependence of cd-> prevents vectorization
+         Complex loop carried dependence of tmps prevents parallelization
+         Outer loop unrolled 4 times (completely unrolled)
+     44, Complex loop carried dependence of tmps prevents parallelization
+         Loop not fused: dependence chain to sibling loop
+     49, Complex loop carried dependence of tmps prevents parallelization
+         Loop carried reuse of tmps prevents parallelization
+         Loop not vectorized: unknown
+         Loop unrolled 8 times
+     56, Loop unrolled 4 times (completely unrolled)
+mixbenchGPU(long, int, int):
+     71, Recognized memory zero idiom
+     78, Generating copy(cd[:size]) [if not already present]
+     80, Loop not vectorized/parallelized: contains call
+     87, Loop not vectorized/parallelized: contains call
+     98, Loop not vectorized/parallelized: potential early exits
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     10, include "chrono"
+         472, Loop not vectorized/parallelized: not countable

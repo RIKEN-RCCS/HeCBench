@@ -16,18 +16,31 @@
 #define seed 0.1f
 
 void benchmark_func(float *cd, int grid_dim, int block_dim, int compute_iterations) { 
+  const int total_threads = grid_dim * block_dim;
       
-  #pragma acc parallel teams num_teams(grid_dim) thread_limit(block_dim)
+  #pragma acc parallel loop gang vector num_gangs(grid_dim) vector_length(block_dim) \
+          present(cd[0:VECTOR_SIZE])
+  for (int t = 0; t < total_threads; t++)
   { 
-    #pragma omp parallel 
-    {
-      const unsigned int blockSize = block_dim;
-      const int stride = blockSize;
-      int idx = omp_get_team_num()*blockSize*granularity + omp_get_thread_num();
-      const int big_stride = omp_get_gang()*blockSize*granularity;
-      float tmps[granularity];
+    const int thread_id = t % block_dim;
+    const int team_id = t / block_dim;
+
+    const int blockSize = block_dim;
+    const int stride = blockSize;
+    const int idx = team_id * blockSize * granularity + thread_id;
+    const int big_stride = grid_dim * blockSize * granularity;
+
+    float tmps[granularity];
+
+    //#pragma omp parallel 
+    //{
+      //const unsigned int blockSize = block_dim;
+      //const int stride = blockSize;
+      //int idx = omp_get_team_num()*blockSize*granularity + omp_get_thread_num();
+      //const int big_stride = omp_get_gang()*blockSize*granularity;
+      //float tmps[granularity];
       for(int k=0; k<fusion_degree; k++) {
-        #pragma unroll
+        #pragma acc loop seq
         for(int j=0; j<granularity; j++) {
           // Load elements (memory intensive part)
           tmps[j] = cd[idx+j*stride+k*big_stride];
@@ -39,15 +52,15 @@ void benchmark_func(float *cd, int grid_dim, int block_dim, int compute_iteratio
 
         // Multiply add reduction
         float sum = 0;
-        #pragma unroll
+	#pragma acc loop seq
         for(int j=0; j<granularity; j+=2)
           sum += tmps[j]*tmps[j+1];
 
-        #pragma unroll
-        for(int j=0; j<granularity; j++)
+        //#pragma unroll
+        //for(int j=0; j<granularity; j++)
           cd[idx+k*big_stride] = sum;
       }
-    }
+    //}
   }
 }
 
@@ -61,7 +74,7 @@ void mixbenchGPU(long size, int compute_iterations, int repeat) {
   const int block_dim = 256;
   const int grid_dim = reduced_grid_size/block_dim;
 
-  #pragma acc data tofrom: cd[0:size]) 
+  #pragma acc data copy(cd[0:size])
   {
     // warmup
     for (int i = 0; i < repeat; i++) {
@@ -69,6 +82,7 @@ void mixbenchGPU(long size, int compute_iterations, int repeat) {
     }
 
     auto start = std::chrono::steady_clock::now();
+    #pragma acc wait
 
     for (int i = 0; i < repeat; i++) {
       benchmark_func(cd, grid_dim, block_dim, compute_iterations);
