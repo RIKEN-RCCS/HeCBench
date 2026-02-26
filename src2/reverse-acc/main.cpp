@@ -38,34 +38,40 @@ int main(int argc, char* argv[]) {
 
   long time = 0;
 
-  #pragma acc data alloc: test[0:len]) 
+  #pragma acc data create(test[0:len])
   {
     for (int i = 0; i < iteration; i++) {
       const int count = distribution(generator);
 
       memcpy(test, gold_even, elem_size);
-      #pragma acc update to (test[0:len])
+      #pragma acc update device(test[0:len])
 
       auto start = std::chrono::steady_clock::now();
 
       for (int j = 0; j < count; j++) {
-        #pragma acc parallel teams gang(1) thread_limit(len)
+        #pragma acc parallel num_gangs(1) vector_length(len) present(test[0:len])
         {
           int s[len];
-          #pragma omp parallel 
+	  #pragma acc loop vector
+	  for (int t = 0; t < len; t++)
           {
-            int t = omp_get_thread_num();
+            //int t = omp_get_thread_num();
             s[t] = test[t];
-            #pragma omp barrier
+	  }
+          //  #pragma omp barrier
+	  #pragma acc loop vector
+	  for (int t = 0; t < len; t++)
+          {
             test[t] = s[len-t-1];
           }
         }
       }
 
+      #pragma acc wait
       auto end = std::chrono::steady_clock::now();
       time += std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
 
-      #pragma acc update from (test[0:len])
+      #pragma acc update self(test[0:len])
 
       if (count % 2 == 0)
         error = memcmp(test, gold_even, elem_size);
