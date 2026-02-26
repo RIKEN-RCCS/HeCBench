@@ -1,4 +1,4 @@
 Buffer size: 32MB
 Trade-off type:compute with global memory (block strided)
-Total kernel execution time: 0.555390 (s)
+Total kernel execution time: 0.631234 (s)
 PASS
