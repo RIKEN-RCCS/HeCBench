@@ -59,14 +59,13 @@ static const stattype out = 0;
 /* hash function to generate random values */
 
 // source of hash function: https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key
-#pragma omp declare target
+#pragma acc routine seq
 unsigned int hash(unsigned int val)
 {
   val = ((val >> 16) ^ val) * 0x45d9f3b;
   val = ((val >> 16) ^ val) * 0x45d9f3b;
   return (val >> 16) ^ val;
 }
-#pragma omp end declare target
 
 void computeMIS(
     const int repeat,
@@ -74,12 +73,14 @@ void computeMIS(
     const int edges,
     const int* const __restrict nidx,
     const int* const __restrict nlist,
-    volatile stattype* const __restrict nstat)
+    stattype* const __restrict nstat)
 {
-  #pragma acc data to: nidx[0:nodes+1], nlist[0:edges]) \
-                          map(from: nstat[0:nodes])
-  {
   const int blocks = 24;
+  const int total_threads = blocks * ThreadsPerBlock;
+
+  #pragma acc data copyin(nidx[0:nodes+1], nlist[0:edges]) \
+                   copyout(nstat[0:nodes])
+  {
 
   auto start = std::chrono::high_resolution_clock::now();
 
@@ -87,8 +88,7 @@ void computeMIS(
   const float scaledavg = ((in / 2) - 1) * avg;
 
   for (int n = 0; n < 100; n++) {
-    #pragma acc parallel loop \
-      num_teams(blocks) thread_limit(ThreadsPerBlock) shared(avg, scaledavg)
+    #pragma acc parallel loop gang vector vector_length(ThreadsPerBlock) num_gangs(blocks)
     for (int i = 0; i < nodes; i++) {
       stattype val = in;
       const int degree = nidx[i + 1] - nidx[i];
@@ -100,36 +100,30 @@ void computeMIS(
       nstat[i] = val;
     }
     
-    #pragma acc parallel teams num_teams(blocks) thread_limit(ThreadsPerBlock)
-    {
-      #pragma omp parallel 
-      {
-        const int from = omp_get_thread_num() + omp_get_team_num() * ThreadsPerBlock;
-        const int incr = omp_get_gang() * ThreadsPerBlock;
-
-        int missing;
-        do {
+        int missing = 1;
+        while (missing != 0) {
           missing = 0;
-          for (int v = from; v < nodes; v += incr) {
+          #pragma acc parallel loop gang vector vector_length(ThreadsPerBlock) num_gangs(blocks) reduction(+:missing)
+          for (int v = 0; v < nodes; v++) {
             const stattype nv = nstat[v];
             if (nv & 1) {
               int i = nidx[v];
-              while ((i < nidx[v + 1]) && ((nv > nstat[nlist[i]]) || ((nv == nstat[nlist[i]]) && (v > nlist[i])))) {
+              const int end_idx = nidx[v + 1];
+              while ((i < end_idx) && ((nv > nstat[nlist[i]]) || ((nv == nstat[nlist[i]]) && (v > nlist[i])))) {
                 i++;
               }
-              if (i < nidx[v + 1]) {
-                missing = 1;
+
+              if (i < end_idx) {
+                missing += 1;
               } else {
-                for (int i = nidx[v]; i < nidx[v + 1]; i++) {
-                  nstat[nlist[i]] = out;
+                for (int j = nidx[v]; j < end_idx; j++) {
+                  nstat[nlist[j]] = out;
                 }
                 nstat[v] = in;
               }
             }
           }
-        } while (missing != 0);
-      }
-    }
+        }
   }
 
   auto end = std::chrono::high_resolution_clock::now();
