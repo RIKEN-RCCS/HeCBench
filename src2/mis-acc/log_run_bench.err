@@ -1,45 +1,45 @@
-"main.cpp", line 79: error: invalid text in pragma
-    #pragma acc data to: nidx[0:nodes+1], nlist[0:edges]) \
-                     ^
-
-"main.cpp", line 79: error: extra text after expected end of preprocessing directive
-    #pragma acc data to: nidx[0:nodes+1], nlist[0:edges]) \
-                       ^
-
-"main.cpp", line 91: error: invalid text in pragma
-        num_teams(blocks) thread_limit(ThreadsPerBlock) shared(avg, scaledavg)
-        ^
-
-"main.cpp", line 91: error: extra text after expected end of preprocessing directive
-        num_teams(blocks) thread_limit(ThreadsPerBlock) shared(avg, scaledavg)
-                 ^
-
-"main.cpp", line 103: error: invalid text in pragma
-      #pragma acc parallel teams num_teams(blocks) thread_limit(ThreadsPerBlock)
-                           ^
-
-"main.cpp", line 103: error: extra text after expected end of preprocessing directive
-      #pragma acc parallel teams num_teams(blocks) thread_limit(ThreadsPerBlock)
-                                 ^
-
-"main.cpp", line 107: error: identifier "omp_get_thread_num" is undefined
-          const int from = omp_get_thread_num() + omp_get_team_num() * ThreadsPerBlock;
-                           ^
-
-"main.cpp", line 107: error: identifier "omp_get_team_num" is undefined
-          const int from = omp_get_thread_num() + omp_get_team_num() * ThreadsPerBlock;
-                                                  ^
-
-"main.cpp", line 108: error: identifier "omp_get_gang" is undefined
-          const int incr = omp_get_gang() * ThreadsPerBlock;
-                           ^
-
-"main.cpp", line 82: warning: variable "blocks" was declared but never referenced [declared_but_not_referenced]
-    const int blocks = 24;
+"main.cpp", line 79: warning: variable "total_threads" was declared but never referenced [declared_but_not_referenced]
+    const int total_threads = blocks * ThreadsPerBlock;
               ^
 
 Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
 
-9 errors detected in the compilation of "main.cpp".
-make: *** [Makefile.NVD:57: main.o] Error 2
-timeout was set to  600
+hash(unsigned int):
+     64, Generating acc routine seq
+         Generating NVIDIA GPU code
+computeMIS(int, int, int, int const*, int const*, unsigned char*):
+     83, Generating copyin(nidx[:nodes+1]) [if not already present]
+         Generating copyout(nstat[:nodes]) [if not already present]
+         Generating copyin(nlist[:edges]) [if not already present]
+     90, Generating implicit firstprivate(nodes)
+         Generating NVIDIA GPU code
+         92, #pragma acc loop gang(24), vector(256) /* blockIdx.x threadIdx.x */
+     90, Loop not vectorized/parallelized: too deeply nested
+     92, Generating implicit firstprivate(avg,scaledavg)
+         Loop not fused: no successor loop
+         Generated vector simd code for the loop
+    105, Generating implicit firstprivate(nodes)
+         Generating NVIDIA GPU code
+        107, #pragma acc loop gang(24), vector(256) /* blockIdx.x threadIdx.x */
+             Generating reduction(+:missing)
+        119, #pragma acc loop seq
+    105, Generating implicit copy(missing) [if not already present]
+    112, Accelerator restriction: induction variable live-out from loop: i
+         Loop not vectorized/parallelized: potential early exits
+    113, Accelerator restriction: induction variable live-out from loop: i
+    114, Accelerator restriction: induction variable live-out from loop: i
+    119, Loop is parallelizable
+         Loop not vectorized: unsupported scatter
+         Loop unrolled 4 times
+main:
+    171, Loop not vectorized/parallelized: potential early exits
+    179, Loop not vectorized: unknown
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     49, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<long, std::ratio<1l, 1l>>::_S_gcd(long, long):
+     49, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+std::chrono::duration<double, std::ratio<1l, 1l>>::_S_gcd(long, long):
+     49, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
