@@ -116,7 +116,7 @@ int main(int argc, char** argv)
   memcpy(gpuSrc, data, cols*sizeof(int));
 
 #pragma omp target data map(to: gpuSrc[0:cols]) \
-                        map(alloc: gpuResult[0:cols]) \
+                        map(to: gpuResult[0:cols]) \
                         map(to: gpuWall[0:size-cols]) \
                         map(from: outputBuffer[0:16384])
   {
@@ -131,10 +131,14 @@ int main(int argc, char** argv)
       // Calculate this for the kernel argument...
       int iteration = MIN(pyramid_height, rows-t-1);
 
-      #pragma omp target teams num_teams(gws) thread_limit(lws)
+      //int* current_src = gpuSrc;
+      //int* current_res = gpuResult;
+
+      #pragma omp target teams num_teams(gws) thread_limit(lws) \
+//                  is_device_ptr(current_src, current_res)
       {
-        int prev[lws];
-        int result[lws];
+        static int prev[lws];
+        static int result[lws];
         #pragma omp parallel 
         {
           // Set the kernel arguments.
@@ -174,6 +178,7 @@ int main(int argc, char** argv)
 
           if(IN_RANGE(xidx, 0, cols-1))
           {
+            //prev[tx] = current_src[xidx];
             prev[tx] = gpuSrc[xidx];
           }
 
@@ -230,6 +235,7 @@ int main(int argc, char** argv)
           // small block perform the calculation and switch on "computed"
           if (computed)
           {
+            //current_res[xidx] = result[tx];
             gpuResult[xidx] = result[tx];
           }
         }
