@@ -1,27 +1,119 @@
-"kernel.h", line 20: error: invalid text in pragma
-    #pragma acc parallel teams num_teams(teams) thread_limit(threads)
-                         ^
-
-"kernel.h", line 20: error: extra text after expected end of preprocessing directive
-    #pragma acc parallel teams num_teams(teams) thread_limit(threads)
-                               ^
-
-"kernel.h", line 28: error: identifier "omp_get_team_num" is undefined
-        int batch_id = omp_get_team_num();
-                       ^
-
-"kernel.h", line 29: error: identifier "omp_get_thread_num" is undefined
-        int states_id = omp_get_thread_num();
-                        ^
-
-"main.cpp", line 80: error: invalid text in pragma
-    #pragma acc parallel data map (tofrom: d_cur_forward[0:forward_matrix_elem]),\
-                         ^
-
-"main.cpp", line 80: error: extra text after expected end of preprocessing directive
-    #pragma acc parallel data map (tofrom: d_cur_forward[0:forward_matrix_elem]),\
-                              ^
-
-6 errors detected in the compilation of "main.cpp".
-make: *** [Makefile.NVD:57: main.o] Error 2
-timeout was set to  600
+pair_HMM_forward(int, int, int, int, double const (*) [41][4][2], double const (*) [4][2][3], double const (*) [41][4][2], double const (*) [2][4][2], double const (*) [2], double (*) [41][4][2]):
+      7, include "kernel.h"
+          18, Generating implicit firstprivate(threads,teams)
+              Generating NVIDIA GPU code
+              21, #pragma acc loop gang(teams) /* blockIdx.x */
+              32, #pragma acc loop vector(threads) /* threadIdx.x */
+              40, #pragma acc loop seq
+              41, #pragma acc loop seq
+              55, #pragma acc loop seq
+              66, #pragma acc loop vector(threads) /* threadIdx.x */
+              73, #pragma acc loop seq
+              74, #pragma acc loop seq
+              84, #pragma acc loop vector(threads) /* threadIdx.x */
+              93, #pragma acc loop seq
+                  Generating implicit reduction(+:s)
+             106, #pragma acc loop seq
+                  Generating implicit reduction(+:s2,s3,s1,s0)
+             125, #pragma acc loop vector(threads) /* threadIdx.x */
+             138, #pragma acc loop seq
+          18, CUDA shared memory used for mul_3d,f01,t,t01,e,f,mul_4d
+              Generating implicit copyin(forward_matrix_out[:][:][:teams][:]) [if not already present]
+              Generating implicit copyin(likelihood[:2][:][:teams][:threads],forward_matrix_in[cur_i-1:2][cur_j-1:2][:teams][:]) [if not already present]
+              Generating implicit copyout(forward_matrix_out[cur_i][cur_j][:teams][:]) [if not already present]
+              Generating implicit copyin(transitions[cur_i-1:2][:teams][:][:2],start_transitions[:teams][:threads],emissions[cur_i][cur_j][:teams][:threads]) [if not already present]
+          32, Loop is parallelizable
+              Generating implicit firstprivate(cur_j,cur_i)
+              Invariant if transformation
+              Loop not fused: no successor loop
+          40, Loop is parallelizable
+              Loop unrolled 2 times (completely unrolled)
+          41, Loop is parallelizable
+              Loop unrolled 2 times (completely unrolled)
+          55, Loop is parallelizable
+              Loop unrolled 2 times (completely unrolled)
+          66, Loop is parallelizable
+              Invariant if transformation
+              Loop not fused: no successor loop
+              Loop not vectorized: unknown
+          73, Loop is parallelizable
+              Loop unrolled 2 times (completely unrolled)
+          74, Loop is parallelizable
+              Loop unrolled 2 times (completely unrolled)
+          84, Loop is parallelizable
+          93, Loop is parallelizable
+              Loop unrolled 2 times (completely unrolled)
+         106, Loop is parallelizable
+              Loop unrolled 2 times (completely unrolled)
+         125, Loop is parallelizable
+              Invariant if transformation
+              Loop not fused: no successor loop
+              Loop not vectorized: data dependency
+         138, Loop is parallelizable
+              Loop unrolled 2 times (completely unrolled)
+main:
+     36, Loop not vectorized/parallelized: too deeply nested
+     37, Loop not vectorized/parallelized: too deeply nested
+     39, Loop not vectorized/parallelized: contains call
+        1861, Loop not fused: function call before adjacent loop
+              Loop not vectorized: may not be beneficial for target
+        1861, Loop not fused: function call before adjacent loop
+              Loop not vectorized: may not be beneficial for target
+     47, Loop not vectorized/parallelized: too deeply nested
+     48, Loop not vectorized/parallelized: too deeply nested
+     50, Loop not vectorized/parallelized: contains call
+        1861, Loop not fused: function call before adjacent loop
+              Loop not vectorized: may not be beneficial for target
+     58, Loop not vectorized/parallelized: contains call
+        1861, Loop not fused: function call before adjacent loop
+              Loop not vectorized: may not be beneficial for target
+     63, Loop not vectorized/parallelized: too deeply nested
+     64, Loop not vectorized/parallelized: too deeply nested
+     66, Loop not vectorized/parallelized: contains call
+        1861, Loop not fused: function call before adjacent loop
+              Loop not vectorized: may not be beneficial for target
+     86, Generating copy(d_cur_forward[:forward_matrix_elem]) [if not already present]
+         Generating copyin(d_trans[:transitions_elem],d_start[:start_transitions_elem],d_emis[:forward_matrix_elem]) [if not already present]
+         Generating create(d_next_forward[:forward_matrix_elem]) [if not already present]
+         Generating copyin(d_like[:likelihood_elem]) [if not already present]
+     95, Loop not vectorized/parallelized: contains call
+         616, Loop not vectorized/parallelized: not countable
+         616, Loop not vectorized/parallelized: not countable
+    114, Loop not fused: function call before adjacent loop
+         Outer loop unwound (12)
+    115, Outer loop unrolled 1 times (completely unrolled)
+    116, Outer loop unrolled 1 times (completely unrolled)
+    117, Generated vector simd code for the loop containing reductions
+         117, Loop nest collapsed
+         616, Loop not vectorized/parallelized: not countable
+std::char_traits<char>::length(char const*):
+         171, Loop not vectorized/parallelized: not countable
+double std::uniform_real_distribution<double>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&):
+        1870, Loop not vectorized: data dependency
+double std::uniform_real_distribution<double>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&, std::uniform_real_distribution<double>::param_type const&):
+         189, Loop not vectorized: data dependency
+std::__detail::_Adaptor<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>, double>::operator()():
+        3364, Loop not vectorized: data dependency
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      3, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      7, include "kernel.h"
+std::chrono::duration<double, std::ratio<1l, 1000l>>::_S_gcd(long, long):
+      3, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      7, include "kernel.h"
+__gnu_cxx::char_traits<char>::length(char const*):
+      1, include "iostream"
+          39, include "ostream"
+               38, include "ios"
+                    40, include "char_traits.h"
+                        171, Loop not vectorized/parallelized: not countable
+std::basic_ostream<char, std::char_traits<char>>& std::endl<char, std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&):
+      1, include "iostream"
+          39, include "ostream"
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&, char const*):
+         397, Loop not vectorized/parallelized: not countable
+double std::generate_canonical<double, 53ul, std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>>(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&):
+      4, include "random"
+          51, include "random.tcc"
+             3364, Loop not vectorized: data dependency
