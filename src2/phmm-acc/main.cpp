@@ -77,12 +77,12 @@ int main(int argc, char* argv[]) {
   double *d_start = (double*) h_start;
   double *d_next_forward = (double*) malloc (forward_matrix_size);
 
-  #pragma acc parallel data map (tofrom: d_cur_forward[0:forward_matrix_elem]),\
-                          map (to: d_emis[0:forward_matrix_elem],\
-                                   d_trans[0:transitions_elem],\
-                                   d_like[0:likelihood_elem],\
-                                   d_start[0:start_transitions_elem]) \
-                          map (alloc: d_next_forward[0:forward_matrix_elem])
+  #pragma acc data copy(d_cur_forward[0:forward_matrix_elem]) \
+                 copyin(d_emis[0:forward_matrix_elem], \
+                        d_trans[0:transitions_elem], \
+                        d_like[0:likelihood_elem], \
+                        d_start[0:start_transitions_elem]) \
+                 create(d_next_forward[0:forward_matrix_elem])
   {
     // OMP teams and threads
     const int num_teams = batch;
@@ -104,6 +104,7 @@ int main(int argc, char* argv[]) {
       }
     }
 
+    #pragma acc wait
     auto t2 = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double, std::milli> milli = (t2 - t1);
     std::cout << "Total execution time " <<  milli.count() << " milliseconds\n" ;
