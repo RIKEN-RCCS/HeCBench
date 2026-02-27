@@ -1,1 +1,5 @@
-nvc++ -acc   -Wall -Minfo -mp=gpu -gpu=cc90 -O3 ./main.c 		-c 		-o ./main.o 		-O3
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "time -p ( ./myocyte.out -time 10000 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 1 561 560
