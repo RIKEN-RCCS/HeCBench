@@ -115,10 +115,9 @@ int main(int argc, char** argv)
   int* gpuResult = (int*) malloc (sizeof(int)*cols);
   memcpy(gpuSrc, data, cols*sizeof(int));
 
-#pragma acc data to: gpuSrc[0:cols]) \
-                        map(alloc: gpuResult[0:cols]) \
-                        map(to: gpuWall[0:size-cols]) \
-                        map(from: outputBuffer[0:16384])
+#pragma acc data copyin(gpuSrc[0:cols], gpuWall[0:size-cols]) \
+                   create(gpuResult[0:cols]) \
+                   copyout(outputBuffer[0:16384])
   {
     double kstart = 0.0;
 
@@ -131,16 +130,27 @@ int main(int argc, char** argv)
       // Calculate this for the kernel argument...
       int iteration = MIN(pyramid_height, rows-t-1);
 
-      #pragma acc parallel teams num_teams(gws) thread_limit(lws)
+      #pragma acc parallel num_gangs(gws) vector_length(lws) \
+                           present(gpuSrc[0:cols], gpuResult[0:cols], gpuWall[0:size-cols])
       {
-        int prev[lws];
-        int result[lws];
-        #pragma omp parallel 
+        //int prev[lws];
+        //int result[lws];
+        //bool computed[lws];
+	int prev[lws];
+        int res_acc[lws]; // result[lws]の代わり
+        int W_arr[lws];   // 変数Wを保持するための配列
+        int E_arr[lws];   // 変数Eを保持するための配列
+        bool isValid_arr[lws]; // isValidを保持するための配列
+        bool computed_arr[lws]; // computedを保持するための配列
+
+	#pragma acc loop gang
+        for (int bx = 0; bx < gws; bx++)
         {
           // Set the kernel arguments.
-          int BLOCK_SIZE = omp_get_vector();
-          int bx = omp_get_team_num();
-          int tx = omp_get_thread_num();
+          //int BLOCK_SIZE = omp_get_vector();
+          int BLOCK_SIZE = lws;
+          //int bx = omp_get_team_num();
+          //int tx = omp_get_thread_num();
 
           // Each block finally computes result for a small block
           // after N iterations.
@@ -155,83 +165,112 @@ int main(int argc, char** argv)
           int blkX = (small_block_cols*bx) - borderCols;
           int blkXmax = blkX+BLOCK_SIZE-1;
 
-          // calculate the global thread coordination
-          int xidx = blkX+tx;
+	  #pragma acc loop vector
+          for (int tx = 0; tx < lws; tx++)
+	  {
+            // calculate the global thread coordination
+            int xidx = blkX+tx;
 
-          // effective range within this block that falls within
-          // the valid range of the input data
-          // used to rule out computation outside the boundary.
-          int validXmin = (blkX < 0) ? -blkX : 0;
-          int validXmax = (blkXmax > cols-1) ? BLOCK_SIZE-1-(blkXmax-cols+1) : BLOCK_SIZE-1;
+            // effective range within this block that falls within
+            // the valid range of the input data
+            // used to rule out computation outside the boundary.
+            int validXmin = (blkX < 0) ? -blkX : 0;
+            int validXmax = (blkXmax > cols-1) ? BLOCK_SIZE-1-(blkXmax-cols+1) : BLOCK_SIZE-1;
 
-          int W = tx-1;
-          int E = tx+1;
+            int W = tx-1;
+            int E = tx+1;
 
-          W = (W < validXmin) ? validXmin : W;
-          E = (E > validXmax) ? validXmax : E;
+            W = (W < validXmin) ? validXmin : W;
+            E = (E > validXmax) ? validXmax : E;
 
-          bool isValid = IN_RANGE(tx, validXmin, validXmax);
+            W_arr[tx] = W;
+            E_arr[tx] = E;
+            isValid_arr[tx] = IN_RANGE(tx, validXmin, validXmax);
+            //bool isValid = IN_RANGE(tx, validXmin, validXmax);
 
-          if(IN_RANGE(xidx, 0, cols-1))
-          {
-            prev[tx] = gpuSrc[xidx];
-          }
+            if(IN_RANGE(xidx, 0, cols-1))
+            {
+              prev[tx] = gpuSrc[xidx];
+            }
+	  }
+	  // auto barrier
 
-          #pragma omp barrier
-
-          bool computed;
           for (int i = 0; i < iteration; i++)
           {
-            computed = false;
-
-            if( IN_RANGE(tx, i+1, BLOCK_SIZE-i-2) && isValid )
+            #pragma acc loop vector
+            for (int tx = 0; tx < lws; tx++)
             {
-              computed = true;
-              int left = prev[W];
-              int up = prev[tx];
-              int right = prev[E];
-              int shortest = MIN(left, up);
-              shortest = MIN(shortest, right);
+              computed_arr[tx] = false;
+              //computed = false;
+	      int W = W_arr[tx];
+              int E = E_arr[tx];
+              bool isValid = isValid_arr[tx];
+              int xidx = blkX + tx;
 
-              int index = cols*(t+i)+xidx;
-              result[tx] = shortest + gpuWall[index];
-
-              // ===================================================================
-              // add debugging info to the debug output buffer...
-              if (tx==11 && i==0)
+              if( IN_RANGE(tx, i+1, BLOCK_SIZE-i-2) && isValid )
               {
-                // set bufIndex to what value/range of values you want to know.
-                int bufIndex = gpuSrc[xidx];
-                // dont touch the line below.
-                outputBuffer[bufIndex] = 1;
+                computed_arr[tx] = true;
+                //computed = true;
+                int left = prev[W];
+                int up = prev[tx];
+                int right = prev[E];
+                int shortest = MIN(left, up);
+                shortest = MIN(shortest, right);
+
+                int index = cols*(t+i)+xidx;
+	        res_acc[tx] = shortest + gpuWall[index];
+                //result[tx] = shortest + gpuWall[index];
+
+                // ===================================================================
+                // add debugging info to the debug output buffer...
+                if (tx==11 && i==0)
+                {
+                  // set bufIndex to what value/range of values you want to know.
+                  int bufIndex = gpuSrc[xidx];
+                  // dont touch the line below.
+                  outputBuffer[bufIndex] = 1;
+                }
+                // ===================================================================
               }
-              // ===================================================================
-            }
+	    }
+	    // auto barrier
+            //#pragma omp barrier
 
-            #pragma omp barrier
-
-            if(i==iteration-1)
-            {
-              // we are on the last iteration, and thus don't need to 
-              // compute for the next step.
-              break;
+            #pragma acc loop vector
+            for (int tx = 0; tx < lws; tx++)
+	    {
+              if(i==iteration-1)
+              {
+                // we are on the last iteration, and thus don't need to 
+                // compute for the next step.
+                //break;
+              }
+	      else if(computed_arr[tx])
+              //if(computed)
+              {
+                //Assign the computation range
+                prev[tx] = res_acc[tx];
+                //prev[tx] = result[tx];
+              }
             }
-
-            if(computed)
-            {
-              //Assign the computation range
-              prev[tx] = result[tx];
-            }
-            #pragma omp barrier
+	    // auto barrier
+            //#pragma omp barrier
           }
 
-          // update the global memory
-          // after the last iteration, only threads coordinated within the
-          // small block perform the calculation and switch on "computed"
-          if (computed)
-          {
-            gpuResult[xidx] = result[tx];
-          }
+          #pragma acc loop vector
+          for (int tx = 0; tx < lws; tx++)
+	  {
+            int xidx = blkX + tx;
+            // update the global memory
+            // after the last iteration, only threads coordinated within the
+            // small block perform the calculation and switch on "computed"
+            if (computed_arr[tx])
+            //if (computed)
+            {
+              gpuResult[xidx] = res_acc[tx];
+              //gpuResult[xidx] = result[tx];
+            }
+	  }
         }
       } 
       int *temp = gpuResult;
@@ -239,10 +278,11 @@ int main(int argc, char** argv)
       gpuSrc = temp;
     }
 
+    #pragma acc wait
     double kend = get_time();
     printf("Total kernel execution time: %lf (s)\n", kend - kstart);
 
-    #pragma acc update from(gpuSrc[0:cols])
+    #pragma acc update self(gpuSrc[0:cols])
   }
 
   double offload_end = get_time();
