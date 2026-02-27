@@ -5,6 +5,7 @@ DEVICE    = gpu
 SM        = cc90
 LAUNCHER = bash -c
 
+program = myocyte.out
 
 # Standard flags
 #CFLAGS := $(EXTRA_CFLAGS) -std=c++11 -Wall
@@ -30,8 +31,8 @@ ifeq ($(OPTIMIZE),yes)
 endif
 
 
-./myocyte.out:	./main.o 	./kernel/kernel_wrapper.o 	./util/file/file.o 	./util/num/num.o 	$(CC) $(CFLAGS) ./main.o 		./kernel/kernel_wrapper.o 		./util/file/file.o 		./util/num/num.o
-		$(LDFLAGS) 		-o myocyte.out
+./myocyte.out:	./main.o 	./kernel/kernel_wrapper.o 	./util/file/file.o 	./util/num/num.o
+	$(CC) $(CFLAGS) ./main.o 		./kernel/kernel_wrapper.o 		./util/file/file.o 		./util/num/num.o		$(LDFLAGS) 		-o myocyte.out
 
 ./main.o:	./common.h ./main.c
 	$(CC) $(CFLAGS) ./main.c 		-c 		-o ./main.o 		-O3
@@ -46,6 +47,7 @@ endif
 	$(CC)	./util/num/num.c 		-c 		-o ./util/num/num.o 		-O3
 
 include ../include/myocyte-NVIDIA
+COMMAND = time -p ( ./$(program) -time 10000 1>log.std 2>log.err ) 2> log.time
 
 run: myocyte.out
 	$(LAUNCHER) "$(COMMAND)"

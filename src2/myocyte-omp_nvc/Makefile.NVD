@@ -5,6 +5,7 @@ DEVICE    = gpu
 SM        = cc90
 LAUNCHER = bash -c
 
+program = myocyte.out
 
 # Standard flags
 #CFLAGS := $(EXTRA_CFLAGS) -std=c++11 -Wall
@@ -46,6 +47,7 @@ endif
 	$(CC)	./util/num/num.c 		-c 		-o ./util/num/num.o 		-O3
 
 include ../include/myocyte-NVIDIA
+COMMAND = time -p ( ./$(program) -time 10000 1>log.std 2>log.err ) 2> log.time
 
 run: myocyte.out
 	$(LAUNCHER) "$(COMMAND)"
