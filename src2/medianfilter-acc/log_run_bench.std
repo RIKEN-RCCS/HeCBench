@@ -1,1 +1,5 @@
-nvc++ -acc  -std=c++14 -Wall -I../boxfilter-sycl -I../medianfilter-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "../medianfilter-cuda/prepare_data.sh; time -p ( ./main ../medianfilter-cuda/data/SierrasRGB.ppm 10000 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 0 575 575
