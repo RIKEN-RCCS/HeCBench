@@ -43,8 +43,8 @@ void kernelUpdatePBest(const float *__restrict positions,
                        const int p)
 {
   #pragma omp target teams distribute parallel for thread_limit(256)
-  for (int i=0; i < p; i++) {
-    i = i*DIM;
+  for (int k=0; k < p; k++) {
+    int i = k*DIM;
 
     float tempParticle1[DIM];
     float tempParticle2[DIM];
