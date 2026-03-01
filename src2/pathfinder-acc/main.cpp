@@ -59,7 +59,7 @@ int main(int argc, char** argv)
   }
   else
   {
-    printf("Usage: %s <column length> <row length> <pyramid_height>\n", argv[0]);
+    printf("Usage: %s <column length> <row length> <pyramid_height>\n", argv[0]);
     exit(0);
   }
 
@@ -133,24 +133,18 @@ int main(int argc, char** argv)
       #pragma acc parallel num_gangs(gws) vector_length(lws) \
                            present(gpuSrc[0:cols], gpuResult[0:cols], gpuWall[0:size-cols])
       {
-        //int prev[lws];
-        //int result[lws];
-        //bool computed[lws];
 	int prev[lws];
-        int res_acc[lws]; // result[lws]の代わり
-        int W_arr[lws];   // 変数Wを保持するための配列
-        int E_arr[lws];   // 変数Eを保持するための配列
-        bool isValid_arr[lws]; // isValidを保持するための配列
-        bool computed_arr[lws]; // computedを保持するための配列
+        int res_acc[lws]; // Instead of result[lws]
+        int W_arr[lws];   // Array for variable W
+        int E_arr[lws];   // Array for variable E
+        bool isValid_arr[lws]; // Array for variable isValid
+        bool computed_arr[lws]; // Array for variable computed
 
 	#pragma acc loop gang
         for (int bx = 0; bx < gws; bx++)
         {
           // Set the kernel arguments.
-          //int BLOCK_SIZE = omp_get_vector();
           int BLOCK_SIZE = lws;
-          //int bx = omp_get_team_num();
-          //int tx = omp_get_thread_num();
 
           // Each block finally computes result for a small block
           // after N iterations.
@@ -186,14 +180,12 @@ int main(int argc, char** argv)
             W_arr[tx] = W;
             E_arr[tx] = E;
             isValid_arr[tx] = IN_RANGE(tx, validXmin, validXmax);
-            //bool isValid = IN_RANGE(tx, validXmin, validXmax);
 
             if(IN_RANGE(xidx, 0, cols-1))
             {
               prev[tx] = gpuSrc[xidx];
             }
 	  }
-	  // auto barrier
 
           for (int i = 0; i < iteration; i++)
           {
@@ -201,7 +193,6 @@ int main(int argc, char** argv)
             for (int tx = 0; tx < lws; tx++)
             {
               computed_arr[tx] = false;
-              //computed = false;
 	      int W = W_arr[tx];
               int E = E_arr[tx];
               bool isValid = isValid_arr[tx];
@@ -210,7 +201,6 @@ int main(int argc, char** argv)
               if( IN_RANGE(tx, i+1, BLOCK_SIZE-i-2) && isValid )
               {
                 computed_arr[tx] = true;
-                //computed = true;
                 int left = prev[W];
                 int up = prev[tx];
                 int right = prev[E];
@@ -219,7 +209,6 @@ int main(int argc, char** argv)
 
                 int index = cols*(t+i)+xidx;
 	        res_acc[tx] = shortest + gpuWall[index];
-                //result[tx] = shortest + gpuWall[index];
 
                 // ===================================================================
                 // add debugging info to the debug output buffer...
@@ -233,8 +222,6 @@ int main(int argc, char** argv)
                 // ===================================================================
               }
 	    }
-	    // auto barrier
-            //#pragma omp barrier
 
             #pragma acc loop vector
             for (int tx = 0; tx < lws; tx++)
@@ -246,15 +233,11 @@ int main(int argc, char** argv)
                 //break;
               }
 	      else if(computed_arr[tx])
-              //if(computed)
               {
                 //Assign the computation range
                 prev[tx] = res_acc[tx];
-                //prev[tx] = result[tx];
               }
             }
-	    // auto barrier
-            //#pragma omp barrier
           }
 
           #pragma acc loop vector
@@ -265,10 +248,8 @@ int main(int argc, char** argv)
             // after the last iteration, only threads coordinated within the
             // small block perform the calculation and switch on "computed"
             if (computed_arr[tx])
-            //if (computed)
             {
               gpuResult[xidx] = res_acc[tx];
-              //gpuResult[xidx] = result[tx];
             }
 	  }
         }

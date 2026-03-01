@@ -32,7 +32,6 @@ void linear_regression(
       interns[loc_id].z = (dataset[glob_id].x * dataset[glob_id].y);
       interns[loc_id].w = (dataset[glob_id].x * dataset[glob_id].x);
     }
-    // auto barrier
     for (size_t i = (loc_size / 2), old_i = loc_size; i > 0; old_i = i, i /= 2) {
       #pragma acc loop vector
       for( int loc_id = 0; loc_id < loc_size; loc_id++ ) {
@@ -45,7 +44,6 @@ void linear_regression(
           }
         }
       }
-      // auto barrier
     }
 
     #pragma acc loop vector
@@ -76,7 +74,6 @@ void rsquared(
       float y_estimated = dataset[glob_id].x * equation.y + equation.x;
       dist[loc_id].y = powf((y_estimated - mean), 2.f);
     }
-    // auto barrier
     for (size_t i = (loc_size / 2), old_i = loc_size; i > 0; old_i = i, i /= 2) {
       #pragma acc loop vector
       for( int loc_id = 0; loc_id < loc_size; loc_id++ ) {
@@ -89,7 +86,6 @@ void rsquared(
           }
         }
       }
-      // auto barrier
     }
 
     #pragma acc loop vector

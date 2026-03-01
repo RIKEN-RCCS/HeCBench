@@ -85,7 +85,6 @@ void fasten_main(
 
         etot[i] = ZERO;
       }
-      // auto barrier
 
       // Loop over ligand atoms
       size_t il = 0;

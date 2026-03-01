@@ -280,7 +280,6 @@ double MedianFilterGPU(
           }
         }
       }
-      // auto barrier
       #pragma acc loop vector
       for (int v = 0; v < iNumThreads; v++)
       {
@@ -403,7 +402,6 @@ double MedianFilterGPU(
           uiDest[iDevGMEMOffset + iImageX] = uiPackedPix;
         }
       }
-      // auto barrier
     }
   }
 

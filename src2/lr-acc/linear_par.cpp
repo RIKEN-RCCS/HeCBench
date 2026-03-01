@@ -113,8 +113,6 @@ void r_squared(linear_param_t *params, data_t *dataset, sum_t *linreg, result_t 
       auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
       response->ktime += time;
 
-      //int update_size = wg_count * (100-cpu_offset) / 100;
-      //#pragma acc update self (results[0:update_size])
       #pragma acc update self (results[0:(wg_count * (100-cpu_offset) / 100)])
     }
   }

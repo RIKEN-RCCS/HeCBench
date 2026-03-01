@@ -131,11 +131,7 @@ int main(int argc, char** argv)
       // Calculate this for the kernel argument...
       int iteration = MIN(pyramid_height, rows-t-1);
 
-      //int* current_src = gpuSrc;
-      //int* current_res = gpuResult;
-
       #pragma omp target teams num_teams(gws) thread_limit(lws) \
-//                  is_device_ptr(current_src, current_res)
       {
         static int prev[lws];
         static int result[lws];
@@ -178,7 +174,6 @@ int main(int argc, char** argv)
 
           if(IN_RANGE(xidx, 0, cols-1))
           {
-            //prev[tx] = current_src[xidx];
             prev[tx] = gpuSrc[xidx];
           }
 
@@ -235,7 +230,6 @@ int main(int argc, char** argv)
           // small block perform the calculation and switch on "computed"
           if (computed)
           {
-            //current_res[xidx] = result[tx];
             gpuResult[xidx] = result[tx];
           }
         }

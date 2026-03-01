@@ -31,12 +31,8 @@ void pair_HMM_forward(
     #pragma acc loop vector
     for (int states_id = 0; states_id < threads; states_id++)
     {
-      //int batch_id = omp_get_team_num();
-      //int states_id = omp_get_thread_num();
-    
       e[batch_id][states_id] = emissions[cur_i][cur_j][batch_id][states_id];
     
-      //double t[2][2][batch][2][2];
       for (int k = 0; k < 2; k++) {
         for (int l = 0; l < 2; l++) {
           t[0][0][batch_id][k][l] = transitions[cur_i - 1][batch_id][k][l];
@@ -60,7 +56,6 @@ void pair_HMM_forward(
         }
       }
     }
-    //#pragma omp barrier
     
     #pragma acc loop vector
     for (int states_id = 0; states_id < threads; states_id++)
@@ -69,7 +64,6 @@ void pair_HMM_forward(
         if (cur_i == 1) {
 	}
 	else {
-          //double t01[batch][2][2];
           for (int j = 0; j < 2; j++) {
             for (int k = 0; k < 2; k++) {
               t01[batch_id][j][k] = t[0][1][batch_id][j][k];
@@ -78,7 +72,6 @@ void pair_HMM_forward(
 	}
       }
     }
-    // #pragma omp barrier
 
     #pragma acc loop vector
     for (int states_id = 0; states_id < threads; states_id++)
@@ -119,7 +112,6 @@ void pair_HMM_forward(
         mul_4d[3][batch_id][0][states_id] = s3;
       }
     }
-    //      #pragma omp barrier
 
     #pragma acc loop vector
     for (int states_id = 0; states_id < threads; states_id++)
@@ -147,7 +139,6 @@ void pair_HMM_forward(
         }
       }
     }
-    //      #pragma omp barrier
   }
 }
 
