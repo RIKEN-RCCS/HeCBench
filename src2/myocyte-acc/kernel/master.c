@@ -57,9 +57,6 @@ void master(
 #pragma acc loop gang
     for(int gang_id = 0; gang_id < 2; gang_id++) 
     {
-      //int bx = omp_get_team_num();
-      //int tx = omp_get_thread_num();
-
       // pointers
       int valu_offset;                                  // inivalu and finavalu offset
       int params_offset;                                  // parameters offset
@@ -75,12 +72,10 @@ void master(
       //====================================================================================================100
 
       // limit to useful threads
-      //if(bx == 0){                                    // first processor runs ECC
-      if(gang_id == 0) {
+      if(gang_id == 0) {                                // first processor runs ECC
 
-        //if(tx == 0){                                  // only 1 thread runs it, since its a sequential code
 	#pragma acc loop vector
-	for(int v = 0; v < 1; v++) {
+	for(int v = 0; v < 1; v++) {                    // only 1 thread runs it, since its a sequential code
 
           // thread offset
           valu_offset = 0;                              //
@@ -100,12 +95,10 @@ void master(
       //====================================================================================================100
 
       // limit to useful threads
-     // else if(bx == 1){                                  // second processor runs CAMs (in parallel with ECC)
-      else if(gang_id == 1) {
+      else if(gang_id == 1) {                           // second processor runs CAMs (in parallel with ECC)
 
-        //if(tx == 0){                                  // only 1 thread runs it, since its a sequential code
 	#pragma acc loop vector
-        for(int v = 0; v < 1; v++) {
+        for(int v = 0; v < 1; v++) {                    // only 1 thread runs it, since its a sequential code
 
           // specific
           valu_offset = 46;

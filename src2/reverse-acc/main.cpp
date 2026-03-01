@@ -55,10 +55,8 @@ int main(int argc, char* argv[]) {
 	  #pragma acc loop vector
 	  for (int t = 0; t < len; t++)
           {
-            //int t = omp_get_thread_num();
             s[t] = test[t];
 	  }
-          //  #pragma omp barrier
 	  #pragma acc loop vector
 	  for (int t = 0; t < len; t++)
           {

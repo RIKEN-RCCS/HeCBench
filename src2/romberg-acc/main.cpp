@@ -41,9 +41,6 @@ int main( int argc, char** argv)
   const double base_a = A;
   const double base_b = B;
 
-  //double d_sum;
-  //double a = A;
-  //double b = B;
   #pragma acc data create(result[0:nwg])
   {
     auto start = std::chrono::steady_clock::now();
@@ -61,29 +58,15 @@ int main( int argc, char** argv)
           double step = (local_b - local_a) / (1 << (ROW_SIZE - 1));
           int max_eval = (1 << (ROW_SIZE - 1));
 
-          //int threadIdx_x = omp_get_thread_num();
-          //int blockIdx_x = omp_get_team_num();
-          //int gridDim_x = omp_get_gang();
-          //int blockDim_x = omp_get_vector();
-          //double diff = (b-a)/gridDim_x, step;
-          //int k;
-          //int max_eval = (1<<(ROW_SIZE-1));
-          //b = a + (blockIdx_x+1)*diff;
-          //a += blockIdx_x*diff;
 	  #pragma acc loop vector
           for (int threadIdx_x = 0; threadIdx_x < wgs; threadIdx_x++) {
-
-          //step = (b-a)/max_eval;
 
           double local_col[ROW_SIZE];  // specific to the row size
           for(int i = 0; i < ROW_SIZE; i++) local_col[i] = 0.0;
           if(!threadIdx_x)
           {
-            //k = blockDim_x;
             local_col[0] = f(local_a) + f(local_b);
           }
-          //else
-          //  k = threadIdx_x;
 
           for(int k = threadIdx_x; k < max_eval; k += wgs)
             if (k > 0) 
@@ -92,40 +75,37 @@ int main( int argc, char** argv)
           for(int i = 0; i < ROW_SIZE; i++)
             smem[ROW_SIZE*threadIdx_x + i] = local_col[i];
 	  }
-          //#pragma omp barrier
 
 	  #pragma acc loop vector
           for (int v = 0; v < wgs; v++) {
-          if(v < ROW_SIZE)
-          {
-            double sum = 0.0;
-            for(int i = v; i < wgs*ROW_SIZE; i+=ROW_SIZE)
-              sum += smem[i];
-            smem[v] = sum;
+            if(v < ROW_SIZE)
+            {
+              double sum = 0.0;
+              for(int i = v; i < wgs*ROW_SIZE; i+=ROW_SIZE)
+                sum += smem[i];
+              smem[v] = sum;
+            }
           }
-          }
-	  // auto barrier
 
 	  #pragma acc loop vector
           for (int v = 0; v < wgs; v++) {
-          if(!v)
-          {
-            //double *table = local_col;
-            double table[ROW_SIZE];
-            table[0] = smem[0];
+            if(!v)
+            {
+              double table[ROW_SIZE];
+              table[0] = smem[0];
 
-            for(int k = 1; k < ROW_SIZE; k++)
-              table[k] = table[k-1] + smem[k];
+              for(int k = 1; k < ROW_SIZE; k++)
+                table[k] = table[k-1] + smem[k];
 
-            for(int k = 0; k < ROW_SIZE; k++)  
-              table[k]*= (local_b-local_a)/(1<<(k+1));
+              for(int k = 0; k < ROW_SIZE; k++)  
+                table[k]*= (local_b-local_a)/(1<<(k+1));
 
-            for(int col = 0 ; col < ROW_SIZE-1 ; col++)
-              for(int row = ROW_SIZE-1; row > col; row--)
-                table[row] = table[row] + (table[row] - table[row-1])/((1<<(2*col+1))-1);
+              for(int col = 0 ; col < ROW_SIZE-1 ; col++)
+                for(int row = ROW_SIZE-1; row > col; row--)
+                  table[row] = table[row] + (table[row] - table[row-1])/((1<<(2*col+1))-1);
 
-            result[blockIdx_x] = table[ROW_SIZE-1];
-          }
+              result[blockIdx_x] = table[ROW_SIZE-1];
+            }
 	  }
         }
       }

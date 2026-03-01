@@ -32,7 +32,6 @@ void kernelUpdateParticle(float *__restrict positions,
 {
   #pragma acc parallel loop present(positions, velocities, pBests, gBest) \
           vector_length(256)
-          //vector_length(256) firstprivate(OMEGA, c1, c2)
   for (int i=0; i < p*DIM; i++) {
     velocities[i]=OMEGA*velocities[i]+
                   c1*rp*(pBests[i]-positions[i])+

@@ -43,7 +43,6 @@ void nll_loss_forward_reduce2d_kernel(
           acc_weight[tid] += static_cast<accscalar_t>(cur_weight);
         }
       }
-      //auto barrier
 
       #pragma acc loop vector
       for (int tid = 0; tid < NLL_LOSS_THREADS; tid++) {
@@ -63,7 +62,6 @@ void nll_loss_forward_reduce2d_kernel(
           }
         }
       }
-      //auto barrier
     }
   }
 }

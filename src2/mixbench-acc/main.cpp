@@ -32,35 +32,25 @@ void benchmark_func(float *cd, int grid_dim, int block_dim, int compute_iteratio
 
     float tmps[granularity];
 
-    //#pragma omp parallel 
-    //{
-      //const unsigned int blockSize = block_dim;
-      //const int stride = blockSize;
-      //int idx = omp_get_team_num()*blockSize*granularity + omp_get_thread_num();
-      //const int big_stride = omp_get_gang()*blockSize*granularity;
-      //float tmps[granularity];
-      for(int k=0; k<fusion_degree; k++) {
-        #pragma acc loop seq
-        for(int j=0; j<granularity; j++) {
-          // Load elements (memory intensive part)
-          tmps[j] = cd[idx+j*stride+k*big_stride];
+    for(int k=0; k<fusion_degree; k++) {
+      #pragma acc loop seq
+      for(int j=0; j<granularity; j++) {
+        // Load elements (memory intensive part)
+        tmps[j] = cd[idx+j*stride+k*big_stride];
 
-          // Perform computations (compute intensive part)
-          for(int i=0; i<compute_iterations; i++)
-            tmps[j] = tmps[j]*tmps[j]+(float)seed;
-        }
-
-        // Multiply add reduction
-        float sum = 0;
-	#pragma acc loop seq
-        for(int j=0; j<granularity; j+=2)
-          sum += tmps[j]*tmps[j+1];
-
-        //#pragma unroll
-        //for(int j=0; j<granularity; j++)
-          cd[idx+k*big_stride] = sum;
+        // Perform computations (compute intensive part)
+        for(int i=0; i<compute_iterations; i++)
+          tmps[j] = tmps[j]*tmps[j]+(float)seed;
       }
-    //}
+
+      // Multiply add reduction
+      float sum = 0;
+      #pragma acc loop seq
+      for(int j=0; j<granularity; j+=2)
+        sum += tmps[j]*tmps[j+1];
+
+      cd[idx+k*big_stride] = sum;
+    }
   }
 }
 
