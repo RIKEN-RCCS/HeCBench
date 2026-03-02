@@ -1,28 +1,18 @@
 michalewicz(float const*, int):
-     11, Generating implicit omp declare target routine
+     12, Generating acc routine seq
          Generating NVIDIA GPU code
-     13, Generated vector simd code for the loop containing reductions
+     15, Generated vector simd code for the loop containing reductions
 main:
          531, Loop not fused: function call before adjacent loop
               Loop not vectorized: data dependency
-     51, Loop not vectorized/parallelized: too deeply nested
-     61, Loop not vectorized/parallelized: potential early exits
-     69, Generating copyin(values[:size]) [if not already present]
+     63, Loop not vectorized/parallelized: potential early exits
+     71, Generating copyin(values[:size]) [if not already present]
          Generating copy(minValue) [if not already present]
-     72, Generating implicit firstprivate(n)
+     74, Generating implicit firstprivate(n)
          Generating NVIDIA GPU code
-         13, #pragma acc loop worker(256) /* threadIdx.y */
-             Generating implicit reduction(+:.inl_result_423)
-             Generating implicit reduction(+:.inl_result_416)
-         75, #pragma acc loop gang /* blockIdx.x */
+         76, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
              Generating reduction(min:minValue)
-     72, Loop not vectorized/parallelized: contains call
-     75, Loop not fused: no successor loop
-          13, Loop is parallelizable
-              Loop not fused: complex flow graph
-              Generated vector simd code for the loop containing reductions
-          13, Loop is parallelizable
-              Generated vector simd code for the loop containing reductions
+     76, Loop not vectorized/parallelized: contains call
 std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::mersenne_twister_engine(unsigned long):
          330, Loop not vectorized: data dependency
 std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::mersenne_twister_engine(unsigned long):
@@ -68,5 +58,3 @@ float std::generate_canonical<float, 24ul, std::mersenne_twister_engine<unsigned
          456, Loop not fused: different loop trip count
               Generated vector simd code for the loop
               Loop not vectorized: data dependency
-make: *** [Makefile.NVD:69: run_mem] Terminated
-timeout was set to  600

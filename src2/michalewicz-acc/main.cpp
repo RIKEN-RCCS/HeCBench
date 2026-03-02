@@ -7,9 +7,11 @@
 
 #define min(a,b) (a) < (b) ? (a) : (b)
 
+#pragma acc routine seq
 inline
 float michalewicz(const float *xValues, const int dim) {
   float result = 0;
+  #pragma acc loop seq
   for (int i = 0; i < dim; ++i) {
       float a = sinf(xValues[i]);
       float b = sinf(((i + 1) * xValues[i] * xValues[i]) / (float)M_PI);
@@ -64,14 +66,13 @@ int main(int argc, char* argv[])
 
     float minValue = 0;
 
-#pragma acc data copyin(values[0:size])		\
-  copy(minValue)
+    #pragma acc data copyin(values[0:size])		\
+                copy(minValue)
     {
       auto start = std::chrono::steady_clock::now();
 
       for (int i = 0; i < repeat; i++) {
-	//        #pragma acc parallel loop vector_length(256) reduction(min: minValue)
-        #pragma acc parallel loop num_workers(256) reduction(min: minValue)
+        #pragma acc parallel loop reduction(min: minValue) vector_length(256)
         for (size_t j = 0; j < n; j++) {
           minValue = min(minValue, michalewicz(values + j * dim, dim));
         }
