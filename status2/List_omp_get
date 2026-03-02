@@ -41,14 +41,12 @@ frna
 fwt
 gmm
 grep
-heat
 hexciton
 histogram
 hogbom
 hwt1d
 hybridsort
 kernelLaunch
-kmeans
 knn
 lanczos
 langford
@@ -70,7 +68,6 @@ minibude
 mis
 mixbench
 morphology
-multimaterial
 nlll
 nms
 ntt
@@ -92,7 +89,6 @@ recursiveGaussian
 reverse
 rng-wallace
 romberg
-rsbench
 rsc
 sampling
 scan2
