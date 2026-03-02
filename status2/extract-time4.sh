@@ -1,5 +1,5 @@
 #!/bin/sh
-echo "# 実行時間 (秒)"
+echo "# time コマンドによる実行時間測定結果 (秒)"
 echo ""
 echo "|" 名称 "|" cuda "|" sycl "|" acc  "|"  omp_nvc "|"  分類 "|" メモリ"(GB)" "|"
 echo "|" "--" "|" "--" "|" "--" "|" "--" "|"   "--"   "|"  "--" "|" "--"   "|"
@@ -133,5 +133,5 @@ echo ""
 echo "sycl と acc がともに完了した件数" $sum_both "(A:"$sum_bothA")"
 
 echo ""
-echo "分類: OpenMP コードが omp_get_* を (A) 含まない (B) 含む"
+echo "分類: OpenMP コードが (omp_get_wtime 以外の) omp_get_* を (A) 含まない (B) 含む"
 
