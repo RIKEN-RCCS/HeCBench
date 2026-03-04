@@ -329,4 +329,5 @@
 | zmddft | 1.16e+00 | 1.40e+00 | | 2.01e+00 | ms | B |![zmddft](SVGs_builtin/zmddft.svg) |
 
 ※ 分類: OpenMP コードが (omp_get_wtime 以外の) omp_get_* を (A) 含まない (B) 含む
+
 ※ メモリ: cuda 版での値
