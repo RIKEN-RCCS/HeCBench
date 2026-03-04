@@ -332,4 +332,5 @@
 
 sycl と acc がともに完了した件数 234 (A:183)|
 
-分類: OpenMP コードが (omp_get_wtime 以外の) omp_get_* を (A) 含まない (B) 含む
+※ 分類: OpenMP コードが (omp_get_wtime 以外の) omp_get_* を (A) 含まない (B) 含む
+※ メモリ: cuda 版での値
