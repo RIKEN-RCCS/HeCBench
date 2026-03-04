@@ -250,8 +250,4 @@ simplifyRe(char**, SimpleReBuilder*):
          131, Loop not vectorized/parallelized: not countable
 stringifyRegex(char const*):
     196, Loop not vectorized: data dependency
-tail: unrecognized option '--1'
-Try 'tail --help' for more information.
-tail: unrecognized option '--1'
-Try 'tail --help' for more information.
 timeout was set to  600

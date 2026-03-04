@@ -1,1 +1,4 @@
-nvc++ -acc -c -o basis.o ../xlqc-cuda/basis.cc  -std=c++14 -Wall -I../xlqc-cuda -I../xlqc-cuda/int_lib -I/path/to/gsl/include -O3 -Minfo -mp=gpu -gpu=cc90
+tar xf ../lib/gsl/gsl-nvidia.tar.bz2 -C ../lib/gsl
+nvc++ -acc -c -o basis.o ../xlqc-cuda/basis.cc  -std=c++14 -Wall -I../xlqc-cuda -I../xlqc-cuda/int_lib -I../lib/gsl/gsl-nvidia/include -O3 -Minfo -mp=gpu -gpu=cc90
+nvc++ -acc -c -o scf.o ../xlqc-cuda/scf.cc  -std=c++14 -Wall -I../xlqc-cuda -I../xlqc-cuda/int_lib -I../lib/gsl/gsl-nvidia/include -O3 -Minfo -mp=gpu -gpu=cc90
+nvc++ -acc -c -o main.o main.cpp  -std=c++14 -Wall -I../xlqc-cuda -I../xlqc-cuda/int_lib -I../lib/gsl/gsl-nvidia/include -O3 -Minfo -mp=gpu -gpu=cc90
