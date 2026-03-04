@@ -116,7 +116,7 @@ if __name__ == '__main__':
     parser.add_option('-m', '--markdown', dest='markdown', default=None)
     parser.add_option('-e', '--extend', dest='extend', action='store_true', default=False)
     parser.add_option('-n', '--noplot', dest='noplot', action='store_true', default=False)
-    parser.add_option('-i', '--imagedir', dest='imagedir', default='SVGs')
+    parser.add_option('-i', '--imagedir', dest='imagedir', default='SVGs_command')
     parser.add_option('--mark_command', dest='mark_command', action='store_true', default=False)
     parser.add_option('--src_dir', dest='src_dir', default='../src2')
 
