@@ -107,10 +107,13 @@ def gen_plt(x, line, imagedir='SVGs'):
     plt.close()
     fig, ax = plt.subplots()
 
-    if unit == "s" or unit == "ms" or unit == "us" or unit == "ns":
-        tmp = 'time (' +unit +')'
-    else:
-        tmp = 'speed (' +unit +')'
+#    if unit == "s" or unit == "ms" or unit == "us" or unit == "ns":
+#        tmp = 'time (' +unit +')'
+#    else:
+#        tmp = 'speed (' +unit +')'
+
+    tmp = 'values (' +unit +')'
+    
     ax.set_ylabel(tmp)
     plt.bar(x, y)
     os.makedirs(imagedir, exist_ok = True)
