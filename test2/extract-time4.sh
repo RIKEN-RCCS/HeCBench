@@ -133,5 +133,6 @@ echo ""
 echo "sycl と acc がともに完了した件数" $sum_both "(A:"$sum_bothA")"
 
 echo ""
-echo "分類: OpenMP コードが (omp_get_wtime 以外の) omp_get_* を (A) 含まない (B) 含む"
+echo "※ 分類: OpenMP コードが (omp_get_wtime 以外の) omp_get_* を (A) 含まない (B) 含む"
+echo "※ メモリ: cuda 版での値"
 

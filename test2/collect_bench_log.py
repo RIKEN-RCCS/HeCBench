@@ -131,8 +131,8 @@ def run():
         fw.write(row+'\n')
 
     fw.write("\n")
-    fw.write("分類: OpenMP コードが (omp_get_wtime 以外の) omp_get_* を (A) 含まない (B) 含む\n")
-    
+    fw.write("※ 分類: OpenMP コードが (omp_get_wtime 以外の) omp_get_* を (A) 含まない (B) 含む\n")
+    fw.write("※ メモリ: cuda 版での値\n")
     fw.close()
     fw.close()
 
