@@ -36,6 +36,8 @@ def run():
     (options, args) = parser.parse_args()
 
     fw = open(options.output,'w')
+    fw.write('# ベンチマークが標準出力に出力する値 \n')
+    fw.write('\n')
     fw.write('| 名称 | cuda | sycl | acc | omp_nvc  | 単位 | \n')
     fw.write('|  --  |  --  | --   |  -- |   --     | --   | \n')
 
