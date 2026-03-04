@@ -43,11 +43,11 @@ endif
 
 ifeq ($(DEVICE),gpu)
   CFLAGS += -target x86_64-pc-linux-gnu \
-          -fopenacc -fopenmp-targets=amdgcn-amd-amdhsa \
+          -fopenmp -fopenmp-targets=amdgcn-amd-amdhsa \
           -Xopenmp-target=amdgcn-amd-amdhsa \
           -march=$(ARCH)
 else
-  CFLAGS +=-fopenacc
+  CFLAGS +=-fopenmp
 endif
 #===============================================================================
 # Targets to Build

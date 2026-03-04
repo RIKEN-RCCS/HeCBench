@@ -33,7 +33,7 @@
  *
  */
 
-#include <openacc.h>
+#include <omp.h>
 #include <math.h>
 #include "support/common.h"
 
@@ -41,65 +41,48 @@ void call_RANSAC_kernel_block(int blocks, int threads, float *model_param_local,
     flowvector *flowvectors, int flowvector_count, int max_iter, int error_threshold,
     float convergence_threshold, int *g_out_id, int *model_candidate, int *outliers_candidate)
 {
-  #pragma acc parallel teams num_teams(blocks) thread_limit(threads)
+  #pragma acc parallel num_gangs(blocks) vector_length(threads) \
+      present(model_param_local, flowvectors, g_out_id, model_candidate, outliers_candidate)
   {
-    int outlier_block_count;
-    #pragma omp parallel 
-    {
-      const int tx         = omp_get_thread_num();
-      const int bx         = omp_get_team_num();
-      const int num_blocks = omp_get_gang();
-      const int block_dim  = omp_get_vector();
+    #pragma acc loop gang
+		for (int loop_count = 0; loop_count < max_iter; ++loop_count) {
 
-      float vx_error, vy_error;
-      int   outlier_local_count = 0;
+			const float *model_param = &model_param_local[4 * loop_count];
 
-      // Each block performs one iteration
-      for(int loop_count = bx; loop_count < max_iter; loop_count += num_blocks) {
+			if (model_param[0] == -2011) continue;
 
-        // xc=model_param_sh[0], yc=model_param_sh[1], D=model_param_sh[2], R=model_param_sh[3]
-        const float *model_param = &model_param_local [4 * loop_count];
+			int outlier_block_count = 0;
 
-        // Wait until CPU computes F-o-F model
-        if(tx == 0) {
-          outlier_block_count = 0;
-        }
-        #pragma omp barrier
+			#pragma acc loop vector reduction(+:outlier_block_count)
+			for (int i = 0; i < flowvector_count; ++i) {
+				flowvector fvreg = flowvectors[i];
 
-        if(model_param[0] == -2011)
-          continue;
+				float vx_error =
+						fvreg.x
+					+ ((int)((fvreg.x - model_param[0]) * model_param[2])
+						 - (int)((fvreg.y - model_param[1]) * model_param[3]))
+					- fvreg.vx;
 
-        // Reset local outlier counter
-        outlier_local_count = 0;
+				float vy_error =
+						fvreg.y
+					+ ((int)((fvreg.y - model_param[1]) * model_param[2])
+						 + (int)((fvreg.x - model_param[0]) * model_param[3]))
+					- fvreg.vy;
 
-        // Compute number of outliers
-        for(int i = tx; i < flowvector_count; i += block_dim) {
-          flowvector fvreg = flowvectors[i]; // x, y, vx, vy
-          vx_error         = fvreg.x + ((int)((fvreg.x - model_param[0]) * model_param[2]) -
-                             (int)((fvreg.y - model_param[1]) * model_param[3])) - fvreg.vx;
-          vy_error = fvreg.y + ((int)((fvreg.y - model_param[1]) * model_param[2]) +
-                     (int)((fvreg.x - model_param[0]) * model_param[3])) - fvreg.vy;
-          if((fabs(vx_error) >= error_threshold) || (fabs(vy_error) >= error_threshold)) {
-            outlier_local_count++;
-          }
-        }
+				if ((fabsf(vx_error) >= error_threshold) || (fabsf(vy_error) >= error_threshold)) {
+					outlier_block_count += 1;
+				}
+			}
 
-        #pragma acc atomic update
-        outlier_block_count += outlier_local_count;
+			if (outlier_block_count < (int)(flowvector_count * convergence_threshold)) {
+				int index;
 
-        #pragma omp barrier
+				#pragma acc atomic capture
+				{ index = g_out_id[0]++; }
 
-        if(tx == 0) {
-          // Compare to threshold
-          if(outlier_block_count < flowvector_count * convergence_threshold) {
-            int index;
-            #pragma acc atomic capture
-            index = g_out_id[0]++;
-            model_candidate[index]    = loop_count;
-            outliers_candidate[index] = outlier_block_count;
-          }
-        }
-      }
+				model_candidate[index]    = loop_count;
+				outliers_candidate[index] = outlier_block_count;
+			}
     }
   }
 }

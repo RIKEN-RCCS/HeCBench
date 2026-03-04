@@ -1,27 +1,164 @@
-"main.cpp", line 76: error: invalid text in pragma
-  #pragma acc data to: sos[0:sos_size], zi[0:z_size]) map (tofrom: x_in[0:x_size])
-                   ^
-
-"main.cpp", line 76: error: extra text after expected end of preprocessing directive
-  #pragma acc data to: sos[0:sos_size], zi[0:z_size]) map (tofrom: x_in[0:x_size])
-                     ^
-
-"main.cpp", line 81: error: invalid text in pragma
-      #pragma acc parallel teams num_teams(blocks) thread_limit(THREADS)
-                           ^
-
-"main.cpp", line 81: error: extra text after expected end of preprocessing directive
-      #pragma acc parallel teams num_teams(blocks) thread_limit(THREADS)
-                                 ^
-
-"main.cpp", line 91: error: identifier "omp_get_thread_num" is undefined
-          const int tx = static_cast<int>( omp_get_thread_num() );
-                                           ^
-
-"main.cpp", line 92: error: identifier "omp_get_team_num" is undefined
-          const int ty = static_cast<int>( omp_get_team_num() );
-                                           ^
-
-6 errors detected in the compilation of "main.cpp".
-make: *** [Makefile.NVD:57: main.o] Error 2
-timeout was set to  600
+void filtering<float>(int, int, int, int, int):
+    101, Outer loop unrolled 1 times (completely unrolled)
+    102, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+    107, Recognized memory set idiom
+    111, Loop not fused: function call before adjacent loop
+    112, Generated vector simd code for the loop
+         Loop unrolled 2 times
+    127, Generating copyin(zi[:z_size]) [if not already present]
+         Generating copy(x_in[:x_size]) [if not already present]
+         Generating copyin(sos[:sos_size]) [if not already present]
+    130, Loop not vectorized/parallelized: too deeply nested
+    134, Generating implicit firstprivate(blocks,n_sections,zi_width)
+         Generating NVIDIA GPU code
+        136, #pragma acc loop gang(blocks) /* blockIdx.x */
+        152, #pragma acc loop vector(32) /* threadIdx.x */
+        157, #pragma acc loop seq
+        163, #pragma acc loop seq
+        179, #pragma acc loop seq
+        184, #pragma acc loop vector(32) /* threadIdx.x */
+        210, #pragma acc loop seq
+        215, #pragma acc loop vector(32) /* threadIdx.x */
+        246, #pragma acc loop seq
+        251, #pragma acc loop vector(32) /* threadIdx.x */
+    136, Generating implicit firstprivate(n_samples,s_out1,s_zi,s_sos,s_out0,n_signals)
+    152, Loop is parallelizable
+    157, Complex loop carried dependence of zi->,s_zi-> prevents parallelization
+         Recognized memory copy idiom
+    163, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 6 times (completely unrolled)
+    179, Complex loop carried dependence of x_in->,prev->,s_zi-> prevents parallelization
+         Loop carried reuse of s_zi-> prevents parallelization
+         Complex loop carried dependence of s_sos-> prevents parallelization
+         Loop carried reuse of s_zi-> prevents parallelization
+         Loop carried dependence of next-> prevents parallelization
+         Loop carried backward dependence of next-> prevents vectorization
+         Complex loop carried dependence of next-> prevents parallelization
+         Generating implicit private(next,prev)
+         Complex loop carried dependence of s_zi->,next-> prevents parallelization
+         Loop not fused: different loop trip count
+    184, Loop is parallelizable
+         Loop not vectorized: data dependency
+    205, Accelerator restriction: induction variable live-out from loop: step
+    210, Loop carried dependence of x_in-> prevents parallelization
+         Loop carried dependence of x_in-> prevents vectorization
+         Complex loop carried dependence of x_in->,prev->,s_zi-> prevents parallelization
+         Loop carried dependence of s_zi->,next-> prevents parallelization
+         Loop carried dependence of s_zi-> prevents vectorization
+         Complex loop carried dependence of s_sos-> prevents parallelization
+         Loop carried backward dependence of s_zi-> prevents vectorization
+         Complex loop carried dependence of s_zi->,next-> prevents parallelization
+         Loop carried backward dependence of next-> prevents vectorization
+         Complex loop carried dependence of next-> prevents parallelization
+         Loop carried backward dependence of x_in-> prevents vectorization
+         Generating implicit private(prev,next)
+         Loop carried dependence of x_in->,next-> prevents parallelization
+         Loop not fused: different loop trip count
+    215, Loop is parallelizable
+         Loop not vectorized: data dependency
+    246, Complex loop carried dependence of prev->,s_zi-> prevents parallelization
+         Loop carried dependence of s_zi->,next-> prevents parallelization
+         Loop carried dependence of s_zi-> prevents vectorization
+         Complex loop carried dependence of s_sos-> prevents parallelization
+         Loop carried backward dependence of s_zi-> prevents vectorization
+         Loop carried dependence of next-> prevents parallelization
+         Complex loop carried dependence of next-> prevents parallelization
+         Loop carried backward dependence of next-> prevents vectorization
+         Complex loop carried dependence of x_in-> prevents parallelization
+         Generating implicit private(prev,next)
+    251, Loop is parallelizable
+         Loop not vectorized: data dependency
+          55, Loop not vectorized/parallelized: contains call
+          66, Loop unrolled 4 times (completely unrolled)
+         102, Loop nest collapsed
+void filtering<double>(int, int, int, int, int):
+    101, Outer loop unrolled 1 times (completely unrolled)
+    102, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+    107, Recognized memory set idiom
+    111, Loop not fused: function call before adjacent loop
+    112, Generated vector simd code for the loop
+         Loop unrolled 2 times
+    127, Generating copyin(zi[:z_size]) [if not already present]
+         Generating copy(x_in[:x_size]) [if not already present]
+         Generating copyin(sos[:sos_size]) [if not already present]
+    130, Loop not vectorized/parallelized: too deeply nested
+    134, Generating implicit firstprivate(blocks,n_sections,zi_width)
+         Generating NVIDIA GPU code
+        136, #pragma acc loop gang(blocks) /* blockIdx.x */
+        152, #pragma acc loop vector(32) /* threadIdx.x */
+        157, #pragma acc loop seq
+        163, #pragma acc loop seq
+        179, #pragma acc loop seq
+        184, #pragma acc loop vector(32) /* threadIdx.x */
+        210, #pragma acc loop seq
+        215, #pragma acc loop vector(32) /* threadIdx.x */
+        246, #pragma acc loop seq
+        251, #pragma acc loop vector(32) /* threadIdx.x */
+    136, Generating implicit firstprivate(n_samples,s_out1,s_zi,s_sos,s_out0,n_signals)
+    152, Loop is parallelizable
+    157, Complex loop carried dependence of zi->,s_zi-> prevents parallelization
+         Recognized memory copy idiom
+    163, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 6 times (completely unrolled)
+    179, Complex loop carried dependence of x_in->,prev->,s_zi-> prevents parallelization
+         Loop carried reuse of s_zi-> prevents parallelization
+         Complex loop carried dependence of s_sos-> prevents parallelization
+         Loop carried reuse of s_zi-> prevents parallelization
+         Loop carried dependence of next-> prevents parallelization
+         Loop carried backward dependence of next-> prevents vectorization
+         Complex loop carried dependence of next-> prevents parallelization
+         Generating implicit private(next,prev)
+         Complex loop carried dependence of s_zi->,next-> prevents parallelization
+         Loop not fused: different loop trip count
+    184, Loop is parallelizable
+         Loop not vectorized: data dependency
+    205, Accelerator restriction: induction variable live-out from loop: step
+    210, Loop carried dependence of x_in-> prevents parallelization
+         Loop carried dependence of x_in-> prevents vectorization
+         Complex loop carried dependence of x_in->,prev->,s_zi-> prevents parallelization
+         Loop carried dependence of s_zi->,next-> prevents parallelization
+         Loop carried dependence of s_zi-> prevents vectorization
+         Complex loop carried dependence of s_sos-> prevents parallelization
+         Loop carried backward dependence of s_zi-> prevents vectorization
+         Complex loop carried dependence of s_zi->,next-> prevents parallelization
+         Loop carried backward dependence of next-> prevents vectorization
+         Complex loop carried dependence of next-> prevents parallelization
+         Loop carried backward dependence of x_in-> prevents vectorization
+         Generating implicit private(prev,next)
+         Loop carried dependence of x_in->,next-> prevents parallelization
+         Loop not fused: different loop trip count
+    215, Loop is parallelizable
+         Loop not vectorized: data dependency
+    246, Complex loop carried dependence of prev->,s_zi-> prevents parallelization
+         Loop carried dependence of s_zi->,next-> prevents parallelization
+         Loop carried dependence of s_zi-> prevents vectorization
+         Complex loop carried dependence of s_sos-> prevents parallelization
+         Loop carried backward dependence of s_zi-> prevents vectorization
+         Loop carried dependence of next-> prevents parallelization
+         Complex loop carried dependence of next-> prevents parallelization
+         Loop carried backward dependence of next-> prevents vectorization
+         Complex loop carried dependence of x_in-> prevents parallelization
+         Generating implicit private(prev,next)
+    251, Loop is parallelizable
+         Loop not vectorized: data dependency
+          55, Loop not vectorized/parallelized: contains call
+          66, Loop not vectorized: recurrence
+              Loop unrolled 2 times
+         102, Loop nest collapsed
+ResultDigest<float> make_digest<float>(float const*, int):
+     55, Loop not vectorized/parallelized: contains call
+          37, Loop unrolled 4 times (completely unrolled)
+ResultDigest<double> make_digest<double>(double const*, int):
+     55, Loop not vectorized/parallelized: contains call
+          37, Loop not vectorized: recurrence
+              Loop unrolled 2 times
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     13, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+_INTERNAL_8_main_cpp_main::fnv1a64_update(unsigned long, void const*, unsigned long):
+     37, Loop not vectorized: recurrence
+         Loop unrolled 2 times

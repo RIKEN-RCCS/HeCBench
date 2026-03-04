@@ -1,2 +1,7 @@
-Average kernel execution time: 326.023567 (ms)
+[OMP] iter=0 teams=5508068 blocks=256 N=1410065408  count=0  r0=-1.410065408e+09 r1=-2.560000000e+02 rLast=-2.560000000e+02  hash=0x35a8637cf04664fb
+[OMP] iter=1 teams=5508068 blocks=256 N=1410065408  count=0  r0=-1.410065408e+09 r1=-2.560000000e+02 rLast=-2.560000000e+02  hash=0x35a8637cf04664fb
+[OMP] iter=2 teams=5508068 blocks=256 N=1410065408  count=0  r0=-1.410065408e+09 r1=-2.560000000e+02 rLast=-2.560000000e+02  hash=0x35a8637cf04664fb
+[OMP] iter=3 teams=5508068 blocks=256 N=1410065408  count=0  r0=-1.410065408e+09 r1=-2.560000000e+02 rLast=-2.560000000e+02  hash=0x35a8637cf04664fb
+[OMP] iter=4 teams=5508068 blocks=256 N=1410065408  count=0  r0=-1.410065408e+09 r1=-2.560000000e+02 rLast=-2.560000000e+02  hash=0x35a8637cf04664fb
+Average kernel execution time: 326.711554 (ms)
 PASS

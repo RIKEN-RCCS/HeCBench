@@ -18,6 +18,71 @@
 #include <chrono>
 #include <omp.h>
 
+#include <cstdint>
+#include <cstring>
+#include <limits>
+
+
+/*---------------------------*/
+//additional code for check benchmark results
+template <typename T>
+struct ResultDigest {
+  double sum;
+  double sumsq;
+  T minv;
+  T maxv;
+  long long nan_count;
+  long long inf_count;
+  uint64_t hash64;
+};
+
+static inline uint64_t fnv1a64_update(uint64_t h, const void* data, size_t nbytes) {
+  const uint8_t* p = static_cast<const uint8_t*>(data);
+  for (size_t i = 0; i < nbytes; i++) {
+    h ^= (uint64_t)p[i];
+    h *= 1099511628211ULL;
+  }
+  return h;
+}
+
+template <typename T>
+ResultDigest<T> make_digest(const T* a, int n) {
+  ResultDigest<T> d{};
+  d.sum = 0.0;
+  d.sumsq = 0.0;
+  d.minv = std::numeric_limits<T>::infinity();
+  d.maxv = -std::numeric_limits<T>::infinity();
+  d.nan_count = 0;
+  d.inf_count = 0;
+  d.hash64 = 14695981039346656037ULL; // FNV-1a offset basis
+
+  for (int i = 0; i < n; i++) {
+    T v = a[i];
+    if (std::isnan((double)v)) d.nan_count++;
+    if (std::isinf((double)v)) d.inf_count++;
+
+    if (v < d.minv) d.minv = v;
+    if (v > d.maxv) d.maxv = v;
+
+    d.sum   += (double)v;
+    d.sumsq += (double)v * (double)v;
+
+    d.hash64 = fnv1a64_update(d.hash64, &v, sizeof(T));
+  }
+  return d;
+}
+
+template <typename T>
+void print_digest(const char* tag, const ResultDigest<T>& d) {
+  //"OMP float","ACC double"
+  printf("[%s]\n min=% .9e\n max=% .9e\n sum=% .17e\n sumsq=% .17e\n nan=%lld\n inf=%lld\n hash64=0x%016llx\n",
+         tag,
+         (double)d.minv, (double)d.maxv, d.sum, d.sumsq,
+         d.nan_count, d.inf_count,
+         (unsigned long long)d.hash64);
+}
+/*---------------------------*/
+
 ///////////////////////////////////////////////////////////////////////////////
 //                                SOSFILT                                    //
 ///////////////////////////////////////////////////////////////////////////////
@@ -191,6 +256,12 @@ void filtering (const int repeat, const int n_signals, const int n_samples,
   auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
   printf("Average kernel execution time %lf (s)\n", time * 1e-9 / repeat);
 }
+
+  /*---------------------------*/
+  //additional code for check benchmark results
+  auto dig = make_digest<T>(x_in, x_size);
+  print_digest("OMP", dig);
+  /*---------------------------*/
 
 #ifdef DEBUG
   for (int i = 0; i < n_signals; i++) { 

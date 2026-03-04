@@ -18,7 +18,7 @@
   Parallel and Distributed Systems Group
   on 15/03/2011
  ***********************************************/
-#include <openacc.h>
+//#include <omp.h>
 #include "streamcluster.h"
 #include "streamcluster_cl.h"
 
@@ -821,7 +821,7 @@ void streamCluster( PStream* stream, long kmin, long kmax, int dim,
 
     localSearch(&points,kmin, kmax,&kfinal);
 
-    #pragma acc parallel exit data map(release: center_table[0:points.num])
+    #pragma acc exit data delete(center_table[0:points.num])
 
     fprintf(stderr,"finish local search\n");
     contcenters(&points);
@@ -941,14 +941,10 @@ int main(int argc, char **argv)
   gpu_free = gettime();
 #endif
 
-  // Notes
-  // 1. the size of work_mem_h is (kmax+2)*chunksize, equal to the allocation size
-  // 2. the device allocation of center_table is released before the host allocation
-  // of center_table is freed and reallocated in streamcluster.cpp
-  #pragma acc parallel exit data map(release: coord_h[0:dim*chunksize],\
-                                            work_mem_h[0:(kmax+2)*chunksize], \
-                                            switch_membership[0:chunksize], \
-                                            p_h[0:chunksize])
+  #pragma acc exit data delete(coord_h[0:dim*chunksize],\
+                               work_mem_h[0:(kmax+2)*chunksize], \
+                               switch_membership[0:chunksize], \
+                               p_h[0:chunksize])
 
   free(coord_h);
   free(gl_lower);

@@ -19,7 +19,7 @@
 #include <vector>
 #include <stdlib.h>
 #include <stdio.h>
-#include <openacc.h>
+//#include <omp.h>
 
 struct Dataset {
   int nrows_exact;
@@ -32,7 +32,8 @@ struct Dataset {
 
 typedef float T;
 
-#pragma omp declare target
+// Generate device code for this routine (sequential on device)
+#pragma acc routine seq
 double LCG_random_double(uint64_t * seed)
 {
   const uint64_t m = 9223372036854775808ULL; // 2^63
@@ -42,70 +43,77 @@ double LCG_random_double(uint64_t * seed)
   return (double) (*seed) / (double) m;
 }  
 
+//Generate device code for this routine (sequential on device)
+//before barrier
+#pragma acc routine seq
 template <typename DataT, typename IdxT>
-void sampled_rows_kernel(const IdxT* nsamples, float* X, const IdxT nrows_X,
+void sampled_rows_kernel_phase1(int bid, int tid, int nthreads,
+												 const IdxT* nsamples, float* X, const IdxT nrows_X,
                          const IdxT ncols, DataT* background,
                          const IdxT nrows_background, DataT* dataset,
                          const DataT* observation, uint64_t seed) {
-  // int tid = tid + bid * blockDim.x;
-  // see what k this block will generate
-  int bid = omp_get_team_num();
-  int tid = omp_get_thread_num();
 
-  int k_blk = nsamples[bid];
+	int k_blk = nsamples[bid];
 
-  // First k threads of block generate samples
-  if (tid < k_blk) {
-    int rand_idx = (int)(LCG_random_double(&seed) * ncols);
+	// First k threads of block generate samples
+	if (tid < k_blk) {
+		int rand_idx = (int)(LCG_random_double(&seed) * ncols);
 
-    // Since X is initialized to 0, we quickly check for collisions (if k_blk << ncols the likelyhood of collisions is low)
-    while (1) {
-      float x;
-      #pragma acc atomic capture
-      {
-        x = X[2 * bid * ncols + rand_idx];
-        X[2 * bid * ncols + rand_idx] = (float)1;
-      }
-      if (x == 0) break;
-      rand_idx = (int)(LCG_random_double(&seed) * ncols);
-    }; 
-  }
-  #pragma omp barrier
-
-  // Each block processes one row of X. Columns are iterated over by blockDim.x at a time to ensure data coelescing
-  int col_idx = tid;
-  while (col_idx < ncols) {
-    // Load the X idx for the current column
-    int curr_X = (int)X[2 * bid * ncols + col_idx];
-    X[(2 * bid + 1) * ncols + col_idx] = 1 - curr_X;
-
-    for (int bg_row_idx = 2 * bid * nrows_background;
-         bg_row_idx < 2 * bid * nrows_background + nrows_background;
-         bg_row_idx += 1) {
-      if (curr_X == 0) {
-        dataset[bg_row_idx * ncols + col_idx] =
-          background[(bg_row_idx % nrows_background) * ncols + col_idx];
-      } else {
-        dataset[bg_row_idx * ncols + col_idx] = observation[col_idx];
-      }
-    }
-
-    for (int bg_row_idx = (2 * bid + 1) * nrows_background;
-         bg_row_idx <
-         (2 * bid + 1) * nrows_background + nrows_background;
-         bg_row_idx += 1) {
-      if (curr_X == 0) {
-        dataset[bg_row_idx * ncols + col_idx] = observation[col_idx];
-      } else {
-        // if(tid == 0) printf("tid bg_row_idx: %d %d\n", tid, bg_row_idx);
-        dataset[bg_row_idx * ncols + col_idx] =
-          background[(bg_row_idx) % nrows_background * ncols + col_idx];
-      }
-    }
-    col_idx += omp_get_vector();
-  }
+		// Since X is initialized to 0, we quickly check for collisions (if k_blk << ncols the likelyhood of collisions is low)
+		while (1) {
+			float x;
+			#pragma acc atomic capture
+			{
+				x = X[2 * bid * ncols + rand_idx];
+				X[2 * bid * ncols + rand_idx] = (float)1;
+			}
+			if (x == 0) break;
+			rand_idx = (int)(LCG_random_double(&seed) * ncols);
+		}; 
+	}
 }
-#pragma omp end declare target
+
+// Generate device code for this routine (sequential on device)
+// after barrier
+#pragma acc routine seq
+template <typename DataT, typename IdxT>
+void sampled_rows_kernel_phase2(int bid, int tid, int nthreads,
+												 const IdxT* nsamples, float* X, const IdxT nrows_X,
+                         const IdxT ncols, DataT* background,
+                         const IdxT nrows_background, DataT* dataset,
+                         const DataT* observation, uint64_t seed) {
+
+	// Each block processes one row of X. Columns are iterated over by blockDim.x at a time to ensure data coelescing
+	for(int col_idx = tid;col_idx < ncols;col_idx += nthreads){
+		// Load the X idx for the current column
+		int curr_X = (int)X[2 * bid * ncols + col_idx];
+		X[(2 * bid + 1) * ncols + col_idx] = 1 - curr_X;
+
+		for (int bg_row_idx = 2 * bid * nrows_background;
+				 bg_row_idx < 2 * bid * nrows_background + nrows_background;
+				 bg_row_idx += 1) {
+			if (curr_X == 0) {
+				dataset[bg_row_idx * ncols + col_idx] =
+					background[(bg_row_idx % nrows_background) * ncols + col_idx];
+			} else {
+				dataset[bg_row_idx * ncols + col_idx] = observation[col_idx];
+			}
+		}
+
+		for (int bg_row_idx = (2 * bid + 1) * nrows_background;
+				 bg_row_idx <
+				 (2 * bid + 1) * nrows_background + nrows_background;
+				 bg_row_idx += 1) {
+			if (curr_X == 0) {
+				dataset[bg_row_idx * ncols + col_idx] = observation[col_idx];
+			} else {
+				// if(tid == 0) printf("tid bg_row_idx: %d %d\n", tid, bg_row_idx);
+				dataset[bg_row_idx * ncols + col_idx] =
+					background[(bg_row_idx) % nrows_background * ncols + col_idx];
+			}
+		}
+	}
+}
 
 int main( int argc, char** argv)
 {
@@ -173,12 +181,11 @@ int main( int argc, char** argv)
       const int nrows_background = params.nrows_background;
       const int nrows_sampled = params.nrows_sampled;
       uint64_t seed = params.seed;
-
-      #pragma acc data to: background[0:nrows_background * ncols], \
-                                      observation[0:ncols], \
-                                      nsamples[0:nrows_sampled/2]) \
-                              map(tofrom: X[0:nrows_X * ncols]) \
-                              map(from: dataset[0:nrows_X * nrows_background * ncols])
+			
+			#pragma acc data \
+			copyin(background[0:nrows_background*ncols],observation[0:ncols],nsamples[0:nrows_sampled/2]) \
+			copy(X[0:nrows_X * ncols]) \
+			copyout(dataset[0:nrows_X * nrows_background * ncols])
       {
         int nthreads = std::min(256, ncols);
         int nblks = nrows_X - nrows_sampled;
@@ -187,53 +194,92 @@ int main( int argc, char** argv)
         auto start = std::chrono::steady_clock::now();
 
         if (nblks > 0) {
-          #pragma acc parallel teams num_teams(nblks) thread_limit(nthreads)
-          {
-            #pragma omp parallel 
-            {
-              int gid = omp_get_team_num(); 
-              int col = omp_get_thread_num();
-              int row = gid * ncols;
-      
-              while (col < ncols) {
-                // Load the X idx for the current column
-                int curr_X = (int)X[row + col];
-      
-                // Iterate over nrows_background
-                for (int row_idx = gid * nrows_background;
-                     row_idx < gid * nrows_background + nrows_background;
-                     row_idx += 1) {
-                  if (curr_X == 0) {
-                    dataset[row_idx * ncols + col] =
-                      background[(row_idx % nrows_background) * ncols + col];
-                  } else {
-                    dataset[row_idx * ncols + col] = observation[col];
-                  }
-                }
-                // Increment the column
-                col += omp_get_vector();
-              }
-            }
-          }
+					#pragma acc parallel num_gangs(nblks) vector_length(nthreads) \
+									present(background, observation, X, dataset)
+					{
+						#pragma acc loop gang
+						for(int gid=0;gid<nblks;gid++){
+							int row = gid * ncols;
+							#pragma acc loop vector
+							for(int col=0;col < nthreads;col++){
+								
+								//initialize col_idx (OpenMP:thread number)
+								int col_idx=col;
+								
+								while (col_idx < ncols) {
+									// Load the X idx for the current column
+									int curr_X = (int)X[row + col_idx];
+				
+									// Iterate over nrows_background
+									for (int row_idx = gid * nrows_background;
+											 row_idx < gid * nrows_background + nrows_background;
+											 row_idx += 1) {
+										if (curr_X == 0) {
+											dataset[row_idx * ncols + col_idx] =
+												background[(row_idx % nrows_background) * ncols + col_idx];
+										} else {
+											dataset[row_idx * ncols + col_idx] = observation[col_idx];
+										}
+									}
+									// Increment the column
+									// OpenMP: col += omp_get_num_threads()
+									// OpenACC: the number of threads within an OpenMP team corresponds to vector_length
+									// Increment col by nthreads
+									col_idx += nthreads;
+								
+								}
+							}//end col (vector loop)
+						}//end gid (gang loop)
+					}//end kernel unit
         }
       
         if (nrows_sampled > 0) {
           nblks = nrows_sampled / 2;
-          #pragma acc parallel teams num_teams(nblks) thread_limit(nthreads)
-          {
-            #pragma omp parallel 
-            {
-               sampled_rows_kernel (
-                  nsamples, &X[(nrows_X - nrows_sampled) * ncols], nrows_sampled, ncols,
-                  background, nrows_background,
-                  &dataset[(nrows_X - nrows_sampled) * nrows_background * ncols], observation,
-                  seed);
-            }
-          }
-        }
+					//phase 1
+					#pragma acc parallel num_gangs(nblks) vector_length(nthreads) \
+									present(background, observation, nsamples, X, dataset)
+					{
+						#pragma acc loop gang
+						for(int bid=0;bid<nblks;bid++){
+							#pragma acc loop vector
+							for(int tid=0;tid < nthreads;tid++){
+								//OpenMP (omp_nvc): inside sampled_rows_kernel, obtain the block ID and thread ID via OpenMP runtime APIs.
+								//OpenACC: parallelize nested for-loops using the loop counters (bid/tid) as the block ID and thread ID.
+								//Pass bid/tid to sampled_rows_kernel as the block/thread ID information.
+								sampled_rows_kernel_phase1(
+									bid,tid,nthreads,
+									nsamples, &X[(nrows_X - nrows_sampled) * ncols], nrows_sampled, ncols,
+									background, nrows_background,
+									&dataset[(nrows_X - nrows_sampled) * nrows_background * ncols], observation,
+									seed);
+							}//end tid (vector loop)
+						}//end bid (gang loop)
+					}//end kernel unit
+					
+					//phase 2
+					#pragma acc parallel num_gangs(nblks) vector_length(nthreads) \
+									present(background, observation, nsamples, X, dataset)
+					{
+						#pragma acc loop gang
+						for(int bid=0;bid<nblks;bid++){
+							#pragma acc loop vector
+							for(int tid=0;tid < nthreads;tid++){
+								sampled_rows_kernel_phase2(
+									bid,tid,nthreads,
+									nsamples, &X[(nrows_X - nrows_sampled) * ncols], nrows_sampled, ncols,
+									background, nrows_background,
+									&dataset[(nrows_X - nrows_sampled) * nrows_background * ncols], observation,
+									seed);
+							}//end tid (vector loop)
+						}//end bid (gang loop)
+					}//end kernel unit
+				}
 
         auto end = std::chrono::steady_clock::now();
         time += std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+
+				//dataset corresponds to map(from: ...) so copy it back to the host.
+				//#pragma acc update host(dataset[0:nrows_X*nrows_background*ncols])
       }
 
       // Check the generated part of X by sampling. The first nrows_exact

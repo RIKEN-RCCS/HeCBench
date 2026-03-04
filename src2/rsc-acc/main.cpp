@@ -37,7 +37,7 @@
 #include <unistd.h>
 #include <thread>
 #include <assert.h>
-#include <openacc.h>
+#include <omp.h>
 #include <chrono>
 #include "kernel.h"
 
@@ -194,7 +194,7 @@ int main(int argc, char **argv) {
     // Initialize flow vector and random numbers
     read_input(h_flow_vector_array, h_random_numbers, p);
 
-  #pragma acc data to: h_flow_vector_array[0:n_flow_vectors], \
+  #pragma acc data copyin (h_flow_vector_array[0:n_flow_vectors], \
                                   h_model_candidate[0: p.max_iter], \
                                   h_outliers_candidate[0: p.max_iter], \
                                   h_model_param_local[0: 4 * p.max_iter], \
@@ -211,17 +211,17 @@ int main(int argc, char **argv) {
         memset((void *)h_model_param_local, 0, 4 * p.max_iter * sizeof(float));
         h_g_out_id[0] = 0;
 
-        #pragma acc update to (h_model_candidate[0:p.max_iter])
-        #pragma acc update to (h_outliers_candidate[0:p.max_iter])
-        #pragma acc update to (h_model_param_local[0:4*p.max_iter])
-        #pragma acc update to (h_g_out_id[0:1])
+        #pragma acc update device (h_model_candidate[0:p.max_iter])
+        #pragma acc update device (h_outliers_candidate[0:p.max_iter])
+        #pragma acc update device (h_model_param_local[0:4*p.max_iter])
+        #pragma acc update device (h_g_out_id[0:1])
 
         // Launch CPU threads
         std::thread main_thread(run_cpu_threads, h_model_param_local, h_flow_vector_array, n_flow_vectors,
             h_random_numbers, p.max_iter, p.error_threshold, p.convergence_threshold, h_g_out_id, p.n_threads);
         main_thread.join();
 
-        #pragma acc update to (h_model_param_local[0:4*p.max_iter])
+        #pragma acc update device (h_model_param_local[0:4*p.max_iter])
         
         // Launch GPU threads
         // Kernel launch
@@ -230,11 +230,11 @@ int main(int argc, char **argv) {
             n_flow_vectors, p.max_iter, p.error_threshold, p.convergence_threshold, 
             h_g_out_id, h_model_candidate, h_outliers_candidate);
         
-        #pragma acc update from (h_g_out_id[0:1])
+        #pragma acc update host (h_g_out_id[0:1])
         candidates = h_g_out_id[0];
 
-        #pragma acc update from (h_outliers_candidate[0:candidates])
-        #pragma acc update from (h_model_candidate[0:candidates])
+        #pragma acc update host (h_outliers_candidate[0:candidates])
+        #pragma acc update host (h_model_candidate[0:candidates])
 
         // Post-processing (chooses the best model among the candidates)
         for(int i = 0; i < candidates; i++) {
