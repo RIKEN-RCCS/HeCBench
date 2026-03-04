@@ -92,7 +92,7 @@ def gen_plt(x, line, imagedir='SVGs'):
     if bname == "完了":  return
     
 #    words = words[2:len(words)-1]
-    unit = words[6]
+    unit = words[6].strip()
     words = words[2:6]
 #    print("qors ", unit )
 
