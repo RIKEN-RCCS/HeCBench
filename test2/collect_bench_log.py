@@ -130,7 +130,10 @@ def run():
         row += ' ' +unit +' | ' +myclass +' |'
         fw.write(row+'\n')
 
-    f.close()
+    fw.write("\n")
+    fw.write("分類: OpenMP コードが (omp_get_wtime 以外の) omp_get_* を (A) 含まない (B) 含む\n")
+    
+    fw.close()
     fw.close()
 
 if __name__ == '__main__':
