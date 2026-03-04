@@ -18,8 +18,9 @@
 #include <stdlib.h>
 #include <math.h>
 #include <chrono>
-#include <openacc.h>
 #include "reference.h"
+
+#include <openacc.h>
 
 /**
  * @brief Compute stddev of the input matrix
@@ -47,51 +48,65 @@ void stddev(Type *std, const Type *data, IdxType D, IdxType N, bool sample) {
   static const int TeamY = (D + (IdxType)ColsPerBlk - 1) / (IdxType)ColsPerBlk;
   static const int Teams = TeamX * TeamY;
 
-  // required for atomics
-  #pragma acc parallel loop vector_length(256)
-  for (int i = 0; i < D; i++)
+  #pragma acc parallel loop present(std[0:D]) vector_length(TPB)
+  for (int i = 0; i < D; i++) {
     std[i] = (Type)0;
+  }
 
-  #pragma acc parallel teams num_teams(Teams) thread_limit(TPB)
+  #pragma acc parallel present(data[0:(size_t)D*(size_t)N], std[0:D]) num_gangs(Teams) vector_length(TPB)
   {
-    Type sstd[ColsPerBlk];
-    #pragma omp parallel
-    {
-      int tx = omp_get_thread_num();
-      int bx = omp_get_team_num() % TeamX;
-      int by = omp_get_team_num() / TeamX;
-      int gridDim_x = TeamX;
- 
+    #pragma acc loop gang
+    for (int g = 0; g < Teams; ++g) {
+      Type sstd[ColsPerBlk];
+
+      const int bx = g % TeamX;
+      const int by = g / TeamX;
+      const int gridDim_x = TeamX;
+
       const int RowsPerBlkPerIter = TPB / ColsPerBlk;
-      IdxType thisColId = tx % ColsPerBlk;
-      IdxType thisRowId = tx / ColsPerBlk;
-      IdxType colId = thisColId + ((IdxType)by * ColsPerBlk);
-      IdxType rowId = thisRowId + ((IdxType)bx * RowsPerBlkPerIter);
-      Type thread_data = Type(0);
-      const IdxType stride = RowsPerBlkPerIter * gridDim_x;
-      for (IdxType i = rowId; i < N; i += stride) {
-        Type val = (colId < D) ? data[i * D + colId] : Type(0);
-        thread_data += val * val;
+      const IdxType stride = (IdxType)(RowsPerBlkPerIter * gridDim_x);
+
+      #pragma acc loop vector
+      for (int c = 0; c < ColsPerBlk; ++c) {
+        sstd[c] = (Type)0;
       }
-      if (tx < ColsPerBlk) sstd[tx] = Type(0);
-      #pragma omp barrier
+      
+			#pragma acc loop vector
+      for (int tx = 0; tx < TPB; ++tx) {
+        const IdxType thisColId = (IdxType)(tx % ColsPerBlk);
+        const IdxType thisRowId = (IdxType)(tx / ColsPerBlk);
 
-      #pragma acc atomic update
-      sstd[thisColId] += thread_data;
+        const IdxType colId = thisColId + ((IdxType)by * (IdxType)ColsPerBlk);
+        const IdxType rowId = thisRowId + ((IdxType)bx * (IdxType)RowsPerBlkPerIter);
 
-      #pragma omp barrier
+        Type thread_data = (Type)0;
 
-      if (tx < ColsPerBlk) {
+        for (IdxType i = rowId; i < N; i += stride) {
+          const Type val = (colId < D) ? data[(size_t)i * (size_t)D + (size_t)colId] : (Type)0;
+          thread_data += val * val;
+        }
+
         #pragma acc atomic update
-        std[colId] += sstd[thisColId];
+        sstd[thisColId] += thread_data;
+      }
+      
+			#pragma acc loop vector
+      for (int c = 0; c < ColsPerBlk; ++c) {
+        const IdxType colId = (IdxType)c + ((IdxType)by * (IdxType)ColsPerBlk);
+        if (colId < D) {
+          #pragma acc atomic update
+          std[colId] += sstd[c];
+        }
       }
     }
   }
 
-  IdxType sampleSize = sample ? N-1 : N;
-  #pragma acc parallel loop thread_limit(TPB)
-  for (int i = 0; i < D; i++)
-    std[i] = sqrtf(std[i] / sampleSize);
+  const IdxType sampleSize = sample ? (N - 1) : N;
+
+  #pragma acc parallel loop present(std[0:D]) vector_length(TPB)
+  for (int i = 0; i < D; i++) {
+    std[i] = (Type)sqrtf((float)(std[i] / (Type)sampleSize));
+  }
 }
 
 int main(int argc, char* argv[]) {
@@ -106,25 +121,24 @@ int main(int argc, char* argv[]) {
   int repeat = atoi(argv[3]);
 
   bool sample = true;
-  long inputSize = D * N;
-  long inputSizeByte = inputSize * sizeof(float);
-  float *data = (float*) malloc (inputSizeByte);
+  long inputSize = (long)D * (long)N;
+  long inputSizeByte = inputSize * (long)sizeof(float);
+  float *data = (float*) malloc((size_t)inputSizeByte);
 
-  // input data 
+  // input data
   srand(123);
   for (int i = 0; i < N; i++)
-    for (int j = 0; j < D; j++) 
-      data[i*D + j] = rand() / (float)RAND_MAX; 
+    for (int j = 0; j < D; j++)
+      data[i*D + j] = rand() / (float)RAND_MAX;
 
   // host and device results
   long outputSize = D;
-  long outputSizeByte = outputSize * sizeof(float);
-  float *std  = (float*) malloc (outputSizeByte);
-  float *std_ref  = (float*) malloc (outputSizeByte);
+  long outputSizeByte = outputSize * (long)sizeof(float);
+  float *std  = (float*) malloc((size_t)outputSizeByte);
+  float *std_ref  = (float*) malloc((size_t)outputSizeByte);
 
-  #pragma acc parallel data map (to: data[0:inputSize]) map (from: std[0:outputSize])
+  #pragma acc data copyin(data[0:inputSize]) copyout(std[0:outputSize])
   {
-    // warmup
     stddev(std, data, D, N, sample);
 
     auto start = std::chrono::steady_clock::now();
@@ -137,7 +151,7 @@ int main(int argc, char* argv[]) {
     printf("Average execution time of stddev kernels: %f (s)\n", (time * 1e-9f) / repeat);
   }
 
-  // verify
+  // verify (host reference)
   stddev_ref(std_ref, data, D, N, sample);
 
   bool ok = true;

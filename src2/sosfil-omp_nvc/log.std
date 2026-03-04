@@ -1,2 +1,18 @@
-Average kernel execution time 0.051261 (s)
-Average kernel execution time 0.057845 (s)
+Average kernel execution time 0.049074 (s)
+[OMP]
+ min=-1.010004501e+02
+ max= 1.010003128e+02
+ sum=-2.52079775357246399e+03
+ sumsq= 5.33373723611918831e+09
+ nan=0
+ inf=0
+ hash64=0xc95ccc08c04b12f6
+Average kernel execution time 0.056369 (s)
+[OMP]
+ min=-1.010000000e+02
+ max= 1.010000000e+02
+ sum=-2.52079548683971325e+03
+ sumsq= 5.33376063662775707e+09
+ nan=0
+ inf=0
+ hash64=0x3498c64ebae3d2d1

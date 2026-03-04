@@ -1,39 +1,48 @@
-"main.cpp", line 15: error: invalid text in pragma
-    #pragma acc parallel teams num_teams(teams) thread_limit(blocks)
-                         ^
-
-"main.cpp", line 15: error: extra text after expected end of preprocessing directive
-    #pragma acc parallel teams num_teams(teams) thread_limit(blocks)
-                               ^
-
-"main.cpp", line 22: error: identifier "omp_get_team_num" is undefined
-        unsigned int bid = omp_get_team_num();
-                           ^
-
-"main.cpp", line 25: error: identifier "omp_get_thread_num" is undefined
-        unsigned int lid = omp_get_thread_num();
-                           ^
-
-"main.cpp", line 115: error: invalid text in pragma
-    #pragma acc parallel data map (to: h_array[0:N], h_count[0:1]) \
-                         ^
-
-"main.cpp", line 115: error: extra text after expected end of preprocessing directive
-    #pragma acc parallel data map (to: h_array[0:N], h_count[0:1]) \
-                              ^
-
-"main.cpp", line 129: error: invalid text in pragma
-        #pragma acc update from (h_result[0:1])
-                           ^
-
-"main.cpp", line 129: error: OpenACC data clause expected
-        #pragma acc update from (h_result[0:1])
-                           ^
-
-"main.cpp", line 129: error: extra text after expected end of preprocessing directive
-        #pragma acc update from (h_result[0:1])
-                                ^
-
-9 errors detected in the compilation of "main.cpp".
-make: *** [Makefile.NVD:57: main.o] Error 2
-timeout was set to  600
+main:
+    123, Recognized memory set idiom
+    127, Generating copyin(h_array[:N],h_count[:1]) [if not already present]
+         Generating create(h_result[:grids]) [if not already present]
+    128, Loop not vectorized/parallelized: potential early exits
+          32, Loop not fused: function call before adjacent loop
+              Loop not vectorized: recurrence
+              Loop unrolled 2 times
+    137, Generating update self(h_count[:1],h_result[:grids])
+    140, Generating update self(h_result[:1],h_count[:1])
+    156, Generating update self(h_result[:1])
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+_INTERNAL_8_main_cpp_main::fnv1a_hash_u32(unsigned int const*, unsigned long):
+     14, Loop not vectorized: recurrence
+         Loop unrolled 2 times
+_INTERNAL_8_main_cpp_main::hash_float_array(float const*, int):
+          14, Loop not vectorized: recurrence
+              Loop unrolled 2 times
+_INTERNAL_8_main_cpp_main::dump_result_summary(char const*, int, int, int, int, unsigned int const*, float const*):
+          22, Loop not vectorized: recurrence
+              Loop unrolled 2 times
+_INTERNAL_8_main_cpp_main::sum_acc(int, int, float const*, int, unsigned int*, float*):
+     58, Generating present(count[:1])
+         Accelerator serial kernel generated
+         Generating NVIDIA GPU code
+     60, Generating present(result[:teams],array[:N])
+         Generating implicit firstprivate(blocks,teams)
+         Generating NVIDIA GPU code
+         69, #pragma acc loop gang(teams) /* blockIdx.x */
+         74, #pragma acc loop vector(blocks) /* threadIdx.x */
+             Generating reduction(+:partial)
+     69, Loop not fused: no successor loop
+     74, Loop is parallelizable
+         Generating implicit firstprivate(N)
+         Generated vector simd code for the loop containing reductions
+     88, Generating present(result[:teams])
+         Generating implicit firstprivate(teams)
+         Accelerator serial kernel generated
+         Generating NVIDIA GPU code
+         90, #pragma acc for seq
+     90, Loop not fused: no successor loop
+         Generated vector simd code for the loop containing reductions
+         Loop unrolled 8 times
+     98, Generating present(count[:1])
+         Accelerator serial kernel generated
+         Generating NVIDIA GPU code

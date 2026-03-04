@@ -1,51 +1,116 @@
-"main.cpp", line 177: error: invalid text in pragma
-        #pragma acc data to: background[0:nrows_background * ncols], \
-                         ^
-
-"main.cpp", line 177: error: extra text after expected end of preprocessing directive
-        #pragma acc data to: background[0:nrows_background * ncols], \
-                           ^
-
-"main.cpp", line 190: error: invalid text in pragma
-            #pragma acc parallel teams num_teams(nblks) thread_limit(nthreads)
-                                 ^
-
-"main.cpp", line 190: error: extra text after expected end of preprocessing directive
-            #pragma acc parallel teams num_teams(nblks) thread_limit(nthreads)
-                                       ^
-
-"main.cpp", line 194: error: identifier "omp_get_team_num" is undefined
-                int gid = omp_get_team_num(); 
-                          ^
-
-"main.cpp", line 195: error: identifier "omp_get_thread_num" is undefined
-                int col = omp_get_thread_num();
-                          ^
-
-"main.cpp", line 214: error: identifier "omp_get_vector" is undefined
-                  col += omp_get_vector();
-                         ^
-
-"main.cpp", line 222: error: invalid text in pragma
-            #pragma acc parallel teams num_teams(nblks) thread_limit(nthreads)
-                                 ^
-
-"main.cpp", line 222: error: extra text after expected end of preprocessing directive
-            #pragma acc parallel teams num_teams(nblks) thread_limit(nthreads)
-                                       ^
-
-"main.cpp", line 52: error: identifier "omp_get_team_num" is undefined
-    int bid = omp_get_team_num();
-              ^
-
-"main.cpp", line 53: error: identifier "omp_get_thread_num" is undefined
-    int tid = omp_get_thread_num();
-              ^
-
-"main.cpp", line 105: error: identifier "omp_get_vector" is undefined
-      col_idx += omp_get_vector();
-                 ^
-
-12 errors detected in the compilation of "main.cpp".
-make: *** [Makefile.NVD:57: main.o] Error 2
-timeout was set to  600
+LCG_random_double(unsigned long*):
+     38, Generating acc routine seq
+         Generating NVIDIA GPU code
+main:
+     87, Loop not vectorized/parallelized: not countable
+     92, Loop not fused: complex flow graph
+         Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    103, Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    135, Loop not vectorized/parallelized: too deeply nested
+    139, Loop not vectorized/parallelized: too deeply nested
+    154, Recognized memory set idiom
+    161, Recognized memory set idiom
+    167, Recognized memory zero idiom
+    169, Recognized memory set idiom
+    176, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+    189, Generating copy(X[:nrows_X*ncols]) [if not already present]
+         Generating copyin(observation[:ncols],nsamples[:nrows_sampled/2]) [if not already present]
+         Generating copyout(dataset[:ncols*(nrows_X*nrows_background)]) [if not already present]
+         Generating copyin(background[:ncols*nrows_background]) [if not already present]
+    199, Generating present(X[:],observation[:],dataset[:],background[:])
+         Generating NVIDIA GPU code
+        201, #pragma acc loop gang(nblks) /* blockIdx.x */
+        204, #pragma acc loop vector(nthreads) /* threadIdx.x */
+        209, #pragma acc loop seq
+        214, #pragma acc loop seq
+    201, Loop not vectorized/parallelized: too deeply nested
+    204, Loop is parallelizable
+    209, Complex loop carried dependence of X->,background->,dataset-> prevents parallelization
+         Loop carried dependence of dataset-> prevents parallelization
+         Loop carried dependence of dataset-> prevents vectorization
+         Loop carried backward dependence of dataset-> prevents vectorization
+         Complex loop carried dependence of observation-> prevents parallelization
+         Loop not vectorized/parallelized: not countable
+    214, Complex loop carried dependence of background-> prevents parallelization
+         Loop carried dependence of dataset-> prevents parallelization
+         Complex loop carried dependence of dataset-> prevents parallelization
+         Loop carried backward dependence of dataset-> prevents vectorization
+         Complex loop carried dependence of observation-> prevents parallelization
+         Invariant if transformation
+         Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    241, Generating present(X[:],observation[:],nsamples[:],dataset[:],background[:])
+         Generating NVIDIA GPU code
+         63, #pragma acc loop seq
+        243, #pragma acc loop gang(nblks) /* blockIdx.x */
+        245, #pragma acc loop vector(nthreads) /* threadIdx.x */
+    245, Loop is parallelizable
+          63, Loop carried reuse of X+((ncols*(nrows_X-nrows_sampled))*4)-> prevents parallelization
+              Loop carried scalar dependence for .inl_seed_641 at line 71
+              Loop carried scalar dependence for .inl_rand_idx_640 at line 67
+              Loop not vectorized/parallelized: not countable
+    262, Generating present(X[:],observation[:],nsamples[:],dataset[:],background[:])
+         Generating NVIDIA GPU code
+         87, #pragma acc loop seq
+         92, #pragma acc loop seq
+        103, #pragma acc loop seq
+        264, #pragma acc loop gang(nblks) /* blockIdx.x */
+        266, #pragma acc loop vector(nthreads) /* threadIdx.x */
+    264, Loop not vectorized/parallelized: too deeply nested
+    266, Loop is parallelizable
+          87, Complex loop carried dependence of X+((ncols*(nrows_X-nrows_sampled))*4)-> prevents parallelization
+              Loop carried dependence of X+((ncols*(nrows_X-nrows_sampled))*4)-> prevents parallelization
+              Loop carried backward dependence of X+((ncols*(nrows_X-nrows_sampled))*4)-> prevents vectorization
+              Complex loop carried dependence of background->,dataset+((ncols*(nrows_background*(nrows_X-nrows_sampled)))*4)-> prevents parallelization
+              Loop carried dependence of dataset+((ncols*(nrows_background*(nrows_X-nrows_sampled)))*4)-> prevents parallelization
+              Loop carried dependence of dataset+((ncols*(nrows_background*(nrows_X-nrows_sampled)))*4)-> prevents vectorization
+              Loop carried backward dependence of dataset+((ncols*(nrows_background*(nrows_X-nrows_sampled)))*4)-> prevents vectorization
+              Complex loop carried dependence of observation-> prevents parallelization
+              Invariant if transformation
+          92, Complex loop carried dependence of background-> prevents parallelization
+              Loop carried dependence of dataset+((ncols*(nrows_background*(nrows_X-nrows_sampled)))*4)-> prevents parallelization
+              Complex loop carried dependence of dataset+((ncols*(nrows_background*(nrows_X-nrows_sampled)))*4)-> prevents parallelization
+              Loop carried backward dependence of dataset+((ncols*(nrows_background*(nrows_X-nrows_sampled)))*4)-> prevents vectorization
+              Complex loop carried dependence of observation-> prevents parallelization
+              Invariant if transformation
+         103, Complex loop carried dependence of observation-> prevents parallelization
+              Loop carried dependence of dataset+((ncols*(nrows_background*(nrows_X-nrows_sampled)))*4)-> prevents parallelization
+              Complex loop carried dependence of dataset+((ncols*(nrows_background*(nrows_X-nrows_sampled)))*4)-> prevents parallelization
+              Loop carried backward dependence of dataset+((ncols*(nrows_background*(nrows_X-nrows_sampled)))*4)-> prevents vectorization
+              Complex loop carried dependence of background-> prevents parallelization
+              Invariant if transformation
+    291, Loop not vectorized/parallelized: not countable
+    295, Loop not fused: complex flow graph
+    302, Loop not fused: complex flow graph
+    311, Loop not vectorized/parallelized: potential early exits
+    315, Loop not fused: complex flow graph
+    340, Loop not vectorized/parallelized: potential early exits
+    346, Loop not fused: complex flow graph
+    359, Loop not vectorized/parallelized: potential early exits
+    365, Loop not fused: complex flow graph
+void sampled_rows_kernel_phase1<float, int>(int, int, int, int const*, float*, int, int, float*, int, float*, float const*, unsigned long):
+     54, Generating acc routine seq
+         Generating NVIDIA GPU code
+     63, Loop not vectorized/parallelized: not countable
+void sampled_rows_kernel_phase2<float, int>(int, int, int, int const*, float*, int, int, float*, int, float*, float const*, unsigned long):
+     84, Generating acc routine seq
+         Generating NVIDIA GPU code
+     87, Loop not vectorized/parallelized: not countable
+     92, Invariant if transformation
+         Loop not fused: complex flow graph
+         Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+    103, Invariant if transformation
+         Loop not fused: no successor loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+     17, include "chrono"
+         472, Loop not vectorized/parallelized: not countable

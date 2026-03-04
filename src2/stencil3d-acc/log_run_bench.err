@@ -1,27 +1,69 @@
-"main.cpp", line 23: error: invalid text in pragma
-    #pragma acc parallel teams num_teams(bdimz*bdimy*bdimx) thread_limit(BSIZE*BSIZE)
-                         ^
-
-"main.cpp", line 23: error: extra text after expected end of preprocessing directive
-    #pragma acc parallel teams num_teams(bdimz*bdimy*bdimx) thread_limit(BSIZE*BSIZE)
-                               ^
-
-"main.cpp", line 39: error: identifier "omp_get_thread_num" is undefined
-        const int tjj = omp_get_thread_num() / BSIZE;
-                        ^
-
-"main.cpp", line 41: error: identifier "omp_get_team_num" is undefined
-        const int blockIdx_x = omp_get_team_num() % bdimx;
-                               ^
-
-"main.cpp", line 183: error: invalid text in pragma
-    #pragma acc data to: h_Vm[0:vol], h_sigma[0:vol*9]) map(tofrom: h_dVm[0:vol])
-                     ^
-
-"main.cpp", line 183: error: extra text after expected end of preprocessing directive
-    #pragma acc data to: h_Vm[0:vol], h_sigma[0:vol*9]) map(tofrom: h_dVm[0:vol])
-                       ^
-
-6 errors detected in the compilation of "main.cpp".
-make: *** [Makefile.NVD:62: main.o] Error 2
-timeout was set to  600
+stencil3d(float const*, float*, float const*, float const*, float const*, int, int, int, int, int, int):
+     32, Generating present(d_npsi[:nz*(ny*nx)],d_psi[:nz*(ny*nx)],d_sigmaX[:nz*(ny*(nx*3))],d_sigmaZ[:nz*(ny*(nx*3))],d_sigmaY[:nz*(ny*(nx*3))])
+         Generating implicit firstprivate(total_teams)
+         Generating NVIDIA GPU code
+         38, #pragma acc loop gang(total_teams) /* blockIdx.x */
+         91, #pragma acc loop vector(256) /* threadIdx.x */
+        108, #pragma acc loop vector(256) /* threadIdx.x */
+        132, #pragma acc loop vector(256) /* threadIdx.x */
+        142, #pragma acc loop seq
+        146, #pragma acc loop vector(256) /* threadIdx.x */
+        156, #pragma acc loop vector(256) /* threadIdx.x */
+        186, #pragma acc loop vector(256) /* threadIdx.x */
+        197, #pragma acc loop vector(256) /* threadIdx.x */
+        227, #pragma acc loop vector(256) /* threadIdx.x */
+        238, #pragma acc loop vector(256) /* threadIdx.x */
+        264, #pragma acc loop vector(256) /* threadIdx.x */
+     32, CUDA shared memory used for dV_lane
+     38, Generating implicit firstprivate(bdimx,bdimy,ny,nx,npsi_ptr,sigZ_ptr,sigY_ptr,sigX_ptr,psi_ptr,bdimz,nz)
+         Loop not fused: no successor loop
+     91, Loop is parallelizable
+         Loop not fused: dependence chain to sibling loop
+         Loop not vectorized: unsupported scatter
+    108, Loop is parallelizable
+         Loop not fused: different loop trip count
+         2 loops fused
+         Loop not vectorized: data dependency
+    132, Loop is parallelizable
+    142, Complex loop carried dependence of sm_psi prevents parallelization
+         Loop carried dependence of sm_psi prevents parallelization
+         Loop carried backward dependence of sm_psi prevents vectorization
+         Complex loop carried dependence of dV_lane prevents parallelization
+         Loop carried reuse of dV_lane prevents parallelization
+         Loop carried dependence of npsi_ptr-> prevents parallelization
+         Loop carried backward dependence of npsi_ptr-> prevents vectorization
+         Loop carried scalar dependence for pii at line 266,202,203,161,162
+         Loop carried scalar dependence for cii at line 266,243,247,249,209,212,213,168,169,172
+         Loop carried scalar dependence for nii at line 266,244,247,249,204,205,163,164,150
+    146, Loop is parallelizable
+         Loop not fused: dependence chain to sibling loop
+         Loop not vectorized: unsupported scatter
+    156, Loop is parallelizable
+         Loop not fused: dependence chain to sibling loop
+         Loop not vectorized: data dependency
+    186, Loop is parallelizable
+         Loop not fused: dependence chain to sibling loop
+         Loop not vectorized: data dependency
+    197, Loop is parallelizable
+         Loop not fused: dependence chain to sibling loop
+         Loop not vectorized: data dependency
+    227, Loop is parallelizable
+         Loop not fused: dependence chain to sibling loop
+         Loop not vectorized: data dependency
+    238, Loop is parallelizable
+         Loop not fused: scalar dependence chain to sibling loop
+         Loop not vectorized: data dependency
+    264, Scalar last value needed after loop for pii at line 202
+         Loop not vectorized: unknown
+main:
+    300, Loop not fused: function call before adjacent loop
+    302, Generated vector simd code for the loop
+         Loop unrolled 4 times
+    307, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop
+    320, Generating copy(h_dVm[:vol]) [if not already present]
+         Generating copyin(h_sigma[:vol*9],h_Vm[:vol]) [if not already present]
+    323, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
