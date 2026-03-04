@@ -29,12 +29,12 @@ SCF converged! E_total =       -74.9420799262
     5       occ.        -0.38759       -10.55
     6      virt.         0.47762        13.00
     7      virt.         0.58814        16.00
-Time_Basis    = 4778.433105 usec
-Time_1e_Ints  = 683.324036 usec
-Time_2e_Prep  = 7.840000 usec
-Time_SCF_Init = 286768.718750 usec
-Time_SCF_Conv = 11201.429688 usec
-Time_Finalize = 25.888000 usec
-Total time: 303466 usec
-Total kernel Mat_J time: 8026.89 usec
-Total kernel Mat_K time: 2786.25 usec
+Time_Basis    = 4627.618164 usec
+Time_1e_Ints  = 411.709015 usec
+Time_2e_Prep  = 2.336000 usec
+Time_SCF_Init = 2232551.000000 usec
+Time_SCF_Conv = 4759.232422 usec
+Time_Finalize = 106.431007 usec
+Total time: 2.24246e+06 usec
+Total kernel Mat_J time: 1738.64 usec
+Total kernel Mat_K time: 2719.63 usec

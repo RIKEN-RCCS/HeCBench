@@ -1,1 +1,14 @@
-nvcc -c -o basis.o basis.cc  -std=c++17 -Xcompiler -Wall -I/path/to/gsl/include -arch=sm_90 -O3
+tar xf ../lib/gsl/gsl-nvidia.tar.bz2 -C ../lib/gsl
+nvcc -c -o basis.o basis.cc  -std=c++17 -Xcompiler -Wall -I../lib/gsl/gsl-nvidia/include -arch=sm_90 -O3
+nvcc -c -o scf.o scf.cc  -std=c++17 -Xcompiler -Wall -I../lib/gsl/gsl-nvidia/include -arch=sm_90 -O3
+nvcc -dc -o main.o main.cu  -std=c++17 -Xcompiler -Wall -I../lib/gsl/gsl-nvidia/include -arch=sm_90 -O3
+nvcc -c -o crys.o int_lib/crys.cc  -std=c++17 -Xcompiler -Wall -I../lib/gsl/gsl-nvidia/include -arch=sm_90 -O3
+nvcc -c -o cints.o int_lib/cints.cc  -std=c++17 -Xcompiler -Wall -I../lib/gsl/gsl-nvidia/include -arch=sm_90 -O3
+nvcc -dc -o cuda_rys_sp.o cuda_rys_sp.cu  -std=c++17 -Xcompiler -Wall -I../lib/gsl/gsl-nvidia/include -arch=sm_90 -O3
+nvcc -dc -o cuda_rys_dp.o cuda_rys_dp.cu  -std=c++17 -Xcompiler -Wall -I../lib/gsl/gsl-nvidia/include -arch=sm_90 -O3
+nvcc  -std=c++17 -Xcompiler -Wall -I../lib/gsl/gsl-nvidia/include -arch=sm_90 -O3 basis.o scf.o main.o crys.o cints.o cuda_rys_sp.o cuda_rys_dp.o -o main -L../lib/gsl/gsl-nvidia/lib -lgsl -lgslcblas
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
+bash -c "../xlqc-cuda/prepare_data.sh; export LD_LIBRARY_PATH=D_LIBRARY_PATH:../lib/gsl/gsl-nvidia/lib; time -p ( ./main dp 1>log.std 2>log.err ) 2> log.time"
+pkill nvidia-smi
+../scripts/m.sh
+min max diff memory in [MB] : 1 560 559

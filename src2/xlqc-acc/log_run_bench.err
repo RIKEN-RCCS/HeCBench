@@ -1,8 +1,160 @@
-"../xlqc-cuda/basis.cc", line 27: catastrophic error: cannot open source file "gsl/gsl_matrix.h"
-  #include <gsl/gsl_matrix.h>
+get_nuc_chg(char*):
+     91, Loop not vectorized/parallelized: potential early exits
+read_geom(Atom*):
+    160, Loop not vectorized/parallelized: potential early exits
+calc_ene_nucl(Atom*):
+    186, Generated vector simd code for the loop containing reductions
+parse_basis(Atom*, Basis*, int):
+    304, Loop not vectorized/parallelized: contains call
+    344, Loop not vectorized/parallelized: potential early exits
+    373, Loop not vectorized/parallelized: contains call
+read_basis(Atom*, Basis*, int):
+    419, Loop not vectorized/parallelized: too deeply nested
+    471, Loop not vectorized/parallelized: contains call
+    599, Loop not vectorized/parallelized: potential early exits
+print_basis(Basis*):
+    617, Loop not vectorized/parallelized: contains call
+mat_inn_prod(int, double**, double**):
+     44, Zero trip check eliminated
+         Generated vector simd code for the loop containing reductions
+         Loop unrolled 2 times
+my_print_matrix(gsl_matrix*):
+     86, Loop not vectorized/parallelized: contains call
+my_print_vector(gsl_vector*):
+     99, Loop not vectorized/parallelized: contains call
+sum_H_core(int, gsl_matrix*, gsl_matrix*, gsl_matrix*):
+    112, Zero trip check eliminated
+         Loop not vectorized/parallelized: contains call
+diag_overlap(int, gsl_matrix*, gsl_matrix*):
+    136, Loop not vectorized/parallelized: contains call
+Coef_to_Dens(int, int, gsl_matrix*, gsl_matrix*):
+    191, Loop not vectorized/parallelized: contains call
+get_elec_ene(int, gsl_matrix*, gsl_matrix*, gsl_matrix*):
+    209, Zero trip check eliminated
+         Loop not vectorized/parallelized: contains call
+form_Fock(int, gsl_matrix*, gsl_matrix*, gsl_matrix*, gsl_matrix*):
+    226, Zero trip check eliminated
+         Loop not vectorized/parallelized: contains call
+init_guess_GWH(Basis*, gsl_matrix*, gsl_matrix*, gsl_matrix*):
+    242, Loop not vectorized/parallelized: contains call
+update_Fock_DIIS(int*, int*, double*, gsl_matrix*, gsl_matrix*, gsl_matrix*, Basis*, double***, double***):
+    282, Loop not vectorized/parallelized: contains call
+    304, Loop not vectorized/parallelized: too deeply nested
+    306, Loop not vectorized/parallelized: contains call
+          42, Loop not fused: function call before adjacent loop
+          44, Zero trip check eliminated
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 2 times
+    313, Loop not vectorized/parallelized: contains call
+    339, Loop not vectorized/parallelized: contains call
+"cuda_rys_sp.cpp", line 1538: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(n_pbf*n_pbf) thread_limit(BLOCKSIZE * BLOCKSIZE)
+                         ^
+
+"cuda_rys_sp.cpp", line 1538: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(n_pbf*n_pbf) thread_limit(BLOCKSIZE * BLOCKSIZE)
+                               ^
+
+"cuda_rys_sp.cpp", line 1544: error: identifier "omp_get_team_num" is undefined
+        int i = omp_get_team_num() % n_pbf; 
+                ^
+
+"cuda_rys_sp.cpp", line 1550: error: identifier "omp_get_thread_num" is undefined
+          int tx = omp_get_thread_num() % BLOCKSIZE;
+                   ^
+
+"cuda_rys_sp.cpp", line 1615: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(n_pbf*n_pbf) thread_limit(BLOCKSIZE * BLOCKSIZE)
+                         ^
+
+"cuda_rys_sp.cpp", line 1615: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(n_pbf*n_pbf) thread_limit(BLOCKSIZE * BLOCKSIZE)
+                               ^
+
+"cuda_rys_sp.cpp", line 1621: error: identifier "omp_get_team_num" is undefined
+        int i = omp_get_team_num() % n_pbf; 
+                ^
+
+"cuda_rys_sp.cpp", line 1627: error: identifier "omp_get_thread_num" is undefined
+          int tx = omp_get_thread_num() % BLOCKSIZE;
+                   ^
+
+"cuda_rys_dp.cpp", line 1520: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(n_pbf*n_pbf) thread_limit(BLOCKSIZE * BLOCKSIZE)
+                         ^
+
+"cuda_rys_dp.cpp", line 1520: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(n_pbf*n_pbf) thread_limit(BLOCKSIZE * BLOCKSIZE)
+                               ^
+
+"cuda_rys_dp.cpp", line 1526: error: identifier "omp_get_team_num" is undefined
+        int i = omp_get_team_num() % n_pbf; 
+                ^
+
+"cuda_rys_dp.cpp", line 1532: error: identifier "omp_get_thread_num" is undefined
+          int tx = omp_get_thread_num() % BLOCKSIZE;
+                   ^
+
+"cuda_rys_dp.cpp", line 1597: error: invalid text in pragma
+    #pragma acc parallel teams num_teams(n_pbf*n_pbf) thread_limit(BLOCKSIZE * BLOCKSIZE)
+                         ^
+
+"cuda_rys_dp.cpp", line 1597: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel teams num_teams(n_pbf*n_pbf) thread_limit(BLOCKSIZE * BLOCKSIZE)
+                               ^
+
+"cuda_rys_dp.cpp", line 1603: error: identifier "omp_get_team_num" is undefined
+        int i = omp_get_team_num() % n_pbf; 
+                ^
+
+"cuda_rys_dp.cpp", line 1609: error: identifier "omp_get_thread_num" is undefined
+          int tx = omp_get_thread_num() % BLOCKSIZE;
+                   ^
+
+"main.cpp", line 368: error: invalid text in pragma
+    #pragma acc parallel data map (to: h_pbf_xlec[0:n_pbf*8], \
+                         ^
+
+"main.cpp", line 368: error: extra text after expected end of preprocessing directive
+    #pragma acc parallel data map (to: h_pbf_xlec[0:n_pbf*8], \
+                              ^
+
+"main.cpp", line 411: error: invalid text in pragma
+          #pragma acc update to (h_mat_D[0:n_combi])
                              ^
 
-1 catastrophic error detected in the compilation of "../xlqc-cuda/basis.cc".
-Compilation terminated.
-make: *** [Makefile.NVD:65: basis.o] Error 2
+"main.cpp", line 411: error: OpenACC data clause expected
+          #pragma acc update to (h_mat_D[0:n_combi])
+                             ^
+
+"main.cpp", line 411: error: extra text after expected end of preprocessing directive
+          #pragma acc update to (h_mat_D[0:n_combi])
+                                ^
+
+"main.cpp", line 430: error: invalid text in pragma
+          #pragma acc update from (h_mat_J_PI[0:n_pbf_combi])
+                             ^
+
+"main.cpp", line 430: error: OpenACC data clause expected
+          #pragma acc update from (h_mat_J_PI[0:n_pbf_combi])
+                             ^
+
+"main.cpp", line 430: error: extra text after expected end of preprocessing directive
+          #pragma acc update from (h_mat_J_PI[0:n_pbf_combi])
+                                  ^
+
+"main.cpp", line 447: error: invalid text in pragma
+          #pragma acc update from (h_mat_K_PI[0:n_pbf_combi])
+                             ^
+
+"main.cpp", line 447: error: OpenACC data clause expected
+          #pragma acc update from (h_mat_K_PI[0:n_pbf_combi])
+                             ^
+
+"main.cpp", line 447: error: extra text after expected end of preprocessing directive
+          #pragma acc update from (h_mat_K_PI[0:n_pbf_combi])
+                                  ^
+
+27 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:67: main.o] Error 2
 timeout was set to  600

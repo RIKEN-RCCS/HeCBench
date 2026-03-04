@@ -1,6 +1,46 @@
-../xlqc-cuda/basis.cc:27:10: fatal error: 'gsl/gsl_matrix.h' file not found
-   27 | #include <gsl/gsl_matrix.h>
-      |          ^~~~~~~~~~~~~~~~~~
-1 error generated.
-make: *** [Makefile.NVD:88: basis.o] Error 1
+../xlqc-cuda/int_lib/crys.cc:94:16: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+   94 |   double roots[norder],weights[norder];
+      |                ^~~~~~
+../xlqc-cuda/int_lib/crys.cc:94:16: note: read of non-const variable 'norder' is not allowed in a constant expression
+../xlqc-cuda/int_lib/crys.cc:76:7: note: declared here
+   76 |   int norder,i;
+      |       ^
+../xlqc-cuda/int_lib/crys.cc:94:32: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+   94 |   double roots[norder],weights[norder];
+      |                                ^~~~~~
+../xlqc-cuda/int_lib/crys.cc:94:32: note: read of non-const variable 'norder' is not allowed in a constant expression
+../xlqc-cuda/int_lib/crys.cc:76:7: note: declared here
+   76 |   int norder,i;
+      |       ^
+../xlqc-cuda/int_lib/crys.cc:95:12: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+   95 |   double G[la+lb+ma+mb+na+nb+1][MAXROOTS];
+      |            ^~~~~~~~~~~~~~~~~~~
+../xlqc-cuda/int_lib/crys.cc:95:12: note: function parameter 'la' with unknown value cannot be used in a constant expression
+../xlqc-cuda/int_lib/crys.cc:68:34: note: declared here
+   68 |                              int la,int ma,int na,double alphaa,
+      |                                  ^
+3 warnings generated.
+../xlqc-cuda/int_lib/crys.cc:94:16: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+   94 |   double roots[norder],weights[norder];
+      |                ^~~~~~
+../xlqc-cuda/int_lib/crys.cc:94:16: note: read of non-const variable 'norder' is not allowed in a constant expression
+../xlqc-cuda/int_lib/crys.cc:76:7: note: declared here
+   76 |   int norder,i;
+      |       ^
+../xlqc-cuda/int_lib/crys.cc:94:32: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+   94 |   double roots[norder],weights[norder];
+      |                                ^~~~~~
+../xlqc-cuda/int_lib/crys.cc:94:32: note: read of non-const variable 'norder' is not allowed in a constant expression
+../xlqc-cuda/int_lib/crys.cc:76:7: note: declared here
+   76 |   int norder,i;
+      |       ^
+../xlqc-cuda/int_lib/crys.cc:95:12: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+   95 |   double G[la+lb+ma+mb+na+nb+1][MAXROOTS];
+      |            ^~~~~~~~~~~~~~~~~~~
+../xlqc-cuda/int_lib/crys.cc:95:12: note: function parameter 'la' with unknown value cannot be used in a constant expression
+../xlqc-cuda/int_lib/crys.cc:68:34: note: declared here
+   68 |                              int la,int ma,int na,double alphaa,
+      |                                  ^
+3 warnings generated.
+make: *** [Makefile.NVD:106: run_mem] Error 127
 timeout was set to  600
