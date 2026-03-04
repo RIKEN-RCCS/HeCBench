@@ -38,13 +38,21 @@ def run():
     fw = open(options.output,'w')
     fw.write('# ベンチマークが標準出力に出力する値 \n')
     fw.write('\n')
-    fw.write('| 名称 | cuda | sycl | acc | omp_nvc  | 単位 | \n')
-    fw.write('|  --  |  --  | --   |  -- |   --     | --   | \n')
+    fw.write('| 名称 | cuda | sycl | acc | omp_nvc  | 単位 | 分類 | \n')
+    fw.write('|  --  |  --  | --   |  -- |   --     | --   | --   | \n')
 
     f=open(options.bench_names)
-
+    
     for line in f:
         line = line.strip()
+
+        f2 = open( "List_omp_get" )
+        myclass = "A"
+        for line2 in f2:
+            if line == line2.strip():
+                myclass = "B"; break
+        f2.close()
+        
         if line.startswith('#') or len(line)==0:
             continue
         rexp = regexps.regexps[line]
@@ -119,10 +127,14 @@ def run():
                 print('log.std file does not exist under '+line+'-'+arch)
                 row += ' |'
 
-        row += ' ' +unit +' |'
+        row += ' ' +unit +' | ' +myclass +' |'
         fw.write(row+'\n')
 
-    f.close()
+    fw.write("\n")
+    fw.write("※ 分類: OpenMP コードが (omp_get_wtime 以外の) omp_get_* を (A) 含まない (B) 含む\n")
+    fw.write("\n")
+    fw.write("※ メモリ: cuda 版での値\n")
+    fw.close()
     fw.close()
 
 if __name__ == '__main__':
