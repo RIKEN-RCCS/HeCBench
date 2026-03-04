@@ -92,9 +92,10 @@ def gen_plt(x, line, imagedir='SVGs'):
     if bname == "完了":  return
     
 #    words = words[2:len(words)-1]
+    unit = words[6]
     words = words[2:6]
-#    print("qors ", words )
-    
+#    print("qors ", unit )
+
     y = []
     for w in words:
         w = w.strip()
@@ -105,7 +106,12 @@ def gen_plt(x, line, imagedir='SVGs'):
         y.append(fl)
     plt.close()
     fig, ax = plt.subplots()
-    ax.set_ylabel('time (s)')
+
+    if unit == "s" or unit == "ms" or unit == "us" or unit == "ns":
+        tmp = 'time (' +unit +')'
+    else:
+        tmp = 'speed (' +unit +')'
+    ax.set_ylabel(tmp)
     plt.bar(x, y)
     os.makedirs(imagedir, exist_ok = True)
     outf = imagedir+'/'+bname+'.svg'
@@ -135,7 +141,6 @@ if __name__ == '__main__':
 #    x = columns[2:len(columns)-1]
     x = columns[2:6]
 #    print("x",x)
-#    exit(-1)
     
     dumm = f.readline()
 
