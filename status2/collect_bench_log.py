@@ -85,6 +85,7 @@ def run():
             if line == "d2q9-bgk": unit = "us"
             if line == "fdtd3d": unit = "s"
             if line == "feynman-kac": unit = "s"
+            if line == "phmm": unit = "ms"
             if line == "rsc": unit = "ms"
             if line == "sw4ck": unit = "ms"
             if line == "testSNAP": unit = "ms"

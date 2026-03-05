@@ -237,7 +237,7 @@
 | permutate | 2.05e+00 | 2.42e+00 | | 2.26e+00 | s | B |![permutate](SVGs_builtin/permutate.svg) |
 | permute | 2.00e+01 | 2.22e+01 | 2.23e+01 | 2.28e+01 | ms | A |![permute](SVGs_builtin/permute.svg) |
 | perplexity | 1.64e+00 | 2.24e+00 | 1.53e+00 | 1.69e+00 | s | A |![perplexity](SVGs_builtin/perplexity.svg) |
-| phmm | 1.16e+03 | 1.10e+03 | 4.62e+03 | 5.23e+03 | millis | B |![phmm](SVGs_builtin/phmm.svg) |
+| phmm | 1.16e+03 | 1.10e+03 | 4.62e+03 | 5.23e+03 | ms | B |![phmm](SVGs_builtin/phmm.svg) |
 | pnpoly | 4.59e-02 | 5.17e-02 | | 7.17e-01 | s | A |![pnpoly](SVGs_builtin/pnpoly.svg) |
 | pns | 5.44e+00 | 5.38e+00 | | | s | B |![pns](SVGs_builtin/pns.svg) |
 | pointwise | 9.21e-02 | 1.14e-01 | 1.80e-01 | 1.66e-01 | s | A |![pointwise](SVGs_builtin/pointwise.svg) |
