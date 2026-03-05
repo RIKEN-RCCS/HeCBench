@@ -317,7 +317,7 @@
 | vanGenuchten | 21.39 | 21.48 | 30.99 | 30.92 | A | 6.2 |
 | vmc | 5.07 | 4.38 | build err | build err | B | 0.6 |
 | vol2col | 8.27 | 5.26 | 7.87 | 8.13 | A | 3.5 |
-| wedford | exe err | build err | build err | exe err | B | |
+| wedford | 34.48 | 35.05 | build err | 33.65 | B | 8.8 |
 | winograd | 0.84 | 0.65 | 3.25 | 3.20 | A | 0.6 |
 | wlcpow | 4.53 | 4.50 | build err | 12.37 | B | 0.7 |
 | wordcount | 8.03 | 7.98 | 8.18 | 7.93 | A | 0.8 |
@@ -328,7 +328,7 @@
 | zeropoint | 18.63 | 55.54 | 21.82 | 24.23 | A | 15.8 |
 | zmddft | 2.63 | 2.63 | build err | 14.28 | B | 1.6 |
 | | | | | | | |
-| 完了した件数 | 319 | 305 | 238 (A:186) | 290 | | |
+| 完了した件数 | 320 | 306 | 238 (A:186) | 291 | | |
 
 sycl と acc がともに完了した件数 234 (A:183)
 

@@ -81,6 +81,7 @@ def run():
             if line == "bwt": unit = "ms"
             if line == "cooling": unit = "ms"
             if line == "cross": unit = "us"
+            if line == "damage": unit = "s"
             if line == "d2q9-bgk": unit = "us"
             if line == "fdtd3d": unit = "s"
             if line == "feynman-kac": unit = "s"
