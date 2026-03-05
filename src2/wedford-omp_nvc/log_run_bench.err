@@ -26,5 +26,4 @@ std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
       4, include "chrono"
          472, Loop not vectorized/parallelized: not countable
       6, include "reference.h"
-make: *** [Makefile.NVD:70: run_mem] Error 134
 timeout was set to  600

@@ -76,7 +76,7 @@
 | cross | 6.96e+03 | 6.96e+03 | 7.00e+03 | 7.00e+03 | us | A |![cross](SVGs_builtin/cross.svg) |
 | crs | 6.64e-02 | 7.09e-02 | | | s | B |![crs](SVGs_builtin/crs.svg) |
 | d2q9-bgk | 5.83e+00 | 5.53e+00 | | 2.45e+01 | us | B |![d2q9-bgk](SVGs_builtin/d2q9-bgk.svg) |
-| damage | 1.89e-02 | 1.99e-02 | 3.22e-02 | 2.39e-01 | s|ms|us | B |![damage](SVGs_builtin/damage.svg) |
+| damage | 1.89e-02 | 1.99e-02 | 3.22e-02 | 2.39e-01 | s | B |![damage](SVGs_builtin/damage.svg) |
 | dct8x8 | 9.43e-03 | 9.43e-03 | | | s | B |![dct8x8](SVGs_builtin/dct8x8.svg) |
 | ddbp | 3.42e-01 | | | 2.63e-01 | s | B |![ddbp](SVGs_builtin/ddbp.svg) |
 | debayer | 3.62e-03 | 3.68e-03 | 7.34e-02 | 8.39e-02 | s | B |![debayer](SVGs_builtin/debayer.svg) |
@@ -317,7 +317,7 @@
 | vanGenuchten | 7.29e-03 | 7.25e-03 | 7.45e-03 | 7.55e-03 | s | A |![vanGenuchten](SVGs_builtin/vanGenuchten.svg) |
 | vmc | 2.52e-03 | 1.88e-03 | | | s | B |![vmc](SVGs_builtin/vmc.svg) |
 | vol2col | 2.53e+03 | 2.55e+03 | 2.02e+03 | 2.73e+03 | us | A |![vol2col](SVGs_builtin/vol2col.svg) |
-| wedford | | | | | ms | B |![wedford](SVGs_builtin/wedford.svg) |
+| wedford | 3.87e+00 | 3.99e+00 | | 1.65e+01 | ms | B |![wedford](SVGs_builtin/wedford.svg) |
 | winograd | 7.85e-01 | 2.94e-01 | 3.19e+00 | 3.14e+00 | s | A |![winograd](SVGs_builtin/winograd.svg) |
 | wlcpow | 2.03e+03 | 2.09e+03 | | 6.74e+03 | us | B |![wlcpow](SVGs_builtin/wlcpow.svg) |
 | wordcount | 1.74e-03 | 3.75e-03 | 1.75e-03 | 2.73e-03 | s | A |![wordcount](SVGs_builtin/wordcount.svg) |
