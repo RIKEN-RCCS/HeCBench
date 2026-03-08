@@ -5,11 +5,11 @@ Iterations: 1
 Computing wavefield in device ..
 Running on:: NVIDIA GH200 480GB
 The Device Max Work Group Size is : 1024
-Total kernel execution time 24.4009 (ms)
-Average kernel execution time 24400.9 (us)
+Total kernel execution time 24.451 (ms)
+Average kernel execution time 24451 (us)
 Computing wavefield in CPU ..
 Initializing ... 
-CPU time: 5603 ms
+CPU time: 5569 ms
 
 Check difference between final wavefields computed in device and host
 PASS

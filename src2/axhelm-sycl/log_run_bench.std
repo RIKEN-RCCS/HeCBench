@@ -2,7 +2,7 @@ tar xf BlasLapack.tar.gz
 clang++  -Ddfloat=float -Ddlong=int           -std=c++17 -Wall -I../axhelm-cuda           -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c main.cpp -o main.o
 clang++  -Ddfloat=float -Ddlong=int           -std=c++17 -Wall -I../axhelm-cuda           -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU -c meshBasis.cpp -o meshBasis.o
 cd BlasLapack && make -j8 && cd ..
-make[1]: Entering directory '/hs/work0/home/users/u0001901/2026/test3/tmp14/axhelm-sycl/BlasLapack'
+make[1]: Entering directory '/hs/work0/home/users/u0001901/2026/test6/tmp4/src2/axhelm-sycl/BlasLapack'
 gfortran  -O3 -c dasum.f 
 gfortran  -O3 -c daxpy.f 
 gfortran  -O3 -c dbdsqr.f 
@@ -152,10 +152,10 @@ gfortran  -O3 -c zswap.f
 gfortran  -O3 -c ztrsm.f 
 gfortran  -O3 -c ztrsv.f 
 ar -cr libBlasLapack.a *.o
-make[1]: Leaving directory '/hs/work0/home/users/u0001901/2026/test3/tmp14/axhelm-sycl/BlasLapack'
+make[1]: Leaving directory '/hs/work0/home/users/u0001901/2026/test6/tmp4/src2/axhelm-sycl/BlasLapack'
 clang++  -Ddfloat=float -Ddlong=int           -std=c++17 -Wall -I../axhelm-cuda           -fsycl --gcc-toolchain= -fsycl-targets=nvptx64-nvidia-cuda             -Xsycl-target-backend --cuda-gpu-arch=sm_90 -O3 -DUSE_GPU main.o meshBasis.o BlasLapack/libBlasLapack.a -o main ./BlasLapack/libBlasLapack.a -lgfortran
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv --loop-ms=1 > log.mem &
 bash -c "time -p ( ./main 1 8000 100 1>log.std 2>log.err ) 2> log.time"
 pkill nvidia-smi
 ../scripts/m.sh
-min max diff memory in [MB] : 1 732 731
+min max diff memory in [MB] : 1 733 732

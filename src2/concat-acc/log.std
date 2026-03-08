@@ -2,23 +2,23 @@
 num_head = 6	seq_len = 1024	batch_size = 8	hidden_dimension = 768	beam_size = 8
 Total device memory usage (GB) = 0.40
 PASS
-Average kernel execution time: 213.140289 (us)
-Average kernel throughput : 1889.146293 (GB/s)
+Average kernel execution time: 213.159210 (us)
+Average kernel throughput : 1888.978605 (GB/s)
 
 num_head = 12	seq_len = 1024	batch_size = 8	hidden_dimension = 1536	beam_size = 8
 Total device memory usage (GB) = 0.81
 PASS
-Average kernel execution time: 411.748657 (us)
-Average kernel throughput : 1955.820282 (GB/s)
+Average kernel execution time: 413.320160 (us)
+Average kernel throughput : 1948.383972 (GB/s)
 
 num_head = 24	seq_len = 1024	batch_size = 8	hidden_dimension = 3072	beam_size = 8
 Total device memory usage (GB) = 1.61
 PASS
-Average kernel execution time: 813.462646 (us)
-Average kernel throughput : 1979.946783 (GB/s)
+Average kernel execution time: 814.879578 (us)
+Average kernel throughput : 1976.504007 (GB/s)
 
 num_head = 48	seq_len = 1024	batch_size = 8	hidden_dimension = 6144	beam_size = 8
 Total device memory usage (GB) = 3.22
 PASS
-Average kernel execution time: 1618.172974 (us)
-Average kernel throughput : 1990.655852 (GB/s)
+Average kernel execution time: 1619.610352 (us)
+Average kernel throughput : 1988.889178 (GB/s)

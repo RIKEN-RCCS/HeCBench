@@ -1,9 +1,9 @@
-Average execution time of kernel (dim = 2): 128601.226562 (us)
+Average execution time of kernel (dim = 2): 128607.562500 (us)
 Global minima = -1.801303
 Error = 0.000003
-Average execution time of kernel (dim = 5): 312328.625000 (us)
+Average execution time of kernel (dim = 5): 312359.218750 (us)
 Global minima = -4.560543
 Error = 0.127115
-Average execution time of kernel (dim = 10): 610921.937500 (us)
+Average execution time of kernel (dim = 10): 610984.375000 (us)
 Global minima = -6.888669
 Error = 2.771481

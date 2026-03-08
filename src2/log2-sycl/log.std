@@ -3,61 +3,61 @@ Number of precision counts : 19
  Number of runs for each precision : 100
 
 Iterative approximation with 1 bits of precision
-Average kernel execution time 41.5127 (us)
+Average kernel execution time 41.6605 (us)
 
 Iterative approximation with 2 bits of precision
-Average kernel execution time 43.5283 (us)
+Average kernel execution time 43.4201 (us)
 
 Iterative approximation with 3 bits of precision
-Average kernel execution time 47.7699 (us)
+Average kernel execution time 47.645 (us)
 
 Iterative approximation with 4 bits of precision
-Average kernel execution time 52.3977 (us)
+Average kernel execution time 52.358 (us)
 
 Iterative approximation with 5 bits of precision
-Average kernel execution time 57.223 (us)
+Average kernel execution time 57.2027 (us)
 
 Iterative approximation with 6 bits of precision
-Average kernel execution time 62.6216 (us)
+Average kernel execution time 62.5384 (us)
 
 Iterative approximation with 7 bits of precision
-Average kernel execution time 68.1311 (us)
+Average kernel execution time 68.1076 (us)
 
 Iterative approximation with 8 bits of precision
-Average kernel execution time 73.9764 (us)
+Average kernel execution time 73.961 (us)
 
 Iterative approximation with 9 bits of precision
-Average kernel execution time 79.8945 (us)
+Average kernel execution time 79.8634 (us)
 
 Iterative approximation with 10 bits of precision
-Average kernel execution time 86.3213 (us)
+Average kernel execution time 86.1033 (us)
 
 Iterative approximation with 11 bits of precision
-Average kernel execution time 92.2086 (us)
+Average kernel execution time 92.1353 (us)
 
 Iterative approximation with 12 bits of precision
-Average kernel execution time 98.6924 (us)
+Average kernel execution time 98.5963 (us)
 
 Iterative approximation with 13 bits of precision
-Average kernel execution time 105.413 (us)
+Average kernel execution time 105.392 (us)
 
 Iterative approximation with 14 bits of precision
-Average kernel execution time 112.486 (us)
+Average kernel execution time 112.54 (us)
 
 Iterative approximation with 15 bits of precision
-Average kernel execution time 120.279 (us)
+Average kernel execution time 120.343 (us)
 
 Iterative approximation with 16 bits of precision
-Average kernel execution time 129.045 (us)
+Average kernel execution time 129.1 (us)
 
 Iterative approximation with 18 bits of precision
-Average kernel execution time 151.338 (us)
+Average kernel execution time 151.37 (us)
 
 Iterative approximation with 20 bits of precision
-Average kernel execution time 181.427 (us)
+Average kernel execution time 181.465 (us)
 
 Iterative approximation with 23 bits of precision
-Average kernel execution time 233.208 (us)
+Average kernel execution time 232.558 (us)
 -------------- SUMMARY (Device results): --------------
 
 ----- Iterative approximation with 1 bits of precision -----

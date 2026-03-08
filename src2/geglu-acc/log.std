@@ -5,38 +5,38 @@ PASS
 PASS
 PASS
 Batch size: 1, sequence length: 4096, hidden dimension: 1280
-Average execution time of GeGLU kernel: 54.405399 (us)
+Average execution time of GeGLU kernel: 54.440201 (us)
 Batch size: 1, sequence length: 4096, hidden dimension: 2560
-Average execution time of GeGLU kernel: 99.209900 (us)
+Average execution time of GeGLU kernel: 99.132957 (us)
 Batch size: 1, sequence length: 4096, hidden dimension: 5120
-Average execution time of GeGLU kernel: 187.308853 (us)
+Average execution time of GeGLU kernel: 186.634018 (us)
 Batch size: 1, sequence length: 8192, hidden dimension: 1280
-Average execution time of GeGLU kernel: 98.407021 (us)
+Average execution time of GeGLU kernel: 98.483688 (us)
 Batch size: 1, sequence length: 8192, hidden dimension: 2560
-Average execution time of GeGLU kernel: 192.278732 (us)
+Average execution time of GeGLU kernel: 190.672073 (us)
 Batch size: 1, sequence length: 8192, hidden dimension: 5120
-Average execution time of GeGLU kernel: 364.820618 (us)
+Average execution time of GeGLU kernel: 364.814331 (us)
 Batch size: 4, sequence length: 4096, hidden dimension: 1280
-Average execution time of GeGLU kernel: 188.028854 (us)
+Average execution time of GeGLU kernel: 188.083282 (us)
 Batch size: 4, sequence length: 4096, hidden dimension: 2560
-Average execution time of GeGLU kernel: 364.504761 (us)
+Average execution time of GeGLU kernel: 364.343658 (us)
 Batch size: 4, sequence length: 4096, hidden dimension: 5120
-Average execution time of GeGLU kernel: 718.804871 (us)
+Average execution time of GeGLU kernel: 718.565186 (us)
 Batch size: 4, sequence length: 8192, hidden dimension: 1280
-Average execution time of GeGLU kernel: 364.952148 (us)
+Average execution time of GeGLU kernel: 364.967926 (us)
 Batch size: 4, sequence length: 8192, hidden dimension: 2560
-Average execution time of GeGLU kernel: 718.718140 (us)
+Average execution time of GeGLU kernel: 718.679688 (us)
 Batch size: 4, sequence length: 8192, hidden dimension: 5120
-Average execution time of GeGLU kernel: 1426.631226 (us)
+Average execution time of GeGLU kernel: 1426.594360 (us)
 Batch size: 16, sequence length: 4096, hidden dimension: 1280
-Average execution time of GeGLU kernel: 718.643188 (us)
+Average execution time of GeGLU kernel: 718.628540 (us)
 Batch size: 16, sequence length: 4096, hidden dimension: 2560
-Average execution time of GeGLU kernel: 1427.075195 (us)
+Average execution time of GeGLU kernel: 1425.908569 (us)
 Batch size: 16, sequence length: 4096, hidden dimension: 5120
-Average execution time of GeGLU kernel: 2842.408447 (us)
+Average execution time of GeGLU kernel: 2843.019043 (us)
 Batch size: 16, sequence length: 8192, hidden dimension: 1280
-Average execution time of GeGLU kernel: 1427.661377 (us)
+Average execution time of GeGLU kernel: 1426.901855 (us)
 Batch size: 16, sequence length: 8192, hidden dimension: 2560
-Average execution time of GeGLU kernel: 2842.457520 (us)
+Average execution time of GeGLU kernel: 2843.004883 (us)
 Batch size: 16, sequence length: 8192, hidden dimension: 5120
-Average execution time of GeGLU kernel: 5673.462402 (us)
+Average execution time of GeGLU kernel: 5674.000488 (us)

@@ -1,8 +1,81 @@
-"main.cpp", line 44: catastrophic error: cannot open source file "support/common.h"
-  #include "support/common.h"
+"main.cpp", line 152: error: invalid text in pragma
+  #pragma acc data alloc: h_in_out[0:in_size], \
+                   ^
+
+"main.cpp", line 152: error: extra text after expected end of preprocessing directive
+  #pragma acc data alloc: h_in_out[0:in_size], \
+                        ^
+
+"main.cpp", line 164: error: invalid text in pragma
+  #pragma acc update to(h_in_out[0:in_size]) // nowait
+                     ^
+
+"main.cpp", line 164: error: OpenACC data clause expected
+  #pragma acc update to(h_in_out[0:in_size]) // nowait
+                     ^
+
+"main.cpp", line 164: error: extra text after expected end of preprocessing directive
+  #pragma acc update to(h_in_out[0:in_size]) // nowait
+                       ^
+
+"main.cpp", line 165: error: invalid text in pragma
+  #pragma acc update to(h_finished[0:finished_size]) // nowait
+                     ^
+
+"main.cpp", line 165: error: OpenACC data clause expected
+  #pragma acc update to(h_finished[0:finished_size]) // nowait
+                     ^
+
+"main.cpp", line 165: error: extra text after expected end of preprocessing directive
+  #pragma acc update to(h_finished[0:finished_size]) // nowait
+                       ^
+
+"main.cpp", line 166: error: invalid text in pragma
+  #pragma acc update to(h_head[0:1]) // nowait
+                     ^
+
+"main.cpp", line 166: error: OpenACC data clause expected
+  #pragma acc update to(h_head[0:1]) // nowait
+                     ^
+
+"main.cpp", line 166: error: extra text after expected end of preprocessing directive
+  #pragma acc update to(h_head[0:1]) // nowait
+                       ^
+
+"main.cpp", line 170: error: invalid text in pragma
+  #pragma acc parallel teams num_teams(blocks) thread_limit(threads) 
+                       ^
+
+"main.cpp", line 170: error: extra text after expected end of preprocessing directive
+  #pragma acc parallel teams num_teams(blocks) thread_limit(threads) 
                              ^
 
-1 catastrophic error detected in the compilation of "main.cpp".
-Compilation terminated.
-make: *** [<builtin>: main.o] Error 2
+"main.cpp", line 175: error: identifier "omp_get_thread_num" is undefined
+            const int tid = omp_get_thread_num();
+                            ^
+
+"main.cpp", line 198: error: identifier "omp_get_vector" is undefined
+              i += omp_get_vector();
+                   ^
+
+"main.cpp", line 280: error: invalid text in pragma
+  #pragma acc update from(h_in_out[0:in_size]) //nowait
+                     ^
+
+"main.cpp", line 280: error: OpenACC data clause expected
+  #pragma acc update from(h_in_out[0:in_size]) //nowait
+                     ^
+
+"main.cpp", line 280: error: extra text after expected end of preprocessing directive
+  #pragma acc update from(h_in_out[0:in_size]) //nowait
+                         ^
+
+"main.cpp", line 124: warning: variable "blocks" was declared but never referenced [declared_but_not_referenced]
+    int blocks = p.n_gpu_blocks;
+        ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+18 errors detected in the compilation of "main.cpp".
+make: *** [Makefile.NVD:58: main.o] Error 2
 timeout was set to  600

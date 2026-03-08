@@ -4,6 +4,16 @@ if [ -z "${1}" ];then
   echo Usage : ./gen_bench.sh BENCHMARK_NAME
   exit
 else
+#  if [ -e ${1}-cuda ];then
+#    cd ${1}-cuda
+#    pwd
+#    ../scripts/edit_makefile.py -t NVIDIA --command
+#    cat Makefile.NVD | sed -E 's/(CUDA\s*=\s*)no/\1yes/' |
+#        sed -e 's/sm_60/sm_90/g' | sed -e 's/sm_70/sm_90/g' > TMPFILE
+#    mv TMPFILE Makefile.NVD
+#    cd ..
+#  fi
+
   if [ -e ${1}-sycl ];then
     cd ${1}-sycl
     pwd

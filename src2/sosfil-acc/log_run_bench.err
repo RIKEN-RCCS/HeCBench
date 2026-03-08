@@ -70,7 +70,7 @@ void filtering<float>(int, int, int, int, int):
          Generating implicit private(prev,next)
     251, Loop is parallelizable
          Loop not vectorized: data dependency
-          55, Loop not vectorized/parallelized: contains call
+          55, Loop not vectorized/parallelized: potential early exits
           66, Loop unrolled 4 times (completely unrolled)
          102, Loop nest collapsed
 void filtering<double>(int, int, int, int, int):
@@ -145,15 +145,15 @@ void filtering<double>(int, int, int, int, int):
          Generating implicit private(prev,next)
     251, Loop is parallelizable
          Loop not vectorized: data dependency
-          55, Loop not vectorized/parallelized: contains call
+          55, Loop not vectorized/parallelized: potential early exits
           66, Loop not vectorized: recurrence
               Loop unrolled 2 times
          102, Loop nest collapsed
 ResultDigest<float> make_digest<float>(float const*, int):
-     55, Loop not vectorized/parallelized: contains call
+     55, Loop not vectorized/parallelized: potential early exits
           37, Loop unrolled 4 times (completely unrolled)
 ResultDigest<double> make_digest<double>(double const*, int):
-     55, Loop not vectorized/parallelized: contains call
+     55, Loop not vectorized/parallelized: potential early exits
           37, Loop not vectorized: recurrence
               Loop unrolled 2 times
 std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
@@ -162,3 +162,4 @@ std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
 _INTERNAL_8_main_cpp_main::fnv1a64_update(unsigned long, void const*, unsigned long):
      37, Loop not vectorized: recurrence
          Loop unrolled 2 times
+timeout was set to  600

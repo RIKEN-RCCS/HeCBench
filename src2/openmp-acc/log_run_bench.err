@@ -22,3 +22,4 @@ main:
            4, Generated vector simd code for the loop containing reductions
               Loop unrolled 2 times
           58, Loop not vectorized/parallelized: too deeply nested
+timeout was set to  600

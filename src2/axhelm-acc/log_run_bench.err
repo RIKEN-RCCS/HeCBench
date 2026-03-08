@@ -39,5 +39,5 @@
                       ^
 
 10 errors detected in the compilation of "main.cpp".
-make: *** [Makefile.NVD:54: main.o] Error 2
+make: *** [Makefile.NVD:60: main.o] Error 2
 timeout was set to  600

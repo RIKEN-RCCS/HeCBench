@@ -1,12 +1,12 @@
 Grid size is 2048
-Average execution time of accuracy kernel: 153.791306 (us)
+Average execution time of accuracy kernel: 154.216370 (us)
 PASS
 Grid size is 4096
-Average execution time of accuracy kernel: 150.864594 (us)
+Average execution time of accuracy kernel: 151.028229 (us)
 PASS
 Grid size is 6144
-Average execution time of accuracy kernel: 150.597382 (us)
+Average execution time of accuracy kernel: 150.512711 (us)
 PASS
 Grid size is 8192
-Average execution time of accuracy kernel: 151.493378 (us)
+Average execution time of accuracy kernel: 151.344711 (us)
 PASS

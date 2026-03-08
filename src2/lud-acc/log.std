@@ -1,5 +1,5 @@
 Generate input matrix internally, size =32768
 Creating matrix internally size=32768
 WG size of kernel = 16 X 16
-Total kernel execution time : 7.026206 (s)
-Device offloading time (s): 9.310373
+Total kernel execution time : 7.024334 (s)
+Device offloading time (s): 9.214154

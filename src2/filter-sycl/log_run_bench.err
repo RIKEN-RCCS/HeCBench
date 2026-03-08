@@ -2,7 +2,7 @@ main.cpp:88:12: error: no member named 'get_opportunistic_group' in namespace 's
    88 |   auto g = sycl::ext::oneapi::experimental::this_kernel::get_opportunistic_group();
       |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       |            sycl::ext::oneapi::experimental::this_work_item::get_opportunistic_group
-/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/ext/oneapi/experimental/fragment.hpp:183:34: note: 'sycl::ext::oneapi::experimental::this_work_item::get_opportunistic_group' declared here
+/hs/work0/home/users/u0001901/software/RRR/bin/../include/sycl/ext/oneapi/experimental/fragment.hpp:183:34: note: 'sycl::ext::oneapi::experimental::this_work_item::get_opportunistic_group' declared here
   183 | inline fragment<sycl::sub_group> get_opportunistic_group() {
       |                                  ^
 1 error generated.

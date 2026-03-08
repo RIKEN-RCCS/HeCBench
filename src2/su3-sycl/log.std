@@ -3,8 +3,8 @@ Executing 1000 iterations with 1 warmups
 Threads per group = 128
 Setting number of work items 398297088
 Workgroup size is 128
-Total kernel execution time = 2.323704 (s)
-Total GFLOP/s = 1156.991
-Total GByte/s (GPU memory)  = 1714.061
+Total kernel execution time = 2.323777 (s)
+Total GFLOP/s = 1156.955
+Total GByte/s (GPU memory)  = 1714.008
 Total allocation for matrices = 3798.458 MiB
-Approximate memory usage = 3910.500 MiB
+Approximate memory usage = 3915.625 MiB

@@ -1,24 +1,25 @@
 verify(double*, double*):
-     30, Loop not vectorized/parallelized: potential early exits
+     25, Loop not vectorized/parallelized: potential early exits
 main:
-     51, Loop not fused: function call before adjacent loop
+     46, Loop not fused: function call before adjacent loop
          Loop not vectorized: data dependency
          Loop unrolled 2 times
-     70, Generating copyout(output[:200514600]) [if not already present]
+     62, Generating copyout(output[:200514600]) [if not already present]
          Generating copyin(shape_input[:],shape_input_r[:],shape_output[:],shape_output_r[:],stride_output_local[:],stride_output_global[:],stride_input[:],input[:200514600]) [if not already present]
-     73, Generating present(input[:],output[:],shape_input[:],shape_input_r[:],shape_output[:],shape_output_r[:],stride_output_local[:],stride_output_global[:],stride_input[:])
+     65, Generating present(input[:],output[:],shape_input[:],shape_input_r[:],shape_output[:],shape_output_r[:],stride_output_local[:],stride_output_global[:],stride_input[:])
          Loop not vectorized/parallelized: contains call
-     86, Generating NVIDIA GPU code
-         88, #pragma acc loop gang(34200) /* blockIdx.x */
-         95, #pragma acc loop seq
-        103, #pragma acc loop vector(256) /* threadIdx.x */
-        110, #pragma acc loop seq
-     88, Loop not fused: no successor loop
-     95, Loop unrolled 3 times (completely unrolled)
-    103, Loop is parallelizable
+     73, Generating NVIDIA GPU code
+         75, #pragma acc loop gang(34200) /* blockIdx.x */
+         81, #pragma acc loop seq
+         88, #pragma acc loop vector(256) /* threadIdx.x */
+         94, #pragma acc loop seq
+     75, Loop not fused: no successor loop
+     81, Loop unrolled 3 times (completely unrolled)
+     88, Loop is parallelizable
          Loop not vectorized: data dependency
-    110, Loop unrolled 3 times (completely unrolled)
-          30, Loop not vectorized/parallelized: potential early exits
+     94, Loop unrolled 3 times (completely unrolled)
+          25, Loop not vectorized/parallelized: potential early exits
 std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
       3, include "chrono"
          472, Loop not vectorized/parallelized: not countable
+timeout was set to  600

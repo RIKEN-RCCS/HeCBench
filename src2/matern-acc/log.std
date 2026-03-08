@@ -19,16 +19,16 @@ Length scale = 1.0e+05 check = FAIL
 Timing the kernel execution with the problem size (200 cube)
 --------------------------------------------------------------------
 Warmup..
-Length scale = 1.0e-01 Average kernel execution time: 995.880798 (us)
+Length scale = 1.0e-01 Average kernel execution time: 995.603455 (us)
 Warmup..
-Length scale = 1.0e+00 Average kernel execution time: 997.390564 (us)
+Length scale = 1.0e+00 Average kernel execution time: 996.766968 (us)
 Warmup..
-Length scale = 1.0e+01 Average kernel execution time: 995.438232 (us)
+Length scale = 1.0e+01 Average kernel execution time: 996.488525 (us)
 Warmup..
-Length scale = 1.0e+02 Average kernel execution time: 996.527527 (us)
+Length scale = 1.0e+02 Average kernel execution time: 997.588989 (us)
 Warmup..
-Length scale = 1.0e+03 Average kernel execution time: 996.816101 (us)
+Length scale = 1.0e+03 Average kernel execution time: 997.496887 (us)
 Warmup..
-Length scale = 1.0e+04 Average kernel execution time: 996.761108 (us)
+Length scale = 1.0e+04 Average kernel execution time: 997.538757 (us)
 Warmup..
-Length scale = 1.0e+05 Average kernel execution time: 996.459290 (us)
+Length scale = 1.0e+05 Average kernel execution time: 996.997009 (us)

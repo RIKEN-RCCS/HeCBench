@@ -16,6 +16,16 @@ else
       timeout_cmd=timeout
   fi
 
+#  if [ -e ${1}-cuda ];then
+#      echo "running benchmark under ${1}-cuda"
+#      cd ${1}-cuda
+#      ${timeout_cmd} ${3} make -f Makefile.NVD ${run} 1> log_run_bench.std 2> log_run_bench.err
+#      if [ "${timeout_cmd}" != "" ]; then
+#          echo "timeout was set to " ${3} >> log_run_bench.err
+#      fi
+#      cd ..
+#  fi
+
   if [ -e ${1}-sycl ];then
       echo "running benchmark under ${1}-sycl"
       cd ${1}-sycl
@@ -34,13 +44,13 @@ else
       fi
       cd ..
   fi
-  if [ -e ${1}-omp_nvc ];then
-      echo "running benchmark under ${1}-omp_nvc"
-      cd ${1}-omp_nvc
-      ${timeout_cmd} ${3} make -f Makefile.NVD ${run} 1> log_run_bench.std 2> log_run_bench.err
-      if [ "${timeout_cmd}" != "" ]; then
-	  echo "timeout was set to " ${3} >> log_run_bench.err
-      fi
-      cd ..
-  fi
+#  if [ -e ${1}-omp_nvc ];then
+#      echo "running benchmark under ${1}-omp_nvc"
+#      cd ${1}-omp_nvc
+#      ${timeout_cmd} ${3} make -f Makefile.NVD ${run} 1> log_run_bench.std 2> log_run_bench.err
+#      if [ "${timeout_cmd}" != "" ]; then
+#	  echo "timeout was set to " ${3} >> log_run_bench.err
+#      fi
+#      cd ..
+#  fi
 fi

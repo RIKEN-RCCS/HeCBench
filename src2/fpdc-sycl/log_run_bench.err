@@ -1,1 +1,19 @@
+In file included from main.cpp:47:
+./kernels.h:101:5: warning: variable 'code' is uninitialized when used here [-Wuninitialized]
+  101 |     code |= bcount;
+      |     ^~~~
+./kernels.h:34:19: note: initialize the variable 'code' to silence this warning
+   34 |   int offset, code, bcount, tmp, off, beg, end, lane, warp, iindex, lastidx, start, term;
+      |                   ^
+      |                    = 0
+1 warning generated.
+In file included from main.cpp:47:
+./kernels.h:101:5: warning: variable 'code' is uninitialized when used here [-Wuninitialized]
+  101 |     code |= bcount;
+      |     ^~~~
+./kernels.h:34:19: note: initialize the variable 'code' to silence this warning
+   34 |   int offset, code, bcount, tmp, off, beg, end, lane, warp, iindex, lastidx, start, term;
+      |                   ^
+      |                    = 0
+1 warning generated.
 timeout was set to  600

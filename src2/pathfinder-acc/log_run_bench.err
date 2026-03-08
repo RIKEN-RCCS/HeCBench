@@ -1,0 +1,46 @@
+main:
+     68, Loop not fused: complex flow graph
+         Loop not vectorized: may not be beneficial for target
+         Loop unrolled 8 times
+     80, Loop not vectorized/parallelized: contains call
+    121, Generating create(gpuResult[:cols]) [if not already present]
+         Generating copyin(gpuSrc[:cols],gpuWall[:size-cols]) [if not already present]
+         Generating copyout(outputBuffer[:16384]) [if not already present]
+    124, Loop not vectorized/parallelized: too deeply nested
+    135, Generating present(gpuResult[:cols],gpuSrc[:cols],gpuWall[:size-cols])
+         Generating implicit firstprivate(gws)
+         Generating NVIDIA GPU code
+        144, #pragma acc loop gang(gws) /* blockIdx.x */
+        163, #pragma acc loop vector(250) /* threadIdx.x */
+        190, #pragma acc loop seq
+        193, #pragma acc loop vector(250) /* threadIdx.x */
+        227, #pragma acc loop vector(250) /* threadIdx.x */
+        244, #pragma acc loop vector(250) /* threadIdx.x */
+    135, CUDA shared memory used for res_acc,prev,W_arr,isValid_arr,computed_arr,E_arr
+    144, Generating implicit firstprivate(theHalo,borderCols)
+         Loop not fused: no successor loop
+    163, Loop is parallelizable
+         Generating implicit firstprivate(cols)
+         Loop not fused: different loop trip count
+         Loop not vectorized: data dependency
+    190, Loop carried dependence of computed_arr prevents parallelization
+         Complex loop carried dependence of computed_arr,W_arr,E_arr,isValid_arr prevents parallelization
+         Loop carried dependence of prev prevents parallelization
+         Complex loop carried dependence of prev,gpuWall-> prevents parallelization
+         Loop carried dependence of res_acc prevents parallelization
+         Complex loop carried dependence of res_acc prevents parallelization
+         Loop carried backward dependence of res_acc prevents vectorization
+         Complex loop carried dependence of gpuSrc->,outputBuffer-> prevents parallelization
+         Loop carried backward dependence of computed_arr,prev prevents vectorization
+         Loop not fused: different loop trip count
+    193, Loop is parallelizable
+         Generating implicit firstprivate(t)
+         Loop not fused: different controlling conditions
+         Loop not vectorized: data dependency
+    227, Loop is parallelizable
+         Invariant if transformation
+         Generated vector simd code for the loop
+    244, Loop is parallelizable
+         Loop not vectorized: data dependency
+    267, Generating update self(gpuSrc[:cols])
+timeout was set to  600
