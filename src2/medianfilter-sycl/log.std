@@ -1,0 +1,12 @@
+Image File	 = ../medianfilter-cuda/data/SierrasRGB.ppm
+Image Dimensions = 1920 w x 1080 h x 32 bpp
+
+
+Running MedianFilterGPU for 10000 cycles...
+
+Average kernel execution time: 0.000076 (s)
+
+Comparing GPU Result to CPU Result...
+
+GPU Result matches CPU Result within tolerance...
+PASS

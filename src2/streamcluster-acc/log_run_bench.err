@@ -1,0 +1,191 @@
+"streamcluster.cpp", line 192: warning: variable "open" was set but never used [set_but_not_used]
+    static bool open = false;
+                ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+pgain(long, Points*, float, long*, int, bool*, int*, char*, double*, double*, double*, double*, double*):
+     23, include "streamcluster_cl.h"
+          47, Loop not vectorized/parallelized: not countable
+          67, Loop not vectorized/parallelized: not countable
+          82, Generating enter data create(coord_h[:num*dim],p_h[:num],switch_membership[:num],work_mem_h[:num*(kmax+1)],center_table[:num])
+          89, Generating update device(coord_h[:num*dim])
+          98, Loop not vectorized/parallelized: not countable
+         116, Generating update device(p_h[:num],center_table[:num])
+         123, Generating implicit firstprivate(num)
+              Generating NVIDIA GPU code
+             127, #pragma acc loop seq
+         123, Generating implicit copyout(switch_membership[:num]) [if not already present]
+         127, Accelerator restriction: induction variable live-out from loop: i
+              Generating implicit firstprivate(num,K)
+              Generating NVIDIA GPU code
+             130, #pragma acc loop seq
+         127, Generating implicit copyout(work_mem_h[:num*(K+1)]) [if not already present]
+              Loop not vectorized/parallelized: not countable
+         130, Accelerator restriction: induction variable live-out from loop: i
+              Loop not vectorized/parallelized: not countable
+         141, Generating present(coord_h[:num*dim],center_table[:num],work_mem_h[:num*(K+1)],switch_membership[:num],p_h[:num])
+              Generating implicit firstprivate(work_group_size,num_gangs,dim)
+              Generating NVIDIA GPU code
+              11, #pragma acc loop seq
+             143, #pragma acc loop gang(num_gangs) /* blockIdx.x */
+             146, #pragma acc loop vector(work_group_size) /* threadIdx.x */
+         146, Loop is parallelizable
+              Generating implicit firstprivate(num,K)
+         148, include "kernel.h"
+               11, Generating implicit firstprivate(x)
+                   Loop not vectorized/parallelized: not countable
+               12, Accelerator restriction: induction variable live-out from loop: i
+               13, Accelerator restriction: induction variable live-out from loop: i
+               16, Accelerator restriction: induction variable live-out from loop: i
+         163, Generating update self(work_mem_h[:num*(K+1)],switch_membership[:num])
+         174, Loop not vectorized/parallelized: not countable
+         188, Loop not vectorized/parallelized: not countable
+         197, Loop not vectorized/parallelized: not countable
+         165, Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+shuffle(Points*):
+    118, Loop not vectorized/parallelized: contains call
+intshuffle(int*, int):
+    138, Loop not vectorized/parallelized: contains call
+dist(Point, Point, int):
+    165, Generated vector simd code for the loop containing reductions
+         Loop unrolled 4 times
+pspeedy(Points*, float, long*, int, pthread_barrier_t*):
+    208, Loop not fused: function call before adjacent loop
+         165, Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+    220, Loop not vectorized/parallelized: not countable
+         165, Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+    243, Loop not vectorized/parallelized: contains call
+         165, Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+    285, Loop not fused: complex flow graph
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 4 times
+    296, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+         Loop unrolled 8 times
+pFL(Points*, int*, int, float, long*, int, float, long, float, int, pthread_barrier_t*):
+         138, Loop not vectorized/parallelized: contains call
+    362, Loop not vectorized/parallelized: potential early exits
+selectfeasible_fast(Points*, int**, int, int, pthread_barrier_t*):
+    418, Loop not fused: no successor loop
+         Generated vector simd code for the loop
+    426, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+    440, Loop not vectorized/parallelized: not countable
+pkmedian(Points*, long, long, long*, int, pthread_barrier_t*):
+    495, Loop not fused: different loop trip count
+         165, Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+    505, Loop not fused: complex flow graph
+         Generated vector simd code for the loop containing reductions
+         Loop unrolled 8 times
+    513, Loop not fused: function call before adjacent loop
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 4 times
+         118, Loop not vectorized/parallelized: contains call
+         208, Loop not fused: function call before adjacent loop
+         209, Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+         220, Loop not vectorized/parallelized: not countable
+         229, Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+         243, Loop not vectorized/parallelized: contains call
+         256, Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+         285, Loop not fused: complex flow graph
+              Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+         296, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 8 times
+         208, Loop not fused: function call before adjacent loop
+         209, Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+         220, Loop not vectorized/parallelized: not countable
+         229, Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+         243, Loop not vectorized/parallelized: contains call
+         256, Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+         285, Loop not fused: complex flow graph
+              Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+         296, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 8 times
+         533, Loop not vectorized/parallelized: too deeply nested
+         118, Loop not vectorized/parallelized: contains call
+         208, Loop not fused: function call before adjacent loop
+         209, Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+         220, Loop not vectorized/parallelized: not countable
+         229, Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+         243, Loop not vectorized/parallelized: contains call
+         256, Generated vector simd code for the loop containing reductions
+              Loop unrolled 4 times
+         285, Loop not fused: complex flow graph
+              Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+         296, Loop not fused: function call before adjacent loop
+              Generated vector simd code for the loop containing reductions
+              Loop unrolled 8 times
+         543, Loop not vectorized/parallelized: too deeply nested
+         418, Loop not fused: no successor loop
+              Generated vector simd code for the loop
+         426, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+         440, Loop not vectorized/parallelized: not countable
+    564, Loop not vectorized: unsupported scatter
+         Loop unrolled 2 times
+         354, Loop not vectorized/parallelized: contains call
+         362, Loop not vectorized/parallelized: potential early exits
+         354, Loop not vectorized/parallelized: contains call
+         362, Loop not vectorized/parallelized: potential early exits
+contcenters(Points*):
+    647, Loop not vectorized: data dependency
+         Loop unrolled 4 times
+copycenters(Points*, Points*, long*, long):
+    668, Loop not vectorized: unsupported scatter
+         Loop unrolled 2 times
+    675, Loop not vectorized/parallelized: contains call
+localSearch(Points*, long, long, long*):
+    710, Loop not vectorized/parallelized: potential early exits
+outcenterIDs(Points*, long*, char*):
+    752, Loop not vectorized: unsupported scatter
+         Loop unrolled 2 times
+    760, Loop not vectorized/parallelized: contains call
+streamCluster(PStream*, long, long, int, long, long, char*):
+    786, Loop not fused: function call before adjacent loop
+         Loop not vectorized: may not be beneficial for target
+         Loop unrolled 4 times
+    796, Loop not vectorized: may not be beneficial for target
+         Loop unrolled 4 times
+    814, Loop not fused: function call before adjacent loop
+         Loop not vectorized: unprofitable for target
+         Loop unrolled 4 times
+         710, Loop not vectorized/parallelized: potential early exits
+    826, Generating exit data delete(center_table[:points.num])
+         641, Loop not fused: function call before adjacent loop
+         647, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+         668, Loop not vectorized/parallelized: not countable
+         675, Loop not vectorized/parallelized: contains call
+         710, Loop not vectorized/parallelized: potential early exits
+         641, Loop not fused: function call before adjacent loop
+         647, Loop not vectorized: data dependency
+              Loop unrolled 4 times
+         752, Loop not vectorized/parallelized: not countable
+         760, Loop not vectorized/parallelized: contains call
+main:
+    949, Generating exit data delete(coord_h[:chunksize*(dim)],p_h[:chunksize],work_mem_h[:chunksize*(kmax+2)],switch_membership[:chunksize])
+SimStream::read(float*, int, int):
+     22, include "streamcluster.h"
+          87, Loop not vectorized/parallelized: contains call
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+     22, include "streamcluster.h"
+timeout was set to  600

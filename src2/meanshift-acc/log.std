@@ -6,10 +6,10 @@ BLOCKS:     157
 THREADS:    64
 TILE WIDTH: 64
 
-Average execution time of mean-shift (base) 1.14956 ms
+Average execution time of mean-shift (base) 1.15134 ms
 
 PASS
 
-Average execution time of mean-shift (opt) 1.37515 ms
+Average execution time of mean-shift (opt) 1.37452 ms
 
 PASS

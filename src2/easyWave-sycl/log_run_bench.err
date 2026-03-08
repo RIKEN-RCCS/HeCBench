@@ -1,98 +1,98 @@
 main.cpp:887:9: warning: 'nd_range' is deprecated: offsets are deprecated in SYCL2020 [-Wdeprecated-declarations]
   887 |         sycl::nd_range<2>(sycl::range<2>((Imax-Imin+16)/16*16, (Jmax-Jmin+16)/16*16), 
       |         ^
-/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/nd_range.hpp:40:3: note: 'nd_range' has been explicitly marked deprecated here
+/hs/work0/home/users/u0001901/software/RRR/bin/../include/sycl/nd_range.hpp:40:3: note: 'nd_range' has been explicitly marked deprecated here
    40 |   __SYCL2020_DEPRECATED("offsets are deprecated in SYCL2020")
       |   ^
-/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/detail/defines_elementary.hpp:71:40: note: expanded from macro '__SYCL2020_DEPRECATED'
+/hs/work0/home/users/u0001901/software/RRR/bin/../include/sycl/detail/defines_elementary.hpp:71:40: note: expanded from macro '__SYCL2020_DEPRECATED'
    71 | #define __SYCL2020_DEPRECATED(message) __SYCL_DEPRECATED(message)
       |                                        ^
-/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/detail/defines_elementary.hpp:62:38: note: expanded from macro '__SYCL_DEPRECATED'
+/hs/work0/home/users/u0001901/software/RRR/bin/../include/sycl/detail/defines_elementary.hpp:62:38: note: expanded from macro '__SYCL_DEPRECATED'
    62 | #define __SYCL_DEPRECATED(message) [[deprecated(message)]]
       |                                      ^
 main.cpp:887:9: warning: 'nd_range' is deprecated: offsets are deprecated in SYCL2020 [-Wdeprecated-declarations]
   887 |         sycl::nd_range<2>(sycl::range<2>((Imax-Imin+16)/16*16, (Jmax-Jmin+16)/16*16), 
       |         ^
-/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/nd_range.hpp:40:3: note: 'nd_range' has been explicitly marked deprecated here
+/hs/work0/home/users/u0001901/software/RRR/bin/../include/sycl/nd_range.hpp:40:3: note: 'nd_range' has been explicitly marked deprecated here
    40 |   __SYCL2020_DEPRECATED("offsets are deprecated in SYCL2020")
       |   ^
-/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/detail/defines_elementary.hpp:71:40: note: expanded from macro '__SYCL2020_DEPRECATED'
+/hs/work0/home/users/u0001901/software/RRR/bin/../include/sycl/detail/defines_elementary.hpp:71:40: note: expanded from macro '__SYCL2020_DEPRECATED'
    71 | #define __SYCL2020_DEPRECATED(message) __SYCL_DEPRECATED(message)
       |                                        ^
-/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/detail/defines_elementary.hpp:62:38: note: expanded from macro '__SYCL_DEPRECATED'
+/hs/work0/home/users/u0001901/software/RRR/bin/../include/sycl/detail/defines_elementary.hpp:62:38: note: expanded from macro '__SYCL_DEPRECATED'
    62 | #define __SYCL_DEPRECATED(message) [[deprecated(message)]]
       |                                      ^
 main.cpp:963:7: warning: 'nd_range' is deprecated: offsets are deprecated in SYCL2020 [-Wdeprecated-declarations]
   963 |       sycl::nd_range<2>(sycl::range<2>((Imax-Imin+16)/16*16, (Jmax-Jmin+16)/16*16), 
       |       ^
-/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/nd_range.hpp:40:3: note: 'nd_range' has been explicitly marked deprecated here
+/hs/work0/home/users/u0001901/software/RRR/bin/../include/sycl/nd_range.hpp:40:3: note: 'nd_range' has been explicitly marked deprecated here
    40 |   __SYCL2020_DEPRECATED("offsets are deprecated in SYCL2020")
       |   ^
-/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/detail/defines_elementary.hpp:71:40: note: expanded from macro '__SYCL2020_DEPRECATED'
+/hs/work0/home/users/u0001901/software/RRR/bin/../include/sycl/detail/defines_elementary.hpp:71:40: note: expanded from macro '__SYCL2020_DEPRECATED'
    71 | #define __SYCL2020_DEPRECATED(message) __SYCL_DEPRECATED(message)
       |                                        ^
-/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/detail/defines_elementary.hpp:62:38: note: expanded from macro '__SYCL_DEPRECATED'
+/hs/work0/home/users/u0001901/software/RRR/bin/../include/sycl/detail/defines_elementary.hpp:62:38: note: expanded from macro '__SYCL_DEPRECATED'
    62 | #define __SYCL_DEPRECATED(message) [[deprecated(message)]]
       |                                      ^
 main.cpp:963:7: warning: 'nd_range' is deprecated: offsets are deprecated in SYCL2020 [-Wdeprecated-declarations]
   963 |       sycl::nd_range<2>(sycl::range<2>((Imax-Imin+16)/16*16, (Jmax-Jmin+16)/16*16), 
       |       ^
-/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/nd_range.hpp:40:3: note: 'nd_range' has been explicitly marked deprecated here
+/hs/work0/home/users/u0001901/software/RRR/bin/../include/sycl/nd_range.hpp:40:3: note: 'nd_range' has been explicitly marked deprecated here
    40 |   __SYCL2020_DEPRECATED("offsets are deprecated in SYCL2020")
       |   ^
-/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/detail/defines_elementary.hpp:71:40: note: expanded from macro '__SYCL2020_DEPRECATED'
+/hs/work0/home/users/u0001901/software/RRR/bin/../include/sycl/detail/defines_elementary.hpp:71:40: note: expanded from macro '__SYCL2020_DEPRECATED'
    71 | #define __SYCL2020_DEPRECATED(message) __SYCL_DEPRECATED(message)
       |                                        ^
-/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/detail/defines_elementary.hpp:62:38: note: expanded from macro '__SYCL_DEPRECATED'
+/hs/work0/home/users/u0001901/software/RRR/bin/../include/sycl/detail/defines_elementary.hpp:62:38: note: expanded from macro '__SYCL_DEPRECATED'
    62 | #define __SYCL_DEPRECATED(message) [[deprecated(message)]]
       |                                      ^
 4 warnings generated.
 main.cpp:887:9: warning: 'nd_range' is deprecated: offsets are deprecated in SYCL2020 [-Wdeprecated-declarations]
   887 |         sycl::nd_range<2>(sycl::range<2>((Imax-Imin+16)/16*16, (Jmax-Jmin+16)/16*16), 
       |         ^
-/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/nd_range.hpp:40:3: note: 'nd_range' has been explicitly marked deprecated here
+/hs/work0/home/users/u0001901/software/RRR/bin/../include/sycl/nd_range.hpp:40:3: note: 'nd_range' has been explicitly marked deprecated here
    40 |   __SYCL2020_DEPRECATED("offsets are deprecated in SYCL2020")
       |   ^
-/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/detail/defines_elementary.hpp:71:40: note: expanded from macro '__SYCL2020_DEPRECATED'
+/hs/work0/home/users/u0001901/software/RRR/bin/../include/sycl/detail/defines_elementary.hpp:71:40: note: expanded from macro '__SYCL2020_DEPRECATED'
    71 | #define __SYCL2020_DEPRECATED(message) __SYCL_DEPRECATED(message)
       |                                        ^
-/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/detail/defines_elementary.hpp:62:38: note: expanded from macro '__SYCL_DEPRECATED'
+/hs/work0/home/users/u0001901/software/RRR/bin/../include/sycl/detail/defines_elementary.hpp:62:38: note: expanded from macro '__SYCL_DEPRECATED'
    62 | #define __SYCL_DEPRECATED(message) [[deprecated(message)]]
       |                                      ^
 main.cpp:887:9: warning: 'nd_range' is deprecated: offsets are deprecated in SYCL2020 [-Wdeprecated-declarations]
   887 |         sycl::nd_range<2>(sycl::range<2>((Imax-Imin+16)/16*16, (Jmax-Jmin+16)/16*16), 
       |         ^
-/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/nd_range.hpp:40:3: note: 'nd_range' has been explicitly marked deprecated here
+/hs/work0/home/users/u0001901/software/RRR/bin/../include/sycl/nd_range.hpp:40:3: note: 'nd_range' has been explicitly marked deprecated here
    40 |   __SYCL2020_DEPRECATED("offsets are deprecated in SYCL2020")
       |   ^
-/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/detail/defines_elementary.hpp:71:40: note: expanded from macro '__SYCL2020_DEPRECATED'
+/hs/work0/home/users/u0001901/software/RRR/bin/../include/sycl/detail/defines_elementary.hpp:71:40: note: expanded from macro '__SYCL2020_DEPRECATED'
    71 | #define __SYCL2020_DEPRECATED(message) __SYCL_DEPRECATED(message)
       |                                        ^
-/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/detail/defines_elementary.hpp:62:38: note: expanded from macro '__SYCL_DEPRECATED'
+/hs/work0/home/users/u0001901/software/RRR/bin/../include/sycl/detail/defines_elementary.hpp:62:38: note: expanded from macro '__SYCL_DEPRECATED'
    62 | #define __SYCL_DEPRECATED(message) [[deprecated(message)]]
       |                                      ^
 main.cpp:963:7: warning: 'nd_range' is deprecated: offsets are deprecated in SYCL2020 [-Wdeprecated-declarations]
   963 |       sycl::nd_range<2>(sycl::range<2>((Imax-Imin+16)/16*16, (Jmax-Jmin+16)/16*16), 
       |       ^
-/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/nd_range.hpp:40:3: note: 'nd_range' has been explicitly marked deprecated here
+/hs/work0/home/users/u0001901/software/RRR/bin/../include/sycl/nd_range.hpp:40:3: note: 'nd_range' has been explicitly marked deprecated here
    40 |   __SYCL2020_DEPRECATED("offsets are deprecated in SYCL2020")
       |   ^
-/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/detail/defines_elementary.hpp:71:40: note: expanded from macro '__SYCL2020_DEPRECATED'
+/hs/work0/home/users/u0001901/software/RRR/bin/../include/sycl/detail/defines_elementary.hpp:71:40: note: expanded from macro '__SYCL2020_DEPRECATED'
    71 | #define __SYCL2020_DEPRECATED(message) __SYCL_DEPRECATED(message)
       |                                        ^
-/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/detail/defines_elementary.hpp:62:38: note: expanded from macro '__SYCL_DEPRECATED'
+/hs/work0/home/users/u0001901/software/RRR/bin/../include/sycl/detail/defines_elementary.hpp:62:38: note: expanded from macro '__SYCL_DEPRECATED'
    62 | #define __SYCL_DEPRECATED(message) [[deprecated(message)]]
       |                                      ^
 main.cpp:963:7: warning: 'nd_range' is deprecated: offsets are deprecated in SYCL2020 [-Wdeprecated-declarations]
   963 |       sycl::nd_range<2>(sycl::range<2>((Imax-Imin+16)/16*16, (Jmax-Jmin+16)/16*16), 
       |       ^
-/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/nd_range.hpp:40:3: note: 'nd_range' has been explicitly marked deprecated here
+/hs/work0/home/users/u0001901/software/RRR/bin/../include/sycl/nd_range.hpp:40:3: note: 'nd_range' has been explicitly marked deprecated here
    40 |   __SYCL2020_DEPRECATED("offsets are deprecated in SYCL2020")
       |   ^
-/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/detail/defines_elementary.hpp:71:40: note: expanded from macro '__SYCL2020_DEPRECATED'
+/hs/work0/home/users/u0001901/software/RRR/bin/../include/sycl/detail/defines_elementary.hpp:71:40: note: expanded from macro '__SYCL2020_DEPRECATED'
    71 | #define __SYCL2020_DEPRECATED(message) __SYCL_DEPRECATED(message)
       |                                        ^
-/hs/work0/home/users/u0001901/software/clang_from_source/bin/../include/sycl/detail/defines_elementary.hpp:62:38: note: expanded from macro '__SYCL_DEPRECATED'
+/hs/work0/home/users/u0001901/software/RRR/bin/../include/sycl/detail/defines_elementary.hpp:62:38: note: expanded from macro '__SYCL_DEPRECATED'
    62 | #define __SYCL_DEPRECATED(message) [[deprecated(message)]]
       |                                      ^
 4 warnings generated.

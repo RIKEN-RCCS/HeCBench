@@ -4,19 +4,19 @@ pair_HMM_forward(int, int, int, int, double const (*) [41][4][2], double const (
               Generating NVIDIA GPU code
               21, #pragma acc loop gang(teams) /* blockIdx.x */
               32, #pragma acc loop vector(threads) /* threadIdx.x */
-              40, #pragma acc loop seq
-              41, #pragma acc loop seq
-              55, #pragma acc loop seq
-              66, #pragma acc loop vector(threads) /* threadIdx.x */
-              73, #pragma acc loop seq
-              74, #pragma acc loop seq
-              84, #pragma acc loop vector(threads) /* threadIdx.x */
-              93, #pragma acc loop seq
+              36, #pragma acc loop seq
+              37, #pragma acc loop seq
+              51, #pragma acc loop seq
+              61, #pragma acc loop vector(threads) /* threadIdx.x */
+              67, #pragma acc loop seq
+              68, #pragma acc loop seq
+              77, #pragma acc loop vector(threads) /* threadIdx.x */
+              86, #pragma acc loop seq
                   Generating implicit reduction(+:s)
-             106, #pragma acc loop seq
+              99, #pragma acc loop seq
                   Generating implicit reduction(+:s2,s3,s1,s0)
-             125, #pragma acc loop vector(threads) /* threadIdx.x */
-             138, #pragma acc loop seq
+             117, #pragma acc loop vector(threads) /* threadIdx.x */
+             130, #pragma acc loop seq
           18, CUDA shared memory used for mul_3d,f01,t,t01,e,f,mul_4d
               Generating implicit copyin(forward_matrix_out[:][:][:teams][:]) [if not already present]
               Generating implicit copyin(likelihood[:2][:][:teams][:threads],forward_matrix_in[cur_i-1:2][cur_j-1:2][:teams][:]) [if not already present]
@@ -26,30 +26,30 @@ pair_HMM_forward(int, int, int, int, double const (*) [41][4][2], double const (
               Generating implicit firstprivate(cur_j,cur_i)
               Invariant if transformation
               Loop not fused: no successor loop
-          40, Loop is parallelizable
+          36, Loop is parallelizable
               Loop unrolled 2 times (completely unrolled)
-          41, Loop is parallelizable
+          37, Loop is parallelizable
               Loop unrolled 2 times (completely unrolled)
-          55, Loop is parallelizable
+          51, Loop is parallelizable
               Loop unrolled 2 times (completely unrolled)
-          66, Loop is parallelizable
+          61, Loop is parallelizable
               Invariant if transformation
               Loop not fused: no successor loop
               Loop not vectorized: unknown
-          73, Loop is parallelizable
+          67, Loop is parallelizable
               Loop unrolled 2 times (completely unrolled)
-          74, Loop is parallelizable
+          68, Loop is parallelizable
               Loop unrolled 2 times (completely unrolled)
-          84, Loop is parallelizable
-          93, Loop is parallelizable
+          77, Loop is parallelizable
+          86, Loop is parallelizable
               Loop unrolled 2 times (completely unrolled)
-         106, Loop is parallelizable
+          99, Loop is parallelizable
               Loop unrolled 2 times (completely unrolled)
-         125, Loop is parallelizable
+         117, Loop is parallelizable
               Invariant if transformation
               Loop not fused: no successor loop
               Loop not vectorized: data dependency
-         138, Loop is parallelizable
+         130, Loop is parallelizable
               Loop unrolled 2 times (completely unrolled)
 main:
      36, Loop not vectorized/parallelized: too deeply nested
@@ -117,3 +117,4 @@ double std::generate_canonical<double, 53ul, std::linear_congruential_engine<uns
       4, include "random"
           51, include "random.tcc"
              3364, Loop not vectorized: data dependency
+timeout was set to  600

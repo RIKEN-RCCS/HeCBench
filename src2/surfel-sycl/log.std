@@ -3,14 +3,14 @@
 -------------------------------------
 
 f = 0
-Average execution time of surfel_render(base): 102.370117 (ms)
-Average execution time of surfel_render(tile): 86.510727 (ms)
+Average execution time of surfel_render(base): 102.322021 (ms)
+Average execution time of surfel_render(tile): 86.546570 (ms)
 
 f = 1
-Average execution time of surfel_render(base): 101.898888 (ms)
-Average execution time of surfel_render(tile): 86.525475 (ms)
+Average execution time of surfel_render(base): 101.884018 (ms)
+Average execution time of surfel_render(tile): 86.451942 (ms)
 
 f = 2
-Average execution time of surfel_render(base): 101.928299 (ms)
-Average execution time of surfel_render(tile): 86.548965 (ms)
+Average execution time of surfel_render(base): 101.948524 (ms)
+Average execution time of surfel_render(tile): 86.463463 (ms)
 PASS

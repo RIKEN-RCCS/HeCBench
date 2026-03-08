@@ -1,5 +1,5 @@
 Reading File
 run bfs (#nodes = 1000000) on device
-Total kernel execution time : 435.038025 (us)
+Total kernel execution time : 442.910034 (us)
 run bfs (#nodes = 1000000) on host (cpu) 
 Passed

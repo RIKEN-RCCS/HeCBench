@@ -14,9 +14,9 @@
 // 
 //------------ 
 
-Wall time = 0.221437 seconds. 
+Wall time = 0.220742 seconds. 
  
- Relax: error: 7.267767e-01
+ Relax: error: 7.266910e-01
 
 //------------ 
 // 
@@ -24,7 +24,7 @@ Wall time = 0.221437 seconds.
 // 
 //------------ 
 
-Wall time = 0.005612 seconds. 
+Wall time = 0.005640 seconds. 
 
 //------------ 
 // 
@@ -32,6 +32,6 @@ Wall time = 0.005612 seconds.
 // 
 //------------ 
 
-Wall time = 0.014073 seconds. 
+Wall time = 0.013189 seconds. 
 
-Total Wall time = 2.366040 seconds. 
+Total Wall time = 2.353187 seconds. 

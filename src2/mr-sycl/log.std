@@ -1,22 +1,22 @@
 Setting random primes...
 Starting benchmark...
-Total kernel execution time (mr32_simple  ): 0.433825 (ms)
-Total kernel execution time (mr32_efficent): 0.144228 (ms)
+Total kernel execution time (mr32_simple  ): 0.434075 (ms)
+Total kernel execution time (mr32_efficent): 0.144235 (ms)
 PASS
          |     8-bit integer   |    16-bit integer   |    24-bit integer   |    32-bit integer   
   bases  |  effcnt  |  simple  |  effcnt  |  simple  |  effcnt  |  simple  |  effcnt  |  simple  
- 1 base  |    21 ns |    19 ns |    50 ns |    57 ns |    76 ns |   110 ns |   128 ns |   179 ns
- 2 bases |    35 ns |    37 ns |    96 ns |   118 ns |   148 ns |   227 ns |   257 ns |   365 ns
- 3 bases |    48 ns |    56 ns |   144 ns |   183 ns |   220 ns |   350 ns |   391 ns |   557 ns
+ 1 base  |    21 ns |    19 ns |    50 ns |    57 ns |    75 ns |   110 ns |   127 ns |   177 ns
+ 2 bases |    34 ns |    37 ns |    96 ns |   117 ns |   146 ns |   226 ns |   256 ns |   362 ns
+ 3 bases |    48 ns |    56 ns |   143 ns |   182 ns |   219 ns |   348 ns |   389 ns |   554 ns
 
 Setting random odd integers...
 Starting benchmark...
-Total kernel execution time (mr32_simple  ): 0.401440 (ms)
-Total kernel execution time (mr32_efficent): 0.137888 (ms)
+Total kernel execution time (mr32_simple  ): 0.402054 (ms)
+Total kernel execution time (mr32_efficent): 0.137869 (ms)
 PASS
          |     8-bit integer   |    16-bit integer   |    24-bit integer   |    32-bit integer   
   bases  |  effcnt  |  simple  |  effcnt  |  simple  |  effcnt  |  simple  |  effcnt  |  simple  
- 1 base  |    23 ns |    19 ns |    51 ns |    59 ns |    75 ns |   111 ns |   128 ns |   178 ns
- 2 bases |    29 ns |    27 ns |    61 ns |    71 ns |    85 ns |   126 ns |   144 ns |   196 ns
- 3 bases |    34 ns |    34 ns |    70 ns |    84 ns |    94 ns |   141 ns |   155 ns |   214 ns
+ 1 base  |    23 ns |    19 ns |    51 ns |    58 ns |    76 ns |   109 ns |   127 ns |   176 ns
+ 2 bases |    28 ns |    26 ns |    60 ns |    70 ns |    84 ns |   128 ns |   139 ns |   193 ns
+ 3 bases |    33 ns |    33 ns |    69 ns |    82 ns |    94 ns |   140 ns |   153 ns |   211 ns
 

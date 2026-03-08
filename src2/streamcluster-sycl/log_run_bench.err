@@ -1,1 +1,9 @@
+streamcluster.cpp:200:15: warning: variable 'open' set but not used [-Wunused-but-set-variable]
+  200 |   static bool open = false;
+      |               ^
+1 warning generated.
+streamcluster.cpp:200:15: warning: variable 'open' set but not used [-Wunused-but-set-variable]
+  200 |   static bool open = false;
+      |               ^
+1 warning generated.
 timeout was set to  600

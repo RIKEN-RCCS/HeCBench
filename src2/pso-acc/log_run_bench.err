@@ -1,3 +1,8 @@
+main:
+     26, Loop not vectorized/parallelized: potential early exits
+     33, Recognized memory copy idiom
+     43, Recognized memory copy idiom
+     51, Loop not vectorized/parallelized: potential early exits
 fitness_function(float*):
       7, Generating acc routine seq
          Generating NVIDIA GPU code
@@ -6,28 +11,50 @@ kernelUpdateParticle(float*, float*, float const*, float const*, int, float, flo
      32, Generating present(pBests[:],velocities[:],positions[:],gBest[:])
          Generating implicit firstprivate(p)
          Generating NVIDIA GPU code
-         36, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
-     36, Generating implicit firstprivate(rg,rp)
+         35, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+     35, Generating implicit firstprivate(rg,rp)
          Loop not fused: no successor loop
          Generated vector simd code for the loop
 kernelUpdatePBest(float const*, float*, float*, int):
-     48, Generating present(positions[:],pBests[:],gBest[:])
+     47, Generating present(positions[:],pBests[:],gBest[:])
          Generating implicit firstprivate(p)
          Generating NVIDIA GPU code
-         51, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
-         59, #pragma acc loop seq
-         68, #pragma acc loop seq
-         76, #pragma acc loop seq
-     48, Local memory used for tempParticle2,tempParticle1
-     59, Loop not fused: function call before adjacent loop
+         50, #pragma acc loop gang, vector(256) /* blockIdx.x threadIdx.x */
+         58, #pragma acc loop seq
+         67, #pragma acc loop seq
+         75, #pragma acc loop seq
+     47, Local memory used for tempParticle2,tempParticle1
+     58, Loop not fused: function call before adjacent loop
          Generated vector simd code for the loop
-     68, Recognized memory copy idiom
-     76, Generated vector simd code for the loop
+     67, Recognized memory copy idiom
+     75, Generated vector simd code for the loop
 gpu_pso:
-     92, Generating copy(pBests[:size]) [if not already present]
+     91, Generating copy(pBests[:size]) [if not already present]
          Generating copyin(positions[:size],velocities[:size]) [if not already present]
          Generating copy(gBest[:30]) [if not already present]
-     95, Loop not vectorized/parallelized: contains call
+     94, Loop not vectorized/parallelized: contains call
 std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
       1, include "chrono"
          472, Loop not vectorized/parallelized: not countable
+host_fitness_function(float*):
+     11, Generated vector simd code for the loop containing reductions
+pso(int, int, float*, float*, float*, float*):
+     42, Loop not vectorized: data dependency
+         Loop unrolled 2 times
+     53, Loop not fused: different loop trip count
+         Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 8 times
+          11, 1 loop-carried redundant expressions removed with 1 operations and 1 arrays
+              Loop not fused: function call before adjacent loop
+              2 loops fused
+              Generated vector simd code for the loop containing reductions
+          11, 1 loop-carried redundant expressions removed with 1 operations and 1 arrays
+     60, Recognized memory copy idiom
+          11, 1 loop-carried redundant expressions removed with 1 operations and 1 arrays
+              Loop not fused: different loop trip count
+              Generated vector simd code for the loop containing reductions
+     65, Loop versioned for possible aliasing
+         Generated vector simd code for the loop
+         Loop unrolled 4 times
+timeout was set to  600

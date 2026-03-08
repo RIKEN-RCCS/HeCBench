@@ -82,7 +82,7 @@ Finished reading ../lsqt-hip/examples/fan2018cpc/lattice/diffusive/time_step.in
 Started  simulation with random vector number 0
 
 Info: open ./dos.out for output 
-- Time used for finding DOS = 0.26752 s
+- Time used for finding DOS = 0.268397 s
 Info: open ./vac.out for output 
 - calculating VAC step 0
 - calculating VAC step 1
@@ -104,7 +104,7 @@ Info: open ./vac.out for output
 - calculating VAC step 17
 - calculating VAC step 18
 - calculating VAC step 19
-- Time used for finding VAC = 5.43273 s
+- Time used for finding VAC = 5.43816 s
 Info: open ./msd.out for output 
 - calculating MSD step 0
 - calculating MSD step 1
@@ -126,14 +126,14 @@ Info: open ./msd.out for output
 - calculating MSD step 17
 - calculating MSD step 18
 - calculating MSD step 19
-- Time used for finding MSD = 5.53573 s
+- Time used for finding MSD = 5.54475 s
 
 Finished simulation with random vector number 0
 ===========================================================
 
 
 ===============================================================
-Total time used for ../lsqt-hip/examples/fan2018cpc/lattice/diffusive = 14.9851 s
+Total time used for ../lsqt-hip/examples/fan2018cpc/lattice/diffusive = 15.0119 s
 ===============================================================
 
 ===============================================================
@@ -210,7 +210,7 @@ Finished reading ../lsqt-hip/examples/fan2018cpc/lattice/localized/time_step.in
 Started  simulation with random vector number 0
 
 Info: open ./dos.out for output 
-- Time used for finding DOS = 0.118214 s
+- Time used for finding DOS = 0.118254 s
 Info: open ./msd.out for output 
 - calculating MSD step 0
 - calculating MSD step 1
@@ -242,7 +242,7 @@ Info: open ./msd.out for output
 - calculating MSD step 27
 - calculating MSD step 28
 - calculating MSD step 29
-- Time used for finding MSD = 6.09676 s
+- Time used for finding MSD = 6.09796 s
 
 Finished simulation with random vector number 0
 ===========================================================
@@ -252,7 +252,7 @@ Finished simulation with random vector number 0
 Started  simulation with random vector number 1
 
 Info: open ./dos.out for output 
-- Time used for finding DOS = 0.117096 s
+- Time used for finding DOS = 0.117239 s
 Info: open ./msd.out for output 
 - calculating MSD step 0
 - calculating MSD step 1
@@ -284,12 +284,12 @@ Info: open ./msd.out for output
 - calculating MSD step 27
 - calculating MSD step 28
 - calculating MSD step 29
-- Time used for finding MSD = 6.09107 s
+- Time used for finding MSD = 6.09524 s
 
 Finished simulation with random vector number 1
 ===========================================================
 
 
 ===============================================================
-Total time used for ../lsqt-hip/examples/fan2018cpc/lattice/localized = 17.5815 s
+Total time used for ../lsqt-hip/examples/fan2018cpc/lattice/localized = 17.6148 s
 ===============================================================

@@ -1,30 +1,30 @@
 
 kernel size: 1
-Average execution time of vol2col kernel: 22.067717 (us)
+Average execution time of vol2col kernel: 23.145575 (us)
 PASS
-Average execution time of col2vol kernel: 32.794651 (us)
+Average execution time of col2vol kernel: 32.037697 (us)
 PASS
 
 kernel size: 3
-Average execution time of vol2col kernel: 56.319088 (us)
+Average execution time of vol2col kernel: 56.359680 (us)
 PASS
-Average execution time of col2vol kernel: 99.068268 (us)
+Average execution time of col2vol kernel: 99.007080 (us)
 PASS
 
 kernel size: 5
-Average execution time of vol2col kernel: 152.373108 (us)
+Average execution time of vol2col kernel: 152.066132 (us)
 PASS
-Average execution time of col2vol kernel: 267.520660 (us)
+Average execution time of col2vol kernel: 267.104462 (us)
 PASS
 
 kernel size: 7
-Average execution time of vol2col kernel: 505.910126 (us)
+Average execution time of vol2col kernel: 508.477692 (us)
 PASS
-Average execution time of col2vol kernel: 393.662872 (us)
+Average execution time of col2vol kernel: 396.374390 (us)
 PASS
 
 kernel size: 9
-Average execution time of vol2col kernel: 1279.060913 (us)
+Average execution time of vol2col kernel: 1281.828369 (us)
 PASS
-Average execution time of col2vol kernel: 704.933716 (us)
+Average execution time of col2vol kernel: 705.395874 (us)
 PASS

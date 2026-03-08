@@ -1,49 +1,49 @@
 
 LEBESGUE_TEST
-03 February 2026 06:27:11 AM
+07 March 2026 11:47:18 PM
 
 LEBESGUE_TEST01:
   Analyze Chebyshev1 points.
-  Total kernel execution time 0.020403 (s)
+  Total kernel execution time 0.020569 (s)
   PASS
 
 LEBESGUE_TEST02:
   Analyze Chebyshev2 points.
-  Total kernel execution time 0.020823 (s)
+  Total kernel execution time 0.021267 (s)
   PASS
 
 LEBESGUE_TEST03:
   Analyze Chebyshev3 points.
-  Total kernel execution time 0.018759 (s)
+  Total kernel execution time 0.019205 (s)
   PASS
 
 LEBESGUE_TEST04:
   Analyze Chebyshev4 points.
-  Total kernel execution time 0.020856 (s)
+  Total kernel execution time 0.021192 (s)
   PASS
 
 LEBESGUE_TEST05:
   Analyze Equidistant1 points.
-  Total kernel execution time 0.018554 (s)
+  Total kernel execution time 0.019211 (s)
   PASS
 
 LEBESGUE_TEST06:
   Analyze Equidistant2 points.
-  Total kernel execution time 0.019938 (s)
+  Total kernel execution time 0.020443 (s)
   PASS
 
 LEBESGUE_TEST07:
   Analyze Equidistant3 points.
-  Total kernel execution time 0.018625 (s)
+  Total kernel execution time 0.018931 (s)
   PASS
 
 LEBESGUE_TEST08:
   Analyze Fejer1 points.
-  Total kernel execution time 0.018553 (s)
+  Total kernel execution time 0.019243 (s)
   PASS
 
 LEBESGUE_TEST09:
   Analyze Fejer2 points.
-  Total kernel execution time 0.018439 (s)
+  Total kernel execution time 0.019097 (s)
   PASS
-03 February 2026 06:27:51 AM
+07 March 2026 11:47:57 PM

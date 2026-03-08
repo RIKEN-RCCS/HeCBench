@@ -1,0 +1,10 @@
+<CUDA>[ERROR]: 
+UR CUDA ERROR:
+	Value:           700
+	Name:            CUDA_ERROR_ILLEGAL_ADDRESS
+	Description:     an illegal memory access was encountered
+	Function:        operator()
+	Source Location: /hs/work0/home/users/u0001901/tmp2/sycl_workspace/unified-runtime/source/adapters/cuda/queue.cpp:154
+
+terminate called after throwing an instance of 'sycl::_V1::exception'
+  what():  cuda backend failed with error: 2147483646 (UR_RESULT_ERROR_UNKNOWN)

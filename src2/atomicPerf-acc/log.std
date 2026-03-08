@@ -1,42 +1,42 @@
 
 FP64 atomic add
-Average execution time of BlockRangeAtomicOnGlobalMem: 123.686356 (us)
+Average execution time of BlockRangeAtomicOnGlobalMem: 123.357269 (us)
 PASS
-Average execution time of WarpRangeAtomicOnGlobalMem: 462.065125 (us)
+Average execution time of WarpRangeAtomicOnGlobalMem: 462.150421 (us)
 PASS
-Average execution time of SingleRangeAtomicOnGlobalMem: 2726.340576 (us)
+Average execution time of SingleRangeAtomicOnGlobalMem: 2726.195068 (us)
 PASS
-Average execution time of BlockRangeAtomicOnSharedMem: 17.892439 (us)
+Average execution time of BlockRangeAtomicOnSharedMem: 17.916981 (us)
 PASS
-Average execution time of WarpRangeAtomicOnSharedMem: 15.516524 (us)
+Average execution time of WarpRangeAtomicOnSharedMem: 15.564407 (us)
 PASS
-Average execution time of SingleRangeAtomicOnSharedMem: 36.405682 (us)
+Average execution time of SingleRangeAtomicOnSharedMem: 36.369305 (us)
 PASS
 
 INT32 atomic add
-Average execution time of BlockRangeAtomicOnGlobalMem: 65.964432 (us)
+Average execution time of BlockRangeAtomicOnGlobalMem: 66.089844 (us)
 PASS
-Average execution time of WarpRangeAtomicOnGlobalMem: 123.710075 (us)
+Average execution time of WarpRangeAtomicOnGlobalMem: 123.873169 (us)
 PASS
-Average execution time of SingleRangeAtomicOnGlobalMem: 44.724216 (us)
+Average execution time of SingleRangeAtomicOnGlobalMem: 44.846924 (us)
 PASS
-Average execution time of BlockRangeAtomicOnSharedMem: 12.925179 (us)
+Average execution time of BlockRangeAtomicOnSharedMem: 13.068334 (us)
 PASS
-Average execution time of WarpRangeAtomicOnSharedMem: 13.236517 (us)
+Average execution time of WarpRangeAtomicOnSharedMem: 13.305176 (us)
 PASS
-Average execution time of SingleRangeAtomicOnSharedMem: 13.104988 (us)
+Average execution time of SingleRangeAtomicOnSharedMem: 13.162895 (us)
 PASS
 
 FP32 atomic add
-Average execution time of BlockRangeAtomicOnGlobalMem: 65.931061 (us)
+Average execution time of BlockRangeAtomicOnGlobalMem: 66.034782 (us)
 PASS
-Average execution time of WarpRangeAtomicOnGlobalMem: 123.281143 (us)
+Average execution time of WarpRangeAtomicOnGlobalMem: 123.360771 (us)
 PASS
-Average execution time of SingleRangeAtomicOnGlobalMem: 2726.263916 (us)
+Average execution time of SingleRangeAtomicOnGlobalMem: 2726.220703 (us)
 PASS
-Average execution time of BlockRangeAtomicOnSharedMem: 13.351266 (us)
+Average execution time of BlockRangeAtomicOnSharedMem: 13.411769 (us)
 PASS
-Average execution time of WarpRangeAtomicOnSharedMem: 14.806971 (us)
+Average execution time of WarpRangeAtomicOnSharedMem: 14.941881 (us)
 PASS
-Average execution time of SingleRangeAtomicOnSharedMem: 86.160507 (us)
+Average execution time of SingleRangeAtomicOnSharedMem: 86.367432 (us)
 PASS

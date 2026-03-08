@@ -8,12 +8,12 @@ k 10000
 
 Getting input from file file...
 Transforming data to a GPU suitable structure...
-Tree transformation took 0.047685
+Tree transformation took 0.043635
 Waiting for command
 > 
 ******command: j count=6000, rSize=6000 
 knodes_elem=7874, knodes_unit_mem=2068, knodes_mem=16283432
-Kernel execution time: 1122.000000 (us)
+Kernel execution time: 1410.000000 (us)
 > > > > > > > > > > > > 
  ******command: k count=10000 
 records_elem=1000000, records_unit_mem=4, records_mem=4000000

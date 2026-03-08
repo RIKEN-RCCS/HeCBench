@@ -1,4 +1,4 @@
-Average kernel execution time 0.013551 (s)
+Average kernel execution time 0.013727 (s)
 [ACC]
  min=-1.010004501e+02
  max= 1.010003128e+02
@@ -7,7 +7,7 @@ Average kernel execution time 0.013551 (s)
  nan=0
  inf=0
  hash64=0xc95ccc08c04b12f6
-Average kernel execution time 0.017862 (s)
+Average kernel execution time 0.017873 (s)
 [ACC]
  min=-1.010000000e+02
  max= 1.010000000e+02

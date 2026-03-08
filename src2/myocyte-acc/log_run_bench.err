@@ -1,0 +1,155 @@
+main:
+     84, Loop not vectorized/parallelized: potential early exits
+    147, Loop not vectorized/parallelized: contains call
+    154, Loop not vectorized/parallelized: contains call
+    160, Loop not vectorized/parallelized: contains call
+    171, Loop not vectorized/parallelized: potential early exits
+    177, Loop not vectorized/parallelized: potential early exits
+    199, Loop not vectorized/parallelized: contains call
+    211, Loop not vectorized/parallelized: contains call
+    219, Loop not vectorized/parallelized: contains call
+    225, Loop not vectorized/parallelized: contains call
+"./kernel/./kernel_ecc.h", line 3: warning: Routine "kernel_ecc" will be treated as sequential because its "routine" directive doesn't specify a level of parallelism [no_routine_type]
+  kernel_ecc(const  fp timeinst,
+  ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"./kernel/./kernel_cam.h", line 3: warning: Routine "kernel_cam" will be treated as sequential because its "routine" directive doesn't specify a level of parallelism [no_routine_type]
+  kernel_cam(const fp timeinst,
+  ^
+
+kernel_ecc(float, float const*, float*, int, float const*):
+      5, include "solver.c"
+          56, include "embedded_fehlberg_7_8.c"
+               76, include "master.c"
+                     5, include "kernel_ecc.h"
+                          7, Generating acc routine seq
+                             Generating NVIDIA GPU code
+kernel_cam(float, float const*, float*, int, float const*, int, float*, int, float):
+      5, include "solver.c"
+          56, include "embedded_fehlberg_7_8.c"
+               76, include "master.c"
+                     6, include "kernel_cam.h"
+                         11, Generating acc routine seq
+                             Generating NVIDIA GPU code
+master(float, float*, float*, float*, float*, double*, double*, double*):
+      5, include "solver.c"
+          56, include "embedded_fehlberg_7_8.c"
+               76, include "master.c"
+                    50, Generating update device(initvalu[:91],params[:18])
+                    56, Generating present(finavalu[:],params[:],initvalu[:],com[:])
+                        Generating NVIDIA GPU code
+                        58, #pragma acc loop gang(2) /* blockIdx.x */
+                        78, #pragma acc loop vector(2) /* threadIdx.x */
+                       101, #pragma acc loop vector(2) /* threadIdx.x */
+                    78, Loop is parallelizable
+                        Generating implicit firstprivate(timeinst)
+                        Loop not vectorized/parallelized: contains call
+                   101, Loop is parallelizable
+                        Loop not vectorized/parallelized: loop count too small
+                   169, Generating update self(finavalu[:91],com[:3])
+                   196, Loop not vectorized/parallelized: potential early exits
+embedded_fehlberg_7_8(float, float, float*, float*, float*, float*, float*, double*, double*, double*):
+      5, include "solver.c"
+          56, include "embedded_fehlberg_7_8.c"
+              183, Loop not vectorized/parallelized: contains call
+              197, Recognized memory copy idiom
+              203, Generating create(initvalu[:91],finavalu[:91]) [if not already present]
+              209, Generating update device(initvalu[:91])
+              221, Generating update self(finavalu[:91])
+              227, Loop not fused: function call before adjacent loop
+                   Loop versioned for possible aliasing
+                   Generated vector simd code for the loop
+                   Loop unrolled 4 times
+              235, Generating update device(initvalu[:91])
+              247, Generating update self(finavalu[:91])
+              253, Loop not fused: function call before adjacent loop
+                   Loop versioned for possible aliasing
+                   Generated vector simd code for the loop
+                   Loop unrolled 4 times
+              262, Generating update device(initvalu[:91])
+              274, Generating update self(finavalu[:91])
+              280, Loop not fused: function call before adjacent loop
+                   Loop versioned for possible aliasing
+                   Generated vector simd code for the loop
+                   Loop unrolled 4 times
+              289, Generating update device(initvalu[:91])
+              301, Generating update self(finavalu[:91])
+              307, Loop not fused: function call before adjacent loop
+                   Loop versioned for possible aliasing
+                   Generated vector simd code for the loop
+                   Loop unrolled 2 times
+              316, Generating update device(initvalu[:91])
+              328, Generating update self(finavalu[:91])
+              334, Loop not fused: function call before adjacent loop
+                   Loop versioned for possible aliasing
+                   Generated vector simd code for the loop
+                   Loop unrolled 2 times
+              343, Generating update device(initvalu[:91])
+              354, Generating update self(finavalu[:91])
+              364, Loop not fused: function call before adjacent loop
+                   Loop versioned for possible aliasing
+                   Generated vector simd code for the loop
+                   Loop unrolled 2 times
+              370, Generating update device(initvalu[:91])
+              381, Generating update self(finavalu[:91])
+              389, Loop not fused: function call before adjacent loop
+                   Loop versioned for possible aliasing
+                   Generated vector simd code for the loop
+                   Loop unrolled 2 times
+              398, Generating update device(initvalu[:91])
+              409, Generating update self(finavalu[:91])
+              416, Loop not fused: function call before adjacent loop
+                   Loop versioned for possible aliasing
+                   Generated vector simd code for the loop
+              425, Generating update device(initvalu[:91])
+              436, Generating update self(finavalu[:91])
+              443, Loop not fused: function call before adjacent loop
+                   Loop versioned for possible aliasing
+                   Generated vector simd code for the loop
+              452, Generating update device(initvalu[:91])
+              463, Generating update self(finavalu[:91])
+              470, Loop not fused: function call before adjacent loop
+                   Loop versioned for possible aliasing
+                   Generated vector simd code for the loop
+              479, Generating update device(initvalu[:91])
+              490, Generating update self(finavalu[:91])
+              497, Loop not fused: function call before adjacent loop
+                   Loop versioned for possible aliasing
+                   Generated vector simd code for the loop
+              506, Generating update device(initvalu[:91])
+              517, Generating update self(finavalu[:91])
+              524, Loop not fused: function call before adjacent loop
+                   Loop versioned for possible aliasing
+                   Generated vector simd code for the loop
+              533, Generating update device(initvalu[:91])
+              545, Generating update self(finavalu[:91])
+              551, Loop not fused: dependence chain to sibling loop
+                   Loop not vectorized: data dependency
+              558, Loop not fused: function call before adjacent loop
+                   Loop versioned for possible aliasing
+                   Generated vector simd code for the loop
+                   Loop unrolled 2 times
+solver(float**, float*, int, float*, float*, double*, double*, double*):
+      5, include "solver.c"
+         134, Generating enter data create(params[:18],com[:3])
+              Generating update device(com[:3],params[:18])
+         150, Loop not vectorized/parallelized: potential early exits
+         179, Loop not vectorized: unknown
+         193, Loop not fused: complex flow graph
+              Loop not vectorized: data dependency
+         214, Loop not vectorized: unknown
+         259, Generating exit data delete(com[:3],params[:18])
+         279, Generating exit data delete(params[:18],com[:3])
+kernel_wrapper(int, int, float***, float**, float**, float*):
+     29, Loop not vectorized/parallelized: contains call
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      3, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      5, include "solver.c"
+std::fmod(float, float):
+      5, include "solver.c"
+                             280, Generating implicit omp declare target routine
+                                  Generating NVIDIA GPU code
+timeout was set to  600

@@ -8,9 +8,9 @@ Checking block size 512.
 Checking block size 1024.
 All results match. Starting benchmarks.
 
-block_size   32 | time 2.9381 ms | per token 0.36 µs
-block_size   64 | time 2.3050 ms | per token 0.28 µs
-block_size  128 | time 2.3070 ms | per token 0.28 µs
-block_size  256 | time 2.3069 ms | per token 0.28 µs
-block_size  512 | time 2.3061 ms | per token 0.28 µs
-block_size 1024 | time 2.3045 ms | per token 0.28 µs
+block_size   32 | time 2.9389 ms | per token 0.36 µs
+block_size   64 | time 2.3041 ms | per token 0.28 µs
+block_size  128 | time 2.3033 ms | per token 0.28 µs
+block_size  256 | time 2.3027 ms | per token 0.28 µs
+block_size  512 | time 2.3040 ms | per token 0.28 µs
+block_size 1024 | time 2.3026 ms | per token 0.28 µs

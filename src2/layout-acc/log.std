@@ -1,4 +1,4 @@
-Average kernel execution time (AoS): 29.1054 (us)
+Average kernel execution time (AoS): 28.5242 (us)
 PASS
-Average kernel execution time (SoA): 90.6589 (us)
+Average kernel execution time (SoA): 89.8485 (us)
 PASS

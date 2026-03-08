@@ -1,23 +1,59 @@
 extend2(extend2_dat*):
-     80, Generating copyin(qp[:qlen*m],target[:tlen],query[:qlen],eh[:qlen+1]) [if not already present]
+     80, Generating copyin(qp[:qlen*m],query[:qlen],target[:tlen],eh[:qlen+1]) [if not already present]
          Generating copyout(d_tle) [if not already present]
          Generating copyin(mat[:m*m]) [if not already present]
          Generating copyout(d_max_off,d_score,d_gscore,d_qle,d_gtle) [if not already present]
-     82, Generating implicit firstprivate(qlen,o_ins,m,e_del,o_del,h0,end_bonus,e_ins,tlen)
-         Accelerator serial kernel generated
-         Generating implicit firstprivate(w)
+     82, Generating implicit firstprivate(qlen,o_ins,m,e_del,o_del,h0,end_bonus,e_ins,w,tlen)
          Generating NVIDIA GPU code
-         92, #pragma acc for seq
-         94, #pragma acc for seq
-        107, #pragma acc for seq
-        136, #pragma acc for seq
-     92, Generating implicit private(p)
-     94, Loop not vectorized: data dependency
+         92, #pragma acc loop seq
+         94, #pragma acc loop seq
+        107, #pragma acc loop seq
+        136, #pragma acc loop seq
+     92, Complex loop carried dependence of query->,p-> prevents parallelization
+         Loop carried dependence due to exposed use of qp prevents parallelization
+         Complex loop carried dependence of qp-> prevents parallelization
+         Generating implicit private(p)
+         Complex loop carried dependence of query-> prevents parallelization
+     94, Complex loop carried dependence of query->,p-> prevents parallelization
+         Loop carried dependence due to exposed use of qp prevents parallelization
+         Complex loop carried dependence of qp-> prevents parallelization
+         Loop not vectorized: data dependency
          Loop unrolled 2 times
-    102, Loop not vectorized/parallelized: potential early exits
-    107, Generated vector simd code for the loop containing reductions
-    119, Generating implicit firstprivate(zdrop,q)
-    136, Loop not vectorized: data dependency
+    102, Loop carried dependence of eh->h prevents parallelization
+         Loop carried backward dependence of eh->h prevents vectorization
+         Loop not vectorized/parallelized: potential early exits
+    107, Loop carried scalar dependence for max at line 108
+         Scalar last value needed after loop for max at line 109,112
+         Generated vector simd code for the loop containing reductions
+    119, Loop carried dependence due to exposed use of eh[:qlen+1],eh[2:qlen-1] prevents parallelization
+         Loop carried dependence of eh->h prevents parallelization
+         Loop carried backward dependence of eh->h prevents vectorization
+         Loop carried dependence of eh->e prevents parallelization
+         Loop carried backward dependence of eh->e prevents vectorization
+         Loop carried scalar dependence for max_ie at line 163
+         Scalar last value needed after loop for max_ie at line 186
+         Loop carried scalar dependence for gscore at line 163,164
+         Scalar last value needed after loop for gscore at line 187
+         Loop carried scalar dependence for max at line 167,172,174
+         Scalar last value needed after loop for max at line 189
+         Loop carried scalar dependence for max_j at line 171,172,174
+         Scalar last value needed after loop for max_j at line 184
+         Loop carried scalar dependence for max_off at line 169
+         Scalar last value needed after loop for max_off at line 188
+         Loop carried scalar dependence for beg at line 124
+         Loop carried scalar dependence for end at line 125
+         Complex loop carried dependence of p->h,p->e prevents parallelization
+         Generating implicit firstprivate(zdrop,q)
+         Complex loop carried dependence of p->e prevents parallelization
+    136, Complex loop carried dependence of p->h,p->e prevents parallelization
+         Loop carried scalar dependence for h1 at line 144
+         Scalar last value needed after loop for h1 at line 161,163,164
+         Loop carried scalar dependence for mj at line 149
+         Scalar last value needed after loop for mj at line 168,169,171,172,174
+         Loop carried scalar dependence for m at line 149,150
+         Scalar last value needed after loop for m at line 166,167,168,172,174
+         Loop carried scalar dependence for f at line 147,158
+         Loop not vectorized: data dependency
     160, Accelerator restriction: induction variable live-out from loop: j
     168, Accelerator restriction: induction variable live-out from loop: max_i
     178, Accelerator restriction: induction variable live-out from loop: j

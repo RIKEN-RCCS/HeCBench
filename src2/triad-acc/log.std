@@ -1,45 +1,45 @@
 >> Executing Triad with vectors of length 4194304 and block size of 16384 elements.
 Block: 64KB
-Average TriadFlops 7.52437 GFLOPS/s
-Average TriadBdwth 45.1462 GB/s
+Average TriadFlops 7.02799 GFLOPS/s
+Average TriadBdwth 42.168 GB/s
 PASS
 >> Executing Triad with vectors of length 4194304 and block size of 32768 elements.
 Block: 128KB
-Average TriadFlops 48.3968 GFLOPS/s
-Average TriadBdwth 290.381 GB/s
+Average TriadFlops 47.7418 GFLOPS/s
+Average TriadBdwth 286.451 GB/s
 PASS
 >> Executing Triad with vectors of length 4194304 and block size of 65536 elements.
 Block: 256KB
-Average TriadFlops 74.8991 GFLOPS/s
-Average TriadBdwth 449.394 GB/s
+Average TriadFlops 73.8864 GFLOPS/s
+Average TriadBdwth 443.319 GB/s
 PASS
 >> Executing Triad with vectors of length 4194304 and block size of 131072 elements.
 Block: 512KB
-Average TriadFlops 96.9843 GFLOPS/s
-Average TriadBdwth 581.906 GB/s
+Average TriadFlops 100.55 GFLOPS/s
+Average TriadBdwth 603.298 GB/s
 PASS
 >> Executing Triad with vectors of length 4194304 and block size of 262144 elements.
 Block: 1024KB
-Average TriadFlops 103.354 GFLOPS/s
-Average TriadBdwth 620.123 GB/s
+Average TriadFlops 99.5538 GFLOPS/s
+Average TriadBdwth 597.323 GB/s
 PASS
 >> Executing Triad with vectors of length 4194304 and block size of 524288 elements.
 Block: 2048KB
-Average TriadFlops 89.1259 GFLOPS/s
-Average TriadBdwth 534.755 GB/s
+Average TriadFlops 84.91 GFLOPS/s
+Average TriadBdwth 509.46 GB/s
 PASS
 >> Executing Triad with vectors of length 4194304 and block size of 1048576 elements.
 Block: 4096KB
-Average TriadFlops 65.8483 GFLOPS/s
-Average TriadBdwth 395.09 GB/s
+Average TriadFlops 63.477 GFLOPS/s
+Average TriadBdwth 380.862 GB/s
 PASS
 >> Executing Triad with vectors of length 4194304 and block size of 2097152 elements.
 Block: 8192KB
-Average TriadFlops 40.7788 GFLOPS/s
-Average TriadBdwth 244.673 GB/s
+Average TriadFlops 40.6498 GFLOPS/s
+Average TriadBdwth 243.899 GB/s
 PASS
 >> Executing Triad with vectors of length 4194304 and block size of 4194304 elements.
 Block: 16384KB
-Average TriadFlops 58.4692 GFLOPS/s
-Average TriadBdwth 350.815 GB/s
+Average TriadFlops 56.522 GFLOPS/s
+Average TriadBdwth 339.132 GB/s
 PASS

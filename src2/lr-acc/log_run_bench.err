@@ -1,0 +1,97 @@
+"main.cpp", line 42: warning: conversion from a string literal to "char *" is deprecated [deprecated_string_conv]
+    params.filename = TEMP_FILENAME;
+                    ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+main:
+          48, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_8_main_cpp_5c2b4bbd::create_dataset(linear_param_t*, float2*):
+     29, Loop not vectorized/parallelized: potential early exits
+_INTERNAL_8_main_cpp_5c2b4bbd::temperature_regression(results_t*, int):
+          29, Loop not vectorized/parallelized: potential early exits
+iterative_regression(linear_param_t*, float2*, result_t*):
+     31, Loop not fused: different loop trip count
+         Generated vector simd code for the loop containing reductions
+          14, Generated vector simd code for the loop containing reductions
+_INTERNAL_15_linear_iter_cpp_14d11714::r_squared(linear_param_t*, float2*, float4*, result_t*):
+     14, Generated vector simd code for the loop containing reductions
+operator+=(float2&, float2 const&):
+           2, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+operator+=(float4&, float4 const&):
+           8, Generating implicit omp declare target routine
+              Generating NVIDIA GPU code
+linear_regression(int, float2 const*, float4*):
+      6, include "kernel.h"
+          19, Generating implicit firstprivate(nTeams)
+              Generating NVIDIA GPU code
+              21, #pragma acc loop gang(nTeams) /* blockIdx.x */
+              26, #pragma acc loop vector(63) /* threadIdx.x */
+              35, #pragma acc loop seq
+              37, #pragma acc loop vector(63) /* threadIdx.x */
+              50, #pragma acc loop vector(63) /* threadIdx.x */
+          19, CUDA shared memory used for interns
+              Generating implicit copyout(result[:nTeams]) [if not already present]
+              Generating implicit copyin(dataset[:]) [if not already present]
+          26, Loop is parallelizable
+              Loop not vectorized: unprofitable for target
+              Loop unrolled 4 times
+          35, Loop carried scalar dependence for old_i at line 41,43
+              Loop carried scalar dependence for i at line 38,40,41,47
+              Complex loop carried dependence of +((i+(loc_id))*16)->x,+((loc_id)*16)->x,+((i+(loc_id))*16)->y,+((loc_id)*16)->y,+((i+(loc_id))*16)->z,+((loc_id)*16)->z,+((i+(loc_id))*16)->w,+((loc_id)*16)->w,+(old_i*16)->x,+(old_i*16)->y,+(old_i*16)->z,+(old_i*16)->w prevents parallelization
+              Loop not vectorized/parallelized: not countable
+          37, Loop is parallelizable
+              Loop not vectorized: data dependency
+          50, Loop is parallelizable
+              Loop unrolled 1 times (completely unrolled)
+rsquared(int, float2 const*, float, float2, float2*):
+      6, include "kernel.h"
+          62, Generating implicit firstprivate(nTeams)
+              Generating NVIDIA GPU code
+              64, #pragma acc loop gang(nTeams) /* blockIdx.x */
+              69, #pragma acc loop vector(63) /* threadIdx.x */
+              77, #pragma acc loop seq
+              79, #pragma acc loop vector(63) /* threadIdx.x */
+              92, #pragma acc loop vector(63) /* threadIdx.x */
+          62, CUDA shared memory used for dist
+              Generating implicit copyin(equation) [if not already present]
+              Generating implicit copyout(result[:nTeams]) [if not already present]
+              Generating implicit copyin(dataset[:]) [if not already present]
+          69, Loop is parallelizable
+              Generating implicit firstprivate(mean)
+              Generated vector simd code for the loop
+          77, Loop carried scalar dependence for old_i at line 83,85
+              Loop carried scalar dependence for i at line 80,82,83,89
+              Complex loop carried dependence of +((i+(loc_id))*8)->x,+((loc_id)*8)->x,+((i+(loc_id))*8)->y,+((loc_id)*8)->y,+(old_i*8)->x,+(old_i*8)->y prevents parallelization
+              Loop not vectorized/parallelized: not countable
+          79, Loop is parallelizable
+              Loop not vectorized: data dependency
+          92, Loop is parallelizable
+              Loop unrolled 1 times (completely unrolled)
+linear_regressionOMP(float2*, float4*, int, int):
+     23, Loop not vectorized/parallelized: not countable
+rsquaredOMP(float2*, float, float2, float2*, int, int):
+     60, Loop not vectorized/parallelized: not countable
+parallelized_regression(linear_param_t*, float2*, result_t*):
+    160, Generating copyin(dataset[:size]) [if not already present]
+         Generating create(results[:wg_count]) [if not already present]
+    165, Loop not vectorized/parallelized: contains call
+    173, Generating update self(results[:?])
+          23, Loop not vectorized/parallelized: not countable
+    183, Loop not fused: function call before adjacent loop
+         Loop not vectorized: data dependency
+         Loop unrolled 2 times
+std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
+      4, include "chrono"
+         472, Loop not vectorized/parallelized: not countable
+      6, include "kernel.h"
+_INTERNAL_14_linear_par_cpp_c77ce6ef::r_squared(linear_param_t*, float2*, float4*, result_t*):
+    104, Generating copyin(dataset[:size]) [if not already present]
+         Generating create(results[:wg_count]) [if not already present]
+    109, Loop not vectorized/parallelized: contains call
+    117, Generating update self(results[:?])
+          60, Loop not vectorized/parallelized: not countable
+    126, Loop not fused: function call before adjacent loop
+         Generated vector simd code for the loop containing reductions
+timeout was set to  600

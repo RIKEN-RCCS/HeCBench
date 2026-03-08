@@ -1,14 +1,14 @@
 main:
-    123, Recognized memory set idiom
-    127, Generating copyin(h_array[:N],h_count[:1]) [if not already present]
+    122, Recognized memory set idiom
+    126, Generating copyin(h_array[:N],h_count[:1]) [if not already present]
          Generating create(h_result[:grids]) [if not already present]
-    128, Loop not vectorized/parallelized: potential early exits
+    127, Loop not vectorized/parallelized: potential early exits
           32, Loop not fused: function call before adjacent loop
               Loop not vectorized: recurrence
               Loop unrolled 2 times
-    137, Generating update self(h_count[:1],h_result[:grids])
-    140, Generating update self(h_result[:1],h_count[:1])
-    156, Generating update self(h_result[:1])
+    136, Generating update self(h_count[:1],h_result[:grids])
+    139, Generating update self(h_result[:1],h_count[:1])
+    155, Generating update self(h_result[:1])
 std::chrono::duration<long, std::ratio<1l, 1000000000l>>::_S_gcd(long, long):
       4, include "chrono"
          472, Loop not vectorized/parallelized: not countable
@@ -35,14 +35,15 @@ _INTERNAL_8_main_cpp_main::sum_acc(int, int, float const*, int, unsigned int*, f
      74, Loop is parallelizable
          Generating implicit firstprivate(N)
          Generated vector simd code for the loop containing reductions
-     88, Generating present(result[:teams])
+     87, Generating present(result[:teams])
          Generating implicit firstprivate(teams)
          Accelerator serial kernel generated
          Generating NVIDIA GPU code
-         90, #pragma acc for seq
-     90, Loop not fused: no successor loop
+         89, #pragma acc for seq
+     89, Loop not fused: no successor loop
          Generated vector simd code for the loop containing reductions
          Loop unrolled 8 times
-     98, Generating present(count[:1])
+     97, Generating present(count[:1])
          Accelerator serial kernel generated
          Generating NVIDIA GPU code
+timeout was set to  600
