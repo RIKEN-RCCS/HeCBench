@@ -1,7 +1,8 @@
-./extract-time4.sh > results_time_command.md
-python3 genfig_time_command.py -m results_time_command.md -e > results_time_command_with_graph.md
+./extract-time.sh > results_time_command.md
+python3 genfig_time_command.py -m results_time_command.md -e > results_time_command_with_graph.md 
 
 python3 collect_bench_log.py -b List_full -o results_time_builtin.md
-python3 genfig_time_builtin.py -m results_time_builtin.md -e > results_time_builtin_with_graph.md
+python3 genfig_time_builtin.py -m results_time_builtin.md -e > results_time_builtin_with_graph.md 
 
-./extract-mem4.sh > results_memory.md
+./extract-mem.sh > results_memory.md
+
