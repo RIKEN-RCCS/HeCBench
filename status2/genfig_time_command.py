@@ -56,14 +56,14 @@ def extend_markdown(markd, imagedir='SVGs', src_dir='../src2', mark_command=Fals
     line = f.readline().strip();  print(line);
     
     firstline = f.readline().strip()
-    firstline += ' plot |'
+    firstline += ' グラフ |'
     if mark_command:
         firstline += ' command |'
     print(firstline)
     secondline = f.readline().strip()
-    secondline += ' -- |'
+    secondline += ' ---: |'
     if mark_command:
-        secondline += ' -- |'
+        secondline += ' ---: |'
     print(secondline)
     for line in f:
         if line.find("完了") > 0:
@@ -84,7 +84,7 @@ def extend_markdown(markd, imagedir='SVGs', src_dir='../src2', mark_command=Fals
         print(line)
     f.close()
 
-def gen_plt(x, line, imagedir='SVGs'):
+def gen_plt(x, line, imagedir='SVGs', large_font=False):
     words = line.strip().split('|')
     bname = words[1].strip()
 
@@ -93,7 +93,6 @@ def gen_plt(x, line, imagedir='SVGs'):
     
 #    words = words[2:len(words)-1]
     words = words[2:6]
-#    print("qors ", words )
     
     y = []
     for w in words:
@@ -104,21 +103,29 @@ def gen_plt(x, line, imagedir='SVGs'):
             fl = 0.0
         y.append(fl)
     plt.close()
+
+    if large_font:
+        plt.rcParams['font.size'] = 24
+
     fig, ax = plt.subplots()
     ax.set_ylabel('time (s)')
-    plt.bar(x, y)
+
+    plt.bar(x, y, color='0.7')
     os.makedirs(imagedir, exist_ok = True)
+
     outf = imagedir+'/'+bname+'.svg'
-    plt.savefig(outf)
+    plt.savefig(outf,bbox_inches='tight')
 
 if __name__ == '__main__':
     parser = optparse.OptionParser(usage="%prog [options]",description="generate bar graph from the markdown table")
     parser.add_option('-m', '--markdown', dest='markdown', default=None)
     parser.add_option('-e', '--extend', dest='extend', action='store_true', default=False)
     parser.add_option('-n', '--noplot', dest='noplot', action='store_true', default=False)
-    parser.add_option('-i', '--imagedir', dest='imagedir', default='SVGs_command')
+    parser.add_option('-i', '--imagedir', dest='imagedir', default='Graph_command')
     parser.add_option('--mark_command', dest='mark_command', action='store_true', default=False)
     parser.add_option('--src_dir', dest='src_dir', default='../src2')
+    parser.add_option('--large_font', dest='large_font',
+                      action='store_true', default=False )
 
     (options, args) = parser.parse_args()
 
@@ -134,8 +141,6 @@ if __name__ == '__main__':
     columns = line0.strip().split('|')
 #    x = columns[2:len(columns)-1]
     x = columns[2:6]
-#    print("x",x)
-#    exit(-1)
     
     dumm = f.readline()
 
@@ -144,8 +149,7 @@ if __name__ == '__main__':
             if line.find("完了") > 0: pass
             if line.find("|") >= 0:
                 line = line.strip()
-#                print("line ", line )
-                gen_plt(x,line,imagedir=options.imagedir)
+                gen_plt(x,line,imagedir=options.imagedir,large_font=options.large_font)
     f.close()
 
     if options.extend:
