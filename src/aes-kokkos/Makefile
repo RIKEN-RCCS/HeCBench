@@ -15,7 +15,7 @@ KOKKOS_PATH ?= $(HOME)/kokkos
 
 program = main
 
-source = main.cpp
+source = main.cpp reference.cpp utils.cpp
 
 obj = $(source:.cpp=.o)
 
@@ -49,7 +49,7 @@ endif
 $(program): $(obj) Makefile
 	$(CC) $(CFLAGS) $(obj) -o $@ $(LDFLAGS)
 
-%.o: %.cpp aes.h kernels.h reference.cpp utils.cpp ../include/SDKBitMap.h
+%.o: %.cpp aes.h kernels.h ../include/SDKBitMap.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean: kokkos-clean
