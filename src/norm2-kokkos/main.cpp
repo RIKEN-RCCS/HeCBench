@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
 
     float* h_result = (float*) malloc(repeat * sizeof(float));
     if (h_result == nullptr) {
-      printf("output on host allocation failed");
+      printf("output on host allocation failed\n");
       Kokkos::finalize();
       return 1;
     }
@@ -28,7 +28,7 @@ int main(int argc, char *argv[]) {
     for (int n = 512*1024; n <= 1024*1024*512; n = n * 2) {
       float *a = (float*) malloc(n * sizeof(float));
       if (a == nullptr) {
-        printf("input on host allocation failed");
+        printf("input on host allocation failed\n");
         break;
       }
 
