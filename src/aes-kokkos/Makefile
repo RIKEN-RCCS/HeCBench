@@ -1,0 +1,61 @@
+#===============================================================================
+# User Options
+#===============================================================================
+
+# Compiler can be set below, or via environment variable
+CC        = $(KOKKOS_CXX)
+OPTIMIZE  = yes
+DEBUG     = no
+LAUNCHER  =
+KOKKOS_PATH ?= $(HOME)/kokkos
+
+#===============================================================================
+# Program name & source code list
+#===============================================================================
+
+program = main
+
+source = main.cpp reference.cpp utils.cpp
+
+obj = $(source:.cpp=.o)
+
+#===============================================================================
+# Sets Flags
+#===============================================================================
+
+include $(KOKKOS_PATH)/Makefile.kokkos
+
+# Standard Flags
+CFLAGS := $(EXTRA_CFLAGS) -std=c++17 $(KOKKOS_CPPFLAGS) $(KOKKOS_CXXFLAGS) -I../include
+
+# Linker Flags
+LDFLAGS = $(KOKKOS_LDFLAGS) $(KOKKOS_LIBS)
+
+# Debug Flags
+ifeq ($(DEBUG),yes)
+  CFLAGS += -g -DDEBUG
+  LDFLAGS += -g
+endif
+
+# Optimization Flags
+ifeq ($(OPTIMIZE),yes)
+  CFLAGS += -O3
+endif
+
+#===============================================================================
+# Targets to Build
+#===============================================================================
+
+$(program): $(obj) Makefile
+	$(CC) $(CFLAGS) $(obj) -o $@ $(LDFLAGS)
+
+%.o: %.cpp aes.h kernels.h ../include/SDKBitMap.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clean: kokkos-clean
+	rm -rf $(program) $(obj)
+
+# reuse the image
+run: $(program)
+	$(LAUNCHER) ./$(program) 100 0 ../urng-sycl/URNG_Input.bmp
+	$(LAUNCHER) ./$(program) 100 1 ../urng-sycl/URNG_Input.bmp
