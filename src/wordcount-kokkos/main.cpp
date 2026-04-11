@@ -7,6 +7,10 @@
 #include <iostream>
 #include <Kokkos_Core.hpp>
 
+// Note: The range 'A'-'z' is preserved from the original OpenMP reference (wordcount-omp/wc.cpp)
+// for a faithful port. It includes characters between 'Z' (0x5A) and 'a' (0x61) such as
+// '[', '\\', ']', '^', '_', '`'. Both the device kernel and host reference use the same
+// definition so correctness checks (device vs host) remain consistent.
 KOKKOS_INLINE_FUNCTION
 bool is_alpha_dev(const char c) {
   return (c >= 'A' && c <= 'z');

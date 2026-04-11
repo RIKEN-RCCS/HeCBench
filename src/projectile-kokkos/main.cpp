@@ -114,7 +114,7 @@ int main(int argc, char* argv[]) {
           float cos_value  = cosf(proj_angle * kPIValue / 180.0f);
           float total_time = fabsf(2.0f * proj_vel * sin_value) / kGValue;
           float max_range  = fabsf(proj_vel * total_time * cos_value);
-          float max_height = (proj_vel * proj_vel * sin_value * sin_value) / 2.0f * kGValue;
+          float max_height = (proj_vel * proj_vel * sin_value * sin_value) / (2.0f * kGValue);
           d_out(i).setRangeandTime(max_range, total_time, proj_angle, proj_vel, max_height);
         });
     }

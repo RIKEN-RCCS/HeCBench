@@ -25,3 +25,7 @@ main
 *.json
 !CMakePresets.json
 !CMakeUserPresets.json
+src/*/main
+src/*/main_omp
+src/*/stencil_1d
+src/*/Projectile
