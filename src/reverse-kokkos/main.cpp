@@ -31,7 +31,7 @@ int main(int argc, char* argv[]) {
     using TeamPolicy  = Kokkos::TeamPolicy<>;
     using TeamMember  = TeamPolicy::member_type;
     using ScratchSpace = Kokkos::DefaultExecutionSpace::scratch_memory_space;
-    using ScratchView  = Kokkos::View<int*, ScratchSpace, Kokkos::MemoryUnmanaged>;
+    using ScratchView  = Kokkos::View<int*, ScratchSpace, Kokkos::MemoryTraits<Kokkos::Unmanaged>>;
 
     const size_t scratch_size = ScratchView::shmem_size(len);
 
