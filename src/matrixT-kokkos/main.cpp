@@ -283,7 +283,7 @@ int main(int argc, char** argv) {
 
       bool ok = true;
       for (int i = 0; i < mat_size; i++) {
-        if (fabsf(gold[i] - h_odata[i]) > 0.01f) {
+        if (std::fabs(gold[i] - h_odata[i]) > 0.01f) {
           ok = false;
           break;
         }

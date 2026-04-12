@@ -12,7 +12,7 @@
 
 // Compute padded width (in float elements) for 64-byte row alignment
 static int padded_width(int w) {
-  return (int)(((w * (int)sizeof(float) + 63) & ~63) / (int)sizeof(float));
+  return ((w * (int)sizeof(float) + 63) & ~63) / (int)sizeof(float);
 }
 
 void malloc2D(int repeat, int width, int height) {
