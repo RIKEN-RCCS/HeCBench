@@ -16,7 +16,7 @@ inline double f(double x) { return exp(x)*sin(x); }
 KOKKOS_INLINE_FUNCTION double f_dev(double x) { return exp(x)*sin(x); }
 
 KOKKOS_INLINE_FUNCTION unsigned int getFirstSetBitPos(int n) {
-  return (unsigned int)(logf((float)(n & -n)) / logf(2.f)) + 1;
+  return (unsigned int)(log2f((float)(n & -n))) + 1;
 }
 
 int main(int argc, char** argv)
