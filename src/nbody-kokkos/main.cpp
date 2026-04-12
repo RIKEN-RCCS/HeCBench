@@ -113,6 +113,8 @@ void run_simulation(int npart, int nsteps) {
   Kokkos::deep_copy(mass,  h_mass);
   Kokkos::deep_copy(e, 0.f);
 
+  // 11 flops per interaction (dx,dy,dz,dist_sqr,dist_inv) + 18 acc updates (6 per axis)
+  // + 19 flops per particle for velocity/position update and energy calculation
   double gflops = 1e-9 * ((11. + 18.) * (double)npart * npart + (double)npart * 19.);
   int nf = 0;
   double av = 0.0, dev = 0.0;
