@@ -76,7 +76,7 @@ int main(int argc, char* argv[])
     const float decay = 0.5f;
     const float beta1 = 0.9f;
     const float beta2 = 0.999f;
-    const float eps = 1e-8f;
+    const float eps = 1e-10f;
     const float grad_scale = 256.f;
 
     adamMode_t mode = ADAM_MODE_0;
