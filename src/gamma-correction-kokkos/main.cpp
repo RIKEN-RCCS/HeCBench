@@ -29,6 +29,7 @@ int main(int argc, char* argv[]) {
   const int width     = atoi(argv[1]);
   const int height    = atoi(argv[2]);
   // block_size is accepted for interface compatibility but unused in Kokkos
+  const int block_size [[maybe_unused]] = atoi(argv[3]);
   const int repeat    = atoi(argv[4]);
 
   Kokkos::initialize(argc, argv);

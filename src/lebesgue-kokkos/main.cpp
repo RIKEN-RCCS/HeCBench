@@ -30,8 +30,9 @@ double lebesgue_function(int n, double x[], int nfun, double xfun[]) {
 
   Kokkos::parallel_reduce("lebesgue", nfun,
     KOKKOS_LAMBDA(int j, double& local_max) {
-      // n_max is 11 in tests; use a fixed-size local array
-      double linterp[12];
+  // n is at most 11 in all tests; use a named constant for clarity
+  constexpr int MAX_N = 11;
+  double linterp[MAX_N + 1];
       for (int i = 0; i < n; i++) linterp[i] = 1.0;
 
       for (int i1 = 0; i1 < n; i1++)
