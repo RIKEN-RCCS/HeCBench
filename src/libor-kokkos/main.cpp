@@ -235,6 +235,8 @@ int main(int argc, char** argv)
     for (int iter = 0; iter < repeat; iter++) {
       Kokkos::parallel_for("greek", threadN, KOKKOS_LAMBDA(int tid) {
         float L[NN], L2[L2_SIZE], z[NN];
+        // L_b intentionally aliases L: portfolio_b writes sensitivities back
+        // into L (the forward path values) for path_calc_b2 to consume.
         float* L_b = L;
 
         for (int path = tid; path < NPATH; path += threadN) {

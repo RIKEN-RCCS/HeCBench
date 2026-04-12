@@ -104,7 +104,7 @@ int main(int argc, char* argv[]) {
           int iX = (int)Kokkos::floor(pX);
           int iY = (int)Kokkos::floor(pY);
 
-          if ((pX < (float)gs) & (pY < (float)gs) & (pX >= 0.f) & (pY >= 0.f)) {
+          if ((pX < (float)gs) && (pY < (float)gs) && (pX >= 0.f) && (pY >= 0.f)) {
             if (dX * dX + dY * dY <= radius * radius)
               d_map(map_base + (size_t)iY * gs + (size_t)iX)++;
           }
