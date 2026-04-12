@@ -309,8 +309,8 @@ void render(unsigned char *img, int w, int h, int nsubsamples,
 
   Kokkos::parallel_for("render", Kokkos::RangePolicy<>(0, w * h),
     KOKKOS_LAMBDA(const int idx) {
-      int x = idx / h;
-      int y = idx % h;
+      int y = idx / w;
+      int x = idx % w;
 
       RNG rng(y * w + x);
       float s0 = 0;
