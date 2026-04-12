@@ -221,8 +221,8 @@ void contract(const int max_N, const int max_C, const int repeat) {
             adj_value = d_adj[d * max_N + e];
             if (adj_value > 0) {
               a = e;
-              for (int lc = 0; lc < max_N; ++lc) {
-                sum += d_tensor[a * A + b * B + lc * C + f] * adj_value;
+              for (int c_idx = 0; c_idx < max_N; ++c_idx) {
+                sum += d_tensor[a * A + b * B + c_idx * C + f] * adj_value;
               }
             }
           }
@@ -236,8 +236,8 @@ void contract(const int max_N, const int max_C, const int repeat) {
             adj_value = d_adj[d * max_N + e];
             if (adj_value > 0) {
               c = e;
-              for (int la = 0; la < max_N; ++la) {
-                sum += d_tensor[la * A + b * B + c * C + f] * adj_value;
+              for (int a_idx = 0; a_idx < max_N; ++a_idx) {
+                sum += d_tensor[a_idx * A + b * B + c * C + f] * adj_value;
               }
             }
           }
@@ -249,10 +249,10 @@ void contract(const int max_N, const int max_C, const int repeat) {
           e = y;
           adj_value = d_adj[d * max_N + e];
           if (adj_value > 0) {
-            for (int la = 0; la < max_N; ++la) {
-              b = la;
-              for (int lc = 0; lc < max_N; ++lc) {
-                sum += d_tensor[la * A + b * B + lc * C + f] * adj_value;
+            for (int a_idx = 0; a_idx < max_N; ++a_idx) {
+              b = a_idx;
+              for (int c_idx = 0; c_idx < max_N; ++c_idx) {
+                sum += d_tensor[a_idx * A + b * B + c_idx * C + f] * adj_value;
               }
             }
           }
@@ -264,10 +264,10 @@ void contract(const int max_N, const int max_C, const int repeat) {
           e = y;
           adj_value = d_adj[d * max_N + e];
           if (adj_value > 0) {
-            for (int lb = 0; lb < max_N; ++lb) {
-              c = lb;
-              for (int la = 0; la < max_N; ++la) {
-                sum += d_tensor[la * A + lb * B + c * C + f] * adj_value;
+            for (int b_idx = 0; b_idx < max_N; ++b_idx) {
+              c = b_idx;
+              for (int a_idx = 0; a_idx < max_N; ++a_idx) {
+                sum += d_tensor[a_idx * A + b_idx * B + c * C + f] * adj_value;
               }
             }
           }
@@ -277,11 +277,11 @@ void contract(const int max_N, const int max_C, const int repeat) {
         if (Case == 16) {
           a = x;
           d = y;
-          for (int le = 0; le < max_N; ++le) {
-            adj_value = d_adj[d * max_N + le];
+          for (int e_idx = 0; e_idx < max_N; ++e_idx) {
+            adj_value = d_adj[d * max_N + e_idx];
             if (adj_value > 0) {
-              b = le;
-              c = le;
+              b = e_idx;
+              c = e_idx;
               sum += d_tensor[a * A + b * B + c * C + f] * adj_value;
             }
           }
@@ -291,11 +291,11 @@ void contract(const int max_N, const int max_C, const int repeat) {
         if (Case == 17) {
           b = x;
           d = y;
-          for (int le = 0; le < max_N; ++le) {
-            adj_value = d_adj[d * max_N + le];
+          for (int e_idx = 0; e_idx < max_N; ++e_idx) {
+            adj_value = d_adj[d * max_N + e_idx];
             if (adj_value > 0) {
-              a = le;
-              c = le;
+              a = e_idx;
+              c = e_idx;
               sum += d_tensor[a * A + b * B + c * C + f] * adj_value;
             }
           }
@@ -307,10 +307,10 @@ void contract(const int max_N, const int max_C, const int repeat) {
           e = y;
           adj_value = d_adj[d * max_N + e];
           if (adj_value > 0) {
-            for (int la = 0; la < max_N; ++la) {
-              b = la;
-              c = la;
-              sum += d_tensor[la * A + b * B + c * C + f] * adj_value;
+            for (int a_idx = 0; a_idx < max_N; ++a_idx) {
+              b = a_idx;
+              c = a_idx;
+              sum += d_tensor[a_idx * A + b * B + c * C + f] * adj_value;
             }
           }
         }
