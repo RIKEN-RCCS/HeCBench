@@ -55,9 +55,9 @@ int main(int argc, char *argv[]) {
       Kokkos::parallel_for("entropy_baseline",
         Kokkos::MDRangePolicy<Kokkos::Rank<2>>({0, 0}, {height, width}),
         KOKKOS_LAMBDA(const int y, const int x) {
-          char count[16];
+          int count[16];
           for (int i = 0; i < 16; i++) count[i] = 0;
-          char total = 0;
+          int total = 0;
 
           for (int dy = -2; dy <= 2; dy++) {
             for (int dx = -2; dx <= 2; dx++) {
@@ -102,7 +102,7 @@ int main(int argc, char *argv[]) {
         KOKKOS_LAMBDA(const int y, const int x) {
           int count[16];
           for (int i = 0; i < 16; i++) count[i] = 0;
-          char total = 0;
+          int total = 0;
 
           for (int dy = -2; dy <= 2; dy++) {
             for (int dx = -2; dx <= 2; dx++) {
@@ -116,10 +116,11 @@ int main(int argc, char *argv[]) {
           }
 
           float ent = 0.0f;
-          for (int k = 0; k < 16; k++)
-            ent -= d_logTable(count[k]);
-
-          ent = ent / total + log2f((float)total);
+          if (total >= 1) {
+            for (int k = 0; k < 16; k++)
+              ent -= d_logTable(count[k]);
+            ent = ent / total + log2f((float)total);
+          }
           d_output(y * width + x) = ent;
         });
       Kokkos::fence();
