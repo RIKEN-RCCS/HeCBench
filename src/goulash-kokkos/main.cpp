@@ -146,7 +146,7 @@ int main(int argc, char* argv[])
 
     kernel_endtime = secs_elapsed();
     double kernel_runtime = kernel_endtime - kernel_starttime;
-    printf("total kernel time %lf(s) for %ld iterations\n", kernel_runtime, iterations - 1);
+    printf("total kernel time %f(s) for %ld iterations\n", kernel_runtime, iterations - 1);
   }
   Kokkos::finalize();
 
