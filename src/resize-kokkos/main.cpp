@@ -146,9 +146,9 @@ void resize_image(
 
 int main(int argc, char* argv[]) {
     if (argc != 7) {
-        printf("Usage: %s <input image width> <input image height>\n", argv[0]);
-        printf("          <output image width> <output image height>\n");
-        printf("          <image channels> <repeat>\n");
+        printf("Usage: %s <input image width> <input image height>"
+               " <output image width> <output image height>"
+               " <image channels> <repeat>\n", argv[0]);
         return 1;
     }
 
