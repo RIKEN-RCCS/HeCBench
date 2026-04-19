@@ -204,19 +204,19 @@ int main(int argc, char* argv[]) {
       const int nR = (int)nRows;
       const int nC = (int)nCols;
 
+      // Only launch threads over the interior (non-halo) region
       Kokkos::parallel_for(
         "iso2dfd",
-        Kokkos::MDRangePolicy<Kokkos::Rank<2>>({0, 0}, {nR, nC}),
+        Kokkos::MDRangePolicy<Kokkos::Rank<2>>(
+          {HALF_LENGTH, HALF_LENGTH},
+          {nR - HALF_LENGTH, nC - HALF_LENGTH}),
         KOKKOS_LAMBDA(const int gidRow, const int gidCol) {
           const int gid = gidRow * nC + gidCol;
-          if (gidCol >= HALF_LENGTH && gidCol < nC - HALF_LENGTH &&
-              gidRow >= HALF_LENGTH && gidRow < nR - HALF_LENGTH) {
-            float value = 0.f;
-            value += cur_prev(gid + 1)  - 2.f * cur_prev(gid) + cur_prev(gid - 1);
-            value += cur_prev(gid + nC) - 2.f * cur_prev(gid) + cur_prev(gid - nC);
-            value *= dtDIVdxy * d_vel(gid);
-            cur_next(gid) = 2.f * cur_prev(gid) - cur_next(gid) + value;
-          }
+          float value = 0.f;
+          value += cur_prev(gid + 1)  - 2.f * cur_prev(gid) + cur_prev(gid - 1);
+          value += cur_prev(gid + nC) - 2.f * cur_prev(gid) + cur_prev(gid - nC);
+          value *= dtDIVdxy * d_vel(gid);
+          cur_next(gid) = 2.f * cur_prev(gid) - cur_next(gid) + value;
         });
     }
 
@@ -229,7 +229,10 @@ int main(int argc, char* argv[]) {
     std::cout << "Average kernel execution time "
               << (ktime * 1e-3f) / nIterations << " (us)\n";
 
-    // Copy d_next back to host next_base, matching OMP tofrom semantics
+    // Copy d_next back to host next_base.
+    // The alternation writes to d_next on even k and d_prev on odd k —
+    // matching the OMP version which maps both buffers tofrom but compares
+    // next_base vs next_cpu (both last written on the same even-k iteration).
     auto h_next_out = Kokkos::create_mirror_view(d_next);
     Kokkos::deep_copy(h_next_out, d_next);
     for (size_t i = 0; i < nsize; i++) {
