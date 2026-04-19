@@ -157,8 +157,11 @@ void SumWithinBlocks(const int n, const int threads,
   const int teams = n / threads;
   Kokkos::parallel_for("SumWithinBlocks", teams, KOKKOS_LAMBDA(int block) {
     FLOAT sum = ZERO;
-    // Replicate the original cycling pattern: each thread covers the full
-    // stride, cycling while index < n.
+    // Each Kokkos work-item handles one logical "block".  It strides by
+    // (teams * threads) — exactly the total work width — so it picks up any
+    // elements that fall beyond the first teams*threads items when n is not
+    // an exact multiple.  In practice n == teams*threads so the loop body
+    // runs exactly once per work-item.
     const int nthread = teams * threads;
     for (int gid = block * threads; gid < n; gid += nthread)
       sum += data(data_off + gid);

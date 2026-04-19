@@ -163,21 +163,24 @@ void test(int hiddenSize, int miniBatch, int seqLength, int numLayers,
 
     for (int layer = lStart; layer < lEnd; layer++) {
       for (int i = rStart; i < rEnd; i++) {
+        const int off_tmp_h  = 4 * layer * numElements;
+        const int off_tmp_i  = 4 * i * numElements;
+        const int off_bias   = 8 * layer * hiddenSize;
+        const int off_lg     = 4 * (i * numElements + layer * seqLength * numElements);
+        const int off_h_out  = (i + 1) * numElements + layer * (seqLength + 1) * numElements;
+        const int off_i_out  = i * numElements + (layer + 1) * seqLength * numElements;
+        const int off_c_in   = i * numElements + layer * (seqLength + 1) * numElements;
+        const int off_c_out  = (i + 1) * numElements + layer * (seqLength + 1) * numElements;
         elementWise_fp(
             hiddenSize, miniBatch,
-            d_tmp_h, 4 * layer * numElements,
-            d_tmp_i, 4 * i * numElements,
-            d_bias,  8 * layer * hiddenSize,
-            d_linearGates,
-                4 * (i * numElements + layer * seqLength * numElements),
-            d_h_data,
-                (i + 1) * numElements + layer * (seqLength + 1) * numElements,
-            d_i_data,
-                i * numElements + (layer + 1) * seqLength * numElements,
-            d_c_data,
-                i * numElements + layer * (seqLength + 1) * numElements,
-            d_c_data,
-                (i + 1) * numElements + layer * (seqLength + 1) * numElements);
+            d_tmp_h, off_tmp_h,
+            d_tmp_i, off_tmp_i,
+            d_bias,  off_bias,
+            d_linearGates, off_lg,
+            d_h_data, off_h_out,
+            d_i_data, off_i_out,
+            d_c_data, off_c_in,
+            d_c_data, off_c_out);
       }
     }
 

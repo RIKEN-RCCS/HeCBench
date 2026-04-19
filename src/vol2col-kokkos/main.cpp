@@ -210,7 +210,7 @@ void eval(
   start = std::chrono::steady_clock::now();
   for (int i = 0; i < repeat; i++) {
     col2vol_kernel<T, T>(
-        Kokkos::View<const T*>(d_data_col),
+        d_data_col,
         n, depth, height, width,
         ksize_t, ksize_h, ksize_w,
         pad_t, pad_h, pad_w,
