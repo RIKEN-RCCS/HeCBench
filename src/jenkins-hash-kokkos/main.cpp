@@ -176,7 +176,7 @@ int main(int argc, char** argv) {
         KOKKOS_LAMBDA(const unsigned long id) {
           unsigned int length   = d_lens(id);
           unsigned int initval  = d_initvals(id);
-          const unsigned int *k = d_keys.data() + id*16;  // each key has at most 15 words (60 bytes)
+          const unsigned int *k = d_keys.data() + id*16;  // each key slot is 16 words (64 bytes), data up to 60 bytes
 
           unsigned int a, b, c;
           unsigned int r0, r1, r2;
