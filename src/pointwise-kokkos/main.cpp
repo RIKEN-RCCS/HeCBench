@@ -25,24 +25,24 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <Kokkos_Core.hpp>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
 #include <chrono>
-#include <Kokkos_Core.hpp>
 
 typedef struct {
   double i, c, h;
 } checksum;
 
-KOKKOS_INLINE_FUNCTION
-float sigmoidf(float in) {
+using DevView = Kokkos::View<float*>;
+
+KOKKOS_INLINE_FUNCTION float sigmoidf(float in) {
   return 1.f / (1.f + expf(-in));
 }
 
-KOKKOS_INLINE_FUNCTION
-float LCG_random(unsigned int* seed) {
+KOKKOS_INLINE_FUNCTION float LCG_random(unsigned int *seed) {
   const unsigned int m = 2147483648u;
   const unsigned int a = 26757677u;
   const unsigned int c = 1u;
@@ -50,106 +50,99 @@ float LCG_random(unsigned int* seed) {
   return (float)(*seed) / (float)m;
 }
 
-// Fused LSTM elementwise kernel.
-// All array parameters are full Views; integer offsets select the active region.
-void elementWise_fp(
-    int hiddenSize, int miniBatch,
-    Kokkos::View<const float*> tmp_h,  int tmp_h_off,
-    Kokkos::View<const float*> tmp_i,  int tmp_i_off,
-    Kokkos::View<const float*> bias,   int bias_off,
-    Kokkos::View<float*>       linearGates, int lg_off,
-    Kokkos::View<float*>       h_out,  int h_off,
-    Kokkos::View<float*>       i_out,  int i_off,
-    Kokkos::View<const float*> c_in,   int cin_off,
-    Kokkos::View<float*>       c_out,  int cout_off)
-{
-  const int numElements = miniBatch * hiddenSize;
-  Kokkos::parallel_for("elementWise_fp", numElements,
-    KOKKOS_LAMBDA(int index) {
-      const int batch     = index / hiddenSize;
-      const int gateIndex = (index % hiddenSize) + 4 * batch * hiddenSize;
-
-      float g[4];
-      for (int i = 0; i < 4; i++) {
-        g[i] = tmp_i(tmp_i_off + i * hiddenSize + gateIndex)
-             + tmp_h(tmp_h_off + i * hiddenSize + gateIndex);
-        g[i] += bias(bias_off + i * hiddenSize + index % hiddenSize)
-              + bias(bias_off + (i + 4) * hiddenSize + index % hiddenSize);
-        linearGates(lg_off + gateIndex + i * hiddenSize) = g[i];
-      }
-
-      const float in_gate     = sigmoidf(g[0]);
-      const float forget_gate = sigmoidf(g[1]);
-      const float in_gate2    = tanhf(g[2]);
-      const float out_gate    = sigmoidf(g[3]);
-
-      float val = (forget_gate * c_in(cin_off + index)) + (in_gate * in_gate2);
-      c_out(cout_off + index) = val;
-      val = out_gate * tanhf(val);
-      h_out(h_off + index) = val;
-      i_out(i_off + index) = val;
+void init(DevView data, int size) {
+  Kokkos::parallel_for("init", Kokkos::RangePolicy<>(0, size),
+    KOKKOS_LAMBDA(const int index) {
+      unsigned int seed = (unsigned int)index ^ (unsigned int)size;
+      data[index] = LCG_random(&seed);
     });
   Kokkos::fence();
 }
 
-void init(Kokkos::View<float*> data, int size) {
-  Kokkos::parallel_for("init", size,
-    KOKKOS_LAMBDA(int index) {
-      unsigned int seed = (unsigned int)index ^ (unsigned int)size;
-      data(index) = LCG_random(&seed);
+void elementWise_fp(int hiddenSize, int miniBatch,
+    DevView tmp_h,
+    DevView tmp_i,
+    DevView bias,
+    DevView linearGates,
+    DevView h_out,
+    DevView i_out,
+    DevView c_in,
+    DevView c_out)
+{
+  int numElements = miniBatch * hiddenSize;
+
+  Kokkos::parallel_for("elementWise", Kokkos::RangePolicy<>(0, numElements),
+    KOKKOS_LAMBDA(const int index) {
+      int batch = index / hiddenSize;
+      int gateIndex = (index % hiddenSize) + 4 * batch * hiddenSize;
+
+      float g[4];
+      for (int i = 0; i < 4; i++) {
+        g[i] = tmp_i[i * hiddenSize + gateIndex] + tmp_h[i * hiddenSize + gateIndex];
+        g[i] += bias[i * hiddenSize + index % hiddenSize] +
+                bias[(i + 4) * hiddenSize + index % hiddenSize];
+        linearGates[gateIndex + i * hiddenSize] = g[i];
+      }
+
+      float in_gate     = sigmoidf(g[0]);
+      float forget_gate = sigmoidf(g[1]);
+      float in_gate2    = tanhf(g[2]);
+      float out_gate    = sigmoidf(g[3]);
+
+      float val = (forget_gate * c_in[index]) + (in_gate * in_gate2);
+      c_out[index] = val;
+      val = out_gate * tanhf(val);
+      h_out[index] = val;
+      i_out[index] = val;
     });
   Kokkos::fence();
 }
 
 void test(int hiddenSize, int miniBatch, int seqLength, int numLayers,
-          checksum& cs, double& time)
+          checksum &cs, double &time)
 {
-  const int numElements = hiddenSize * miniBatch;
-  const int hc_size     = (seqLength + 1) * numLayers * numElements;
-  const int i_size      = seqLength * (numLayers + 1) * numElements;
-  const int bias_size   = numLayers * hiddenSize * 8;
-  const int tmp_h_size  = 4 * numLayers * numElements;
-  const int tmp_i_size  = 4 * seqLength * numElements;
-  const int lg_size     = 4 * seqLength * numLayers * numElements;
+  int numElements = hiddenSize * miniBatch;
 
-  // Allocate device Views (no host initialisation needed; init kernel runs on device)
-  Kokkos::View<float*> d_h_data("h_data", hc_size);
-  Kokkos::View<float*> d_i_data("i_data", i_size);
-  Kokkos::View<float*> d_c_data("c_data", hc_size);
-  Kokkos::View<float*> d_bias("bias", bias_size);
-  Kokkos::View<float*> d_tmp_h("tmp_h", tmp_h_size);
-  Kokkos::View<float*> d_tmp_i("tmp_i", tmp_i_size);
-  Kokkos::View<float*> d_linearGates("linearGates", lg_size);
+  int hc_size         = (seqLength + 1) * numLayers * numElements;
+  int i_size          = seqLength * (numLayers + 1) * numElements;
+  int bias_size       = numLayers * hiddenSize * 8;
+  int tmp_h_size      = 4 * numLayers * numElements;
+  int tmp_i_size      = 4 * seqLength * numElements;
+  int linearGates_size = 4 * seqLength * numLayers * numElements;
 
-  // Initialise with random values on device
+  DevView d_h_data("h_data", hc_size);
+  DevView d_i_data("i_data", i_size);
+  DevView d_c_data("c_data", hc_size);
+  DevView d_bias("bias", bias_size);
+  DevView d_tmp_h("tmp_h", tmp_h_size);
+  DevView d_tmp_i("tmp_i", tmp_i_size);
+  DevView d_linearGates("linearGates", linearGates_size);
+
+  // Initialize device arrays with pseudo-random values
   init(d_tmp_h, tmp_h_size);
   init(d_tmp_i, tmp_i_size);
   init(d_c_data, hc_size);
   init(d_bias, bias_size);
 
   int lStart = 0, lEnd = 0, rStart = 0, rEnd = 0;
-  const int recurBatchSize = 2;
+  int recurBatchSize = 2;
   double ktime = 0.0;
 
   while (true) {
+    // Many layer "scheduling" (diagonal sweep over layers and sequence positions)
     if (lEnd == 0) {
-      lStart = 0;
-      lEnd   = 1;
-      rStart = 0;
+      lStart = 0; lEnd = 1; rStart = 0;
     } else {
-      lStart++;
-      lEnd++;
+      lStart++; lEnd++;
       rStart -= recurBatchSize;
 
       if (lEnd > numLayers || rStart < 0) {
         rStart += (lStart + 1) * recurBatchSize;
-        lStart = 0;
-        lEnd   = 1;
+        lStart = 0; lEnd = 1;
       }
 
       while (rStart >= seqLength && lEnd <= numLayers) {
-        lStart++;
-        lEnd++;
+        lStart++; lEnd++;
         rStart -= recurBatchSize;
       }
 
@@ -163,30 +156,31 @@ void test(int hiddenSize, int miniBatch, int seqLength, int numLayers,
 
     for (int layer = lStart; layer < lEnd; layer++) {
       for (int i = rStart; i < rEnd; i++) {
-        const int off_tmp_h  = 4 * layer * numElements;
-        const int off_tmp_i  = 4 * i * numElements;
-        const int off_bias   = 8 * layer * hiddenSize;
-        const int off_lg     = 4 * (i * numElements + layer * seqLength * numElements);
-        const int off_h_out  = (i + 1) * numElements + layer * (seqLength + 1) * numElements;
-        const int off_i_out  = i * numElements + (layer + 1) * seqLength * numElements;
-        const int off_c_in   = i * numElements + layer * (seqLength + 1) * numElements;
-        const int off_c_out  = (i + 1) * numElements + layer * (seqLength + 1) * numElements;
-        elementWise_fp(
-            hiddenSize, miniBatch,
-            d_tmp_h, off_tmp_h,
-            d_tmp_i, off_tmp_i,
-            d_bias,  off_bias,
-            d_linearGates, off_lg,
-            d_h_data, off_h_out,
-            d_i_data, off_i_out,
-            d_c_data, off_c_in,
-            d_c_data, off_c_out);
+        // Build subviews at the appropriate offsets (mirroring pointer arithmetic
+        // from the OMP version)
+        int tmp_h_off = 4 * layer * numElements;
+        int tmp_i_off = 4 * i * numElements;
+        int bias_off  = 8 * layer * hiddenSize;
+        int lg_off    = 4 * (i * numElements + layer * seqLength * numElements);
+        int h_out_off = (i + 1) * numElements + layer * (seqLength + 1) * numElements;
+        int i_out_off = i * numElements + (layer + 1) * seqLength * numElements;
+        int c_in_off  = i * numElements + layer * (seqLength + 1) * numElements;
+        int c_out_off = (i + 1) * numElements + layer * (seqLength + 1) * numElements;
+
+        elementWise_fp(hiddenSize, miniBatch,
+          Kokkos::subview(d_tmp_h,     Kokkos::make_pair(tmp_h_off, tmp_h_size)),
+          Kokkos::subview(d_tmp_i,     Kokkos::make_pair(tmp_i_off, tmp_i_size)),
+          Kokkos::subview(d_bias,      Kokkos::make_pair(bias_off,  bias_size)),
+          Kokkos::subview(d_linearGates, Kokkos::make_pair(lg_off,  linearGates_size)),
+          Kokkos::subview(d_h_data,    Kokkos::make_pair(h_out_off, hc_size)),
+          Kokkos::subview(d_i_data,    Kokkos::make_pair(i_out_off, i_size)),
+          Kokkos::subview(d_c_data,    Kokkos::make_pair(c_in_off,  hc_size)),
+          Kokkos::subview(d_c_data,    Kokkos::make_pair(c_out_off, hc_size)));
       }
     }
 
     auto end = std::chrono::steady_clock::now();
-    ktime +=
-        std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+    ktime += std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
   }
 
   time += ktime;
@@ -199,67 +193,82 @@ void test(int hiddenSize, int miniBatch, int seqLength, int numLayers,
   Kokkos::deep_copy(h_h_data, d_h_data);
   Kokkos::deep_copy(h_c_data, d_c_data);
 
-  // Compute checksums matching the OMP version's layout
-  double checksumi = 0., checksumh = 0., checksumc = 0.;
-  const int i_out_off = numLayers * seqLength * numElements;
-  for (int m = 0; m < miniBatch; m++) {
-    for (int j = 0; j < seqLength; j++) {
-      for (int i = 0; i < hiddenSize; i++) {
-        checksumi += h_i_data(i_out_off + j * numElements + m * hiddenSize + i);
-      }
-    }
-    for (int j = 0; j < numLayers; j++) {
-      const int h_off = seqLength * numElements + j * (seqLength + 1) * numElements;
-      for (int i = 0; i < hiddenSize; i++) {
-        checksumh += h_h_data(h_off + m * hiddenSize + i);
-        checksumc += h_c_data(h_off + m * hiddenSize + i);
-      }
-    }
+  float *testOutputi = (float*)malloc(numElements * seqLength * sizeof(float));
+  float *testOutputh = (float*)malloc(numElements * numLayers * sizeof(float));
+  float *testOutputc = (float*)malloc(numElements * numLayers * sizeof(float));
+
+  memcpy(testOutputi,
+    h_i_data.data() + numLayers * seqLength * numElements,
+    seqLength * numElements * sizeof(float));
+
+  for (int layer = 0; layer < numLayers; layer++) {
+    memcpy(testOutputh + layer * numElements,
+      h_h_data.data() + seqLength * numElements + layer * (seqLength + 1) * numElements,
+      numElements * sizeof(float));
+    memcpy(testOutputc + layer * numElements,
+      h_c_data.data() + seqLength * numElements + layer * (seqLength + 1) * numElements,
+      numElements * sizeof(float));
   }
+
+  double checksumi = 0., checksumh = 0., checksumc = 0.;
+
+  for (int m = 0; m < miniBatch; m++) {
+    for (int j = 0; j < seqLength; j++)
+      for (int i = 0; i < hiddenSize; i++)
+        checksumi += testOutputi[j * numElements + m * hiddenSize + i];
+    for (int j = 0; j < numLayers; j++)
+      for (int i = 0; i < hiddenSize; i++) {
+        checksumh += testOutputh[j * numElements + m * hiddenSize + i];
+        checksumc += testOutputc[j * numElements + m * hiddenSize + i];
+      }
+  }
+
+  free(testOutputi);
+  free(testOutputc);
+  free(testOutputh);
 
   cs.i = checksumi;
   cs.c = checksumc;
   cs.h = checksumh;
 }
 
-int main(int argc, char* argv[]) {
-  int seqLength, numLayers, hiddenSize, miniBatch, numRuns;
-
-  if (argc == 6) {
-    seqLength  = atoi(argv[1]);
-    numLayers  = atoi(argv[2]);
-    hiddenSize = atoi(argv[3]);
-    miniBatch  = atoi(argv[4]);
-    numRuns    = atoi(argv[5]);
-  } else if (argc == 1) {
-    printf("Running with default settings\n");
-    seqLength  = 100;
-    numLayers  = 4;
-    hiddenSize = 512;
-    miniBatch  = 64;
-    numRuns    = 1;
-  } else {
-    printf("Usage: %s <seqLength> <numLayers> <hiddenSize> <miniBatch> <repeat>\n",
-           argv[0]);
-    return 1;
-  }
-
-  printf("seqLength %d, numLayers %d, hiddenSize %d, miniBatch %d\n",
-         seqLength, numLayers, hiddenSize, miniBatch);
-
+int main(int argc, char *argv[]) {
   Kokkos::initialize(argc, argv);
   {
+    int seqLength, numLayers, hiddenSize, miniBatch, numRuns;
+
+    if (argc == 6) {
+      seqLength  = atoi(argv[1]);
+      numLayers  = atoi(argv[2]);
+      hiddenSize = atoi(argv[3]);
+      miniBatch  = atoi(argv[4]);
+      numRuns    = atoi(argv[5]);
+    } else if (argc == 1) {
+      printf("Running with default settings\n");
+      seqLength  = 100;
+      numLayers  = 4;
+      hiddenSize = 512;
+      miniBatch  = 64;
+      numRuns    = 1;
+    } else {
+      printf("Usage: %s <seqLength> <numLayers> <hiddenSize> <miniBatch> <repeat>\n", argv[0]);
+      Kokkos::finalize();
+      return 1;
+    }
+
+    printf("seqLength %d, numLayers %d, hiddenSize %d, miniBatch %d\n",
+           seqLength, numLayers, hiddenSize, miniBatch);
+
     checksum cs;
     double time = 0.0;
 
-    for (int run = 0; run < numRuns; run++) {
+    for (int run = 0; run < numRuns; run++)
       test(hiddenSize, miniBatch, seqLength, numLayers, cs, time);
-    }
 
     printf("Average kernel execution time: %f (s)\n", (time * 1e-9f) / numRuns);
     printf("i checksum %E     ", cs.i);
     printf("c checksum %E     ", cs.c);
-    printf("h checksum %E\n",    cs.h);
+    printf("h checksum %E\n", cs.h);
   }
   Kokkos::finalize();
   return 0;

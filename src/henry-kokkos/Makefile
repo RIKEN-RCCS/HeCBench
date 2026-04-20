@@ -2,33 +2,34 @@
 # User Options
 #===============================================================================
 
+CC        = $(KOKKOS_CXX)
 OPTIMIZE  = yes
 DEBUG     = no
 LAUNCHER  =
-
-KOKKOS_INC = /usr/include
-KOKKOS_LIB = /usr/lib/x86_64-linux-gnu
-
-CC = g++
+KOKKOS_PATH ?= $(HOME)/kokkos
 
 #===============================================================================
 # Program name & source code list
 #===============================================================================
 
 program = main
-source  = main.cpp
-obj     = $(source:.cpp=.o)
+
+source = main.cpp
+
+obj = $(source:.cpp=.o)
 
 #===============================================================================
 # Sets Flags
 #===============================================================================
 
-CFLAGS := $(EXTRA_CFLAGS) -std=c++17 -fopenmp -I$(KOKKOS_INC)
+include $(KOKKOS_PATH)/Makefile.kokkos
 
-LDFLAGS = -L$(KOKKOS_LIB) -lkokkoscore -lkokkoscontainers -fopenmp -lpthread -ldl
+CFLAGS := $(EXTRA_CFLAGS) -std=c++17 $(KOKKOS_CPPFLAGS) $(KOKKOS_CXXFLAGS)
+
+LDFLAGS = $(KOKKOS_LDFLAGS) $(KOKKOS_LIBS)
 
 ifeq ($(DEBUG),yes)
-  CFLAGS  += -g -DDEBUG
+  CFLAGS += -g -DDEBUG
   LDFLAGS += -g
 endif
 
@@ -46,8 +47,8 @@ $(program): $(obj) Makefile
 %.o: %.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
-clean:
+clean: kokkos-clean
 	rm -rf $(program) $(obj)
 
 run: $(program)
-	$(LAUNCHER) ./$(program) ../henry-cuda/IRMOF-1.cssr 100
+	$(LAUNCHER) ./$(program) ../henry-omp/IRMOF-1.cssr 10000

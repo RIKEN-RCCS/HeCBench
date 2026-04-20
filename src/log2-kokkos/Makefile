@@ -1,18 +1,30 @@
+#===============================================================================
+# User Options
+#===============================================================================
+
 OPTIMIZE  = yes
 DEBUG     = no
 LAUNCHER  =
 
-KOKKOS_INC = /usr/include
-KOKKOS_LIB = /usr/lib/x86_64-linux-gnu
+KOKKOS_INC = $(HOME)/kokkos-install/include
+KOKKOS_LIB = $(HOME)/kokkos-install/lib
 
 CC = g++
+
+#===============================================================================
+# Program name & source code list
+#===============================================================================
 
 program = main
 source  = main.cpp
 obj     = $(source:.cpp=.o)
 
-CFLAGS := $(EXTRA_CFLAGS) -std=c++17 -fopenmp -I$(KOKKOS_INC)
-LDFLAGS = -L$(KOKKOS_LIB) -lkokkoscore -lkokkoscontainers -fopenmp -lpthread -ldl
+#===============================================================================
+# Sets Flags
+#===============================================================================
+
+CFLAGS := $(EXTRA_CFLAGS) -std=c++17 -I$(KOKKOS_INC)
+LDFLAGS = -L$(KOKKOS_LIB) -lkokkoscore -lkokkoscontainers -lpthread -ldl
 
 ifeq ($(DEBUG),yes)
   CFLAGS  += -g -DDEBUG
@@ -23,6 +35,10 @@ ifeq ($(OPTIMIZE),yes)
   CFLAGS += -O3
 endif
 
+#===============================================================================
+# Targets to Build
+#===============================================================================
+
 $(program): $(obj) Makefile
 	$(CC) $(CFLAGS) $(obj) -o $@ $(LDFLAGS)
 
@@ -32,5 +48,6 @@ $(program): $(obj) Makefile
 clean:
 	rm -rf $(program) $(obj)
 
+# Config file from log2-omp
 run: $(program)
-	$(LAUNCHER) ./$(program) input.txt
+	$(LAUNCHER) ./$(program) ../log2-omp/config.txt

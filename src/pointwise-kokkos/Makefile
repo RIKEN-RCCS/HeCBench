@@ -1,44 +1,30 @@
 #===============================================================================
 # User Options
 #===============================================================================
-
+CC        = $(KOKKOS_CXX)
 OPTIMIZE  = yes
 DEBUG     = no
 LAUNCHER  =
-
-KOKKOS_INC = /usr/include
-KOKKOS_LIB = /usr/lib/x86_64-linux-gnu
-
-CC = g++
+KOKKOS_PATH ?= $(HOME)/kokkos
 
 #===============================================================================
-# Program name & source code list
-#===============================================================================
-
 program = main
-source  = main.cpp
-obj     = $(source:.cpp=.o)
-
-#===============================================================================
-# Sets Flags
+source = main.cpp
+obj = $(source:.cpp=.o)
 #===============================================================================
 
-CFLAGS := $(EXTRA_CFLAGS) -std=c++17 -fopenmp -I$(KOKKOS_INC)
+include $(KOKKOS_PATH)/Makefile.kokkos
 
-LDFLAGS = -L$(KOKKOS_LIB) -lkokkoscore -lkokkoscontainers -fopenmp -lpthread -ldl
+CFLAGS := $(EXTRA_CFLAGS) -std=c++17 $(KOKKOS_CPPFLAGS) $(KOKKOS_CXXFLAGS)
+LDFLAGS = $(KOKKOS_LDFLAGS) $(KOKKOS_LIBS)
 
 ifeq ($(DEBUG),yes)
-  CFLAGS  += -g -DDEBUG
+  CFLAGS += -g -DDEBUG
   LDFLAGS += -g
 endif
-
 ifeq ($(OPTIMIZE),yes)
   CFLAGS += -O3
 endif
-
-#===============================================================================
-# Targets to Build
-#===============================================================================
 
 $(program): $(obj) Makefile
 	$(CC) $(CFLAGS) $(obj) -o $@ $(LDFLAGS)
@@ -46,8 +32,8 @@ $(program): $(obj) Makefile
 %.o: %.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
-clean:
+clean: kokkos-clean
 	rm -rf $(program) $(obj)
 
 run: $(program)
-	$(LAUNCHER) ./$(program)
+	$(LAUNCHER) ./$(program) 100 8 512 64 100
