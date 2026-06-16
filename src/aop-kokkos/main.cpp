@@ -562,6 +562,7 @@ void prepare_svd_kernel(const int numTeams,
         Kokkos::atomic_add(&scratch_double(lsums_off + 0), sums.x);
         Kokkos::atomic_add(&scratch_double(lsums_off + 1), sums.y);
         Kokkos::atomic_add(&scratch_double(lsums_off + 2), sums.z);
+        Kokkos::atomic_add(&scratch_double(lsums_off + 3), sums.w);
 
         team.team_barrier();
 

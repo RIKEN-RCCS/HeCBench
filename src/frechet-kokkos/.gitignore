@@ -1,0 +1,8 @@
+main
+main.o
+libkokkos.a
+*.o
+KokkosCore_config.h
+KokkosCore_config.tmp
+KokkosCore_Config_*.hpp
+KokkosCore_Config_*.tmp
