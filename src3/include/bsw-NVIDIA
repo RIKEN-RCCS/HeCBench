@@ -1,0 +1,1 @@
+COMMAND = ../bsw-cuda/prepare_data.sh; time -p ( ./$(program) ../bsw-cuda/test-data/protein-reference.fasta ../bsw-cuda/test-data/protein-query.fasta test_regression_protein_out 1>log.std 2>log.err ) 2> log.time

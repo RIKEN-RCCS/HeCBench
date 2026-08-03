@@ -1,0 +1,15 @@
+**/log.*
+**/log_run_bench.*
+**/build/
+**/CMakeFiles/
+**/__pycache__/
+**/eWave.2D.*
+**/result.raw
+**/temperature.dat
+**/momentum
+**/result.dat
+**/wavefield_snapshot*.bin
+testSNAP-*/refdata_2J*_W.h
+clink-*/input.hpp
+clink-*/weight_1.hpp
+clink-*/weight_2.hpp

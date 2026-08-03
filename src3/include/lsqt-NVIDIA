@@ -1,0 +1,1 @@
+COMMAND = ../lsqt-hip/prepare_data.sh; time -p ( ./$(program) ../lsqt-hip/examples/input.txt 1>log.std 2>log.err ) 2> log.time

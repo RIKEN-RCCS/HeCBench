@@ -1,0 +1,1 @@
+COMMAND = time -p ( ./$(program) -m 2000 -f ../rsc-cuda/input/vectors.csv -g 512 1>log.std 2>log.err ) 2> log.time

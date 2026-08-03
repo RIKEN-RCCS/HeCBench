@@ -1,0 +1,1 @@
+COMMAND = time -p ( ./$(program) -i output.tns -m 0 -R 32 -f 128 -w 4 1>log.std 2>log.err ) 2> log.time

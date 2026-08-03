@@ -1,0 +1,1 @@
+COMMAND = ../minibude-cuda/prepare_data.sh; time -p ( ./$(program) --deck ../minibude-sycl/data/bm1  --wgsize 256 --iterations 100 1>log.std 2>log.err ) 2> log.time

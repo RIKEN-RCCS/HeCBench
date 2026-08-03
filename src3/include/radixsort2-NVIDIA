@@ -1,0 +1,2 @@
+#COMMAND = time -p ( ./$(program) -float -keysonly -n=536870912 1>log.std 2>log.err;./$(program) -float -n=536870912 1>>log.std 2>>log.err;./$(program) -keysonly -n=536870912 1>>log.std 2>>log.err;./$(program) -n=536870912 1>>log.std 2>>log.err ) 2> log.time
+COMMAND = time -p ( ./$(program) -float -keysonly -n=10368709120 1>log.std 2>log.err ) 2> log.time

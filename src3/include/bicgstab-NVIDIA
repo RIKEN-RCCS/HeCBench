@@ -1,0 +1,1 @@
+COMMAND = ../bicgstab-cuda/prepare_data.sh; time -p ( ./$(program) ../bicgstab-cuda/TEM27623/TEM27623_M.mtx 100 0 1>log.std 2>log.err ) 2> log.time
