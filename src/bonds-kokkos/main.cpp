@@ -8,7 +8,7 @@
 #include <cstring>
 #include <cmath>
 #include <Kokkos_Core.hpp>
-#include "../bonds-omp/bondsStructs.h"
+#include "bondsStructs.h"
 
 // ============================================================
 // Forward declarations for all device helper functions

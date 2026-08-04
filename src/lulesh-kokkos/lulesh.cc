@@ -1173,7 +1173,7 @@ int main(int argc, char *argv[])
 
     Real_t  hgcoef = domain.hgcoef() ;
 
-    Kokkos::parallel_for("kernel_1", Kokkos::RangePolicy<>(0, numElem), KOKKOS_LAMBDA(Index_t i) {
+    Kokkos::parallel_for("kernel_1", Kokkos::RangePolicy<Kokkos::DefaultHostExecutionSpace>(0, numElem), KOKKOS_LAMBDA(Index_t i) {
       sigxx[i] = sigyy[i] = sigzz[i] = - p[i] - q[i] ;
     });
 
@@ -1181,7 +1181,7 @@ int main(int argc, char *argv[])
     // IntegrateStressForElems( domain, sigxx, sigyy, sigzz, determ, numElem, domain.numNode())
     //==============================================================================================
 
-    Kokkos::parallel_for("kernel_2", Kokkos::RangePolicy<>(0, numElem), KOKKOS_LAMBDA(Index_t k) {
+    Kokkos::parallel_for("kernel_2", Kokkos::RangePolicy<Kokkos::DefaultHostExecutionSpace>(0, numElem), KOKKOS_LAMBDA(Index_t k) {
 
       const Index_t* const elemToNode = nodelist + Index_t(8)*k;
       Real_t B[3][8] ;// shape function derivatives
@@ -1240,7 +1240,7 @@ int main(int argc, char *argv[])
           &fz_elem[k*8] ) ;
     });
 
-    Kokkos::parallel_for("kernel_3", Kokkos::RangePolicy<>(0, numNode), KOKKOS_LAMBDA(Index_t gnode) {
+    Kokkos::parallel_for("kernel_3", Kokkos::RangePolicy<Kokkos::DefaultHostExecutionSpace>(0, numNode), KOKKOS_LAMBDA(Index_t gnode) {
       // element count
       const Index_t count = nodeElemStart[gnode+1] - nodeElemStart[gnode];//domain.nodeElemCount(gnode) ;
       // list of all corners
@@ -1277,7 +1277,7 @@ int main(int argc, char *argv[])
 
     Kokkos::fence();
 
-    Kokkos::parallel_for("kernel_4", Kokkos::RangePolicy<>(0, numElem), KOKKOS_LAMBDA(Index_t i) {
+    Kokkos::parallel_for("kernel_4", Kokkos::RangePolicy<Kokkos::DefaultHostExecutionSpace>(0, numElem), KOKKOS_LAMBDA(Index_t i) {
 
       Real_t  x1[8],  y1[8],  z1[8] ;
       Real_t pfx[8], pfy[8], pfz[8] ;
@@ -1384,7 +1384,7 @@ int main(int argc, char *argv[])
       }
 #endif
 
-      Kokkos::parallel_for("kernel_5", Kokkos::RangePolicy<>(0, numElem), KOKKOS_LAMBDA(Index_t i2) {
+      Kokkos::parallel_for("kernel_5", Kokkos::RangePolicy<Kokkos::DefaultHostExecutionSpace>(0, numElem), KOKKOS_LAMBDA(Index_t i2) {
 
         Index_t i3 = 8*i2;
 
@@ -1569,7 +1569,7 @@ int main(int argc, char *argv[])
         fz_local[7] = hgfz[7];
       });
 
-      Kokkos::parallel_for("kernel_6", Kokkos::RangePolicy<>(0, numNode), KOKKOS_LAMBDA(Index_t gnode) {
+      Kokkos::parallel_for("kernel_6", Kokkos::RangePolicy<Kokkos::DefaultHostExecutionSpace>(0, numNode), KOKKOS_LAMBDA(Index_t gnode) {
         // element count
         const Index_t count = nodeElemStart[gnode+1] - nodeElemStart[gnode];//domain.nodeElemCount(gnode) ;
         // list of all corners
@@ -1602,7 +1602,7 @@ int main(int argc, char *argv[])
     //CalcAccelerationForNodes(domain, domain.numNode());   // IN: fx  OUT: m_xdd
     //===========================================================================
 
-    Kokkos::parallel_for("kernel_7", Kokkos::RangePolicy<>(0, numNode), KOKKOS_LAMBDA(Index_t i) {
+    Kokkos::parallel_for("kernel_7", Kokkos::RangePolicy<Kokkos::DefaultHostExecutionSpace>(0, numNode), KOKKOS_LAMBDA(Index_t i) {
       Real_t one_over_nMass = Real_t(1.) / nodalMass[i];
       xdd[i] = fx[i] * one_over_nMass;
       ydd[i] = fy[i] * one_over_nMass;
@@ -1619,7 +1619,7 @@ int main(int argc, char *argv[])
     Index_t s2 = domain.symmYempty();
     Index_t s3 = domain.symmZempty();
 
-    Kokkos::parallel_for("kernel_8", Kokkos::RangePolicy<>(0, numNodeBC), KOKKOS_LAMBDA(Index_t i) {
+    Kokkos::parallel_for("kernel_8", Kokkos::RangePolicy<Kokkos::DefaultHostExecutionSpace>(0, numNodeBC), KOKKOS_LAMBDA(Index_t i) {
       if ((!s1) != 0) xdd[symmX[i]] = Real_t(0.0) ;
       if ((!s2) != 0) ydd[symmY[i]] = Real_t(0.0) ;
       if ((!s3) != 0) zdd[symmZ[i]] = Real_t(0.0) ;
@@ -1629,7 +1629,7 @@ int main(int argc, char *argv[])
     // CalcVelocityForNodes( domain, delt, u_cut, domain.numNode()) ; //uses m_xd and m_xdd
     //=================================================================
 
-    Kokkos::parallel_for("kernel_9", Kokkos::RangePolicy<>(0, numNode), KOKKOS_LAMBDA(Index_t i) {
+    Kokkos::parallel_for("kernel_9", Kokkos::RangePolicy<Kokkos::DefaultHostExecutionSpace>(0, numNode), KOKKOS_LAMBDA(Index_t i) {
 
       Real_t xdtmp = xd[i] + xdd[i] * deltaTime;
       // FABS is not compiled with target regions in mind
@@ -1651,7 +1651,7 @@ int main(int argc, char *argv[])
     //=================================================================================
     // CalcPositionForNodes( domain, delt, domain.numNode() );  //uses m_xd and m_x 
     //=================================================================================
-    Kokkos::parallel_for("kernel_10", Kokkos::RangePolicy<>(0, numNode), KOKKOS_LAMBDA(Index_t i) {
+    Kokkos::parallel_for("kernel_10", Kokkos::RangePolicy<Kokkos::DefaultHostExecutionSpace>(0, numNode), KOKKOS_LAMBDA(Index_t i) {
 
       x[i] += xd[i] * deltaTime;
       y[i] += yd[i] * deltaTime;
@@ -1680,7 +1680,7 @@ int main(int argc, char *argv[])
     //========================================================================
     // void CalcKinematicsForElems( Domain &domain, Real_t *vnew, 
     //========================================================================
-    Kokkos::parallel_for("kernel_11", Kokkos::RangePolicy<>(0, numElem), KOKKOS_LAMBDA(Index_t k) {
+    Kokkos::parallel_for("kernel_11", Kokkos::RangePolicy<Kokkos::DefaultHostExecutionSpace>(0, numElem), KOKKOS_LAMBDA(Index_t k) {
 
       Real_t B[3][8] ; // shape function derivatives 
       Real_t D[6] ;
@@ -1777,7 +1777,7 @@ int main(int argc, char *argv[])
     Kokkos::fence();
 
 
-    Kokkos::parallel_for("kernel_12", Kokkos::RangePolicy<>(0, numElem), KOKKOS_LAMBDA(Index_t k) {
+    Kokkos::parallel_for("kernel_12", Kokkos::RangePolicy<Kokkos::DefaultHostExecutionSpace>(0, numElem), KOKKOS_LAMBDA(Index_t k) {
       // calc strain rate and apply as constraint (only done in FB element)
       Real_t vvdov = dxx[k] + dyy[k] + dzz[k] ;
       Real_t vdovthird = vvdov/Real_t(3.0) ;
@@ -1825,7 +1825,7 @@ int main(int argc, char *argv[])
     //CalcMonotonicQGradientsForElems(domain, vnew);
     //================================================================
 
-    Kokkos::parallel_for("kernel_13", Kokkos::RangePolicy<>(0, numElem), KOKKOS_LAMBDA(Index_t i) {
+    Kokkos::parallel_for("kernel_13", Kokkos::RangePolicy<Kokkos::DefaultHostExecutionSpace>(0, numElem), KOKKOS_LAMBDA(Index_t i) {
 
       Real_t ax,ay,az ;
       Real_t dxv,dyv,dzv ;
@@ -1972,7 +1972,7 @@ int main(int argc, char *argv[])
     Real_t qlc_monoq = domain.qlc_monoq();
     Real_t qqc_monoq = domain.qqc_monoq();
 
-    Kokkos::parallel_for("kernel_14", Kokkos::RangePolicy<>(0, numElem), KOKKOS_LAMBDA(Index_t i) {
+    Kokkos::parallel_for("kernel_14", Kokkos::RangePolicy<Kokkos::DefaultHostExecutionSpace>(0, numElem), KOKKOS_LAMBDA(Index_t i) {
 
       Real_t qlin, qquad ;
       Real_t phixi, phieta, phizeta ;
@@ -2154,7 +2154,7 @@ int main(int argc, char *argv[])
     Real_t emin    = domain.emin() ;
     Real_t rho0    = domain.refdens() ;
 
-    Kokkos::parallel_for("kernel_15", Kokkos::RangePolicy<>(0, numElem), KOKKOS_LAMBDA(Index_t elem) {
+    Kokkos::parallel_for("kernel_15", Kokkos::RangePolicy<Kokkos::DefaultHostExecutionSpace>(0, numElem), KOKKOS_LAMBDA(Index_t elem) {
       Index_t rep = elemRep[elem];
       Real_t e_old, delvc, p_old, q_old, qq_old, ql_old;
       Real_t p_new, q_new, e_new;

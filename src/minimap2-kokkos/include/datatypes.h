@@ -12,7 +12,7 @@ typedef int32_t score_t;
 typedef int32_t parent_t;
 typedef int32_t width_t;
 
-struct short4 {
+struct hec_short4 {
     short x;
     short y;
     short z;

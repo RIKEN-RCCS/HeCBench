@@ -149,6 +149,12 @@ int main(int argc, char **argv) {
 
     reductions(mass, te);
   }
+  // Release global Views while Kokkos is still initialized.
+  d_state = {}; d_state_tmp = {}; d_flux = {}; d_tend = {};
+  d_hy_dens_cell = {}; d_hy_dens_theta_cell = {};
+  d_hy_dens_int = {}; d_hy_dens_theta_int = {}; d_hy_pressure_int = {};
+  d_sendbuf_l = {}; d_sendbuf_r = {}; d_recvbuf_l = {}; d_recvbuf_r = {};
+  Kokkos::fence();
   Kokkos::finalize();
 
   printf("d_mass: %le\n", (mass - mass0) / mass0);
@@ -185,6 +191,7 @@ void semi_discrete_step(Kokkos::View<double*> state_init,
                         double dt, int dir)
 {
   const int lnx = nx, lnz = nz, l_hs = hs, l_NUM_VARS = NUM_VARS;
+  const auto l_tend = d_tend;
 
   if (dir == DIR_X) {
     set_halo_values_x(state_forcing);
@@ -199,7 +206,7 @@ void semi_discrete_step(Kokkos::View<double*> state_init,
     KOKKOS_LAMBDA(int ll, int k, int i) {
       int inds = ll*(lnz+2*l_hs)*(lnx+2*l_hs) + (k+l_hs)*(lnx+2*l_hs) + i+l_hs;
       int indt = ll*lnz*lnx + k*lnx + i;
-      state_out[inds] = state_init[inds] + dt * d_tend[indt];
+      state_out[inds] = state_init[inds] + dt * l_tend[indt];
     });
   Kokkos::fence();
 }
@@ -214,6 +221,8 @@ void compute_tendencies_x(Kokkos::View<double*> d_st,
   const double l_hv_beta = hv_beta;
   const double hv_coef   = -l_hv_beta * l_dx / (16*l_dt);
   const double l_C0 = C0, l_gamm = gamm;
+  const auto l_hy_dens_cell = d_hy_dens_cell;
+  const auto l_hy_dens_theta_cell = d_hy_dens_theta_cell;
 
   Kokkos::parallel_for("flux_x",
     Kokkos::MDRangePolicy<Kokkos::Rank<2>>({0,0},{lnz,lnx+1}),
@@ -227,10 +236,10 @@ void compute_tendencies_x(Kokkos::View<double*> d_st,
         vals[ll]    = -stencil[0]/12 + 7*stencil[1]/12 + 7*stencil[2]/12 - stencil[3]/12;
         d3_vals[ll] = -stencil[0]    + 3*stencil[1]    - 3*stencil[2]    + stencil[3];
       }
-      double r = vals[0] + d_hy_dens_cell[k+l_hs];
+      double r = vals[0] + l_hy_dens_cell[k+l_hs];
       double u = vals[1] / r;
       double w = vals[2] / r;
-      double t = (vals[3] + d_hy_dens_theta_cell[k+l_hs]) / r;
+      double t = (vals[3] + l_hy_dens_theta_cell[k+l_hs]) / r;
       double p = l_C0 * pow(r*t, l_gamm);
       d_fl[0*(lnz+1)*(lnx+1)+k*(lnx+1)+i] = r*u     - hv_coef*d3_vals[0];
       d_fl[1*(lnz+1)*(lnx+1)+k*(lnx+1)+i] = r*u*u+p - hv_coef*d3_vals[1];
@@ -259,6 +268,9 @@ void compute_tendencies_z(Kokkos::View<double*> d_st,
   const double l_dz = dz, l_dt = dt;
   const double hv_coef = -hv_beta * l_dz / (16*l_dt);
   const double l_C0 = C0, l_gamm = gamm, l_grav = grav;
+  const auto l_hy_dens_int = d_hy_dens_int;
+  const auto l_hy_dens_theta_int = d_hy_dens_theta_int;
+  const auto l_hy_pressure_int = d_hy_pressure_int;
 
   Kokkos::parallel_for("flux_z",
     Kokkos::MDRangePolicy<Kokkos::Rank<2>>({0,0},{lnz+1,lnx}),
@@ -272,11 +284,11 @@ void compute_tendencies_z(Kokkos::View<double*> d_st,
         vals[ll]    = -stencil[0]/12 + 7*stencil[1]/12 + 7*stencil[2]/12 - stencil[3]/12;
         d3_vals[ll] = -stencil[0]    + 3*stencil[1]    - 3*stencil[2]    + stencil[3];
       }
-      double r  = vals[0] + d_hy_dens_int[k];
+      double r  = vals[0] + l_hy_dens_int[k];
       double u  = vals[1] / r;
       double w  = vals[2] / r;
-      double t  = (vals[3] + d_hy_dens_theta_int[k]) / r;
-      double p  = l_C0 * pow(r*t, l_gamm) - d_hy_pressure_int[k];
+      double t  = (vals[3] + l_hy_dens_theta_int[k]) / r;
+      double p  = l_C0 * pow(r*t, l_gamm) - l_hy_pressure_int[k];
       d_fl[0*(lnz+1)*(lnx+1)+k*(lnx+1)+i] = r*w     - hv_coef*d3_vals[0];
       d_fl[1*(lnz+1)*(lnx+1)+k*(lnx+1)+i] = r*w*u   - hv_coef*d3_vals[1];
       d_fl[2*(lnz+1)*(lnx+1)+k*(lnx+1)+i] = r*w*w+p - hv_coef*d3_vals[2];
@@ -303,6 +315,12 @@ void compute_tendencies_z(Kokkos::View<double*> d_st,
 void set_halo_values_x(Kokkos::View<double*> d_st)
 {
   const int lnx = nx, lnz = nz, l_hs = hs, l_NUM_VARS = NUM_VARS;
+  const auto l_sendbuf_l = d_sendbuf_l;
+  const auto l_sendbuf_r = d_sendbuf_r;
+  const auto l_recvbuf_l = d_recvbuf_l;
+  const auto l_recvbuf_r = d_recvbuf_r;
+  const auto l_hy_dens_cell = d_hy_dens_cell;
+  const auto l_hy_dens_theta_cell = d_hy_dens_theta_cell;
   int ierr;
   MPI_Request req_r[2], req_s[2];
 
@@ -313,8 +331,8 @@ void set_halo_values_x(Kokkos::View<double*> d_st)
   Kokkos::parallel_for("pack_halo_x",
     Kokkos::MDRangePolicy<Kokkos::Rank<3>>({0,0,0},{l_NUM_VARS,lnz,l_hs}),
     KOKKOS_LAMBDA(int ll, int k, int s) {
-      d_sendbuf_l[ll*lnz*l_hs + k*l_hs + s] = d_st[ll*(lnz+2*l_hs)*(lnx+2*l_hs) + (k+l_hs)*(lnx+2*l_hs) + l_hs+s];
-      d_sendbuf_r[ll*lnz*l_hs + k*l_hs + s] = d_st[ll*(lnz+2*l_hs)*(lnx+2*l_hs) + (k+l_hs)*(lnx+2*l_hs) + lnx+s];
+      l_sendbuf_l[ll*lnz*l_hs + k*l_hs + s] = d_st[ll*(lnz+2*l_hs)*(lnx+2*l_hs) + (k+l_hs)*(lnx+2*l_hs) + l_hs+s];
+      l_sendbuf_r[ll*lnz*l_hs + k*l_hs + s] = d_st[ll*(lnz+2*l_hs)*(lnx+2*l_hs) + (k+l_hs)*(lnx+2*l_hs) + lnx+s];
     });
   Kokkos::fence();
 
@@ -346,8 +364,8 @@ void set_halo_values_x(Kokkos::View<double*> d_st)
   Kokkos::parallel_for("unpack_halo_x",
     Kokkos::MDRangePolicy<Kokkos::Rank<3>>({0,0,0},{l_NUM_VARS,lnz,l_hs}),
     KOKKOS_LAMBDA(int ll, int k, int s) {
-      d_st[ll*(lnz+2*l_hs)*(lnx+2*l_hs) + (k+l_hs)*(lnx+2*l_hs) + s         ] = d_recvbuf_l[ll*lnz*l_hs + k*l_hs + s];
-      d_st[ll*(lnz+2*l_hs)*(lnx+2*l_hs) + (k+l_hs)*(lnx+2*l_hs) + lnx+l_hs+s] = d_recvbuf_r[ll*lnz*l_hs + k*l_hs + s];
+      d_st[ll*(lnz+2*l_hs)*(lnx+2*l_hs) + (k+l_hs)*(lnx+2*l_hs) + s         ] = l_recvbuf_l[ll*lnz*l_hs + k*l_hs + s];
+      d_st[ll*(lnz+2*l_hs)*(lnx+2*l_hs) + (k+l_hs)*(lnx+2*l_hs) + lnx+l_hs+s] = l_recvbuf_r[ll*lnz*l_hs + k*l_hs + s];
     });
   Kokkos::fence();
 
@@ -363,8 +381,8 @@ void set_halo_values_x(Kokkos::View<double*> d_st)
           int ind_r = 0*(lnz+2*l_hs)*(lnx+2*l_hs) + (k+l_hs)*(lnx+2*l_hs) + i;
           int ind_u = 1*(lnz+2*l_hs)*(lnx+2*l_hs) + (k+l_hs)*(lnx+2*l_hs) + i;
           int ind_t = 3*(lnz+2*l_hs)*(lnx+2*l_hs) + (k+l_hs)*(lnx+2*l_hs) + i;
-          d_st[ind_u] = (d_st[ind_r] + d_hy_dens_cell[k+l_hs]) * 50.;
-          d_st[ind_t] = (d_st[ind_r] + d_hy_dens_cell[k+l_hs]) * 298. - d_hy_dens_theta_cell[k+l_hs];
+          d_st[ind_u] = (d_st[ind_r] + l_hy_dens_cell[k+l_hs]) * 50.;
+          d_st[ind_t] = (d_st[ind_r] + l_hy_dens_cell[k+l_hs]) * 298. - l_hy_dens_theta_cell[k+l_hs];
         }
       });
     Kokkos::fence();
@@ -421,6 +439,9 @@ void reductions(double &mass_out, double &te_out)
   const double l_dx = dx, l_dz = dz;
   const double l_C0 = C0, l_gamm = gamm, l_grav = grav;
   const double l_cp = cp, l_cv = cv, l_rd = rd, l_p0 = p0;
+  const auto l_state = d_state;
+  const auto l_hy_dens_cell = d_hy_dens_cell;
+  const auto l_hy_dens_theta_cell = d_hy_dens_theta_cell;
 
   // Upload current state to device (if needed); state is already on device
   double lmass = 0.0, lte = 0.0;
@@ -431,10 +452,10 @@ void reductions(double &mass_out, double &te_out)
       int ind_u = 1*(lnz+2*l_hs)*(lnx+2*l_hs) + (k+l_hs)*(lnx+2*l_hs) + i+l_hs;
       int ind_w = 2*(lnz+2*l_hs)*(lnx+2*l_hs) + (k+l_hs)*(lnx+2*l_hs) + i+l_hs;
       int ind_t = 3*(lnz+2*l_hs)*(lnx+2*l_hs) + (k+l_hs)*(lnx+2*l_hs) + i+l_hs;
-      double r  = d_state[ind_r] + d_hy_dens_cell[l_hs+k];
-      double u  = d_state[ind_u] / r;
-      double w  = d_state[ind_w] / r;
-      double th = (d_state[ind_t] + d_hy_dens_theta_cell[l_hs+k]) / r;
+      double r  = l_state[ind_r] + l_hy_dens_cell[l_hs+k];
+      double u  = l_state[ind_u] / r;
+      double w  = l_state[ind_w] / r;
+      double th = (l_state[ind_t] + l_hy_dens_theta_cell[l_hs+k]) / r;
       double p  = l_C0 * pow(r*th, l_gamm);
       double t  = th / pow(l_p0/p, l_rd/l_cp);
       double ke = r * (u*u + w*w);

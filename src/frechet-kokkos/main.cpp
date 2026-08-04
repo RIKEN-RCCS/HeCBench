@@ -154,36 +154,45 @@ void discrete_frechet_distance(const int s, const int n_1, const int n_2,
   Kokkos::fence();
   auto t_start = std::chrono::steady_clock::now();
 
-  using Policy2D = Kokkos::MDRangePolicy<Kokkos::Rank<2>>;
-
   for (int k = 0; k < repeat; k++) {
+    Kokkos::deep_copy(d_ca, -1.0);
     double *raw_ca = d_ca.data();
     double *raw_c1 = d_c1.data();
     double *raw_c2 = d_c2.data();
 
-    if (s == 0) {
-      Kokkos::parallel_for(
-          "frechet_norm1",
-          Policy2D({1, 1}, {n_1 + 1, n_2 + 1}),
-          KOKKOS_LAMBDA(int i, int j) {
-            recursive_norm1(i, j, n_2, raw_ca, raw_c1, raw_c2);
-          });
-    } else if (s == 1) {
-      Kokkos::parallel_for(
-          "frechet_norm2",
-          Policy2D({1, 1}, {n_1 + 1, n_2 + 1}),
-          KOKKOS_LAMBDA(int i, int j) {
-            recursive_norm2(i, j, n_2, raw_ca, raw_c1, raw_c2);
-          });
-    } else {
-      Kokkos::parallel_for(
-          "frechet_norm3",
-          Policy2D({1, 1}, {n_1 + 1, n_2 + 1}),
-          KOKKOS_LAMBDA(int i, int j) {
-            recursive_norm3(i, j, n_2, raw_ca, raw_c1, raw_c2);
-          });
+    for (int diag = 0; diag <= n_1 + n_2 - 2; ++diag) {
+      const int i_begin = diag < n_2 ? 0 : diag - (n_2 - 1);
+      const int i_end = diag < n_1 ? diag : n_1 - 1;
+      const int count = i_end - i_begin + 1;
+
+      Kokkos::parallel_for("frechet_diag", count, KOKKOS_LAMBDA(int t) {
+        const int i0 = i_begin + t;
+        const int j0 = diag - i0;
+        const int i = i0 + 1;
+        const int j = j0 + 1;
+
+        double dist;
+        if (s == 0) dist = norm1(i, j, raw_c1, raw_c2);
+        else if (s == 1) dist = norm2(i, j, raw_c1, raw_c2);
+        else dist = norm3(i, j, raw_c1, raw_c2);
+
+        double value;
+        if (i0 == 0 && j0 == 0) {
+          value = dist;
+        } else if (i0 > 0 && j0 == 0) {
+          value = fmax(raw_ca[(i0 - 1) * n_2], dist);
+        } else if (i0 == 0) {
+          value = fmax(raw_ca[j0 - 1], dist);
+        } else {
+          const double prev_i = raw_ca[(i0 - 1) * n_2 + j0];
+          const double prev_ij = raw_ca[(i0 - 1) * n_2 + (j0 - 1)];
+          const double prev_j = raw_ca[i0 * n_2 + (j0 - 1)];
+          value = fmax(fmin(fmin(prev_i, prev_ij), prev_j), dist);
+        }
+        raw_ca[i0 * n_2 + j0] = value;
+      });
+      Kokkos::fence();
     }
-    Kokkos::fence();
   }
 
   auto t_end = std::chrono::steady_clock::now();

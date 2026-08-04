@@ -167,15 +167,12 @@ void kernel_mergeIndex(Kokkos::View<const long*> d_offsets,
   });
 }
 
-void kernel_makeTable(Kokkos::View<const long*> d_offsets,
+void kernel_makeTable(long start, long end,
     Kokkos::View<const unsigned short*> d_indexs,
     Kokkos::View<const unsigned short*> d_orders,
-    Kokkos::View<const long*> d_words,
     Kokkos::View<unsigned short*> d_table, int representative)
 {
-  int start = (int)d_offsets(representative);
-  int end   = (int)(start + d_words(representative));
-  int n     = end - start;
+  int n = (int)(end - start);
   Kokkos::parallel_for("makeTable", n, KOKKOS_LAMBDA(int i) {
     unsigned short ord = d_orders(start + i);
     if (ord != 0)
@@ -183,15 +180,12 @@ void kernel_makeTable(Kokkos::View<const long*> d_offsets,
   });
 }
 
-void kernel_cleanTable(Kokkos::View<const long*> d_offsets,
+void kernel_cleanTable(long start, long end,
     Kokkos::View<const unsigned short*> d_indexs,
     Kokkos::View<const unsigned short*> d_orders,
-    Kokkos::View<const long*> d_words,
     Kokkos::View<unsigned short*> d_table, int representative)
 {
-  int start = (int)d_offsets(representative);
-  int end   = (int)(start + d_words(representative));
-  int n     = end - start;
+  int n = (int)(end - start);
   Kokkos::parallel_for("cleanTable", n, KOKKOS_LAMBDA(int i) {
     if (d_orders(start + i) != 0)
       d_table(d_indexs(start + i)) = 0;
@@ -463,6 +457,7 @@ int main(int argc, char** argv) {
       Kokkos::deep_copy(hv_off,  d_offsets);
       Kokkos::deep_copy(hv_wrd,  d_words);
       for (int i = 0; i < readsCount; i++) {
+        h_words[i] = hv_wrd(i);
         int start = (int)hv_off(i);
         int len   = (int)hv_wrd(i);
         std::sort(&hv_idx(start), &hv_idx(start) + len);
@@ -490,7 +485,9 @@ int main(int argc, char** argv) {
       if (r >= readsCount) break;
       Kokkos::deep_copy(d_cluster, hv_cluster);
 
-      kernel_makeTable(d_offsets, d_indexs, d_orders, d_words, d_table, r);
+      const long table_start = h_offsets[r];
+      const long table_end = table_start + h_words[r];
+      kernel_makeTable(table_start, table_end, d_indexs, d_orders, d_table, r);
       Kokkos::fence();
       kernel_magic(option.threshold, d_lengths, d_magicBase, d_cluster, r, readsCount);
       Kokkos::fence();
@@ -500,7 +497,7 @@ int main(int argc, char** argv) {
       kernel_align(option.threshold, d_lengths, d_offsets, d_compressed, d_gaps,
                    r, d_cluster, readsCount);
       Kokkos::fence();
-      kernel_cleanTable(d_offsets, d_indexs, d_orders, d_words, d_table, r);
+      kernel_cleanTable(table_start, table_end, d_indexs, d_orders, d_table, r);
       Kokkos::fence();
     }
 

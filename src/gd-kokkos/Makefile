@@ -7,16 +7,16 @@ CC = g++
 program = main
 source  = main.cpp
 obj     = main.o utils.o
-CFLAGS := $(EXTRA_CFLAGS) -std=c++17 -fopenmp -I$(KOKKOS_INC) -I../gd-sycl
+CFLAGS := $(EXTRA_CFLAGS) -std=c++17 -fopenmp -I$(KOKKOS_INC) -I../gd-cuda
 LDFLAGS = -L$(KOKKOS_LIB) -lkokkoscore -lkokkoscontainers -fopenmp -lpthread -ldl
 ifeq ($(OPTIMIZE),yes)
   CFLAGS += -O3
 endif
 $(program): $(obj) Makefile
 	$(CC) $(CFLAGS) $(obj) -o $@ $(LDFLAGS)
-utils.o: ../gd-sycl/utils.cpp ../gd-sycl/utils.h
+utils.o: ../gd-cuda/utils.cpp ../gd-cuda/utils.h
 	$(CC) $(CFLAGS) -c $< -o $@
-main.o: main.cpp ../gd-sycl/utils.h
+main.o: main.cpp ../gd-cuda/utils.h
 	$(CC) $(CFLAGS) -c $< -o $@
 clean:
 	rm -rf $(program) $(obj)

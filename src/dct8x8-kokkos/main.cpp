@@ -8,7 +8,7 @@
 #include <math.h>
 #include <chrono>
 #include <Kokkos_Core.hpp>
-#include "../dct8x8-omp/DCT8x8.h"
+#include "DCT8x8.h"
 
 // DCT8x8_gold CPU reference (pulled from DCT8x8_gold.cpp inline here)
 static void DCT8_cpu(float *dst, const float *src, unsigned int os, unsigned int is) {

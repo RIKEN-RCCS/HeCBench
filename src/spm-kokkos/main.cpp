@@ -9,10 +9,10 @@
 #define NUM_THREADS 128
 #define NUM_BLOCKS  256
 
-struct int3 { int x, y, z; };
+struct hec_int3 { int x, y, z; };
 
 KOKKOS_INLINE_FUNCTION
-float interp(const int3 d, const unsigned char f[], float x, float y, float z)
+float interp(const hec_int3 d, const unsigned char f[], float x, float y, float z)
 {
   int ix = (int)floorf(x); float dx1 = x - ix; float dx2 = 1.f - dx1;
   int iy = (int)floorf(y); float dy1 = y - iy; float dy2 = 1.f - dy1;
@@ -32,7 +32,7 @@ float interp(const int3 d, const unsigned char f[], float x, float y, float z)
 void spm_reference(
   const float *M, const int data_size,
   const unsigned char *g_d, const unsigned char *f_d,
-  const int3 dg, const int3 df,
+  const hec_int3 dg, const hec_int3 df,
   unsigned char *ivf_d, unsigned char *ivg_d, bool *data_threshold_d)
 {
   const float ran[] = {
@@ -85,8 +85,8 @@ int main(int argc, char* argv[])
   int v      = atoi(argv[1]);
   int repeat = atoi(argv[2]);
 
-  int3 g_vol = {v, v, v};
-  int3 f_vol = {v, v, v};
+  hec_int3 g_vol = {v, v, v};
+  hec_int3 f_vol = {v, v, v};
 
   const int data_size = (g_vol.x + 1) * (g_vol.y + 1) * (g_vol.z + 5);
   const int vol_size  = g_vol.x * g_vol.y * g_vol.z;
@@ -135,8 +135,8 @@ int main(int argc, char* argv[])
     }
 
     // Capture by value for the lambda
-    const int3 dg = g_vol;
-    const int3 df = f_vol;
+    const hec_int3 dg = g_vol;
+    const hec_int3 df = f_vol;
 
     auto start = std::chrono::steady_clock::now();
 

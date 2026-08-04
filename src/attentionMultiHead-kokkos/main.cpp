@@ -10,8 +10,11 @@
 #include <cstdlib>
 #include <Kokkos_Core.hpp>
 
-using TeamPol = Kokkos::TeamPolicy<>;
+using exec_space = Kokkos::DefaultExecutionSpace;
+using scratch_space = typename exec_space::scratch_memory_space;
+using TeamPol = Kokkos::TeamPolicy<exec_space>;
 using TeamMem = TeamPol::member_type;
+using ScratchView = Kokkos::View<float*, scratch_space, Kokkos::MemoryUnmanaged>;
 
 void mha(
     Kokkos::View<const float*> q,
@@ -33,8 +36,7 @@ void mha(
 
       // QK^T / sqrt(d_k): dot each key row with the query slice
       // logits[step] = sum_i q[candidate*qk_col + head*dim + i] * k[candidate*qk_col*n_steps + head*dim + step*qk_col + i]
-      Kokkos::View<float*, Kokkos::ScratchMemorySpace<>, Kokkos::MemoryUnmanaged>
-        logits(team.team_scratch(0), n_steps);
+      ScratchView logits(team.team_scratch(0), n_steps);
 
       Kokkos::parallel_for(Kokkos::TeamThreadRange(team, n_steps),
         [&](int step) {
@@ -123,13 +125,13 @@ int main(int argc, char* argv[]) {
     Kokkos::fence();
 
     // Compute scratch size: n_steps floats per team
-    int scratch_size = Kokkos::View<float*, Kokkos::ScratchMemorySpace<>, Kokkos::MemoryUnmanaged>::shmem_size(n_steps);
+    int scratch_size = ScratchView::shmem_size(n_steps);
 
     Kokkos::fence();
     auto start = std::chrono::steady_clock::now();
 
     for (int i = 0; i < repeat; i++) {
-      using TeamPol2 = Kokkos::TeamPolicy<>;
+      using TeamPol2 = Kokkos::TeamPolicy<exec_space>;
       Kokkos::parallel_for("mha_timed",
         TeamPol2(beamsize * nhead, Kokkos::AUTO, 1).set_scratch_size(0, Kokkos::PerTeam(scratch_size)),
         KOKKOS_LAMBDA(const TeamMem& team) {
@@ -138,8 +140,7 @@ int main(int argc, char* argv[]) {
           int head_id = bid % nhead;
           int dim_per_head = qk_col / nhead;
 
-          Kokkos::View<float*, Kokkos::ScratchMemorySpace<>, Kokkos::MemoryUnmanaged>
-            logits(team.team_scratch(0), n_steps);
+          ScratchView logits(team.team_scratch(0), n_steps);
 
           Kokkos::parallel_for(Kokkos::TeamThreadRange(team, n_steps),
             [&](int step) {

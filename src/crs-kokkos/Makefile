@@ -10,7 +10,7 @@ KOKKOS_LIB = /home/copilot/kokkos-install/lib
 
 CC      = g++
 program = main
-source  = main.cpp \
+source  = main.cpp crs.cpp \
           ../crs-omp/utils.cpp \
           ../crs-sycl/GCRSMatrix.cpp \
           ../crs-sycl/galois.cpp \

@@ -36,4 +36,5 @@ clean:
 	rm -rf $(program) $(obj) device/*.o src/*.o
 
 run: $(program)
-	$(LAUNCHER) ./$(program) ../minimap2-omp/in-1k.txt kernel-out.txt
+	@if [ ! -f in-1k.txt ]; then tar xzf ../minimap2-sycl/in-1k.txt.tar.gz; fi
+	$(LAUNCHER) ./$(program) in-1k.txt kernel-out.txt

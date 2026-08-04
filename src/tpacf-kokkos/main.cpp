@@ -6,86 +6,8 @@
 #include <chrono>
 #include <cstdio>
 #include <cstdlib>
-#include <cmath>
-#include <vector>
-#include <cstring>
 
-#define NUMBINS 64
-#define D2R (M_PI / 180.0)
-
-// Global bin boundaries in constant-like view
-static double g_binbounds[NUMBINS];
-
-static double* init_bins(int bins_per_dec, float min_angle, float max_angle,
-                         int angle_units, int *nbins) {
-  *nbins = (int)floor(bins_per_dec * (log10(max_angle) - log10(min_angle)));
-  static double binb[31];
-  int binoffset = 30 - (*nbins);
-  for (int k = 0; k < (*nbins)+1; k++) {
-    double bb = pow(10.0, log10(min_angle) + k * 1.0 / bins_per_dec);
-    binb[k + binoffset] = cos(bb / (angle_units ? 60.0 : 1.0) * D2R);
-  }
-  for (int k = 0; k < binoffset; k++) binb[k] = -5.0;
-  binb[30] = -5.0;
-  return binb;
-}
-
-struct CartesianData {
-  std::vector<double> x, y, z;
-  int n;
-  CartesianData(int n_) : n(n_), x(n_), y(n_), z(n_) {}
-};
-
-// Generate synthetic spherical point cloud
-static CartesianData generate_data(int n, unsigned seed) {
-  CartesianData cd(n);
-  srand(seed);
-  for (int i = 0; i < n; i++) {
-    double ra  = (rand() / (double)RAND_MAX) * 360.0;  // degrees
-    double dec = (rand() / (double)RAND_MAX) * 180.0 - 90.0;
-    double ra_r  = ra  * D2R;
-    double dec_r = dec * D2R;
-    cd.x[i] = cos(dec_r) * cos(ra_r);
-    cd.y[i] = cos(dec_r) * sin(ra_r);
-    cd.z[i] = sin(dec_r);
-  }
-  return cd;
-}
-
-// Find bin for a dot product value using waterfall search
-KOKKOS_INLINE_FUNCTION
-int find_bin(double dot, const double *binb, int nbins_minus1) {
-  for (int b = 0; b < nbins_minus1; b++) {
-    if (dot > binb[b]) return b;
-  }
-  return nbins_minus1;
-}
-
-// Compute histogram for all pairs between set1 and set2
-static void compute_histogram(
-    const Kokkos::View<double*> &x1, const Kokkos::View<double*> &y1, const Kokkos::View<double*> &z1,
-    const Kokkos::View<double*> &x2, const Kokkos::View<double*> &y2, const Kokkos::View<double*> &z2,
-    int n1, int n2,
-    Kokkos::View<long long*> &histo,
-    const Kokkos::View<double*> &d_binb, int nbins)
-{
-  Kokkos::parallel_for("acf", n1, KOKKOS_LAMBDA(const int i) {
-    double xi = x1(i), yi = y1(i), zi = z1(i);
-    for (int j = 0; j < n2; j++) {
-      double dot = xi * x2(j) + yi * y2(j) + zi * z2(j);
-      // clamp
-      if (dot >  1.0) dot =  1.0;
-      if (dot < -1.0) dot = -1.0;
-      // find bin
-      int bin = nbins - 1;
-      for (int b = 0; b < nbins - 1; b++) {
-        if (dot > d_binb(b)) { bin = b; break; }
-      }
-      Kokkos::atomic_add(&histo(bin), 1LL);
-    }
-  });
-  Kokkos::fence();
-}
+#include "tpacf.h"
 
 int main(int argc, char **argv) {
   if (argc < 5) {

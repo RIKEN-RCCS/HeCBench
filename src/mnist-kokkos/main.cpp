@@ -87,7 +87,7 @@ struct Layer {
 // Sigmoid and error helpers
 // -------------------------------------------------------------------------
 KOKKOS_INLINE_FUNCTION float step_function(float v) {
-    return 1.f / (1.f + Kokkos::Experimental::exp(-v));
+    return 1.f / (1.f + Kokkos::exp(-v));
 }
 
 // -------------------------------------------------------------------------
@@ -367,10 +367,11 @@ static void apply_grad(Kokkos::View<float*> wt, Kokkos::View<float*> dw, int sz)
 // -------------------------------------------------------------------------
 static float compute_norm(Kokkos::View<float*> v, int n)
 {
-    auto hv = Kokkos::create_mirror_view(v);
-    Kokkos::deep_copy(hv, v);
     float sum = 0.f;
-    for (int i = 0; i < n; i++) sum += hv(i) * hv(i);
+    Kokkos::parallel_reduce("compute_norm", Kokkos::RangePolicy<>(0, n),
+        KOKKOS_LAMBDA(const int i, float& acc) {
+            acc += v(i) * v(i);
+        }, sum);
     return sqrtf(sum);
 }
 
@@ -457,6 +458,7 @@ int main(int argc, const char **argv)
 
         // ---- Training ----
         fprintf(stdout, "Learning\n");
+        fflush(stdout);
         int remaining = iter;
         while (remaining < 0 || remaining-- > 0) {
             float err = 0.f;
@@ -474,14 +476,17 @@ int main(int argc, const char **argv)
             }
             err /= train_cnt;
             fprintf(stdout, "error: %e\n", err);
+            fflush(stdout);
             if (err < threshold) {
                 fprintf(stdout, "Training complete, error less than threshold\n\n");
+                fflush(stdout);
                 break;
             }
         }
 
         // ---- Testing ----
         fprintf(stdout, "Testing\n");
+        fflush(stdout);
         int errors = 0;
         for (unsigned i = 0; i < test_cnt; i++) {
             forward_pass(test_set[i].data, l_input, l_c1, l_s1, l_f);

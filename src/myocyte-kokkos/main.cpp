@@ -52,9 +52,9 @@ static void read_file(const char *filename, fp *input,
 #ifdef _OPENMP
 #  undef _OPENMP   // suppress declare target warnings from kernel headers
 #endif
-#include "../myocyte-omp/kernel/kernel_fin.c"
-#include "../myocyte-omp/kernel/kernel_ecc.h"
-#include "../myocyte-omp/kernel/kernel_cam.h"
+#include "kernel/kernel_fin.c"
+#include "kernel/kernel_ecc.h"
+#include "kernel/kernel_cam.h"
 
 // ---------------------------------------------------------------------------
 // Sequential master() — replaces OMP target teams version
@@ -194,7 +194,8 @@ int main(int argc, char *argv[])
 
     // Outer parallelism: one workload instance per Kokkos thread
     // (workload=1 by default; for larger workloads each instance is independent)
-    Kokkos::parallel_for("myocyte_workload", workload,
+    Kokkos::parallel_for("myocyte_workload",
+        Kokkos::RangePolicy<Kokkos::DefaultHostExecutionSpace>(0, workload),
         [&](int i) {
           double ltci = 0, ltck = 0, ltco = 0;
           int status = solver(y[i], x[i], xmax, params[i], com,

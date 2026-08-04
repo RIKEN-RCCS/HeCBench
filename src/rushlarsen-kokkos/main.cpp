@@ -470,9 +470,9 @@ int main(int argc, char* argv[])
                 KOKKOS_LAMBDA(int i) {
                     RUSH_LARSEN_BODY(d_states, d_parameters, n, i, t_cur, dt_cur);
                 });
-            Kokkos::fence();
             t += dt;
         }
+        Kokkos::fence();
 
         auto ts1 = std::chrono::steady_clock::now();
         double time_elapsed = std::chrono::duration<double>(ts1 - ts0).count();

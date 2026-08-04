@@ -250,8 +250,8 @@ int main(int argc, const char **argv) {
             if (data & 1) result ^= d_table[(int)y * qrng_res + bit];
           d_output[(int)y * N + (int)pos] = (float)(result + 1) * INT_SCALE;
         });
-      Kokkos::fence();
     }
+    Kokkos::fence();
 
     auto end = std::chrono::steady_clock::now();
     auto t = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
@@ -291,8 +291,8 @@ int main(int argc, const char **argv) {
           unsigned int d = (unsigned int)(pos + 1) * distance;
           d_output[pos] = MoroInvCNDgpu(d);
         });
-      Kokkos::fence();
     }
+    Kokkos::fence();
 
     end = std::chrono::steady_clock::now();
     t = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();

@@ -43,6 +43,18 @@ static void print_total(const float *arr, int ngrid)
   printf("Accumulated value: %1.7g\n", accum);
 }
 
+static void compare(const float *arr, const float *arr2, int ngrid)
+{
+  bool ok = true;
+  for (int i = 0; i < ngrid; i++) {
+    if (fabsf(arr[i] - arr2[i]) > 1e-3f) {
+      ok = false;
+      break;
+    }
+  }
+  printf("%s\n", ok ? "PASS" : "FAIL");
+}
+
 // -----------------------------------------------------------------------
 // CPU reference kernel
 // -----------------------------------------------------------------------
@@ -52,24 +64,28 @@ static void run_cpu_kernel(int itmax, int ngrid, int natom,
                            const float *charge, const float *size,
                            float xkappa, float pre1, float *val)
 {
+  using HostExec = Kokkos::DefaultHostExecutionSpace;
   auto t0 = std::chrono::steady_clock::now();
 
   for (int n = 0; n < itmax; n++) {
-    #pragma omp parallel for
-    for (int igrid = 0; igrid < ngrid; igrid++) {
-      float sum = 0.0f;
-      for (int iatom = 0; iatom < natom; iatom++) {
-        float dx = gx[igrid] - ax[iatom];
-        float dy = gy[igrid] - ay[iatom];
-        float dz = gz[igrid] - az[iatom];
-        float dist = sqrtf(dx*dx + dy*dy + dz*dz);
-        sum += pre1 * (charge[iatom] / dist) *
-               expf(-xkappa * (dist - size[iatom])) /
-               (1.0f + xkappa * size[iatom]);
-      }
-      val[igrid] = sum;
-    }
+    Kokkos::parallel_for(
+      "mdh_host_reference",
+      Kokkos::RangePolicy<HostExec>(0, ngrid),
+      KOKKOS_LAMBDA(const int igrid) {
+        float sum = 0.0f;
+        for (int iatom = 0; iatom < natom; iatom++) {
+          float dx = gx[igrid] - ax[iatom];
+          float dy = gy[igrid] - ay[iatom];
+          float dz = gz[igrid] - az[iatom];
+          float dist = sqrtf(dx*dx + dy*dy + dz*dz);
+          sum += pre1 * (charge[iatom] / dist) *
+                 expf(-xkappa * (dist - size[iatom])) /
+                 (1.0f + xkappa * size[iatom]);
+        }
+        val[igrid] = sum;
+      });
   }
+  HostExec().fence();
 
   auto t1 = std::chrono::steady_clock::now();
   double elapsed = std::chrono::duration<double>(t1 - t0).count();
@@ -89,6 +105,8 @@ static void run_gpu_kernel(int wgsize, int itmax,
   using ExecSpace  = Kokkos::DefaultExecutionSpace;
   using MemSpace   = typename ExecSpace::memory_space;
   using ViewF1     = Kokkos::View<float*, MemSpace>;
+  using TeamPolicy = Kokkos::TeamPolicy<ExecSpace>;
+  using Member     = TeamPolicy::member_type;
 
   // Device views
   ViewF1 d_ax    ("ax",     natom);
@@ -131,27 +149,31 @@ static void run_gpu_kernel(int wgsize, int itmax,
   Kokkos::fence();
   auto t0 = std::chrono::steady_clock::now();
 
+  TeamPolicy policy = (wgsize > 0) ? TeamPolicy(ngrid, wgsize)
+                                   : TeamPolicy(ngrid, Kokkos::AUTO());
+
   for (int n = 0; n < itmax; n++) {
-    // Each thread handles one grid point; inner atom loop is serial per thread.
-    // This maps to the OMP "teams distribute thread_limit(wgsize)" pattern where
-    // each team works on one grid point and threads reduce over atoms.
-    // With Kokkos we use a flat parallel_for (one work item per grid point) since
-    // the inner loop is inexpensive to serialize at the thread level.
     Kokkos::parallel_for(
       "mdh",
-      Kokkos::RangePolicy<ExecSpace>(0, ngrid),
-      KOKKOS_LAMBDA(int igrid) {
+      policy,
+      KOKKOS_LAMBDA(const Member& team) {
+        const int igrid = team.league_rank();
         float sum = 0.0f;
-        for (int iatom = 0; iatom < natom; iatom++) {
-          float dx = d_gx(igrid) - d_ax(iatom);
-          float dy = d_gy(igrid) - d_ay(iatom);
-          float dz = d_gz(igrid) - d_az(iatom);
+        const float l_gx = d_gx(igrid);
+        const float l_gy = d_gy(igrid);
+        const float l_gz = d_gz(igrid);
+        Kokkos::parallel_reduce(Kokkos::TeamThreadRange(team, natom), [&](const int iatom, float& local_sum) {
+          float dx = l_gx - d_ax(iatom);
+          float dy = l_gy - d_ay(iatom);
+          float dz = l_gz - d_az(iatom);
           float dist = sqrtf(dx*dx + dy*dy + dz*dz);
-          sum += pre1 * (d_charge(iatom) / dist) *
+          local_sum += pre1 * (d_charge(iatom) / dist) *
                  expf(-xkappa * (dist - d_size(iatom))) /
                  (1.0f + xkappa * d_size(iatom));
-        }
-        d_val(igrid) = sum;
+        }, sum);
+        Kokkos::single(Kokkos::PerTeam(team), [&]() {
+          d_val(igrid) = sum;
+        });
       });
   }
 
@@ -202,28 +224,31 @@ int main(int argc, const char **argv)
   float *gx     = (float*)calloc(ngadj, sizeof(float));
   float *gy     = (float*)calloc(ngadj, sizeof(float));
   float *gz     = (float*)calloc(ngadj, sizeof(float));
-  float *val    = (float*)calloc(ngadj, sizeof(float));
+  float *val_cpu = (float*)calloc(ngadj, sizeof(float));
+  float *val_gpu = (float*)calloc(ngadj, sizeof(float));
 
   gendata(ax, ay, az, gx, gy, gz, charge, size, natom, ngrid);
 
-  // CPU reference
-  run_cpu_kernel(itmax, ngrid, natom, ax, ay, az, gx, gy, gz, charge, size,
-                 xkappa, pre1, val);
-  print_total(val, ngrid);
-
-  // GPU kernel (Kokkos)
   Kokkos::initialize(argc, const_cast<char**>(argv));
   {
+    // One host pass is enough for validation: repeating this deterministic
+    // kernel only overwrites the same output values.
+    run_cpu_kernel(1, ngrid, natom, ax, ay, az, gx, gy, gz, charge, size,
+                   xkappa, pre1, val_cpu);
+    print_total(val_cpu, ngrid);
+
+    // Device kernel
     run_gpu_kernel(wgsize, itmax, ngrid, natom, ngadj,
                    ax, ay, az, gx, gy, gz, charge, size,
-                   xkappa, pre1, val);
-    print_total(val, ngrid);
+                   xkappa, pre1, val_gpu);
+    print_total(val_gpu, ngrid);
+    compare(val_cpu, val_gpu, ngrid);
   }
   Kokkos::finalize();
 
   free(ax); free(ay); free(az);
   free(charge); free(size);
   free(gx); free(gy); free(gz);
-  free(val);
+  free(val_cpu); free(val_gpu);
   return 0;
 }

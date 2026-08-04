@@ -96,10 +96,10 @@ struct DivergenceKokkos {
   Kokkos::View<real*> d_div;
   Kokkos::View<real*> d_vvtemp;
 
-  typename Kokkos::View<real*>::HostMirror h_gv;
-  typename Kokkos::View<real*>::HostMirror h_Dvv;
-  typename Kokkos::View<real*>::HostMirror h_rmetdet;
-  typename Kokkos::View<real*>::HostMirror h_div;
+  Kokkos::View<real*, Kokkos::HostSpace> h_gv;
+  Kokkos::View<real*, Kokkos::HostSpace> h_Dvv;
+  Kokkos::View<real*, Kokkos::HostSpace> h_rmetdet;
+  Kokkos::View<real*, Kokkos::HostSpace> h_div;
 
   static constexpr int np = NP;
 

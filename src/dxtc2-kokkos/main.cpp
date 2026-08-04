@@ -10,9 +10,9 @@
 #include "shrUtils.h"
 #include "permutations.h"
 
-// float4/uint4 structs (no OMP needed)
-struct float4 { float x, y, z, w; };
-struct uint4  { unsigned int x, y, z, w; };
+// hec_float4/hec_uint4 structs (no OMP needed)
+struct hec_float4 { float x, y, z, w; };
+struct hec_uint4  { unsigned int x, y, z, w; };
 
 #define ERROR_THRESHOLD 0.02f
 #define MIN(a,b) ((a)<(b)?(a):(b))
@@ -22,22 +22,22 @@ struct uint4  { unsigned int x, y, z, w; };
 //=============================================================================
 
 KOKKOS_INLINE_FUNCTION
-float4 make_float4(float x, float y, float z, float w) {
-  float4 r; r.x=x; r.y=y; r.z=z; r.w=w; return r;
+hec_float4 make_hec_float4(float x, float y, float z, float w) {
+  hec_float4 r; r.x=x; r.y=y; r.z=z; r.w=w; return r;
 }
 
 KOKKOS_INLINE_FUNCTION
-float4 operator+(float4 a, float4 b) { return {a.x+b.x, a.y+b.y, a.z+b.z, a.w+b.w}; }
+hec_float4 operator+(hec_float4 a, hec_float4 b) { return {a.x+b.x, a.y+b.y, a.z+b.z, a.w+b.w}; }
 KOKKOS_INLINE_FUNCTION
-void   operator+=(float4 &a, float4 b) { a.x+=b.x; a.y+=b.y; a.z+=b.z; a.w+=b.w; }
+void   operator+=(hec_float4 &a, hec_float4 b) { a.x+=b.x; a.y+=b.y; a.z+=b.z; a.w+=b.w; }
 KOKKOS_INLINE_FUNCTION
-float4 operator-(float4 a, float4 b) { return {a.x-b.x, a.y-b.y, a.z-b.z, a.w-b.w}; }
+hec_float4 operator-(hec_float4 a, hec_float4 b) { return {a.x-b.x, a.y-b.y, a.z-b.z, a.w-b.w}; }
 KOKKOS_INLINE_FUNCTION
-float4 operator*(float4 a, float4 b) { return {a.x*b.x, a.y*b.y, a.z*b.z, a.w*b.w}; }
+hec_float4 operator*(hec_float4 a, hec_float4 b) { return {a.x*b.x, a.y*b.y, a.z*b.z, a.w*b.w}; }
 KOKKOS_INLINE_FUNCTION
-float4 operator*(float4 a, float s)  { return {a.x*s,   a.y*s,   a.z*s,   a.w*s  }; }
+hec_float4 operator*(hec_float4 a, float s)  { return {a.x*s,   a.y*s,   a.z*s,   a.w*s  }; }
 KOKKOS_INLINE_FUNCTION
-float4 operator*(float s, float4 a)  { return {s*a.x,   s*a.y,   s*a.z,   s*a.w  }; }
+hec_float4 operator*(float s, hec_float4 a)  { return {s*a.x,   s*a.y,   s*a.z,   s*a.w  }; }
 
 KOKKOS_INLINE_FUNCTION
 float dev_clamp(float x, float upper, float lower) {
@@ -45,8 +45,8 @@ float dev_clamp(float x, float upper, float lower) {
 }
 
 KOKKOS_INLINE_FUNCTION
-float4 firstEigenVector(float *matrix) {
-  float4 v = {1.0f, 1.0f, 1.0f, 0.0f};
+hec_float4 firstEigenVector(float *matrix) {
+  hec_float4 v = {1.0f, 1.0f, 1.0f, 0.0f};
   for(int i=0; i<8; i++) {
     float x = v.x*matrix[0] + v.y*matrix[1] + v.z*matrix[2];
     float y = v.x*matrix[1] + v.y*matrix[3] + v.z*matrix[4];
@@ -59,7 +59,7 @@ float4 firstEigenVector(float *matrix) {
 }
 
 KOKKOS_INLINE_FUNCTION
-float4 roundAndExpand(float4 v, unsigned short *w) {
+hec_float4 roundAndExpand(hec_float4 v, unsigned short *w) {
   unsigned short x = (unsigned short)rintf(dev_clamp(v.x, 1.0f, 0.0f) * 31.0f);
   unsigned short y = (unsigned short)rintf(dev_clamp(v.y, 1.0f, 0.0f) * 63.0f);
   unsigned short z = (unsigned short)rintf(dev_clamp(v.z, 1.0f, 0.0f) * 31.0f);
@@ -71,12 +71,12 @@ float4 roundAndExpand(float4 v, unsigned short *w) {
 }
 
 KOKKOS_INLINE_FUNCTION
-float evalPermutation(const float4 *colors, unsigned int permutation,
+float evalPermutation(const hec_float4 *colors, unsigned int permutation,
                       unsigned short *start, unsigned short *end,
-                      float4 color_sum,
+                      hec_float4 color_sum,
                       const float *alphaTable, const int *prods, float weight)
 {
-  float4 alphax_sum = {0,0,0,0};
+  hec_float4 alphax_sum = {0,0,0,0};
   int akku = 0;
   for(int i=0; i<16; i++) {
     const unsigned int bits = permutation >> (2*i);
@@ -86,13 +86,13 @@ float evalPermutation(const float4 *colors, unsigned int permutation,
   float alpha2_sum   = (float)(akku >> 16);
   float beta2_sum    = (float)((akku >> 8) & 0xff);
   float alphabeta_sum= (float)((akku >> 0) & 0xff);
-  float4 betax_sum = weight * color_sum - alphax_sum;
+  hec_float4 betax_sum = weight * color_sum - alphax_sum;
   const float factor = 1.0f / (alpha2_sum*beta2_sum - alphabeta_sum*alphabeta_sum);
-  float4 a = (alphax_sum*beta2_sum  - betax_sum*alphabeta_sum) * factor;
-  float4 b = (betax_sum*alpha2_sum  - alphax_sum*alphabeta_sum) * factor;
+  hec_float4 a = (alphax_sum*beta2_sum  - betax_sum*alphabeta_sum) * factor;
+  hec_float4 b = (betax_sum*alpha2_sum  - alphax_sum*alphabeta_sum) * factor;
   a = roundAndExpand(a, start);
   b = roundAndExpand(b, end);
-  float4 e = a*a*alpha2_sum + b*b*beta2_sum
+  hec_float4 e = a*a*alpha2_sum + b*b*beta2_sum
              + 2.0f*(a*b*alphabeta_sum - a*alphax_sum - b*betax_sum);
   return (1.0f/weight) * (e.x + e.y + e.z);
 }
@@ -108,7 +108,7 @@ void processDXTBlock(
     unsigned int *result)
 {
   // Load 16 colors
-  float4 colors[16];
+  hec_float4 colors[16];
   for(int i=0; i<16; i++) {
     unsigned int c = image[bid*16 + i];
     colors[i].x = ((c >>  0) & 0xFF) * (1.0f/255.0f);
@@ -118,14 +118,14 @@ void processDXTBlock(
   }
 
   // Compute color sum
-  float4 color_sum = {0,0,0,0};
+  hec_float4 color_sum = {0,0,0,0};
   for(int i=0; i<16; i++) color_sum += colors[i];
 
   // Compute covariance matrix (6 unique entries of 3x3 symmetric matrix)
   float cov[6] = {0,0,0,0,0,0};
-  float4 s = {0.0625f, 0.0625f, 0.0625f, 0.0625f};
+  hec_float4 s = {0.0625f, 0.0625f, 0.0625f, 0.0625f};
   for(int i=0; i<16; i++) {
-    float4 d = colors[i] - color_sum * s;
+    hec_float4 d = colors[i] - color_sum * s;
     cov[0] += d.x*d.x;
     cov[1] += d.x*d.y;
     cov[2] += d.x*d.z;
@@ -135,7 +135,7 @@ void processDXTBlock(
   }
 
   // First eigenvector for best fit line
-  float4 axis = firstEigenVector(cov);
+  hec_float4 axis = firstEigenVector(cov);
 
   // Project colors onto axis and sort
   float proj[16];
@@ -155,7 +155,7 @@ void processDXTBlock(
       if(xrefs[i] == xrefs[j]) ++xrefs[i];
 
   // Scatter: sorted_colors[xrefs[i]] = colors[i]
-  float4 sorted[16];
+  hec_float4 sorted[16];
   for(int i=0; i<16; i++) sorted[xrefs[i]] = colors[i];
 
   // Evaluate all 992 permutations with weight 9

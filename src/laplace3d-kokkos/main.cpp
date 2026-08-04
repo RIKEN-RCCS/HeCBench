@@ -103,7 +103,11 @@ int main(int argc, char **argv) {
     auto start = std::chrono::steady_clock::now();
     for (int i = 1; i <= REPEAT; ++i) {
       laplace3d(NX, NY, NZ, d_u1, d_u2);
-      Kokkos::deep_copy(d_u1, d_u2);  // swap: copy d_u2 -> d_u1
+      // The next iteration reads the newly computed field.  Exchange the
+      // View handles instead of copying the complete 3-D grid on the device.
+      auto previous = d_u1;
+      d_u1 = d_u2;
+      d_u2 = previous;
     }
     auto end = std::chrono::steady_clock::now();
     auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();

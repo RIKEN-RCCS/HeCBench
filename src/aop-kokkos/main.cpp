@@ -44,20 +44,20 @@ typedef struct __attribute__((__aligned__(32)))
 {
   double x, y, z, w;
 }
-double4;
+hec_double4;
 
 typedef struct __attribute__((__aligned__(32)))
 {
   double x, y, z;
 }
-double3;
+hec_double3;
 
-KOKKOS_INLINE_FUNCTION double3 operator+(const double3 &u, const double3 &v)
+KOKKOS_INLINE_FUNCTION hec_double3 operator+(const hec_double3 &u, const hec_double3 &v)
 {
   return {u.x+v.x, u.y+v.y, u.z+v.z};
 }
 
-KOKKOS_INLINE_FUNCTION double4 operator+(const double4 &u, const double4 &v)
+KOKKOS_INLINE_FUNCTION hec_double4 operator+(const hec_double4 &u, const hec_double4 &v)
 {
   return {u.x+v.x, u.y+v.y, u.z+v.z, u.w+v.w};
 }
@@ -112,7 +112,7 @@ void generate_paths_kernel(int num_timesteps,
 }
 
 KOKKOS_INLINE_FUNCTION
-static void assemble_R(int m, double4 &sums, double *smem_svds)
+static void assemble_R(int m, hec_double4 &sums, double *smem_svds)
 {
   double x0 = smem_svds[0];
   double x1 = smem_svds[1];
@@ -218,7 +218,7 @@ static void my_swap(double &x, double &y)
 }
 
 KOKKOS_INLINE_FUNCTION
-static void svd_3x3(int m, double4 &sums, double *smem_svds)
+static void svd_3x3(int m, hec_double4 &sums, double *smem_svds)
 {
   assemble_R(m, sums, smem_svds);
 
@@ -475,7 +475,7 @@ void prepare_svd_kernel(const int numTeams,
       const int offset = timestep * num_paths;
 
       int m = 0;
-      double4 sums = {0.0, 0.0, 0.0, 0.0};
+      hec_double4 sums = {0.0, 0.0, 0.0, 0.0};
 
       if (lid < R_W_MATRICES_SMEM_SLOTS)
         scratch_double(smem_off + lid) = 0.0;
@@ -568,7 +568,7 @@ void prepare_svd_kernel(const int numTeams,
 
         if (lid == 0)
         {
-          double4 final_sums;
+          hec_double4 final_sums;
           final_sums.x = scratch_double(lsums_off + 0);
           final_sums.y = scratch_double(lsums_off + 1);
           final_sums.z = scratch_double(lsums_off + 2);

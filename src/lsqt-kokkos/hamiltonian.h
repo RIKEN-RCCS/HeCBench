@@ -27,7 +27,7 @@ class Hamiltonian
 {
 public:
   Hamiltonian(Model&);
-  ~Hamiltonian() = default;
+  ~Hamiltonian();
 
   void apply(Vector&, Vector&);
   void apply_commutator(Vector&, Vector&);
@@ -39,12 +39,23 @@ public:
   void chebyshev_2x(Vector&, Vector&, Vector&, Vector&, Vector&, Vector&, Vector&, real, int);
 
 private:
+  void initialize_gpu(Model&);
+  void initialize_cpu(Model&);
+
   Kokkos::View<int*> d_neighbor_number;
   Kokkos::View<int*> d_neighbor_list;
   Kokkos::View<real*> d_potential;
   Kokkos::View<real*> d_hopping_real;
   Kokkos::View<real*> d_hopping_imag;
   Kokkos::View<real*> d_xx;
+
+  int* neighbor_number;
+  int* neighbor_list;
+  real* potential;
+  real* hopping_real;
+  real* hopping_imag;
+  real* xx;
+  int grid_size;
   int n;
   int max_neighbor;
   real energy_max;

@@ -599,8 +599,6 @@ int test(uint arraySize, unsigned int NUM_ITERATIONS, const std::string& type_na
 
   for (uint k = 0; k < NUM_ITERATIONS; k++) {
     std::copy(original.begin(), original.end(), pArray);
-    std::vector<T> verify(pArray, pArray + arraySize);
-
     double t0 = seconds();
     GPUQSort(arraySize, pArray, pArrayCopy);
     double t1 = seconds();
@@ -608,11 +606,14 @@ int test(uint arraySize, unsigned int NUM_ITERATIONS, const std::string& type_na
     avgTime  += times[k];
     printf("Time to sort: %.3f ms\n", times[k]*1000.0);
 
+#ifdef TRUST_BUT_VERIFY
+    std::vector<T> verify(original.begin(), original.end());
     std::sort(verify.begin(), verify.end());
     if (!std::equal(verify.begin(), verify.end(), pArray)) {
       fprintf(stderr, "MISMATCH at iteration %u\n", k);
       failures++;
     }
+#endif
   }
   printf("Number of failures: %u / %u\n", failures, NUM_ITERATIONS);
   avgTime /= NUM_ITERATIONS;

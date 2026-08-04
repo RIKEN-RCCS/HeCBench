@@ -10,6 +10,14 @@
 #include <algorithm>
 #include <chrono>
 
+static void require_alloc(const void *ptr, const char *name)
+{
+  if (!ptr) {
+    fprintf(stderr, "Failed to allocate %s\n", name);
+    exit(1);
+  }
+}
+
 // ---------------------------------------------------------------------------
 // Copy helpers
 // ---------------------------------------------------------------------------
@@ -157,6 +165,7 @@ static void full_matrix_cell_centric(full_data &cc)
             for (int nj = -1; nj <= 1; nj++) {
               if (j+nj < 0 || j+nj >= sizey) continue;
               for (int ni = -1; ni <= 1; ni++) {
+                if (ni == 0 && nj == 0) continue;
                 if (i+ni < 0 || i+ni >= sizex) continue;
                 int nc = (i+ni)+sizex*(j+nj);
                 if (d_Vf(nc*Nmats+mat) > 0.0) {
@@ -164,7 +173,7 @@ static void full_matrix_cell_centric(full_data &cc)
                 }
               }
             }
-            d_rma(cell*Nmats+mat) = rs / Nn;
+            d_rma(cell*Nmats+mat) = Nn ? rs / Nn : 0.0;
           } else {
             d_rma(cell*Nmats+mat) = 0.0;
           }
@@ -243,6 +252,7 @@ static void full_matrix_material_centric(full_data &cc, full_data &mc)
           for (int nj=-1; nj<=1; nj++) {
             if (j+nj<0||j+nj>=sizey) continue;
             for (int ni=-1; ni<=1; ni++) {
+              if (ni == 0 && nj == 0) continue;
               if (i+ni<0||i+ni>=sizex) continue;
               int nc=(i+ni)+sizex*(j+nj);
               if (d_Vf((long)ncells*mat+nc) > 0.0) {
@@ -252,7 +262,7 @@ static void full_matrix_material_centric(full_data &cc, full_data &mc)
               }
             }
           }
-          d_rma((long)ncells*mat+cell) = rs / Nn;
+          d_rma((long)ncells*mat+cell) = Nn ? rs / Nn : 0.0;
         } else {
           d_rma((long)ncells*mat+cell) = 0.0;
         }
@@ -361,6 +371,7 @@ static void compact_cell_centric(full_data &cc, compact_data &ccc)
             int mat=d_matids(lx); double rs=0.0; int Nn=0;
             for (int nj=-1; nj<=1; nj++)
               for (int ni=-1; ni<=1; ni++) {
+                if (ni == 0 && nj == 0) continue;
                 int ci=i+ni, cj=j+nj, nc=ci+sizex*cj;
                 int jx=d_imaterial(nc);
                 if (jx<=0) {
@@ -372,13 +383,14 @@ static void compact_cell_centric(full_data &cc, compact_data &ccc)
                   rs+=d_rho_c(nc)/dsqr[(nj+1)*3+(ni+1)]; Nn++;
                 }
               }
-            d_rma_cl(lx) = rs / Nn;
+            d_rma_cl(lx) = Nn ? rs / Nn : 0.0;
           }
         } else {
           int mat=ix-1; double rs=0.0; int Nn=0;
           for (int nj=-1; nj<=1; nj++) {
             if (j+nj<0||j+nj>=sizey) continue;
             for (int ni=-1; ni<=1; ni++) {
+              if (ni == 0 && nj == 0) continue;
               if (i+ni<0||i+ni>=sizex) continue;
               int ci=i+ni, cj=j+nj, nc=ci+sizex*cj;
               int jx=d_imaterial(nc);
@@ -392,7 +404,7 @@ static void compact_cell_centric(full_data &cc, compact_data &ccc)
               }
             }
           }
-          d_rma_c(cell) = rs / Nn;
+          d_rma_c(cell) = Nn ? rs / Nn : 0.0;
         }
       });
   Kokkos::fence();
@@ -509,6 +521,41 @@ int main(int argc, char **argv)
   ccc.t_compact_list=(double*)malloc(list_size*8);
   ccc.p_compact_list=(double*)malloc(list_size*8);
 
+  require_alloc(cc.rho, "cc.rho");
+  require_alloc(cc.rho_mat_ave, "cc.rho_mat_ave");
+  require_alloc(cc.p, "cc.p");
+  require_alloc(cc.Vf, "cc.Vf");
+  require_alloc(cc.t, "cc.t");
+  require_alloc(mc.rho, "mc.rho");
+  require_alloc(mc.rho_mat_ave, "mc.rho_mat_ave");
+  require_alloc(mc.p, "mc.p");
+  require_alloc(mc.Vf, "mc.Vf");
+  require_alloc(mc.t, "mc.t");
+  require_alloc(cc.V, "cc.V");
+  require_alloc(cc.x, "cc.x");
+  require_alloc(cc.y, "cc.y");
+  require_alloc(cc.n, "cc.n");
+  require_alloc(cc.rho_ave, "cc.rho_ave");
+  require_alloc(mc.rho_ave, "mc.rho_ave");
+  require_alloc(ccc.rho_ave_compact, "ccc.rho_ave_compact");
+  require_alloc(ccc.rho_compact, "ccc.rho_compact");
+  require_alloc(ccc.rho_mat_ave_compact, "ccc.rho_mat_ave_compact");
+  require_alloc(ccc.p_compact, "ccc.p_compact");
+  require_alloc(ccc.t_compact, "ccc.t_compact");
+  require_alloc(nmats_per_cell, "nmats_per_cell");
+  require_alloc(ccc.imaterial, "ccc.imaterial");
+  require_alloc(ccc.nextfrac, "ccc.nextfrac");
+  require_alloc(frac2cell, "frac2cell");
+  require_alloc(ccc.matids, "ccc.matids");
+  require_alloc(ccc.mmc_index, "ccc.mmc_index");
+  require_alloc(ccc.mmc_i, "ccc.mmc_i");
+  require_alloc(ccc.mmc_j, "ccc.mmc_j");
+  require_alloc(ccc.Vf_compact_list, "ccc.Vf_compact_list");
+  require_alloc(ccc.rho_compact_list, "ccc.rho_compact_list");
+  require_alloc(ccc.rho_mat_ave_compact_list, "ccc.rho_mat_ave_compact_list");
+  require_alloc(ccc.t_compact_list, "ccc.t_compact_list");
+  require_alloc(ccc.p_compact_list, "ccc.p_compact_list");
+
   double dx=1.0/sizex, dy=1.0/sizey;
   for (int j=0; j<sizey; j++)
     for (int i=0; i<sizex; i++) {
@@ -533,6 +580,47 @@ int main(int argc, char **argv)
     }
   printf("Pure %d, 2-mat %d, 3-mat %d, 4-mat %d: MMC %d\n",
          cell_counts[0],cell_counts[1],cell_counts[2],cell_counts[3],ccc.mmc_cells);
+  fflush(stdout);
+
+  int needed_list_size = cell_counts[1] * 2 + cell_counts[2] * 3 + cell_counts[3] * 4 + 1;
+  if (needed_list_size > list_size) {
+    free(ccc.nextfrac);
+    free(frac2cell);
+    free(ccc.matids);
+    free(ccc.mmc_index);
+    free(ccc.mmc_i);
+    free(ccc.mmc_j);
+    free(ccc.Vf_compact_list);
+    free(ccc.rho_compact_list);
+    free(ccc.rho_mat_ave_compact_list);
+    free(ccc.t_compact_list);
+    free(ccc.p_compact_list);
+
+    list_size = needed_list_size;
+    ccc.nextfrac = (int*)malloc((size_t)list_size * sizeof(int));
+    frac2cell = (int*)malloc((size_t)list_size * sizeof(int));
+    ccc.matids = (int*)malloc((size_t)list_size * sizeof(int));
+    ccc.mmc_index = (int*)malloc((size_t)list_size * sizeof(int));
+    ccc.mmc_i = (int*)malloc((size_t)list_size * sizeof(int));
+    ccc.mmc_j = (int*)malloc((size_t)list_size * sizeof(int));
+    ccc.Vf_compact_list = (double*)malloc((size_t)list_size * sizeof(double));
+    ccc.rho_compact_list = (double*)malloc((size_t)list_size * sizeof(double));
+    ccc.rho_mat_ave_compact_list = (double*)calloc((size_t)list_size, sizeof(double));
+    ccc.t_compact_list = (double*)malloc((size_t)list_size * sizeof(double));
+    ccc.p_compact_list = (double*)malloc((size_t)list_size * sizeof(double));
+
+    require_alloc(ccc.nextfrac, "resized ccc.nextfrac");
+    require_alloc(frac2cell, "resized frac2cell");
+    require_alloc(ccc.matids, "resized ccc.matids");
+    require_alloc(ccc.mmc_index, "resized ccc.mmc_index");
+    require_alloc(ccc.mmc_i, "resized ccc.mmc_i");
+    require_alloc(ccc.mmc_j, "resized ccc.mmc_j");
+    require_alloc(ccc.Vf_compact_list, "resized ccc.Vf_compact_list");
+    require_alloc(ccc.rho_compact_list, "resized ccc.rho_compact_list");
+    require_alloc(ccc.rho_mat_ave_compact_list, "resized ccc.rho_mat_ave_compact_list");
+    require_alloc(ccc.t_compact_list, "resized ccc.t_compact_list");
+    require_alloc(ccc.p_compact_list, "resized ccc.p_compact_list");
+  }
 
   // Material-centric conversion
   for (int j=0; j<sizey; j++)

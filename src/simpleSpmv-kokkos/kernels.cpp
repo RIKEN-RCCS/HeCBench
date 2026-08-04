@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <chrono>
 #include <Kokkos_Core.hpp>
-#include "../simpleSpmv-cuda/mv.h"
+#include "mv.h"
 
 // Dense matrix-vector multiply
 long mv_dense_parallel(const int repeat,

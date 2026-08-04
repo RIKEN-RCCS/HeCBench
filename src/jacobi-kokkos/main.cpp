@@ -50,11 +50,11 @@ int main() {
           err += df * df;
         }, error);
 
-      Kokkos::parallel_for("swap",
-        Kokkos::MDRangePolicy<Kokkos::Rank<2>>({1,1},{N-1,N-1}),
-        KOKKOS_LAMBDA(int i, int j) {
-          d_f_old[IDX(i,j)] = d_f[IDX(i,j)];
-        });
+      // Both fields have identical boundary values.  Swapping their handles
+      // avoids a second full-grid kernel solely to copy the new iterate.
+      auto previous = d_f_old;
+      d_f_old = d_f;
+      d_f = previous;
 
       error = sqrtf(error / (N * N));
 

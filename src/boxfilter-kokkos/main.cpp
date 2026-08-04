@@ -4,16 +4,16 @@
 #include <chrono>
 #include <Kokkos_Core.hpp>
 
-typedef struct { unsigned char x,y,z,w; } uchar4;
-typedef struct { float x,y,z,w; } float4;
+typedef struct { unsigned char x,y,z,w; } hec_uchar4;
+typedef struct { float x,y,z,w; } hec_float4;
 
-KOKKOS_INLINE_FUNCTION float4 rgbaUintToFloat4(unsigned int c) {
-  float4 r; r.x=c&0xff; r.y=(c>>8)&0xff; r.z=(c>>16)&0xff; r.w=(c>>24)&0xff; return r;
+KOKKOS_INLINE_FUNCTION hec_float4 rgbaUintToFloat4(unsigned int c) {
+  hec_float4 r; r.x=c&0xff; r.y=(c>>8)&0xff; r.z=(c>>16)&0xff; r.w=(c>>24)&0xff; return r;
 }
-KOKKOS_INLINE_FUNCTION uchar4 rgbaUintToUchar4(unsigned int c) {
-  uchar4 r; r.x=c&0xff; r.y=(c>>8)&0xff; r.z=(c>>16)&0xff; r.w=(c>>24)&0xff; return r;
+KOKKOS_INLINE_FUNCTION hec_uchar4 rgbaUintToUchar4(unsigned int c) {
+  hec_uchar4 r; r.x=c&0xff; r.y=(c>>8)&0xff; r.z=(c>>16)&0xff; r.w=(c>>24)&0xff; return r;
 }
-KOKKOS_INLINE_FUNCTION unsigned int rgbaFloat4ToUint(float4 r, float fScale) {
+KOKKOS_INLINE_FUNCTION unsigned int rgbaFloat4ToUint(hec_float4 r, float fScale) {
   unsigned int p=0;
   p|=0x000000FFu&(unsigned int)(r.x*fScale);
   p|=0x0000FF00u&(((unsigned int)(r.y*fScale))<<8);
@@ -75,8 +75,8 @@ int main(int argc, char **argv) {
     const int blockSize = iRadiusAligned + uiNumOutputPix + iRadius;
 
     using ScratchSpace = Kokkos::DefaultExecutionSpace::scratch_memory_space;
-    using ScratchView = Kokkos::View<uchar4*, ScratchSpace, Kokkos::MemoryUnmanaged>;
-    const int scratchBytes = blockSize * sizeof(uchar4);
+    using ScratchView = Kokkos::View<hec_uchar4*, ScratchSpace, Kokkos::MemoryUnmanaged>;
+    const int scratchBytes = blockSize * sizeof(hec_uchar4);
 
     using ViewUI = Kokkos::View<unsigned int*>;
     ViewUI d_in("in", szBuff), d_tmp("tmp", szBuff), d_out("out", szBuff);
@@ -110,7 +110,7 @@ int main(int argc, char **argv) {
 
           if((globalPosX>=0)&&(globalPosX<(int)uiImageWidth)&&
              (lid>=iRadiusAligned)&&(lid<iRadiusAligned+(int)uiNumOutputPix)) {
-            float4 f4Sum={0,0,0,0};
+            hec_float4 f4Sum={0,0,0,0};
             int iOffsetX=lid-iRadius;
             int iLimit=iOffsetX+(2*iRadius)+1;
             for(;iOffsetX<iLimit;iOffsetX++) {
@@ -129,30 +129,30 @@ int main(int argc, char **argv) {
         unsigned int *uiOutputImage = &d_out(globalPosX);
         const int W = uiImageWidth;
         const int H = uiImageHeight;
-        float4 top_color=rgbaUintToFloat4(uiInputImage[0]);
-        float4 bot_color=rgbaUintToFloat4(uiInputImage[(H-1)*W]);
-        float4 f4iRadius={float(iRadius),float(iRadius),float(iRadius),float(iRadius)};
-        float4 f4Sum; f4Sum.x=top_color.x*f4iRadius.x; f4Sum.y=top_color.y*f4iRadius.y;
+        hec_float4 top_color=rgbaUintToFloat4(uiInputImage[0]);
+        hec_float4 bot_color=rgbaUintToFloat4(uiInputImage[(H-1)*W]);
+        hec_float4 f4iRadius={float(iRadius),float(iRadius),float(iRadius),float(iRadius)};
+        hec_float4 f4Sum; f4Sum.x=top_color.x*f4iRadius.x; f4Sum.y=top_color.y*f4iRadius.y;
         f4Sum.z=top_color.z*f4iRadius.z; f4Sum.w=top_color.w*f4iRadius.w;
         for(int y=0;y<iRadius+1;y++) {
-          float4 c=rgbaUintToFloat4(uiInputImage[y*W]);
+          hec_float4 c=rgbaUintToFloat4(uiInputImage[y*W]);
           f4Sum.x+=c.x; f4Sum.y+=c.y; f4Sum.z+=c.z; f4Sum.w+=c.w;
         }
         uiOutputImage[0]=rgbaFloat4ToUint(f4Sum,SCALE);
         for(int y=1;y<iRadius+1;y++) {
-          float4 a=rgbaUintToFloat4(uiInputImage[(y+iRadius)*W]);
+          hec_float4 a=rgbaUintToFloat4(uiInputImage[(y+iRadius)*W]);
           f4Sum.x+=a.x-top_color.x; f4Sum.y+=a.y-top_color.y;
           f4Sum.z+=a.z-top_color.z; f4Sum.w+=a.w-top_color.w;
           uiOutputImage[y*W]=rgbaFloat4ToUint(f4Sum,SCALE);
         }
         for(int y=iRadius+1;y<H-iRadius;y++) {
-          float4 a=rgbaUintToFloat4(uiInputImage[(y+iRadius)*W]);
-          float4 b=rgbaUintToFloat4(uiInputImage[(y-iRadius-1)*W]);
+          hec_float4 a=rgbaUintToFloat4(uiInputImage[(y+iRadius)*W]);
+          hec_float4 b=rgbaUintToFloat4(uiInputImage[(y-iRadius-1)*W]);
           f4Sum.x+=a.x-b.x; f4Sum.y+=a.y-b.y; f4Sum.z+=a.z-b.z; f4Sum.w+=a.w-b.w;
           uiOutputImage[y*W]=rgbaFloat4ToUint(f4Sum,SCALE);
         }
         for(int y=H-iRadius;y<H;y++) {
-          float4 b=rgbaUintToFloat4(uiInputImage[(y-iRadius-1)*W]);
+          hec_float4 b=rgbaUintToFloat4(uiInputImage[(y-iRadius-1)*W]);
           f4Sum.x+=bot_color.x-b.x; f4Sum.y+=bot_color.y-b.y;
           f4Sum.z+=bot_color.z-b.z; f4Sum.w+=bot_color.w-b.w;
           uiOutputImage[y*W]=rgbaFloat4ToUint(f4Sum,SCALE);

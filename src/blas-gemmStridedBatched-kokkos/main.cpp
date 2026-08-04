@@ -9,6 +9,7 @@
 #include <chrono>
 #include <cmath>
 #include <iostream>
+#include <unistd.h>
 #include <Kokkos_Core.hpp>
 
 void performance(int m, int n, int k, double avg_time_us) {

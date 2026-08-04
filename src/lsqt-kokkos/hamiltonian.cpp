@@ -20,296 +20,822 @@
 #include "hamiltonian.h"
 #include "model.h"
 #include "vector.h"
+#include <string.h>    // memcpy
 #define BLOCK_SIZE 256
 
-Hamiltonian::Hamiltonian(Model& model)
+#ifndef CPU_ONLY
+void Hamiltonian::initialize_gpu(Model& model)
+{
+  n = model.number_of_atoms;
+  max_neighbor = model.max_neighbor;
+  energy_max = model.energy_max;
+  grid_size = (model.number_of_atoms - 1) / BLOCK_SIZE + 1;
+
+  d_neighbor_number = Kokkos::View<int*>("lsqt_neighbor_number", n);
+  Kokkos::View<int*, Kokkos::HostSpace, Kokkos::MemoryTraits<Kokkos::Unmanaged>>
+    h_neighbor_number(model.neighbor_number, n);
+  Kokkos::deep_copy(d_neighbor_number, h_neighbor_number);
+  neighbor_number = d_neighbor_number.data();
+  delete[] model.neighbor_number;
+
+  d_potential = Kokkos::View<real*>("lsqt_potential", n);
+  Kokkos::View<real*, Kokkos::HostSpace, Kokkos::MemoryTraits<Kokkos::Unmanaged>>
+    h_potential(model.potential, n);
+  Kokkos::deep_copy(d_potential, h_potential);
+  potential = d_potential.data();
+  delete[] model.potential;
+
+  d_neighbor_list = Kokkos::View<int*>("lsqt_neighbor_list", model.number_of_pairs);
+  auto h_neighbor_list = Kokkos::create_mirror_view(d_neighbor_list);
+  for (int m = 0; m < max_neighbor; ++m) {
+    for (int i = 0; i < n; ++i) {
+      h_neighbor_list(m * n + i) = model.neighbor_list[i * max_neighbor + m];
+    }
+  }
+  Kokkos::deep_copy(d_neighbor_list, h_neighbor_list);
+  neighbor_list = d_neighbor_list.data();
+  delete[] model.neighbor_list;
+
+  d_hopping_real = Kokkos::View<real*>("lsqt_hopping_real", model.number_of_pairs);
+  auto h_hopping_real = Kokkos::create_mirror_view(d_hopping_real);
+  for (int m = 0; m < max_neighbor; ++m) {
+    for (int i = 0; i < n; ++i) {
+      h_hopping_real(m * n + i) = model.hopping_real[i * max_neighbor + m];
+    }
+  }
+  Kokkos::deep_copy(d_hopping_real, h_hopping_real);
+  hopping_real = d_hopping_real.data();
+  delete[] model.hopping_real;
+
+  d_hopping_imag = Kokkos::View<real*>("lsqt_hopping_imag", model.number_of_pairs);
+  auto h_hopping_imag = Kokkos::create_mirror_view(d_hopping_imag);
+  for (int m = 0; m < max_neighbor; ++m) {
+    for (int i = 0; i < n; ++i) {
+      h_hopping_imag(m * n + i) = model.hopping_imag[i * max_neighbor + m];
+    }
+  }
+  Kokkos::deep_copy(d_hopping_imag, h_hopping_imag);
+  hopping_imag = d_hopping_imag.data();
+  delete[] model.hopping_imag;
+
+  d_xx = Kokkos::View<real*>("lsqt_xx", model.number_of_pairs);
+  auto h_xx = Kokkos::create_mirror_view(d_xx);
+  for (int m = 0; m < max_neighbor; ++m) {
+    for (int i = 0; i < n; ++i) {
+      h_xx(m * n + i) = model.xx[i * max_neighbor + m];
+    }
+  }
+  Kokkos::deep_copy(d_xx, h_xx);
+  xx = d_xx.data();
+  delete[] model.xx;
+}
+#else
+void Hamiltonian::initialize_cpu(Model& model)
 {
   n = model.number_of_atoms;
   max_neighbor = model.max_neighbor;
   energy_max = model.energy_max;
   int number_of_pairs = model.number_of_pairs;
 
-  d_neighbor_number = Kokkos::View<int*>("neighbor_number", n);
-  d_potential = Kokkos::View<real*>("potential", n);
-  d_neighbor_list = Kokkos::View<int*>("neighbor_list", number_of_pairs);
-  d_hopping_real = Kokkos::View<real*>("hopping_real", number_of_pairs);
-  d_hopping_imag = Kokkos::View<real*>("hopping_imag", number_of_pairs);
-  d_xx = Kokkos::View<real*>("xx", number_of_pairs);
+  neighbor_number = new int[n];
+  memcpy(neighbor_number, model.neighbor_number, sizeof(int) * n);
+  delete[] model.neighbor_number;
 
-  auto h_nn = Kokkos::create_mirror_view(d_neighbor_number);
-  auto h_pot = Kokkos::create_mirror_view(d_potential);
-  auto h_nl = Kokkos::create_mirror_view(d_neighbor_list);
-  auto h_hr = Kokkos::create_mirror_view(d_hopping_real);
-  auto h_hi = Kokkos::create_mirror_view(d_hopping_imag);
-  auto h_xx = Kokkos::create_mirror_view(d_xx);
+  neighbor_list = new int[number_of_pairs];
+  memcpy(neighbor_list, model.neighbor_list, sizeof(int) * number_of_pairs);
+  delete[] model.neighbor_list;
 
-  for (int i = 0; i < n; ++i) {
-    h_nn(i) = model.neighbor_number[i];
-    h_pot(i) = model.potential[i];
-  }
+  potential = new real[n];
+  memcpy(potential, model.potential, sizeof(real) * n);
+  delete[] model.potential;
 
-  // Transpose from row-major [atom][neighbor] to column-major [neighbor][atom]
-  // so that GPU threads (one per atom) have coalesced access.
-  for (int m = 0; m < max_neighbor; ++m) {
-    for (int i = 0; i < n; ++i) {
-      int src = i * max_neighbor + m;
-      int dst = m * n + i;
-      h_nl(dst) = model.neighbor_list[src];
-      h_hr(dst) = model.hopping_real[src];
-      h_hi(dst) = model.hopping_imag[src];
-      h_xx(dst) = model.xx[src];
-    }
-  }
+  hopping_real = new real[number_of_pairs];
+  memcpy(hopping_real, model.hopping_real, sizeof(real) * number_of_pairs);
+  delete[] model.hopping_real;
 
-  Kokkos::deep_copy(d_neighbor_number, h_nn);
-  Kokkos::deep_copy(d_potential, h_pot);
-  Kokkos::deep_copy(d_neighbor_list, h_nl);
-  Kokkos::deep_copy(d_hopping_real, h_hr);
-  Kokkos::deep_copy(d_hopping_imag, h_hi);
-  Kokkos::deep_copy(d_xx, h_xx);
+  hopping_imag = new real[number_of_pairs];
+  memcpy(hopping_imag, model.hopping_imag, sizeof(real) * number_of_pairs);
+  delete[] model.hopping_imag;
+
+  xx = new real[number_of_pairs];
+  memcpy(xx, model.xx, sizeof(real) * number_of_pairs);
+  delete[] model.xx;
 }
+#endif
+
+Hamiltonian::Hamiltonian(Model& model)
+{
+#ifndef CPU_ONLY
+  initialize_gpu(model);
+#else
+  initialize_cpu(model);
+#endif
+}
+
+Hamiltonian::~Hamiltonian()
+{
+#ifndef CPU_ONLY
+#else
+  delete[] neighbor_number;
+  delete[] neighbor_list;
+  delete[] potential;
+  delete[] hopping_real;
+  delete[] hopping_imag;
+  delete[] xx;
+#endif
+}
+
+#ifndef CPU_ONLY
+void gpu_apply_hamiltonian(
+  const int number_of_atoms,
+  const real energy_max,
+  const  int* __restrict g_neighbor_number,
+  const  int* __restrict g_neighbor_list,
+  const real* __restrict g_potential,
+  const real* __restrict g_hopping_real,
+  const real* __restrict g_hopping_imag,
+  const real* __restrict g_state_in_real,
+  const real* __restrict g_state_in_imag,
+        real* __restrict g_state_out_real,
+        real* __restrict g_state_out_imag)
+{
+  Kokkos::parallel_for("lsqt_apply_hamiltonian", Kokkos::RangePolicy<>(0, number_of_atoms), KOKKOS_LAMBDA(const int n) {
+    real temp_real = g_potential[n] * g_state_in_real[n]; // on-site
+    real temp_imag = g_potential[n] * g_state_in_imag[n]; // on-site
+
+    for (int m = 0; m < g_neighbor_number[n]; ++m) {
+      int index_1 = m * number_of_atoms + n;
+      int index_2 = g_neighbor_list[index_1];
+      real a = g_hopping_real[index_1];
+      real b = g_hopping_imag[index_1];
+      real c = g_state_in_real[index_2];
+      real d = g_state_in_imag[index_2];
+      temp_real += a * c - b * d; // hopping
+      temp_imag += a * d + b * c; // hopping
+    }
+    temp_real /= energy_max; // scale
+    temp_imag /= energy_max; // scale
+    g_state_out_real[n] = temp_real;
+    g_state_out_imag[n] = temp_imag;
+  });
+}
+#else
+void cpu_apply_hamiltonian(
+  int number_of_atoms,
+  int max_neighbor,
+  real energy_max,
+  int* g_neighbor_number,
+  int* g_neighbor_list,
+  real* g_potential,
+  real* g_hopping_real,
+  real* g_hopping_imag,
+  real* g_state_in_real,
+  real* g_state_in_imag,
+  real* g_state_out_real,
+  real* g_state_out_imag)
+{
+  for (int n = 0; n < number_of_atoms; ++n) {
+    real temp_real = g_potential[n] * g_state_in_real[n]; // on-site
+    real temp_imag = g_potential[n] * g_state_in_imag[n]; // on-site
+
+    for (int m = 0; m < g_neighbor_number[n]; ++m) {
+      int index_1 = n * max_neighbor + m;
+      int index_2 = g_neighbor_list[index_1];
+      real a = g_hopping_real[index_1];
+      real b = g_hopping_imag[index_1];
+      real c = g_state_in_real[index_2];
+      real d = g_state_in_imag[index_2];
+      temp_real += a * c - b * d; // hopping
+      temp_imag += a * d + b * c; // hopping
+    }
+    temp_real /= energy_max; // scale
+    temp_imag /= energy_max; // scale
+    g_state_out_real[n] = temp_real;
+    g_state_out_imag[n] = temp_imag;
+  }
+}
+#endif
 
 // |output> = H |input>
 void Hamiltonian::apply(Vector& input, Vector& output)
 {
-  auto nn = d_neighbor_number;
-  auto nl = d_neighbor_list;
-  auto pot = d_potential;
-  auto hr = d_hopping_real;
-  auto hi = d_hopping_imag;
-  auto in_r = input.d_real_part;
-  auto in_i = input.d_imag_part;
-  auto out_r = output.d_real_part;
-  auto out_i = output.d_imag_part;
-  real emax = energy_max;
-  int num_atoms = n;
-
-  Kokkos::parallel_for(
-    "apply_H", num_atoms, KOKKOS_LAMBDA(int idx) {
-      real tr = pot(idx) * in_r(idx);
-      real ti = pot(idx) * in_i(idx);
-      for (int m = 0; m < nn(idx); ++m) {
-        int index_1 = m * num_atoms + idx;
-        int index_2 = nl(index_1);
-        real a = hr(index_1);
-        real b = hi(index_1);
-        real c = in_r(index_2);
-        real d = in_i(index_2);
-        tr += a * c - b * d;
-        ti += a * d + b * c;
-      }
-      out_r(idx) = tr / emax;
-      out_i(idx) = ti / emax;
-    });
+#ifndef CPU_ONLY
+  gpu_apply_hamiltonian(
+    n, energy_max, neighbor_number, neighbor_list, potential, hopping_real, hopping_imag,
+    input.real_part, input.imag_part, output.real_part, output.imag_part);
+#else
+  cpu_apply_hamiltonian(
+    n, max_neighbor, energy_max, neighbor_number, neighbor_list, potential, hopping_real,
+    hopping_imag, input.real_part, input.imag_part, output.real_part, output.imag_part);
+#endif
 }
+
+#ifndef CPU_ONLY
+void gpu_apply_commutator(
+  int number_of_atoms,
+  real energy_max,
+  int* g_neighbor_number,
+  int* g_neighbor_list,
+  real* g_hopping_real,
+  real* g_hopping_imag,
+  real* g_xx,
+  real* g_state_in_real,
+  real* g_state_in_imag,
+  real* g_state_out_real,
+  real* g_state_out_imag)
+{
+  Kokkos::parallel_for("lsqt_apply_commutator", Kokkos::RangePolicy<>(0, number_of_atoms), KOKKOS_LAMBDA(const int n) {
+    real temp_real = 0.0;
+    real temp_imag = 0.0;
+    for (int m = 0; m < g_neighbor_number[n]; ++m) {
+      int index_1 = m * number_of_atoms + n;
+      int index_2 = g_neighbor_list[index_1];
+      real a = g_hopping_real[index_1];
+      real b = g_hopping_imag[index_1];
+      real c = g_state_in_real[index_2];
+      real d = g_state_in_imag[index_2];
+      real xx = g_xx[index_1];
+      temp_real -= (a * c - b * d) * xx;
+      temp_imag -= (a * d + b * c) * xx;
+    }
+    g_state_out_real[n] = temp_real / energy_max; // scale
+    g_state_out_imag[n] = temp_imag / energy_max; // scale
+  });
+}
+#else
+void cpu_apply_commutator(
+  int number_of_atoms,
+  int max_neighbor,
+  real energy_max,
+  int* g_neighbor_number,
+  int* g_neighbor_list,
+  real* g_hopping_real,
+  real* g_hopping_imag,
+  real* g_xx,
+  real* g_state_in_real,
+  real* g_state_in_imag,
+  real* g_state_out_real,
+  real* g_state_out_imag)
+{
+  for (int n = 0; n < number_of_atoms; ++n) {
+    real temp_real = 0.0;
+    real temp_imag = 0.0;
+    for (int m = 0; m < g_neighbor_number[n]; ++m) {
+      int index_1 = n * max_neighbor + m;
+      int index_2 = g_neighbor_list[index_1];
+      real a = g_hopping_real[index_1];
+      real b = g_hopping_imag[index_1];
+      real c = g_state_in_real[index_2];
+      real d = g_state_in_imag[index_2];
+      real xx = g_xx[index_1];
+      temp_real -= (a * c - b * d) * xx;
+      temp_imag -= (a * d + b * c) * xx;
+    }
+    g_state_out_real[n] = temp_real / energy_max; // scale
+    g_state_out_imag[n] = temp_imag / energy_max; // scale
+  }
+}
+#endif
 
 // |output> = [X, H] |input>
 void Hamiltonian::apply_commutator(Vector& input, Vector& output)
 {
-  auto nn = d_neighbor_number;
-  auto nl = d_neighbor_list;
-  auto hr = d_hopping_real;
-  auto hi = d_hopping_imag;
-  auto xx = d_xx;
-  auto in_r = input.d_real_part;
-  auto in_i = input.d_imag_part;
-  auto out_r = output.d_real_part;
-  auto out_i = output.d_imag_part;
-  real emax = energy_max;
-  int num_atoms = n;
-
-  Kokkos::parallel_for(
-    "apply_commutator", num_atoms, KOKKOS_LAMBDA(int idx) {
-      real tr = static_cast<real>(0.0);
-      real ti = static_cast<real>(0.0);
-      for (int m = 0; m < nn(idx); ++m) {
-        int index_1 = m * num_atoms + idx;
-        int index_2 = nl(index_1);
-        real a = hr(index_1);
-        real b = hi(index_1);
-        real c = in_r(index_2);
-        real d = in_i(index_2);
-        real x = xx(index_1);
-        tr -= (a * c - b * d) * x;
-        ti -= (a * d + b * c) * x;
-      }
-      out_r(idx) = tr / emax;
-      out_i(idx) = ti / emax;
-    });
+#ifndef CPU_ONLY
+  gpu_apply_commutator(
+    n, energy_max, neighbor_number, neighbor_list, hopping_real, hopping_imag, xx, input.real_part,
+    input.imag_part, output.real_part, output.imag_part);
+#else
+  cpu_apply_commutator(
+    n, max_neighbor, energy_max, neighbor_number, neighbor_list, hopping_real, hopping_imag, xx,
+    input.real_part, input.imag_part, output.real_part, output.imag_part);
+#endif
 }
 
-// |output> = V |input>  (velocity operator = i[H, X])
+#ifndef CPU_ONLY
+void gpu_apply_current(
+  const int number_of_atoms,
+  const  int* __restrict g_neighbor_number,
+  const  int* __restrict g_neighbor_list,
+  const real* __restrict g_hopping_real,
+  const real* __restrict g_hopping_imag,
+  const real* __restrict g_xx,
+  const real* __restrict g_state_in_real,
+  const real* __restrict g_state_in_imag,
+        real* __restrict g_state_out_real,
+        real* __restrict g_state_out_imag)
+{
+  Kokkos::parallel_for("lsqt_apply_current", Kokkos::RangePolicy<>(0, number_of_atoms), KOKKOS_LAMBDA(const int n) {
+    real temp_real = 0.0;
+    real temp_imag = 0.0;
+    for (int m = 0; m < g_neighbor_number[n]; ++m) {
+      int index_1 = m * number_of_atoms + n;
+      int index_2 = g_neighbor_list[index_1];
+      real a = g_hopping_real[index_1];
+      real b = g_hopping_imag[index_1];
+      real c = g_state_in_real[index_2];
+      real d = g_state_in_imag[index_2];
+      temp_real += (a * c - b * d) * g_xx[index_1];
+      temp_imag += (a * d + b * c) * g_xx[index_1];
+    }
+    g_state_out_real[n] = +temp_imag;
+    g_state_out_imag[n] = -temp_real;
+  });
+}
+#else
+void cpu_apply_current(
+  int number_of_atoms,
+  int max_neighbor,
+  int* g_neighbor_number,
+  int* g_neighbor_list,
+  real* g_hopping_real,
+  real* g_hopping_imag,
+  real* g_xx,
+  real* g_state_in_real,
+  real* g_state_in_imag,
+  real* g_state_out_real,
+  real* g_state_out_imag)
+{
+  for (int n = 0; n < number_of_atoms; ++n) {
+    real temp_real = 0.0;
+    real temp_imag = 0.0;
+    for (int m = 0; m < g_neighbor_number[n]; ++m) {
+      int index_1 = n * max_neighbor + m;
+      int index_2 = g_neighbor_list[index_1];
+      real a = g_hopping_real[index_1];
+      real b = g_hopping_imag[index_1];
+      real c = g_state_in_real[index_2];
+      real d = g_state_in_imag[index_2];
+      temp_real += (a * c - b * d) * g_xx[index_1];
+      temp_imag += (a * d + b * c) * g_xx[index_1];
+    }
+    g_state_out_real[n] = +temp_imag;
+    g_state_out_imag[n] = -temp_real;
+  }
+}
+#endif
+
+// |output> = V |input>
 void Hamiltonian::apply_current(Vector& input, Vector& output)
 {
-  auto nn = d_neighbor_number;
-  auto nl = d_neighbor_list;
-  auto hr = d_hopping_real;
-  auto hi = d_hopping_imag;
-  auto xx = d_xx;
-  auto in_r = input.d_real_part;
-  auto in_i = input.d_imag_part;
-  auto out_r = output.d_real_part;
-  auto out_i = output.d_imag_part;
-  int num_atoms = n;
-
-  Kokkos::parallel_for(
-    "apply_current", num_atoms, KOKKOS_LAMBDA(int idx) {
-      real tr = static_cast<real>(0.0);
-      real ti = static_cast<real>(0.0);
-      for (int m = 0; m < nn(idx); ++m) {
-        int index_1 = m * num_atoms + idx;
-        int index_2 = nl(index_1);
-        real a = hr(index_1);
-        real b = hi(index_1);
-        real c = in_r(index_2);
-        real d = in_i(index_2);
-        tr += (a * c - b * d) * xx(index_1);
-        ti += (a * d + b * c) * xx(index_1);
-      }
-      out_r(idx) = +ti;
-      out_i(idx) = -tr;
-    });
+#ifndef CPU_ONLY
+  gpu_apply_current(
+    n, neighbor_number, neighbor_list, hopping_real, hopping_imag, xx, input.real_part,
+    input.imag_part, output.real_part, output.imag_part);
+#else
+  cpu_apply_current(
+    n, max_neighbor, neighbor_number, neighbor_list, hopping_real, hopping_imag, xx,
+    input.real_part, input.imag_part, output.real_part, output.imag_part);
+#endif
 }
 
-// Chebyshev iteration: state_2 = 2*H*state_1 - state_0
-void Hamiltonian::kernel_polynomial(Vector& state_0, Vector& state_1, Vector& state_2)
+// Kernel which calculates the two first terms of time evolution as described by
+// Eq. (36) in [Comput. Phys. Commun.185, 28 (2014)].
+#ifndef CPU_ONLY
+void gpu_chebyshev_01(
+  const int number_of_atoms,
+  const real* __restrict g_state_0_real,
+  const real* __restrict g_state_0_imag,
+  const real* __restrict g_state_1_real,
+  const real* __restrict g_state_1_imag,
+        real* __restrict g_state_real,
+        real* __restrict g_state_imag,
+  const real b0,
+  const real b1,
+  const int direction)
 {
-  auto nn = d_neighbor_number;
-  auto nl = d_neighbor_list;
-  auto pot = d_potential;
-  auto hr = d_hopping_real;
-  auto hi = d_hopping_imag;
-  auto s0r = state_0.d_real_part;
-  auto s0i = state_0.d_imag_part;
-  auto s1r = state_1.d_real_part;
-  auto s1i = state_1.d_imag_part;
-  auto s2r = state_2.d_real_part;
-  auto s2i = state_2.d_imag_part;
-  real emax = energy_max;
-  int num_atoms = n;
-
-  Kokkos::parallel_for(
-    "kernel_poly", num_atoms, KOKKOS_LAMBDA(int idx) {
-      real tr = pot(idx) * s1r(idx);
-      real ti = pot(idx) * s1i(idx);
-      for (int m = 0; m < nn(idx); ++m) {
-        int index_1 = m * num_atoms + idx;
-        int index_2 = nl(index_1);
-        real a = hr(index_1);
-        real b = hi(index_1);
-        real c = s1r(index_2);
-        real d = s1i(index_2);
-        tr += a * c - b * d;
-        ti += a * d + b * c;
-      }
-      tr /= emax;
-      ti /= emax;
-      s2r(idx) = static_cast<real>(2.0) * tr - s0r(idx);
-      s2i(idx) = static_cast<real>(2.0) * ti - s0i(idx);
-    });
+  Kokkos::parallel_for("lsqt_chebyshev_01", Kokkos::RangePolicy<>(0, number_of_atoms), KOKKOS_LAMBDA(const int n) {
+    real bessel_0 = b0;
+    real bessel_1 = b1 * direction;
+    g_state_real[n] = bessel_0 * g_state_0_real[n] + bessel_1 * g_state_1_imag[n];
+    g_state_imag[n] = bessel_0 * g_state_0_imag[n] - bessel_1 * g_state_1_real[n];
+  });
 }
+#else
+void cpu_chebyshev_01(
+  int number_of_atoms,
+  real* g_state_0_real,
+  real* g_state_0_imag,
+  real* g_state_1_real,
+  real* g_state_1_imag,
+  real* g_state_real,
+  real* g_state_imag,
+  real b0,
+  real b1,
+  int direction)
+{
+  for (int n = 0; n < number_of_atoms; ++n) {
+    real bessel_0 = b0;
+    real bessel_1 = b1 * direction;
+    g_state_real[n] = bessel_0 * g_state_0_real[n] + bessel_1 * g_state_1_imag[n];
+    g_state_imag[n] = bessel_0 * g_state_0_imag[n] - bessel_1 * g_state_1_real[n];
+  }
+}
+#endif
 
-// First two terms of the time evolution: state = b0*state_0 +/- i*b1*state_1
+// Wrapper for the kernel above
 void Hamiltonian::chebyshev_01(
   Vector& state_0, Vector& state_1, Vector& state, real bessel_0, real bessel_1, int direction)
 {
-  auto s0r = state_0.d_real_part;
-  auto s0i = state_0.d_imag_part;
-  auto s1r = state_1.d_real_part;
-  auto s1i = state_1.d_imag_part;
-  auto sr = state.d_real_part;
-  auto si = state.d_imag_part;
-  real b0 = bessel_0;
-  real b1 = bessel_1 * direction;
-  int num_atoms = n;
-
-  Kokkos::parallel_for(
-    "chebyshev_01", num_atoms, KOKKOS_LAMBDA(int idx) {
-      sr(idx) = b0 * s0r(idx) + b1 * s1i(idx);
-      si(idx) = b0 * s0i(idx) - b1 * s1r(idx);
-    });
+#ifndef CPU_ONLY
+  gpu_chebyshev_01(
+    n, state_0.real_part, state_0.imag_part, state_1.real_part, state_1.imag_part, state.real_part,
+    state.imag_part, bessel_0, bessel_1, direction);
+#else
+  cpu_chebyshev_01(
+    n, state_0.real_part, state_0.imag_part, state_1.real_part, state_1.imag_part, state.real_part,
+    state.imag_part, bessel_0, bessel_1, direction);
+#endif
 }
 
-// Further terms of time evolution: update state, compute state_2 = 2*H*state_1 - state_0
+// Kernel for calculating further terms of Eq. (36)
+// in [Comput. Phys. Commun.185, 28 (2014)].
+#ifndef CPU_ONLY
+void gpu_chebyshev_2(
+  const int number_of_atoms,
+  const real energy_max,
+  const  int* __restrict g_neighbor_number,
+  const  int* __restrict g_neighbor_list,
+  const real* __restrict g_potential,
+  const real* __restrict g_hopping_real,
+  const real* __restrict g_hopping_imag,
+  const real* __restrict g_state_0_real,
+  const real* __restrict g_state_0_imag,
+  const real* __restrict g_state_1_real,
+  const real* __restrict g_state_1_imag,
+        real* __restrict g_state_2_real,
+        real* __restrict g_state_2_imag,
+        real* __restrict g_state_real,
+        real* __restrict g_state_imag,
+  const real bessel_m,
+  const int label)
+{
+  Kokkos::parallel_for("lsqt_chebyshev_2", Kokkos::RangePolicy<>(0, number_of_atoms), KOKKOS_LAMBDA(const int n) {
+    real temp_real = g_potential[n] * g_state_1_real[n]; // on-site
+    real temp_imag = g_potential[n] * g_state_1_imag[n]; // on-site
+
+    for (int m = 0; m < g_neighbor_number[n]; ++m) {
+      int index_1 = m * number_of_atoms + n;
+      int index_2 = g_neighbor_list[index_1];
+      real a = g_hopping_real[index_1];
+      real b = g_hopping_imag[index_1];
+      real c = g_state_1_real[index_2];
+      real d = g_state_1_imag[index_2];
+      temp_real += a * c - b * d; // hopping
+      temp_imag += a * d + b * c; // hopping
+    }
+    temp_real /= energy_max; // scale
+    temp_imag /= energy_max; // scale
+
+    temp_real = 2.0 * temp_real - g_state_0_real[n];
+    temp_imag = 2.0 * temp_imag - g_state_0_imag[n];
+    switch (label) {
+      case 1: {
+        g_state_real[n] += bessel_m * temp_real;
+        g_state_imag[n] += bessel_m * temp_imag;
+        break;
+      }
+      case 2: {
+        g_state_real[n] -= bessel_m * temp_real;
+        g_state_imag[n] -= bessel_m * temp_imag;
+        break;
+      }
+      case 3: {
+        g_state_real[n] += bessel_m * temp_imag;
+        g_state_imag[n] -= bessel_m * temp_real;
+        break;
+      }
+      case 4: {
+        g_state_real[n] -= bessel_m * temp_imag;
+        g_state_imag[n] += bessel_m * temp_real;
+        break;
+      }
+    }
+    g_state_2_real[n] = temp_real;
+    g_state_2_imag[n] = temp_imag;
+  });
+}
+#else
+void cpu_chebyshev_2(
+  int number_of_atoms,
+  int max_neighbor,
+  real energy_max,
+  int* g_neighbor_number,
+  int* g_neighbor_list,
+  real* g_potential,
+  real* g_hopping_real,
+  real* g_hopping_imag,
+  real* g_state_0_real,
+  real* g_state_0_imag,
+  real* g_state_1_real,
+  real* g_state_1_imag,
+  real* g_state_2_real,
+  real* g_state_2_imag,
+  real* g_state_real,
+  real* g_state_imag,
+  real bessel_m,
+  int label)
+{
+  for (int n = 0; n < number_of_atoms; ++n) {
+    real temp_real = g_potential[n] * g_state_1_real[n]; // on-site
+    real temp_imag = g_potential[n] * g_state_1_imag[n]; // on-site
+
+    for (int m = 0; m < g_neighbor_number[n]; ++m) {
+      int index_1 = n * max_neighbor + m;
+      int index_2 = g_neighbor_list[index_1];
+      real a = g_hopping_real[index_1];
+      real b = g_hopping_imag[index_1];
+      real c = g_state_1_real[index_2];
+      real d = g_state_1_imag[index_2];
+      temp_real += a * c - b * d; // hopping
+      temp_imag += a * d + b * c; // hopping
+    }
+    temp_real /= energy_max; // scale
+    temp_imag /= energy_max; // scale
+
+    temp_real = 2.0 * temp_real - g_state_0_real[n];
+    temp_imag = 2.0 * temp_imag - g_state_0_imag[n];
+    switch (label) {
+      case 1: {
+        g_state_real[n] += bessel_m * temp_real;
+        g_state_imag[n] += bessel_m * temp_imag;
+        break;
+      }
+      case 2: {
+        g_state_real[n] -= bessel_m * temp_real;
+        g_state_imag[n] -= bessel_m * temp_imag;
+        break;
+      }
+      case 3: {
+        g_state_real[n] += bessel_m * temp_imag;
+        g_state_imag[n] -= bessel_m * temp_real;
+        break;
+      }
+      case 4: {
+        g_state_real[n] -= bessel_m * temp_imag;
+        g_state_imag[n] += bessel_m * temp_real;
+        break;
+      }
+    }
+    g_state_2_real[n] = temp_real;
+    g_state_2_imag[n] = temp_imag;
+  }
+}
+#endif
+
+// Wrapper for the kernel above
 void Hamiltonian::chebyshev_2(
   Vector& state_0, Vector& state_1, Vector& state_2, Vector& state, real bessel_m, int label)
 {
-  auto nn = d_neighbor_number;
-  auto nl = d_neighbor_list;
-  auto pot = d_potential;
-  auto hr = d_hopping_real;
-  auto hi = d_hopping_imag;
-  auto s0r = state_0.d_real_part;
-  auto s0i = state_0.d_imag_part;
-  auto s1r = state_1.d_real_part;
-  auto s1i = state_1.d_imag_part;
-  auto s2r = state_2.d_real_part;
-  auto s2i = state_2.d_imag_part;
-  auto sr = state.d_real_part;
-  auto si = state.d_imag_part;
-  real emax = energy_max;
-  real bm = bessel_m;
-  int num_atoms = n;
-
-  Kokkos::parallel_for(
-    "chebyshev_2", num_atoms, KOKKOS_LAMBDA(int idx) {
-      real tr = pot(idx) * s1r(idx);
-      real ti = pot(idx) * s1i(idx);
-      for (int m = 0; m < nn(idx); ++m) {
-        int index_1 = m * num_atoms + idx;
-        int index_2 = nl(index_1);
-        real a = hr(index_1);
-        real b = hi(index_1);
-        real c = s1r(index_2);
-        real d = s1i(index_2);
-        tr += a * c - b * d;
-        ti += a * d + b * c;
-      }
-      tr /= emax;
-      ti /= emax;
-      tr = static_cast<real>(2.0) * tr - s0r(idx);
-      ti = static_cast<real>(2.0) * ti - s0i(idx);
-      switch (label) {
-        case 1:
-          sr(idx) += bm * tr;
-          si(idx) += bm * ti;
-          break;
-        case 2:
-          sr(idx) -= bm * tr;
-          si(idx) -= bm * ti;
-          break;
-        case 3:
-          sr(idx) += bm * ti;
-          si(idx) -= bm * tr;
-          break;
-        case 4:
-          sr(idx) -= bm * ti;
-          si(idx) += bm * tr;
-          break;
-      }
-      s2r(idx) = tr;
-      s2i(idx) = ti;
-    });
+#ifndef CPU_ONLY
+  gpu_chebyshev_2(
+    n, energy_max, neighbor_number, neighbor_list, potential, hopping_real, hopping_imag,
+    state_0.real_part, state_0.imag_part, state_1.real_part, state_1.imag_part, state_2.real_part,
+    state_2.imag_part, state.real_part, state.imag_part, bessel_m, label);
+#else
+  cpu_chebyshev_2(
+    n, max_neighbor, energy_max, neighbor_number, neighbor_list, potential, hopping_real,
+    hopping_imag, state_0.real_part, state_0.imag_part, state_1.real_part, state_1.imag_part,
+    state_2.real_part, state_2.imag_part, state.real_part, state.imag_part, bessel_m, label);
+#endif
 }
 
-// First commutator term: state = i*b1*state_1x
+// Kernel which calculates the two first terms of commutator [X, U(dt)]
+// Corresponds to Eq. (37) in [Comput. Phys. Commun.185, 28 (2014)].
+#ifndef CPU_ONLY
+void gpu_chebyshev_1x(
+  const int number_of_atoms,
+  const real* __restrict g_state_1x_real,
+  const real* __restrict g_state_1x_imag,
+        real* __restrict g_state_real,
+        real* __restrict g_state_imag,
+  const real g_bessel_1)
+{
+  Kokkos::parallel_for("lsqt_chebyshev_1x", Kokkos::RangePolicy<>(0, number_of_atoms), KOKKOS_LAMBDA(const int n) {
+    real b1 = g_bessel_1;
+    g_state_real[n] = +b1 * g_state_1x_imag[n];
+    g_state_imag[n] = -b1 * g_state_1x_real[n];
+  });
+}
+#else
+void cpu_chebyshev_1x(
+  int number_of_atoms,
+  real* g_state_1x_real,
+  real* g_state_1x_imag,
+  real* g_state_real,
+  real* g_state_imag,
+  real g_bessel_1)
+{
+  for (int n = 0; n < number_of_atoms; ++n) {
+    real b1 = g_bessel_1;
+    g_state_real[n] = +b1 * g_state_1x_imag[n];
+    g_state_imag[n] = -b1 * g_state_1x_real[n];
+  }
+}
+#endif
+
+// Wrapper for kernel above
 void Hamiltonian::chebyshev_1x(Vector& input, Vector& output, real bessel_1)
 {
-  auto ir = input.d_real_part;
-  auto ii = input.d_imag_part;
-  auto or_ = output.d_real_part;
-  auto oi = output.d_imag_part;
-  real b1 = bessel_1;
-  int num_atoms = n;
-
-  Kokkos::parallel_for(
-    "chebyshev_1x", num_atoms, KOKKOS_LAMBDA(int idx) {
-      or_(idx) = +b1 * ii(idx);
-      oi(idx) = -b1 * ir(idx);
-    });
+#ifndef CPU_ONLY
+  gpu_chebyshev_1x(
+    n, input.real_part, input.imag_part, output.real_part, output.imag_part, bessel_1);
+#else
+  cpu_chebyshev_1x(
+    n, input.real_part, input.imag_part, output.real_part, output.imag_part, bessel_1);
+#endif
 }
 
-// Further commutator terms: update state, compute state_2 and state_2x
+// Kernel which calculates the further terms of [X, U(dt)]
+#ifndef CPU_ONLY
+void gpu_chebyshev_2x(
+  const int number_of_atoms,
+  const real energy_max,
+  const  int* __restrict g_neighbor_number,
+  const  int* __restrict g_neighbor_list,
+  const real* __restrict g_potential,
+  const real* __restrict g_hopping_real,
+  const real* __restrict g_hopping_imag,
+  const real* __restrict g_xx,
+  const real* __restrict g_state_0_real,
+  const real* __restrict g_state_0_imag,
+  const real* __restrict g_state_0x_real,
+  const real* __restrict g_state_0x_imag,
+  const real* __restrict g_state_1_real,
+  const real* __restrict g_state_1_imag,
+  const real* __restrict g_state_1x_real,
+  const real* __restrict g_state_1x_imag,
+        real* __restrict g_state_2_real,
+        real* __restrict g_state_2_imag,
+        real* __restrict g_state_2x_real,
+        real* __restrict g_state_2x_imag,
+        real* __restrict g_state_real,
+        real* __restrict g_state_imag,
+  const real g_bessel_m,
+  const int g_label)
+{
+  Kokkos::parallel_for("lsqt_chebyshev_2x", Kokkos::RangePolicy<>(0, number_of_atoms), KOKKOS_LAMBDA(const int n) {
+    real temp_real = g_potential[n] * g_state_1_real[n];    // on-site
+    real temp_imag = g_potential[n] * g_state_1_imag[n];    // on-site
+    real temp_x_real = g_potential[n] * g_state_1x_real[n]; // on-site
+    real temp_x_imag = g_potential[n] * g_state_1x_imag[n]; // on-site
+
+    for (int m = 0; m < g_neighbor_number[n]; ++m) {
+      int index_1 = m * number_of_atoms + n;
+      int index_2 = g_neighbor_list[index_1];
+
+      real a = g_hopping_real[index_1];
+      real b = g_hopping_imag[index_1];
+      real c = g_state_1_real[index_2];
+      real d = g_state_1_imag[index_2];
+      temp_real += a * c - b * d; // hopping
+      temp_imag += a * d + b * c; // hopping
+
+      real cx = g_state_1x_real[index_2];
+      real dx = g_state_1x_imag[index_2];
+      temp_x_real += a * cx - b * dx; // hopping
+      temp_x_imag += a * dx + b * cx; // hopping
+
+      real xx = g_xx[index_1];
+      temp_x_real -= (a * c - b * d) * xx; // hopping
+      temp_x_imag -= (a * d + b * c) * xx; // hopping
+    }
+
+    temp_real /= energy_max; // scale
+    temp_imag /= energy_max; // scale
+    temp_real = 2.0 * temp_real - g_state_0_real[n];
+    temp_imag = 2.0 * temp_imag - g_state_0_imag[n];
+    g_state_2_real[n] = temp_real;
+    g_state_2_imag[n] = temp_imag;
+
+    temp_x_real /= energy_max; // scale
+    temp_x_imag /= energy_max; // scale
+    temp_x_real = 2.0 * temp_x_real - g_state_0x_real[n];
+    temp_x_imag = 2.0 * temp_x_imag - g_state_0x_imag[n];
+    g_state_2x_real[n] = temp_x_real;
+    g_state_2x_imag[n] = temp_x_imag;
+
+    real bessel_m = g_bessel_m;
+    switch (g_label) {
+      case 1: {
+        g_state_real[n] += bessel_m * temp_x_real;
+        g_state_imag[n] += bessel_m * temp_x_imag;
+        break;
+      }
+      case 2: {
+        g_state_real[n] -= bessel_m * temp_x_real;
+        g_state_imag[n] -= bessel_m * temp_x_imag;
+        break;
+      }
+      case 3: {
+        g_state_real[n] += bessel_m * temp_x_imag;
+        g_state_imag[n] -= bessel_m * temp_x_real;
+        break;
+      }
+      case 4: {
+        g_state_real[n] -= bessel_m * temp_x_imag;
+        g_state_imag[n] += bessel_m * temp_x_real;
+        break;
+      }
+    }
+  });
+}
+#else
+void cpu_chebyshev_2x(
+  int number_of_atoms,
+  int max_neighbor,
+  real energy_max,
+  int* g_neighbor_number,
+  int* g_neighbor_list,
+  real* g_potential,
+  real* g_hopping_real,
+  real* g_hopping_imag,
+  real* g_xx,
+  real* g_state_0_real,
+  real* g_state_0_imag,
+  real* g_state_0x_real,
+  real* g_state_0x_imag,
+  real* g_state_1_real,
+  real* g_state_1_imag,
+  real* g_state_1x_real,
+  real* g_state_1x_imag,
+  real* g_state_2_real,
+  real* g_state_2_imag,
+  real* g_state_2x_real,
+  real* g_state_2x_imag,
+  real* g_state_real,
+  real* g_state_imag,
+  real g_bessel_m,
+  int g_label)
+{
+  for (int n = 0; n < number_of_atoms; ++n) {
+    real temp_real = g_potential[n] * g_state_1_real[n];    // on-site
+    real temp_imag = g_potential[n] * g_state_1_imag[n];    // on-site
+    real temp_x_real = g_potential[n] * g_state_1x_real[n]; // on-site
+    real temp_x_imag = g_potential[n] * g_state_1x_imag[n]; // on-site
+
+    for (int m = 0; m < g_neighbor_number[n]; ++m) {
+      int index_1 = n * max_neighbor + m;
+      int index_2 = g_neighbor_list[index_1];
+
+      real a = g_hopping_real[index_1];
+      real b = g_hopping_imag[index_1];
+      real c = g_state_1_real[index_2];
+      real d = g_state_1_imag[index_2];
+      temp_real += a * c - b * d; // hopping
+      temp_imag += a * d + b * c; // hopping
+
+      real cx = g_state_1x_real[index_2];
+      real dx = g_state_1x_imag[index_2];
+      temp_x_real += a * cx - b * dx; // hopping
+      temp_x_imag += a * dx + b * cx; // hopping
+
+      real xx = g_xx[index_1];
+      temp_x_real -= (a * c - b * d) * xx; // hopping
+      temp_x_imag -= (a * d + b * c) * xx; // hopping
+    }
+
+    temp_real /= energy_max; // scale
+    temp_imag /= energy_max; // scale
+    temp_real = 2.0 * temp_real - g_state_0_real[n];
+    temp_imag = 2.0 * temp_imag - g_state_0_imag[n];
+    g_state_2_real[n] = temp_real;
+    g_state_2_imag[n] = temp_imag;
+
+    temp_x_real /= energy_max; // scale
+    temp_x_imag /= energy_max; // scale
+    temp_x_real = 2.0 * temp_x_real - g_state_0x_real[n];
+    temp_x_imag = 2.0 * temp_x_imag - g_state_0x_imag[n];
+    g_state_2x_real[n] = temp_x_real;
+    g_state_2x_imag[n] = temp_x_imag;
+
+    real bessel_m = g_bessel_m;
+    switch (g_label) {
+      case 1: {
+        g_state_real[n] += bessel_m * temp_x_real;
+        g_state_imag[n] += bessel_m * temp_x_imag;
+        break;
+      }
+      case 2: {
+        g_state_real[n] -= bessel_m * temp_x_real;
+        g_state_imag[n] -= bessel_m * temp_x_imag;
+        break;
+      }
+      case 3: {
+        g_state_real[n] += bessel_m * temp_x_imag;
+        g_state_imag[n] -= bessel_m * temp_x_real;
+        break;
+      }
+      case 4: {
+        g_state_real[n] -= bessel_m * temp_x_imag;
+        g_state_imag[n] += bessel_m * temp_x_real;
+        break;
+      }
+    }
+  }
+}
+#endif
+
+// Wrapper for the kernel above
 void Hamiltonian::chebyshev_2x(
   Vector& state_0,
   Vector& state_0x,
@@ -321,88 +847,118 @@ void Hamiltonian::chebyshev_2x(
   real bessel_m,
   int label)
 {
-  auto nn = d_neighbor_number;
-  auto nl = d_neighbor_list;
-  auto pot = d_potential;
-  auto hr = d_hopping_real;
-  auto hi = d_hopping_imag;
-  auto xx = d_xx;
-  auto s0r = state_0.d_real_part;
-  auto s0i = state_0.d_imag_part;
-  auto s0xr = state_0x.d_real_part;
-  auto s0xi = state_0x.d_imag_part;
-  auto s1r = state_1.d_real_part;
-  auto s1i = state_1.d_imag_part;
-  auto s1xr = state_1x.d_real_part;
-  auto s1xi = state_1x.d_imag_part;
-  auto s2r = state_2.d_real_part;
-  auto s2i = state_2.d_imag_part;
-  auto s2xr = state_2x.d_real_part;
-  auto s2xi = state_2x.d_imag_part;
-  auto sr = state.d_real_part;
-  auto si = state.d_imag_part;
-  real emax = energy_max;
-  real bm = bessel_m;
-  int num_atoms = n;
+#ifndef CPU_ONLY
+  gpu_chebyshev_2x(
+    n, energy_max, neighbor_number, neighbor_list, potential, hopping_real, hopping_imag, xx,
+    state_0.real_part, state_0.imag_part, state_0x.real_part, state_0x.imag_part, state_1.real_part,
+    state_1.imag_part, state_1x.real_part, state_1x.imag_part, state_2.real_part, state_2.imag_part,
+    state_2x.real_part, state_2x.imag_part, state.real_part, state.imag_part, bessel_m, label);
+#else
+  cpu_chebyshev_2x(
+    n, max_neighbor, energy_max, neighbor_number, neighbor_list, potential, hopping_real,
+    hopping_imag, xx, state_0.real_part, state_0.imag_part, state_0x.real_part, state_0x.imag_part,
+    state_1.real_part, state_1.imag_part, state_1x.real_part, state_1x.imag_part, state_2.real_part,
+    state_2.imag_part, state_2x.real_part, state_2x.imag_part, state.real_part, state.imag_part,
+    bessel_m, label);
+#endif
+}
 
-  Kokkos::parallel_for(
-    "chebyshev_2x", num_atoms, KOKKOS_LAMBDA(int idx) {
-      real tr = pot(idx) * s1r(idx);
-      real ti = pot(idx) * s1i(idx);
-      real tx_r = pot(idx) * s1xr(idx);
-      real tx_i = pot(idx) * s1xi(idx);
+// Kernel for doing the Chebyshev iteration phi_2 = 2 * H * phi_1 - phi_0.
+#ifndef CPU_ONLY
+void gpu_kernel_polynomial(
+  const int number_of_atoms,
+  const real energy_max,
+  const  int* __restrict g_neighbor_number,
+  const  int* __restrict g_neighbor_list,
+  const real* __restrict g_potential,
+  const real* __restrict g_hopping_real,
+  const real* __restrict g_hopping_imag,
+  const real* __restrict g_state_0_real,
+  const real* __restrict g_state_0_imag,
+  const real* __restrict g_state_1_real,
+  const real* __restrict g_state_1_imag,
+        real* __restrict g_state_2_real,
+        real* __restrict g_state_2_imag)
+{
+  Kokkos::parallel_for("lsqt_kernel_polynomial", Kokkos::RangePolicy<>(0, number_of_atoms), KOKKOS_LAMBDA(const int n) {
+    real temp_real = g_potential[n] * g_state_1_real[n]; // on-site
+    real temp_imag = g_potential[n] * g_state_1_imag[n]; // on-site
 
-      for (int m = 0; m < nn(idx); ++m) {
-        int index_1 = m * num_atoms + idx;
-        int index_2 = nl(index_1);
-        real a = hr(index_1);
-        real b = hi(index_1);
-        real c = s1r(index_2);
-        real d = s1i(index_2);
-        tr += a * c - b * d;
-        ti += a * d + b * c;
+    for (int m = 0; m < g_neighbor_number[n]; ++m) {
+      int index_1 = m * number_of_atoms + n;
+      int index_2 = g_neighbor_list[index_1];
+      real a = g_hopping_real[index_1];
+      real b = g_hopping_imag[index_1];
+      real c = g_state_1_real[index_2];
+      real d = g_state_1_imag[index_2];
+      temp_real += a * c - b * d; // hopping
+      temp_imag += a * d + b * c; // hopping
+    }
 
-        real cx = s1xr(index_2);
-        real dx = s1xi(index_2);
-        tx_r += a * cx - b * dx;
-        tx_i += a * dx + b * cx;
+    temp_real /= energy_max; // scale
+    temp_imag /= energy_max; // scale
 
-        real x = xx(index_1);
-        tx_r -= (a * c - b * d) * x;
-        tx_i -= (a * d + b * c) * x;
-      }
+    temp_real = 2.0 * temp_real - g_state_0_real[n];
+    temp_imag = 2.0 * temp_imag - g_state_0_imag[n];
+    g_state_2_real[n] = temp_real;
+    g_state_2_imag[n] = temp_imag;
+  });
+}
+#else
+void cpu_kernel_polynomial(
+  int number_of_atoms,
+  int max_neighbor,
+  real energy_max,
+  int* g_neighbor_number,
+  int* g_neighbor_list,
+  real* g_potential,
+  real* g_hopping_real,
+  real* g_hopping_imag,
+  real* g_state_0_real,
+  real* g_state_0_imag,
+  real* g_state_1_real,
+  real* g_state_1_imag,
+  real* g_state_2_real,
+  real* g_state_2_imag)
+{
+  for (int n = 0; n < number_of_atoms; ++n) {
+    real temp_real = g_potential[n] * g_state_1_real[n]; // on-site
+    real temp_imag = g_potential[n] * g_state_1_imag[n]; // on-site
 
-      tr /= emax;
-      ti /= emax;
-      tr = static_cast<real>(2.0) * tr - s0r(idx);
-      ti = static_cast<real>(2.0) * ti - s0i(idx);
-      s2r(idx) = tr;
-      s2i(idx) = ti;
+    for (int m = 0; m < g_neighbor_number[n]; ++m) {
+      int index_1 = n * max_neighbor + m;
+      int index_2 = g_neighbor_list[index_1];
+      real a = g_hopping_real[index_1];
+      real b = g_hopping_imag[index_1];
+      real c = g_state_1_real[index_2];
+      real d = g_state_1_imag[index_2];
+      temp_real += a * c - b * d; // hopping
+      temp_imag += a * d + b * c; // hopping
+    }
 
-      tx_r /= emax;
-      tx_i /= emax;
-      tx_r = static_cast<real>(2.0) * tx_r - s0xr(idx);
-      tx_i = static_cast<real>(2.0) * tx_i - s0xi(idx);
-      s2xr(idx) = tx_r;
-      s2xi(idx) = tx_i;
+    temp_real /= energy_max; // scale
+    temp_imag /= energy_max; // scale
 
-      switch (label) {
-        case 1:
-          sr(idx) += bm * tx_r;
-          si(idx) += bm * tx_i;
-          break;
-        case 2:
-          sr(idx) -= bm * tx_r;
-          si(idx) -= bm * tx_i;
-          break;
-        case 3:
-          sr(idx) += bm * tx_i;
-          si(idx) -= bm * tx_r;
-          break;
-        case 4:
-          sr(idx) -= bm * tx_i;
-          si(idx) += bm * tx_r;
-          break;
-      }
-    });
+    temp_real = 2.0 * temp_real - g_state_0_real[n];
+    temp_imag = 2.0 * temp_imag - g_state_0_imag[n];
+    g_state_2_real[n] = temp_real;
+    g_state_2_imag[n] = temp_imag;
+  }
+}
+#endif
+
+// Wrapper for the Chebyshev iteration
+void Hamiltonian::kernel_polynomial(Vector& state_0, Vector& state_1, Vector& state_2)
+{
+#ifndef CPU_ONLY
+  gpu_kernel_polynomial(
+    n, energy_max, neighbor_number, neighbor_list, potential, hopping_real, hopping_imag,
+    state_0.real_part, state_0.imag_part, state_1.real_part, state_1.imag_part, state_2.real_part,
+    state_2.imag_part);
+#else
+  cpu_kernel_polynomial(
+    n, max_neighbor, energy_max, neighbor_number, neighbor_list, potential, hopping_real,
+    hopping_imag, state_0.real_part, state_0.imag_part, state_1.real_part, state_1.imag_part,
+    state_2.real_part, state_2.imag_part);
+#endif
 }

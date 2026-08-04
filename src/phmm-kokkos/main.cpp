@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <chrono>
 #include <random>
+#include <utility>
 
 // Compile-time constants inferred from the OMP source (constants_types.h)
 // All internal array dims of size "2" in kernel.h match SM1=2 => states=3
@@ -185,11 +186,11 @@ int main(int argc, char *argv[]) {
           pair_HMM_forward(i, j,
                            d_cur_fwd, d_trans, d_emis, d_like, d_start,
                            d_next_fwd);
-          Kokkos::fence();
-          Kokkos::deep_copy(d_cur_fwd, d_next_fwd);
+          std::swap(d_cur_fwd, d_next_fwd);
         }
       }
     }
+    Kokkos::fence();
 
     auto t2 = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double, std::milli> ms = (t2 - t1);

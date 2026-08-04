@@ -4,7 +4,9 @@
 #include <chrono>
 #include <cmath>
 #include <cstdlib>
+#include <fstream>
 #include <iostream>
+#include <vector>
 #include <Kokkos_Core.hpp>
 
 #define MAX_LOOP     25
@@ -50,19 +52,27 @@ static void invkin_cpu(const float* xTarget, const float* yTarget,
 
 int main(int argc, char* argv[])
 {
-  const int data_size = 4096;
-  const int iteration = 100;
-
-  float* xTarget = new float[data_size];
-  float* yTarget = new float[data_size];
-  srand(42);
-  for (int i = 0; i < data_size; i++) {
-    xTarget[i] = ((rand() % 400) - 200) / 100.0f;  // [-2, 2]
-    yTarget[i] = ((rand() % 400) - 200) / 100.0f;
+  if (argc != 3) {
+    std::cerr << "Usage: " << argv[0] << " <input file coefficients> <iterations>\n";
+    return 1;
   }
 
-  float* angle_out_gpu = new float[data_size * NUM_JOINTS]();
-  float* angle_out_cpu = new float[data_size * NUM_JOINTS]();
+  std::ifstream coordinate_in_file(argv[1]);
+  if (!coordinate_in_file.is_open()) {
+    std::cerr << "Cannot open input file: " << argv[1] << "\n";
+    return 1;
+  }
+  int data_size = 0;
+  coordinate_in_file >> data_size;
+  const int iteration = atoi(argv[2]);
+
+  std::vector<float> xTarget(data_size);
+  std::vector<float> yTarget(data_size);
+  std::vector<float> angle_out_gpu(data_size * NUM_JOINTS, 0.0f);
+  std::vector<float> angle_out_cpu(data_size * NUM_JOINTS, 0.0f);
+
+  for (int i = 0; i < data_size; i++)
+    coordinate_in_file >> xTarget[i] >> yTarget[i];
 
   Kokkos::initialize(argc, argv);
   {
@@ -128,12 +138,14 @@ int main(int argc, char* argv[])
   Kokkos::finalize();
 
   // CPU reference
-  invkin_cpu(xTarget, yTarget, angle_out_cpu, data_size);
+  invkin_cpu(xTarget.data(), yTarget.data(), angle_out_cpu.data(), data_size);
 
   int errors = 0;
   for (int i = 0; i < data_size; i++) {
     for (int j = 0; j < NUM_JOINTS; j++) {
-      if (fabsf(angle_out_gpu[i*NUM_JOINTS+j] - angle_out_cpu[i*NUM_JOINTS+j]) > 1e-3f) {
+      const float gpu = angle_out_gpu[i*NUM_JOINTS+j];
+      const float cpu = angle_out_cpu[i*NUM_JOINTS+j];
+      if (!std::isfinite(gpu) || !std::isfinite(cpu) || fabsf(gpu - cpu) > 1e-3f) {
         errors++;
         break;
       }
@@ -141,9 +153,5 @@ int main(int argc, char* argv[])
   }
   std::cout << (errors ? "FAIL\n" : "PASS\n");
 
-  delete[] xTarget;
-  delete[] yTarget;
-  delete[] angle_out_gpu;
-  delete[] angle_out_cpu;
   return errors ? 1 : 0;
 }

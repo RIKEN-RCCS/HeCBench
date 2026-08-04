@@ -4,7 +4,7 @@ CC = g++
 CFLAGS := $(EXTRA_CFLAGS) -std=c++17 -fopenmp -O3 -I$(KOKKOS_INC)
 LDFLAGS = -L$(KOKKOS_LIB) -lkokkoscore -lkokkoscontainers -fopenmp -lpthread -ldl
 program = main
-source = main.cpp
+source = main.cpp saxpy_kernels.cpp
 obj = $(source:.cpp=.o)
 $(program): $(obj) Makefile
 	$(CC) $(CFLAGS) $(obj) -o $@ $(LDFLAGS)

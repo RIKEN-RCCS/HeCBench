@@ -9,7 +9,7 @@ KOKKOS_PATH ?= $(HOME)/kokkos
 
 #===============================================================================
 program = main
-source = main.cpp
+source = main.cpp resnet_kernels.cpp
 obj = $(source:.cpp=.o)
 
 #===============================================================================

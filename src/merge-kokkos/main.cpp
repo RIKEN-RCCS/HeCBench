@@ -96,88 +96,31 @@ void mergeSinglePath(int blocks, int /*threads*/,
                      Kokkos::View<const vec_t*>   d_B, uint32_t B_length,
                      Kokkos::View<const uint32_t*> dpi_c,
                      Kokkos::View<vec_t*>          d_C, uint32_t /*C_length*/) {
-  using ScratchSpace = Kokkos::DefaultExecutionSpace::scratch_memory_space;
-  using SPvec = Kokkos::View<vec_t*, ScratchSpace, Kokkos::MemoryUnmanaged>;
-  // Two windows of K+2 elements each (sentinel at 0 and K+1)
-  const int  shared_n    = (K + 2) * 2;
-  const int  scratch_bytes = (int)SPvec::shmem_size(shared_n);
-
-  using policy_t = Kokkos::TeamPolicy<>;
-
+  (void)blocks;
+  (void)dpi_c;
+  const uint32_t total = A_length + B_length;
   Kokkos::parallel_for(
     "mergeSinglePath",
-    policy_t(blocks, Kokkos::AUTO).set_scratch_size(0, Kokkos::PerTeam(scratch_bytes)),
-    KOKKOS_LAMBDA(const policy_t::member_type& team) {
-      const int bid      = team.league_rank();
-      const int gridDim  = team.league_size();
-      const int blockDim = team.team_size();
+    total,
+    KOKKOS_LAMBDA(uint32_t k) {
+      uint32_t lo = (k > B_length) ? (k - B_length) : 0;
+      uint32_t hi = (k < A_length) ? k : A_length;
 
-      SPvec scratch(team.team_scratch(0), shared_n);
-      vec_t* A_shared = scratch.data();
-      vec_t* B_shared = A_shared + (K + 2);
-
-      // Block window boundaries from diagonal intersections
-      uint32_t x_top  = dpi_c(bid);
-      uint32_t y_top  = dpi_c(bid + gridDim + 1);
-      uint32_t x_stop = dpi_c(bid + 1);
-      uint32_t y_stop = dpi_c(bid + gridDim + 2);
-
-      // Process the window in K-element tiles
-      while ((x_top < x_stop) || (y_top < y_stop)) {
-        // Number of A and B elements to load in this tile
-        uint32_t na = MIN((uint32_t)K, x_stop - x_top);
-        uint32_t nb = MIN((uint32_t)K - na, y_stop - y_top);
-        uint32_t tile = na + nb;
-
-        // Load A tile (with sentinels) cooperatively
-        Kokkos::single(Kokkos::PerTeam(team), [&]() {
-          A_shared[0]      = getNegativeInfinity<vec_t>();
-          A_shared[na + 1] = getPositiveInfinity<vec_t>();
-        });
-        Kokkos::parallel_for(Kokkos::TeamThreadRange(team, na), [&](int i) {
-          A_shared[i + 1] = d_A(x_top + (uint32_t)i);
-        });
-
-        // Load B tile (with sentinels) cooperatively
-        Kokkos::single(Kokkos::PerTeam(team), [&]() {
-          B_shared[0]      = getNegativeInfinity<vec_t>();
-          B_shared[nb + 1] = getPositiveInfinity<vec_t>();
-        });
-        Kokkos::parallel_for(Kokkos::TeamThreadRange(team, nb), [&](int i) {
-          B_shared[i + 1] = d_B(y_top + (uint32_t)i);
-        });
-        team.team_barrier();
-
-        // Each thread merges its chunk of the tile using binary search
-        Kokkos::parallel_for(Kokkos::TeamThreadRange(team, tile), [&](int idx) {
-          // Find the merge-path position for output index (x_top+y_top+idx)
-          // Binary search for Ax s.t. A_shared[Ax] <= B_shared[idx+1-Ax]
-          // and A_shared[Ax+1] > B_shared[idx-Ax]
-          int lo2 = (int)idx - (int)nb;
-          if (lo2 < 0) lo2 = 0;
-          int hi2 = (int)idx + 1;
-          if (hi2 > (int)na) hi2 = (int)na;
-
-          while (lo2 < hi2) {
-            int mid2 = lo2 + (hi2 - lo2 + 1) / 2;
-            int bx   = idx + 1 - mid2;  // 1-indexed
-            bool ok  = (bx <= 0) || (mid2 > 0 && A_shared[mid2] >= B_shared[bx]);
-            if (!ok) lo2 = mid2;
-            else     hi2 = mid2 - 1;
-          }
-          // lo2 is the number of A elements before output position idx
-          int ax = lo2;        // 0-indexed count from A
-          int bx = idx - ax;   // 0-indexed count from B
-          // The element at output index idx comes from whichever is smaller
-          vec_t a = A_shared[ax + 1];  // next A element (1-indexed)
-          vec_t b = B_shared[bx + 1];  // next B element (1-indexed)
-          d_C(x_top + y_top + (uint32_t)idx) = (a <= b) ? a : b;
-        });
-        team.team_barrier();
-
-        x_top += na;
-        y_top += nb;
+      while (lo < hi) {
+        uint32_t mid = lo + (hi - lo + 1) / 2;
+        uint32_t j = k - mid;
+        if (j < B_length && d_A(mid - 1) > d_B(j)) {
+          hi = mid - 1;
+        } else {
+          lo = mid;
+        }
       }
+
+      uint32_t a_count = lo;
+      uint32_t b_count = k - a_count;
+      vec_t next_a = (a_count < A_length) ? d_A(a_count) : getPositiveInfinity<vec_t>();
+      vec_t next_b = (b_count < B_length) ? d_B(b_count) : getPositiveInfinity<vec_t>();
+      d_C(k) = (next_a <= next_b) ? next_a : next_b;
     });
 }
 

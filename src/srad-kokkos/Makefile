@@ -5,7 +5,7 @@ LAUNCHER  =
 KOKKOS_PATH ?= $(HOME)/kokkos
 
 program = main
-source = main.cpp
+source = main.cpp srad.cpp
 obj = $(source:.cpp=.o)
 
 UTIL_OBJS = graphics.o resize.o timer.o
@@ -13,9 +13,9 @@ UTIL_OBJS = graphics.o resize.o timer.o
 include $(KOKKOS_PATH)/Makefile.kokkos
 
 CFLAGS := $(EXTRA_CFLAGS) -std=c++17 $(KOKKOS_CPPFLAGS) $(KOKKOS_CXXFLAGS) \
-          -I../srad-omp \
-          -I../srad-omp/util/graphics \
-          -I../srad-omp/util/timer
+          -I. \
+          -I./util/graphics \
+          -I./util/timer
 LDFLAGS = $(KOKKOS_LDFLAGS) $(KOKKOS_LIBS) -lm
 
 ifeq ($(DEBUG),yes)
@@ -32,13 +32,13 @@ $(program): $(obj) $(UTIL_OBJS) Makefile
 %.o: %.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
-graphics.o: ../srad-omp/util/graphics/graphics.c
+graphics.o: util/graphics/graphics.c
 	$(CC) -O3 -x c -c $< -o $@
 
-resize.o: ../srad-omp/util/graphics/resize.c
+resize.o: util/graphics/resize.c
 	$(CC) -O3 -x c -c $< -o $@
 
-timer.o: ../srad-omp/util/timer/timer.c
+timer.o: util/timer/timer.c
 	$(CC) -O3 -x c -c $< -o $@
 
 clean: kokkos-clean

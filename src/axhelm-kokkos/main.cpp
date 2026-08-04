@@ -119,16 +119,17 @@ int main(int argc, char **argv) {
         Kokkos::parallel_for("axhelm3",
           Kokkos::TeamPolicy<>(Nelements, 64).set_scratch_size(0, Kokkos::PerTeam(scratchND3)),
           KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type &team) {
-            ScratchD s_D(team.team_scratch(0), 64);
-            ScratchD s_U(team.team_scratch(0)+64*sizeof(dfloat), 64);
-            ScratchD s_V(team.team_scratch(0)+128*sizeof(dfloat), 64);
-            ScratchD s_W(team.team_scratch(0)+192*sizeof(dfloat), 64);
-            ScratchD s_GUr(team.team_scratch(0)+256*sizeof(dfloat), 64);
-            ScratchD s_GUs(team.team_scratch(0)+320*sizeof(dfloat), 64);
-            ScratchD s_GVr(team.team_scratch(0)+384*sizeof(dfloat), 64);
-            ScratchD s_GVs(team.team_scratch(0)+448*sizeof(dfloat), 64);
-            ScratchD s_GWr(team.team_scratch(0)+512*sizeof(dfloat), 64);
-            ScratchD s_GWs(team.team_scratch(0)+576*sizeof(dfloat), 64);
+            ScratchD scratch(team.team_scratch(0), 11 * 64);
+            ScratchD s_D  (scratch.data() +   0, 64);
+            ScratchD s_U  (scratch.data() +  64, 64);
+            ScratchD s_V  (scratch.data() + 128, 64);
+            ScratchD s_W  (scratch.data() + 192, 64);
+            ScratchD s_GUr(scratch.data() + 256, 64);
+            ScratchD s_GUs(scratch.data() + 320, 64);
+            ScratchD s_GVr(scratch.data() + 384, 64);
+            ScratchD s_GVs(scratch.data() + 448, 64);
+            ScratchD s_GWr(scratch.data() + 512, 64);
+            ScratchD s_GWs(scratch.data() + 576, 64);
 
             const int e = team.league_rank();
             const int tid = team.team_rank();
@@ -208,10 +209,11 @@ int main(int argc, char **argv) {
         Kokkos::parallel_for("axhelm1",
           Kokkos::TeamPolicy<>(Nelements, 64).set_scratch_size(0, Kokkos::PerTeam(scratchND1)),
           KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type &team) {
-            ScratchD s_D(team.team_scratch(0), 64);
-            ScratchD s_q(team.team_scratch(0)+64*sizeof(dfloat), 64);
-            ScratchD s_Gqr(team.team_scratch(0)+128*sizeof(dfloat), 64);
-            ScratchD s_Gqs(team.team_scratch(0)+192*sizeof(dfloat), 64);
+            ScratchD scratch(team.team_scratch(0), 4 * 64);
+            ScratchD s_D  (scratch.data() +   0, 64);
+            ScratchD s_q  (scratch.data() +  64, 64);
+            ScratchD s_Gqr(scratch.data() + 128, 64);
+            ScratchD s_Gqs(scratch.data() + 192, 64);
 
             const int e = team.league_rank();
             const int tid = team.team_rank();

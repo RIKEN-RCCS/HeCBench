@@ -397,17 +397,3 @@ void releaseTextClassifier() {
   free(alpha2_array);
   free(stages_thresh_array);
 }
-
-void drawRectangle(MyImage *image, MyRect r) {
-  int col = r.x, row = r.y;
-  int width = r.width, height = r.height;
-  int i;
-  for (i = 0; i < width; i++) {
-    image->data[row * image->width + col + i] = 255;
-    image->data[(row + height) * image->width + col + i] = 255;
-  }
-  for (i = 0; i < height; i++) {
-    image->data[(row + i) * image->width + col] = 255;
-    image->data[(row + i) * image->width + col + width] = 255;
-  }
-}

@@ -9,7 +9,7 @@
 
 // ---- init helpers (from init.cpp) ----------------------------------------
 
-static Input* set_default_input(void)
+Input* set_default_input(void)
 {
   Input* I = (Input*)malloc(sizeof(Input));
   I->source_2D_regions    = 5000;
@@ -22,7 +22,7 @@ static Input* set_default_input(void)
   return I;
 }
 
-static Source* initialize_sources(Input* I)
+Source* initialize_sources(Input* I)
 {
   I->nbytes = 0;
   Source* sources = (Source*)malloc(I->source_3D_regions * sizeof(Source));
@@ -73,10 +73,10 @@ static void copy_sources_flat(Input* I, Source* S,
 
 // ---- io helpers (minimal) ------------------------------------------------
 
-static void border_print(void) {
+void border_print(void) {
   printf("======================================================================" "=========\n");
 }
-static void center_print(const char* s, int width) {
+void center_print(const char* s, int width) {
   int length = (int)strlen(s);
   for (int i = 0; i <= (width - length) / 2; i++) fputs(" ", stdout);
   fputs(s, stdout); fputs("\n", stdout);
@@ -91,7 +91,30 @@ int main(int argc, char* argv[])
 
   Input* I = set_default_input();
 
-  if (argc >= 2) I->repeat = atoi(argv[1]);
+  for (int i = 1; i < argc; ++i) {
+    if (++i >= argc) {
+      fprintf(stderr, "Missing value for %s\n", argv[i - 1]);
+      free(I);
+      return 1;
+    }
+    if (strcmp(argv[i - 1], "-s") == 0) {
+      I->segments = atol(argv[i]);
+    } else if (strcmp(argv[i - 1], "-e") == 0) {
+      I->egroups = atoi(argv[i]);
+    } else if (strcmp(argv[i - 1], "-n") == 0) {
+      I->repeat = atoi(argv[i]);
+    } else {
+      fprintf(stderr, "Unknown option: %s\n", argv[i - 1]);
+      free(I);
+      return 1;
+    }
+  }
+
+  if (I->segments < 1 || I->egroups < 1 || I->repeat < 1) {
+    fprintf(stderr, "-s, -e and -n must be positive\n");
+    free(I);
+    return 1;
+  }
 
   I->source_3D_regions = (int)ceil((double)I->source_2D_regions *
       I->coarse_axial_intervals / I->decomp_assemblies_ax);
@@ -194,7 +217,9 @@ int main(int argc, char* argv[])
                      + q2 * mu2 * (tau * (tau * (tau - 3.f) + 6.f) - 6.f * expVal)
                        / (3.f * sigT2 * sigT2);
 
-            Kokkos::atomic_add(&d_fine_flux(offset + FAI_id * egroups + g), weight * fi);
+            // Match the ACC and OpenMP reference kernels, which accumulate
+            // directly into the flux array for each processed segment.
+            d_fine_flux(offset + FAI_id * egroups + g) += weight * fi;
 
             float t1 = q0 * expVal / sigT_g;
             float t2 = q1 * mu * (tau - expVal) / sigT2;

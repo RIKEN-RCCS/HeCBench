@@ -7,20 +7,20 @@
 // ---------------------------------------------------------------------------
 // Data structures
 // ---------------------------------------------------------------------------
-struct double3 { double x, y, z; };
+struct hec_double3 { double x, y, z; };
 
 struct boundary_particle {
-    double3 pos;
-    double3 n;
+    hec_double3 pos;
+    hec_double3 n;
 };
 
 struct fluid_particle {
     double density;
     double pressure;
-    double3 pos;
-    double3 v;
-    double3 v_half;
-    double3 a;
+    hec_double3 pos;
+    hec_double3 v;
+    hec_double3 v_half;
+    hec_double3 a;
 };
 
 struct param {
@@ -51,7 +51,7 @@ struct AABB {
 // ---------------------------------------------------------------------------
 
 KOKKOS_INLINE_FUNCTION
-double W(double3 p, double3 q, double h) {
+double W(hec_double3 p, hec_double3 q, double h) {
     double dx = p.x - q.x, dy = p.y - q.y, dz = p.z - q.z;
     double r = Kokkos::sqrt(dx*dx + dy*dy + dz*dz);
     double C = 1.0 / (M_PI * h * h * h);
@@ -64,7 +64,7 @@ double W(double3 p, double3 q, double h) {
 }
 
 KOKKOS_INLINE_FUNCTION
-double del_W(double3 p, double3 q, double h) {
+double del_W(hec_double3 p, hec_double3 q, double h) {
     double dx = p.x - q.x, dy = p.y - q.y, dz = p.z - q.z;
     double r = Kokkos::sqrt(dx*dx + dy*dy + dz*dz);
     double C = 1.0 / (M_PI * h * h * h);
@@ -77,7 +77,7 @@ double del_W(double3 p, double3 q, double h) {
 }
 
 KOKKOS_INLINE_FUNCTION
-double boundaryGamma(double3 p_pos, double3 k_pos, double3 k_n,
+double boundaryGamma(hec_double3 p_pos, hec_double3 k_pos, hec_double3 k_n,
                      double h, double speed_sound) {
     double dx = p_pos.x - k_pos.x;
     double dy = p_pos.y - k_pos.y;
@@ -96,7 +96,7 @@ double boundaryGamma(double3 p_pos, double3 k_pos, double3 k_n,
 }
 
 KOKKOS_INLINE_FUNCTION
-double computeDensity(double3 p_pos, double3 p_v, double3 q_pos, double3 q_v,
+double computeDensity(hec_double3 p_pos, hec_double3 p_v, hec_double3 q_pos, hec_double3 q_v,
                       double mass_particle, double smoothing_radius, double time_step) {
     double vx = p_v.x - q_v.x, vy = p_v.y - q_v.y, vz = p_v.z - q_v.z;
     double dw = del_W(p_pos, q_pos, smoothing_radius);
@@ -113,18 +113,18 @@ double computePressure(double density, double rest_density, double speed_sound) 
 }
 
 KOKKOS_INLINE_FUNCTION
-double3 computeBoundaryAcceleration(double3 p_pos, double3 k_pos, double3 k_n,
+hec_double3 computeBoundaryAcceleration(hec_double3 p_pos, hec_double3 k_pos, hec_double3 k_n,
                                     double h, double speed_sound) {
     double bg = boundaryGamma(p_pos, k_pos, k_n, h, speed_sound);
     return {bg * k_n.x, bg * k_n.y, bg * k_n.z};
 }
 
 KOKKOS_INLINE_FUNCTION
-double3 computeAcceleration(double3 p_pos, double3 p_v, double p_density, double p_pressure,
-                             double3 q_pos, double3 q_v, double q_density, double q_pressure,
+hec_double3 computeAcceleration(hec_double3 p_pos, hec_double3 p_v, double p_density, double p_pressure,
+                             hec_double3 q_pos, hec_double3 q_v, double q_density, double q_pressure,
                              double h, double alpha, double speed_sound,
                              double mass_particle, double surface_tension) {
-    double3 a;
+    hec_double3 a;
     double dw = del_W(p_pos, q_pos, h);
     double accel = (p_pressure / (p_density * p_density) + q_pressure / (q_density * q_density))
                    * mass_particle * dw;
@@ -345,9 +345,11 @@ int main(int argc, char* argv[]) {
         for (int step = 0; step < params.number_steps; step++) {
 
             // --- Update densities ---
-            Kokkos::parallel_for("update_density", nfp, KOKKOS_LAMBDA(int i) {
-                double3 p_pos = fp(i).pos;
-                double3 p_v   = fp(i).v;
+            Kokkos::parallel_for("update_density",
+              Kokkos::RangePolicy<Kokkos::DefaultHostExecutionSpace>(0, nfp),
+              [=](int i) {
+                hec_double3 p_pos = fp(i).pos;
+                hec_double3 p_v   = fp(i).v;
                 double density = fp(i).density;
                 for (int j = 0; j < nfp; j++) {
                     density += computeDensity(p_pos, p_v,
@@ -360,15 +362,17 @@ int main(int argc, char* argv[]) {
             Kokkos::fence();
 
             // --- Update fluid-fluid accelerations ---
-            Kokkos::parallel_for("update_accel_fp", nfp, KOKKOS_LAMBDA(int i) {
+            Kokkos::parallel_for("update_accel_fp",
+              Kokkos::RangePolicy<Kokkos::DefaultHostExecutionSpace>(0, nfp),
+              [=](int i) {
                 double ax = 0.0, ay = 0.0, az = -9.8;
-                double3 p_pos      = fp(i).pos;
-                double3 p_v        = fp(i).v;
+                hec_double3 p_pos      = fp(i).pos;
+                hec_double3 p_v        = fp(i).v;
                 double  p_density  = fp(i).density;
                 double  p_pressure = fp(i).pressure;
                 for (int j = 0; j < nfp; j++) {
                     if (i == j) continue;
-                    double3 a = computeAcceleration(
+                    hec_double3 a = computeAcceleration(
                         p_pos, p_v, p_density, p_pressure,
                         fp(j).pos, fp(j).v, fp(j).density, fp(j).pressure,
                         smoothing_radius, alpha, speed_sound, mass_particle, surface_tension);
@@ -379,11 +383,13 @@ int main(int argc, char* argv[]) {
             Kokkos::fence();
 
             // --- Update boundary accelerations ---
-            Kokkos::parallel_for("update_accel_bp", nkern, KOKKOS_LAMBDA(int i) {
+            Kokkos::parallel_for("update_accel_bp",
+              Kokkos::RangePolicy<Kokkos::DefaultHostExecutionSpace>(0, nkern),
+              [=](int i) {
                 double ax = fp(i).a.x, ay = fp(i).a.y, az = fp(i).a.z;
-                double3 p_pos = fp(i).pos;
+                hec_double3 p_pos = fp(i).pos;
                 for (int j = 0; j < nbp; j++) {
-                    double3 a = computeBoundaryAcceleration(
+                    hec_double3 a = computeBoundaryAcceleration(
                         p_pos, bp(j).pos, bp(j).n,
                         smoothing_radius, speed_sound);
                     ax += a.x; ay += a.y; az += a.z;
@@ -393,12 +399,14 @@ int main(int argc, char* argv[]) {
             Kokkos::fence();
 
             // --- Update positions (leapfrog) ---
-            Kokkos::parallel_for("update_pos", nfp, KOKKOS_LAMBDA(int i) {
+            Kokkos::parallel_for("update_pos",
+              Kokkos::RangePolicy<Kokkos::DefaultHostExecutionSpace>(0, nfp),
+              [=](int i) {
                 double dt = time_step;
-                double3 v_half = fp(i).v_half;
-                double3 v      = fp(i).v;
-                double3 pos    = fp(i).pos;
-                double3 a      = fp(i).a;
+                hec_double3 v_half = fp(i).v_half;
+                hec_double3 v      = fp(i).v;
+                hec_double3 pos    = fp(i).pos;
+                hec_double3 a      = fp(i).a;
 
                 v_half.x += dt * a.x;
                 v_half.y += dt * a.y;

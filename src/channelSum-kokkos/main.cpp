@@ -7,6 +7,21 @@
 // choose integer type to avoid floating-point rounding errors
 typedef int scalar_t;
 
+struct ChannelSums {
+  scalar_t sum;
+  scalar_t sumsq;
+
+  KOKKOS_INLINE_FUNCTION
+  ChannelSums() : sum(0), sumsq(0) {}
+
+  KOKKOS_INLINE_FUNCTION
+  ChannelSums& operator+=(const ChannelSums& rhs) {
+    sum += rhs.sum;
+    sumsq += rhs.sumsq;
+    return *this;
+  }
+};
+
 template <typename T>
 void ref_nchw(
     const int N,
@@ -72,18 +87,23 @@ void ChannelSumNCHW(
     Kokkos::View<T*> d_sum,
     Kokkos::View<T*> d_sumsq)
 {
-  Kokkos::parallel_for("ChannelSumNCHW", C,
-    KOKKOS_LAMBDA(const int c) {
-      T m_val = 0, v_val = 0;
-      for (int n = 0; n < N; n++) {
-        for (int hw = 0; hw < HxW; hw++) {
-          const int index = (n * C + c) * HxW + hw;
-          m_val += d_X(index);
-          v_val += d_X(index) * d_X(index);
-        }
+  Kokkos::parallel_for("ChannelSumNCHW",
+    Kokkos::TeamPolicy<>(C, Kokkos::AUTO),
+    KOKKOS_LAMBDA(const typename Kokkos::TeamPolicy<>::member_type& team) {
+      const int c = team.league_rank();
+      ChannelSums result;
+      Kokkos::parallel_reduce(Kokkos::TeamThreadRange(team, N * HxW),
+        [&](const int item, ChannelSums& local) {
+          const int n = item / HxW;
+          const int hw = item % HxW;
+          const T value = d_X((n * C + c) * HxW + hw);
+          local.sum += value;
+          local.sumsq += value * value;
+        }, result);
+      if (team.team_rank() == 0) {
+        d_sum(c) = result.sum;
+        d_sumsq(c) = result.sumsq;
       }
-      d_sum(c) = m_val;
-      d_sumsq(c) = v_val;
     });
   Kokkos::fence();
 }
@@ -97,16 +117,21 @@ void ChannelSumNHWC(
     Kokkos::View<T*> d_sum,
     Kokkos::View<T*> d_sumsq)
 {
-  Kokkos::parallel_for("ChannelSumNHWC", C,
-    KOKKOS_LAMBDA(const int c) {
-      T m_val = 0, v_val = 0;
-      for (int i = 0; i < N * HxW; i++) {
-        const int index = i * C + c;
-        m_val += d_X(index);
-        v_val += d_X(index) * d_X(index);
+  Kokkos::parallel_for("ChannelSumNHWC",
+    Kokkos::TeamPolicy<>(C, Kokkos::AUTO),
+    KOKKOS_LAMBDA(const typename Kokkos::TeamPolicy<>::member_type& team) {
+      const int c = team.league_rank();
+      ChannelSums result;
+      Kokkos::parallel_reduce(Kokkos::TeamThreadRange(team, N * HxW),
+        [&](const int item, ChannelSums& local) {
+          const T value = d_X(item * C + c);
+          local.sum += value;
+          local.sumsq += value * value;
+        }, result);
+      if (team.team_rank() == 0) {
+        d_sum(c) = result.sum;
+        d_sumsq(c) = result.sumsq;
       }
-      d_sum(c) = m_val;
-      d_sumsq(c) = v_val;
     });
   Kokkos::fence();
 }

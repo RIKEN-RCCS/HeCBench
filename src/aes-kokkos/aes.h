@@ -9,15 +9,15 @@ typedef unsigned int uint;
 #define KOKKOS_INLINE_FUNCTION inline
 #endif
 
-// uchar4 struct (compatible with Kokkos device code)
-struct uchar4 {
+// hec_uchar4 struct (compatible with Kokkos device code)
+struct hec_uchar4 {
   unsigned char x, y, z, w;
-  KOKKOS_INLINE_FUNCTION uchar4() : x(0), y(0), z(0), w(0) {}
-  KOKKOS_INLINE_FUNCTION uchar4(unsigned char a, unsigned char b, unsigned char c, unsigned char d) : x(a), y(b), z(c), w(d) {}
-  KOKKOS_INLINE_FUNCTION uchar4 operator^(const uchar4& b) const {
-    return uchar4(x ^ b.x, y ^ b.y, z ^ b.z, w ^ b.w);
+  KOKKOS_INLINE_FUNCTION hec_uchar4() : x(0), y(0), z(0), w(0) {}
+  KOKKOS_INLINE_FUNCTION hec_uchar4(unsigned char a, unsigned char b, unsigned char c, unsigned char d) : x(a), y(b), z(c), w(d) {}
+  KOKKOS_INLINE_FUNCTION hec_uchar4 operator^(const hec_uchar4& b) const {
+    return hec_uchar4(x ^ b.x, y ^ b.y, z ^ b.z, w ^ b.w);
   }
-  KOKKOS_INLINE_FUNCTION uchar4& operator^=(const uchar4& b) {
+  KOKKOS_INLINE_FUNCTION hec_uchar4& operator^=(const hec_uchar4& b) {
     x ^= b.x; y ^= b.y; z ^= b.z; w ^= b.w;
     return *this;
   }

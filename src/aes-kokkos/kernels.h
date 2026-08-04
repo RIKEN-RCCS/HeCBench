@@ -26,13 +26,13 @@ uchar galoisMultiplication(uchar a, uchar b)
 }
 
 KOKKOS_INLINE_FUNCTION
-uchar4 sboxRead(const uchar * SBox, uchar4 block)
+hec_uchar4 sboxRead(const uchar * SBox, hec_uchar4 block)
 {
-  return uchar4(SBox[block.x], SBox[block.y], SBox[block.z], SBox[block.w]);
+  return hec_uchar4(SBox[block.x], SBox[block.y], SBox[block.z], SBox[block.w]);
 }
 
 KOKKOS_INLINE_FUNCTION
-uchar4 mixColumnsDevice(const uchar4 * block, const uchar4 * galiosCoeff, unsigned int j)
+hec_uchar4 mixColumnsDevice(const hec_uchar4 * block, const hec_uchar4 * galiosCoeff, unsigned int j)
 {
   unsigned int bw = 4;
 
@@ -51,35 +51,35 @@ uchar4 mixColumnsDevice(const uchar4 * block, const uchar4 * galiosCoeff, unsign
     w ^= galoisMultiplication(block[k].w, galiosCoeff[(k+bw-j)%bw].x);
   }
 
-  return uchar4(x, y, z, w);
+  return hec_uchar4(x, y, z, w);
 }
 
 KOKKOS_INLINE_FUNCTION
-uchar4 shiftRowsDevice(uchar4 row, unsigned int j)
+hec_uchar4 shiftRowsDevice(hec_uchar4 row, unsigned int j)
 {
-  uchar4 r = row;
+  hec_uchar4 r = row;
   for(uint i=0; i < j; ++i)  
   {
     uchar x = r.x;
     uchar y = r.y;
     uchar z = r.z;
     uchar w = r.w;
-    r = uchar4(y,z,w,x);
+    r = hec_uchar4(y,z,w,x);
   }
   return r;
 }
 
 KOKKOS_INLINE_FUNCTION
-uchar4 shiftRowsInvDevice(uchar4 row, unsigned int j)
+hec_uchar4 shiftRowsInvDevice(hec_uchar4 row, unsigned int j)
 {
-  uchar4 r = row;
+  hec_uchar4 r = row;
   for(uint i=0; i < j; ++i)  
   {
     uchar x = r.x;
     uchar y = r.y;
     uchar z = r.z;
     uchar w = r.w;
-    r = uchar4(w,x,y,z);
+    r = hec_uchar4(w,x,y,z);
   }
   return r;
 }

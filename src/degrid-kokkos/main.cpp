@@ -25,15 +25,15 @@
 #define PRECISION float
 #endif
 
-struct float2  { float  x, y; };
-struct double2 { double x, y; };
+struct hec_float2  { float  x, y; };
+struct hec_double2 { double x, y; };
 
 #if defined(DOUBLE_PRECISION)
   typedef double  PREC;
-  typedef double2 PREC2;
+  typedef hec_double2 PREC2;
 #else
   typedef float  PREC;
-  typedef float2 PREC2;
+  typedef hec_float2 PREC2;
 #endif
 
 // ------ CPU reference ------

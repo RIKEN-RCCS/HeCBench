@@ -28,8 +28,8 @@ int main(int argc, char* argv[])
         volatile char* dummy = nullptr;
         if (dummy) *dummy = args.args[idx];
       });
-      Kokkos::fence();
     }
+    Kokkos::fence();
 
     auto start = std::chrono::steady_clock::now();
     for (int i = 0; i < repeat; i++) {
@@ -38,8 +38,8 @@ int main(int argc, char* argv[])
         volatile char* dummy = nullptr;
         if (dummy) *dummy = args.args[idx];
       });
-      Kokkos::fence();
     }
+    Kokkos::fence();
     auto end = std::chrono::steady_clock::now();
     auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
     printf("Average execution time of kernelWithSmallArgs: %f (us)\n", (time * 1e-3f) / repeat);
@@ -51,8 +51,8 @@ int main(int argc, char* argv[])
         volatile char* dummy = nullptr;
         if (dummy) *dummy = args.args[idx];
       });
-      Kokkos::fence();
     }
+    Kokkos::fence();
 
     start = std::chrono::steady_clock::now();
     for (int i = 0; i < repeat; i++) {
@@ -61,8 +61,8 @@ int main(int argc, char* argv[])
         volatile char* dummy = nullptr;
         if (dummy) *dummy = args.args[idx];
       });
-      Kokkos::fence();
     }
+    Kokkos::fence();
     end = std::chrono::steady_clock::now();
     time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
     printf("Average execution time of kernelWithMediumArgs: %f (us)\n", (time * 1e-3f) / repeat);
@@ -74,8 +74,8 @@ int main(int argc, char* argv[])
         volatile char* dummy = nullptr;
         if (dummy) *dummy = args.args[idx];
       });
-      Kokkos::fence();
     }
+    Kokkos::fence();
 
     start = std::chrono::steady_clock::now();
     for (int i = 0; i < repeat; i++) {
@@ -84,8 +84,8 @@ int main(int argc, char* argv[])
         volatile char* dummy = nullptr;
         if (dummy) *dummy = args.args[idx];
       });
-      Kokkos::fence();
     }
+    Kokkos::fence();
     end = std::chrono::steady_clock::now();
     time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
     printf("Average execution time of kernelWithLargeArgs: %f (us)\n", (time * 1e-3f) / repeat);

@@ -9,7 +9,7 @@ KOKKOS_PATH ?= $(HOME)/kokkos
 
 #===============================================================================
 program = main
-source = main.cpp
+source = main.cpp hybridsort.cpp
 obj = $(source:.cpp=.o)
 
 include $(KOKKOS_PATH)/Makefile.kokkos

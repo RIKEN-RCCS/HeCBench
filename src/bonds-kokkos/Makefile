@@ -11,7 +11,7 @@ obj = $(source:.cpp=.o)
 
 include $(KOKKOS_PATH)/Makefile.kokkos
 
-CFLAGS := $(EXTRA_CFLAGS) -std=c++17 -I../bonds-omp $(KOKKOS_CPPFLAGS) $(KOKKOS_CXXFLAGS)
+CFLAGS := $(EXTRA_CFLAGS) -std=c++17 -I. $(KOKKOS_CPPFLAGS) $(KOKKOS_CXXFLAGS)
 LDFLAGS = $(KOKKOS_LDFLAGS) $(KOKKOS_LIBS)
 
 ifeq ($(OPTIMIZE),yes)

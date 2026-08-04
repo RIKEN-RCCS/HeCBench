@@ -23,8 +23,8 @@ static double drnd() {
   return (double)lastrand / 2147483648.0;
 }
 
-struct float4 { float x, y, z, w; };
-struct float2 { float x, y; };
+struct hec_float4 { float x, y, z, w; };
+struct hec_float2 { float x, y; };
 
 int main(int argc, char* argv[]) {
   printf("ECL-BH v4.5 (Kokkos port - direct N-body)\n");

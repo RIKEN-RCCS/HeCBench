@@ -9,8 +9,8 @@
 #include <chrono>
 #include <Kokkos_Core.hpp>
 
-struct float3 { float x, y, z; };
-struct float4 { float x, y, z, w; };
+struct hec_float3 { float x, y, z; };
+struct hec_float4 { float x, y, z, w; };
 
 struct Box {
   int width, height, left, top;
@@ -21,7 +21,7 @@ template<typename T>
 void reference(const T *input, T *output,
                int imgWidth, int imgHeight,
                const Box *detections, int numDetections,
-               float4 colors)
+               hec_float4 colors)
 {
   for (int n = 0; n < numDetections; n++) {
     int boxWidth  = detections[n].width;
@@ -53,7 +53,7 @@ void DetectionOverlayBox(
     Kokkos::View<T*>       output,
     int imgWidth, int imgHeight,
     int x0, int y0, int boxWidth, int boxHeight,
-    float4 color)
+    hec_float4 color)
 {
   Kokkos::parallel_for("overlay",
       Kokkos::MDRangePolicy<Kokkos::Rank<2>>({0,0},{boxHeight,boxWidth}),
@@ -84,9 +84,9 @@ int main(int argc, char* argv[]) {
   const int img_size = width * height;
 
   srand(123);
-  float3 *input      = (float3*) malloc(img_size * sizeof(float3));
-  float3 *output     = (float3*) malloc(img_size * sizeof(float3));
-  float3 *ref_output = (float3*) malloc(img_size * sizeof(float3));
+  hec_float3 *input      = (hec_float3*) malloc(img_size * sizeof(hec_float3));
+  hec_float3 *output     = (hec_float3*) malloc(img_size * sizeof(hec_float3));
+  hec_float3 *ref_output = (hec_float3*) malloc(img_size * sizeof(hec_float3));
 
   for (int i = 0; i < img_size; i++) {
     output[i].x = ref_output[i].x = input[i].x = (float)(rand() % 256);
@@ -94,7 +94,7 @@ int main(int argc, char* argv[]) {
     output[i].z = ref_output[i].z = input[i].z = (float)(rand() % 256);
   }
 
-  float4 colors = {255.f, 204.f, 203.f, 1.f};
+  hec_float4 colors = {255.f, 204.f, 203.f, 1.f};
 
   const int numDetections = (int)(img_size * 0.8f);
   Box *detections = (Box*) malloc(numDetections * sizeof(Box));
@@ -107,8 +107,8 @@ int main(int argc, char* argv[]) {
 
   Kokkos::initialize(argc, argv);
   {
-    Kokkos::View<float3*> d_input("d_input", img_size);
-    Kokkos::View<float3*> d_output("d_output", img_size);
+    Kokkos::View<hec_float3*> d_input("d_input", img_size);
+    Kokkos::View<hec_float3*> d_output("d_output", img_size);
 
     auto h_input  = Kokkos::create_mirror_view(d_input);
     auto h_output = Kokkos::create_mirror_view(d_output);
@@ -122,7 +122,7 @@ int main(int argc, char* argv[]) {
     auto start = std::chrono::steady_clock::now();
 
     for (int n = 0; n < numDetections; n++) {
-      DetectionOverlayBox<float3>(
+      DetectionOverlayBox<hec_float3>(
           d_input, d_output, width, height,
           detections[n].left, detections[n].top,
           detections[n].width, detections[n].height, colors);
@@ -137,7 +137,7 @@ int main(int argc, char* argv[]) {
   }
   Kokkos::finalize();
 
-  reference<float3>(input, ref_output, width, height, detections, numDetections, colors);
+  reference<hec_float3>(input, ref_output, width, height, detections, numDetections, colors);
 
   bool ok = true;
   for (int i = 0; i < img_size; i++) {

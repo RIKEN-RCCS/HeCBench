@@ -7,6 +7,7 @@
 #include <cmath>
 #include <cassert>
 #include <chrono>
+#include <cfloat>
 #include <limits>
 
 // CPU reference implementation
@@ -40,7 +41,7 @@ void softmax_online_kokkos(Kokkos::View<float*> d_out,
       float* y = &d_out[row * C];
 
       // Compute max
-      float max_val = -Kokkos::Experimental::infinity<float>();
+      float max_val = -FLT_MAX;
       Kokkos::parallel_reduce(Kokkos::TeamThreadRange(team, C),
         [&](const int j, float& lmax) {
           if (x[j] > lmax) lmax = x[j];

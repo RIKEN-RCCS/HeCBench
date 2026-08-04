@@ -118,8 +118,7 @@ int main(int argc, char* argv[]) {
     Kokkos::View<float*> d_sources("d_sources", nsources * 3);
     Kokkos::View<float*> d_targets("d_targets", ntargets * 3);
     Kokkos::View<float*> d_weights("d_weights", nsources);
-    const int ntargets_alloc = (ntargets > ntargets_small) ? ntargets : ntargets_small;
-    Kokkos::View<float*> d_result ("d_result",  ntargets_alloc);
+    Kokkos::View<float*> d_result ("d_result",  ntargets);
 
     {
       auto h = Kokkos::create_mirror_view(d_sources);

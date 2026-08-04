@@ -5,8 +5,8 @@
 #include <chrono>
 #include <Kokkos_Core.hpp>
 
-// Define double3 since we don't have CUDA headers
-struct double3 {
+// Define hec_double3 since we don't have CUDA headers
+struct hec_double3 {
     double x, y, z;
 };
 
@@ -31,7 +31,7 @@ void Extrema(const double* history, const int history_length,
 
 KOKKOS_INLINE_FUNCTION
 void Execute(const double* history, const int history_length,
-             double* extrema, int* points, double3* results,
+             double* extrema, int* points, hec_double3* results,
              int* results_length)
 {
     int extrema_length = 0;
@@ -89,7 +89,7 @@ static void ref_Extrema(const double* history, int history_length,
 }
 
 static void ref_Execute(const double* history, int history_length,
-                        double* extrema, int* points, double3* results,
+                        double* extrema, int* points, hec_double3* results,
                         int* results_length)
 {
     int extrema_length = 0;
@@ -126,7 +126,7 @@ static void ref_Execute(const double* history, int history_length,
 }
 
 static void reference(const double* history, const int* history_lengths,
-                      double* extrema, int* points, double3* results,
+                      double* extrema, int* points, hec_double3* results,
                       int* result_length, int num_history)
 {
     for (int i = 0; i < num_history; i++) {
@@ -164,12 +164,12 @@ int main(int argc, char* argv[]) {
 
     double  *history = (double*)  malloc(total_length * sizeof(double));
     double  *extrema = (double*)  malloc(total_length * sizeof(double));
-    double3 *results = (double3*) malloc(total_length * sizeof(double3));
+    hec_double3 *results = (hec_double3*) malloc(total_length * sizeof(hec_double3));
     int     *points  = (int*)     malloc(total_length * sizeof(int));
 
     // Reference work arrays (separate from device work arrays)
     double  *ref_extrema = (double*)  malloc(total_length * sizeof(double));
-    double3 *ref_results = (double3*) malloc(total_length * sizeof(double3));
+    hec_double3 *ref_results = (hec_double3*) malloc(total_length * sizeof(hec_double3));
     int     *ref_points  = (int*)     malloc(total_length * sizeof(int));
 
     for (size_t i = 0; i < total_length; i++)
@@ -180,7 +180,7 @@ int main(int argc, char* argv[]) {
         Kokkos::View<int*>     d_history_lengths("history_lengths", num_history + 1);
         Kokkos::View<double*>  d_history        ("history",         total_length);
         Kokkos::View<double*>  d_extrema        ("extrema",         total_length);
-        Kokkos::View<double3*> d_results        ("results",         total_length);
+        Kokkos::View<hec_double3*> d_results        ("results",         total_length);
         Kokkos::View<int*>     d_points         ("points",          total_length);
         Kokkos::View<int*>     d_result_lengths ("result_lengths",  num_history);
 

@@ -5,7 +5,7 @@
 #include <cmath>
 #include <Kokkos_Core.hpp>
 
-struct float4 {
+struct hec_float4 {
   float x, y, z, w;
 };
 
@@ -65,9 +65,9 @@ float distance_host(float lat1, float lon1, float lat2, float lon2)
   return dist;
 }
 
-void distance_device(const float4* VA, float* VC, int N, int iteration)
+void distance_device(const hec_float4* VA, float* VC, int N, int iteration)
 {
-  Kokkos::View<float4*> va_d("VA", N);
+  Kokkos::View<hec_float4*> va_d("VA", N);
   Kokkos::View<float*>  vc_d("VC", N);
 
   {
@@ -168,7 +168,7 @@ int main(int argc, char** argv)
     printf("Opened %s\n", filename);
   }
 
-  float4* input           = (float4*)aligned_alloc(4096, N * sizeof(float4));
+  hec_float4* input           = (hec_float4*)aligned_alloc(4096, N * sizeof(hec_float4));
   float*  output          = (float*)aligned_alloc(4096, N * sizeof(float));
   float*  expected_output = (float*)malloc(N * sizeof(float));
 

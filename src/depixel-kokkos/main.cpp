@@ -7,7 +7,7 @@
 
 typedef unsigned int uint;
 
-struct float3 {
+struct hec_float3 {
   float x, y, z;
 };
 
@@ -17,8 +17,8 @@ float saturatef(float v) {
 }
 
 KOKKOS_INLINE_FUNCTION
-uint rgbToyuv(float3 rgba) {
-  float3 yuv;
+uint rgbToyuv(hec_float3 rgba) {
+  hec_float3 yuv;
   yuv.x = 0.299f*rgba.x + 0.587f*rgba.y + 0.114f*rgba.z;
   yuv.y = 0.713f*(rgba.x - yuv.x) + 0.5f;
   yuv.z = 0.564f*(rgba.z - yuv.x) + 0.5f;
@@ -55,14 +55,14 @@ int main(int argc, char** argv) {
   std::mt19937 gen(19937);
   std::uniform_real_distribution<float> dis(0.f, 0.4f);
 
-  float3* img = (float3*)malloc(size * sizeof(float3));
+  hec_float3* img = (hec_float3*)malloc(size * sizeof(hec_float3));
   uint*   out = (uint*)  malloc(size * sizeof(uint));
 
   float sum = 0.f, total_time = 0.f;
 
   Kokkos::initialize(argc, argv);
   {
-    Kokkos::View<float3*> d_img("img", size);
+    Kokkos::View<hec_float3*> d_img("img", size);
     Kokkos::View<uint*>   d_tmp("tmp", size);
     Kokkos::View<uint*>   d_out("out", size);
     auto h_img = Kokkos::create_mirror_view(d_img);

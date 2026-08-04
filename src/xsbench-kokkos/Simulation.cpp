@@ -169,16 +169,6 @@ void calculate_macro_xs( double p_energy, int mat, long n_isotopes,
 }
 
 KOKKOS_INLINE_FUNCTION
-double LCG_random_double(uint64_t * seed)
-{
-  const uint64_t m = 9223372036854775808ULL; // 2^63
-  const uint64_t a = 2806196910506780709ULL;
-  const uint64_t c = 1ULL;
-  *seed = (a * (*seed) + c) % m;
-  return (double) (*seed) / (double) m;
-}
-
-KOKKOS_INLINE_FUNCTION
 uint64_t fast_forward_LCG(uint64_t seed, uint64_t n)
 {
   const uint64_t m = 9223372036854775808ULL; // 2^63

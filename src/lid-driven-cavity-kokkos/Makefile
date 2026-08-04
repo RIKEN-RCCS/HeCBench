@@ -50,4 +50,4 @@ clean:
 	rm -rf $(program) $(obj)
 
 run: $(program)
-	$(LAUNCHER) ./$(program) 10
+	$(LAUNCHER) ./$(program)

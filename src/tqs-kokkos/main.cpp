@@ -11,7 +11,6 @@
 #include <chrono>
 #include <Kokkos_Core.hpp>
 
-// Support headers live in ../tqs-cuda/support/ (via -I../tqs-cuda)
 #include "support/setup.h"
 #include "support/task.h"
 #include "support/verify.h"

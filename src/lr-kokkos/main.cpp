@@ -15,12 +15,12 @@
 #define RESULT_FILENAME     "assets/_results.txt"
 
 // ---- Types ----------------------------------------------------------------
-struct alignas(8) float2  { float x, y; };
-struct alignas(16) float4 { float x, y, z, w; };
+struct alignas(8) hec_float2  { float x, y; };
+struct alignas(16) hec_float4 { float x, y, z, w; };
 
-typedef float2 data_t;
-typedef float4 sum_t;
-typedef float2 rsquared_t;
+typedef hec_float2 data_t;
+typedef hec_float4 sum_t;
+typedef hec_float2 rsquared_t;
 
 struct result_t {
   float  a0, a1;
@@ -148,7 +148,7 @@ static void linear_regression_kokkos(
 // rsquared kernel: each team computes actual vs estimated variance
 static void rsquared_kokkos(
     int nTeams, Kokkos::View<data_t *> d_dataset,
-    float mean, float2 equation,
+    float mean, hec_float2 equation,
     Kokkos::View<rsquared_t *> d_results) {
 
   const int wg_size = TEMP_WORKGROUP_SIZE;
@@ -223,7 +223,7 @@ static void linear_regressionCPU(data_t *dataset, sum_t *result,
   }
 }
 
-static void rsquaredCPU(data_t *dataset, float mean, float2 equation,
+static void rsquaredCPU(data_t *dataset, float mean, hec_float2 equation,
                         rsquared_t *result, int gpu_groups, int total_groups) {
   const int wg_size = TEMP_WORKGROUP_SIZE;
   std::vector<rsquared_t> dist(wg_size);
@@ -267,7 +267,7 @@ static void r_squared(linear_param_t *params, data_t *dataset,
   int    gpu_groups = (int)(gpu_global / wg_size);
 
   float   mean     = linreg->y / params->size;
-  float2  equation = {response->a0, response->a1};
+  hec_float2  equation = {response->a0, response->a1};
 
   std::vector<rsquared_t> h_results(wg_count, {0.f, 0.f});
 

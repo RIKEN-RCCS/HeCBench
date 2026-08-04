@@ -5,7 +5,7 @@ LAUNCHER  =
 KOKKOS_PATH ?= $(HOME)/kokkos
 
 program = main
-source = main.cpp
+source = main.cpp Option.cpp OptionParser.cpp Timer.cpp triad.cpp
 obj = $(source:.cpp=.o)
 
 include $(KOKKOS_PATH)/Makefile.kokkos
@@ -22,13 +22,13 @@ ifeq ($(OPTIMIZE),yes)
 endif
 
 $(program): $(obj) Makefile
-$(CC) $(CFLAGS) $(obj) -o $@ $(LDFLAGS)
+	$(CC) $(CFLAGS) $(obj) -o $@ $(LDFLAGS)
 
 %.o: %.cpp
-$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean: kokkos-clean
-rm -rf $(program) $(obj)
+	rm -rf $(program) $(obj)
 
 run: $(program)
-$(LAUNCHER) ./$(program) -n 10
+	$(LAUNCHER) ./$(program) -n 10

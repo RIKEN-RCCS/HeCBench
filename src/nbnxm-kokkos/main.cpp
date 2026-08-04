@@ -224,6 +224,7 @@ void runNbnxmKernel(
 
       const float beta2 = ewaldBeta * ewaldBeta;
       const float beta3 = ewaldBeta * ewaldBeta * ewaldBeta;
+      const float minDistanceSquared = c_nbnxnMinDistanceSquared;
 
       // Per-thread force accumulators for each i-cluster (8 values)
       float fCiBufX[c_nbnxnGpuNumClusterPerSupercluster] = {};
@@ -280,7 +281,7 @@ void runNbnxmKernel(
                 const float  c6    = c6c12.x;
                 const float  c12   = c6c12.y;
 
-                r2 = Kokkos::max(r2, c_nbnxnMinDistanceSquared);
+                r2 = Kokkos::max(r2, minDistanceSquared);
 
                 const float rInv  = 1.0f / Kokkos::sqrt(r2);
                 const float r2Inv = rInv * rInv;

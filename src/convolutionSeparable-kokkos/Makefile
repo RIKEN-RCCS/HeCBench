@@ -10,10 +10,10 @@ KOKKOS_LIB = /home/copilot/kokkos-install/lib
 
 CC      = g++
 program = main
-source  = main.cpp ../convolutionSeparable-omp/conv_gold.cpp
+source  = main.cpp conv_gold.cpp
 obj     = $(source:.cpp=.o)
 
-CFLAGS := $(EXTRA_CFLAGS) -std=c++17 -I$(KOKKOS_INC) -I../convolutionSeparable-omp
+CFLAGS := $(EXTRA_CFLAGS) -std=c++17 -I$(KOKKOS_INC) -I.
 LDFLAGS = -L$(KOKKOS_LIB) -lkokkoscore -lkokkoscontainers -lpthread -ldl
 
 ifeq ($(OPTIMIZE),yes)

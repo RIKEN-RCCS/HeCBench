@@ -55,40 +55,42 @@ template <bool weighted, typename T>
 void jaccard_is(int n,
                 Kokkos::View<const int*> csrPtr,
                 Kokkos::View<const int*> csrInd,
+                Kokkos::View<const int*> edgeRow,
                 Kokkos::View<const T*>   weight_j,
                 Kokkos::View<const T*>   work,
                 Kokkos::View<T*>         weight_i,
                 Kokkos::View<T*>         weight_s) {
-  Kokkos::parallel_for("jaccard_is", n, KOKKOS_LAMBDA(const int row) {
-    for (int j = csrPtr(row); j < csrPtr(row + 1); j++) {
-      int col = csrInd(j);
-      int Ni  = csrPtr(row + 1) - csrPtr(row);
-      int Nj  = csrPtr(col + 1) - csrPtr(col);
-      int ref = (Ni < Nj) ? row : col;
-      int cur = (Ni < Nj) ? col : row;
+  const int e = weight_i.extent(0);
+  Kokkos::parallel_for("jaccard_is", e, KOKKOS_LAMBDA(const int j) {
+    int row = edgeRow(j);
+    int col = csrInd(j);
+    int Ni  = csrPtr(row + 1) - csrPtr(row);
+    int Nj  = csrPtr(col + 1) - csrPtr(col);
+    int ref = (Ni < Nj) ? row : col;
+    int cur = (Ni < Nj) ? col : row;
 
-      weight_s(j) = work(row) + work(col);
+    weight_s(j) = work(row) + work(col);
 
-      // Iterate over ref's neighbors; binary-search for each in cur's neighbors.
-      // No atomics needed: each edge j is owned exclusively by this row thread.
-      for (int i = csrPtr(ref); i < csrPtr(ref + 1); i++) {
-        int ref_col = csrInd(i);
-        T   ref_val = weighted ? weight_j(ref_col) : (T)1.0;
+    int ref_ptr = csrPtr(ref);
+    int cur_ptr = csrPtr(cur);
+    int ref_end = csrPtr(ref + 1);
+    int cur_end = csrPtr(cur + 1);
+    T local_sum = (T)0.0;
 
-        int left  = csrPtr(cur);
-        int right = csrPtr(cur + 1) - 1;
-        while (left <= right) {
-          int middle  = (left + right) >> 1;
-          int cur_col = csrInd(middle);
-          if      (cur_col > ref_col) right = middle - 1;
-          else if (cur_col < ref_col) left  = middle + 1;
-          else {
-            weight_i(j) += ref_val;
-            break;
-          }
-        }
+    while (ref_ptr < ref_end && cur_ptr < cur_end) {
+      int ref_col = csrInd(ref_ptr);
+      int cur_col = csrInd(cur_ptr);
+      if (ref_col == cur_col) {
+        local_sum += weighted ? weight_j(ref_col) : (T)1.0;
+        ref_ptr++;
+        cur_ptr++;
+      } else if (ref_col < cur_col) {
+        ref_ptr++;
+      } else {
+        cur_ptr++;
       }
     }
+    weight_i(j) = local_sum;
   });
 }
 
@@ -116,6 +118,7 @@ void jaccard_weight(int iteration, int n, int e,
   // Device views
   Kokkos::View<int*> d_csrPtr("csrPtr", n + 1);
   Kokkos::View<int*> d_csrInd("csrInd", e);
+  Kokkos::View<int*> d_edgeRow("edgeRow", e);
   Kokkos::View<T*>   d_csrVal("csrVal", e);
   Kokkos::View<T*>   d_weight_j("weight_j", e);
   Kokkos::View<T*>   d_weight_i("weight_i", e);
@@ -126,12 +129,17 @@ void jaccard_weight(int iteration, int n, int e,
   {
     auto h_ptr = Kokkos::create_mirror_view(d_csrPtr);
     auto h_ind = Kokkos::create_mirror_view(d_csrInd);
+    auto h_row = Kokkos::create_mirror_view(d_edgeRow);
     auto h_val = Kokkos::create_mirror_view(d_csrVal);
     for (int i = 0; i <= n; i++) h_ptr(i) = csr_ptr[i];
     for (int i = 0; i < e;  i++) h_ind(i) = csr_ind[i];
+    for (int row = 0; row < n; row++)
+      for (int j = csr_ptr[row]; j < csr_ptr[row + 1]; j++)
+        h_row(j) = row;
     for (int i = 0; i < e;  i++) h_val(i) = csr_val[i];
     Kokkos::deep_copy(d_csrPtr, h_ptr);
     Kokkos::deep_copy(d_csrInd, h_ind);
+    Kokkos::deep_copy(d_edgeRow, h_row);
     Kokkos::deep_copy(d_csrVal, h_val);
   }
   Kokkos::fence();
@@ -150,6 +158,7 @@ void jaccard_weight(int iteration, int n, int e,
     jaccard_is<weighted, T>(n,
       Kokkos::View<const int*>(d_csrPtr),
       Kokkos::View<const int*>(d_csrInd),
+      Kokkos::View<const int*>(d_edgeRow),
       Kokkos::View<const T*>(d_weight_j),
       Kokkos::View<const T*>(d_work),
       d_weight_i,

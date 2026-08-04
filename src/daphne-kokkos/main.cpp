@@ -38,7 +38,7 @@ static constexpr int PLANE = IMG_H * IMG_W; // pixels per plane
 KOKKOS_INLINE_FUNCTION
 void atomic_float_min(float* addr, float val) {
   float assumed = *addr;
-  while (val < assumed) {
+  while (assumed == 0.f || val < assumed) {
     float old = Kokkos::atomic_compare_exchange(addr, assumed, val);
     if (old == assumed) break; // CAS succeeded
     assumed = old;             // retry with refreshed value

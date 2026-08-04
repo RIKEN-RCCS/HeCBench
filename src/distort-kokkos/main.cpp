@@ -10,7 +10,7 @@
 // -----------------------------------------------------------------------
 typedef struct __attribute__((__aligned__(4))) {
     unsigned char x, y, z;
-} uchar3;
+} hec_uchar3;
 
 struct Properties {
     float K;
@@ -56,8 +56,8 @@ float getRadialY(float x, float y, Properties prop) {
 }
 
 KOKKOS_INLINE_FUNCTION
-void sampleImageTest(const uchar3* src, float idx0, float idx1,
-                     uchar3& result, Properties prop)
+void sampleImageTest(const hec_uchar3* src, float idx0, float idx1,
+                     hec_uchar3& result, Properties prop)
 {
     if (idx0 < 0 || idx1 < 0 ||
         idx0 > prop.height - 1 || idx1 > prop.width - 1) {
@@ -69,10 +69,10 @@ void sampleImageTest(const uchar3* src, float idx0, float idx1,
     int idx1_floor = (int)floorf(idx1);
     int idx1_ceil  = (int)ceilf(idx1);
 
-    uchar3 s1 = src[idx0_floor * prop.width + idx1_floor];
-    uchar3 s2 = src[idx0_floor * prop.width + idx1_ceil];
-    uchar3 s3 = src[idx0_ceil  * prop.width + idx1_ceil];
-    uchar3 s4 = src[idx0_ceil  * prop.width + idx1_floor];
+    hec_uchar3 s1 = src[idx0_floor * prop.width + idx1_floor];
+    hec_uchar3 s2 = src[idx0_floor * prop.width + idx1_ceil];
+    hec_uchar3 s3 = src[idx0_ceil  * prop.width + idx1_ceil];
+    hec_uchar3 s4 = src[idx0_ceil  * prop.width + idx1_floor];
 
     float fx = idx0 - idx0_floor;
     float fy = idx1 - idx1_floor;
@@ -88,12 +88,12 @@ void sampleImageTest(const uchar3* src, float idx0, float idx1,
 // -----------------------------------------------------------------------
 // CPU reference
 // -----------------------------------------------------------------------
-static void reference(const uchar3* src, uchar3* dst, const Properties* prop) {
+static void reference(const hec_uchar3* src, hec_uchar3* dst, const Properties* prop) {
     for (int h = 0; h < prop->height; h++) {
         for (int w = 0; w < prop->width; w++) {
             float rx = getRadialX((float)w, (float)h, *prop);
             float ry = getRadialY((float)w, (float)h, *prop);
-            uchar3 temp;
+            hec_uchar3 temp;
             sampleImageTest(src, ry, rx, temp, *prop);
             dst[h * prop->width + w] = temp;
         }
@@ -103,8 +103,8 @@ static void reference(const uchar3* src, uchar3* dst, const Properties* prop) {
 // -----------------------------------------------------------------------
 // Kokkos kernel wrapper
 // -----------------------------------------------------------------------
-static void barrel_distort(Kokkos::View<uchar3*> d_src,
-                           Kokkos::View<uchar3*> d_dst,
+static void barrel_distort(Kokkos::View<hec_uchar3*> d_src,
+                           Kokkos::View<hec_uchar3*> d_dst,
                            Properties prop)
 {
     int height = prop.height;
@@ -115,7 +115,7 @@ static void barrel_distort(Kokkos::View<uchar3*> d_src,
             int w = idx % width;
             float rx = getRadialX((float)w, (float)h, prop);
             float ry = getRadialY((float)w, (float)h, prop);
-            uchar3 temp;
+            hec_uchar3 temp;
             sampleImageTest(d_src.data(), ry, rx, temp, prop);
             d_dst[idx] = temp;
         });
@@ -159,9 +159,9 @@ int main(int argc, char** argv) {
 
     const int imageSize = height * width;
 
-    uchar3* h_src = (uchar3*) malloc(imageSize * sizeof(uchar3));
-    uchar3* h_dst = (uchar3*) malloc(imageSize * sizeof(uchar3));
-    uchar3* r_dst = (uchar3*) malloc(imageSize * sizeof(uchar3));
+    hec_uchar3* h_src = (hec_uchar3*) malloc(imageSize * sizeof(hec_uchar3));
+    hec_uchar3* h_dst = (hec_uchar3*) malloc(imageSize * sizeof(hec_uchar3));
+    hec_uchar3* r_dst = (hec_uchar3*) malloc(imageSize * sizeof(hec_uchar3));
 
     srand(123);
     for (int i = 0; i < imageSize; i++) {
@@ -172,8 +172,8 @@ int main(int argc, char** argv) {
 
     Kokkos::initialize(argc, argv);
     {
-        Kokkos::View<uchar3*> d_src("src", imageSize);
-        Kokkos::View<uchar3*> d_dst("dst", imageSize);
+        Kokkos::View<hec_uchar3*> d_src("src", imageSize);
+        Kokkos::View<hec_uchar3*> d_dst("dst", imageSize);
 
         {
             auto hs = Kokkos::create_mirror_view(d_src);

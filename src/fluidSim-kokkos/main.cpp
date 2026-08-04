@@ -12,10 +12,10 @@ struct int8_t_ {
 struct double8 {
   double s0, s1, s2, s3, s4, s5, s6, s7;
 };
-struct double4 {
+struct hec_double4 {
   double x, y, z, w;
 };
-struct double2 {
+struct hec_double2 {
   double x, y;
 };
 
@@ -24,22 +24,22 @@ using lbm_int8 = int8_t_;
 
 // ---- Device helper functions ----
 KOKKOS_INLINE_FUNCTION
-double dot4(double4 a, double4 b) {
+double dot4(hec_double4 a, hec_double4 b) {
   return a.x*b.x + a.y*b.y + a.z*b.z + a.w*b.w;
 }
 
 KOKKOS_INLINE_FUNCTION
-double4 add4(double4 a, double4 b) {
-  double4 r; r.x=a.x+b.x; r.y=a.y+b.y; r.z=a.z+b.z; r.w=a.w+b.w; return r;
+hec_double4 add4(hec_double4 a, hec_double4 b) {
+  hec_double4 r; r.x=a.x+b.x; r.y=a.y+b.y; r.z=a.z+b.z; r.w=a.w+b.w; return r;
 }
 
 KOKKOS_INLINE_FUNCTION
-double4 scale4(double s, double4 a) {
-  double4 r; r.x=s*a.x; r.y=s*a.y; r.z=s*a.z; r.w=s*a.w; return r;
+hec_double4 scale4(double s, hec_double4 a) {
+  hec_double4 r; r.x=s*a.x; r.y=s*a.y; r.z=s*a.z; r.w=s*a.w; return r;
 }
 
 KOKKOS_INLINE_FUNCTION
-double ced(double rho, double weight, double2 dir, double2 u) {
+double ced(double rho, double weight, hec_double2 dir, hec_double2 u) {
   double u2 = u.x*u.x + u.y*u.y;
   double eu = dir.x*u.x + dir.y*u.y;
   return rho * weight * (1.0 + 3.0*eu + 4.5*eu*eu - 1.5*u2);
@@ -73,8 +73,8 @@ double computefEq(double rho, double weight, const double dir[2], const double v
 // ---- LBM kernel ----
 void lbm(unsigned int width, unsigned int height,
          const double* if0,   double* of0,
-         const double4* if1234, double4* of1234,
-         const double4* if5678, double4* of5678,
+         const hec_double4* if1234, hec_double4* of1234,
+         const hec_double4* if5678, hec_double4* of5678,
          const bool* type_arr,
          double8 dirX, double8 dirY,
          const double* weight_,
@@ -87,39 +87,39 @@ void lbm(unsigned int width, unsigned int height,
       unsigned int pos = (unsigned int)idx + width * (unsigned int)idy;
 
       double f0    = if0[pos];
-      double4 f1234 = if1234[pos];
-      double4 f5678 = if5678[pos];
+      hec_double4 f1234 = if1234[pos];
+      hec_double4 f5678 = if5678[pos];
 
       double e0 = f0; // boundary default
-      double4 e1234, e5678;
+      hec_double4 e1234, e5678;
       double rho;
-      double2 u;
+      hec_double2 u;
 
       if (type_arr[pos]) { // Boundary: bounce-back
         e1234.x=f1234.z; e1234.y=f1234.w; e1234.z=f1234.x; e1234.w=f1234.y;
         e5678.x=f5678.z; e5678.y=f5678.w; e5678.z=f5678.x; e5678.w=f5678.y;
         rho=0.0; u.x=0.0; u.y=0.0;
       } else { // Fluid
-        double4 temp = add4(f1234, f5678);
+        hec_double4 temp = add4(f1234, f5678);
         rho = f0 + temp.x + temp.y + temp.z + temp.w;
 
-        double4 x1234; x1234.x=dirX.s0; x1234.y=dirX.s1; x1234.z=dirX.s2; x1234.w=dirX.s3;
-        double4 y1234; y1234.x=dirY.s0; y1234.y=dirY.s1; y1234.z=dirY.s2; y1234.w=dirY.s3;
-        double4 x5678; x5678.x=dirX.s4; x5678.y=dirX.s5; x5678.z=dirX.s6; x5678.w=dirX.s7;
-        double4 y5678; y5678.x=dirY.s4; y5678.y=dirY.s5; y5678.z=dirY.s6; y5678.w=dirY.s7;
+        hec_double4 x1234; x1234.x=dirX.s0; x1234.y=dirX.s1; x1234.z=dirX.s2; x1234.w=dirX.s3;
+        hec_double4 y1234; y1234.x=dirY.s0; y1234.y=dirY.s1; y1234.z=dirY.s2; y1234.w=dirY.s3;
+        hec_double4 x5678; x5678.x=dirX.s4; x5678.y=dirX.s5; x5678.z=dirX.s6; x5678.w=dirX.s7;
+        hec_double4 y5678; y5678.x=dirY.s4; y5678.y=dirY.s5; y5678.z=dirY.s6; y5678.w=dirY.s7;
         u.x = (dot4(f1234,x1234) + dot4(f5678,x5678)) / rho;
         u.y = (dot4(f1234,y1234) + dot4(f5678,y5678)) / rho;
 
-        double2 d0; d0.x=0.0; d0.y=0.0;
+        hec_double2 d0; d0.x=0.0; d0.y=0.0;
         e0 = ced(rho, weight_[0], d0, u);
-        double2 d1; d1.x=dirX.s0; d1.y=dirY.s0; e1234.x=ced(rho,weight_[1],d1,u);
-        double2 d2; d2.x=dirX.s1; d2.y=dirY.s1; e1234.y=ced(rho,weight_[2],d2,u);
-        double2 d3; d3.x=dirX.s2; d3.y=dirY.s2; e1234.z=ced(rho,weight_[3],d3,u);
-        double2 d4; d4.x=dirX.s3; d4.y=dirY.s3; e1234.w=ced(rho,weight_[4],d4,u);
-        double2 d5; d5.x=dirX.s4; d5.y=dirY.s4; e5678.x=ced(rho,weight_[5],d5,u);
-        double2 d6; d6.x=dirX.s5; d6.y=dirY.s5; e5678.y=ced(rho,weight_[6],d6,u);
-        double2 d7; d7.x=dirX.s6; d7.y=dirY.s6; e5678.z=ced(rho,weight_[7],d7,u);
-        double2 d8; d8.x=dirX.s7; d8.y=dirY.s7; e5678.w=ced(rho,weight_[8],d8,u);
+        hec_double2 d1; d1.x=dirX.s0; d1.y=dirY.s0; e1234.x=ced(rho,weight_[1],d1,u);
+        hec_double2 d2; d2.x=dirX.s1; d2.y=dirY.s1; e1234.y=ced(rho,weight_[2],d2,u);
+        hec_double2 d3; d3.x=dirX.s2; d3.y=dirY.s2; e1234.z=ced(rho,weight_[3],d3,u);
+        hec_double2 d4; d4.x=dirX.s3; d4.y=dirY.s3; e1234.w=ced(rho,weight_[4],d4,u);
+        hec_double2 d5; d5.x=dirX.s4; d5.y=dirY.s4; e5678.x=ced(rho,weight_[5],d5,u);
+        hec_double2 d6; d6.x=dirX.s5; d6.y=dirY.s5; e5678.y=ced(rho,weight_[6],d6,u);
+        hec_double2 d7; d7.x=dirX.s6; d7.y=dirY.s6; e5678.z=ced(rho,weight_[7],d7,u);
+        hec_double2 d8; d8.x=dirX.s7; d8.y=dirY.s7; e5678.w=ced(rho,weight_[8],d8,u);
 
         double omf = 1.0 - omega;
         e0     = omf*f0     + omega*e0;
@@ -152,14 +152,14 @@ void lbm(unsigned int width, unsigned int height,
 }
 
 int main(int argc, char* argv[]) {
-  if (argc != 5) {
-    printf("Usage: %s <iterations> <omega> <width> <height>\n", argv[0]);
+  if (argc != 2) {
+    printf("Usage: %s <iterations>\n", argv[0]);
     return 1;
   }
   const int    iterations = atoi(argv[1]);
-  const double omega      = atof(argv[2]);
-  const int    lbm_width  = atoi(argv[3]);
-  const int    lbm_height = atoi(argv[4]);
+  const double omega      = 1.2;
+  const int    lbm_width  = 256;
+  const int    lbm_height = 256;
 
   Kokkos::initialize(argc, argv);
   {
@@ -183,8 +183,8 @@ int main(int argc, char* argv[]) {
 
     // Host arrays
     auto h_if0    = Kokkos::View<double*,  Kokkos::HostSpace>("h_if0",   n);
-    auto h_if1234 = Kokkos::View<double4*, Kokkos::HostSpace>("h_if1234", n);
-    auto h_if5678 = Kokkos::View<double4*, Kokkos::HostSpace>("h_if5678", n);
+    auto h_if1234 = Kokkos::View<hec_double4*, Kokkos::HostSpace>("h_if1234", n);
+    auto h_if5678 = Kokkos::View<hec_double4*, Kokkos::HostSpace>("h_if5678", n);
     auto h_type   = Kokkos::View<bool*,    Kokkos::HostSpace>("h_type",  n);
 
     double u0[2] = {0.01, 0.01};
@@ -208,8 +208,8 @@ int main(int argc, char* argv[]) {
 
     // Device views (double-buffered)
     Kokkos::View<double*>  d_f0_a("d_f0_a", n),   d_f0_b("d_f0_b", n);
-    Kokkos::View<double4*> d_f1234_a("d_f1234_a", n), d_f1234_b("d_f1234_b", n);
-    Kokkos::View<double4*> d_f5678_a("d_f5678_a", n), d_f5678_b("d_f5678_b", n);
+    Kokkos::View<hec_double4*> d_f1234_a("d_f1234_a", n), d_f1234_b("d_f1234_b", n);
+    Kokkos::View<hec_double4*> d_f5678_a("d_f5678_a", n), d_f5678_b("d_f5678_b", n);
     Kokkos::View<bool*>    d_type("d_type", n);
     Kokkos::View<double*>  d_weight("d_weight", 9);
 
@@ -228,8 +228,8 @@ int main(int argc, char* argv[]) {
 
     // Current input/output views (pointers to views for swap)
     Kokkos::View<double*>  if0   = d_f0_a,    of0   = d_f0_b;
-    Kokkos::View<double4*> if1234 = d_f1234_a, of1234 = d_f1234_b;
-    Kokkos::View<double4*> if5678 = d_f5678_a, of5678 = d_f5678_b;
+    Kokkos::View<hec_double4*> if1234 = d_f1234_a, of1234 = d_f1234_b;
+    Kokkos::View<hec_double4*> if5678 = d_f5678_a, of5678 = d_f5678_b;
 
     auto start = std::chrono::steady_clock::now();
 

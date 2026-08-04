@@ -19,7 +19,7 @@
 // ---------------------------------------------------------------------------
 // Types
 // ---------------------------------------------------------------------------
-struct uchar4 {
+struct hec_uchar4 {
     unsigned char x, y, z, w;
 };
 
@@ -40,7 +40,7 @@ static constexpr int TEAM_SIZE   = 128;
 // ---------------------------------------------------------------------------
 // CPU reference
 // ---------------------------------------------------------------------------
-static void cpu_histogram(const uchar4 *img, unsigned int *hist, int n)
+static void cpu_histogram(const hec_uchar4 *img, unsigned int *hist, int n)
 {
     std::memset(hist, 0, NUM_CHANNELS * NUM_BINS * sizeof(unsigned int));
     for (int i = 0; i < n; i++) {
@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
     Kokkos::initialize(argc, argv);
     {
         // ---- Build synthetic image ----------------------------------------
-        Kokkos::View<uchar4 *> d_image("image", N_PIXELS);
+        Kokkos::View<hec_uchar4 *> d_image("image", N_PIXELS);
         auto h_image = Kokkos::create_mirror_view(d_image);
 
         for (int i = 0; i < N_PIXELS; i++) {
@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
         auto t0 = std::chrono::steady_clock::now();
 
         Kokkos::parallel_for("hist_gmem", N_PIXELS, KOKKOS_LAMBDA(int idx) {
-            uchar4 p = d_image(idx);
+            hec_uchar4 p = d_image(idx);
             Kokkos::atomic_fetch_add(&d_hist_g(0 * 256 + p.x), 1u);
             Kokkos::atomic_fetch_add(&d_hist_g(1 * 256 + p.y), 1u);
             Kokkos::atomic_fetch_add(&d_hist_g(2 * 256 + p.z), 1u);
@@ -147,7 +147,7 @@ int main(int argc, char *argv[])
 
                 for (int col = col0; col < WIDTH; col += 512) {
                     for (int row = row0; row < HEIGHT; row += 64) {
-                        uchar4 p = d_image(row * WIDTH + col);
+                        hec_uchar4 p = d_image(row * WIDTH + col);
                         Kokkos::atomic_fetch_add(&smem(0 * 256 + p.x), 1u);
                         Kokkos::atomic_fetch_add(&smem(1 * 256 + p.y), 1u);
                         Kokkos::atomic_fetch_add(&smem(2 * 256 + p.z), 1u);

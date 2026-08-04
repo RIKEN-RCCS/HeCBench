@@ -12,8 +12,8 @@
 typedef unsigned char  uchar;
 typedef unsigned int   uint;
 
-struct uchar4 { uchar x, y, z, w; };
-struct uchar3 { uchar x, y, z; };
+struct hec_uchar4 { uchar x, y, z, w; };
+struct hec_uchar3 { uchar x, y, z; };
 
 // Bayer patterns
 enum { RGGB=0, GRBG=1, GBRG=2, BGGR=3 };
@@ -134,6 +134,8 @@ int main(int argc, char* argv[]) {
   srand(123);
   for (int i = 0; i < numPix; i++) input[i] = rand() % 256;
 
+  const uint tile_cols = 16;
+  const uint tile_rows = 16;
   const uint teamX = (width  + tile_cols - 1) / tile_cols;
   const uint teamY = (height + tile_rows - 1) / tile_rows;
 

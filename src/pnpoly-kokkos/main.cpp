@@ -16,7 +16,7 @@
 #define VERTICES 600
 #define BLOCK_SIZE_X 256
 
-struct float2 {
+struct hec_float2 {
   float x, y;
 };
 
@@ -27,17 +27,17 @@ int is_between(float a, float b, float c) {
 
 void pnpoly_base(
     Kokkos::View<int*> bitmap,
-    Kokkos::View<const float2*> point,
-    Kokkos::View<const float2*> vertex,
+    Kokkos::View<const hec_float2*> point,
+    Kokkos::View<const hec_float2*> vertex,
     int n)
 {
   Kokkos::parallel_for("pnpoly_base", n, KOKKOS_LAMBDA(int i) {
     int c = 0;
-    float2 p = point(i);
+    hec_float2 p = point(i);
     int k = VERTICES - 1;
     for (int j = 0; j < VERTICES; k = j++) {
-      float2 vj = vertex(j);
-      float2 vk = vertex(k);
+      hec_float2 vj = vertex(j);
+      hec_float2 vk = vertex(k);
       float slope = (vk.x - vj.x) / (vk.y - vj.y);
       if (((vj.y > p.y) != (vk.y > p.y)) &&
           (p.x < slope * (p.y - vj.y) + vj.x)) {
@@ -52,13 +52,13 @@ void pnpoly_base(
 template <int tile_size>
 void pnpoly_opt(
     Kokkos::View<int*> bitmap,
-    Kokkos::View<const float2*> point,
-    Kokkos::View<const float2*> vertex,
+    Kokkos::View<const hec_float2*> point,
+    Kokkos::View<const hec_float2*> vertex,
     int n)
 {
   Kokkos::parallel_for("pnpoly_opt", n, KOKKOS_LAMBDA(int i) {
     int c[tile_size];
-    float2 lpoint[tile_size];
+    hec_float2 lpoint[tile_size];
     for (int ti = 0; ti < tile_size; ti++) {
       c[ti] = 0;
       if (i + BLOCK_SIZE_X * ti < n)
@@ -67,12 +67,12 @@ void pnpoly_opt(
 
     int k = VERTICES - 1;
     for (int j = 0; j < VERTICES; k = j++) {
-      float2 vj = vertex(j);
-      float2 vk = vertex(k);
+      hec_float2 vj = vertex(j);
+      hec_float2 vk = vertex(k);
       float slope = (vk.x - vj.x) / (vk.y - vj.y);
 
       for (int ti = 0; ti < tile_size; ti++) {
-        float2 p = lpoint[ti];
+        hec_float2 p = lpoint[ti];
         if (is_between(p.y, vj.y, vk.y) &&
             (p.x < slope * (p.y - vj.y) + vj.x)) {
           c[ti] = !c[ti];
@@ -101,13 +101,13 @@ int main(int argc, char* argv[]) {
   std::default_random_engine rng(123);
   std::normal_distribution<float> distribution(0, 1);
 
-  float2 *point = (float2*) malloc(sizeof(float2) * nPoints);
+  hec_float2 *point = (hec_float2*) malloc(sizeof(hec_float2) * nPoints);
   for (int i = 0; i < nPoints; i++) {
     point[i].x = distribution(rng);
     point[i].y = distribution(rng);
   }
 
-  float2 *vertex = (float2*) malloc(vertices * sizeof(float2));
+  hec_float2 *vertex = (hec_float2*) malloc(vertices * sizeof(hec_float2));
   for (int i = 0; i < vertices; i++) {
     float t = distribution(rng) * 2.f * M_PI;
     vertex[i].x = cosf(t);
@@ -119,8 +119,8 @@ int main(int argc, char* argv[]) {
 
   Kokkos::initialize(argc, argv);
   {
-    Kokkos::View<float2*> d_point("d_point", nPoints);
-    Kokkos::View<float2*> d_vertex("d_vertex", vertices);
+    Kokkos::View<hec_float2*> d_point("d_point", nPoints);
+    Kokkos::View<hec_float2*> d_vertex("d_vertex", vertices);
     Kokkos::View<int*> d_bitmap_ref("d_bitmap_ref", nPoints);
     Kokkos::View<int*> d_bitmap_opt("d_bitmap_opt", nPoints);
 
@@ -134,8 +134,8 @@ int main(int argc, char* argv[]) {
     auto start = std::chrono::steady_clock::now();
     for (int i = 0; i < repeat; i++)
       pnpoly_base(d_bitmap_ref,
-                  Kokkos::View<const float2*>(d_point),
-                  Kokkos::View<const float2*>(d_vertex),
+                  Kokkos::View<const hec_float2*>(d_point),
+                  Kokkos::View<const hec_float2*>(d_vertex),
                   nPoints);
     auto end = std::chrono::steady_clock::now();
     auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
@@ -144,8 +144,8 @@ int main(int argc, char* argv[]) {
     start = std::chrono::steady_clock::now();
     for (int i = 0; i < repeat; i++)
       pnpoly_opt<1>(d_bitmap_opt,
-                    Kokkos::View<const float2*>(d_point),
-                    Kokkos::View<const float2*>(d_vertex),
+                    Kokkos::View<const hec_float2*>(d_point),
+                    Kokkos::View<const hec_float2*>(d_vertex),
                     nPoints);
     end = std::chrono::steady_clock::now();
     time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
@@ -154,8 +154,8 @@ int main(int argc, char* argv[]) {
     start = std::chrono::steady_clock::now();
     for (int i = 0; i < repeat; i++)
       pnpoly_opt<2>(d_bitmap_opt,
-                    Kokkos::View<const float2*>(d_point),
-                    Kokkos::View<const float2*>(d_vertex),
+                    Kokkos::View<const hec_float2*>(d_point),
+                    Kokkos::View<const hec_float2*>(d_vertex),
                     nPoints);
     end = std::chrono::steady_clock::now();
     time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
@@ -164,8 +164,8 @@ int main(int argc, char* argv[]) {
     start = std::chrono::steady_clock::now();
     for (int i = 0; i < repeat; i++)
       pnpoly_opt<4>(d_bitmap_opt,
-                    Kokkos::View<const float2*>(d_point),
-                    Kokkos::View<const float2*>(d_vertex),
+                    Kokkos::View<const hec_float2*>(d_point),
+                    Kokkos::View<const hec_float2*>(d_vertex),
                     nPoints);
     end = std::chrono::steady_clock::now();
     time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
@@ -174,8 +174,8 @@ int main(int argc, char* argv[]) {
     start = std::chrono::steady_clock::now();
     for (int i = 0; i < repeat; i++)
       pnpoly_opt<8>(d_bitmap_opt,
-                    Kokkos::View<const float2*>(d_point),
-                    Kokkos::View<const float2*>(d_vertex),
+                    Kokkos::View<const hec_float2*>(d_point),
+                    Kokkos::View<const hec_float2*>(d_vertex),
                     nPoints);
     end = std::chrono::steady_clock::now();
     time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
@@ -184,8 +184,8 @@ int main(int argc, char* argv[]) {
     start = std::chrono::steady_clock::now();
     for (int i = 0; i < repeat; i++)
       pnpoly_opt<16>(d_bitmap_opt,
-                     Kokkos::View<const float2*>(d_point),
-                     Kokkos::View<const float2*>(d_vertex),
+                     Kokkos::View<const hec_float2*>(d_point),
+                     Kokkos::View<const hec_float2*>(d_vertex),
                      nPoints);
     end = std::chrono::steady_clock::now();
     time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
@@ -194,8 +194,8 @@ int main(int argc, char* argv[]) {
     start = std::chrono::steady_clock::now();
     for (int i = 0; i < repeat; i++)
       pnpoly_opt<32>(d_bitmap_opt,
-                     Kokkos::View<const float2*>(d_point),
-                     Kokkos::View<const float2*>(d_vertex),
+                     Kokkos::View<const hec_float2*>(d_point),
+                     Kokkos::View<const hec_float2*>(d_vertex),
                      nPoints);
     end = std::chrono::steady_clock::now();
     time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
@@ -204,8 +204,8 @@ int main(int argc, char* argv[]) {
     start = std::chrono::steady_clock::now();
     for (int i = 0; i < repeat; i++)
       pnpoly_opt<64>(d_bitmap_opt,
-                     Kokkos::View<const float2*>(d_point),
-                     Kokkos::View<const float2*>(d_vertex),
+                     Kokkos::View<const hec_float2*>(d_point),
+                     Kokkos::View<const hec_float2*>(d_vertex),
                      nPoints);
     end = std::chrono::steady_clock::now();
     time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();

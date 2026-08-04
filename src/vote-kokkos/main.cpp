@@ -60,14 +60,14 @@ static void vote_any3_kernel(bool *info, int warp_size, int total, int repeat) {
 
       bool any_upper = false;
       for (int k = warp_base; k < warp_base + warp_size; k++) {
-        if (k >= (total * 3) / 2) { any_upper = true; break; }
+        if (k >= warp_size) { any_upper = true; break; }
       }
       offs[0] = any_upper;
-      offs[1] = (tx >= (total * 3) / 2);
+      offs[1] = (tx >= total / 2);
 
       bool all_upper = true;
       for (int k = warp_base; k < warp_base + warp_size; k++) {
-        if (k < (total * 3) / 2) { all_upper = false; break; }
+        if (k < 2 * warp_size) { all_upper = false; break; }
       }
       if (all_upper) offs[2] = true;
     });
@@ -106,7 +106,7 @@ static int checkResultsVoteAllKernel2(const unsigned int *h, int size, int ws) {
   printf((ec == 0) ? "\tOK\n" : "\tERROR\n");
   return ec;
 }
-static int checkResultsVoteAnyKernel3(const bool *hinfo, int size) {
+static int checkResultsVoteAnyKernel3(const unsigned char *hinfo, int size) {
   int ec = 0;
   for (int i = 0; i < size * 3; i++) {
     switch (i % 3) {
@@ -195,7 +195,7 @@ int main(int argc, char **argv) {
     {
       auto hi = Kokkos::create_mirror_view(d_info);
       Kokkos::deep_copy(hi, d_info);
-      std::vector<bool> hinfo(warp_size * 3 * 3);
+      std::vector<unsigned char> hinfo(warp_size * 3 * 3);
       for (int i = 0; i < warp_size * 3 * 3; i++) hinfo[i] = hi(i);
       error_count[2] = checkResultsVoteAnyKernel3(hinfo.data(), warp_size * 3);
     }

@@ -20,7 +20,7 @@
 #define M5H  16
 #define M5R   4
 
-struct alignas(16) float4 {
+struct alignas(16) hec_float4 {
   float x, y, z, w;
 };
 
@@ -231,15 +231,15 @@ void MatchGPU3(Kokkos::View<float *> d_pts1, Kokkos::View<float *> d_pts2,
             << 2.0 * NPTS * NPTS * NDIM / ms / 1024 / 1024 << " Gflops" << std::endl;
 }
 
-// ---- GPU4: float4 vectorised version --------------------------------------
+// ---- GPU4: hec_float4 vectorised version --------------------------------------
 void MatchGPU4(Kokkos::View<float *> d_pts1, Kokkos::View<float *> d_pts2,
                Kokkos::View<float *> d_score, Kokkos::View<int *> d_index,
                int repeat) {
   const int NDIM4  = NDIM / 4;
   const int NDIM41 = NDIM4 + 1; // padded
-  // buffer1: M2W*(NDIM/4+1) float4, buffer2: M2H*(NDIM/4) float4, scores: M2W*M2H float
+  // buffer1: M2W*(NDIM/4+1) hec_float4, buffer2: M2H*(NDIM/4) hec_float4, scores: M2W*M2H float
   const int scratch_bytes =
-      (M2W * NDIM41 + M2H * NDIM4) * (int)sizeof(float4) +
+      (M2W * NDIM41 + M2H * NDIM4) * (int)sizeof(hec_float4) +
       M2W * M2H * (int)sizeof(float);
 
   using TeamPolicy  = Kokkos::TeamPolicy<>;
@@ -261,13 +261,13 @@ void MatchGPU4(Kokkos::View<float *> d_pts1, Kokkos::View<float *> d_pts2,
           int ty  = idx / M2W;
 
           ScratchViewB raw(team.team_scratch(0), scratch_bytes);
-          float4 *buffer1 = reinterpret_cast<float4 *>(raw.data());
-          float4 *buffer2 = buffer1 + M2W * NDIM41;
+          hec_float4 *buffer1 = reinterpret_cast<hec_float4 *>(raw.data());
+          hec_float4 *buffer2 = buffer1 + M2W * NDIM41;
           float  *scores  = reinterpret_cast<float *>(buffer2 + M2H * NDIM4);
 
-          // Cast pts to float4 pointers via raw data
-          const float4 *f4_pts1 = reinterpret_cast<const float4 *>(&d_pts1(0));
-          const float4 *f4_pts2 = reinterpret_cast<const float4 *>(&d_pts2(0));
+          // Cast pts to hec_float4 pointers via raw data
+          const hec_float4 *f4_pts1 = reinterpret_cast<const hec_float4 *>(&d_pts1(0));
+          const hec_float4 *f4_pts2 = reinterpret_cast<const hec_float4 *>(&d_pts2(0));
 
           if (ty < M2W)
             for (int d = tx; d < NDIM4; d += M2W)
@@ -285,8 +285,8 @@ void MatchGPU4(Kokkos::View<float *> d_pts1, Kokkos::View<float *> d_pts2,
 
             float score = 0.0f;
             for (int d = 0; d < NDIM4; d++) {
-              float4 v1 = buffer1[tx * NDIM41 + d];
-              float4 v2 = buffer2[ty * NDIM4 + d];
+              hec_float4 v1 = buffer1[tx * NDIM41 + d];
+              hec_float4 v2 = buffer2[ty * NDIM4 + d];
               score += v1.x * v2.x + v1.y * v2.y + v1.z * v2.z + v1.w * v2.w;
             }
             scores[idx] = score;
@@ -314,16 +314,16 @@ void MatchGPU4(Kokkos::View<float *> d_pts1, Kokkos::View<float *> d_pts2,
             << 2.0 * NPTS * NPTS * NDIM / ms / 1024 / 1024 << " Gflops" << std::endl;
 }
 
-// ---- GPU5: float4 with M5R loop unrolling ---------------------------------
+// ---- GPU5: hec_float4 with M5R loop unrolling ---------------------------------
 void MatchGPU5(Kokkos::View<float *> d_pts1, Kokkos::View<float *> d_pts2,
                Kokkos::View<float *> d_score, Kokkos::View<int *> d_index,
                int repeat) {
   const int NDIM4  = NDIM / 4;
   const int NDIM41 = NDIM4 + 1;
-  // buffer1: M5W*(NDIM/4+1) float4, buffer2: M5H*(NDIM/4) float4
+  // buffer1: M5W*(NDIM/4+1) hec_float4, buffer2: M5H*(NDIM/4) hec_float4
   // scores: M5W*M5H float, indices: M5W*M5H/M5R ints
   const int scratch_bytes =
-      (M5W * NDIM41 + M5H * NDIM4) * (int)sizeof(float4) +
+      (M5W * NDIM41 + M5H * NDIM4) * (int)sizeof(hec_float4) +
       (M5W * M5H) * (int)sizeof(float) +
       (M5W * M5H / M5R) * (int)sizeof(int);
 
@@ -346,13 +346,13 @@ void MatchGPU5(Kokkos::View<float *> d_pts1, Kokkos::View<float *> d_pts2,
           int ty  = idx / M5W;
 
           ScratchViewB raw(team.team_scratch(0), scratch_bytes);
-          float4 *buffer1 = reinterpret_cast<float4 *>(raw.data());
-          float4 *buffer2 = buffer1 + M5W * NDIM41;
+          hec_float4 *buffer1 = reinterpret_cast<hec_float4 *>(raw.data());
+          hec_float4 *buffer2 = buffer1 + M5W * NDIM41;
           float  *scores  = reinterpret_cast<float *>(buffer2 + M5H * NDIM4);
           int    *indices = reinterpret_cast<int *>(scores + M5W * M5H);
 
-          const float4 *f4_pts1 = reinterpret_cast<const float4 *>(&d_pts1(0));
-          const float4 *f4_pts2 = reinterpret_cast<const float4 *>(&d_pts2(0));
+          const hec_float4 *f4_pts1 = reinterpret_cast<const hec_float4 *>(&d_pts1(0));
+          const hec_float4 *f4_pts2 = reinterpret_cast<const hec_float4 *>(&d_pts2(0));
 
           if (ty < M5W)
             for (int d = tx; d < NDIM4; d += M5W)
@@ -372,9 +372,9 @@ void MatchGPU5(Kokkos::View<float *> d_pts1, Kokkos::View<float *> d_pts2,
               float score[M5R];
               for (int dy = 0; dy < M5R; dy++) score[dy] = 0.0f;
               for (int d = 0; d < NDIM4; d++) {
-                float4 v1 = buffer1[tx * NDIM41 + d];
+                hec_float4 v1 = buffer1[tx * NDIM41 + d];
                 for (int dy = 0; dy < M5R; dy++) {
-                  float4 v2 = buffer2[(M5R * ty + dy) * NDIM4 + d];
+                  hec_float4 v2 = buffer2[(M5R * ty + dy) * NDIM4 + d];
                   score[dy] += v1.x * v2.x + v1.y * v2.y +
                                v1.z * v2.z + v1.w * v2.w;
                 }

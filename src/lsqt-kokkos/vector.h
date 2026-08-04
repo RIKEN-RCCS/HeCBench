@@ -37,17 +37,14 @@ public:
   void inner_product_1(int, Vector& other, Vector& target, int offset);
   void inner_product_2(int, int, Vector& target);
 
-  // Host pointers (point to host mirror data)
   real* real_part;
   real* imag_part;
 
-  // Device views (used by GPU kernels)
+private:
+  void initialize_gpu(int n);
+  void initialize_cpu(int n);
   Kokkos::View<real*> d_real_part;
   Kokkos::View<real*> d_imag_part;
-
-private:
-  Kokkos::View<real*>::HostMirror h_real_part;
-  Kokkos::View<real*>::HostMirror h_imag_part;
   int n;
   int array_size;
 };

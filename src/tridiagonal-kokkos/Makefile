@@ -5,12 +5,12 @@ LAUNCHER  =
 KOKKOS_PATH ?= $(HOME)/kokkos
 
 program = main
-source = main.cpp
+source = main.cpp shrUtils.cpp cmd_arg_reader.cpp
 obj = $(source:.cpp=.o)
 
 include $(KOKKOS_PATH)/Makefile.kokkos
 
-CFLAGS := $(EXTRA_CFLAGS) -std=c++17 $(KOKKOS_CPPFLAGS) $(KOKKOS_CXXFLAGS) -I../tridiagonal-omp
+CFLAGS := $(EXTRA_CFLAGS) -DUNIX -DBENCH_ITERATIONS=100 -std=c++17 $(KOKKOS_CPPFLAGS) $(KOKKOS_CXXFLAGS)
 LDFLAGS = $(KOKKOS_LDFLAGS) $(KOKKOS_LIBS)
 
 ifeq ($(DEBUG),yes)

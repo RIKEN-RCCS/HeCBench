@@ -7,11 +7,11 @@
 extern "C" {
 #endif /* __cplusplus */
 
-typedef struct __attribute__((__aligned__(8)))  { float  x, y; } float2;
-typedef struct __attribute__((__aligned__(16))) { double x, y; } double2;
+typedef struct __attribute__((__aligned__(8)))  { float  x, y; } hec_float2;
+typedef struct __attribute__((__aligned__(16))) { double x, y; } hec_double2;
 
-typedef float2  FloatComplex;
-typedef double2 DoubleComplex;
+typedef hec_float2  FloatComplex;
+typedef hec_double2 DoubleComplex;
 
 KOKKOS_INLINE_FUNCTION float Crealf(FloatComplex x)  { return x.x; }
 KOKKOS_INLINE_FUNCTION float Cimagf(FloatComplex x)  { return x.y; }

@@ -320,8 +320,8 @@ void RL_onecol_cleartmpMem(
 
 // ---- main factorization routine using Kokkos views ----------------------
 
-void factorize(Symbolic_Matrix& A_sym, const bool PERTURB,
-               std::ostream& out, std::ostream& err)
+void LUonDevice(Symbolic_Matrix& A_sym, std::ostream& out, std::ostream& err,
+                bool PERTURB)
 {
   Kokkos::initialize();
   {

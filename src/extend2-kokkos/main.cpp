@@ -97,6 +97,7 @@ float run_extend2(struct extend2_dat *d)
   Kokkos::View<char*,          Kokkos::HostSpace> mat_v    ("mat",    m*m);
   Kokkos::View<eh_t*,          Kokkos::HostSpace> eh_v     ("eh",     qlen+1);
   Kokkos::View<char*,          Kokkos::HostSpace> qp_v     ("qp",     qlen*m);
+  Kokkos::View<int*,           Kokkos::HostSpace> result_v ("result", 6);
 
   for (int i = 0; i < qlen; i++) query_v(i)  = d->query[i];
   for (int i = 0; i < tlen; i++) target_v(i) = d->target[i];
@@ -201,24 +202,19 @@ float run_extend2(struct extend2_dat *d)
         end_v = j + 2 < qlen ? j + 2 : qlen;
       }
 
-      // store results back via aliases (captured by value, work on ptr)
-      // We write results into the first eh slot (repurposed as output slot)
-      // using a trick: store in qp_v first 6 ints (enough space)
-      int* res = (int*)qp;
-      res[0] = max_j + 1;
-      res[1] = max_i + 1;
-      res[2] = max_ie + 1;
-      res[3] = gscore;
-      res[4] = max_off;
-      res[5] = max;
+      result_v(0) = max_j + 1;
+      result_v(1) = max_i + 1;
+      result_v(2) = max_ie + 1;
+      result_v(3) = gscore;
+      result_v(4) = max_off;
+      result_v(5) = max;
     });
   Kokkos::fence();
 
   auto stop = std::chrono::steady_clock::now();
   int64_t ns = std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count();
 
-  // Read back results from qp (repurposed)
-  int* res = (int*)qp_v.data();
+  int* res = result_v.data();
   check(d->qle,    res[0], "qle");
   check(d->tle,    res[1], "tle");
   check(d->gtle,   res[2], "gtle");

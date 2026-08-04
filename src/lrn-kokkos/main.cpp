@@ -45,7 +45,9 @@ void Forward(int repeat)
     auto start = high_resolution_clock::now();
 
     for (int r = 0; r < repeat; r++) {
-      Kokkos::parallel_for("lrn_fwd", wk_size,
+      Kokkos::parallel_for("lrn_fwd",
+        Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace,
+                            Kokkos::IndexType<int64_t>>(0, wk_size),
         KOKKOS_LAMBDA(const int64_t idx) {
           const float* src_ = src_d.data();
           float*       dst_ = dst_d.data();
@@ -141,7 +143,9 @@ void Backward(int repeat)
     auto start = high_resolution_clock::now();
 
     for (int r = 0; r < repeat; r++) {
-      Kokkos::parallel_for("lrn_bwd", wk_size,
+      Kokkos::parallel_for("lrn_bwd",
+        Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace,
+                            Kokkos::IndexType<int64_t>>(0, wk_size),
         KOKKOS_LAMBDA(const int64_t idx) {
           const float* src_       = src_d.data();
           const float* dst_       = dst_d.data();

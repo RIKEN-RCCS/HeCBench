@@ -56,7 +56,6 @@ void init(DevView data, int size) {
       unsigned int seed = (unsigned int)index ^ (unsigned int)size;
       data[index] = LCG_random(&seed);
     });
-  Kokkos::fence();
 }
 
 void elementWise_fp(int hiddenSize, int miniBatch,
@@ -179,6 +178,7 @@ void test(int hiddenSize, int miniBatch, int seqLength, int numLayers,
       }
     }
 
+    Kokkos::fence();
     auto end = std::chrono::steady_clock::now();
     ktime += std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
   }

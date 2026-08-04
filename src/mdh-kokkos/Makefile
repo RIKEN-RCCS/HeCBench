@@ -50,4 +50,4 @@ clean:
 	rm -rf $(program) $(obj)
 
 run: $(program)
-	$(LAUNCHER) ./$(program) -itmax 100 -wgsize 256
+	$(LAUNCHER) ./$(program) -itmax 100

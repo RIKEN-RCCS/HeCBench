@@ -17,8 +17,10 @@ void bScan(const int blockSize,
            Kokkos::View<float*> sumBuffer)
 {
   int nblocks = len / blockSize;
+  auto policy = Kokkos::TeamPolicy<>(nblocks, blockSize / 2)
+                    .set_scratch_size(0, Kokkos::PerTeam(sizeof(float) * blockSize));
   Kokkos::parallel_for("bScan",
-    Kokkos::TeamPolicy<>(nblocks, blockSize / 2),
+    policy,
     KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
       int bid  = team.league_rank();
       int tid  = team.team_rank();
@@ -57,8 +59,7 @@ void bScan(const int blockSize,
         output(2 * gid)     = block(2 * tid - 1);
         output(2 * gid + 1) = block(2 * tid);
       }
-    },
-    Kokkos::TeamPolicy<>::scratch_size(0, sizeof(float) * blockSize));
+    });
 }
 
 // Scan over a small array (the block sums) using a single team.
@@ -68,8 +69,10 @@ void pScan(const int blockSize,
            Kokkos::View<float*> output)
 {
   int tsz = len / 2;
+  auto policy = Kokkos::TeamPolicy<>(1, tsz)
+                    .set_scratch_size(0, Kokkos::PerTeam(sizeof(float) * len));
   Kokkos::parallel_for("pScan",
-    Kokkos::TeamPolicy<>(1, tsz),
+    policy,
     KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
       int tid = team.team_rank();
       int gid = tid;
@@ -103,8 +106,7 @@ void pScan(const int blockSize,
         output(2 * gid)     = block(2 * tid - 1);
         output(2 * gid + 1) = block(2 * tid);
       }
-    },
-    Kokkos::TeamPolicy<>::scratch_size(0, sizeof(float) * len));
+    });
 }
 
 // Add per-block prefix sums back into block outputs.

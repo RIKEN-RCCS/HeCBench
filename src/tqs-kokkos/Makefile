@@ -10,7 +10,7 @@ obj = $(source:.cpp=.o)
 
 include $(KOKKOS_PATH)/Makefile.kokkos
 
-CFLAGS := $(EXTRA_CFLAGS) -std=c++17 $(KOKKOS_CPPFLAGS) $(KOKKOS_CXXFLAGS) -I../tqs-cuda
+CFLAGS := $(EXTRA_CFLAGS) -std=c++17 $(KOKKOS_CPPFLAGS) $(KOKKOS_CXXFLAGS) -I.
 LDFLAGS = $(KOKKOS_LDFLAGS) $(KOKKOS_LIBS)
 
 ifeq ($(DEBUG),yes)
@@ -22,13 +22,13 @@ ifeq ($(OPTIMIZE),yes)
 endif
 
 $(program): $(obj) Makefile
-$(CC) $(CFLAGS) $(obj) -o $@ $(LDFLAGS)
+	$(CC) $(CFLAGS) $(obj) -o $@ $(LDFLAGS)
 
 %.o: %.cpp
-$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean: kokkos-clean
-rm -rf $(program) $(obj)
+	rm -rf $(program) $(obj)
 
 run: $(program)
-$(LAUNCHER) ./$(program)
+	$(LAUNCHER) ./$(program) -f input/patternsNP100NB512FB25.txt

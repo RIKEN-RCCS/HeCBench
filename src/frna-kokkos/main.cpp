@@ -117,7 +117,7 @@ DEV static int_t internal_loop_energy(const fbase_t* s, int n, int i, int j, int
   if (d1==2&&d2==2) return p->int22[s[i]][s[ip]][s[j]][s[jp]][s[i+1]][s[i+2]][s[j-1]][s[j-2]];
   if (d1==1&&d2==2) return p->int21[s[i]][s[j]][s[i+1]][s[j-1]][s[jp+1]][s[ip]][s[jp]];
   if (d1==2&&d2==1) return p->int21[s[jp]][s[ip]][s[jp+1]][s[ip-1]][s[i+1]][s[j]][s[i]];
-  const int_t (*sp)[NBASE][NBASE][NBASE];
+  const tab4_t* sp;
   if (d1==1||d2==1) sp=&p->tstacki1n;
   else if ((d1==2&&d2==3)||(d1==3&&d2==2)) sp=&p->tstacki23;
   else sp=&p->tstacki;

@@ -11,7 +11,7 @@
 #include <random>
 #include <Kokkos_Core.hpp>
 
-template <typename input_t, typename output_t, typename IndexType>
+template <typename input_t, typename IndexType>
 KOKKOS_INLINE_FUNCTION
 IndexType getBin(input_t v, input_t minvalue, input_t maxvalue, IndexType nbins) {
   IndexType bin = (IndexType)((v - minvalue) * nbins / (maxvalue - minvalue));
@@ -52,9 +52,11 @@ void bincount_shared(
     IndexType nbins, input_t minvalue, input_t maxvalue, IndexType input_size,
     int repeat)
 {
-  using TeamPol = Kokkos::TeamPolicy<>;
+  using exec_space = Kokkos::DefaultExecutionSpace;
+  using scratch_space = typename exec_space::scratch_memory_space;
+  using TeamPol = Kokkos::TeamPolicy<exec_space>;
   using TeamMem = TeamPol::member_type;
-  using ScratchView = Kokkos::View<output_t*, Kokkos::ScratchMemorySpace<>, Kokkos::MemoryUnmanaged>;
+  using ScratchView = Kokkos::View<output_t*, scratch_space, Kokkos::MemoryUnmanaged>;
 
   const int block_size = 256;
   int nteams = (input_size + block_size - 1) / block_size;
@@ -135,14 +137,19 @@ void eval(IndexType input_size, int repeat) {
 
     // Shared version (only when nbins is small enough for scratch)
     printf("\nbincount using global and local atomics\n");
-    Kokkos::deep_copy(d_output, (output_t)0);
-    bincount_shared<output_t, input_t, IndexType>(
-        d_output, Kokkos::View<const input_t*>(d_input), nbins, minval, maxval, input_size, repeat);
-    Kokkos::deep_copy(h_out, d_output);
-    omin = *std::min_element(h_out.data(), h_out.data()+nbins);
-    omax = *std::max_element(h_out.data(), h_out.data()+nbins);
-    printf("Output min, median, max values: (%ld %ld %ld)\n\n",
-           (int64_t)omin/repeat, (int64_t)h_out(nbins/2)/repeat, (int64_t)omax/repeat);
+    if (Kokkos::View<output_t*, typename Kokkos::DefaultExecutionSpace::scratch_memory_space,
+                     Kokkos::MemoryUnmanaged>::shmem_size(nbins) <= 48 * 1024) {
+      Kokkos::deep_copy(d_output, (output_t)0);
+      bincount_shared<output_t, input_t, IndexType>(
+          d_output, Kokkos::View<const input_t*>(d_input), nbins, minval, maxval, input_size, repeat);
+      Kokkos::deep_copy(h_out, d_output);
+      omin = *std::min_element(h_out.data(), h_out.data()+nbins);
+      omax = *std::max_element(h_out.data(), h_out.data()+nbins);
+      printf("Output min, median, max values: (%ld %ld %ld)\n\n",
+             (int64_t)omin/repeat, (int64_t)h_out(nbins/2)/repeat, (int64_t)omax/repeat);
+    } else {
+      printf("Skipping shared+global variant: requested scratch memory exceeds CUDA default limit\n\n");
+    }
   }
 }
 

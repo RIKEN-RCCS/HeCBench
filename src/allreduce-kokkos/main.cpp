@@ -30,6 +30,9 @@ void run_test(size_t n, int iterations) {
 
   auto start = std::chrono::steady_clock::now();
   for (int i = 0; i < iterations; i++) {
+    Kokkos::parallel_for("reset", n, KOKKOS_LAMBDA(int j) {
+      data(j) = 1.0f;
+    });
     allreduce_sum(data, n);
     Kokkos::fence();
   }

@@ -15,7 +15,7 @@ include $(KOKKOS_PATH)/Makefile.kokkos
 
 CFLAGS := $(EXTRA_CFLAGS) -std=c++17 $(KOKKOS_CPPFLAGS) $(KOKKOS_CXXFLAGS) \
           -I../dxtc2-omp
-LDFLAGS = $(KOKKOS_LDFLAGS) $(KOKKOS_LIBS) ../dxtc2-omp/block.cpp ../dxtc2-omp/shrUtils.cpp
+LDFLAGS = $(KOKKOS_LDFLAGS) $(KOKKOS_LIBS) ../dxtc2-omp/block.cpp ../boxfilter-sycl/shrUtils.cpp
 
 ifeq ($(DEBUG),yes)
   CFLAGS += -g -DDEBUG

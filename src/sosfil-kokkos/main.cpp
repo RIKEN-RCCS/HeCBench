@@ -19,20 +19,26 @@ void filtering(const int repeat, const int n_signals, const int n_samples,
     const int z_size   = n_signals * n_sections * zi_width;
     const int x_size   = n_signals * n_samples;
 
-    Kokkos::View<T*, Kokkos::HostSpace> sos("sos", sos_size);
-    Kokkos::View<T*, Kokkos::HostSpace> zi("zi",   z_size);
-    Kokkos::View<T*, Kokkos::HostSpace> x_in("x_in", x_size);
+    Kokkos::View<T*> sos("sos", sos_size);
+    Kokkos::View<T*> zi("zi", z_size);
+    Kokkos::View<T*> x_in("x_in", x_size);
+    auto h_sos = Kokkos::create_mirror_view(sos);
+    auto h_zi = Kokkos::create_mirror_view(zi);
+    auto h_x = Kokkos::create_mirror_view(x_in);
 
     // Initialize: all-ones SOS, all-ones zi, sinusoidal signals
     for (int i = 0; i < n_sections; i++)
         for (int j = 0; j < SOS_WIDTH; j++)
-            sos(i * SOS_WIDTH + j) = (T)1;
+            h_sos(i * SOS_WIDTH + j) = (T)1;
 
-    for (int i = 0; i < z_size; i++) zi(i) = (T)1;
+    for (int i = 0; i < z_size; i++) h_zi(i) = (T)1;
 
     for (int i = 0; i < n_signals; i++)
         for (int j = 0; j < n_samples; j++)
-            x_in(i * n_samples + j) = (T)std::sin(2 * 3.14 * (i + 1 + j));
+            h_x(i * n_samples + j) = (T)std::sin(2 * 3.14 * (i + 1 + j));
+    Kokkos::deep_copy(sos, h_sos);
+    Kokkos::deep_copy(zi, h_zi);
+    Kokkos::deep_copy(x_in, h_x);
 
     // Raw pointers for capture in KOKKOS_LAMBDA
     T* sos_ptr = sos.data();

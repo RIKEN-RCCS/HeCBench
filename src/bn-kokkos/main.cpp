@@ -6,7 +6,7 @@
 #include <Kokkos_Core.hpp>
 
 // Include data from OMP source directory
-#include "../bn-omp/data45.h"
+#include "data45.h"
 
 const int HIGHEST = 3;
 const int ITER = 100;

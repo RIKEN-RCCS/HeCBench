@@ -23,12 +23,6 @@ int i4_ceiling(double x) {
   return value;
 }
 
-KOKKOS_INLINE_FUNCTION
-double potential(double a, double b, double x, double y) {
-  return 2.0 * (pow(x / a / a, 2.0) + pow(y / b / b, 2.0))
-             + 1.0 / a / a + 1.0 / b / b;
-}
-
 // LCG random number generator (thread-local, non-atomic)
 KOKKOS_INLINE_FUNCTION
 double r8_uniform_01(int *seed) {
@@ -51,7 +45,7 @@ int main(int argc, char **argv) {
   double err;
   double h = 0.001;
   int N = 1000;
-  int n_inside;
+  int n_inside = 0;
   int ni;
   int nj;
   double rth;
@@ -87,36 +81,46 @@ int main(int argc, char **argv) {
   printf("  X coordinate marked by %d points\n", ni);
   printf("  Y coordinate marked by %d points\n", nj);
 
+  const double inv_a2 = 1.0 / (a * a);
+  const double inv_b2 = 1.0 / (b * b);
+  const double potential_constant = inv_a2 + inv_b2;
+  const double potential_x_factor = 2.0 * inv_a2 * inv_a2;
+  const double potential_y_factor = 2.0 * inv_b2 * inv_b2;
+
+  for (int j = 0; j < nj; j++) {
+    const double x = ((double)(nj - j) * (-a) + (double)(j - 1) * a) /
+                     (double)(nj - 1);
+    for (int i = 0; i < ni; i++) {
+      const double y = ((double)(ni - i) * (-b) + (double)(i - 1) * b) /
+                       (double)(ni - 1);
+      if (x * x * inv_a2 + y * y * inv_b2 <= 1.0) {
+        n_inside++;
+      }
+    }
+  }
+
   Kokkos::initialize(argc, argv);
   {
     long total_time = 0;
 
     for (int iter = 0; iter < repeat; iter++) {
-      // Use Views with atomic add for reductions
-      Kokkos::View<double> d_err("err");
-      Kokkos::View<int> d_n_inside("n_inside");
-      Kokkos::deep_copy(d_err, 0.0);
-      Kokkos::deep_copy(d_n_inside, 0);
-
       auto start = std::chrono::steady_clock::now();
 
-      Kokkos::parallel_for(
+      double iteration_err = 0.0;
+
+      Kokkos::parallel_reduce(
           "feynman_kac",
           Kokkos::MDRangePolicy<Kokkos::Rank<2>>({0, 0}, {nj, ni}),
-          KOKKOS_LAMBDA(int j, int i) {
+          KOKKOS_LAMBDA(int j, int i, double &local_err) {
             double x = ((double)(nj - j) * (-a) + (double)(j - 1) * a) /
                        (double)(nj - 1);
             double y = ((double)(ni - i) * (-b) + (double)(i - 1) * b) /
                        (double)(ni - 1);
 
-            double chk = pow(x / a, 2.0) + pow(y / b, 2.0);
+            double chk = x * x * inv_a2 + y * y * inv_b2;
 
-            if (1.0 < chk) {
-              // outside: do nothing (w_exact = wt = 1, contribution = 0)
-            } else {
-              Kokkos::atomic_add(&d_n_inside(), 1);
-
-              double w_exact = exp(pow(x / a, 2.0) + pow(y / b, 2.0) - 1.0);
+            if (chk <= 1.0) {
+              double w_exact = exp(chk - 1.0);
               double wt = 0.0;
 
               // Per-thread seed derived from position
@@ -142,37 +146,32 @@ int main(int argc, char **argv) {
                     dy = (us < 0.0) ? -rth : rth;
                   }
 
-                  double vs = potential(a, b, x1, x2);
+                  double vs = potential_x_factor * x1 * x1 +
+                              potential_y_factor * x2 * x2 + potential_constant;
                   x1 = x1 + dx;
                   x2 = x2 + dy;
-                  double vh = potential(a, b, x1, x2);
+                  double vh = potential_x_factor * x1 * x1 +
+                              potential_y_factor * x2 * x2 + potential_constant;
 
                   double we = (1.0 - h * vs) * w;
                   w = w - 0.5 * h * (vh * we + vs * w);
 
-                  chk2 = pow(x1 / a, 2.0) + pow(x2 / b, 2.0);
+                  chk2 = x1 * x1 * inv_a2 + x2 * x2 * inv_b2;
                 }
                 wt += w;
               }
               wt /= (double)(N);
-              double contrib = pow(w_exact - wt, 2.0);
-              Kokkos::atomic_add(&d_err(), contrib);
+              double diff = w_exact - wt;
+              double contrib = diff * diff;
+              local_err += contrib;
             }
-          });
+          }, iteration_err);
       Kokkos::fence();
 
       auto end = std::chrono::steady_clock::now();
       total_time += std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
 
-      // Copy results back (last iteration)
-      if (iter == repeat - 1) {
-        auto h_err = Kokkos::create_mirror_view(d_err);
-        auto h_n_inside = Kokkos::create_mirror_view(d_n_inside);
-        Kokkos::deep_copy(h_err, d_err);
-        Kokkos::deep_copy(h_n_inside, d_n_inside);
-        err = h_err();
-        n_inside = h_n_inside();
-      }
+      err = iteration_err;
     }
     printf("Average kernel time: %lf (s)\n", total_time * 1e-9 / repeat);
 

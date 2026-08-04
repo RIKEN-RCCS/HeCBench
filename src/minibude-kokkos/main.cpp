@@ -104,8 +104,8 @@ void fasten_main(
       ix = (ix < (int)nposes) ? ix : (int)nposes - NUM_TD_PER_THREAD;
 
       float etot[NUM_TD_PER_THREAD];
-      float3 lpos[NUM_TD_PER_THREAD];
-      float4 transform[NUM_TD_PER_THREAD][3];
+      hec_float3 lpos[NUM_TD_PER_THREAD];
+      hec_float4 transform[NUM_TD_PER_THREAD][3];
 
       for (int i = 0; i < NUM_TD_PER_THREAD; i++) {
         const int index = ix + i * lrange;
@@ -139,7 +139,7 @@ void fasten_main(
         const FFParams l_params = local_forcefield[l_atom.type];
         const bool lhphb_ltz = l_params.hphb < ZERO;
         const bool lhphb_gtz = l_params.hphb > ZERO;
-        const float4 linitpos = {l_atom.x, l_atom.y, l_atom.z, ONE};
+        const hec_float4 linitpos = {l_atom.x, l_atom.y, l_atom.z, ONE};
 
         for (int i = 0; i < NUM_TD_PER_THREAD; i++) {
           lpos[i].x = transform[i][0].w

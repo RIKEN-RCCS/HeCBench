@@ -44,7 +44,9 @@ static void eval(bool warmup, const int repeat) {
     // Kernel timing
     t0 = std::chrono::steady_clock::now();
     for (int r = 0; r < repeat; r++) {
-      Kokkos::parallel_for("vec_add", nelem, KOKKOS_LAMBDA(const int i) {
+      Kokkos::parallel_for("vec_add",
+        Kokkos::RangePolicy<Kokkos::DefaultHostExecutionSpace>(0, nelem),
+        [=](const int i) {
         h_c(i) = h_a(i) + h_b(i);
       });
       Kokkos::fence();

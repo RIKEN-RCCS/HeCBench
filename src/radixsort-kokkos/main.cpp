@@ -11,12 +11,12 @@
 #include <chrono>
 
 // ─── type helpers ─────────────────────────────────────────────────────────────
-struct uint2 { unsigned int x, y; };
-struct uint4 {
+struct hec_uint2 { unsigned int x, y; };
+struct hec_uint4 {
   unsigned int x, y, z, w;
-  KOKKOS_INLINE_FUNCTION uint4 operator+(const uint4& o) const { return {x+o.x,y+o.y,z+o.z,w+o.w}; }
-  KOKKOS_INLINE_FUNCTION uint4 operator-(const uint4& o) const { return {x-o.x,y-o.y,z-o.z,w-o.w}; }
-  KOKKOS_INLINE_FUNCTION uint4& operator+=(const uint4& o){ x+=o.x;y+=o.y;z+=o.z;w+=o.w; return *this; }
+  KOKKOS_INLINE_FUNCTION hec_uint4 operator+(const hec_uint4& o) const { return {x+o.x,y+o.y,z+o.z,w+o.w}; }
+  KOKKOS_INLINE_FUNCTION hec_uint4 operator-(const hec_uint4& o) const { return {x-o.x,y-o.y,z-o.z,w-o.w}; }
+  KOKKOS_INLINE_FUNCTION hec_uint4& operator+=(const hec_uint4& o){ x+=o.x;y+=o.y;z+=o.z;w+=o.w; return *this; }
 };
 
 using ExecSpace    = Kokkos::DefaultExecutionSpace;
@@ -46,10 +46,9 @@ unsigned int warpScanInclusive(const unsigned int idata,
                                 volatile unsigned int* l_Data,
                                 const unsigned int size)
 {
-  int lid = Kokkos::impl_get_thread_num();   // NOTE: non-portable; use thread rank
-  // We receive lid via a wrapper – see scan4 below
-  (void)lid;
-  return idata; // placeholder; actual implementation below using passed lid
+  (void)l_Data;
+  (void)size;
+  return idata;
 }
 
 // ─── scan helpers (all take explicit thread index) ────────────────────────────
@@ -116,17 +115,17 @@ unsigned int scan1ExclusiveIdx(const unsigned int idata,
 }
 
 KOKKOS_INLINE_FUNCTION
-uint4 scan4Inclusive(uint4 data4, unsigned int* l_Data,
+hec_uint4 scan4Inclusive(hec_uint4 data4, unsigned int* l_Data,
                      const unsigned int size, const int lid, const Member& team)
 {
   data4.y += data4.x; data4.z += data4.y; data4.w += data4.z;
   unsigned int val = scan1InclusiveIdx(data4.w, l_Data, size / 4, lid, team) - data4.w;
-  uint4 v4 = { val, val, val, val };
+  hec_uint4 v4 = { val, val, val, val };
   return data4 + v4;
 }
 
 KOKKOS_INLINE_FUNCTION
-uint4 scan4Exclusive(uint4 data4, unsigned int* l_Data,
+hec_uint4 scan4Exclusive(hec_uint4 data4, unsigned int* l_Data,
                      const unsigned int size, const int lid, const Member& team)
 {
   return scan4Inclusive(data4, l_Data, size, lid, team) - data4;
@@ -150,10 +149,10 @@ unsigned int scanwarp(unsigned int val, volatile unsigned int* sData,
 }
 
 KOKKOS_INLINE_FUNCTION
-uint4 scan4_rsx(const uint4 idata, unsigned int* ptr,
+hec_uint4 scan4_rsx(const hec_uint4 idata, unsigned int* ptr,
                 const int idx, const Member& team)
 {
-  uint4 val4 = idata;
+  hec_uint4 val4 = idata;
   unsigned int sum[3];
   sum[0] = val4.x;
   sum[1] = val4.y + sum[0];
@@ -180,15 +179,15 @@ uint4 scan4_rsx(const uint4 idata, unsigned int* ptr,
 }
 
 KOKKOS_INLINE_FUNCTION
-uint4 rank4_rsx(const uint4 preds, unsigned int* sMem, unsigned int* numtrue,
+hec_uint4 rank4_rsx(const hec_uint4 preds, unsigned int* sMem, unsigned int* numtrue,
                 const int localId, const int localSize, const Member& team)
 {
-  uint4 address = scan4_rsx(preds, sMem, localId, team);
+  hec_uint4 address = scan4_rsx(preds, sMem, localId, team);
   if (localId == localSize - 1)
     numtrue[0] = address.w + preds.w;
   team.team_barrier();
 
-  uint4 rank;
+  hec_uint4 rank;
   int idx = localId * 4;
   rank.x = preds.x ? address.x : numtrue[0] + idx     - address.x;
   rank.y = preds.y ? address.y : numtrue[0] + idx + 1 - address.y;
@@ -220,7 +219,7 @@ void radixSortBlocksKeysOnly(UintView d_keys, UintView d_tempKeys,
 
       // load 4 keys per thread
       unsigned int* keys_u4 = d_keys.data();
-      uint4 key;
+      hec_uint4 key;
       key.x = keys_u4[4*globalId + 0];
       key.y = keys_u4[4*globalId + 1];
       key.z = keys_u4[4*globalId + 2];
@@ -229,13 +228,13 @@ void radixSortBlocksKeysOnly(UintView d_keys, UintView d_tempKeys,
       team.team_barrier();
 
       for (unsigned int shift = startbit; shift < startbit + nbits; ++shift) {
-        uint4 lsb;
+        hec_uint4 lsb;
         lsb.x = !((key.x >> shift) & 1u);
         lsb.y = !((key.y >> shift) & 1u);
         lsb.z = !((key.z >> shift) & 1u);
         lsb.w = !((key.w >> shift) & 1u);
 
-        uint4 r = rank4_rsx(lsb, sMem.data(), numtrue.data(), localId, localSize, team);
+        hec_uint4 r = rank4_rsx(lsb, sMem.data(), numtrue.data(), localId, localSize, team);
 
         sMem[(r.x & 3) * localSize + (r.x >> 2)] = key.x;
         sMem[(r.y & 3) * localSize + (r.y >> 2)] = key.y;
@@ -396,8 +395,8 @@ void scanExclusiveLocal1(UintView d_Dst, UintView d_Src,
       int i   = team.league_rank() * team.team_size() + lid;
 
       unsigned int* src4 = d_Src.data();
-      uint4 idata4 = { src4[4*i], src4[4*i+1], src4[4*i+2], src4[4*i+3] };
-      uint4 odata4 = scan4Exclusive(idata4, l_Data.data(), size, lid, team);
+      hec_uint4 idata4 = { src4[4*i], src4[4*i+1], src4[4*i+2], src4[4*i+3] };
+      hec_uint4 odata4 = scan4Exclusive(idata4, l_Data.data(), size, lid, team);
       unsigned int* dst4 = d_Dst.data();
       dst4[4*i]   = odata4.x; dst4[4*i+1] = odata4.y;
       dst4[4*i+2] = odata4.z; dst4[4*i+3] = odata4.w;
@@ -448,10 +447,10 @@ void uniformUpdate(UintView d_Dst, UintView d_Buf, unsigned int n)
       int i       = groupId * team.team_size() + lid;
 
       unsigned int* dst4 = d_Dst.data();
-      uint4 data4 = { dst4[4*i], dst4[4*i+1], dst4[4*i+2], dst4[4*i+3] };
+      hec_uint4 data4 = { dst4[4*i], dst4[4*i+1], dst4[4*i+2], dst4[4*i+3] };
       if (lid == 0) buf[0] = d_Buf[groupId];
       team.team_barrier();
-      uint4 bv = { buf[0], buf[0], buf[0], buf[0] };
+      hec_uint4 bv = { buf[0], buf[0], buf[0], buf[0] };
       data4 += bv;
       dst4[4*i]   = data4.x; dst4[4*i+1] = data4.y;
       dst4[4*i+2] = data4.z; dst4[4*i+3] = data4.w;

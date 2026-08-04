@@ -23,7 +23,7 @@
 
 #include <Kokkos_Core.hpp>
 #include <pthread.h>
-#include "../streamcluster-omp/streamcluster.h"
+#include "streamcluster.h"
 
 using namespace std;
 
@@ -425,7 +425,10 @@ float pgain(long x, Points *points, float z, long int *numcenters,
     auto work_mem_h_view = Kokkos::View<float*, Kokkos::HostSpace,
                              Kokkos::MemoryTraits<Kokkos::Unmanaged>>(
                                pgain_work_mem_h, num * (K+1));
-    Kokkos::deep_copy(work_mem_h_view, pgain_work_mem_d);
+    auto work_mem_d_view = Kokkos::subview(
+        pgain_work_mem_d,
+        Kokkos::pair<size_t, size_t>(0, static_cast<size_t>(num) * (K + 1)));
+    Kokkos::deep_copy(work_mem_h_view, work_mem_d_view);
   }
 
 #ifdef PROFILE_TMP
@@ -1296,6 +1299,12 @@ int main(int argc, char **argv)
 #ifdef ENABLE_PARSEC_HOOKS
   __parsec_bench_end();
 #endif
+
+  pgain_coord_d = Kokkos::View<float*>();
+  pgain_p_d = Kokkos::View<Point_Struct*>();
+  pgain_work_mem_d = Kokkos::View<float*>();
+  pgain_switch_d = Kokkos::View<char*>();
+  pgain_center_table_d = Kokkos::View<int*>();
 
   Kokkos::finalize();
 

@@ -25,16 +25,16 @@
 // ---------------------------------------------------------------------------
 // Simple pixel types (self-contained, no SDKBitMap dependency)
 // ---------------------------------------------------------------------------
-struct uchar4 { unsigned char x, y, z, w; };
-struct float4 { float x, y, z, w; };
+struct hec_uchar4 { unsigned char x, y, z, w; };
+struct hec_float4 { float x, y, z, w; };
 
 KOKKOS_INLINE_FUNCTION
-float4 convert_float4(uchar4 v) {
+hec_float4 convert_float4(hec_uchar4 v) {
     return {(float)v.x, (float)v.y, (float)v.z, (float)v.w};
 }
 
 KOKKOS_INLINE_FUNCTION
-uchar4 convert_uchar4_sat(float4 v) {
+hec_uchar4 convert_uchar4_sat(hec_float4 v) {
     auto clamp = [](float c) -> unsigned char {
         return (unsigned char)(c > 255.f ? 255.f : (c < 0.f ? 0.f : c));
     };
@@ -42,7 +42,7 @@ uchar4 convert_uchar4_sat(float4 v) {
 }
 
 KOKKOS_INLINE_FUNCTION
-float4 operator+(float4 a, float b) {
+hec_float4 operator+(hec_float4 a, float b) {
     return {a.x + b, a.y + b, a.z + b, a.w + b};
 }
 
@@ -89,9 +89,9 @@ int main(int argc, char **argv) {
     const int n_pixels = width * height;
     const int factor   = FACTOR;
 
-    uchar4 *inputImageData  = (uchar4 *)malloc(n_pixels * sizeof(uchar4));
-    uchar4 *outputImageData = (uchar4 *)malloc(n_pixels * sizeof(uchar4));
-    memset(outputImageData, 0, n_pixels * sizeof(uchar4));
+    hec_uchar4 *inputImageData  = (hec_uchar4 *)malloc(n_pixels * sizeof(hec_uchar4));
+    hec_uchar4 *outputImageData = (hec_uchar4 *)malloc(n_pixels * sizeof(hec_uchar4));
+    memset(outputImageData, 0, n_pixels * sizeof(hec_uchar4));
 
     // Fill with a deterministic pattern so the mean check is meaningful
     for (int i = 0; i < n_pixels; i++) {
@@ -111,11 +111,11 @@ int main(int argc, char **argv) {
         using IntScratch   = Kokkos::View<int*, ScratchSpace,
                                           Kokkos::MemoryUnmanaged>;
 
-        Kokkos::View<uchar4*, mem_space> d_input("d_input",   n_pixels);
-        Kokkos::View<uchar4*, mem_space> d_output("d_output", n_pixels);
+        Kokkos::View<hec_uchar4*, mem_space> d_input("d_input",   n_pixels);
+        Kokkos::View<hec_uchar4*, mem_space> d_output("d_output", n_pixels);
 
         {
-            auto h_in = Kokkos::View<uchar4*, Kokkos::HostSpace,
+            auto h_in = Kokkos::View<hec_uchar4*, Kokkos::HostSpace,
                                      Kokkos::MemoryUnmanaged>(
                             inputImageData, n_pixels);
             Kokkos::deep_copy(d_input, h_in);
@@ -154,7 +154,7 @@ int main(int argc, char **argv) {
                     const int pos = team.league_rank() * team.team_size()
                                     + tid;
 
-                    float4 temp = convert_float4(d_input(pos));
+                    hec_float4 temp = convert_float4(d_input(pos));
                     float  avg  = (temp.x + temp.y + temp.z + temp.w)
                                   / 4.0f;
 
@@ -181,7 +181,7 @@ int main(int argc, char **argv) {
             auto h_out = Kokkos::create_mirror_view(d_output);
             Kokkos::deep_copy(h_out, d_output);
             memcpy(outputImageData, h_out.data(),
-                   n_pixels * sizeof(uchar4));
+                   n_pixels * sizeof(hec_uchar4));
         }
     }
     Kokkos::finalize();

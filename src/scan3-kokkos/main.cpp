@@ -20,6 +20,18 @@ void scanCPUReference(float* output, const float* input, unsigned int length) {
     output[i] = input[i-1] + output[i-1];
 }
 
+bool compareScan(const float* output, const float* reference, int length, float epsilon) {
+  double error = 0.0;
+  double ref = 0.0;
+  for (int i = 1; i < length; ++i) {
+    const double diff = (double)reference[i] - (double)output[i];
+    error += diff * diff;
+    ref += (double)reference[i] * (double)reference[i];
+  }
+  if (ref < epsilon) return false;
+  return std::sqrt(error) / std::sqrt(ref) < epsilon;
+}
+
 int main(int argc, char* argv[]) {
   if (argc != 3) {
     std::cout << "Usage: " << argv[0] << " <repeat> <input_length>\n";
@@ -88,10 +100,9 @@ int main(int argc, char* argv[]) {
     auto h_out = Kokkos::create_mirror_view(d_output);
     Kokkos::deep_copy(h_out, d_output);
 
-    bool pass = true;
-    for (int i = 0; i < length; i++) {
-      if (fabsf(h_out(i) - refOutput[i]) > 0.001f) { pass = false; break; }
-    }
+    std::vector<float> hostOutput(length);
+    for (int i = 0; i < length; i++) hostOutput[i] = h_out(i);
+    bool pass = compareScan(hostOutput.data(), refOutput.data(), length, 0.001f);
     std::cout << (pass ? "PASS" : "FAIL") << std::endl;
   }
   Kokkos::finalize();

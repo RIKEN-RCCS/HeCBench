@@ -46,13 +46,13 @@ endif
 #===============================================================================
 
 $(program): $(obj) Makefile
-$(CC) $(CFLAGS) $(obj) -o $@ $(LDFLAGS)
+	$(CC) $(CFLAGS) $(obj) -o $@ $(LDFLAGS)
 
 %.o: %.cpp ../sad-cuda/bitmap_image.hpp
-$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean: kokkos-clean
-rm -rf $(program) $(obj)
+	rm -rf $(program) $(obj)
 
 run: $(program)
-$(LAUNCHER) ./$(program) ../sad-cuda/coins.bmp ../sad-cuda/coin.bmp 100
+	$(LAUNCHER) ./$(program) ../sad-cuda/coins.bmp ../sad-cuda/coin.bmp 100

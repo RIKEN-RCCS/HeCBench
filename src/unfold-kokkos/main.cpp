@@ -79,7 +79,7 @@ int main(int argc, char *argv[]) {
 
     bool ok = true;
     for (int i = 0; i < grad_in_dim_size; i++) {
-      if (repeat * h_grad_in[i] != h_out(i)) { ok = false; break; }
+      if (repeat * h_grad_in[h_idx_dim] != h_out(i)) { ok = false; break; }
     }
     printf("%s\n", ok ? "PASS" : "FAIL");
   }

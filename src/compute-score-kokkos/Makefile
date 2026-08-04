@@ -10,10 +10,10 @@ KOKKOS_LIB = /home/copilot/kokkos-install/lib
 
 CC      = g++
 program = main
-source  = main.cpp ../compute-score-omp/options.cpp
+source  = main.cpp options.cpp
 obj     = $(source:.cpp=.o)
 
-CFLAGS := $(EXTRA_CFLAGS) -std=c++17 -I$(KOKKOS_INC) -I../compute-score-omp
+CFLAGS := $(EXTRA_CFLAGS) -std=c++17 -I$(KOKKOS_INC) -I.
 LDFLAGS = -L$(KOKKOS_LIB) -lkokkoscore -lkokkoscontainers -lpthread -ldl
 
 ifeq ($(OPTIMIZE),yes)

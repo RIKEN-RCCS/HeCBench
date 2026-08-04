@@ -14,7 +14,7 @@ KOKKOS_PATH ?= $(HOME)/kokkos
 
 program = main
 
-source = main.cpp
+source = main.cpp grep.cpp
 
 obj = $(source:.cpp=.o)
 

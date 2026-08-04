@@ -26,11 +26,11 @@
 #define EPI_POINTS  31
 #define ALL_POINTS  51
 
-#include "../heartwall-omp/main.h"
-#include "../heartwall-omp/util/timer/timer.h"
-#include "../heartwall-omp/util/file/file.h"
-#include "../heartwall-omp/util/avi/avilib.h"
-#include "../heartwall-omp/util/avi/avimod.h"
+#include "main.h"
+#include "util/timer/timer.h"
+#include "util/file/file.h"
+#include "util/avi/avilib.h"
+#include "util/avi/avimod.h"
 
 // ─── Kokkos kernel wrapper ────────────────────────────────────────────────────
 
@@ -308,7 +308,7 @@ int main(int argc, char* argv[])
     common.common_mem = sizeof(params_common);
 
     // Open video
-    const char* video_file_name = argv[1];
+    char* video_file_name = argv[1];
     avi_t* frames = (avi_t*)AVI_open_input_file(video_file_name, 1);
     if (!frames) {
       AVI_print_error((char*)"Error with AVI_open_input_file");
@@ -336,7 +336,7 @@ int main(int argc, char* argv[])
     long long time2 = get_time();
 
     // Read parameters from input file (same path as OMP version)
-    const char* param_file = "../heartwall-omp/input.txt";
+    const char* param_file = "../data/heartwall/input.txt";
     read_parameters(param_file, &common.tSize, &common.sSize,
                     &common.maxMove, &common.alpha);
     read_header(param_file, &common.endoPoints, &common.epiPoints);

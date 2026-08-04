@@ -34,7 +34,7 @@ typedef struct {
 #define SC SECP256K1_GE_STORAGE_CONST
 
 // KOKKOS_DEVICE
-void secp256k1_fe_from_storage(secp256k1_fe *r, const secp256k1_fe_storage *a) {
+KOKKOS_INLINE_FUNCTION void secp256k1_fe_from_storage(secp256k1_fe *r, const secp256k1_fe_storage *a) {
   r->n[0] = a->n[0] & 0x3FFFFFFUL;
   r->n[1] = a->n[0] >> 26 | ((a->n[1] << 6) & 0x3FFFFFFUL);
   r->n[2] = a->n[1] >> 20 | ((a->n[2] << 12) & 0x3FFFFFFUL);
@@ -47,7 +47,7 @@ void secp256k1_fe_from_storage(secp256k1_fe *r, const secp256k1_fe_storage *a) {
   r->n[9] = a->n[7] >> 10;
 }
 
-void secp256k1_fe_sqr_inner(unsigned int *r, const unsigned int *a) {
+KOKKOS_INLINE_FUNCTION void secp256k1_fe_sqr_inner(unsigned int *r, const unsigned int *a) {
   unsigned long c, d;
   unsigned long u0, u1, u2, u3, u4, u5, u6, u7, u8;
   unsigned int t9, t0, t1, t2, t3, t4, t5, t6, t7;
@@ -142,11 +142,11 @@ void secp256k1_fe_sqr_inner(unsigned int *r, const unsigned int *a) {
   r[2] = d;
 }
 
-void secp256k1_fe_sqr(secp256k1_fe *r, const secp256k1_fe *a) {
+KOKKOS_INLINE_FUNCTION void secp256k1_fe_sqr(secp256k1_fe *r, const secp256k1_fe *a) {
   secp256k1_fe_sqr_inner(r->n, a->n);
 }
 
-void secp256k1_fe_normalize_weak(secp256k1_fe *r) {
+KOKKOS_INLINE_FUNCTION void secp256k1_fe_normalize_weak(secp256k1_fe *r) {
   unsigned int t0 = r->n[0], t1 = r->n[1], t2 = r->n[2], t3 = r->n[3], t4 = r->n[4],
      t5 = r->n[5], t6 = r->n[6], t7 = r->n[7], t8 = r->n[8], t9 = r->n[9];
 
@@ -169,7 +169,7 @@ void secp256k1_fe_normalize_weak(secp256k1_fe *r) {
   r->n[5] = t5; r->n[6] = t6; r->n[7] = t7; r->n[8] = t8; r->n[9] = t9;
 }
 
-void secp256k1_fe_mul_inner(unsigned int *r, const unsigned int *a, const unsigned int * b) {
+KOKKOS_INLINE_FUNCTION void secp256k1_fe_mul_inner(unsigned int *r, const unsigned int *a, const unsigned int * b) {
   unsigned long c, d;
   unsigned long u0, u1, u2, u3, u4, u5, u6, u7, u8;
   unsigned int t9, t1, t0, t2, t3, t4, t5, t6, t7;
@@ -395,11 +395,11 @@ void secp256k1_fe_mul_inner(unsigned int *r, const unsigned int *a, const unsign
   r[2] = d;
 }
 
-void secp256k1_fe_mul(secp256k1_fe *r, const secp256k1_fe *a, const secp256k1_fe * b) {
+KOKKOS_INLINE_FUNCTION void secp256k1_fe_mul(secp256k1_fe *r, const secp256k1_fe *a, const secp256k1_fe * b) {
   secp256k1_fe_mul_inner(r->n, a->n, b->n);
 }
 
-void secp256k1_fe_add(secp256k1_fe *r, const secp256k1_fe *a) {
+KOKKOS_INLINE_FUNCTION void secp256k1_fe_add(secp256k1_fe *r, const secp256k1_fe *a) {
   r->n[0] += a->n[0];
   r->n[1] += a->n[1];
   r->n[2] += a->n[2];
@@ -412,7 +412,7 @@ void secp256k1_fe_add(secp256k1_fe *r, const secp256k1_fe *a) {
   r->n[9] += a->n[9];
 }
 
-void secp256k1_fe_negate(secp256k1_fe *r, const secp256k1_fe *a, int m) {
+KOKKOS_INLINE_FUNCTION void secp256k1_fe_negate(secp256k1_fe *r, const secp256k1_fe *a, int m) {
   r->n[0] = 0x3FFFC2FUL * 2 * (m + 1) - a->n[0];
   r->n[1] = 0x3FFFFBFUL * 2 * (m + 1) - a->n[1];
   r->n[2] = 0x3FFFFFFUL * 2 * (m + 1) - a->n[2];
@@ -425,7 +425,7 @@ void secp256k1_fe_negate(secp256k1_fe *r, const secp256k1_fe *a, int m) {
   r->n[9] = 0x03FFFFFUL * 2 * (m + 1) - a->n[9];
 }
 
-void secp256k1_fe_mul_int(secp256k1_fe *r, int a) {
+KOKKOS_INLINE_FUNCTION void secp256k1_fe_mul_int(secp256k1_fe *r, int a) {
   r->n[0] *= a;
   r->n[1] *= a;
   r->n[2] *= a;
@@ -438,16 +438,16 @@ void secp256k1_fe_mul_int(secp256k1_fe *r, int a) {
   r->n[9] *= a;
 }
 
-void secp256k1_fe_set_int(secp256k1_fe *r, int a) {
+KOKKOS_INLINE_FUNCTION void secp256k1_fe_set_int(secp256k1_fe *r, int a) {
   r->n[0] = a;
   r->n[1] = r->n[2] = r->n[3] = r->n[4] = r->n[5] = r->n[6] = r->n[7] = r->n[8] = r->n[9] = 0;
 }
 
-int secp256k1_fe_is_odd(const secp256k1_fe *a) {
+KOKKOS_INLINE_FUNCTION int secp256k1_fe_is_odd(const secp256k1_fe *a) {
   return a->n[0] & 1;
 }
 
-void secp256k1_fe_normalize_var(secp256k1_fe *r) {
+KOKKOS_INLINE_FUNCTION void secp256k1_fe_normalize_var(secp256k1_fe *r) {
   unsigned int t0 = r->n[0];
   unsigned int t1 = r->n[1];
   unsigned int t2 = r->n[2];
@@ -498,14 +498,14 @@ void secp256k1_fe_normalize_var(secp256k1_fe *r) {
   r->n[5] = t5; r->n[6] = t6; r->n[7] = t7; r->n[8] = t8; r->n[9] = t9;
 }
 
-void secp256k1_fe_clear(secp256k1_fe *a) {
+KOKKOS_INLINE_FUNCTION void secp256k1_fe_clear(secp256k1_fe *a) {
   int i;
   for (i=0; i<10; i++) {
     a->n[i] = 0;
   }
 }
 
-void secp256k1_fe_inv(secp256k1_fe *r, const secp256k1_fe *a) {
+KOKKOS_INLINE_FUNCTION void secp256k1_fe_inv(secp256k1_fe *r, const secp256k1_fe *a) {
   secp256k1_fe x2, x3, x6, x9, x11, x22, x44, x88, x176, x220, x223, t1;
   int j;
 
@@ -588,7 +588,7 @@ void secp256k1_fe_inv(secp256k1_fe *r, const secp256k1_fe *a) {
   secp256k1_fe_mul(r, a, &t1);
 }
 
-void secp256k1_fe_get_b32(unsigned char *r, const secp256k1_fe *a) {
+KOKKOS_INLINE_FUNCTION void secp256k1_fe_get_b32(unsigned char *r, const secp256k1_fe *a) {
   r[0] = (a->n[9] >> 14) & 0xff;
   r[1] = (a->n[9] >> 6) & 0xff;
   r[2] = ((a->n[9] & 0x3F) << 2) | ((a->n[8] >> 24) & 0x3);
@@ -623,18 +623,18 @@ void secp256k1_fe_get_b32(unsigned char *r, const secp256k1_fe *a) {
   r[31] = a->n[0] & 0xff;
 }
 
-void secp256k1_ge_from_storage(secp256k1_ge *r,  const secp256k1_ge_storage *a) {
+KOKKOS_INLINE_FUNCTION void secp256k1_ge_from_storage(secp256k1_ge *r,  const secp256k1_ge_storage *a) {
   secp256k1_fe_from_storage(&r->x, &a->x);
   secp256k1_fe_from_storage(&r->y, &a->y);
 }
 
-void secp256k1_gej_set_ge(secp256k1_gej *r, const secp256k1_ge *a) {
+KOKKOS_INLINE_FUNCTION void secp256k1_gej_set_ge(secp256k1_gej *r, const secp256k1_ge *a) {
   r->x = a->x;
   r->y = a->y;
   secp256k1_fe_set_int(&r->z, 1);
 }
 
-void secp256k1_gej_add_ge_var(secp256k1_gej *r, const secp256k1_gej *a, const secp256k1_ge *b, secp256k1_fe *rzr) {
+KOKKOS_INLINE_FUNCTION void secp256k1_gej_add_ge_var(secp256k1_gej *r, const secp256k1_gej *a, const secp256k1_ge *b, secp256k1_fe *rzr) {
   /* 8 mul, 3 sqr, 4 normalize, 12 mul_int/add/negate */
   secp256k1_fe z12, u1, u2, s1, s2, h, i, i2, h2, h3, t;
 
@@ -659,7 +659,7 @@ void secp256k1_gej_add_ge_var(secp256k1_gej *r, const secp256k1_gej *a, const se
   secp256k1_fe_add(&r->y, &h3);
 }
 
-void secp256k1_ge_set_gej(secp256k1_ge *r, secp256k1_gej *a) {
+KOKKOS_INLINE_FUNCTION void secp256k1_ge_set_gej(secp256k1_ge *r, secp256k1_gej *a) {
   secp256k1_fe z2, z3;
   secp256k1_fe_inv(&a->z, &a->z);
   secp256k1_fe_sqr(&z2, &a->z);
@@ -675,13 +675,6 @@ void secp256k1_ge_set_gej(secp256k1_ge *r, secp256k1_gej *a) {
 
 
 int main(int argc, char **argv) {
-  if(argc != 2) {
-    printf("Usage: %s <repeat>\n", argv[0]);
-    return 1;
-  }
-  const int repeat = atoi(argv[1]);
-
-  secp256k1_ge_storage prec[512] = {
   if(argc != 2) {
     printf("Usage: %s <repeat>\n", argv[0]);
     return 1;
@@ -1202,8 +1195,6 @@ int main(int argc, char **argv) {
     SC(3168765711u, 2371065012u, 4059251820u, 170257517u, 95734073u, 3046696342u, 2169138650u, 2689907503u, 119339997u, 3517609762u, 2301592548u, 3928878160u, 2177159502u, 1418335940u, 672708461u, 1461844860u),
     SC(3408457434u, 864702600u, 229967322u, 2493308402u, 1948124958u, 932156145u, 3686409998u, 2620533847u, 3649878625u, 3438060863u, 2105857823u, 4170365282u, 1864819030u, 2216504827u, 2058008633u, 1062295811u),
   };
-
-  unsigned char output[32];
 
   unsigned char output[32];
 

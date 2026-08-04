@@ -7,7 +7,7 @@ KOKKOS_LIB = /home/copilot/kokkos-install/lib
 
 CC        = g++
 program   = main
-source    = main.cpp
+source    = main.cpp logic_rewrite.cpp
 obj       = $(source:.cpp=.o)
 
 CFLAGS := $(EXTRA_CFLAGS) -std=c++17 -I$(KOKKOS_INC)

@@ -44,7 +44,7 @@ void benchmark_func(Kokkos::View<float*> cd, int grid_dim, int block_dim, int co
   Kokkos::fence();
 }
 
-void mixbenchGPU(long size, int repeat) {
+void mixbenchGPU(long size, int compute_iterations, int repeat) {
   const char *benchtype = "compute with global memory (block strided)";
   printf("Trade-off type:%s\n", benchtype);
 
@@ -59,13 +59,13 @@ void mixbenchGPU(long size, int repeat) {
 
   // warmup
   for (int i = 0; i < repeat; i++) {
-    benchmark_func(d_cd, grid_dim, block_dim, i);
+    benchmark_func(d_cd, grid_dim, block_dim, compute_iterations);
   }
 
   auto start = std::chrono::steady_clock::now();
 
   for (int i = 0; i < repeat; i++) {
-    benchmark_func(d_cd, grid_dim, block_dim, i);
+    benchmark_func(d_cd, grid_dim, block_dim, compute_iterations);
   }
 
   auto end = std::chrono::steady_clock::now();
@@ -89,18 +89,19 @@ void mixbenchGPU(long size, int repeat) {
 }
 
 int main(int argc, char* argv[]) {
-  if (argc != 2) {
-    printf("Usage: %s <repeat>\n", argv[0]);
+  if (argc != 3) {
+    printf("Usage: %s <compute iterations> <repeat>\n", argv[0]);
     return 1;
   }
-  const int repeat = atoi(argv[1]);
+  const int compute_iterations = atoi(argv[1]);
+  const int repeat = atoi(argv[2]);
 
   unsigned int datasize = VECTOR_SIZE * sizeof(float);
   printf("Buffer size: %dMB\n", datasize / (1024 * 1024));
 
   Kokkos::initialize(argc, argv);
   {
-    mixbenchGPU(VECTOR_SIZE, repeat);
+    mixbenchGPU(VECTOR_SIZE, compute_iterations, repeat);
   }
   Kokkos::finalize();
 

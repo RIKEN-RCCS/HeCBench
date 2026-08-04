@@ -15,8 +15,8 @@
 #include <string>
 #include <Kokkos_Core.hpp>
 
-constexpr int const BLOCK_SIZE = 256;
-constexpr int const BLOCK_WIDTH = 4096;
+#define BLOCK_SIZE 256
+#define BLOCK_WIDTH 4096
 
 typedef enum nvcompType_t
 {

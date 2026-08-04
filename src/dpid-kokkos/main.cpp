@@ -17,8 +17,8 @@ struct Params {
   uint32_t repeat;
 };
 
-struct uchar3 { unsigned char x, y, z; };
-struct float4 { float x, y, z, w; };
+struct hec_uchar3 { unsigned char x, y, z; };
+struct hec_float4 { float x, y, z, w; };
 
 double LCG_random_double(uint64_t* seed)
 {
@@ -59,8 +59,8 @@ int main(int argc, char** argv)
   const size_t inSz  = (size_t)p.iWidth * p.iHeight;
   const size_t outSz = (size_t)p.oWidth * p.oHeight;
 
-  uchar3* hInput  = (uchar3*)malloc(sizeof(uchar3) * inSz);
-  uchar3* hOutput = (uchar3*)malloc(sizeof(uchar3) * outSz);
+  hec_uchar3* hInput  = (hec_uchar3*)malloc(sizeof(hec_uchar3) * inSz);
+  hec_uchar3* hOutput = (hec_uchar3*)malloc(sizeof(hec_uchar3) * outSz);
 
   uint64_t seed = 123;
   for (uint32_t i = 0; i < inSz; i++) {
@@ -71,9 +71,9 @@ int main(int argc, char** argv)
 
   Kokkos::initialize(argc, argv);
   {
-    Kokkos::View<uchar3*>  dInput  ("input",    inSz);
-    Kokkos::View<uchar3*>  dOutput ("output",   outSz);
-    Kokkos::View<uchar3*>  dGuidance("guidance", outSz);
+    Kokkos::View<hec_uchar3*>  dInput  ("input",    inSz);
+    Kokkos::View<hec_uchar3*>  dOutput ("output",   outSz);
+    Kokkos::View<hec_uchar3*>  dGuidance("guidance", outSz);
 
     {
       auto hv = Kokkos::create_mirror_view(dInput);
@@ -115,14 +115,14 @@ int main(int argc, char** argv)
             if ((x+1.f) > ex)  f *= 1.f - ((x+1.f) - ex);
             if (y < sy)        f *= 1.f - (sy - y);
             if ((y+1.f) > ey)  f *= 1.f - ((y+1.f) - ey);
-            const uchar3& pix = dInput(x + y * p.iWidth);
+            const hec_uchar3& pix = dInput(x + y * p.iWidth);
             cx += pix.x * f;
             cy += pix.y * f;
             cz += pix.z * f;
             cw += f;
           }
           if (cw > 0) { cx /= cw; cy /= cw; cz /= cw; }
-          uchar3 g; g.x = (unsigned char)cx; g.y = (unsigned char)cy; g.z = (unsigned char)cz;
+          hec_uchar3 g; g.x = (unsigned char)cx; g.y = (unsigned char)cy; g.z = (unsigned char)cz;
           dGuidance(PX + PY * p.oWidth) = g;
         });
 
@@ -137,7 +137,7 @@ int main(int argc, char** argv)
           const float corner = 1.f, edge = 2.f, center = 4.f;
           float ax = 0, ay = 0, az = 0, aw = 0;
           auto addG = [&](uint32_t gx, uint32_t gy, float w) {
-            const uchar3& g = dGuidance(gx + gy * p.oWidth);
+            const hec_uchar3& g = dGuidance(gx + gy * p.oWidth);
             ax += g.x * w; ay += g.y * w; az += g.z * w; aw += w;
           };
           if (PY > 0) {
@@ -171,7 +171,7 @@ int main(int argc, char** argv)
           for (uint32_t i = 0; i < pixelCount; i++) {
             uint32_t x = sxr + (i % xCount);
             uint32_t y = syr + (i / xCount);
-            const uchar3& pix = dInput(x + y * p.iWidth);
+            const hec_uchar3& pix = dInput(x + y * p.iWidth);
             float dx = ax - pix.x, dy = ay - pix.y, dz = az - pix.z;
             float dist = Kokkos::sqrt(dx*dx + dy*dy + dz*dz) / 441.6729559f;
             float lam = (p.lambda == 0.f) ? 1.f :
@@ -184,7 +184,7 @@ int main(int argc, char** argv)
             cx += pix.x * f; cy += pix.y * f; cz += pix.z * f; cw += f;
           }
 
-          uchar3 out;
+          hec_uchar3 out;
           if (cw == 0.f) {
             out.x = (unsigned char)ax;
             out.y = (unsigned char)ay;

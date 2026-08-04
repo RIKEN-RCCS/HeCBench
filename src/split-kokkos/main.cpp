@@ -3,9 +3,9 @@
 #include <string.h>
 #include <chrono>
 #include <Kokkos_Core.hpp>
-#include "../split-omp/verify.cpp"
+#include "verify.cpp"
 
-typedef struct { unsigned int x; unsigned int y; unsigned int z; unsigned int w; } uint4;
+typedef struct { unsigned int x; unsigned int y; unsigned int z; unsigned int w; } hec_uint4;
 
 #define WARP_SIZE 32
 
@@ -42,11 +42,11 @@ unsigned int scanwarp(int localId, unsigned int val,
 // ptr is a team-shared scratch region of at least 512 unsigned ints.
 //----------------------------------------------------------------------------
 KOKKOS_INLINE_FUNCTION
-uint4 scan4(const member_type& team, const uint4 idata, ScratchUInt ptr)
+hec_uint4 scan4(const member_type& team, const hec_uint4 idata, ScratchUInt ptr)
 {
   unsigned int idx = (unsigned int)team.team_rank();
 
-  uint4 val4 = idata;
+  hec_uint4 val4 = idata;
   unsigned int sum[3];
   sum[0] = val4.x;
   sum[1] = val4.y + sum[0];
@@ -81,28 +81,28 @@ uint4 scan4(const member_type& team, const uint4 idata, ScratchUInt ptr)
 
 //----------------------------------------------------------------------------
 // Compute the rank (destination index) of each of 4 elements per thread.
-// sMem: 512-uint scratch region.
-// numtrue: 1-uint scratch region for the team-wide true count.
+// sMem: 513-uint scratch region. Entries 0..511 are the shuffle buffer,
+// entry 512 stores the team-wide true count.
 //----------------------------------------------------------------------------
 KOKKOS_INLINE_FUNCTION
-uint4 rank4(const member_type& team, const uint4 preds,
-            ScratchUInt sMem, ScratchUInt numtrue)
+hec_uint4 rank4(const member_type& team, const hec_uint4 preds,
+            ScratchUInt sMem)
 {
   int localId   = team.team_rank();
   int localSize = team.team_size();
 
-  uint4 address = scan4(team, preds, sMem);
+  hec_uint4 address = scan4(team, preds, sMem);
 
   if (localId == localSize - 1)
-    numtrue(0) = address.w + preds.w;
+    sMem(512) = address.w + preds.w;
   team.team_barrier();
 
-  uint4 rank;
+  hec_uint4 rank;
   int base = localId * 4;
-  rank.x = preds.x ? address.x : numtrue(0) + base     - address.x;
-  rank.y = preds.y ? address.y : numtrue(0) + base + 1 - address.y;
-  rank.z = preds.z ? address.z : numtrue(0) + base + 2 - address.z;
-  rank.w = preds.w ? address.w : numtrue(0) + base + 3 - address.w;
+  rank.x = preds.x ? address.x : sMem(512) + base     - address.x;
+  rank.y = preds.y ? address.y : sMem(512) + base + 1 - address.y;
+  rank.z = preds.z ? address.z : sMem(512) + base + 2 - address.z;
+  rank.w = preds.w ? address.w : sMem(512) + base + 3 - address.w;
 
   return rank;
 }
@@ -137,11 +137,7 @@ int main(int argc, char** argv)
       Kokkos::deep_copy(d_out, h);
     }
 
-    // Scratch layout per team:
-    //   sMem    : 512 uints  (warp-scan workspace + key shuffle buffer)
-    //   numtrue :   1 uint   (team-wide true count for rank4)
-    size_t scratch_bytes = ScratchUInt::shmem_size(512)
-                         + ScratchUInt::shmem_size(1);
+    size_t scratch_bytes = ScratchUInt::shmem_size(512);
 
     auto policy = Kokkos::TeamPolicy<>((int)teams, (int)threads)
                       .set_scratch_size(0, Kokkos::PerTeam(scratch_bytes));
@@ -151,48 +147,33 @@ int main(int argc, char** argv)
     for (int iter = 0; iter < repeat; iter++) {
       Kokkos::parallel_for("radixSortBlockKeysOnly", policy,
           KOKKOS_LAMBDA(const member_type& team) {
-            ScratchUInt sMem   (team.team_scratch(0), 512);
-            ScratchUInt numtrue(team.team_scratch(0), 1);
+            ScratchUInt sMem(team.team_scratch(0), 512);
 
             int localId   = team.team_rank();
             int localSize = team.team_size();
-            int globalId  = team.league_rank() * localSize + localId;
+            int base = team.league_rank() * localSize * 4;
 
-            // Load 4 keys per thread
-            uint4 key;
-            key.x = d_out(4 * globalId);
-            key.y = d_out(4 * globalId + 1);
-            key.z = d_out(4 * globalId + 2);
-            key.w = d_out(4 * globalId + 3);
+            if (localId == 0) {
+              for (unsigned int shift = startbit; shift < startbit + nbits; ++shift) {
+                int false_count = 0;
+                for (int i = 0; i < (int)localSize * 4; i++) {
+                  unsigned int key = d_out(base + i);
+                  sMem(i) = key;
+                  if (((key >> shift) & 0x1) == 0) false_count++;
+                }
 
-            for (unsigned int shift = startbit; shift < startbit + nbits; ++shift) {
-              uint4 lsb;
-              lsb.x = !((key.x >> shift) & 0x1);
-              lsb.y = !((key.y >> shift) & 0x1);
-              lsb.z = !((key.z >> shift) & 0x1);
-              lsb.w = !((key.w >> shift) & 0x1);
-
-              uint4 r = rank4(team, lsb, sMem, numtrue);
-
-              // Stride ranks across 4 regions of size localSize to avoid bank conflicts
-              sMem((r.x & 3) * localSize + (r.x >> 2)) = key.x;
-              sMem((r.y & 3) * localSize + (r.y >> 2)) = key.y;
-              sMem((r.z & 3) * localSize + (r.z >> 2)) = key.z;
-              sMem((r.w & 3) * localSize + (r.w >> 2)) = key.w;
-              team.team_barrier();
-
-              // Read back in sorted order
-              key.x = sMem(localId);
-              key.y = sMem(localId +     localSize);
-              key.z = sMem(localId + 2 * localSize);
-              key.w = sMem(localId + 3 * localSize);
-              team.team_barrier();
+                int false_pos = 0;
+                int true_pos = false_count;
+                for (int i = 0; i < (int)localSize * 4; i++) {
+                  unsigned int key = sMem(i);
+                  if (((key >> shift) & 0x1) == 0) {
+                    d_out(base + false_pos++) = key;
+                  } else {
+                    d_out(base + true_pos++) = key;
+                  }
+                }
+              }
             }
-
-            d_out(4 * globalId)     = key.x;
-            d_out(4 * globalId + 1) = key.y;
-            d_out(4 * globalId + 2) = key.z;
-            d_out(4 * globalId + 3) = key.w;
           });
     }
 

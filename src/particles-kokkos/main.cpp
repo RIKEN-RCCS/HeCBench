@@ -17,21 +17,21 @@
 
 #define UMAD(a, b, c)  ( (a) * (b) + (c) )
 
-struct uint3 { unsigned int x, y, z; };
-struct int4  { int x, y, z, w; };
-struct float3 { float x, y, z; };
-struct float4 { float x, y, z, w; };
+struct hec_uint3 { unsigned int x, y, z; };
+struct hec_int4  { int x, y, z, w; };
+struct hec_float3 { float x, y, z; };
+struct hec_float4 { float x, y, z, w; };
 
 typedef struct {
-  float3 colliderPos;
+  hec_float3 colliderPos;
   float  colliderRadius;
-  float3 gravity;
+  hec_float3 gravity;
   float  globalDamping;
   float  particleRadius;
-  uint3  gridSize;
+  hec_uint3  gridSize;
   unsigned int numCells;
-  float3 worldOrigin;
-  float3 cellSize;
+  hec_float3 worldOrigin;
+  hec_float3 cellSize;
   unsigned int numBodies;
   unsigned int maxParticlesPerCell;
   float spring;
@@ -45,27 +45,27 @@ typedef struct {
 // Device-callable helpers
 // ---------------------------------------------------------------------------
 KOKKOS_INLINE_FUNCTION
-static void f4_add_eq(float4 &a, float4 b)
+static void f4_add_eq(hec_float4 &a, hec_float4 b)
 {
   a.x += b.x; a.y += b.y; a.z += b.z; a.w += b.w;
 }
 
 KOKKOS_INLINE_FUNCTION
-static float4 f4_add(float4 a, float4 b)  { return {a.x+b.x, a.y+b.y, a.z+b.z, a.w+b.w}; }
+static hec_float4 f4_add(hec_float4 a, hec_float4 b)  { return {a.x+b.x, a.y+b.y, a.z+b.z, a.w+b.w}; }
 
 KOKKOS_INLINE_FUNCTION
-static float4 f4_sub(float4 a, float4 b)  { return {a.x-b.x, a.y-b.y, a.z-b.z, a.w-b.w}; }
+static hec_float4 f4_sub(hec_float4 a, hec_float4 b)  { return {a.x-b.x, a.y-b.y, a.z-b.z, a.w-b.w}; }
 
 KOKKOS_INLINE_FUNCTION
-static float4 f4_mulf(float4 a, float b)  { return {a.x*b, a.y*b, a.z*b, a.w*b}; }
+static hec_float4 f4_mulf(hec_float4 a, float b)  { return {a.x*b, a.y*b, a.z*b, a.w*b}; }
 
 KOKKOS_INLINE_FUNCTION
-static void f4_mul_eq(float4 &a, float b) { a.x*=b; a.y*=b; a.z*=b; a.w*=b; }
+static void f4_mul_eq(hec_float4 &a, float b) { a.x*=b; a.y*=b; a.z*=b; a.w*=b; }
 
 KOKKOS_INLINE_FUNCTION
-static int4 getGridPos(const float4 p, const simParams_t &params)
+static hec_int4 getGridPos(const hec_float4 p, const simParams_t &params)
 {
-  int4 gp;
+  hec_int4 gp;
   gp.x = (int)floorf((p.x - params.worldOrigin.x) / params.cellSize.x);
   gp.y = (int)floorf((p.y - params.worldOrigin.y) / params.cellSize.y);
   gp.z = (int)floorf((p.z - params.worldOrigin.z) / params.cellSize.z);
@@ -74,7 +74,7 @@ static int4 getGridPos(const float4 p, const simParams_t &params)
 }
 
 KOKKOS_INLINE_FUNCTION
-static unsigned int getGridHash(int4 gridPos, const simParams_t &params)
+static unsigned int getGridHash(hec_int4 gridPos, const simParams_t &params)
 {
   gridPos.x = gridPos.x & (params.gridSize.x - 1);
   gridPos.y = gridPos.y & (params.gridSize.y - 1);
@@ -83,21 +83,21 @@ static unsigned int getGridHash(int4 gridPos, const simParams_t &params)
 }
 
 KOKKOS_INLINE_FUNCTION
-static float4 collideSpheres(
-    float4 posA, float4 posB,
-    float4 velA, float4 velB,
+static hec_float4 collideSpheres(
+    hec_float4 posA, hec_float4 posB,
+    hec_float4 velA, hec_float4 velB,
     float radiusA, float radiusB,
     float spring, float damping, float shear, float attraction)
 {
-  float4 relPos = {posB.x-posA.x, posB.y-posA.y, posB.z-posA.z, 0};
+  hec_float4 relPos = {posB.x-posA.x, posB.y-posA.y, posB.z-posA.z, 0};
   float dist = sqrtf(relPos.x*relPos.x + relPos.y*relPos.y + relPos.z*relPos.z);
   float collideDist = radiusA + radiusB;
-  float4 force = {0,0,0,0};
+  hec_float4 force = {0,0,0,0};
   if (dist < collideDist) {
-    float4 norm = {relPos.x/dist, relPos.y/dist, relPos.z/dist, 0};
-    float4 relVel = {velB.x-velA.x, velB.y-velA.y, velB.z-velA.z, 0};
+    hec_float4 norm = {relPos.x/dist, relPos.y/dist, relPos.z/dist, 0};
+    hec_float4 relVel = {velB.x-velA.x, velB.y-velA.y, velB.z-velA.z, 0};
     float relVelDotNorm = relVel.x*norm.x + relVel.y*norm.y + relVel.z*norm.z;
-    float4 tanVel = {relVel.x - relVelDotNorm*norm.x,
+    hec_float4 tanVel = {relVel.x - relVelDotNorm*norm.x,
                      relVel.y - relVelDotNorm*norm.y,
                      relVel.z - relVelDotNorm*norm.z, 0};
     float sf = -spring * (collideDist - dist);
@@ -111,7 +111,7 @@ static float4 collideSpheres(
 // ---------------------------------------------------------------------------
 // Kokkos Views typedefs
 // ---------------------------------------------------------------------------
-using ViewF4  = Kokkos::View<float4*>;
+using ViewF4  = Kokkos::View<hec_float4*>;
 using ViewUI  = Kokkos::View<unsigned int*>;
 using MirrorF4 = ViewF4::HostMirror;
 using MirrorUI = ViewUI::HostMirror;
@@ -124,12 +124,12 @@ void integrateSystem(ViewF4 d_Pos, ViewF4 d_Vel,
                      unsigned int numParticles)
 {
   Kokkos::parallel_for("integrateSystem", numParticles, KOKKOS_LAMBDA(int index) {
-    float4 pos = d_Pos(index);
-    float4 vel = d_Vel(index);
+    hec_float4 pos = d_Pos(index);
+    hec_float4 vel = d_Vel(index);
     pos.w = 1.0f;
     vel.w = 0.0f;
 
-    float4 g = {params.gravity.x, params.gravity.y, params.gravity.z, 0};
+    hec_float4 g = {params.gravity.x, params.gravity.y, params.gravity.z, 0};
     f4_add_eq(vel, f4_mulf(g, deltaTime));
     f4_mul_eq(vel, params.globalDamping);
     f4_add_eq(pos, f4_mulf(vel, deltaTime));
@@ -155,8 +155,8 @@ void calcHash(ViewUI d_Hash, ViewUI d_Index, ViewF4 d_Pos,
               const simParams_t &params, unsigned int numParticles)
 {
   Kokkos::parallel_for("calcHash", numParticles, KOKKOS_LAMBDA(int index) {
-    float4 p = d_Pos(index);
-    int4 gridPos = getGridPos(p, params);
+    hec_float4 p = d_Pos(index);
+    hec_int4 gridPos = getGridPos(p, params);
     d_Hash(index)  = getGridHash(gridPos, params);
     d_Index(index) = index;
   });
@@ -246,25 +246,25 @@ void collide(
     unsigned int /*numCells*/)
 {
   Kokkos::parallel_for("collide", numParticles, KOKKOS_LAMBDA(int index) {
-    float4 pos   = d_ReorderedPos(index);
-    float4 vel   = d_ReorderedVel(index);
-    float4 force = {0,0,0,0};
+    hec_float4 pos   = d_ReorderedPos(index);
+    hec_float4 vel   = d_ReorderedVel(index);
+    hec_float4 force = {0,0,0,0};
 
-    int4 gridPos = getGridPos(pos, params);
+    hec_int4 gridPos = getGridPos(pos, params);
 
     for (int z = -1; z <= 1; z++)
       for (int y = -1; y <= 1; y++)
         for (int x = -1; x <= 1; x++) {
-          int4 t = {x, y, z, 0};
-          int4 nb = {gridPos.x+t.x, gridPos.y+t.y, gridPos.z+t.z, 0};
+          hec_int4 t = {x, y, z, 0};
+          hec_int4 nb = {gridPos.x+t.x, gridPos.y+t.y, gridPos.z+t.z, 0};
           unsigned int hash = getGridHash(nb, params);
           unsigned int startI = d_CellStart(hash);
           if (startI == 0xFFFFFFFFU) continue;
           unsigned int endI = d_CellEnd(hash);
           for (unsigned int j = startI; j < endI; j++) {
             if (j == (unsigned int)index) continue;
-            float4 pos2 = d_ReorderedPos(j);
-            float4 vel2 = d_ReorderedVel(j);
+            hec_float4 pos2 = d_ReorderedPos(j);
+            hec_float4 vel2 = d_ReorderedVel(j);
             f4_add_eq(force, collideSpheres(
                 pos, pos2, vel, vel2,
                 params.particleRadius, params.particleRadius,
@@ -273,8 +273,8 @@ void collide(
         }
 
     // Collide with cursor sphere
-    float4 colliderPos = {params.colliderPos.x, params.colliderPos.y, params.colliderPos.z, 0};
-    float4 zero4 = {0,0,0,0};
+    hec_float4 colliderPos = {params.colliderPos.x, params.colliderPos.y, params.colliderPos.z, 0};
+    hec_float4 zero4 = {0,0,0,0};
     f4_add_eq(force, collideSpheres(
         pos, colliderPos, vel, zero4,
         params.particleRadius, params.colliderRadius,
@@ -332,7 +332,7 @@ int main(int argc, char **argv)
     unsigned int numParticles = NUM_PARTICLES;
     unsigned int gridDim      = GRID_SIZE;
 
-    uint3 gridSize;
+    hec_uint3 gridSize;
     gridSize.x = gridSize.y = gridSize.z = gridDim;
     unsigned int numGridCells = gridSize.x * gridSize.y * gridSize.z;
 
@@ -380,8 +380,8 @@ int main(int argc, char **argv)
       auto hPosM = Kokkos::create_mirror_view(dPos);
       auto hVelM = Kokkos::create_mirror_view(dVel);
       for (unsigned int i = 0; i < numParticles; ++i) {
-        hPosM(i) = ((float4*)hPos)[i];
-        hVelM(i) = ((float4*)hVel)[i];
+        hPosM(i) = ((hec_float4*)hPos)[i];
+        hVelM(i) = ((hec_float4*)hVel)[i];
       }
       Kokkos::deep_copy(dPos, hPosM);
       Kokkos::deep_copy(dVel, hVelM);

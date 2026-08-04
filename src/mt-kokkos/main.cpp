@@ -8,10 +8,10 @@
 #include <chrono>
 using namespace std::chrono;
 
-#include "../mt-omp/MT.h"
-#include "../mt-omp/dci.h"
-#include "../mt-omp/genmtrand.cpp"
-#include "../mt-omp/MT_gold.cpp"
+#include "MT.h"
+#include "dci.h"
+#include "genmtrand.cpp"
+#include "MT_gold.cpp"
 
 // -------------------------------------------------------------------------
 // Box-Muller transformation (device-callable)

@@ -22,12 +22,12 @@ Kokkos port.
 // ---- Device function: count leading zeros ----
 KOKKOS_INLINE_FUNCTION
 int clzll_device(ull num) {
-  int count = 0;
-  while (!(num & 0x1000000000000000ULL)) {
-    count++;
-    num <<= 1;
-  }
-  return count;
+  if (num == 0) return 64;
+#if defined(__CUDA_ARCH__) || defined(__HIP_DEVICE_COMPILE__)
+  return __clzll(num);
+#else
+  return __builtin_clzll(num);
+#endif
 }
 
 // ---- Compression kernel ----
@@ -78,26 +78,28 @@ void CompressionKernel(
 
       prev = 0;
       for (int i = start + lane; i < term; i += WARPSIZE) {
-        diff  = cbufd[i] - prev;
-        code  = (int)((diff >> 60) & 8);
-        if (code != 0) diff = (ull)(-(long long)diff);
+        if (cbufd[i] >= prev)
+          diff = cbufd[i] - prev;
+        else
+          diff = prev - cbufd[i];
+        code = 0;
 
         bcount = 8 - (clzll_device(diff) >> 3);
         if (bcount == 2) bcount = 3;
 
         // Prefix sum (6 steps for WARPSIZE=32)
         ibufs[iindex] = bcount;
-        team.team_barrier();
+        Kokkos::memory_fence();
         ibufs[iindex] += ibufs[iindex - 1];
-        team.team_barrier();
+        Kokkos::memory_fence();
         ibufs[iindex] += ibufs[iindex - 2];
-        team.team_barrier();
+        Kokkos::memory_fence();
         ibufs[iindex] += ibufs[iindex - 4];
-        team.team_barrier();
+        Kokkos::memory_fence();
         ibufs[iindex] += ibufs[iindex - 8];
-        team.team_barrier();
+        Kokkos::memory_fence();
         ibufs[iindex] += ibufs[iindex - 16];
-        team.team_barrier();
+        Kokkos::memory_fence();
 
         beg = off + (WARPSIZE / 2) + ibufs[iindex - 1];
         end = beg + bcount;
@@ -110,7 +112,7 @@ void CompressionKernel(
         tmp = ibufs[lastidx];
         code |= bcount;
         ibufs[iindex] = code;
-        team.team_barrier();
+        Kokkos::memory_fence();
 
         if ((lane & 1) != 0) {
           dbufd[off + (lane >> 1)] = (char)(ibufs[iindex - 1] | (code << 4));
@@ -197,8 +199,8 @@ static void Compress(int blocks, int warpsperblock, int repeat, int dimensionali
                       dimensionality,
                       d_cbuf.data(), d_dbuf.data(),
                       d_cut.data(),  d_off.data());
-    Kokkos::fence();
   }
+  Kokkos::fence();
   auto t_end = std::chrono::steady_clock::now();
   auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(t_end - t_start).count();
   fprintf(stderr, "Average compression kernel execution time %f (s)\n",

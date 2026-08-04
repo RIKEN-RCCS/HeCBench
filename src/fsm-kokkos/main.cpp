@@ -150,7 +150,7 @@ void FSMKernel(
 
       // Record best result globally using 64-bit packed compare-and-swap
       if (sbest[bid] == lid) {
-        unsigned long long myresult = (unsigned long long)(length - misses);
+        unsigned long long myresult = (unsigned long long)smax[bid];
         myresult = (myresult << 32) + (unsigned long long)bid;
         volatile unsigned long long* best_ull = (volatile unsigned long long*)best;
         unsigned long long current = *best_ull;

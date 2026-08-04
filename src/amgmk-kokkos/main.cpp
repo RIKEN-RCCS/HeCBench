@@ -107,7 +107,7 @@ void test_Matvec()
   hypre_Vector *x, *y, *sol;
   int nx, ny, nz, i;
   double *values;
-  double *y_data, *sol_data;
+  double *x_data, *y_data, *sol_data;
   double error, diff;
 
   nx = 50;  /* size per proc nx*ny*nz */
@@ -125,16 +125,41 @@ void test_Matvec()
   hypre_SeqVectorSetConstantValues(x,1);
   hypre_SeqVectorSetConstantValues(y,0);
 
+  const int n = hypre_CSRMatrixNumRows(A);
+  const int nonzero = hypre_CSRMatrixNumNonzeros(A);
+  double *A_data = hypre_CSRMatrixData(A);
+  int *A_i = hypre_CSRMatrixI(A);
+  int *A_j = hypre_CSRMatrixJ(A);
+  x_data = hypre_VectorData(x);
+  y_data = hypre_VectorData(y);
+
+  Kokkos::View<double*> d_A_data("matvec_A_data", nonzero);
+  Kokkos::View<int*> d_A_i("matvec_A_i", n + 1);
+  Kokkos::View<int*> d_A_j("matvec_A_j", nonzero);
+  Kokkos::View<double*> d_x("matvec_x", n);
+  Kokkos::View<double*> d_y("matvec_y", n);
+  Kokkos::deep_copy(d_A_data, Kokkos::View<double*, Kokkos::HostSpace, Kokkos::MemoryUnmanaged>(A_data, nonzero));
+  Kokkos::deep_copy(d_A_i, Kokkos::View<int*, Kokkos::HostSpace, Kokkos::MemoryUnmanaged>(A_i, n + 1));
+  Kokkos::deep_copy(d_A_j, Kokkos::View<int*, Kokkos::HostSpace, Kokkos::MemoryUnmanaged>(A_j, nonzero));
+  Kokkos::deep_copy(d_x, Kokkos::View<double*, Kokkos::HostSpace, Kokkos::MemoryUnmanaged>(x_data, n));
+
   auto t0 = std::chrono::steady_clock::now();
 
-  for (i=0; i<testIter; ++i)
-      hypre_CSRMatrixMatvec(1,A,x,0,y);
+  for (i=0; i<testIter; ++i) {
+    Kokkos::parallel_for("amgmk_matvec", n, KOKKOS_LAMBDA(const int row) {
+      double sum = 0.0;
+      for (int jj = d_A_i(row); jj < d_A_i(row + 1); ++jj)
+        sum += d_A_data(jj) * d_x(d_A_j(jj));
+      d_y(row) = sum;
+    });
+  }
+  Kokkos::fence();
 
   auto t1 = std::chrono::steady_clock::now();
   std::chrono::duration<double> tdiff = t1 - t0;
   totalWallTime += tdiff.count();
 
-  y_data = hypre_VectorData(y);
+  Kokkos::deep_copy(Kokkos::View<double*, Kokkos::HostSpace, Kokkos::MemoryUnmanaged>(y_data, n), d_y);
   sol_data = hypre_VectorData(sol);
 
   error = 0;
@@ -253,7 +278,6 @@ void test_Axpy()
   int nx, i;
   double alpha=0.5;
   double diff, error;
-  double *y_data;
 
   nx = 125000;  /* size per proc  */
 
@@ -266,14 +290,25 @@ void test_Axpy()
   hypre_SeqVectorSetConstantValues(x,1);
   hypre_SeqVectorSetConstantValues(y,1);
 
+  double *x_data = hypre_VectorData(x);
+  double *y_data = hypre_VectorData(y);
+  Kokkos::View<double*> d_x("axpy_x", nx);
+  Kokkos::View<double*> d_y("axpy_y", nx);
+  Kokkos::deep_copy(d_x, Kokkos::View<double*, Kokkos::HostSpace, Kokkos::MemoryUnmanaged>(x_data, nx));
+  Kokkos::deep_copy(d_y, Kokkos::View<double*, Kokkos::HostSpace, Kokkos::MemoryUnmanaged>(y_data, nx));
+
   auto t0 = std::chrono::steady_clock::now();
 
-  for (i=0; i<testIter; ++i)
-      hypre_SeqVectorAxpy(alpha,x,y);
+  for (i=0; i<testIter; ++i) {
+    Kokkos::parallel_for("amgmk_axpy", nx, KOKKOS_LAMBDA(const int j) {
+      d_y(j) += alpha * d_x(j);
+    });
+  }
+  Kokkos::fence();
 
   auto t1 = std::chrono::steady_clock::now();
 
-  y_data = hypre_VectorData(y);
+  Kokkos::deep_copy(Kokkos::View<double*, Kokkos::HostSpace, Kokkos::MemoryUnmanaged>(y_data, nx), d_y);
   error = 0;
   for (i=0; i < nx; i++)
   {

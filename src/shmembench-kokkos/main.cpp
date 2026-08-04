@@ -13,7 +13,7 @@
 #define TOTAL_ITERATIONS 1024
 #define BLOCK_SIZE     256
 
-struct float4 {
+struct hec_float4 {
   float x, y, z, w;
 };
 
@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
 
     Kokkos::View<double*> d_c("c", VECTOR_SIZE);
 
-    using scratch_t = Kokkos::View<float4*,
+    using scratch_t = Kokkos::View<hec_float4*,
                                    Kokkos::DefaultExecutionSpace::scratch_memory_space,
                                    Kokkos::MemoryUnmanaged>;
     size_t scratch_bytes = scratch_t::shmem_size(BLOCK_SIZE * 6);
@@ -58,23 +58,18 @@ int main(int argc, char* argv[]) {
 
           scratch_t shm_buffer(team.team_scratch(0), BLOCK_SIZE * 6);
 
-          // Init
-          auto init_val = [=](int i) KOKKOS_INLINE_FUNCTION -> float4 {
-            return {(float)i, (float)i + 11, (float)i + 19, (float)i + 23};
-          };
-
-          shm_buffer(tid + 0 * blk) = init_val(tid);
-          shm_buffer(tid + 1 * blk) = init_val(tid + 1);
-          shm_buffer(tid + 2 * blk) = init_val(tid + 3);
-          shm_buffer(tid + 3 * blk) = init_val(tid + 7);
-          shm_buffer(tid + 4 * blk) = init_val(tid + 13);
-          shm_buffer(tid + 5 * blk) = init_val(tid + 17);
+          shm_buffer(tid + 0 * blk) = {(float)tid,      (float)tid + 11, (float)tid + 19, (float)tid + 23};
+          shm_buffer(tid + 1 * blk) = {(float)tid + 1,  (float)tid + 12, (float)tid + 20, (float)tid + 24};
+          shm_buffer(tid + 2 * blk) = {(float)tid + 3,  (float)tid + 14, (float)tid + 22, (float)tid + 26};
+          shm_buffer(tid + 3 * blk) = {(float)tid + 7,  (float)tid + 18, (float)tid + 26, (float)tid + 30};
+          shm_buffer(tid + 4 * blk) = {(float)tid + 13, (float)tid + 24, (float)tid + 32, (float)tid + 36};
+          shm_buffer(tid + 5 * blk) = {(float)tid + 17, (float)tid + 28, (float)tid + 36, (float)tid + 40};
 
           team.team_barrier();
 
           for (int j = 0; j < TOTAL_ITERATIONS; j++) {
             // swap pairs
-            float4 tmp;
+            hec_float4 tmp;
             tmp = shm_buffer(tid + 1 * blk);
             shm_buffer(tid + 1 * blk) = shm_buffer(tid + 0 * blk);
             shm_buffer(tid + 0 * blk) = tmp;
@@ -100,21 +95,21 @@ int main(int argc, char* argv[]) {
             team.team_barrier();
           }
 
-          // Reduce all 6 float4 values into a double
-          float4 v0 = shm_buffer(tid + 0 * blk);
-          float4 v1 = shm_buffer(tid + 1 * blk);
-          float4 v2 = shm_buffer(tid + 2 * blk);
-          float4 v3 = shm_buffer(tid + 3 * blk);
-          float4 v4 = shm_buffer(tid + 4 * blk);
-          float4 v5 = shm_buffer(tid + 5 * blk);
+          // Reduce all 6 hec_float4 values into a double
+          hec_float4 v0 = shm_buffer(tid + 0 * blk);
+          hec_float4 v1 = shm_buffer(tid + 1 * blk);
+          hec_float4 v2 = shm_buffer(tid + 2 * blk);
+          hec_float4 v3 = shm_buffer(tid + 3 * blk);
+          hec_float4 v4 = shm_buffer(tid + 4 * blk);
+          hec_float4 v5 = shm_buffer(tid + 5 * blk);
 
-          float4 r = {v0.x + v1.x + v2.x + v3.x + v4.x + v5.x,
+          hec_float4 r = {v0.x + v1.x + v2.x + v3.x + v4.x + v5.x,
                       v0.y + v1.y + v2.y + v3.y + v4.y + v5.y,
                       v0.z + v1.z + v2.z + v3.z + v4.z + v5.z,
                       v0.w + v1.w + v2.w + v3.w + v4.w + v5.w};
 
-          // Pack float4 into two doubles in d_c
-          float4* g_data = reinterpret_cast<float4*>(&d_c(0));
+          // Pack hec_float4 into two doubles in d_c
+          hec_float4* g_data = reinterpret_cast<hec_float4*>(&d_c(0));
           g_data[globaltid] = r;
         });
     }

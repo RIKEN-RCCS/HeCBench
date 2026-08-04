@@ -12,7 +12,7 @@
 #include <iostream>
 
 // snap.h provides COMPLEX, SNA_BINDICES, index macros, and declarations.
-#include "../testSNAP-omp/snap.h"
+#include "snap.h"
 
 // Reference data
 #if REFDATA_TWOJ == 14

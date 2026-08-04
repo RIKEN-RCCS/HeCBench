@@ -59,7 +59,9 @@ static void execute_task(Task<T> &t) {
     Kokkos::View<T*, Kokkos::HostSpace> x(t.vec.data(), N);
     Kokkos::View<T*, Kokkos::HostSpace> r(t.result.data(), M);
 
-    Kokkos::parallel_for("gemv_large", M, [=](int i) {
+    Kokkos::parallel_for("gemv_large",
+      Kokkos::RangePolicy<Kokkos::DefaultHostExecutionSpace>(0, M),
+      [=](int i) {
       T s = T(0);
       for (int j = 0; j < N; j++)
         s += A(i * N + j) * x(j);
@@ -74,11 +76,11 @@ static void check(const std::vector<Task<T>> &tasks) {
   bool ok = true;
   for (const auto &t : tasks) {
     if (t.size < 100) continue;
-    // column-major reference
+    // row-major reference, matching execute_task/gemv_host.
     std::vector<T> ref(t.size, T(0));
     for (int i = 0; i < (int)t.size; i++) {
       for (int j = 0; j < (int)t.size; j++) {
-        ref[i] += t.data[j * t.size + i] * t.vec[j];
+        ref[i] += t.data[i * t.size + j] * t.vec[j];
       }
     }
     for (int j = 0; j < (int)t.size; j++) {

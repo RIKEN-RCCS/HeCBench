@@ -34,4 +34,4 @@ clean: kokkos-clean
 	rm -rf $(program) $(obj)
 
 run: $(program)
-	$(LAUNCHER) ./$(program) 100 512 512
+	$(LAUNCHER) ./$(program) 10 2048 2048

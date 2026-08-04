@@ -14,7 +14,7 @@ KOKKOS_PATH ?= $(HOME)/kokkos
 
 program = main
 
-source = main.cpp
+source = main.cpp sobol_gpu.cpp
 
 obj = $(source:.cpp=.o) sobol_primitives.o sobol_gold.o
 
@@ -25,7 +25,7 @@ obj = $(source:.cpp=.o) sobol_primitives.o sobol_gold.o
 include $(KOKKOS_PATH)/Makefile.kokkos
 
 # Standard Flags
-CFLAGS := $(EXTRA_CFLAGS) -std=c++17 $(KOKKOS_CPPFLAGS) $(KOKKOS_CXXFLAGS) -I../sobol-omp
+CFLAGS := $(EXTRA_CFLAGS) -std=c++17 $(KOKKOS_CPPFLAGS) $(KOKKOS_CXXFLAGS) -I.
 
 # Linker Flags
 LDFLAGS = $(KOKKOS_LDFLAGS) $(KOKKOS_LIBS)
@@ -51,10 +51,10 @@ $(program): $(obj) Makefile
 %.o: %.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
-sobol_primitives.o: ../sobol-omp/sobol_primitives.cpp
+sobol_primitives.o: sobol_primitives.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
-sobol_gold.o: ../sobol-omp/sobol_gold.cpp
+sobol_gold.o: sobol_gold.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean: kokkos-clean

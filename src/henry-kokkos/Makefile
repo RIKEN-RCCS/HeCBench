@@ -51,4 +51,4 @@ clean: kokkos-clean
 	rm -rf $(program) $(obj)
 
 run: $(program)
-	$(LAUNCHER) ./$(program) ../henry-omp/IRMOF-1.cssr 10000
+	$(LAUNCHER) ./$(program) ../henry-cuda/IRMOF-1.cssr 1000

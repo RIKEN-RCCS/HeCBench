@@ -9,51 +9,51 @@
 #include <chrono>
 #include <Kokkos_Core.hpp>
 
-struct float3 {
+struct hec_float3 {
   float x, y, z;
 };
 
-struct float4 {
+struct hec_float4 {
   float x, y, z, w;
 };
 
 KOKKOS_INLINE_FUNCTION
-float3 operator*(const float3 &a, float b) {
+hec_float3 operator*(const hec_float3 &a, float b) {
   return {a.x * b, a.y * b, a.z * b};
 }
 
 KOKKOS_INLINE_FUNCTION
-float3 operator-(const float3 &a, const float3 &b) {
+hec_float3 operator-(const hec_float3 &a, const hec_float3 &b) {
   return {a.x - b.x, a.y - b.y, a.z - b.z};
 }
 
 KOKKOS_INLINE_FUNCTION
-float dot(const float3 &a, const float3 &b) {
+float dot(const hec_float3 &a, const hec_float3 &b) {
   return a.x * b.x + a.y * b.y + a.z * b.z;
 }
 
 KOKKOS_INLINE_FUNCTION
-float3 normalize(const float3 &v) {
+hec_float3 normalize(const hec_float3 &v) {
   float invLen = 1.f / Kokkos::sqrt(dot(v, v));
   return v * invLen;
 }
 
 KOKKOS_INLINE_FUNCTION
-float3 cross(const float3 &a, const float3 &b) {
+hec_float3 cross(const hec_float3 &a, const hec_float3 &b) {
   return {a.y * b.z - a.z * b.y,
           a.z * b.x - a.x * b.z,
           a.x * b.y - a.y * b.x};
 }
 
 KOKKOS_INLINE_FUNCTION
-float length(const float3 &v) {
+float length(const hec_float3 &v) {
   return Kokkos::sqrt(dot(v, v));
 }
 
 KOKKOS_INLINE_FUNCTION
-float4 normalEstimate(const float3 *points, int idx, int width, int height)
+hec_float4 normalEstimate(const hec_float3 *points, int idx, int width, int height)
 {
-  float3 query_pt = points[idx];
+  hec_float3 query_pt = points[idx];
   if (Kokkos::isnan(query_pt.z))
     return {0.f, 0.f, 0.f, 0.f};
 
@@ -69,7 +69,7 @@ float4 normalEstimate(const float3 *points, int idx, int width, int height)
   bool south_valid = (yIdx < height-1)  && !Kokkos::isnan(points[idx+width].z)
                                          && Kokkos::fabs(points[idx+width].z - query_pt.z) < 200.f;
 
-  float3 horiz = {0.f, 0.f, 0.f}, vert = {0.f, 0.f, 0.f};
+  hec_float3 horiz = {0.f, 0.f, 0.f}, vert = {0.f, 0.f, 0.f};
 
   if ( west_valid &&  east_valid)  horiz = points[idx+1] - points[idx-1];
   if ( west_valid && !east_valid)  horiz = points[idx]   - points[idx-1];
@@ -81,12 +81,12 @@ float4 normalEstimate(const float3 *points, int idx, int width, int height)
   if (!south_valid &&  north_valid) vert = points[idx-width] - points[idx];
   if (!south_valid && !north_valid) return {0.f, 0.f, 0.f, 1.f};
 
-  float3 normal = cross(horiz, vert);
+  hec_float3 normal = cross(horiz, vert);
 
   float curvature = (float)(Kokkos::fabs(horiz.z) > 0.04f || Kokkos::fabs(vert.z) > 0.04f ||
                              !west_valid || !east_valid || !north_valid || !south_valid);
 
-  float3 mc = normalize(normal);
+  hec_float3 mc = normalize(normal);
   if (dot(query_pt, mc) > 0.f)
     mc = mc * -1.f;
 
@@ -104,8 +104,8 @@ int main(int argc, char* argv[]) {
 
   const int numPts = width * height;
 
-  float3 *points        = (float3*) malloc(numPts * sizeof(float3));
-  float4 *normal_points = (float4*) malloc(numPts * sizeof(float4));
+  hec_float3 *points        = (hec_float3*) malloc(numPts * sizeof(hec_float3));
+  hec_float4 *normal_points = (hec_float4*) malloc(numPts * sizeof(hec_float4));
 
   srand(123);
   for (int i = 0; i < numPts; i++) {
@@ -116,8 +116,8 @@ int main(int argc, char* argv[]) {
 
   Kokkos::initialize(argc, argv);
   {
-    Kokkos::View<float3*> d_points("d_points", numPts);
-    Kokkos::View<float4*> d_normals("d_normals", numPts);
+    Kokkos::View<hec_float3*> d_points("d_points", numPts);
+    Kokkos::View<hec_float4*> d_normals("d_normals", numPts);
 
     auto h_points = Kokkos::create_mirror_view(d_points);
     for (int i = 0; i < numPts; i++) {

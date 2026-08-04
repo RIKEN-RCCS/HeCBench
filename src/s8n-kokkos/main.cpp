@@ -182,7 +182,7 @@ int main(int argc, char* argv[])
                             out_b[i * 8 + j] = i;
                         }
                         for (int j = 0; j < n; j++) {
-                            if (i != j) continue; // matches OMP original
+                            if (i == j) continue;
                             int tx   = xyz_b[j * 3];
                             int ty   = xyz_b[j * 3 + 1];
                             int tz   = xyz_b[j * 3 + 2];
@@ -318,20 +318,11 @@ int main(int argc, char* argv[])
     }
     Kokkos::finalize();
 
-    // CPU reference (uses correct condition for select1)
+    // CPU reference.
     cube_select(b, n, radius, h_xyz, r_out);
-    // Note: k_cube_select in the OMP original uses `if(i != j) continue`
-    // (no neighbours are found), so h_out will equal the default (all self-pointing).
-    // We compare against the CPU reference which also uses default init when nothing is found.
-    // For select_two and select_four the OMP original uses the correct condition.
     cube_select_two(b, n, radius, h_xyz, r_out2);
     cube_select_four(b, n, radius, h_xyz, r_out4);
 
-    // For k_cube_select result: because the OMP kernel uses `if(i != j) continue`,
-    // only j==i is visited, but the loop body checks `if(dist > radius) continue` —
-    // dist(i,i)==0 which is ≤ radius, so it tries to update octant for self.
-    // The net effect: idx_out stays at default (i). The CPU reference cube_select
-    // skips self, so both end up with all i's. The memcmp should pass.
     int error = 0;
     error += memcmp(h_out,  r_out,  output_size       * sizeof(int));
     error += memcmp(h_out2, r_out2, 2 * output_size   * sizeof(int));

@@ -15,7 +15,9 @@
 #define ATTRIBUTES 4096 /* # of attributes */
 #define THREADS 128    /* # of threads per block */
 
+#if !defined(__CUDACC__) && !defined(__HIPCC__) && !defined(__HIP_PLATFORM_AMD__)
 struct char4 { char x; char y; char z; char w; };
+#endif
 
 /* CPU implementation */
 void CPU(int * data, int * distance) {

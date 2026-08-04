@@ -8,7 +8,7 @@ LAUNCHER  =
 KOKKOS_PATH ?= $(HOME)/kokkos
 
 program = main
-source = main.cpp
+source = main.cpp s3d.cpp
 obj = $(source:.cpp=.o)
 
 include $(KOKKOS_PATH)/Makefile.kokkos

@@ -41,14 +41,14 @@ struct __attribute__((__packed__)) FFParams {
   float elsc;
 };
 
-struct __attribute__((__packed__)) float4 {
+struct __attribute__((__packed__)) hec_float4 {
   float x;
   float y;
   float z;
   float w;
 };
 
-struct __attribute__((__packed__)) float3 {
+struct __attribute__((__packed__)) hec_float3 {
   float x;
   float y;
   float z;

@@ -5,8 +5,10 @@
 #include <iostream>
 #include <Kokkos_Core.hpp>
 
-#include "SDKBitMap.h"
 #include "aes.h"
+#define uchar4 hec_uchar4
+#include "SDKBitMap.h"
+#undef uchar4
 #include "kernels.h"
 
 // Forward declarations (defined in reference.cpp and utils.cpp)
@@ -15,9 +17,9 @@ extern void reference(uchar * output, uchar * input, uchar * rKey,
                unsigned int height, bool inverse, unsigned int rounds,
                unsigned int keySize);
 
-extern void convertColorToGray(const uchar4 *pixels, uchar *gray,
+extern void convertColorToGray(const hec_uchar4 *pixels, uchar *gray,
                                const int height, const int width);
-extern void convertGrayToGray(const uchar4 *pixels, uchar *gray,
+extern void convertGrayToGray(const hec_uchar4 *pixels, uchar *gray,
                               const int height, const int width);
 extern void createRoundKey(uchar * eKey, uchar * rKey);
 extern void keyExpansion(uchar * key, uchar * expandedKey,
@@ -54,7 +56,7 @@ int main(int argc, char * argv[])
   std::cout << "Image width and height: " 
             << width << " " << height << std::endl;
 
-  uchar4 *pixels = image.getPixels();
+  hec_uchar4 *pixels = image.getPixels();
 
   unsigned int sizeBytes = width*height*sizeof(uchar);
   uchar *input = (uchar*)malloc(sizeBytes); 
@@ -123,7 +125,7 @@ int main(int argc, char * argv[])
     using team_policy = Kokkos::TeamPolicy<>;
     using member_type = team_policy::member_type;
     using scratch_space = Kokkos::DefaultExecutionSpace::scratch_memory_space;
-    using ScratchViewUchar4 = Kokkos::View<uchar4*, scratch_space, Kokkos::MemoryUnmanaged>;
+    using ScratchViewUchar4 = Kokkos::View<hec_uchar4*, scratch_space, Kokkos::MemoryUnmanaged>;
 
     size_t scratch_bytes = ScratchViewUchar4::shmem_size(4) * 2; // block0[4] and block1[4]
 
@@ -148,21 +150,21 @@ int main(int argc, char * argv[])
 
             unsigned int globalIndex = (((by * width/4) + bx) * 4) + localIndex;
 
-            uchar4 galiosCoeff[4];
-            galiosCoeff[0] = uchar4(14, 0, 0, 0);
-            galiosCoeff[1] = uchar4(11, 0, 0, 0);
-            galiosCoeff[2] = uchar4(13, 0, 0, 0);
-            galiosCoeff[3] = uchar4( 9, 0, 0, 0);
+            hec_uchar4 galiosCoeff[4];
+            galiosCoeff[0] = hec_uchar4(14, 0, 0, 0);
+            galiosCoeff[1] = hec_uchar4(11, 0, 0, 0);
+            galiosCoeff[2] = hec_uchar4(13, 0, 0, 0);
+            galiosCoeff[3] = hec_uchar4( 9, 0, 0, 0);
 
-            // Load input as uchar4
-            block0(localIndex) = uchar4(
+            // Load input as hec_uchar4
+            block0(localIndex) = hec_uchar4(
               d_input(globalIndex*4),
               d_input(globalIndex*4+1),
               d_input(globalIndex*4+2),
               d_input(globalIndex*4+3));
 
-            // Load round key as uchar4
-            uchar4 rk = uchar4(
+            // Load round key as hec_uchar4
+            hec_uchar4 rk = hec_uchar4(
               d_roundKey((4*rounds + localIndex)*4),
               d_roundKey((4*rounds + localIndex)*4+1),
               d_roundKey((4*rounds + localIndex)*4+2),
@@ -176,7 +178,7 @@ int main(int argc, char * argv[])
               block0(localIndex) = sboxRead(d_rsbox.data(), block0(localIndex));
 
               team.team_barrier();
-              uchar4 rkr = uchar4(
+              hec_uchar4 rkr = hec_uchar4(
                 d_roundKey((r*4 + localIndex)*4),
                 d_roundKey((r*4 + localIndex)*4+1),
                 d_roundKey((r*4 + localIndex)*4+2),
@@ -190,12 +192,12 @@ int main(int argc, char * argv[])
             block0(localIndex) = shiftRowsInvDevice(block0(localIndex), localIndex);
             block0(localIndex) = sboxRead(d_rsbox.data(), block0(localIndex));
 
-            uchar4 rk0 = uchar4(
+            hec_uchar4 rk0 = hec_uchar4(
               d_roundKey(localIndex*4),
               d_roundKey(localIndex*4+1),
               d_roundKey(localIndex*4+2),
               d_roundKey(localIndex*4+3));
-            uchar4 result = block0(localIndex) ^ rk0;
+            hec_uchar4 result = block0(localIndex) ^ rk0;
 
             d_output(globalIndex*4)   = result.x;
             d_output(globalIndex*4+1) = result.y;
@@ -217,21 +219,21 @@ int main(int argc, char * argv[])
 
             unsigned int globalIndex = (((by * width/4) + bx) * 4) + localIndex;
 
-            uchar4 galiosCoeff[4];
-            galiosCoeff[0] = uchar4(2, 0, 0, 0);
-            galiosCoeff[1] = uchar4(3, 0, 0, 0);
-            galiosCoeff[2] = uchar4(1, 0, 0, 0);
-            galiosCoeff[3] = uchar4(1, 0, 0, 0);
+            hec_uchar4 galiosCoeff[4];
+            galiosCoeff[0] = hec_uchar4(2, 0, 0, 0);
+            galiosCoeff[1] = hec_uchar4(3, 0, 0, 0);
+            galiosCoeff[2] = hec_uchar4(1, 0, 0, 0);
+            galiosCoeff[3] = hec_uchar4(1, 0, 0, 0);
 
-            // Load input as uchar4
-            block0(localIndex) = uchar4(
+            // Load input as hec_uchar4
+            block0(localIndex) = hec_uchar4(
               d_input(globalIndex*4),
               d_input(globalIndex*4+1),
               d_input(globalIndex*4+2),
               d_input(globalIndex*4+3));
 
-            // Load round key as uchar4
-            uchar4 rk = uchar4(
+            // Load round key as hec_uchar4
+            hec_uchar4 rk = hec_uchar4(
               d_roundKey(localIndex*4),
               d_roundKey(localIndex*4+1),
               d_roundKey(localIndex*4+2),
@@ -248,7 +250,7 @@ int main(int argc, char * argv[])
               block1(localIndex) = mixColumnsDevice(block0.data(), galiosCoeff, localIndex);
 
               team.team_barrier();
-              uchar4 rkr = uchar4(
+              hec_uchar4 rkr = hec_uchar4(
                 d_roundKey((r*4 + localIndex)*4),
                 d_roundKey((r*4 + localIndex)*4+1),
                 d_roundKey((r*4 + localIndex)*4+2),
@@ -259,12 +261,12 @@ int main(int argc, char * argv[])
             block0(localIndex) = sboxRead(d_sbox.data(), block0(localIndex));
             block0(localIndex) = shiftRowsDevice(block0(localIndex), localIndex);
 
-            uchar4 rkFinal = uchar4(
+            hec_uchar4 rkFinal = hec_uchar4(
               d_roundKey((rounds*4 + localIndex)*4),
               d_roundKey((rounds*4 + localIndex)*4+1),
               d_roundKey((rounds*4 + localIndex)*4+2),
               d_roundKey((rounds*4 + localIndex)*4+3));
-            uchar4 result = block0(localIndex) ^ rkFinal;
+            hec_uchar4 result = block0(localIndex) ^ rkFinal;
 
             d_output(globalIndex*4)   = result.x;
             d_output(globalIndex*4+1) = result.y;

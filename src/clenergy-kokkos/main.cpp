@@ -17,11 +17,11 @@ static inline double wkf_timer_time(wkf_timerhandle) { return 0.0; }
 #define BLOCKSIZEY 8
 #define BLOCKSIZE  (BLOCKSIZEX * BLOCKSIZEY)
 
-struct float4 { float x, y, z, w; };
-struct int3   { int x, y, z; };
+struct hec_float4 { float x, y, z, w; };
+struct hec_int3 { int x, y, z; };
 
 int copyatoms(float *atoms, int count, float zplane,
-              Kokkos::View<float4*> d_atominfo)
+              Kokkos::View<hec_float4*> d_atominfo)
 {
   if (count > MAXATOMS) {
     printf("Atom count exceeds constant buffer\n");
@@ -39,7 +39,7 @@ int copyatoms(float *atoms, int count, float zplane,
   return 0;
 }
 
-int initatoms(float **atombuf, int count, int3 volsize, float gridspacing) {
+int initatoms(float **atombuf, int count, hec_int3 volsize, float gridspacing) {
   float *atoms = (float*) malloc(count * 4 * sizeof(float));
   *atombuf = atoms;
   srand(2);
@@ -57,7 +57,7 @@ int initatoms(float **atombuf, int count, int3 volsize, float gridspacing) {
 
 int main(int argc, char **argv) {
   float *energy = nullptr, *atoms = nullptr;
-  int3 volsize; volsize.x=768; volsize.y=768; volsize.z=1;
+  hec_int3 volsize; volsize.x=768; volsize.y=768; volsize.z=1;
   float gridspacing = 0.1f;
   int atomcount = 1000000;
 
@@ -71,7 +71,7 @@ int main(int argc, char **argv) {
 
   Kokkos::initialize(argc, argv);
   {
-    Kokkos::View<float4*> d_atominfo("atominfo", MAXATOMS);
+    Kokkos::View<hec_float4*> d_atominfo("atominfo", MAXATOMS);
     Kokkos::View<float*>  d_energy("energy",   volmem);
 
     Kokkos::parallel_for("init_energy", volmem, KOKKOS_LAMBDA(int i) {

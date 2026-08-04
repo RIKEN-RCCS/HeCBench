@@ -59,4 +59,4 @@ clean: kokkos-clean
 	rm -rf $(program) $(obj)
 
 run: $(program)
-	$(LAUNCHER) ./$(program) ../frna-omp/LRPPRC_HUMAN.fasta frna_output.txt
+	DATAPATH=../prna-cuda/data_tables $(LAUNCHER) ./$(program) ../frna-cuda/RD0260.seq rd0260.out

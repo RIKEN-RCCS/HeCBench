@@ -145,7 +145,7 @@ int main(int argc, char* argv[])
     {
       auto text_hv    = Kokkos::View<uchar*, Kokkos::HostSpace,
                                      Kokkos::MemoryUnmanaged>(text, textLength);
-      auto pattern_hv = Kokkos::View<uchar*, Kokkos::HostSpace,
+      auto pattern_hv = Kokkos::View<const uchar*, Kokkos::HostSpace,
                                      Kokkos::MemoryUnmanaged>(pattern, subStrLength);
       Kokkos::deep_copy(text_d,    text_hv);
       Kokkos::deep_copy(pattern_d, pattern_hv);

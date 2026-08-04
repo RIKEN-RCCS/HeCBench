@@ -9,13 +9,13 @@ KOKKOS_PATH ?= $(HOME)/kokkos
 
 program = main
 source  = main.cpp \
-          ../eigenvalue-omp/reference.cpp
+          reference.cpp
 obj     = main.o reference.o
 
 include $(KOKKOS_PATH)/Makefile.kokkos
 
 CFLAGS := $(EXTRA_CFLAGS) -std=c++17 $(KOKKOS_CPPFLAGS) $(KOKKOS_CXXFLAGS) \
-          -I../eigenvalue-omp
+          -I.
 LDFLAGS = $(KOKKOS_LDFLAGS) $(KOKKOS_LIBS)
 
 ifeq ($(DEBUG),yes)
@@ -25,7 +25,7 @@ ifeq ($(OPTIMIZE),yes)
   CFLAGS += -O3
 endif
 
-VPATH = ../eigenvalue-omp
+VPATH = .
 
 $(program): $(obj) Makefile
 	$(CC) $(CFLAGS) $(obj) -o $@ $(LDFLAGS)

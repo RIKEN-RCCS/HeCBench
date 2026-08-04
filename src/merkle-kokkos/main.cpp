@@ -12,13 +12,13 @@
 typedef unsigned long ulong;
 
 // ---------------------------------------------------------------------------
-// ulong4: 4-element vector of uint64 (replaces CUDA's ulong4)
+// hec_ulong4: 4-element vector of uint64 (replaces CUDA's ulong4)
 // ---------------------------------------------------------------------------
-struct ulong4 {
+struct hec_ulong4 {
   uint64_t x, y, z, w;
 };
 
-KOKKOS_INLINE_FUNCTION ulong4 make_ulong4(uint64_t a, uint64_t b,
+KOKKOS_INLINE_FUNCTION hec_ulong4 make_hec_ulong4(uint64_t a, uint64_t b,
                                            uint64_t c, uint64_t d) {
   return {a, b, c, d};
 }
@@ -55,43 +55,43 @@ KOKKOS_INLINE_FUNCTION uint64_t umul64hi(uint64_t a, uint64_t b) {
 }
 
 // ---------------------------------------------------------------------------
-// ulong4 operator overloads (device + host)
+// hec_ulong4 operator overloads (device + host)
 // ---------------------------------------------------------------------------
-KOKKOS_INLINE_FUNCTION ulong4 operator*(const ulong4& a, const ulong4& b) {
+KOKKOS_INLINE_FUNCTION hec_ulong4 operator*(const hec_ulong4& a, const hec_ulong4& b) {
   return {a.x*b.x, a.y*b.y, a.z*b.z, a.w*b.w};
 }
-KOKKOS_INLINE_FUNCTION ulong4 operator+(const ulong4& a, const ulong4& b) {
+KOKKOS_INLINE_FUNCTION hec_ulong4 operator+(const hec_ulong4& a, const hec_ulong4& b) {
   return {a.x+b.x, a.y+b.y, a.z+b.z, a.w+b.w};
 }
-KOKKOS_INLINE_FUNCTION ulong4 operator-(const ulong4& a, const ulong4& b) {
+KOKKOS_INLINE_FUNCTION hec_ulong4 operator-(const hec_ulong4& a, const hec_ulong4& b) {
   return {a.x-b.x, a.y-b.y, a.z-b.z, a.w-b.w};
 }
-KOKKOS_INLINE_FUNCTION ulong4 operator-(uint64_t a, const ulong4& b) {
+KOKKOS_INLINE_FUNCTION hec_ulong4 operator-(uint64_t a, const hec_ulong4& b) {
   return {a-b.x, a-b.y, a-b.z, a-b.w};
 }
-KOKKOS_INLINE_FUNCTION ulong4 operator&(const ulong4& a, uint64_t b) {
+KOKKOS_INLINE_FUNCTION hec_ulong4 operator&(const hec_ulong4& a, uint64_t b) {
   return {a.x&b, a.y&b, a.z&b, a.w&b};
 }
-KOKKOS_INLINE_FUNCTION ulong4 operator>>(const ulong4& a, int b) {
+KOKKOS_INLINE_FUNCTION hec_ulong4 operator>>(const hec_ulong4& a, int b) {
   return {a.x>>b, a.y>>b, a.z>>b, a.w>>b};
 }
-KOKKOS_INLINE_FUNCTION ulong4 operator<<(const ulong4& a, int b) {
+KOKKOS_INLINE_FUNCTION hec_ulong4 operator<<(const hec_ulong4& a, int b) {
   return {a.x<<b, a.y<<b, a.z<<b, a.w<<b};
 }
-KOKKOS_INLINE_FUNCTION ulong4 cmp_lt(const ulong4& a, const ulong4& b) {
+KOKKOS_INLINE_FUNCTION hec_ulong4 cmp_lt(const hec_ulong4& a, const hec_ulong4& b) {
   return {(a.x<b.x)?ULONG_MAX:0, (a.y<b.y)?ULONG_MAX:0,
           (a.z<b.z)?ULONG_MAX:0, (a.w<b.w)?ULONG_MAX:0};
 }
-KOKKOS_INLINE_FUNCTION ulong4 cmp_gt(const ulong4& a, const ulong4& b) {
+KOKKOS_INLINE_FUNCTION hec_ulong4 cmp_gt(const hec_ulong4& a, const hec_ulong4& b) {
   return {(a.x>b.x)?ULONG_MAX:0, (a.y>b.y)?ULONG_MAX:0,
           (a.z>b.z)?ULONG_MAX:0, (a.w>b.w)?ULONG_MAX:0};
 }
-KOKKOS_INLINE_FUNCTION ulong4 cmp_ge(const ulong4& a, const ulong4& b) {
+KOKKOS_INLINE_FUNCTION hec_ulong4 cmp_ge(const hec_ulong4& a, const hec_ulong4& b) {
   return {(a.x>=b.x)?ULONG_MAX:0, (a.y>=b.y)?ULONG_MAX:0,
           (a.z>=b.z)?ULONG_MAX:0, (a.w>=b.w)?ULONG_MAX:0};
 }
 
-KOKKOS_INLINE_FUNCTION ulong4 mul_hi(const ulong4& a, const ulong4& b) {
+KOKKOS_INLINE_FUNCTION hec_ulong4 mul_hi(const hec_ulong4& a, const hec_ulong4& b) {
   return {umul64hi(a.x,b.x), umul64hi(a.y,b.y),
           umul64hi(a.z,b.z), umul64hi(a.w,b.w)};
 }
@@ -164,39 +164,39 @@ KOKKOS_INLINE_FUNCTION uint64_t ff_p_inv(uint64_t a) {
 }
 
 // ---------------------------------------------------------------------------
-// ulong4 field arithmetic (vectorized)
+// hec_ulong4 field arithmetic (vectorized)
 // ---------------------------------------------------------------------------
-KOKKOS_INLINE_FUNCTION ulong4 ff_p_vec_mul_(ulong4 a, ulong4 b) {
+KOKKOS_INLINE_FUNCTION hec_ulong4 ff_p_vec_mul_(hec_ulong4 a, hec_ulong4 b) {
   if (b.x >= MOD) b.x -= MOD;
   if (b.y >= MOD) b.y -= MOD;
   if (b.z >= MOD) b.z -= MOD;
   if (b.w >= MOD) b.w -= MOD;
 
-  ulong4 ab = a * b;
-  ulong4 cd = mul_hi(a, b);
-  ulong4 c = cd & 0x00000000ffffffffULL;
-  ulong4 d = cd >> 32;
+  hec_ulong4 ab = a * b;
+  hec_ulong4 cd = mul_hi(a, b);
+  hec_ulong4 c = cd & 0x00000000ffffffffULL;
+  hec_ulong4 d = cd >> 32;
 
-  ulong4 res0 = ab - d;
-  ulong4 un0 = cmp_lt(ab, d);
+  hec_ulong4 res0 = ab - d;
+  hec_ulong4 un0 = cmp_lt(ab, d);
   res0 = res0 - (un0 & 1ULL);
 
-  ulong4 t1 = (c << 32) - c;
-  ulong4 res1 = res0 + t1;
-  ulong4 ov0 = cmp_gt(res0, make_ulong4(UINT64_MAX,UINT64_MAX,UINT64_MAX,UINT64_MAX) - t1);
+  hec_ulong4 t1 = (c << 32) - c;
+  hec_ulong4 res1 = res0 + t1;
+  hec_ulong4 ov0 = cmp_gt(res0, make_hec_ulong4(UINT64_MAX,UINT64_MAX,UINT64_MAX,UINT64_MAX) - t1);
   res1 = res1 + (ov0 & 1ULL);
   return res1;
 }
 
-KOKKOS_INLINE_FUNCTION void ff_p_vec_mul(const ulong4* a, const ulong4* b,
-                                          ulong4* c) {
+KOKKOS_INLINE_FUNCTION void ff_p_vec_mul(const hec_ulong4* a, const hec_ulong4* b,
+                                          hec_ulong4* c) {
   c[0] = ff_p_vec_mul_(a[0], b[0]);
   c[1] = ff_p_vec_mul_(a[1], b[1]);
   c[2] = ff_p_vec_mul_(a[2], b[2]);
 }
 
-KOKKOS_INLINE_FUNCTION ulong4 ff_p_vec_add_(const ulong4& a, const ulong4& b) {
-  ulong4 res;
+KOKKOS_INLINE_FUNCTION hec_ulong4 ff_p_vec_add_(const hec_ulong4& a, const hec_ulong4& b) {
+  hec_ulong4 res;
   res.x = ff_p_add(a.x, b.x);
   res.y = ff_p_add(a.y, b.y);
   res.z = ff_p_add(a.z, b.z);
@@ -204,8 +204,8 @@ KOKKOS_INLINE_FUNCTION ulong4 ff_p_vec_add_(const ulong4& a, const ulong4& b) {
   return res;
 }
 
-KOKKOS_INLINE_FUNCTION void ff_p_vec_add(const ulong4* a, const ulong4* b,
-                                          ulong4* c) {
+KOKKOS_INLINE_FUNCTION void ff_p_vec_add(const hec_ulong4* a, const hec_ulong4* b,
+                                          hec_ulong4* c) {
   c[0] = ff_p_vec_add_(a[0], b[0]);
   c[1] = ff_p_vec_add_(a[1], b[1]);
   c[2] = ff_p_vec_add_(a[2], b[2]);
@@ -348,13 +348,13 @@ inline constexpr ulong ARK2_DATA[84] = {
 // Rescue Prime hash functions  (KOKKOS_INLINE_FUNCTION = device+host)
 // ---------------------------------------------------------------------------
 
-KOKKOS_INLINE_FUNCTION void apply_sbox(const ulong4* state_in,
-                                        ulong4* state_out) {
-  ulong4 t2[3], t4[3];
+KOKKOS_INLINE_FUNCTION void apply_sbox(const hec_ulong4* state_in,
+                                        hec_ulong4* state_out) {
+  hec_ulong4 t2[3], t4[3];
   ff_p_vec_mul(state_in, state_in, t2);
   ff_p_vec_mul(t2, t2, t4);
   for (int i = 0; i < 3; i++) {
-    ulong4 tmp;
+    hec_ulong4 tmp;
     tmp.x = ff_p_mult(t4[i].x % MOD, t2[i].x % MOD);
     tmp.y = ff_p_mult(t4[i].y % MOD, t2[i].y % MOD);
     tmp.z = ff_p_mult(t4[i].z % MOD, t2[i].z % MOD);
@@ -367,55 +367,55 @@ KOKKOS_INLINE_FUNCTION void apply_sbox(const ulong4* state_in,
   }
 }
 
-KOKKOS_INLINE_FUNCTION void apply_constants(const ulong4* state_in,
-                                             const ulong4* cnst,
-                                             ulong4* state_out) {
+KOKKOS_INLINE_FUNCTION void apply_constants(const hec_ulong4* state_in,
+                                             const hec_ulong4* cnst,
+                                             hec_ulong4* state_out) {
   ff_p_vec_add(state_in, cnst, state_out);
 }
 
-KOKKOS_INLINE_FUNCTION uint64_t accumulate_vec4(ulong4 a) {
+KOKKOS_INLINE_FUNCTION uint64_t accumulate_vec4(hec_ulong4 a) {
   uint64_t v0 = ff_p_add(a.x, a.y);
   uint64_t v1 = ff_p_add(a.z, a.w);
   return ff_p_add(v0, v1);
 }
 
-KOKKOS_INLINE_FUNCTION uint64_t accumulate_state(const ulong4* state) {
+KOKKOS_INLINE_FUNCTION uint64_t accumulate_state(const hec_ulong4* state) {
   uint64_t v0 = accumulate_vec4(state[0]);
   uint64_t v1 = accumulate_vec4(state[1]);
   uint64_t v2 = accumulate_vec4(state[2]);
   return ff_p_add(v2, ff_p_add(v0, v1));
 }
 
-KOKKOS_INLINE_FUNCTION void apply_mds(const ulong4* state_in,
-                                       const ulong4* mds,
-                                       ulong4* state_out) {
-  ulong4 scratch[3];
+KOKKOS_INLINE_FUNCTION void apply_mds(const hec_ulong4* state_in,
+                                       const hec_ulong4* mds,
+                                       hec_ulong4* state_out) {
+  hec_ulong4 scratch[3];
   uint64_t vals[STATE_WIDTH];
   for (uint64_t row = 0; row < STATE_WIDTH; row++) {
     ff_p_vec_mul(state_in, mds + row * 3, scratch);
     vals[row] = accumulate_state(scratch);
   }
-  state_out[0] = make_ulong4(vals[0],  vals[1],  vals[2],  vals[3]);
-  state_out[1] = make_ulong4(vals[4],  vals[5],  vals[6],  vals[7]);
-  state_out[2] = make_ulong4(vals[8],  vals[9],  vals[10], vals[11]);
+  state_out[0] = make_hec_ulong4(vals[0],  vals[1],  vals[2],  vals[3]);
+  state_out[1] = make_hec_ulong4(vals[4],  vals[5],  vals[6],  vals[7]);
+  state_out[2] = make_hec_ulong4(vals[8],  vals[9],  vals[10], vals[11]);
 }
 
-KOKKOS_INLINE_FUNCTION void exp_acc(uint64_t m, const ulong4* base,
-                                     const ulong4* tail, ulong4* out) {
+KOKKOS_INLINE_FUNCTION void exp_acc(uint64_t m, const hec_ulong4* base,
+                                     const hec_ulong4* tail, hec_ulong4* out) {
   out[0] = base[0]; out[1] = base[1]; out[2] = base[2];
   for (uint64_t i = 0; i < m; i++) {
-    ulong4 sc[3];
+    hec_ulong4 sc[3];
     ff_p_vec_mul(out, out, sc);
     out[0] = sc[0]; out[1] = sc[1]; out[2] = sc[2];
   }
-  ulong4 sc[3];
+  hec_ulong4 sc[3];
   ff_p_vec_mul(out, tail, sc);
   out[0] = sc[0]; out[1] = sc[1]; out[2] = sc[2];
 }
 
-KOKKOS_INLINE_FUNCTION void apply_inv_sbox(const ulong4* state_in,
-                                            ulong4* state_out) {
-  ulong4 t1[3], t2[3], t3[3], t4[3], t5[3], t6[3], t7[3];
+KOKKOS_INLINE_FUNCTION void apply_inv_sbox(const hec_ulong4* state_in,
+                                            hec_ulong4* state_out) {
+  hec_ulong4 t1[3], t2[3], t3[3], t4[3], t5[3], t6[3], t7[3];
   ff_p_vec_mul(state_in, state_in, t1);
   ff_p_vec_mul(t1, t1, t2);
   exp_acc(3,  t2, t2, t3);
@@ -424,7 +424,7 @@ KOKKOS_INLINE_FUNCTION void apply_inv_sbox(const ulong4* state_in,
   exp_acc(6,  t5, t3, t6);
   exp_acc(31, t6, t6, t7);
 
-  ulong4 a[3], b[3], sc[3];
+  hec_ulong4 a[3], b[3], sc[3];
   ff_p_vec_mul(t7, t7, sc);
   ff_p_vec_mul(t6, sc, a);
   ff_p_vec_mul(a,  a,  sc);
@@ -436,12 +436,12 @@ KOKKOS_INLINE_FUNCTION void apply_inv_sbox(const ulong4* state_in,
   ff_p_vec_mul(a, b, state_out);
 }
 
-KOKKOS_INLINE_FUNCTION void apply_permutation_round(const ulong4* state_in,
-                                                      const ulong4* mds,
-                                                      const ulong4* ark1,
-                                                      const ulong4* ark2,
-                                                      ulong4* state_out) {
-  ulong4 s0[3], s1[3], s2[3];
+KOKKOS_INLINE_FUNCTION void apply_permutation_round(const hec_ulong4* state_in,
+                                                      const hec_ulong4* mds,
+                                                      const hec_ulong4* ark1,
+                                                      const hec_ulong4* ark2,
+                                                      hec_ulong4* state_out) {
+  hec_ulong4 s0[3], s1[3], s2[3];
   apply_sbox(state_in, s0);
   apply_mds(s0, mds, s1);
   apply_constants(s1, ark1, s2);
@@ -450,12 +450,12 @@ KOKKOS_INLINE_FUNCTION void apply_permutation_round(const ulong4* state_in,
   apply_constants(s1, ark2, state_out);
 }
 
-KOKKOS_INLINE_FUNCTION void apply_rescue_permutation(const ulong4* state_in,
-                                                       const ulong4* mds,
-                                                       const ulong4* ark1,
-                                                       const ulong4* ark2,
-                                                       ulong4* state_out) {
-  ulong4 s0[3], s1[3], s2[3];
+KOKKOS_INLINE_FUNCTION void apply_rescue_permutation(const hec_ulong4* state_in,
+                                                       const hec_ulong4* mds,
+                                                       const hec_ulong4* ark1,
+                                                       const hec_ulong4* ark2,
+                                                       hec_ulong4* state_out) {
+  hec_ulong4 s0[3], s1[3], s2[3];
   apply_permutation_round(state_in, mds, ark1+0,  ark2+0,  s0);
   apply_permutation_round(s0,       mds, ark1+3,  ark2+3,  s1);
   apply_permutation_round(s1,       mds, ark1+6,  ark2+6,  s2);
@@ -469,17 +469,17 @@ KOKKOS_INLINE_FUNCTION void apply_rescue_permutation(const ulong4* state_in,
 // input_hashes points to 2*DIGEST_SIZE = 8 consecutive ulong values.
 KOKKOS_INLINE_FUNCTION void merge(const ulong* input_hashes,
                                    ulong* merged_hash,
-                                   const ulong4* mds,
-                                   const ulong4* ark1,
-                                   const ulong4* ark2) {
-  ulong4 state[3] = {
-    make_ulong4(input_hashes[0], input_hashes[1],
+                                   const hec_ulong4* mds,
+                                   const hec_ulong4* ark1,
+                                   const hec_ulong4* ark2) {
+  hec_ulong4 state[3] = {
+    make_hec_ulong4(input_hashes[0], input_hashes[1],
                 input_hashes[2], input_hashes[3]),
-    make_ulong4(input_hashes[4], input_hashes[5],
+    make_hec_ulong4(input_hashes[4], input_hashes[5],
                 input_hashes[6], input_hashes[7]),
-    make_ulong4(0, 0, 0, RATE_WIDTH)
+    make_hec_ulong4(0, 0, 0, RATE_WIDTH)
   };
-  ulong4 scratch[3];
+  hec_ulong4 scratch[3];
   apply_rescue_permutation(state, mds, ark1, ark2, scratch);
   merged_hash[0] = scratch[0].x;
   merged_hash[1] = scratch[0].y;
@@ -488,24 +488,24 @@ KOKKOS_INLINE_FUNCTION void merge(const ulong* input_hashes,
 }
 
 // ---------------------------------------------------------------------------
-// Prepare MDS and ARK constants into packed ulong4 arrays
+// Prepare MDS and ARK constants into packed hec_ulong4 arrays
 // ---------------------------------------------------------------------------
-void prepare_mds(ulong4* mds) {
-  // STATE_WIDTH * 3 rows, each row = 4 consecutive elements packed into ulong4
+void prepare_mds(hec_ulong4* mds) {
+  // STATE_WIDTH * 3 rows, each row = 4 consecutive elements packed into hec_ulong4
   for (size_t i = 0; i < STATE_WIDTH * 3; i++) {
-    mds[i] = make_ulong4(MDS_DATA[i*4+0], MDS_DATA[i*4+1],
+    mds[i] = make_hec_ulong4(MDS_DATA[i*4+0], MDS_DATA[i*4+1],
                           MDS_DATA[i*4+2], MDS_DATA[i*4+3]);
   }
 }
-void prepare_ark1(ulong4* ark1) {
+void prepare_ark1(hec_ulong4* ark1) {
   for (size_t i = 0; i < NUM_ROUNDS * 3; i++) {
-    ark1[i] = make_ulong4(ARK1_DATA[i*4+0], ARK1_DATA[i*4+1],
+    ark1[i] = make_hec_ulong4(ARK1_DATA[i*4+0], ARK1_DATA[i*4+1],
                            ARK1_DATA[i*4+2], ARK1_DATA[i*4+3]);
   }
 }
-void prepare_ark2(ulong4* ark2) {
+void prepare_ark2(hec_ulong4* ark2) {
   for (size_t i = 0; i < NUM_ROUNDS * 3; i++) {
-    ark2[i] = make_ulong4(ARK2_DATA[i*4+0], ARK2_DATA[i*4+1],
+    ark2[i] = make_hec_ulong4(ARK2_DATA[i*4+0], ARK2_DATA[i*4+1],
                            ARK2_DATA[i*4+2], ARK2_DATA[i*4+3]);
   }
 }
@@ -517,9 +517,9 @@ uint64_t merklize_approach_1_kokkos(const ulong* leaves_h,
                                      ulong* intermediates_h,
                                      size_t leaf_count,
                                      size_t /*wg_size unused*/,
-                                     const ulong4* mds_h,
-                                     const ulong4* ark1_h,
-                                     const ulong4* ark2_h) {
+                                     const hec_ulong4* mds_h,
+                                     const hec_ulong4* ark1_h,
+                                     const hec_ulong4* ark2_h) {
   assert((leaf_count & (leaf_count - 1)) == 0);
 
   const size_t leaves_elems  = leaf_count * DIGEST_SIZE;
@@ -529,9 +529,9 @@ uint64_t merklize_approach_1_kokkos(const ulong* leaves_h,
   // Allocate device views
   Kokkos::View<ulong*>  d_leaves("leaves",        leaves_elems);
   Kokkos::View<ulong*>  d_inter ("intermediates", leaves_elems);
-  Kokkos::View<ulong4*> d_mds   ("mds",  mds_elems);
-  Kokkos::View<ulong4*> d_ark1  ("ark1", ark_elems);
-  Kokkos::View<ulong4*> d_ark2  ("ark2", ark_elems);
+  Kokkos::View<hec_ulong4*> d_mds   ("mds",  mds_elems);
+  Kokkos::View<hec_ulong4*> d_ark1  ("ark1", ark_elems);
+  Kokkos::View<hec_ulong4*> d_ark2  ("ark2", ark_elems);
 
   // Host mirrors for initial copy
   auto h_leaves = Kokkos::create_mirror_view(d_leaves);
@@ -558,9 +558,9 @@ uint64_t merklize_approach_1_kokkos(const ulong* leaves_h,
   {
     ulong* leaves_ptr = d_leaves.data();
     ulong* inter_ptr  = d_inter.data();
-    ulong4* mds_ptr   = d_mds.data();
-    ulong4* ark1_ptr  = d_ark1.data();
-    ulong4* ark2_ptr  = d_ark2.data();
+    hec_ulong4* mds_ptr   = d_mds.data();
+    hec_ulong4* ark1_ptr  = d_ark1.data();
+    hec_ulong4* ark2_ptr  = d_ark2.data();
     size_t out_off    = output_offset;
 
     Kokkos::parallel_for("phase0", output_offset,
@@ -580,9 +580,9 @@ uint64_t merklize_approach_1_kokkos(const ulong* leaves_h,
     const size_t offset = leaf_count >> (r + 2);
 
     ulong* inter_ptr = d_inter.data();
-    ulong4* mds_ptr  = d_mds.data();
-    ulong4* ark1_ptr = d_ark1.data();
-    ulong4* ark2_ptr = d_ark2.data();
+    hec_ulong4* mds_ptr  = d_mds.data();
+    hec_ulong4* ark1_ptr = d_ark1.data();
+    hec_ulong4* ark2_ptr = d_ark2.data();
 
     Kokkos::parallel_for("phase1", offset,
       KOKKOS_LAMBDA(const size_t idx) {
@@ -615,9 +615,9 @@ uint64_t benchmark_merklize_approach_1(size_t leaf_count, size_t wg_size) {
 
   std::vector<ulong>  leaves_h(leaves_elems);
   std::vector<ulong>  inter_h(leaves_elems, 0);
-  std::vector<ulong4> mds_h(mds_elems);
-  std::vector<ulong4> ark1_h(ark_elems);
-  std::vector<ulong4> ark2_h(ark_elems);
+  std::vector<hec_ulong4> mds_h(mds_elems);
+  std::vector<hec_ulong4> ark1_h(ark_elems);
+  std::vector<hec_ulong4> ark2_h(ark_elems);
 
   {
     std::mt19937_64 gen(19937);

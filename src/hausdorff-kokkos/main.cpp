@@ -7,19 +7,19 @@
 #include <Kokkos_Core.hpp>
 #include "reference.h"
 
-inline float hd(const float2 ap, const float2 bp) {
+inline float hd(const hec_float2 ap, const hec_float2 bp) {
   return (ap.x - bp.x) * (ap.x - bp.x) + (ap.y - bp.y) * (ap.y - bp.y);
 }
 
-void computeDistance(Kokkos::View<float2 *> d_Apoints,
-                     Kokkos::View<float2 *> d_Bpoints, float &distance,
+void computeDistance(Kokkos::View<hec_float2 *> d_Apoints,
+                     Kokkos::View<hec_float2 *> d_Bpoints, float &distance,
                      const int numA, const int numB) {
   float result = -1.f;
   Kokkos::parallel_reduce(
       "computeDistance", numA,
       KOKKOS_LAMBDA(const int i, float &lmax) {
         float d = FLT_MAX;
-        float2 p = d_Apoints(i);
+        hec_float2 p = d_Apoints(i);
         for (int j = 0; j < numB; j++) {
           float dx = p.x - d_Bpoints(j).x;
           float dy = p.y - d_Bpoints(j).y;
@@ -42,8 +42,8 @@ int main(int argc, char *argv[]) {
   const int num_Bpoints = atoi(argv[2]);
   const int repeat = atoi(argv[3]);
 
-  float2 *h_Apoints = (float2 *)malloc(sizeof(float2) * num_Apoints);
-  float2 *h_Bpoints = (float2 *)malloc(sizeof(float2) * num_Bpoints);
+  hec_float2 *h_Apoints = (hec_float2 *)malloc(sizeof(hec_float2) * num_Apoints);
+  hec_float2 *h_Bpoints = (hec_float2 *)malloc(sizeof(hec_float2) * num_Bpoints);
 
   srand(123);
   for (int i = 0; i < num_Apoints; i++) {
@@ -59,8 +59,8 @@ int main(int argc, char *argv[]) {
 
   Kokkos::initialize(argc, argv);
   {
-    Kokkos::View<float2 *> d_Apoints("Apoints", num_Apoints);
-    Kokkos::View<float2 *> d_Bpoints("Bpoints", num_Bpoints);
+    Kokkos::View<hec_float2 *> d_Apoints("Apoints", num_Apoints);
+    Kokkos::View<hec_float2 *> d_Bpoints("Bpoints", num_Bpoints);
 
     auto h_A = Kokkos::create_mirror_view(d_Apoints);
     auto h_B = Kokkos::create_mirror_view(d_Bpoints);

@@ -5,8 +5,8 @@
 #include <cmath>
 #include <Kokkos_Core.hpp>
 
-#define P_x 5
-#define P_y 1
+#define HEC_P_X 5
+#define HEC_P_Y 1
 #define MODULUS 17
 #define A_COEFF 2
 
@@ -116,7 +116,7 @@ int main(int argc, char** argv)
     auto start_slow = std::chrono::steady_clock::now();
     for (int r = 0; r < repeat; r++) {
       Kokkos::parallel_for("k_slow", num_pk, KOKKOS_LAMBDA(int i) {
-        make_pk_slow(18, P_x, P_y, &d_slow_x(i), &d_slow_y(i), MODULUS, A_COEFF);
+        make_pk_slow(18, HEC_P_X, HEC_P_Y, &d_slow_x(i), &d_slow_y(i), MODULUS, A_COEFF);
       });
       Kokkos::fence();
     }
@@ -128,7 +128,7 @@ int main(int argc, char** argv)
     auto start_fast = std::chrono::steady_clock::now();
     for (int r = 0; r < repeat; r++) {
       Kokkos::parallel_for("k_fast", num_pk, KOKKOS_LAMBDA(int i) {
-        make_pk_fast(18, P_x, P_y, &d_fast_x(i), &d_fast_y(i), MODULUS, A_COEFF);
+        make_pk_fast(18, HEC_P_X, HEC_P_Y, &d_fast_x(i), &d_fast_y(i), MODULUS, A_COEFF);
       });
       Kokkos::fence();
     }

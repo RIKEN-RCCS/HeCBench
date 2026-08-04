@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <cstdlib>
+#include <Kokkos_Core.hpp>
 #include "host_data_io.h"
 #include "kernel_common.h"
 #include "datatypes.h"
@@ -10,6 +11,8 @@
 #define READ_BATCH_SIZE 0x7FFFFFFF
 
 int main(int argc, char *argv[]) {
+    Kokkos::ScopeGuard kokkos(argc, argv);
+
     FILE *in, *out;
     if (argc == 1) {
         in = stdin;
@@ -17,6 +20,10 @@ int main(int argc, char *argv[]) {
     } else if (argc == 3) {
         in = fopen(argv[1], "r");
         out = fopen(argv[2], "w");
+        if (in == nullptr || out == nullptr) {
+            fprintf(stderr, "ERROR: failed to open the input or output file\n");
+            return 1;
+        }
     } else {
         fprintf(stderr, "ERROR: %s [infile] [outfile]\n",
                 argv[0]);

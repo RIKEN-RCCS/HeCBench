@@ -41,4 +41,7 @@ clean:
 	rm -rf $(program) $(obj)
 
 run: $(program)
-	$(LAUNCHER) ./$(program) -c0 1.2 -c1 1.8 -nc 5 -aph 600 -tau 0.002 -i ../cmp-omp/data -v 0
+	@if [ ! -f ../cmp-cuda/data/simple-synthetic.su ]; then \
+		cd ../cmp-cuda && tar xjf data.tar.bz; \
+	fi
+	$(LAUNCHER) ./$(program) -c0 1.98e-7 -c1 1.77e-6 -nc 5 -aph 600 -tau 0.002 -v 2 -i ../cmp-cuda/data/simple-synthetic.su

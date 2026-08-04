@@ -2,17 +2,17 @@
 #include <algorithm>
 #include <cstdlib>
 
-struct float2 {
+struct hec_float2 {
   float x, y;
 };
 
-inline float hd(const float2 ap, const float2 bp);
+inline float hd(const hec_float2 ap, const hec_float2 bp);
 
 int cmpfunc(const void *a, const void *b) {
   return (*(float *)a - *(float *)b) > 0.f ? 1 : 0;
 }
 
-float computeDirDistance(const float2 Apoints[], const float2 Bpoints[],
+float computeDirDistance(const hec_float2 Apoints[], const hec_float2 Bpoints[],
                          int numA, int numB) {
   float *disA = (float *)malloc(sizeof(float) * numA);
 
@@ -31,7 +31,7 @@ float computeDirDistance(const float2 Apoints[], const float2 Bpoints[],
   return dis;
 }
 
-float hausdorff_distance(const float2 Apoints[], const float2 Bpoints[],
+float hausdorff_distance(const hec_float2 Apoints[], const hec_float2 Bpoints[],
                          int numA, int numB) {
   float hAB = computeDirDistance(Apoints, Bpoints, numA, numB);
   float hBA = computeDirDistance(Bpoints, Apoints, numB, numA);

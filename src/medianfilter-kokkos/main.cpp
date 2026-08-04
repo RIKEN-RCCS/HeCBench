@@ -17,9 +17,9 @@
 #include <iostream>
 
 // ---------------------------------------------------------------------------
-// uchar4 (RGBA pixel)
+// hec_uchar4 (RGBA pixel)
 // ---------------------------------------------------------------------------
-struct alignas(4) uchar4 {
+struct alignas(4) hec_uchar4 {
   unsigned char x, y, z, w;
 };
 
@@ -141,13 +141,13 @@ static size_t shrRoundUp(int group_size, int global_size) {
 // ---------------------------------------------------------------------------
 // Kokkos GPU median filter kernel
 // ---------------------------------------------------------------------------
-static double MedianFilterGPU(Kokkos::View<uchar4*>       d_source,
+static double MedianFilterGPU(Kokkos::View<hec_uchar4*>       d_source,
                                Kokkos::View<unsigned int*> d_dest,
                                int iImageWidth, int iImageHeight)
 {
   using ExecSpace    = Kokkos::DefaultExecutionSpace;
   using ScratchSpace = ExecSpace::scratch_memory_space;
-  using ScratchView  = Kokkos::View<uchar4*, ScratchSpace,
+  using ScratchView  = Kokkos::View<hec_uchar4*, ScratchSpace,
                                     Kokkos::MemoryTraits<Kokkos::Unmanaged>>;
 
   const int iBlockDimX      = 16;
@@ -162,11 +162,11 @@ static double MedianFilterGPU(Kokkos::View<uchar4*>       d_source,
   int iNumTeams = iTeamX * iTeamY;
   int iNumThreads = iBlockDimX * iBlockDimY;   // 64
 
-  // Scratch: uchar4 uc4LocalData[iLocalPixPitch * (iBlockDimY + 2)]
-  // = 18 * 6 = 108 uchar4 elements
+  // Scratch: hec_uchar4 uc4LocalData[iLocalPixPitch * (iBlockDimY + 2)]
+  // = 18 * 6 = 108 hec_uchar4 elements
   const int LMEM_H      = iBlockDimY + 2;        // 6
   const int scratch_elems = iLocalPixPitch * LMEM_H;  // 108
-  const int scratch_bytes = scratch_elems * (int)sizeof(uchar4);
+  const int scratch_bytes = scratch_elems * (int)sizeof(hec_uchar4);
 
   Kokkos::TeamPolicy<> policy(iNumTeams, iNumThreads);
   policy = policy.set_scratch_size(0, Kokkos::PerTeam(scratch_bytes));
@@ -198,8 +198,8 @@ static double MedianFilterGPU(Kokkos::View<uchar4*>       d_source,
 
       // ---- Main read into LMEM ----
       {
-        uchar4 zero = {0, 0, 0, 0};
-        uchar4 val = ((iDevYPrime > -1) && (iDevYPrime < iImageHeight) &&
+        hec_uchar4 zero = {0, 0, 0, 0};
+        hec_uchar4 val = ((iDevYPrime > -1) && (iDevYPrime < iImageHeight) &&
                       (iImagePosX < iImageWidth))
                      ? d_source(iDevGMEMOffset) : zero;
         uc4LocalData(iLocalPixOffset) = val;
@@ -208,8 +208,8 @@ static double MedianFilterGPU(Kokkos::View<uchar4*>       d_source,
       // ---- Bottom 2 rows ----
       if (iLocalIdY < 2) {
         iLocalPixOffset += iBlockY * iLocalPixPitch;
-        uchar4 zero = {0, 0, 0, 0};
-        uchar4 val = (((iDevYPrime + iBlockY) < iImageHeight) &&
+        hec_uchar4 zero = {0, 0, 0, 0};
+        hec_uchar4 val = (((iDevYPrime + iBlockY) < iImageHeight) &&
                       (iImagePosX < iImageWidth))
                      ? d_source(iDevGMEMOffset + iBlockY * iImageX) : zero;
         uc4LocalData(iLocalPixOffset) = val;
@@ -219,15 +219,15 @@ static double MedianFilterGPU(Kokkos::View<uchar4*>       d_source,
       // ---- Left apron (rightmost thread in X reads left edge) ----
       if (iLocalIdX == iBlockX - 1) {
         int off = iLocalIdY * iLocalPixPitch;
-        uchar4 zero = {0, 0, 0, 0};
-        uchar4 val = ((iDevYPrime > -1) && (iDevYPrime < iImageHeight) &&
+        hec_uchar4 zero = {0, 0, 0, 0};
+        hec_uchar4 val = ((iDevYPrime > -1) && (iDevYPrime < iImageHeight) &&
                       (iGroupIdX > 0))
                      ? d_source(iDevYPrime * iImageX + iGroupIdX * iBlockX - 1)
                      : zero;
         uc4LocalData(off) = val;
         if (iLocalIdY < 2) {
           int off2 = off + iBlockY * iLocalPixPitch;
-          uchar4 v2 = (((iDevYPrime + iBlockY) < iImageHeight) && (iGroupIdX > 0))
+          hec_uchar4 v2 = (((iDevYPrime + iBlockY) < iImageHeight) && (iGroupIdX > 0))
                       ? d_source((iDevYPrime + iBlockY)*iImageX + iGroupIdX*iBlockX - 1)
                       : zero;
           uc4LocalData(off2) = v2;
@@ -236,15 +236,15 @@ static double MedianFilterGPU(Kokkos::View<uchar4*>       d_source,
       // ---- Right apron (leftmost thread in X reads right edge) ----
       else if (iLocalIdX == 0) {
         int off = (iLocalIdY + 1) * iLocalPixPitch - 1;
-        uchar4 zero = {0, 0, 0, 0};
-        uchar4 val = ((iDevYPrime > -1) && (iDevYPrime < iImageHeight) &&
+        hec_uchar4 zero = {0, 0, 0, 0};
+        hec_uchar4 val = ((iDevYPrime > -1) && (iDevYPrime < iImageHeight) &&
                       ((iGroupIdX + 1) * iBlockX < iImageWidth))
                      ? d_source(iDevYPrime * iImageX + (iGroupIdX + 1) * iBlockX)
                      : zero;
         uc4LocalData(off) = val;
         if (iLocalIdY < 2) {
           int off2 = off + iBlockY * iLocalPixPitch;
-          uchar4 v2 = (((iDevYPrime + iBlockY) < iImageHeight) &&
+          hec_uchar4 v2 = (((iDevYPrime + iBlockY) < iImageHeight) &&
                        ((iGroupIdX + 1) * iBlockX < iImageWidth))
                       ? d_source((iDevYPrime+iBlockY)*iImageX + (iGroupIdX+1)*iBlockX)
                       : zero;
@@ -351,14 +351,14 @@ int main(int argc, char **argv)
   size_t szBuffWords = (size_t)uiImageHeight * uiImageWidth;
   uiOutput = (unsigned int*)malloc(szBuffWords * sizeof(unsigned int));
 
-  uchar4 *uc4Source = (uchar4*)uiInput;
+  hec_uchar4 *uc4Source = (hec_uchar4*)uiInput;
 
   Kokkos::initialize(argc, argv);
   {
     using ExecSpace = Kokkos::DefaultExecutionSpace;
     using MemSpace  = ExecSpace::memory_space;
 
-    Kokkos::View<uchar4*,       MemSpace> d_source("source", szBuffWords);
+    Kokkos::View<hec_uchar4*,       MemSpace> d_source("source", szBuffWords);
     Kokkos::View<unsigned int*, MemSpace> d_dest  ("dest",   szBuffWords);
 
     // Upload source

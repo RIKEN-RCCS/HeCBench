@@ -584,46 +584,47 @@ int main(int argc, char **argv)
                 = Quantities_init_face_acceldir(ia, ie, iu, sf, octant);
             }
           });
-
-        // Initialize facexz
-        Kokkos::parallel_for("init_facexz",
-          Kokkos::MDRangePolicy<Kokkos::Rank<3>>({0,0,0},
-              {NOCTANT, dims_b_ncell_z, dims_b_ncell_x}),
-          KOKKOS_LAMBDA(int octant, int iz, int ix) {
-            const int dir_y = Dir_y(octant);
-            const int iy    = dir_y == DIR_UP ? -1 : dims_b_ncell_y;
-            const int ix_g  = ix + ix_base;
-            const int iy_g  = iy + iy_base;
-            const int iz_g  = iz + stepinfoall.stepinfo[octant].block_z * dims_b_ncell_z;
-            const int sf    = Quantities_scalefactor_space_acceldir(ix_g, iy_g, iz_g);
-            for (int ie = 0; ie < dims_b_ne; ++ie)
-            for (int iu = 0; iu < NU; ++iu)
-            for (int ia = 0; ia < dims_b_na; ++ia) {
-              d_facexz[ia + dims_b_na*(iu + NU*(ie + dims_b_ne*(ix + dims_b_ncell_x*(iz + dims_b_ncell_z*(octant + NOCTANT*0)))))]
-                = Quantities_init_face_acceldir(ia, ie, iu, sf, octant);
-            }
-          });
-
-        // Initialize faceyz
-        Kokkos::parallel_for("init_faceyz",
-          Kokkos::MDRangePolicy<Kokkos::Rank<3>>({0,0,0},
-              {NOCTANT, dims_b_ncell_z, dims_b_ncell_y}),
-          KOKKOS_LAMBDA(int octant, int iz, int iy) {
-            const int dir_x = Dir_x(octant);
-            const int ix    = dir_x == DIR_UP ? -1 : dims_b_ncell_x;
-            const int ix_g  = ix + ix_base;
-            const int iy_g  = iy + iy_base;
-            const int iz_g  = iz + stepinfoall.stepinfo[octant].block_z * dims_b_ncell_z;
-            const int sf    = Quantities_scalefactor_space_acceldir(ix_g, iy_g, iz_g);
-            for (int ie = 0; ie < dims_b_ne; ++ie)
-            for (int iu = 0; iu < NU; ++iu)
-            for (int ia = 0; ia < dims_b_na; ++ia) {
-              d_faceyz[ia + dims_b_na*(iu + NU*(ie + dims_b_ne*(iy + dims_b_ncell_y*(iz + dims_b_ncell_z*(octant + NOCTANT*0)))))]
-                = Quantities_init_face_acceldir(ia, ie, iu, sf, octant);
-            }
-          });
         Kokkos::fence();
       }
+
+      // Initialize facexz every step, matching minisweep-omp.
+      Kokkos::parallel_for("init_facexz",
+        Kokkos::MDRangePolicy<Kokkos::Rank<3>>({0,0,0},
+            {NOCTANT, dims_b_ncell_z, dims_b_ncell_x}),
+        KOKKOS_LAMBDA(int octant, int iz, int ix) {
+          const int dir_y = Dir_y(octant);
+          const int iy    = dir_y == DIR_UP ? -1 : dims_b_ncell_y;
+          const int ix_g  = ix + ix_base;
+          const int iy_g  = iy + iy_base;
+          const int iz_g  = iz + stepinfoall.stepinfo[octant].block_z * dims_b_ncell_z;
+          const int sf    = Quantities_scalefactor_space_acceldir(ix_g, iy_g, iz_g);
+          for (int ie = 0; ie < dims_b_ne; ++ie)
+          for (int iu = 0; iu < NU; ++iu)
+          for (int ia = 0; ia < dims_b_na; ++ia) {
+            d_facexz[ia + dims_b_na*(iu + NU*(ie + dims_b_ne*(ix + dims_b_ncell_x*(iz + dims_b_ncell_z*(octant + NOCTANT*0)))))]
+              = Quantities_init_face_acceldir(ia, ie, iu, sf, octant);
+          }
+        });
+
+      // Initialize faceyz every step, matching minisweep-omp.
+      Kokkos::parallel_for("init_faceyz",
+        Kokkos::MDRangePolicy<Kokkos::Rank<3>>({0,0,0},
+            {NOCTANT, dims_b_ncell_z, dims_b_ncell_y}),
+        KOKKOS_LAMBDA(int octant, int iz, int iy) {
+          const int dir_x = Dir_x(octant);
+          const int ix    = dir_x == DIR_UP ? -1 : dims_b_ncell_x;
+          const int ix_g  = ix + ix_base;
+          const int iy_g  = iy + iy_base;
+          const int iz_g  = iz + stepinfoall.stepinfo[octant].block_z * dims_b_ncell_z;
+          const int sf    = Quantities_scalefactor_space_acceldir(ix_g, iy_g, iz_g);
+          for (int ie = 0; ie < dims_b_ne; ++ie)
+          for (int iu = 0; iu < NU; ++iu)
+          for (int ia = 0; ia < dims_b_na; ++ia) {
+            d_faceyz[ia + dims_b_na*(iu + NU*(ie + dims_b_ne*(iy + dims_b_ncell_y*(iz + dims_b_ncell_z*(octant + NOCTANT*0)))))]
+              = Quantities_init_face_acceldir(ia, ie, iu, sf, octant);
+          }
+        });
+      Kokkos::fence();
 
       // ── Sweep wavefront kernel ────────────────────────────────────────────
       // For each (ie, octant) pair, iterate over wavefronts serially.

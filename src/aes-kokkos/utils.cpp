@@ -6,7 +6,7 @@
 #include <iostream>
 #include "aes.h"
 
-void convertColorToGray(const uchar4 *pixels, 
+void convertColorToGray(const hec_uchar4 *pixels,
                         uchar *gray,
                         const int height,
                         const int width)
@@ -22,7 +22,7 @@ void convertColorToGray(const uchar4 *pixels,
     }
 }
 
-void convertGrayToGray(const uchar4 *pixels, 
+void convertGrayToGray(const hec_uchar4 *pixels,
                        uchar *gray,
                        const int height,
                        const int width)
