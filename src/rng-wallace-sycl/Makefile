@@ -72,7 +72,9 @@ endif
 $(program): $(obj)
 	$(CC) $(CFLAGS) $(obj) -o $@ $(LDFLAGS)
 
-%.o: %.cpp ../rng-wallace-cuda/reference.h constants.h rand_helpers.h
+%.o: %.cpp ../rng-wallace-cuda/reference.h \
+           ../rng-wallace-cuda/constants.h \
+           ../rng-wallace-cuda/rand_helpers.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
