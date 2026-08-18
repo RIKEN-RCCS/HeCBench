@@ -21,9 +21,7 @@ HIP_ARCH  = gfx908
 
 program = main
 
-source = main.cpp cpu.cpp
-
-obj = $(source:.cpp=.o)
+obj = main.o cpu.o
 
 #===============================================================================
 # Sets Flags
@@ -72,6 +70,9 @@ $(program): $(obj)
 	$(CC) $(CFLAGS) $(obj) -o $@ $(LDFLAGS)
 
 %.o: %.cpp kernel.cpp matrix.h LDPC.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
+cpu.o: ../ldpc-cuda/cpu.cpp ../ldpc-cuda/LDPC.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

@@ -22,7 +22,7 @@ DNN       = yes
 # path to the install of the oneMKL interface (only needed for CUDA/HIP targets)
 ONEMKL_PATH = /path/to/oneMKL
 # path to the oneDNN (DNNL) install
-DNNL_PATH   = /opt/intel/oneapi/dnnl/latest
+DNNL_PATH   ?= /opt/intel/oneapi/dnnl/latest
 #GCC_TOOLCHAIN = "/auto/software/gcc/x86_64/gcc-9.1.0/"
 
 #===============================================================================

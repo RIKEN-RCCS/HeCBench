@@ -6,8 +6,8 @@
 CC        = clang++
 OPTIMIZE  = yes
 DEBUG     = no
-MPI_ROOT  = /opt/intel/oneapi/2024.1
-LAUNCHER  = $(MPI_ROOT)/bin/mpirun -n 2
+MPI_ROOT  ?= /opt/intel/oneapi/2024.1
+LAUNCHER  ?= $(MPI_ROOT)/bin/mpirun -n 2
 
 # when CUDA enabled for the MPI pingpong
 #NVHPC_SDK = /opt/nvidia/hpc_sdk/Linux_x86_64/24.5
