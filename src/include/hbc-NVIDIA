@@ -1,0 +1,1 @@
+COMMAND = ../hbc-cuda/prepare_data.sh; time -p ( ./$(program) -i ../hbc-cuda/graphs/breast_coexpress.txt -v --printscores=output.txt 1>log.std 2>log.err ) 2> log.time

@@ -1,0 +1,1 @@
+COMMAND = ../cc-cuda/prepare_data.sh; time -p ( ulimit -s unlimited ; ./main delaunay_n24.egr 100 1>log.std 2>log.err ) 2> log.time

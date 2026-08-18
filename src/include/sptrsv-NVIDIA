@@ -1,0 +1,1 @@
+COMMAND = ../sptrsv-cuda/prepare_data.sh; time -p ( ./$(program) ../sptrsv-sycl/lp1.mtx 2000 1>log.std 2>log.err ) 2> log.time

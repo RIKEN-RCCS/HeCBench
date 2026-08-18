@@ -1,0 +1,1 @@
+COMMAND = ../ge-spmm-cuda/prepare_data.sh; time -p ( ./$(program) ../ge-spmm-cuda/data/snap/amazon0302/amazon0302.mtx 8 1000 1>log.std 2>log.err ) 2> log.time

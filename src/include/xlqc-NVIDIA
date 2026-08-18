@@ -1,0 +1,1 @@
+COMMAND = time -p ( ./$(program) sp 1>log.std 2>log.err;./$(program) dp 1>>log.std 2>>log.err ) 2> log.time

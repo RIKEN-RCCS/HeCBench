@@ -1,0 +1,2 @@
+#COMMAND = time -p ( ./$(program) data/dirty_4096.img data/psf_4096.img 1000 1>log.std 2>log.err ) 2> log.time
+COMMAND = ../hogbom-cuda/prepare_data.sh; time -p ( ./$(program) ../hogbom-cuda/data/dirty_4096.img ../hogbom-cuda/data/psf_4096.img 1000 1>log.std 2>log.err ) 2> log.time

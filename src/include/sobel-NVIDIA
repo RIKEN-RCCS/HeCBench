@@ -1,0 +1,1 @@
+COMMAND = ../sobel-cuda/prepare_data.sh; time -p ( ./$(program) ../sobel-sycl/SobelFilter_Input.bmp 100000 1>log.std 2>log.err ) 2> log.time
