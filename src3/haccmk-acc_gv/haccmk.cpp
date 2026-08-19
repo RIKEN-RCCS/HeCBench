@@ -32,7 +32,7 @@ void haccmk (
 
       auto start = std::chrono::steady_clock::now();
 
-      #pragma acc parallel loop gang vector
+      #pragma acc parallel loop gang 
       for (int i = 0; i < n; i++) {
 
         const float ma0 = 0.269327f; 
@@ -51,7 +51,7 @@ void haccmk (
         float xxi = xx[i];
         float yyi = yy[i];
         float zzi = zz[i];
-
+        #pragma acc loop vector reduction(+:xi,yi,zi)
         for ( int j = 0; j < ilp; j++ ) {
           dxc = xx[j] - xxi;
           dyc = yy[j] - yyi;

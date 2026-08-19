@@ -1,0 +1,27 @@
+FC       ?= nvfortran
+FFLAGS   ?= -O3 -mp=gpu -gpu=cc90 -Mextend
+PROGRAM  := main
+SOURCES  := main.f90
+LAUNCHER ?=
+RUN_ARGS ?= 79 91 83 1000
+LARGE_RUN_ARGS ?= 4096 4096 4096 100
+
+.PHONY: all clean run run-small run-large
+
+all: $(PROGRAM)
+
+$(PROGRAM): $(SOURCES) Makefile
+	$(FC) $(FFLAGS) -o $@ $(SOURCES)
+
+run: $(PROGRAM)
+	OMP_TARGET_OFFLOAD=MANDATORY $(LAUNCHER) ./$(PROGRAM) $(RUN_ARGS)
+	OMP_TARGET_OFFLOAD=MANDATORY $(LAUNCHER) ./$(PROGRAM) $(LARGE_RUN_ARGS)
+
+run-small: $(PROGRAM)
+	OMP_TARGET_OFFLOAD=MANDATORY $(LAUNCHER) ./$(PROGRAM) $(RUN_ARGS)
+
+run-large: $(PROGRAM)
+	OMP_TARGET_OFFLOAD=MANDATORY $(LAUNCHER) ./$(PROGRAM) $(LARGE_RUN_ARGS)
+
+clean:
+	rm -f $(PROGRAM) *.o *.mod

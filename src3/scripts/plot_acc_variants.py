@@ -11,8 +11,8 @@ from xml.sax.saxutils import escape
 REPORT_BENCHMARKS = (
     "inversek2j epistasis scel testSNAP bilateral libor contract nqueen "
     "degrid tissue lulesh miniWeather cfd winograd overlay jenkins-hash "
-    "aligned-types distort keogh scatterAdd fluidSim s8n doh hellinger "
-    "affine sw4ck clenergy nbody"
+    "aligned-types distort keogh scatterAdd fluidSim s8n doh "
+    "affine sw4ck clenergy"
 ).split()
 
 
@@ -53,7 +53,7 @@ def main():
     ]
     rows.sort(key=lambda row: row[1] / row[2], reverse=True)
 
-    left, plot_width, top, row_height = 210, 850, 86, 23
+    left, plot_width, top, row_height = 210, 850, 86, 33
     height = top + len(rows) * row_height + 72
     axis_y = top - 22
     ticks = (0.25, 0.5, 1, 2, 4, 8, 16, 32, 64, 128)
@@ -61,10 +61,11 @@ def main():
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{left + plot_width + 40}" height="{height}" viewBox="0 0 {left + plot_width + 40} {height}">',
         '<style>text { font-family: sans-serif; fill: #202124; } .small { font-size: 11px; } .label { font-size: 12px; } .title { font-size: 18px; font-weight: bold; } .grid { stroke: #d9d9d9; stroke-width: 1; } .base { stroke: #555; stroke-width: 1.5; }</style>',
         '<rect width="100%" height="100%" fill="white"/>',
-        '<text x="20" y="28" class="title">ACC baseline speedup — lower execution time is better</text>',
-        '<text x="20" y="48" class="small">Bars show ACC time / variant time; values above 1 mean the variant is faster. Log₂ scale. All times are ms.</text>',
-        '<rect x="20" y="60" width="14" height="8" fill="#f28e2b"/><text x="40" y="69" class="small">ACC_GV</text>',
-        '<rect x="110" y="60" width="14" height="8" fill="#4e79a7"/><text x="130" y="69" class="small">OMP_NVC</text>',
+            '<text x="20" y="28" class="title">Speedup Comparison on NVIDIA GH200</text>',
+            '<text x="20" y="48" class="small">Higher values indicate faster execution. Log₂ scale, all times in ms.</text>',
+            '<rect x="20" y="60" width="14" height="8" fill="#f28e2b"/><text x="40" y="69" class="small">ACC vs ACC_GV</text>',
+            '<rect x="160" y="60" width="14" height="8" fill="#4e79a7"/><text x="180" y="69" class="small">ACC vs OMP_NVC</text>',
+            '<rect x="320" y="60" width="14" height="8" fill="#59a14f"/><text x="340" y="69" class="small">OMP_NVC vs ACC_GV</text>',
     ]
     for tick in ticks:
         x = bar(tick, left, plot_width)
@@ -76,11 +77,14 @@ def main():
     for index, (name, acc_time, gv_time, omp_time) in enumerate(rows):
         y = top + index * row_height
         gv_speedup, omp_speedup = acc_time / gv_time, acc_time / omp_time
+        direct_speedup = omp_time / gv_time
         gv_x, omp_x = bar(gv_speedup, left, plot_width), bar(omp_speedup, left, plot_width)
+        direct_x = bar(direct_speedup, left, plot_width)
         svg += [
             f'<text x="{left - 10}" y="{y + 13}" text-anchor="end" class="label">{escape(name)}</text>',
             f'<rect x="{min(left, gv_x):.1f}" y="{y + 2}" width="{abs(gv_x - left):.1f}" height="8" fill="#f28e2b"/>',
             f'<rect x="{min(left, omp_x):.1f}" y="{y + 12}" width="{abs(omp_x - left):.1f}" height="8" fill="#4e79a7"/>',
+            f'<rect x="{min(left, direct_x):.1f}" y="{y + 22}" width="{abs(direct_x - left):.1f}" height="8" fill="#59a14f"/>',
         ]
     svg += [
         f'<text x="{left}" y="{height - 15}" class="small">Selected report benchmarks with all three measurements: {len(rows)}.</text>',

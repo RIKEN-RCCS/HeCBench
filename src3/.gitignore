@@ -3,6 +3,8 @@
 **/build/
 **/CMakeFiles/
 **/__pycache__/
+**/*.mod
+**/*.smod
 **/eWave.2D.*
 **/result.raw
 **/temperature.dat

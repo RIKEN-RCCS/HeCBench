@@ -1,113 +1,134 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="802" viewBox="0 0 1100 802">
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="1016" viewBox="0 0 1100 1016">
 <style>text { font-family: sans-serif; fill: #202124; } .small { font-size: 11px; } .label { font-size: 12px; } .title { font-size: 18px; font-weight: bold; } .grid { stroke: #d9d9d9; stroke-width: 1; } .base { stroke: #555; stroke-width: 1.5; }</style>
 <rect width="100%" height="100%" fill="white"/>
-<text x="20" y="28" class="title">ACC baseline speedup — lower execution time is better</text>
-<text x="20" y="48" class="small">Bars show ACC time / variant time; values above 1 mean the variant is faster. Log₂ scale. All times are ms.</text>
-<rect x="20" y="60" width="14" height="8" fill="#f28e2b"/><text x="40" y="69" class="small">ACC_GV</text>
-<rect x="110" y="60" width="14" height="8" fill="#4e79a7"/><text x="130" y="69" class="small">OMP_NVC</text>
-<line x1="210.0" y1="64" x2="210.0" y2="760" class="grid"/>
+<text x="20" y="28" class="title">Speedup Comparison on NVIDIA GH200</text>
+<text x="20" y="48" class="small">Higher values indicate faster execution. Log₂ scale, all times in ms.</text>
+<rect x="20" y="60" width="14" height="8" fill="#f28e2b"/><text x="40" y="69" class="small">ACC vs ACC_GV</text>
+<rect x="160" y="60" width="14" height="8" fill="#4e79a7"/><text x="180" y="69" class="small">ACC vs OMP_NVC</text>
+<rect x="320" y="60" width="14" height="8" fill="#59a14f"/><text x="340" y="69" class="small">OMP_NVC vs ACC_GV</text>
+<line x1="210.0" y1="64" x2="210.0" y2="974" class="grid"/>
 <text x="210.0" y="59" text-anchor="middle" class="small">0.25×</text>
-<line x1="304.4" y1="64" x2="304.4" y2="760" class="grid"/>
+<line x1="304.4" y1="64" x2="304.4" y2="974" class="grid"/>
 <text x="304.4" y="59" text-anchor="middle" class="small">0.5×</text>
-<line x1="398.9" y1="64" x2="398.9" y2="760" class="base"/>
+<line x1="398.9" y1="64" x2="398.9" y2="974" class="base"/>
 <text x="398.9" y="59" text-anchor="middle" class="small">1×</text>
-<line x1="493.3" y1="64" x2="493.3" y2="760" class="grid"/>
+<line x1="493.3" y1="64" x2="493.3" y2="974" class="grid"/>
 <text x="493.3" y="59" text-anchor="middle" class="small">2×</text>
-<line x1="587.8" y1="64" x2="587.8" y2="760" class="grid"/>
+<line x1="587.8" y1="64" x2="587.8" y2="974" class="grid"/>
 <text x="587.8" y="59" text-anchor="middle" class="small">4×</text>
-<line x1="682.2" y1="64" x2="682.2" y2="760" class="grid"/>
+<line x1="682.2" y1="64" x2="682.2" y2="974" class="grid"/>
 <text x="682.2" y="59" text-anchor="middle" class="small">8×</text>
-<line x1="776.7" y1="64" x2="776.7" y2="760" class="grid"/>
+<line x1="776.7" y1="64" x2="776.7" y2="974" class="grid"/>
 <text x="776.7" y="59" text-anchor="middle" class="small">16×</text>
-<line x1="871.1" y1="64" x2="871.1" y2="760" class="grid"/>
+<line x1="871.1" y1="64" x2="871.1" y2="974" class="grid"/>
 <text x="871.1" y="59" text-anchor="middle" class="small">32×</text>
-<line x1="965.6" y1="64" x2="965.6" y2="760" class="grid"/>
+<line x1="965.6" y1="64" x2="965.6" y2="974" class="grid"/>
 <text x="965.6" y="59" text-anchor="middle" class="small">64×</text>
-<line x1="1060.0" y1="64" x2="1060.0" y2="760" class="grid"/>
+<line x1="1060.0" y1="64" x2="1060.0" y2="974" class="grid"/>
 <text x="1060.0" y="59" text-anchor="middle" class="small">128×</text>
 <text x="200" y="99" text-anchor="end" class="label">inversek2j</text>
-<rect x="210.0" y="88" width="850.0" height="8" fill="#f28e2b"/>
-<rect x="210.0" y="98" width="759.0" height="8" fill="#4e79a7"/>
-<text x="200" y="122" text-anchor="end" class="label">epistasis</text>
-<rect x="210.0" y="111" width="766.6" height="8" fill="#f28e2b"/>
-<rect x="210.0" y="121" width="750.1" height="8" fill="#4e79a7"/>
-<text x="200" y="145" text-anchor="end" class="label">scel</text>
-<rect x="210.0" y="134" width="730.5" height="8" fill="#f28e2b"/>
-<rect x="210.0" y="144" width="605.1" height="8" fill="#4e79a7"/>
-<text x="200" y="168" text-anchor="end" class="label">testSNAP</text>
-<rect x="210.0" y="157" width="709.5" height="8" fill="#f28e2b"/>
-<rect x="210.0" y="167" width="700.2" height="8" fill="#4e79a7"/>
-<text x="200" y="191" text-anchor="end" class="label">bilateral</text>
-<rect x="210.0" y="180" width="695.2" height="8" fill="#f28e2b"/>
-<rect x="210.0" y="190" width="686.7" height="8" fill="#4e79a7"/>
-<text x="200" y="214" text-anchor="end" class="label">libor</text>
-<rect x="210.0" y="203" width="664.6" height="8" fill="#f28e2b"/>
-<rect x="210.0" y="213" width="663.6" height="8" fill="#4e79a7"/>
-<text x="200" y="237" text-anchor="end" class="label">contract</text>
-<rect x="210.0" y="226" width="457.9" height="8" fill="#f28e2b"/>
-<rect x="210.0" y="236" width="437.1" height="8" fill="#4e79a7"/>
-<text x="200" y="260" text-anchor="end" class="label">nqueen</text>
-<rect x="210.0" y="249" width="405.3" height="8" fill="#f28e2b"/>
-<rect x="210.0" y="259" width="404.9" height="8" fill="#4e79a7"/>
-<text x="200" y="283" text-anchor="end" class="label">degrid</text>
-<rect x="210.0" y="272" width="327.4" height="8" fill="#f28e2b"/>
-<rect x="210.0" y="282" width="354.8" height="8" fill="#4e79a7"/>
-<text x="200" y="306" text-anchor="end" class="label">tissue</text>
-<rect x="210.0" y="295" width="273.1" height="8" fill="#f28e2b"/>
-<rect x="210.0" y="305" width="261.4" height="8" fill="#4e79a7"/>
-<text x="200" y="329" text-anchor="end" class="label">lulesh</text>
-<rect x="210.0" y="318" width="268.3" height="8" fill="#f28e2b"/>
-<rect x="210.0" y="328" width="276.4" height="8" fill="#4e79a7"/>
-<text x="200" y="352" text-anchor="end" class="label">miniWeather</text>
-<rect x="210.0" y="341" width="194.5" height="8" fill="#f28e2b"/>
-<rect x="210.0" y="351" width="204.5" height="8" fill="#4e79a7"/>
-<text x="200" y="375" text-anchor="end" class="label">cfd</text>
-<rect x="210.0" y="364" width="192.7" height="8" fill="#f28e2b"/>
-<rect x="210.0" y="374" width="138.8" height="8" fill="#4e79a7"/>
-<text x="200" y="398" text-anchor="end" class="label">winograd</text>
-<rect x="210.0" y="387" width="192.1" height="8" fill="#f28e2b"/>
-<rect x="210.0" y="397" width="186.7" height="8" fill="#4e79a7"/>
-<text x="200" y="421" text-anchor="end" class="label">overlay</text>
-<rect x="210.0" y="410" width="191.6" height="8" fill="#f28e2b"/>
-<rect x="210.0" y="420" width="154.5" height="8" fill="#4e79a7"/>
-<text x="200" y="444" text-anchor="end" class="label">jenkins-hash</text>
-<rect x="210.0" y="433" width="190.5" height="8" fill="#f28e2b"/>
-<rect x="210.0" y="443" width="180.9" height="8" fill="#4e79a7"/>
-<text x="200" y="467" text-anchor="end" class="label">aligned-types</text>
-<rect x="210.0" y="456" width="190.0" height="8" fill="#f28e2b"/>
-<rect x="210.0" y="466" width="170.9" height="8" fill="#4e79a7"/>
-<text x="200" y="490" text-anchor="end" class="label">distort</text>
-<rect x="210.0" y="479" width="189.7" height="8" fill="#f28e2b"/>
-<rect x="210.0" y="489" width="192.7" height="8" fill="#4e79a7"/>
-<text x="200" y="513" text-anchor="end" class="label">keogh</text>
-<rect x="210.0" y="502" width="189.1" height="8" fill="#f28e2b"/>
-<rect x="210.0" y="512" width="43.6" height="8" fill="#4e79a7"/>
-<text x="200" y="536" text-anchor="end" class="label">scatterAdd</text>
-<rect x="210.0" y="525" width="188.9" height="8" fill="#f28e2b"/>
-<rect x="210.0" y="535" width="188.9" height="8" fill="#4e79a7"/>
-<text x="200" y="559" text-anchor="end" class="label">fluidSim</text>
-<rect x="210.0" y="548" width="188.9" height="8" fill="#f28e2b"/>
-<rect x="210.0" y="558" width="151.2" height="8" fill="#4e79a7"/>
-<text x="200" y="582" text-anchor="end" class="label">s8n</text>
-<rect x="210.0" y="571" width="188.9" height="8" fill="#f28e2b"/>
-<rect x="210.0" y="581" width="74.7" height="8" fill="#4e79a7"/>
-<text x="200" y="605" text-anchor="end" class="label">doh</text>
-<rect x="210.0" y="594" width="188.7" height="8" fill="#f28e2b"/>
-<rect x="210.0" y="604" width="131.8" height="8" fill="#4e79a7"/>
-<text x="200" y="628" text-anchor="end" class="label">hellinger</text>
-<rect x="210.0" y="617" width="188.6" height="8" fill="#f28e2b"/>
-<rect x="210.0" y="627" width="457.7" height="8" fill="#4e79a7"/>
-<text x="200" y="651" text-anchor="end" class="label">affine</text>
-<rect x="210.0" y="640" width="188.2" height="8" fill="#f28e2b"/>
-<rect x="210.0" y="650" width="186.4" height="8" fill="#4e79a7"/>
-<text x="200" y="674" text-anchor="end" class="label">sw4ck</text>
-<rect x="210.0" y="663" width="184.4" height="8" fill="#f28e2b"/>
-<rect x="210.0" y="673" width="182.5" height="8" fill="#4e79a7"/>
-<text x="200" y="697" text-anchor="end" class="label">clenergy</text>
-<rect x="210.0" y="686" width="165.8" height="8" fill="#f28e2b"/>
-<rect x="210.0" y="696" width="185.1" height="8" fill="#4e79a7"/>
-<text x="200" y="720" text-anchor="end" class="label">nbody</text>
-<rect x="210.0" y="709" width="82.6" height="8" fill="#f28e2b"/>
-<rect x="210.0" y="719" width="84.0" height="8" fill="#4e79a7"/>
-<text x="210" y="787" class="small">Selected report benchmarks with all three measurements: 28.</text>
+<rect x="210.0" y="88" width="815.7" height="8" fill="#f28e2b"/>
+<rect x="210.0" y="98" width="724.7" height="8" fill="#4e79a7"/>
+<rect x="210.0" y="108" width="279.9" height="8" fill="#59a14f"/>
+<text x="200" y="132" text-anchor="end" class="label">epistasis</text>
+<rect x="210.0" y="121" width="766.6" height="8" fill="#f28e2b"/>
+<rect x="210.0" y="131" width="750.1" height="8" fill="#4e79a7"/>
+<rect x="210.0" y="141" width="205.3" height="8" fill="#59a14f"/>
+<text x="200" y="165" text-anchor="end" class="label">scel</text>
+<rect x="210.0" y="154" width="730.5" height="8" fill="#f28e2b"/>
+<rect x="210.0" y="164" width="605.1" height="8" fill="#4e79a7"/>
+<rect x="210.0" y="174" width="314.3" height="8" fill="#59a14f"/>
+<text x="200" y="198" text-anchor="end" class="label">testSNAP</text>
+<rect x="210.0" y="187" width="709.5" height="8" fill="#f28e2b"/>
+<rect x="210.0" y="197" width="700.2" height="8" fill="#4e79a7"/>
+<rect x="210.0" y="207" width="198.1" height="8" fill="#59a14f"/>
+<text x="200" y="231" text-anchor="end" class="label">bilateral</text>
+<rect x="210.0" y="220" width="695.2" height="8" fill="#f28e2b"/>
+<rect x="210.0" y="230" width="686.7" height="8" fill="#4e79a7"/>
+<rect x="210.0" y="240" width="197.4" height="8" fill="#59a14f"/>
+<text x="200" y="264" text-anchor="end" class="label">libor</text>
+<rect x="210.0" y="253" width="664.6" height="8" fill="#f28e2b"/>
+<rect x="210.0" y="263" width="663.6" height="8" fill="#4e79a7"/>
+<rect x="210.0" y="273" width="189.9" height="8" fill="#59a14f"/>
+<text x="200" y="297" text-anchor="end" class="label">contract</text>
+<rect x="210.0" y="286" width="457.9" height="8" fill="#f28e2b"/>
+<rect x="210.0" y="296" width="437.1" height="8" fill="#4e79a7"/>
+<rect x="210.0" y="306" width="209.7" height="8" fill="#59a14f"/>
+<text x="200" y="330" text-anchor="end" class="label">nqueen</text>
+<rect x="210.0" y="319" width="405.3" height="8" fill="#f28e2b"/>
+<rect x="210.0" y="329" width="404.9" height="8" fill="#4e79a7"/>
+<rect x="210.0" y="339" width="189.4" height="8" fill="#59a14f"/>
+<text x="200" y="363" text-anchor="end" class="label">degrid</text>
+<rect x="210.0" y="352" width="327.4" height="8" fill="#f28e2b"/>
+<rect x="210.0" y="362" width="354.8" height="8" fill="#4e79a7"/>
+<rect x="210.0" y="372" width="161.4" height="8" fill="#59a14f"/>
+<text x="200" y="396" text-anchor="end" class="label">tissue</text>
+<rect x="210.0" y="385" width="273.1" height="8" fill="#f28e2b"/>
+<rect x="210.0" y="395" width="261.4" height="8" fill="#4e79a7"/>
+<rect x="210.0" y="405" width="200.6" height="8" fill="#59a14f"/>
+<text x="200" y="429" text-anchor="end" class="label">lulesh</text>
+<rect x="210.0" y="418" width="268.3" height="8" fill="#f28e2b"/>
+<rect x="210.0" y="428" width="276.4" height="8" fill="#4e79a7"/>
+<rect x="210.0" y="438" width="180.7" height="8" fill="#59a14f"/>
+<text x="200" y="462" text-anchor="end" class="label">miniWeather</text>
+<rect x="210.0" y="451" width="194.5" height="8" fill="#f28e2b"/>
+<rect x="210.0" y="461" width="204.5" height="8" fill="#4e79a7"/>
+<rect x="210.0" y="471" width="178.9" height="8" fill="#59a14f"/>
+<text x="200" y="495" text-anchor="end" class="label">cfd</text>
+<rect x="210.0" y="484" width="192.7" height="8" fill="#f28e2b"/>
+<rect x="210.0" y="494" width="138.8" height="8" fill="#4e79a7"/>
+<rect x="210.0" y="504" width="242.8" height="8" fill="#59a14f"/>
+<text x="200" y="528" text-anchor="end" class="label">winograd</text>
+<rect x="210.0" y="517" width="192.1" height="8" fill="#f28e2b"/>
+<rect x="210.0" y="527" width="186.7" height="8" fill="#4e79a7"/>
+<rect x="210.0" y="537" width="194.2" height="8" fill="#59a14f"/>
+<text x="200" y="561" text-anchor="end" class="label">overlay</text>
+<rect x="210.0" y="550" width="191.6" height="8" fill="#f28e2b"/>
+<rect x="210.0" y="560" width="154.5" height="8" fill="#4e79a7"/>
+<rect x="210.0" y="570" width="226.0" height="8" fill="#59a14f"/>
+<text x="200" y="594" text-anchor="end" class="label">jenkins-hash</text>
+<rect x="210.0" y="583" width="190.5" height="8" fill="#f28e2b"/>
+<rect x="210.0" y="593" width="180.9" height="8" fill="#4e79a7"/>
+<rect x="210.0" y="603" width="198.5" height="8" fill="#59a14f"/>
+<text x="200" y="627" text-anchor="end" class="label">aligned-types</text>
+<rect x="210.0" y="616" width="190.0" height="8" fill="#f28e2b"/>
+<rect x="210.0" y="626" width="170.9" height="8" fill="#4e79a7"/>
+<rect x="210.0" y="636" width="208.0" height="8" fill="#59a14f"/>
+<text x="200" y="660" text-anchor="end" class="label">distort</text>
+<rect x="210.0" y="649" width="189.7" height="8" fill="#f28e2b"/>
+<rect x="210.0" y="659" width="192.7" height="8" fill="#4e79a7"/>
+<rect x="210.0" y="669" width="185.9" height="8" fill="#59a14f"/>
+<text x="200" y="693" text-anchor="end" class="label">keogh</text>
+<rect x="210.0" y="682" width="189.1" height="8" fill="#f28e2b"/>
+<rect x="210.0" y="692" width="43.6" height="8" fill="#4e79a7"/>
+<rect x="210.0" y="702" width="334.4" height="8" fill="#59a14f"/>
+<text x="200" y="726" text-anchor="end" class="label">scatterAdd</text>
+<rect x="210.0" y="715" width="188.9" height="8" fill="#f28e2b"/>
+<rect x="210.0" y="725" width="188.9" height="8" fill="#4e79a7"/>
+<rect x="210.0" y="735" width="188.9" height="8" fill="#59a14f"/>
+<text x="200" y="759" text-anchor="end" class="label">fluidSim</text>
+<rect x="210.0" y="748" width="188.9" height="8" fill="#f28e2b"/>
+<rect x="210.0" y="758" width="151.2" height="8" fill="#4e79a7"/>
+<rect x="210.0" y="768" width="226.5" height="8" fill="#59a14f"/>
+<text x="200" y="792" text-anchor="end" class="label">s8n</text>
+<rect x="210.0" y="781" width="188.9" height="8" fill="#f28e2b"/>
+<rect x="210.0" y="791" width="74.7" height="8" fill="#4e79a7"/>
+<rect x="210.0" y="801" width="303.1" height="8" fill="#59a14f"/>
+<text x="200" y="825" text-anchor="end" class="label">doh</text>
+<rect x="210.0" y="814" width="188.7" height="8" fill="#f28e2b"/>
+<rect x="210.0" y="824" width="131.8" height="8" fill="#4e79a7"/>
+<rect x="210.0" y="834" width="245.8" height="8" fill="#59a14f"/>
+<text x="200" y="858" text-anchor="end" class="label">affine</text>
+<rect x="210.0" y="847" width="188.2" height="8" fill="#f28e2b"/>
+<rect x="210.0" y="857" width="186.4" height="8" fill="#4e79a7"/>
+<rect x="210.0" y="867" width="190.7" height="8" fill="#59a14f"/>
+<text x="200" y="891" text-anchor="end" class="label">sw4ck</text>
+<rect x="210.0" y="880" width="184.4" height="8" fill="#f28e2b"/>
+<rect x="210.0" y="890" width="182.5" height="8" fill="#4e79a7"/>
+<rect x="210.0" y="900" width="190.8" height="8" fill="#59a14f"/>
+<text x="200" y="924" text-anchor="end" class="label">clenergy</text>
+<rect x="210.0" y="913" width="165.8" height="8" fill="#f28e2b"/>
+<rect x="210.0" y="923" width="185.1" height="8" fill="#4e79a7"/>
+<rect x="210.0" y="933" width="169.6" height="8" fill="#59a14f"/>
+<text x="210" y="1001" class="small">Selected report benchmarks with all three measurements: 26.</text>
 </svg>

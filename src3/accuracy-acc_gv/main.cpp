@@ -54,12 +54,12 @@ int main(int argc, char* argv[])
         count[0] = 0;
         #pragma acc update device (count[0:1]) 
 
-        #pragma acc parallel loop gang num_gangs(ngrid) vector_length(NUM_THREADS)
+        #pragma acc parallel loop gang vector num_gangs(ngrid) vector_length(NUM_THREADS)
         for (int row = 0; row < nrows; row++) {
           const int label_data = label[row];
           const float label_pred = data[row * ndims + label_data];
           int ngt = 0;
-          #pragma acc loop vector reduction(+:ngt)
+          #pragma acc loop reduction(+:ngt)
           for (int col = 0; col < ndims; col++) {
             const float pred = data[row * ndims + col];
             if (pred > label_pred || (pred == label_pred && col <= label_data)) {
