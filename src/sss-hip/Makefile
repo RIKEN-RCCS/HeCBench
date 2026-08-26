@@ -6,7 +6,6 @@
 CC        = hipcc
 OPTIMIZE  = yes
 DEBUG     = no
-GSL       = /path/to/GSL
 LAUNCHER  =
 
 #===============================================================================
@@ -24,10 +23,10 @@ obj = $(source:.cu=.o)
 #===============================================================================
 
 # Standard Flags
-CFLAGS := $(EXTRA_CFLAGS) -std=c++17 -Wall -I$(GSL)/include
+CFLAGS := $(EXTRA_CFLAGS) -std=c++17 -Wall
 
 # Linker Flags
-LDFLAGS = -L$(GSL)/lib -lgsl
+LDFLAGS =
 
 # Debug Flags
 ifeq ($(DEBUG),yes)
@@ -47,7 +46,7 @@ $(program): $(obj) Makefile
 	$(CC) $(CFLAGS) $(obj) -o $@ $(LDFLAGS)
 
 %.o: %.cu DPmixGGM.cpp  DPmixGGM_Lists.cpp  DPmixGGM_SSSmoves.cpp  \
-           kernels.cu graph.cpp  gwish.cpp  utilities.cpp Makefile
+           kernels.cu graph.cpp  gwish.cpp  utilities.cpp gsl_compat.h Makefile
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
