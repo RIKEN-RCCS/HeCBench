@@ -8,9 +8,10 @@ OPTIMIZE  = yes
 DEBUG     = no
 ARCH      = sm_90
 
-GSL_HOME  = ../lib/gsl
-GSL_INC   =-I$(GSL_HOME)/gsl-nvidia/include
-GSL_LIB   =-L$(GSL_HOME)/gsl-nvidia/lib -lgsl -lgslcblas
+EIGEN_INC ?= $(shell pkg-config --cflags eigen3 2>/dev/null)
+ifeq ($(EIGEN_INC),)
+$(error Eigen not found; install libeigen3-dev or set EIGEN_INC=-I/path/to/eigen)
+endif
 
 LAUNCHER = bash -c
 
@@ -29,10 +30,10 @@ obj=basis.o scf.o main.o crys.o cints.o cuda_rys_sp.o cuda_rys_dp.o
 #===============================================================================
 
 # Standard Flags
-CFLAGS := $(EXTRA_CFLAGS) -std=c++17 -Xcompiler -Wall $(GSL_INC) -arch=$(ARCH)
+CFLAGS := $(EXTRA_CFLAGS) -std=c++17 -Xcompiler -Wall $(EIGEN_INC) -arch=$(ARCH)
 
 # Linker Flags
-LDFLAGS = $(GSL_LIB)
+LDFLAGS =
 
 # Debug Flags
 ifeq ($(DEBUG),yes)
@@ -49,10 +50,7 @@ endif
 # Targets to Build
 #===============================================================================
 
-all : lib $(program)
-
-lib :
-	tar xf $(GSL_HOME)/gsl-nvidia.tar.bz2 -C $(GSL_HOME)
+all : $(program)
 
 $(program): $(obj)
 	$(CC) $(CFLAGS) $(obj) -o $@ $(LDFLAGS)

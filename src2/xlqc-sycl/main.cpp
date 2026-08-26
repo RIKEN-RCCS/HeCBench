@@ -26,11 +26,7 @@ of this software, even if advised of the possibility of such damage.
 #include <string>
 #include <iostream>
 
-#include <gsl/gsl_math.h>
-#include <gsl/gsl_blas.h>
-#include <gsl/gsl_eigen.h>
-#include <gsl/gsl_matrix.h>
-#include <gsl/gsl_linalg.h>
+#include "gsl_compat.h"
 
 #include "int_lib/cints.h"
 #include "int_lib/crys.h"
