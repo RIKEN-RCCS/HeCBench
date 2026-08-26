@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 project(xlqc_kokkos LANGUAGES CXX)
 
 find_package(Kokkos REQUIRED)
-find_package(GSL REQUIRED)
+find_package(Eigen3 REQUIRED)
 
 if(NOT EXISTS "${CMAKE_CURRENT_LIST_DIR}/geom.dat"
    AND EXISTS "${CMAKE_CURRENT_LIST_DIR}/../xlqc-cuda/example.tar.gz")
@@ -23,12 +23,11 @@ add_executable(main
     ../xlqc-cuda/int_lib/crys.cc
     ../xlqc-cuda/int_lib/cints.cc
 )
-target_link_libraries(main PRIVATE Kokkos::kokkos GSL::gsl GSL::gslcblas)
+target_link_libraries(main PRIVATE Kokkos::kokkos Eigen3::Eigen)
 target_compile_features(main PRIVATE cxx_std_17)
 target_include_directories(main PRIVATE
     ../xlqc-cuda
     ../xlqc-cuda/int_lib
-    ${GSL_INCLUDE_DIRS}
 )
 
 add_custom_target(run

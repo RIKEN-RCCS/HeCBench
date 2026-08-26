@@ -6,8 +6,12 @@
 CC        = $(KOKKOS_CXX)
 OPTIMIZE  = yes
 DEBUG     = no
-GSL_INC   = -I/path/to/gsl/include
-GSL_LIB   = -L/path/to/gsl/lib -lgsl -lgslcblas
+
+EIGEN_INC ?= $(shell pkg-config --cflags eigen3 2>/dev/null)
+ifeq ($(EIGEN_INC),)
+$(error Eigen not found; install libeigen3-dev or set EIGEN_INC=-I/path/to/eigen)
+endif
+
 LAUNCHER  =
 KOKKOS_PATH ?= $(HOME)/kokkos
 
@@ -28,10 +32,10 @@ include $(KOKKOS_PATH)/Makefile.kokkos
 
 # Standard Flags
 CFLAGS := $(EXTRA_CFLAGS) -std=c++17 $(KOKKOS_CPPFLAGS) $(KOKKOS_CXXFLAGS) \
-          -I../xlqc-cuda -I../xlqc-cuda/int_lib $(GSL_INC)
+          -I../xlqc-cuda -I../xlqc-cuda/int_lib $(EIGEN_INC)
 
 # Linker Flags
-LDFLAGS = $(KOKKOS_LDFLAGS) $(KOKKOS_LIBS) $(GSL_LIB)
+LDFLAGS = $(KOKKOS_LDFLAGS) $(KOKKOS_LIBS)
 
 # Debug Flags
 ifeq ($(DEBUG),yes)
