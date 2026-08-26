@@ -6,7 +6,6 @@
 CC        = clang++
 OPTIMIZE  = yes
 DEBUG     = no
-GSL       = /path/to/GSL
 LAUNCHER  =
 
 CUDA      = no
@@ -31,7 +30,6 @@ obj = $(source:.cpp=.o)
 
 # Standard Flags
 CFLAGS := $(EXTRA_CFLAGS) -std=c++17 -Wall -fsycl \
-          -I$(GSL)/include \
           --gcc-toolchain=$(GCC_TOOLCHAIN)
 
 ifeq ($(VENDOR), AdaptiveCpp)
@@ -40,7 +38,7 @@ ifeq ($(VENDOR), AdaptiveCpp)
 endif
 
 # Linker Flags
-LDFLAGS = -L$(GSL)/lib -lgsl
+LDFLAGS =
 
 ifeq ($(CUDA), yes)
   CFLAGS += -fsycl-targets=nvptx64-nvidia-cuda \
@@ -71,7 +69,7 @@ $(program): $(obj)
 	$(CC) $(CFLAGS) $(obj) -o $@ $(LDFLAGS)
 
 %.o: %.cpp DPmixGGM.cpp  DPmixGGM_Lists.cpp  DPmixGGM_SSSmoves.cpp  \
-           kernels.cpp graph.cpp  gwish.cpp  utilities.cpp
+           kernels.cpp graph.cpp  gwish.cpp  utilities.cpp gsl_compat.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
