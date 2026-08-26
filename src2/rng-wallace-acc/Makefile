@@ -24,10 +24,10 @@ obj = $(source:.cpp=.o)
 #===============================================================================
 
 # Standard Flags
-CFLAGS := $(EXTRA_CFLAGS) -std=c++17 -Wall 
+CFLAGS := $(EXTRA_CFLAGS) -std=c++17 -Wall -I../rng-wallace-cuda
 
 # Linker Flags
-LDFLAGS = 
+LDFLAGS =
 
 # Debug Flags
 ifeq ($(DEBUG),yes)
@@ -52,7 +52,7 @@ endif
 $(program): $(obj)
 	$(CC) $(CFLAGS) $(obj) -o $@ $(LDFLAGS)
 
-%.o: %.cpp constants.h rand_helpers.h
+%.o: %.cpp ../rng-wallace-cuda/constants.h ../rng-wallace-cuda/rand_helpers.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
