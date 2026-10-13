@@ -28,7 +28,7 @@ void fwtBatchGPU(float *d_Data, int M, int log2N)
     for (; log2N > ELEMENTARY_LOG2SIZE; log2N -= 2, N >>= 2, M <<= 2)
     {
       const int stride = N/4;
-      #pragma acc parallel loop collapse(2) present(d_Data) vector_length(256)
+      #pragma acc parallel loop collapse(2) present(d_Data) vector_length(256) async(1)
       for (int m = 0; m < sM; m++) {
         for (int pos = 0; pos < sN/4; pos++) {
           const float *d_Src = d_Data  + m * sN;
@@ -68,7 +68,7 @@ void fwtBatchGPU(float *d_Data, int M, int log2N)
     for (; log2N > ELEMENTARY_LOG2SIZE; log2N -= 2, N >>= 2, M <<= 2)
     {
       const int stride = N/4;
-      #pragma acc parallel num_gangs(numTeams) thread_limit(256)
+      #pragma acc parallel num_gangs(numTeams) thread_limit(256) async(1)
       {
         #pragma omp parallel
         {
@@ -113,7 +113,7 @@ void fwtBatchGPU(float *d_Data, int M, int log2N)
 
     {
       float s_data[2048];
-      #pragma acc parallel loop gang private(s_data) present(d_Data) num_gangs(M) vector_length(256)
+      #pragma acc parallel loop gang private(s_data) present(d_Data) num_gangs(M) vector_length(256) async(1)
       for (int gid = 0; gid < M; gid++) {
 
         // Handle to thread block group
@@ -191,7 +191,7 @@ void fwtBatchGPU(float *d_Data, int M, int log2N)
 void modulateGPU(float *__restrict d_A, const float *__restrict d_B, int N)
 {
     const float rcpN = 1.0f / (float)N;
-    #pragma acc parallel loop present(d_A, d_B) num_gangs(128) vector_length(256)
+    #pragma acc parallel loop present(d_A, d_B) num_gangs(128) vector_length(256) async(1)
     for (int pos = 0; pos < N; pos++)
     {
         d_A[pos] *= d_B[pos] * rcpN;

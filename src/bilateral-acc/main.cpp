@@ -15,7 +15,7 @@ void bilateralFilter(
     float variance_I,
     float variance_spatial)
 {
-  #pragma acc parallel loop collapse(2) vector_length(256)
+  #pragma acc parallel loop gang vector collapse(2) vector_length(256) default(present)
   for (int idy = 0; idy < h; idy++)
     for (int idx = 0; idx < w; idx++) {
 

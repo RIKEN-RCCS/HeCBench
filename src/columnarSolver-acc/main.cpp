@@ -106,7 +106,7 @@ int main(int argc, char* argv[]) {
         LCG_random_init(&state[idx]);
     }
 
-    #pragma acc parallel loop gang vector
+    #pragma acc parallel loop gang vector num_gangs(B) vector_length(T)
     for (int idx = 0; idx < THREADS; idx++) {
       decodeKernel(scores, encryptedMap, state, decrypted, idx);
     }

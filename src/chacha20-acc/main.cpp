@@ -26,22 +26,22 @@ void test_keystreams (
     const int text_keystream_size)
 
 {
-  #pragma acc parallel loop present(text_key, char_to_uint, raw_key)
+  #pragma acc parallel loop present(text_key, char_to_uint, raw_key) async(1)
   for (int i = 0; i < text_key_size/2; i++) {
     hex_to_raw_element(text_key, raw_key, char_to_uint, i);
   }
 
-  #pragma acc parallel loop present(text_nonce, char_to_uint, raw_nonce)
+  #pragma acc parallel loop present(text_nonce, char_to_uint, raw_nonce) async(1)
   for (int i = 0; i < text_nonce_size/2; i++) {
     hex_to_raw_element(text_nonce, raw_nonce, char_to_uint, i);
   }
 
-  #pragma acc parallel loop present(text_keystream, char_to_uint, raw_keystream)
+  #pragma acc parallel loop present(text_keystream, char_to_uint, raw_keystream) async(1)
   for (int i = 0; i < text_keystream_size/2; i++) {
     hex_to_raw_element(text_keystream, raw_keystream, char_to_uint, i);
   }
 
-  #pragma acc serial present(raw_key, raw_nonce, result)
+  #pragma acc serial present(raw_key, raw_nonce, result) async(1)
   {
     Chacha20 chacha(raw_key, raw_nonce);
     chacha.crypt(result, text_keystream_size / 2);
@@ -89,7 +89,7 @@ int main(int argc, char* argv[])
     auto start = std::chrono::steady_clock::now();
 
     for (int i = 0; i < repeat; i++) {
-      #pragma acc parallel loop present(result)
+      #pragma acc parallel loop present(result) async(1)
       for (int i = 0; i < result_len; i++)
         result[i] = 0;
 
@@ -99,6 +99,7 @@ int main(int argc, char* argv[])
         key_len, nonce_len, keystream_len);
     }
 
+    #pragma acc wait(1)
     auto end = std::chrono::steady_clock::now();
     auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
     printf("Average execution time of kernels: %f (us)\n", (time * 1e-3f) / repeat);

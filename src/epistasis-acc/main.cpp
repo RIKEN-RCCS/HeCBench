@@ -166,7 +166,7 @@ int main(int argc, char **argv)
 
     for (int i = 0; i < iteration; i++) {
 
-      #pragma acc parallel loop collapse(2) vector_length(block_snp)
+      #pragma acc parallel loop gang vector collapse(2) vector_length(block_snp)
       for (int i = 0; i < num_snp_m; i++) {
         for (int j = 0; j < num_snp_m; j++) {
 

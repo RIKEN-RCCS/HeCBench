@@ -81,7 +81,7 @@ int main(int argc, char *argv[]) {
 
     for (int it = 0; it < repeat; ++it) {
       #pragma acc parallel loop \
-        num_workers(GRID_SIZE) vector_length(BLOCK_SIZE)
+        num_gangs(GRID_SIZE) vector_length(BLOCK_SIZE) async(1)
       for (int thread_id = 0; thread_id < BLOCK_SIZE * GRID_SIZE; thread_id++) {
         typedef interval_gpu<T> I;
 
@@ -104,6 +104,7 @@ int main(int argc, char *argv[]) {
         h_nresults[thread_id] = result.size();
       }
     }
+    #pragma acc wait(1)
     auto end = std::chrono::steady_clock::now();
     time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
   }

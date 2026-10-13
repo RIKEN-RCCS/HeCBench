@@ -123,10 +123,10 @@ float pgain( long x, Points *points, float z, long int *numcenters,
     double t9 = gettime();
 #endif
 
-#pragma acc parallel loop
+#pragma acc parallel loop gang vector
     for (int i = 0; i < num; i++) switch_membership[i] = 0;
 
-#pragma acc parallel loop
+#pragma acc parallel loop gang vector
     for (int i = 0; i < num*(K+1); i++) work_mem_h[i] = 0;
 
     int work_group_size = THREADS_PER_BLOCK;

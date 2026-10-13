@@ -48,7 +48,7 @@ int main(int argc, char* argv[]) {
     auto start = std::chrono::steady_clock::now();
 
     for (int i = 0; i < repeat; i++) {
-      #pragma acc parallel loop num_gangs(grids) vector_length(blocks)
+      #pragma acc parallel loop gang vector num_gangs(grids) vector_length(blocks)
       for (int idx = 0; idx < N-M+1; idx++) {
         // obtain statistics
         float residues = 0;

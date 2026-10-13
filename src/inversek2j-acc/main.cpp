@@ -168,7 +168,7 @@ int main(int argc, char* argv[])
 
     for (int n = 0; n < iteration; n++) 
     {
-      #pragma acc parallel loop vector vector_length(BLOCK_SIZE) 
+      #pragma acc parallel loop gang vector vector_length(BLOCK_SIZE) async(1)
       for (int idx = 0; idx < data_size; idx++) 
       {  
         float angle_out[NUM_JOINTS];
@@ -240,6 +240,8 @@ int main(int argc, char* argv[])
         angle_out_h[idx * NUM_JOINTS + 2] = angle_out[2];
       }
     }
+
+    #pragma acc wait(1)
 
     auto end = std::chrono::steady_clock::now();
     auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();

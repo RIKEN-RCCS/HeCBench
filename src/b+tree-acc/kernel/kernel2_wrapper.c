@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-#include <omp.h>
 #include "../common.h"                // (in directory provided here)
 #include "../util/timer/timer.h"          // (in directory provided here)
 #include "./kernel2_wrapper.h"      // (in directory provided here)
@@ -35,32 +34,32 @@ kernel2_wrapper(
 
   // findRangeK kernel
 
-  size_t threads;
-  threads = order < 256 ? order : 256;
+  int threads = order < 256 ? order : 256;
 
-#pragma omp target data map(to: knodes[0: knodes_mem],\
-                                start[0: count],\
-                                end[0: count],\
-                                currKnode[0: count],\
-                                offset[0: count],\
-                                lastKnode[0: count],\
-                                offset_2[0: count])\
-                        map(tofrom: recstart[0: count])\
-                        map(from: reclength[0: count])
+#pragma acc data copyin(knodes[0: knodes_mem],\
+                        start[0: count],\
+                        end[0: count],\
+                        currKnode[0: count],\
+                        offset[0: count],\
+                        lastKnode[0: count],\
+                        offset_2[0: count])\
+                 copy(recstart[0: count])\
+                 copyout(reclength[0: count])
   {
     long long kernel_start = get_time();
 
-    #pragma omp target teams num_teams(count) thread_limit(threads)
-    {
-      #pragma omp parallel
-      {
-        // private thread IDs
-        int thid = omp_get_thread_num();
-        int bid = omp_get_team_num();
+    #pragma acc parallel loop gang num_gangs(count) vector_length(256) \
+                         present(knodes[0: knodes_mem], start[0: count], \
+                                 end[0: count], currKnode[0: count], \
+                                 offset[0: count], lastKnode[0: count], \
+                                 offset_2[0: count], recstart[0: count], \
+                                 reclength[0: count])
+    for(int bid = 0; bid < count; bid++){
+      int i;
+      for(i = 0; i < maxheight; i++){
 
-        int i;
-        for(i = 0; i < maxheight; i++){
-
+        #pragma acc loop vector
+        for(int thid = 0; thid < threads; thid++){
           if((knodes[currKnode[bid]].keys[thid] <= start[bid]) && (knodes[currKnode[bid]].keys[thid+1] > start[bid])){
             // this conditional statement is inserted to avoid crush due to but in original code
             // "offset[bid]" calculated below that later addresses part of knodes goes outside of its bounds cause segmentation fault
@@ -77,22 +76,24 @@ kernel2_wrapper(
               offset_2[bid] = knodes[lastKnode[bid]].indices[thid];
             }
           }
-          #pragma omp barrier
-          // set for next tree level
-          if(thid==0){
-            currKnode[bid] = offset[bid];
-            lastKnode[bid] = offset_2[bid];
-          }
-          #pragma omp barrier
         }
 
-        // Find the index of the starting record
+        // set for next tree level
+        currKnode[bid] = offset[bid];
+        lastKnode[bid] = offset_2[bid];
+      }
+
+      // Find the index of the starting record
+      #pragma acc loop vector
+      for(int thid = 0; thid < threads; thid++){
         if(knodes[currKnode[bid]].keys[thid] == start[bid]){
           recstart[bid] = knodes[currKnode[bid]].indices[thid];
         }
-        #pragma omp barrier
+      }
 
-        // Find the index of the ending record
+      // Find the index of the ending record
+      #pragma acc loop vector
+      for(int thid = 0; thid < threads; thid++){
         if(knodes[lastKnode[bid]].keys[thid] == end[bid]){
           reclength[bid] = knodes[lastKnode[bid]].indices[thid] - recstart[bid]+1;
         }
@@ -110,4 +111,3 @@ kernel2_wrapper(
 #endif
 
 }
-

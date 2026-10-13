@@ -76,7 +76,7 @@ void barrel_distort (
         uchar3 *__restrict dst,
   const struct Properties *__restrict prop)
 {
-  #pragma acc parallel loop collapse(2) vector_length(256)
+  #pragma acc parallel loop collapse(2) vector_length(256) async(1) default(present)
   for (int h = 0; h < prop->height; h++) {
     for (int w = 0; w < prop->width; w++) {
       float x = getRadialX((float)w, (float)h, prop);

@@ -240,7 +240,7 @@ void run(XYZ *in, int in_size_i, int in_size_j, int out_size_i, int out_size_j, 
   {
     auto kstart = std::chrono::steady_clock::now();
 
-    #pragma acc parallel loop vector vector_length(256)
+    #pragma acc parallel loop vector_length(256)
     for (int i = 0; i < out_size_i; i++) {
       FLOAT   mui = i / (FLOAT)(out_size_i - 1);
       for(int j = 0; j < out_size_j; j++) {

@@ -59,16 +59,19 @@ int main(int argc, char* argv[]) {
     auto start = std::chrono::steady_clock::now();
   
     for (int n = 0; n < repeat; n++) {
-      #pragma acc parallel loop vector vector_length(BLOCK_SIZE)
+      #pragma acc parallel loop vector_length(BLOCK_SIZE)
       for (int i = 0; i < numSlice; i++) {
         float max_ = input[i * sliceSize];
+        #pragma acc loop vector reduction(max:max_)
         for (int j = 1; j < sliceSize; j++) {
           max_ = (max_ < input[i * sliceSize + j]) ? input[i * sliceSize + j] : max_;
         }
         float sum = 0;
+        #pragma acc loop vector reduction(+:sum)
         for (int j = 0; j < sliceSize; j++) {
           sum += expf(input[i * sliceSize + j] - max_);
         }
+        #pragma acc loop vector
         for (int j = 0; j < sliceSize; j++) {
           output_gpu[i * sliceSize + j] = expf(input[i * sliceSize + j] - max_) / sum;
         }

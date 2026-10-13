@@ -93,7 +93,7 @@ int main(int argc, char** argv)
 
     for(int i = 0; i < iterations; i++)
     {
-#pragma acc parallel num_gangs(teams) vector_length(block)
+#pragma acc parallel num_gangs(teams) vector_length(block) async(1)
       {
         int iv[NTAB];
 #pragma acc loop gang vector private(iv)
@@ -113,6 +113,7 @@ int main(int argc, char** argv)
       }
     }
 
+    #pragma acc wait(1)
     auto end = std::chrono::steady_clock::now();
     auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
     std::cout << "Average kernel execution time: " <<  (time * 1e-3f) / iterations << " (us)\n";

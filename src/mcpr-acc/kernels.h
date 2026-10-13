@@ -5,7 +5,7 @@ void compute_probs(
   int n, int K, int M,
   int threads, int blocks)
 {
-  #pragma acc parallel loop present(alphas, rands, probs)
+  #pragma acc parallel loop gang vector present(alphas, rands, probs)
   for (int i = 0; i < n; i++) {
     double maxval;    
     int m, k;
@@ -49,7 +49,7 @@ void compute_probs_unitStrides(
   int n, int K, int M,
   int threads, int blocks)
 {
-  #pragma acc parallel loop present(alphas, rands, probs)
+  #pragma acc parallel loop gang vector present(alphas, rands, probs)
   for (int i = 0; i < n; i++) {
     double maxval;    
     int m, k;
@@ -95,7 +95,7 @@ void compute_probs_unitStrides_sharedMem(
   int n, int K, int M,
   int threads, int blocks)
 {
-  #pragma acc parallel loop present(alphas, rands, probs)
+  #pragma acc parallel loop gang vector present(alphas, rands, probs)
   for (int i = 0; i < n; i++) {
 
     // set up local memory: half for probs and half for w

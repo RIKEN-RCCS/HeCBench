@@ -91,8 +91,8 @@ int main(int argc, char** argv)
 
     for(int j = 0; j < iterations; j++)
     {
-#pragma acc parallel loop collapse(2) vector_length(256)
-      for (int j = 0; j < numRows; j++)  
+#pragma acc parallel loop collapse(2) vector_length(256) async(1) present(tIn,tOut,pIn)
+      for (int j = 0; j < numRows; j++)
       {
         for (int i = 0; i < numCols; i++)  
         {
@@ -140,6 +140,7 @@ int main(int argc, char** argv)
       tOut = temp;
     }
 
+    #pragma acc wait(1)
     auto kend = std::chrono::steady_clock::now();
     auto ktime = std::chrono::duration_cast<std::chrono::nanoseconds>(kend - kstart).count();
     printf("Average kernel execution time %f (us)\n", (ktime * 1e-3f) / iterations);

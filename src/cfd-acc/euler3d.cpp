@@ -106,7 +106,7 @@ inline void compute_flux_contribution(float density, Float3 momentum, float dens
 
 //#pragma acc routine vector
 void copy(float* dst, const float* src, int N){
-#pragma acc parallel loop vector_length(256)
+#pragma acc parallel loop vector_length(256) async(1) default(present)
   for (int i = 0; i < N; i++) { 
     dst[i] = src[i];
   }
@@ -140,7 +140,7 @@ void dump(float* h_variables, int nel, int nelr){
 
 //#pragma acc routine vector
 void initialize_buffer(float* d, float val, int number_words) { //throw(std::string){
-#pragma acc parallel loop vector_length(256)
+#pragma acc parallel loop vector_length(256) async(1) default(present)
   for (int i = 0; i < number_words; i++) { 
     d[i] = val;
   }
@@ -150,7 +150,7 @@ void initialize_buffer(float* d, float val, int number_words) { //throw(std::str
 //#pragma acc routine vector
 void initialize_variables(int nelr, float* variables, float* ff_variable)  { //throw(std::string){
 
-#pragma acc parallel loop vector_length(BLOCK_SIZE_1)
+#pragma acc parallel loop vector_length(BLOCK_SIZE_1) async(1) default(present)
   for (int i = 0; i < nelr; i++)
     for(int j = 0; j < NVAR; j++)
       variables[i + j*nelr] = ff_variable[j];
@@ -159,7 +159,7 @@ void initialize_variables(int nelr, float* variables, float* ff_variable)  { //t
 //#pragma acc routine vector
 void compute_step_factor(int nelr, float* variables, float* areas, float* step_factors){
 
-#pragma acc parallel loop vector_length(BLOCK_SIZE_2)
+#pragma acc parallel loop vector_length(BLOCK_SIZE_2) async(1) default(present)
   for (int i = 0; i < nelr; i++) {
     float density = variables[i + VAR_DENSITY*nelr];
     Float3 momentum;
@@ -191,7 +191,8 @@ void compute_flux(
     Float3 ff_flux_contribution_momentum_y,
     Float3 ff_flux_contribution_momentum_z){
 
-#pragma acc parallel loop vector_length(BLOCK_SIZE_3)
+#pragma acc parallel loop vector_length(BLOCK_SIZE_3) async(1) \
+ present(elements_surrounding_elements, normals, variables, ff_variable, fluxes)
   for (int i = 0; i < nelr; i++) {
     int j, nb;
     Float3 normal; 
@@ -335,7 +336,7 @@ void time_step(int j, int nelr,
     const float* step_factors, 
     const float* fluxes) {
 
-#pragma acc parallel loop vector_length(BLOCK_SIZE_4)
+#pragma acc parallel loop vector_length(BLOCK_SIZE_4) async(1) default(present)
   for (int i = 0; i < nelr; i++) {
     float factor = step_factors[i]/(float)(RK+1-j);
 
@@ -515,6 +516,7 @@ int main(int argc, char** argv){
       }
     }
 
+#pragma acc wait(1)
     kernel_end = get_time();
   }
 #ifdef OUTPUT

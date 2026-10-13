@@ -20,7 +20,7 @@ void computeDistance(const float2* __restrict Apoints,
 {
   float max_d = distance[0]; 
 
-#pragma acc parallel loop reduction(max:max_d) vector_length(256)
+#pragma acc parallel loop gang vector reduction(max:max_d) vector_length(256) default(present)
   for (int i = 0; i < numA; i++) {
     float d = FLT_MAX;
     float2 p = Apoints[i];
@@ -30,7 +30,7 @@ void computeDistance(const float2* __restrict Apoints,
     }
     if (d > max_d) max_d = d; 
   }
-  distance[0] = max_d; 
+  distance[0] = max_d;
 
 }
 
@@ -64,14 +64,11 @@ int main(int argc, char* argv[]) {
   float h_distance[2] = {-1.f, -1.f};
 
 #pragma acc data copyin(h_Apoints[0:num_Apoints],	\
-			h_Bpoints[0:num_Bpoints])	\
-  copyout(h_distance[0:2]) 
+			h_Bpoints[0:num_Bpoints])
   {
     double time = 0.0;
 
     for (int i = 0; i < repeat; i++) {
-
-      #pragma acc update device (h_distance[0:2])
 
       auto start = std::chrono::steady_clock::now();
 

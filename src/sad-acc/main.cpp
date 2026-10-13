@@ -24,7 +24,7 @@ void compute_sad_array(
 {
   auto kbegin = std::chrono::steady_clock::now();
 
-  #pragma acc parallel loop collapse(2) vector_length(BLOCK_SIZE)
+  #pragma acc parallel loop gang vector collapse(2) vector_length(BLOCK_SIZE) default(present)
   for (int row = 0; row < image_height; row++) {
     for (int col = 0; col < image_width; col++) {
       int sad_result = 0;
@@ -57,14 +57,14 @@ void compute_sad_array(
   }
 
   int m = THRESHOLD;
-  #pragma acc parallel loop vector_length(256) \
-    copy(m) reduction(min: m)
+  #pragma acc parallel loop gang vector vector_length(256) \
+    default(present) copy(m) reduction(min: m)
   for (int i = 0; i < sad_array_size; i++) 
     m = min(m, sad_array[i]);
 
   int n = 0; 
-  #pragma acc parallel loop vector_length(256) \
-    copy(n) reduction(+: n)
+  #pragma acc parallel loop gang vector vector_length(256) \
+    default(present) copy(n) reduction(+: n)
   for (int i = 0; i < sad_array_size; i++) {
     if (sad_array[i] == m) n++;
   }

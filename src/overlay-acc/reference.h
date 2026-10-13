@@ -1,4 +1,4 @@
-typedef struct __attribute__((__aligned__(16)))
+typedef struct
 {
   float x, y, z;
 }

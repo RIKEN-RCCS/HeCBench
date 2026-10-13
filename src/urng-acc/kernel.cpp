@@ -14,6 +14,7 @@
   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ********************************************************************/
 
+#pragma acc routine seq
 inline float4 convert_float4(uchar4 v) {
   float4 res;
   res.x = (float) v.x;
@@ -23,6 +24,7 @@ inline float4 convert_float4(uchar4 v) {
   return res;
 }
 
+#pragma acc routine seq
 inline uchar4 convert_uchar4_sat(float4 v) {
   uchar4 res;
   res.x = (unsigned char) ((v.x > 255.f) ? 255.f : (v.x < 0.f ? 0.f : v.x));
@@ -70,6 +72,7 @@ float ran1(int idum, int *iv)
   return (AM * iy);  //AM *iy will be between 0.0 and 1.0
 }
 
+#pragma acc routine seq
 inline float4 operator+(float4 a, float b)
 {
   return {a.x + b, a.y + b, a.z + b,  a.w + b};

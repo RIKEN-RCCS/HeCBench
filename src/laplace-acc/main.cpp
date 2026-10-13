@@ -187,9 +187,9 @@ int main (void) {
   
       Real norm_L2 = ZERO;
   
-      #pragma acc parallel loop collapse(2) vector_length(BLOCK_SIZE)
-      for (int row = 1; row <= NUM/2; row++) {
-        for (int col = 1; col <= NUM; col++) {
+      #pragma acc parallel loop collapse(2) vector_length(BLOCK_SIZE) async(1)
+      for (int col = 1; col <= NUM; col++) {
+        for (int row = 1; row <= NUM/2; row++) {
           int ind_red = col * ((NUM >> 1) + 2) + row;  					// local (red) index
           int ind = 2 * row - (col & 1) - 1 + NUM * (col - 1);	// global index
   
@@ -209,14 +209,16 @@ int main (void) {
         }
       }
       // add red cell contributions to residual
-      #pragma acc parallel loop reduction(+:norm_L2)
+      #pragma acc parallel loop reduction(+:norm_L2) async(1)
       for (int i = 0; i < size_norm; ++i) {
         norm_L2 += bl_norm_L2[i];
       }
+
+      #pragma acc wait(1)
   
-      #pragma acc parallel loop collapse(2) vector_length(BLOCK_SIZE)
-      for (int row = 1; row <= NUM/2; row++) {
-        for (int col = 1; col <= NUM; col++) {
+      #pragma acc parallel loop collapse(2) vector_length(BLOCK_SIZE) async(1)
+      for (int col = 1; col <= NUM; col++) {
+        for (int row = 1; row <= NUM/2; row++) {
           int ind_black = col * ((NUM >> 1) + 2) + row; // local (black) index
           int ind = 2 * row - ((col + 1) & 1) - 1 + NUM * (col - 1); // global index
   
@@ -236,11 +238,12 @@ int main (void) {
         }
       }
       // add black cell contributions to residual
-      #pragma acc parallel loop reduction(+:norm_L2)
+      #pragma acc parallel loop reduction(+:norm_L2) async(1)
       for (int i = 0; i < size_norm; ++i)
         norm_L2 += bl_norm_L2[i];
   
       // calculate residual
+      #pragma acc wait(1)
       norm_L2 = sqrt(norm_L2 / ((Real)size));
   
       if (iter % 1000 == 0) printf("%5d, %0.6f\n", iter, norm_L2);

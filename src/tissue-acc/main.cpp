@@ -30,10 +30,10 @@ void tissue(
     const float *__restrict d_qt,
     int nnt, int nntDev, int step, int isp)
 {
-  #pragma acc parallel loop present(d_ct)
+  #pragma acc parallel loop gang vector present(d_ct)
   for (int i = 0; i < nnt; i++) d_ct[i] = 0.0f;
 
-#pragma acc parallel loop vector_length(256)				\
+#pragma acc parallel loop gang vector vector_length(256)				\
     present(d_tisspoints, d_gtt, d_gbartt, d_ct, d_ctprev, d_qt)
   for (int i = 0; i < step * nnt; i++) {
     int jtp,ixyz,ix,iy,iz,jx,jy,jz,istep;

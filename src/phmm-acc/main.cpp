@@ -104,7 +104,7 @@ int main(int argc, char* argv[]) {
       }
     }
 
-    #pragma acc wait
+    #pragma acc wait(1)
     auto t2 = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double, std::milli> milli = (t2 - t1);
     std::cout << "Total execution time " <<  milli.count() << " milliseconds\n" ;

@@ -31,7 +31,7 @@ void laplace3d(
   const float *__restrict u1,
         float *__restrict u2)
 {
-  #pragma acc parallel loop collapse(3) vector_length(BLOCK_X*BLOCK_Y)
+  #pragma acc parallel loop gang vector collapse(3) num_gangs(NX*NY/BLOCK_X/BLOCK_Y) vector_length(BLOCK_X*BLOCK_Y) default(present)
   for (int k=0; k<NZ; k++) {
     for (int j=0; j<NY; j++) {
       for (int i=0; i<NX; i++) {   // i loop innermost for sequential memory access

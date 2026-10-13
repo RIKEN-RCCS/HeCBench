@@ -41,7 +41,7 @@ ifeq ($(OPTIMIZE),yes)
 endif
 
 ifeq ($(DEVICE),gpu)
-  CFLAGS +=-fopenacc -fopenacc-targets=spir64 -D__STRICT_ANSI__ -DOPENMP_TARGET
+  CFLAGS +=-fopenacc -fopenacc-targets=spir64 -D__STRICT_ANSI__
 else
   CFLAGS +=-acc
 endif

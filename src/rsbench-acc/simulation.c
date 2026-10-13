@@ -35,7 +35,7 @@ void run_event_based_simulation(Input input, SimulationData data, unsigned long 
   {
     double start = get_time();
 
-    #pragma acc parallel loop reduction(+:verification)
+    #pragma acc parallel loop gang vector reduction(+:verification)
     for( int i = 0; i < input.lookups; i++ )
     {
       // Set the initial seed value

@@ -66,7 +66,7 @@ void FindNearestNeighbors(
     auto start = std::chrono::steady_clock::now();
 
     for (int i = 0; i < repeat; i++) {
-      #pragma acc parallel loop vector_length(64)
+      #pragma acc parallel loop vector_length(64) async(1)
       for (int gid = 0; gid < numRecords; gid++) {
         LatLong latLong = p_locations[gid];
         distances[gid] = sqrtf((lat-latLong.lat)*(lat-latLong.lat)+
@@ -74,6 +74,7 @@ void FindNearestNeighbors(
       }
     }
 
+    #pragma acc wait(1)
     auto end = std::chrono::steady_clock::now();
     auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
     printf("Average kernel execution time: %f (us)\n", (time * 1e-3f) / repeat);

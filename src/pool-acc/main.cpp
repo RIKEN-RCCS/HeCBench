@@ -26,7 +26,14 @@ class MaxPoolGrad {
 
 #include "reference.h"
 
-template <typename PoolProcess, typename T>
+template <typename PoolProcess, typename T,
+          int ksize_height,
+          int ksize_width,
+          int stride_height,
+          int stride_width,
+          int padding_height,
+          int padding_width,
+          bool exclusive>
 void KernelPool2DGrad(
     const int nthreads,
     const T*__restrict input_data,
@@ -37,18 +44,11 @@ void KernelPool2DGrad(
     const int input_width,
     const int output_height,
     const int output_width,
-    const int ksize_height,
-    const int ksize_width,
-    const int stride_height,
-    const int stride_width,
-    const int padding_height,
-    const int padding_width,
     PoolProcess pool_process,
-    bool exclusive,
     T*__restrict input_grad,
     bool channel_last = false)
 {
-  #pragma acc parallel loop vector_length(BSIZE)
+  #pragma acc parallel loop gang vector vector_length(BSIZE) async(1)
   for (int index = 0; index < nthreads; index ++) {
     int w_offset, h_offset, offsetC, batch_idx;
     int tmp;
@@ -175,13 +175,15 @@ int main(int argc, char* argv[])
     auto start = std::chrono::steady_clock::now();
 
     for (int i = 0; i < repeat; i++) {
-      KernelPool2DGrad<AvgPoolGrad<float>, float>(
+      KernelPool2DGrad<AvgPoolGrad<float>, float, ksize_height, ksize_width,
+                     stride_height, stride_width, padding_height, padding_width,
+                     exclusive>(
         nthreads, input, output, output_grad, input_channels,
-        input_height, input_width, output_height, output_width, ksize_height,
-        ksize_width, stride_height, stride_width, padding_height, padding_width,
-        pool_process, exclusive, input_grad, channel_last);
+        input_height, input_width, output_height, output_width,
+        pool_process, input_grad, channel_last);
     }
 
+    #pragma acc wait(1)
     auto end = std::chrono::steady_clock::now();
     auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
     printf("Average kernel execution time: %f (s)\n", (time * 1e-9f) / repeat);

@@ -50,7 +50,7 @@ void elementwise(int hiddenSize, int miniBatch,
 {
   int numElements = miniBatch * hiddenSize;
 
-  #pragma acc parallel loop vector_length(256)
+  #pragma acc parallel loop vector_length(256) async(1) default(present)
   for (int index = 0; index < numElements; index++) {
 
     int batch = index / hiddenSize;
@@ -91,7 +91,7 @@ float LCG_random(unsigned int * seed) {
 
 
 void init (float* data, int size) {
-  #pragma acc parallel loop vector_length(256)
+  #pragma acc parallel loop vector_length(256) default(present)
   for (int index = 0; index < size; index++) {
     unsigned int seed = index ^ size;
     data[index] = LCG_random(&seed);
@@ -205,7 +205,7 @@ void test(int hiddenSize, int miniBatch, int seqLength, int numLayers,
          c_data + i * numElements + layer * (seqLength + 1) * numElements,
          c_data + (i + 1) * numElements + layer * (seqLength + 1) * numElements);
     }
-
+    #pragma acc wait(1)
     auto end = std::chrono::steady_clock::now();
     ktime += std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
   }

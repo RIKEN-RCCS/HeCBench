@@ -1,4 +1,4 @@
-CC        = nvc++ -acc
+CC        = nvc++
 OPTIMIZE  = yes
 DEBUG     = no
 DEVICE    = gpu
@@ -24,7 +24,7 @@ ifeq ($(OPTIMIZE),yes)
 endif
 
 ifeq ($(DEVICE),gpu)
-  CFLAGS +=-Minfo -mp=gpu -gpu=$(SM)
+  CFLAGS +=-Minfo -acc=gpu -gpu=$(SM)
 else
   CFLAGS +=-acc
 endif
@@ -84,4 +84,3 @@ run_mem: b+tree.out
 
 clean:
 	rm -f	*.o *.out 		./kernel/*.o 		./util/timer/*.o 		./util/num/*.o 		output.txt
-

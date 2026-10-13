@@ -22,7 +22,7 @@ void conv1d(const T * __restrict__ mask,
             const int input_width,
             const int mask_width)
 {
-  #pragma acc parallel loop vector_length(BLOCK_SIZE)
+  #pragma acc parallel loop gang vector vector_length(BLOCK_SIZE) default(present)
   for (int i = 0; i < input_width; i++) {
     T s = 0;
     int start = i - mask_width / 2;
@@ -42,7 +42,7 @@ void conv1d_tiled(const T *__restrict__ mask,
                   const int input_width,
                   const int mask_width)
 {
-  #pragma acc parallel num_gangs(input_width/BLOCK_SIZE) vector_length(BLOCK_SIZE)
+  #pragma acc parallel num_gangs(input_width/BLOCK_SIZE) vector_length(BLOCK_SIZE) default(present)
   {
     T tile[TILE_SIZE + MAX_MASK_WIDTH - 1];
 #pragma acc loop gang
@@ -88,7 +88,7 @@ void conv1d_tiled_caching(const T *__restrict__ mask,
                           const int input_width,
                           const int mask_width)
 {
-  #pragma acc parallel num_gangs(input_width/BLOCK_SIZE) vector_length(BLOCK_SIZE)
+  #pragma acc parallel num_gangs(input_width/BLOCK_SIZE) vector_length(BLOCK_SIZE) default(present)
   {
     T tile[TILE_SIZE];
 

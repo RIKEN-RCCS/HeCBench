@@ -43,25 +43,20 @@ void nll_loss_forward_reduce2d_kernel(
           acc_weight[tid] += static_cast<accscalar_t>(cur_weight);
         }
       }
+    }
 
-      #pragma acc loop vector
-      for (int tid = 0; tid < NLL_LOSS_THREADS; tid++) {
-        if (tid == 0) {
-          accscalar_t output_acc = 0;
-          accscalar_t total_weight_acc = 0;
-          //for (int i = 0; i < NLL_LOSS_THREADS; ++i) {
-          for (int i = 0; i < nthreads; ++i) {
-            output_acc += sm_inputs[i];
-            total_weight_acc += acc_weight[i];
-          }
-          *total_weight = static_cast<scalar_t>(total_weight_acc);
-          if (size_average) {
-            *output = static_cast<scalar_t>(output_acc / total_weight_acc);
-          } else {
-            *output = static_cast<scalar_t>(output_acc);
-          }
-        }
-      }
+    accscalar_t output_acc = 0;
+    accscalar_t total_weight_acc = 0;
+    #pragma acc loop seq
+    for (int i = 0; i < NLL_LOSS_THREADS; ++i) {
+      output_acc += sm_inputs[i];
+      total_weight_acc += acc_weight[i];
+    }
+    *total_weight = static_cast<scalar_t>(total_weight_acc);
+    if (size_average) {
+      *output = static_cast<scalar_t>(output_acc / total_weight_acc);
+    } else {
+      *output = static_cast<scalar_t>(output_acc);
     }
   }
 }

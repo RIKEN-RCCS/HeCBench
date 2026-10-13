@@ -49,7 +49,7 @@ int main(int argc, char* argv[]) {
       auto start = std::chrono::steady_clock::now();
 
       for (int j = 0; j < count; j++) {
-        #pragma acc parallel num_gangs(1) vector_length(len) present(test[0:len])
+        #pragma acc parallel num_gangs(1) vector_length(len) present(test[0:len]) async(1)
         {
           int s[len];
 	  #pragma acc loop vector
@@ -65,7 +65,7 @@ int main(int argc, char* argv[]) {
         }
       }
 
-      #pragma acc wait
+      #pragma acc wait(1)
       auto end = std::chrono::steady_clock::now();
       time += std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
 

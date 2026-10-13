@@ -306,7 +306,7 @@ int main(int argc, char* argv[])
 
       // Simplified approach: each gang processes one work group
       // Each vector element checks one position
-      #pragma acc parallel loop gang \
+      #pragma acc parallel loop gang vector_length(256) \
                 present(text, pattern, result, resultCount)
       for (uint groupIdx = 0; groupIdx < workGroupCount; groupIdx++)
       {

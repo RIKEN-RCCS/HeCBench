@@ -16,7 +16,7 @@ void contraction (
   const int nChanels)
 {
   // #pragma acc parallel loop vector_length(256)
-#pragma acc parallel loop // num_workers(256)
+#pragma acc parallel loop gang vector vector_length(256) default(present)
   for (int tid = 0; tid < output_size; tid++) {
     int C = nChanels;
     int B = N * C;

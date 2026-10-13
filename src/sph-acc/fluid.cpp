@@ -347,7 +347,7 @@ int main(int argc, char *argv[])
   for(int n=0; n<params.number_steps; n++) {
 
     //updatePressures <<< dim3(grid1D_FP), dim3(block1D) >>> (d_fluid_particles, d_params);
-    #pragma acc parallel loop vector vector_length(256) 
+    #pragma acc parallel loop gang vector vector_length(256)
     for (int i = 0; i < num_fluid_particles; i++) {
         double3 p_pos = fluid_particles[i].pos;
         double3 p_v   = fluid_particles[i].v;
@@ -362,7 +362,7 @@ int main(int argc, char *argv[])
     }
 
     //updateAccelerationsFP <<< dim3(grid1D_FP), dim3(block1D) >>> (d_fluid_particles, d_params);
-    #pragma acc parallel loop vector vector_length(256) 
+    #pragma acc parallel loop gang vector vector_length(256)
     for (int i = 0; i < num_fluid_particles; i++) {
 
       double ax = 0.0;
@@ -396,7 +396,7 @@ int main(int argc, char *argv[])
     }
 
     //updateAccelerationsBP ()<<< dim3(grid1D_BP), dim3(block1D) >>> (d_fluid_particles, d_boundary_particles, d_params);
-    #pragma acc parallel loop vector vector_length(256) 
+    #pragma acc parallel loop gang vector vector_length(256)
     for (int i = 0; i < num_particles; i++) {
       double ax = fluid_particles[i].a.x;
       double ay = fluid_particles[i].a.y;
@@ -419,7 +419,7 @@ int main(int argc, char *argv[])
     }
 
     //updatePositions <<< dim3(grid1D_FP), dim3(block1D) >>> (d_fluid_particles, d_params);
-    #pragma acc parallel loop vector vector_length(256) 
+    #pragma acc parallel loop gang vector vector_length(256)
     for (int i = 0; i < num_fluid_particles; i++) {
       double dt = params.time_step;
 

@@ -109,6 +109,7 @@ void r_squared(linear_param_t *params, data_t *dataset, sum_t *linreg, result_t 
       for (int i = 0; i < params->repeat; i++)
         rsquared(nTeams, dataset, mean, equation, results);
 
+      #pragma acc wait(1)
       auto end = std::chrono::steady_clock::now();
       auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
       response->ktime += time;
@@ -165,6 +166,7 @@ void parallelized_regression(linear_param_t *params, data_t *dataset, result_t *
       for (int i = 0; i < params->repeat; i++)
         linear_regression(nTeams, dataset, results);
 
+      #pragma acc wait(1)
       auto end = std::chrono::steady_clock::now();
       auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
       response->ktime += time;

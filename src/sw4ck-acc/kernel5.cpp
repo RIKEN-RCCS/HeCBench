@@ -1,5 +1,5 @@
 void kernel5(
-    const int start0, const int N0, 
+    const int start0, const int N0,
     const int start1, const int N1,
     const int start2, const int N2,
     const int ifirst, const int ilast,
@@ -7,23 +7,24 @@ void kernel5(
     const int kfirst, const int klast,
     const int nk,
     const float_sw4 a1, const float_sw4 sgn,
-    const float_sw4* __restrict__ a_u, 
+    const float_sw4* __restrict__ a_u,
     const float_sw4* __restrict__ a_mu,
     const float_sw4* __restrict__ a_lambda,
     const float_sw4* __restrict__ a_met,
     const float_sw4* __restrict__ a_jac,
-          float_sw4* __restrict__ a_lu, 
-    const float_sw4* __restrict__ a_acof, 
+          float_sw4* __restrict__ a_lu,
+    const float_sw4* __restrict__ a_acof,
     const float_sw4* __restrict__ a_bope,
-    const float_sw4* __restrict__ a_ghcof, 
+    const float_sw4* __restrict__ a_ghcof,
     const float_sw4* __restrict__ a_acof_no_gp,
-    const float_sw4* __restrict__ a_ghcof_no_gp, 
+    const float_sw4* __restrict__ a_ghcof_no_gp,
     const float_sw4* __restrict__ a_strx,
-    const float_sw4* __restrict__ a_stry ) 
+    const float_sw4* __restrict__ a_stry )
 {
 
-#pragma acc parallel loop collapse(3) vector_length(256)
-  for (int k = start2; k < N2; k++) 
+#pragma acc parallel loop gang vector collapse(3) vector_length(256) \
+ present(a_u,a_mu,a_lambda,a_met,a_jac,a_lu,a_acof,a_bope,a_ghcof,a_acof_no_gp,a_ghcof_no_gp,a_strx,a_stry)
+  for (int k = start2; k < N2; k++)
     for (int j = start1; j < N1; j++)
       for (int i = start0; i < N0; i++) {
     // 5 ops

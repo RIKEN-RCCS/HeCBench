@@ -20,6 +20,8 @@ void kernel2(
     const float_sw4* __restrict__ a_strx,
     const float_sw4* __restrict__ a_stry ) 
 {
+#pragma acc parallel loop gang vector collapse(3) vector_length(256) \
+ present(a_u,a_mu,a_lambda,a_met,a_jac,a_lu,a_acof,a_bope,a_ghcof,a_acof_no_gp,a_ghcof_no_gp,a_strx,a_stry)
   for (int k = start2; k < N2; k++) 
     for (int j = start1; j < N1; j++)
       for (int i = start0; i < N0; i++) {
@@ -420,4 +422,3 @@ void kernel2(
     lu(1, i, j, k) = a1 * lu(1, i, j, k) + sgn * r1 * ijac;
   } 
 }
-

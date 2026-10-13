@@ -58,6 +58,7 @@ int main(int argc, char **argv)
       barrel_distort(h_src, h_dst, h_prop);
     }
 
+    #pragma acc wait(1)
     auto end = std::chrono::steady_clock::now();
     auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
     printf("Average kernel execution time: %f (ms)\n", (time * 1e-6f) / repeat);

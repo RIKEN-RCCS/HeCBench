@@ -31,10 +31,11 @@ int main(int argc, char* argv[]) {
 
   for (int i = 0; i < length+RADIUS; i++) a[i] = i;
 
+  #pragma acc data copyin(a[0:pad_size]) copyout(b[0:size])
+  {
   auto start = std::chrono::steady_clock::now();
-
   for (int i = 0; i < repeat; i++) {
-    #pragma acc parallel loop copyin(a[0:pad_size]) copyout(b[0:size]) 
+    #pragma acc parallel loop
     //    for (int i = 0; i < length; i = i + BLOCK_SIZE) {
     for (int i = 0; i < length; i += BLOCK_SIZE) {
       int temp[BLOCK_SIZE + 2 * RADIUS];
@@ -61,6 +62,7 @@ int main(int argc, char* argv[]) {
   auto end = std::chrono::steady_clock::now();
   auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
   printf("Average kernel execution time: %f (s)\n", (time * 1e-9f) / repeat);
+  }
 
   // verification
   bool ok = true;

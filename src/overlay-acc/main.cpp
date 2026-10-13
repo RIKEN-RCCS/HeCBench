@@ -35,7 +35,8 @@ void DetectionOverlayBox(
   int x0, int y0, int boxWidth, int boxHeight,
   const float4 color) 
 {
-  #pragma acc parallel loop collapse(2) vector_length(64)
+  #pragma acc parallel loop collapse(2) vector_length(64) async(1)  \
+  present(input, output)
   for(int box_y = 0; box_y < boxHeight; box_y++)
     for(int box_x = 0; box_x < boxWidth; box_x++) {
   
@@ -79,6 +80,7 @@ int DetectionOverlay(
     DetectionOverlayBox<T>(
       input, output, width, height, boxLeft, boxTop, boxWidth, boxHeight, colors);
   }
+#pragma acc wait(1)
 
   auto end = std::chrono::steady_clock::now();
   auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
@@ -124,7 +126,7 @@ int main(int argc, char* argv[]) {
   #pragma acc data copyin(input[0:img_size]) \
     copy (output[0:img_size])
   {
-    DetectionOverlay<float3>(input, output, width, height, detections, numDetections, colors);  
+    DetectionOverlay<float3>(input, output, width, height, detections, numDetections, colors);
   }
 
   reference<float3>(input, ref_output, width, height, detections, numDetections, colors);  

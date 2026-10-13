@@ -320,7 +320,7 @@ int main(int argc, char **argv)
   start = std::chrono::steady_clock::now();
 
   for (int i = 0; i < repeat; i++) { 
-    #pragma acc parallel loop num_gangs(GRID_SIZE) vector_length(BLOCK_SIZE)
+    #pragma acc parallel loop gang vector num_gangs(GRID_SIZE) vector_length(BLOCK_SIZE)
     for (int tid = 0; tid < GRID_SIZE * BLOCK_SIZE; tid++) {
       const int threadN = GRID_SIZE * BLOCK_SIZE;
 

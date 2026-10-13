@@ -77,7 +77,7 @@ int main(int argc, char** argv)
     auto start = std::chrono::steady_clock::now();
 
     for (int i = 0; i < iterations; i++) {
-      #pragma acc parallel loop collapse(2) vector_length(256)
+      #pragma acc parallel loop collapse(2) vector_length(256) async(1)
       for (int y = 0; y < Y_SIZE; y++)
         for (int x = 0; x < X_SIZE; x++) {
 
@@ -159,6 +159,7 @@ int main(int argc, char** argv)
           output_image[(y * X_SIZE)+x] = output_buffer;
         }
     }
+    #pragma acc wait(1)
     auto end = std::chrono::steady_clock::now();
     auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
     std::cout << "   Average kernel execution time " << (time * 1e-9f) / iterations << " (s)\n";

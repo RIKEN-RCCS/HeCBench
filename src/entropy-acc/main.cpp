@@ -10,7 +10,7 @@ void entropy(
   const char*__restrict d_val, 
   int height, int width)
 {
-  #pragma acc parallel loop collapse(2) present(d_entropy, d_val)
+  #pragma acc parallel loop gang vector collapse(2) present(d_entropy, d_val)
   for (int y = 0; y < height; y++) {
     for (int x = 0; x < width; x++) {
       // value of matrix element ranges from 0 inclusive to 16 exclusive
@@ -54,7 +54,7 @@ void entropy_opt(
   const float*__restrict d_logTable,
   int m, int n)
 {
-  #pragma acc parallel loop collapse(2) present(d_entropy, d_val, d_logTable)
+  #pragma acc parallel loop gang vector collapse(2) present(d_entropy, d_val, d_logTable)
   for (int y = 0; y < m; y++) {
     for (int x = 0; x < n; x++) {
       int count[16];

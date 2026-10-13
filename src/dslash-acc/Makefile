@@ -27,7 +27,7 @@ obj = $(source:.cpp=.o)
 CFLAGS := $(EXTRA_CFLAGS) -Wall \
           -DMILC_COMPLEX \
           -DLDIM=32 \
-          -DPRECISION=2
+          -DPRECISION=1
 
 # Linker Flags
 LDFLAGS = 

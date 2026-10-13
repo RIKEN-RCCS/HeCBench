@@ -107,6 +107,7 @@ int main(int argc, char *argv[])
       modulateGPU(d_Data, d_Kernel, dataN);
       fwtBatchGPU(d_Data, 1, log2Data);
 
+      #pragma acc wait(1)
       auto end = std::chrono::steady_clock::now();
       auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
       total_time += time;
@@ -114,6 +115,7 @@ int main(int argc, char *argv[])
     printf("Average device execution time %f (s)\n", (total_time * 1e-9f) / repeat);
   
     printf("Reading back GPU results...\n");
+    #pragma acc wait(1)
     #pragma acc update host(d_Data[0:dataN])
   }
 

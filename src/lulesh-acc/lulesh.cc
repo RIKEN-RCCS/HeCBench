@@ -1238,7 +1238,7 @@ int main(int argc, char *argv[])
 
     Real_t  hgcoef = domain.hgcoef() ;
 
-#pragma acc parallel loop vector_length(THREADS)
+#pragma acc parallel loop gang vector vector_length(THREADS)
     for (Index_t i = 0; i < numElem; i++) {
       sigxx[i] = sigyy[i] = sigzz[i] = - p[i] - q[i] ;
     }
@@ -1247,7 +1247,7 @@ int main(int argc, char *argv[])
     // IntegrateStressForElems( domain, sigxx, sigyy, sigzz, determ, numElem, domain.numNode())
     //==============================================================================================
 
-#pragma acc parallel loop vector_length(THREADS)
+#pragma acc parallel loop gang vector vector_length(THREADS)
     for (Index_t k = 0; k < numElem; k++) {
 
       const Index_t* const elemToNode = nodelist + Index_t(8)*k;
@@ -1307,7 +1307,7 @@ int main(int argc, char *argv[])
           &fz_elem[k*8] ) ;
     }
 
-#pragma acc parallel loop vector_length(THREADS)
+#pragma acc parallel loop gang vector vector_length(THREADS)
     for (Index_t gnode = 0; gnode < numNode; gnode++) {
       // element count
       const Index_t count = nodeElemStart[gnode+1] - nodeElemStart[gnode];//domain.nodeElemCount(gnode) ;
@@ -1332,7 +1332,7 @@ int main(int argc, char *argv[])
 #pragma acc update host (determ[0:numElem])
 
 #ifdef _OPENMP
-#pragma acc parallel loop firstprivate(numElem)
+#pragma acc parallel loop gang vector firstprivate(numElem)
 #endif
     for ( Index_t k=0 ; k<numElem ; ++k ) {
       if (determ[k] <= Real_t(0.0)) {
@@ -1349,7 +1349,7 @@ int main(int argc, char *argv[])
 
 #pragma acc update device (vol_error[0:1])
 
-#pragma acc parallel loop vector_length(THREADS)
+#pragma acc parallel loop gang vector vector_length(THREADS)
     for (Index_t i = 0; i < numElem; i++) {
 
       Real_t  x1[8],  y1[8],  z1[8] ;
@@ -1457,7 +1457,7 @@ int main(int argc, char *argv[])
       }
 #endif
 
-#pragma acc parallel loop vector_length(THREADS)
+#pragma acc parallel loop gang vector vector_length(THREADS)
       for (Index_t i2 = 0; i2 < numElem; i2++) {
 
         Index_t i3 = 8*i2;
@@ -1643,7 +1643,7 @@ int main(int argc, char *argv[])
         fz_local[7] = hgfz[7];
       }
 
-#pragma acc parallel loop vector_length(THREADS)
+#pragma acc parallel loop gang vector vector_length(THREADS)
       for (Index_t gnode = 0; gnode < numNode; gnode++) {
         // element count
         const Index_t count = nodeElemStart[gnode+1] - nodeElemStart[gnode];//domain.nodeElemCount(gnode) ;
@@ -1677,7 +1677,7 @@ int main(int argc, char *argv[])
     //CalcAccelerationForNodes(domain, domain.numNode());   // IN: fx  OUT: m_xdd
     //===========================================================================
 
-#pragma acc parallel loop vector_length(THREADS)
+#pragma acc parallel loop gang vector vector_length(THREADS)
     for (Index_t i = 0; i < numNode; i++) {
       Real_t one_over_nMass = Real_t(1.) / nodalMass[i];
       xdd[i] = fx[i] * one_over_nMass;
@@ -1695,7 +1695,7 @@ int main(int argc, char *argv[])
     Index_t s2 = domain.symmYempty();
     Index_t s3 = domain.symmZempty();
 
-#pragma acc parallel loop vector_length(THREADS)
+#pragma acc parallel loop gang vector vector_length(THREADS)
     for (Index_t i = 0; i < numNodeBC; i++) {
       if ((!s1) != 0) xdd[symmX[i]] = Real_t(0.0) ;
       if ((!s2) != 0) ydd[symmY[i]] = Real_t(0.0) ;
@@ -1706,7 +1706,7 @@ int main(int argc, char *argv[])
     // CalcVelocityForNodes( domain, delt, u_cut, domain.numNode()) ; //uses m_xd and m_xdd
     //=================================================================
 
-#pragma acc parallel loop vector_length(THREADS)
+#pragma acc parallel loop gang vector vector_length(THREADS)
     for (Index_t i = 0; i < numNode; i++) {
 
       Real_t xdtmp = xd[i] + xdd[i] * deltaTime;
@@ -1729,7 +1729,7 @@ int main(int argc, char *argv[])
     //=================================================================================
     // CalcPositionForNodes( domain, delt, domain.numNode() );  //uses m_xd and m_x 
     //=================================================================================
-#pragma acc parallel loop vector_length(THREADS)
+#pragma acc parallel loop gang vector vector_length(THREADS)
     for (Index_t i = 0; i < numNode; i++) {
 
       x[i] += xd[i] * deltaTime;
@@ -1759,7 +1759,7 @@ int main(int argc, char *argv[])
     //========================================================================
     // void CalcKinematicsForElems( Domain &domain, Real_t *vnew, 
     //========================================================================
-#pragma acc parallel loop vector_length(THREADS)
+#pragma acc parallel loop gang vector vector_length(THREADS)
     for (Index_t k = 0; k < numElem; k++) {
 
       Real_t B[3][8] ; // shape function derivatives 
@@ -1857,7 +1857,7 @@ int main(int argc, char *argv[])
 #pragma acc update device (vol_error[0:1])
 
 
-#pragma acc parallel loop vector_length(THREADS)
+#pragma acc parallel loop gang vector vector_length(THREADS)
     for (Index_t k = 0; k < numElem; k++) {
       // calc strain rate and apply as constraint (only done in FB element)
       Real_t vvdov = dxx[k] + dyy[k] + dzz[k] ;
@@ -1906,7 +1906,7 @@ int main(int argc, char *argv[])
     //CalcMonotonicQGradientsForElems(domain, vnew);
     //================================================================
 
-#pragma acc parallel loop vector_length(THREADS)
+#pragma acc parallel loop gang vector vector_length(THREADS)
     for (Index_t i = 0; i < numElem; i++) {
 
       Real_t ax,ay,az ;
@@ -2054,7 +2054,7 @@ int main(int argc, char *argv[])
     Real_t qlc_monoq = domain.qlc_monoq();
     Real_t qqc_monoq = domain.qqc_monoq();
 
-#pragma acc parallel loop vector_length(THREADS)
+#pragma acc parallel loop gang vector vector_length(THREADS)
     for (Index_t i = 0; i < numElem; i++) {
 
       Real_t qlin, qquad ;
@@ -2237,7 +2237,7 @@ int main(int argc, char *argv[])
     Real_t emin    = domain.emin() ;
     Real_t rho0    = domain.refdens() ;
 
-#pragma acc parallel loop vector_length(THREADS)
+#pragma acc parallel loop gang vector vector_length(THREADS)
     for (Index_t elem = 0; elem < numElem; elem++) {
       Index_t rep = elemRep[elem];
       Real_t e_old, delvc, p_old, q_old, qq_old, ql_old;

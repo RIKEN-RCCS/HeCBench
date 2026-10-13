@@ -80,7 +80,8 @@ void lbm (
     const double *__restrict weight,
     double omega)
 {
-  #pragma acc parallel loop collapse(2) vector_length(GROUP_SIZE)
+  #pragma acc parallel loop collapse(2) vector_length(GROUP_SIZE) async(1) \
+   present(if0,of0,if1234,of1234,if5678,of5678,type,weight)
   for (unsigned int idy = 0; idy < height; idy++) {
     for (unsigned int idx = 0; idx < width; idx++) {
       unsigned int pos = idx + width * idy;
@@ -250,6 +251,7 @@ void fluidSim (
       h_if5678 = temp5678;
     }
 
+    #pragma acc wait(1)
     auto end = std::chrono::steady_clock::now();
     auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
     printf("Average kernel execution time %f (s)\n", (time * 1e-9f) / iterations);

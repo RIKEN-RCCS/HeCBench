@@ -23,12 +23,13 @@
  * Both filters are summed (vector sum) to form the final result.
  */
 
-#pragma omp declare target
+#pragma acc routine seq
 inline float4 convert_float4(uchar4 data) 
 {
    return {(float)data.x, (float)data.y, (float)data.z, (float)data.w};
 }
 
+#pragma acc routine seq
 inline uchar4 convert_uchar4(float4 v) {
   uchar4 res;
   res.x = (uchar) ((v.x > 255.f) ? 255.f : (v.x < 0.f ? 0.f : v.x));
@@ -38,19 +39,21 @@ inline uchar4 convert_uchar4(float4 v) {
   return res;
 }
 
+#pragma acc routine seq
 inline float4 operator+(float4 a, float4 b)
 {
   return {a.x + b.x, a.y + b.y, a.z + b.z,  a.w + b.w};
 }
 
+#pragma acc routine seq
 inline float4 operator-(float4 a, float4 b)
 {
     return {a.x - b.x, a.y - b.y, a.z - b.z,  a.w - b.w};
 }
 
+#pragma acc routine seq
 inline float4 operator*(float4 a, float4 b)
 {
     return {a.x * b.x, a.y * b.y, a.z * b.z,  a.w * b.w};
 }
 
-#pragma omp end declare target

@@ -17,10 +17,10 @@ void SigmoidCrossEntropyWithLogitsKernel(
   const float* targets_ptr,
         float* out_ptr)
 {
-  #pragma acc parallel loop num_gangs(outer_size) vector_length(GPU_NUM_THREADS) 
+  #pragma acc parallel loop gang num_gangs(outer_size) vector_length(GPU_NUM_THREADS) default(present)
   for (int i = 0; i < outer_size; i++) {
     float value = 0;
-    #pragma acc loop reduction(+:value) 
+    #pragma acc loop vector reduction(+:value)
     for (int in_idx = i * inner_size;
              in_idx < (i+1) * inner_size; in_idx++) {
       float lgt = logits_ptr[in_idx];

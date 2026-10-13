@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-#include <omp.h>
 #include "../common.h"                // (in directory provided here)
 #include "../util/timer/timer.h"          // (in directory provided here)
 #include "./kernel_wrapper.h"      // (in directory provided here)
@@ -31,26 +30,25 @@ kernel_wrapper(  record *records,
 
   int threads = order < 256 ? order : 256;
 
-  #pragma omp target data map(to: knodes[0: knodes_mem],\
-                                  records[0: records_mem],\
-                                  keys[0: count], \
-                                  currKnode[0: count],\
-                                  offset[0: count])\
-                          map(from: ans[0: count])
+  #pragma acc data copyin(knodes[0: knodes_mem],\
+                          records[0: records_mem],\
+                          keys[0: count], \
+                          currKnode[0: count],\
+                          offset[0: count])\
+                   copyout(ans[0: count])
   {
     long long kernel_start = get_time();
 
-    #pragma omp target teams num_teams(count) thread_limit(threads)
-    {
-      #pragma omp parallel
-      {
-        // private thread IDs
-        int thid = omp_get_thread_num();
-        int bid = omp_get_team_num();
+    #pragma acc parallel loop gang num_gangs(count) vector_length(256) \
+                         present(knodes[0: knodes_mem], records[0: records_mem], \
+                                 keys[0: count], currKnode[0: count], \
+                                 offset[0: count], ans[0: count])
+    for(int bid = 0; bid < count; bid++){
+      // processtree levels
+      for(int i = 0; i < maxheight; i++){
 
-        // processtree levels
-        for(int i = 0; i < maxheight; i++){
-
+        #pragma acc loop vector
+        for(int thid = 0; thid < threads; thid++){
           // if value is between the two keys
           if((knodes[currKnode[bid]].keys[thid]) <= keys[bid] && (knodes[currKnode[bid]].keys[thid+1] > keys[bid])){
             // this conditional statement is inserted to avoid crush due to but in original code
@@ -60,16 +58,16 @@ kernel_wrapper(  record *records,
               offset[bid] = knodes[offset[bid]].indices[thid];
             }
           }
-          #pragma omp barrier
-          // set for next tree level
-          if(thid==0){
-            currKnode[bid] = offset[bid];
-          }
-          #pragma omp barrier
         }
 
-        //At this point, we have a candidate leaf node which may contain
-        //the target record.  Check each key to hopefully find the record
+        // set for next tree level
+        currKnode[bid] = offset[bid];
+      }
+
+      //At this point, we have a candidate leaf node which may contain
+      //the target record.  Check each key to hopefully find the record
+      #pragma acc loop vector
+      for(int thid = 0; thid < threads; thid++){
         if(knodes[currKnode[bid]].keys[thid] == keys[bid]){
           ans[bid].value = records[knodes[currKnode[bid]].indices[thid]].value;
         }
@@ -86,4 +84,3 @@ kernel_wrapper(  record *records,
 #endif
 
 }
-

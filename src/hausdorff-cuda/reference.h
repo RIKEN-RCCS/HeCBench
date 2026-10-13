@@ -2,7 +2,7 @@
 __host__ __device__
 #endif
 
-#if defined(_OPENMP)
+#if defined(_OPENMP) || defined(_OPENACC)
 typedef struct __attribute__((__aligned__(8)))
 {
   float x,y;

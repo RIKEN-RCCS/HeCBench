@@ -343,7 +343,6 @@ int main(int argc, char* argv[])
   // initialize error tally
   double sumsqferr = 0.0;
 
-#if defined(OPENMP_TARGET)
 #pragma acc data copyin(idxu_block[0:jdim],		  \
 			ulist_parity[0:idxu_max],		\
 			rootpqarray[0:jdimpq * jdimpq],		\
@@ -361,7 +360,6 @@ int main(int argc, char* argv[])
 	 rcutij[0:num_atoms*num_nbor],					\
 	 wj[0:num_atoms*num_nbor])
 {
-#endif
 
   // loop over steps
 
@@ -387,11 +385,9 @@ int main(int argc, char* argv[])
       }
     }
 
-#if defined(OPENMP_TARGET)
 #pragma acc update device(rij[0:num_atoms*num_nbor*3])
 #pragma acc update device(rcutij[0:num_atoms*num_nbor])
 #pragma acc update device(wj[0:num_atoms*num_nbor])
-#endif
 
     // compute_ui
     start = system_clock::now();
@@ -402,19 +398,11 @@ int main(int argc, char* argv[])
     //   compute r0 = (x,y,z,z0)
     //   utot(j,ma,mb) += u(r0;j,ma,mb) for all j,ma,mb
 
-#if defined(OPENMP_TARGET)
 #pragma acc parallel loop
-#else
-#pragma acc loop default(none) shared(ulisttot, num_atoms, idxu_max)
-#endif
     for (int i = 0; i < num_atoms * idxu_max; ++i)
       ulisttot[i] = { 0.0, 0.0 };
 
-#if (OPENMP_TARGET)
 #pragma acc parallel loop
-#else
-#pragma acc loop default(none) shared(ulisttot, wself, idxu_block, num_atoms, twojmax)
-#endif
     for (int natom = 0; natom < num_atoms; natom++) {
       for (int j = 0; j <= twojmax; j++) {
         int jju = idxu_block[j];
@@ -425,13 +413,7 @@ int main(int argc, char* argv[])
       }
     }
 
-#if (OPENMP_TARGET)
-#pragma acc parallel loop collapse(2)
-#else
-#pragma acc loop collapse(2) default(none) \
-    shared(rcutij, rij, wj, rootpqarray, ulist_parity, idxu_block, ulist, ulisttot, \
-           num_atoms, num_nbor, twojmax, jdimpq, idxu_max, switch_flag)
-#endif
+#pragma acc parallel loop gang vector collapse(2)
     for (int nbor = 0; nbor < num_nbor; nbor++) {
       for (int natom = 0; natom < num_atoms; natom++) {
         double x = rij[ULIST_INDEX(natom, nbor, 0)];
@@ -582,27 +564,11 @@ int main(int argc, char* argv[])
     //compute_yi(beta);
 
     // Initialize ylist elements to zeros
-#if defined(OPENMP_TARGET)
 #pragma acc parallel loop
-#else
-#pragma acc loop default(none) shared(num_atoms, idxdu_max, ylist)
-#endif
     for (int i = 0; i < num_atoms * idxdu_max; i++)
       ylist[i] = { 0.0, 0.0 };
 
-#if defined(OPENMP_TARGET)
-#pragma acc parallel loop collapse(2)
-#else
-#pragma acc loop collapse(2) default(none) shared(idxz,                \
-    idxzbeta,            \
-    idxcg_block,         \
-    idxdu_block,         \
-    idxu_block,          \
-    cglist,              \
-    ulisttot,            \
-    ylist, \
-    jdim, num_atoms, idxz_max)
-#endif
+#pragma acc parallel loop gang vector collapse(2) vector_length(256)
     for (int jjz = 0; jjz < idxz_max; jjz++)
       for (int natom = 0; natom < num_atoms; natom++)
           {
@@ -687,13 +653,8 @@ int main(int argc, char* argv[])
 
     // compute_duidrj
     start = system_clock::now();
-#if defined(OPENMP_TARGET)
+
 #pragma acc parallel loop collapse(2)
-#else
-#pragma omp parallel default(none) shared(rij, wj, rcutij, rootpqarray, dulist, ulist, \
-                                          num_atoms, num_nbor, twojmax, idxdu_max, jdimpq, switch_flag)
-#pragma omp for collapse(2)
-#endif
     for (int nbor = 0; nbor < num_nbor; nbor++) {
       for (int natom = 0; natom < num_atoms; natom++) {
         double wj_in = wj[INDEX_2D(natom, nbor)];
@@ -724,11 +685,7 @@ int main(int argc, char* argv[])
 
     start = system_clock::now();
     // compute_deidrj();
-#if (OPENMP_TARGET)
 #pragma acc parallel loop collapse(2)
-#else
-#pragma acc loop collapse(2)
-#endif
     for (int nbor = 0; nbor < num_nbor; nbor++) {
       for (int natom = 0; natom < num_atoms; natom++) {
         for (int k = 0; k < 3; k++)
@@ -786,9 +743,7 @@ int main(int argc, char* argv[])
       } // nbor
     }   // natom
 
-#if defined(OPENMP_TARGET)
 #pragma acc update host(dedr[0:num_atoms * num_nbor * 3])
-#endif
     end = system_clock::now();
     elapsed = end - start;
     elapsed_deidrj += elapsed.count();
@@ -844,10 +799,7 @@ int main(int argc, char* argv[])
   printf("grind time = %g [msec/atom-step]\n", 1000.0 * duration / (nlocal * nsteps));
   printf("RMS |Fj| deviation %g [eV/A]\n", sqrt(sumsqferr / (ntotal * nsteps)));
 
-#if defined(OPENMP_TARGET)
 }
-#endif
-
 
   free(coeffi);
   free(idxcg_block);

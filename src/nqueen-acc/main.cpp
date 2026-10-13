@@ -58,7 +58,7 @@ void BP_queens_root_dfs(
   unsigned long long *__restrict vector_of_tree_size,
   unsigned long long *__restrict sols)
 {
-  #pragma acc parallel loop vector_length(_QUEENS_BLOCK_SIZE_)
+  #pragma acc parallel loop gang vector vector_length(_QUEENS_BLOCK_SIZE_)
   for (int idx = 0; idx < nPreFixos; idx++) {
      unsigned int flag = 0;
      unsigned int bit_test = 0;

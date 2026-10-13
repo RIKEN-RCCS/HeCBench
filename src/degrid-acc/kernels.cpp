@@ -10,15 +10,15 @@ degrid_kernel(CmplxType* __restrict out,
               const CmplxType* __restrict gcf)
 {
 
-  #pragma acc parallel loop num_gangs(NPOINTS/32) vector_length(256)
+  #pragma acc parallel loop gang num_gangs(NPOINTS/32) vector_length(256) default(present)
   for(size_t n=0; n<NPOINTS; n++) {
     int sub_x = floorf(GCF_GRID*(in[n].x-floorf(in[n].x)));
     int sub_y = floorf(GCF_GRID*(in[n].y-floorf(in[n].y)));
-    int main_x = floor(in[n].x); 
-    int main_y = floor(in[n].y); 
+    int main_x = floor(in[n].x);
+    int main_y = floor(in[n].y);
     PRECISION sum_r = 0.0;
     PRECISION sum_i = 0.0;
-    #pragma acc loop collapse(2) reduction(+:sum_r, sum_i)
+    #pragma acc loop vector collapse(2) reduction(+:sum_r, sum_i)
     for (int a=-GCF_DIM/2; a<GCF_DIM/2 ;a++)
       for (int b=-GCF_DIM/2; b<GCF_DIM/2 ;b++) {
         PRECISION r1 = img[main_x+a+IMG_SIZE*(main_y+b)].x; 

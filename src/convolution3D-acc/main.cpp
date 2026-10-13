@@ -81,7 +81,7 @@ void conv3D(const int N, const int C, const int M, const int Win, const int Hin,
   {
     auto start = std::chrono::steady_clock::now();
     for (int i = 0; i < repeat; i++) {
-      #pragma acc parallel loop collapse(4) vector_length(TILE_WIDTH*TILE_WIDTH)
+      #pragma acc parallel loop gang vector collapse(4) vector_length(TILE_WIDTH*TILE_WIDTH)
       for(int n = 0; n < N; n++)
         for(int m = 0; m < M; m++)
           for(int h = 0; h < Hout; h++)

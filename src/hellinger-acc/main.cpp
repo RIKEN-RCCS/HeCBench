@@ -75,9 +75,8 @@ int main(int argc, char** argv)
   {
     auto start = std::chrono::steady_clock::now();
 
-#pragma acc parallel loop vector_length(256)
     for (int i = 0; i < repeat; i++) {
-#pragma acc loop vector collapse(2) 
+#pragma acc parallel loop gang vector collapse(2) vector_length(256)
       for (int i = 0; i < M; i++) {
         for (int j = 0; j < P; j++) {
           FP sum = (FP)0.0;

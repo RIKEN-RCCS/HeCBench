@@ -3,7 +3,7 @@
 #===============================================================================
 
 # Compiler can be set below, or via environment variable
-CC        = nvc++ -acc
+CC        = nvc++
 OPTIMIZE  = yes
 DEBUG     = no
 DEVICE    = gpu
@@ -25,7 +25,7 @@ obj = $(source:.cpp=.o)
 #===============================================================================
 
 # Standard Flags
-CFLAGS := $(EXTRA_CFLAGS) -Wall           -DMILC_COMPLEX           -DLDIM=32           -DPRECISION=2 
+CFLAGS := $(EXTRA_CFLAGS) -Wall           -DMILC_COMPLEX           -DLDIM=32           -DPRECISION=1
 # Linker Flags
 LDFLAGS = 
 
@@ -41,7 +41,7 @@ ifeq ($(OPTIMIZE),yes)
 endif
 
 ifeq ($(DEVICE),gpu)
-  CFLAGS +=-Minfo -mp=gpu -gpu=$(SM)
+  CFLAGS +=-Minfo -acc=gpu -gpu=$(SM)
 else
   CFLAGS +=-acc
 endif

@@ -17,7 +17,7 @@ void pair_HMM_forward(
           fArray *__restrict forward_matrix_out)
 {
 
-  #pragma acc parallel loop gang num_gangs(teams) vector_length(threads)
+  #pragma acc parallel loop gang num_gangs(teams) vector_length(threads) async(1)
   for (int batch_id = 0; batch_id < teams; batch_id++)
   {
     double e[batch][states-1];
@@ -141,4 +141,3 @@ void pair_HMM_forward(
     }
   }
 }
-

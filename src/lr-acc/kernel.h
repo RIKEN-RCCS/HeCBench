@@ -17,7 +17,7 @@ void linear_regression(
   const float2 *__restrict dataset,
         float4 *__restrict result)
 {
-  #pragma acc parallel loop gang num_gangs(nTeams) vector_length(TEMP_WORKGROUP_SIZE)
+  #pragma acc parallel loop gang num_gangs(nTeams) vector_length(TEMP_WORKGROUP_SIZE) async(1) default(present)
   for( int blk_id = 0; blk_id < nTeams; blk_id++ ) {
     float4 interns[TEMP_WORKGROUP_SIZE];
     size_t loc_size = TEMP_WORKGROUP_SIZE; 
@@ -60,7 +60,8 @@ void rsquared(
   const float2 equation, // [a0,a1]
   float2 *__restrict result)
 {
-  #pragma acc parallel loop gang num_gangs(nTeams) vector_length(TEMP_WORKGROUP_SIZE)
+  #pragma acc parallel loop gang num_gangs(nTeams) vector_length(TEMP_WORKGROUP_SIZE) async(1) \
+   present(dataset,result)
   for (int blk_id = 0; blk_id < nTeams; blk_id++) {
     float2 dist[TEMP_WORKGROUP_SIZE];
     size_t loc_size = TEMP_WORKGROUP_SIZE; 

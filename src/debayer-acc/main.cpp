@@ -45,8 +45,10 @@ int main(int argc, char* argv[])
 
     //this version takes a tile (z=1) and each tile job does 4 line median sorts
     for (int i = 0; i < repeat; i++) {
-      memset(output, 0, output_image_size);
-      #pragma acc update device(output[0:4*numPix])
+    #pragma acc parallel loop gang vector present(output[0:4*numPix])
+      for (int j = 0; j < 4*numPix; j++) {
+        output[j] = 0;
+      }
       malvar_he_cutler_demosaic (
         teamX, teamY,
         height, width, 

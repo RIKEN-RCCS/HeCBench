@@ -38,7 +38,7 @@ static const short bitMapID = 19778;
  */
 #pragma pack(push,1)
 
-#ifdef _OPENMP
+#if defined(_OPENMP) || defined(_OPENACC)
 /**
  * uchar4
  * struct implements a vector of chars

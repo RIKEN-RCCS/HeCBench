@@ -7,7 +7,7 @@
 #include "reference.h"
 
 void k_cube_select(int b, int n, int radius, const int* in, int* out) {
-#pragma acc parallel loop num_gangs(b) vector_length(512)
+#pragma acc parallel loop num_gangs(b) vector_length(512) async(1)
   for (int batch_idx = 0; batch_idx < b; batch_idx++) {
     auto xyz = in + batch_idx * n * 3;
     auto idx_out = out + batch_idx * n * 8;
@@ -43,7 +43,7 @@ void k_cube_select(int b, int n, int radius, const int* in, int* out) {
 }
 
 void k_cube_select_two(int b, int n, int radius, const int* in, int* out) {
-#pragma acc parallel loop num_gangs(b) vector_length(512)
+#pragma acc parallel loop num_gangs(b) vector_length(512) async(1)
   for (int batch_idx = 0; batch_idx < b; batch_idx++) {
     auto xyz = in + batch_idx * n * 3;
     auto idx_out = out + batch_idx * n * 16;
@@ -90,7 +90,7 @@ void k_cube_select_two(int b, int n, int radius, const int* in, int* out) {
 }
 
 void k_cube_select_four(int b, int n, int radius, const int* in, int* out) {
-#pragma acc parallel loop num_gangs(b)  vector_length(512)
+#pragma acc parallel loop num_gangs(b)  vector_length(512) async(1)
   for (int batch_idx = 0; batch_idx < b; batch_idx++) {
     auto xyz = in + batch_idx * n * 3;
     auto idx_out = out + batch_idx * n * 32;
@@ -181,6 +181,7 @@ int main(int argc, char* argv[])
     for (int i = 0; i < repeat; i++) {
      k_cube_select(b, n, radius, h_xyz, h_out); 
     }
+    #pragma acc wait(1)
     auto end = std::chrono::steady_clock::now();
     auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
     printf("Average execution time of select kernel: %f (us)\n", (time * 1e-3f) / repeat);
@@ -194,6 +195,7 @@ int main(int argc, char* argv[])
     for (int i = 0; i < repeat; i++) {
       k_cube_select_two(b, n, radius, h_xyz, h_out2); 
     }
+    #pragma acc wait(1)
     end = std::chrono::steady_clock::now();
     time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
     printf("Average execution time of select2 kernel: %f (us)\n", (time * 1e-3f) / repeat);
@@ -207,6 +209,7 @@ int main(int argc, char* argv[])
     for (int i = 0; i < repeat; i++) {
       k_cube_select_four(b, n, radius, h_xyz, h_out4); 
     }
+    #pragma acc wait(1)
     end = std::chrono::steady_clock::now();
     time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
     printf("Average execution time of select4 kernel: %f (us)\n", (time * 1e-3f) / repeat);

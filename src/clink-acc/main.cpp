@@ -93,13 +93,13 @@ void init(const char* work_path, const char* input_filename, const char* weight_
   fclose(fp);
 }
 
-long lstm_n5( const float* x, 
-    const float* inW, 
-    const float* intW, 
-    const float* intB, 
-    const float* outW, 
-    const float* outB,
-    float* y) 
+long lstm_n5( const float*__restrict__ x,
+    const float*__restrict__ inW,
+    const float*__restrict__ intW,
+    const float*__restrict__ intB,
+    const float*__restrict__ outW,
+    const float*__restrict__ outB,
+    float*__restrict__ y)
 {
   long time;
 #pragma acc data copyin(x[0:N*SAMPLE_TEST_LEN],   \
@@ -112,7 +112,7 @@ long lstm_n5( const float* x,
   {
     auto start = std::chrono::steady_clock::now();
 
-    #pragma acc parallel loop vector_length(WGS)
+    #pragma acc parallel loop gang vector vector_length(WGS)
     for (int gid = 0; gid < N; gid++) {
 
       int t,i,j;

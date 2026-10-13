@@ -122,7 +122,7 @@ void hessian_matrix_det(const IMAGE_T* img,
                         const IMAGE_T sigma,
                         IMAGE_T* out)
 {
-  #pragma acc parallel loop vector_length(256)
+  #pragma acc parallel loop vector_length(256) async(1)
   for (int tid = 0; tid < img_rows*img_cols; tid++) {
 
     const int r = tid / img_cols;
@@ -209,6 +209,7 @@ int main(int argc, char* argv[])
       hessian_matrix_det(integral_img, h, w, sigma, output_img);
     }
 
+    #pragma acc wait(1)
     auto end = std::chrono::steady_clock::now();
     time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
   }
