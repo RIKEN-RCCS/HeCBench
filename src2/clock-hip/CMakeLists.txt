@@ -1,8 +1,0 @@
-# clock-hip/CMakeLists.txt
-
-add_hecbench_benchmark(
-    NAME clock
-    MODEL hip
-    SOURCES main.cu
-    CATEGORIES algorithms
-)

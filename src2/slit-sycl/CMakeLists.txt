@@ -1,9 +1,0 @@
-# slit-sycl/CMakeLists.txt
-
-add_hecbench_benchmark(
-    NAME slit
-    MODEL sycl
-    SOURCES main.cpp
-    CATEGORIES algorithms
-    LINK_LIBRARIES -qmkl=parallel
-)

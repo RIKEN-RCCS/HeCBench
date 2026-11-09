@@ -1,8 +1,0 @@
-# ring-hip/CMakeLists.txt
-
-add_hecbench_benchmark(
-    NAME ring
-    MODEL hip
-    SOURCES main.cu
-    CATEGORIES algorithms
-)

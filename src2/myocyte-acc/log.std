@@ -1,7 +1,0 @@
-Total kernel execution time 3.216745 (s)
-
-Total host to device time 1.469073 (s)
-
-Total device to host time 2.027829 (s)
-
-Device offloading time: 11.005491 (s)

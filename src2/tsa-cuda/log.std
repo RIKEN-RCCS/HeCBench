@@ -1,7 +1,0 @@
-TSA in float32
-Average kernel execution time: 7333.525391 (us)
-PASS
-
-TSA in float64
-Average kernel execution time: 9773.564453 (us)
-PASS

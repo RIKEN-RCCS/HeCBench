@@ -1,1 +1,0 @@
-nvc++ -acc  -Wall -I../tqs-cuda -O3 -Minfo -mp=gpu -gpu=cc90 -c main.cpp -o main.o

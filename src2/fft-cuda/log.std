@@ -1,4 +1,0 @@
-used_bytes=268435456, n_cmplx=16777216
-FFT PASS
-iFFT PASS
-Average kernel execution time 0.000354873 (s)

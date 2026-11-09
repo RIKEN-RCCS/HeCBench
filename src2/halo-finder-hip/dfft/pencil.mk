@@ -1,7 +1,0 @@
-PENCIL = 1
-
-ifeq (${PENCIL},1)
-DFFT_PEN_CXXFLAGS += -DPENCIL=1
-DFFT_PEN_CFLAGS   += -DPENCIL=1
-endif
-

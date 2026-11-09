@@ -1,1 +1,0 @@
-COMMAND = cd ./src/points2image; time -p ( ./main -p 1 1>../../log.std 2>../../log.err ) 2> ../../log.time; cd ../../

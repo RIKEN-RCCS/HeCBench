@@ -1,3 +1,0 @@
-Reading city locations from file ../haversine-cuda/locations.txt...
-Average kernel execution time 0.000209 (s)
-The maximum error in distance is 0.000000

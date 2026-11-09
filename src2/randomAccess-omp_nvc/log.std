@@ -1,5 +1,0 @@
-Table size = 67108864
-Main table size   = 2^26 = 67108864 words
-Number of updates = 268435456
-Average kernel execution time: 1.918820 (s)
-Found 0 errors in 67108864 locations (PASS).

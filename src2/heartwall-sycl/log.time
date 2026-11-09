@@ -1,4 +1,0 @@
-bash: line 1: 3224372 Aborted                 (core dumped) ./heartwall 104 > log.std 2> log.err
-real 2.17
-user 0.00
-sys 0.28

@@ -1,1 +1,0 @@
-COMMAND = time -p ( rm -rf out; mkdir out ; ./$(program) 1000 1>log.std 2>log.err ) 2> log.time

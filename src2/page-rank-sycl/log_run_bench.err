@@ -1,9 +1,0 @@
-main.cpp:121:7: warning: unused variable 'j' [-Wunused-variable]
-  121 |   int j;
-      |       ^
-1 warning generated.
-main.cpp:121:7: warning: unused variable 'j' [-Wunused-variable]
-  121 |   int j;
-      |       ^
-1 warning generated.
-timeout was set to  600
