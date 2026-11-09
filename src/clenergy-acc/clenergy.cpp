@@ -145,7 +145,7 @@ int main(int argc, char** argv) {
 
 #pragma acc enter data create(atominfo[0:MAXATOMS]) create(energy[0:volmem])
 {
-  #pragma acc parallel loop vector
+  #pragma acc parallel loop gang vector
   for (int i = 0; i < volmem; i++)
     energy[i] = 0.f;
 

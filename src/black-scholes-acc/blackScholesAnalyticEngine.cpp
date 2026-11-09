@@ -234,7 +234,7 @@ void runBlackScholesAnalyticEngine(const int repeat)
       gettimeofday(&kstart, NULL);
 
       for (int i = 0; i < repeat; i++) {
-        #pragma acc parallel loop vector vector_length(THREAD_BLOCK_SIZE)
+        #pragma acc parallel loop gang vector vector_length(THREAD_BLOCK_SIZE)
         for (int optionNum = 0; optionNum < numVals; optionNum++) {
           const optionInputStruct threadOption = values[optionNum];
 
