@@ -21,6 +21,7 @@ int main(int argc, char* argv[]) {
   }
   const int length = atoi(argv[1]);
   const int repeat = atoi(argv[2]);
+  const int warmup = 100;
 
   int size = length;
   int pad_size = (length + RADIUS);
@@ -31,37 +32,44 @@ int main(int argc, char* argv[]) {
 
   for (int i = 0; i < length+RADIUS; i++) a[i] = i;
 
+  const int num_blocks = length / BLOCK_SIZE;
+
+  std::chrono::steady_clock::time_point start;
+
   #pragma acc data copyin(a[0:pad_size]) copyout(b[0:size])
   {
-  auto start = std::chrono::steady_clock::now();
-  for (int i = 0; i < repeat; i++) {
-    #pragma acc parallel loop
-    //    for (int i = 0; i < length; i = i + BLOCK_SIZE) {
-    for (int i = 0; i < length; i += BLOCK_SIZE) {
-      int temp[BLOCK_SIZE + 2 * RADIUS];
-      #pragma acc loop vector
-      for (int j = 0; j < BLOCK_SIZE; j++) {
-        int gindex = i+j;
-        temp[j+RADIUS] = a[gindex]; 
-        if (j < RADIUS) {
-          temp[j] = (gindex < RADIUS) ? 0 : a[gindex - RADIUS];
-          temp[j + RADIUS + BLOCK_SIZE] = a[gindex + BLOCK_SIZE];
+    // Warmup launches load the device kernel. Keep them outside the timer.
+    for (int iter = 0; iter < repeat + warmup; iter++) {
+      if (iter == warmup)
+        start = std::chrono::steady_clock::now();
+
+      #pragma acc parallel loop gang
+      for (int block = 0; block < num_blocks; ++block) {
+        const int i = block * BLOCK_SIZE;
+        int temp[BLOCK_SIZE + 2 * RADIUS];
+        #pragma acc loop vector
+        for (int j = 0; j < BLOCK_SIZE; j++) {
+          int gindex = i+j;
+          temp[j+RADIUS] = a[gindex]; 
+          if (j < RADIUS) {
+            temp[j] = (gindex < RADIUS) ? 0 : a[gindex - RADIUS];
+            temp[j + RADIUS + BLOCK_SIZE] = a[gindex + BLOCK_SIZE];
+          }
+        }
+
+        #pragma acc loop vector
+        for (int j = 0; j < BLOCK_SIZE; j++) {
+          int result = 0;
+          for (int offset = -RADIUS ; offset <= RADIUS ; offset++)
+            result += temp[j+RADIUS+offset];
+          b[i+j] = result; 
         }
       }
-
-      #pragma acc loop vector
-      for (int j = 0; j < BLOCK_SIZE; j++) {
-        int result = 0;
-        for (int offset = -RADIUS ; offset <= RADIUS ; offset++)
-          result += temp[j+RADIUS+offset];
-        b[i+j] = result; 
-      }
     }
-  }
 
-  auto end = std::chrono::steady_clock::now();
-  auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
-  printf("Average kernel execution time: %f (s)\n", (time * 1e-9f) / repeat);
+    auto end = std::chrono::steady_clock::now();
+    auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+    printf("Average kernel execution time: %f (s)\n", (time * 1e-9f) / repeat);
   }
 
   // verification
