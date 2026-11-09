@@ -59,8 +59,10 @@ void call_TaskQueue_gpu(int blocks,
       if(tid == 0) {
         #pragma acc atomic capture
         next = (*consumed)++;
-        t->id = task_queue[next].id;
-        t->op = task_queue[next].op;
+        if(next < gpuQueueSize) {
+          t->id = task_queue[next].id;
+          t->op = task_queue[next].op;
+        }
       }
 
       #pragma omp barrier
@@ -85,8 +87,10 @@ void call_TaskQueue_gpu(int blocks,
           #pragma acc atomic capture
           next = (*consumed)++;
           // Fetch task
-          t->id = task_queue[next].id;
-          t->op = task_queue[next].op;
+          if(next < gpuQueueSize) {
+            t->id = task_queue[next].id;
+            t->op = task_queue[next].op;
+          }
         }
         #pragma omp barrier
       }
