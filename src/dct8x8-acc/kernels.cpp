@@ -9,6 +9,7 @@
  *
  */
 
+#include <stddef.h>
 #include <openacc.h>
 #include "DCT8x8.h"
 
