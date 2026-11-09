@@ -163,7 +163,7 @@ set(HECBENCH_POC_BENCHMARKS
     frna
     fsm
     fwt
-    # Batch 8: G-I benchmarks (39 benchmarks)
+    # Batch 8: G-I benchmarks (40 benchmarks)
     ga
     gabor
     gamma-correction
@@ -175,6 +175,7 @@ set(HECBENCH_POC_BENCHMARKS
     gelu
     gemv
     ge-spmm
+    gis
     gibbs
     goulash
     gpp
@@ -184,6 +185,7 @@ set(HECBENCH_POC_BENCHMARKS
     grrt
     gru
     gru2
+    gsplat4d
     haccmk
     hausdorff
     haversine
@@ -199,6 +201,7 @@ set(HECBENCH_POC_BENCHMARKS
     hungarian
     hwt1d
     hypterm
+    index-shuffle
     interval
     intrinsics-cast
     intrinsics-simd
@@ -208,6 +211,7 @@ set(HECBENCH_POC_BENCHMARKS
     jaccard
     jenkins-hash
     kalman
+    kda
     keccaktreehash
     keogh
     kernelLaunch
@@ -216,6 +220,7 @@ set(HECBENCH_POC_BENCHMARKS
     kmeans
     kurtosis
     lanczos
+    laghos-force
     langevin
     langford
     laplace
@@ -231,6 +236,7 @@ set(HECBENCH_POC_BENCHMARKS
     lid-driven-cavity
     lif
     linearprobing
+    local-ht
     logan
     log2
     logic-rewrite
@@ -245,6 +251,7 @@ set(HECBENCH_POC_BENCHMARKS
     lut-gemm
     lzss
     # Batch 10: M-N benchmarks (50 benchmarks)
+    mace
     mallocFree
     mandelbrot
     marchingCubes
@@ -275,6 +282,7 @@ set(HECBENCH_POC_BENCHMARKS
     mnist
     moe
     moe-align
+    moe-combine
     moe-sum
     morphology
     mpc
@@ -299,7 +307,7 @@ set(HECBENCH_POC_BENCHMARKS
     nosync
     nqueen
     ntt
-    # Batch 11: O-P benchmarks (27 benchmarks)
+    # Batch 11: O-P benchmarks (28 benchmarks)
     openmp
     opticalFlow
     overlap
@@ -327,6 +335,7 @@ set(HECBENCH_POC_BENCHMARKS
     prna
     projectile
     pso
+    putget
     # Batch 12: Q-R benchmarks (31 benchmarks)
     qem
     qkv
@@ -342,6 +351,7 @@ set(HECBENCH_POC_BENCHMARKS
     reaction
     recursiveGaussian
     relu
+    reshapeKVCache
     resize
     resnet-kernels
     reverse
@@ -359,7 +369,7 @@ set(HECBENCH_POC_BENCHMARKS
     rsmt
     rtm8
     rushlarsen
-    # Batch 13: S benchmarks (59 benchmarks)
+    # Batch 13: S benchmarks (60 benchmarks)
     s3d
     s8n
     sa
@@ -373,9 +383,11 @@ set(HECBENCH_POC_BENCHMARKS
     schur-complement
     score
     sddmm-batch
+    sdma
     seam-carving
     secp256k1
     segment-reduce
+    segment-reduce2
     segsort
     sheath
     shmembench
@@ -386,6 +398,7 @@ set(HECBENCH_POC_BENCHMARKS
     slit
     slu
     snake
+    snicit
     sobel
     sobol
     sort
@@ -420,8 +433,10 @@ set(HECBENCH_POC_BENCHMARKS
     stsg
     surfel
     svd3x3
+    svt
     sw4ck
-    # Batch 14: T-Z benchmarks (33 benchmarks)
+    # Batch 14: T-Z benchmarks (34 benchmarks)
+    tbe
     tensorAccessor
     tensorT
     testSNAP
@@ -431,8 +446,10 @@ set(HECBENCH_POC_BENCHMARKS
     tonemapping
     tpacf
     tqs
+    trimul
     tsne
     tsp
+    twell
     unfold
     urng
     vanGenuchten
@@ -520,6 +537,7 @@ set(HECBENCH_POC_BENCHMARKS
     complex
     concat
     concurrentKernels
+    condor
     contract
     conversion
     convolution3D
@@ -544,18 +562,29 @@ set(HECBENCH_POC_BENCHMARKS
     oziMMU
     pointerchase
     rmsnorm
+    rmsnorm-quant
+    rmsnorm-rope
     saxpy-ompt
+    shampoo
     silu
     softmax-fused
     softmax-online
+    swiglu-oai
     sundials
+    stiff-ode
     ssm
+    ssm2
     storeKVCache
+    axpby
+    f8cast
+    minimap2
+    tgvnn
     threadcpy
     tridiagonal
     topk
     upsample
     vadd
+    vdi
     wenofv
 )
 

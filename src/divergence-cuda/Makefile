@@ -7,7 +7,7 @@ CC        = nvcc
 OPTIMIZE  = yes
 DEBUG     = no
 ARCH      = sm_60
-LAUNCHER  =
+LAUNCHER  ?=
 
 #===============================================================================
 # Program name & source code list
@@ -45,7 +45,7 @@ endif
 $(program): divergence.o
 	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
 
-divergence.o: divergence.cu divergence.hpp Makefile
+divergence.o: divergence.cu divergence.hpp divergence_pragmas.hpp Makefile
 	$(CC) $(CFLAGS) -c $< -o $@
 
 

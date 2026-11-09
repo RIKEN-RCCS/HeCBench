@@ -17,9 +17,9 @@ OPTIMIZE  = yes
 DEBUG     = no
 GPU       = yes
 CUDA      = no
-CUDA_ARCH = sm_70
+CUDA_ARCH ?= sm_70
 HIP       = no
-HIP_ARCH  = gfx908
+HIP_ARCH  ?= gfx908
 # Use sycl_ext_oneapi_enqueue_functions (event-less kernel submission) to
 # reduce per-launch overhead of the many small CG kernels.
 ENQUEUE_FUNCTIONS = yes
@@ -35,11 +35,13 @@ endif
 
 ifeq ($(CUDA), yes)
   # Auto-detect the installed NVIDIA GPU's compute capability (e.g. 12.0 -> sm_120)
-  # so we build natively for the target device. Overridable on the command line
-  # via `make CUDA_ARCH=sm_XX` (command-line assignments take precedence).
-  DETECTED_CC := $(shell nvidia-smi --query-gpu=compute_cap --format=csv,noheader 2>/dev/null | head -1 | tr -d '. ')
-  ifneq ($(DETECTED_CC),)
-    CUDA_ARCH := sm_$(DETECTED_CC)
+  # so we build natively for the target device. Detection is skipped when
+  # CUDA_ARCH comes from the environment or the command line.
+  ifeq ($(filter environment command line,$(origin CUDA_ARCH)),)
+    DETECTED_CC := $(shell nvidia-smi --query-gpu=compute_cap --format=csv,noheader 2>/dev/null | head -1 | tr -d '. ')
+    ifneq ($(DETECTED_CC),)
+      CUDA_ARCH := sm_$(DETECTED_CC)
+    endif
   endif
   $(info miniFE: building for CUDA arch $(CUDA_ARCH))
   CPPFLAGS += -fsycl-targets=nvptx64-nvidia-cuda \

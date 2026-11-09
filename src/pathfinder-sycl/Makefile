@@ -4,17 +4,16 @@
 
 # Compiler can be set below, or via environment variable
 CC        = clang++
-LAUNCHER=
+LAUNCHER  ?=
 
 OPTIMIZE  = yes
 DEBUG     = no
-OUTPUT    = no
 
 GPU       = yes
 CUDA      = no
-CUDA_ARCH = sm_70
+CUDA_ARCH ?= sm_70
 HIP       = no
-HIP_ARCH  = gfx908
+HIP_ARCH  ?= gfx908
 #GCC_TOOLCHAIN = "/auto/software/gcc/x86_64/gcc-9.1.0/"
 
 #===============================================================================
@@ -63,10 +62,6 @@ endif
 ifeq ($(GPU),yes)
   CFLAGS +=-DUSE_GPU
 endif
-
-ifeq ($(OUTPUT),yes)
-  CFLAGS += -DBENCH_PRINT
-endif
 #===============================================================================
 # Targets to Build
 #===============================================================================
@@ -74,7 +69,7 @@ endif
 $(program): $(obj)
 	$(CC) $(CFLAGS) $(obj) -o $@ $(LDFLAGS)
 
-%.o: %.cpp kernel.sycl
+%.o: %.cpp kernel.sycl ../pathfinder-cuda/reference.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

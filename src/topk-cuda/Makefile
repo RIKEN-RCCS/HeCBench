@@ -7,7 +7,7 @@ CC        = nvcc
 OPTIMIZE  = yes
 DEBUG     = no
 ARCH      = sm_60
-LAUNCHER  =
+LAUNCHER  ?=
 
 #===============================================================================
 # Program name & source code list
@@ -48,7 +48,7 @@ endif
 $(program): $(obj) Makefile
 	$(CC) $(CFLAGS) $(obj) -o $@ $(LDFLAGS)
 
-%.o: %.cu  topk_per_row_kernels.h utils.h Makefile
+%.o: %.cu  topk_per_row_kernels.h ragged_config.h utils.h Makefile
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

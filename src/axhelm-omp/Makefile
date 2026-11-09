@@ -7,7 +7,7 @@ CC        = icpx
 OPTIMIZE  = yes
 DEBUG     = no
 DEVICE    = gpu
-LAUNCHER  =
+LAUNCHER  ?=
 
 #===============================================================================
 # Program name & source code list
@@ -26,7 +26,15 @@ CFLAGS := $(EXTRA_CFLAGS) -std=c++17 -Wall -Ddfloat=float -Ddlong=int \
           -I../axhelm-cuda
 
 # Linker Flags
-LDFLAGS = BlasLapack/libBlasLapack.a -lgfortran
+FC = gfortran
+
+# Resolved on demand, so goals that do not link need no Fortran compiler.
+# $(FC) echoes the bare name when it cannot resolve the library, hence /%.
+LIBGFORTRAN_PATH = $(filter /%,$(shell $(FC) -print-file-name=libgfortran.so))
+LIBGFORTRAN = $(or $(wildcard $(LIBGFORTRAN_PATH)),\
+              $(error Could not find libgfortran using $(FC)))
+
+LDLIBS = BlasLapack/libBlasLapack.a $(LIBGFORTRAN)
 
 # Debug Flags
 ifeq ($(DEBUG),yes)
@@ -44,11 +52,15 @@ ifeq ($(DEVICE),gpu)
 else
   CFLAGS +=-qopenmp
 endif
+# Shared DVC archive lives in axhelm-cuda
+BLAS_TGZ := ../axhelm-cuda/BlasLapack.tar.gz
+BLAS_MK  := BlasLapack/Makefile
+
 #===============================================================================
 # Targets to Build
 #===============================================================================
 $(program): $(obj) BlasLapack/libBlasLapack.a 
-	$(CC) $(CFLAGS) $+ -o $@ $(LDFLAGS)
+	$(CC) $(CFLAGS) $+ -o $@ $(LDFLAGS) $(LDLIBS)
 
 main.o : main.cpp ../axhelm-cuda/axhelmReference.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -56,11 +68,18 @@ main.o : main.cpp ../axhelm-cuda/axhelmReference.cpp
 meshBasis.o : meshBasis.cpp meshBasis.hpp meshNodesTet3D.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
-BlasLapack/libBlasLapack.a: 
-	cd BlasLapack && make -j8 && cd ..
+BlasLapack/libBlasLapack.a: $(BLAS_MK)
+	$(MAKE) -C BlasLapack -j8
+
+$(BLAS_MK): $(wildcard $(BLAS_TGZ))
+	@test -f $(BLAS_TGZ) || { \
+	  echo "Missing $(BLAS_TGZ). From the repository root run: dvc pull src/axhelm-cuda/BlasLapack.tar.gz" >&2; \
+	  exit 1; }
+	tar -xzf $(BLAS_TGZ)
+	touch $(BLAS_MK)
 
 clean:
-	cd BlasLapack && make clean && cd ..
+	if [ -d BlasLapack ]; then cd BlasLapack && make clean; fi
 	rm -rf $(program) $(obj)
 
 # run one- and three-dimensional kernels

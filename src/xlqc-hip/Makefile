@@ -7,7 +7,7 @@ CC        = hipcc
 OPTIMIZE  = yes
 DEBUG     = no
 EIGEN_INC ?= $(shell pkg-config --cflags eigen3 2>/dev/null)
-LAUNCHER  =
+LAUNCHER  ?=
 
 ifneq ($(MAKECMDGOALS),clean)
 ifeq ($(EIGEN_INC),)

@@ -7,7 +7,7 @@ VPATH   = ./
 HDRDIR  = ./include
 
 # adjust this for your system
-CUDADIR=/auto/software/nvidia/x86_64/cuda-11.0
+CUDADIR ?= /auto/software/nvidia/x86_64/cuda-11.0
 OPENMPI_BINDIR ?= /usr/lib64/openmpi3/bin
 
 # set options for this machine
@@ -17,7 +17,7 @@ LD	= $(OPENMPI_BINDIR)/mpicc
 NVCC	= $(CUDADIR)/bin/nvcc
 #DEBUG   = -g -G -DDEBUG
 FAST    = -O3 --use_fast_math 
-LAUNCHER=
+LAUNCHER  ?=
 
 # compiler flags to be used (set to compile with debugging on)
 CFLAGS = -Dp_N=$(N) -DNDG3d -DCUDA -I$(HDRDIR) -O3 -I$(CUDADIR)/include
@@ -35,7 +35,7 @@ LIBS	= -lm -L./3rdParty/ParMetis-3.1/ -lparmetis -lmetis -L$(CUDADIR)/lib64 -lcu
 .c.o:
 	$(CC) $(CFLAGS) -o $*.o -c $*.c
 .cu.o: 
-	$(NVCC) -Xcompiler -Wall $(CFLAGS) $(DEBUG) $(FAST) -o $*.o -c $*.cu  
+	$(NVCC) -std=c++17 -Xcompiler -Wall $(CFLAGS) $(DEBUG) $(FAST) -o $*.o -c $*.cu  
 
 # list of objects to be compiled
 OBJS    = \

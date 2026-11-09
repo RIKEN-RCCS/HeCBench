@@ -143,7 +143,7 @@ int calcRepeatProbs(float *letterProbs,
   return (fabs(fTot - bTot) > fmax(fTot, bTot) / 1e6);
 }
 
-auto_ptr<Masking> Masking::instance;
+unique_ptr<Masking> Masking::instance;
 const uint8_t Masking::bit_mask = 128;
 
 Masking::Masking(const Score_matrix &score_matrix)

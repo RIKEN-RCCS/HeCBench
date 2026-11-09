@@ -8,7 +8,7 @@ OPTIMIZE  = yes
 DEBUG     = no
 DEVICE    = gpu
 EIGEN_INC ?= $(shell pkg-config --cflags eigen3 2>/dev/null)
-LAUNCHER  =
+LAUNCHER  ?=
 
 ifneq ($(MAKECMDGOALS),clean)
 ifeq ($(EIGEN_INC),)
