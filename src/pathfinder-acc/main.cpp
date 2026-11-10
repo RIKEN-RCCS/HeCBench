@@ -126,7 +126,7 @@ int main(int argc, char** argv)
       int sm[2][NUMBER_THREADS];
 
       #pragma acc parallel loop gang num_gangs(gws) vector_length(NUMBER_THREADS) \
-                  private(sm) present(gpuSrc[0:cols], gpuResult[0:cols], gpuWall[0:size-cols])
+                  private(sm) present(gpuSrc[0:cols], gpuResult[0:cols], gpuWall[0:size-cols]) async(1)
       for (int bx = 0; bx < gws; bx++)
       {
         const int BLOCK_SIZE = NUMBER_THREADS;
@@ -206,6 +206,7 @@ int main(int argc, char** argv)
     }
 
     // Final row lives in whichever host pointer gpuSrc currently names.
+    #pragma acc wait(1)
     #pragma acc update self(gpuSrc[0:cols])
 
     auto kend = std::chrono::steady_clock::now();
