@@ -223,8 +223,8 @@ unsigned char* Masking::call_opt(Sequence_set &seqs) const
   const double minMaskProb = 0.5;
   const int seqs_len = n;
 
-  #pragma acc data tofrom: s[0:total]) \
-                          map(to: likelihoodRatioMatrix[0:size*size], maskTable[0:size])
+  #pragma acc data copy(s[0:total]) \
+                   copyin(likelihoodRatioMatrix[0:size*size], maskTable[0:size])
   {
     #pragma acc parallel loop vector_length(128)
     for (int gid = 0; gid < seqs_len; gid++) {
@@ -355,7 +355,7 @@ void mask_seqs(Sequence_set &seqs, const Masking &masking, bool hard_mask)
 
 #else
 
-#pragma acc loop num_threads(config.threads_)
+#pragma omp parallel for num_threads(config.threads_)
   for (int i=0; i < n; i++){
     masking.call_opt(seqs.ptr(i), seqs.length(i));
   }
