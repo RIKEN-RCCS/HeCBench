@@ -2,7 +2,7 @@
 
 > **注意: このファイルは作業引き継ぎ用の一時ファイルです。upstream に PR を出す前に必ず削除してください。**
 
-- 最終更新: 2026-11-10（Mac での作業を終え、GPU マシンでの作業に引き継ぐ時点）
+- 最終更新: 2026-11-10（GPU マシン（GB200, cc100）で3章の確認を終えた時点）
 - 対象ブランチ: `acc`（`origin` = `github.com:RIKEN-RCCS/HeCBench`）
 
 ## 1. 目的と方針
@@ -24,6 +24,14 @@
 ## 2. これまでの作業（PR #3 マージ後、`f1902eb1a` 以降）
 
 ```
+b496229af [diamond-acc] map each sequence to one thread and use the upstream input
+c2d5f1558 [lr-acc] read the assets from lr-sycl like the OpenMP version
+80d76967b [sad-acc] extract data.tar.gz at build time like the other ports
+19c512f8b [diamond-acc] fix the data clauses and the host CPU loop pragma
+6df834e2d [divergence-acc] read input.txt from divergence-cuda
+1ffa6c53e [hausdorff-acc] keep the point coordinates in registers
+3b14849e1 [pathfinder-acc] launch the pyramid kernels asynchronously
+ae3af0359 Add ACC_WORK_STATUS.md (temporary hand-off notes; remove before the upstream PR)
 73c766130 Remove ans-acc, leukocyte-acc and shmembench-acc (not yet implemented)
 9fac85448 Remove the -omp_nvc ports
 4359d4730 [pathfinder-acc] fix the launch geometry and verify results against a host checker
@@ -58,34 +66,65 @@ e8a3e305a Merge origin/master (upstream sync) into acc   ← master 8f44ff3e6 �
 - `e8a3e305a`: master（`8f44ff3e6`）をマージ。git のコンフリクトはなし。master が `diamond-sycl/src/basic/masking.h` を `unique_ptr` に変えたため、diamond-acc の `masking.cpp` も合わせて修正した。
 - `9f904ae79`〜`4359d4730`（22コミット）: master が `-omp` などで直したバグや追加した検証を、`-acc` に移植したもの。各コミットのメッセージに、元になった upstream のコミットを書いてある。
   - pathfinder, bitonic-sort, gamma-correction, hausdorff, stencil1d, sw4ck は、master の新しい `-omp` 版をもとに ACC で書き直した。共有メモリの処理は、gang ごとの `private` 配列と、続けて並べた `loop vector` で表している（PR #3 の fwt-acc と同じ書き方）。
+- `3b14849e1`〜`b496229af`（7コミット）: GPU での確認（3章）で見つかった問題の修正。
 
-## 3. GPU マシンでまずやること：変更したベンチマークの確認
+## 3. GPU での確認結果（2026-11-10, GB200 / cc100, nvc++ 26.3）
 
-Mac では nvc++ が使えなかったため、**ここまでの変更は GPU でまったく確認していない**。Mac では次の確認だけをした。
+2章の変更を GPU で確認した。**ビルドできるものは、すべて正しい結果になることを確認済み。**
 
-- clang++ による構文チェック（変更前後でエラー数が増えていないこと）
-- pathfinder, bitonic-sort, gamma-correction, stencil1d：ACC の pragma を無視して逐次でビルドし、実行して PASS
-
-確認手順（例）:
+手順:
 ```bash
+module load nvhpc
 cd src/<name>-acc
 make -f Makefile.NVD clean
-make -f Makefile.NVD SM=cc90 run      # SM の既定値は cc90。GPU に合わせて変える
+make -f Makefile.NVD SM=cc100 run     # GB200 は cc100
 cat log.std log.err log.time          # 実行コマンドは src/include/<name>-NVIDIA の COMMAND
 ```
+比較には `-cuda`（`make ARCH=sm_100`）と `-omp`（`make -f Makefile.nvc SM=cc100`）を、同じ引数で実行した。
 
-確認する対象と、期待する結果:
+### 結果（カーネル時間）
 
-| ベンチマーク | 確認すること |
-|---|---|
-| black-scholes, clenergy | PASS すること。black-scholes は時間が短くなっているはず（gang が1つだったのを直した） |
-| diamond | ビルドが通ること（`unique_ptr` の修正）。※ `masking.cpp:226` に、前からの誤った pragma `#pragma acc data tofrom: s[0:total]) \` があり、ここでビルドエラーになる可能性が高い（4章 B を参照） |
-| wsm5 | PASS すること |
-| pathfinder, bitonic-sort, gamma-correction, hausdorff, stencil1d, sw4ck | **書き直したもの。PASS することと、性能を重点的に確認する** |
-| sad, lr, ccs, b+tree, su3, mis, ising, cfd, divergence | PASS すること（sad, lr, hausdorff, bitonic-sort, pathfinder, gamma-correction は、新しく PASS/FAIL の判定を追加した） |
-| hexciton, bn, gc, tqs, fpdc, dct8x8 | 修正自体は入れたが、**もともと OpenMP の名残があってビルドできない**（4章 A）。この時点ではビルドエラーで構わない |
+| ベンチマーク | acc | cuda | omp | 判定 |
+|---|---|---|---|---|
+| pathfinder | 0.042s（修正前 0.159s） | 0.042s | 0.418s | PASS |
+| bitonic-sort | 20.8ms | 25.5ms | 203ms | PASS |
+| gamma-correction | 0.56ms | 0.46ms | 0.52ms | PASS |
+| hausdorff | 8.8ms（修正前 27.2ms） | 7.0ms | 8.9ms | PASS |
+| stencil1d | 1.66ms | 2.09ms | 9.21ms | PASS |
+| sw4ck | 1.47 / 6.53ms | 1.21 / 5.40ms | 15.5 / 284ms | 誤差は omp と同じ程度 |
+| black-scholes | 0.76ms | 0.70ms | 2.85ms | 出力の合計が omp と一致。gang の修正の効果を確認 |
+| clenergy | 2.42ms/回 | 1.59ms/回 | 2.57ms/回 | 出力が omp・cuda と一致 |
+| wsm5 | 290ms | 303ms | 310ms | チェックサムが omp と一致 |
+| divergence | — | — | — | 修正後、omp と同じ値 |
+| ccs | 10.9ms | — | 15.6ms | `Output.txt` が omp と完全に一致 |
+| b+tree | 113µs | — | 1201µs | `output.txt` が omp と完全に一致 |
+| cfd | 0.21s | — | 0.55s | 出力3ファイルが omp と完全に一致 |
+| diamond | 2.60s | — | 2.73s | 検証エラー0件。`long_cur.m8` が omp と完全に一致 |
+| sad, lr, su3, ising | — | — | — | PASS / SUCCESS |
+| mis | — | — | — | 検証エラーなし（時間の表示は下記の注意を参照） |
+| hexciton, bn, gc, tqs, fpdc, dct8x8 | — | — | — | 予想どおりビルドエラー（OpenMP の名残。4章 A） |
 
-- b+tree, cfd, sad などは、入力データの `dvc pull` と展開が必要な場合がある（PR #3 の説明では、b+tree, cfd, columnarSolver, hotspot3D, lr, mcpr, nn, sad, sobel, ss, urng の11件が該当）。
+- 実行時間（real）が長いもの（gamma-correction 約110秒、hausdorff 約60秒、pathfinder 約30秒）は、ホスト側で逐次に検証しているため。GPU の問題ではない。
+
+### この確認で直したもの（7コミット）
+- **pathfinder**：10000回のカーネル起動のたびにホストと同期していた。`async(1)` を付け、最後に `wait(1)` を入れた。
+- **hausdorff**：`float2` の点がローカルメモリに置かれていた。スカラーに分けて計算するようにした。
+- **divergence**：`divergence-acc` に `input.txt` がなく、CPU・GPU ともに NaN になっていた。`../divergence-cuda/input.txt` を読むようにした。
+- **diamond**：
+  - `masking.cpp` の誤った2つの pragma を直した。データ句は `copy`/`copyin` にし、ホスト側の CPU 基準ループは omp 版と同じ `omp parallel for` に戻した。
+  - マスク処理のループが gang だけになっていて、作業配列が共有メモリに置かれて競合し、約2250件の検証エラーが出ていた。`gang vector` に直した。
+  - 入力を、外部の gerbil データから、omp と同じ DVC のデータ（`diamond-sycl/long.fastq.gz`）に変えた。
+- **sad**：upstream `2c09431bc` を移植した。リポジトリに入っていた `bitmap_image.hpp` のコピーを削除し、ビルド時に `sad-cuda/data.tar.gz` を展開するようにした。それまでは、存在しないファイルに依存していたため、make の組み込みルールで CFLAGS なしにビルドされて失敗していた。
+- **lr**：アセットを、omp と同じ `../lr-sycl/assets/` から読むようにした。
+
+### 入力データ
+- dvc はこのマシンに入っていない。確認には、scratchpad の venv に `pip install 'dvc[s3]'` で入れたものを使った。
+- 取得したもの: `src/sad-cuda/data.tar.gz`, `src/ccs-cuda/data.tar.gz`, `src/lr-sycl/assets.tar.gz`, `src/data/b+tree/b+tree.tar.bz`, `src/data/cfd/cfd.tar.bz`, `src/diamond-sycl/data.tar.bz`（658MB）。
+- 展開は、CMake の `UNZIPFILE` と同じく、アーカイブがあるディレクトリで `tar x` した。sad だけは Makefile が自動で展開する。
+
+### 注意
+- **mis**：`compute time: 0.000000 s` と表示される。ループ回数は100で固定なのに、時間を `repeat`（100000）で割っているため。upstream の mis-omp にも同じ不具合があり、acc 版はそれに合わせた状態（直していない）。
+- **diamond-acc と diamond-omp** は、同じ `../diamond-sycl/src/*.o` にオブジェクトを出力する。並べてビルドすると互いに壊れるので、順番にクリーンビルドすること。
 - `run_mem` ターゲットは `../scripts/m.sh` を呼ぶが、このファイルは `src/scripts/` にない（使わなければ問題ない）。
 
 ## 4. 未解決の課題：`-acc` に残る OpenMP の名残
@@ -114,7 +153,7 @@ adv(1) aes(2) aop(5) assert(2) asta(1) axhelm(2) binomial(1) bn(1) cm(3) cmp(2) 
 | chacha20 | 正常 | declare target 2 |
 | complex | 正常 | declare target 4 |
 | debayer | 正常 | declare target 6 |
-| diamond | build err | `acc target` 1、データ句1（`masking.cpp:226`） |
+| diamond | build err | **修正済み**（`19c512f8b`, `b496229af`） |
 | ecdh | 正常 | declare target 2 |
 | kalman | build err | データ句1、declare target 2 |
 | lci | 正常 | declare target 2 |
@@ -129,8 +168,11 @@ adv(1) aes(2) aop(5) assert(2) asta(1) axhelm(2) binomial(1) bn(1) cm(3) cmp(2) 
 
 backprop（`omp_get_num_procs` など）, mr（データ句1。build err）, myocyte, rsbench, rsc, simplemoc, su3（いずれも `omp.h` などで、status2 は正常）
 
+### `-mp=gpu` について（GPU マシンで確認）
+Makefile.NVD の約250件が `-mp=gpu` を指定している（`-acc=gpu` は約60件）。多くは `CC = nvc++ -acc` も指定しているので、OpenACC と OpenMP のオフロードが両方とも有効になり、OpenMP の名残があってもビルドが通ってしまう。名残をなくした後に、`-acc=gpu` にそろえるかを決める必要がある。
+
 ### 決める必要があること
-1. B と C の19件を直すか（比較的短時間で済む。GPU で確認しながら進められる）。
+1. B と C の18件（diamond は修正済み）を直すか（比較的短時間で済む。GPU で確認しながら進められる）。
 2. A の77件の扱い:
    - (a) ans などと同じく「Not yet implemented」として PR から外す（ディレクトリを削除）
    - (b) 書き直す（263カーネル分。1カーネルのものから順に、など）
@@ -145,6 +187,8 @@ backprop（`omp_get_num_procs` など）, mr（データ句1。build err）, myo
   - 選択肢: (a) CMake には対応しない（CMakeLists.txt を削除し、Makefile だけにする）、(b) マクロに acc モデル（`HECBENCH_ENABLE_OPENACC`、nvc++ の `-acc` など）を足し、324件を `MODEL acc` に直す。
 - **通常の Makefile**: `-acc/Makefile` はほぼすべて `CC = icpx` で、`-fopenacc -fopenacc-targets=spir64` を指定している（`-omp` の Makefile を機械的に置き換えたものと見られる）。実際に使えるのは Makefile.NVD（nvc++）だけ。upstream に合わせて `Makefile` をどうするか（Makefile.NVD を Makefile に統合するかなど）を決める必要がある。
 - **heartwall-acc**: status2 では build err だが、OpenMP の名残はない。原因は未調査。
+- **`prepare_data.sh`**: `src/include/*-NVIDIA` のうち55件が、COMMAND の先頭で `../<name>-cuda/prepare_data.sh` を呼んでいるが、このスクリプトは src2 の時代のもので、src にはない（sad と lr は直した）。`;` で区切られているので実行は止まらないが、データは展開されない。upstream の CMake `UNZIPFILE` や Makefile のやり方に合わせて直す必要がある。
+  - ほかにも lr-acc のように、`prepare_data.sh` がコピーしたファイルを、自分のディレクトリから読もうとするものがあるかもしれない。
 - **dct8x8-acc**: ACC のカーネルの中で `omp_get_thread_num()` を使っている（A に含まれる）。
 
 ## 6. 参考
@@ -152,4 +196,5 @@ backprop（`omp_get_num_procs` など）, mr（データ句1。build err）, myo
 - 保存してあるもの: `src2/`、`status2/` → タグ `archive/src2-final-20261109`。`-omp_nvc` → `4359d4730`。削除した3件 → `9fac85448`。
   - 取り出し方の例: `git worktree add ../hecbench-src2 archive/src2-final-20261109`
 - 関連ブランチ: `AMB-work`（`src3/` に `-acc_gv` 版がある。上の比較で、取り込むものは black-scholes と clenergy だけと判断済み）。
+- 3章の確認には、scratchpad に書いた一時的なスクリプトを使った（ベンチマークごとに clean、build、run を行い、`log.*` を集めるもの）。リポジトリには入っていない。
 - 4章の分類は、Mac 上のスクリプトで出したもの（コメントを除き、`unifdef -k -D_OPENACC -U_OPENMP` で使われない分岐を取り除き、Makefile.NVD がビルドするソースとそこから `#include` されるファイルだけを対象にした）。スクリプトはリポジトリに入っていない。必要なら作り直す。
