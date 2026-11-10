@@ -226,7 +226,7 @@ unsigned char* Masking::call_opt(Sequence_set &seqs) const
   #pragma acc data copy(s[0:total]) \
                    copyin(likelihoodRatioMatrix[0:size*size], maskTable[0:size])
   {
-    #pragma acc parallel loop vector_length(128)
+    #pragma acc parallel loop gang vector vector_length(128)
     for (int gid = 0; gid < seqs_len; gid++) {
 
       unsigned char* seqBeg = s+gid*33;
