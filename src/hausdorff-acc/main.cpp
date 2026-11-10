@@ -7,12 +7,6 @@
 #include <openacc.h>
 #include "reference.h"
 
-inline float hd (const float2 ap, const float2 bp)
-{
-  return (ap.x - bp.x) * (ap.x - bp.x)
-       + (ap.y - bp.y) * (ap.y - bp.y);
-}
-
 void computeDistance(const float2* __restrict Apoints,
                      const float2* __restrict Bpoints,
                            float*  __restrict distance,
@@ -23,9 +17,13 @@ void computeDistance(const float2* __restrict Apoints,
 #pragma acc parallel loop gang vector reduction(max:max_d) vector_length(256) default(present)
   for (int i = 0; i < numA; i++) {
     float d = FLT_MAX;
-    float2 p = Apoints[i];
+    // Scalar copies keep the point in registers instead of local memory.
+    const float px = Apoints[i].x;
+    const float py = Apoints[i].y;
     for (int j = 0; j < numB; j++) {
-      float t = hd(p, Bpoints[j]);
+      const float dx = px - Bpoints[j].x;
+      const float dy = py - Bpoints[j].y;
+      float t = dx * dx + dy * dy;
       if (t < d) d = t;
     }
     if (d > max_d) max_d = d; 
