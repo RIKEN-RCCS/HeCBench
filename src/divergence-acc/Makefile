@@ -60,4 +60,4 @@ clean:
 	rm -rf $(program) *.o
 
 run: $(program)
-	$(LAUNCHER) ./$(program) input.txt 10000
+	$(LAUNCHER) ./$(program) ../divergence-cuda/input.txt 10000
