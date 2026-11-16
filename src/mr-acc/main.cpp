@@ -25,14 +25,14 @@ void run_benchmark(const int repeat)
   bool ok = true;
   double mr32_sf_time = 0.0, mr32_eff_time = 0.0;
 
-  #pragma acc parallel data map (to: d_bases32[0:bases32_size]) \
-                          map (alloc: d_n32[0:BENCHMARK_ITERATIONS], d_val[0:1])
+  #pragma acc data copyin(d_bases32[0:bases32_size]) \
+                   create(d_n32[0:BENCHMARK_ITERATIONS], d_val[0:1])
   {
     for (i = 0; i < SIZES_CNT32; i++) {
       val_ref = val_eff = 0;
 
       memcpy(d_n32, n32[i], sizeof(uint32_t) * BENCHMARK_ITERATIONS);
-      #pragma acc update to (d_n32[0:BENCHMARK_ITERATIONS])
+      #pragma acc update device(d_n32[0:BENCHMARK_ITERATIONS])
       
       for (cnt = 1; cnt <= BASES_CNT32; cnt++) {
         time_point start = get_time();
@@ -70,7 +70,7 @@ void run_benchmark(const int repeat)
       }
       mr32_sf_time += time / repeat;
 
-      #pragma acc update from (d_val[0:1])
+      #pragma acc update self(d_val[0:1])
 
       if (val_ref != val_dev) {
         ok = false;
@@ -92,7 +92,7 @@ void run_benchmark(const int repeat)
       }
       mr32_eff_time += time / repeat;
 
-      #pragma acc update from (d_val[0:1])
+      #pragma acc update self(d_val[0:1])
 
       if (val_ref != val_dev) {
         ok = false;
