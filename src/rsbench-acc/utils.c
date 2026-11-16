@@ -14,16 +14,7 @@ size_t get_mem_estimate( Input input )
 
 double get_time(void)
 {
-	#ifdef OPENMP
-	return omp_get_wtime();
-	#endif
-
-	struct timeval timecheck;
-
-	gettimeofday(&timecheck, NULL);
-	long ms = (long)timecheck.tv_sec * 1000 + (long)timecheck.tv_usec / 1000;
-
-	double time = (double) ms / 1000.0;
-
-	return time;
+	struct timespec ts;
+	clock_gettime(CLOCK_MONOTONIC, &ts);
+	return (double) ts.tv_sec + (double) ts.tv_nsec * 1e-9;
 }

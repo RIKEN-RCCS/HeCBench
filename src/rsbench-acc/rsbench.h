@@ -5,10 +5,8 @@
 #include<string.h>
 #include<stdint.h>
 #include<float.h>
-#include<omp.h>
+#include<time.h>
 #include<assert.h>
-
-#define OPENMP
 
 #define PI 3.14159265359
 
