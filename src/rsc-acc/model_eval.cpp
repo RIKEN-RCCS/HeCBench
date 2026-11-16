@@ -33,7 +33,6 @@
  *
  */
 
-#include <omp.h>
 #include <math.h>
 #include "support/common.h"
 
