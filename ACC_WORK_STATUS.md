@@ -2,7 +2,7 @@
 
 > **注意: このファイルは作業引き継ぎ用の一時ファイルです。upstream に PR を出す前に必ず削除してください。**
 
-- 最終更新: 2026-11-10（GPU マシン（GB200, cc100）で3章の確認を終えた時点）
+- 最終更新: 2026-11-17（4章 C の7件を直した時点）
 - 対象ブランチ: `acc`（`origin` = `github.com:RIKEN-RCCS/HeCBench`）
 
 ## 1. 目的と方針
@@ -24,6 +24,13 @@
 ## 2. これまでの作業（PR #3 マージ後、`f1902eb1a` 以降）
 
 ```
+c8120d96d [su3-acc] drop the unused omp.h include
+0b030785f [rsc-acc] drop the unused omp.h includes
+8d0b5406c [rsbench-acc] time with clock_gettime instead of omp_get_wtime
+9fd25651c [myocyte-acc] drop the unused omp.h include
+c5bac52ba [mr-acc] use OpenACC data clauses and fix the atomic updates
+e0c31c939 [backprop-acc] restore the host OpenMP pragmas in the #ifdef OPEN blocks
+b76e89284 Update ACC_WORK_STATUS.md with the GPU check results (temporary; remove before the upstream PR)
 b496229af [diamond-acc] map each sequence to one thread and use the upstream input
 c2d5f1558 [lr-acc] read the assets from lr-sycl like the OpenMP version
 80d76967b [sad-acc] extract data.tar.gz at build time like the other ports
@@ -67,6 +74,7 @@ e8a3e305a Merge origin/master (upstream sync) into acc   ← master 8f44ff3e6 �
 - `9f904ae79`〜`4359d4730`（22コミット）: master が `-omp` などで直したバグや追加した検証を、`-acc` に移植したもの。各コミットのメッセージに、元になった upstream のコミットを書いてある。
   - pathfinder, bitonic-sort, gamma-correction, hausdorff, stencil1d, sw4ck は、master の新しい `-omp` 版をもとに ACC で書き直した。共有メモリの処理は、gang ごとの `private` 配列と、続けて並べた `loop vector` で表している（PR #3 の fwt-acc と同じ書き方）。
 - `3b14849e1`〜`b496229af`（7コミット）: GPU での確認（3章）で見つかった問題の修正。
+- `e0c31c939`〜`c8120d96d`（6コミット）: 4章 C の修正（2026-11-17）。
 
 ## 3. GPU での確認結果（2026-11-10, GB200 / cc100, nvc++ 26.3）
 
@@ -162,17 +170,25 @@ adv(1) aes(2) aop(5) assert(2) asta(1) axhelm(2) binomial(1) bn(1) cm(3) cmp(2) 
 | multimaterial | 正常 | `omp_get_wtime` 6、そのほかの omp 2 |
 | pnpoly | build err | データ句1、declare target 2 |
 
-### C. ホスト側だけの名残（7件）
+### C. ホスト側だけの名残（7件）：**完了**（2026-11-17）
 
-`#include <omp.h>`、`omp_get_wtime()`、`omp_get_num_procs()` など。chrono などへの置き換えで済む。
+調べ直すと、実際の状況は次のとおりだった。7件とも、`-mp=gpu` を `-acc=gpu` に置き換えた一時的な Makefile（OpenMP なし）でビルドでき、実行して結果を確認した。
 
-backprop（`omp_get_num_procs` など）, mr（データ句1。build err）, myocyte, rsbench, rsc, simplemoc, su3（いずれも `omp.h` などで、status2 は正常）
+| ベンチマーク | 実際の状況 | 対応 | 結果 |
+|---|---|---|---|
+| backprop | `#ifdef OPEN`（未定義でビルドされない）の中で、`omp parallel for` が誤って `acc loop ... schedule(static)` に置き換えられていた。このブロックは cuda・omp 版にもある upstream 共通のホスト側コード | ほかの版と同じ `omp parallel for` に戻した（`e0c31c939`） | PASS |
+| mr | `acc parallel data map(...)`、`acc update to/from` が残っていた。また、`acc atomic update` の式の中で関数を呼んでいて、もともとビルドできなかった | `acc data copyin/create`、`update device/self` に直し、関数の結果をローカル変数に入れてから atomic で加えるようにした（`c5bac52ba`） | PASS（初めてビルドが通った） |
+| rsbench | `rsbench.h` に `#define OPENMP` があり、`omp_get_wtime()` を実際に使っていた | `clock_gettime(CLOCK_MONOTONIC)` に置き換えた（ソースが .c なので chrono ではなくこれにした）。表示も「OpenACC Init」に直した（`8d0b5406c`） | Valid |
+| myocyte, rsc, su3 | 使っていない `#include <omp.h>` があった | 削除した（`9fd25651c`, `0b030785f`, `c8120d96d`） | rsc：Test Passed、su3：SUCCESS、myocyte：5章を参照 |
+| simplemoc | `OPENMP` が未定義なので、OpenMP のコードは使われていない。cuda 版と同じ書き方 | 変更なし | 動作を確認 |
+
+- 当初の分類（Mac 上のスクリプト）は `_OPENMP` だけを未定義として扱っていたため、`OPEN` や `OPENMP` のような独自のマクロで囲まれた、ビルドされないコードも「名残」として数えていた。A と B の件数にも、同じように数えすぎているものがあるかもしれない。
 
 ### `-mp=gpu` について（GPU マシンで確認）
 Makefile.NVD の約250件が `-mp=gpu` を指定している（`-acc=gpu` は約60件）。多くは `CC = nvc++ -acc` も指定しているので、OpenACC と OpenMP のオフロードが両方とも有効になり、OpenMP の名残があってもビルドが通ってしまう。名残をなくした後に、`-acc=gpu` にそろえるかを決める必要がある。
 
 ### 決める必要があること
-1. B と C の18件（diamond は修正済み）を直すか（比較的短時間で済む。GPU で確認しながら進められる）。
+1. B の11件（diamond は修正済み）を直すか（比較的短時間で済む。GPU で確認しながら進められる）。C の7件は完了。
 2. A の77件の扱い:
    - (a) ans などと同じく「Not yet implemented」として PR から外す（ディレクトリを削除）
    - (b) 書き直す（263カーネル分。1カーネルのものから順に、など）
@@ -187,6 +203,9 @@ Makefile.NVD の約250件が `-mp=gpu` を指定している（`-acc=gpu` は約
   - 選択肢: (a) CMake には対応しない（CMakeLists.txt を削除し、Makefile だけにする）、(b) マクロに acc モデル（`HECBENCH_ENABLE_OPENACC`、nvc++ の `-acc` など）を足し、324件を `MODEL acc` に直す。
 - **通常の Makefile**: `-acc/Makefile` はほぼすべて `CC = icpx` で、`-fopenacc -fopenacc-targets=spir64` を指定している（`-omp` の Makefile を機械的に置き換えたものと見られる）。実際に使えるのは Makefile.NVD（nvc++）だけ。upstream に合わせて `Makefile` をどうするか（Makefile.NVD を Makefile に統合するかなど）を決める必要がある。
 - **heartwall-acc**: status2 では build err だが、OpenMP の名残はない。原因は未調査。
+- **myocyte-acc の出力が `nan`**: `output.txt` の約92万行のうち87万行が `nan`。`9fd25651c` より前の状態（`omp.h` あり、`-mp=gpu`）でも同じなので、もともとの不具合。omp 版には `nan` がないが、時刻 0 の値（`y[0][0][0]=1.13e30`）が入力 `data/myocyte/y.txt` の先頭（1.37e-3）と合っていないので、upstream の実装も含めて調べる必要がある。実行コマンドは Makefile.NVD の50行目の COMMAND（`-time 10000`）で、`include/myocyte-NVIDIA` の COMMAND は上書きされている。
+- **upstream の `myocyte-omp/Makefile.nvc` が壊れている**: リンクのルールの行の続け方が誤っていて、ビルドできない（比較のときは手でビルドした）。
+- **simplemoc**: カーネル時間が約220秒、実行全体で約5分かかる（コードは変えていない）。
 - **`prepare_data.sh`**: `src/include/*-NVIDIA` のうち55件が、COMMAND の先頭で `../<name>-cuda/prepare_data.sh` を呼んでいるが、このスクリプトは src2 の時代のもので、src にはない（sad と lr は直した）。`;` で区切られているので実行は止まらないが、データは展開されない。upstream の CMake `UNZIPFILE` や Makefile のやり方に合わせて直す必要がある。
   - ほかにも lr-acc のように、`prepare_data.sh` がコピーしたファイルを、自分のディレクトリから読もうとするものがあるかもしれない。
 - **dct8x8-acc**: ACC のカーネルの中で `omp_get_thread_num()` を使っている（A に含まれる）。
