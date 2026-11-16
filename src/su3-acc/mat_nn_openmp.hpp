@@ -1,5 +1,4 @@
 // OpenMP target offload implementation
-#include <omp.h>
 #include <unistd.h>
 
 #define THREADS_PER_SITE 36
