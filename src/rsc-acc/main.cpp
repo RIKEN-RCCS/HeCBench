@@ -37,7 +37,6 @@
 #include <unistd.h>
 #include <thread>
 #include <assert.h>
-#include <omp.h>
 #include <chrono>
 #include "kernel.h"
 
