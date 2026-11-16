@@ -232,7 +232,7 @@ void bpnn_layerforward(float *l1, float *l2, float **conn, int n1, int n2)
   l1[0] = 1.0;
 #ifdef OPEN
   omp_set_num_threads(NUM_THREAD);
-  #pragma acc loop shared(conn, n1, n2, l1) private(k, j) reduction(+: sum) schedule(static)
+  #pragma omp parallel for shared(conn, n1, n2, l1) private(k, j) reduction(+: sum) schedule(static)
 #endif 
   /*** For each unit in second layer ***/
   for (j = 1; j <= n2; j++) {
@@ -294,7 +294,7 @@ void bpnn_adjust_weights(float *delta, int ndelta, float *ly, int nly, float **w
 
 #ifdef OPEN
   omp_set_num_threads(NUM_THREAD);
-  #pragma acc loop  \
+  #pragma omp parallel for  \
       shared(oldw, w, delta) \
 	  private(j, k, new_dw) \
 	  firstprivate(ndelta, nly, momentum) 
