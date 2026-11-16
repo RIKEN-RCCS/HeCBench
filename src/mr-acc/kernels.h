@@ -8,8 +8,9 @@ void mr32_sf(
   for (int j = 0; j < iter; j++) {
     int n = n32[j];
     for (int cnt = 1; cnt <= BASES_CNT32; cnt++) {
+      const int r = straightforward_mr32(bases, cnt, n);
       #pragma acc atomic update
-      *val += straightforward_mr32(bases, cnt, n);
+      *val += r;
     }
   }
 }
@@ -24,8 +25,9 @@ void mr32_eff(
   for (int j = 0; j < iter; j++) {
     int n = n32[j];
     for (int cnt = 1; cnt <= BASES_CNT32; cnt++) {
+      const int r = efficient_mr32(bases, cnt, n);
       #pragma acc atomic update
-      *val += efficient_mr32(bases, cnt, n);
+      *val += r;
     }
   }
 }
