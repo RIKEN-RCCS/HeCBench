@@ -11,6 +11,9 @@
   - 調べること: ①ビルドが通るか（通らなければ通常の Makefile.NVD でも試し、「`-mp=gpu` があるときだけ通る」ものを見分ける）、②`-Minfo` の `CUDA shared memory used for` と `loop gang /* blockIdx.x */`（gang だけのループの競合の候補）、③`-acc` なしでコンパイルされたファイル（組み込みルールへの切り替わり）。
   - スクリプトは scratchpad の `sweep/one.sh`（1件ずつビルドし、1行の TSV を書く）。`xargs -P 12` で並列に実行。セッションが切れたら、同じことをやり直せばよい（ビルドだけなので、全件で1時間以内の見込み）。
   - 結果がまとまったら、集計をこのファイルの4章に書く。
+  - **途中経過（06:40）**: 全件のビルドは終わった（約2分）。OpenMP なしで通る 205件、`-mp=gpu` があるときだけ通る 34件、どちらでも通らない 80件、Makefile.NVD なし 3件。A の77件は、73件がどちらでも通らず、通るのは deredundancy, openmp, winograd の3件だけ（最初の分類はおおむね正しかった）。
+  - 見つけて直したもの: ①grrt, iso2dfd, tridiagonal の `make clean` が `*.txt` で `CMakeLists.txt`（追跡中）を消していた（`035ec4cea`, `44238d593`, `7b2d58ff7`）。②**私の `1ffa6c53e` で hausdorff のビルドが壊れていた**（`hd()` を消したが、`../hausdorff-cuda/reference.h` が使っていた）。`c38d652bb` で直した。
+  - 次: `-mp=gpu` があるときだけ通る34件と、A 以外でどちらでも通らないもの（lud, gd, gpp, goulash, extend2, heartwall など）のエラーを分類し、gang だけのループの候補（`sweep/gangonly.py`）を集計する。
 - **直前に終えたこと**: 4章 B の8件（2026-11-19）。
 - **次の候補**（どれから進めるかは未定）:
   1. 存在しない `prepare_data.sh` を呼んでいる `include/*-NVIDIA` 55件（5章）
