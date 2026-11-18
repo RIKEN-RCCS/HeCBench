@@ -21,9 +21,9 @@
 #include <openacc.h>
 #include "reference.h"
 
-#pragma omp declare target
 
 //! Thread-local Matrix-Vector multiplication.
+#pragma acc routine seq
 template <int n>
 void Mv_l(const double* A, const double* v, double* out)
 {
@@ -36,6 +36,7 @@ void Mv_l(const double* A, const double* v, double* out)
   }
 }
 
+#pragma acc routine seq
 template <int n>
 void Mv_l(double alpha, const double* A, const double* v, double* out)
 {
@@ -49,6 +50,7 @@ void Mv_l(double alpha, const double* A, const double* v, double* out)
 }
 
 //! Thread-local Matrix-Matrix multiplication.
+#pragma acc routine seq
 template <int n, bool aT = false, bool bT = false>
 void MM_l(const double* A, const double* B, double* out)
 {
@@ -64,7 +66,6 @@ void MM_l(const double* A, const double* B, double* out)
     }
   }
 }
-#pragma omp end declare target
 
 /**
  * Kalman loop kernel. Each thread computes kalman filter for a single series
@@ -111,7 +112,7 @@ void kalman(
   bool conf_int = false,
   double* d_F_fc = nullptr)
 {
-  #pragma acc parallel loop vector_length(256)
+  #pragma acc parallel loop gang vector vector_length(256) default(present)
   for (int bid = 0; bid < batch_size; bid++) {
     constexpr int rd2 = rd * rd;
     double l_RQR[rd2] = {0.0};
@@ -335,18 +336,18 @@ int main(int argc, char* argv[]) {
 
   double *F_fc = (double*) malloc (fc_size);
 
-  #pragma acc data to: RQR[0:rd2_word],\
-                                    T[0:rd2_word],\
-                                    P[0:rd2_word],\
-                                    Z[0:rd_word],\
-                                    alpha[0:rd_word],\
-                                    ys[0:nobs_word],\
-                                    mu[0:ns_word]) \
-                          map (alloc: vs[0:nobs_word],\
-                                    Fs[0:nobs_word],\
-                                    sum_logFs[0:ns_word], \
-                                    fc[0:fc_word], \
-                                    F_fc[0:fc_word])
+  #pragma acc data copyin(RQR[0:rd2_word],\
+                          T[0:rd2_word],\
+                          P[0:rd2_word],\
+                          Z[0:rd_word],\
+                          alpha[0:rd_word],\
+                          ys[0:nobs_word],\
+                          mu[0:ns_word]) \
+                   create(vs[0:nobs_word],\
+                          Fs[0:nobs_word],\
+                          sum_logFs[0:ns_word], \
+                          fc[0:fc_word], \
+                          F_fc[0:fc_word])
   {
     for (int n_diff = 0; n_diff < rd; n_diff++) {
 
@@ -376,7 +377,7 @@ int main(int argc, char* argv[]) {
       auto end = std::chrono::steady_clock::now();
       auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
       printf("Average kernel execution time (n_diff = %d): %f (s)\n", n_diff, (time * 1e-9f) / repeat);
-      #pragma acc update from (F_fc[0:fc_word])
+      #pragma acc update self(F_fc[0:fc_word])
       reference<rd>(
             nseries,
             nobs,
