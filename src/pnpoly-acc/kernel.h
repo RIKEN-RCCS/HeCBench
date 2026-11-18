@@ -14,11 +14,10 @@
 /*
  * The is_between method returns a boolean that is True when the a is between c and b.
  */
-#pragma omp declare target
+#pragma acc routine seq
 inline int is_between(float a, float b, float c) {
   return (b > a) != (c > a);
 }
-#pragma omp end declare target
 
 /*
  * The Point-in-Polygon kernel
@@ -30,7 +29,8 @@ void pnpoly_opt(
     const float2*__restrict vertex,
     int n) 
 {
-  #pragma acc parallel loop vector_length(256)
+  #pragma acc parallel loop gang vector vector_length(256) \
+              present(bitmap[0:n], point[0:n], vertex[0:VERTICES])
   for (int i = 0; i < n; i++) {
     int c[tile_size];
     float2 lpoint[tile_size];
@@ -44,7 +44,7 @@ void pnpoly_opt(
 
     int k = VERTICES-1;
 
-    for (int j=0; j<VERTICES; k = j++) {    // edge from vj to vk
+    for (int j=0; j<VERTICES; j++) {    // edge from vj to vk
       float2 vj = vertex[j]; 
       float2 vk = vertex[k]; 
 
@@ -61,6 +61,7 @@ void pnpoly_opt(
           c[ti] = !c[ti];
         }
       }
+      k = j;
     }
 
     #pragma unroll
@@ -82,14 +83,15 @@ void pnpoly_base(
     const float2*__restrict vertex,
     int n) 
 {
-  #pragma acc parallel loop vector_length(256)
+  #pragma acc parallel loop gang vector vector_length(256) \
+              present(bitmap[0:n], point[0:n], vertex[0:VERTICES])
   for (int i = 0; i < n; i++) {
     int c = 0;
     float2 p = point[i];
 
     int k = VERTICES-1;
 
-    for (int j=0; j<VERTICES; k = j++) {    // edge from v to vp
+    for (int j=0; j<VERTICES; j++) {    // edge from v to vp
       float2 vj = vertex[j]; 
       float2 vk = vertex[k]; 
 
@@ -97,8 +99,10 @@ void pnpoly_base(
 
       if (((vj.y>p.y) != (vk.y>p.y)) &&            //if p is between vj and vk vertically
           (p.x < slope * (p.y-vj.y) + vj.x)) {   //if p.x crosses the line vj-vk when moved in positive x-direction
-        c = !c;
+        // c ^= 1 instead of c = !c: nvc++ 26.3 miscompiles the latter here at -O2 and above.
+        c ^= 1;
       }
+      k = j;
     }
 
     bitmap[i] = c; // 0 if even (out), and 1 if odd (in)

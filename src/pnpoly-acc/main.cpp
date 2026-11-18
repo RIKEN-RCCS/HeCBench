@@ -46,10 +46,8 @@ int main(int argc, char* argv[]) {
   int *bitmap_ref = (int*) malloc (nPoints * sizeof(int));
   int *bitmap_opt = (int*) malloc (nPoints * sizeof(int));
 
-  #pragma acc parallel data map (to: point[0:nPoints], \
-                                  vertex[0:vertices]) \
-                         map (from: bitmap_ref[0:nPoints], \
-                                    bitmap_opt[0:nPoints])
+  #pragma acc data copyin(point[0:nPoints], vertex[0:vertices]) \
+                   copyout(bitmap_ref[0:nPoints], bitmap_opt[0:nPoints])
   {
     auto start = std::chrono::steady_clock::now();
 
