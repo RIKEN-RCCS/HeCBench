@@ -13,7 +13,10 @@
   - 結果がまとまったら、集計をこのファイルの4章に書く。
   - **途中経過（06:40）**: 全件のビルドは終わった（約2分）。OpenMP なしで通る 205件、`-mp=gpu` があるときだけ通る 34件、どちらでも通らない 80件、Makefile.NVD なし 3件。A の77件は、73件がどちらでも通らず、通るのは deredundancy, openmp, winograd の3件だけ（最初の分類はおおむね正しかった）。
   - 見つけて直したもの: ①grrt, iso2dfd, tridiagonal の `make clean` が `*.txt` で `CMakeLists.txt`（追跡中）を消していた（`035ec4cea`, `44238d593`, `7b2d58ff7`）。②**私の `1ffa6c53e` で hausdorff のビルドが壊れていた**（`hd()` を消したが、`../hausdorff-cuda/reference.h` が使っていた）。`c38d652bb` で直した。
-  - 次: `-mp=gpu` があるときだけ通る34件と、A 以外でどちらでも通らないもの（lud, gd, gpp, goulash, extend2, heartwall など）のエラーを分類し、gang だけのループの候補（`sweep/gangonly.py`）を集計する。
+  - **分類の結果（07:00）**:
+    - `-mp=gpu` があるときだけ通る34件: 31件が "Could not find allocated-variable index for symbol"（関数の引数のポインタを、データ句なしでカーネルの中で使っている。呼び出し元の `acc data` にある配列なので OpenACC としては正しく、nvc++ 26.3 が OpenMP 無効のときに失敗する。`default(present)` で回避できる。kalman, linearprobing で確認済み）。対象: adamw atomicPerf boxfilter bwt car channelShuffle eigenvalue face flip ga glu grrt heat2d hogbom hypterm ising iso2dfd keccaktreehash lif lsqt mask md memtest permute perplexity resize scatterAdd surfel tonemapping vol2col wsm5。残り3件: haversine（`../haversine-cuda/distance.h` が `sycl/sycl.hpp` を include）、rainflow（`../rainflow-cuda/reference.h` の `double3` が未定義）、kmeans（`rmse.c:79` で "Cannot determine bounds for array"）。
+    - A 以外でどちらでも通らないもの: lud（`stopwatch` が未定義。`-I../lud-cuda/common`）、gd（`get_time()` の定義をビルドしていない）、gpp（`gettimeofday` が未定義）、goulash（`secs_elapsed` が未定義）、heartwall（omp 版にある `kernel/`, `util/` がない）、extend2（依存先 `filelist.txt` がない）。upstream のファイル構成の変更に、acc 版が追従していないものと見られる。
+    - gang だけのループの候補: 33件（`sweep/gangonly.tsv`）。そのうち、同じ領域で共有メモリに配列が置かれている強い候補は adamw, chi2, libor, meanshift, snake の5件。実行して確認中（adamw は PASS）。
 - **直前に終えたこと**: 4章 B の8件（2026-11-19）。
 - **次の候補**（どれから進めるかは未定）:
   1. 存在しない `prepare_data.sh` を呼んでいる `include/*-NVIDIA` 55件（5章）
