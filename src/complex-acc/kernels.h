@@ -1,5 +1,5 @@
-#pragma omp declare target
 
+#pragma acc routine seq
 double LCG_random_double(uint64_t * seed)
 {
   const uint64_t m = 9223372036854775808ULL; // 2^63
@@ -9,6 +9,7 @@ double LCG_random_double(uint64_t * seed)
   return (double) (*seed) / (double) m;
 }
 
+#pragma acc routine seq
 uint64_t fast_forward_LCG(uint64_t seed, uint64_t n)
 {
   const uint64_t m = 9223372036854775808ULL; // 2^63
@@ -35,7 +36,6 @@ uint64_t fast_forward_LCG(uint64_t seed, uint64_t n)
 
   return (a_new * seed + c_new) % m;
 }
-#pragma omp end declare target
 
 void complex_float (char* checkSum, int n)
 {
