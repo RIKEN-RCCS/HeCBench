@@ -3,10 +3,11 @@
 #include <string.h>
 #include <vector>
 #include <chrono>
+#include <atomic>
 #include "linearprobing.h"
 
 // 32 bit Murmur3 hash
-#pragma omp declare target
+#pragma acc routine seq
 uint32_t hash(uint32_t k)
 {
   k ^= k >> 16;
@@ -16,7 +17,6 @@ uint32_t hash(uint32_t k)
   k ^= k >> 16;
   return k & (kHashTableCapacity-1);
 }
-#pragma omp end declare target
 
 // Insert the key/values in kvs into the hashtable
 double insert_hashtable(KeyValue*__restrict pHashTable,
@@ -29,8 +29,8 @@ double insert_hashtable(KeyValue*__restrict pHashTable,
 
   auto start = std::chrono::steady_clock::now();
 
-  #pragma acc parallel loop \
-   num_teams(gridsize) thread_limit(threadblocksize)
+  #pragma acc parallel loop gang vector \
+   num_gangs(gridsize) vector_length(threadblocksize) default(present)
   for (unsigned int tid = 0; tid < num_kvs; tid++) {
     uint32_t key = kvs[tid].key;
     uint32_t value = kvs[tid].value;
@@ -38,16 +38,12 @@ double insert_hashtable(KeyValue*__restrict pHashTable,
 
     while (true)
     {
-      uint32_t prev;
-      // OpenMP 5.1 not necessarily supported by all compilers
-      #pragma acc atomic compare capture
-      {
-        prev = pHashTable[slot].key;
-        if (pHashTable[slot].key == kEmpty) {
-          pHashTable[slot].key = key;
-        }
-      }
-      if (prev == kEmpty || prev == key)
+      // OpenACC has no atomic compare; use a C++20 atomic_ref compare-and-swap.
+      // On failure, prev receives the key currently in the slot.
+      uint32_t prev = kEmpty;
+      const bool inserted =
+        std::atomic_ref<uint32_t>(pHashTable[slot].key).compare_exchange_strong(prev, key);
+      if (inserted || prev == key)
       {
         pHashTable[slot].value = value;
         break; //return;
@@ -74,8 +70,8 @@ double delete_hashtable(KeyValue* pHashTable, const KeyValue* kvs, uint32_t num_
 
   auto start = std::chrono::steady_clock::now();
 
-  #pragma acc parallel loop \
-   num_teams(gridsize) thread_limit(threadblocksize)
+  #pragma acc parallel loop gang vector \
+   num_gangs(gridsize) vector_length(threadblocksize) default(present)
   for (unsigned int tid = 0; tid < num_kvs; tid++) {
     uint32_t key = kvs[tid].key;
     uint32_t slot = hash(key);
@@ -110,8 +106,8 @@ std::vector<KeyValue> iterate_hashtable(KeyValue* pHashTable, KeyValue *device_k
 
   auto start = std::chrono::steady_clock::now();
 
-  #pragma acc parallel loop \
-   num_teams(gridsize) thread_limit(threadblocksize) map(tofrom: kvs_size)
+  #pragma acc parallel loop gang vector \
+   num_gangs(gridsize) vector_length(threadblocksize) copy(kvs_size) default(present)
   for (unsigned int tid = 0; tid < kHashTableCapacity; tid++) 
   {
     if (pHashTable[tid].key != kEmpty) 
@@ -136,7 +132,7 @@ std::vector<KeyValue> iterate_hashtable(KeyValue* pHashTable, KeyValue *device_k
   std::vector<KeyValue> kvs;
   kvs.resize(num_kvs);
 
-  #pragma acc update from (device_kvs[0:num_kvs])
+  #pragma acc update self(device_kvs[0:num_kvs])
   memcpy(kvs.data(), device_kvs, sizeof(KeyValue) * num_kvs);
 
   return kvs;

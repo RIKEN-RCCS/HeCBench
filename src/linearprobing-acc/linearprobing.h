@@ -8,9 +8,7 @@ struct KeyValue
     uint32_t value;
 };
 
-#pragma omp declare target
 const uint32_t kHashTableCapacity = 64*1024*1024; //128 * 1024 * 1024;
-#pragma omp end declare target
 
 const uint32_t kNumKeyValues = kHashTableCapacity / 2;
 
