@@ -58,7 +58,7 @@ $(program): $(obj) iso2dfd.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -rf $(program) $(obj) *.txt *.bin
+	rm -rf $(program) $(obj) error_diff.txt *.bin
 
 include ../include/iso2dfd-NVIDIA
 
