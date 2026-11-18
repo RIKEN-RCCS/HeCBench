@@ -7,9 +7,9 @@
 
 ## 0. 作業中（セッションは2時間で強制終了されるので、ここを随時更新してコミットする）
 
-- **現在の作業（2026-11-19）**: ユーザーの決定により、4章 A のうち `-mp=gpu` があってもビルドできない73件と、Makefile.NVD のない binomial の、計74件を PR から外す（ディレクトリを `git rm`。`src/include/*-NVIDIA` は残す。ans などと同じ扱い）。A のうち OpenMP なしでビルドできる deredundancy, openmp, winograd は残す。残す側から外す74件への参照はないことを確認済み。push はユーザーが行う（このマシンには GitHub の認証情報がない）。
+- **現在の状態**: 4章 A の74件を PR から外した（`e56416827`）。残る `-acc` は248件。コミットされていない変更はない。A のうち OpenMP なしでビルドできる deredundancy, openmp, winograd は残したが、OpenMP の名残があるので、中身の確認が必要。push はユーザーが行う（このマシンには GitHub の認証情報がない）。
 - **次の候補**（どれから進めるかは未定）:
-  1. 4章 A の扱いを決める。全件ビルドで、73件が `-mp=gpu` があっても通らないことを確認した（通るのは deredundancy, openmp, winograd の3件だけ）
+  1. 残した deredundancy, openmp, winograd の名残を確認する（4章 A）
   2. `-mp=gpu` があるときだけ通る31件に `default(present)` を付ける（`-acc=gpu` にそろえるなら必要。機械的に直せるが、1件ずつ実行して確認する）
   3. upstream のファイル構成の変更に追従していない6件（lud, gd, gpp, goulash, heartwall, extend2）と、haversine, rainflow, kmeans
   4. gang だけのループの候補33件の性能の確認（正しさは、確認できた3件では問題なし）
@@ -35,6 +35,7 @@
 | `src2/`, `status2/` | acc から削除。タグで保存 | `82329bd55`, タグ `archive/src2-final-20261109`（タグは `3e0a8367a` を指す） |
 | `-omp_nvc` | acc から削除（`-omp` のコピーなので不要） | `9fac85448`（削除前の状態は `4359d4730`） |
 | ans-acc, leukocyte-acc, shmembench-acc | 「OpenACC 版は Not yet implemented」として削除 | `73c766130` |
+| 4章 A のうちビルドできない73件と binomial（計74件） | 「Not yet implemented」として PR から外す（2026-11-19 に決定）。書き直しは後の別 PR で行う | `e56416827`（削除前の状態は `63f12161d`） |
 | `src/include/*-NVIDIA` | **すべて残す**。`-acc` がないベンチマーク向けの約170件も、将来 `-acc` を追加するかもしれないので残す | — |
 | `src/include/SDKBitMap.h`, `src/hausdorff-cuda/reference.h` | `#if defined(_OPENACC)` の追加だけ。`-acc` に必要なので残す | PR #3 |
 
@@ -203,7 +204,9 @@ cat log.std log.err log.time          # 実行コマンドは src/include/<name>
   - grrt, iso2dfd, tridiagonal の `make clean` が、`*.txt` の指定で追跡中の `CMakeLists.txt` を消していた。cuda・omp 版と同じく、ファイル名を個別に書くようにした（`035ec4cea`, `44238d593`, `7b2d58ff7`）。
   - **私のコミット `1ffa6c53e` で hausdorff のビルドが壊れていた**。`hd()` を使われていないと判断して消したが、`../hausdorff-cuda/reference.h` が使っていた。消した後にビルドし直していなかった。`c38d652bb` で戻した（8.8 ms、PASS）。教訓: 変更の後は、必ずクリーンビルドと実行をしてからコミットする。
 
-### A. カーネルの書き直しが必要（77件・263カーネル）
+### A. カーネルの書き直しが必要（77件・263カーネル）：**74件を PR から外した**（2026-11-19, `e56416827`）
+
+全件ビルドで、73件が `-mp=gpu` があってもビルドできないことを確認したので、binomial（Makefile.NVD なし）と合わせて74件を「Not yet implemented」として外した。OpenMP なしでビルドできた deredundancy, openmp, winograd の3件は残した（ただし名残がある）。以下は、外す前の記録。
 
 gang のループと `loop vector` で組み直し、`barrier` で区切られた部分は別々の vector ループに分ける必要がある。括弧内はカーネル数（`acc parallel teams` の数）。
 
