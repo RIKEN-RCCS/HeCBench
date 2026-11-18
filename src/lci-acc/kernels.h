@@ -1,7 +1,6 @@
 #define one_over_theta0  (5.0/(2.0*pow(M_PI,4.0)))
 #define kappa (pow(M_PI,2.0)/3.0 - 2 * 1.2020569031595942)
 
-#pragma omp declare target
 /*
  there are some limitation on L_max
  due to GSL's factorial N! is only defined in GSL for N<=170
@@ -9,21 +8,25 @@
  */
 #define L_max 64
 
+#pragma acc routine seq
 double B(int l)
 {
   return 2.0*(14.0*l*l + 7.0*l - 2.0)/(4.0*l-1.0)/(4.0*l+3.0);
 }
 
+#pragma acc routine seq
 double U(int l)
 {
   return -(2.0*l-1)*(2.0*l+1)*(2.0*l+2)/(4.0*l+3)/(4.0*l+5);
 }
 
+#pragma acc routine seq
 double C(int l)
 {
   return (2.0*l-1)*2.0*l*(2.0*l+2)/(4.0*l-3.0)/(4.0*l-1.0);
 }
 
+#pragma acc routine seq
 double alpha(int l, const double* dftab, const double* ftab)
 {
   if(l<0) return 0.0;
@@ -32,6 +35,7 @@ double alpha(int l, const double* dftab, const double* ftab)
     return double_fact_table[2*l-1] / fact_table[l];
 }
 
+#pragma acc routine seq
 double Omega(int l, int m, int n, const double* dftab, const double* ftab)
 {
   return alpha(m-n+l, dftab, ftab) * alpha(m+n-l, dftab, ftab) *
@@ -39,6 +43,7 @@ double Omega(int l, int m, int n, const double* dftab, const double* ftab)
          (4*l+1) / (2.0*(n+m+l)+1) ;
 }
 
+#pragma acc routine seq
 double Sum_Omega(int l, const double c[], const double* dftab, const double* ftab)
 {
   double sum = 0.0;
@@ -48,6 +53,7 @@ double Sum_Omega(int l, const double c[], const double* dftab, const double* fta
   return sum;
 }
 
+#pragma acc routine seq
 double Sum_NL(int l, const double c[])
 {
   double sum = 0.0;
@@ -55,12 +61,11 @@ double Sum_NL(int l, const double c[])
     sum += pow(c[n],2.0)/(4.0*n+1);
   return sum * (2*l-1)*(l+1)*c[l]/3.0;
 }
-#pragma omp end declare target
 
 void RHS_f (const double* dftab, const double* ftab,
             double t, const double *c, double *RHS)
 {
-  #pragma acc parallel loop gang(1) vector_length(96)
+  #pragma acc parallel loop gang vector num_gangs(1) vector_length(96)
   for (int l = 0; l < L_max; l++) {
 
     double T = c[0];
