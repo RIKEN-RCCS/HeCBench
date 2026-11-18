@@ -131,10 +131,10 @@ int main(int argc, char* argv[])
   // Create key value store for hashtable iterate
   KeyValue* iter_kvs = (KeyValue*) malloc (sizeof(KeyValue) * kNumKeyValues);
 
-  #pragma acc data to : pHashTable[0:kHashTableCapacity]) \
-                          map(alloc: ins_kvs[0:num_inserts_per_batch], \
-                                     del_kvs[0:num_deletes_per_batch], \
-                                     iter_kvs[0:kNumKeyValues])
+  #pragma acc data copyin(pHashTable[0:kHashTableCapacity]) \
+                   create(ins_kvs[0:num_inserts_per_batch], \
+                          del_kvs[0:num_deletes_per_batch], \
+                          iter_kvs[0:kNumKeyValues])
   {
     double total_ktime = 0.0;
 
@@ -142,7 +142,7 @@ int main(int argc, char* argv[])
     for (uint32_t i = 0; i < num_insert_batches; i++)
     {
       memcpy(ins_kvs, insert_kvs.data() + i * num_inserts_per_batch, sizeof(KeyValue) * num_inserts_per_batch);
-      #pragma acc update to (ins_kvs[0:num_inserts_per_batch])
+      #pragma acc update device(ins_kvs[0:num_inserts_per_batch])
 
       total_ktime += insert_hashtable(pHashTable, ins_kvs, num_inserts_per_batch);
     }
@@ -153,7 +153,7 @@ int main(int argc, char* argv[])
     for (uint32_t i = 0; i < num_delete_batches; i++)
     {
       memcpy(del_kvs, delete_kvs.data() + i * num_deletes_per_batch, sizeof(KeyValue) * num_deletes_per_batch);
-      #pragma acc update to (del_kvs[0:num_deletes_per_batch])
+      #pragma acc update device(del_kvs[0:num_deletes_per_batch])
 
       total_ktime += delete_hashtable(pHashTable, del_kvs, num_deletes_per_batch);
     }
