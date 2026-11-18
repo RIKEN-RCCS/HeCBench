@@ -4,7 +4,6 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#pragma omp declare target
 
 struct Chacha20Block {
   // This is basically a random number generator seeded with key and nonce.
@@ -12,10 +11,12 @@ struct Chacha20Block {
 
   uint32_t state[16];
 
+  #pragma acc routine seq
   static uint32_t rotl32(uint32_t x, int n) {
       return (x << n) | (x >> (32 - n));
   }
 
+  #pragma acc routine seq
   static uint32_t pack4(const uint8_t *a) {
       return
           uint32_t(a[0] << 0*8) |
@@ -24,6 +25,7 @@ struct Chacha20Block {
           uint32_t(a[3] << 3*8);
   }
 
+  #pragma acc routine seq
   static void unpack4(uint32_t src, uint8_t *dst) {
       dst[0] = (src >> 0*8) & 0xff;
       dst[1] = (src >> 1*8) & 0xff;
@@ -31,6 +33,7 @@ struct Chacha20Block {
       dst[3] = (src >> 3*8) & 0xff;
   }
 
+  #pragma acc routine seq
   Chacha20Block(const uint8_t key[32], const uint8_t nonce[8]) {
       const uint8_t *magic_constant = (uint8_t*)"expand 32-byte k";
       state[ 0] = pack4(magic_constant + 0*4);
@@ -52,6 +55,7 @@ struct Chacha20Block {
       state[15] = pack4(nonce + 1*4);
   }
 
+  #pragma acc routine seq
   void set_counter(uint64_t counter) {
       // Want to process many blocks in parallel?
       // No problem! Just set the counter to the block you want to process.
@@ -59,6 +63,7 @@ struct Chacha20Block {
       state[13] = counter >> 32;
   }
 
+  #pragma acc routine seq
   void next(uint32_t result[16]) {
     // This is where the crazy voodoo magic happens.
     // Mix the bytes a lot and hope that nobody finds out how to undo it.
@@ -98,6 +103,7 @@ struct Chacha20Block {
     }
   }
     
+  #pragma acc routine seq
   void next(uint8_t result8[64]) {
     uint32_t temp32[16];
     
@@ -119,11 +125,13 @@ struct Chacha20 {
   uint8_t keystream8[64];
   size_t position;
 
+  #pragma acc routine seq
   Chacha20(const uint8_t key[32], const uint8_t nonce[8], uint64_t counter = 0):
     block(key, nonce), position(64) {
       block.set_counter(counter);
   }
 
+  #pragma acc routine seq
   void crypt(uint8_t *bytes, size_t n_bytes) {
     for (size_t i = 0; i < n_bytes; i++) {
       if (position >= 64) {
@@ -136,4 +144,3 @@ struct Chacha20 {
   }
 };
 
-#pragma omp end declare target
