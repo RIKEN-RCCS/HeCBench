@@ -57,7 +57,7 @@ $(program): $(obj)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -rf $(program) $(obj) *.txt
+	rm -rf $(program) $(obj) Output_task1.txt Output_task2.txt
 
 run: $(program)
 	$(LAUNCHER) ./$(program)
