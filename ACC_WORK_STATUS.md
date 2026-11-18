@@ -5,6 +5,22 @@
 - 最終更新: 2026-11-19（4章 B の8件を直した時点）
 - 対象ブランチ: `acc`（`origin` = `github.com:RIKEN-RCCS/HeCBench`）
 
+## 0. 作業中（セッションは2時間で強制終了されるので、ここを随時更新してコミットする）
+
+- **現在の状態**: 区切りのよいところで止まっている。コミットされていない変更はない。push はユーザーが行う（このマシンには GitHub の認証情報がない）。
+- **直前に終えたこと**: 4章 B の8件（2026-11-19）。
+- **次の候補**（どれから進めるかは未定）:
+  1. 存在しない `prepare_data.sh` を呼んでいる `include/*-NVIDIA` 55件（5章）
+  2. 4章 A の77件の扱いを決める（最初の分類はビルドされないコードも数えていたので、B と同じように数え直すとよい）
+  3. ほかの `-acc` に、gang だけのループの競合（4章 B の知見）が残っていないかを `-Minfo` で調べる
+  4. lulesh-acc の結果の誤り、blas-gemm の書き直し
+- **確認の手順**（scratchpad は日をまたぐと消えるので、ここに書いておく）:
+  - `module load nvhpc` をしてから、`cd src/<name>-acc && make -f Makefile.NVD clean && make -f Makefile.NVD SM=cc100 run`。結果は `log.std` / `log.err` / `log.time`。
+  - OpenMP なしの確認: `sed 's/-mp=gpu/-acc=gpu/' Makefile.NVD > /tmp/…/x.mk` を作り、`make -f /tmp/…/x.mk SM=cc100 run`。
+  - 比較: `-omp` は `make -f Makefile.nvc SM=cc100`、`-cuda` は `make ARCH=sm_100`。同じ引数で実行する。
+  - ビルドのログで、パターンルールが使われたか（`-acc` 付きでコンパイルされたか）を必ず確認する（組み込みルールに切り替わる落とし穴がある。4章 B）。
+  - 実行に5分以上かかるもの（simplemoc、kalman の既定サイズなど）はバックグラウンドで実行する。
+
 ## 1. 目的と方針
 
 - **目的**: upstream（ORNL/HeCBench `master`）に、OpenACC 版 `-acc` を追加する PR を出す。
