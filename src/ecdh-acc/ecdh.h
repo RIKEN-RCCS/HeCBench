@@ -2,7 +2,7 @@
   Description: Finds t and s such that a*t + b*s = gcd(a, b)
   Output: return gcd(a, b).
 */
-#pragma omp declare target 
+#pragma acc routine seq
 int ext_euclidian_alg(int a, int b, int& x, int& y) 
 { 
   x = 1, y = 0;
@@ -25,6 +25,7 @@ int ext_euclidian_alg(int a, int b, int& x, int& y)
           modulus (m)
   Output: return positive integer congruent to a mod m
 */
+#pragma acc routine seq
 unsigned int make_positive(int a, unsigned int m) {
   while(a < 0) {
     a += m;
@@ -37,6 +38,7 @@ unsigned int make_positive(int a, unsigned int m) {
           modulus (m)
   Output: return inverse of a mod m.
 */
+#pragma acc routine seq
 int find_inverse(int a, unsigned int m) 
 { 
   int t, s; 
@@ -51,6 +53,7 @@ int find_inverse(int a, unsigned int m)
   Output: sum of the input points (x3, y3)
   note: non-commutative (x1,y1) + (x2,y2) != (x2,y2) + (x1,y1)
 */
+#pragma acc routine seq
 void point_addition(unsigned int m, int x1, int y1, 
                     int x2, int y2, 
                     int *x3, int *y3) 
@@ -66,6 +69,7 @@ void point_addition(unsigned int m, int x1, int y1,
           point (x1, y1)
   Output: sum of the input point (x3, y3)
 */
+#pragma acc routine seq
 void point_doubling(unsigned int m, int a, int x1, int y1, int *x3, int *y3) 
 {
   int slope = (3 * x1 * x1 + a) * find_inverse(2 * y1, m);
@@ -77,6 +81,7 @@ void point_doubling(unsigned int m, int a, int x1, int y1, int *x3, int *y3)
   Input:  integer to check (n)
   Output: return index of first set bit starting from the left
 */
+#pragma acc routine seq
 int first_set_bit(int n)
 {
   int i;
@@ -95,6 +100,7 @@ int first_set_bit(int n)
           primitive (P_x, P_y)
   Output: public key (T_x, T_y)
 */
+#pragma acc routine seq
 void make_pk_fast(int sk, int P_x, int P_y, int *T_x, int *T_y, unsigned int m, int a)
 {
   int i = 0;
@@ -117,6 +123,7 @@ void make_pk_fast(int sk, int P_x, int P_y, int *T_x, int *T_y, unsigned int m, 
           primitive (P_x, P_y)
   Output: public key (T_x, T_y)
 */
+#pragma acc routine seq
 void make_pk_slow(int sk, int P_x, int P_y, int *T_x, int *T_y, unsigned int m, int a)
 {
   point_doubling(m, a, P_x, P_y, T_x, T_y);
@@ -138,12 +145,12 @@ void make_pk_slow(int sk, int P_x, int P_y, int *T_x, int *T_y, unsigned int m, 
           modulus (m)
   Output: shared secret key (shared_x, shared_y)
 */
+#pragma acc routine seq
 void get_shared_key(int sk, int T_x, int T_y, int *shared_x, int *shared_y, unsigned int m, int a)
 {
   make_pk_fast(sk, T_x, T_y, shared_x, shared_y, m, a);
 }
 
-#pragma omp end declare target 
 
 void k_slow (
   const int sk,
