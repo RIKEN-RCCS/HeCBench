@@ -7,6 +7,13 @@
 #include <openacc.h>
 #include "reference.h"
 
+// Also used by the host reference in ../hausdorff-cuda/reference.h.
+inline float hd (const float2 ap, const float2 bp)
+{
+  return (ap.x - bp.x) * (ap.x - bp.x)
+       + (ap.y - bp.y) * (ap.y - bp.y);
+}
+
 void computeDistance(const float2* __restrict Apoints,
                      const float2* __restrict Bpoints,
                            float*  __restrict distance,
