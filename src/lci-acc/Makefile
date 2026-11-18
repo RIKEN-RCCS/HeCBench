@@ -57,7 +57,7 @@ endif
 $(program): $(obj)
 	$(CC) $(CFLAGS) $(obj) -o $@ $(LDFLAGS)
 
-%.o: %.cpp kernels.h tables.h
+%.o: %.cpp kernels.h ../lci-cuda/tables.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
