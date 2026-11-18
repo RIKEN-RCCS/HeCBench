@@ -2,33 +2,25 @@
 
 > **注意: このファイルは作業引き継ぎ用の一時ファイルです。upstream に PR を出す前に必ず削除してください。**
 
-- 最終更新: 2026-11-19（全件ビルドによる洗い出しを始めた時点）
+- 最終更新: 2026-11-19（全件ビルドによる洗い出しを終えた時点）
 - 対象ブランチ: `acc`（`origin` = `github.com:RIKEN-RCCS/HeCBench`）
 
 ## 0. 作業中（セッションは2時間で強制終了されるので、ここを随時更新してコミットする）
 
-- **現在の作業（2026-11-19 開始）**: 全322件の `-acc` を、OpenMP なし（`-mp=*` を `-acc=*` に置き換えた一時的な Makefile）でビルドし（実行はしない）、問題を洗い出している。コミットされていない変更はない。push はユーザーが行う（このマシンには GitHub の認証情報がない）。
-  - 調べること: ①ビルドが通るか（通らなければ通常の Makefile.NVD でも試し、「`-mp=gpu` があるときだけ通る」ものを見分ける）、②`-Minfo` の `CUDA shared memory used for` と `loop gang /* blockIdx.x */`（gang だけのループの競合の候補）、③`-acc` なしでコンパイルされたファイル（組み込みルールへの切り替わり）。
-  - スクリプトは scratchpad の `sweep/one.sh`（1件ずつビルドし、1行の TSV を書く）。`xargs -P 12` で並列に実行。セッションが切れたら、同じことをやり直せばよい（ビルドだけなので、全件で1時間以内の見込み）。
-  - 結果がまとまったら、集計をこのファイルの4章に書く。
-  - **途中経過（06:40）**: 全件のビルドは終わった（約2分）。OpenMP なしで通る 205件、`-mp=gpu` があるときだけ通る 34件、どちらでも通らない 80件、Makefile.NVD なし 3件。A の77件は、73件がどちらでも通らず、通るのは deredundancy, openmp, winograd の3件だけ（最初の分類はおおむね正しかった）。
-  - 見つけて直したもの: ①grrt, iso2dfd, tridiagonal の `make clean` が `*.txt` で `CMakeLists.txt`（追跡中）を消していた（`035ec4cea`, `44238d593`, `7b2d58ff7`）。②**私の `1ffa6c53e` で hausdorff のビルドが壊れていた**（`hd()` を消したが、`../hausdorff-cuda/reference.h` が使っていた）。`c38d652bb` で直した。
-  - **分類の結果（07:00）**:
-    - `-mp=gpu` があるときだけ通る34件: 31件が "Could not find allocated-variable index for symbol"（関数の引数のポインタを、データ句なしでカーネルの中で使っている。呼び出し元の `acc data` にある配列なので OpenACC としては正しく、nvc++ 26.3 が OpenMP 無効のときに失敗する。`default(present)` で回避できる。kalman, linearprobing で確認済み）。対象: adamw atomicPerf boxfilter bwt car channelShuffle eigenvalue face flip ga glu grrt heat2d hogbom hypterm ising iso2dfd keccaktreehash lif lsqt mask md memtest permute perplexity resize scatterAdd surfel tonemapping vol2col wsm5。残り3件: haversine（`../haversine-cuda/distance.h` が `sycl/sycl.hpp` を include）、rainflow（`../rainflow-cuda/reference.h` の `double3` が未定義）、kmeans（`rmse.c:79` で "Cannot determine bounds for array"）。
-    - A 以外でどちらでも通らないもの: lud（`stopwatch` が未定義。`-I../lud-cuda/common`）、gd（`get_time()` の定義をビルドしていない）、gpp（`gettimeofday` が未定義）、goulash（`secs_elapsed` が未定義）、heartwall（omp 版にある `kernel/`, `util/` がない）、extend2（依存先 `filelist.txt` がない）。upstream のファイル構成の変更に、acc 版が追従していないものと見られる。
-    - gang だけのループの候補: 33件（`sweep/gangonly.tsv`）。そのうち、同じ領域で共有メモリに配列が置かれている強い候補は adamw, chi2, libor, meanshift, snake の5件。実行して確認中（adamw は PASS）。
-- **直前に終えたこと**: 4章 B の8件（2026-11-19）。
+- **現在の状態**: 全件ビルドによる洗い出しを終えた（2026-11-19、結果は4章の「全件ビルドの結果」）。コミットされていない変更はない。push はユーザーが行う（このマシンには GitHub の認証情報がない）。
 - **次の候補**（どれから進めるかは未定）:
-  1. 存在しない `prepare_data.sh` を呼んでいる `include/*-NVIDIA` 55件（5章）
-  2. 4章 A の77件の扱いを決める（最初の分類はビルドされないコードも数えていたので、B と同じように数え直すとよい）
-  3. ほかの `-acc` に、gang だけのループの競合（4章 B の知見）が残っていないかを `-Minfo` で調べる
-  4. lulesh-acc の結果の誤り、blas-gemm の書き直し
+  1. 4章 A の扱いを決める。全件ビルドで、73件が `-mp=gpu` があっても通らないことを確認した（通るのは deredundancy, openmp, winograd の3件だけ）
+  2. `-mp=gpu` があるときだけ通る31件に `default(present)` を付ける（`-acc=gpu` にそろえるなら必要。機械的に直せるが、1件ずつ実行して確認する）
+  3. upstream のファイル構成の変更に追従していない6件（lud, gd, gpp, goulash, heartwall, extend2）と、haversine, rainflow, kmeans
+  4. gang だけのループの候補33件の性能の確認（正しさは、確認できた3件では問題なし）
+  5. 存在しない `prepare_data.sh` を呼んでいる `include/*-NVIDIA` 55件、lulesh-acc の結果の誤り、blas-gemm の書き直し
 - **確認の手順**（scratchpad は日をまたぐと消えるので、ここに書いておく）:
   - `module load nvhpc` をしてから、`cd src/<name>-acc && make -f Makefile.NVD clean && make -f Makefile.NVD SM=cc100 run`。結果は `log.std` / `log.err` / `log.time`。
   - OpenMP なしの確認: `sed 's/-mp=gpu/-acc=gpu/' Makefile.NVD > /tmp/…/x.mk` を作り、`make -f /tmp/…/x.mk SM=cc100 run`。
   - 比較: `-omp` は `make -f Makefile.nvc SM=cc100`、`-cuda` は `make ARCH=sm_100`。同じ引数で実行する。
   - ビルドのログで、パターンルールが使われたか（`-acc` 付きでコンパイルされたか）を必ず確認する（組み込みルールに切り替わる落とし穴がある。4章 B）。
   - 実行に5分以上かかるもの（simplemoc、kalman の既定サイズなど）はバックグラウンドで実行する。
+  - 全件ビルド: 1件ごとに、`-mp=multicore,gpu`→`-acc=gpu`、`-mp=multicore`→`-acc=multicore`、`-mp=gpu`→`-acc=gpu` に置き換えた Makefile でビルドし、失敗したら通常の Makefile.NVD でも試す。`xargs -P 12` で全322件が約2分。
 
 ## 1. 目的と方針
 
@@ -176,6 +168,40 @@ cat log.std log.err log.time          # 実行コマンドは src/include/<name>
 - 名残の種類: CUDA 風のカーネル（`#pragma acc parallel teams num_teams() thread_limit()` の中に `#pragma omp parallel`、`omp_get_thread_num()`、`omp_get_team_num()`、`#pragma omp barrier`）、`#pragma acc data to:/from:` や `map(...)` のような OpenMP の書き方のデータ句、`#pragma omp declare target`、置換に失敗した存在しない関数（`omp_get_vector()`、`omp_get_gang()`）など。
 - main ブランチ時代の status2（`archive/src2-final-20261109:status2/results_memory.md`）で ACC 版が build err/exe err だった82件のうち、78件がこの96件に含まれる。残りの4件は ans, leukocyte, shmembench（削除済み）と heartwall（名残以外が原因。未調査）。
 - status2 で「正常」だったのに名残があるものは、`-mp=gpu` 付きでビルドしていたので OpenMP として通っていたと見られる。PR #3 などで `-acc=gpu` に変えると、通らなくなる可能性がある。
+
+### 全件ビルドの結果（2026-11-19）
+
+全322件を、OpenMP なし（`-mp=*` を `-acc=*` に置き換えた一時的な Makefile）でビルドした（実行はしない）。失敗したものは、通常の Makefile.NVD でも試した。
+
+| 結果 | 件数 |
+|---|---|
+| OpenMP なしで通る | 205 |
+| `-mp=gpu` があるときだけ通る | 34 |
+| どちらでも通らない | 80 |
+| Makefile.NVD がない（binomial, blas-gemm, miniFE） | 3 |
+
+- **A の77件**: 73件がどちらでも通らない。通るのは deredundancy, openmp, winograd の3件だけで、残りの1件は Makefile.NVD のない binomial。最初の分類は、A についてはおおむね正しかった。
+- **`-mp=gpu` があるときだけ通る34件**:
+  - 31件が "Could not find allocated-variable index for symbol"。関数の引数のポインタを、データ句なしでカーネルの中で使っている（呼び出し元の `acc data` にある配列）。OpenACC としては正しいコードで、nvc++ 26.3 が OpenMP を無効にしたときだけ失敗する（`-std` や `-Minfo` の有無には関係しない）。`default(present)` で回避できる（kalman, linearprobing で確認済み）。対象: adamw atomicPerf boxfilter bwt car channelShuffle eigenvalue face flip ga glu grrt heat2d hogbom hypterm ising iso2dfd keccaktreehash lif lsqt mask md memtest permute perplexity resize scatterAdd surfel tonemapping vol2col wsm5
+  - haversine: `../haversine-cuda/distance.h` が `sycl/sycl.hpp` を include している。
+  - rainflow: `../rainflow-cuda/reference.h` の `double3` が未定義。
+  - kmeans: `rmse.c:79` で "Cannot determine bounds for array"。
+  - haversine と rainflow は、cuda 版の共有ヘッダーの `_OPENMP` の分岐に頼っていると見られる（PR #3 の SDKBitMap.h のように `_OPENACC` の分岐が必要かもしれない）。
+- **A 以外でどちらでも通らないもの**: upstream のファイル構成の変更に、acc 版が追従していないものと見られる。
+  - lud: `stopwatch` が未定義（`-I../lud-cuda/common`）
+  - gd: `../gd-cuda/utils.h` で宣言されている `get_time()` の定義をビルドしていない
+  - gpp: `gettimeofday` が未定義
+  - goulash: `secs_elapsed` が未定義
+  - heartwall: omp 版にある `kernel/` と `util/` がない
+  - extend2: 依存先の `filelist.txt` がない
+- **組み込みルールへの切り替わり**: `-acc` なしでコンパイルされた GPU のコードは、ない（lci は直した。b+tree の timer.c はホスト側のコード）。
+- **gang だけのループの候補**: ソースで gang/vector/worker/seq のどれも指定していない `acc parallel loop` が、202件・493か所ある。そのうち、`-Minfo` で `loop gang /* blockIdx.x */`（gang だけ）と報告されたものが33件:
+  - accuracy adamw adjacent aidw amgmk attention bonds bspline-vgh channelSum chi2 dslash face fhd gd haccmk kmeans layout libor lsqt mcmd mdh meanshift multimaterial murmurhash3 nbody page-rank rfs s8n secp256k1 simpleSpmv snake softmax xsbench
+  - 同じ領域で、共有メモリに配列が置かれている強い候補は5件。adamw と chi2 は PASS、libor は期待値どおり。meanshift と snake は入力データがなく、確認できなかった。
+  - 正しさに問題がなくても、gang の中で1スレッドしか働かないので、性能は落ちている可能性が高い（kalman では gang vector にして 24倍速くなった）。
+- **全件ビルドで見つけて直したもの**:
+  - grrt, iso2dfd, tridiagonal の `make clean` が、`*.txt` の指定で追跡中の `CMakeLists.txt` を消していた。cuda・omp 版と同じく、ファイル名を個別に書くようにした（`035ec4cea`, `44238d593`, `7b2d58ff7`）。
+  - **私のコミット `1ffa6c53e` で hausdorff のビルドが壊れていた**。`hd()` を使われていないと判断して消したが、`../hausdorff-cuda/reference.h` が使っていた。消した後にビルドし直していなかった。`c38d652bb` で戻した（8.8 ms、PASS）。教訓: 変更の後は、必ずクリーンビルドと実行をしてからコミットする。
 
 ### A. カーネルの書き直しが必要（77件・263カーネル）
 
