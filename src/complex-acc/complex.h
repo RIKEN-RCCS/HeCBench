@@ -7,7 +7,6 @@
 extern "C" {
 #endif /* __cplusplus */
 
-#pragma omp declare target
 
 typedef struct __attribute__((__aligned__(8)))
 {
@@ -21,16 +20,19 @@ typedef struct __attribute__((__aligned__(16)))
 
 typedef float2 FloatComplex;
 
+#pragma acc routine seq
 static inline float Crealf (FloatComplex x) 
 { 
     return x.x; 
 }
 
+#pragma acc routine seq
 static inline float Cimagf (FloatComplex x) 
 { 
     return x.y; 
 }
 
+#pragma acc routine seq
 static inline FloatComplex make_FloatComplex (float r, float i)
 {
     FloatComplex res;
@@ -39,17 +41,20 @@ static inline FloatComplex make_FloatComplex (float r, float i)
     return res;
 }
 
+#pragma acc routine seq
 static inline FloatComplex Conjf (FloatComplex x)
 {
     return make_FloatComplex (Crealf(x), -Cimagf(x));
 }
 
+#pragma acc routine seq
 static inline FloatComplex Caddf (FloatComplex x, FloatComplex y)
 {
     return make_FloatComplex (Crealf(x) + Crealf(y), 
                                 Cimagf(x) + Cimagf(y));
 }
 
+#pragma acc routine seq
 static inline FloatComplex Csubf (FloatComplex x, FloatComplex y)
 {
     return make_FloatComplex (Crealf(x) - Crealf(y), 
@@ -61,6 +66,7 @@ static inline FloatComplex Csubf (FloatComplex x, FloatComplex y)
  * not guard against this (presumably to avoid losing performance), so we 
  * don't do it either to stay competitive.
  */
+#pragma acc routine seq
 static inline FloatComplex Cmulf (FloatComplex x, FloatComplex y)
 {
     FloatComplex prod;
@@ -76,6 +82,7 @@ static inline FloatComplex Cmulf (FloatComplex x, FloatComplex y)
  * complex library implementations, with some also offering an unguarded,
  * faster version.
  */
+#pragma acc routine seq
 static inline FloatComplex Cdivf (FloatComplex x, FloatComplex y)
 {
     FloatComplex quot;
@@ -100,6 +107,7 @@ static inline FloatComplex Cdivf (FloatComplex x, FloatComplex y)
  * simplest and fastest solution, however this may suffer from inacracies 
  * if sqrt and division are not IEEE compliant. 
  */
+#pragma acc routine seq
 static inline float Cabsf (FloatComplex x)
 {
     float a = Crealf(x);
@@ -126,16 +134,19 @@ static inline float Cabsf (FloatComplex x)
 /* Double precision */
 typedef double2 DoubleComplex;
 
+#pragma acc routine seq
 static inline double Creal (DoubleComplex x) 
 { 
     return x.x; 
 }
 
+#pragma acc routine seq
 static inline double Cimag (DoubleComplex x) 
 { 
     return x.y; 
 }
 
+#pragma acc routine seq
 static inline DoubleComplex make_DoubleComplex (double r, double i)
 {
     DoubleComplex res;
@@ -144,17 +155,20 @@ static inline DoubleComplex make_DoubleComplex (double r, double i)
     return res;
 }
 
+#pragma acc routine seq
 static inline DoubleComplex Conj(DoubleComplex x)
 {
     return make_DoubleComplex (Creal(x), -Cimag(x));
 }
 
+#pragma acc routine seq
 static inline DoubleComplex Cadd(DoubleComplex x, DoubleComplex y)
 {
     return make_DoubleComplex (Creal(x) + Creal(y), 
                                  Cimag(x) + Cimag(y));
 }
 
+#pragma acc routine seq
 static inline DoubleComplex Csub(DoubleComplex x, DoubleComplex y)
 {
     return make_DoubleComplex (Creal(x) - Creal(y), 
@@ -166,6 +180,7 @@ static inline DoubleComplex Csub(DoubleComplex x, DoubleComplex y)
  * not guard against this (presumably to avoid losing performance), so we 
  * don't do it either to stay competitive.
  */
+#pragma acc routine seq
 static inline DoubleComplex Cmul(DoubleComplex x, DoubleComplex y)
 {
     DoubleComplex prod;
@@ -181,6 +196,7 @@ static inline DoubleComplex Cmul(DoubleComplex x, DoubleComplex y)
  * complex library implementations, with some also offering an unguarded,
  * faster version.
  */
+#pragma acc routine seq
 static inline DoubleComplex Cdiv(DoubleComplex x, DoubleComplex y)
 {
     DoubleComplex quot;
@@ -203,6 +219,7 @@ static inline DoubleComplex Cdiv(DoubleComplex x, DoubleComplex y)
  * and fastest solution, however this may suffer from inacracies if sqrt
  * and division are not IEEE compliant.
  */
+#pragma acc routine seq
 static inline double Cabs (DoubleComplex x)
 {
     double a = Creal(x);
@@ -233,22 +250,26 @@ static inline double Cabs (DoubleComplex x)
 
 /* aliases */
 typedef FloatComplex Complex;
+#pragma acc routine seq
 static inline Complex make_Complex (float x, float y) 
 { 
     return make_FloatComplex (x, y); 
 }
 
 /* float-to-double promotion */
+#pragma acc routine seq
 static inline DoubleComplex ComplexFloatToDouble (FloatComplex c)
 {
     return make_DoubleComplex ((double)Crealf(c), (double)Cimagf(c));
 }
 
+#pragma acc routine seq
 static inline FloatComplex ComplexDoubleToFloat (DoubleComplex c)
 {
     return make_FloatComplex ((float)Creal(c), (float)Cimag(c));
 }
 
+#pragma acc routine seq
 static inline Complex Cfmaf( Complex x, Complex y, Complex d)
 {
     float real_res;
@@ -263,6 +284,7 @@ static inline Complex Cfmaf( Complex x, Complex y, Complex d)
     return make_Complex(real_res, imag_res);
 }
 
+#pragma acc routine seq
 static inline DoubleComplex Cfma( DoubleComplex x, DoubleComplex y, DoubleComplex d)
 {
     double real_res;
@@ -277,6 +299,5 @@ static inline DoubleComplex Cfma( DoubleComplex x, DoubleComplex y, DoubleComple
     return make_DoubleComplex(real_res, imag_res);
 }
 
-#pragma omp end declare target
 
 #endif /* !defined(COMPLEX_H_) */
