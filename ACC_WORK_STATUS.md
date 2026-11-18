@@ -2,7 +2,7 @@
 
 > **注意: このファイルは作業引き継ぎ用の一時ファイルです。upstream に PR を出す前に必ず削除してください。**
 
-- 最終更新: 2026-11-17（4章 C の7件を直した時点）
+- 最終更新: 2026-11-19（4章 B の8件を直した時点）
 - 対象ブランチ: `acc`（`origin` = `github.com:RIKEN-RCCS/HeCBench`）
 
 ## 1. 目的と方針
@@ -24,6 +24,15 @@
 ## 2. これまでの作業（PR #3 マージ後、`f1902eb1a` 以降）
 
 ```
+9c2924105 [pnpoly-acc] port the data clauses and work around two nvc++ issues
+e26dadabf [linearprobing-acc] port the data clauses, kernels and atomic compare to OpenACC
+2c1db65a5 [kalman-acc] use OpenACC data clauses and map each series to one thread
+f340613f7 [lci-acc] build with the OpenACC flags and fix the gang clause
+61465e885 [ecdh-acc] mark the device functions with acc routine seq
+017b12205 [debayer-acc] mark the device functions with acc routine seq
+a28316ae7 [complex-acc] mark the device functions with acc routine seq
+6cef2c456 [chacha20-acc] mark the device functions with acc routine seq
+7be2fee27 Update ACC_WORK_STATUS.md after fixing the host-only OpenMP remnants (temporary; remove before the upstream PR)
 c8120d96d [su3-acc] drop the unused omp.h include
 0b030785f [rsc-acc] drop the unused omp.h includes
 8d0b5406c [rsbench-acc] time with clock_gettime instead of omp_get_wtime
@@ -75,6 +84,7 @@ e8a3e305a Merge origin/master (upstream sync) into acc   ← master 8f44ff3e6 �
   - pathfinder, bitonic-sort, gamma-correction, hausdorff, stencil1d, sw4ck は、master の新しい `-omp` 版をもとに ACC で書き直した。共有メモリの処理は、gang ごとの `private` 配列と、続けて並べた `loop vector` で表している（PR #3 の fwt-acc と同じ書き方）。
 - `3b14849e1`〜`b496229af`（7コミット）: GPU での確認（3章）で見つかった問題の修正。
 - `e0c31c939`〜`c8120d96d`（6コミット）: 4章 C の修正（2026-11-17）。
+- `6cef2c456`〜`9c2924105`（8コミット）: 4章 B の修正（2026-11-19）。
 
 ## 3. GPU での確認結果（2026-11-10, GB200 / cc100, nvc++ 26.3）
 
@@ -151,24 +161,31 @@ adv(1) aes(2) aop(5) assert(2) asta(1) axhelm(2) binomial(1) bn(1) cm(3) cmp(2) 
 - カーネル数 0 の histogram, openmp, permutate, winograd は、`teams` はないが `#pragma omp parallel` や `omp_get_*()` などが残っているもの。
 - status2 で正常だったもの: deredundancy, openmp, winograd。記載がないもの: binomial。ほかはすべて build err。
 
-### B. pragma の置き換えで直る（12件）
+### B. pragma の置き換えで直る（12件）：**8件完了、残り2件**（2026-11-19）
 
-`#pragma omp declare target` → `#pragma acc routine seq`、`#pragma acc target update` → `#pragma acc update`、データ句を `copyin`/`copyout`/`copy` に直す、`omp atomic` → `acc atomic` など。
+数え直し（OpenMP なし、つまり `-mp=gpu` を `-acc=gpu` に置き換えた一時的な Makefile で、実際にビルドして実行した）の結果と対応:
 
-| ベンチマーク | status2 | 名残 |
-|---|---|---|
-| blas-gemm | 記載なし | データ句1、`omp dispatch` 3（MKL 呼び出し。置き換えだけでは済まない可能性あり） |
-| chacha20 | 正常 | declare target 2 |
-| complex | 正常 | declare target 4 |
-| debayer | 正常 | declare target 6 |
-| diamond | build err | **修正済み**（`19c512f8b`, `b496229af`） |
-| ecdh | 正常 | declare target 2 |
-| kalman | build err | データ句1、declare target 2 |
-| lci | 正常 | declare target 2 |
-| linearprobing | build err | データ句1、declare target 4 |
-| lulesh | 正常 | `#pragma acc target update host(...)` 18 |
-| multimaterial | 正常 | `omp_get_wtime` 6、そのほかの omp 2 |
-| pnpoly | build err | データ句1、declare target 2 |
+| ベンチマーク | 実際の状況 | 対応（コミット） | 結果 |
+|---|---|---|---|
+| chacha20, complex, debayer, ecdh | `omp declare target` が残っていた（nvc++ は自動でデバイス向けにするので動いていた） | 関数ごとの `acc routine seq` に置き換えた（`6cef2c456`, `a28316ae7`, `017b12205`, `61465e885`） | PASS（debayer はチェックサムが omp と一致） |
+| lci | Makefile.NVD の依存先 `tables.h` が存在せず、組み込みルールで `-acc` なしにビルドされていた（**CPU で実行されていた**）。依存先を直すと `gang(1)` がエラーになった | 依存先を `../lci-cuda/tables.h` に直し（Makefile も）、`gang vector num_gangs(1) vector_length(96)` にした。routine も置き換えた（`f340613f7`） | `-DDUMP` の出力が CPU のビルドと一致 |
+| kalman | OpenMP の書き方のデータ句で、ビルドできなかった | `copyin/create`、`update self` に直した。カーネルを `gang vector` にした（gang だけだと作業配列が共有メモリに置かれ、内側のループが vector に割り当てられていた。カーネル 1.9s → 0.08s）。OpenMP なしでもビルドできるよう `default(present)` を付けた（`2c1db65a5`） | **FAIL のまま**（下記） |
+| linearprobing | データ句と `num_teams/thread_limit` が OpenMP の書き方。OpenACC にない `acc atomic compare capture` を使っていた | `copyin/create`、`update device/self`、`gang vector num_gangs/vector_length` に直した。compare-and-swap は C++20 の `std::atomic_ref::compare_exchange_strong` にした（`-std=c++20`）。`default(present)` も付けた（`e26dadabf`） | PASS |
+| pnpoly | OpenMP の書き方のデータ句で、ビルドできなかった | `copyin/copyout` に直し、カーネルを `gang vector` にし、範囲を明示した `present` を付けた。nvc++ の不具合を2つ回避した（下記）（`9c2924105`） | PASS。チェックサムが multicore のビルドとホストでの検算に一致 |
+| diamond | — | **修正済み**（`19c512f8b`, `b496229af`） | — |
+| lulesh | 名残（18件の `acc target update host`）は、すべて `#ifdef VERIFY`（既定はオフ）の中で、使われない | 変更なし | **結果が誤っている**（下記。名残とは無関係） |
+| multimaterial | `omp_get_wtime` は `#ifdef DEBUG` の中、`omp simd` は CPU で実行する基準の実装（upstream と同じ） | 変更なし | 2000×2000 で All tests passed（下記） |
+| **blas-gemm（未着手）** | Makefile.NVD がない。MKL 向けの `omp dispatch` を使っている | 置き換えでは直らない。cuBLAS などで書き直す必要があり、A に近い | — |
+
+kalman の FAIL について:
+- 予測値が1億程度まで膨らむのに、upstream の reference（`kalman-cuda/reference.h`）は絶対誤差 1e-3 で判定している。kalman-cuda も8回中7回 FAIL する。acc 版の相対誤差は 1e-6 未満（n_diff=0 で 2.4e-8）で、`-gpu=nofma` にしてもほぼ変わらない。判定は upstream の共有コードなので変えていない。
+
+この作業で分かった、ほかにも当てはまりそうなこと:
+- **gang だけのループの競合**：外側のループに `gang vector` を書かないと、nvc++ は内側にループがあるときに gang だけを割り当てる。すると、反復ごとの作業配列が gang の共有メモリに置かれ、内側のループが vector に割り当てられて競合する（diamond, kalman, pnpoly で発生）。`-Minfo` で `CUDA shared memory used for ...` と `loop gang /* blockIdx.x */` が出ていたら疑う。ほかの `-acc` にも残っている可能性がある。
+- **組み込みルールへの切り替わり**：パターンルールの依存先が存在しないと、make は組み込みルールで CFLAGS なしにビルドする（sad, lci で発生）。全322件を `make -n` で調べた結果、`-acc` なしでビルドされていた GPU のコードは lci だけ。extend2, heartwall, lavaMD, srad は依存先がなく、make が始まらない。
+- **nvc++ 26.3 の不具合**（pnpoly で回避）：ループの増分の式の `k = j++` が変換に失敗する。`pnpoly_base` の `c = !c` が `-O2` 以上で誤ってコンパイルされる（`c ^= 1` で回避）。
+- **compare-and-swap**：nvc++ の OpenACC では、`__atomic_compare_exchange_n` が逐次実行になり、結果も誤る。`std::atomic_ref` は使えるが、`compare_exchange_strong` の戻り値を使わないと、デバイス向けのコンストラクタが作られずエラーになる。
+- **`-mp=gpu` なしで出るエラー**：関数の引数のポインタを、データ句なしでカーネルの中で使うと、`-acc=gpu` だけのとき "Could not find allocated-variable index" になる（kalman, linearprobing）。`default(present)` で直る。
 
 ### C. ホスト側だけの名残（7件）：**完了**（2026-11-17）
 
@@ -188,7 +205,7 @@ adv(1) aes(2) aop(5) assert(2) asta(1) axhelm(2) binomial(1) bn(1) cm(3) cmp(2) 
 Makefile.NVD の約250件が `-mp=gpu` を指定している（`-acc=gpu` は約60件）。多くは `CC = nvc++ -acc` も指定しているので、OpenACC と OpenMP のオフロードが両方とも有効になり、OpenMP の名残があってもビルドが通ってしまう。名残をなくした後に、`-acc=gpu` にそろえるかを決める必要がある。
 
 ### 決める必要があること
-1. B の11件（diamond は修正済み）を直すか（比較的短時間で済む。GPU で確認しながら進められる）。C の7件は完了。
+1. B は8件を直した（2026-11-19）。残りは lulesh（結果が誤っている。名残とは無関係）と blas-gemm（書き直しが必要）。C の7件は完了。
 2. A の77件の扱い:
    - (a) ans などと同じく「Not yet implemented」として PR から外す（ディレクトリを削除）
    - (b) 書き直す（263カーネル分。1カーネルのものから順に、など）
@@ -206,6 +223,12 @@ Makefile.NVD の約250件が `-mp=gpu` を指定している（`-acc=gpu` は約
 - **myocyte-acc の出力が `nan`**: `output.txt` の約92万行のうち87万行が `nan`。`9fd25651c` より前の状態（`omp.h` あり、`-mp=gpu`）でも同じなので、もともとの不具合。omp 版には `nan` がないが、時刻 0 の値（`y[0][0][0]=1.13e30`）が入力 `data/myocyte/y.txt` の先頭（1.37e-3）と合っていないので、upstream の実装も含めて調べる必要がある。実行コマンドは Makefile.NVD の50行目の COMMAND（`-time 10000`）で、`include/myocyte-NVIDIA` の COMMAND は上書きされている。
 - **upstream の `myocyte-omp/Makefile.nvc` が壊れている**: リンクのルールの行の続け方が誤っていて、ビルドできない（比較のときは手でビルドした）。
 - **simplemoc**: カーネル時間が約220秒、実行全体で約5分かかる（コードは変えていない）。
+- **lulesh-acc の結果が誤っている**: Final Origin Energy が 2.453665e+10 なのに対し、lulesh-cuda と lulesh-omp はどちらも 1.850962e+10（`-i 5 -s 384 -r 11 -b 1 -c 1`）。`-mp=gpu` を加えても変わらないので、OpenMP の名残とは関係のない、もともとの不具合。
+- **multimaterial の実行コマンドが大きすぎる**: `include/multimaterial-NVIDIA` の 6000×6000 では、omp 版も約66GB 使ったところで強制終了された（signal 9）。upstream の run ターゲットは 2000×2000。入力 `volfrac.dat` は `multimaterial-cuda/volfrac.dat.tgz` を実行するディレクトリに展開する必要がある（`prepare_data.sh` の問題の1件）。
+- **upstream 側の問題（直していない）**:
+  - kalman-omp は、系列数 100000 で何も出力せずに異常終了する（2500000 では動く）。
+  - pnpoly-omp は PASS だが、チェックサム（1297432）がホストでの検算の結果（3938029）と合わない。基準と最適化版が同じように誤っている可能性がある。
+  - lci-omp の Makefile.nvc にも、依存先 `tables.h` の同じ誤りがある。
 - **`prepare_data.sh`**: `src/include/*-NVIDIA` のうち55件が、COMMAND の先頭で `../<name>-cuda/prepare_data.sh` を呼んでいるが、このスクリプトは src2 の時代のもので、src にはない（sad と lr は直した）。`;` で区切られているので実行は止まらないが、データは展開されない。upstream の CMake `UNZIPFILE` や Makefile のやり方に合わせて直す必要がある。
   - ほかにも lr-acc のように、`prepare_data.sh` がコピーしたファイルを、自分のディレクトリから読もうとするものがあるかもしれない。
 - **dct8x8-acc**: ACC のカーネルの中で `omp_get_thread_num()` を使っている（A に含まれる）。
