@@ -62,7 +62,7 @@ void test (
     float*__restrict gain,
     float*__restrict spikes)
 {
-  #pragma acc parallel loop vector_length(256)
+  #pragma acc parallel loop vector_length(256) default(present)
   for (int i = 0; i < numNeurons; i++)
   {
     int neuron_index = i % neurons_per_item;
