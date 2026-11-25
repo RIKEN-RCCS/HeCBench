@@ -41,7 +41,7 @@ void reference(float *out, const float *in, const float delta, const float norm,
 
 void dev_lapl_iter(float *out, const float *in, const float delta, const float norm, const int Lx, const int Ly)
 {
-  #pragma acc parallel loop collapse(2) vector_length(256)
+  #pragma acc parallel loop collapse(2) vector_length(256) default(present)
   for (int y = 0; y < Ly; y++) {
     for (int x = 0; x < Lx; x++) {
       int v00 = y*Lx + x;
