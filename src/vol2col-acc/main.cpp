@@ -89,7 +89,7 @@ void col2vol_kernel(
     T* data_vol)
 {
 #pragma acc parallel loop collapse(4)		\
-  vector_length(threadsPerBlock)
+  vector_length(threadsPerBlock) default(present)
   for (int channel_in = 0; channel_in < channels; channel_in++) {
   for (int t_out = 0; t_out < depth; t_out++) {
   for (int h_out = 0; h_out < height; h_out++) {
