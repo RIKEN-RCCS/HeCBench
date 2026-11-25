@@ -255,7 +255,7 @@ void gpu_find_inner_product_1(
         real* __restrict g_inner_product_imag,
   const int g_offset)
 {
-  #pragma acc parallel loop
+  #pragma acc parallel loop default(present)
   for (int m = 0; m < grid_size; ++m) {
     real s_data_real = 0.0;
     real s_data_imag = 0.0;
@@ -330,7 +330,7 @@ void gpu_find_inner_product_2(
         real* __restrict g_inner_product_2_real,
         real* __restrict g_inner_product_2_imag)
 {
-  #pragma acc parallel loop
+  #pragma acc parallel loop default(present)
   for (int m = 0; m < number_of_moments; ++m) {
     real s_data_real = 0.0;
     real s_data_imag = 0.0;

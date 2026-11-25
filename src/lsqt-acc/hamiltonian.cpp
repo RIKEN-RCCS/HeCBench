@@ -164,7 +164,7 @@ void gpu_apply_hamiltonian(
         real* __restrict g_state_out_real,
         real* __restrict g_state_out_imag)
 {
-  #pragma acc parallel loop vector_length(BLOCK_SIZE)
+  #pragma acc parallel loop vector_length(BLOCK_SIZE) default(present)
   for (int n = 0; n < number_of_atoms; n++) {
     real temp_real = g_potential[n] * g_state_in_real[n]; // on-site
     real temp_imag = g_potential[n] * g_state_in_imag[n]; // on-site
@@ -250,7 +250,7 @@ void gpu_apply_commutator(
   real* g_state_out_real,
   real* g_state_out_imag)
 {
-  #pragma acc parallel loop vector_length(BLOCK_SIZE)
+  #pragma acc parallel loop vector_length(BLOCK_SIZE) default(present)
   for (int n = 0; n < number_of_atoms; n++) {
     real temp_real = 0.0;
     real temp_imag = 0.0;
@@ -331,7 +331,7 @@ void gpu_apply_current(
         real* __restrict g_state_out_real,
         real* __restrict g_state_out_imag)
 {
-  #pragma acc parallel loop vector_length(BLOCK_SIZE)
+  #pragma acc parallel loop vector_length(BLOCK_SIZE) default(present)
   for (int n = 0; n < number_of_atoms; n++) {
     real temp_real = 0.0;
     real temp_imag = 0.0;
@@ -478,7 +478,7 @@ void gpu_chebyshev_2(
   const real bessel_m,
   const int label)
 {
-  #pragma acc parallel loop vector_length(BLOCK_SIZE)
+  #pragma acc parallel loop vector_length(BLOCK_SIZE) default(present)
   for (int n = 0; n < number_of_atoms; n++) {
     real temp_real = g_potential[n] * g_state_1_real[n]; // on-site
     real temp_imag = g_potential[n] * g_state_1_imag[n]; // on-site
@@ -684,7 +684,7 @@ void gpu_chebyshev_2x(
   const real g_bessel_m,
   const int g_label)
 {
-  #pragma acc parallel loop vector_length(BLOCK_SIZE)
+  #pragma acc parallel loop vector_length(BLOCK_SIZE) default(present)
   for (int n = 0; n < number_of_atoms; n++) {
     real temp_real = g_potential[n] * g_state_1_real[n];    // on-site
     real temp_imag = g_potential[n] * g_state_1_imag[n];    // on-site
@@ -892,7 +892,7 @@ void gpu_kernel_polynomial(
         real* __restrict g_state_2_real,
         real* __restrict g_state_2_imag)
 {
-  #pragma acc parallel loop vector_length(BLOCK_SIZE)
+  #pragma acc parallel loop vector_length(BLOCK_SIZE) default(present)
   for (int n = 0; n < number_of_atoms; n++) {
     real temp_real = g_potential[n] * g_state_1_real[n]; // on-site
     real temp_imag = g_potential[n] * g_state_1_imag[n]; // on-site
