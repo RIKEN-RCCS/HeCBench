@@ -31,6 +31,11 @@
   3. upstream のファイル構成の変更に追従していない6件（lud, gd, gpp, goulash, heartwall, extend2）と、haversine, rainflow, kmeans
   4. gang だけのループの候補33件の性能の確認（正しさは、確認できた3件では問題なし）
   5. 存在しない `prepare_data.sh` を呼んでいる `include/*-NVIDIA` 55件、lulesh-acc の結果の誤り、blas-gemm の書き直し
+- **最終的なテストは nvhpc 26.11 で行う**（2026-11-25 に決定）。今の作業（`default(present)` の確認など）は、これまでどおり 26.3（`module load nvhpc` の既定）で進める。最終テストでは、少なくとも次を 26.11 で確かめ直す:
+  - 残す全248件のビルド（通常の Makefile.NVD）と実行の結果
+  - 26.3 の不具合を回避したところが 26.11 でも必要か: pnpoly の `k = j++` と `c = !c`（`9c2924105`）、`std::atomic_ref` の戻り値を使う書き方（linearprobing `e26dadabf`）、`-mp=gpu` なしで出る "Could not find allocated-variable index"（`default(present)` を付けた31件）
+  - `-acc=gpu` だけのビルドで遅くなる問題（car、channelShuffle）が 26.11 でも起きるか。起きなければ、Makefile.NVD を `-acc=gpu` にそろえることも考えられる
+  - 26.11 は `module load nvhpc/26.11` で読み込む。`SM=cc100` はそのまま。
 - **確認の手順**（scratchpad は日をまたぐと消えるので、ここに書いておく）:
   - **セッションの最初に、必ず GPU の数を確かめる**（`module load nvhpc` の後に `nvidia-smi --query-gpu=index,name,compute_cap --format=csv`）。GPU の数はセッションごとに変わる（11-10〜11-19 は4基、11-25 は1基）。存在しない GPU を `CUDA_VISIBLE_DEVICES` で指定すると、GPU なしで動いて、遅く、結果も誤る。
   - `module load nvhpc` をしてから、`cd src/<name>-acc && make -f Makefile.NVD clean && make -f Makefile.NVD SM=cc100 run`。結果は `log.std` / `log.err` / `log.time`。
@@ -53,6 +58,7 @@
 | `src2/`, `status2/` | acc から削除。タグで保存 | `82329bd55`, タグ `archive/src2-final-20261109`（タグは `3e0a8367a` を指す） |
 | `-omp_nvc` | acc から削除（`-omp` のコピーなので不要） | `9fac85448`（削除前の状態は `4359d4730`） |
 | ans-acc, leukocyte-acc, shmembench-acc | 「OpenACC 版は Not yet implemented」として削除 | `73c766130` |
+| 最終的なテストのコンパイラ | **nvhpc の最新版 26.11 で行う**（2026-11-25 に決定）。それまでの作業と確認は 26.3 で行っている | — |
 | 4章 A のうちビルドできない73件と binomial（計74件） | 「Not yet implemented」として PR から外す（2026-11-19 に決定）。書き直しは後の別 PR で行う | `e56416827`（削除前の状態は `63f12161d`） |
 | `src/include/*-NVIDIA` | **すべて残す**。`-acc` がないベンチマーク向けの約170件も、将来 `-acc` を追加するかもしれないので残す | — |
 | `src/include/SDKBitMap.h`, `src/hausdorff-cuda/reference.h` | `#if defined(_OPENACC)` の追加だけ。`-acc` に必要なので残す | PR #3 |
