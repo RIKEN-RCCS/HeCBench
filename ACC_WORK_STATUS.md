@@ -8,6 +8,8 @@
 ## 0. 作業中（セッションは2時間で強制終了されるので、ここを随時更新してコミットする）
 
 - **現在の作業（2026-11-25 開始）**: `-mp=gpu` があるときだけ通る31件（4章「全件ビルドの結果」）に `default(present)` を付け、OpenMP なしでビルドでき、実行して正しい結果になることを1件ずつ確認する。ベンチマークごとにコミットする。
+  - 進捗（2026-11-25）: flip は完了（`3060bfaf7`）。残り30件は `default(present)` を付けて OpenMP なしでビルドできることを確認済み（57か所、すべて行末に ` default(present)` を足しただけ。**作業ツリーにあり、まだコミットしていない**）。次は、30件を通常の Makefile.NVD と OpenMP なしの両方で実行して確認し、問題のないものからコミットする。
+  - 手順: scratchpad の `dp/fix_dp.py <name>`（OpenMP なしでビルドし、"Could not find allocated-variable index" の出たカーネルの指示文に `default(present)` を付けて、通るまで繰り返す）と `dp/run.sh <name> <tag> [makefile]`。セッションが切れて作業ツリーの変更が残っていたら、`git diff` で中身（`default(present)` の追加だけ）を確かめてから実行の確認に進めばよい。
 - **前回の状態**: 4章 A の74件を PR から外した（`e56416827`）。残る `-acc` は248件。A のうち OpenMP なしでビルドできる deredundancy, openmp, winograd は残したが、OpenMP の名残があるので、中身の確認が必要。push はユーザーが行う（このマシンには GitHub の認証情報がない）。
 - **次の候補**（どれから進めるかは未定）:
   1. 残した deredundancy, openmp, winograd の名残を確認する（4章 A）
