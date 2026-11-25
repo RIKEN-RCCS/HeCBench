@@ -438,7 +438,7 @@ void KeccakTreeGPU(tKeccakLane * h_inBuffer, tKeccakLane * h_outBuffer,
 #pragma acc update device(h_inBuffer[0:INPUT_BLOCK_SIZE_B/4 * NB_THREADS * NB_INPUT_BLOCK*NB_THREADS_BLOCKS])
 
 #pragma acc parallel loop collapse(2)				\
-  num_gangs(NB_THREADS_BLOCKS) vector_length(NB_THREADS) 
+  num_gangs(NB_THREADS_BLOCKS) vector_length(NB_THREADS) default(present)
   for(int blkIdx=0;blkIdx<NB_THREADS_BLOCKS;blkIdx++) 
     for (int thrIdx=0; thrIdx< NB_THREADS;thrIdx++)
     {
