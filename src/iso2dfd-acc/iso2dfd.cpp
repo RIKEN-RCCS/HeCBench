@@ -147,7 +147,7 @@ void iso_2dfd_iteration_cpu(float* next, float* prev, float* vel,
  */
 void iso_2dfd_kernel(float* next, const float* prev, const float* vel, 
                      const float dtDIVdxy, const size_t nRows, const size_t nCols) {
-  #pragma acc parallel loop collapse(2) vector_length(256) 
+  #pragma acc parallel loop collapse(2) vector_length(256) default(present)
   for (size_t gidRow = 0; gidRow < nRows ; gidRow++)
     for (size_t gidCol = 0; gidCol < nCols ; gidCol++) {
       size_t gid = (gidRow)*nCols + gidCol;
