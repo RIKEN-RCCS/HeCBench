@@ -8,6 +8,7 @@
 ## 0. 作業中（セッションは2時間で強制終了されるので、ここを随時更新してコミットする）
 
 - **現在の作業（2026-11-25 開始）**: `-mp=gpu` があるときだけ通る31件（4章「全件ビルドの結果」）に `default(present)` を付け、OpenMP なしでビルドでき、実行して正しい結果になることを1件ずつ確認する。ベンチマークごとにコミットする。
+  - **再開（2026-11-25、GPU 2基の環境）**: `module load nvhpc` で nvc++ 26.3 が使えることを確認（この環境には 26.5〜26.11 もあるが、これまでどおり 26.3 を使う）。注意: `module load ... | tail` のようにパイプにつなぐとサブシェルで読み込まれ、反映されない。古い worktree を `git worktree prune` で消し、`dp/wt`（変更前）と `dp/wt2`（変更後）を作り直した。`dp/pair.sh` は GPU 0 と GPU 1 で同時に実行する版に直した。
   - **中断（2026-11-25、ユーザーの指示）**: 比較を途中で止めた。**作業ツリーに、確認の済んでいない24件の変更（25ファイル）がコミットされずに残っている**: eigenvalue face ga glu grrt heat2d hogbom hypterm ising iso2dfd keccaktreehash lif lsqt mask md memtest permute perplexity resize scatterAdd surfel tonemapping vol2col wsm5。中身は、どれも指示文の行末への ` default(present)` の追加だけ（`git diff` で確かめられる）。OpenMP なしでビルドできることは確認済み。
     - 再開の手順: ①GPU の数を確かめる。②scratchpad が残っていれば `dp/pair.sh <name>` で1件ずつ比較する（変更前 `dp/wt`、変更後 `dp/wt2`）。scratchpad が消えていたら、`git worktree prune` で古い worktree の登録を消してから、HEAD の worktree（変更前）と、そこに `git diff -- src` を当てた worktree（変更後）を作り直し、通常の Makefile.NVD で両方を実行して、時間以外の出力を比べる。③出力が同じものから、ベンチマークごとにコミットする。
     - 比較中だった eigenvalue は、実行の途中で止めたので、最初からやり直す必要がある（変更前と変更後を合わせて7分以上かかる）。
