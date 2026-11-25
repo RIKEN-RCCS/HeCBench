@@ -38,7 +38,7 @@ void perplexity_search(const value_t* __restrict distances,
 
   auto start = std::chrono::steady_clock::now();
 
-  #pragma acc parallel loop vector_length(256)
+  #pragma acc parallel loop vector_length(256) default(present)
   for (int i = 0; i < n; i++) {
     value_t beta_min = -INFINITY, beta_max = INFINITY;
     value_t beta = 1;
