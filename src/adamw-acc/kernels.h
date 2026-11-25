@@ -132,7 +132,8 @@ void fused_4bit_kernel (
     const float resid_beta1,
     const float resid_beta2)
 {
-  #pragma acc parallel loop num_gangs(numTeams) vector_length(numThreads)
+  #pragma acc parallel loop num_gangs(numTeams) vector_length(numThreads) default(present) \
+              copyin(_exp_qmap, _exp_qmidpt, _sq_qmap, _sq_qmidpt)
   for (int block_id = 0; block_id < numTeams; block_id++) {  
     float absmax_exp = 0;
     float absmax_sq = 0;
