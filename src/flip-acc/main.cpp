@@ -21,7 +21,7 @@ void flip_kernel(
     const int64_t* shape,
     const int64_t  total_dims) 
 {
-  #pragma acc parallel loop vector_length(256)
+  #pragma acc parallel loop vector_length(256) default(present)
   for (int64_t linear_index = 0; linear_index < n; linear_index++) {
 
     int64_t cur_indices = linear_index;
