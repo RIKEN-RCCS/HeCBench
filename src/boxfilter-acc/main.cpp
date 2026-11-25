@@ -128,7 +128,7 @@ void BoxFilterGPU ( unsigned int *uiInput,
 
   for (int i = 0; i < iCycles; i++) {
     // Launch row kernel
-#pragma acc parallel num_gangs(numTeams) vector_length(blockSize)
+#pragma acc parallel num_gangs(numTeams) vector_length(blockSize) default(present)
     {
       uchar4 uc4LocalData[90]; //16+64+10;
 #pragma acc loop gang
