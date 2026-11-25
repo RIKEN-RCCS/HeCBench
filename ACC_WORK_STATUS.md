@@ -9,6 +9,13 @@
 
 - **現在の作業（2026-11-25 開始）**: `-mp=gpu` があるときだけ通る31件（4章「全件ビルドの結果」）に `default(present)` を付け、OpenMP なしでビルドでき、実行して正しい結果になることを1件ずつ確認する。ベンチマークごとにコミットする。
   - 進捗（2026-11-25）: flip は完了（`3060bfaf7`）。残り30件は `default(present)` を付けて OpenMP なしでビルドできることを確認済み（57か所、すべて行末に ` default(present)` を足しただけ。**作業ツリーにあり、まだコミットしていない**）。次は、30件を通常の Makefile.NVD と OpenMP なしの両方で実行して確認し、問題のないものからコミットする。
+  - **重要な発見（2026-11-25）**: nvc++ 26.3 は `-mp=gpu` の有無でコード生成そのものが変わる。OpenMP なし（`-acc=gpu` だけ）のビルドは、`default(present)` でビルドできるようになっても、大幅に遅くなることがある。
+    - car: 外側の collapse(4) のループが `gang, vector(256)` から `gang` だけになり、内側が `vector(256)` になった。カーネル 0.0047s → 0.94s（200倍）。RMSE も 0.100244 → 0.100481 と変わった（和の順番が変わったためと見られる）。
+    - channelShuffle: ループの割り当ては同じだが、OpenMP なしのときだけ、カーネルの中のループが "Recognized memory copy idiom"（`memcpy` への置き換え）になり、実行が15分近く終わらない（通常のビルドでは各カーネル 0.02〜0.04 ms）。
+    - そのため、**Makefile.NVD を `-acc=gpu` にそろえるのは、今の nvc++ では勧められない**。`default(present)` の追加は、通常のビルド（`-mp=gpu`）で結果が変わらないことを確認したうえでコミットする。
+    - `default(present)` の注意: カーネルがグローバル変数の配列を使っていると、実行時に "data in PRESENT clause was not found" になる（adamw。定数表を `copyin(...)` で明示して直した）。
+    - boxfilter は、変更前のコードでも同じ値で FAIL する（もともとの不具合）。
+  - 比較用に、HEAD（変更前）を scratchpad の `dp/wt` に git worktree として取り出してある（作業が終わったら `git worktree remove` する）。
   - 手順: scratchpad の `dp/fix_dp.py <name>`（OpenMP なしでビルドし、"Could not find allocated-variable index" の出たカーネルの指示文に `default(present)` を付けて、通るまで繰り返す）と `dp/run.sh <name> <tag> [makefile]`。セッションが切れて作業ツリーの変更が残っていたら、`git diff` で中身（`default(present)` の追加だけ）を確かめてから実行の確認に進めばよい。
 - **前回の状態**: 4章 A の74件を PR から外した（`e56416827`）。残る `-acc` は248件。A のうち OpenMP なしでビルドできる deredundancy, openmp, winograd は残したが、OpenMP の名残があるので、中身の確認が必要。push はユーザーが行う（このマシンには GitHub の認証情報がない）。
 - **次の候補**（どれから進めるかは未定）:
