@@ -43,7 +43,7 @@ void k_findPeak(
   Peak *__restrict absPeak)
 {
 
-#pragma acc parallel num_gangs(findPeakNBlocks) vector_length(findPeakWidth)
+#pragma acc parallel num_gangs(findPeakNBlocks) vector_length(findPeakWidth) default(present)
   {
     float maxVal[findPeakWidth];
     size_t maxPos[findPeakWidth];
@@ -122,7 +122,7 @@ static void subtractPSF(const float* d_psf, const int psfWidth,
   const int stopx = std::min(residualWidth - 1, rx + (psfWidth - px - 1));
   const int stopy = std::min(residualWidth - 1, ry + (psfWidth - py - 1));
 
-  #pragma acc parallel loop collapse(2) vector_length(256)
+  #pragma acc parallel loop collapse(2) vector_length(256) default(present)
   for (int y = starty; y <= stopy; y++) 
     for (int x = startx; x <= stopx; x++) 
     d_residual[posToIdx(residualWidth, Position(x, y))] -= gain * absPeakVal
