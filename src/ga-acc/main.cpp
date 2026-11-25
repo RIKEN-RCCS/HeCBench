@@ -15,7 +15,7 @@ void ga(const char *__restrict target,
               int coarse_match_threshold,
               int current_position)
 {
-  #pragma acc parallel loop vector_length(256)
+  #pragma acc parallel loop vector_length(256) default(present)
   for (uint tid = 0; tid < length; tid++) { 
     bool match = false;
     int max_length = query_sequence_length - coarse_match_length;
