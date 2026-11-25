@@ -35,7 +35,7 @@ void permute (float* out, const float* inp,
   int num_blocks = ceil_div(total_threads, block_size);
   //permute_kernel<<<num_blocks, block_size>>>(q, k, v, inp, B, T, NH, HS);
   #pragma acc parallel loop \
-   num_gangs(num_blocks) vector_length(block_size) 
+   num_gangs(num_blocks) vector_length(block_size) default(present)
   for (int idx = 0; idx < B * T * C; idx++) { 
     // Q[b][nh_][n][d_] = inp[b][n][0][nh_][d_]
     int b = idx / (C * T);
