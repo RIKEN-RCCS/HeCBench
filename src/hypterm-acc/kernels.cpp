@@ -26,7 +26,7 @@ void hypterm_1 (double * __restrict flux_0,
                 double dxinv0, double dxinv1, double dxinv2,
                 int L, int M, int N)
 {
-  #pragma acc parallel loop collapse(3) vector_length(256)
+  #pragma acc parallel loop collapse(3) vector_length(256) default(present)
   for (int k = 4; k < N-4; k++) {
     for (int j = 4; j < N-4; j++) {
       for (int i = 4; i < N-4; i++) {
@@ -56,7 +56,7 @@ void hypterm_2 (double * __restrict flux_0,
                 double dxinv0, double dxinv1, double dxinv2,
                 int L, int M, int N)
 {
-  #pragma acc parallel loop collapse(3) vector_length(256)
+  #pragma acc parallel loop collapse(3) vector_length(256) default(present)
   for (int k = 4; k < N-4; k++) {
     for (int j = 4; j < N-4; j++) {
       for (int i = 4; i < N-4; i++) {
@@ -86,7 +86,7 @@ void hypterm_3 (double * __restrict flux_0,
                 double dxinv0, double dxinv1, double dxinv2,
                 int L, int M, int N)
 {
-  #pragma acc parallel loop collapse(3) vector_length(256)
+  #pragma acc parallel loop collapse(3) vector_length(256) default(present)
   for (int k = 4; k < N-4; k++) {
     for (int j = 4; j < N-4; j++) {
       for (int i = 4; i < N-4; i++) {
