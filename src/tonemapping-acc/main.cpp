@@ -43,7 +43,7 @@ double runKernels(
 
   auto start = std::chrono::steady_clock::now();
 
-  #pragma acc parallel loop collapse(2) vector_length(256)
+  #pragma acc parallel loop collapse(2) vector_length(256) default(present)
   for (uint y = 0; y < height; y++) {
     for (uint x = 0; x < width; x++) {
       float r, g, b;
