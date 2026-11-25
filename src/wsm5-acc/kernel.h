@@ -28,7 +28,7 @@ void wsm (
   const int kps, const int kpe,
   const int teamX, const int teamY)
 {
-  #pragma acc parallel num_gangs(teamX*teamY) vector_length(XXX*YYY)
+  #pragma acc parallel num_gangs(teamX*teamY) vector_length(XXX*YYY) default(present)
   {
 #pragma acc loop gang
     for ( int gangid=0; gangid<teamX*teamY; gangid++ ) {
