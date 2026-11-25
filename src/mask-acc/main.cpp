@@ -22,7 +22,7 @@ void sequenceMaskKernel(
 {
   if (B >= 0) {
     #pragma acc parallel loop \
-    num_gangs(M*N) vector_length(GPU_THREADS)
+    num_gangs(M*N) vector_length(GPU_THREADS) default(present)
     KERNEL_LOOP(index, B * N * M) {
       int k = index % M;
       int j = (index - k) / M % N;
@@ -32,7 +32,7 @@ void sequenceMaskKernel(
     }
   } else {
     #pragma acc parallel loop \
-    num_gangs(M*N/GPU_THREADS) vector_length(GPU_THREADS)
+    num_gangs(M*N/GPU_THREADS) vector_length(GPU_THREADS) default(present)
     KERNEL_LOOP(index, N * M) {
       int i = index / M;
       int j = index % M;
@@ -53,7 +53,7 @@ void windowMaskKernel(
     T* out) {
   if (B >= 0) {
     #pragma acc parallel loop \
-    num_gangs(M*N) vector_length(GPU_THREADS)
+    num_gangs(M*N) vector_length(GPU_THREADS) default(present)
     KERNEL_LOOP(index, B * N * M) {
       int k = index % M;
       int j = (index - k) / M % N;
@@ -67,7 +67,7 @@ void windowMaskKernel(
     }
   } else {
     #pragma acc parallel loop \
-    num_gangs(M*N/GPU_THREADS) vector_length(GPU_THREADS)
+    num_gangs(M*N/GPU_THREADS) vector_length(GPU_THREADS) default(present)
     KERNEL_LOOP(index, N * M) {
       int i = index / M;
       int j = index % M;
@@ -85,7 +85,7 @@ void
 upperMaskKernel(int N, int M, int B, const T* in, T fill_val, T* out) {
   if (B >= 0) {
     #pragma acc parallel loop \
-    num_gangs(M*N) vector_length(GPU_THREADS)
+    num_gangs(M*N) vector_length(GPU_THREADS) default(present)
     KERNEL_LOOP(index, B * N * M) {
       int k = index % M;
       int j = (index - k) / M % N;
@@ -111,7 +111,7 @@ void
 lowerMaskKernel(int N, int M, int B, const T* in, T fill_val, T* out) {
   if (B >= 0) {
     #pragma acc parallel loop \
-    num_gangs(M*N) vector_length(GPU_THREADS)
+    num_gangs(M*N) vector_length(GPU_THREADS) default(present)
     KERNEL_LOOP(index, B * N * M) {
       int k = index % M;
       int j = (index - k) / M % N;
@@ -137,7 +137,7 @@ void
 upperDiagMaskKernel(int N, int M, int B, const T* in, T fill_val, T* out) {
   if (B >= 0) {
     #pragma acc parallel loop \
-    num_gangs(M*N) vector_length(GPU_THREADS)
+    num_gangs(M*N) vector_length(GPU_THREADS) default(present)
     KERNEL_LOOP(index, B * N * M) {
       int k = index % M;
       int j = (index - k) / M % N;
@@ -163,7 +163,7 @@ void
 lowerDiagMaskKernel(int N, int M, int B, const T* in, T fill_val, T* out) {
   if (B >= 0) {
     #pragma acc parallel loop \
-    num_gangs(M*N) vector_length(GPU_THREADS)
+    num_gangs(M*N) vector_length(GPU_THREADS) default(present)
     KERNEL_LOOP(index, B * N * M) {
       int k = index % M;
       int j = (index - k) / M % N;
