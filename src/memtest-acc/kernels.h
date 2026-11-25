@@ -45,7 +45,7 @@ void kernel0_read(
     unsigned long*__restrict err_second_read)
 {
   unsigned long n = size/BLOCKSIZE;
-  #pragma acc parallel loop num_gangs(1024) vector_length(64)
+  #pragma acc parallel loop num_gangs(1024) vector_length(64) default(present)
   for (int i = 0; i < n; i++) {
     unsigned long * start_p = (unsigned long*)(ptr + i*BLOCKSIZE);
     unsigned long * end_p = (unsigned long*)(ptr + (i+1)*BLOCKSIZE);
@@ -117,7 +117,7 @@ void kernel1_read(
   unsigned long* buf = ( unsigned long*)ptr;
   unsigned long n = size/sizeof(unsigned long);
 
-  #pragma acc parallel loop num_gangs(1024) vector_length(64)
+  #pragma acc parallel loop num_gangs(1024) vector_length(64) default(present)
   for (int i = 0; i < n; i++) {
     if(buf[i] != (unsigned long)(buf+i)) {
       // RECORD_ERR(err_count, &buf[i], (buf+i), buf[i]);
@@ -156,7 +156,7 @@ void kernel_read_write(
   unsigned long n =  size/sizeof(TYPE);
   TYPE localp;
 
-  #pragma acc parallel loop num_gangs(1024) vector_length(64)
+  #pragma acc parallel loop num_gangs(1024) vector_length(64) default(present)
   for (int i = 0; i < n; i++) {
 
     localp = buf[i];
@@ -189,7 +189,7 @@ void kernel_read(
   unsigned long n =  size/sizeof(TYPE);
   TYPE localp;
 
-  #pragma acc parallel loop num_gangs(1024) vector_length(64)
+  #pragma acc parallel loop num_gangs(1024) vector_length(64) default(present)
   for (int i = 0; i < n; i++) {
     localp = buf[i];
     if (localp != p1) {
@@ -268,7 +268,7 @@ void kernel5_check(
   unsigned int * buf = (unsigned int*)ptr;
   unsigned long n = size/(2*sizeof(unsigned int));
 
-  #pragma acc parallel loop num_gangs(1024) vector_length(64)
+  #pragma acc parallel loop num_gangs(1024) vector_length(64) default(present)
   for (int i = 0; i < n; i++) {
     if (buf[2*i] != buf[2*i+1]) {
       // RECORD_ERR(err_count, &buf[2*i], buf[2*i+1], buf[2*i]);
