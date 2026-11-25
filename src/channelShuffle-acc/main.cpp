@@ -17,7 +17,7 @@ void ChannelShuffleNCHWKernel(
           T* Y)
 {
   const int C = G * K;
-#pragma acc parallel loop collapse(3) vector_length(NUM_THREADS)
+#pragma acc parallel loop collapse(3) vector_length(NUM_THREADS) default(present)
   for (int n = 0; n < N; n++)
     for (int c = 0; c < C; c++)
       for (int s = 0; s < HxW; s++)
@@ -29,7 +29,7 @@ void
 ChannelShuffleNHWCKernel(const int O, const int G, const int K, const T* X, T* Y)
 {
   const int C = G * K;
-  #pragma acc parallel loop collapse(2) vector_length(NUM_THREADS)
+  #pragma acc parallel loop collapse(2) vector_length(NUM_THREADS) default(present)
   for (int o = 0; o < O; o++)
     for (int i = 0; i < C; i++)
       Y[o*C + i] = X[o*C + (i % G) * K + i / G];
