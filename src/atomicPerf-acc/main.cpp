@@ -10,7 +10,7 @@
 template <typename T>
 void BlockRangeAtomicOnGlobalMem(T* data, int n)
 {
-  #pragma acc parallel loop vector_length(BLOCK_SIZE)
+  #pragma acc parallel loop vector_length(BLOCK_SIZE) default(present)
   for ( unsigned int i = 0; i < n; i++) {
     #pragma acc atomic update
     data[i % BLOCK_SIZE]++;  //arbitrary number to add
@@ -20,7 +20,7 @@ void BlockRangeAtomicOnGlobalMem(T* data, int n)
 template <typename T>
 void WarpRangeAtomicOnGlobalMem(T* data, int n)
 {
-  #pragma acc parallel loop vector_length(BLOCK_SIZE)
+  #pragma acc parallel loop vector_length(BLOCK_SIZE) default(present)
   for ( unsigned int i = 0; i < n; i++) {
     #pragma acc atomic update
     data[i & 0x1F]++; //arbitrary number to add
