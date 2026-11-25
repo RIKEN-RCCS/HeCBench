@@ -371,7 +371,7 @@ void task1(double*__restrict ResultsPixel,
            double*__restrict VariablesIn,
            int GridIdxX, int GridIdxY)
 {
-#pragma acc parallel loop collapse(2) vector_length(256) 
+#pragma acc parallel loop collapse(2) vector_length(256) default(present) copyin(K2_tab)
   for (int y1 = 0; y1 < 50; y1++) {
     for (int x1 = 0; x1 < 100; x1++) {
       int abs_X1 = GridIdxX * 100 + x1;
@@ -499,7 +499,7 @@ void task2( double*__restrict ResultsPixel,
 	    double*__restrict VariablesIn,
 	    int GridIdxX, int GridIdxY )
 {
-#pragma acc parallel loop collapse(2) vector_length(256) 
+#pragma acc parallel loop collapse(2) vector_length(256) default(present) copyin(K2_tab)
 
   for (int y1 = 0; y1 < 50; y1++) {
     for (int x1 = 0; x1 < 100; x1++) {
