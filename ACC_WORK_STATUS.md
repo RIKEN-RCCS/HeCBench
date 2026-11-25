@@ -2,12 +2,15 @@
 
 > **注意: このファイルは作業引き継ぎ用の一時ファイルです。upstream に PR を出す前に必ず削除してください。**
 
-- 最終更新: 2026-11-25（31件への default(present) の追加を始めた時点）
+- 最終更新: 2026-11-25（31件への default(present) の追加を、7件コミットしたところで中断した時点）
 - 対象ブランチ: `acc`（`origin` = `github.com:RIKEN-RCCS/HeCBench`）
 
 ## 0. 作業中（セッションは2時間で強制終了されるので、ここを随時更新してコミットする）
 
 - **現在の作業（2026-11-25 開始）**: `-mp=gpu` があるときだけ通る31件（4章「全件ビルドの結果」）に `default(present)` を付け、OpenMP なしでビルドでき、実行して正しい結果になることを1件ずつ確認する。ベンチマークごとにコミットする。
+  - **中断（2026-11-25、ユーザーの指示）**: 比較を途中で止めた。**作業ツリーに、確認の済んでいない24件の変更（25ファイル）がコミットされずに残っている**: eigenvalue face ga glu grrt heat2d hogbom hypterm ising iso2dfd keccaktreehash lif lsqt mask md memtest permute perplexity resize scatterAdd surfel tonemapping vol2col wsm5。中身は、どれも指示文の行末への ` default(present)` の追加だけ（`git diff` で確かめられる）。OpenMP なしでビルドできることは確認済み。
+    - 再開の手順: ①GPU の数を確かめる。②scratchpad が残っていれば `dp/pair.sh <name>` で1件ずつ比較する（変更前 `dp/wt`、変更後 `dp/wt2`）。scratchpad が消えていたら、`git worktree prune` で古い worktree の登録を消してから、HEAD の worktree（変更前）と、そこに `git diff -- src` を当てた worktree（変更後）を作り直し、通常の Makefile.NVD で両方を実行して、時間以外の出力を比べる。③出力が同じものから、ベンチマークごとにコミットする。
+    - 比較中だった eigenvalue は、実行の途中で止めたので、最初からやり直す必要がある（変更前と変更後を合わせて7分以上かかる）。
   - 進捗（2026-11-25、更新）: コミット済み 7件（flip `3060bfaf7`, car `9f1adfdc9`, adamw `b7181eee0`, atomicPerf `3ac44b56d`, boxfilter `a58335353`, bwt `60947f93a`, channelShuffle `7a9d5c2b4`）。どれも、通常のビルドで変更前と出力が同じことを確認した。残り24件は `dp/pair.sh` で比較中（結果は `dp/pair28.txt`）。
   - 以前の進捗: flip は完了（`3060bfaf7`）。残り30件は `default(present)` を付けて OpenMP なしでビルドできることを確認済み（57か所、すべて行末に ` default(present)` を足しただけ。**作業ツリーにあり、まだコミットしていない**）。次は、30件を通常の Makefile.NVD と OpenMP なしの両方で実行して確認し、問題のないものからコミットする。
   - **重要な発見（2026-11-25）**: nvc++ 26.3 は `-mp=gpu` の有無でコード生成そのものが変わる。OpenMP なし（`-acc=gpu` だけ）のビルドは、`default(present)` でビルドできるようになっても、大幅に遅くなることがある。
