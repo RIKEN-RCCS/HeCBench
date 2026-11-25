@@ -41,7 +41,7 @@ void bitonic_sort_step(int*__restrict table, int table_size,
 
 void reconstruct_sequence(const int*__restrict table, const char*__restrict sequence, 
                           char*__restrict transformed_sequence, int n) {
-  #pragma acc parallel loop vector_length(blockSize)
+  #pragma acc parallel loop vector_length(blockSize) default(present)
   for(int i = 0; i < n; i ++) {
     transformed_sequence[i] = sequence[(n + table[i] - 1) % n];
   }
