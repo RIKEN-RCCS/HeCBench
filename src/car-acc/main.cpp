@@ -32,7 +32,7 @@ void car (
   const int w = img_w - 2 * padding;
   const int h = img_h - 2 * padding;
 
-  #pragma acc parallel loop collapse(4) vector_length(256)
+  #pragma acc parallel loop collapse(4) vector_length(256) default(present)
   for (int idb = 0; idb < dim_b; idb++)
   for (int idc = 0; idc < dim_c; idc++)
   for (int idy = 0; idy < dim_h; idy++)
