@@ -27,6 +27,7 @@
   4. gang だけのループの候補33件の性能の確認（正しさは、確認できた3件では問題なし）
   5. 存在しない `prepare_data.sh` を呼んでいる `include/*-NVIDIA` 55件、lulesh-acc の結果の誤り、blas-gemm の書き直し
 - **確認の手順**（scratchpad は日をまたぐと消えるので、ここに書いておく）:
+  - **セッションの最初に、必ず GPU の数を確かめる**（`module load nvhpc` の後に `nvidia-smi --query-gpu=index,name,compute_cap --format=csv`）。GPU の数はセッションごとに変わる（11-10〜11-19 は4基、11-25 は1基）。存在しない GPU を `CUDA_VISIBLE_DEVICES` で指定すると、GPU なしで動いて、遅く、結果も誤る。
   - `module load nvhpc` をしてから、`cd src/<name>-acc && make -f Makefile.NVD clean && make -f Makefile.NVD SM=cc100 run`。結果は `log.std` / `log.err` / `log.time`。
   - OpenMP なしの確認: `sed 's/-mp=gpu/-acc=gpu/' Makefile.NVD > /tmp/…/x.mk` を作り、`make -f /tmp/…/x.mk SM=cc100 run`。
   - 比較: `-omp` は `make -f Makefile.nvc SM=cc100`、`-cuda` は `make ARCH=sm_100`。同じ引数で実行する。
