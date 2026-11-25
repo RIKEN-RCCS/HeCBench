@@ -52,7 +52,7 @@ void update_lattice(signed char *lattice,
     const long long nx,
     const long long ny) {
 
-  #pragma acc parallel loop collapse(2) vector_length(THREADS)
+  #pragma acc parallel loop collapse(2) vector_length(THREADS) default(present)
   for (int i = 0; i < nx; i++)
     for (int j = 0; j < ny; j++) {
       // Set stencil indices with periodicity
