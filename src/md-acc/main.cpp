@@ -20,7 +20,7 @@ void md (
     const FPTYPE lj2_t,
     const FPTYPE cutsq_t )
 {
-  #pragma acc parallel loop vector_length(256) 
+  #pragma acc parallel loop vector_length(256) default(present)
   for (uint idx = 0; idx < nAtom; idx++) {
     POSVECTYPE ipos = position[idx];
     FORCEVECTYPE f = zero;
