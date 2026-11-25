@@ -303,7 +303,7 @@ myCascade* _cascade, MyIntImage* _sum, MyIntImage* _sqsum, int total_nodes)
   int* data = sum->data;
   const int width = sum->width;
 
-#pragma acc parallel loop vector_length(256)
+#pragma acc parallel loop vector_length(256) default(present)
   for (int gid = 0; gid < total_nodes; gid++) {
     int idx = gid * 12;
     for (int k = 0; k < 3; k++)
