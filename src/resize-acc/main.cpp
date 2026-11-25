@@ -15,7 +15,7 @@ void resize (
 {
     auto iters_required = output_size / CHANNELS_PER_ITER;
 
-    #pragma acc parallel loop num_gangs(29184) vector_length(256)
+    #pragma acc parallel loop num_gangs(29184) vector_length(256) default(present)
     for (int iter = 0; iter < iters_required; iter++) {
 
        auto in_image_size = in_height * in_width;
@@ -62,7 +62,7 @@ void resize_bilinear(
 {
     auto iters_required = output_size / CHANNELS_PER_ITER;
 
-    #pragma acc parallel loop num_gangs(29184) vector_length(256)
+    #pragma acc parallel loop num_gangs(29184) vector_length(256) default(present)
     for (int iter = 0; iter < iters_required; iter++) {
 
         auto in_image_size = in_height * in_width;
