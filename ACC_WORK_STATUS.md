@@ -15,7 +15,9 @@
     - そのため、**Makefile.NVD を `-acc=gpu` にそろえるのは、今の nvc++ では勧められない**。`default(present)` の追加は、通常のビルド（`-mp=gpu`）で結果が変わらないことを確認したうえでコミットする。
     - `default(present)` の注意: カーネルがグローバル変数の配列を使っていると、実行時に "data in PRESENT clause was not found" になる（adamw。定数表を `copyin(...)` で明示して直した）。
     - boxfilter は、変更前のコードでも同じ値で FAIL する（もともとの不具合）。
-  - 比較用に、HEAD（変更前）を scratchpad の `dp/wt` に git worktree として取り出してある（作業が終わったら `git worktree remove` する）。
+  - 比較用に、HEAD（変更前）を scratchpad の `dp/wt`、HEAD に作業ツリーの差分を当てたもの（変更後）を `dp/wt2` に、git worktree として取り出してある（作業が終わったら `git worktree remove` する）。`dp/pair.sh <name>` で、通常のビルドの変更前と変更後を GPU 0 で順番に実行し、時間以外の出力を比べる。
+  - 通常のビルド（`-mp=gpu`）の `-Minfo` を変更前後で比べると、30件ともループの割り当てと `memcpy` への置き換えはまったく同じ（adamw は行番号が1つずれただけ）。
+  - **注意: 2026-11-25 のセッションでは GPU が1基（GPU 0）しかない**（11-10〜11-19 は4基だった）。`CUDA_VISIBLE_DEVICES=1` を指定すると、GPU なしで動いて、遅く、結果も誤る。実行の前に `nvidia-smi` で GPU の数を確かめること。
   - 手順: scratchpad の `dp/fix_dp.py <name>`（OpenMP なしでビルドし、"Could not find allocated-variable index" の出たカーネルの指示文に `default(present)` を付けて、通るまで繰り返す）と `dp/run.sh <name> <tag> [makefile]`。セッションが切れて作業ツリーの変更が残っていたら、`git diff` で中身（`default(present)` の追加だけ）を確かめてから実行の確認に進めばよい。
 - **前回の状態**: 4章 A の74件を PR から外した（`e56416827`）。残る `-acc` は248件。A のうち OpenMP なしでビルドできる deredundancy, openmp, winograd は残したが、OpenMP の名残があるので、中身の確認が必要。push はユーザーが行う（このマシンには GitHub の認証情報がない）。
 - **次の候補**（どれから進めるかは未定）:
