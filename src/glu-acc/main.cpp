@@ -16,7 +16,7 @@ void glu_kernel(
    const float* Xdata,
          float* Ydata)
 {
-  #pragma acc parallel loop vector_length(block_size)
+  #pragma acc parallel loop vector_length(block_size) default(present)
   for (int index = 0; index < M * split_dim_size * N; index++) {
     const int xOffset = 2 * split_dim_size * N;
     const int yOffset = split_dim_size * N;
