@@ -8,6 +8,7 @@
 ## 0. 作業中（セッションは2時間で強制終了されるので、ここを随時更新してコミットする）
 
 - **現在の作業（2026-11-25 開始）**: `-mp=gpu` があるときだけ通る31件（4章「全件ビルドの結果」）に `default(present)` を付け、OpenMP なしでビルドでき、実行して正しい結果になることを1件ずつ確認する。ベンチマークごとにコミットする。
+  - **進捗（2026-11-25、GPU 2基、更新2）**: コミット済み 29件（さらに face `632d1e585`、hogbom `5d4123e14`、tonemapping `4b3209131`。データを用意して比較し、出力が同じだった）。**未コミットは2件**: eigenvalue（引数 2048 10000 で比較中）、lsqt（`input.txt` がさらに `../lsqt-cuda/examples/...` を参照していたので、そこにも展開して比較し直し中）。
   - **進捗（2026-11-25、GPU 2基、更新）**: コミット済み 26件（さらに grrt `2cc201bbf`、perplexity resize scatterAdd surfel vol2col wsm5 `4632c6c5f`〜`3bb9e891b`）。**未コミットは5件**: eigenvalue face hogbom lsqt tonemapping。face hogbom lsqt tonemapping は入力データ（DVC）がなかったので、scratchpad の venv の dvc で取得し、比較用の worktree の中に以前の `prepare_data.sh` と同じ場所へ展開して比較中。eigenvalue は既定の引数（10000 10000）では20分で終わらないので、worktree の中だけ upstream の run と同じ `2048 10000` に変えて比較中。
     - 注意: lsqt-acc の実行コマンドは `../lsqt-hip/examples/` を参照しているが、データは今の upstream では `lsqt-cuda/examples.tar.gz` にある（`prepare_data.sh` の問題の1件）。
   - **進捗（2026-11-25、GPU 2基）**: コミット済み 19件（前の7件に、ga glu heat2d iso2dfd lif mask ising keccaktreehash hypterm md memtest permute の12件を追加。`c7cac8430`〜`652ea5546`）。**未コミットは12件**: grrt（グローバルの配列 `K2_tab` が見つからず実行時エラーになったので、adamw と同じく `copyin(K2_tab)` を加えた。比較し直し中）、eigenvalue face hogbom lsqt（変更前も変更後も同じように失敗するので、実行での確認ができていない。eigenvalue は20分で打ち切り、face hogbom lsqt は入力データがないためと見られる）、perplexity resize scatterAdd surfel tonemapping vol2col wsm5（比較中）。
