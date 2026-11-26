@@ -8,7 +8,10 @@
 ## 0. 作業中（セッションは2時間で強制終了されるので、ここを随時更新してコミットする）
 
 - **現在の作業（2026-11-26 開始）**: 次の候補の1（ビルドできない9件）を進めている。まず、どちらのビルドでも通らない6件（lud, gd, gpp, goulash, heartwall, extend2）、次に `-mp=gpu` があるときだけ通る3件（haversine, rainflow, kmeans）。1件ずつ原因を調べて直し、通常の Makefile.NVD で実行して確かめ、ベンチマークごとにコミットする。GPU は2基。
-  - 進捗: lud（`f08d384f4`、upstream `c6589a71c` の chrono 化の移植）、gd（`e3e9453f3`、upstream `5f366260f` の移植）、gpp（upstream `a04e3a290`）、goulash（upstream `6c899be7f`）は完了。どちらも upstream が時間計測を chrono に変えたときに共有ヘッダー（`../X-cuda/`）から関数を消したのに、acc 版が追従していなかった。gd の入力 gisette_scale は LIBSVM のサイトから scratchpad にダウンロードして使った（リポジトリには置いていない）。
+  - 進捗: lud（`f08d384f4`、upstream `c6589a71c` の chrono 化の移植）、gd（`e3e9453f3`、upstream `5f366260f` の移植）、gpp（upstream `a04e3a290`）、goulash（upstream `6c899be7f`）は完了。
+  - extend2 は、`filelist.txt` が src2 から src へのコピー（`c578731c9`）で抜け落ちていた。**ルートの `.gitignore` に `*.txt` があるため**（upstream も同じ。追跡中の `.txt` は `git add -f` で追加されている）。戻して（`b5c7ec894`）、出力が extend2-omp と一致することを確認した（omp 版も "Error:" の不一致を10704行表示する。upstream 側の問題）。
+  - 同じ原因で抜け落ちていたファイルを、src2 と比べて洗い出した: ライセンスの minibude-acc/LICENSE.txt, nbody-acc/License.txt, su3-acc/License.txt（`0d665e478` で戻した）、nn-acc/filelist.txt（戻したが未コミット。実行の確認中）。inversek2j と face は別の場所のファイルを読むので不要。mcmd-acc/dataset/restart.pdb.bak は `prepare_data.sh` の問題として扱う。
+  - **heartwall-acc は OpenACC 版が作られていない**: `main.cpp` に OpenACC の指示文がなく、GPU の計算をする `kernel/kernel.cpp` と `util/` が一度も追加されていない（src2 にも AMB-work にもない）。ans, leukocyte と同じく外すのが妥当と考えるが、ユーザーに確認する。どちらも upstream が時間計測を chrono に変えたときに共有ヘッダー（`../X-cuda/`）から関数を消したのに、acc 版が追従していなかった。gd の入力 gisette_scale は LIBSVM のサイトから scratchpad にダウンロードして使った（リポジトリには置いていない）。
 - **前の作業の状態（2026-11-26）**: `-mp=gpu` があるときだけビルドできた31件に `default(present)` を付ける作業を終えた（31件とも、ベンチマークごとにコミット済み。最後は eigenvalue `2042e555d`）。コミットされていない変更はない。push はユーザーが行う（このマシンには GitHub の認証情報がない）。結果のまとめは4章の「`default(present)` の追加（31件）」。
 - **次の候補**（どれから進めるかは未定）:
   1. upstream のファイル構成の変更に追従していない6件（lud, gd, gpp, goulash, heartwall, extend2）と、haversine, rainflow, kmeans（4章「全件ビルドの結果」）
