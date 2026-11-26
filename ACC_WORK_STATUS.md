@@ -19,6 +19,7 @@
   - 26.3 の不具合を回避したところが 26.11 でも必要か: pnpoly の `k = j++` と `c = !c`（`9c2924105`）、`std::atomic_ref` の戻り値を使う書き方（linearprobing `e26dadabf`）、`-mp=gpu` なしで出る "Could not find allocated-variable index"（`default(present)` を付けた31件）
   - `-acc=gpu` だけのビルドで遅くなる問題（car、channelShuffle）が 26.11 でも起きるか。起きなければ、Makefile.NVD を `-acc=gpu` にそろえることも考えられる
   - 26.11 は `module load nvhpc/26.11` で読み込む。`SM=cc100` はそのまま。
+  - 注意: `module load ... | tail` のようにパイプにつなぐと、サブシェルで読み込まれて元のシェルに反映されない。
 - **確認の手順**（scratchpad は日をまたぐと消えるので、ここに書いておく）:
   - **セッションの最初に、必ず GPU の数を確かめる**（`module load nvhpc` の後に `nvidia-smi --query-gpu=index,name,compute_cap --format=csv`）。GPU の数はセッションごとに変わる（11-10〜11-19 は4基、11-25 は1基）。存在しない GPU を `CUDA_VISIBLE_DEVICES` で指定すると、GPU なしで動いて、遅く、結果も誤る。
   - `module load nvhpc` をしてから、`cd src/<name>-acc && make -f Makefile.NVD clean && make -f Makefile.NVD SM=cc100 run`。結果は `log.std` / `log.err` / `log.time`。
@@ -219,7 +220,10 @@ cat log.std log.err log.time          # 実行コマンドは src/include/<name>
 - **`default(present)` だけでは済まなかったもの**: カーネルがグローバル変数の配列を使っていると、実行時に "data in PRESENT clause was not found" になる。adamw（量子化の表）と grrt（`K2_tab`）は、その配列を `copyin(...)` で明示して直した。
 - **入力データ**: face, hogbom, lsqt, tonemapping は DVC のデータが必要だった（`prepare_data.sh` がないので、比較用の worktree の中に手で展開した）。置き場所: face は `face-cuda/dataset.tar.gz` を実行するディレクトリ（face-acc）に、hogbom は `hogbom-cuda/data.tar.bz` を hogbom-cuda に、tonemapping は `tonemapping-sycl/input.tar.gz` を tonemapping-sycl に、lsqt は `lsqt-cuda/examples.tar.gz` を lsqt-hip と lsqt-cuda の両方に展開する（acc 版の実行コマンドは `../lsqt-hip/examples/input.txt` を読み、その中で `../lsqt-cuda/examples/...` を参照している）。
 - **もともとの不具合（変更前から同じ）**: boxfilter は FAIL。eigenvalue は `-O2` 以上でビルドすると止まる（`-O1` なら PASS。eigenvalue-omp は `-O3` で PASS）。
-- **OpenMP なしのビルドの性能**: car は200倍遅くなり、channelShuffle は終わらない（上の「重要な発見」）。Makefile.NVD は `-mp=gpu` のままにしている。
+- **重要な発見（2026-11-25）: OpenMP なしのビルドの性能**: nvc++ 26.3 は `-mp=gpu` の有無でコード生成そのものが変わる。OpenMP なし（`-acc=gpu` だけ）のビルドは、`default(present)` でビルドできるようになっても、大幅に遅くなることがある。
+  - car: 外側の collapse(4) のループが `gang, vector(256)` から `gang` だけになり、内側が `vector(256)` になった。カーネル 0.0047s → 0.94s（200倍）。RMSE も 0.100244 → 0.100481 と変わった（和の順番が変わったためと見られる）。
+  - channelShuffle: ループの割り当ては同じだが、OpenMP なしのときだけ、カーネルの中のループが "Recognized memory copy idiom"（`memcpy` への置き換え）になり、実行が15分近く終わらない（通常のビルドでは各カーネル 0.02〜0.04 ms）。
+  - そのため、**Makefile.NVD を `-acc=gpu` にそろえるのは、今の nvc++ では勧められない**。`default(present)` の追加は、通常のビルド（`-mp=gpu`）で結果が変わらないことを確認したうえでコミットする。
 
 ### A. カーネルの書き直しが必要（77件・263カーネル）：**74件を PR から外した**（2026-11-19, `e56416827`）
 
