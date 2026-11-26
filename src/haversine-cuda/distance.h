@@ -11,8 +11,10 @@
 #elif defined __HIPCC__
 #include <hip/hip_runtime.h>
 
-#elif defined _OPENMP
+#elif defined _OPENMP || defined _OPENACC
+#ifdef _OPENMP
 #include <omp.h>
+#endif
 typedef struct __attribute__((__aligned__(16)))
 {
   double x, y, z, w;
