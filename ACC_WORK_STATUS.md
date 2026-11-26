@@ -8,6 +8,7 @@
 ## 0. 作業中（セッションは2時間で強制終了されるので、ここを随時更新してコミットする）
 
 - **現在の作業（2026-11-26 開始）**: 次の候補の1（ビルドできない9件）を進めている。まず、どちらのビルドでも通らない6件（lud, gd, gpp, goulash, heartwall, extend2）、次に `-mp=gpu` があるときだけ通る3件（haversine, rainflow, kmeans）。1件ずつ原因を調べて直し、通常の Makefile.NVD で実行して確かめ、ベンチマークごとにコミットする。GPU は2基。
+  - 進捗: lud（`f08d384f4`、upstream `c6589a71c` の chrono 化の移植）、gd（`e3e9453f3`、upstream `5f366260f` の移植）は完了。どちらも upstream が時間計測を chrono に変えたときに共有ヘッダー（`../X-cuda/`）から関数を消したのに、acc 版が追従していなかった。gd の入力 gisette_scale は LIBSVM のサイトから scratchpad にダウンロードして使った（リポジトリには置いていない）。
 - **前の作業の状態（2026-11-26）**: `-mp=gpu` があるときだけビルドできた31件に `default(present)` を付ける作業を終えた（31件とも、ベンチマークごとにコミット済み。最後は eigenvalue `2042e555d`）。コミットされていない変更はない。push はユーザーが行う（このマシンには GitHub の認証情報がない）。結果のまとめは4章の「`default(present)` の追加（31件）」。
 - **次の候補**（どれから進めるかは未定）:
   1. upstream のファイル構成の変更に追従していない6件（lud, gd, gpp, goulash, heartwall, extend2）と、haversine, rainflow, kmeans（4章「全件ビルドの結果」）
