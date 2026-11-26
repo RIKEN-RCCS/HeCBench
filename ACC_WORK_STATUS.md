@@ -9,7 +9,7 @@
 
 - **現在の状態（2026-11-26）**: `prepare_data.sh` を呼んでいた29件の対応を終えた（29件とも `make run` が最後まで通ることを確認し、ベンチマークごとにコミット済み。結果は4章「`prepare_data.sh` の29件」）。コミットされていない変更はない。
   - **コミットの作者を直した（2026-11-26）**: GPU マシンの git に `user.name` / `user.email` がなく、このマシンでのコミット100件が `rku00196 <rku00196@cXXX.rikyu.r-ccs.riken.jp>` で記録されていた。ユーザーが `git config --global` で `Hitoshi Murai <h-murai@riken.jp>` を設定し（ホームディレクトリは共通なので、どの GPU マシンでも使われるはず）、`ae3af0359` より後の134件を `git filter-branch` で書き換えた（作者の日時は元のまま、ツリーは不変、マージは範囲内になし）。ハッシュが変わったので、コミットのメッセージの中の参照（3か所）とこのファイルの中の参照も、新しいハッシュに直した。
-    - **`origin/acc` への force push が必要**（ユーザーが `git push --force-with-lease origin acc` を実行する）。
+    - 2026-11-26 にユーザーが `git push --force-with-lease origin acc` で force push した（`b74e6bb7d`）。`origin/acc` に自動設定の作者は残っていない。
     - 書き換え前の状態は、ローカルのブランチ `backup/acc-before-reauthor`、`backup/acc-before-reauthor2`、`backup/acc-before-msgfix` と `refs/original/` に残してある。force push の後、問題がなければ消してよい。
 - **前の状態（2026-11-26）**: 区切りのよいところ。コミットされていない変更はない。残る `-acc` は247件。push はユーザーが行う（このマシンには GitHub の認証情報がない）。
   - 直前に終えたこと: ビルドできなかった9件の対応（4章「ビルドできなかった9件の対応」）、その前は31件への `default(present)` の追加（4章）。
