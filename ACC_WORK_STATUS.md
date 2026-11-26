@@ -2,21 +2,21 @@
 
 > **注意: このファイルは作業引き継ぎ用の一時ファイルです。upstream に PR を出す前に必ず削除してください。**
 
-- 最終更新: 2026-11-26（ビルドできない9件の修正を始めた時点）
+- 最終更新: 2026-11-26（ビルドできなかった9件の対応を終えた時点）
 - 対象ブランチ: `acc`（`origin` = `github.com:RIKEN-RCCS/HeCBench`）
 
 ## 0. 作業中（セッションは2時間で強制終了されるので、ここを随時更新してコミットする）
 
-- **現在の作業（2026-11-26 開始）**: 次の候補の1（ビルドできない9件）を進めている。まず、どちらのビルドでも通らない6件（lud, gd, gpp, goulash, heartwall, extend2）、次に `-mp=gpu` があるときだけ通る3件（haversine, rainflow, kmeans）。1件ずつ原因を調べて直し、通常の Makefile.NVD で実行して確かめ、ベンチマークごとにコミットする。GPU は2基。
+- **直前に終えた作業（2026-11-26）**: ビルドできなかった9件の対応を終えた。8件を直し、heartwall はユーザーの決定で PR から外した（`de93c7670`）。残る `-acc` は247件。コミットされていない変更はない。以下は作業の記録。まず、どちらのビルドでも通らない6件（lud, gd, gpp, goulash, heartwall, extend2）、次に `-mp=gpu` があるときだけ通る3件（haversine, rainflow, kmeans）。1件ずつ原因を調べて直し、通常の Makefile.NVD で実行して確かめ、ベンチマークごとにコミットする。GPU は2基。
   - 進捗: lud（`f08d384f4`、upstream `c6589a71c` の chrono 化の移植）、gd（`e3e9453f3`、upstream `5f366260f` の移植）、gpp（upstream `a04e3a290`）、goulash（upstream `6c899be7f`）は完了。
   - extend2 は、`filelist.txt` が src2 から src へのコピー（`c578731c9`）で抜け落ちていた。**ルートの `.gitignore` に `*.txt` があるため**（upstream も同じ。追跡中の `.txt` は `git add -f` で追加されている）。戻して（`b5c7ec894`）、出力が extend2-omp と一致することを確認した（omp 版も "Error:" の不一致を10704行表示する。upstream 側の問題）。
   - 同じ原因で抜け落ちていたファイルを、src2 と比べて洗い出した: ライセンスの minibude-acc/LICENSE.txt, nbody-acc/License.txt, su3-acc/License.txt（`0d665e478` で戻した）、nn-acc/filelist.txt（戻したが未コミット。実行の確認中）。inversek2j と face は別の場所のファイルを読むので不要。mcmd-acc/dataset/restart.pdb.bak は `prepare_data.sh` の問題として扱う。
-  - nn（`2e09c3061`、`filelist.txt` を戻した。DVC の `data/nn` で omp と出力が一致）、haversine（`a218312c8`、`../haversine-cuda/distance.h` に `_OPENACC` の分岐を加え、入力を omp と同じ `../geodesic-cuda/locations.txt` に直した。実体は DVC の `geodesic-sycl/locations.tar.gz`）、rainflow（`8e2066dd9`、`../rainflow-cuda/reference.h` に `_OPENACC` の分岐）は完了。kmeans（`82c4eb8c1`、`rmse.c` のホスト側のループが `acc data copyin(二重ポインタ)` + 計算領域の外の `acc loop gang` になっていたのを、upstream と同じ `omp parallel for` に戻した）も完了。**9件のうち8件が完了し、残りは heartwall の扱いの確認だけ**。
+  - nn（`2e09c3061`、`filelist.txt` を戻した。DVC の `data/nn` で omp と出力が一致）、haversine（`a218312c8`、`../haversine-cuda/distance.h` に `_OPENACC` の分岐を加え、入力を omp と同じ `../geodesic-cuda/locations.txt` に直した。実体は DVC の `geodesic-sycl/locations.tar.gz`）、rainflow（`8e2066dd9`、`../rainflow-cuda/reference.h` に `_OPENACC` の分岐）は完了。kmeans（`82c4eb8c1`、`rmse.c` のホスト側のループが `acc data copyin(二重ポインタ)` + 計算領域の外の `acc loop gang` になっていたのを、upstream と同じ `omp parallel for` に戻した）も完了。**9件のうち8件を直した**。
     - kmeans の注意: 通常のビルド（`-mp=gpu`）では、"Best number of clusters" が実行ごとに変わる（9, 8, 11。kmeans-omp も 13）。upstream の `rms_err()` の `omp parallel for` に `sum_euclid` の reduction がないため（upstream の不具合）。`OMP_NUM_THREADS=1` なら acc, omp とも 15 で一致し、OpenMP なしのビルドも 15。また、OpenMP なしのビルドは Kmeans core timing が 92秒（通常は 21秒）で、gang だけのループの候補（`cluster.c:115`）と関係があるかもしれない。
-  - **heartwall-acc は OpenACC 版が作られていない**: `main.cpp` に OpenACC の指示文がなく、GPU の計算をする `kernel/kernel.cpp` と `util/` が一度も追加されていない（src2 にも AMB-work にもない）。ans, leukocyte と同じく外すのが妥当と考えるが、ユーザーに確認する。どちらも upstream が時間計測を chrono に変えたときに共有ヘッダー（`../X-cuda/`）から関数を消したのに、acc 版が追従していなかった。gd の入力 gisette_scale は LIBSVM のサイトから scratchpad にダウンロードして使った（リポジトリには置いていない）。
+  - **heartwall-acc は OpenACC 版が作られていない**: `main.cpp` に OpenACC の指示文がなく、GPU の計算をする `kernel/kernel.cpp` と `util/` が一度も追加されていない（src2 にも AMB-work にもない）。ユーザーの決定により、ans, leukocyte と同じく PR から外した（`de93c7670`）。どちらも upstream が時間計測を chrono に変えたときに共有ヘッダー（`../X-cuda/`）から関数を消したのに、acc 版が追従していなかった。gd の入力 gisette_scale は LIBSVM のサイトから scratchpad にダウンロードして使った（リポジトリには置いていない）。
 - **前の作業の状態（2026-11-26）**: `-mp=gpu` があるときだけビルドできた31件に `default(present)` を付ける作業を終えた（31件とも、ベンチマークごとにコミット済み。最後は eigenvalue `2042e555d`）。コミットされていない変更はない。push はユーザーが行う（このマシンには GitHub の認証情報がない）。結果のまとめは4章の「`default(present)` の追加（31件）」。
 - **次の候補**（どれから進めるかは未定）:
-  1. upstream のファイル構成の変更に追従していない6件（lud, gd, gpp, goulash, heartwall, extend2）と、haversine, rainflow, kmeans（4章「全件ビルドの結果」）
+  1. （完了）ビルドできなかった9件
   2. 残した deredundancy, openmp, winograd の名残を確認する（4章 A）
   3. 存在しない `prepare_data.sh` を呼んでいる `include/*-NVIDIA` 55件（5章）。face, hogbom, lsqt, tonemapping のデータの置き場所は、今回の確認で分かった（4章の `default(present)` の節）
   4. もともとの不具合: eigenvalue（`-O2` 以上で止まる）、boxfilter（FAIL）、lulesh（結果が誤り）、kalman（upstream の判定の問題）
@@ -50,6 +50,7 @@
 | `-omp_nvc` | acc から削除（`-omp` のコピーなので不要） | `9fac85448`（削除前の状態は `4359d4730`） |
 | ans-acc, leukocyte-acc, shmembench-acc | 「OpenACC 版は Not yet implemented」として削除 | `73c766130` |
 | 最終的なテストのコンパイラ | **nvhpc の最新版 26.11 で行う**（2026-11-25 に決定）。それまでの作業と確認は 26.3 で行っている | — |
+| heartwall-acc | 「Not yet implemented」として PR から外す（2026-11-26 に決定）。`main.cpp` に OpenACC の指示文がなく、`kernel/`, `util/` が一度も追加されていない | `de93c7670`（削除前の状態は `2ead64d23`） |
 | 4章 A のうちビルドできない73件と binomial（計74件） | 「Not yet implemented」として PR から外す（2026-11-19 に決定）。書き直しは後の別 PR で行う | `e56416827`（削除前の状態は `63f12161d`） |
 | `src/include/*-NVIDIA` | **すべて残す**。`-acc` がないベンチマーク向けの約170件も、将来 `-acc` を追加するかもしれないので残す | — |
 | `src/include/SDKBitMap.h`, `src/hausdorff-cuda/reference.h` | `#if defined(_OPENACC)` の追加だけ。`-acc` に必要なので残す | PR #3 |
