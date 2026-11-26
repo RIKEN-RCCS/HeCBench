@@ -1,6 +1,6 @@
 #include <math.h>
 
-#ifdef _OPENMP
+#if defined(_OPENMP) || defined(_OPENACC)
 typedef struct __attribute__((__aligned__(32)))
 {
   double x, y, z;
