@@ -38,7 +38,7 @@ endif
 
 # Optimization Flags
 ifeq ($(OPTIMIZE),yes)
-  CFLAGS += -O3 -DOMP_REDUCE
+  CFLAGS += -O3 -DACC_REDUCE
 endif
 
 ifeq ($(DEVICE),gpu)

@@ -451,7 +451,7 @@ void kernel_filter(
     const unsigned short *table, 
     const int readsCount)
 {  
-#ifdef OMP_REDUCE
+#ifdef ACC_REDUCE
   #pragma acc parallel loop gang num_gangs(readsCount) vector_length(128) \
     present(lengths, offsets, indexs, orders, words, wordCutoff, cluster, table)
   for (int gid = 0; gid < readsCount; gid++) {
