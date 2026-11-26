@@ -8,7 +8,7 @@
 ## 0. 作業中（セッションは2時間で強制終了されるので、ここを随時更新してコミットする）
 
 - **現在の状態（2026-11-26）**: `prepare_data.sh` を呼んでいた29件の対応を終えた（29件とも `make run` が最後まで通ることを確認し、ベンチマークごとにコミット済み。結果は4章「`prepare_data.sh` の29件」）。コミットされていない変更はない。
-  - **要対応: コミットの作者**: このマシンの git に `user.name` / `user.email` が設定されておらず、このマシンで作ったコミット（`f1902eb1a` 以降の約100件、うち約70件は push 済み）の作者と記録者が `rku00196 <rku00196@cXXX.rikyu.r-ccs.riken.jp>`（ホスト名は毎回違う）になっている。Mac でのコミットは `Hitoshi Murai <h-murai@riken.jp>`。2026-11-26 に、ユーザーが `git config --global` で `Hitoshi Murai <h-murai@riken.jp>` を設定した（ホームディレクトリは共通なので、どの GPU マシンでも使われるはず）。未 push の33件は、作者・記録者をこれに書き換えた（作者の日時は元のまま。ツリーは不変。書き換え前はローカルのブランチ `backup/acc-before-reauthor`）。**push 済みの約70件（`f1902eb1a`〜`815541d44` のうちこのマシンで作ったもの）をどうするかは未決定**（書き換えるなら force push が必要）。
+  - **要対応: コミットの作者**: このマシンの git に `user.name` / `user.email` が設定されておらず、このマシンで作ったコミット（`f1902eb1a` 以降の約100件、うち約70件は push 済み）の作者と記録者が `rku00196 <rku00196@cXXX.rikyu.r-ccs.riken.jp>`（ホスト名は毎回違う）になっている。Mac でのコミットは `Hitoshi Murai <h-murai@riken.jp>`。2026-11-26 に、ユーザーが `git config --global` で `Hitoshi Murai <h-murai@riken.jp>` を設定した（ホームディレクトリは共通なので、どの GPU マシンでも使われるはず）。未 push の33件は、作者・記録者をこれに書き換えた（作者の日時は元のまま。ツリーは不変。書き換え前はローカルのブランチ `backup/acc-before-reauthor`）。**push 済みの約70件（`f1902eb1a`〜`7930feadf` のうちこのマシンで作ったもの）をどうするかは未決定**（書き換えるなら force push が必要）。
 - **前の状態（2026-11-26）**: 区切りのよいところ。コミットされていない変更はない。残る `-acc` は247件。push はユーザーが行う（このマシンには GitHub の認証情報がない）。
   - 直前に終えたこと: ビルドできなかった9件の対応（4章「ビルドできなかった9件の対応」）、その前は31件への `default(present)` の追加（4章）。
 - **次の候補**（どれから進めるかは未定）:
@@ -16,7 +16,7 @@
   2. （完了）`prepare_data.sh` の29件
   3. もともとの不具合: eigenvalue（`-O2` 以上で止まる）、boxfilter（FAIL）、lulesh（結果が誤り）、kalman（upstream の判定）
   4. gang だけのループの候補33件の性能、blas-gemm の書き直し
-- **最終テストは nvhpc 26.11 で行う**（`module load nvhpc/26.11`）。それまでの作業は 26.3（`module load nvhpc` の既定）。26.11 では、全247件のビルドと実行に加えて、26.3 の不具合の回避（pnpoly `9c2924105`、linearprobing `e26dadabf`、`default(present)` の31件）が必要か、`-acc=gpu` だけのビルドが遅くなる問題（car, channelShuffle）が起きるかを確かめ直す。
+- **最終テストは nvhpc 26.11 で行う**（`module load nvhpc/26.11`）。それまでの作業は 26.3（`module load nvhpc` の既定）。26.11 では、全247件のビルドと実行に加えて、26.3 の不具合の回避（pnpoly `74cfca2e3`、linearprobing `d0872d728`、`default(present)` の31件）が必要か、`-acc=gpu` だけのビルドが遅くなる問題（car, channelShuffle）が起きるかを確かめ直す。
 - **確認の手順**（scratchpad は日をまたぐと消える）:
   - **セッションの最初に GPU の数を確かめる**（`nvidia-smi --query-gpu=index,name,compute_cap --format=csv`）。数はセッションごとに変わる（4基、1基、2基を経験）。存在しない GPU を `CUDA_VISIBLE_DEVICES` で指定すると、GPU なしで動いて結果が誤る。
   - `module load nvhpc` の後、`cd src/<name>-acc && make -f Makefile.NVD clean && make -f Makefile.NVD SM=cc100 run`（結果は `log.std` / `log.err` / `log.time`）。`module load` をパイプにつなぐと反映されない。
@@ -38,37 +38,37 @@
 | `-omp_nvc` | acc から削除（`-omp` のコピーなので不要） | `9fac85448`（削除前の状態は `4359d4730`） |
 | ans-acc, leukocyte-acc, shmembench-acc | 「OpenACC 版は Not yet implemented」として削除 | `73c766130` |
 | 最終的なテストのコンパイラ | **nvhpc の最新版 26.11 で行う**（2026-11-25 に決定）。それまでの作業と確認は 26.3 で行っている | — |
-| heartwall-acc | 「Not yet implemented」として PR から外す（2026-11-26 に決定）。`main.cpp` に OpenACC の指示文がなく、`kernel/`, `util/` が一度も追加されていない | `de93c7670`（削除前の状態は `2ead64d23`） |
-| 4章 A のうちビルドできない73件と binomial（計74件） | 「Not yet implemented」として PR から外す（2026-11-19 に決定）。書き直しは後の別 PR で行う | `e56416827`（削除前の状態は `63f12161d`） |
+| heartwall-acc | 「Not yet implemented」として PR から外す（2026-11-26 に決定）。`main.cpp` に OpenACC の指示文がなく、`kernel/`, `util/` が一度も追加されていない | `1127101fe`（削除前の状態は `13dbbb84c`） |
+| 4章 A のうちビルドできない73件と binomial（計74件） | 「Not yet implemented」として PR から外す（2026-11-19 に決定）。書き直しは後の別 PR で行う | `27d343993`（削除前の状態は `9e1d5df4f`） |
 | `src/include/*-NVIDIA` | **すべて残す**。`-acc` がないベンチマーク向けの約170件も、将来 `-acc` を追加するかもしれないので残す | — |
 | `src/include/SDKBitMap.h`, `src/hausdorff-cuda/reference.h` | `#if defined(_OPENACC)` の追加だけ。`-acc` に必要なので残す | PR #3 |
 
 ## 2. これまでの作業（PR #3 マージ後、`f1902eb1a` 以降）
 
 ```
-9c2924105 [pnpoly-acc] port the data clauses and work around two nvc++ issues
-e26dadabf [linearprobing-acc] port the data clauses, kernels and atomic compare to OpenACC
-2c1db65a5 [kalman-acc] use OpenACC data clauses and map each series to one thread
-f340613f7 [lci-acc] build with the OpenACC flags and fix the gang clause
-61465e885 [ecdh-acc] mark the device functions with acc routine seq
-017b12205 [debayer-acc] mark the device functions with acc routine seq
-a28316ae7 [complex-acc] mark the device functions with acc routine seq
-6cef2c456 [chacha20-acc] mark the device functions with acc routine seq
-7be2fee27 Update ACC_WORK_STATUS.md after fixing the host-only OpenMP remnants (temporary; remove before the upstream PR)
-c8120d96d [su3-acc] drop the unused omp.h include
-0b030785f [rsc-acc] drop the unused omp.h includes
-8d0b5406c [rsbench-acc] time with clock_gettime instead of omp_get_wtime
-9fd25651c [myocyte-acc] drop the unused omp.h include
-c5bac52ba [mr-acc] use OpenACC data clauses and fix the atomic updates
-e0c31c939 [backprop-acc] restore the host OpenMP pragmas in the #ifdef OPEN blocks
-b76e89284 Update ACC_WORK_STATUS.md with the GPU check results (temporary; remove before the upstream PR)
-b496229af [diamond-acc] map each sequence to one thread and use the upstream input
-c2d5f1558 [lr-acc] read the assets from lr-sycl like the OpenMP version
-80d76967b [sad-acc] extract data.tar.gz at build time like the other ports
-19c512f8b [diamond-acc] fix the data clauses and the host CPU loop pragma
-6df834e2d [divergence-acc] read input.txt from divergence-cuda
-1ffa6c53e [hausdorff-acc] keep the point coordinates in registers
-3b14849e1 [pathfinder-acc] launch the pyramid kernels asynchronously
+74cfca2e3 [pnpoly-acc] port the data clauses and work around two nvc++ issues
+d0872d728 [linearprobing-acc] port the data clauses, kernels and atomic compare to OpenACC
+fee77cfb4 [kalman-acc] use OpenACC data clauses and map each series to one thread
+461e892a1 [lci-acc] build with the OpenACC flags and fix the gang clause
+8337638ae [ecdh-acc] mark the device functions with acc routine seq
+9f64bc3dd [debayer-acc] mark the device functions with acc routine seq
+60c3f042b [complex-acc] mark the device functions with acc routine seq
+25141f5d3 [chacha20-acc] mark the device functions with acc routine seq
+36717dadd Update ACC_WORK_STATUS.md after fixing the host-only OpenMP remnants (temporary; remove before the upstream PR)
+613079143 [su3-acc] drop the unused omp.h include
+b4adbd3d0 [rsc-acc] drop the unused omp.h includes
+f942cf05d [rsbench-acc] time with clock_gettime instead of omp_get_wtime
+1520707d9 [myocyte-acc] drop the unused omp.h include
+1b9967d3c [mr-acc] use OpenACC data clauses and fix the atomic updates
+40a2fc25a [backprop-acc] restore the host OpenMP pragmas in the #ifdef OPEN blocks
+e7b77358c Update ACC_WORK_STATUS.md with the GPU check results (temporary; remove before the upstream PR)
+c3d7ba4c4 [diamond-acc] map each sequence to one thread and use the upstream input
+0535bfd62 [lr-acc] read the assets from lr-sycl like the OpenMP version
+e9395c364 [sad-acc] extract data.tar.gz at build time like the other ports
+c30419011 [diamond-acc] fix the data clauses and the host CPU loop pragma
+e9e40fca5 [divergence-acc] read input.txt from divergence-cuda
+f97c6388d [hausdorff-acc] keep the point coordinates in registers
+6d4a47984 [pathfinder-acc] launch the pyramid kernels asynchronously
 ae3af0359 Add ACC_WORK_STATUS.md (temporary hand-off notes; remove before the upstream PR)
 73c766130 Remove ans-acc, leukocyte-acc and shmembench-acc (not yet implemented)
 9fac85448 Remove the -omp_nvc ports
@@ -104,9 +104,9 @@ e8a3e305a Merge origin/master (upstream sync) into acc   ← master 8f44ff3e6 �
 - `e8a3e305a`: master（`8f44ff3e6`）をマージ。git のコンフリクトはなし。master が `diamond-sycl/src/basic/masking.h` を `unique_ptr` に変えたため、diamond-acc の `masking.cpp` も合わせて修正した。
 - `9f904ae79`〜`4359d4730`（22コミット）: master が `-omp` などで直したバグや追加した検証を、`-acc` に移植したもの。各コミットのメッセージに、元になった upstream のコミットを書いてある。
   - pathfinder, bitonic-sort, gamma-correction, hausdorff, stencil1d, sw4ck は、master の新しい `-omp` 版をもとに ACC で書き直した。共有メモリの処理は、gang ごとの `private` 配列と、続けて並べた `loop vector` で表している（PR #3 の fwt-acc と同じ書き方）。
-- `3b14849e1`〜`b496229af`（7コミット）: GPU での確認（3章）で見つかった問題の修正。
-- `e0c31c939`〜`c8120d96d`（6コミット）: 4章 C の修正（2026-11-17）。
-- `6cef2c456`〜`9c2924105`（8コミット）: 4章 B の修正（2026-11-19）。
+- `6d4a47984`〜`c3d7ba4c4`（7コミット）: GPU での確認（3章）で見つかった問題の修正。
+- `40a2fc25a`〜`613079143`（6コミット）: 4章 C の修正（2026-11-17）。
+- `25141f5d3`〜`74cfca2e3`（8コミット）: 4章 B の修正（2026-11-19）。
 
 ## 3. GPU での確認結果（2026-11-10, GB200 / cc100, nvc++ 26.3）
 
@@ -205,8 +205,8 @@ cat log.std log.err log.time          # 実行コマンドは src/include/<name>
   - 同じ領域で、共有メモリに配列が置かれている強い候補は5件。adamw と chi2 は PASS、libor は期待値どおり。meanshift と snake は入力データがなく、確認できなかった。
   - 正しさに問題がなくても、gang の中で1スレッドしか働かないので、性能は落ちている可能性が高い（kalman では gang vector にして 24倍速くなった）。
 - **全件ビルドで見つけて直したもの**:
-  - grrt, iso2dfd, tridiagonal の `make clean` が、`*.txt` の指定で追跡中の `CMakeLists.txt` を消していた。cuda・omp 版と同じく、ファイル名を個別に書くようにした（`035ec4cea`, `44238d593`, `7b2d58ff7`）。
-  - **私のコミット `1ffa6c53e` で hausdorff のビルドが壊れていた**。`hd()` を使われていないと判断して消したが、`../hausdorff-cuda/reference.h` が使っていた。消した後にビルドし直していなかった。`c38d652bb` で戻した（8.8 ms、PASS）。教訓: 変更の後は、必ずクリーンビルドと実行をしてからコミットする。
+  - grrt, iso2dfd, tridiagonal の `make clean` が、`*.txt` の指定で追跡中の `CMakeLists.txt` を消していた。cuda・omp 版と同じく、ファイル名を個別に書くようにした（`d9fe5ac4b`, `35d096f2f`, `6b26486d0`）。
+  - **私のコミット `f97c6388d` で hausdorff のビルドが壊れていた**。`hd()` を使われていないと判断して消したが、`../hausdorff-cuda/reference.h` が使っていた。消した後にビルドし直していなかった。`1dafdedf9` で戻した（8.8 ms、PASS）。教訓: 変更の後は、必ずクリーンビルドと実行をしてからコミットする。
 
 ### `prepare_data.sh` の29件（2026-11-26）
 
@@ -224,19 +224,19 @@ cat log.std log.err log.time          # 実行コマンドは src/include/<name>
 
 | ベンチマーク | 原因 | 対応（コミット） | 確認 |
 |---|---|---|---|
-| lud, gd, gpp, goulash | upstream が時間計測を chrono に変えたとき、共有ヘッダー（`../X-cuda/`）から古い関数（`stopwatch`, `get_time()` など）を消したが、acc 版が追従していなかった | upstream の変更（`c6589a71c`, `5f366260f`, `a04e3a290`, `6c899be7f`）を移植（`f08d384f4`, `e3e9453f3`, `8f98bca25`, `857fbfc9d`） | lud は検証で不一致なし、gd と goulash は PASS、gpp は結果が omp と一致 |
-| extend2, nn | `filelist.txt` がない | src2 から戻した（`b5c7ec894`, `2e09c3061`） | 出力が omp と一致 |
-| haversine, rainflow | cuda 版の共有ヘッダーが `_OPENMP` のときだけ型を定義していた | PR #3 と同じく `_OPENACC` の分岐を加えた。haversine は入力も upstream と同じ `../geodesic-cuda/locations.txt` に直した（`a218312c8`, `8e2066dd9`） | haversine は omp と一致、rainflow は PASS |
-| kmeans | ホスト側の `omp parallel for` が、誤った OpenACC の指示文に置き換えられていた | upstream と同じ指示文に戻した（`82c4eb8c1`） | `OMP_NUM_THREADS=1` で omp と一致 |
-| heartwall | OpenACC 版が作られていない（指示文がなく、`kernel/`, `util/` が一度も追加されていない） | PR から外した（`de93c7670`） | — |
+| lud, gd, gpp, goulash | upstream が時間計測を chrono に変えたとき、共有ヘッダー（`../X-cuda/`）から古い関数（`stopwatch`, `get_time()` など）を消したが、acc 版が追従していなかった | upstream の変更（`c6589a71c`, `5f366260f`, `a04e3a290`, `6c899be7f`）を移植（`6af18f876`, `36276c754`, `602c2d435`, `4047eb78f`） | lud は検証で不一致なし、gd と goulash は PASS、gpp は結果が omp と一致 |
+| extend2, nn | `filelist.txt` がない | src2 から戻した（`16214140e`, `0757c4c5b`） | 出力が omp と一致 |
+| haversine, rainflow | cuda 版の共有ヘッダーが `_OPENMP` のときだけ型を定義していた | PR #3 と同じく `_OPENACC` の分岐を加えた。haversine は入力も upstream と同じ `../geodesic-cuda/locations.txt` に直した（`7f9d6576a`, `e4da713a7`） | haversine は omp と一致、rainflow は PASS |
+| kmeans | ホスト側の `omp parallel for` が、誤った OpenACC の指示文に置き換えられていた | upstream と同じ指示文に戻した（`29acd7bfa`） | `OMP_NUM_THREADS=1` で omp と一致 |
+| heartwall | OpenACC 版が作られていない（指示文がなく、`kernel/`, `util/` が一度も追加されていない） | PR から外した（`1127101fe`） | — |
 
-- **`.txt` の抜け落ち**: ルートの `.gitignore` に `*.txt` があるため（upstream も同じ。追跡中の `.txt` は `git add -f` で追加されている）、src2 から src へのコピー（`c578731c9`）で `.txt` が抜け落ちていた。src2 と比べて洗い出し、extend2 と nn の `filelist.txt`、**ライセンスの minibude-acc/LICENSE.txt, nbody-acc/License.txt, su3-acc/License.txt**（`0d665e478`）を戻した。omp 版にあって acc 版にないライセンスは、ほかにない（miniFE-acc の README だけ）。
+- **`.txt` の抜け落ち**: ルートの `.gitignore` に `*.txt` があるため（upstream も同じ。追跡中の `.txt` は `git add -f` で追加されている）、src2 から src へのコピー（`c578731c9`）で `.txt` が抜け落ちていた。src2 と比べて洗い出し、extend2 と nn の `filelist.txt`、**ライセンスの minibude-acc/LICENSE.txt, nbody-acc/License.txt, su3-acc/License.txt**（`2fcbf3b34`）を戻した。omp 版にあって acc 版にないライセンスは、ほかにない（miniFE-acc の README だけ）。
 - **入力データ**: gd の gisette_scale は LIBSVM のサイトから、nn, kmeans, haversine は DVC（`data/nn`, `data/kmeans`, `geodesic-sycl/locations.tar.gz`）から取得した（リポジトリには置いていない）。
 - **upstream 側の問題**: extend2 は omp 版も "Error:" の不一致を10704行表示する。kmeans は、`rms_err()` の `omp parallel for` に `sum_euclid` の reduction がなく、通常のビルドでは結果が実行ごとに変わる（omp 版も同じ）。kmeans の OpenMP なしのビルドは 92秒かかる（通常は 21秒）。
 
 ### `default(present)` の追加（31件）（2026-11-25〜26）
 
-全件ビルドで「`-mp=gpu` があるときだけ通る」と分かった34件のうち、"Could not find allocated-variable index" の31件に `default(present)` を付けた。ベンチマークごとにコミットした（flip `3060bfaf7` 〜 eigenvalue `2042e555d`）。
+全件ビルドで「`-mp=gpu` があるときだけ通る」と分かった34件のうち、"Could not find allocated-variable index" の31件に `default(present)` を付けた。ベンチマークごとにコミットした（flip `cfd1f6052` 〜 eigenvalue `e5b5db9eb`）。
 
 - **確認の方法**: OpenMP なし（`-acc=gpu` だけ）でビルドできることを確かめたうえで、通常の Makefile.NVD（`-mp=gpu`）で、変更前（HEAD の git worktree）と変更後を同じ引数で実行し、時間・速度以外の出力が同じことを確かめた。通常のビルドの `-Minfo` も比べ、ループの割り当てと `memcpy` への置き換えが変わらないことを確かめた。
 - **`default(present)` だけでは済まなかったもの**: カーネルがグローバル変数の配列を使っていると、実行時に "data in PRESENT clause was not found" になる。adamw（量子化の表）と grrt（`K2_tab`）は、その配列を `copyin(...)` で明示して直した。
@@ -247,7 +247,7 @@ cat log.std log.err log.time          # 実行コマンドは src/include/<name>
   - channelShuffle: ループの割り当ては同じだが、OpenMP なしのときだけ、カーネルの中のループが "Recognized memory copy idiom"（`memcpy` への置き換え）になり、実行が15分近く終わらない（通常のビルドでは各カーネル 0.02〜0.04 ms）。
   - そのため、**Makefile.NVD を `-acc=gpu` にそろえるのは、今の nvc++ では勧められない**。`default(present)` の追加は、通常のビルド（`-mp=gpu`）で結果が変わらないことを確認したうえでコミットする。
 
-### A. カーネルの書き直しが必要（77件・263カーネル）：**74件を PR から外した**（2026-11-19, `e56416827`）
+### A. カーネルの書き直しが必要（77件・263カーネル）：**74件を PR から外した**（2026-11-19, `27d343993`）
 
 全件ビルドで、73件が `-mp=gpu` があってもビルドできないことを確認したので、binomial（Makefile.NVD なし）と合わせて74件を「Not yet implemented」として外した。OpenMP なしでビルドできた deredundancy, openmp, winograd の3件は残した（ただし名残がある）。以下は、外す前の記録。
 
@@ -264,12 +264,12 @@ adv(1) aes(2) aop(5) assert(2) asta(1) axhelm(2) binomial(1) bn(1) cm(3) cmp(2) 
 
 | ベンチマーク | 実際の状況 | 対応（コミット） | 結果 |
 |---|---|---|---|
-| chacha20, complex, debayer, ecdh | `omp declare target` が残っていた（nvc++ は自動でデバイス向けにするので動いていた） | 関数ごとの `acc routine seq` に置き換えた（`6cef2c456`, `a28316ae7`, `017b12205`, `61465e885`） | PASS（debayer はチェックサムが omp と一致） |
-| lci | Makefile.NVD の依存先 `tables.h` が存在せず、組み込みルールで `-acc` なしにビルドされていた（**CPU で実行されていた**）。依存先を直すと `gang(1)` がエラーになった | 依存先を `../lci-cuda/tables.h` に直し（Makefile も）、`gang vector num_gangs(1) vector_length(96)` にした。routine も置き換えた（`f340613f7`） | `-DDUMP` の出力が CPU のビルドと一致 |
-| kalman | OpenMP の書き方のデータ句で、ビルドできなかった | `copyin/create`、`update self` に直した。カーネルを `gang vector` にした（gang だけだと作業配列が共有メモリに置かれ、内側のループが vector に割り当てられていた。カーネル 1.9s → 0.08s）。OpenMP なしでもビルドできるよう `default(present)` を付けた（`2c1db65a5`） | **FAIL のまま**（下記） |
-| linearprobing | データ句と `num_teams/thread_limit` が OpenMP の書き方。OpenACC にない `acc atomic compare capture` を使っていた | `copyin/create`、`update device/self`、`gang vector num_gangs/vector_length` に直した。compare-and-swap は C++20 の `std::atomic_ref::compare_exchange_strong` にした（`-std=c++20`）。`default(present)` も付けた（`e26dadabf`） | PASS |
-| pnpoly | OpenMP の書き方のデータ句で、ビルドできなかった | `copyin/copyout` に直し、カーネルを `gang vector` にし、範囲を明示した `present` を付けた。nvc++ の不具合を2つ回避した（下記）（`9c2924105`） | PASS。チェックサムが multicore のビルドとホストでの検算に一致 |
-| diamond | — | **修正済み**（`19c512f8b`, `b496229af`） | — |
+| chacha20, complex, debayer, ecdh | `omp declare target` が残っていた（nvc++ は自動でデバイス向けにするので動いていた） | 関数ごとの `acc routine seq` に置き換えた（`25141f5d3`, `60c3f042b`, `9f64bc3dd`, `8337638ae`） | PASS（debayer はチェックサムが omp と一致） |
+| lci | Makefile.NVD の依存先 `tables.h` が存在せず、組み込みルールで `-acc` なしにビルドされていた（**CPU で実行されていた**）。依存先を直すと `gang(1)` がエラーになった | 依存先を `../lci-cuda/tables.h` に直し（Makefile も）、`gang vector num_gangs(1) vector_length(96)` にした。routine も置き換えた（`461e892a1`） | `-DDUMP` の出力が CPU のビルドと一致 |
+| kalman | OpenMP の書き方のデータ句で、ビルドできなかった | `copyin/create`、`update self` に直した。カーネルを `gang vector` にした（gang だけだと作業配列が共有メモリに置かれ、内側のループが vector に割り当てられていた。カーネル 1.9s → 0.08s）。OpenMP なしでもビルドできるよう `default(present)` を付けた（`fee77cfb4`） | **FAIL のまま**（下記） |
+| linearprobing | データ句と `num_teams/thread_limit` が OpenMP の書き方。OpenACC にない `acc atomic compare capture` を使っていた | `copyin/create`、`update device/self`、`gang vector num_gangs/vector_length` に直した。compare-and-swap は C++20 の `std::atomic_ref::compare_exchange_strong` にした（`-std=c++20`）。`default(present)` も付けた（`d0872d728`） | PASS |
+| pnpoly | OpenMP の書き方のデータ句で、ビルドできなかった | `copyin/copyout` に直し、カーネルを `gang vector` にし、範囲を明示した `present` を付けた。nvc++ の不具合を2つ回避した（下記）（`74cfca2e3`） | PASS。チェックサムが multicore のビルドとホストでの検算に一致 |
+| diamond | — | **修正済み**（`c30419011`, `c3d7ba4c4`） | — |
 | lulesh | 名残（18件の `acc target update host`）は、すべて `#ifdef VERIFY`（既定はオフ）の中で、使われない | 変更なし | **結果が誤っている**（下記。名残とは無関係） |
 | multimaterial | `omp_get_wtime` は `#ifdef DEBUG` の中、`omp simd` は CPU で実行する基準の実装（upstream と同じ） | 変更なし | 2000×2000 で All tests passed（下記） |
 | **blas-gemm（未着手）** | Makefile.NVD がない。MKL 向けの `omp dispatch` を使っている | 置き換えでは直らない。cuBLAS などで書き直す必要があり、A に近い | — |
@@ -290,10 +290,10 @@ kalman の FAIL について:
 
 | ベンチマーク | 実際の状況 | 対応 | 結果 |
 |---|---|---|---|
-| backprop | `#ifdef OPEN`（未定義でビルドされない）の中で、`omp parallel for` が誤って `acc loop ... schedule(static)` に置き換えられていた。このブロックは cuda・omp 版にもある upstream 共通のホスト側コード | ほかの版と同じ `omp parallel for` に戻した（`e0c31c939`） | PASS |
-| mr | `acc parallel data map(...)`、`acc update to/from` が残っていた。また、`acc atomic update` の式の中で関数を呼んでいて、もともとビルドできなかった | `acc data copyin/create`、`update device/self` に直し、関数の結果をローカル変数に入れてから atomic で加えるようにした（`c5bac52ba`） | PASS（初めてビルドが通った） |
-| rsbench | `rsbench.h` に `#define OPENMP` があり、`omp_get_wtime()` を実際に使っていた | `clock_gettime(CLOCK_MONOTONIC)` に置き換えた（ソースが .c なので chrono ではなくこれにした）。表示も「OpenACC Init」に直した（`8d0b5406c`） | Valid |
-| myocyte, rsc, su3 | 使っていない `#include <omp.h>` があった | 削除した（`9fd25651c`, `0b030785f`, `c8120d96d`） | rsc：Test Passed、su3：SUCCESS、myocyte：5章を参照 |
+| backprop | `#ifdef OPEN`（未定義でビルドされない）の中で、`omp parallel for` が誤って `acc loop ... schedule(static)` に置き換えられていた。このブロックは cuda・omp 版にもある upstream 共通のホスト側コード | ほかの版と同じ `omp parallel for` に戻した（`40a2fc25a`） | PASS |
+| mr | `acc parallel data map(...)`、`acc update to/from` が残っていた。また、`acc atomic update` の式の中で関数を呼んでいて、もともとビルドできなかった | `acc data copyin/create`、`update device/self` に直し、関数の結果をローカル変数に入れてから atomic で加えるようにした（`1b9967d3c`） | PASS（初めてビルドが通った） |
+| rsbench | `rsbench.h` に `#define OPENMP` があり、`omp_get_wtime()` を実際に使っていた | `clock_gettime(CLOCK_MONOTONIC)` に置き換えた（ソースが .c なので chrono ではなくこれにした）。表示も「OpenACC Init」に直した（`f942cf05d`） | Valid |
+| myocyte, rsc, su3 | 使っていない `#include <omp.h>` があった | 削除した（`1520707d9`, `b4adbd3d0`, `613079143`） | rsc：Test Passed、su3：SUCCESS、myocyte：5章を参照 |
 | simplemoc | `OPENMP` が未定義なので、OpenMP のコードは使われていない。cuda 版と同じ書き方 | 変更なし | 動作を確認 |
 
 - 当初の分類（Mac 上のスクリプト）は `_OPENMP` だけを未定義として扱っていたため、`OPEN` や `OPENMP` のような独自のマクロで囲まれた、ビルドされないコードも「名残」として数えていた。A と B の件数にも、同じように数えすぎているものがあるかもしれない。
@@ -317,7 +317,7 @@ Makefile.NVD の約250件が `-mp=gpu` を指定している（`-acc=gpu` は約
   - 選択肢: (a) CMake には対応しない（CMakeLists.txt を削除し、Makefile だけにする）、(b) マクロに acc モデル（`HECBENCH_ENABLE_OPENACC`、nvc++ の `-acc` など）を足し、324件を `MODEL acc` に直す。
 - **通常の Makefile**: `-acc/Makefile` はほぼすべて `CC = icpx` で、`-fopenacc -fopenacc-targets=spir64` を指定している（`-omp` の Makefile を機械的に置き換えたものと見られる）。実際に使えるのは Makefile.NVD（nvc++）だけ。upstream に合わせて `Makefile` をどうするか（Makefile.NVD を Makefile に統合するかなど）を決める必要がある。
 - **heartwall-acc**: status2 では build err だが、OpenMP の名残はない。原因は未調査。
-- **myocyte-acc の出力が `nan`**: `output.txt` の約92万行のうち87万行が `nan`。`9fd25651c` より前の状態（`omp.h` あり、`-mp=gpu`）でも同じなので、もともとの不具合。omp 版には `nan` がないが、時刻 0 の値（`y[0][0][0]=1.13e30`）が入力 `data/myocyte/y.txt` の先頭（1.37e-3）と合っていないので、upstream の実装も含めて調べる必要がある。実行コマンドは Makefile.NVD の50行目の COMMAND（`-time 10000`）で、`include/myocyte-NVIDIA` の COMMAND は上書きされている。
+- **myocyte-acc の出力が `nan`**: `output.txt` の約92万行のうち87万行が `nan`。`1520707d9` より前の状態（`omp.h` あり、`-mp=gpu`）でも同じなので、もともとの不具合。omp 版には `nan` がないが、時刻 0 の値（`y[0][0][0]=1.13e30`）が入力 `data/myocyte/y.txt` の先頭（1.37e-3）と合っていないので、upstream の実装も含めて調べる必要がある。実行コマンドは Makefile.NVD の50行目の COMMAND（`-time 10000`）で、`include/myocyte-NVIDIA` の COMMAND は上書きされている。
 - **upstream の `myocyte-omp/Makefile.nvc` が壊れている**: リンクのルールの行の続け方が誤っていて、ビルドできない（比較のときは手でビルドした）。
 - **simplemoc**: カーネル時間が約220秒、実行全体で約5分かかる（コードは変えていない）。
 - **eigenvalue-acc は `-O2` 以上でビルドすると止まる**: 引数が `16 1` でも、"Executing kernel for 1 iterations" と表示した後で終わらない。`-O1` なら PASS（`2048 10000` で 662µs）。eigenvalue-omp は `-O3` で PASS。nvc++ 26.3 の最適化の問題の可能性があるが、GPU 向けのコードかホスト側かは未確認。upstream の eigenvalue-omp の Makefile.nvc も壊れている（存在しない `main2.o` を要求する）。
