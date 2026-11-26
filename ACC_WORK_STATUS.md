@@ -10,6 +10,8 @@
 - **現在の作業（2026-11-26 開始）**: `prepare_data.sh` を呼んでいる `include/*-NVIDIA` のうち、PR に残す `-acc` の29件（ace bfs b+tree ccs cfd columnarSolver deredundancy face gd geodesic henry hogbom hotspot3D kmeans lsqt mcmd mcpr meanshift medianfilter minibude minimap2 mriQ multimaterial snake sobel ss svd3x3 tonemapping urng）を直す。
   - 方針（ユーザーと合意）: acc 版も最終的には CMake でビルドする。upstream の CMake は、設定のときに `-cuda` などの CMakeLists.txt の `UNZIPFILE` でデータを展開するので、Makefile.NVD 用の展開の仕組みは作らない。`prepare_data.sh` の呼び出しを外し、入力のパスを upstream の `-omp` 版の run ターゲット（＝CMake の展開先）に合わせる。テストのときは、`UNZIPFILE` と同じ場所に手でデータを展開して `make run` を確かめる。Makefile.NVD を使う間はデータの展開を使う人に任せることを、PR の説明に書く。
   - 手順: ①29件について、acc の COMMAND、omp の run ターゲット、`UNZIPFILE` の対応表を作る。②COMMAND を直す。③データを取得・展開して `make run` を確かめ、ベンチマークごとにコミットする。
+  - 進捗: ①②は済み（**未コミット**: 29件の `include/*-NVIDIA`、geodesic-acc の main.cpp（upstream `8060b37bc` の移植。入力ファイルを引数で受け取る）、mcmd-acc/dataset の削除（入力は mcmd-cuda と同じで、実行の出力までコミットされていた。upstream と同じく `../mcmd-cuda/dataset` で実行する））。パスを直したもの: face, lsqt, medianfilter, mriQ, geodesic, mcmd。③のデータは scratchpad の `pd/prep_data.sh` で取得・展開した（`UNZIPFILE` と同じ場所）。
+  - upstream の CMake が展開しないデータ（`UNZIPFILE` がない）: columnarSolver-cuda/data.tar.gz, deredundancy-sycl/testData.tar.gz, henry-cuda/data.tar.gz, snake-cuda/Datasets.tar.gz, tonemapping-sycl/input.tar.gz。ほかに multimaterial は実行するディレクトリの `volfrac.dat`（`multimaterial-cuda/volfrac.dat.tgz`）を読み、gd は外部のデータ。CMake に移っても自動では用意されない。
 - **前の状態（2026-11-26）**: 区切りのよいところ。コミットされていない変更はない。残る `-acc` は247件。push はユーザーが行う（このマシンには GitHub の認証情報がない）。
   - 直前に終えたこと: ビルドできなかった9件の対応（4章「ビルドできなかった9件の対応」）、その前は31件への `default(present)` の追加（4章）。
 - **次の候補**（どれから進めるかは未定）:
