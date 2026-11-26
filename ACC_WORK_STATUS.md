@@ -2,12 +2,15 @@
 
 > **注意: このファイルは作業引き継ぎ用の一時ファイルです。upstream に PR を出す前に必ず削除してください。**
 
-- 最終更新: 2026-11-26（ビルドできなかった9件の対応を終えた時点）
+- 最終更新: 2026-11-26（prepare_data.sh の29件の修正を始めた時点）
 - 対象ブランチ: `acc`（`origin` = `github.com:RIKEN-RCCS/HeCBench`）
 
 ## 0. 作業中（セッションは2時間で強制終了されるので、ここを随時更新してコミットする）
 
-- **現在の状態（2026-11-26）**: 区切りのよいところ。コミットされていない変更はない。残る `-acc` は247件。push はユーザーが行う（このマシンには GitHub の認証情報がない）。
+- **現在の作業（2026-11-26 開始）**: `prepare_data.sh` を呼んでいる `include/*-NVIDIA` のうち、PR に残す `-acc` の29件（ace bfs b+tree ccs cfd columnarSolver deredundancy face gd geodesic henry hogbom hotspot3D kmeans lsqt mcmd mcpr meanshift medianfilter minibude minimap2 mriQ multimaterial snake sobel ss svd3x3 tonemapping urng）を直す。
+  - 方針（ユーザーと合意）: acc 版も最終的には CMake でビルドする。upstream の CMake は、設定のときに `-cuda` などの CMakeLists.txt の `UNZIPFILE` でデータを展開するので、Makefile.NVD 用の展開の仕組みは作らない。`prepare_data.sh` の呼び出しを外し、入力のパスを upstream の `-omp` 版の run ターゲット（＝CMake の展開先）に合わせる。テストのときは、`UNZIPFILE` と同じ場所に手でデータを展開して `make run` を確かめる。Makefile.NVD を使う間はデータの展開を使う人に任せることを、PR の説明に書く。
+  - 手順: ①29件について、acc の COMMAND、omp の run ターゲット、`UNZIPFILE` の対応表を作る。②COMMAND を直す。③データを取得・展開して `make run` を確かめ、ベンチマークごとにコミットする。
+- **前の状態（2026-11-26）**: 区切りのよいところ。コミットされていない変更はない。残る `-acc` は247件。push はユーザーが行う（このマシンには GitHub の認証情報がない）。
   - 直前に終えたこと: ビルドできなかった9件の対応（4章「ビルドできなかった9件の対応」）、その前は31件への `default(present)` の追加（4章）。
 - **次の候補**（どれから進めるかは未定）:
   1. 残した deredundancy, openmp, winograd の名残の確認（4章 A）
