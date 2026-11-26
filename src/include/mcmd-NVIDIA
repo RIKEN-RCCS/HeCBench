@@ -1,1 +1,1 @@
-COMMAND = ../mcmd-cuda/prepare_data.sh; cd dataset; time -p ( ../$(program) mcmd.inp 1> ../log.std 2> ../log.err ) 2> ../log.time; cd ..
+COMMAND = cd ../mcmd-cuda/dataset; time -p ( ../../mcmd-acc/$(program) mcmd.inp 1> ../../mcmd-acc/log.std 2> ../../mcmd-acc/log.err ) 2> ../../mcmd-acc/log.time; cd ../../mcmd-acc
