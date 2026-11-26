@@ -2,21 +2,18 @@
 
 > **注意: このファイルは作業引き継ぎ用の一時ファイルです。upstream に PR を出す前に必ず削除してください。**
 
-- 最終更新: 2026-11-26（prepare_data.sh の29件の修正を始めた時点）
+- 最終更新: 2026-11-26（prepare_data.sh の29件の対応を終えた時点）
 - 対象ブランチ: `acc`（`origin` = `github.com:RIKEN-RCCS/HeCBench`）
 
 ## 0. 作業中（セッションは2時間で強制終了されるので、ここを随時更新してコミットする）
 
-- **現在の作業（2026-11-26 開始）**: `prepare_data.sh` を呼んでいる `include/*-NVIDIA` のうち、PR に残す `-acc` の29件（ace bfs b+tree ccs cfd columnarSolver deredundancy face gd geodesic henry hogbom hotspot3D kmeans lsqt mcmd mcpr meanshift medianfilter minibude minimap2 mriQ multimaterial snake sobel ss svd3x3 tonemapping urng）を直す。
-  - 方針（ユーザーと合意）: acc 版も最終的には CMake でビルドする。upstream の CMake は、設定のときに `-cuda` などの CMakeLists.txt の `UNZIPFILE` でデータを展開するので、Makefile.NVD 用の展開の仕組みは作らない。`prepare_data.sh` の呼び出しを外し、入力のパスを upstream の `-omp` 版の run ターゲット（＝CMake の展開先）に合わせる。テストのときは、`UNZIPFILE` と同じ場所に手でデータを展開して `make run` を確かめる。Makefile.NVD を使う間はデータの展開を使う人に任せることを、PR の説明に書く。
-  - 手順: ①29件について、acc の COMMAND、omp の run ターゲット、`UNZIPFILE` の対応表を作る。②COMMAND を直す。③データを取得・展開して `make run` を確かめ、ベンチマークごとにコミットする。
-  - 進捗: ①②は済み（**未コミット**: 29件の `include/*-NVIDIA`、geodesic-acc の main.cpp（upstream `8060b37bc` の移植。入力ファイルを引数で受け取る）、mcmd-acc/dataset の削除（入力は mcmd-cuda と同じで、実行の出力までコミットされていた。upstream と同じく `../mcmd-cuda/dataset` で実行する））。パスを直したもの: face, lsqt, medianfilter, mriQ, geodesic, mcmd。③のデータは scratchpad の `pd/prep_data.sh` で取得・展開した（`UNZIPFILE` と同じ場所）。
-  - upstream の CMake が展開しないデータ（`UNZIPFILE` がない）: columnarSolver-cuda/data.tar.gz, deredundancy-sycl/testData.tar.gz, henry-cuda/data.tar.gz, snake-cuda/Datasets.tar.gz, tonemapping-sycl/input.tar.gz。ほかに multimaterial は実行するディレクトリの `volfrac.dat`（`multimaterial-cuda/volfrac.dat.tgz`）を読み、gd は外部のデータ。CMake に移っても自動では用意されない。
+- **現在の状態（2026-11-26）**: `prepare_data.sh` を呼んでいた29件の対応を終えた（29件とも `make run` が最後まで通ることを確認し、ベンチマークごとにコミット済み。結果は4章「`prepare_data.sh` の29件」）。コミットされていない変更はない。
+  - **要対応: コミットの作者**: このマシンの git に `user.name` / `user.email` が設定されておらず、このマシンで作ったコミット（`f1902eb1a` 以降の約100件、うち約70件は push 済み）の作者と記録者が `rku00196 <rku00196@cXXX.rikyu.r-ccs.riken.jp>`（ホスト名は毎回違う）になっている。Mac でのコミットは `Hitoshi Murai <h-murai@riken.jp>`。直すかどうか、直し方（push 済みの分は書き換えと force push が必要）をユーザーに確認中。
 - **前の状態（2026-11-26）**: 区切りのよいところ。コミットされていない変更はない。残る `-acc` は247件。push はユーザーが行う（このマシンには GitHub の認証情報がない）。
   - 直前に終えたこと: ビルドできなかった9件の対応（4章「ビルドできなかった9件の対応」）、その前は31件への `default(present)` の追加（4章）。
 - **次の候補**（どれから進めるかは未定）:
   1. 残した deredundancy, openmp, winograd の名残の確認（4章 A）
-  2. 存在しない `prepare_data.sh` を呼んでいる `include/*-NVIDIA` 55件（5章。データの置き場所が分かっているものは4章に記録）
+  2. （完了）`prepare_data.sh` の29件
   3. もともとの不具合: eigenvalue（`-O2` 以上で止まる）、boxfilter（FAIL）、lulesh（結果が誤り）、kalman（upstream の判定）
   4. gang だけのループの候補33件の性能、blas-gemm の書き直し
 - **最終テストは nvhpc 26.11 で行う**（`module load nvhpc/26.11`）。それまでの作業は 26.3（`module load nvhpc` の既定）。26.11 では、全247件のビルドと実行に加えて、26.3 の不具合の回避（pnpoly `9c2924105`、linearprobing `e26dadabf`、`default(present)` の31件）が必要か、`-acc=gpu` だけのビルドが遅くなる問題（car, channelShuffle）が起きるかを確かめ直す。
@@ -210,6 +207,16 @@ cat log.std log.err log.time          # 実行コマンドは src/include/<name>
 - **全件ビルドで見つけて直したもの**:
   - grrt, iso2dfd, tridiagonal の `make clean` が、`*.txt` の指定で追跡中の `CMakeLists.txt` を消していた。cuda・omp 版と同じく、ファイル名を個別に書くようにした（`035ec4cea`, `44238d593`, `7b2d58ff7`）。
   - **私のコミット `1ffa6c53e` で hausdorff のビルドが壊れていた**。`hd()` を使われていないと判断して消したが、`../hausdorff-cuda/reference.h` が使っていた。消した後にビルドし直していなかった。`c38d652bb` で戻した（8.8 ms、PASS）。教訓: 変更の後は、必ずクリーンビルドと実行をしてからコミットする。
+
+### `prepare_data.sh` の29件（2026-11-26）
+
+`include/*-NVIDIA` の実行コマンドの多くが、src2 の時代の `prepare_data.sh`（今はどこにもない）を呼んでいた。PR に残す `-acc` に関係する29件を直した（ほかの25件は、`-acc` を外したものか、もともと `-acc` がないもの）。
+
+- **方針**: acc 版も最終的には CMake でビルドする。upstream の CMake は、設定のときに各版の CMakeLists.txt の `UNZIPFILE` でデータを展開する（有効にしたモデルに関係なく、全版の CMakeLists.txt を読み込む）。そこで、Makefile.NVD 用の展開の仕組みは作らず、`prepare_data.sh` の呼び出しを外して、入力のパスを upstream の `-omp` 版（＝CMake の展開先）に合わせた。Makefile.NVD を使う間は、データの展開を使う人に任せる（PR の説明に書く）。
+- **パスも直したもの**: face（`../face-cuda/`）、lsqt（`../lsqt-cuda/examples/`）、medianfilter（`../medianfilter-sycl/data/`）、mriQ（`../mriQ-cuda/datasets/`）、geodesic（upstream `8060b37bc` を移植し、入力を引数で受け取る）、mcmd（`../mcmd-cuda/dataset` で実行。mcmd-acc にコミットされていた `dataset/`（実行の出力まで含む）を削除）。gd は `../gd-cuda/gisette_scale` のまま（DVC になく、README が gd-cuda で案内している）。
+- **確認**: 24個のアーカイブを DVC で取得し、`UNZIPFILE` と同じ場所に展開して（scratchpad の `pd/prep_data.sh`）、29件とも `make run` が最後まで通ることを確かめた。PASS/FAIL を出すものはすべて PASS。geodesic と mcmd は出力が omp と一致（geodesic の「最大誤差 31.0」は omp も同じ）。
+- **upstream の CMake でも用意されないデータ**（`UNZIPFILE` がない）: columnarSolver-cuda/data.tar.gz, deredundancy-sycl/testData.tar.gz, henry-cuda/data.tar.gz, snake-cuda/Datasets.tar.gz, tonemapping-sycl/input.tar.gz。ほかに multimaterial（実行するディレクトリの `volfrac.dat`。`multimaterial-cuda/volfrac.dat.tgz`）と gd（外部）。CMake に移っても手で用意する必要がある。
+- 実行コマンドの引数の大きさ（mcpr, multimaterial, medianfilter など upstream と違うもの）は変えていない。
 
 ### ビルドできなかった9件の対応（2026-11-26）
 
