@@ -41,7 +41,7 @@ void calNumEigenValueInterval(
     const float *__restrict offDiagonal,
     const uint     width)
 {
-  #pragma acc parallel loop vector_length(256)
+  #pragma acc parallel loop vector_length(256) default(present)
   for (uint gid = 0; gid < width; gid++) {
     uint lowerId = 2 * gid; 
     uint upperId = lowerId + 1;
@@ -63,7 +63,7 @@ void recalculateEigenIntervals(
     const    uint    width,  
     const    float   tolerance)
 {
-  #pragma acc parallel loop vector_length(256)
+  #pragma acc parallel loop vector_length(256) default(present)
   for (uint gid = 0; gid < width; gid++) {
     uint lowerId = 2 * gid; 
     uint upperId = lowerId + 1;
