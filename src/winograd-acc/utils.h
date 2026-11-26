@@ -7,8 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <sys/time.h>
-#include <time.h>
+#include <chrono>
 
 // Can switch DATA_TYPE between float and double
 #define DATA_TYPE float
@@ -35,7 +34,6 @@ void WinogradConv2D_2x2_omp(DATA_TYPE* input, DATA_TYPE* output, DATA_TYPE* tran
 void WinogradConv2D_2x2_filter_transformation(DATA_TYPE* transformed_filter);
 void WinogradConv2D_2x2(DATA_TYPE* input, DATA_TYPE* output, DATA_TYPE* transformed_filter);
 bool compareResults(DATA_TYPE* B, DATA_TYPE* B_outputFromGpu);
-double rtclock();
 float absVal(float a);
 float percentDiff(double val1, double val2);
 

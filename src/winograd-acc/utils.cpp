@@ -248,15 +248,6 @@ void WinogradConv2D_2x2(DATA_TYPE* input, DATA_TYPE* output, DATA_TYPE* transfor
 }
 
 
-double rtclock()
-{
-  struct timezone Tzp;
-  struct timeval Tp;
-  int stat;
-  stat = gettimeofday (&Tp, &Tzp);
-  if (stat != 0) printf("Error return from gettimeofday: %d",stat);
-  return(Tp.tv_sec + Tp.tv_usec*1.0e-6);
-}
 
 
 float absVal(float a)
