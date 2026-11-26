@@ -3,7 +3,6 @@
 #include <getopt.h>
 #include <stdlib.h>
 #include <assert.h>
-#include <sys/time.h>
 #include <string.h>
 #include <chrono>
 #include <openacc.h>
@@ -34,7 +33,6 @@ int main ( int argc, char *argv[] )
   func_ret_t ret;
   const char *input_file = NULL;
   float *m, *mm;
-  stopwatch sw;
 
   while ((opt = getopt_long(argc, argv, "::vs:i:", 
           long_options, &option_index)) != -1 ) {
@@ -108,14 +106,14 @@ int main ( int argc, char *argv[] )
   printf("WG size of kernel = %d X %d\n", BLOCK_SIZE, BLOCK_SIZE);
 
   /* beginning of timing point */
-  stopwatch_start(&sw);
+  auto start = std::chrono::steady_clock::now();
 
   #pragma acc data copy( m[0:(size_t)matrix_dim*matrix_dim])
   {
   int offset;
   int i=0;
   
-  auto start = std::chrono::steady_clock::now();
+  auto kstart = std::chrono::steady_clock::now();
 
   for (i=0; i < matrix_dim-BLOCK_SIZE; i += BLOCK_SIZE) {
     offset = i;  // add the offset 
@@ -325,14 +323,15 @@ int main ( int argc, char *argv[] )
     }
    }
 
-   auto end = std::chrono::steady_clock::now();
-   auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
-   printf("Total kernel execution time : %f (s)\n", time * 1e-9f);
-  } // #pragma acc parallel loop  data map
+   auto kend = std::chrono::steady_clock::now();
+   auto ktime = std::chrono::duration_cast<std::chrono::nanoseconds>(kend - kstart).count();
+   printf("Total kernel execution time : %lf (s)\n", ktime * 1e-9);
+  } // #pragma acc data
 
   /* end of timing point */
-  stopwatch_stop(&sw);
-  printf("Device offloading time (s): %lf\n", get_interval_by_sec(&sw));
+  auto end = std::chrono::steady_clock::now();
+  auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+  printf("Device offloading time (s): %lf\n", time * 1e-9);
 
   if (do_verify){
     printf("After LUD\n");
