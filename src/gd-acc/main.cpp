@@ -48,7 +48,7 @@ int main(int argc, const char *argv[]) {
 	   total_obj_val[0:1],					\
 	   correct[0:1])
   {
-    long long train_start = get_time();
+    auto start = std::chrono::steady_clock::now();
 
     float l2_norm;
 
@@ -111,10 +111,9 @@ int main(int argc, const char *argv[]) {
       }
     }
 
-    long long train_end = get_time();
-
-    printf("Training time takes %lf (s) for %d iterations\n\n",
-           (train_end - train_start) * 1e-6, iters);
+    auto end = std::chrono::steady_clock::now();
+    auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+    printf("Training time takes %lf (s) for %d iterations\n\n", time * 1e-9, iters);
 
     #pragma acc update host (total_obj_val[0:1])
     #pragma acc update host (correct[0:1])
