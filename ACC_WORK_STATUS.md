@@ -2,12 +2,13 @@
 
 > **注意: このファイルは作業引き継ぎ用の一時ファイルです。upstream に PR を出す前に必ず削除してください。**
 
-- 最終更新: 2026-11-26（31件への default(present) の追加を終えた時点）
+- 最終更新: 2026-11-26（ビルドできない9件の修正を始めた時点）
 - 対象ブランチ: `acc`（`origin` = `github.com:RIKEN-RCCS/HeCBench`）
 
 ## 0. 作業中（セッションは2時間で強制終了されるので、ここを随時更新してコミットする）
 
-- **現在の状態（2026-11-26）**: `-mp=gpu` があるときだけビルドできた31件に `default(present)` を付ける作業を終えた（31件とも、ベンチマークごとにコミット済み。最後は eigenvalue `2042e555d`）。コミットされていない変更はない。push はユーザーが行う（このマシンには GitHub の認証情報がない）。結果のまとめは4章の「`default(present)` の追加（31件）」。
+- **現在の作業（2026-11-26 開始）**: 次の候補の1（ビルドできない9件）を進めている。まず、どちらのビルドでも通らない6件（lud, gd, gpp, goulash, heartwall, extend2）、次に `-mp=gpu` があるときだけ通る3件（haversine, rainflow, kmeans）。1件ずつ原因を調べて直し、通常の Makefile.NVD で実行して確かめ、ベンチマークごとにコミットする。GPU は2基。
+- **前の作業の状態（2026-11-26）**: `-mp=gpu` があるときだけビルドできた31件に `default(present)` を付ける作業を終えた（31件とも、ベンチマークごとにコミット済み。最後は eigenvalue `2042e555d`）。コミットされていない変更はない。push はユーザーが行う（このマシンには GitHub の認証情報がない）。結果のまとめは4章の「`default(present)` の追加（31件）」。
 - **次の候補**（どれから進めるかは未定）:
   1. upstream のファイル構成の変更に追従していない6件（lud, gd, gpp, goulash, heartwall, extend2）と、haversine, rainflow, kmeans（4章「全件ビルドの結果」）
   2. 残した deredundancy, openmp, winograd の名残を確認する（4章 A）
