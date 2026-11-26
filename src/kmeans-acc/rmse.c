@@ -71,11 +71,11 @@ float rms_err	(float **feature,         /* [npoints][nfeatures] */
     float  ret;						/* return value */
     
     /* calculate and sum the sqaure of euclidean distance*/	
-    #pragma acc data copyin(feature,cluster_centres) 
-    #pragma acc loop gang \
+    #pragma omp parallel for \
+                shared(feature,cluster_centres) \
+                firstprivate(npoints,nfeatures,nclusters) \
                 private(i, nearest_cluster_index) \
-                firstprivate(npoints,nfeatures,nclusters) 
-
+                schedule (static)	
     for (i=0; i<npoints; i++) {
         nearest_cluster_index = find_nearest_point(feature[i], 
 													nfeatures, 
