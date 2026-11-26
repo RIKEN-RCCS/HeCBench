@@ -2,12 +2,16 @@
 
 > **注意: このファイルは作業引き継ぎ用の一時ファイルです。upstream に PR を出す前に必ず削除してください。**
 
-- 最終更新: 2026-11-25（31件への default(present) の追加を、7件コミットしたところで中断した時点）
+- 最終更新: 2026-11-26（31件への default(present) の追加、残り eigenvalue の1件）
 - 対象ブランチ: `acc`（`origin` = `github.com:RIKEN-RCCS/HeCBench`）
 
 ## 0. 作業中（セッションは2時間で強制終了されるので、ここを随時更新してコミットする）
 
 - **現在の作業（2026-11-25 開始）**: `-mp=gpu` があるときだけ通る31件（4章「全件ビルドの結果」）に `default(present)` を付け、OpenMP なしでビルドでき、実行して正しい結果になることを1件ずつ確認する。ベンチマークごとにコミットする。
+  - **進捗（2026-11-26、前回のセッションは強制終了）**: コミット済み 30件（lsqt `865723424` を追加。`../lsqt-cuda/examples/...` にもデータを展開して比較し、出力が同じだった）。**未コミットは eigenvalue だけ**。
+    - eigenvalue-acc は、**今回の変更とは関係なく、`-O2` 以上でビルドすると止まる**（引数が `16 1` でも終わらない。"Executing kernel for 1 iterations" と表示した後で止まる）。`-O1` なら PASS。変更前のコードでも同じ。eigenvalue-omp（`-mp=gpu -O3`）は `16 1` でも `2048 10000` でも PASS なので、acc 版だけの問題。pnpoly と同じく nvc++ 26.3 の最適化の問題の可能性がある（未確認）。原因が GPU 向けのコードかホスト側かを切り分ける途中で、セッションが切れた。
+    - upstream の eigenvalue-omp の Makefile.nvc も壊れている（存在しない `main2.o` を要求する）。比較のときは `nvc++ -O3 -mp=gpu main.cpp reference.cpp` で手でビルドした。
+    - 次: `-O1` で、変更前と変更後の出力が同じかを確かめて、eigenvalue の `default(present)` をコミットする。`-O2` 以上で止まる問題は、別に調べる。
   - **進捗（2026-11-25、GPU 2基、更新2）**: コミット済み 29件（さらに face `632d1e585`、hogbom `5d4123e14`、tonemapping `4b3209131`。データを用意して比較し、出力が同じだった）。**未コミットは2件**: eigenvalue（引数 2048 10000 で比較中）、lsqt（`input.txt` がさらに `../lsqt-cuda/examples/...` を参照していたので、そこにも展開して比較し直し中）。
   - **進捗（2026-11-25、GPU 2基、更新）**: コミット済み 26件（さらに grrt `2cc201bbf`、perplexity resize scatterAdd surfel vol2col wsm5 `4632c6c5f`〜`3bb9e891b`）。**未コミットは5件**: eigenvalue face hogbom lsqt tonemapping。face hogbom lsqt tonemapping は入力データ（DVC）がなかったので、scratchpad の venv の dvc で取得し、比較用の worktree の中に以前の `prepare_data.sh` と同じ場所へ展開して比較中。eigenvalue は既定の引数（10000 10000）では20分で終わらないので、worktree の中だけ upstream の run と同じ `2048 10000` に変えて比較中。
     - 注意: lsqt-acc の実行コマンドは `../lsqt-hip/examples/` を参照しているが、データは今の upstream では `lsqt-cuda/examples.tar.gz` にある（`prepare_data.sh` の問題の1件）。
