@@ -473,15 +473,15 @@ void kernel_filter(
     }
   }
 #else
-  #pragma acc parallel num_gangs(readsCount) thread_limit(128)
-  {
+  // Two-step reduction as in the CUDA version: each vector lane writes its
+  // partial sum to a gang-private array, then one lane adds them up.
+  #pragma acc parallel loop gang num_gangs(readsCount) vector_length(128) \
+    present(lengths, offsets, indexs, orders, words, wordCutoff, cluster, table)
+  for (int gid = 0; gid < readsCount; gid++) {
     int result[128];
-    #pragma omp parallel 
-    {
-      int gid = omp_get_team_num();
-      int lid = omp_get_thread_num(); 
-
-      if (cluster[gid] == -2) {
+    if (cluster[gid] == -2) {
+      #pragma acc loop vector
+      for (int lid = 0; lid < 128; lid++) {
         result[lid] = 0;             // result in thread
         int start = offsets[gid];
         int end = start + words[gid];
@@ -489,17 +489,15 @@ void kernel_filter(
           result[lid] += min(table[indexs[i]], orders[i]);
         }
       }
-      #pragma omp barrier
 
-      if ((cluster[gid] == -2) && (lid == 0)) {
-        for (int i=1; i<128; i++) {
-          result[0] += result[i];
-        }
-        if (result[0] > wordCutoff[gid]) { // pass filter
-          cluster[gid] = -3;
-        } else {
-          cluster[gid] = -1; // not pass filter
-        }
+      #pragma acc loop seq
+      for (int i=1; i<128; i++) {
+        result[0] += result[i];
+      }
+      if (result[0] > wordCutoff[gid]) { // pass filter
+        cluster[gid] = -3;
+      } else {
+        cluster[gid] = -1; // not pass filter
       }
     }
   }
