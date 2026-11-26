@@ -55,11 +55,6 @@ int main(int argc, char **argv) {
   const dataType to1 = 1e-6;
   const dataType e_n1kq = 6.0;
 
-  // Start the timer before the work begins.
-  dataType elapsedKernelTimer, elapsedTimer;
-  timeval startTimer, endTimer;
-  gettimeofday(&startTimer, NULL);
-
   // Printing out the params passed.
   std::cout << "Sizeof(CustomComplex<dataType> = "
             << sizeof(CustomComplex<dataType>) << " bytes" << std::endl;
@@ -72,6 +67,9 @@ int main(int argc, char **argv) {
   CustomComplex<dataType> expr0(0.0, 0.0);
   CustomComplex<dataType> expr(0.025, 0.025);
   size_t memFootPrint = 0;
+
+  // Start the timer before the work begins.
+  auto start = std::chrono::steady_clock::now();
 
   CustomComplex<dataType> *achtemp;
   achtemp = (CustomComplex<dataType> *)safe_malloc(
@@ -158,13 +156,13 @@ int main(int argc, char **argv) {
   {
     dataType ach_re0, ach_re1, ach_re2, ach_im0, ach_im1, ach_im2;
 
-    float total_time = 0.f;
+    long total_ktime = 0;
 
     for (int i = 0; i < 10; i++) {
       ach_re0 = 0.0, ach_re1 = 0.0, ach_re2 = 0.0,
       ach_im0 = 0.0, ach_im1 = 0.0, ach_im2 = 0.0;
 
-      auto start = std::chrono::steady_clock::now();
+      auto kstart = std::chrono::steady_clock::now();
 
       #pragma acc parallel loop collapse(2) \
        reduction(+:ach_re0, ach_re1, ach_re2, ach_im0, ach_im1, ach_im2)
@@ -213,12 +211,11 @@ int main(int argc, char **argv) {
         } // ngpown
       }   // number_bands
 
-      auto end = std::chrono::steady_clock::now();
-      auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
-      total_time += time;
+      auto kend = std::chrono::steady_clock::now();
+      total_ktime += std::chrono::duration_cast<std::chrono::nanoseconds>(kend - kstart).count();
     } // for
 
-    printf("Average kernel execution time %f (s)\n", (total_time * 1e-9f) / 10.f);
+    printf("Average kernel execution time %f (s)\n", (total_ktime * 1e-9) / 10);
 
     achtemp_re[0] = ach_re0;
     achtemp_re[1] = ach_re1;
@@ -242,9 +239,6 @@ int main(int argc, char **argv) {
     printf("\n Final achtemp\n");
     achtemp[0].print();
 
-    gettimeofday(&endTimer, NULL);
-    elapsedTimer = (endTimer.tv_sec - startTimer.tv_sec) +
-                   1e-6 * (endTimer.tv_usec - startTimer.tv_usec);
   }
 
   // Free the allocated memory
@@ -260,7 +254,9 @@ int main(int argc, char **argv) {
   free(achtemp_im);
   free(wx_array);
 
-  std::cout << "********** Total Time Taken **********= " << elapsedTimer << " secs"
+  auto end = std::chrono::steady_clock::now();
+  auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+  std::cout << "********** Total Time Taken **********= " << time * 1e-9 << " secs"
             << std::endl;
 
   return 0;
