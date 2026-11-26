@@ -2,43 +2,18 @@
 
 > **注意: このファイルは作業引き継ぎ用の一時ファイルです。upstream に PR を出す前に必ず削除してください。**
 
-- 最終更新: 2026-11-26（31件への default(present) の追加、残り eigenvalue の1件）
+- 最終更新: 2026-11-26（31件への default(present) の追加を終えた時点）
 - 対象ブランチ: `acc`（`origin` = `github.com:RIKEN-RCCS/HeCBench`）
 
 ## 0. 作業中（セッションは2時間で強制終了されるので、ここを随時更新してコミットする）
 
-- **現在の作業（2026-11-25 開始）**: `-mp=gpu` があるときだけ通る31件（4章「全件ビルドの結果」）に `default(present)` を付け、OpenMP なしでビルドでき、実行して正しい結果になることを1件ずつ確認する。ベンチマークごとにコミットする。
-  - **進捗（2026-11-26、前回のセッションは強制終了）**: コミット済み 30件（lsqt `865723424` を追加。`../lsqt-cuda/examples/...` にもデータを展開して比較し、出力が同じだった）。**未コミットは eigenvalue だけ**。
-    - eigenvalue-acc は、**今回の変更とは関係なく、`-O2` 以上でビルドすると止まる**（引数が `16 1` でも終わらない。"Executing kernel for 1 iterations" と表示した後で止まる）。`-O1` なら PASS。変更前のコードでも同じ。eigenvalue-omp（`-mp=gpu -O3`）は `16 1` でも `2048 10000` でも PASS なので、acc 版だけの問題。pnpoly と同じく nvc++ 26.3 の最適化の問題の可能性がある（未確認）。原因が GPU 向けのコードかホスト側かを切り分ける途中で、セッションが切れた。
-    - upstream の eigenvalue-omp の Makefile.nvc も壊れている（存在しない `main2.o` を要求する）。比較のときは `nvc++ -O3 -mp=gpu main.cpp reference.cpp` で手でビルドした。
-    - 次: `-O1` で、変更前と変更後の出力が同じかを確かめて、eigenvalue の `default(present)` をコミットする。`-O2` 以上で止まる問題は、別に調べる。
-  - **進捗（2026-11-25、GPU 2基、更新2）**: コミット済み 29件（さらに face `632d1e585`、hogbom `5d4123e14`、tonemapping `4b3209131`。データを用意して比較し、出力が同じだった）。**未コミットは2件**: eigenvalue（引数 2048 10000 で比較中）、lsqt（`input.txt` がさらに `../lsqt-cuda/examples/...` を参照していたので、そこにも展開して比較し直し中）。
-  - **進捗（2026-11-25、GPU 2基、更新）**: コミット済み 26件（さらに grrt `2cc201bbf`、perplexity resize scatterAdd surfel vol2col wsm5 `4632c6c5f`〜`3bb9e891b`）。**未コミットは5件**: eigenvalue face hogbom lsqt tonemapping。face hogbom lsqt tonemapping は入力データ（DVC）がなかったので、scratchpad の venv の dvc で取得し、比較用の worktree の中に以前の `prepare_data.sh` と同じ場所へ展開して比較中。eigenvalue は既定の引数（10000 10000）では20分で終わらないので、worktree の中だけ upstream の run と同じ `2048 10000` に変えて比較中。
-    - 注意: lsqt-acc の実行コマンドは `../lsqt-hip/examples/` を参照しているが、データは今の upstream では `lsqt-cuda/examples.tar.gz` にある（`prepare_data.sh` の問題の1件）。
-  - **進捗（2026-11-25、GPU 2基）**: コミット済み 19件（前の7件に、ga glu heat2d iso2dfd lif mask ising keccaktreehash hypterm md memtest permute の12件を追加。`c7cac8430`〜`652ea5546`）。**未コミットは12件**: grrt（グローバルの配列 `K2_tab` が見つからず実行時エラーになったので、adamw と同じく `copyin(K2_tab)` を加えた。比較し直し中）、eigenvalue face hogbom lsqt（変更前も変更後も同じように失敗するので、実行での確認ができていない。eigenvalue は20分で打ち切り、face hogbom lsqt は入力データがないためと見られる）、perplexity resize scatterAdd surfel tonemapping vol2col wsm5（比較中）。
-  - **再開（2026-11-25、GPU 2基の環境）**: `module load nvhpc` で nvc++ 26.3 が使えることを確認（この環境には 26.5〜26.11 もあるが、これまでどおり 26.3 を使う）。注意: `module load ... | tail` のようにパイプにつなぐとサブシェルで読み込まれ、反映されない。古い worktree を `git worktree prune` で消し、`dp/wt`（変更前）と `dp/wt2`（変更後）を作り直した。`dp/pair.sh` は GPU 0 と GPU 1 で同時に実行する版に直した。
-  - **中断（2026-11-25、ユーザーの指示）**: 比較を途中で止めた。**作業ツリーに、確認の済んでいない24件の変更（25ファイル）がコミットされずに残っている**: eigenvalue face ga glu grrt heat2d hogbom hypterm ising iso2dfd keccaktreehash lif lsqt mask md memtest permute perplexity resize scatterAdd surfel tonemapping vol2col wsm5。中身は、どれも指示文の行末への ` default(present)` の追加だけ（`git diff` で確かめられる）。OpenMP なしでビルドできることは確認済み。
-    - 再開の手順: ①GPU の数を確かめる。②scratchpad が残っていれば `dp/pair.sh <name>` で1件ずつ比較する（変更前 `dp/wt`、変更後 `dp/wt2`）。scratchpad が消えていたら、`git worktree prune` で古い worktree の登録を消してから、HEAD の worktree（変更前）と、そこに `git diff -- src` を当てた worktree（変更後）を作り直し、通常の Makefile.NVD で両方を実行して、時間以外の出力を比べる。③出力が同じものから、ベンチマークごとにコミットする。
-    - 比較中だった eigenvalue は、実行の途中で止めたので、最初からやり直す必要がある（変更前と変更後を合わせて7分以上かかる）。
-  - 進捗（2026-11-25、更新）: コミット済み 7件（flip `3060bfaf7`, car `9f1adfdc9`, adamw `b7181eee0`, atomicPerf `3ac44b56d`, boxfilter `a58335353`, bwt `60947f93a`, channelShuffle `7a9d5c2b4`）。どれも、通常のビルドで変更前と出力が同じことを確認した。残り24件は `dp/pair.sh` で比較中（結果は `dp/pair28.txt`）。
-  - 以前の進捗: flip は完了（`3060bfaf7`）。残り30件は `default(present)` を付けて OpenMP なしでビルドできることを確認済み（57か所、すべて行末に ` default(present)` を足しただけ。**作業ツリーにあり、まだコミットしていない**）。次は、30件を通常の Makefile.NVD と OpenMP なしの両方で実行して確認し、問題のないものからコミットする。
-  - **重要な発見（2026-11-25）**: nvc++ 26.3 は `-mp=gpu` の有無でコード生成そのものが変わる。OpenMP なし（`-acc=gpu` だけ）のビルドは、`default(present)` でビルドできるようになっても、大幅に遅くなることがある。
-    - car: 外側の collapse(4) のループが `gang, vector(256)` から `gang` だけになり、内側が `vector(256)` になった。カーネル 0.0047s → 0.94s（200倍）。RMSE も 0.100244 → 0.100481 と変わった（和の順番が変わったためと見られる）。
-    - channelShuffle: ループの割り当ては同じだが、OpenMP なしのときだけ、カーネルの中のループが "Recognized memory copy idiom"（`memcpy` への置き換え）になり、実行が15分近く終わらない（通常のビルドでは各カーネル 0.02〜0.04 ms）。
-    - そのため、**Makefile.NVD を `-acc=gpu` にそろえるのは、今の nvc++ では勧められない**。`default(present)` の追加は、通常のビルド（`-mp=gpu`）で結果が変わらないことを確認したうえでコミットする。
-    - `default(present)` の注意: カーネルがグローバル変数の配列を使っていると、実行時に "data in PRESENT clause was not found" になる（adamw。定数表を `copyin(...)` で明示して直した）。
-    - boxfilter は、変更前のコードでも同じ値で FAIL する（もともとの不具合）。
-  - 比較用に、HEAD（変更前）を scratchpad の `dp/wt`、HEAD に作業ツリーの差分を当てたもの（変更後）を `dp/wt2` に、git worktree として取り出してある（作業が終わったら `git worktree remove` する）。`dp/pair.sh <name>` で、通常のビルドの変更前と変更後を GPU 0 で順番に実行し、時間以外の出力を比べる。
-  - 通常のビルド（`-mp=gpu`）の `-Minfo` を変更前後で比べると、30件ともループの割り当てと `memcpy` への置き換えはまったく同じ（adamw は行番号が1つずれただけ）。
-  - **注意: 2026-11-25 のセッションでは GPU が1基（GPU 0）しかない**（11-10〜11-19 は4基だった）。`CUDA_VISIBLE_DEVICES=1` を指定すると、GPU なしで動いて、遅く、結果も誤る。実行の前に `nvidia-smi` で GPU の数を確かめること。
-  - 手順: scratchpad の `dp/fix_dp.py <name>`（OpenMP なしでビルドし、"Could not find allocated-variable index" の出たカーネルの指示文に `default(present)` を付けて、通るまで繰り返す）と `dp/run.sh <name> <tag> [makefile]`。セッションが切れて作業ツリーの変更が残っていたら、`git diff` で中身（`default(present)` の追加だけ）を確かめてから実行の確認に進めばよい。
-- **前回の状態**: 4章 A の74件を PR から外した（`e56416827`）。残る `-acc` は248件。A のうち OpenMP なしでビルドできる deredundancy, openmp, winograd は残したが、OpenMP の名残があるので、中身の確認が必要。push はユーザーが行う（このマシンには GitHub の認証情報がない）。
+- **現在の状態（2026-11-26）**: `-mp=gpu` があるときだけビルドできた31件に `default(present)` を付ける作業を終えた（31件とも、ベンチマークごとにコミット済み。最後は eigenvalue `2042e555d`）。コミットされていない変更はない。push はユーザーが行う（このマシンには GitHub の認証情報がない）。結果のまとめは4章の「`default(present)` の追加（31件）」。
 - **次の候補**（どれから進めるかは未定）:
-  1. 残した deredundancy, openmp, winograd の名残を確認する（4章 A）
-  2. `-mp=gpu` があるときだけ通る31件に `default(present)` を付ける（`-acc=gpu` にそろえるなら必要。機械的に直せるが、1件ずつ実行して確認する）
-  3. upstream のファイル構成の変更に追従していない6件（lud, gd, gpp, goulash, heartwall, extend2）と、haversine, rainflow, kmeans
-  4. gang だけのループの候補33件の性能の確認（正しさは、確認できた3件では問題なし）
-  5. 存在しない `prepare_data.sh` を呼んでいる `include/*-NVIDIA` 55件、lulesh-acc の結果の誤り、blas-gemm の書き直し
+  1. upstream のファイル構成の変更に追従していない6件（lud, gd, gpp, goulash, heartwall, extend2）と、haversine, rainflow, kmeans（4章「全件ビルドの結果」）
+  2. 残した deredundancy, openmp, winograd の名残を確認する（4章 A）
+  3. 存在しない `prepare_data.sh` を呼んでいる `include/*-NVIDIA` 55件（5章）。face, hogbom, lsqt, tonemapping のデータの置き場所は、今回の確認で分かった（4章の `default(present)` の節）
+  4. もともとの不具合: eigenvalue（`-O2` 以上で止まる）、boxfilter（FAIL）、lulesh（結果が誤り）、kalman（upstream の判定の問題）
+  5. gang だけのループの候補33件の性能の確認、blas-gemm の書き直し
 - **最終的なテストは nvhpc 26.11 で行う**（2026-11-25 に決定）。今の作業（`default(present)` の確認など）は、これまでどおり 26.3（`module load nvhpc` の既定）で進める。最終テストでは、少なくとも次を 26.11 で確かめ直す:
   - 残す全248件のビルド（通常の Makefile.NVD）と実行の結果
   - 26.3 の不具合を回避したところが 26.11 でも必要か: pnpoly の `k = j++` と `c = !c`（`9c2924105`）、`std::atomic_ref` の戻り値を使う書き方（linearprobing `e26dadabf`）、`-mp=gpu` なしで出る "Could not find allocated-variable index"（`default(present)` を付けた31件）
@@ -236,6 +211,16 @@ cat log.std log.err log.time          # 実行コマンドは src/include/<name>
   - grrt, iso2dfd, tridiagonal の `make clean` が、`*.txt` の指定で追跡中の `CMakeLists.txt` を消していた。cuda・omp 版と同じく、ファイル名を個別に書くようにした（`035ec4cea`, `44238d593`, `7b2d58ff7`）。
   - **私のコミット `1ffa6c53e` で hausdorff のビルドが壊れていた**。`hd()` を使われていないと判断して消したが、`../hausdorff-cuda/reference.h` が使っていた。消した後にビルドし直していなかった。`c38d652bb` で戻した（8.8 ms、PASS）。教訓: 変更の後は、必ずクリーンビルドと実行をしてからコミットする。
 
+### `default(present)` の追加（31件）（2026-11-25〜26）
+
+全件ビルドで「`-mp=gpu` があるときだけ通る」と分かった34件のうち、"Could not find allocated-variable index" の31件に `default(present)` を付けた。ベンチマークごとにコミットした（flip `3060bfaf7` 〜 eigenvalue `2042e555d`）。
+
+- **確認の方法**: OpenMP なし（`-acc=gpu` だけ）でビルドできることを確かめたうえで、通常の Makefile.NVD（`-mp=gpu`）で、変更前（HEAD の git worktree）と変更後を同じ引数で実行し、時間・速度以外の出力が同じことを確かめた。通常のビルドの `-Minfo` も比べ、ループの割り当てと `memcpy` への置き換えが変わらないことを確かめた。
+- **`default(present)` だけでは済まなかったもの**: カーネルがグローバル変数の配列を使っていると、実行時に "data in PRESENT clause was not found" になる。adamw（量子化の表）と grrt（`K2_tab`）は、その配列を `copyin(...)` で明示して直した。
+- **入力データ**: face, hogbom, lsqt, tonemapping は DVC のデータが必要だった（`prepare_data.sh` がないので、比較用の worktree の中に手で展開した）。置き場所: face は `face-cuda/dataset.tar.gz` を実行するディレクトリ（face-acc）に、hogbom は `hogbom-cuda/data.tar.bz` を hogbom-cuda に、tonemapping は `tonemapping-sycl/input.tar.gz` を tonemapping-sycl に、lsqt は `lsqt-cuda/examples.tar.gz` を lsqt-hip と lsqt-cuda の両方に展開する（acc 版の実行コマンドは `../lsqt-hip/examples/input.txt` を読み、その中で `../lsqt-cuda/examples/...` を参照している）。
+- **もともとの不具合（変更前から同じ）**: boxfilter は FAIL。eigenvalue は `-O2` 以上でビルドすると止まる（`-O1` なら PASS。eigenvalue-omp は `-O3` で PASS）。
+- **OpenMP なしのビルドの性能**: car は200倍遅くなり、channelShuffle は終わらない（上の「重要な発見」）。Makefile.NVD は `-mp=gpu` のままにしている。
+
 ### A. カーネルの書き直しが必要（77件・263カーネル）：**74件を PR から外した**（2026-11-19, `e56416827`）
 
 全件ビルドで、73件が `-mp=gpu` があってもビルドできないことを確認したので、binomial（Makefile.NVD なし）と合わせて74件を「Not yet implemented」として外した。OpenMP なしでビルドできた deredundancy, openmp, winograd の3件は残した（ただし名残がある）。以下は、外す前の記録。
@@ -309,6 +294,8 @@ Makefile.NVD の約250件が `-mp=gpu` を指定している（`-acc=gpu` は約
 - **myocyte-acc の出力が `nan`**: `output.txt` の約92万行のうち87万行が `nan`。`9fd25651c` より前の状態（`omp.h` あり、`-mp=gpu`）でも同じなので、もともとの不具合。omp 版には `nan` がないが、時刻 0 の値（`y[0][0][0]=1.13e30`）が入力 `data/myocyte/y.txt` の先頭（1.37e-3）と合っていないので、upstream の実装も含めて調べる必要がある。実行コマンドは Makefile.NVD の50行目の COMMAND（`-time 10000`）で、`include/myocyte-NVIDIA` の COMMAND は上書きされている。
 - **upstream の `myocyte-omp/Makefile.nvc` が壊れている**: リンクのルールの行の続け方が誤っていて、ビルドできない（比較のときは手でビルドした）。
 - **simplemoc**: カーネル時間が約220秒、実行全体で約5分かかる（コードは変えていない）。
+- **eigenvalue-acc は `-O2` 以上でビルドすると止まる**: 引数が `16 1` でも、"Executing kernel for 1 iterations" と表示した後で終わらない。`-O1` なら PASS（`2048 10000` で 662µs）。eigenvalue-omp は `-O3` で PASS。nvc++ 26.3 の最適化の問題の可能性があるが、GPU 向けのコードかホスト側かは未確認。upstream の eigenvalue-omp の Makefile.nvc も壊れている（存在しない `main2.o` を要求する）。
+- **boxfilter-acc は FAIL**（`default(present)` の追加の前から同じ値）。
 - **lulesh-acc の結果が誤っている**: Final Origin Energy が 2.453665e+10 なのに対し、lulesh-cuda と lulesh-omp はどちらも 1.850962e+10（`-i 5 -s 384 -r 11 -b 1 -c 1`）。`-mp=gpu` を加えても変わらないので、OpenMP の名残とは関係のない、もともとの不具合。
 - **multimaterial の実行コマンドが大きすぎる**: `include/multimaterial-NVIDIA` の 6000×6000 では、omp 版も約66GB 使ったところで強制終了された（signal 9）。upstream の run ターゲットは 2000×2000。入力 `volfrac.dat` は `multimaterial-cuda/volfrac.dat.tgz` を実行するディレクトリに展開する必要がある（`prepare_data.sh` の問題の1件）。
 - **upstream 側の問題（直していない）**:
