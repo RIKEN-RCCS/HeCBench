@@ -7,34 +7,20 @@
 
 ## 0. 作業中（セッションは2時間で強制終了されるので、ここを随時更新してコミットする）
 
-- **直前に終えた作業（2026-11-26）**: ビルドできなかった9件の対応を終えた。8件を直し、heartwall はユーザーの決定で PR から外した（`de93c7670`）。残る `-acc` は247件。コミットされていない変更はない。以下は作業の記録。まず、どちらのビルドでも通らない6件（lud, gd, gpp, goulash, heartwall, extend2）、次に `-mp=gpu` があるときだけ通る3件（haversine, rainflow, kmeans）。1件ずつ原因を調べて直し、通常の Makefile.NVD で実行して確かめ、ベンチマークごとにコミットする。GPU は2基。
-  - 進捗: lud（`f08d384f4`、upstream `c6589a71c` の chrono 化の移植）、gd（`e3e9453f3`、upstream `5f366260f` の移植）、gpp（upstream `a04e3a290`）、goulash（upstream `6c899be7f`）は完了。
-  - extend2 は、`filelist.txt` が src2 から src へのコピー（`c578731c9`）で抜け落ちていた。**ルートの `.gitignore` に `*.txt` があるため**（upstream も同じ。追跡中の `.txt` は `git add -f` で追加されている）。戻して（`b5c7ec894`）、出力が extend2-omp と一致することを確認した（omp 版も "Error:" の不一致を10704行表示する。upstream 側の問題）。
-  - 同じ原因で抜け落ちていたファイルを、src2 と比べて洗い出した: ライセンスの minibude-acc/LICENSE.txt, nbody-acc/License.txt, su3-acc/License.txt（`0d665e478` で戻した）、nn-acc/filelist.txt（戻したが未コミット。実行の確認中）。inversek2j と face は別の場所のファイルを読むので不要。mcmd-acc/dataset/restart.pdb.bak は `prepare_data.sh` の問題として扱う。
-  - nn（`2e09c3061`、`filelist.txt` を戻した。DVC の `data/nn` で omp と出力が一致）、haversine（`a218312c8`、`../haversine-cuda/distance.h` に `_OPENACC` の分岐を加え、入力を omp と同じ `../geodesic-cuda/locations.txt` に直した。実体は DVC の `geodesic-sycl/locations.tar.gz`）、rainflow（`8e2066dd9`、`../rainflow-cuda/reference.h` に `_OPENACC` の分岐）は完了。kmeans（`82c4eb8c1`、`rmse.c` のホスト側のループが `acc data copyin(二重ポインタ)` + 計算領域の外の `acc loop gang` になっていたのを、upstream と同じ `omp parallel for` に戻した）も完了。**9件のうち8件を直した**。
-    - kmeans の注意: 通常のビルド（`-mp=gpu`）では、"Best number of clusters" が実行ごとに変わる（9, 8, 11。kmeans-omp も 13）。upstream の `rms_err()` の `omp parallel for` に `sum_euclid` の reduction がないため（upstream の不具合）。`OMP_NUM_THREADS=1` なら acc, omp とも 15 で一致し、OpenMP なしのビルドも 15。また、OpenMP なしのビルドは Kmeans core timing が 92秒（通常は 21秒）で、gang だけのループの候補（`cluster.c:115`）と関係があるかもしれない。
-  - **heartwall-acc は OpenACC 版が作られていない**: `main.cpp` に OpenACC の指示文がなく、GPU の計算をする `kernel/kernel.cpp` と `util/` が一度も追加されていない（src2 にも AMB-work にもない）。ユーザーの決定により、ans, leukocyte と同じく PR から外した（`de93c7670`）。どちらも upstream が時間計測を chrono に変えたときに共有ヘッダー（`../X-cuda/`）から関数を消したのに、acc 版が追従していなかった。gd の入力 gisette_scale は LIBSVM のサイトから scratchpad にダウンロードして使った（リポジトリには置いていない）。
-- **前の作業の状態（2026-11-26）**: `-mp=gpu` があるときだけビルドできた31件に `default(present)` を付ける作業を終えた（31件とも、ベンチマークごとにコミット済み。最後は eigenvalue `2042e555d`）。コミットされていない変更はない。push はユーザーが行う（このマシンには GitHub の認証情報がない）。結果のまとめは4章の「`default(present)` の追加（31件）」。
+- **現在の状態（2026-11-26）**: 区切りのよいところ。コミットされていない変更はない。残る `-acc` は247件。push はユーザーが行う（このマシンには GitHub の認証情報がない）。
+  - 直前に終えたこと: ビルドできなかった9件の対応（4章「ビルドできなかった9件の対応」）、その前は31件への `default(present)` の追加（4章）。
 - **次の候補**（どれから進めるかは未定）:
-  1. （完了）ビルドできなかった9件
-  2. 残した deredundancy, openmp, winograd の名残を確認する（4章 A）
-  3. 存在しない `prepare_data.sh` を呼んでいる `include/*-NVIDIA` 55件（5章）。face, hogbom, lsqt, tonemapping のデータの置き場所は、今回の確認で分かった（4章の `default(present)` の節）
-  4. もともとの不具合: eigenvalue（`-O2` 以上で止まる）、boxfilter（FAIL）、lulesh（結果が誤り）、kalman（upstream の判定の問題）
-  5. gang だけのループの候補33件の性能の確認、blas-gemm の書き直し
-- **最終的なテストは nvhpc 26.11 で行う**（2026-11-25 に決定）。今の作業（`default(present)` の確認など）は、これまでどおり 26.3（`module load nvhpc` の既定）で進める。最終テストでは、少なくとも次を 26.11 で確かめ直す:
-  - 残す全248件のビルド（通常の Makefile.NVD）と実行の結果
-  - 26.3 の不具合を回避したところが 26.11 でも必要か: pnpoly の `k = j++` と `c = !c`（`9c2924105`）、`std::atomic_ref` の戻り値を使う書き方（linearprobing `e26dadabf`）、`-mp=gpu` なしで出る "Could not find allocated-variable index"（`default(present)` を付けた31件）
-  - `-acc=gpu` だけのビルドで遅くなる問題（car、channelShuffle）が 26.11 でも起きるか。起きなければ、Makefile.NVD を `-acc=gpu` にそろえることも考えられる
-  - 26.11 は `module load nvhpc/26.11` で読み込む。`SM=cc100` はそのまま。
-  - 注意: `module load ... | tail` のようにパイプにつなぐと、サブシェルで読み込まれて元のシェルに反映されない。
-- **確認の手順**（scratchpad は日をまたぐと消えるので、ここに書いておく）:
-  - **セッションの最初に、必ず GPU の数を確かめる**（`module load nvhpc` の後に `nvidia-smi --query-gpu=index,name,compute_cap --format=csv`）。GPU の数はセッションごとに変わる（11-10〜11-19 は4基、11-25 は1基）。存在しない GPU を `CUDA_VISIBLE_DEVICES` で指定すると、GPU なしで動いて、遅く、結果も誤る。
-  - `module load nvhpc` をしてから、`cd src/<name>-acc && make -f Makefile.NVD clean && make -f Makefile.NVD SM=cc100 run`。結果は `log.std` / `log.err` / `log.time`。
-  - OpenMP なしの確認: `sed 's/-mp=gpu/-acc=gpu/' Makefile.NVD > /tmp/…/x.mk` を作り、`make -f /tmp/…/x.mk SM=cc100 run`。
-  - 比較: `-omp` は `make -f Makefile.nvc SM=cc100`、`-cuda` は `make ARCH=sm_100`。同じ引数で実行する。
-  - ビルドのログで、パターンルールが使われたか（`-acc` 付きでコンパイルされたか）を必ず確認する（組み込みルールに切り替わる落とし穴がある。4章 B）。
-  - 実行に5分以上かかるもの（simplemoc、kalman の既定サイズなど）はバックグラウンドで実行する。
-  - 全件ビルド: 1件ごとに、`-mp=multicore,gpu`→`-acc=gpu`、`-mp=multicore`→`-acc=multicore`、`-mp=gpu`→`-acc=gpu` に置き換えた Makefile でビルドし、失敗したら通常の Makefile.NVD でも試す。`xargs -P 12` で全322件が約2分。
+  1. 残した deredundancy, openmp, winograd の名残の確認（4章 A）
+  2. 存在しない `prepare_data.sh` を呼んでいる `include/*-NVIDIA` 55件（5章。データの置き場所が分かっているものは4章に記録）
+  3. もともとの不具合: eigenvalue（`-O2` 以上で止まる）、boxfilter（FAIL）、lulesh（結果が誤り）、kalman（upstream の判定）
+  4. gang だけのループの候補33件の性能、blas-gemm の書き直し
+- **最終テストは nvhpc 26.11 で行う**（`module load nvhpc/26.11`）。それまでの作業は 26.3（`module load nvhpc` の既定）。26.11 では、全247件のビルドと実行に加えて、26.3 の不具合の回避（pnpoly `9c2924105`、linearprobing `e26dadabf`、`default(present)` の31件）が必要か、`-acc=gpu` だけのビルドが遅くなる問題（car, channelShuffle）が起きるかを確かめ直す。
+- **確認の手順**（scratchpad は日をまたぐと消える）:
+  - **セッションの最初に GPU の数を確かめる**（`nvidia-smi --query-gpu=index,name,compute_cap --format=csv`）。数はセッションごとに変わる（4基、1基、2基を経験）。存在しない GPU を `CUDA_VISIBLE_DEVICES` で指定すると、GPU なしで動いて結果が誤る。
+  - `module load nvhpc` の後、`cd src/<name>-acc && make -f Makefile.NVD clean && make -f Makefile.NVD SM=cc100 run`（結果は `log.std` / `log.err` / `log.time`）。`module load` をパイプにつなぐと反映されない。
+  - OpenMP なしの確認は、`-mp=gpu` を `-acc=gpu` に置き換えた一時的な Makefile で行う。比較は `-omp`（`make -f Makefile.nvc SM=cc100`）や `-cuda`（`make ARCH=sm_100`）を同じ引数で実行する。
+  - ビルドのログで `-acc` 付きでコンパイルされたかを確認する（依存先がないと、組み込みルールでフラグなしにビルドされる。4章 B）。
+  - 変更の後は、クリーンビルドと実行をしてからコミットする。5分以上かかる実行はバックグラウンドで行う。
 
 ## 1. 目的と方針
 
@@ -219,6 +205,22 @@ cat log.std log.err log.time          # 実行コマンドは src/include/<name>
 - **全件ビルドで見つけて直したもの**:
   - grrt, iso2dfd, tridiagonal の `make clean` が、`*.txt` の指定で追跡中の `CMakeLists.txt` を消していた。cuda・omp 版と同じく、ファイル名を個別に書くようにした（`035ec4cea`, `44238d593`, `7b2d58ff7`）。
   - **私のコミット `1ffa6c53e` で hausdorff のビルドが壊れていた**。`hd()` を使われていないと判断して消したが、`../hausdorff-cuda/reference.h` が使っていた。消した後にビルドし直していなかった。`c38d652bb` で戻した（8.8 ms、PASS）。教訓: 変更の後は、必ずクリーンビルドと実行をしてからコミットする。
+
+### ビルドできなかった9件の対応（2026-11-26）
+
+全件ビルドで、どちらのビルドでも通らなかった6件と、`-mp=gpu` があるときだけ通った3件。8件を直し、heartwall は PR から外した。直した8件は、通常のビルドと OpenMP なしのビルドの両方で、ビルドと実行ができることを確認した。
+
+| ベンチマーク | 原因 | 対応（コミット） | 確認 |
+|---|---|---|---|
+| lud, gd, gpp, goulash | upstream が時間計測を chrono に変えたとき、共有ヘッダー（`../X-cuda/`）から古い関数（`stopwatch`, `get_time()` など）を消したが、acc 版が追従していなかった | upstream の変更（`c6589a71c`, `5f366260f`, `a04e3a290`, `6c899be7f`）を移植（`f08d384f4`, `e3e9453f3`, `8f98bca25`, `857fbfc9d`） | lud は検証で不一致なし、gd と goulash は PASS、gpp は結果が omp と一致 |
+| extend2, nn | `filelist.txt` がない | src2 から戻した（`b5c7ec894`, `2e09c3061`） | 出力が omp と一致 |
+| haversine, rainflow | cuda 版の共有ヘッダーが `_OPENMP` のときだけ型を定義していた | PR #3 と同じく `_OPENACC` の分岐を加えた。haversine は入力も upstream と同じ `../geodesic-cuda/locations.txt` に直した（`a218312c8`, `8e2066dd9`） | haversine は omp と一致、rainflow は PASS |
+| kmeans | ホスト側の `omp parallel for` が、誤った OpenACC の指示文に置き換えられていた | upstream と同じ指示文に戻した（`82c4eb8c1`） | `OMP_NUM_THREADS=1` で omp と一致 |
+| heartwall | OpenACC 版が作られていない（指示文がなく、`kernel/`, `util/` が一度も追加されていない） | PR から外した（`de93c7670`） | — |
+
+- **`.txt` の抜け落ち**: ルートの `.gitignore` に `*.txt` があるため（upstream も同じ。追跡中の `.txt` は `git add -f` で追加されている）、src2 から src へのコピー（`c578731c9`）で `.txt` が抜け落ちていた。src2 と比べて洗い出し、extend2 と nn の `filelist.txt`、**ライセンスの minibude-acc/LICENSE.txt, nbody-acc/License.txt, su3-acc/License.txt**（`0d665e478`）を戻した。omp 版にあって acc 版にないライセンスは、ほかにない（miniFE-acc の README だけ）。
+- **入力データ**: gd の gisette_scale は LIBSVM のサイトから、nn, kmeans, haversine は DVC（`data/nn`, `data/kmeans`, `geodesic-sycl/locations.tar.gz`）から取得した（リポジトリには置いていない）。
+- **upstream 側の問題**: extend2 は omp 版も "Error:" の不一致を10704行表示する。kmeans は、`rms_err()` の `omp parallel for` に `sum_euclid` の reduction がなく、通常のビルドでは結果が実行ごとに変わる（omp 版も同じ）。kmeans の OpenMP なしのビルドは 92秒かかる（通常は 21秒）。
 
 ### `default(present)` の追加（31件）（2026-11-25〜26）
 
